@@ -121,7 +121,7 @@ instance
       SettlementtransactionsListResponse
   type
     Scopes ContentSettlementtransactionsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentSettlementtransactionsList {..} =
     go
       merchantId

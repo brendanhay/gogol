@@ -113,7 +113,7 @@ instance
   type Rs ContentBuyongoogleprogramsPause = ()
   type
     Scopes ContentBuyongoogleprogramsPause =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentBuyongoogleprogramsPause {..} =
     go
       merchantId

@@ -112,7 +112,7 @@ instance
       ShippingSettings
   type
     Scopes ContentShippingsettingsUpdate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentShippingsettingsUpdate {..} =
     go
       merchantId

@@ -117,7 +117,7 @@ instance
       OrdersSetLineItemMetadataResponse
   type
     Scopes ContentOrdersSetlineitemmetadata =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersSetlineitemmetadata {..} =
     go
       merchantId

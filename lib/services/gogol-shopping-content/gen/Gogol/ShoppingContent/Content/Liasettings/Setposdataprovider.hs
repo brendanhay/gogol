@@ -123,7 +123,7 @@ instance
       LiasettingsSetPosDataProviderResponse
   type
     Scopes ContentLiasettingsSetposdataprovider =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentLiasettingsSetposdataprovider {..} =
       go

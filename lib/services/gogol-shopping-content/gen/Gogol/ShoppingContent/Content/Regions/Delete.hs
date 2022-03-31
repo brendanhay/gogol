@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentRegionsDelete where
   type Rs ContentRegionsDelete = ()
   type
     Scopes ContentRegionsDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionsDelete {..} =
     go
       merchantId

@@ -107,7 +107,7 @@ instance Core.GoogleRequest ContentLiasettingsUpdate where
   type Rs ContentLiasettingsUpdate = LiaSettings
   type
     Scopes ContentLiasettingsUpdate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentLiasettingsUpdate {..} =
     go
       merchantId

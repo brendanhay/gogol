@@ -108,7 +108,7 @@ instance Core.GoogleRequest ContentPosInventory where
   type Rs ContentPosInventory = PosInventoryResponse
   type
     Scopes ContentPosInventory =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentPosInventory {..} =
     go
       merchantId

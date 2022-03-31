@@ -125,7 +125,7 @@ instance
       ListRepricingRuleReportsResponse
   type
     Scopes ContentRepricingrulesRepricingreportsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentRepricingrulesRepricingreportsList {..} =
       go

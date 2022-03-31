@@ -104,7 +104,7 @@ instance
   type Rs ContentReturnaddressInsert = ReturnAddress
   type
     Scopes ContentReturnaddressInsert =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnaddressInsert {..} =
     go
       merchantId

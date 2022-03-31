@@ -110,7 +110,7 @@ instance Core.GoogleRequest ContentOrdersCaptureOrder where
       CaptureOrderResponse
   type
     Scopes ContentOrdersCaptureOrder =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersCaptureOrder {..} =
     go
       merchantId

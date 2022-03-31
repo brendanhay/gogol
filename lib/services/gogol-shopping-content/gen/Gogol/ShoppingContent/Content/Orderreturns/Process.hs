@@ -117,7 +117,7 @@ instance
       OrderreturnsProcessResponse
   type
     Scopes ContentOrderreturnsProcess =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrderreturnsProcess {..} =
     go
       merchantId

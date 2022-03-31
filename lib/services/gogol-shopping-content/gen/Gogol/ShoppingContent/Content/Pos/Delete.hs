@@ -106,9 +106,7 @@ newContentPosDelete merchantId storeCode targetMerchantId =
 
 instance Core.GoogleRequest ContentPosDelete where
   type Rs ContentPosDelete = ()
-  type
-    Scopes ContentPosDelete =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentPosDelete = '[Content'FullControl]
   requestClient ContentPosDelete {..} =
     go
       merchantId

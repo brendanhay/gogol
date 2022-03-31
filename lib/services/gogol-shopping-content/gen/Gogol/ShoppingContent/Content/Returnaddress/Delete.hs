@@ -104,7 +104,7 @@ instance
   type Rs ContentReturnaddressDelete = ()
   type
     Scopes ContentReturnaddressDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnaddressDelete {..} =
     go
       merchantId

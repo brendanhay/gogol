@@ -117,7 +117,7 @@ instance
       OrdersCancelLineItemResponse
   type
     Scopes ContentOrdersCancellineitem =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersCancellineitem {..} =
     go
       merchantId

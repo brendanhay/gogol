@@ -106,7 +106,7 @@ instance
       CollectionStatus
   type
     Scopes ContentCollectionstatusesGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentCollectionstatusesGet {..} =
     go
       merchantId

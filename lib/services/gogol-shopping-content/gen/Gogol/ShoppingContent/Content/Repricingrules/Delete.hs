@@ -104,7 +104,7 @@ instance
   type Rs ContentRepricingrulesDelete = ()
   type
     Scopes ContentRepricingrulesDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRepricingrulesDelete {..} =
     go
       merchantId

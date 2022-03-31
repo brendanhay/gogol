@@ -99,9 +99,7 @@ newContentOrdersGet merchantId orderId =
 
 instance Core.GoogleRequest ContentOrdersGet where
   type Rs ContentOrdersGet = Order
-  type
-    Scopes ContentOrdersGet =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentOrdersGet = '[Content'FullControl]
   requestClient ContentOrdersGet {..} =
     go
       merchantId

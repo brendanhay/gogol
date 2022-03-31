@@ -105,7 +105,7 @@ instance Core.GoogleRequest ContentAccountsDelete where
   type Rs ContentAccountsDelete = ()
   type
     Scopes ContentAccountsDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsDelete {..} =
     go
       merchantId

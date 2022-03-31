@@ -92,7 +92,7 @@ instance Core.GoogleRequest ContentAccountsAuthinfo where
       AccountsAuthInfoResponse
   type
     Scopes ContentAccountsAuthinfo =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsAuthinfo {..} =
     go
       xgafv

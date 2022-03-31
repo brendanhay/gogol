@@ -112,7 +112,7 @@ instance Core.GoogleRequest ContentAccountsListlinks where
       AccountsListLinksResponse
   type
     Scopes ContentAccountsListlinks =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsListlinks {..} =
     go
       merchantId

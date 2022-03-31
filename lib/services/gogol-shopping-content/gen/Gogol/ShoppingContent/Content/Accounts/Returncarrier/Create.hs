@@ -107,7 +107,7 @@ instance
       AccountReturnCarrier
   type
     Scopes ContentAccountsReturncarrierCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsReturncarrierCreate {..} =
     go
       accountId

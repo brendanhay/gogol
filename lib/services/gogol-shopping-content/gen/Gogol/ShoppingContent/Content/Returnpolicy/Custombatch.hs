@@ -105,7 +105,7 @@ instance
       ReturnpolicyCustomBatchResponse
   type
     Scopes ContentReturnpolicyCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnpolicyCustombatch {..} =
     go
       xgafv

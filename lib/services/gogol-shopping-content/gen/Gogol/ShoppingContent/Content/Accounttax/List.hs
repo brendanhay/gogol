@@ -105,7 +105,7 @@ instance Core.GoogleRequest ContentAccounttaxList where
       AccounttaxListResponse
   type
     Scopes ContentAccounttaxList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccounttaxList {..} =
     go
       merchantId

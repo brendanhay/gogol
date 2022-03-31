@@ -102,7 +102,7 @@ instance Core.GoogleRequest ContentReportsSearch where
   type Rs ContentReportsSearch = SearchResponse
   type
     Scopes ContentReportsSearch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReportsSearch {..} =
     go
       merchantId

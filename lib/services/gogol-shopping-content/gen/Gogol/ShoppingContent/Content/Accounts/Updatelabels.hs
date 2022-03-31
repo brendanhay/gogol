@@ -117,7 +117,7 @@ instance
       AccountsUpdateLabelsResponse
   type
     Scopes ContentAccountsUpdatelabels =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsUpdatelabels {..} =
     go
       merchantId

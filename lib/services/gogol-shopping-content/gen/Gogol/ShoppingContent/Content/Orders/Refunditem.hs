@@ -110,7 +110,7 @@ instance Core.GoogleRequest ContentOrdersRefunditem where
       OrdersRefundItemResponse
   type
     Scopes ContentOrdersRefunditem =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersRefunditem {..} =
     go
       merchantId

@@ -100,7 +100,7 @@ instance
       ShoppingAdsProgramStatus
   type
     Scopes ContentShoppingadsprogramGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentShoppingadsprogramGet {..} =
     go
       merchantId

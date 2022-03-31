@@ -115,7 +115,7 @@ instance
       LiasettingsRequestGmbAccessResponse
   type
     Scopes ContentLiasettingsRequestgmbaccess =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentLiasettingsRequestgmbaccess {..} =
     go
       merchantId

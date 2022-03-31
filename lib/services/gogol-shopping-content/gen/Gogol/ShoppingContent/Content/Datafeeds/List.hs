@@ -103,7 +103,7 @@ instance Core.GoogleRequest ContentDatafeedsList where
   type Rs ContentDatafeedsList = DatafeedsListResponse
   type
     Scopes ContentDatafeedsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentDatafeedsList {..} =
     go
       merchantId

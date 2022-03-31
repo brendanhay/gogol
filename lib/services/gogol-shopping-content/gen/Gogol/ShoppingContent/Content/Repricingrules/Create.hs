@@ -108,7 +108,7 @@ instance
   type Rs ContentRepricingrulesCreate = RepricingRule
   type
     Scopes ContentRepricingrulesCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRepricingrulesCreate {..} =
     go
       merchantId

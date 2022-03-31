@@ -135,7 +135,7 @@ instance
   type
     Scopes
       ContentLiasettingsSetinventoryverificationcontact =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentLiasettingsSetinventoryverificationcontact {..} =
       go

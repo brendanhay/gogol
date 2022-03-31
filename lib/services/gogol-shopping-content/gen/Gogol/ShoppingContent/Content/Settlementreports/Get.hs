@@ -106,7 +106,7 @@ instance
       SettlementReport
   type
     Scopes ContentSettlementreportsGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentSettlementreportsGet {..} =
     go
       merchantId

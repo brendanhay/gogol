@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentProductsGet where
   type Rs ContentProductsGet = Product
   type
     Scopes ContentProductsGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentProductsGet {..} =
     go
       merchantId

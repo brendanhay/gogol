@@ -106,7 +106,7 @@ instance
       OrderTrackingSignal
   type
     Scopes ContentOrdertrackingsignalsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdertrackingsignalsCreate {..} =
     go
       merchantId

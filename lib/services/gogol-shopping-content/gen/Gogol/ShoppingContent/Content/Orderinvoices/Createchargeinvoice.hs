@@ -117,7 +117,7 @@ instance
       OrderinvoicesCreateChargeInvoiceResponse
   type
     Scopes ContentOrderinvoicesCreatechargeinvoice =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentOrderinvoicesCreatechargeinvoice {..} =
       go

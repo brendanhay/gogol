@@ -117,7 +117,7 @@ instance
       OrdersReturnRefundLineItemResponse
   type
     Scopes ContentOrdersReturnrefundlineitem =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersReturnrefundlineitem {..} =
     go
       merchantId

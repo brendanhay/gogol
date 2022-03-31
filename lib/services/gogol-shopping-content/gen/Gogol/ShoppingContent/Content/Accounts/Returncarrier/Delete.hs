@@ -105,7 +105,7 @@ instance
   type Rs ContentAccountsReturncarrierDelete = ()
   type
     Scopes ContentAccountsReturncarrierDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsReturncarrierDelete {..} =
     go
       accountId

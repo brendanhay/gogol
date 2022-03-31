@@ -118,7 +118,7 @@ instance
   type
     Scopes
       ContentOrdersUpdatelineitemshippingdetails =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentOrdersUpdatelineitemshippingdetails {..} =
       go

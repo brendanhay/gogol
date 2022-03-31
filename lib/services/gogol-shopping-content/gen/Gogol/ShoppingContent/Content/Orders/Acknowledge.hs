@@ -110,7 +110,7 @@ instance Core.GoogleRequest ContentOrdersAcknowledge where
       OrdersAcknowledgeResponse
   type
     Scopes ContentOrdersAcknowledge =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersAcknowledge {..} =
     go
       merchantId

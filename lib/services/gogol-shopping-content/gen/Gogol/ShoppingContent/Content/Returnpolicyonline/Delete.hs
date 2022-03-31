@@ -104,7 +104,7 @@ instance
   type Rs ContentReturnpolicyonlineDelete = ()
   type
     Scopes ContentReturnpolicyonlineDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnpolicyonlineDelete {..} =
     go
       merchantId

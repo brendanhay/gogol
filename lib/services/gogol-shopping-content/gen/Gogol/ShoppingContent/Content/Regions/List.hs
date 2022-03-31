@@ -103,7 +103,7 @@ instance Core.GoogleRequest ContentRegionsList where
   type Rs ContentRegionsList = ListRegionsResponse
   type
     Scopes ContentRegionsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionsList {..} =
     go
       merchantId

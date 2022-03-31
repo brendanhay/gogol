@@ -108,7 +108,7 @@ instance Core.GoogleRequest ContentCssesUpdatelabels where
   type Rs ContentCssesUpdatelabels = Css
   type
     Scopes ContentCssesUpdatelabels =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentCssesUpdatelabels {..} =
     go
       cssGroupId

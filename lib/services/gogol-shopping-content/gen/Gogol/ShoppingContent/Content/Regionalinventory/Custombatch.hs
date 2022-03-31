@@ -105,7 +105,7 @@ instance
       RegionalinventoryCustomBatchResponse
   type
     Scopes ContentRegionalinventoryCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionalinventoryCustombatch {..} =
     go
       xgafv

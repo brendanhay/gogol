@@ -104,7 +104,7 @@ instance
   type
     Scopes
       ContentShippingsettingsGetsupportedpickupservices =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentShippingsettingsGetsupportedpickupservices {..} =
       go

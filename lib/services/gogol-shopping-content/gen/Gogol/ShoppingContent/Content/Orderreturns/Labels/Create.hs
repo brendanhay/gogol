@@ -113,7 +113,7 @@ instance
       ReturnShippingLabel
   type
     Scopes ContentOrderreturnsLabelsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrderreturnsLabelsCreate {..} =
     go
       merchantId
