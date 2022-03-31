@@ -103,9 +103,7 @@ instance
   type Rs CloudTraceProjectsTracesBatchWrite = Empty
   type
     Scopes CloudTraceProjectsTracesBatchWrite =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/trace.append"
-       ]
+      '[CloudPlatform'FullControl, Trace'Append]
   requestClient CloudTraceProjectsTracesBatchWrite {..} =
     go
       name
