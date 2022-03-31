@@ -103,9 +103,7 @@ instance
   type Rs FirebaseRulesProjectsReleasesCreate = Release
   type
     Scopes FirebaseRulesProjectsReleasesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient FirebaseRulesProjectsReleasesCreate {..} =
     go
       name

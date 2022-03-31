@@ -34,9 +34,9 @@ module Gogol.FirebaseRules
     firebaseRulesService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    firebaseScope,
-    firebaseReadOnlyScope,
+    CloudPlatform'FullControl,
+    Firebase'FullControl,
+    Firebase'Readonly,
 
     -- * Resources
 

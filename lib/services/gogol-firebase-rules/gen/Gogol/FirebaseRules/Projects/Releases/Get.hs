@@ -96,9 +96,9 @@ instance
   type Rs FirebaseRulesProjectsReleasesGet = Release
   type
     Scopes FirebaseRulesProjectsReleasesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase",
-         "https://www.googleapis.com/auth/firebase.readonly"
+      '[ CloudPlatform'FullControl,
+         Firebase'FullControl,
+         Firebase'Readonly
        ]
   requestClient FirebaseRulesProjectsReleasesGet {..} =
     go

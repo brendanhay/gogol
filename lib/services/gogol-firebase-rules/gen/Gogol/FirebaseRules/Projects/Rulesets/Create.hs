@@ -103,9 +103,7 @@ instance
   type Rs FirebaseRulesProjectsRulesetsCreate = Ruleset
   type
     Scopes FirebaseRulesProjectsRulesetsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient FirebaseRulesProjectsRulesetsCreate {..} =
     go
       name

@@ -102,9 +102,7 @@ instance
   type Rs FirebaseRulesProjectsReleasesPatch = Release
   type
     Scopes FirebaseRulesProjectsReleasesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/firebase"
-       ]
+      '[CloudPlatform'FullControl, Firebase'FullControl]
   requestClient FirebaseRulesProjectsReleasesPatch {..} =
     go
       name
