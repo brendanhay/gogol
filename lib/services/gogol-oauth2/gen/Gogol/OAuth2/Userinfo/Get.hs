@@ -63,10 +63,7 @@ instance Core.GoogleRequest OAuth2UserinfoGet where
   type Rs OAuth2UserinfoGet = Userinfo
   type
     Scopes OAuth2UserinfoGet =
-      '[ "openid",
-         "https://www.googleapis.com/auth/userinfo.email",
-         "https://www.googleapis.com/auth/userinfo.profile"
-       ]
+      '[OAuth2'OpenID, Userinfo'Email, Userinfo'Profile]
   requestClient OAuth2UserinfoGet {} =
     go (Core.Just Core.AltJSON) oAuth2Service
     where

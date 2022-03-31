@@ -34,9 +34,9 @@ module Gogol.OAuth2
     oAuth2Service,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
-    userinfoProfileScope,
-    openidScope,
+    Userinfo'Email,
+    Userinfo'Profile,
+    OAuth2'OpenID,
 
     -- * Resources
 
