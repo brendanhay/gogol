@@ -115,7 +115,7 @@ instance Core.GoogleRequest BloggerPagesPatch where
   type Rs BloggerPagesPatch = Page
   type
     Scopes BloggerPagesPatch =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPagesPatch {..} =
     go
       blogId

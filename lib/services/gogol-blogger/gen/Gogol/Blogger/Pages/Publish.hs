@@ -102,7 +102,7 @@ instance Core.GoogleRequest BloggerPagesPublish where
   type Rs BloggerPagesPublish = Page
   type
     Scopes BloggerPagesPublish =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPagesPublish {..} =
     go
       blogId

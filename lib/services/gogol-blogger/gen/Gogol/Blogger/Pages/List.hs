@@ -115,9 +115,7 @@ instance Core.GoogleRequest BloggerPagesList where
   type Rs BloggerPagesList = PageList
   type
     Scopes BloggerPagesList =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerPagesList {..} =
     go
       blogId

@@ -110,9 +110,7 @@ instance Core.GoogleRequest BloggerPostsGetByPath where
   type Rs BloggerPostsGetByPath = Post'
   type
     Scopes BloggerPostsGetByPath =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerPostsGetByPath {..} =
     go
       blogId

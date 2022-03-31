@@ -109,7 +109,7 @@ instance Core.GoogleRequest BloggerCommentsApprove where
   type Rs BloggerCommentsApprove = Comment
   type
     Scopes BloggerCommentsApprove =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerCommentsApprove {..} =
     go
       blogId

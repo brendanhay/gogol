@@ -94,9 +94,7 @@ instance Core.GoogleRequest BloggerUsersGet where
   type Rs BloggerUsersGet = User
   type
     Scopes BloggerUsersGet =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerUsersGet {..} =
     go
       userId

@@ -99,9 +99,7 @@ instance Core.GoogleRequest BloggerBlogsGetByUrl where
   type Rs BloggerBlogsGetByUrl = Blog
   type
     Scopes BloggerBlogsGetByUrl =
-      '[ "https://www.googleapis.com/auth/blogger",
-         "https://www.googleapis.com/auth/blogger.readonly"
-       ]
+      '[Blogger'FullControl, Blogger'Readonly]
   requestClient BloggerBlogsGetByUrl {..} =
     go
       (Core.Just url)

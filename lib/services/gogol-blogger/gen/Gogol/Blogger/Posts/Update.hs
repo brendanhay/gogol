@@ -127,7 +127,7 @@ instance Core.GoogleRequest BloggerPostsUpdate where
   type Rs BloggerPostsUpdate = Post'
   type
     Scopes BloggerPostsUpdate =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPostsUpdate {..} =
     go
       blogId

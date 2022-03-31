@@ -105,7 +105,7 @@ instance Core.GoogleRequest BloggerPagesInsert where
   type Rs BloggerPagesInsert = Page
   type
     Scopes BloggerPagesInsert =
-      '["https://www.googleapis.com/auth/blogger"]
+      '[Blogger'FullControl]
   requestClient BloggerPagesInsert {..} =
     go
       blogId
