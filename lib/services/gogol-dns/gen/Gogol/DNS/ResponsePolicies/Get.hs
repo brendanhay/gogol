@@ -111,10 +111,10 @@ instance Core.GoogleRequest DNSResponsePoliciesGet where
   type Rs DNSResponsePoliciesGet = ResponsePolicy
   type
     Scopes DNSResponsePoliciesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.clouddns.readonly",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Ndev'Clouddns'Readonly,
+         Ndev'Clouddns'Readwrite
        ]
   requestClient DNSResponsePoliciesGet {..} =
     go

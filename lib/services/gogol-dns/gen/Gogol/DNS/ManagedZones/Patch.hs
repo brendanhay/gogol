@@ -117,9 +117,7 @@ instance Core.GoogleRequest DNSManagedZonesPatch where
   type Rs DNSManagedZonesPatch = Operation
   type
     Scopes DNSManagedZonesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSManagedZonesPatch {..} =
     go
       project

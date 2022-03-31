@@ -123,9 +123,7 @@ instance
       ResourceRecordSet
   type
     Scopes DNSResourceRecordSetsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSResourceRecordSetsCreate {..} =
     go
       project

@@ -104,10 +104,10 @@ instance Core.GoogleRequest DNSProjectsGet where
   type Rs DNSProjectsGet = Project
   type
     Scopes DNSProjectsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.clouddns.readonly",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Ndev'Clouddns'Readonly,
+         Ndev'Clouddns'Readwrite
        ]
   requestClient DNSProjectsGet {..} =
     go

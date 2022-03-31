@@ -111,9 +111,7 @@ instance Core.GoogleRequest DNSManagedZonesCreate where
   type Rs DNSManagedZonesCreate = ManagedZone
   type
     Scopes DNSManagedZonesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSManagedZonesCreate {..} =
     go
       project

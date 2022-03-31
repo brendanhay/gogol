@@ -127,9 +127,7 @@ instance
   type Rs DNSResourceRecordSetsDelete = ()
   type
     Scopes DNSResourceRecordSetsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSResourceRecordSetsDelete {..} =
     go
       project

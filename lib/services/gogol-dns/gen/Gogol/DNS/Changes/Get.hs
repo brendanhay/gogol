@@ -118,10 +118,10 @@ instance Core.GoogleRequest DNSChangesGet where
   type Rs DNSChangesGet = Change
   type
     Scopes DNSChangesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/ndev.clouddns.readonly",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Ndev'Clouddns'Readonly,
+         Ndev'Clouddns'Readwrite
        ]
   requestClient DNSChangesGet {..} =
     go
