@@ -73,7 +73,7 @@ instance Core.GoogleRequest DriveTeamdrivesDelete where
   type Rs DriveTeamdrivesDelete = ()
   type
     Scopes DriveTeamdrivesDelete =
-      '["https://www.googleapis.com/auth/drive"]
+      '[Drive'FullControl]
   requestClient DriveTeamdrivesDelete {..} =
     go
       teamDriveId

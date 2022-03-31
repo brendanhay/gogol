@@ -76,9 +76,7 @@ newDriveDrivesCreate payload requestId =
 
 instance Core.GoogleRequest DriveDrivesCreate where
   type Rs DriveDrivesCreate = Drive
-  type
-    Scopes DriveDrivesCreate =
-      '["https://www.googleapis.com/auth/drive"]
+  type Scopes DriveDrivesCreate = '[Drive'FullControl]
   requestClient DriveDrivesCreate {..} =
     go
       (Core.Just requestId)

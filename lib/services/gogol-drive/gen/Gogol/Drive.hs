@@ -34,14 +34,14 @@ module Gogol.Drive
     driveService,
 
     -- * OAuth Scopes
-    driveScope,
-    driveAppdataScope,
-    driveFileScope,
-    driveMetadataScope,
-    driveMetadataReadOnlyScope,
-    drivePhotosReadOnlyScope,
-    driveReadOnlyScope,
-    driveScriptsScope,
+    Drive'FullControl,
+    Drive'Appdata,
+    Drive'File,
+    Drive'Metadata,
+    Drive'Metadata'Readonly,
+    Drive'Photos'Readonly,
+    Drive'Readonly,
+    Drive'Scripts,
 
     -- * Resources
 

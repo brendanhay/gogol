@@ -123,13 +123,13 @@ instance Core.GoogleRequest DriveChangesList where
   type Rs DriveChangesList = ChangeList
   type
     Scopes DriveChangesList =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.metadata",
-         "https://www.googleapis.com/auth/drive.metadata.readonly",
-         "https://www.googleapis.com/auth/drive.photos.readonly",
-         "https://www.googleapis.com/auth/drive.readonly"
+      '[ Drive'FullControl,
+         Drive'Appdata,
+         Drive'File,
+         Drive'Metadata,
+         Drive'Metadata'Readonly,
+         Drive'Photos'Readonly,
+         Drive'Readonly
        ]
   requestClient DriveChangesList {..} =
     go

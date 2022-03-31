@@ -110,10 +110,10 @@ instance Core.GoogleRequest DriveFilesCopy where
   type Rs DriveFilesCopy = File
   type
     Scopes DriveFilesCopy =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.photos.readonly"
+      '[ Drive'FullControl,
+         Drive'Appdata,
+         Drive'File,
+         Drive'Photos'Readonly
        ]
   requestClient DriveFilesCopy {..} =
     go

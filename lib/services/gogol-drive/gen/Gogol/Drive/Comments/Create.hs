@@ -79,9 +79,7 @@ instance Core.GoogleRequest DriveCommentsCreate where
   type Rs DriveCommentsCreate = Comment
   type
     Scopes DriveCommentsCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'File]
   requestClient DriveCommentsCreate {..} =
     go
       fileId

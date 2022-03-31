@@ -79,10 +79,7 @@ instance Core.GoogleRequest DriveRevisionsDelete where
   type Rs DriveRevisionsDelete = ()
   type
     Scopes DriveRevisionsDelete =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'Appdata, Drive'File]
   requestClient DriveRevisionsDelete {..} =
     go
       fileId

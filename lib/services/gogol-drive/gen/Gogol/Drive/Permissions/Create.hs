@@ -114,9 +114,7 @@ instance Core.GoogleRequest DrivePermissionsCreate where
   type Rs DrivePermissionsCreate = Permission
   type
     Scopes DrivePermissionsCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'File]
   requestClient DrivePermissionsCreate {..} =
     go
       fileId

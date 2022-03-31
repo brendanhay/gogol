@@ -87,10 +87,7 @@ instance Core.GoogleRequest DriveFilesExport where
   type Rs DriveFilesExport = ()
   type
     Scopes DriveFilesExport =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'File, Drive'Readonly]
   requestClient DriveFilesExport {..} =
     go
       fileId

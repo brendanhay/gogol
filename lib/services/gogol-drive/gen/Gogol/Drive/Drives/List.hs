@@ -85,9 +85,7 @@ instance Core.GoogleRequest DriveDrivesList where
   type Rs DriveDrivesList = DriveList
   type
     Scopes DriveDrivesList =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.readonly"
-       ]
+      '[Drive'FullControl, Drive'Readonly]
   requestClient DriveDrivesList {..} =
     go
       (Core.Just pageSize)

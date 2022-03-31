@@ -108,9 +108,7 @@ instance Core.GoogleRequest DrivePermissionsUpdate where
   type Rs DrivePermissionsUpdate = Permission
   type
     Scopes DrivePermissionsUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file"
-       ]
+      '[Drive'FullControl, Drive'File]
   requestClient DrivePermissionsUpdate {..} =
     go
       fileId

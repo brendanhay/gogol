@@ -85,7 +85,7 @@ instance Core.GoogleRequest DriveTeamdrivesUpdate where
   type Rs DriveTeamdrivesUpdate = TeamDrive
   type
     Scopes DriveTeamdrivesUpdate =
-      '["https://www.googleapis.com/auth/drive"]
+      '[Drive'FullControl]
   requestClient DriveTeamdrivesUpdate {..} =
     go
       teamDriveId
