@@ -30,13 +30,13 @@ module Gogol.Slides.Types
     slidesService,
 
     -- * OAuth Scopes
-    driveScope,
-    driveFileScope,
-    driveReadOnlyScope,
-    presentationsScope,
-    presentationsReadOnlyScope,
-    spreadsheetsScope,
-    spreadsheetsReadOnlyScope,
+    Drive'FullControl,
+    Drive'File,
+    Drive'Readonly,
+    Presentations'FullControl,
+    Presentations'Readonly,
+    Spreadsheets'FullControl,
+    Spreadsheets'Readonly,
 
     -- * Types
 
@@ -755,29 +755,22 @@ slidesService =
     "slides.googleapis.com"
 
 -- | See, edit, create, and delete all of your Google Drive files
-driveScope :: Core.Proxy '["https://www.googleapis.com/auth/drive"]
-driveScope = Core.Proxy
+type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 
 -- | See, edit, create, and delete only the specific Google Drive files you use with this app
-driveFileScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.file"]
-driveFileScope = Core.Proxy
+type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
 -- | See and download all your Google Drive files
-driveReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-driveReadOnlyScope = Core.Proxy
+type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"
 
 -- | See, edit, create, and delete all your Google Slides presentations
-presentationsScope :: Core.Proxy '["https://www.googleapis.com/auth/presentations"]
-presentationsScope = Core.Proxy
+type Presentations'FullControl = "https://www.googleapis.com/auth/presentations"
 
 -- | See all your Google Slides presentations
-presentationsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/presentations.readonly"]
-presentationsReadOnlyScope = Core.Proxy
+type Presentations'Readonly = "https://www.googleapis.com/auth/presentations.readonly"
 
 -- | See, edit, create, and delete all your Google Sheets spreadsheets
-spreadsheetsScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets"]
-spreadsheetsScope = Core.Proxy
+type Spreadsheets'FullControl = "https://www.googleapis.com/auth/spreadsheets"
 
 -- | See all your Google Sheets spreadsheets
-spreadsheetsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/spreadsheets.readonly"]
-spreadsheetsReadOnlyScope = Core.Proxy
+type Spreadsheets'Readonly = "https://www.googleapis.com/auth/spreadsheets.readonly"

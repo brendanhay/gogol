@@ -34,13 +34,13 @@ module Gogol.Slides
     slidesService,
 
     -- * OAuth Scopes
-    driveScope,
-    driveFileScope,
-    driveReadOnlyScope,
-    presentationsScope,
-    presentationsReadOnlyScope,
-    spreadsheetsScope,
-    spreadsheetsReadOnlyScope,
+    Drive'FullControl,
+    Drive'File,
+    Drive'Readonly,
+    Presentations'FullControl,
+    Presentations'Readonly,
+    Spreadsheets'FullControl,
+    Spreadsheets'Readonly,
 
     -- * Resources
 

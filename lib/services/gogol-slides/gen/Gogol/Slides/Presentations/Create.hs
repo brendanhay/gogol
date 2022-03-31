@@ -94,9 +94,9 @@ instance Core.GoogleRequest SlidesPresentationsCreate where
   type Rs SlidesPresentationsCreate = Presentation
   type
     Scopes SlidesPresentationsCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/presentations"
+      '[ Drive'FullControl,
+         Drive'File,
+         Presentations'FullControl
        ]
   requestClient SlidesPresentationsCreate {..} =
     go
