@@ -34,7 +34,7 @@ module Gogol.WebSecurityScanner
     webSecurityScannerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

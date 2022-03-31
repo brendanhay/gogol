@@ -106,7 +106,7 @@ instance
   type
     Scopes
       WebSecurityScannerProjectsScanConfigsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     WebSecurityScannerProjectsScanConfigsCreate {..} =
       go
