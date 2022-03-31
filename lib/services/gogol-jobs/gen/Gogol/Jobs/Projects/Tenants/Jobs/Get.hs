@@ -96,9 +96,7 @@ instance
   type Rs JobsProjectsTenantsJobsGet = Job
   type
     Scopes JobsProjectsTenantsJobsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsJobsGet {..} =
     go
       name

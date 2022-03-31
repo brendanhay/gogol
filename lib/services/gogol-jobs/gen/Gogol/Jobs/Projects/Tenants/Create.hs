@@ -100,9 +100,7 @@ instance Core.GoogleRequest JobsProjectsTenantsCreate where
   type Rs JobsProjectsTenantsCreate = Tenant
   type
     Scopes JobsProjectsTenantsCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsCreate {..} =
     go
       parent

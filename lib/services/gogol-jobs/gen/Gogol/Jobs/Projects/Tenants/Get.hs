@@ -93,9 +93,7 @@ instance Core.GoogleRequest JobsProjectsTenantsGet where
   type Rs JobsProjectsTenantsGet = Tenant
   type
     Scopes JobsProjectsTenantsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsGet {..} =
     go
       name

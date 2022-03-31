@@ -111,9 +111,7 @@ instance
       ListCompaniesResponse
   type
     Scopes JobsProjectsTenantsCompaniesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsCompaniesList {..} =
     go
       parent
