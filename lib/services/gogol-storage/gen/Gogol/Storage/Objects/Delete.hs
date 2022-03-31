@@ -114,9 +114,9 @@ instance Core.GoogleRequest StorageObjectsDelete where
   type Rs StorageObjectsDelete = ()
   type
     Scopes StorageObjectsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadWrite
        ]
   requestClient StorageObjectsDelete {..} =
     go

@@ -99,11 +99,11 @@ instance Core.GoogleRequest StorageBucketsGet where
   type Rs StorageBucketsGet = Bucket
   type
     Scopes StorageBucketsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Devstorage'FullControl,
+         Devstorage'ReadOnly,
+         Devstorage'ReadWrite
        ]
   requestClient StorageBucketsGet {..} =
     go

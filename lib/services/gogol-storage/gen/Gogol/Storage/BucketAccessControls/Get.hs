@@ -99,9 +99,7 @@ instance
       BucketAccessControl
   type
     Scopes StorageBucketAccessControlsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient StorageBucketAccessControlsGet {..} =
     go
       bucket

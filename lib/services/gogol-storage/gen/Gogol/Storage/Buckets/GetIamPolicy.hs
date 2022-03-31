@@ -97,9 +97,7 @@ instance
   type Rs StorageBucketsGetIamPolicy = Policy
   type
     Scopes StorageBucketsGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient StorageBucketsGetIamPolicy {..} =
     go
       bucket

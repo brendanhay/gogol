@@ -119,9 +119,9 @@ instance Core.GoogleRequest StorageObjectsCompose where
   type Rs StorageObjectsCompose = Object
   type
     Scopes StorageObjectsCompose =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadWrite
        ]
   requestClient StorageObjectsCompose {..} =
     go

@@ -117,9 +117,7 @@ instance Core.GoogleRequest StorageBucketsPatch where
   type Rs StorageBucketsPatch = Bucket
   type
     Scopes StorageBucketsPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient StorageBucketsPatch {..} =
     go
       bucket

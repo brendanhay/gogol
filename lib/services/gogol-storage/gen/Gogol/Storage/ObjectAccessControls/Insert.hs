@@ -110,9 +110,7 @@ instance
       ObjectAccessControl
   type
     Scopes StorageObjectAccessControlsInsert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control"
-       ]
+      '[CloudPlatform'FullControl, Devstorage'FullControl]
   requestClient StorageObjectAccessControlsInsert {..} =
     go
       bucket

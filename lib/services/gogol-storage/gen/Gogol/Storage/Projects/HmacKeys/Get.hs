@@ -93,10 +93,10 @@ instance
   type Rs StorageProjectsHmacKeysGet = HmacKeyMetadata
   type
     Scopes StorageProjectsHmacKeysGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_only"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Devstorage'FullControl,
+         Devstorage'ReadOnly
        ]
   requestClient StorageProjectsHmacKeysGet {..} =
     go

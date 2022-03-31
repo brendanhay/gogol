@@ -207,9 +207,9 @@ instance Core.GoogleRequest StorageObjectsRewrite where
   type Rs StorageObjectsRewrite = RewriteResponse
   type
     Scopes StorageObjectsRewrite =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/devstorage.full_control",
-         "https://www.googleapis.com/auth/devstorage.read_write"
+      '[ CloudPlatform'FullControl,
+         Devstorage'FullControl,
+         Devstorage'ReadWrite
        ]
   requestClient StorageObjectsRewrite {..} =
     go
