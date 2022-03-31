@@ -121,7 +121,7 @@ instance
       BuildBazelRemoteExecutionV2GetTreeResponse
   type
     Scopes RemoteBuildExecutionBlobsGetTree =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RemoteBuildExecutionBlobsGetTree {..} =
     go
       instanceName

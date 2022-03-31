@@ -113,7 +113,7 @@ instance
       GoogleLongrunningOperation
   type
     Scopes RemoteBuildExecutionActionsExecute =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RemoteBuildExecutionActionsExecute {..} =
     go
       instanceName

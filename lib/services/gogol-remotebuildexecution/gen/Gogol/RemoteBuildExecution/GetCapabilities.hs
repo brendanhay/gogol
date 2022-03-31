@@ -101,7 +101,7 @@ instance
       BuildBazelRemoteExecutionV2ServerCapabilities
   type
     Scopes RemoteBuildExecutionGetCapabilities =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RemoteBuildExecutionGetCapabilities {..} =
     go
       instanceName

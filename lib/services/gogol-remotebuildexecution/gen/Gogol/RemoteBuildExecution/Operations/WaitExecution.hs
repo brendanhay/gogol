@@ -107,7 +107,7 @@ instance
   type
     Scopes
       RemoteBuildExecutionOperationsWaitExecution =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RemoteBuildExecutionOperationsWaitExecution {..} =
       go

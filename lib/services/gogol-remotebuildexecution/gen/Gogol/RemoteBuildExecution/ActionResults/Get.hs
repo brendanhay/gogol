@@ -125,7 +125,7 @@ instance
       BuildBazelRemoteExecutionV2ActionResult
   type
     Scopes RemoteBuildExecutionActionResultsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RemoteBuildExecutionActionResultsGet {..} =
       go

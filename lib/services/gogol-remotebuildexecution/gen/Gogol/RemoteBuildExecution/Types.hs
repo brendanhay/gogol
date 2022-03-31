@@ -30,7 +30,7 @@ module Gogol.RemoteBuildExecution.Types
     remoteBuildExecutionService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Types
 
@@ -458,5 +458,4 @@ remoteBuildExecutionService =
     "remotebuildexecution.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud Platform data
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
