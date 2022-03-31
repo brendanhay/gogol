@@ -98,7 +98,7 @@ instance
       UrlNotificationMetadata
   type
     Scopes IndexingUrlNotificationsGetMetadata =
-      '["https://www.googleapis.com/auth/indexing"]
+      '[Indexing'FullControl]
   requestClient IndexingUrlNotificationsGetMetadata {..} =
     go
       xgafv

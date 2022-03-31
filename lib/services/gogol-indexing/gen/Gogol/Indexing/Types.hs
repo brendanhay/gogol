@@ -30,7 +30,7 @@ module Gogol.Indexing.Types
     indexingService,
 
     -- * OAuth Scopes
-    indexingScope,
+    Indexing'FullControl,
 
     -- * Types
 
@@ -66,5 +66,4 @@ indexingService =
     "indexing.googleapis.com"
 
 -- | Submit data to Google for indexing
-indexingScope :: Core.Proxy '["https://www.googleapis.com/auth/indexing"]
-indexingScope = Core.Proxy
+type Indexing'FullControl = "https://www.googleapis.com/auth/indexing"

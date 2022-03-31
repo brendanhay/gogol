@@ -34,7 +34,7 @@ module Gogol.Indexing
     indexingService,
 
     -- * OAuth Scopes
-    indexingScope,
+    Indexing'FullControl,
 
     -- * Resources
 
