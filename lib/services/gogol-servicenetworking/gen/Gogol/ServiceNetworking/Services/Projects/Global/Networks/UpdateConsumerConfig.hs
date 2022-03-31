@@ -109,9 +109,7 @@ instance
   type
     Scopes
       ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/service.management"
-       ]
+      '[CloudPlatform'FullControl, Service'Management]
   requestClient
     ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig {..} =
       go
