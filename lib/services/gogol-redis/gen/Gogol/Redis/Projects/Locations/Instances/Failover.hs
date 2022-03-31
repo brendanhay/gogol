@@ -104,7 +104,7 @@ instance
       Operation
   type
     Scopes RedisProjectsLocationsInstancesFailover =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsInstancesFailover {..} =
       go

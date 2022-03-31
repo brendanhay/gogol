@@ -93,7 +93,7 @@ instance Core.GoogleRequest RedisProjectsLocationsGet where
   type Rs RedisProjectsLocationsGet = Location
   type
     Scopes RedisProjectsLocationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RedisProjectsLocationsGet {..} =
     go
       name

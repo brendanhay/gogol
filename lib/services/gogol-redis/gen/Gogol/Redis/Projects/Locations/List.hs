@@ -111,7 +111,7 @@ instance
       ListLocationsResponse
   type
     Scopes RedisProjectsLocationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RedisProjectsLocationsList {..} =
     go
       name

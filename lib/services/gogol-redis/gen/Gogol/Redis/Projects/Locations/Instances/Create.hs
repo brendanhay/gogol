@@ -109,7 +109,7 @@ instance
       Operation
   type
     Scopes RedisProjectsLocationsInstancesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsInstancesCreate {..} =
       go

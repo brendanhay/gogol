@@ -96,7 +96,7 @@ instance
   type Rs RedisProjectsLocationsInstancesGet = Instance
   type
     Scopes RedisProjectsLocationsInstancesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RedisProjectsLocationsInstancesGet {..} =
     go
       name

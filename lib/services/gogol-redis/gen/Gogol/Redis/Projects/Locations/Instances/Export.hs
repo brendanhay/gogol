@@ -104,7 +104,7 @@ instance
       Operation
   type
     Scopes RedisProjectsLocationsInstancesExport =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsInstancesExport {..} =
       go

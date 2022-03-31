@@ -34,7 +34,7 @@ module Gogol.Redis
     redisService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

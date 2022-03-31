@@ -107,7 +107,7 @@ instance
       ListInstancesResponse
   type
     Scopes RedisProjectsLocationsInstancesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient RedisProjectsLocationsInstancesList {..} =
     go
       parent
