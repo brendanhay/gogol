@@ -95,7 +95,7 @@ instance Core.GoogleRequest DLPProjectsJobTriggersGet where
       GooglePrivacyDlpV2JobTrigger
   type
     Scopes DLPProjectsJobTriggersGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsJobTriggersGet {..} =
     go
       name

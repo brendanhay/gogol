@@ -109,7 +109,7 @@ instance
       GooglePrivacyDlpV2DeidentifyTemplate
   type
     Scopes DLPOrganizationsDeidentifyTemplatesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsDeidentifyTemplatesCreate {..} =
       go

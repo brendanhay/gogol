@@ -98,7 +98,7 @@ instance
       GoogleProtobufEmpty
   type
     Scopes DLPOrganizationsDeidentifyTemplatesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsDeidentifyTemplatesDelete {..} =
       go

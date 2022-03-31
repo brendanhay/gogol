@@ -100,7 +100,7 @@ instance
   type
     Scopes
       DLPOrganizationsLocationsDeidentifyTemplatesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPOrganizationsLocationsDeidentifyTemplatesDelete {..} =
       go

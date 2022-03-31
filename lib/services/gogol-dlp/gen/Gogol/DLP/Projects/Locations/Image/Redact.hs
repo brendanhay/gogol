@@ -109,7 +109,7 @@ instance
       GooglePrivacyDlpV2RedactImageResponse
   type
     Scopes DLPProjectsLocationsImageRedact =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsLocationsImageRedact {..} =
     go
       parent

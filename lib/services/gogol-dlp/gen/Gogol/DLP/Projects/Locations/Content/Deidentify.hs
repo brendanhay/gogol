@@ -109,7 +109,7 @@ instance
       GooglePrivacyDlpV2DeidentifyContentResponse
   type
     Scopes DLPProjectsLocationsContentDeidentify =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsContentDeidentify {..} =
       go

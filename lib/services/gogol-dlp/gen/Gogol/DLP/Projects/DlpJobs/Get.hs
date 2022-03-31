@@ -95,7 +95,7 @@ instance Core.GoogleRequest DLPProjectsDlpJobsGet where
       GooglePrivacyDlpV2DlpJob
   type
     Scopes DLPProjectsDlpJobsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsDlpJobsGet {..} =
     go
       name

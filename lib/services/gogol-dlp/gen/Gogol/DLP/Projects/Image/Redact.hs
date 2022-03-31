@@ -106,7 +106,7 @@ instance Core.GoogleRequest DLPProjectsImageRedact where
       GooglePrivacyDlpV2RedactImageResponse
   type
     Scopes DLPProjectsImageRedact =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsImageRedact {..} =
     go
       parent

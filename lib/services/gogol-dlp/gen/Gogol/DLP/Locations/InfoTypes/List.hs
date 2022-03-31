@@ -110,7 +110,7 @@ instance Core.GoogleRequest DLPLocationsInfoTypesList where
       GooglePrivacyDlpV2ListInfoTypesResponse
   type
     Scopes DLPLocationsInfoTypesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPLocationsInfoTypesList {..} =
     go
       parent

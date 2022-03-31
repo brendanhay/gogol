@@ -117,7 +117,7 @@ instance
       GooglePrivacyDlpV2ListStoredInfoTypesResponse
   type
     Scopes DLPProjectsStoredInfoTypesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DLPProjectsStoredInfoTypesList {..} =
     go
       parent

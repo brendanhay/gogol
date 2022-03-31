@@ -108,7 +108,7 @@ instance
       GooglePrivacyDlpV2HybridInspectResponse
   type
     Scopes DLPProjectsLocationsDlpJobsHybridInspect =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DLPProjectsLocationsDlpJobsHybridInspect {..} =
       go
