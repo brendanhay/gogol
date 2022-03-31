@@ -30,9 +30,9 @@ module Gogol.BigQueryDataTransfer.Types
     bigQueryDataTransferService,
 
     -- * OAuth Scopes
-    bigqueryScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
+    Bigquery'FullControl,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
 
     -- * Types
 
@@ -208,13 +208,10 @@ bigQueryDataTransferService =
     "bigquerydatatransfer.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
-bigqueryScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigqueryScope = Core.Proxy
+type Bigquery'FullControl = "https://www.googleapis.com/auth/bigquery"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"

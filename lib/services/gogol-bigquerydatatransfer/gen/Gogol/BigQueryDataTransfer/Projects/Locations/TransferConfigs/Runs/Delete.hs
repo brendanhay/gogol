@@ -100,9 +100,7 @@ instance
   type
     Scopes
       BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient
     BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete {..} =
       go

@@ -122,7 +122,7 @@ instance
   type
     Scopes
       BigQueryDataTransferProjectsTransferConfigsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BigQueryDataTransferProjectsTransferConfigsPatch {..} =
       go

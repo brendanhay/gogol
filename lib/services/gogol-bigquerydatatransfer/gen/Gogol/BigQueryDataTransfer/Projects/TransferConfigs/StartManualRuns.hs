@@ -110,9 +110,7 @@ instance
   type
     Scopes
       BigQueryDataTransferProjectsTransferConfigsStartManualRuns =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient
     BigQueryDataTransferProjectsTransferConfigsStartManualRuns {..} =
       go
