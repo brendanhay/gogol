@@ -30,8 +30,8 @@ module Gogol.Genomics.Types
     genomicsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    genomicsScope,
+    CloudPlatform'FullControl,
+    Genomics'FullControl,
 
     -- * Types
 
@@ -278,9 +278,7 @@ genomicsService =
     "genomics.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage Genomics data
-genomicsScope :: Core.Proxy '["https://www.googleapis.com/auth/genomics"]
-genomicsScope = Core.Proxy
+type Genomics'FullControl = "https://www.googleapis.com/auth/genomics"

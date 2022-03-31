@@ -100,9 +100,7 @@ instance Core.GoogleRequest GenomicsWorkersCheckIn where
   type Rs GenomicsWorkersCheckIn = CheckInResponse
   type
     Scopes GenomicsWorkersCheckIn =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsWorkersCheckIn {..} =
     go
       id

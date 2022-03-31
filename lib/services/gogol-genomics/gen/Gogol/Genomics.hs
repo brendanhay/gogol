@@ -34,8 +34,8 @@ module Gogol.Genomics
     genomicsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    genomicsScope,
+    CloudPlatform'FullControl,
+    Genomics'FullControl,
 
     -- * Resources
 

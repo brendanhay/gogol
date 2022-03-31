@@ -94,9 +94,7 @@ instance Core.GoogleRequest GenomicsPipelinesRun where
   type Rs GenomicsPipelinesRun = Operation
   type
     Scopes GenomicsPipelinesRun =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsPipelinesRun {..} =
     go
       xgafv

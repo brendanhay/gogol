@@ -110,9 +110,7 @@ instance
       ListOperationsResponse
   type
     Scopes GenomicsProjectsOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/genomics"
-       ]
+      '[CloudPlatform'FullControl, Genomics'FullControl]
   requestClient GenomicsProjectsOperationsList {..} =
     go
       name
