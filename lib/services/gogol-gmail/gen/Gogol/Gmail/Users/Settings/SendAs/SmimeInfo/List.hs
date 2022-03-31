@@ -107,11 +107,11 @@ instance
       ListSmimeInfoResponse
   type
     Scopes GmailUsersSettingsSendAsSmimeInfoList =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly",
-         "https://www.googleapis.com/auth/gmail.settings.basic",
-         "https://www.googleapis.com/auth/gmail.settings.sharing"
+      '[ Gmail'FullControl,
+         Gmail'Modify,
+         Gmail'Readonly,
+         Gmail'Settings'Basic,
+         Gmail'Settings'Sharing
        ]
   requestClient
     GmailUsersSettingsSendAsSmimeInfoList {..} =

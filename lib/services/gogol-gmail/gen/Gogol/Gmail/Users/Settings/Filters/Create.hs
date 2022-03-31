@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsFiltersCreate = Filter
   type
     Scopes GmailUsersSettingsFiltersCreate =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsFiltersCreate {..} =
     go
       userId

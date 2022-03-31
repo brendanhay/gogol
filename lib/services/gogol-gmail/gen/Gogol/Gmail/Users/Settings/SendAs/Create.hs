@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsSendAsCreate = SendAs
   type
     Scopes GmailUsersSettingsSendAsCreate =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient GmailUsersSettingsSendAsCreate {..} =
     go
       userId

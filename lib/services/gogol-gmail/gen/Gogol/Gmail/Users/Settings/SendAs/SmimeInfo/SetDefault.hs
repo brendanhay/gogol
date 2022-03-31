@@ -115,9 +115,7 @@ instance
   type
     Scopes
       GmailUsersSettingsSendAsSmimeInfoSetDefault =
-      '[ "https://www.googleapis.com/auth/gmail.settings.basic",
-         "https://www.googleapis.com/auth/gmail.settings.sharing"
-       ]
+      '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
   requestClient
     GmailUsersSettingsSendAsSmimeInfoSetDefault {..} =
       go

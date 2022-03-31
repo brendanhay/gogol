@@ -94,10 +94,10 @@ instance Core.GoogleRequest GmailUsersStop where
   type Rs GmailUsersStop = ()
   type
     Scopes GmailUsersStop =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersStop {..} =
     go

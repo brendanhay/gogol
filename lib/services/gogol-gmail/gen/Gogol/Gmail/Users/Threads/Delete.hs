@@ -100,7 +100,7 @@ instance Core.GoogleRequest GmailUsersThreadsDelete where
   type Rs GmailUsersThreadsDelete = ()
   type
     Scopes GmailUsersThreadsDelete =
-      '["https://mail.google.com/"]
+      '[Gmail'FullControl]
   requestClient GmailUsersThreadsDelete {..} =
     go
       userId

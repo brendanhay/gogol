@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsUpdateImap = ImapSettings
   type
     Scopes GmailUsersSettingsUpdateImap =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsUpdateImap {..} =
     go
       userId

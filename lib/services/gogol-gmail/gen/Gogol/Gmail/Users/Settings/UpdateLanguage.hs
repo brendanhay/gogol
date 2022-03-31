@@ -106,7 +106,7 @@ instance
       LanguageSettings
   type
     Scopes GmailUsersSettingsUpdateLanguage =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsUpdateLanguage {..} =
     go
       userId

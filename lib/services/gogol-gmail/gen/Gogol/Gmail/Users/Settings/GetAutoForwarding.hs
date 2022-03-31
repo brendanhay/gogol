@@ -100,10 +100,10 @@ instance
       AutoForwarding
   type
     Scopes GmailUsersSettingsGetAutoForwarding =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly",
-         "https://www.googleapis.com/auth/gmail.settings.basic"
+      '[ Gmail'FullControl,
+         Gmail'Modify,
+         Gmail'Readonly,
+         Gmail'Settings'Basic
        ]
   requestClient GmailUsersSettingsGetAutoForwarding {..} =
     go

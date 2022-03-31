@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsDelegatesCreate = Delegate
   type
     Scopes GmailUsersSettingsDelegatesCreate =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient GmailUsersSettingsDelegatesCreate {..} =
     go
       userId

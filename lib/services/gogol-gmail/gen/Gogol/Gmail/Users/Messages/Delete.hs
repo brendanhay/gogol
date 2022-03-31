@@ -100,7 +100,7 @@ instance Core.GoogleRequest GmailUsersMessagesDelete where
   type Rs GmailUsersMessagesDelete = ()
   type
     Scopes GmailUsersMessagesDelete =
-      '["https://mail.google.com/"]
+      '[Gmail'FullControl]
   requestClient GmailUsersMessagesDelete {..} =
     go
       userId

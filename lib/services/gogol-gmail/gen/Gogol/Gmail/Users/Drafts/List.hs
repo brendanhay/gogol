@@ -110,10 +110,10 @@ instance Core.GoogleRequest GmailUsersDraftsList where
   type Rs GmailUsersDraftsList = ListDraftsResponse
   type
     Scopes GmailUsersDraftsList =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Compose,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersDraftsList {..} =
     go

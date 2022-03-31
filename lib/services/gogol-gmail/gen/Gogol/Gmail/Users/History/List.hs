@@ -116,10 +116,10 @@ instance Core.GoogleRequest GmailUsersHistoryList where
   type Rs GmailUsersHistoryList = ListHistoryResponse
   type
     Scopes GmailUsersHistoryList =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersHistoryList {..} =
     go

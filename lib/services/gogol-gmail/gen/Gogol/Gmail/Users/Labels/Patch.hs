@@ -106,10 +106,7 @@ instance Core.GoogleRequest GmailUsersLabelsPatch where
   type Rs GmailUsersLabelsPatch = Label
   type
     Scopes GmailUsersLabelsPatch =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Labels, Gmail'Modify]
   requestClient GmailUsersLabelsPatch {..} =
     go
       userId

@@ -117,11 +117,11 @@ instance Core.GoogleRequest GmailUsersMessagesSend where
   type Rs GmailUsersMessagesSend = Message
   type
     Scopes GmailUsersMessagesSend =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.send"
+      '[ Gmail'FullControl,
+         Gmail'Addons'Current'Action'Compose,
+         Gmail'Compose,
+         Gmail'Modify,
+         Gmail'Send
        ]
   requestClient GmailUsersMessagesSend {..} =
     go

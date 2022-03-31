@@ -107,9 +107,7 @@ instance Core.GoogleRequest GmailUsersThreadsModify where
   type Rs GmailUsersThreadsModify = Thread
   type
     Scopes GmailUsersThreadsModify =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Modify]
   requestClient GmailUsersThreadsModify {..} =
     go
       userId

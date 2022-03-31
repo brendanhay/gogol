@@ -104,10 +104,10 @@ instance Core.GoogleRequest GmailUsersDraftsGet where
   type Rs GmailUsersDraftsGet = Draft
   type
     Scopes GmailUsersDraftsGet =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Compose,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersDraftsGet {..} =
     go

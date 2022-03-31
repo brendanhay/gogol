@@ -100,10 +100,10 @@ instance Core.GoogleRequest GmailUsersWatch where
   type Rs GmailUsersWatch = WatchResponse
   type
     Scopes GmailUsersWatch =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersWatch {..} =
     go

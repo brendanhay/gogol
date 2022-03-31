@@ -108,13 +108,13 @@ instance Core.GoogleRequest GmailUsersThreadsGet where
   type Rs GmailUsersThreadsGet = Thread
   type
     Scopes GmailUsersThreadsGet =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.addons.current.message.action",
-         "https://www.googleapis.com/auth/gmail.addons.current.message.metadata",
-         "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Addons'Current'Message'Action,
+         Gmail'Addons'Current'Message'Metadata,
+         Gmail'Addons'Current'Message'Readonly,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersThreadsGet {..} =
     go

@@ -114,10 +114,10 @@ instance Core.GoogleRequest GmailUsersThreadsList where
   type Rs GmailUsersThreadsList = ListThreadsResponse
   type
     Scopes GmailUsersThreadsList =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersThreadsList {..} =
     go

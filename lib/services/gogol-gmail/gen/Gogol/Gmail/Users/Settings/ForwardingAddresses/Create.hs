@@ -107,7 +107,7 @@ instance
   type
     Scopes
       GmailUsersSettingsForwardingAddressesCreate =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient
     GmailUsersSettingsForwardingAddressesCreate {..} =
       go

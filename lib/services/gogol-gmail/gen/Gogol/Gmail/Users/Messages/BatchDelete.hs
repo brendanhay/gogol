@@ -106,7 +106,7 @@ instance
   type Rs GmailUsersMessagesBatchDelete = ()
   type
     Scopes GmailUsersMessagesBatchDelete =
-      '["https://mail.google.com/"]
+      '[Gmail'FullControl]
   requestClient GmailUsersMessagesBatchDelete {..} =
     go
       userId

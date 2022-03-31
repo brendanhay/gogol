@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsUpdatePop = PopSettings
   type
     Scopes GmailUsersSettingsUpdatePop =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsUpdatePop {..} =
     go
       userId

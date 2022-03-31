@@ -100,10 +100,7 @@ instance Core.GoogleRequest GmailUsersLabelsCreate where
   type Rs GmailUsersLabelsCreate = Label
   type
     Scopes GmailUsersLabelsCreate =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Labels, Gmail'Modify]
   requestClient GmailUsersLabelsCreate {..} =
     go
       userId

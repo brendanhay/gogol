@@ -106,9 +106,7 @@ instance
   type Rs GmailUsersMessagesBatchModify = ()
   type
     Scopes GmailUsersMessagesBatchModify =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Modify]
   requestClient GmailUsersMessagesBatchModify {..} =
     go
       userId
