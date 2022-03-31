@@ -108,7 +108,7 @@ instance
       GoogleLongrunning__Operation
   type
     Scopes MlProjectsModelsVersionsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsVersionsPatch {..} =
     go
       name

@@ -111,7 +111,7 @@ instance
   type
     Scopes
       MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState {..} =
       go

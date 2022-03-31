@@ -93,9 +93,7 @@ instance Core.GoogleRequest MlProjectsJobsGet where
   type Rs MlProjectsJobsGet = GoogleCloudMlV1__Job
   type
     Scopes MlProjectsJobsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient MlProjectsJobsGet {..} =
     go
       name

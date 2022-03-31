@@ -97,7 +97,7 @@ instance Core.GoogleRequest MlProjectsGetConfig where
       GoogleCloudMlV1__GetConfigResponse
   type
     Scopes MlProjectsGetConfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsGetConfig {..} =
     go
       name

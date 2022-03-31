@@ -110,7 +110,7 @@ instance Core.GoogleRequest MlProjectsOperationsList where
       GoogleLongrunning__ListOperationsResponse
   type
     Scopes MlProjectsOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsOperationsList {..} =
     go
       name

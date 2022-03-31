@@ -98,7 +98,7 @@ instance
       GoogleCloudMlV1__Trial
   type
     Scopes MlProjectsLocationsStudiesTrialsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsLocationsStudiesTrialsGet {..} =
     go
       name

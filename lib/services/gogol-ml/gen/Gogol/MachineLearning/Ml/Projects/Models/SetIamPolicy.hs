@@ -106,7 +106,7 @@ instance
       GoogleIamV1__Policy
   type
     Scopes MlProjectsModelsSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsSetIamPolicy {..} =
     go
       resource

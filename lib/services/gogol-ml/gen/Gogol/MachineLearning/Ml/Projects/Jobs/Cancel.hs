@@ -101,7 +101,7 @@ instance Core.GoogleRequest MlProjectsJobsCancel where
   type Rs MlProjectsJobsCancel = GoogleProtobuf__Empty
   type
     Scopes MlProjectsJobsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsJobsCancel {..} =
     go
       name

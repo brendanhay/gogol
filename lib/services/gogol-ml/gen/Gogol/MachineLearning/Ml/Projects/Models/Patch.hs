@@ -105,7 +105,7 @@ instance Core.GoogleRequest MlProjectsModelsPatch where
       GoogleLongrunning__Operation
   type
     Scopes MlProjectsModelsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient MlProjectsModelsPatch {..} =
     go
       name
