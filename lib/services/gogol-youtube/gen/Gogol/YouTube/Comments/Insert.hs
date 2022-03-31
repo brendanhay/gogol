@@ -101,7 +101,7 @@ instance Core.GoogleRequest YouTubeCommentsInsert where
   type Rs YouTubeCommentsInsert = Comment
   type
     Scopes YouTubeCommentsInsert =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentsInsert {..} =
     go
       part

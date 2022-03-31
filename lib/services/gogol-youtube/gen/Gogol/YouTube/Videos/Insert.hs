@@ -149,10 +149,10 @@ instance Core.GoogleRequest YouTubeVideosInsert where
   type Rs YouTubeVideosInsert = Video
   type
     Scopes YouTubeVideosInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.upload",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Upload,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubeVideosInsert {..} =
     go

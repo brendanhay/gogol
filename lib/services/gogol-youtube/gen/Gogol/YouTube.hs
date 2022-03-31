@@ -34,13 +34,13 @@ module Gogol.YouTube
     youTubeService,
 
     -- * OAuth Scopes
-    youTubeScope,
-    youTubeChannelMembershipsCreatorScope,
-    youTubeForceSslScope,
-    youTubeReadOnlyScope,
-    youTubeUploadScope,
-    youtubepartnerScope,
-    youtubepartnerChannelAuditScope,
+    Youtube'FullControl,
+    Youtube'ChannelMemberships'Creator,
+    Youtube'ForceSsl,
+    Youtube'Readonly,
+    Youtube'Upload,
+    Youtubepartner'FullControl,
+    YoutubepartnerChannelAudit'FullControl,
 
     -- * Resources
 

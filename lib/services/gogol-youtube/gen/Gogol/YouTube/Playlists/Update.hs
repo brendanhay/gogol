@@ -105,9 +105,9 @@ instance Core.GoogleRequest YouTubePlaylistsUpdate where
   type Rs YouTubePlaylistsUpdate = Playlist
   type
     Scopes YouTubePlaylistsUpdate =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubePlaylistsUpdate {..} =
     go

@@ -139,9 +139,9 @@ instance
       ChannelBannerResource
   type
     Scopes YouTubeChannelBannersInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.upload"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Upload
        ]
   requestClient YouTubeChannelBannersInsert {..} =
     go

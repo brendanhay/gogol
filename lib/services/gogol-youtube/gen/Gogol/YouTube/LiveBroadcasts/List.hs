@@ -138,9 +138,9 @@ instance Core.GoogleRequest YouTubeLiveBroadcastsList where
       LiveBroadcastListResponse
   type
     Scopes YouTubeLiveBroadcastsList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly
        ]
   requestClient YouTubeLiveBroadcastsList {..} =
     go

@@ -117,9 +117,7 @@ instance Core.GoogleRequest YouTubeLiveBroadcastsBind where
   type Rs YouTubeLiveBroadcastsBind = LiveBroadcast
   type
     Scopes YouTubeLiveBroadcastsBind =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveBroadcastsBind {..} =
     go
       (Core.Just id)

@@ -104,7 +104,7 @@ instance
   type Rs YouTubeCommentThreadsInsert = CommentThread
   type
     Scopes YouTubeCommentThreadsInsert =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentThreadsInsert {..} =
     go
       part

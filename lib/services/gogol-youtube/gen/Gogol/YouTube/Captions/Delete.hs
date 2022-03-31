@@ -103,9 +103,7 @@ instance Core.GoogleRequest YouTubeCaptionsDelete where
   type Rs YouTubeCaptionsDelete = ()
   type
     Scopes YouTubeCaptionsDelete =
-      '[ "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
-       ]
+      '[Youtube'ForceSsl, Youtubepartner'FullControl]
   requestClient YouTubeCaptionsDelete {..} =
     go
       (Core.Just id)

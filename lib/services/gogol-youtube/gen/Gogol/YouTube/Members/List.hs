@@ -115,7 +115,7 @@ instance Core.GoogleRequest YouTubeMembersList where
   type Rs YouTubeMembersList = MemberListResponse
   type
     Scopes YouTubeMembersList =
-      '["https://www.googleapis.com/auth/youtube.channel-memberships.creator"]
+      '[Youtube'ChannelMemberships'Creator]
   requestClient YouTubeMembersList {..} =
     go
       part

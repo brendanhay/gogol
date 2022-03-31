@@ -112,9 +112,9 @@ instance Core.GoogleRequest YouTubePlaylistsInsert where
   type Rs YouTubePlaylistsInsert = Playlist
   type
     Scopes YouTubePlaylistsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubePlaylistsInsert {..} =
     go

@@ -112,9 +112,7 @@ instance Core.GoogleRequest YouTubeLiveStreamsInsert where
   type Rs YouTubeLiveStreamsInsert = LiveStream
   type
     Scopes YouTubeLiveStreamsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveStreamsInsert {..} =
     go
       part

@@ -95,7 +95,7 @@ instance Core.GoogleRequest YouTubeCommentsDelete where
   type Rs YouTubeCommentsDelete = ()
   type
     Scopes YouTubeCommentsDelete =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentsDelete {..} =
     go
       (Core.Just id)

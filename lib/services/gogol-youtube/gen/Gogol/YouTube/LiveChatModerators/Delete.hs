@@ -99,9 +99,7 @@ instance
   type Rs YouTubeLiveChatModeratorsDelete = ()
   type
     Scopes YouTubeLiveChatModeratorsDelete =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveChatModeratorsDelete {..} =
     go
       (Core.Just id)

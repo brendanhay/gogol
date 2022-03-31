@@ -130,9 +130,7 @@ instance Core.GoogleRequest YouTubeCaptionsInsert where
   type Rs YouTubeCaptionsInsert = Caption
   type
     Scopes YouTubeCaptionsInsert =
-      '[ "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
-       ]
+      '[Youtube'ForceSsl, Youtubepartner'FullControl]
   requestClient YouTubeCaptionsInsert {..} =
     go
       part

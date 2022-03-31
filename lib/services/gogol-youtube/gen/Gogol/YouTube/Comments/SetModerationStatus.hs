@@ -111,7 +111,7 @@ instance
   type Rs YouTubeCommentsSetModerationStatus = ()
   type
     Scopes YouTubeCommentsSetModerationStatus =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentsSetModerationStatus {..} =
     go
       id

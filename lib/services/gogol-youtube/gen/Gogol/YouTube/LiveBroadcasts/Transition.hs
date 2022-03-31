@@ -126,9 +126,7 @@ instance
       LiveBroadcast
   type
     Scopes YouTubeLiveBroadcastsTransition =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveBroadcastsTransition {..} =
     go
       (Core.Just broadcastStatus)

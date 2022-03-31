@@ -115,9 +115,7 @@ instance
   type Rs YouTubeLiveBroadcastsInsert = LiveBroadcast
   type
     Scopes YouTubeLiveBroadcastsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveBroadcastsInsert {..} =
     go
       part

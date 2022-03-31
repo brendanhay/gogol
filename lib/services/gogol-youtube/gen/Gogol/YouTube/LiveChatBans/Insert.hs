@@ -102,9 +102,7 @@ instance Core.GoogleRequest YouTubeLiveChatBansInsert where
   type Rs YouTubeLiveChatBansInsert = LiveChatBan
   type
     Scopes YouTubeLiveChatBansInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveChatBansInsert {..} =
     go
       part

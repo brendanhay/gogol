@@ -112,9 +112,9 @@ instance
       SuperChatEventListResponse
   type
     Scopes YouTubeSuperChatEventsList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly
        ]
   requestClient YouTubeSuperChatEventsList {..} =
     go
