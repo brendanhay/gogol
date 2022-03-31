@@ -91,9 +91,7 @@ instance Core.GoogleRequest PlusActivitiesSearch where
   type Rs PlusActivitiesSearch = ActivityFeed
   type
     Scopes PlusActivitiesSearch =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+      '[Plus'Login, Plus'Me]
   requestClient PlusActivitiesSearch {..} =
     go
       (Core.Just query)

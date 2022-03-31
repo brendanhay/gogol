@@ -92,11 +92,7 @@ newPlusPeopleList collection userId =
 
 instance Core.GoogleRequest PlusPeopleList where
   type Rs PlusPeopleList = PeopleFeed
-  type
-    Scopes PlusPeopleList =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+  type Scopes PlusPeopleList = '[Plus'Login, Plus'Me]
   requestClient PlusPeopleList {..} =
     go
       userId

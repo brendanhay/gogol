@@ -34,10 +34,10 @@ module Gogol.Plus
     plusService,
 
     -- * OAuth Scopes
-    plusLoginScope,
-    plusMeScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Plus'Login,
+    Plus'Me,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Resources
 

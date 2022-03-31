@@ -30,10 +30,10 @@ module Gogol.Plus.Types
     plusService,
 
     -- * OAuth Scopes
-    plusLoginScope,
-    plusMeScope,
-    userinfoEmailScope,
-    userinfoProfileScope,
+    Plus'Login,
+    Plus'Me,
+    Userinfo'Email,
+    Userinfo'Profile,
 
     -- * Types
 
@@ -273,17 +273,13 @@ plusService =
     "www.googleapis.com"
 
 -- | View your basic profile info, including your age range and language
-plusLoginScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.login"]
-plusLoginScope = Core.Proxy
+type Plus'Login = "https://www.googleapis.com/auth/plus.login"
 
 -- | Associate you with your personal info on Google
-plusMeScope :: Core.Proxy '["https://www.googleapis.com/auth/plus.me"]
-plusMeScope = Core.Proxy
+type Plus'Me = "https://www.googleapis.com/auth/plus.me"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userinfoProfileScope = Core.Proxy
+type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"

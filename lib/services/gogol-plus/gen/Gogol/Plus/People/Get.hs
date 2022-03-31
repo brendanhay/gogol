@@ -72,10 +72,10 @@ instance Core.GoogleRequest PlusPeopleGet where
   type Rs PlusPeopleGet = Person
   type
     Scopes PlusPeopleGet =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me",
-         "https://www.googleapis.com/auth/userinfo.email",
-         "https://www.googleapis.com/auth/userinfo.profile"
+      '[ Plus'Login,
+         Plus'Me,
+         Userinfo'Email,
+         Userinfo'Profile
        ]
   requestClient PlusPeopleGet {..} =
     go userId (Core.Just Core.AltJSON) plusService

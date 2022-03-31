@@ -86,11 +86,7 @@ newPlusCommentsList activityId =
 
 instance Core.GoogleRequest PlusCommentsList where
   type Rs PlusCommentsList = CommentFeed
-  type
-    Scopes PlusCommentsList =
-      '[ "https://www.googleapis.com/auth/plus.login",
-         "https://www.googleapis.com/auth/plus.me"
-       ]
+  type Scopes PlusCommentsList = '[Plus'Login, Plus'Me]
   requestClient PlusCommentsList {..} =
     go
       activityId
