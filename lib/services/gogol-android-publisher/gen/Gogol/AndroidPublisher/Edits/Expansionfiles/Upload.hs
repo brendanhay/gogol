@@ -151,7 +151,7 @@ instance
       ExpansionFilesUploadResponse
   type
     Scopes AndroidPublisherEditsExpansionfilesUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsExpansionfilesUpload {..} =
       go

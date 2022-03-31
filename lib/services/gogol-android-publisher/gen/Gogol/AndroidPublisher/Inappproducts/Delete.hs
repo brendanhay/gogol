@@ -105,7 +105,7 @@ instance
   type Rs AndroidPublisherInappproductsDelete = ()
   type
     Scopes AndroidPublisherInappproductsDelete =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherInappproductsDelete {..} =
     go
       packageName

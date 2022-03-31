@@ -113,7 +113,7 @@ instance
       ReviewsReplyResponse
   type
     Scopes AndroidPublisherReviewsReply =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherReviewsReply {..} =
     go
       packageName

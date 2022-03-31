@@ -102,7 +102,7 @@ instance Core.GoogleRequest AndroidPublisherEditsGet where
   type Rs AndroidPublisherEditsGet = AppEdit
   type
     Scopes AndroidPublisherEditsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsGet {..} =
     go
       packageName

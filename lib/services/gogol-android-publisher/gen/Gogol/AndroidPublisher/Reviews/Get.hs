@@ -109,7 +109,7 @@ instance
   type Rs AndroidPublisherReviewsGet = Review
   type
     Scopes AndroidPublisherReviewsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherReviewsGet {..} =
     go
       packageName

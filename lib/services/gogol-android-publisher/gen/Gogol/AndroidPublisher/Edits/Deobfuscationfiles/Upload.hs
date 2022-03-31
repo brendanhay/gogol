@@ -152,7 +152,7 @@ instance
   type
     Scopes
       AndroidPublisherEditsDeobfuscationfilesUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherEditsDeobfuscationfilesUpload {..} =
       go

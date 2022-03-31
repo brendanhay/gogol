@@ -114,7 +114,7 @@ instance
       Variant
   type
     Scopes AndroidPublisherSystemapksVariantsCreate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherSystemapksVariantsCreate {..} =
       go

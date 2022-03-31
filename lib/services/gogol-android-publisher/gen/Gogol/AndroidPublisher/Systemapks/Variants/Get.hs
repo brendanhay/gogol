@@ -114,7 +114,7 @@ instance
       Variant
   type
     Scopes AndroidPublisherSystemapksVariantsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherSystemapksVariantsGet {..} =
       go

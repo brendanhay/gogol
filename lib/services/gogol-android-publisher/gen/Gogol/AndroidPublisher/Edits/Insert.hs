@@ -105,7 +105,7 @@ instance
   type Rs AndroidPublisherEditsInsert = AppEdit
   type
     Scopes AndroidPublisherEditsInsert =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsInsert {..} =
     go
       packageName

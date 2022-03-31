@@ -143,7 +143,7 @@ instance
       ImagesUploadResponse
   type
     Scopes AndroidPublisherEditsImagesUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsImagesUpload {..} =
     go
       packageName

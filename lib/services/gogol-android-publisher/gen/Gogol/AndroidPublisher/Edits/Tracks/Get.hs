@@ -112,7 +112,7 @@ instance
   type Rs AndroidPublisherEditsTracksGet = Track
   type
     Scopes AndroidPublisherEditsTracksGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsTracksGet {..} =
     go
       packageName

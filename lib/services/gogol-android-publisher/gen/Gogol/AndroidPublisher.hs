@@ -34,7 +34,7 @@ module Gogol.AndroidPublisher
     androidPublisherService,
 
     -- * OAuth Scopes
-    androidPublisherScope,
+    Androidpublisher'FullControl,
 
     -- * Resources
 

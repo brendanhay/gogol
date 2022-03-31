@@ -118,7 +118,7 @@ instance
   type Rs AndroidPublisherEditsListingsUpdate = Listing
   type
     Scopes AndroidPublisherEditsListingsUpdate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsListingsUpdate {..} =
     go
       packageName

@@ -107,7 +107,7 @@ instance
   type Rs AndroidPublisherGrantsPatch = Grant
   type
     Scopes AndroidPublisherGrantsPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherGrantsPatch {..} =
     go
       name

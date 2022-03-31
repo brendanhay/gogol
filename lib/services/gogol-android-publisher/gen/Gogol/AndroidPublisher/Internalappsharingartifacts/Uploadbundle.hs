@@ -124,7 +124,7 @@ instance
   type
     Scopes
       AndroidPublisherInternalappsharingartifactsUploadbundle =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherInternalappsharingartifactsUploadbundle {..} =
       go

@@ -124,7 +124,7 @@ instance
   type
     Scopes
       AndroidPublisherInternalappsharingartifactsUploadapk =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherInternalappsharingartifactsUploadapk {..} =
       go

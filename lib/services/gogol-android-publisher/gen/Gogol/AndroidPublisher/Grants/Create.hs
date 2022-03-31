@@ -104,7 +104,7 @@ instance
   type Rs AndroidPublisherGrantsCreate = Grant
   type
     Scopes AndroidPublisherGrantsCreate =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherGrantsCreate {..} =
     go
       parent

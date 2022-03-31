@@ -130,7 +130,7 @@ instance
   type
     Scopes
       AndroidPublisherSystemapksVariantsDownload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherSystemapksVariantsDownload {..} =
       go

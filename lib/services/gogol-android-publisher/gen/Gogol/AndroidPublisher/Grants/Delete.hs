@@ -97,7 +97,7 @@ instance
   type Rs AndroidPublisherGrantsDelete = ()
   type
     Scopes AndroidPublisherGrantsDelete =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherGrantsDelete {..} =
     go
       name

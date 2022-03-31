@@ -107,7 +107,7 @@ instance
   type Rs AndroidPublisherUsersPatch = User
   type
     Scopes AndroidPublisherUsersPatch =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherUsersPatch {..} =
     go
       name

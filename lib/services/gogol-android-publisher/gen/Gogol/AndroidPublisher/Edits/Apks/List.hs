@@ -108,7 +108,7 @@ instance
       ApksListResponse
   type
     Scopes AndroidPublisherEditsApksList =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsApksList {..} =
     go
       packageName

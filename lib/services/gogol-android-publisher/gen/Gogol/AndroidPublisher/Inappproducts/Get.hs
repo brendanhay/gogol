@@ -107,7 +107,7 @@ instance
       InAppProduct
   type
     Scopes AndroidPublisherInappproductsGet =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherInappproductsGet {..} =
     go
       packageName

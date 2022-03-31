@@ -132,7 +132,7 @@ instance
   type Rs AndroidPublisherEditsBundlesUpload = Bundle
   type
     Scopes AndroidPublisherEditsBundlesUpload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient AndroidPublisherEditsBundlesUpload {..} =
     go
       packageName

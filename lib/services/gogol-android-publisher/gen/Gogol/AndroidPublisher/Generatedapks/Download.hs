@@ -127,7 +127,7 @@ instance
   type Rs AndroidPublisherGeneratedapksDownload = ()
   type
     Scopes AndroidPublisherGeneratedapksDownload =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherGeneratedapksDownload {..} =
       go

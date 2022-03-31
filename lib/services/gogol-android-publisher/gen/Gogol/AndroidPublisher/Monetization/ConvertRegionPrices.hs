@@ -109,7 +109,7 @@ instance
   type
     Scopes
       AndroidPublisherMonetizationConvertRegionPrices =
-      '["https://www.googleapis.com/auth/androidpublisher"]
+      '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherMonetizationConvertRegionPrices {..} =
       go
