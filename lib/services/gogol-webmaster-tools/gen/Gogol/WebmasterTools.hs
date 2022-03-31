@@ -34,8 +34,8 @@ module Gogol.WebmasterTools
     webmasterToolsService,
 
     -- * OAuth Scopes
-    webmastersScope,
-    webmastersReadOnlyScope,
+    Webmasters'FullControl,
+    Webmasters'Readonly,
 
     -- * Resources
 

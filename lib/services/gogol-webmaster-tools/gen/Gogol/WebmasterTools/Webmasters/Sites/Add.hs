@@ -72,7 +72,7 @@ instance Core.GoogleRequest WebmastersSitesAdd where
   type Rs WebmastersSitesAdd = ()
   type
     Scopes WebmastersSitesAdd =
-      '["https://www.googleapis.com/auth/webmasters"]
+      '[Webmasters'FullControl]
   requestClient WebmastersSitesAdd {..} =
     go
       siteUrl
