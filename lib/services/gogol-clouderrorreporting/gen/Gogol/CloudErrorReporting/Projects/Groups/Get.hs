@@ -98,7 +98,7 @@ instance
       ErrorGroup
   type
     Scopes CloudErrorReportingProjectsGroupsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudErrorReportingProjectsGroupsGet {..} =
       go
