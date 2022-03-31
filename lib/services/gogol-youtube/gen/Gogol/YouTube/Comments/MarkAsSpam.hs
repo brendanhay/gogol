@@ -96,7 +96,7 @@ instance Core.GoogleRequest YouTubeCommentsMarkAsSpam where
   type Rs YouTubeCommentsMarkAsSpam = ()
   type
     Scopes YouTubeCommentsMarkAsSpam =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentsMarkAsSpam {..} =
     go
       id

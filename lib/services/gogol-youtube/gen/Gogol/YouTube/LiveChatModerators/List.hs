@@ -117,9 +117,9 @@ instance
       LiveChatModeratorListResponse
   type
     Scopes YouTubeLiveChatModeratorsList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly
        ]
   requestClient YouTubeLiveChatModeratorsList {..} =
     go

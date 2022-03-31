@@ -147,7 +147,7 @@ instance Core.GoogleRequest YouTubeCommentThreadsList where
       CommentThreadListResponse
   type
     Scopes YouTubeCommentThreadsList =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+      '[Youtube'ForceSsl]
   requestClient YouTubeCommentThreadsList {..} =
     go
       part

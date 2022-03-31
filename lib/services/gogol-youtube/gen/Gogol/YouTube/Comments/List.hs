@@ -113,9 +113,7 @@ newYouTubeCommentsList part =
 
 instance Core.GoogleRequest YouTubeCommentsList where
   type Rs YouTubeCommentsList = CommentListResponse
-  type
-    Scopes YouTubeCommentsList =
-      '["https://www.googleapis.com/auth/youtube.force-ssl"]
+  type Scopes YouTubeCommentsList = '[Youtube'ForceSsl]
   requestClient YouTubeCommentsList {..} =
     go
       part

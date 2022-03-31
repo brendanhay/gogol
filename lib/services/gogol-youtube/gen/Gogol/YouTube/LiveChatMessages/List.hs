@@ -125,9 +125,9 @@ instance
       LiveChatMessageListResponse
   type
     Scopes YouTubeLiveChatMessagesList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly
        ]
   requestClient YouTubeLiveChatMessagesList {..} =
     go

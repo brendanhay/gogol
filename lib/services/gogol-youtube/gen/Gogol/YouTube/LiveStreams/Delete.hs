@@ -106,9 +106,7 @@ instance Core.GoogleRequest YouTubeLiveStreamsDelete where
   type Rs YouTubeLiveStreamsDelete = ()
   type
     Scopes YouTubeLiveStreamsDelete =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveStreamsDelete {..} =
     go
       (Core.Just id)

@@ -113,9 +113,7 @@ instance Core.GoogleRequest YouTubeCaptionsList where
   type Rs YouTubeCaptionsList = CaptionListResponse
   type
     Scopes YouTubeCaptionsList =
-      '[ "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
-       ]
+      '[Youtube'ForceSsl, Youtubepartner'FullControl]
   requestClient YouTubeCaptionsList {..} =
     go
       part

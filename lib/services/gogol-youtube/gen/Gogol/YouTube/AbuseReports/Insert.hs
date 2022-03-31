@@ -101,9 +101,7 @@ instance Core.GoogleRequest YouTubeAbuseReportsInsert where
   type Rs YouTubeAbuseReportsInsert = AbuseReport
   type
     Scopes YouTubeAbuseReportsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeAbuseReportsInsert {..} =
     go
       part

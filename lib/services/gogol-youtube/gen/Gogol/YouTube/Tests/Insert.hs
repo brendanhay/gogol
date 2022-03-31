@@ -103,9 +103,7 @@ newYouTubeTestsInsert part payload =
 
 instance Core.GoogleRequest YouTubeTestsInsert where
   type Rs YouTubeTestsInsert = TestItem
-  type
-    Scopes YouTubeTestsInsert =
-      '["https://www.googleapis.com/auth/youtube.readonly"]
+  type Scopes YouTubeTestsInsert = '[Youtube'Readonly]
   requestClient YouTubeTestsInsert {..} =
     go
       part

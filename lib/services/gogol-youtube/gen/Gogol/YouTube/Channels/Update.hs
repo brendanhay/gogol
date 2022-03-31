@@ -105,9 +105,9 @@ instance Core.GoogleRequest YouTubeChannelsUpdate where
   type Rs YouTubeChannelsUpdate = Channel
   type
     Scopes YouTubeChannelsUpdate =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubeChannelsUpdate {..} =
     go

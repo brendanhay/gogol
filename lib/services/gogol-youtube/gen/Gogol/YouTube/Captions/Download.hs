@@ -126,9 +126,7 @@ instance Core.GoogleRequest YouTubeCaptionsDownload where
   type Rs YouTubeCaptionsDownload = ()
   type
     Scopes YouTubeCaptionsDownload =
-      '[ "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtubepartner"
-       ]
+      '[Youtube'ForceSsl, Youtubepartner'FullControl]
   requestClient YouTubeCaptionsDownload {..} =
     go
       id

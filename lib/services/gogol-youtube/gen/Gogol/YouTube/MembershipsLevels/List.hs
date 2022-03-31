@@ -100,7 +100,7 @@ instance
       MembershipsLevelListResponse
   type
     Scopes YouTubeMembershipsLevelsList =
-      '["https://www.googleapis.com/auth/youtube.channel-memberships.creator"]
+      '[Youtube'ChannelMemberships'Creator]
   requestClient YouTubeMembershipsLevelsList {..} =
     go
       part

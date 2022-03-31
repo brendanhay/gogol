@@ -152,10 +152,10 @@ instance Core.GoogleRequest YouTubeSubscriptionsList where
       SubscriptionListResponse
   type
     Scopes YouTubeSubscriptionsList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubeSubscriptionsList {..} =
     go

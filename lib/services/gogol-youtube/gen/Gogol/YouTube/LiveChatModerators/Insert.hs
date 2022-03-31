@@ -107,9 +107,7 @@ instance
       LiveChatModerator
   type
     Scopes YouTubeLiveChatModeratorsInsert =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl"
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl]
   requestClient YouTubeLiveChatModeratorsInsert {..} =
     go
       part

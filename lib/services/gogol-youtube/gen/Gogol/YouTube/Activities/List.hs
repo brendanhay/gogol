@@ -129,9 +129,9 @@ instance Core.GoogleRequest YouTubeActivitiesList where
   type Rs YouTubeActivitiesList = ActivityListResponse
   type
     Scopes YouTubeActivitiesList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly
        ]
   requestClient YouTubeActivitiesList {..} =
     go

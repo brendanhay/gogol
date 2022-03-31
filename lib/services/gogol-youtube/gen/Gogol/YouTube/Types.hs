@@ -30,13 +30,13 @@ module Gogol.YouTube.Types
     youTubeService,
 
     -- * OAuth Scopes
-    youTubeScope,
-    youTubeChannelMembershipsCreatorScope,
-    youTubeForceSslScope,
-    youTubeReadOnlyScope,
-    youTubeUploadScope,
-    youtubepartnerScope,
-    youtubepartnerChannelAuditScope,
+    Youtube'FullControl,
+    Youtube'ChannelMemberships'Creator,
+    Youtube'ForceSsl,
+    Youtube'Readonly,
+    Youtube'Upload,
+    Youtubepartner'FullControl,
+    YoutubepartnerChannelAudit'FullControl,
 
     -- * Types
 
@@ -1290,29 +1290,22 @@ youTubeService =
     "youtube.googleapis.com"
 
 -- | Manage your YouTube account
-youTubeScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube"]
-youTubeScope = Core.Proxy
+type Youtube'FullControl = "https://www.googleapis.com/auth/youtube"
 
 -- | See a list of your current active channel members, their current level, and when they became a member
-youTubeChannelMembershipsCreatorScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.channel-memberships.creator"]
-youTubeChannelMembershipsCreatorScope = Core.Proxy
+type Youtube'ChannelMemberships'Creator = "https://www.googleapis.com/auth/youtube.channel-memberships.creator"
 
 -- | See, edit, and permanently delete your YouTube videos, ratings, comments and captions
-youTubeForceSslScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
-youTubeForceSslScope = Core.Proxy
+type Youtube'ForceSsl = "https://www.googleapis.com/auth/youtube.force-ssl"
 
 -- | View your YouTube account
-youTubeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youTubeReadOnlyScope = Core.Proxy
+type Youtube'Readonly = "https://www.googleapis.com/auth/youtube.readonly"
 
 -- | Manage your YouTube videos
-youTubeUploadScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.upload"]
-youTubeUploadScope = Core.Proxy
+type Youtube'Upload = "https://www.googleapis.com/auth/youtube.upload"
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: Core.Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youtubepartnerScope = Core.Proxy
+type Youtubepartner'FullControl = "https://www.googleapis.com/auth/youtubepartner"
 
 -- | View private information of your YouTube channel relevant during the audit process with a YouTube partner
-youtubepartnerChannelAuditScope :: Core.Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
-youtubepartnerChannelAuditScope = Core.Proxy
+type YoutubepartnerChannelAudit'FullControl = "https://www.googleapis.com/auth/youtubepartner-channel-audit"

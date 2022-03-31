@@ -141,11 +141,11 @@ instance Core.GoogleRequest YouTubeChannelsList where
   type Rs YouTubeChannelsList = ChannelListResponse
   type
     Scopes YouTubeChannelsList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly",
-         "https://www.googleapis.com/auth/youtubepartner",
-         "https://www.googleapis.com/auth/youtubepartner-channel-audit"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly,
+         Youtubepartner'FullControl,
+         YoutubepartnerChannelAudit'FullControl
        ]
   requestClient YouTubeChannelsList {..} =
     go

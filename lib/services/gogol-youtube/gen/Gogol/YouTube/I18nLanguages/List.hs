@@ -101,10 +101,10 @@ instance Core.GoogleRequest YouTubeI18nLanguagesList where
       I18nLanguageListResponse
   type
     Scopes YouTubeI18nLanguagesList =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.force-ssl",
-         "https://www.googleapis.com/auth/youtube.readonly",
-         "https://www.googleapis.com/auth/youtubepartner"
+      '[ Youtube'FullControl,
+         Youtube'ForceSsl,
+         Youtube'Readonly,
+         Youtubepartner'FullControl
        ]
   requestClient YouTubeI18nLanguagesList {..} =
     go
