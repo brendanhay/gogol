@@ -105,7 +105,7 @@ instance
   type
     Scopes
       DataFusionProjectsLocationsInstancesRestart =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsInstancesRestart {..} =
       go

@@ -34,7 +34,7 @@ module Gogol.DataFusion
     dataFusionService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

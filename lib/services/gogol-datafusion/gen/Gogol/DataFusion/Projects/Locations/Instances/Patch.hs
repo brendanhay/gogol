@@ -108,7 +108,7 @@ instance
       Operation
   type
     Scopes DataFusionProjectsLocationsInstancesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsInstancesPatch {..} =
       go

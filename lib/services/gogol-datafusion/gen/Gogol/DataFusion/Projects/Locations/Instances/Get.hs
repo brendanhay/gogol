@@ -98,7 +98,7 @@ instance
       Instance
   type
     Scopes DataFusionProjectsLocationsInstancesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsInstancesGet {..} =
       go
