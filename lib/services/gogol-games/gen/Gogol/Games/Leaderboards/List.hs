@@ -103,7 +103,7 @@ instance Core.GoogleRequest GamesLeaderboardsList where
       LeaderboardListResponse
   type
     Scopes GamesLeaderboardsList =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesLeaderboardsList {..} =
     go
       xgafv

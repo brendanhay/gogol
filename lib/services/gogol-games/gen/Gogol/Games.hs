@@ -34,8 +34,8 @@ module Gogol.Games
     gamesService,
 
     -- * OAuth Scopes
-    driveAppdataScope,
-    gamesScope,
+    Drive'Appdata,
+    Games'FullControl,
 
     -- * Resources
 

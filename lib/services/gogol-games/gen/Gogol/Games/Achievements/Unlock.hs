@@ -98,7 +98,7 @@ instance Core.GoogleRequest GamesAchievementsUnlock where
       AchievementUnlockResponse
   type
     Scopes GamesAchievementsUnlock =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementsUnlock {..} =
     go
       achievementId

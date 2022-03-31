@@ -30,8 +30,8 @@ module Gogol.Games.Types
     gamesService,
 
     -- * OAuth Scopes
-    driveAppdataScope,
-    gamesScope,
+    Drive'Appdata,
+    Games'FullControl,
 
     -- * Types
 
@@ -389,9 +389,7 @@ gamesService =
     "games.googleapis.com"
 
 -- | See, create, and delete its own configuration data in your Google Drive
-driveAppdataScope :: Core.Proxy '["https://www.googleapis.com/auth/drive.appdata"]
-driveAppdataScope = Core.Proxy
+type Drive'Appdata = "https://www.googleapis.com/auth/drive.appdata"
 
 -- | Create, edit, and delete your Google Play Games activity
-gamesScope :: Core.Proxy '["https://www.googleapis.com/auth/games"]
-gamesScope = Core.Proxy
+type Games'FullControl = "https://www.googleapis.com/auth/games"

@@ -109,7 +109,7 @@ instance
       AchievementSetStepsAtLeastResponse
   type
     Scopes GamesAchievementsSetStepsAtLeast =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementsSetStepsAtLeast {..} =
     go
       achievementId

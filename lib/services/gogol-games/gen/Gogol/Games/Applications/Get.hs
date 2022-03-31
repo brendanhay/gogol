@@ -105,7 +105,7 @@ instance Core.GoogleRequest GamesApplicationsGet where
   type Rs GamesApplicationsGet = Application
   type
     Scopes GamesApplicationsGet =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesApplicationsGet {..} =
     go
       applicationId

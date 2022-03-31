@@ -108,7 +108,7 @@ instance
       AchievementDefinitionsListResponse
   type
     Scopes GamesAchievementDefinitionsList =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesAchievementDefinitionsList {..} =
     go
       xgafv

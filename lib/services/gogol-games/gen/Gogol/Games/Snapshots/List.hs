@@ -108,9 +108,7 @@ instance Core.GoogleRequest GamesSnapshotsList where
   type Rs GamesSnapshotsList = SnapshotListResponse
   type
     Scopes GamesSnapshotsList =
-      '[ "https://www.googleapis.com/auth/drive.appdata",
-         "https://www.googleapis.com/auth/games"
-       ]
+      '[Drive'Appdata, Games'FullControl]
   requestClient GamesSnapshotsList {..} =
     go
       playerId

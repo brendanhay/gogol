@@ -99,7 +99,7 @@ instance Core.GoogleRequest GamesLeaderboardsGet where
   type Rs GamesLeaderboardsGet = Leaderboard
   type
     Scopes GamesLeaderboardsGet =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesLeaderboardsGet {..} =
     go
       leaderboardId

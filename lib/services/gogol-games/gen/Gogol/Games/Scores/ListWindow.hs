@@ -128,7 +128,7 @@ instance Core.GoogleRequest GamesScoresListWindow where
   type Rs GamesScoresListWindow = LeaderboardScores
   type
     Scopes GamesScoresListWindow =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesScoresListWindow {..} =
     go
       leaderboardId

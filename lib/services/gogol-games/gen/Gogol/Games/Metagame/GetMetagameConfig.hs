@@ -94,7 +94,7 @@ instance
       MetagameConfig
   type
     Scopes GamesMetagameGetMetagameConfig =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesMetagameGetMetagameConfig {..} =
     go
       xgafv

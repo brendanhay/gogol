@@ -98,7 +98,7 @@ instance Core.GoogleRequest GamesApplicationsVerify where
       ApplicationVerifyResponse
   type
     Scopes GamesApplicationsVerify =
-      '["https://www.googleapis.com/auth/games"]
+      '[Games'FullControl]
   requestClient GamesApplicationsVerify {..} =
     go
       applicationId

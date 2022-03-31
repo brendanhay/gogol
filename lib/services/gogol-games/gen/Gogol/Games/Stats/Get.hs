@@ -87,9 +87,7 @@ newGamesStatsGet =
 
 instance Core.GoogleRequest GamesStatsGet where
   type Rs GamesStatsGet = StatsResponse
-  type
-    Scopes GamesStatsGet =
-      '["https://www.googleapis.com/auth/games"]
+  type Scopes GamesStatsGet = '[Games'FullControl]
   requestClient GamesStatsGet {..} =
     go
       xgafv
