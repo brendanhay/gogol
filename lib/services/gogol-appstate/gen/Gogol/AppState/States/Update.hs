@@ -85,7 +85,7 @@ instance Core.GoogleRequest AppStateStatesUpdate where
   type Rs AppStateStatesUpdate = WriteResult
   type
     Scopes AppStateStatesUpdate =
-      '["https://www.googleapis.com/auth/appstate"]
+      '[Appstate'FullControl]
   requestClient AppStateStatesUpdate {..} =
     go
       stateKey

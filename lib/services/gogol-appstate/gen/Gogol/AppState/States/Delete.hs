@@ -72,7 +72,7 @@ instance Core.GoogleRequest AppStateStatesDelete where
   type Rs AppStateStatesDelete = ()
   type
     Scopes AppStateStatesDelete =
-      '["https://www.googleapis.com/auth/appstate"]
+      '[Appstate'FullControl]
   requestClient AppStateStatesDelete {..} =
     go
       stateKey

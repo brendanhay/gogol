@@ -30,7 +30,7 @@ module Gogol.AppState.Types
     appStateService,
 
     -- * OAuth Scopes
-    appStateScope,
+    Appstate'FullControl,
 
     -- * Types
 
@@ -64,5 +64,4 @@ appStateService =
     "www.googleapis.com"
 
 -- | View and manage your data for this application
-appStateScope :: Core.Proxy '["https://www.googleapis.com/auth/appstate"]
-appStateScope = Core.Proxy
+type Appstate'FullControl = "https://www.googleapis.com/auth/appstate"

@@ -34,7 +34,7 @@ module Gogol.AppState
     appStateService,
 
     -- * OAuth Scopes
-    appStateScope,
+    Appstate'FullControl,
 
     -- * Resources
 
