@@ -118,7 +118,7 @@ instance
   type
     Scopes
       AndroidEnterpriseManagedconfigurationsforuserDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsforuserDelete {..} =
       go

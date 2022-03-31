@@ -108,7 +108,7 @@ instance
       StorePage
   type
     Scopes AndroidEnterpriseStorelayoutpagesGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutpagesGet {..} =
       go

@@ -104,7 +104,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesCompleteSignup =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesCompleteSignup {..} =
       go

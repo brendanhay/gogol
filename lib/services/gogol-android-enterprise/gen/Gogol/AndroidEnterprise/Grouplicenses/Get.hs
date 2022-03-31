@@ -107,7 +107,7 @@ instance
       GroupLicense
   type
     Scopes AndroidEnterpriseGrouplicensesGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseGrouplicensesGet {..} =
     go
       enterpriseId

@@ -108,7 +108,7 @@ instance
       StorePage
   type
     Scopes AndroidEnterpriseStorelayoutpagesInsert =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutpagesInsert {..} =
       go

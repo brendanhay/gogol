@@ -112,7 +112,7 @@ instance
   type
     Scopes
       AndroidEnterpriseManagedconfigurationsforuserList =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsforuserList {..} =
       go

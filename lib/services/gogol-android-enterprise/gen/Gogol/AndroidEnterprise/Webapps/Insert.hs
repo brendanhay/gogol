@@ -105,7 +105,7 @@ instance
   type Rs AndroidEnterpriseWebappsInsert = WebApp
   type
     Scopes AndroidEnterpriseWebappsInsert =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseWebappsInsert {..} =
     go
       enterpriseId

@@ -119,7 +119,7 @@ instance
   type Rs AndroidEnterpriseInstallsDelete = ()
   type
     Scopes AndroidEnterpriseInstallsDelete =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseInstallsDelete {..} =
     go
       enterpriseId

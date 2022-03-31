@@ -101,7 +101,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesAcknowledgeNotificationSet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesAcknowledgeNotificationSet {..} =
       go

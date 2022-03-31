@@ -122,7 +122,7 @@ instance
   type Rs AndroidEnterpriseDevicesUpdate = Device
   type
     Scopes AndroidEnterpriseDevicesUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseDevicesUpdate {..} =
     go
       enterpriseId

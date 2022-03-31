@@ -107,7 +107,7 @@ instance
       EnterpriseAccount
   type
     Scopes AndroidEnterpriseEnterprisesSetAccount =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesSetAccount {..} =
       go

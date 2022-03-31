@@ -111,7 +111,7 @@ instance
   type Rs AndroidEnterpriseUsersUpdate = User
   type
     Scopes AndroidEnterpriseUsersUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseUsersUpdate {..} =
     go
       enterpriseId

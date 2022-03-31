@@ -125,7 +125,7 @@ instance
   type
     Scopes
       AndroidEnterpriseManagedconfigurationsfordeviceGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsfordeviceGet {..} =
       go

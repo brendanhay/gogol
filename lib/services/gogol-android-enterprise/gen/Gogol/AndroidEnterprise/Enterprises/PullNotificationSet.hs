@@ -103,7 +103,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesPullNotificationSet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesPullNotificationSet {..} =
       go

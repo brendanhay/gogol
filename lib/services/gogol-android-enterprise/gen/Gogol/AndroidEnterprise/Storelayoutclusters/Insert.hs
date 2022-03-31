@@ -116,7 +116,7 @@ instance
   type
     Scopes
       AndroidEnterpriseStorelayoutclustersInsert =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutclustersInsert {..} =
       go

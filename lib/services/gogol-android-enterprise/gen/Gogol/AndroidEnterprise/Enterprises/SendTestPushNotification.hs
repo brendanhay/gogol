@@ -105,7 +105,7 @@ instance
   type
     Scopes
       AndroidEnterpriseEnterprisesSendTestPushNotification =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseEnterprisesSendTestPushNotification {..} =
       go

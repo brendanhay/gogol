@@ -109,7 +109,7 @@ instance
   type
     Scopes
       AndroidEnterpriseUsersGetAvailableProductSet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseUsersGetAvailableProductSet {..} =
       go

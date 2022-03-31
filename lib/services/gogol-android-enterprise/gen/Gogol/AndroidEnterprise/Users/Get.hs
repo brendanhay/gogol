@@ -102,7 +102,7 @@ instance Core.GoogleRequest AndroidEnterpriseUsersGet where
   type Rs AndroidEnterpriseUsersGet = User
   type
     Scopes AndroidEnterpriseUsersGet =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseUsersGet {..} =
     go
       enterpriseId

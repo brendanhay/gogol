@@ -122,7 +122,7 @@ instance
   type
     Scopes
       AndroidEnterpriseStorelayoutclustersUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseStorelayoutclustersUpdate {..} =
       go

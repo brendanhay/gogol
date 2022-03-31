@@ -111,7 +111,7 @@ instance
   type Rs AndroidEnterpriseWebappsUpdate = WebApp
   type
     Scopes AndroidEnterpriseWebappsUpdate =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseWebappsUpdate {..} =
     go
       enterpriseId

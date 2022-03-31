@@ -106,7 +106,7 @@ instance
   type Rs AndroidEnterpriseProductsUnapprove = ()
   type
     Scopes AndroidEnterpriseProductsUnapprove =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient AndroidEnterpriseProductsUnapprove {..} =
     go
       enterpriseId

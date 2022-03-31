@@ -110,7 +110,7 @@ instance
   type
     Scopes
       AndroidEnterpriseUsersGenerateAuthenticationToken =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseUsersGenerateAuthenticationToken {..} =
       go

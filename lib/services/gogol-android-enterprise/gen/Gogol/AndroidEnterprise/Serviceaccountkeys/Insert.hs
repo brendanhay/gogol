@@ -107,7 +107,7 @@ instance
       ServiceAccountKey
   type
     Scopes AndroidEnterpriseServiceaccountkeysInsert =
-      '["https://www.googleapis.com/auth/androidenterprise"]
+      '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseServiceaccountkeysInsert {..} =
       go
