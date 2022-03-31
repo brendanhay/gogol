@@ -119,7 +119,7 @@ instance
       Empty
   type
     Scopes ContainerProjectsZonesOperationsCancel =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesOperationsCancel {..} =
       go

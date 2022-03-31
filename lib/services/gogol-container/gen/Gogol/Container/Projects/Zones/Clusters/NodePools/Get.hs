@@ -125,7 +125,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersNodePoolsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersNodePoolsGet {..} =
       go

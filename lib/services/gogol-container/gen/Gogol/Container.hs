@@ -34,7 +34,7 @@ module Gogol.Container
     containerService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

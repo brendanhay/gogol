@@ -110,7 +110,7 @@ instance
       Cluster
   type
     Scopes ContainerProjectsLocationsClustersGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsLocationsClustersGet {..} =
       go

@@ -116,7 +116,7 @@ instance
   type
     Scopes
       ContainerProjectsAggregatedUsableSubnetworksList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsAggregatedUsableSubnetworksList {..} =
       go

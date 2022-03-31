@@ -126,7 +126,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersSetMaintenancePolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersSetMaintenancePolicy {..} =
       go

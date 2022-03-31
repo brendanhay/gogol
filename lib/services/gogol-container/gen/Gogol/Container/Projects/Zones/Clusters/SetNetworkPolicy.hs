@@ -124,7 +124,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersSetNetworkPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersSetNetworkPolicy {..} =
       go

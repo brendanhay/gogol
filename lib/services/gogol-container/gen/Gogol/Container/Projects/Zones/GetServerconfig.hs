@@ -111,7 +111,7 @@ instance
       ServerConfig
   type
     Scopes ContainerProjectsZonesGetServerconfig =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesGetServerconfig {..} =
       go
