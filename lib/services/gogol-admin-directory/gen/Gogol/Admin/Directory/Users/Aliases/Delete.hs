@@ -106,9 +106,7 @@ instance
   type Rs DirectoryUsersAliasesDelete = ()
   type
     Scopes DirectoryUsersAliasesDelete =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.alias"
-       ]
+      '[Admin'Directory'User, Admin'Directory'User'Alias]
   requestClient DirectoryUsersAliasesDelete {..} =
     go
       userKey

@@ -98,7 +98,7 @@ instance
   type Rs AdminCustomersChromePrintersDelete = Empty
   type
     Scopes AdminCustomersChromePrintersDelete =
-      '["https://www.googleapis.com/auth/admin.chrome.printers"]
+      '[Admin'Chrome'Printers]
   requestClient AdminCustomersChromePrintersDelete {..} =
     go
       name

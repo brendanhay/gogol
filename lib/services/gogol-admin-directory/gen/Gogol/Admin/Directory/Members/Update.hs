@@ -109,8 +109,8 @@ instance Core.GoogleRequest DirectoryMembersUpdate where
   type Rs DirectoryMembersUpdate = Member
   type
     Scopes DirectoryMembersUpdate =
-      '[ "https://www.googleapis.com/auth/admin.directory.group",
-         "https://www.googleapis.com/auth/admin.directory.group.member"
+      '[ Admin'Directory'Group,
+         Admin'Directory'Group'Member
        ]
   requestClient DirectoryMembersUpdate {..} =
     go

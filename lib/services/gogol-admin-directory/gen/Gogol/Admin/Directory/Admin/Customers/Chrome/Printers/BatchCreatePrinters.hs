@@ -114,7 +114,7 @@ instance
   type
     Scopes
       AdminCustomersChromePrintersBatchCreatePrinters =
-      '["https://www.googleapis.com/auth/admin.chrome.printers"]
+      '[Admin'Chrome'Printers]
   requestClient
     AdminCustomersChromePrintersBatchCreatePrinters {..} =
       go

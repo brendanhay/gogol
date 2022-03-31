@@ -104,8 +104,8 @@ instance
   type Rs DirectoryDomainAliasesList = DomainAliases
   type
     Scopes DirectoryDomainAliasesList =
-      '[ "https://www.googleapis.com/auth/admin.directory.domain",
-         "https://www.googleapis.com/auth/admin.directory.domain.readonly"
+      '[ Admin'Directory'Domain,
+         Admin'Directory'Domain'Readonly
        ]
   requestClient DirectoryDomainAliasesList {..} =
     go

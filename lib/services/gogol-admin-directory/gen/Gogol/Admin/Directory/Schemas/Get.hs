@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectorySchemasGet where
   type Rs DirectorySchemasGet = Schema
   type
     Scopes DirectorySchemasGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.userschema",
-         "https://www.googleapis.com/auth/admin.directory.userschema.readonly"
+      '[ Admin'Directory'Userschema,
+         Admin'Directory'Userschema'Readonly
        ]
   requestClient DirectorySchemasGet {..} =
     go

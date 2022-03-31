@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectoryMembersDelete where
   type Rs DirectoryMembersDelete = ()
   type
     Scopes DirectoryMembersDelete =
-      '[ "https://www.googleapis.com/auth/admin.directory.group",
-         "https://www.googleapis.com/auth/admin.directory.group.member"
+      '[ Admin'Directory'Group,
+         Admin'Directory'Group'Member
        ]
   requestClient DirectoryMembersDelete {..} =
     go

@@ -109,7 +109,7 @@ instance Core.GoogleRequest DirectoryRolesUpdate where
   type Rs DirectoryRolesUpdate = Role
   type
     Scopes DirectoryRolesUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+      '[Admin'Directory'Rolemanagement]
   requestClient DirectoryRolesUpdate {..} =
     go
       customer

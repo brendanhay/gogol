@@ -106,7 +106,7 @@ instance
   type Rs DirectoryDomainAliasesInsert = DomainAlias
   type
     Scopes DirectoryDomainAliasesInsert =
-      '["https://www.googleapis.com/auth/admin.directory.domain"]
+      '[Admin'Directory'Domain]
   requestClient DirectoryDomainAliasesInsert {..} =
     go
       customer

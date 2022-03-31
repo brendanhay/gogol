@@ -113,8 +113,8 @@ instance
   type Rs DirectoryChromeosdevicesGet = ChromeOsDevice
   type
     Scopes DirectoryChromeosdevicesGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.device.chromeos",
-         "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"
+      '[ Admin'Directory'Device'Chromeos,
+         Admin'Directory'Device'Chromeos'Readonly
        ]
   requestClient DirectoryChromeosdevicesGet {..} =
     go

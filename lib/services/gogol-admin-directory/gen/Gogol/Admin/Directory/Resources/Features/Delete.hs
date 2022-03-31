@@ -107,7 +107,7 @@ instance
   type Rs DirectoryResourcesFeaturesDelete = ()
   type
     Scopes DirectoryResourcesFeaturesDelete =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+      '[Admin'Directory'Resource'Calendar]
   requestClient DirectoryResourcesFeaturesDelete {..} =
     go
       customer

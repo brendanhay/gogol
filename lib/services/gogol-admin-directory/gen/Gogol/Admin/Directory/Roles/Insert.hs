@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryRolesInsert where
   type Rs DirectoryRolesInsert = Role
   type
     Scopes DirectoryRolesInsert =
-      '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+      '[Admin'Directory'Rolemanagement]
   requestClient DirectoryRolesInsert {..} =
     go
       customer

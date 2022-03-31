@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryRolesDelete where
   type Rs DirectoryRolesDelete = ()
   type
     Scopes DirectoryRolesDelete =
-      '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+      '[Admin'Directory'Rolemanagement]
   requestClient DirectoryRolesDelete {..} =
     go
       customer

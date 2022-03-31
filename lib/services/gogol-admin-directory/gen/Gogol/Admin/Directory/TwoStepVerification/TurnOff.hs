@@ -101,7 +101,7 @@ instance
   type Rs DirectoryTwoStepVerificationTurnOff = ()
   type
     Scopes DirectoryTwoStepVerificationTurnOff =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryTwoStepVerificationTurnOff {..} =
     go
       userKey

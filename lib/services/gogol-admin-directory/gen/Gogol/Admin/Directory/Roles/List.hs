@@ -105,8 +105,8 @@ instance Core.GoogleRequest DirectoryRolesList where
   type Rs DirectoryRolesList = Roles
   type
     Scopes DirectoryRolesList =
-      '[ "https://www.googleapis.com/auth/admin.directory.rolemanagement",
-         "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"
+      '[ Admin'Directory'Rolemanagement,
+         Admin'Directory'Rolemanagement'Readonly
        ]
   requestClient DirectoryRolesList {..} =
     go

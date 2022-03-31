@@ -97,7 +97,7 @@ instance Core.GoogleRequest DirectoryAspsList where
   type Rs DirectoryAspsList = Asps
   type
     Scopes DirectoryAspsList =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryAspsList {..} =
     go
       userKey

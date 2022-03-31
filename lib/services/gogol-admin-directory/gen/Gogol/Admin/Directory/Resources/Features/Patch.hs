@@ -113,7 +113,7 @@ instance
   type Rs DirectoryResourcesFeaturesPatch = Feature
   type
     Scopes DirectoryResourcesFeaturesPatch =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+      '[Admin'Directory'Resource'Calendar]
   requestClient DirectoryResourcesFeaturesPatch {..} =
     go
       customer

@@ -96,7 +96,7 @@ instance Core.GoogleRequest DirectoryGroupsInsert where
   type Rs DirectoryGroupsInsert = Group
   type
     Scopes DirectoryGroupsInsert =
-      '["https://www.googleapis.com/auth/admin.directory.group"]
+      '[Admin'Directory'Group]
   requestClient DirectoryGroupsInsert {..} =
     go
       xgafv

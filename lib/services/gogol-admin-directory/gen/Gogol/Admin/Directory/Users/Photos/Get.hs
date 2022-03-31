@@ -98,8 +98,8 @@ instance Core.GoogleRequest DirectoryUsersPhotosGet where
   type Rs DirectoryUsersPhotosGet = UserPhoto
   type
     Scopes DirectoryUsersPhotosGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.readonly"
+      '[ Admin'Directory'User,
+         Admin'Directory'User'Readonly
        ]
   requestClient DirectoryUsersPhotosGet {..} =
     go

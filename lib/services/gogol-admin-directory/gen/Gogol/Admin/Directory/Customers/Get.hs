@@ -96,8 +96,8 @@ instance Core.GoogleRequest DirectoryCustomersGet where
   type Rs DirectoryCustomersGet = Customer
   type
     Scopes DirectoryCustomersGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.customer",
-         "https://www.googleapis.com/auth/admin.directory.customer.readonly"
+      '[ Admin'Directory'Customer,
+         Admin'Directory'Customer'Readonly
        ]
   requestClient DirectoryCustomersGet {..} =
     go

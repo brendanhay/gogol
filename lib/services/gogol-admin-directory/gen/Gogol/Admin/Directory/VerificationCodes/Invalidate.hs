@@ -101,7 +101,7 @@ instance
   type Rs DirectoryVerificationCodesInvalidate = ()
   type
     Scopes DirectoryVerificationCodesInvalidate =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient
     DirectoryVerificationCodesInvalidate {..} =
       go

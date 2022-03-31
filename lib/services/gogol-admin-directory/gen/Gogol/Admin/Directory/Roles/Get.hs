@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectoryRolesGet where
   type Rs DirectoryRolesGet = Role
   type
     Scopes DirectoryRolesGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.rolemanagement",
-         "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"
+      '[ Admin'Directory'Rolemanagement,
+         Admin'Directory'Rolemanagement'Readonly
        ]
   requestClient DirectoryRolesGet {..} =
     go

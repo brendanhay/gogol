@@ -119,7 +119,7 @@ instance
       DirectoryChromeosdevicesIssueCommandResponse
   type
     Scopes AdminCustomerDevicesChromeosIssueCommand =
-      '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+      '[Admin'Directory'Device'Chromeos]
   requestClient
     AdminCustomerDevicesChromeosIssueCommand {..} =
       go

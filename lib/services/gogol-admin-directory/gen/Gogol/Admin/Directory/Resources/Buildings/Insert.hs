@@ -114,7 +114,7 @@ instance
   type Rs DirectoryResourcesBuildingsInsert = Building
   type
     Scopes DirectoryResourcesBuildingsInsert =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+      '[Admin'Directory'Resource'Calendar]
   requestClient DirectoryResourcesBuildingsInsert {..} =
     go
       customer

@@ -102,7 +102,7 @@ instance
       VerificationCodes
   type
     Scopes DirectoryVerificationCodesList =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryVerificationCodesList {..} =
     go
       userKey

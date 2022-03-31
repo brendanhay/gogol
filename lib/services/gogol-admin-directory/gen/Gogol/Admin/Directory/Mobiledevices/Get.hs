@@ -110,9 +110,9 @@ instance Core.GoogleRequest DirectoryMobiledevicesGet where
   type Rs DirectoryMobiledevicesGet = MobileDevice
   type
     Scopes DirectoryMobiledevicesGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.device.mobile",
-         "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
-         "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"
+      '[ Admin'Directory'Device'Mobile,
+         Admin'Directory'Device'Mobile'Action,
+         Admin'Directory'Device'Mobile'Readonly
        ]
   requestClient DirectoryMobiledevicesGet {..} =
     go

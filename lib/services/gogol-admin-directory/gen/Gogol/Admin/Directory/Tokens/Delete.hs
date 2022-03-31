@@ -103,7 +103,7 @@ instance Core.GoogleRequest DirectoryTokensDelete where
   type Rs DirectoryTokensDelete = ()
   type
     Scopes DirectoryTokensDelete =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryTokensDelete {..} =
     go
       userKey

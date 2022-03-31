@@ -109,7 +109,7 @@ instance Core.GoogleRequest DirectoryOrgunitsUpdate where
   type Rs DirectoryOrgunitsUpdate = OrgUnit
   type
     Scopes DirectoryOrgunitsUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.orgunit"]
+      '[Admin'Directory'Orgunit]
   requestClient DirectoryOrgunitsUpdate {..} =
     go
       customerId

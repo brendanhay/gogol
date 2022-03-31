@@ -106,7 +106,7 @@ instance
   type Rs DirectoryGroupsAliasesInsert = Alias
   type
     Scopes DirectoryGroupsAliasesInsert =
-      '["https://www.googleapis.com/auth/admin.directory.group"]
+      '[Admin'Directory'Group]
   requestClient DirectoryGroupsAliasesInsert {..} =
     go
       groupKey

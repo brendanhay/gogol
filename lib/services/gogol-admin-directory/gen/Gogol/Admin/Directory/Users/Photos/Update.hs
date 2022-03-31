@@ -107,7 +107,7 @@ instance
   type Rs DirectoryUsersPhotosUpdate = UserPhoto
   type
     Scopes DirectoryUsersPhotosUpdate =
-      '["https://www.googleapis.com/auth/admin.directory.user"]
+      '[Admin'Directory'User]
   requestClient DirectoryUsersPhotosUpdate {..} =
     go
       userKey

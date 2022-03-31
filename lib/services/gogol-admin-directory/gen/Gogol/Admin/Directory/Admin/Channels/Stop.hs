@@ -96,11 +96,11 @@ instance Core.GoogleRequest AdminChannelsStop where
   type Rs AdminChannelsStop = ()
   type
     Scopes AdminChannelsStop =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.alias",
-         "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
-         "https://www.googleapis.com/auth/admin.directory.user.readonly",
-         "https://www.googleapis.com/auth/cloud-platform"
+      '[ Admin'Directory'User,
+         Admin'Directory'User'Alias,
+         Admin'Directory'User'Alias'Readonly,
+         Admin'Directory'User'Readonly,
+         CloudPlatform'FullControl
        ]
   requestClient AdminChannelsStop {..} =
     go

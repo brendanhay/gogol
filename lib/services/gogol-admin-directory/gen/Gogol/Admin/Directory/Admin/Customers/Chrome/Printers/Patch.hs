@@ -112,7 +112,7 @@ instance
   type Rs AdminCustomersChromePrintersPatch = Printer
   type
     Scopes AdminCustomersChromePrintersPatch =
-      '["https://www.googleapis.com/auth/admin.chrome.printers"]
+      '[Admin'Chrome'Printers]
   requestClient AdminCustomersChromePrintersPatch {..} =
     go
       name

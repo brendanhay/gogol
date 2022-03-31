@@ -97,7 +97,7 @@ instance Core.GoogleRequest DirectoryUsersSignOut where
   type Rs DirectoryUsersSignOut = ()
   type
     Scopes DirectoryUsersSignOut =
-      '["https://www.googleapis.com/auth/admin.directory.user.security"]
+      '[Admin'Directory'User'Security]
   requestClient DirectoryUsersSignOut {..} =
     go
       userKey

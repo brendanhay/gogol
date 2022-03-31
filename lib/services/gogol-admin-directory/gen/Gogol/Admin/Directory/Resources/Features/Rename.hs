@@ -114,7 +114,7 @@ instance
   type Rs DirectoryResourcesFeaturesRename = ()
   type
     Scopes DirectoryResourcesFeaturesRename =
-      '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+      '[Admin'Directory'Resource'Calendar]
   requestClient DirectoryResourcesFeaturesRename {..} =
     go
       customer

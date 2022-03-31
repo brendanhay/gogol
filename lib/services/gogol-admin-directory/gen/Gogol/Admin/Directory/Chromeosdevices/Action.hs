@@ -116,7 +116,7 @@ instance
   type Rs DirectoryChromeosdevicesAction = ()
   type
     Scopes DirectoryChromeosdevicesAction =
-      '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+      '[Admin'Directory'Device'Chromeos]
   requestClient DirectoryChromeosdevicesAction {..} =
     go
       customerId

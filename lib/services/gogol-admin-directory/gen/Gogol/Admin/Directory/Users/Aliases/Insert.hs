@@ -106,9 +106,7 @@ instance
   type Rs DirectoryUsersAliasesInsert = Alias
   type
     Scopes DirectoryUsersAliasesInsert =
-      '[ "https://www.googleapis.com/auth/admin.directory.user",
-         "https://www.googleapis.com/auth/admin.directory.user.alias"
-       ]
+      '[Admin'Directory'User, Admin'Directory'User'Alias]
   requestClient DirectoryUsersAliasesInsert {..} =
     go
       userKey

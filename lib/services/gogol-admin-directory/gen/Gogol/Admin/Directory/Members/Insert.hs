@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectoryMembersInsert where
   type Rs DirectoryMembersInsert = Member
   type
     Scopes DirectoryMembersInsert =
-      '[ "https://www.googleapis.com/auth/admin.directory.group",
-         "https://www.googleapis.com/auth/admin.directory.group.member"
+      '[ Admin'Directory'Group,
+         Admin'Directory'Group'Member
        ]
   requestClient DirectoryMembersInsert {..} =
     go

@@ -103,8 +103,8 @@ instance Core.GoogleRequest DirectoryDomainAliasesGet where
   type Rs DirectoryDomainAliasesGet = DomainAlias
   type
     Scopes DirectoryDomainAliasesGet =
-      '[ "https://www.googleapis.com/auth/admin.directory.domain",
-         "https://www.googleapis.com/auth/admin.directory.domain.readonly"
+      '[ Admin'Directory'Domain,
+         Admin'Directory'Domain'Readonly
        ]
   requestClient DirectoryDomainAliasesGet {..} =
     go

@@ -108,7 +108,7 @@ instance
       RoleAssignment
   type
     Scopes DirectoryRoleAssignmentsInsert =
-      '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+      '[Admin'Directory'Rolemanagement]
   requestClient DirectoryRoleAssignmentsInsert {..} =
     go
       customer
