@@ -30,9 +30,9 @@ module Gogol.OAuth2.Types
     oAuth2Service,
 
     -- * OAuth Scopes
-    userinfoEmailScope,
-    userinfoProfileScope,
-    openidScope,
+    Userinfo'Email,
+    Userinfo'Profile,
+    OAuth2'OpenID,
 
     -- * Types
 
@@ -58,13 +58,10 @@ oAuth2Service =
     "www.googleapis.com"
 
 -- | View your email address
-userinfoEmailScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-userinfoEmailScope = Core.Proxy
+type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-userinfoProfileScope :: Core.Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-userinfoProfileScope = Core.Proxy
+type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"
 
 -- | Associate you with your personal info on Google
-openidScope :: Core.Proxy '["openid"]
-openidScope = Core.Proxy
+type OAuth2'OpenID = "openid"
