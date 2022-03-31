@@ -105,10 +105,10 @@ instance
   type Rs OSLoginUsersGetLoginProfile = LoginProfile
   type
     Scopes OSLoginUsersGetLoginProfile =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only",
-         "https://www.googleapis.com/auth/compute",
-         "https://www.googleapis.com/auth/compute.readonly"
+      '[ CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly,
+         Compute'FullControl,
+         Compute'Readonly
        ]
   requestClient OSLoginUsersGetLoginProfile {..} =
     go

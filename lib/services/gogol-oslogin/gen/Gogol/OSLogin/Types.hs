@@ -30,10 +30,10 @@ module Gogol.OSLogin.Types
     oSLoginService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    computeScope,
-    computeReadOnlyScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Compute'FullControl,
+    Compute'Readonly,
 
     -- * Types
 
@@ -81,17 +81,13 @@ oSLoginService =
     "oslogin.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | View and manage your Google Compute Engine resources
-computeScope :: Core.Proxy '["https://www.googleapis.com/auth/compute"]
-computeScope = Core.Proxy
+type Compute'FullControl = "https://www.googleapis.com/auth/compute"
 
 -- | View your Google Compute Engine resources
-computeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-computeReadOnlyScope = Core.Proxy
+type Compute'Readonly = "https://www.googleapis.com/auth/compute.readonly"

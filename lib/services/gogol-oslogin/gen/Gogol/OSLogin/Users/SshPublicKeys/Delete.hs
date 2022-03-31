@@ -96,9 +96,7 @@ instance
   type Rs OSLoginUsersSshPublicKeysDelete = Empty
   type
     Scopes OSLoginUsersSshPublicKeysDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/compute"
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient OSLoginUsersSshPublicKeysDelete {..} =
     go
       name
