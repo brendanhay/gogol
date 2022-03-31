@@ -30,8 +30,8 @@ module Gogol.CloudKMS.Types
     cloudKMSService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudKMSScope,
+    CloudPlatform'FullControl,
+    Cloudkms'FullControl,
 
     -- * Types
 
@@ -325,9 +325,7 @@ cloudKMSService =
     "cloudkms.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your keys and secrets stored in Cloud Key Management Service
-cloudKMSScope :: Core.Proxy '["https://www.googleapis.com/auth/cloudkms"]
-cloudKMSScope = Core.Proxy
+type Cloudkms'FullControl = "https://www.googleapis.com/auth/cloudkms"

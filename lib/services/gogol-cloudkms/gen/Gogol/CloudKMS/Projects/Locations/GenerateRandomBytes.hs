@@ -108,9 +108,7 @@ instance
   type
     Scopes
       CloudKMSProjectsLocationsGenerateRandomBytes =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloudkms"
-       ]
+      '[CloudPlatform'FullControl, Cloudkms'FullControl]
   requestClient
     CloudKMSProjectsLocationsGenerateRandomBytes {..} =
       go
