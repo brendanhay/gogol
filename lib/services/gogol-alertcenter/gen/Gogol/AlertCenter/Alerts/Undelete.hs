@@ -100,7 +100,7 @@ instance Core.GoogleRequest AlertCenterAlertsUndelete where
   type Rs AlertCenterAlertsUndelete = Alert
   type
     Scopes AlertCenterAlertsUndelete =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+      '[Apps'Alerts]
   requestClient AlertCenterAlertsUndelete {..} =
     go
       alertId

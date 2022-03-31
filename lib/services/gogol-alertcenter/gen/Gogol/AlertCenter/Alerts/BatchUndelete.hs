@@ -99,7 +99,7 @@ instance
       BatchUndeleteAlertsResponse
   type
     Scopes AlertCenterAlertsBatchUndelete =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+      '[Apps'Alerts]
   requestClient AlertCenterAlertsBatchUndelete {..} =
     go
       xgafv

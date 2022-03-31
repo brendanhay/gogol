@@ -30,7 +30,7 @@ module Gogol.AlertCenter.Types
     alertCenterService,
 
     -- * OAuth Scopes
-    appsAlertsScope,
+    Apps'Alerts,
 
     -- * Types
 
@@ -309,5 +309,4 @@ alertCenterService =
     "alertcenter.googleapis.com"
 
 -- | See and delete your domain\'s G Suite alerts, and send alert feedback
-appsAlertsScope :: Core.Proxy '["https://www.googleapis.com/auth/apps.alerts"]
-appsAlertsScope = Core.Proxy
+type Apps'Alerts = "https://www.googleapis.com/auth/apps.alerts"

@@ -90,9 +90,7 @@ newAlertCenterGetSettings =
 
 instance Core.GoogleRequest AlertCenterGetSettings where
   type Rs AlertCenterGetSettings = Settings
-  type
-    Scopes AlertCenterGetSettings =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+  type Scopes AlertCenterGetSettings = '[Apps'Alerts]
   requestClient AlertCenterGetSettings {..} =
     go
       xgafv

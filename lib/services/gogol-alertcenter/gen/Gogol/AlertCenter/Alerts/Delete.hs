@@ -96,9 +96,7 @@ newAlertCenterAlertsDelete alertId =
 
 instance Core.GoogleRequest AlertCenterAlertsDelete where
   type Rs AlertCenterAlertsDelete = Empty
-  type
-    Scopes AlertCenterAlertsDelete =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+  type Scopes AlertCenterAlertsDelete = '[Apps'Alerts]
   requestClient AlertCenterAlertsDelete {..} =
     go
       alertId

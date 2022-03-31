@@ -102,7 +102,7 @@ instance
   type Rs AlertCenterAlertsGetMetadata = AlertMetadata
   type
     Scopes AlertCenterAlertsGetMetadata =
-      '["https://www.googleapis.com/auth/apps.alerts"]
+      '[Apps'Alerts]
   requestClient AlertCenterAlertsGetMetadata {..} =
     go
       alertId
