@@ -30,9 +30,9 @@ module Gogol.Tracing.Types
     tracingService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    traceAppendScope,
-    traceReadOnlyScope,
+    CloudPlatform'FullControl,
+    Trace'Append,
+    Trace'Readonly,
 
     -- * Types
 
@@ -147,13 +147,10 @@ tracingService =
     "tracing.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Write Trace data for a project or application
-traceAppendScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.append"]
-traceAppendScope = Core.Proxy
+type Trace'Append = "https://www.googleapis.com/auth/trace.append"
 
 -- | Read Trace data for a project or application
-traceReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/trace.readonly"]
-traceReadOnlyScope = Core.Proxy
+type Trace'Readonly = "https://www.googleapis.com/auth/trace.readonly"
