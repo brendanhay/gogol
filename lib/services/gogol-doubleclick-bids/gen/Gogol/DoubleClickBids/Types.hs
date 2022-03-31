@@ -30,7 +30,7 @@ module Gogol.DoubleClickBids.Types
     doubleClickBidsService,
 
     -- * OAuth Scopes
-    doubleclickbidManagerScope,
+    Doubleclickbidmanager'FullControl,
 
     -- * Types
 
@@ -177,5 +177,4 @@ doubleClickBidsService =
     "doubleclickbidmanager.googleapis.com"
 
 -- | View and manage your reports in DoubleClick Bid Manager
-doubleclickbidManagerScope :: Core.Proxy '["https://www.googleapis.com/auth/doubleclickbidmanager"]
-doubleclickbidManagerScope = Core.Proxy
+type Doubleclickbidmanager'FullControl = "https://www.googleapis.com/auth/doubleclickbidmanager"

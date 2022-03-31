@@ -104,7 +104,7 @@ instance
       Query
   type
     Scopes DoubleclickbidmanagerQueriesCreatequery =
-      '["https://www.googleapis.com/auth/doubleclickbidmanager"]
+      '[Doubleclickbidmanager'FullControl]
   requestClient
     DoubleclickbidmanagerQueriesCreatequery {..} =
       go

@@ -98,7 +98,7 @@ instance
   type Rs DoubleclickbidmanagerQueriesDeletequery = ()
   type
     Scopes DoubleclickbidmanagerQueriesDeletequery =
-      '["https://www.googleapis.com/auth/doubleclickbidmanager"]
+      '[Doubleclickbidmanager'FullControl]
   requestClient
     DoubleclickbidmanagerQueriesDeletequery {..} =
       go

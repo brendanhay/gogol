@@ -34,7 +34,7 @@ module Gogol.DoubleClickBids
     doubleClickBidsService,
 
     -- * OAuth Scopes
-    doubleclickbidManagerScope,
+    Doubleclickbidmanager'FullControl,
 
     -- * Resources
 

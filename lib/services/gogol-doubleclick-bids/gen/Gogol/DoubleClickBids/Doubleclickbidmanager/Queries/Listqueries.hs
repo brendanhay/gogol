@@ -102,7 +102,7 @@ instance
       ListQueriesResponse
   type
     Scopes DoubleclickbidmanagerQueriesListqueries =
-      '["https://www.googleapis.com/auth/doubleclickbidmanager"]
+      '[Doubleclickbidmanager'FullControl]
   requestClient
     DoubleclickbidmanagerQueriesListqueries {..} =
       go
