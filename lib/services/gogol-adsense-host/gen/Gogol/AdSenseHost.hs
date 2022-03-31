@@ -34,7 +34,7 @@ module Gogol.AdSenseHost
     adSenseHostService,
 
     -- * OAuth Scopes
-    adSenseHostScope,
+    Adsensehost'FullControl,
 
     -- * Resources
 

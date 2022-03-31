@@ -87,7 +87,7 @@ instance
   type Rs AdSenseHostUrlchannelsList = UrlChannels
   type
     Scopes AdSenseHostUrlchannelsList =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostUrlchannelsList {..} =
     go
       adClientId

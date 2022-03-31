@@ -98,7 +98,7 @@ instance
   type Rs AdSenseHostAccountsAdunitsList = AdUnits
   type
     Scopes AdSenseHostAccountsAdunitsList =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsAdunitsList {..} =
     go
       accountId

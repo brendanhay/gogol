@@ -85,7 +85,7 @@ instance
   type Rs AdSenseHostUrlchannelsDelete = UrlChannel
   type
     Scopes AdSenseHostUrlchannelsDelete =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostUrlchannelsDelete {..} =
     go
       adClientId

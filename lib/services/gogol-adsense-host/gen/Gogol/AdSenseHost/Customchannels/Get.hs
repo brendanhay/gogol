@@ -85,7 +85,7 @@ instance
   type Rs AdSenseHostCustomchannelsGet = CustomChannel
   type
     Scopes AdSenseHostCustomchannelsGet =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostCustomchannelsGet {..} =
     go
       adClientId

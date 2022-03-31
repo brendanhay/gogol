@@ -82,7 +82,7 @@ instance
   type Rs AdSenseHostUrlchannelsInsert = UrlChannel
   type
     Scopes AdSenseHostUrlchannelsInsert =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostUrlchannelsInsert {..} =
     go
       adClientId

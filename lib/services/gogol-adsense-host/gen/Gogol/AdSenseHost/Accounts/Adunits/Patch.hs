@@ -98,7 +98,7 @@ instance
   type Rs AdSenseHostAccountsAdunitsPatch = AdUnit
   type
     Scopes AdSenseHostAccountsAdunitsPatch =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsAdunitsPatch {..} =
     go
       accountId

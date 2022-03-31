@@ -73,7 +73,7 @@ instance Core.GoogleRequest AdSenseHostAccountsGet where
   type Rs AdSenseHostAccountsGet = Account
   type
     Scopes AdSenseHostAccountsGet =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsGet {..} =
     go
       accountId

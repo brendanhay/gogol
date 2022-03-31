@@ -119,7 +119,7 @@ instance
   type Rs AdSenseHostAccountsReportsGenerate = Report
   type
     Scopes AdSenseHostAccountsReportsGenerate =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostAccountsReportsGenerate {..} =
     go
       accountId

@@ -112,7 +112,7 @@ instance
   type Rs AdSenseHostReportsGenerate = Report
   type
     Scopes AdSenseHostReportsGenerate =
-      '["https://www.googleapis.com/auth/adsensehost"]
+      '[Adsensehost'FullControl]
   requestClient AdSenseHostReportsGenerate {..} =
     go
       (Core.Just startDate)
