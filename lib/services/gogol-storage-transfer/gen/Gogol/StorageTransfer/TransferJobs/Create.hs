@@ -99,7 +99,7 @@ instance
       TransferJob
   type
     Scopes StorageTransferTransferJobsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient StorageTransferTransferJobsCreate {..} =
     go
       xgafv

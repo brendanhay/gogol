@@ -98,7 +98,7 @@ instance
       AgentPool
   type
     Scopes StorageTransferProjectsAgentPoolsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferProjectsAgentPoolsGet {..} =
       go

@@ -99,7 +99,7 @@ instance
       GoogleServiceAccount
   type
     Scopes StorageTransferGoogleServiceAccountsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferGoogleServiceAccountsGet {..} =
       go

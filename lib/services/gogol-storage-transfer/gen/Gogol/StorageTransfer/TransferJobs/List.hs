@@ -107,7 +107,7 @@ instance
       ListTransferJobsResponse
   type
     Scopes StorageTransferTransferJobsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient StorageTransferTransferJobsList {..} =
     go
       (Core.Just filter)

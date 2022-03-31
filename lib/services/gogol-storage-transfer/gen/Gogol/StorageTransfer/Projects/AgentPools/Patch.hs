@@ -108,7 +108,7 @@ instance
       AgentPool
   type
     Scopes StorageTransferProjectsAgentPoolsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferProjectsAgentPoolsPatch {..} =
       go

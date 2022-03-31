@@ -102,7 +102,7 @@ instance
   type Rs StorageTransferTransferJobsRun = Operation
   type
     Scopes StorageTransferTransferJobsRun =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient StorageTransferTransferJobsRun {..} =
     go
       jobName

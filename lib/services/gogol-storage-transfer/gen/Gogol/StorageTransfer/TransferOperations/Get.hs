@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes StorageTransferTransferOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferTransferOperationsGet {..} =
       go

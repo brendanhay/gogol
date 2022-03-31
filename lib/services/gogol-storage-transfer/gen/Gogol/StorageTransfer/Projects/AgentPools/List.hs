@@ -112,7 +112,7 @@ instance
       ListAgentPoolsResponse
   type
     Scopes StorageTransferProjectsAgentPoolsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferProjectsAgentPoolsList {..} =
       go
