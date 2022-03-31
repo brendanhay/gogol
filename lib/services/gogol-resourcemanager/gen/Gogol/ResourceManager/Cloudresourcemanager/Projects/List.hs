@@ -109,9 +109,7 @@ instance
       ListProjectsResponse
   type
     Scopes CloudresourcemanagerProjectsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerProjectsList {..} =
     go
       xgafv

@@ -106,7 +106,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerTagValuesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerTagValuesDelete {..} =
     go
       name

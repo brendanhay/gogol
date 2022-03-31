@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes CloudresourcemanagerProjectsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerProjectsDelete {..} =
     go
       name

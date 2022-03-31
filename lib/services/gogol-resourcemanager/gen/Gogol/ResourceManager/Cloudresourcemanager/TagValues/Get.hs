@@ -96,9 +96,7 @@ instance
   type Rs CloudresourcemanagerTagValuesGet = TagValue
   type
     Scopes CloudresourcemanagerTagValuesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerTagValuesGet {..} =
     go
       name

@@ -104,9 +104,7 @@ instance
       Policy
   type
     Scopes CloudresourcemanagerTagValuesGetIamPolicy =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient
     CloudresourcemanagerTagValuesGetIamPolicy {..} =
       go

@@ -106,7 +106,7 @@ instance
   type Rs CloudresourcemanagerFoldersPatch = Operation
   type
     Scopes CloudresourcemanagerFoldersPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerFoldersPatch {..} =
     go
       name

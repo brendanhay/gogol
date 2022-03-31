@@ -106,9 +106,7 @@ instance
       SearchFoldersResponse
   type
     Scopes CloudresourcemanagerFoldersSearch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerFoldersSearch {..} =
     go
       xgafv

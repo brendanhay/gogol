@@ -106,7 +106,7 @@ instance
       SearchProjectsResponse
   type
     Scopes CloudresourcemanagerProjectsSearch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerProjectsSearch {..} =
     go
       xgafv

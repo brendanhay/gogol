@@ -97,9 +97,7 @@ instance
   type Rs CloudresourcemanagerLiensCreate = Lien
   type
     Scopes CloudresourcemanagerLiensCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerLiensCreate {..} =
     go
       xgafv

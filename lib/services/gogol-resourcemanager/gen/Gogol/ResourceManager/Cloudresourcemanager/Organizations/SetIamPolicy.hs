@@ -105,7 +105,7 @@ instance
   type
     Scopes
       CloudresourcemanagerOrganizationsSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudresourcemanagerOrganizationsSetIamPolicy {..} =
       go

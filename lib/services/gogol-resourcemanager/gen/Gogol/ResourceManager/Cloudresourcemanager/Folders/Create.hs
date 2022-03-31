@@ -99,7 +99,7 @@ instance
   type Rs CloudresourcemanagerFoldersCreate = Operation
   type
     Scopes CloudresourcemanagerFoldersCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudresourcemanagerFoldersCreate {..} =
     go
       xgafv

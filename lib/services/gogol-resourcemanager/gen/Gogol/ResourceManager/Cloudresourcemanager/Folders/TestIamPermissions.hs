@@ -108,7 +108,7 @@ instance
   type
     Scopes
       CloudresourcemanagerFoldersTestIamPermissions =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudresourcemanagerFoldersTestIamPermissions {..} =
       go

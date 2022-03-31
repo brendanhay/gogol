@@ -104,7 +104,7 @@ instance
       Policy
   type
     Scopes CloudresourcemanagerTagValuesSetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudresourcemanagerTagValuesSetIamPolicy {..} =
       go

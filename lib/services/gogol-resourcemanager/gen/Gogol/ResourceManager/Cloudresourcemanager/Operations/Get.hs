@@ -96,9 +96,7 @@ instance
   type Rs CloudresourcemanagerOperationsGet = Operation
   type
     Scopes CloudresourcemanagerOperationsGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerOperationsGet {..} =
     go
       name

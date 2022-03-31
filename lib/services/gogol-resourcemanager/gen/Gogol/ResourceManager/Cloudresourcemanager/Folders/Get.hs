@@ -96,9 +96,7 @@ instance
   type Rs CloudresourcemanagerFoldersGet = Folder
   type
     Scopes CloudresourcemanagerFoldersGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient CloudresourcemanagerFoldersGet {..} =
     go
       name
