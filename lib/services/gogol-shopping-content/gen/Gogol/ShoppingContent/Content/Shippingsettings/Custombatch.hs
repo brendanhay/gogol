@@ -105,7 +105,7 @@ instance
       ShippingsettingsCustomBatchResponse
   type
     Scopes ContentShippingsettingsCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentShippingsettingsCustombatch {..} =
     go
       xgafv

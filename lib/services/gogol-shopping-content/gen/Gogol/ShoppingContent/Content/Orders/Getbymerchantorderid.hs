@@ -108,7 +108,7 @@ instance
       OrdersGetByMerchantOrderIdResponse
   type
     Scopes ContentOrdersGetbymerchantorderid =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersGetbymerchantorderid {..} =
     go
       merchantId

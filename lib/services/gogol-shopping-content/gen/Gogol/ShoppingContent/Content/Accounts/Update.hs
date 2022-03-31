@@ -107,7 +107,7 @@ instance Core.GoogleRequest ContentAccountsUpdate where
   type Rs ContentAccountsUpdate = Account
   type
     Scopes ContentAccountsUpdate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsUpdate {..} =
     go
       merchantId

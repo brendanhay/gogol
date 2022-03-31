@@ -98,7 +98,7 @@ instance Core.GoogleRequest ContentPosCustombatch where
       PosCustomBatchResponse
   type
     Scopes ContentPosCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentPosCustombatch {..} =
     go
       xgafv

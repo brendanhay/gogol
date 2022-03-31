@@ -113,7 +113,7 @@ instance
       AccountsClaimWebsiteResponse
   type
     Scopes ContentAccountsClaimwebsite =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsClaimwebsite {..} =
     go
       merchantId

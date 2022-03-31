@@ -105,7 +105,7 @@ instance
   type Rs ContentAccountsLabelsCreate = AccountLabel
   type
     Scopes ContentAccountsLabelsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsLabelsCreate {..} =
     go
       accountId

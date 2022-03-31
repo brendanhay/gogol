@@ -103,7 +103,7 @@ instance
       ListAccountReturnCarrierResponse
   type
     Scopes ContentAccountsReturncarrierList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsReturncarrierList {..} =
     go
       accountId

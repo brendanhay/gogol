@@ -103,7 +103,7 @@ instance
   type
     Scopes
       ContentShippingsettingsGetsupportedholidays =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentShippingsettingsGetsupportedholidays {..} =
       go

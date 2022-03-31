@@ -111,7 +111,7 @@ instance
       OrderreturnsCreateOrderReturnResponse
   type
     Scopes ContentOrderreturnsCreateorderreturn =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentOrderreturnsCreateorderreturn {..} =
       go

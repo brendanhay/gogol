@@ -130,7 +130,7 @@ instance
   type
     Scopes
       ContentProductstatusesRepricingreportsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentProductstatusesRepricingreportsList {..} =
       go

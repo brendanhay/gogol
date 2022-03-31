@@ -103,7 +103,7 @@ instance
       LiasettingsCustomBatchResponse
   type
     Scopes ContentLiasettingsCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentLiasettingsCustombatch {..} =
     go
       xgafv

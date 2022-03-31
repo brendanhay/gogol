@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentReturnaddressGet where
   type Rs ContentReturnaddressGet = ReturnAddress
   type
     Scopes ContentReturnaddressGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnaddressGet {..} =
     go
       merchantId

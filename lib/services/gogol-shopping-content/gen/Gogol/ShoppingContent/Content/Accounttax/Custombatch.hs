@@ -103,7 +103,7 @@ instance
       AccounttaxCustomBatchResponse
   type
     Scopes ContentAccounttaxCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccounttaxCustombatch {..} =
     go
       xgafv

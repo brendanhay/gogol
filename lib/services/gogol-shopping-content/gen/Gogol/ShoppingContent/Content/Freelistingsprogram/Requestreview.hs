@@ -107,7 +107,7 @@ instance
   type Rs ContentFreelistingsprogramRequestreview = ()
   type
     Scopes ContentFreelistingsprogramRequestreview =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentFreelistingsprogramRequestreview {..} =
       go

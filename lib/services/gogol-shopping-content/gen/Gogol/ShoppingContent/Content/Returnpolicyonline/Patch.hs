@@ -112,7 +112,7 @@ instance
       ReturnPolicyOnline
   type
     Scopes ContentReturnpolicyonlinePatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnpolicyonlinePatch {..} =
     go
       merchantId

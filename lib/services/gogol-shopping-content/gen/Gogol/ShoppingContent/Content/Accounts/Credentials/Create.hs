@@ -107,7 +107,7 @@ instance
       AccountCredentials
   type
     Scopes ContentAccountsCredentialsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsCredentialsCreate {..} =
     go
       accountId

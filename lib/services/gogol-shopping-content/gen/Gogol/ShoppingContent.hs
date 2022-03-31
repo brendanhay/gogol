@@ -34,7 +34,7 @@ module Gogol.ShoppingContent
     shoppingContentService,
 
     -- * OAuth Scopes
-    contentScope,
+    Content'FullControl,
 
     -- * Resources
 

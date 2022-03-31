@@ -105,7 +105,7 @@ instance Core.GoogleRequest ContentRegionsCreate where
   type Rs ContentRegionsCreate = Region
   type
     Scopes ContentRegionsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionsCreate {..} =
     go
       merchantId

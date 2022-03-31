@@ -117,7 +117,7 @@ instance
       OrdersCancelTestOrderByCustomerResponse
   type
     Scopes ContentOrdersCanceltestorderbycustomer =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentOrdersCanceltestorderbycustomer {..} =
       go

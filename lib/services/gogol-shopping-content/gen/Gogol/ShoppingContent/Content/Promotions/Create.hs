@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentPromotionsCreate where
   type Rs ContentPromotionsCreate = Promotion
   type
     Scopes ContentPromotionsCreate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentPromotionsCreate {..} =
     go
       merchantId

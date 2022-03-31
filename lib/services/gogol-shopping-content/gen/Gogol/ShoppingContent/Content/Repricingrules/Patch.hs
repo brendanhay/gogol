@@ -110,7 +110,7 @@ instance
   type Rs ContentRepricingrulesPatch = RepricingRule
   type
     Scopes ContentRepricingrulesPatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRepricingrulesPatch {..} =
     go
       merchantId

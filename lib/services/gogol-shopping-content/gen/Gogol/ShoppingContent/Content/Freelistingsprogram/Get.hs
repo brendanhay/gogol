@@ -100,7 +100,7 @@ instance
       FreeListingsProgramStatus
   type
     Scopes ContentFreelistingsprogramGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentFreelistingsprogramGet {..} =
     go
       merchantId

@@ -111,7 +111,7 @@ instance
   type Rs ContentLocalinventoryInsert = LocalInventory
   type
     Scopes ContentLocalinventoryInsert =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentLocalinventoryInsert {..} =
     go
       merchantId

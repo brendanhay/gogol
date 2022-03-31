@@ -108,7 +108,7 @@ instance
       OrdersCreateTestOrderResponse
   type
     Scopes ContentOrdersCreatetestorder =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersCreatetestorder {..} =
     go
       merchantId

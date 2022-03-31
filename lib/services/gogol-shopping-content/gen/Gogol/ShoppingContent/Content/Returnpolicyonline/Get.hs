@@ -106,7 +106,7 @@ instance
       ReturnPolicyOnline
   type
     Scopes ContentReturnpolicyonlineGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnpolicyonlineGet {..} =
     go
       merchantId

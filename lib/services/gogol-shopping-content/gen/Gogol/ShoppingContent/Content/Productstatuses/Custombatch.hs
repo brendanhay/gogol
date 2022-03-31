@@ -105,7 +105,7 @@ instance
       ProductstatusesCustomBatchResponse
   type
     Scopes ContentProductstatusesCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentProductstatusesCustombatch {..} =
     go
       xgafv

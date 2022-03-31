@@ -108,7 +108,7 @@ instance
       DatafeedstatusesListResponse
   type
     Scopes ContentDatafeedstatusesList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentDatafeedstatusesList {..} =
     go
       merchantId

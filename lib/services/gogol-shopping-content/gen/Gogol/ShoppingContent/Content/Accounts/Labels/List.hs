@@ -106,7 +106,7 @@ instance Core.GoogleRequest ContentAccountsLabelsList where
       ListAccountLabelsResponse
   type
     Scopes ContentAccountsLabelsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsLabelsList {..} =
     go
       accountId

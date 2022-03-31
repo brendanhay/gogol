@@ -97,7 +97,7 @@ instance
       LiasettingsListPosDataProvidersResponse
   type
     Scopes ContentLiasettingsListposdataproviders =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentLiasettingsListposdataproviders {..} =
       go

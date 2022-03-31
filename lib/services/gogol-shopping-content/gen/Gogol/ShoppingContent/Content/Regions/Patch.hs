@@ -111,7 +111,7 @@ instance Core.GoogleRequest ContentRegionsPatch where
   type Rs ContentRegionsPatch = Region
   type
     Scopes ContentRegionsPatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionsPatch {..} =
     go
       merchantId

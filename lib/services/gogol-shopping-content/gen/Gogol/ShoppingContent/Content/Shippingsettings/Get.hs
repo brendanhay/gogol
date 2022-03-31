@@ -104,7 +104,7 @@ instance
   type Rs ContentShippingsettingsGet = ShippingSettings
   type
     Scopes ContentShippingsettingsGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentShippingsettingsGet {..} =
     go
       merchantId

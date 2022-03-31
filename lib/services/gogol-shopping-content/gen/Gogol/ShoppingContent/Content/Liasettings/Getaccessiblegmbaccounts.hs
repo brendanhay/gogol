@@ -110,7 +110,7 @@ instance
   type
     Scopes
       ContentLiasettingsGetaccessiblegmbaccounts =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentLiasettingsGetaccessiblegmbaccounts {..} =
       go

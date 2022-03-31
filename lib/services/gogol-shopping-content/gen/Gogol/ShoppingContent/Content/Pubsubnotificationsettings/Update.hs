@@ -106,7 +106,7 @@ instance
       PubsubNotificationSettings
   type
     Scopes ContentPubsubnotificationsettingsUpdate =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentPubsubnotificationsettingsUpdate {..} =
       go

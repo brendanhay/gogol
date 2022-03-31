@@ -105,7 +105,7 @@ instance
   type Rs ContentAccountsLabelsDelete = ()
   type
     Scopes ContentAccountsLabelsDelete =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsLabelsDelete {..} =
     go
       accountId

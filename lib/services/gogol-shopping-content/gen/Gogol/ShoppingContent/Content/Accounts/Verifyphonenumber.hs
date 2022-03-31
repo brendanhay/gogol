@@ -113,7 +113,7 @@ instance
       VerifyPhoneNumberResponse
   type
     Scopes ContentAccountsVerifyphonenumber =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsVerifyphonenumber {..} =
     go
       merchantId

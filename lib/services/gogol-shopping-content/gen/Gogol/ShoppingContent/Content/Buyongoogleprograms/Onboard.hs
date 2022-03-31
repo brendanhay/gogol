@@ -113,7 +113,7 @@ instance
   type Rs ContentBuyongoogleprogramsOnboard = ()
   type
     Scopes ContentBuyongoogleprogramsOnboard =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentBuyongoogleprogramsOnboard {..} =
     go
       merchantId

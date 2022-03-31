@@ -113,7 +113,7 @@ instance
       RegionalInventory
   type
     Scopes ContentRegionalinventoryInsert =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRegionalinventoryInsert {..} =
     go
       merchantId

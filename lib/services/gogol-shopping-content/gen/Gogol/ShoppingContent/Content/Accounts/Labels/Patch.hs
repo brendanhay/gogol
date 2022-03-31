@@ -111,7 +111,7 @@ instance
   type Rs ContentAccountsLabelsPatch = AccountLabel
   type
     Scopes ContentAccountsLabelsPatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentAccountsLabelsPatch {..} =
     go
       accountId

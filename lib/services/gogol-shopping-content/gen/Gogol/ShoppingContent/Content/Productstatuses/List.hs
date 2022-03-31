@@ -112,7 +112,7 @@ instance
       ProductstatusesListResponse
   type
     Scopes ContentProductstatusesList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentProductstatusesList {..} =
     go
       merchantId

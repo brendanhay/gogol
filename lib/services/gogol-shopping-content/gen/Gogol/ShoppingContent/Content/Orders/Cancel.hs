@@ -108,7 +108,7 @@ instance Core.GoogleRequest ContentOrdersCancel where
   type Rs ContentOrdersCancel = OrdersCancelResponse
   type
     Scopes ContentOrdersCancel =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersCancel {..} =
     go
       merchantId

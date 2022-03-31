@@ -105,7 +105,7 @@ instance Core.GoogleRequest ContentProductstatusesGet where
   type Rs ContentProductstatusesGet = ProductStatus
   type
     Scopes ContentProductstatusesGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentProductstatusesGet {..} =
     go
       merchantId

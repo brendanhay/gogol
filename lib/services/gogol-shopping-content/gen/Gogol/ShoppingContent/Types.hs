@@ -30,7 +30,7 @@ module Gogol.ShoppingContent.Types
     shoppingContentService,
 
     -- * OAuth Scopes
-    contentScope,
+    Content'FullControl,
 
     -- * Types
 
@@ -1749,5 +1749,4 @@ shoppingContentService =
     "shoppingcontent.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
-contentScope :: Core.Proxy '["https://www.googleapis.com/auth/content"]
-contentScope = Core.Proxy
+type Content'FullControl = "https://www.googleapis.com/auth/content"

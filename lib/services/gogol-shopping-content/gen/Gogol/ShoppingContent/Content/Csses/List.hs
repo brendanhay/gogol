@@ -101,9 +101,7 @@ newContentCssesList cssGroupId =
 
 instance Core.GoogleRequest ContentCssesList where
   type Rs ContentCssesList = ListCssesResponse
-  type
-    Scopes ContentCssesList =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentCssesList = '[Content'FullControl]
   requestClient ContentCssesList {..} =
     go
       cssGroupId

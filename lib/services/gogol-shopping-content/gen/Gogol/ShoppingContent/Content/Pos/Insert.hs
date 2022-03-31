@@ -106,9 +106,7 @@ newContentPosInsert merchantId payload targetMerchantId =
 
 instance Core.GoogleRequest ContentPosInsert where
   type Rs ContentPosInsert = PosStore
-  type
-    Scopes ContentPosInsert =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentPosInsert = '[Content'FullControl]
   requestClient ContentPosInsert {..} =
     go
       merchantId

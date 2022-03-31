@@ -99,9 +99,7 @@ newContentCssesGet cssDomainId cssGroupId =
 
 instance Core.GoogleRequest ContentCssesGet where
   type Rs ContentCssesGet = Css
-  type
-    Scopes ContentCssesGet =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentCssesGet = '[Content'FullControl]
   requestClient ContentCssesGet {..} =
     go
       cssGroupId

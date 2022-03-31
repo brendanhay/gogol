@@ -113,7 +113,7 @@ instance
   type Rs ContentBuyongoogleprogramsRequestreview = ()
   type
     Scopes ContentBuyongoogleprogramsRequestreview =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentBuyongoogleprogramsRequestreview {..} =
       go

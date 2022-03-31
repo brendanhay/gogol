@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentReturnpolicyInsert where
   type Rs ContentReturnpolicyInsert = ReturnPolicy
   type
     Scopes ContentReturnpolicyInsert =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentReturnpolicyInsert {..} =
     go
       merchantId

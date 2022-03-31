@@ -117,7 +117,7 @@ instance
       RequestPhoneVerificationResponse
   type
     Scopes ContentAccountsRequestphoneverification =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient
     ContentAccountsRequestphoneverification {..} =
       go

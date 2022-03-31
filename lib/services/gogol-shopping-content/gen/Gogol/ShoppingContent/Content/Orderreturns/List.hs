@@ -153,7 +153,7 @@ instance Core.GoogleRequest ContentOrderreturnsList where
       OrderreturnsListResponse
   type
     Scopes ContentOrderreturnsList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrderreturnsList {..} =
     go
       merchantId

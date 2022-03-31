@@ -104,7 +104,7 @@ instance Core.GoogleRequest ContentDatafeedsFetchnow where
       DatafeedsFetchNowResponse
   type
     Scopes ContentDatafeedsFetchnow =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentDatafeedsFetchnow {..} =
     go
       merchantId

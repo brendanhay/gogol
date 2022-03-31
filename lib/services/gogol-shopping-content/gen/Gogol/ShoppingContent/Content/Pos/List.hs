@@ -100,9 +100,7 @@ newContentPosList merchantId targetMerchantId =
 
 instance Core.GoogleRequest ContentPosList where
   type Rs ContentPosList = PosListResponse
-  type
-    Scopes ContentPosList =
-      '["https://www.googleapis.com/auth/content"]
+  type Scopes ContentPosList = '[Content'FullControl]
   requestClient ContentPosList {..} =
     go
       merchantId

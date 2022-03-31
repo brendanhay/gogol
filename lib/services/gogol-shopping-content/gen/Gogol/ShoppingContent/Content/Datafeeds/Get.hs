@@ -101,7 +101,7 @@ instance Core.GoogleRequest ContentDatafeedsGet where
   type Rs ContentDatafeedsGet = Datafeed
   type
     Scopes ContentDatafeedsGet =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentDatafeedsGet {..} =
     go
       merchantId

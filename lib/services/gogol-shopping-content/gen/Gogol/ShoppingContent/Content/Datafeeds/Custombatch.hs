@@ -101,7 +101,7 @@ instance
       DatafeedsCustomBatchResponse
   type
     Scopes ContentDatafeedsCustombatch =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentDatafeedsCustombatch {..} =
     go
       xgafv

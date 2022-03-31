@@ -117,7 +117,7 @@ instance
       OrdersUpdateShipmentResponse
   type
     Scopes ContentOrdersUpdateshipment =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentOrdersUpdateshipment {..} =
     go
       merchantId

@@ -115,7 +115,7 @@ instance Core.GoogleRequest ContentRepricingrulesList where
       ListRepricingRulesResponse
   type
     Scopes ContentRepricingrulesList =
-      '["https://www.googleapis.com/auth/content"]
+      '[Content'FullControl]
   requestClient ContentRepricingrulesList {..} =
     go
       merchantId
