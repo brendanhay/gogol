@@ -104,7 +104,7 @@ instance
       TransferJob
   type
     Scopes StorageTransferTransferJobsPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient StorageTransferTransferJobsPatch {..} =
     go
       jobName

@@ -34,7 +34,7 @@ module Gogol.StorageTransfer
     storageTransferService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

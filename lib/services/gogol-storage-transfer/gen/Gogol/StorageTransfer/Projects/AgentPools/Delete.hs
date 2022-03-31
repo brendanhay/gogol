@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes StorageTransferProjectsAgentPoolsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferProjectsAgentPoolsDelete {..} =
       go

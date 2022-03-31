@@ -112,7 +112,7 @@ instance
       ListOperationsResponse
   type
     Scopes StorageTransferTransferOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferTransferOperationsList {..} =
       go

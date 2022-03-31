@@ -106,7 +106,7 @@ instance
       Empty
   type
     Scopes StorageTransferTransferOperationsResume =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     StorageTransferTransferOperationsResume {..} =
       go

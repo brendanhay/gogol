@@ -102,7 +102,7 @@ instance
   type Rs StorageTransferTransferJobsGet = TransferJob
   type
     Scopes StorageTransferTransferJobsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient StorageTransferTransferJobsGet {..} =
     go
       jobName
