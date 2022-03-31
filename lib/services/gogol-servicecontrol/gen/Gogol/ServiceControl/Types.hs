@@ -30,8 +30,8 @@ module Gogol.ServiceControl.Types
     serviceControlService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    serviceControlScope,
+    CloudPlatform'FullControl,
+    Servicecontrol'FullControl,
 
     -- * Types
 
@@ -243,9 +243,7 @@ serviceControlService =
     "servicecontrol.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google Service Control data
-serviceControlScope :: Core.Proxy '["https://www.googleapis.com/auth/servicecontrol"]
-serviceControlScope = Core.Proxy
+type Servicecontrol'FullControl = "https://www.googleapis.com/auth/servicecontrol"
