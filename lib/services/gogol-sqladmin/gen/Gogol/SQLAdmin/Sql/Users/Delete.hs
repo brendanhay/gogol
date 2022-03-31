@@ -110,9 +110,7 @@ instance Core.GoogleRequest SqlUsersDelete where
   type Rs SqlUsersDelete = Operation
   type
     Scopes SqlUsersDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlUsersDelete {..} =
     go
       project

@@ -116,9 +116,7 @@ instance Core.GoogleRequest SqlUsersUpdate where
   type Rs SqlUsersUpdate = Operation
   type
     Scopes SqlUsersUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlUsersUpdate {..} =
     go
       project

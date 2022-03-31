@@ -105,9 +105,7 @@ instance
   type Rs SqlInstancesResetSslConfig = Operation
   type
     Scopes SqlInstancesResetSslConfig =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesResetSslConfig {..} =
     go
       project

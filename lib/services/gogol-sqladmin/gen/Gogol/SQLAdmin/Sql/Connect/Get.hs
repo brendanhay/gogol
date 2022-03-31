@@ -106,9 +106,7 @@ instance Core.GoogleRequest SqlConnectGet where
   type Rs SqlConnectGet = ConnectSettings
   type
     Scopes SqlConnectGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlConnectGet {..} =
     go
       project

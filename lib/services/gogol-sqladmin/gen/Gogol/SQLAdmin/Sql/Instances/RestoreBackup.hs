@@ -110,9 +110,7 @@ instance Core.GoogleRequest SqlInstancesRestoreBackup where
   type Rs SqlInstancesRestoreBackup = Operation
   type
     Scopes SqlInstancesRestoreBackup =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesRestoreBackup {..} =
     go
       project

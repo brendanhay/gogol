@@ -110,9 +110,7 @@ instance Core.GoogleRequest SqlInstancesTruncateLog where
   type Rs SqlInstancesTruncateLog = Operation
   type
     Scopes SqlInstancesTruncateLog =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesTruncateLog {..} =
     go
       project

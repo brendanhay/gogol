@@ -102,9 +102,7 @@ instance Core.GoogleRequest SqlInstancesRestart where
   type Rs SqlInstancesRestart = Operation
   type
     Scopes SqlInstancesRestart =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesRestart {..} =
     go
       project

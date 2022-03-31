@@ -102,9 +102,7 @@ instance Core.GoogleRequest SqlInstancesStartReplica where
   type Rs SqlInstancesStartReplica = Operation
   type
     Scopes SqlInstancesStartReplica =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesStartReplica {..} =
     go
       project

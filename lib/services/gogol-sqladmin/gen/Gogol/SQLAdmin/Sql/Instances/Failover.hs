@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlInstancesFailover where
   type Rs SqlInstancesFailover = Operation
   type
     Scopes SqlInstancesFailover =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesFailover {..} =
     go
       project

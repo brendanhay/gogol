@@ -113,9 +113,7 @@ instance
   type Rs SqlInstancesRotateServerCa = Operation
   type
     Scopes SqlInstancesRotateServerCa =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlInstancesRotateServerCa {..} =
     go
       project

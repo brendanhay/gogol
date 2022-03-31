@@ -30,8 +30,8 @@ module Gogol.SQLAdmin.Types
     sQLAdminService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    sqlserviceAdminScope,
+    CloudPlatform'FullControl,
+    Sqlservice'Admin,
 
     -- * Types
 
@@ -504,9 +504,7 @@ sQLAdminService =
     "sqladmin.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google SQL Service instances
-sqlserviceAdminScope :: Core.Proxy '["https://www.googleapis.com/auth/sqlservice.admin"]
-sqlserviceAdminScope = Core.Proxy
+type Sqlservice'Admin = "https://www.googleapis.com/auth/sqlservice.admin"

@@ -110,9 +110,7 @@ instance Core.GoogleRequest SqlBackupRunsList where
   type Rs SqlBackupRunsList = BackupRunsListResponse
   type
     Scopes SqlBackupRunsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlBackupRunsList {..} =
     go
       project

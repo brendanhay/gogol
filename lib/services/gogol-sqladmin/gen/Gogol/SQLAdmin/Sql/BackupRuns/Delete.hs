@@ -108,9 +108,7 @@ instance Core.GoogleRequest SqlBackupRunsDelete where
   type Rs SqlBackupRunsDelete = Operation
   type
     Scopes SqlBackupRunsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlBackupRunsDelete {..} =
     go
       project

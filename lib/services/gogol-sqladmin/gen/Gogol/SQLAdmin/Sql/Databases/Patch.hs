@@ -114,9 +114,7 @@ instance Core.GoogleRequest SqlDatabasesPatch where
   type Rs SqlDatabasesPatch = Operation
   type
     Scopes SqlDatabasesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/sqlservice.admin"
-       ]
+      '[CloudPlatform'FullControl, Sqlservice'Admin]
   requestClient SqlDatabasesPatch {..} =
     go
       project
