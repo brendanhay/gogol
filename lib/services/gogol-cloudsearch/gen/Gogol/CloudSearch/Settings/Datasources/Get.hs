@@ -105,9 +105,9 @@ instance
       DataSource
   type
     Scopes CloudSearchSettingsDatasourcesGet =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.settings",
-         "https://www.googleapis.com/auth/cloud_search.settings.indexing"
+      '[ CloudSearch'FullControl,
+         CloudSearch'Settings,
+         CloudSearch'Settings'Indexing
        ]
   requestClient CloudSearchSettingsDatasourcesGet {..} =
     go

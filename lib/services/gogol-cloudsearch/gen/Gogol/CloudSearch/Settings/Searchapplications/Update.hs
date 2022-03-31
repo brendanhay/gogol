@@ -106,9 +106,9 @@ instance
   type
     Scopes
       CloudSearchSettingsSearchapplicationsUpdate =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.settings",
-         "https://www.googleapis.com/auth/cloud_search.settings.query"
+      '[ CloudSearch'FullControl,
+         CloudSearch'Settings,
+         CloudSearch'Settings'Query
        ]
   requestClient
     CloudSearchSettingsSearchapplicationsUpdate {..} =

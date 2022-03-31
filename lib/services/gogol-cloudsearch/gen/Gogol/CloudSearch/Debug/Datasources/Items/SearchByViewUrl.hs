@@ -108,9 +108,7 @@ instance
   type
     Scopes
       CloudSearchDebugDatasourcesItemsSearchByViewUrl =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.debug"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Debug]
   requestClient
     CloudSearchDebugDatasourcesItemsSearchByViewUrl {..} =
       go

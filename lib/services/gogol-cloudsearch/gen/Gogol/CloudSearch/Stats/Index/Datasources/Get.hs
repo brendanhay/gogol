@@ -126,9 +126,9 @@ instance
       GetDataSourceIndexStatsResponse
   type
     Scopes CloudSearchStatsIndexDatasourcesGet =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.stats",
-         "https://www.googleapis.com/auth/cloud_search.stats.indexing"
+      '[ CloudSearch'FullControl,
+         CloudSearch'Stats,
+         CloudSearch'Stats'Indexing
        ]
   requestClient CloudSearchStatsIndexDatasourcesGet {..} =
     go

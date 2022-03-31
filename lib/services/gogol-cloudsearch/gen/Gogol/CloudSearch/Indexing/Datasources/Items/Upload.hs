@@ -105,9 +105,7 @@ instance
       UploadItemRef
   type
     Scopes CloudSearchIndexingDatasourcesItemsUpload =
-      '[ "https://www.googleapis.com/auth/cloud_search",
-         "https://www.googleapis.com/auth/cloud_search.indexing"
-       ]
+      '[CloudSearch'FullControl, CloudSearch'Indexing]
   requestClient
     CloudSearchIndexingDatasourcesItemsUpload {..} =
       go

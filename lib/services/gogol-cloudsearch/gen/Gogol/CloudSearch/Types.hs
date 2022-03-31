@@ -30,15 +30,15 @@ module Gogol.CloudSearch.Types
     cloudSearchService,
 
     -- * OAuth Scopes
-    cloud_searchScope,
-    cloud_searchDebugScope,
-    cloud_searchIndexingScope,
-    cloud_searchQueryScope,
-    cloud_searchSettingsScope,
-    cloud_searchSettingsIndexingScope,
-    cloud_searchSettingsQueryScope,
-    cloud_searchStatsScope,
-    cloud_searchStatsIndexingScope,
+    CloudSearch'FullControl,
+    CloudSearch'Debug,
+    CloudSearch'Indexing,
+    CloudSearch'Query,
+    CloudSearch'Settings,
+    CloudSearch'Settings'Indexing,
+    CloudSearch'Settings'Query,
+    CloudSearch'Stats,
+    CloudSearch'Stats'Indexing,
 
     -- * Types
 
@@ -891,37 +891,28 @@ cloudSearchService =
     "cloudsearch.googleapis.com"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search"]
-cloud_searchScope = Core.Proxy
+type CloudSearch'FullControl = "https://www.googleapis.com/auth/cloud_search"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchDebugScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.debug"]
-cloud_searchDebugScope = Core.Proxy
+type CloudSearch'Debug = "https://www.googleapis.com/auth/cloud_search.debug"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.indexing"]
-cloud_searchIndexingScope = Core.Proxy
+type CloudSearch'Indexing = "https://www.googleapis.com/auth/cloud_search.indexing"
 
 -- | Search your organization\'s data in the Cloud Search index
-cloud_searchQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.query"]
-cloud_searchQueryScope = Core.Proxy
+type CloudSearch'Query = "https://www.googleapis.com/auth/cloud_search.query"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchSettingsScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings"]
-cloud_searchSettingsScope = Core.Proxy
+type CloudSearch'Settings = "https://www.googleapis.com/auth/cloud_search.settings"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchSettingsIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings.indexing"]
-cloud_searchSettingsIndexingScope = Core.Proxy
+type CloudSearch'Settings'Indexing = "https://www.googleapis.com/auth/cloud_search.settings.indexing"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchSettingsQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.settings.query"]
-cloud_searchSettingsQueryScope = Core.Proxy
+type CloudSearch'Settings'Query = "https://www.googleapis.com/auth/cloud_search.settings.query"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchStatsScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.stats"]
-cloud_searchStatsScope = Core.Proxy
+type CloudSearch'Stats = "https://www.googleapis.com/auth/cloud_search.stats"
 
 -- | Index and serve your organization\'s data with Cloud Search
-cloud_searchStatsIndexingScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud_search.stats.indexing"]
-cloud_searchStatsIndexingScope = Core.Proxy
+type CloudSearch'Stats'Indexing = "https://www.googleapis.com/auth/cloud_search.stats.indexing"
