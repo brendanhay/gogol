@@ -34,7 +34,7 @@ module Gogol.CloudFunctions
     cloudFunctionsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

@@ -107,7 +107,7 @@ instance
   type
     Scopes
       CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl {..} =
       go
