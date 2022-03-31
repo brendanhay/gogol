@@ -96,7 +96,7 @@ instance
   type Rs FileProjectsLocationsOperationsDelete = Empty
   type
     Scopes FileProjectsLocationsOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     FileProjectsLocationsOperationsDelete {..} =
       go

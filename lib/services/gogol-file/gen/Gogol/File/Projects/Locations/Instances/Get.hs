@@ -96,7 +96,7 @@ instance
   type Rs FileProjectsLocationsInstancesGet = Instance
   type
     Scopes FileProjectsLocationsInstancesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsInstancesGet {..} =
     go
       name

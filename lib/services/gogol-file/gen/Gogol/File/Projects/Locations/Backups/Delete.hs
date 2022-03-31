@@ -98,7 +98,7 @@ instance
       Operation
   type
     Scopes FileProjectsLocationsBackupsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient FileProjectsLocationsBackupsDelete {..} =
     go
       name
