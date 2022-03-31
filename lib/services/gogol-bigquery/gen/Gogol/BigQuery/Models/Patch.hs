@@ -95,9 +95,7 @@ instance Core.GoogleRequest BigQueryModelsPatch where
   type Rs BigQueryModelsPatch = Model
   type
     Scopes BigQueryModelsPatch =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryModelsPatch {..} =
     go
       projectId

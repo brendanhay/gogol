@@ -89,9 +89,7 @@ instance Core.GoogleRequest BigQueryRoutinesDelete where
   type Rs BigQueryRoutinesDelete = ()
   type
     Scopes BigQueryRoutinesDelete =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryRoutinesDelete {..} =
     go
       projectId

@@ -30,13 +30,13 @@ module Gogol.BigQuery.Types
     bigQueryService,
 
     -- * OAuth Scopes
-    bigQueryScope,
-    bigQueryInsertdataScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    Bigquery'FullControl,
+    Bigquery'Insertdata,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Devstorage'FullControl,
+    Devstorage'ReadOnly,
+    Devstorage'ReadWrite,
 
     -- * Types
 
@@ -825,29 +825,22 @@ bigQueryService =
     "bigquery.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
-bigQueryScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery"]
-bigQueryScope = Core.Proxy
+type Bigquery'FullControl = "https://www.googleapis.com/auth/bigquery"
 
 -- | Insert data into Google BigQuery
-bigQueryInsertdataScope :: Core.Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
-bigQueryInsertdataScope = Core.Proxy
+type Bigquery'Insertdata = "https://www.googleapis.com/auth/bigquery.insertdata"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-cloudPlatformReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-cloudPlatformReadOnlyScope = Core.Proxy
+type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your data and permissions in Cloud Storage and see the email address for your Google Account
-storageFull_controlScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-storageFull_controlScope = Core.Proxy
+type Devstorage'FullControl = "https://www.googleapis.com/auth/devstorage.full_control"
 
 -- | View your data in Google Cloud Storage
-storageRead_OnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-storageRead_OnlyScope = Core.Proxy
+type Devstorage'ReadOnly = "https://www.googleapis.com/auth/devstorage.read_only"
 
 -- | Manage your data in Cloud Storage and see the email address of your Google Account
-storageRead_writeScope :: Core.Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-storageRead_writeScope = Core.Proxy
+type Devstorage'ReadWrite = "https://www.googleapis.com/auth/devstorage.read_write"

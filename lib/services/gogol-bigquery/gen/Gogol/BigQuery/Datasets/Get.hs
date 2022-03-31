@@ -79,9 +79,9 @@ instance Core.GoogleRequest BigQueryDatasetsGet where
   type Rs BigQueryDatasetsGet = Dataset
   type
     Scopes BigQueryDatasetsGet =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigQueryDatasetsGet {..} =
     go

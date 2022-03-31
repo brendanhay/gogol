@@ -88,9 +88,7 @@ instance Core.GoogleRequest BigQueryDatasetsPatch where
   type Rs BigQueryDatasetsPatch = Dataset
   type
     Scopes BigQueryDatasetsPatch =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryDatasetsPatch {..} =
     go
       projectId

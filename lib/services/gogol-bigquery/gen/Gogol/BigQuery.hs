@@ -34,13 +34,13 @@ module Gogol.BigQuery
     bigQueryService,
 
     -- * OAuth Scopes
-    bigQueryScope,
-    bigQueryInsertdataScope,
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    storageFull_controlScope,
-    storageRead_OnlyScope,
-    storageRead_writeScope,
+    Bigquery'FullControl,
+    Bigquery'Insertdata,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Devstorage'FullControl,
+    Devstorage'ReadOnly,
+    Devstorage'ReadWrite,
 
     -- * Resources
 

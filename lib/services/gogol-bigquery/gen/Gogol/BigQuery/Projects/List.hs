@@ -74,9 +74,9 @@ instance Core.GoogleRequest BigQueryProjectsList where
   type Rs BigQueryProjectsList = ProjectList
   type
     Scopes BigQueryProjectsList =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Bigquery'FullControl,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient BigQueryProjectsList {..} =
     go

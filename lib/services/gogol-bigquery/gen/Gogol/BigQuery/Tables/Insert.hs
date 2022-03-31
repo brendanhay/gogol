@@ -89,9 +89,7 @@ instance Core.GoogleRequest BigQueryTablesInsert where
   type Rs BigQueryTablesInsert = Table
   type
     Scopes BigQueryTablesInsert =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryTablesInsert {..} =
     go
       projectId

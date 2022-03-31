@@ -95,9 +95,7 @@ instance Core.GoogleRequest BigQueryRoutinesUpdate where
   type Rs BigQueryRoutinesUpdate = Routine
   type
     Scopes BigQueryRoutinesUpdate =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryRoutinesUpdate {..} =
     go
       projectId

@@ -79,9 +79,7 @@ instance Core.GoogleRequest BigQueryDatasetsInsert where
   type Rs BigQueryDatasetsInsert = Dataset
   type
     Scopes BigQueryDatasetsInsert =
-      '[ "https://www.googleapis.com/auth/bigquery",
-         "https://www.googleapis.com/auth/cloud-platform"
-       ]
+      '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient BigQueryDatasetsInsert {..} =
     go
       projectId
