@@ -34,7 +34,7 @@ module Gogol.TPU
     tPUService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

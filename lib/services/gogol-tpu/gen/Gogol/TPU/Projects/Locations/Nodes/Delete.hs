@@ -100,7 +100,7 @@ instance
   type Rs TPUProjectsLocationsNodesDelete = Operation
   type
     Scopes TPUProjectsLocationsNodesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesDelete {..} =
     go
       name

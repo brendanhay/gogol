@@ -106,7 +106,7 @@ instance
   type Rs TPUProjectsLocationsNodesPatch = Operation
   type
     Scopes TPUProjectsLocationsNodesPatch =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesPatch {..} =
     go
       name

@@ -115,7 +115,7 @@ instance
       ListRuntimeVersionsResponse
   type
     Scopes TPUProjectsLocationsRuntimeVersionsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     TPUProjectsLocationsRuntimeVersionsList {..} =
       go

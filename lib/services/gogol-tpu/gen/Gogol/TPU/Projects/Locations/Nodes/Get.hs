@@ -96,7 +96,7 @@ instance
   type Rs TPUProjectsLocationsNodesGet = Node
   type
     Scopes TPUProjectsLocationsNodesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesGet {..} =
     go
       name

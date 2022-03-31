@@ -102,7 +102,7 @@ instance
   type Rs TPUProjectsLocationsNodesStop = Operation
   type
     Scopes TPUProjectsLocationsNodesStop =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesStop {..} =
     go
       name
