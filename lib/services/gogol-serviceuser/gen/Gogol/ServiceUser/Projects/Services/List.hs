@@ -111,9 +111,7 @@ instance
       ListEnabledServicesResponse
   type
     Scopes ServiceUserProjectsServicesList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient ServiceUserProjectsServicesList {..} =
     go
       parent

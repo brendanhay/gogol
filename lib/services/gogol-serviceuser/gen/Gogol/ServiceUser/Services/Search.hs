@@ -102,9 +102,7 @@ instance Core.GoogleRequest ServiceUserServicesSearch where
       SearchServicesResponse
   type
     Scopes ServiceUserServicesSearch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
-       ]
+      '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
   requestClient ServiceUserServicesSearch {..} =
     go
       xgafv

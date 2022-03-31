@@ -1,6 +1,6 @@
 cabal-version:      2.2
 name:               gogol-serviceuser
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Service User SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
@@ -60,5 +60,5 @@ library
     Gogol.ServiceUser.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12  && <5
+    , gogol-core  ^>=1.0.0
