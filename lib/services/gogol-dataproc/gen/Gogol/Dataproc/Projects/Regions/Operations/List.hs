@@ -110,7 +110,7 @@ instance
       ListOperationsResponse
   type
     Scopes DataprocProjectsRegionsOperationsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsOperationsList {..} =
       go

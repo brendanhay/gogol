@@ -121,7 +121,7 @@ instance
   type
     Scopes
       DataprocProjectsRegionsClustersInjectCredentials =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsClustersInjectCredentials {..} =
       go

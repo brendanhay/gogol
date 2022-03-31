@@ -111,7 +111,7 @@ instance
   type Rs DataprocProjectsRegionsJobsGet = Job
   type
     Scopes DataprocProjectsRegionsJobsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsRegionsJobsGet {..} =
     go
       projectId

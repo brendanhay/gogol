@@ -119,7 +119,7 @@ instance
       ListClustersResponse
   type
     Scopes DataprocProjectsRegionsClustersList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsRegionsClustersList {..} =
     go
       projectId

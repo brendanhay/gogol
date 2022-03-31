@@ -113,7 +113,7 @@ instance
       Operation
   type
     Scopes DataprocProjectsLocationsBatchesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsLocationsBatchesCreate {..} =
       go

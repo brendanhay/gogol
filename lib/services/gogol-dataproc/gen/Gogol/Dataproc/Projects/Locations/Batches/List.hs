@@ -107,7 +107,7 @@ instance
       ListBatchesResponse
   type
     Scopes DataprocProjectsLocationsBatchesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsLocationsBatchesList {..} =
       go

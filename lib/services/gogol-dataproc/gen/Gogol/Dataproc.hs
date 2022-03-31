@@ -34,7 +34,7 @@ module Gogol.Dataproc
     dataprocService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

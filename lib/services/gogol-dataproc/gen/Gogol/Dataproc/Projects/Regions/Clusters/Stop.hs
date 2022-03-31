@@ -119,7 +119,7 @@ instance
       Operation
   type
     Scopes DataprocProjectsRegionsClustersStop =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient DataprocProjectsRegionsClustersStop {..} =
     go
       projectId
