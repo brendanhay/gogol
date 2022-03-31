@@ -142,9 +142,9 @@ instance
       AppendValuesResponse
   type
     Scopes SheetsSpreadsheetsValuesAppend =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/spreadsheets"
+      '[ Drive'FullControl,
+         Drive'File,
+         Spreadsheets'FullControl
        ]
   requestClient SheetsSpreadsheetsValuesAppend {..} =
     go

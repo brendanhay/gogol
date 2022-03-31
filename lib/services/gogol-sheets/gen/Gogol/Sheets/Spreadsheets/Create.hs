@@ -94,9 +94,9 @@ instance Core.GoogleRequest SheetsSpreadsheetsCreate where
   type Rs SheetsSpreadsheetsCreate = Spreadsheet
   type
     Scopes SheetsSpreadsheetsCreate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/spreadsheets"
+      '[ Drive'FullControl,
+         Drive'File,
+         Spreadsheets'FullControl
        ]
   requestClient SheetsSpreadsheetsCreate {..} =
     go

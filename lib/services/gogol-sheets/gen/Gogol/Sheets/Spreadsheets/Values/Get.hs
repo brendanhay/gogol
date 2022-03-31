@@ -122,11 +122,11 @@ instance
   type Rs SheetsSpreadsheetsValuesGet = ValueRange
   type
     Scopes SheetsSpreadsheetsValuesGet =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly",
-         "https://www.googleapis.com/auth/spreadsheets",
-         "https://www.googleapis.com/auth/spreadsheets.readonly"
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Readonly,
+         Spreadsheets'FullControl,
+         Spreadsheets'Readonly
        ]
   requestClient SheetsSpreadsheetsValuesGet {..} =
     go

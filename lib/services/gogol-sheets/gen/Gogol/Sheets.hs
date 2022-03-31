@@ -34,11 +34,11 @@ module Gogol.Sheets
     sheetsService,
 
     -- * OAuth Scopes
-    driveScope,
-    driveFileScope,
-    driveReadOnlyScope,
-    spreadsheetsScope,
-    spreadsheetsReadOnlyScope,
+    Drive'FullControl,
+    Drive'File,
+    Drive'Readonly,
+    Spreadsheets'FullControl,
+    Spreadsheets'Readonly,
 
     -- * Resources
 
