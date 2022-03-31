@@ -113,7 +113,7 @@ instance
       ListProductsResponse
   type
     Scopes ManufacturersAccountsProductsList =
-      '["https://www.googleapis.com/auth/manufacturercenter"]
+      '[Manufacturercenter'FullControl]
   requestClient ManufacturersAccountsProductsList {..} =
     go
       parent

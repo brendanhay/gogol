@@ -107,7 +107,7 @@ instance
   type Rs ManufacturersAccountsProductsGet = Product
   type
     Scopes ManufacturersAccountsProductsGet =
-      '["https://www.googleapis.com/auth/manufacturercenter"]
+      '[Manufacturercenter'FullControl]
   requestClient ManufacturersAccountsProductsGet {..} =
     go
       parent
