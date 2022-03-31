@@ -30,8 +30,8 @@ module Gogol.AppsTasks.Types
     appsTasksService,
 
     -- * OAuth Scopes
-    tasksScope,
-    tasksReadOnlyScope,
+    Tasks'FullControl,
+    Tasks'Readonly,
 
     -- * Types
 
@@ -72,9 +72,7 @@ appsTasksService =
     "tasks.googleapis.com"
 
 -- | Create, edit, organize, and delete all your tasks
-tasksScope :: Core.Proxy '["https://www.googleapis.com/auth/tasks"]
-tasksScope = Core.Proxy
+type Tasks'FullControl = "https://www.googleapis.com/auth/tasks"
 
 -- | View your tasks
-tasksReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
-tasksReadOnlyScope = Core.Proxy
+type Tasks'Readonly = "https://www.googleapis.com/auth/tasks.readonly"

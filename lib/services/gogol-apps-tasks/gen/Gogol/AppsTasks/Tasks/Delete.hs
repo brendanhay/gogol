@@ -100,9 +100,7 @@ newTasksTasksDelete task tasklist =
 
 instance Core.GoogleRequest TasksTasksDelete where
   type Rs TasksTasksDelete = ()
-  type
-    Scopes TasksTasksDelete =
-      '["https://www.googleapis.com/auth/tasks"]
+  type Scopes TasksTasksDelete = '[Tasks'FullControl]
   requestClient TasksTasksDelete {..} =
     go
       tasklist

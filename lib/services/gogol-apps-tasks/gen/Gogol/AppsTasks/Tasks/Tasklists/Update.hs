@@ -103,7 +103,7 @@ instance Core.GoogleRequest TasksTasklistsUpdate where
   type Rs TasksTasklistsUpdate = TaskList
   type
     Scopes TasksTasklistsUpdate =
-      '["https://www.googleapis.com/auth/tasks"]
+      '[Tasks'FullControl]
   requestClient TasksTasklistsUpdate {..} =
     go
       tasklist

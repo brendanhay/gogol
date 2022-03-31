@@ -106,9 +106,7 @@ newTasksTasksPatch payload task tasklist =
 
 instance Core.GoogleRequest TasksTasksPatch where
   type Rs TasksTasksPatch = Task
-  type
-    Scopes TasksTasksPatch =
-      '["https://www.googleapis.com/auth/tasks"]
+  type Scopes TasksTasksPatch = '[Tasks'FullControl]
   requestClient TasksTasksPatch {..} =
     go
       tasklist

@@ -97,7 +97,7 @@ instance Core.GoogleRequest TasksTasklistsInsert where
   type Rs TasksTasklistsInsert = TaskList
   type
     Scopes TasksTasklistsInsert =
-      '["https://www.googleapis.com/auth/tasks"]
+      '[Tasks'FullControl]
   requestClient TasksTasklistsInsert {..} =
     go
       xgafv
