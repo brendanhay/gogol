@@ -99,7 +99,7 @@ instance
       PublishUrlNotificationResponse
   type
     Scopes IndexingUrlNotificationsPublish =
-      '["https://www.googleapis.com/auth/indexing"]
+      '[Indexing'FullControl]
   requestClient IndexingUrlNotificationsPublish {..} =
     go
       xgafv
