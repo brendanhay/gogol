@@ -34,7 +34,7 @@ module Gogol.AccessApproval
     accessApprovalService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
