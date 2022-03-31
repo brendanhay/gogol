@@ -34,7 +34,7 @@ module Gogol.BinaryAuthorization
     binaryAuthorizationService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 

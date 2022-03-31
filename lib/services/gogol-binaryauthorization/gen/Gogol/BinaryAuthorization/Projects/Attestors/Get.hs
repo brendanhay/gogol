@@ -98,7 +98,7 @@ instance
       Attestor
   type
     Scopes BinaryAuthorizationProjectsAttestorsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsAttestorsGet {..} =
       go

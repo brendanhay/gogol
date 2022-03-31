@@ -110,7 +110,7 @@ instance
   type
     Scopes
       BinaryAuthorizationProjectsAttestorsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsAttestorsCreate {..} =
       go

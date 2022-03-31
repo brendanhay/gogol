@@ -99,7 +99,7 @@ instance
   type
     Scopes
       BinaryAuthorizationProjectsAttestorsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsAttestorsDelete {..} =
       go

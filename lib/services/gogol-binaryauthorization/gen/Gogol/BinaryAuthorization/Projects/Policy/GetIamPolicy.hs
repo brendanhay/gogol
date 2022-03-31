@@ -105,7 +105,7 @@ instance
   type
     Scopes
       BinaryAuthorizationProjectsPolicyGetIamPolicy =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsPolicyGetIamPolicy {..} =
       go
