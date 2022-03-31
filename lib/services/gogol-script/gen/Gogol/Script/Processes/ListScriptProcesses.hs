@@ -155,7 +155,7 @@ instance
       ListScriptProcessesResponse
   type
     Scopes ScriptProcessesListScriptProcesses =
-      '["https://www.googleapis.com/auth/script.processes"]
+      '[Script'Processes]
   requestClient ScriptProcessesListScriptProcesses {..} =
     go
       xgafv

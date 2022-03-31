@@ -104,7 +104,7 @@ instance
   type Rs ScriptProjectsDeploymentsDelete = Empty
   type
     Scopes ScriptProjectsDeploymentsDelete =
-      '["https://www.googleapis.com/auth/script.deployments"]
+      '[Script'Deployments]
   requestClient ScriptProjectsDeploymentsDelete {..} =
     go
       scriptId

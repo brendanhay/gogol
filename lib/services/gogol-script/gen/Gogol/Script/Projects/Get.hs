@@ -94,9 +94,7 @@ instance Core.GoogleRequest ScriptProjectsGet where
   type Rs ScriptProjectsGet = Project
   type
     Scopes ScriptProjectsGet =
-      '[ "https://www.googleapis.com/auth/script.projects",
-         "https://www.googleapis.com/auth/script.projects.readonly"
-       ]
+      '[Script'Projects, Script'Projects'Readonly]
   requestClient ScriptProjectsGet {..} =
     go
       scriptId

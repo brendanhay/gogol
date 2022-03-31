@@ -104,7 +104,7 @@ instance
   type Rs ScriptProjectsUpdateContent = Content
   type
     Scopes ScriptProjectsUpdateContent =
-      '["https://www.googleapis.com/auth/script.projects"]
+      '[Script'Projects]
   requestClient ScriptProjectsUpdateContent {..} =
     go
       scriptId

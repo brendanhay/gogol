@@ -104,7 +104,7 @@ instance
   type Rs ScriptProjectsVersionsCreate = Version
   type
     Scopes ScriptProjectsVersionsCreate =
-      '["https://www.googleapis.com/auth/script.projects"]
+      '[Script'Projects]
   requestClient ScriptProjectsVersionsCreate {..} =
     go
       scriptId

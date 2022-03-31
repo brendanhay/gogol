@@ -107,7 +107,7 @@ instance Core.GoogleRequest ScriptProjectsGetMetrics where
   type Rs ScriptProjectsGetMetrics = Metrics
   type
     Scopes ScriptProjectsGetMetrics =
-      '["https://www.googleapis.com/auth/script.metrics"]
+      '[Script'Metrics]
   requestClient ScriptProjectsGetMetrics {..} =
     go
       scriptId

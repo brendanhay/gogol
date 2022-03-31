@@ -152,9 +152,7 @@ instance Core.GoogleRequest ScriptProcessesList where
   type
     Rs ScriptProcessesList =
       ListUserProcessesResponse
-  type
-    Scopes ScriptProcessesList =
-      '["https://www.googleapis.com/auth/script.processes"]
+  type Scopes ScriptProcessesList = '[Script'Processes]
   requestClient ScriptProcessesList {..} =
     go
       xgafv

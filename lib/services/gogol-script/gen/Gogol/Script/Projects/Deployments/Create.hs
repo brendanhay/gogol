@@ -104,7 +104,7 @@ instance
   type Rs ScriptProjectsDeploymentsCreate = Deployment
   type
     Scopes ScriptProjectsDeploymentsCreate =
-      '["https://www.googleapis.com/auth/script.deployments"]
+      '[Script'Deployments]
   requestClient ScriptProjectsDeploymentsCreate {..} =
     go
       scriptId
