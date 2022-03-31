@@ -99,7 +99,7 @@ instance
       AnalyzeCommentResponse
   type
     Scopes CommentAnalyzerCommentsAnalyze =
-      '["https://www.googleapis.com/auth/userinfo.email"]
+      '[Userinfo'Email]
   requestClient CommentAnalyzerCommentsAnalyze {..} =
     go
       xgafv
