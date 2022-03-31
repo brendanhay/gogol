@@ -106,7 +106,7 @@ instance
       VacationSettings
   type
     Scopes GmailUsersSettingsUpdateVacation =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsUpdateVacation {..} =
     go
       userId

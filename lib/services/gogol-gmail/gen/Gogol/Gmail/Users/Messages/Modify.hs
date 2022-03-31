@@ -107,9 +107,7 @@ instance Core.GoogleRequest GmailUsersMessagesModify where
   type Rs GmailUsersMessagesModify = Message
   type
     Scopes GmailUsersMessagesModify =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Modify]
   requestClient GmailUsersMessagesModify {..} =
     go
       userId

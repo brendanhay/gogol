@@ -30,20 +30,20 @@ module Gogol.Gmail.Types
     gmailService,
 
     -- * OAuth Scopes
-    mailGoogleComScope,
-    gmailAddonsCurrentActionComposeScope,
-    gmailAddonsCurrentMessageActionScope,
-    gmailAddonsCurrentMessageMetadataScope,
-    gmailAddonsCurrentMessageReadOnlyScope,
-    gmailComposeScope,
-    gmailInsertScope,
-    gmailLabelsScope,
-    gmailMetadataScope,
-    gmailModifyScope,
-    gmailReadOnlyScope,
-    gmailSendScope,
-    gmailSettingsBasicScope,
-    gmailSettingsSharingScope,
+    Gmail'FullControl,
+    Gmail'Addons'Current'Action'Compose,
+    Gmail'Addons'Current'Message'Action,
+    Gmail'Addons'Current'Message'Metadata,
+    Gmail'Addons'Current'Message'Readonly,
+    Gmail'Compose,
+    Gmail'Insert,
+    Gmail'Labels,
+    Gmail'Metadata,
+    Gmail'Modify,
+    Gmail'Readonly,
+    Gmail'Send,
+    Gmail'Settings'Basic,
+    Gmail'Settings'Sharing,
 
     -- * Types
 
@@ -293,57 +293,43 @@ gmailService =
     "gmail.googleapis.com"
 
 -- | Read, compose, send, and permanently delete all your email from Gmail
-mailGoogleComScope :: Core.Proxy '["https://mail.google.com/"]
-mailGoogleComScope = Core.Proxy
+type Gmail'FullControl = "https://mail.google.com/"
 
 -- | Manage drafts and send emails when you interact with the add-on
-gmailAddonsCurrentActionComposeScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.addons.current.action.compose"]
-gmailAddonsCurrentActionComposeScope = Core.Proxy
+type Gmail'Addons'Current'Action'Compose = "https://www.googleapis.com/auth/gmail.addons.current.action.compose"
 
 -- | View your email messages when you interact with the add-on
-gmailAddonsCurrentMessageActionScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.action"]
-gmailAddonsCurrentMessageActionScope = Core.Proxy
+type Gmail'Addons'Current'Message'Action = "https://www.googleapis.com/auth/gmail.addons.current.message.action"
 
 -- | View your email message metadata when the add-on is running
-gmailAddonsCurrentMessageMetadataScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.metadata"]
-gmailAddonsCurrentMessageMetadataScope = Core.Proxy
+type Gmail'Addons'Current'Message'Metadata = "https://www.googleapis.com/auth/gmail.addons.current.message.metadata"
 
 -- | View your email messages when the add-on is running
-gmailAddonsCurrentMessageReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.addons.current.message.readonly"]
-gmailAddonsCurrentMessageReadOnlyScope = Core.Proxy
+type Gmail'Addons'Current'Message'Readonly = "https://www.googleapis.com/auth/gmail.addons.current.message.readonly"
 
 -- | Manage drafts and send emails
-gmailComposeScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.compose"]
-gmailComposeScope = Core.Proxy
+type Gmail'Compose = "https://www.googleapis.com/auth/gmail.compose"
 
 -- | Add emails into your Gmail mailbox
-gmailInsertScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.insert"]
-gmailInsertScope = Core.Proxy
+type Gmail'Insert = "https://www.googleapis.com/auth/gmail.insert"
 
 -- | See and edit your email labels
-gmailLabelsScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.labels"]
-gmailLabelsScope = Core.Proxy
+type Gmail'Labels = "https://www.googleapis.com/auth/gmail.labels"
 
 -- | View your email message metadata such as labels and headers, but not the email body
-gmailMetadataScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.metadata"]
-gmailMetadataScope = Core.Proxy
+type Gmail'Metadata = "https://www.googleapis.com/auth/gmail.metadata"
 
 -- | Read, compose, and send emails from your Gmail account
-gmailModifyScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.modify"]
-gmailModifyScope = Core.Proxy
+type Gmail'Modify = "https://www.googleapis.com/auth/gmail.modify"
 
 -- | View your email messages and settings
-gmailReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
-gmailReadOnlyScope = Core.Proxy
+type Gmail'Readonly = "https://www.googleapis.com/auth/gmail.readonly"
 
 -- | Send email on your behalf
-gmailSendScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.send"]
-gmailSendScope = Core.Proxy
+type Gmail'Send = "https://www.googleapis.com/auth/gmail.send"
 
 -- | See, edit, create, or change your email settings and filters in Gmail
-gmailSettingsBasicScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.settings.basic"]
-gmailSettingsBasicScope = Core.Proxy
+type Gmail'Settings'Basic = "https://www.googleapis.com/auth/gmail.settings.basic"
 
 -- | Manage your sensitive mail settings, including who can manage your mail
-gmailSettingsSharingScope :: Core.Proxy '["https://www.googleapis.com/auth/gmail.settings.sharing"]
-gmailSettingsSharingScope = Core.Proxy
+type Gmail'Settings'Sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"

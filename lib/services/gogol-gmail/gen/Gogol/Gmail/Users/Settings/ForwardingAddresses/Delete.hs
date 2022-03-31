@@ -107,7 +107,7 @@ instance
   type
     Scopes
       GmailUsersSettingsForwardingAddressesDelete =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient
     GmailUsersSettingsForwardingAddressesDelete {..} =
       go

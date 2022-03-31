@@ -100,11 +100,11 @@ instance Core.GoogleRequest GmailUsersLabelsGet where
   type Rs GmailUsersLabelsGet = Label
   type
     Scopes GmailUsersLabelsGet =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Labels,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersLabelsGet {..} =
     go

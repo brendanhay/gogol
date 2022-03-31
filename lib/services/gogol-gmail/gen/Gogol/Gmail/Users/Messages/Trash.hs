@@ -101,9 +101,7 @@ instance Core.GoogleRequest GmailUsersMessagesTrash where
   type Rs GmailUsersMessagesTrash = Message
   type
     Scopes GmailUsersMessagesTrash =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Modify]
   requestClient GmailUsersMessagesTrash {..} =
     go
       userId

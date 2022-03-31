@@ -100,10 +100,10 @@ instance Core.GoogleRequest GmailUsersDraftsDelete where
   type Rs GmailUsersDraftsDelete = ()
   type
     Scopes GmailUsersDraftsDelete =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify"
+      '[ Gmail'FullControl,
+         Gmail'Addons'Current'Action'Compose,
+         Gmail'Compose,
+         Gmail'Modify
        ]
   requestClient GmailUsersDraftsDelete {..} =
     go

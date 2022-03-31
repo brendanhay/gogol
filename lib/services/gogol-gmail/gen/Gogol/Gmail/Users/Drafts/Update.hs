@@ -122,10 +122,10 @@ instance Core.GoogleRequest GmailUsersDraftsUpdate where
   type Rs GmailUsersDraftsUpdate = Draft
   type
     Scopes GmailUsersDraftsUpdate =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify"
+      '[ Gmail'FullControl,
+         Gmail'Addons'Current'Action'Compose,
+         Gmail'Compose,
+         Gmail'Modify
        ]
   requestClient GmailUsersDraftsUpdate {..} =
     go

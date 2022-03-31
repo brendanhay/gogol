@@ -115,10 +115,10 @@ instance Core.GoogleRequest GmailUsersDraftsCreate where
   type Rs GmailUsersDraftsCreate = Draft
   type
     Scopes GmailUsersDraftsCreate =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.modify"
+      '[ Gmail'FullControl,
+         Gmail'Addons'Current'Action'Compose,
+         Gmail'Compose,
+         Gmail'Modify
        ]
   requestClient GmailUsersDraftsCreate {..} =
     go

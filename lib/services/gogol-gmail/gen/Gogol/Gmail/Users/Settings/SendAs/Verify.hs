@@ -105,7 +105,7 @@ instance
   type Rs GmailUsersSettingsSendAsVerify = ()
   type
     Scopes GmailUsersSettingsSendAsVerify =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient GmailUsersSettingsSendAsVerify {..} =
     go
       userId

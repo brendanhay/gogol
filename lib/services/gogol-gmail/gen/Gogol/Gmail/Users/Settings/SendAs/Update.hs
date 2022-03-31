@@ -110,9 +110,7 @@ instance
   type Rs GmailUsersSettingsSendAsUpdate = SendAs
   type
     Scopes GmailUsersSettingsSendAsUpdate =
-      '[ "https://www.googleapis.com/auth/gmail.settings.basic",
-         "https://www.googleapis.com/auth/gmail.settings.sharing"
-       ]
+      '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
   requestClient GmailUsersSettingsSendAsUpdate {..} =
     go
       userId

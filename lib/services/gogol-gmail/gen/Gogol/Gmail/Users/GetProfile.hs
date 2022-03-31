@@ -94,11 +94,11 @@ instance Core.GoogleRequest GmailUsersGetProfile where
   type Rs GmailUsersGetProfile = Profile
   type
     Scopes GmailUsersGetProfile =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.compose",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Compose,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersGetProfile {..} =
     go

@@ -100,10 +100,7 @@ instance Core.GoogleRequest GmailUsersLabelsDelete where
   type Rs GmailUsersLabelsDelete = ()
   type
     Scopes GmailUsersLabelsDelete =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Labels, Gmail'Modify]
   requestClient GmailUsersLabelsDelete {..} =
     go
       userId

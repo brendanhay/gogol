@@ -111,9 +111,7 @@ instance
   type Rs GmailUsersSettingsSendAsSmimeInfoDelete = ()
   type
     Scopes GmailUsersSettingsSendAsSmimeInfoDelete =
-      '[ "https://www.googleapis.com/auth/gmail.settings.basic",
-         "https://www.googleapis.com/auth/gmail.settings.sharing"
-       ]
+      '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
   requestClient
     GmailUsersSettingsSendAsSmimeInfoDelete {..} =
       go

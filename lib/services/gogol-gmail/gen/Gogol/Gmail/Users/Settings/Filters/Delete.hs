@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsFiltersDelete = ()
   type
     Scopes GmailUsersSettingsFiltersDelete =
-      '["https://www.googleapis.com/auth/gmail.settings.basic"]
+      '[Gmail'Settings'Basic]
   requestClient GmailUsersSettingsFiltersDelete {..} =
     go
       userId

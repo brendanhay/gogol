@@ -106,10 +106,7 @@ instance Core.GoogleRequest GmailUsersLabelsUpdate where
   type Rs GmailUsersLabelsUpdate = Label
   type
     Scopes GmailUsersLabelsUpdate =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Labels, Gmail'Modify]
   requestClient GmailUsersLabelsUpdate {..} =
     go
       userId

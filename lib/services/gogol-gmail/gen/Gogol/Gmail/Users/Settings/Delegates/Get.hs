@@ -104,10 +104,10 @@ instance
   type Rs GmailUsersSettingsDelegatesGet = Delegate
   type
     Scopes GmailUsersSettingsDelegatesGet =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly",
-         "https://www.googleapis.com/auth/gmail.settings.basic"
+      '[ Gmail'FullControl,
+         Gmail'Modify,
+         Gmail'Readonly,
+         Gmail'Settings'Basic
        ]
   requestClient GmailUsersSettingsDelegatesGet {..} =
     go

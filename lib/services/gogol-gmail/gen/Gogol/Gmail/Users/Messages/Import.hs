@@ -145,10 +145,7 @@ instance Core.GoogleRequest GmailUsersMessagesImport where
   type Rs GmailUsersMessagesImport = Message
   type
     Scopes GmailUsersMessagesImport =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.insert",
-         "https://www.googleapis.com/auth/gmail.modify"
-       ]
+      '[Gmail'FullControl, Gmail'Insert, Gmail'Modify]
   requestClient GmailUsersMessagesImport {..} =
     go
       userId

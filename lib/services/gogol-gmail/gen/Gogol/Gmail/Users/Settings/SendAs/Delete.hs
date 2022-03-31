@@ -104,7 +104,7 @@ instance
   type Rs GmailUsersSettingsSendAsDelete = ()
   type
     Scopes GmailUsersSettingsSendAsDelete =
-      '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+      '[Gmail'Settings'Sharing]
   requestClient GmailUsersSettingsSendAsDelete {..} =
     go
       userId

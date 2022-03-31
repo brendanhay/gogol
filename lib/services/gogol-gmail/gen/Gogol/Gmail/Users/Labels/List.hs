@@ -94,11 +94,11 @@ instance Core.GoogleRequest GmailUsersLabelsList where
   type Rs GmailUsersLabelsList = ListLabelsResponse
   type
     Scopes GmailUsersLabelsList =
-      '[ "https://mail.google.com/",
-         "https://www.googleapis.com/auth/gmail.labels",
-         "https://www.googleapis.com/auth/gmail.metadata",
-         "https://www.googleapis.com/auth/gmail.modify",
-         "https://www.googleapis.com/auth/gmail.readonly"
+      '[ Gmail'FullControl,
+         Gmail'Labels,
+         Gmail'Metadata,
+         Gmail'Modify,
+         Gmail'Readonly
        ]
   requestClient GmailUsersLabelsList {..} =
     go
