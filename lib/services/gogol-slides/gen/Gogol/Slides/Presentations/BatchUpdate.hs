@@ -112,12 +112,12 @@ instance
       BatchUpdatePresentationResponse
   type
     Scopes SlidesPresentationsBatchUpdate =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly",
-         "https://www.googleapis.com/auth/presentations",
-         "https://www.googleapis.com/auth/spreadsheets",
-         "https://www.googleapis.com/auth/spreadsheets.readonly"
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Readonly,
+         Presentations'FullControl,
+         Spreadsheets'FullControl,
+         Spreadsheets'Readonly
        ]
   requestClient SlidesPresentationsBatchUpdate {..} =
     go

@@ -125,11 +125,11 @@ instance
       Thumbnail
   type
     Scopes SlidesPresentationsPagesGetThumbnail =
-      '[ "https://www.googleapis.com/auth/drive",
-         "https://www.googleapis.com/auth/drive.file",
-         "https://www.googleapis.com/auth/drive.readonly",
-         "https://www.googleapis.com/auth/presentations",
-         "https://www.googleapis.com/auth/presentations.readonly"
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Readonly,
+         Presentations'FullControl,
+         Presentations'Readonly
        ]
   requestClient
     SlidesPresentationsPagesGetThumbnail {..} =
