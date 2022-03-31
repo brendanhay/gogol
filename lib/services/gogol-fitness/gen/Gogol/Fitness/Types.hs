@@ -30,28 +30,28 @@ module Gogol.Fitness.Types
     fitnessService,
 
     -- * OAuth Scopes
-    fitnessActivityReadScope,
-    fitnessActivityWriteScope,
-    fitnessBlood_glucoseReadScope,
-    fitnessBlood_glucoseWriteScope,
-    fitnessBlood_pressureReadScope,
-    fitnessBlood_pressureWriteScope,
-    fitnessBodyReadScope,
-    fitnessBodyWriteScope,
-    fitnessBody_temperatureReadScope,
-    fitnessBody_temperatureWriteScope,
-    fitnessHeart_rateReadScope,
-    fitnessHeart_rateWriteScope,
-    fitnessLocationReadScope,
-    fitnessLocationWriteScope,
-    fitnessNutritionReadScope,
-    fitnessNutritionWriteScope,
-    fitnessOxygen_saturationReadScope,
-    fitnessOxygen_saturationWriteScope,
-    fitnessReproductive_healthReadScope,
-    fitnessReproductive_healthWriteScope,
-    fitnessSleepReadScope,
-    fitnessSleepWriteScope,
+    Fitness'Activity'Read,
+    Fitness'Activity'Write,
+    Fitness'BloodGlucose'Read,
+    Fitness'BloodGlucose'Write,
+    Fitness'BloodPressure'Read,
+    Fitness'BloodPressure'Write,
+    Fitness'Body'Read,
+    Fitness'Body'Write,
+    Fitness'BodyTemperature'Read,
+    Fitness'BodyTemperature'Write,
+    Fitness'HeartRate'Read,
+    Fitness'HeartRate'Write,
+    Fitness'Location'Read,
+    Fitness'Location'Write,
+    Fitness'Nutrition'Read,
+    Fitness'Nutrition'Write,
+    Fitness'OxygenSaturation'Read,
+    Fitness'OxygenSaturation'Write,
+    Fitness'ReproductiveHealth'Read,
+    Fitness'ReproductiveHealth'Write,
+    Fitness'Sleep'Read,
+    Fitness'Sleep'Write,
 
     -- * Types
 
@@ -181,89 +181,67 @@ fitnessService =
     "fitness.googleapis.com"
 
 -- | Use Google Fit to see and store your physical activity data
-fitnessActivityReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
-fitnessActivityReadScope = Core.Proxy
+type Fitness'Activity'Read = "https://www.googleapis.com/auth/fitness.activity.read"
 
 -- | Add to your Google Fit physical activity data
-fitnessActivityWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
-fitnessActivityWriteScope = Core.Proxy
+type Fitness'Activity'Write = "https://www.googleapis.com/auth/fitness.activity.write"
 
 -- | See info about your blood glucose in Google Fit. I consent to Google sharing my blood glucose information with this app.
-fitnessBlood_glucoseReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.read"]
-fitnessBlood_glucoseReadScope = Core.Proxy
+type Fitness'BloodGlucose'Read = "https://www.googleapis.com/auth/fitness.blood_glucose.read"
 
 -- | Add info about your blood glucose to Google Fit. I consent to Google using my blood glucose information with this app.
-fitnessBlood_glucoseWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_glucose.write"]
-fitnessBlood_glucoseWriteScope = Core.Proxy
+type Fitness'BloodGlucose'Write = "https://www.googleapis.com/auth/fitness.blood_glucose.write"
 
 -- | See info about your blood pressure in Google Fit. I consent to Google sharing my blood pressure information with this app.
-fitnessBlood_pressureReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.read"]
-fitnessBlood_pressureReadScope = Core.Proxy
+type Fitness'BloodPressure'Read = "https://www.googleapis.com/auth/fitness.blood_pressure.read"
 
 -- | Add info about your blood pressure in Google Fit. I consent to Google using my blood pressure information with this app.
-fitnessBlood_pressureWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.blood_pressure.write"]
-fitnessBlood_pressureWriteScope = Core.Proxy
+type Fitness'BloodPressure'Write = "https://www.googleapis.com/auth/fitness.blood_pressure.write"
 
 -- | See info about your body measurements in Google Fit
-fitnessBodyReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
-fitnessBodyReadScope = Core.Proxy
+type Fitness'Body'Read = "https://www.googleapis.com/auth/fitness.body.read"
 
 -- | Add info about your body measurements to Google Fit
-fitnessBodyWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
-fitnessBodyWriteScope = Core.Proxy
+type Fitness'Body'Write = "https://www.googleapis.com/auth/fitness.body.write"
 
 -- | See info about your body temperature in Google Fit. I consent to Google sharing my body temperature information with this app.
-fitnessBody_temperatureReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.read"]
-fitnessBody_temperatureReadScope = Core.Proxy
+type Fitness'BodyTemperature'Read = "https://www.googleapis.com/auth/fitness.body_temperature.read"
 
 -- | Add to info about your body temperature in Google Fit. I consent to Google using my body temperature information with this app.
-fitnessBody_temperatureWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.body_temperature.write"]
-fitnessBody_temperatureWriteScope = Core.Proxy
+type Fitness'BodyTemperature'Write = "https://www.googleapis.com/auth/fitness.body_temperature.write"
 
 -- | See your heart rate data in Google Fit. I consent to Google sharing my heart rate information with this app.
-fitnessHeart_rateReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.read"]
-fitnessHeart_rateReadScope = Core.Proxy
+type Fitness'HeartRate'Read = "https://www.googleapis.com/auth/fitness.heart_rate.read"
 
 -- | Add to your heart rate data in Google Fit. I consent to Google using my heart rate information with this app.
-fitnessHeart_rateWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.heart_rate.write"]
-fitnessHeart_rateWriteScope = Core.Proxy
+type Fitness'HeartRate'Write = "https://www.googleapis.com/auth/fitness.heart_rate.write"
 
 -- | See your Google Fit speed and distance data
-fitnessLocationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
-fitnessLocationReadScope = Core.Proxy
+type Fitness'Location'Read = "https://www.googleapis.com/auth/fitness.location.read"
 
 -- | Add to your Google Fit location data
-fitnessLocationWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
-fitnessLocationWriteScope = Core.Proxy
+type Fitness'Location'Write = "https://www.googleapis.com/auth/fitness.location.write"
 
 -- | See info about your nutrition in Google Fit
-fitnessNutritionReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
-fitnessNutritionReadScope = Core.Proxy
+type Fitness'Nutrition'Read = "https://www.googleapis.com/auth/fitness.nutrition.read"
 
 -- | Add to info about your nutrition in Google Fit
-fitnessNutritionWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
-fitnessNutritionWriteScope = Core.Proxy
+type Fitness'Nutrition'Write = "https://www.googleapis.com/auth/fitness.nutrition.write"
 
 -- | See info about your oxygen saturation in Google Fit. I consent to Google sharing my oxygen saturation information with this app.
-fitnessOxygen_saturationReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.read"]
-fitnessOxygen_saturationReadScope = Core.Proxy
+type Fitness'OxygenSaturation'Read = "https://www.googleapis.com/auth/fitness.oxygen_saturation.read"
 
 -- | Add info about your oxygen saturation in Google Fit. I consent to Google using my oxygen saturation information with this app.
-fitnessOxygen_saturationWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.oxygen_saturation.write"]
-fitnessOxygen_saturationWriteScope = Core.Proxy
+type Fitness'OxygenSaturation'Write = "https://www.googleapis.com/auth/fitness.oxygen_saturation.write"
 
 -- | See info about your reproductive health in Google Fit. I consent to Google sharing my reproductive health information with this app.
-fitnessReproductive_healthReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.read"]
-fitnessReproductive_healthReadScope = Core.Proxy
+type Fitness'ReproductiveHealth'Read = "https://www.googleapis.com/auth/fitness.reproductive_health.read"
 
 -- | Add info about your reproductive health in Google Fit. I consent to Google using my reproductive health information with this app.
-fitnessReproductive_healthWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.reproductive_health.write"]
-fitnessReproductive_healthWriteScope = Core.Proxy
+type Fitness'ReproductiveHealth'Write = "https://www.googleapis.com/auth/fitness.reproductive_health.write"
 
 -- | See your sleep data in Google Fit. I consent to Google sharing my sleep information with this app.
-fitnessSleepReadScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.sleep.read"]
-fitnessSleepReadScope = Core.Proxy
+type Fitness'Sleep'Read = "https://www.googleapis.com/auth/fitness.sleep.read"
 
 -- | Add to your sleep data in Google Fit. I consent to Google using my sleep information with this app.
-fitnessSleepWriteScope :: Core.Proxy '["https://www.googleapis.com/auth/fitness.sleep.write"]
-fitnessSleepWriteScope = Core.Proxy
+type Fitness'Sleep'Write = "https://www.googleapis.com/auth/fitness.sleep.write"

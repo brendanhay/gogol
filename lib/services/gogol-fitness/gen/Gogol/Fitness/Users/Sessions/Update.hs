@@ -111,9 +111,7 @@ instance
   type Rs FitnessUsersSessionsUpdate = Session
   type
     Scopes FitnessUsersSessionsUpdate =
-      '[ "https://www.googleapis.com/auth/fitness.activity.write",
-         "https://www.googleapis.com/auth/fitness.sleep.write"
-       ]
+      '[Fitness'Activity'Write, Fitness'Sleep'Write]
   requestClient FitnessUsersSessionsUpdate {..} =
     go
       userId

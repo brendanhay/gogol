@@ -105,9 +105,7 @@ instance
   type Rs FitnessUsersSessionsDelete = ()
   type
     Scopes FitnessUsersSessionsDelete =
-      '[ "https://www.googleapis.com/auth/fitness.activity.write",
-         "https://www.googleapis.com/auth/fitness.sleep.write"
-       ]
+      '[Fitness'Activity'Write, Fitness'Sleep'Write]
   requestClient FitnessUsersSessionsDelete {..} =
     go
       userId

@@ -105,17 +105,17 @@ instance
   type Rs FitnessUsersDataSourcesDelete = DataSource
   type
     Scopes FitnessUsersDataSourcesDelete =
-      '[ "https://www.googleapis.com/auth/fitness.activity.write",
-         "https://www.googleapis.com/auth/fitness.blood_glucose.write",
-         "https://www.googleapis.com/auth/fitness.blood_pressure.write",
-         "https://www.googleapis.com/auth/fitness.body.write",
-         "https://www.googleapis.com/auth/fitness.body_temperature.write",
-         "https://www.googleapis.com/auth/fitness.heart_rate.write",
-         "https://www.googleapis.com/auth/fitness.location.write",
-         "https://www.googleapis.com/auth/fitness.nutrition.write",
-         "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
-         "https://www.googleapis.com/auth/fitness.reproductive_health.write",
-         "https://www.googleapis.com/auth/fitness.sleep.write"
+      '[ Fitness'Activity'Write,
+         Fitness'BloodGlucose'Write,
+         Fitness'BloodPressure'Write,
+         Fitness'Body'Write,
+         Fitness'BodyTemperature'Write,
+         Fitness'HeartRate'Write,
+         Fitness'Location'Write,
+         Fitness'Nutrition'Write,
+         Fitness'OxygenSaturation'Write,
+         Fitness'ReproductiveHealth'Write,
+         Fitness'Sleep'Write
        ]
   requestClient FitnessUsersDataSourcesDelete {..} =
     go
