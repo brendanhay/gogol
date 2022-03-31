@@ -96,9 +96,7 @@ instance Core.GoogleRequest DatatransferTransfersGet where
   type Rs DatatransferTransfersGet = DataTransfer
   type
     Scopes DatatransferTransfersGet =
-      '[ "https://www.googleapis.com/auth/admin.datatransfer",
-         "https://www.googleapis.com/auth/admin.datatransfer.readonly"
-       ]
+      '[Admin'Datatransfer, Admin'Datatransfer'Readonly]
   requestClient DatatransferTransfersGet {..} =
     go
       dataTransferId

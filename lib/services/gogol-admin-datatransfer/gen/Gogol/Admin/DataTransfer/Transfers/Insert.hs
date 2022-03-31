@@ -99,7 +99,7 @@ instance
   type Rs DatatransferTransfersInsert = DataTransfer
   type
     Scopes DatatransferTransfersInsert =
-      '["https://www.googleapis.com/auth/admin.datatransfer"]
+      '[Admin'Datatransfer]
   requestClient DatatransferTransfersInsert {..} =
     go
       xgafv

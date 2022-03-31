@@ -30,8 +30,8 @@ module Gogol.Admin.DataTransfer.Types
     adminDataTransferService,
 
     -- * OAuth Scopes
-    adminDatatransferScope,
-    adminDatatransferReadOnlyScope,
+    Admin'Datatransfer,
+    Admin'Datatransfer'Readonly,
 
     -- * Types
 
@@ -76,9 +76,7 @@ adminDataTransferService =
     "admin.googleapis.com"
 
 -- | View and manage data transfers between users in your organization
-adminDatatransferScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
-adminDatatransferScope = Core.Proxy
+type Admin'Datatransfer = "https://www.googleapis.com/auth/admin.datatransfer"
 
 -- | View data transfers between users in your organization
-adminDatatransferReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-adminDatatransferReadOnlyScope = Core.Proxy
+type Admin'Datatransfer'Readonly = "https://www.googleapis.com/auth/admin.datatransfer.readonly"

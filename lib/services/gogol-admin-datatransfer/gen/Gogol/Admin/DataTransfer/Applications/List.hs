@@ -107,9 +107,7 @@ instance
       ApplicationsListResponse
   type
     Scopes DatatransferApplicationsList =
-      '[ "https://www.googleapis.com/auth/admin.datatransfer",
-         "https://www.googleapis.com/auth/admin.datatransfer.readonly"
-       ]
+      '[Admin'Datatransfer, Admin'Datatransfer'Readonly]
   requestClient DatatransferApplicationsList {..} =
     go
       xgafv

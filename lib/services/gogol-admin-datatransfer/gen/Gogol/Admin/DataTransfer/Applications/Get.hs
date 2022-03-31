@@ -99,9 +99,7 @@ instance
   type Rs DatatransferApplicationsGet = Application
   type
     Scopes DatatransferApplicationsGet =
-      '[ "https://www.googleapis.com/auth/admin.datatransfer",
-         "https://www.googleapis.com/auth/admin.datatransfer.readonly"
-       ]
+      '[Admin'Datatransfer, Admin'Datatransfer'Readonly]
   requestClient DatatransferApplicationsGet {..} =
     go
       applicationId
