@@ -20,7 +20,7 @@ module Gogol.Auth.Scope
   ( -- * Scope constraints
     type HasScope,
     type HasScopeFor,
-    type HasAnyScope,
+    type HasScopeFrom,
 
     -- ** Modifying type-level lists of scopes
     allow,
@@ -89,21 +89,21 @@ import Network.HTTP.Types (urlEncode)
 -- @
 --
 -- /See:/ 'HasScopeFor'.
-type HasScope name scopes = (KnownScopes scopes, HasAnyScope '[name] scopes)
+type HasScope name scopes = (KnownScopes scopes, HasScopeFrom '[name] scopes)
 
 -- | 'Constraint' kind for @scopes@ contains _one_ of the required scopes
 -- for the 'GoogleRequest', @a@.
 --
 -- /See:/ 'HasScope'.
-type HasScopeFor a scopes = (KnownScopes scopes, GoogleRequest a, HasAnyScope (Scopes a) scopes)
+type HasScopeFor a scopes = (KnownScopes scopes, GoogleRequest a, HasScopeFrom (Scopes a) scopes)
 
 -- | 'Constraint' proving at least _one_ scope from @required@ exists in @scopes@.
 --
 -- That is, the set of possible scopes a request requires are on the left, and
 -- the set of scopes credentials or an environment contain are on the right.
-type family HasAnyScope (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
-  HasAnyScope '[] _ = () -- Special case; no scopes are required.
-  HasAnyScope required scopes =
+type family HasScopeFrom (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
+  HasScopeFrom '[] _ = () -- Special case; no scopes are required.
+  HasScopeFrom required scopes =
     If (Intersect required scopes) (() :: Constraint) (TypeError (MissingScopesError required scopes))
 
 type MissingScopesError (required :: [k]) (scopes :: [k]) =

@@ -41,7 +41,7 @@ module Gogol
     -- $authorization
     type HasScope,
     type HasScopeFor,
-    type HasAnyScope,
+    type HasScopeFrom,
     KnownScopes (..),
     (!),
     allow,
