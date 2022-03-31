@@ -105,7 +105,7 @@ instance
   type
     Scopes
       ContainerProjectsLocationsClustersSetLogging =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsLocationsClustersSetLogging {..} =
       go

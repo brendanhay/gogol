@@ -115,7 +115,7 @@ instance
   type Rs ContainerProjectsZonesClustersGet = Cluster
   type
     Scopes ContainerProjectsZonesClustersGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ContainerProjectsZonesClustersGet {..} =
     go
       projectId

@@ -106,7 +106,7 @@ instance
   type
     Scopes
       ContainerProjectsLocationsClustersSetLegacyAbac =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsLocationsClustersSetLegacyAbac {..} =
       go

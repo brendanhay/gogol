@@ -106,7 +106,7 @@ instance
   type
     Scopes
       ContainerProjectsLocationsClustersStartIpRotation =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsLocationsClustersStartIpRotation {..} =
       go

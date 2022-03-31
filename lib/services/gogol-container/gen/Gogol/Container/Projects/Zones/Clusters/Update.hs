@@ -119,7 +119,7 @@ instance
       Operation
   type
     Scopes ContainerProjectsZonesClustersUpdate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersUpdate {..} =
       go

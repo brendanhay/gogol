@@ -123,7 +123,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersSetMasterAuth =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersSetMasterAuth {..} =
       go

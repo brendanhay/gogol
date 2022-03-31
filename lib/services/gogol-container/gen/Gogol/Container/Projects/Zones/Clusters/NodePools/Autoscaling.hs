@@ -131,7 +131,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersNodePoolsAutoscaling =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersNodePoolsAutoscaling {..} =
       go

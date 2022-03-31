@@ -130,7 +130,7 @@ instance
   type
     Scopes
       ContainerProjectsZonesClustersNodePoolsRollback =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ContainerProjectsZonesClustersNodePoolsRollback {..} =
       go

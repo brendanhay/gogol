@@ -117,7 +117,7 @@ instance
       Operation
   type
     Scopes ContainerProjectsZonesOperationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient ContainerProjectsZonesOperationsGet {..} =
     go
       projectId
