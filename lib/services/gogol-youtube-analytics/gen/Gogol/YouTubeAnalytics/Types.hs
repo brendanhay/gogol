@@ -30,11 +30,11 @@ module Gogol.YouTubeAnalytics.Types
     youTubeAnalyticsService,
 
     -- * OAuth Scopes
-    youtubeScope,
-    youtubeReadOnlyScope,
-    youtubepartnerScope,
-    youtubeAnalyticsMonetaryReadOnlyScope,
-    youtubeAnalyticsReadOnlyScope,
+    Youtube'FullControl,
+    Youtube'Readonly,
+    Youtubepartner'FullControl,
+    YtAnalyticsMonetary'Readonly,
+    YtAnalytics'Readonly,
 
     -- * Types
 
@@ -109,21 +109,16 @@ youTubeAnalyticsService =
     "youtubeanalytics.googleapis.com"
 
 -- | Manage your YouTube account
-youtubeScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube"]
-youtubeScope = Core.Proxy
+type Youtube'FullControl = "https://www.googleapis.com/auth/youtube"
 
 -- | View your YouTube account
-youtubeReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youtubeReadOnlyScope = Core.Proxy
+type Youtube'Readonly = "https://www.googleapis.com/auth/youtube.readonly"
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: Core.Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youtubepartnerScope = Core.Proxy
+type Youtubepartner'FullControl = "https://www.googleapis.com/auth/youtubepartner"
 
 -- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
-youtubeAnalyticsMonetaryReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-youtubeAnalyticsMonetaryReadOnlyScope = Core.Proxy
+type YtAnalyticsMonetary'Readonly = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
 
 -- | View YouTube Analytics reports for your YouTube content
-youtubeAnalyticsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-youtubeAnalyticsReadOnlyScope = Core.Proxy
+type YtAnalytics'Readonly = "https://www.googleapis.com/auth/yt-analytics.readonly"

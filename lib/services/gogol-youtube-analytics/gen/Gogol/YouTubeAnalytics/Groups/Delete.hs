@@ -99,11 +99,11 @@ instance
   type Rs YouTubeAnalyticsGroupsDelete = EmptyResponse
   type
     Scopes YouTubeAnalyticsGroupsDelete =
-      '[ "https://www.googleapis.com/auth/youtube",
-         "https://www.googleapis.com/auth/youtube.readonly",
-         "https://www.googleapis.com/auth/youtubepartner",
-         "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
-         "https://www.googleapis.com/auth/yt-analytics.readonly"
+      '[ Youtube'FullControl,
+         Youtube'Readonly,
+         Youtubepartner'FullControl,
+         YtAnalyticsMonetary'Readonly,
+         YtAnalytics'Readonly
        ]
   requestClient YouTubeAnalyticsGroupsDelete {..} =
     go
