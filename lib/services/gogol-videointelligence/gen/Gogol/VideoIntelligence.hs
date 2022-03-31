@@ -34,7 +34,7 @@ module Gogol.VideoIntelligence
     videoIntelligenceService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
+    CloudPlatform'FullControl,
 
     -- * Resources
 
