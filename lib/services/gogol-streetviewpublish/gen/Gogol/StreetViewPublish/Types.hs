@@ -30,7 +30,7 @@ module Gogol.StreetViewPublish.Types
     streetViewPublishService,
 
     -- * OAuth Scopes
-    streetViewPublishScope,
+    Streetviewpublish'FullControl,
 
     -- * Types
 
@@ -154,5 +154,4 @@ streetViewPublishService =
     "streetviewpublish.googleapis.com"
 
 -- | Publish and manage your 360 photos on Google Street View
-streetViewPublishScope :: Core.Proxy '["https://www.googleapis.com/auth/streetviewpublish"]
-streetViewPublishScope = Core.Proxy
+type Streetviewpublish'FullControl = "https://www.googleapis.com/auth/streetviewpublish"

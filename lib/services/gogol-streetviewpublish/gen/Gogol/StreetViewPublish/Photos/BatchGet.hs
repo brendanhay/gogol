@@ -105,7 +105,7 @@ instance
       BatchGetPhotosResponse
   type
     Scopes StreetViewPublishPhotosBatchGet =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotosBatchGet {..} =
     go
       xgafv

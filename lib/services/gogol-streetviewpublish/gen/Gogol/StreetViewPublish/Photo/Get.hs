@@ -102,7 +102,7 @@ instance Core.GoogleRequest StreetViewPublishPhotoGet where
   type Rs StreetViewPublishPhotoGet = Photo
   type
     Scopes StreetViewPublishPhotoGet =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotoGet {..} =
     go
       photoId

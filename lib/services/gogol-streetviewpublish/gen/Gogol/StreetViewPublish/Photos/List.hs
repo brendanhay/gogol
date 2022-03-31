@@ -113,7 +113,7 @@ instance
       ListPhotosResponse
   type
     Scopes StreetViewPublishPhotosList =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotosList {..} =
     go
       xgafv

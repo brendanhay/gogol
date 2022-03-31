@@ -97,7 +97,7 @@ instance
   type Rs StreetViewPublishPhotoStartUpload = UploadRef
   type
     Scopes StreetViewPublishPhotoStartUpload =
-      '["https://www.googleapis.com/auth/streetviewpublish"]
+      '[Streetviewpublish'FullControl]
   requestClient StreetViewPublishPhotoStartUpload {..} =
     go
       xgafv
