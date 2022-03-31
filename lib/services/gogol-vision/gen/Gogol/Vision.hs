@@ -34,8 +34,8 @@ module Gogol.Vision
     visionService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudVisionScope,
+    CloudPlatform'FullControl,
+    CloudVision'FullControl,
 
     -- * Resources
 

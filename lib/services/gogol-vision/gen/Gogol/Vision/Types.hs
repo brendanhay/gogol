@@ -30,8 +30,8 @@ module Gogol.Vision.Types
     visionService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudVisionScope,
+    CloudPlatform'FullControl,
+    CloudVision'FullControl,
 
     -- * Types
 
@@ -1384,9 +1384,7 @@ visionService =
     "vision.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Apply machine learning models to understand and label images
-cloudVisionScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-vision"]
-cloudVisionScope = Core.Proxy
+type CloudVision'FullControl = "https://www.googleapis.com/auth/cloud-vision"

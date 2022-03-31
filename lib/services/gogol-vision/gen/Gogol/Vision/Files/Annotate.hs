@@ -100,9 +100,7 @@ instance Core.GoogleRequest VisionFilesAnnotate where
       GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
   type
     Scopes VisionFilesAnnotate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-vision"
-       ]
+      '[CloudPlatform'FullControl, CloudVision'FullControl]
   requestClient VisionFilesAnnotate {..} =
     go
       xgafv
