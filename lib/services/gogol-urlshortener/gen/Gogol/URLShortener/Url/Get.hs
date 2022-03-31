@@ -76,7 +76,7 @@ instance Core.GoogleRequest URLShortenerUrlGet where
   type Rs URLShortenerUrlGet = Url
   type
     Scopes URLShortenerUrlGet =
-      '["https://www.googleapis.com/auth/urlshortener"]
+      '[Urlshortener'FullControl]
   requestClient URLShortenerUrlGet {..} =
     go
       (Core.Just shortUrl)

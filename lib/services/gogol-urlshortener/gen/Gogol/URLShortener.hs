@@ -34,7 +34,7 @@ module Gogol.URLShortener
     uRLShortenerService,
 
     -- * OAuth Scopes
-    uRLShortenerScope,
+    Urlshortener'FullControl,
 
     -- * Resources
 

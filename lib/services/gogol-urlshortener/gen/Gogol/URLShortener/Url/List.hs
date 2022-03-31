@@ -75,7 +75,7 @@ instance Core.GoogleRequest URLShortenerUrlList where
   type Rs URLShortenerUrlList = UrlHistory
   type
     Scopes URLShortenerUrlList =
-      '["https://www.googleapis.com/auth/urlshortener"]
+      '[Urlshortener'FullControl]
   requestClient URLShortenerUrlList {..} =
     go
       projection

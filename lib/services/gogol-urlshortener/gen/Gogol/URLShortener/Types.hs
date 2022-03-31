@@ -30,7 +30,7 @@ module Gogol.URLShortener.Types
     uRLShortenerService,
 
     -- * OAuth Scopes
-    uRLShortenerScope,
+    Urlshortener'FullControl,
 
     -- * Types
 
@@ -74,5 +74,4 @@ uRLShortenerService =
     "www.googleapis.com"
 
 -- | Manage your goo.gl short URLs
-uRLShortenerScope :: Core.Proxy '["https://www.googleapis.com/auth/urlshortener"]
-uRLShortenerScope = Core.Proxy
+type Urlshortener'FullControl = "https://www.googleapis.com/auth/urlshortener"

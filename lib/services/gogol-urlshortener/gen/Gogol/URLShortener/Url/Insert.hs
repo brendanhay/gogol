@@ -72,7 +72,7 @@ instance Core.GoogleRequest URLShortenerUrlInsert where
   type Rs URLShortenerUrlInsert = Url
   type
     Scopes URLShortenerUrlInsert =
-      '["https://www.googleapis.com/auth/urlshortener"]
+      '[Urlshortener'FullControl]
   requestClient URLShortenerUrlInsert {..} =
     go
       (Core.Just Core.AltJSON)
