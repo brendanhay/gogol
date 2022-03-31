@@ -160,7 +160,7 @@ instance
       ListStoreInfosResponse
   type
     Scopes PlayMoviesPartnerAccountsStoreInfosList =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient
     PlayMoviesPartnerAccountsStoreInfosList {..} =
       go

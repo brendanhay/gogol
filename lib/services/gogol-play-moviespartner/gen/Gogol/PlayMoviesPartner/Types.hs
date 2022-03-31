@@ -30,7 +30,7 @@ module Gogol.PlayMoviesPartner.Types
     playMoviesPartnerService,
 
     -- * OAuth Scopes
-    playmovies_partnerReadOnlyScope,
+    PlaymoviesPartner'Readonly,
 
     -- * Types
 
@@ -99,5 +99,4 @@ playMoviesPartnerService =
     "playmoviespartner.googleapis.com"
 
 -- | View the digital assets you publish on Google Play Movies and TV
-playmovies_partnerReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-playmovies_partnerReadOnlyScope = Core.Proxy
+type PlaymoviesPartner'Readonly = "https://www.googleapis.com/auth/playmovies_partner.readonly"

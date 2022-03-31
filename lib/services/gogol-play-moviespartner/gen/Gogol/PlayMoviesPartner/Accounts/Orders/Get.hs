@@ -116,7 +116,7 @@ instance
   type Rs PlayMoviesPartnerAccountsOrdersGet = Order
   type
     Scopes PlayMoviesPartnerAccountsOrdersGet =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient PlayMoviesPartnerAccountsOrdersGet {..} =
     go
       accountId

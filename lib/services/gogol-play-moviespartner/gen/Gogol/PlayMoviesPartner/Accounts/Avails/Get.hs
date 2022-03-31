@@ -112,7 +112,7 @@ instance
   type Rs PlayMoviesPartnerAccountsAvailsGet = Avail
   type
     Scopes PlayMoviesPartnerAccountsAvailsGet =
-      '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+      '[PlaymoviesPartner'Readonly]
   requestClient PlayMoviesPartnerAccountsAvailsGet {..} =
     go
       accountId
