@@ -34,10 +34,10 @@ module Gogol.DNS
     dNSService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudPlatformReadOnlyScope,
-    ndevClouddnsReadOnlyScope,
-    ndevClouddnsReadwriteScope,
+    CloudPlatform'FullControl,
+    CloudPlatform'ReadOnly,
+    Ndev'Clouddns'Readonly,
+    Ndev'Clouddns'Readwrite,
 
     -- * Resources
 

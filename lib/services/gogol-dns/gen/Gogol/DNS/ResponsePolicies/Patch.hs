@@ -121,9 +121,7 @@ instance Core.GoogleRequest DNSResponsePoliciesPatch where
       ResponsePoliciesPatchResponse
   type
     Scopes DNSResponsePoliciesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSResponsePoliciesPatch {..} =
     go
       project

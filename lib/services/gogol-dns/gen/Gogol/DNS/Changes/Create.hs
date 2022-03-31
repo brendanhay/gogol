@@ -118,9 +118,7 @@ instance Core.GoogleRequest DNSChangesCreate where
   type Rs DNSChangesCreate = Change
   type
     Scopes DNSChangesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSChangesCreate {..} =
     go
       project

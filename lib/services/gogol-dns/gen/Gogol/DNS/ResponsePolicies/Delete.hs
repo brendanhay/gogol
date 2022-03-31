@@ -111,9 +111,7 @@ instance Core.GoogleRequest DNSResponsePoliciesDelete where
   type Rs DNSResponsePoliciesDelete = ()
   type
     Scopes DNSResponsePoliciesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSResponsePoliciesDelete {..} =
     go
       project

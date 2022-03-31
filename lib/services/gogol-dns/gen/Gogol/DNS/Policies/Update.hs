@@ -119,9 +119,7 @@ instance Core.GoogleRequest DNSPoliciesUpdate where
   type Rs DNSPoliciesUpdate = PoliciesUpdateResponse
   type
     Scopes DNSPoliciesUpdate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSPoliciesUpdate {..} =
     go
       project

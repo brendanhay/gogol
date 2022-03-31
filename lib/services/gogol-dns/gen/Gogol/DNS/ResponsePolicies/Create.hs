@@ -111,9 +111,7 @@ instance Core.GoogleRequest DNSResponsePoliciesCreate where
   type Rs DNSResponsePoliciesCreate = ResponsePolicy
   type
     Scopes DNSResponsePoliciesCreate =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSResponsePoliciesCreate {..} =
     go
       project

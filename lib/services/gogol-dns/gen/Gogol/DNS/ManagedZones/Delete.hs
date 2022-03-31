@@ -111,9 +111,7 @@ instance Core.GoogleRequest DNSManagedZonesDelete where
   type Rs DNSManagedZonesDelete = ()
   type
     Scopes DNSManagedZonesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
-       ]
+      '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
   requestClient DNSManagedZonesDelete {..} =
     go
       project
