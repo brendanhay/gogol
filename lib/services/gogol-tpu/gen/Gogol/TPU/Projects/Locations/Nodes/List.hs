@@ -107,7 +107,7 @@ instance
       ListNodesResponse
   type
     Scopes TPUProjectsLocationsNodesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesList {..} =
     go
       parent

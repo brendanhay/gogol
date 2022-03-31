@@ -111,7 +111,7 @@ instance
   type Rs TPUProjectsLocationsNodesCreate = Operation
   type
     Scopes TPUProjectsLocationsNodesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsNodesCreate {..} =
     go
       parent

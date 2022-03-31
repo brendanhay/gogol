@@ -93,7 +93,7 @@ instance Core.GoogleRequest TPUProjectsLocationsGet where
   type Rs TPUProjectsLocationsGet = Location
   type
     Scopes TPUProjectsLocationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TPUProjectsLocationsGet {..} =
     go
       name

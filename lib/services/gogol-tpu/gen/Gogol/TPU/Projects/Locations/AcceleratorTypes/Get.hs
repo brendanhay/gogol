@@ -98,7 +98,7 @@ instance
       AcceleratorType
   type
     Scopes TPUProjectsLocationsAcceleratorTypesGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     TPUProjectsLocationsAcceleratorTypesGet {..} =
       go

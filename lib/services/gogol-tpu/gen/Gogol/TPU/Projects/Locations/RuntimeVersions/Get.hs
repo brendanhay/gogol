@@ -98,7 +98,7 @@ instance
       RuntimeVersion
   type
     Scopes TPUProjectsLocationsRuntimeVersionsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     TPUProjectsLocationsRuntimeVersionsGet {..} =
       go

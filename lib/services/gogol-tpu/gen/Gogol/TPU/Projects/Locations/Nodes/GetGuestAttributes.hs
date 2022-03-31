@@ -108,7 +108,7 @@ instance
   type
     Scopes
       TPUProjectsLocationsNodesGetGuestAttributes =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     TPUProjectsLocationsNodesGetGuestAttributes {..} =
       go
