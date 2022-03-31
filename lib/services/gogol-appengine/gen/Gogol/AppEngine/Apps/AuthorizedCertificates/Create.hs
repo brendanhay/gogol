@@ -106,7 +106,7 @@ instance
       AuthorizedCertificate
   type
     Scopes AppEngineAppsAuthorizedCertificatesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsAuthorizedCertificatesCreate {..} =
       go

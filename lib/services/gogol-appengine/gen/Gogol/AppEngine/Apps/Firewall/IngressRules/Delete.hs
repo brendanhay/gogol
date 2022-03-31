@@ -107,7 +107,7 @@ instance
       Empty
   type
     Scopes AppEngineAppsFirewallIngressRulesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsFirewallIngressRulesDelete {..} =
       go

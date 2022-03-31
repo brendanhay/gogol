@@ -115,9 +115,9 @@ instance
   type Rs AppEngineAppsServicesVersionsGet = Version
   type
     Scopes AppEngineAppsServicesVersionsGet =
-      '[ "https://www.googleapis.com/auth/appengine.admin",
-         "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-platform.read-only"
+      '[ Appengine'Admin,
+         CloudPlatform'FullControl,
+         CloudPlatform'ReadOnly
        ]
   requestClient AppEngineAppsServicesVersionsGet {..} =
     go

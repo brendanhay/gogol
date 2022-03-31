@@ -107,7 +107,7 @@ instance
       FirewallRule
   type
     Scopes AppEngineAppsFirewallIngressRulesCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsFirewallIngressRulesCreate {..} =
       go

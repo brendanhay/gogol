@@ -100,7 +100,7 @@ instance Core.GoogleRequest AppEngineAppsRepair where
   type Rs AppEngineAppsRepair = Operation
   type
     Scopes AppEngineAppsRepair =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsRepair {..} =
     go
       appsId

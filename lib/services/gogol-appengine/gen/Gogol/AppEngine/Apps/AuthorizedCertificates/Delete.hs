@@ -106,7 +106,7 @@ instance
       Empty
   type
     Scopes AppEngineAppsAuthorizedCertificatesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AppEngineAppsAuthorizedCertificatesDelete {..} =
       go

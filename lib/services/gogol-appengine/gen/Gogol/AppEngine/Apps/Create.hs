@@ -94,7 +94,7 @@ instance Core.GoogleRequest AppEngineAppsCreate where
   type Rs AppEngineAppsCreate = Operation
   type
     Scopes AppEngineAppsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsCreate {..} =
     go
       xgafv

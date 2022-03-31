@@ -110,7 +110,7 @@ instance
   type Rs AppEngineAppsDomainMappingsCreate = Operation
   type
     Scopes AppEngineAppsDomainMappingsCreate =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsDomainMappingsCreate {..} =
     go
       appsId

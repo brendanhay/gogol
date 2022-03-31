@@ -104,7 +104,7 @@ instance
   type Rs AppEngineAppsServicesDelete = Operation
   type
     Scopes AppEngineAppsServicesDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient AppEngineAppsServicesDelete {..} =
     go
       appsId
