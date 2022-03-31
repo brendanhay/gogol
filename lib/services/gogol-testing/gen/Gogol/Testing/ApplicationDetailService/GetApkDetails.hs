@@ -101,7 +101,7 @@ instance
   type
     Scopes
       TestingApplicationDetailServiceGetApkDetails =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     TestingApplicationDetailServiceGetApkDetails {..} =
       go
