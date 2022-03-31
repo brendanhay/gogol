@@ -96,7 +96,7 @@ instance
   type Rs CloudTasksProjectsLocationsGet = Location
   type
     Scopes CloudTasksProjectsLocationsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient CloudTasksProjectsLocationsGet {..} =
     go
       name

@@ -114,7 +114,7 @@ instance
   type
     Scopes
       CloudTasksProjectsLocationsQueuesTasksList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     CloudTasksProjectsLocationsQueuesTasksList {..} =
       go
