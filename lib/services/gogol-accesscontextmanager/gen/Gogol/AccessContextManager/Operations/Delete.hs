@@ -96,7 +96,7 @@ instance
   type Rs AccessContextManagerOperationsDelete = Empty
   type
     Scopes AccessContextManagerOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerOperationsDelete {..} =
       go

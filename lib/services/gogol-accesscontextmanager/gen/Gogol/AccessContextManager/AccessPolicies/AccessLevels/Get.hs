@@ -106,7 +106,7 @@ instance
   type
     Scopes
       AccessContextManagerAccessPoliciesAccessLevelsGet =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesAccessLevelsGet {..} =
       go

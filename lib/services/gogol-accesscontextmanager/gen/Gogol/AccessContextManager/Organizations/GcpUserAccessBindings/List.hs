@@ -111,7 +111,7 @@ instance
   type
     Scopes
       AccessContextManagerOrganizationsGcpUserAccessBindingsList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerOrganizationsGcpUserAccessBindingsList {..} =
       go
