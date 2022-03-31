@@ -104,8 +104,8 @@ instance
       TranslateTextResponse
   type
     Scopes TranslateProjectsTranslateText =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient TranslateProjectsTranslateText {..} =
     go

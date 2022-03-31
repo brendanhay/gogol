@@ -109,8 +109,8 @@ instance
   type
     Scopes
       TranslateProjectsLocationsGetSupportedLanguages =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient
     TranslateProjectsLocationsGetSupportedLanguages {..} =

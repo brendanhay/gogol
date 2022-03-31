@@ -111,8 +111,8 @@ instance
       ListOperationsResponse
   type
     Scopes TranslateProjectsLocationsOperationsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient
     TranslateProjectsLocationsOperationsList {..} =

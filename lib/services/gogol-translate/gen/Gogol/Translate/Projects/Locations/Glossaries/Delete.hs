@@ -99,8 +99,8 @@ instance
   type
     Scopes
       TranslateProjectsLocationsGlossariesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient
     TranslateProjectsLocationsGlossariesDelete {..} =

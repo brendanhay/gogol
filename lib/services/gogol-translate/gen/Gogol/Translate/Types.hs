@@ -30,8 +30,8 @@ module Gogol.Translate.Types
     translateService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    cloudTranslationScope,
+    CloudPlatform'FullControl,
+    CloudTranslation'FullControl,
 
     -- * Types
 
@@ -248,9 +248,7 @@ translateService =
     "translation.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Translate text from one language to another using Google Translate
-cloudTranslationScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-translation"]
-cloudTranslationScope = Core.Proxy
+type CloudTranslation'FullControl = "https://www.googleapis.com/auth/cloud-translation"

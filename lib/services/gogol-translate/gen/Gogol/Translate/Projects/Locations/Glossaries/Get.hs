@@ -98,8 +98,8 @@ instance
       Glossary
   type
     Scopes TranslateProjectsLocationsGlossariesGet =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient
     TranslateProjectsLocationsGlossariesGet {..} =

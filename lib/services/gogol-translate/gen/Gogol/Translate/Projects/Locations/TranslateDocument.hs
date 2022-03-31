@@ -108,8 +108,8 @@ instance
   type
     Scopes
       TranslateProjectsLocationsTranslateDocument =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient
     TranslateProjectsLocationsTranslateDocument {..} =

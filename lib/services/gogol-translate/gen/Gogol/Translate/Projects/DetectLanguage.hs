@@ -104,8 +104,8 @@ instance
       DetectLanguageResponse
   type
     Scopes TranslateProjectsDetectLanguage =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/cloud-translation"
+      '[ CloudPlatform'FullControl,
+         CloudTranslation'FullControl
        ]
   requestClient TranslateProjectsDetectLanguage {..} =
     go
