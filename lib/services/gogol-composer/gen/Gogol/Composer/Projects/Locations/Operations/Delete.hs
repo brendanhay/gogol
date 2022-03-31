@@ -98,7 +98,7 @@ instance
       Empty
   type
     Scopes ComposerProjectsLocationsOperationsDelete =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient
     ComposerProjectsLocationsOperationsDelete {..} =
       go
