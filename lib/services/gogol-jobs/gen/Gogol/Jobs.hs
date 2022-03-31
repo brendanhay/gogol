@@ -34,8 +34,8 @@ module Gogol.Jobs
     jobsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    jobsScope,
+    CloudPlatform'FullControl,
+    Jobs'FullControl,
 
     -- * Resources
 

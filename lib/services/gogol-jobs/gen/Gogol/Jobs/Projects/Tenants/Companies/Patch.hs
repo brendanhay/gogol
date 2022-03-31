@@ -106,9 +106,7 @@ instance
   type Rs JobsProjectsTenantsCompaniesPatch = Company
   type
     Scopes JobsProjectsTenantsCompaniesPatch =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsCompaniesPatch {..} =
     go
       name

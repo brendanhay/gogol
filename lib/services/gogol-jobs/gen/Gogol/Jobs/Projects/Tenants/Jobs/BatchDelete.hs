@@ -105,9 +105,7 @@ instance
       Operation
   type
     Scopes JobsProjectsTenantsJobsBatchDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsJobsBatchDelete {..} =
     go
       parent

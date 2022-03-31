@@ -30,8 +30,8 @@ module Gogol.Jobs.Types
     jobsService,
 
     -- * OAuth Scopes
-    cloudPlatformScope,
-    jobsScope,
+    CloudPlatform'FullControl,
+    Jobs'FullControl,
 
     -- * Types
 
@@ -385,9 +385,7 @@ jobsService =
     "jobs.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-cloudPlatformScope :: Core.Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-cloudPlatformScope = Core.Proxy
+type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage job postings
-jobsScope :: Core.Proxy '["https://www.googleapis.com/auth/jobs"]
-jobsScope = Core.Proxy
+type Jobs'FullControl = "https://www.googleapis.com/auth/jobs"

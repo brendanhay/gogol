@@ -96,9 +96,7 @@ instance
   type Rs JobsProjectsTenantsCompaniesDelete = Empty
   type
     Scopes JobsProjectsTenantsCompaniesDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsCompaniesDelete {..} =
     go
       name

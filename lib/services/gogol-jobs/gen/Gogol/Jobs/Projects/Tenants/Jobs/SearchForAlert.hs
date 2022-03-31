@@ -105,9 +105,7 @@ instance
       SearchJobsResponse
   type
     Scopes JobsProjectsTenantsJobsSearchForAlert =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient
     JobsProjectsTenantsJobsSearchForAlert {..} =
       go

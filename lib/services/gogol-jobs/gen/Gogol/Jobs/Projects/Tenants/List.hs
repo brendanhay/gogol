@@ -102,9 +102,7 @@ instance Core.GoogleRequest JobsProjectsTenantsList where
   type Rs JobsProjectsTenantsList = ListTenantsResponse
   type
     Scopes JobsProjectsTenantsList =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsList {..} =
     go
       parent

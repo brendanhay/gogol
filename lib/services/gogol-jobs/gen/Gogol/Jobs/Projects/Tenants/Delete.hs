@@ -93,9 +93,7 @@ instance Core.GoogleRequest JobsProjectsTenantsDelete where
   type Rs JobsProjectsTenantsDelete = Empty
   type
     Scopes JobsProjectsTenantsDelete =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsDelete {..} =
     go
       name

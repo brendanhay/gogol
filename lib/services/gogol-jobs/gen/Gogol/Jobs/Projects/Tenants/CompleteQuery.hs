@@ -126,9 +126,7 @@ instance
       CompleteQueryResponse
   type
     Scopes JobsProjectsTenantsCompleteQuery =
-      '[ "https://www.googleapis.com/auth/cloud-platform",
-         "https://www.googleapis.com/auth/jobs"
-       ]
+      '[CloudPlatform'FullControl, Jobs'FullControl]
   requestClient JobsProjectsTenantsCompleteQuery {..} =
     go
       tenant
