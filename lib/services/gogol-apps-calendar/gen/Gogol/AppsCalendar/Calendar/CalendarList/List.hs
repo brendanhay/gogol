@@ -97,9 +97,7 @@ instance Core.GoogleRequest CalendarCalendarListList where
   type Rs CalendarCalendarListList = CalendarList
   type
     Scopes CalendarCalendarListList =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.readonly"
-       ]
+      '[Calendar'FullControl, Calendar'Readonly]
   requestClient CalendarCalendarListList {..} =
     go
       maxResults

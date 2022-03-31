@@ -99,9 +99,7 @@ instance Core.GoogleRequest CalendarEventsMove where
   type Rs CalendarEventsMove = Event
   type
     Scopes CalendarEventsMove =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.events"
-       ]
+      '[Calendar'FullControl, Calendar'Events]
   requestClient CalendarEventsMove {..} =
     go
       calendarId

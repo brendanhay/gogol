@@ -72,7 +72,7 @@ instance Core.GoogleRequest CalendarCalendarsInsert where
   type Rs CalendarCalendarsInsert = Calendar
   type
     Scopes CalendarCalendarsInsert =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarCalendarsInsert {..} =
     go
       (Core.Just Core.AltJSON)

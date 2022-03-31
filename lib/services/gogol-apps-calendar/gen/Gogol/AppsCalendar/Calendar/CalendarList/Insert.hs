@@ -83,7 +83,7 @@ instance
       CalendarListEntry
   type
     Scopes CalendarCalendarListInsert =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarCalendarListInsert {..} =
     go
       colorRgbFormat

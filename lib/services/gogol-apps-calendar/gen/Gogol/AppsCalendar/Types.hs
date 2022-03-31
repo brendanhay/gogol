@@ -30,11 +30,11 @@ module Gogol.AppsCalendar.Types
     appsCalendarService,
 
     -- * OAuth Scopes
-    calendarScope,
-    calendarEventsScope,
-    calendarEventsReadOnlyScope,
-    calendarReadOnlyScope,
-    calendarSettingsReadOnlyScope,
+    Calendar'FullControl,
+    Calendar'Events,
+    Calendar'Events'Readonly,
+    Calendar'Readonly,
+    Calendar'Settings'Readonly,
 
     -- * Types
 
@@ -282,21 +282,16 @@ appsCalendarService =
     "www.googleapis.com"
 
 -- | See, edit, share, and permanently delete all the calendars you can access using Google Calendar
-calendarScope :: Core.Proxy '["https://www.googleapis.com/auth/calendar"]
-calendarScope = Core.Proxy
+type Calendar'FullControl = "https://www.googleapis.com/auth/calendar"
 
 -- | View and edit events on all your calendars
-calendarEventsScope :: Core.Proxy '["https://www.googleapis.com/auth/calendar.events"]
-calendarEventsScope = Core.Proxy
+type Calendar'Events = "https://www.googleapis.com/auth/calendar.events"
 
 -- | View events on all your calendars
-calendarEventsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/calendar.events.readonly"]
-calendarEventsReadOnlyScope = Core.Proxy
+type Calendar'Events'Readonly = "https://www.googleapis.com/auth/calendar.events.readonly"
 
 -- | See and download any calendar you can access using your Google Calendar
-calendarReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
-calendarReadOnlyScope = Core.Proxy
+type Calendar'Readonly = "https://www.googleapis.com/auth/calendar.readonly"
 
 -- | View your Calendar settings
-calendarSettingsReadOnlyScope :: Core.Proxy '["https://www.googleapis.com/auth/calendar.settings.readonly"]
-calendarSettingsReadOnlyScope = Core.Proxy
+type Calendar'Settings'Readonly = "https://www.googleapis.com/auth/calendar.settings.readonly"

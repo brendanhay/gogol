@@ -160,10 +160,10 @@ instance Core.GoogleRequest CalendarEventsList where
   type Rs CalendarEventsList = Events
   type
     Scopes CalendarEventsList =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.events",
-         "https://www.googleapis.com/auth/calendar.events.readonly",
-         "https://www.googleapis.com/auth/calendar.readonly"
+      '[ Calendar'FullControl,
+         Calendar'Events,
+         Calendar'Events'Readonly,
+         Calendar'Readonly
        ]
   requestClient CalendarEventsList {..} =
     go

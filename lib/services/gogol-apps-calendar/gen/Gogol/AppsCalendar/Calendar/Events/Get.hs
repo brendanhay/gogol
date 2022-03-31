@@ -94,10 +94,10 @@ instance Core.GoogleRequest CalendarEventsGet where
   type Rs CalendarEventsGet = Event
   type
     Scopes CalendarEventsGet =
-      '[ "https://www.googleapis.com/auth/calendar",
-         "https://www.googleapis.com/auth/calendar.events",
-         "https://www.googleapis.com/auth/calendar.events.readonly",
-         "https://www.googleapis.com/auth/calendar.readonly"
+      '[ Calendar'FullControl,
+         Calendar'Events,
+         Calendar'Events'Readonly,
+         Calendar'Readonly
        ]
   requestClient CalendarEventsGet {..} =
     go

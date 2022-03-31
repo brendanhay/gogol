@@ -73,7 +73,7 @@ instance Core.GoogleRequest CalendarCalendarsDelete where
   type Rs CalendarCalendarsDelete = ()
   type
     Scopes CalendarCalendarsDelete =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarCalendarsDelete {..} =
     go
       calendarId

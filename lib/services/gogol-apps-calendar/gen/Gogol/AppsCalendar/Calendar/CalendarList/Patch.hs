@@ -87,7 +87,7 @@ instance Core.GoogleRequest CalendarCalendarListPatch where
   type Rs CalendarCalendarListPatch = CalendarListEntry
   type
     Scopes CalendarCalendarListPatch =
-      '["https://www.googleapis.com/auth/calendar"]
+      '[Calendar'FullControl]
   requestClient CalendarCalendarListPatch {..} =
     go
       calendarId
