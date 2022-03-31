@@ -92,7 +92,7 @@ instance Core.GoogleRequest TextToSpeechVoicesList where
   type Rs TextToSpeechVoicesList = ListVoicesResponse
   type
     Scopes TextToSpeechVoicesList =
-      '["https://www.googleapis.com/auth/cloud-platform"]
+      '[CloudPlatform'FullControl]
   requestClient TextToSpeechVoicesList {..} =
     go
       xgafv
