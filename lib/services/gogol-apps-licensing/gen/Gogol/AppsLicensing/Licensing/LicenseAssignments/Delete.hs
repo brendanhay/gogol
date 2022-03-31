@@ -113,7 +113,7 @@ instance
   type Rs LicensingLicenseAssignmentsDelete = Empty
   type
     Scopes LicensingLicenseAssignmentsDelete =
-      '["https://www.googleapis.com/auth/apps.licensing"]
+      '[Apps'Licensing]
   requestClient LicensingLicenseAssignmentsDelete {..} =
     go
       productId

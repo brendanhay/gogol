@@ -117,7 +117,7 @@ instance
       LicenseAssignment
   type
     Scopes LicensingLicenseAssignmentsInsert =
-      '["https://www.googleapis.com/auth/apps.licensing"]
+      '[Apps'Licensing]
   requestClient LicensingLicenseAssignmentsInsert {..} =
     go
       productId
