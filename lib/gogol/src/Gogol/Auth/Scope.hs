@@ -18,9 +18,9 @@
 -- Helpers for specifying and using type-level OAuth scopes.
 module Gogol.Auth.Scope
   ( -- * Scope constraints
-    type HasScope,
-    type HasScopeFor,
-    type HasScopeFrom,
+    type AllowRequest,
+    type AllowScope,
+    type AllowScopes,
 
     -- ** Modifying type-level lists of scopes
     allow,
@@ -48,6 +48,8 @@ import Gogol.Internal.Auth (Credentials)
 import Gogol.Types (GoogleRequest (..), OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
 
+type AllowRequest a scopes = (GoogleRequest a, KnownScopes scopes, AllowScopes (Scopes a) scopes)
+
 -- | 'Constraint' kind for proving @scopes@ contains the specified scope, @name@.
 --
 -- This is convenient when composing multiple @gogol@ requests and you wish to
@@ -55,7 +57,7 @@ import Network.HTTP.Types (urlEncode)
 --
 -- @
 -- uploadAndDownloadFile
---   :: HasScopes "https://www.googleapis.com/auth/devstorage.read_write" scopes
+--   :: HasScope Devstorage'ReadWrite scopes
 --   => Env scopes
 --   -> Text
 --   -> Object
@@ -81,30 +83,24 @@ import Network.HTTP.Types (urlEncode)
 --
 -- @
 -- uploadAndDownloadFile
---   :: ( HasScopeFor StorageObjectsInsert
---      , HasScopeFor StorageObjectsGet
+--   :: ( AllowGoogleRequest StorageObjectsInsert scopes
+--      , AllowGoogleRequest StorageObjectsGet scopes
 --      )
 --   => Env scopes
 --   -> ...
 -- @
 --
 -- /See:/ 'HasScopeFor'.
-type HasScope name scopes = (KnownScopes scopes, HasScopeFrom '[name] scopes)
-
--- | 'Constraint' kind for @scopes@ contains _one_ of the required scopes
--- for the 'GoogleRequest', @a@.
---
--- /See:/ 'HasScope'.
-type HasScopeFor a scopes = (KnownScopes scopes, GoogleRequest a, HasScopeFrom (Scopes a) scopes)
+type AllowScope name scopes = (KnownScopes scopes, AllowScopes '[name] scopes)
 
 -- | 'Constraint' proving at least _one_ scope from @required@ exists in @scopes@.
 --
 -- That is, the set of possible scopes a request requires are on the left, and
 -- the set of scopes credentials or an environment contain are on the right.
-type family HasScopeFrom (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
-  HasScopeFrom '[] _ = () -- Special case; no scopes are required.
-  HasScopeFrom required scopes =
-    If (Intersect required scopes) (() :: Constraint) (TypeError (MissingScopesError required scopes))
+type family AllowScopes (required :: [Symbol]) (scopes :: [Symbol]) :: Constraint where
+  AllowScopes '[] _ = () -- Special case; no scopes are required.
+  AllowScopes required scopes =
+    If (Intersect scopes required) (() :: Constraint) (TypeError (MissingScopesError required scopes))
 
 type MissingScopesError (required :: [k]) (scopes :: [k]) =
   'Text "One scope from the following list is required:"
