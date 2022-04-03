@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Creatives.AddDeal
     AdExchangeBuyerCreativesAddDealResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerCreativesAddDeal (..),
     newAdExchangeBuyerCreativesAddDeal,
-    AdExchangeBuyerCreativesAddDeal,
   )
 where
 

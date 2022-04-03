@@ -34,8 +34,8 @@ module Gogol.Compute.VpnGateways.TestIamPermissions
     ComputeVpnGatewaysTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeVpnGatewaysTestIamPermissions (..),
     newComputeVpnGatewaysTestIamPermissions,
-    ComputeVpnGatewaysTestIamPermissions,
   )
 where
 

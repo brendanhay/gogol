@@ -34,8 +34,8 @@ module Gogol.YouTubeReporting.Media.Download
     YouTubeReportingMediaDownloadResource,
 
     -- ** Constructing a Request
+    YouTubeReportingMediaDownload (..),
     newYouTubeReportingMediaDownload,
-    YouTubeReportingMediaDownload,
   )
 where
 

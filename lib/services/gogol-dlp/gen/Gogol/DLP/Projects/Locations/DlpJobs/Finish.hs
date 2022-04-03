@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.DlpJobs.Finish
     DLPProjectsLocationsDlpJobsFinishResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsDlpJobsFinish (..),
     newDLPProjectsLocationsDlpJobsFinish,
-    DLPProjectsLocationsDlpJobsFinish,
   )
 where
 

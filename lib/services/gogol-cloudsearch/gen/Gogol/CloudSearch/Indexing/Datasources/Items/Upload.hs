@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Upload
     CloudSearchIndexingDatasourcesItemsUploadResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsUpload (..),
     newCloudSearchIndexingDatasourcesItemsUpload,
-    CloudSearchIndexingDatasourcesItemsUpload,
   )
 where
 

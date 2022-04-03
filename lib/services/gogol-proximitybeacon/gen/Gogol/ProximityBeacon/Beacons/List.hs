@@ -36,8 +36,8 @@ module Gogol.ProximityBeacon.Beacons.List
     ProximityBeaconBeaconsListResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsList (..),
     newProximityBeaconBeaconsList,
-    ProximityBeaconBeaconsList,
   )
 where
 

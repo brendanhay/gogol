@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Threads.Get
     GmailUsersThreadsGetResource,
 
     -- ** Constructing a Request
+    GmailUsersThreadsGet (..),
     newGmailUsersThreadsGet,
-    GmailUsersThreadsGet,
   )
 where
 

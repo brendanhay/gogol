@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Patch
     IAMProjectsLocationsWorkloadIdentityPoolsPatchResource,
 
     -- ** Constructing a Request
+    IAMProjectsLocationsWorkloadIdentityPoolsPatch (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsPatch,
-    IAMProjectsLocationsWorkloadIdentityPoolsPatch,
   )
 where
 

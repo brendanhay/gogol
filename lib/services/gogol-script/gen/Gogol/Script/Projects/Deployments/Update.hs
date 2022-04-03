@@ -34,8 +34,8 @@ module Gogol.Script.Projects.Deployments.Update
     ScriptProjectsDeploymentsUpdateResource,
 
     -- ** Constructing a Request
+    ScriptProjectsDeploymentsUpdate (..),
     newScriptProjectsDeploymentsUpdate,
-    ScriptProjectsDeploymentsUpdate,
   )
 where
 

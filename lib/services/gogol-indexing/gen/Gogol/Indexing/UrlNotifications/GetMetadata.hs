@@ -34,8 +34,8 @@ module Gogol.Indexing.UrlNotifications.GetMetadata
     IndexingUrlNotificationsGetMetadataResource,
 
     -- ** Constructing a Request
+    IndexingUrlNotificationsGetMetadata (..),
     newIndexingUrlNotificationsGetMetadata,
-    IndexingUrlNotificationsGetMetadata,
   )
 where
 

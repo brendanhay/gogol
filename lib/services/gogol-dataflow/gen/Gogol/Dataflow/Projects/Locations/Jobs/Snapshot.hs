@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Jobs.Snapshot
     DataflowProjectsLocationsJobsSnapshotResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsJobsSnapshot (..),
     newDataflowProjectsLocationsJobsSnapshot,
-    DataflowProjectsLocationsJobsSnapshot,
   )
 where
 

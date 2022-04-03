@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.VerificationCodes.Invalidate
     DirectoryVerificationCodesInvalidateResource,
 
     -- ** Constructing a Request
+    DirectoryVerificationCodesInvalidate (..),
     newDirectoryVerificationCodesInvalidate,
-    DirectoryVerificationCodesInvalidate,
   )
 where
 

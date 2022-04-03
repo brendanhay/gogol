@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Asps.Get
     DirectoryAspsGetResource,
 
     -- ** Constructing a Request
+    DirectoryAspsGet (..),
     newDirectoryAspsGet,
-    DirectoryAspsGet,
   )
 where
 

@@ -37,38 +37,38 @@ module Gogol.SafeBrowsing
 
     -- ** safebrowsing.encodedFullHashes.get
     SafeBrowsingEncodedFullHashesGetResource,
+    SafeBrowsingEncodedFullHashesGet (..),
     newSafeBrowsingEncodedFullHashesGet,
-    SafeBrowsingEncodedFullHashesGet,
 
     -- ** safebrowsing.encodedUpdates.get
     SafeBrowsingEncodedUpdatesGetResource,
+    SafeBrowsingEncodedUpdatesGet (..),
     newSafeBrowsingEncodedUpdatesGet,
-    SafeBrowsingEncodedUpdatesGet,
 
     -- ** safebrowsing.fullHashes.find
     SafeBrowsingFullHashesFindResource,
+    SafeBrowsingFullHashesFind (..),
     newSafeBrowsingFullHashesFind,
-    SafeBrowsingFullHashesFind,
 
     -- ** safebrowsing.threatHits.create
     SafeBrowsingThreatHitsCreateResource,
+    SafeBrowsingThreatHitsCreate (..),
     newSafeBrowsingThreatHitsCreate,
-    SafeBrowsingThreatHitsCreate,
 
     -- ** safebrowsing.threatListUpdates.fetch
     SafeBrowsingThreatListUpdatesFetchResource,
+    SafeBrowsingThreatListUpdatesFetch (..),
     newSafeBrowsingThreatListUpdatesFetch,
-    SafeBrowsingThreatListUpdatesFetch,
 
     -- ** safebrowsing.threatLists.list
     SafeBrowsingThreatListsListResource,
+    SafeBrowsingThreatListsList (..),
     newSafeBrowsingThreatListsList,
-    SafeBrowsingThreatListsList,
 
     -- ** safebrowsing.threatMatches.find
     SafeBrowsingThreatMatchesFindResource,
+    SafeBrowsingThreatMatchesFind (..),
     newSafeBrowsingThreatMatchesFind,
-    SafeBrowsingThreatMatchesFind,
 
     -- * Types
 

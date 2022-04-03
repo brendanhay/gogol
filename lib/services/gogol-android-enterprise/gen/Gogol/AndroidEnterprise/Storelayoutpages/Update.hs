@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutpages.Update
     AndroidEnterpriseStorelayoutpagesUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutpagesUpdate (..),
     newAndroidEnterpriseStorelayoutpagesUpdate,
-    AndroidEnterpriseStorelayoutpagesUpdate,
   )
 where
 

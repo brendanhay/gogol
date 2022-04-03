@@ -34,8 +34,8 @@ module Gogol.Docs.Documents.Create
     DocsDocumentsCreateResource,
 
     -- ** Constructing a Request
+    DocsDocumentsCreate (..),
     newDocsDocumentsCreate,
-    DocsDocumentsCreate,
   )
 where
 

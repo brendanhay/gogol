@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveBroadcasts.List
     YouTubeLiveBroadcastsListResource,
 
     -- ** Constructing a Request
+    YouTubeLiveBroadcastsList (..),
     newYouTubeLiveBroadcastsList,
-    YouTubeLiveBroadcastsList,
   )
 where
 

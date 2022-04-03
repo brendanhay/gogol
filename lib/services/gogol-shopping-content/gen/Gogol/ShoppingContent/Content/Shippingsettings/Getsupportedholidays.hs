@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shippingsettings.Getsupportedholidays
     ContentShippingsettingsGetsupportedholidaysResource,
 
     -- ** Constructing a Request
+    ContentShippingsettingsGetsupportedholidays (..),
     newContentShippingsettingsGetsupportedholidays,
-    ContentShippingsettingsGetsupportedholidays,
   )
 where
 

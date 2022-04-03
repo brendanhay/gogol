@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
     BinaryAuthorizationProjectsPolicyTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsPolicyTestIamPermissions (..),
     newBinaryAuthorizationProjectsPolicyTestIamPermissions,
-    BinaryAuthorizationProjectsPolicyTestIamPermissions,
   )
 where
 

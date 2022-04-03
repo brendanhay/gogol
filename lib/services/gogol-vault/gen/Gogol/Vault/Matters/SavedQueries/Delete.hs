@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.SavedQueries.Delete
     VaultMattersSavedQueriesDeleteResource,
 
     -- ** Constructing a Request
+    VaultMattersSavedQueriesDelete (..),
     newVaultMattersSavedQueriesDelete,
-    VaultMattersSavedQueriesDelete,
   )
 where
 

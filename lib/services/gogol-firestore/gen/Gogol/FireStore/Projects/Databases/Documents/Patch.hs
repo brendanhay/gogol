@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.Patch
     FireStoreProjectsDatabasesDocumentsPatchResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsPatch (..),
     newFireStoreProjectsDatabasesDocumentsPatch,
-    FireStoreProjectsDatabasesDocumentsPatch,
   )
 where
 

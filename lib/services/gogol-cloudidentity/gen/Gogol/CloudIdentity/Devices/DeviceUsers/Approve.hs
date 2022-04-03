@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.Approve
     CloudIdentityDevicesDeviceUsersApproveResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersApprove (..),
     newCloudIdentityDevicesDeviceUsersApprove,
-    CloudIdentityDevicesDeviceUsersApprove,
   )
 where
 

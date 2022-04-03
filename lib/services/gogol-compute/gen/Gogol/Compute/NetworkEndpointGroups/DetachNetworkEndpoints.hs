@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkEndpointGroups.DetachNetworkEndpoints
     ComputeNetworkEndpointGroupsDetachNetworkEndpointsResource,
 
     -- ** Constructing a Request
+    ComputeNetworkEndpointGroupsDetachNetworkEndpoints (..),
     newComputeNetworkEndpointGroupsDetachNetworkEndpoints,
-    ComputeNetworkEndpointGroupsDetachNetworkEndpoints,
   )
 where
 

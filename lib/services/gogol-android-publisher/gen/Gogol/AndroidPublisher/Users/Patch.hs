@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Users.Patch
     AndroidPublisherUsersPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherUsersPatch (..),
     newAndroidPublisherUsersPatch,
-    AndroidPublisherUsersPatch,
   )
 where
 

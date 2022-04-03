@@ -35,8 +35,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
     HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdateResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTubeAnalytics.Groups.Insert
     YouTubeAnalyticsGroupsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeAnalyticsGroupsInsert (..),
     newYouTubeAnalyticsGroupsInsert,
-    YouTubeAnalyticsGroupsInsert,
   )
 where
 

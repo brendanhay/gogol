@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Serviceaccountkeys.List
     AndroidEnterpriseServiceaccountkeysListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseServiceaccountkeysList (..),
     newAndroidEnterpriseServiceaccountkeysList,
-    AndroidEnterpriseServiceaccountkeysList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Nodes.Create
     TPUProjectsLocationsNodesCreateResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsNodesCreate (..),
     newTPUProjectsLocationsNodesCreate,
-    TPUProjectsLocationsNodesCreate,
   )
 where
 

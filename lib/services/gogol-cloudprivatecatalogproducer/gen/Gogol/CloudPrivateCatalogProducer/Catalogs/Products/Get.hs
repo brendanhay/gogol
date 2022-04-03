@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Get
     CloudPrivateCatalogProducerCatalogsProductsGetResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsProductsGet (..),
     newCloudPrivateCatalogProducerCatalogsProductsGet,
-    CloudPrivateCatalogProducerCatalogsProductsGet,
   )
 where
 

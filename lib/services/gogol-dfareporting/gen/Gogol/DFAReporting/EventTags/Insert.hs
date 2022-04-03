@@ -34,8 +34,8 @@ module Gogol.DFAReporting.EventTags.Insert
     DFAReportingEventTagsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingEventTagsInsert (..),
     newDFAReportingEventTagsInsert,
-    DFAReportingEventTagsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Data.Ga.Get
     AnalyticsDataGaGetResource,
 
     -- ** Constructing a Request
+    AnalyticsDataGaGet (..),
     newAnalyticsDataGaGet,
-    AnalyticsDataGaGet,
   )
 where
 

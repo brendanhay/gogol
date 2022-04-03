@@ -34,8 +34,8 @@ module Gogol.Books.Promooffer.Get
     BooksPromoofferGetResource,
 
     -- ** Constructing a Request
+    BooksPromoofferGet (..),
     newBooksPromoofferGet,
-    BooksPromoofferGet,
   )
 where
 

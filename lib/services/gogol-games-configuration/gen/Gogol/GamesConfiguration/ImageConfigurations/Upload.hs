@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.ImageConfigurations.Upload
     GamesConfigurationImageConfigurationsUploadResource,
 
     -- ** Constructing a Request
+    GamesConfigurationImageConfigurationsUpload (..),
     newGamesConfigurationImageConfigurationsUpload,
-    GamesConfigurationImageConfigurationsUpload,
   )
 where
 

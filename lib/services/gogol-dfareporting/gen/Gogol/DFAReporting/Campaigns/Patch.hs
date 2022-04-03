@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Campaigns.Patch
     DFAReportingCampaignsPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingCampaignsPatch (..),
     newDFAReportingCampaignsPatch,
-    DFAReportingCampaignsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shippingsettings.Getsupportedcarriers
     ContentShippingsettingsGetsupportedcarriersResource,
 
     -- ** Constructing a Request
+    ContentShippingsettingsGetsupportedcarriers (..),
     newContentShippingsettingsGetsupportedcarriers,
-    ContentShippingsettingsGetsupportedcarriers,
   )
 where
 

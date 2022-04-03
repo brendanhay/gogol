@@ -34,8 +34,8 @@ module Gogol.BigQuery.Jobs.GetQueryResults
     BigQueryJobsGetQueryResultsResource,
 
     -- ** Constructing a Request
+    BigQueryJobsGetQueryResults (..),
     newBigQueryJobsGetQueryResults,
-    BigQueryJobsGetQueryResults,
   )
 where
 

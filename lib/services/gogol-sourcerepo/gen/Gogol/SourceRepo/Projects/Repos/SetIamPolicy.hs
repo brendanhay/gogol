@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.SetIamPolicy
     SourceRepoProjectsReposSetIamPolicyResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposSetIamPolicy (..),
     newSourceRepoProjectsReposSetIamPolicy,
-    SourceRepoProjectsReposSetIamPolicy,
   )
 where
 

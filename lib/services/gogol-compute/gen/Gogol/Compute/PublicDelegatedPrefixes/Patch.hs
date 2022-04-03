@@ -34,8 +34,8 @@ module Gogol.Compute.PublicDelegatedPrefixes.Patch
     ComputePublicDelegatedPrefixesPatchResource,
 
     -- ** Constructing a Request
+    ComputePublicDelegatedPrefixesPatch (..),
     newComputePublicDelegatedPrefixesPatch,
-    ComputePublicDelegatedPrefixesPatch,
   )
 where
 

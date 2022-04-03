@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.RescheduleMaintenance
     RedisProjectsLocationsInstancesRescheduleMaintenanceResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesRescheduleMaintenance (..),
     newRedisProjectsLocationsInstancesRescheduleMaintenance,
-    RedisProjectsLocationsInstancesRescheduleMaintenance,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Users.List
     SqlUsersListResource,
 
     -- ** Constructing a Request
+    SqlUsersList (..),
     newSqlUsersList,
-    SqlUsersList,
   )
 where
 

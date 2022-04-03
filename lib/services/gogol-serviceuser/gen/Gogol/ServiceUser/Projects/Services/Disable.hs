@@ -36,8 +36,8 @@ module Gogol.ServiceUser.Projects.Services.Disable
     ServiceUserProjectsServicesDisableResource,
 
     -- ** Constructing a Request
+    ServiceUserProjectsServicesDisable (..),
     newServiceUserProjectsServicesDisable,
-    ServiceUserProjectsServicesDisable,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionOperations.List
     ComputeRegionOperationsListResource,
 
     -- ** Constructing a Request
+    ComputeRegionOperationsList (..),
     newComputeRegionOperationsList,
-    ComputeRegionOperationsList,
   )
 where
 

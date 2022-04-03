@@ -38,8 +38,8 @@ module Gogol.ProximityBeacon.Beacons.Get
     ProximityBeaconBeaconsGetResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsGet (..),
     newProximityBeaconBeaconsGet,
-    ProximityBeaconBeaconsGet,
   )
 where
 

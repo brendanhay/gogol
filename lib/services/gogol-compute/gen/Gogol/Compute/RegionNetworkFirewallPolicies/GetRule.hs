@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.GetRule
     ComputeRegionNetworkFirewallPoliciesGetRuleResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesGetRule (..),
     newComputeRegionNetworkFirewallPoliciesGetRule,
-    ComputeRegionNetworkFirewallPoliciesGetRule,
   )
 where
 

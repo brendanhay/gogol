@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Operations.List
     MlProjectsOperationsListResource,
 
     -- ** Constructing a Request
+    MlProjectsOperationsList (..),
     newMlProjectsOperationsList,
-    MlProjectsOperationsList,
   )
 where
 

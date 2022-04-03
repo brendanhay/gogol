@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Tracks.Patch
     AndroidPublisherEditsTracksPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsTracksPatch (..),
     newAndroidPublisherEditsTracksPatch,
-    AndroidPublisherEditsTracksPatch,
   )
 where
 

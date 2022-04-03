@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.TenancyUnits.DeleteProject
     ServiceConsumerManagementServicesTenancyUnitsDeleteProjectResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesTenancyUnitsDeleteProject (..),
     newServiceConsumerManagementServicesTenancyUnitsDeleteProject,
-    ServiceConsumerManagementServicesTenancyUnitsDeleteProject,
   )
 where
 

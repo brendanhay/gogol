@@ -34,8 +34,8 @@ module Gogol.Vault.Operations.Cancel
     VaultOperationsCancelResource,
 
     -- ** Constructing a Request
+    VaultOperationsCancel (..),
     newVaultOperationsCancel,
-    VaultOperationsCancel,
   )
 where
 

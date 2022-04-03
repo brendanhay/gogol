@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Projects.GetServiceAccount
     AccessApprovalProjectsGetServiceAccountResource,
 
     -- ** Constructing a Request
+    AccessApprovalProjectsGetServiceAccount (..),
     newAccessApprovalProjectsGetServiceAccount,
-    AccessApprovalProjectsGetServiceAccount,
   )
 where
 

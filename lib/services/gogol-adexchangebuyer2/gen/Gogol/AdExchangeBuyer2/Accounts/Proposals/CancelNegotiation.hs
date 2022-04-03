@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
     AdExchangeBuyer2AccountsProposalsCancelNegotiationResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsCancelNegotiation (..),
     newAdExchangeBuyer2AccountsProposalsCancelNegotiation,
-    AdExchangeBuyer2AccountsProposalsCancelNegotiation,
   )
 where
 

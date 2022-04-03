@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.GetIamPolicy
     ServiceManagementServicesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesGetIamPolicy (..),
     newServiceManagementServicesGetIamPolicy,
-    ServiceManagementServicesGetIamPolicy,
   )
 where
 

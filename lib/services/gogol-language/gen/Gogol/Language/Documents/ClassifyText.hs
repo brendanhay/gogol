@@ -34,8 +34,8 @@ module Gogol.Language.Documents.ClassifyText
     LanguageDocumentsClassifyTextResource,
 
     -- ** Constructing a Request
+    LanguageDocumentsClassifyText (..),
     newLanguageDocumentsClassifyText,
-    LanguageDocumentsClassifyText,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTubeAnalytics.Groups.Update
     YouTubeAnalyticsGroupsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeAnalyticsGroupsUpdate (..),
     newYouTubeAnalyticsGroupsUpdate,
-    YouTubeAnalyticsGroupsUpdate,
   )
 where
 

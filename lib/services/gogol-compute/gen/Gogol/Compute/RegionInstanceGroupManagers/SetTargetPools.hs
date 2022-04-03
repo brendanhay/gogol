@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.SetTargetPools
     ComputeRegionInstanceGroupManagersSetTargetPoolsResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersSetTargetPools (..),
     newComputeRegionInstanceGroupManagersSetTargetPools,
-    ComputeRegionInstanceGroupManagersSetTargetPools,
   )
 where
 

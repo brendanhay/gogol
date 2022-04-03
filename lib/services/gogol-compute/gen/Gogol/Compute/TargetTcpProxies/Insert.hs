@@ -34,8 +34,8 @@ module Gogol.Compute.TargetTcpProxies.Insert
     ComputeTargetTcpProxiesInsertResource,
 
     -- ** Constructing a Request
+    ComputeTargetTcpProxiesInsert (..),
     newComputeTargetTcpProxiesInsert,
-    ComputeTargetTcpProxiesInsert,
   )
 where
 

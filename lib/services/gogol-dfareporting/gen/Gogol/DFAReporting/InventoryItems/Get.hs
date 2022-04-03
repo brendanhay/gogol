@@ -34,8 +34,8 @@ module Gogol.DFAReporting.InventoryItems.Get
     DFAReportingInventoryItemsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingInventoryItemsGet (..),
     newDFAReportingInventoryItemsGet,
-    DFAReportingInventoryItemsGet,
   )
 where
 

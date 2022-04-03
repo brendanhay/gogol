@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.Insert
     FusionTablesTableInsertResource,
 
     -- ** Constructing a Request
+    FusionTablesTableInsert (..),
     newFusionTablesTableInsert,
-    FusionTablesTableInsert,
   )
 where
 

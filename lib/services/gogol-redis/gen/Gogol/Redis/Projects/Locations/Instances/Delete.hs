@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.Delete
     RedisProjectsLocationsInstancesDeleteResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesDelete (..),
     newRedisProjectsLocationsInstancesDelete,
-    RedisProjectsLocationsInstancesDelete,
   )
 where
 

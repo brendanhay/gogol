@@ -35,8 +35,8 @@ module Gogol.AppsReseller.Reseller.Customers.Insert
     ResellerCustomersInsertResource,
 
     -- ** Constructing a Request
+    ResellerCustomersInsert (..),
     newResellerCustomersInsert,
-    ResellerCustomersInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Locations.Get
     LoggingBillingAccountsLocationsGetResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsLocationsGet (..),
     newLoggingBillingAccountsLocationsGet,
-    LoggingBillingAccountsLocationsGet,
   )
 where
 

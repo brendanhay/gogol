@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.AddPeering
     ComputeNetworksAddPeeringResource,
 
     -- ** Constructing a Request
+    ComputeNetworksAddPeering (..),
     newComputeNetworksAddPeering,
-    ComputeNetworksAddPeering,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Modify
     GmailUsersMessagesModifyResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesModify (..),
     newGmailUsersMessagesModify,
-    GmailUsersMessagesModify,
   )
 where
 

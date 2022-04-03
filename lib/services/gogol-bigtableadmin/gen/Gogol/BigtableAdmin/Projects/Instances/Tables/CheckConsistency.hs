@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
     BigtableAdminProjectsInstancesTablesCheckConsistencyResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesCheckConsistency (..),
     newBigtableAdminProjectsInstancesTablesCheckConsistency,
-    BigtableAdminProjectsInstancesTablesCheckConsistency,
   )
 where
 

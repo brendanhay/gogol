@@ -34,8 +34,8 @@ module Gogol.PlusDomains.Media.Insert
     PlusDomainsMediaInsertResource,
 
     -- ** Constructing a Request
+    PlusDomainsMediaInsert (..),
     newPlusDomainsMediaInsert,
-    PlusDomainsMediaInsert,
   )
 where
 

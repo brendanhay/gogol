@@ -34,8 +34,8 @@ module Gogol.Games.Scores.Get
     GamesScoresGetResource,
 
     -- ** Constructing a Request
+    GamesScoresGet (..),
     newGamesScoresGet,
-    GamesScoresGet,
   )
 where
 

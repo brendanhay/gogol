@@ -34,8 +34,8 @@ module Gogol.DNS.Changes.Create
     DNSChangesCreateResource,
 
     -- ** Constructing a Request
+    DNSChangesCreate (..),
     newDNSChangesCreate,
-    DNSChangesCreate,
   )
 where
 

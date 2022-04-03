@@ -40,78 +40,78 @@ module Gogol.BinaryAuthorization
 
     -- ** binaryauthorization.projects.attestors.create
     BinaryAuthorizationProjectsAttestorsCreateResource,
+    BinaryAuthorizationProjectsAttestorsCreate (..),
     newBinaryAuthorizationProjectsAttestorsCreate,
-    BinaryAuthorizationProjectsAttestorsCreate,
 
     -- ** binaryauthorization.projects.attestors.delete
     BinaryAuthorizationProjectsAttestorsDeleteResource,
+    BinaryAuthorizationProjectsAttestorsDelete (..),
     newBinaryAuthorizationProjectsAttestorsDelete,
-    BinaryAuthorizationProjectsAttestorsDelete,
 
     -- ** binaryauthorization.projects.attestors.get
     BinaryAuthorizationProjectsAttestorsGetResource,
+    BinaryAuthorizationProjectsAttestorsGet (..),
     newBinaryAuthorizationProjectsAttestorsGet,
-    BinaryAuthorizationProjectsAttestorsGet,
 
     -- ** binaryauthorization.projects.attestors.getIamPolicy
     BinaryAuthorizationProjectsAttestorsGetIamPolicyResource,
+    BinaryAuthorizationProjectsAttestorsGetIamPolicy (..),
     newBinaryAuthorizationProjectsAttestorsGetIamPolicy,
-    BinaryAuthorizationProjectsAttestorsGetIamPolicy,
 
     -- ** binaryauthorization.projects.attestors.list
     BinaryAuthorizationProjectsAttestorsListResource,
+    BinaryAuthorizationProjectsAttestorsList (..),
     newBinaryAuthorizationProjectsAttestorsList,
-    BinaryAuthorizationProjectsAttestorsList,
 
     -- ** binaryauthorization.projects.attestors.setIamPolicy
     BinaryAuthorizationProjectsAttestorsSetIamPolicyResource,
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy (..),
     newBinaryAuthorizationProjectsAttestorsSetIamPolicy,
-    BinaryAuthorizationProjectsAttestorsSetIamPolicy,
 
     -- ** binaryauthorization.projects.attestors.testIamPermissions
     BinaryAuthorizationProjectsAttestorsTestIamPermissionsResource,
+    BinaryAuthorizationProjectsAttestorsTestIamPermissions (..),
     newBinaryAuthorizationProjectsAttestorsTestIamPermissions,
-    BinaryAuthorizationProjectsAttestorsTestIamPermissions,
 
     -- ** binaryauthorization.projects.attestors.update
     BinaryAuthorizationProjectsAttestorsUpdateResource,
+    BinaryAuthorizationProjectsAttestorsUpdate (..),
     newBinaryAuthorizationProjectsAttestorsUpdate,
-    BinaryAuthorizationProjectsAttestorsUpdate,
 
     -- ** binaryauthorization.projects.attestors.validateAttestationOccurrence
     BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource,
+    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence (..),
     newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence,
-    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence,
 
     -- ** binaryauthorization.projects.getPolicy
     BinaryAuthorizationProjectsGetPolicyResource,
+    BinaryAuthorizationProjectsGetPolicy (..),
     newBinaryAuthorizationProjectsGetPolicy,
-    BinaryAuthorizationProjectsGetPolicy,
 
     -- ** binaryauthorization.projects.policy.getIamPolicy
     BinaryAuthorizationProjectsPolicyGetIamPolicyResource,
+    BinaryAuthorizationProjectsPolicyGetIamPolicy (..),
     newBinaryAuthorizationProjectsPolicyGetIamPolicy,
-    BinaryAuthorizationProjectsPolicyGetIamPolicy,
 
     -- ** binaryauthorization.projects.policy.setIamPolicy
     BinaryAuthorizationProjectsPolicySetIamPolicyResource,
+    BinaryAuthorizationProjectsPolicySetIamPolicy (..),
     newBinaryAuthorizationProjectsPolicySetIamPolicy,
-    BinaryAuthorizationProjectsPolicySetIamPolicy,
 
     -- ** binaryauthorization.projects.policy.testIamPermissions
     BinaryAuthorizationProjectsPolicyTestIamPermissionsResource,
+    BinaryAuthorizationProjectsPolicyTestIamPermissions (..),
     newBinaryAuthorizationProjectsPolicyTestIamPermissions,
-    BinaryAuthorizationProjectsPolicyTestIamPermissions,
 
     -- ** binaryauthorization.projects.updatePolicy
     BinaryAuthorizationProjectsUpdatePolicyResource,
+    BinaryAuthorizationProjectsUpdatePolicy (..),
     newBinaryAuthorizationProjectsUpdatePolicy,
-    BinaryAuthorizationProjectsUpdatePolicy,
 
     -- ** binaryauthorization.systempolicy.getPolicy
     BinaryAuthorizationSystempolicyGetPolicyResource,
+    BinaryAuthorizationSystempolicyGetPolicy (..),
     newBinaryAuthorizationSystempolicyGetPolicy,
-    BinaryAuthorizationSystempolicyGetPolicy,
 
     -- * Types
 

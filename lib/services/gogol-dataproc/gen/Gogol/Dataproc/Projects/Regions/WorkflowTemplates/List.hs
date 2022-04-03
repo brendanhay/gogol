@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.List
     DataprocProjectsRegionsWorkflowTemplatesListResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesList (..),
     newDataprocProjectsRegionsWorkflowTemplatesList,
-    DataprocProjectsRegionsWorkflowTemplatesList,
   )
 where
 

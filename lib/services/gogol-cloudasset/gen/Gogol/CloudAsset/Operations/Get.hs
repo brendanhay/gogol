@@ -34,8 +34,8 @@ module Gogol.CloudAsset.Operations.Get
     CloudAssetOperationsGetResource,
 
     -- ** Constructing a Request
+    CloudAssetOperationsGet (..),
     newCloudAssetOperationsGet,
-    CloudAssetOperationsGet,
   )
 where
 

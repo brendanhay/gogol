@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Stats.GetIndex
     CloudSearchStatsGetIndexResource,
 
     -- ** Constructing a Request
+    CloudSearchStatsGetIndex (..),
     newCloudSearchStatsGetIndex,
-    CloudSearchStatsGetIndex,
   )
 where
 

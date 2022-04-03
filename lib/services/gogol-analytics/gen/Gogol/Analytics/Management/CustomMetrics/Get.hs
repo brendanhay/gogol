@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomMetrics.Get
     AnalyticsManagementCustomMetricsGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomMetricsGet (..),
     newAnalyticsManagementCustomMetricsGet,
-    AnalyticsManagementCustomMetricsGet,
   )
 where
 

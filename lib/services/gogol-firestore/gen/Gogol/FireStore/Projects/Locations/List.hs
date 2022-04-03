@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Locations.List
     FireStoreProjectsLocationsListResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsLocationsList (..),
     newFireStoreProjectsLocationsList,
-    FireStoreProjectsLocationsList,
   )
 where
 

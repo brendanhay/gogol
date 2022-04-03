@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.CalculateCoverage
     DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverageResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage (..),
     newDialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage,
-    DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage,
   )
 where
 

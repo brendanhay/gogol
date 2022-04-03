@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.DlpJobs.Create
     DLPProjectsDlpJobsCreateResource,
 
     -- ** Constructing a Request
+    DLPProjectsDlpJobsCreate (..),
     newDLPProjectsDlpJobsCreate,
-    DLPProjectsDlpJobsCreate,
   )
 where
 

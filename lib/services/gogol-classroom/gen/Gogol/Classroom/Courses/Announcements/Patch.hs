@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Announcements.Patch
     ClassroomCoursesAnnouncementsPatchResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesAnnouncementsPatch (..),
     newClassroomCoursesAnnouncementsPatch,
-    ClassroomCoursesAnnouncementsPatch,
   )
 where
 

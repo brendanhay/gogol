@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderreports.Listtransactions
     ContentOrderreportsListtransactionsResource,
 
     -- ** Constructing a Request
+    ContentOrderreportsListtransactions (..),
     newContentOrderreportsListtransactions,
-    ContentOrderreportsListtransactions,
   )
 where
 

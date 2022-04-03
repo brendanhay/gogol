@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Update
     DataprocProjectsRegionsWorkflowTemplatesUpdateResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesUpdate (..),
     newDataprocProjectsRegionsWorkflowTemplatesUpdate,
-    DataprocProjectsRegionsWorkflowTemplatesUpdate,
   )
 where
 

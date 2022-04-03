@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Labels.Create
     GmailUsersLabelsCreateResource,
 
     -- ** Constructing a Request
+    GmailUsersLabelsCreate (..),
     newGmailUsersLabelsCreate,
-    GmailUsersLabelsCreate,
   )
 where
 

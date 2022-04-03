@@ -34,8 +34,8 @@ module Gogol.Discovery.Apis.List
     DiscoveryApisListResource,
 
     -- ** Constructing a Request
+    DiscoveryApisList (..),
     newDiscoveryApisList,
-    DiscoveryApisList,
   )
 where
 

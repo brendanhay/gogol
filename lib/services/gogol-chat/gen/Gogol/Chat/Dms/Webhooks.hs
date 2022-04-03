@@ -34,8 +34,8 @@ module Gogol.Chat.Dms.Webhooks
     ChatDmsWebhooksResource,
 
     -- ** Constructing a Request
+    ChatDmsWebhooks (..),
     newChatDmsWebhooks,
-    ChatDmsWebhooks,
   )
 where
 

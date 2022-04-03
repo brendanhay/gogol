@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Backups.Operations.Cancel
     SpannerProjectsInstancesBackupsOperationsCancelResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesBackupsOperationsCancel (..),
     newSpannerProjectsInstancesBackupsOperationsCancel,
-    SpannerProjectsInstancesBackupsOperationsCancel,
   )
 where
 

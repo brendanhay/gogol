@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Drafts.Get
     GmailUsersDraftsGetResource,
 
     -- ** Constructing a Request
+    GmailUsersDraftsGet (..),
     newGmailUsersDraftsGet,
-    GmailUsersDraftsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Messages.Update
     ChatSpacesMessagesUpdateResource,
 
     -- ** Constructing a Request
+    ChatSpacesMessagesUpdate (..),
     newChatSpacesMessagesUpdate,
-    ChatSpacesMessagesUpdate,
   )
 where
 

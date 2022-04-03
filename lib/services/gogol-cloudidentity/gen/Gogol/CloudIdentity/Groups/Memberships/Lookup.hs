@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.Lookup
     CloudIdentityGroupsMembershipsLookupResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsLookup (..),
     newCloudIdentityGroupsMembershipsLookup,
-    CloudIdentityGroupsMembershipsLookup,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionBackendServices.List
     ComputeRegionBackendServicesListResource,
 
     -- ** Constructing a Request
+    ComputeRegionBackendServicesList (..),
     newComputeRegionBackendServicesList,
-    ComputeRegionBackendServicesList,
   )
 where
 

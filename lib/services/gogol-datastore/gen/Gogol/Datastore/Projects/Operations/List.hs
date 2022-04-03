@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Operations.List
     DatastoreProjectsOperationsListResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsOperationsList (..),
     newDatastoreProjectsOperationsList,
-    DatastoreProjectsOperationsList,
   )
 where
 

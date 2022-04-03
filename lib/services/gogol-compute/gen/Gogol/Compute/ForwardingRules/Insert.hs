@@ -34,8 +34,8 @@ module Gogol.Compute.ForwardingRules.Insert
     ComputeForwardingRulesInsertResource,
 
     -- ** Constructing a Request
+    ComputeForwardingRulesInsert (..),
     newComputeForwardingRulesInsert,
-    ComputeForwardingRulesInsert,
   )
 where
 

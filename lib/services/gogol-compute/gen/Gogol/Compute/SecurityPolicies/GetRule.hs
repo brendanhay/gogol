@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.GetRule
     ComputeSecurityPoliciesGetRuleResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesGetRule (..),
     newComputeSecurityPoliciesGetRule,
-    ComputeSecurityPoliciesGetRule,
   )
 where
 

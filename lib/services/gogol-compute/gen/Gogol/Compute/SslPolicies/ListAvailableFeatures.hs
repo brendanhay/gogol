@@ -34,8 +34,8 @@ module Gogol.Compute.SslPolicies.ListAvailableFeatures
     ComputeSslPoliciesListAvailableFeaturesResource,
 
     -- ** Constructing a Request
+    ComputeSslPoliciesListAvailableFeatures (..),
     newComputeSslPoliciesListAvailableFeatures,
-    ComputeSslPoliciesListAvailableFeatures,
   )
 where
 

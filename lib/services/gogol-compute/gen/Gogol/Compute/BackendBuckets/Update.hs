@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.Update
     ComputeBackendBucketsUpdateResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsUpdate (..),
     newComputeBackendBucketsUpdate,
-    ComputeBackendBucketsUpdate,
   )
 where
 

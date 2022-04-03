@@ -34,8 +34,8 @@ module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Delete
     IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource,
 
     -- ** Constructing a Request
+    IAPProjectsBrandsIdentityAwareProxyClientsDelete (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsDelete,
-    IAPProjectsBrandsIdentityAwareProxyClientsDelete,
   )
 where
 

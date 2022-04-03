@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
     CloudKMSProjectsLocationsEkmConnectionsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions (..),
     newCloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
-    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.List
     BigQueryTablesListResource,
 
     -- ** Constructing a Request
+    BigQueryTablesList (..),
     newBigQueryTablesList,
-    BigQueryTablesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.ListReferrers
     ComputeInstancesListReferrersResource,
 
     -- ** Constructing a Request
+    ComputeInstancesListReferrers (..),
     newComputeInstancesListReferrers,
-    ComputeInstancesListReferrers,
   )
 where
 

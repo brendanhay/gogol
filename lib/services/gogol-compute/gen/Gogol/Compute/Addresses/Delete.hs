@@ -34,8 +34,8 @@ module Gogol.Compute.Addresses.Delete
     ComputeAddressesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeAddressesDelete (..),
     newComputeAddressesDelete,
-    ComputeAddressesDelete,
   )
 where
 

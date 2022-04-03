@@ -34,8 +34,8 @@ module Gogol.WebmasterTools.Webmasters.Sites.Get
     WebmastersSitesGetResource,
 
     -- ** Constructing a Request
+    WebmastersSitesGet (..),
     newWebmastersSitesGet,
-    WebmastersSitesGet,
   )
 where
 

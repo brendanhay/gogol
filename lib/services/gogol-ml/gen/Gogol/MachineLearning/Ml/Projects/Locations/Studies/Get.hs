@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Get
     MlProjectsLocationsStudiesGetResource,
 
     -- ** Constructing a Request
+    MlProjectsLocationsStudiesGet (..),
     newMlProjectsLocationsStudiesGet,
-    MlProjectsLocationsStudiesGet,
   )
 where
 

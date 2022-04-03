@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.AggregatedList
     ComputeRoutersAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeRoutersAggregatedList (..),
     newComputeRoutersAggregatedList,
-    ComputeRoutersAggregatedList,
   )
 where
 

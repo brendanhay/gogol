@@ -34,8 +34,8 @@ module Gogol.RuntimeConfig.Operations.Cancel
     RuntimeConfigOperationsCancelResource,
 
     -- ** Constructing a Request
+    RuntimeConfigOperationsCancel (..),
     newRuntimeConfigOperationsCancel,
-    RuntimeConfigOperationsCancel,
   )
 where
 

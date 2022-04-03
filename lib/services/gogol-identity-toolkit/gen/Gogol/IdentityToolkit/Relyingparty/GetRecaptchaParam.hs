@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.GetRecaptchaParam
     IdentityToolkitRelyingpartyGetRecaptchaParamResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyGetRecaptchaParam (..),
     newIdentityToolkitRelyingpartyGetRecaptchaParam,
-    IdentityToolkitRelyingpartyGetRecaptchaParam,
   )
 where
 

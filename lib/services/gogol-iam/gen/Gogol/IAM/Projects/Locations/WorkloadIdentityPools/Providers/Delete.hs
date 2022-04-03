@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Delete
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersDeleteResource,
 
     -- ** Constructing a Request
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
   )
 where
 

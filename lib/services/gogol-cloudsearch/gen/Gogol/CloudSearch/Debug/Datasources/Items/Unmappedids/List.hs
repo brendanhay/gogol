@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Debug.Datasources.Items.Unmappedids.List
     CloudSearchDebugDatasourcesItemsUnmappedidsListResource,
 
     -- ** Constructing a Request
+    CloudSearchDebugDatasourcesItemsUnmappedidsList (..),
     newCloudSearchDebugDatasourcesItemsUnmappedidsList,
-    CloudSearchDebugDatasourcesItemsUnmappedidsList,
   )
 where
 

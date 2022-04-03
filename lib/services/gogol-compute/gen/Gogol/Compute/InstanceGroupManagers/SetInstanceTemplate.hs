@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroupManagers.SetInstanceTemplate
     ComputeInstanceGroupManagersSetInstanceTemplateResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupManagersSetInstanceTemplate (..),
     newComputeInstanceGroupManagersSetInstanceTemplate,
-    ComputeInstanceGroupManagersSetInstanceTemplate,
   )
 where
 

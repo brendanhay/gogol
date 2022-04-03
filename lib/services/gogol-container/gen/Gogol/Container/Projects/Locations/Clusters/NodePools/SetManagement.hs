@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.SetManagement
     ContainerProjectsLocationsClustersNodePoolsSetManagementResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersNodePoolsSetManagement (..),
     newContainerProjectsLocationsClustersNodePoolsSetManagement,
-    ContainerProjectsLocationsClustersNodePoolsSetManagement,
   )
 where
 

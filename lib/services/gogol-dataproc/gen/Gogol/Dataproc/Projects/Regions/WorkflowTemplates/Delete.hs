@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Delete
     DataprocProjectsRegionsWorkflowTemplatesDeleteResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesDelete (..),
     newDataprocProjectsRegionsWorkflowTemplatesDelete,
-    DataprocProjectsRegionsWorkflowTemplatesDelete,
   )
 where
 

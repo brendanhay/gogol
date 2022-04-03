@@ -34,8 +34,8 @@ module Gogol.Compute.FirewallPolicies.GetAssociation
     ComputeFirewallPoliciesGetAssociationResource,
 
     -- ** Constructing a Request
+    ComputeFirewallPoliciesGetAssociation (..),
     newComputeFirewallPoliciesGetAssociation,
-    ComputeFirewallPoliciesGetAssociation,
   )
 where
 

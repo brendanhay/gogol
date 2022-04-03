@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebPropertyAdWordsLinks.List
     AnalyticsManagementWebPropertyAdWordsLinksListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebPropertyAdWordsLinksList (..),
     newAnalyticsManagementWebPropertyAdWordsLinksList,
-    AnalyticsManagementWebPropertyAdWordsLinksList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.PlatformTypes.List
     DFAReportingPlatformTypesListResource,
 
     -- ** Constructing a Request
+    DFAReportingPlatformTypesList (..),
     newDFAReportingPlatformTypesList,
-    DFAReportingPlatformTypesList,
   )
 where
 

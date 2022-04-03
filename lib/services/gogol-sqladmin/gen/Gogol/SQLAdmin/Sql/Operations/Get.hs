@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Operations.Get
     SqlOperationsGetResource,
 
     -- ** Constructing a Request
+    SqlOperationsGet (..),
     newSqlOperationsGet,
-    SqlOperationsGet,
   )
 where
 

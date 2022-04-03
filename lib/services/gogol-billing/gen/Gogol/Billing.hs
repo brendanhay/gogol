@@ -42,63 +42,63 @@ module Gogol.Billing
 
     -- ** cloudbilling.billingAccounts.create
     CloudbillingBillingAccountsCreateResource,
+    CloudbillingBillingAccountsCreate (..),
     newCloudbillingBillingAccountsCreate,
-    CloudbillingBillingAccountsCreate,
 
     -- ** cloudbilling.billingAccounts.get
     CloudbillingBillingAccountsGetResource,
+    CloudbillingBillingAccountsGet (..),
     newCloudbillingBillingAccountsGet,
-    CloudbillingBillingAccountsGet,
 
     -- ** cloudbilling.billingAccounts.getIamPolicy
     CloudbillingBillingAccountsGetIamPolicyResource,
+    CloudbillingBillingAccountsGetIamPolicy (..),
     newCloudbillingBillingAccountsGetIamPolicy,
-    CloudbillingBillingAccountsGetIamPolicy,
 
     -- ** cloudbilling.billingAccounts.list
     CloudbillingBillingAccountsListResource,
+    CloudbillingBillingAccountsList (..),
     newCloudbillingBillingAccountsList,
-    CloudbillingBillingAccountsList,
 
     -- ** cloudbilling.billingAccounts.patch
     CloudbillingBillingAccountsPatchResource,
+    CloudbillingBillingAccountsPatch (..),
     newCloudbillingBillingAccountsPatch,
-    CloudbillingBillingAccountsPatch,
 
     -- ** cloudbilling.billingAccounts.projects.list
     CloudbillingBillingAccountsProjectsListResource,
+    CloudbillingBillingAccountsProjectsList (..),
     newCloudbillingBillingAccountsProjectsList,
-    CloudbillingBillingAccountsProjectsList,
 
     -- ** cloudbilling.billingAccounts.setIamPolicy
     CloudbillingBillingAccountsSetIamPolicyResource,
+    CloudbillingBillingAccountsSetIamPolicy (..),
     newCloudbillingBillingAccountsSetIamPolicy,
-    CloudbillingBillingAccountsSetIamPolicy,
 
     -- ** cloudbilling.billingAccounts.testIamPermissions
     CloudbillingBillingAccountsTestIamPermissionsResource,
+    CloudbillingBillingAccountsTestIamPermissions (..),
     newCloudbillingBillingAccountsTestIamPermissions,
-    CloudbillingBillingAccountsTestIamPermissions,
 
     -- ** cloudbilling.projects.getBillingInfo
     CloudbillingProjectsGetBillingInfoResource,
+    CloudbillingProjectsGetBillingInfo (..),
     newCloudbillingProjectsGetBillingInfo,
-    CloudbillingProjectsGetBillingInfo,
 
     -- ** cloudbilling.projects.updateBillingInfo
     CloudbillingProjectsUpdateBillingInfoResource,
+    CloudbillingProjectsUpdateBillingInfo (..),
     newCloudbillingProjectsUpdateBillingInfo,
-    CloudbillingProjectsUpdateBillingInfo,
 
     -- ** cloudbilling.services.list
     CloudbillingServicesListResource,
+    CloudbillingServicesList (..),
     newCloudbillingServicesList,
-    CloudbillingServicesList,
 
     -- ** cloudbilling.services.skus.list
     CloudbillingServicesSkusListResource,
+    CloudbillingServicesSkusList (..),
     newCloudbillingServicesSkusList,
-    CloudbillingServicesSkusList,
 
     -- * Types
 

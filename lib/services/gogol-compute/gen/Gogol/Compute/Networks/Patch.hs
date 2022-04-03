@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.Patch
     ComputeNetworksPatchResource,
 
     -- ** Constructing a Request
+    ComputeNetworksPatch (..),
     newComputeNetworksPatch,
-    ComputeNetworksPatch,
   )
 where
 

@@ -40,83 +40,83 @@ module Gogol.StorageTransfer
 
     -- ** storagetransfer.googleServiceAccounts.get
     StorageTransferGoogleServiceAccountsGetResource,
+    StorageTransferGoogleServiceAccountsGet (..),
     newStorageTransferGoogleServiceAccountsGet,
-    StorageTransferGoogleServiceAccountsGet,
 
     -- ** storagetransfer.projects.agentPools.create
     StorageTransferProjectsAgentPoolsCreateResource,
+    StorageTransferProjectsAgentPoolsCreate (..),
     newStorageTransferProjectsAgentPoolsCreate,
-    StorageTransferProjectsAgentPoolsCreate,
 
     -- ** storagetransfer.projects.agentPools.delete
     StorageTransferProjectsAgentPoolsDeleteResource,
+    StorageTransferProjectsAgentPoolsDelete (..),
     newStorageTransferProjectsAgentPoolsDelete,
-    StorageTransferProjectsAgentPoolsDelete,
 
     -- ** storagetransfer.projects.agentPools.get
     StorageTransferProjectsAgentPoolsGetResource,
+    StorageTransferProjectsAgentPoolsGet (..),
     newStorageTransferProjectsAgentPoolsGet,
-    StorageTransferProjectsAgentPoolsGet,
 
     -- ** storagetransfer.projects.agentPools.list
     StorageTransferProjectsAgentPoolsListResource,
+    StorageTransferProjectsAgentPoolsList (..),
     newStorageTransferProjectsAgentPoolsList,
-    StorageTransferProjectsAgentPoolsList,
 
     -- ** storagetransfer.projects.agentPools.patch
     StorageTransferProjectsAgentPoolsPatchResource,
+    StorageTransferProjectsAgentPoolsPatch (..),
     newStorageTransferProjectsAgentPoolsPatch,
-    StorageTransferProjectsAgentPoolsPatch,
 
     -- ** storagetransfer.transferJobs.create
     StorageTransferTransferJobsCreateResource,
+    StorageTransferTransferJobsCreate (..),
     newStorageTransferTransferJobsCreate,
-    StorageTransferTransferJobsCreate,
 
     -- ** storagetransfer.transferJobs.get
     StorageTransferTransferJobsGetResource,
+    StorageTransferTransferJobsGet (..),
     newStorageTransferTransferJobsGet,
-    StorageTransferTransferJobsGet,
 
     -- ** storagetransfer.transferJobs.list
     StorageTransferTransferJobsListResource,
+    StorageTransferTransferJobsList (..),
     newStorageTransferTransferJobsList,
-    StorageTransferTransferJobsList,
 
     -- ** storagetransfer.transferJobs.patch
     StorageTransferTransferJobsPatchResource,
+    StorageTransferTransferJobsPatch (..),
     newStorageTransferTransferJobsPatch,
-    StorageTransferTransferJobsPatch,
 
     -- ** storagetransfer.transferJobs.run
     StorageTransferTransferJobsRunResource,
+    StorageTransferTransferJobsRun (..),
     newStorageTransferTransferJobsRun,
-    StorageTransferTransferJobsRun,
 
     -- ** storagetransfer.transferOperations.cancel
     StorageTransferTransferOperationsCancelResource,
+    StorageTransferTransferOperationsCancel (..),
     newStorageTransferTransferOperationsCancel,
-    StorageTransferTransferOperationsCancel,
 
     -- ** storagetransfer.transferOperations.get
     StorageTransferTransferOperationsGetResource,
+    StorageTransferTransferOperationsGet (..),
     newStorageTransferTransferOperationsGet,
-    StorageTransferTransferOperationsGet,
 
     -- ** storagetransfer.transferOperations.list
     StorageTransferTransferOperationsListResource,
+    StorageTransferTransferOperationsList (..),
     newStorageTransferTransferOperationsList,
-    StorageTransferTransferOperationsList,
 
     -- ** storagetransfer.transferOperations.pause
     StorageTransferTransferOperationsPauseResource,
+    StorageTransferTransferOperationsPause (..),
     newStorageTransferTransferOperationsPause,
-    StorageTransferTransferOperationsPause,
 
     -- ** storagetransfer.transferOperations.resume
     StorageTransferTransferOperationsResumeResource,
+    StorageTransferTransferOperationsResume (..),
     newStorageTransferTransferOperationsResume,
-    StorageTransferTransferOperationsResume,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.StopWatching
     AdExchangeBuyer2AccountsCreativesStopWatchingResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsCreativesStopWatching (..),
     newAdExchangeBuyer2AccountsCreativesStopWatching,
-    AdExchangeBuyer2AccountsCreativesStopWatching,
   )
 where
 

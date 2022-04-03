@@ -41,63 +41,63 @@ module Gogol.Vision
 
     -- ** vision.files.annotate
     VisionFilesAnnotateResource,
+    VisionFilesAnnotate (..),
     newVisionFilesAnnotate,
-    VisionFilesAnnotate,
 
     -- ** vision.files.asyncBatchAnnotate
     VisionFilesAsyncBatchAnnotateResource,
+    VisionFilesAsyncBatchAnnotate (..),
     newVisionFilesAsyncBatchAnnotate,
-    VisionFilesAsyncBatchAnnotate,
 
     -- ** vision.images.annotate
     VisionImagesAnnotateResource,
+    VisionImagesAnnotate (..),
     newVisionImagesAnnotate,
-    VisionImagesAnnotate,
 
     -- ** vision.images.asyncBatchAnnotate
     VisionImagesAsyncBatchAnnotateResource,
+    VisionImagesAsyncBatchAnnotate (..),
     newVisionImagesAsyncBatchAnnotate,
-    VisionImagesAsyncBatchAnnotate,
 
     -- ** vision.projects.files.annotate
     VisionProjectsFilesAnnotateResource,
+    VisionProjectsFilesAnnotate (..),
     newVisionProjectsFilesAnnotate,
-    VisionProjectsFilesAnnotate,
 
     -- ** vision.projects.files.asyncBatchAnnotate
     VisionProjectsFilesAsyncBatchAnnotateResource,
+    VisionProjectsFilesAsyncBatchAnnotate (..),
     newVisionProjectsFilesAsyncBatchAnnotate,
-    VisionProjectsFilesAsyncBatchAnnotate,
 
     -- ** vision.projects.images.annotate
     VisionProjectsImagesAnnotateResource,
+    VisionProjectsImagesAnnotate (..),
     newVisionProjectsImagesAnnotate,
-    VisionProjectsImagesAnnotate,
 
     -- ** vision.projects.images.asyncBatchAnnotate
     VisionProjectsImagesAsyncBatchAnnotateResource,
+    VisionProjectsImagesAsyncBatchAnnotate (..),
     newVisionProjectsImagesAsyncBatchAnnotate,
-    VisionProjectsImagesAsyncBatchAnnotate,
 
     -- ** vision.projects.locations.files.annotate
     VisionProjectsLocationsFilesAnnotateResource,
+    VisionProjectsLocationsFilesAnnotate (..),
     newVisionProjectsLocationsFilesAnnotate,
-    VisionProjectsLocationsFilesAnnotate,
 
     -- ** vision.projects.locations.files.asyncBatchAnnotate
     VisionProjectsLocationsFilesAsyncBatchAnnotateResource,
+    VisionProjectsLocationsFilesAsyncBatchAnnotate (..),
     newVisionProjectsLocationsFilesAsyncBatchAnnotate,
-    VisionProjectsLocationsFilesAsyncBatchAnnotate,
 
     -- ** vision.projects.locations.images.annotate
     VisionProjectsLocationsImagesAnnotateResource,
+    VisionProjectsLocationsImagesAnnotate (..),
     newVisionProjectsLocationsImagesAnnotate,
-    VisionProjectsLocationsImagesAnnotate,
 
     -- ** vision.projects.locations.images.asyncBatchAnnotate
     VisionProjectsLocationsImagesAsyncBatchAnnotateResource,
+    VisionProjectsLocationsImagesAsyncBatchAnnotate (..),
     newVisionProjectsLocationsImagesAsyncBatchAnnotate,
-    VisionProjectsLocationsImagesAsyncBatchAnnotate,
 
     -- * Types
 

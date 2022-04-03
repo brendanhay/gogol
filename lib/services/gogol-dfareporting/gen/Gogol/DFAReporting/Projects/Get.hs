@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Projects.Get
     DFAReportingProjectsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingProjectsGet (..),
     newDFAReportingProjectsGet,
-    DFAReportingProjectsGet,
   )
 where
 

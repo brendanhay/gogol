@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Undelete
     DirectoryUsersUndeleteResource,
 
     -- ** Constructing a Request
+    DirectoryUsersUndelete (..),
     newDirectoryUsersUndelete,
-    DirectoryUsersUndelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeeds.Custombatch
     ContentDatafeedsCustombatchResource,
 
     -- ** Constructing a Request
+    ContentDatafeedsCustombatch (..),
     newContentDatafeedsCustombatch,
-    ContentDatafeedsCustombatch,
   )
 where
 

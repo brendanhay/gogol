@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Repricingrules.Delete
     ContentRepricingrulesDeleteResource,
 
     -- ** Constructing a Request
+    ContentRepricingrulesDelete (..),
     newContentRepricingrulesDelete,
-    ContentRepricingrulesDelete,
   )
 where
 

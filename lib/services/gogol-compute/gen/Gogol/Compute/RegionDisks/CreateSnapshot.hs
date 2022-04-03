@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.CreateSnapshot
     ComputeRegionDisksCreateSnapshotResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksCreateSnapshot (..),
     newComputeRegionDisksCreateSnapshot,
-    ComputeRegionDisksCreateSnapshot,
   )
 where
 

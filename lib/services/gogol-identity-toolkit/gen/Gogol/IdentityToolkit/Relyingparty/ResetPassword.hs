@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.ResetPassword
     IdentityToolkitRelyingpartyResetPasswordResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyResetPassword (..),
     newIdentityToolkitRelyingpartyResetPassword,
-    IdentityToolkitRelyingpartyResetPassword,
   )
 where
 

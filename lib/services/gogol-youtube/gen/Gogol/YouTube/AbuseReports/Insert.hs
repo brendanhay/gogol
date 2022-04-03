@@ -34,8 +34,8 @@ module Gogol.YouTube.AbuseReports.Insert
     YouTubeAbuseReportsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeAbuseReportsInsert (..),
     newYouTubeAbuseReportsInsert,
-    YouTubeAbuseReportsInsert,
   )
 where
 

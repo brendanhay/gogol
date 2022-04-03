@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Generatedapks.List
     AndroidPublisherGeneratedapksListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherGeneratedapksList (..),
     newAndroidPublisherGeneratedapksList,
-    AndroidPublisherGeneratedapksList,
   )
 where
 

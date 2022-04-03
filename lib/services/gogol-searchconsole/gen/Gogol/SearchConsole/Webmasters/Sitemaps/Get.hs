@@ -34,8 +34,8 @@ module Gogol.SearchConsole.Webmasters.Sitemaps.Get
     WebmastersSitemapsGetResource,
 
     -- ** Constructing a Request
+    WebmastersSitemapsGet (..),
     newWebmastersSitemapsGet,
-    WebmastersSitemapsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.DatabaseOperations.List
     SpannerProjectsInstancesDatabaseOperationsListResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabaseOperationsList (..),
     newSpannerProjectsInstancesDatabaseOperationsList,
-    SpannerProjectsInstancesDatabaseOperationsList,
   )
 where
 

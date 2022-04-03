@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Clone
     SqlInstancesCloneResource,
 
     -- ** Constructing a Request
+    SqlInstancesClone (..),
     newSqlInstancesClone,
-    SqlInstancesClone,
   )
 where
 

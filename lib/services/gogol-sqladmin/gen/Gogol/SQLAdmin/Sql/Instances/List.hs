@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.List
     SqlInstancesListResource,
 
     -- ** Constructing a Request
+    SqlInstancesList (..),
     newSqlInstancesList,
-    SqlInstancesList,
   )
 where
 

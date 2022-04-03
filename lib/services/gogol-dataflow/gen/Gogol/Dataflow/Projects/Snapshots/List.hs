@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Snapshots.List
     DataflowProjectsSnapshotsListResource,
 
     -- ** Constructing a Request
+    DataflowProjectsSnapshotsList (..),
     newDataflowProjectsSnapshotsList,
-    DataflowProjectsSnapshotsList,
   )
 where
 

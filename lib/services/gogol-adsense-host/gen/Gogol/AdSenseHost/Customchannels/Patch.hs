@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Customchannels.Patch
     AdSenseHostCustomchannelsPatchResource,
 
     -- ** Constructing a Request
+    AdSenseHostCustomchannelsPatch (..),
     newAdSenseHostCustomchannelsPatch,
-    AdSenseHostCustomchannelsPatch,
   )
 where
 

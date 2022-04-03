@@ -34,8 +34,8 @@ module Gogol.Testing.ApplicationDetailService.GetApkDetails
     TestingApplicationDetailServiceGetApkDetailsResource,
 
     -- ** Constructing a Request
+    TestingApplicationDetailServiceGetApkDetails (..),
     newTestingApplicationDetailServiceGetApkDetails,
-    TestingApplicationDetailServiceGetApkDetails,
   )
 where
 

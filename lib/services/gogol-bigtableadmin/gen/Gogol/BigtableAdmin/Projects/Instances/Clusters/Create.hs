@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.Create
     BigtableAdminProjectsInstancesClustersCreateResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesClustersCreate (..),
     newBigtableAdminProjectsInstancesClustersCreate,
-    BigtableAdminProjectsInstancesClustersCreate,
   )
 where
 

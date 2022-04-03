@@ -34,8 +34,8 @@ module Gogol.Drive.Comments.Delete
     DriveCommentsDeleteResource,
 
     -- ** Constructing a Request
+    DriveCommentsDelete (..),
     newDriveCommentsDelete,
-    DriveCommentsDelete,
   )
 where
 

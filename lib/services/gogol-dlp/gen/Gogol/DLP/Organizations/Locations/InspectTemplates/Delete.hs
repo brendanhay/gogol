@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.InspectTemplates.Delete
     DLPOrganizationsLocationsInspectTemplatesDeleteResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsInspectTemplatesDelete (..),
     newDLPOrganizationsLocationsInspectTemplatesDelete,
-    DLPOrganizationsLocationsInspectTemplatesDelete,
   )
 where
 

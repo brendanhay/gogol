@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.StartWithEncryptionKey
     ComputeInstancesStartWithEncryptionKeyResource,
 
     -- ** Constructing a Request
+    ComputeInstancesStartWithEncryptionKey (..),
     newComputeInstancesStartWithEncryptionKey,
-    ComputeInstancesStartWithEncryptionKey,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Plus.People.List
     PlusPeopleListResource,
 
     -- ** Constructing a Request
+    PlusPeopleList (..),
     newPlusPeopleList,
-    PlusPeopleList,
   )
 where
 

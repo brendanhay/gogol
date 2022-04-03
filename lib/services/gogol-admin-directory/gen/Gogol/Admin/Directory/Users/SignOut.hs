@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.SignOut
     DirectoryUsersSignOutResource,
 
     -- ** Constructing a Request
+    DirectoryUsersSignOut (..),
     newDirectoryUsersSignOut,
-    DirectoryUsersSignOut,
   )
 where
 

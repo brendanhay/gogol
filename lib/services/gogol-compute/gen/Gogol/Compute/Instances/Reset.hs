@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Reset
     ComputeInstancesResetResource,
 
     -- ** Constructing a Request
+    ComputeInstancesReset (..),
     newComputeInstancesReset,
-    ComputeInstancesReset,
   )
 where
 

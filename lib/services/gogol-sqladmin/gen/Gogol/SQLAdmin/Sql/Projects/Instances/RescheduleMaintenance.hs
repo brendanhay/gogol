@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
     SqlProjectsInstancesRescheduleMaintenanceResource,
 
     -- ** Constructing a Request
+    SqlProjectsInstancesRescheduleMaintenance (..),
     newSqlProjectsInstancesRescheduleMaintenance,
-    SqlProjectsInstancesRescheduleMaintenance,
   )
 where
 

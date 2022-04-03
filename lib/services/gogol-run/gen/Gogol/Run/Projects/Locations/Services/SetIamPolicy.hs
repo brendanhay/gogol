@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.SetIamPolicy
     RunProjectsLocationsServicesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesSetIamPolicy (..),
     newRunProjectsLocationsServicesSetIamPolicy,
-    RunProjectsLocationsServicesSetIamPolicy,
   )
 where
 

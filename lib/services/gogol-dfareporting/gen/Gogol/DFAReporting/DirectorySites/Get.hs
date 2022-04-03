@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DirectorySites.Get
     DFAReportingDirectorySitesGetResource,
 
     -- ** Constructing a Request
+    DFAReportingDirectorySitesGet (..),
     newDFAReportingDirectorySitesGet,
-    DFAReportingDirectorySitesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Videos.Rate
     YouTubeVideosRateResource,
 
     -- ** Constructing a Request
+    YouTubeVideosRate (..),
     newYouTubeVideosRate,
-    YouTubeVideosRate,
   )
 where
 

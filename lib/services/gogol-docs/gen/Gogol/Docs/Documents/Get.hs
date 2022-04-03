@@ -34,8 +34,8 @@ module Gogol.Docs.Documents.Get
     DocsDocumentsGetResource,
 
     -- ** Constructing a Request
+    DocsDocumentsGet (..),
     newDocsDocumentsGet,
-    DocsDocumentsGet,
   )
 where
 

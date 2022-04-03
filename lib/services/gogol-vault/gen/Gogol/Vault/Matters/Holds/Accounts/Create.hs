@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Holds.Accounts.Create
     VaultMattersHoldsAccountsCreateResource,
 
     -- ** Constructing a Request
+    VaultMattersHoldsAccountsCreate (..),
     newVaultMattersHoldsAccountsCreate,
-    VaultMattersHoldsAccountsCreate,
   )
 where
 

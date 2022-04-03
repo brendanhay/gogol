@@ -34,8 +34,8 @@ module Gogol.Partners.UpdateCompanies
     PartnersUpdateCompaniesResource,
 
     -- ** Constructing a Request
+    PartnersUpdateCompanies (..),
     newPartnersUpdateCompanies,
-    PartnersUpdateCompanies,
   )
 where
 

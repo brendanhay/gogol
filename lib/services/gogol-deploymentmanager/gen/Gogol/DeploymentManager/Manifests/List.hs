@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Manifests.List
     DeploymentManagerManifestsListResource,
 
     -- ** Constructing a Request
+    DeploymentManagerManifestsList (..),
     newDeploymentManagerManifestsList,
-    DeploymentManagerManifestsList,
   )
 where
 

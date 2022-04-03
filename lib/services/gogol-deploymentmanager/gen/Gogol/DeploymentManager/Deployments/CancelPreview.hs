@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.CancelPreview
     DeploymentManagerDeploymentsCancelPreviewResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsCancelPreview (..),
     newDeploymentManagerDeploymentsCancelPreview,
-    DeploymentManagerDeploymentsCancelPreview,
   )
 where
 

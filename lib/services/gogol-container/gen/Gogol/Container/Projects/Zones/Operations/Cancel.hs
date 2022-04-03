@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Operations.Cancel
     ContainerProjectsZonesOperationsCancelResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesOperationsCancel (..),
     newContainerProjectsZonesOperationsCancel,
-    ContainerProjectsZonesOperationsCancel,
   )
 where
 

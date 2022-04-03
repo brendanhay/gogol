@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.DownloadAccount
     IdentityToolkitRelyingpartyDownloadAccountResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyDownloadAccount (..),
     newIdentityToolkitRelyingpartyDownloadAccount,
-    IdentityToolkitRelyingpartyDownloadAccount,
   )
 where
 

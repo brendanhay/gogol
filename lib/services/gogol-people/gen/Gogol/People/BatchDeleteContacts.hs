@@ -34,8 +34,8 @@ module Gogol.People.BatchDeleteContacts
     PeoplePeopleBatchDeleteContactsResource,
 
     -- ** Constructing a Request
+    PeoplePeopleBatchDeleteContacts (..),
     newPeoplePeopleBatchDeleteContacts,
-    PeoplePeopleBatchDeleteContacts,
   )
 where
 

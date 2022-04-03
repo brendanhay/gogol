@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.Delete
     ComputeUrlMapsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsDelete (..),
     newComputeUrlMapsDelete,
-    ComputeUrlMapsDelete,
   )
 where
 

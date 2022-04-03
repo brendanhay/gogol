@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.Get
     SourceRepoProjectsReposGetResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposGet (..),
     newSourceRepoProjectsReposGet,
-    SourceRepoProjectsReposGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.BidResponseErrors.List
     AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList (..),
     newAdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList,
-    AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList,
   )
 where
 

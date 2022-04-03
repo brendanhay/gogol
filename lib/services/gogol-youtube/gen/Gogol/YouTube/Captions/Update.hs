@@ -34,8 +34,8 @@ module Gogol.YouTube.Captions.Update
     YouTubeCaptionsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeCaptionsUpdate (..),
     newYouTubeCaptionsUpdate,
-    YouTubeCaptionsUpdate,
   )
 where
 

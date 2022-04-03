@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
     AndroidManagementEnterprisesEnrollmentTokensCreateResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesEnrollmentTokensCreate (..),
     newAndroidManagementEnterprisesEnrollmentTokensCreate,
-    AndroidManagementEnterprisesEnrollmentTokensCreate,
   )
 where
 

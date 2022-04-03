@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Get
     ContentPubsubnotificationsettingsGetResource,
 
     -- ** Constructing a Request
+    ContentPubsubnotificationsettingsGet (..),
     newContentPubsubnotificationsettingsGet,
-    ContentPubsubnotificationsettingsGet,
   )
 where
 

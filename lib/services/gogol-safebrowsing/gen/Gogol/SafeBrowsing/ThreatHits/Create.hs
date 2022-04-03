@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.ThreatHits.Create
     SafeBrowsingThreatHitsCreateResource,
 
     -- ** Constructing a Request
+    SafeBrowsingThreatHitsCreate (..),
     newSafeBrowsingThreatHitsCreate,
-    SafeBrowsingThreatHitsCreate,
   )
 where
 

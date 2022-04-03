@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.GetHealth
     ComputeTargetPoolsGetHealthResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsGetHealth (..),
     newComputeTargetPoolsGetHealth,
-    ComputeTargetPoolsGetHealth,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Search.List
     YouTubeSearchListResource,
 
     -- ** Constructing a Request
+    YouTubeSearchList (..),
     newYouTubeSearchList,
-    YouTubeSearchList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRoles.List
     DFAReportingUserRolesListResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolesList (..),
     newDFAReportingUserRolesList,
-    DFAReportingUserRolesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AccountUserProfiles.Insert
     DFAReportingAccountUserProfilesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingAccountUserProfilesInsert (..),
     newDFAReportingAccountUserProfilesInsert,
-    DFAReportingAccountUserProfilesInsert,
   )
 where
 

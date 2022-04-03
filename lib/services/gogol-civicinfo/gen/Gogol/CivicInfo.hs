@@ -37,28 +37,28 @@ module Gogol.CivicInfo
 
     -- ** civicinfo.divisions.search
     CivicInfoDivisionsSearchResource,
+    CivicInfoDivisionsSearch (..),
     newCivicInfoDivisionsSearch,
-    CivicInfoDivisionsSearch,
 
     -- ** civicinfo.elections.electionQuery
     CivicInfoElectionsElectionQueryResource,
+    CivicInfoElectionsElectionQuery (..),
     newCivicInfoElectionsElectionQuery,
-    CivicInfoElectionsElectionQuery,
 
     -- ** civicinfo.elections.voterInfoQuery
     CivicInfoElectionsVoterInfoQueryResource,
+    CivicInfoElectionsVoterInfoQuery (..),
     newCivicInfoElectionsVoterInfoQuery,
-    CivicInfoElectionsVoterInfoQuery,
 
     -- ** civicinfo.representatives.representativeInfoByAddress
     CivicInfoRepresentativesRepresentativeInfoByAddressResource,
+    CivicInfoRepresentativesRepresentativeInfoByAddress (..),
     newCivicInfoRepresentativesRepresentativeInfoByAddress,
-    CivicInfoRepresentativesRepresentativeInfoByAddress,
 
     -- ** civicinfo.representatives.representativeInfoByDivision
     CivicInfoRepresentativesRepresentativeInfoByDivisionResource,
+    CivicInfoRepresentativesRepresentativeInfoByDivision (..),
     newCivicInfoRepresentativesRepresentativeInfoByDivision,
-    CivicInfoRepresentativesRepresentativeInfoByDivision,
 
     -- * Types
 

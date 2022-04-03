@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Patch
     AdminCustomersChromePrintersPatchResource,
 
     -- ** Constructing a Request
+    AdminCustomersChromePrintersPatch (..),
     newAdminCustomersChromePrintersPatch,
-    AdminCustomersChromePrintersPatch,
   )
 where
 

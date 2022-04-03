@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.Pause
     AdExchangeBuyer2AccountsProposalsPauseResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsPause (..),
     newAdExchangeBuyer2AccountsProposalsPause,
-    AdExchangeBuyer2AccountsProposalsPause,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Notes.Patch
     ContainerAnalysisProjectsNotesPatchResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsNotesPatch (..),
     newContainerAnalysisProjectsNotesPatch,
-    ContainerAnalysisProjectsNotesPatch,
   )
 where
 

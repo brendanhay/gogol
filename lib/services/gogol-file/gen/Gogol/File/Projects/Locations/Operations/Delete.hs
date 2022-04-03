@@ -34,8 +34,8 @@ module Gogol.File.Projects.Locations.Operations.Delete
     FileProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    FileProjectsLocationsOperationsDelete (..),
     newFileProjectsLocationsOperationsDelete,
-    FileProjectsLocationsOperationsDelete,
   )
 where
 

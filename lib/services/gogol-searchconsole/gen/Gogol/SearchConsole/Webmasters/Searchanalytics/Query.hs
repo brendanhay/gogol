@@ -34,8 +34,8 @@ module Gogol.SearchConsole.Webmasters.Searchanalytics.Query
     WebmastersSearchanalyticsQueryResource,
 
     -- ** Constructing a Request
+    WebmastersSearchanalyticsQuery (..),
     newWebmastersSearchanalyticsQuery,
-    WebmastersSearchanalyticsQuery,
   )
 where
 

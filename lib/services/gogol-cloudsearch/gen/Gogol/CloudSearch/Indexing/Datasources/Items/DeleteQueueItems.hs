@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.DeleteQueueItems
     CloudSearchIndexingDatasourcesItemsDeleteQueueItemsResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsDeleteQueueItems (..),
     newCloudSearchIndexingDatasourcesItemsDeleteQueueItems,
-    CloudSearchIndexingDatasourcesItemsDeleteQueueItems,
   )
 where
 

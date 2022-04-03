@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.Patch
     CloudIOTProjectsLocationsRegistriesDevicesPatchResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesDevicesPatch (..),
     newCloudIOTProjectsLocationsRegistriesDevicesPatch,
-    CloudIOTProjectsLocationsRegistriesDevicesPatch,
   )
 where
 

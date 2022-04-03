@@ -34,8 +34,8 @@ module Gogol.Partners.Users.CreateCompanyRelation
     PartnersUsersCreateCompanyRelationResource,
 
     -- ** Constructing a Request
+    PartnersUsersCreateCompanyRelation (..),
     newPartnersUsersCreateCompanyRelation,
-    PartnersUsersCreateCompanyRelation,
   )
 where
 

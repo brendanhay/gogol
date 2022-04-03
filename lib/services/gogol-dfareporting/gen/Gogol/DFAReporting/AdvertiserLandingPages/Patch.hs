@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AdvertiserLandingPages.Patch
     DFAReportingAdvertiserLandingPagesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertiserLandingPagesPatch (..),
     newDFAReportingAdvertiserLandingPagesPatch,
-    DFAReportingAdvertiserLandingPagesPatch,
   )
 where
 

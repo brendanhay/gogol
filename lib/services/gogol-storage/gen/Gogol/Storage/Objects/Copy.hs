@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Copy
     StorageObjectsCopyResource,
 
     -- ** Constructing a Request
+    StorageObjectsCopy (..),
     newStorageObjectsCopy,
-    StorageObjectsCopy,
   )
 where
 

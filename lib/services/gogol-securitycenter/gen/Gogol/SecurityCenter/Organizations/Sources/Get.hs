@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.Get
     SecurityCenterOrganizationsSourcesGetResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesGet (..),
     newSecurityCenterOrganizationsSourcesGet,
-    SecurityCenterOrganizationsSourcesGet,
   )
 where
 

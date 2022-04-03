@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.Attachments.List
     MirrorTimelineAttachmentsListResource,
 
     -- ** Constructing a Request
+    MirrorTimelineAttachmentsList (..),
     newMirrorTimelineAttachmentsList,
-    MirrorTimelineAttachmentsList,
   )
 where
 

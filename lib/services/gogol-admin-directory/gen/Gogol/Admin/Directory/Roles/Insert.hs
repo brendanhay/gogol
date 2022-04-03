@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Roles.Insert
     DirectoryRolesInsertResource,
 
     -- ** Constructing a Request
+    DirectoryRolesInsert (..),
     newDirectoryRolesInsert,
-    DirectoryRolesInsert,
   )
 where
 

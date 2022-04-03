@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Advertisers.Update
     DFAReportingAdvertisersUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertisersUpdate (..),
     newDFAReportingAdvertisersUpdate,
-    DFAReportingAdvertisersUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IAP.Projects.Brands.Get
     IAPProjectsBrandsGetResource,
 
     -- ** Constructing a Request
+    IAPProjectsBrandsGet (..),
     newIAPProjectsBrandsGet,
-    IAPProjectsBrandsGet,
   )
 where
 

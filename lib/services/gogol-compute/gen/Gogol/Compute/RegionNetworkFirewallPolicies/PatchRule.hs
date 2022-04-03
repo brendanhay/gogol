@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.PatchRule
     ComputeRegionNetworkFirewallPoliciesPatchRuleResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesPatchRule (..),
     newComputeRegionNetworkFirewallPoliciesPatchRule,
-    ComputeRegionNetworkFirewallPoliciesPatchRule,
   )
 where
 

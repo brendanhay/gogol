@@ -34,8 +34,8 @@ module Gogol.Drive.Drives.Unhide
     DriveDrivesUnhideResource,
 
     -- ** Constructing a Request
+    DriveDrivesUnhide (..),
     newDriveDrivesUnhide,
-    DriveDrivesUnhide,
   )
 where
 

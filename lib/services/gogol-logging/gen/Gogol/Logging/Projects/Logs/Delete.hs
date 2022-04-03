@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Logs.Delete
     LoggingProjectsLogsDeleteResource,
 
     -- ** Constructing a Request
+    LoggingProjectsLogsDelete (..),
     newLoggingProjectsLogsDelete,
-    LoggingProjectsLogsDelete,
   )
 where
 

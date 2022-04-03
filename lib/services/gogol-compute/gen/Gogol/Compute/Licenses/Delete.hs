@@ -34,8 +34,8 @@ module Gogol.Compute.Licenses.Delete
     ComputeLicensesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeLicensesDelete (..),
     newComputeLicensesDelete,
-    ComputeLicensesDelete,
   )
 where
 

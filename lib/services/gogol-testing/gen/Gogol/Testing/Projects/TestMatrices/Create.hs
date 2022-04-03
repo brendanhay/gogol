@@ -34,8 +34,8 @@ module Gogol.Testing.Projects.TestMatrices.Create
     TestingProjectsTestMatricesCreateResource,
 
     -- ** Constructing a Request
+    TestingProjectsTestMatricesCreate (..),
     newTestingProjectsTestMatricesCreate,
-    TestingProjectsTestMatricesCreate,
   )
 where
 

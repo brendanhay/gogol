@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.DomainMappings.Create
     AppEngineAppsDomainMappingsCreateResource,
 
     -- ** Constructing a Request
+    AppEngineAppsDomainMappingsCreate (..),
     newAppEngineAppsDomainMappingsCreate,
-    AppEngineAppsDomainMappingsCreate,
   )
 where
 

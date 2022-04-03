@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Reopen
     VaultMattersReopenResource,
 
     -- ** Constructing a Request
+    VaultMattersReopen (..),
     newVaultMattersReopen,
-    VaultMattersReopen,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
     AccessContextManagerAccessPoliciesAccessLevelsPatchResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesAccessLevelsPatch (..),
     newAccessContextManagerAccessPoliciesAccessLevelsPatch,
-    AccessContextManagerAccessPoliciesAccessLevelsPatch,
   )
 where
 

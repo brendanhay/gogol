@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.TenancyUnits.AddProject
     ServiceConsumerManagementServicesTenancyUnitsAddProjectResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesTenancyUnitsAddProject (..),
     newServiceConsumerManagementServicesTenancyUnitsAddProject,
-    ServiceConsumerManagementServicesTenancyUnitsAddProject,
   )
 where
 

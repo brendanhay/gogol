@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Campaigns.List
     DFAReportingCampaignsListResource,
 
     -- ** Constructing a Request
+    DFAReportingCampaignsList (..),
     newDFAReportingCampaignsList,
-    DFAReportingCampaignsList,
   )
 where
 

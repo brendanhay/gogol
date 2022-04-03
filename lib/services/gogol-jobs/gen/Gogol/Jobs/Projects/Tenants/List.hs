@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.List
     JobsProjectsTenantsListResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsList (..),
     newJobsProjectsTenantsList,
-    JobsProjectsTenantsList,
   )
 where
 

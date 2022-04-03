@@ -34,8 +34,8 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
     DoubleclickbidmanagerQueriesCreatequeryResource,
 
     -- ** Constructing a Request
+    DoubleclickbidmanagerQueriesCreatequery (..),
     newDoubleclickbidmanagerQueriesCreatequery,
-    DoubleclickbidmanagerQueriesCreatequery,
   )
 where
 

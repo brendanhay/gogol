@@ -34,8 +34,8 @@ module Gogol.Compute.ForwardingRules.SetTarget
     ComputeForwardingRulesSetTargetResource,
 
     -- ** Constructing a Request
+    ComputeForwardingRulesSetTarget (..),
     newComputeForwardingRulesSetTarget,
-    ComputeForwardingRulesSetTarget,
   )
 where
 

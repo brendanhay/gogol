@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Segments.List
     AnalyticsManagementSegmentsListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementSegmentsList (..),
     newAnalyticsManagementSegmentsList,
-    AnalyticsManagementSegmentsList,
   )
 where
 

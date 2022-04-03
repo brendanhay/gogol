@@ -34,8 +34,8 @@ module Gogol.Compute.TargetHttpsProxies.SetQuicOverride
     ComputeTargetHttpsProxiesSetQuicOverrideResource,
 
     -- ** Constructing a Request
+    ComputeTargetHttpsProxiesSetQuicOverride (..),
     newComputeTargetHttpsProxiesSetQuicOverride,
-    ComputeTargetHttpsProxiesSetQuicOverride,
   )
 where
 

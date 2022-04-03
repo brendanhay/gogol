@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.SetIamPolicy
     CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
   )
 where
 

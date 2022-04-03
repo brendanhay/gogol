@@ -34,8 +34,8 @@ module Gogol.IAM.IamPolicies.LintPolicy
     IAMIamPoliciesLintPolicyResource,
 
     -- ** Constructing a Request
+    IAMIamPoliciesLintPolicy (..),
     newIAMIamPoliciesLintPolicy,
-    IAMIamPoliciesLintPolicy,
   )
 where
 

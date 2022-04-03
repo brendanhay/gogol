@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.TestIamPermissions
     DataFusionProjectsLocationsInstancesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesTestIamPermissions (..),
     newDataFusionProjectsLocationsInstancesTestIamPermissions,
-    DataFusionProjectsLocationsInstancesTestIamPermissions,
   )
 where
 

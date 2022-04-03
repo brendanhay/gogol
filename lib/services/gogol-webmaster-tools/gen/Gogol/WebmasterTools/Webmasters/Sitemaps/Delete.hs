@@ -34,8 +34,8 @@ module Gogol.WebmasterTools.Webmasters.Sitemaps.Delete
     WebmastersSitemapsDeleteResource,
 
     -- ** Constructing a Request
+    WebmastersSitemapsDelete (..),
     newWebmastersSitemapsDelete,
-    WebmastersSitemapsDelete,
   )
 where
 

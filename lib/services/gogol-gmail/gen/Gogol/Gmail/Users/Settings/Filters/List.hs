@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.Filters.List
     GmailUsersSettingsFiltersListResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsFiltersList (..),
     newGmailUsersSettingsFiltersList,
-    GmailUsersSettingsFiltersList,
   )
 where
 

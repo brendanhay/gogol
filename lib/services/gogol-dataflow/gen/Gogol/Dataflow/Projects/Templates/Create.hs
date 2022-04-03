@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Templates.Create
     DataflowProjectsTemplatesCreateResource,
 
     -- ** Constructing a Request
+    DataflowProjectsTemplatesCreate (..),
     newDataflowProjectsTemplatesCreate,
-    DataflowProjectsTemplatesCreate,
   )
 where
 

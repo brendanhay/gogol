@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Create
     AndroidManagementEnterprisesCreateResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesCreate (..),
     newAndroidManagementEnterprisesCreate,
-    AndroidManagementEnterprisesCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Labels.Delete
     GmailUsersLabelsDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersLabelsDelete (..),
     newGmailUsersLabelsDelete,
-    GmailUsersLabelsDelete,
   )
 where
 

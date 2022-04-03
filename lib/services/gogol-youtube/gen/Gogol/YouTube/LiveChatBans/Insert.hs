@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatBans.Insert
     YouTubeLiveChatBansInsertResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatBansInsert (..),
     newYouTubeLiveChatBansInsert,
-    YouTubeLiveChatBansInsert,
   )
 where
 

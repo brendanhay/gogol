@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalAddresses.List
     ComputeGlobalAddressesListResource,
 
     -- ** Constructing a Request
+    ComputeGlobalAddressesList (..),
     newComputeGlobalAddressesList,
-    ComputeGlobalAddressesList,
   )
 where
 

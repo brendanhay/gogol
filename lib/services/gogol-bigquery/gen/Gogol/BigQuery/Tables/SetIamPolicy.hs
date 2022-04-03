@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.SetIamPolicy
     BigQueryTablesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    BigQueryTablesSetIamPolicy (..),
     newBigQueryTablesSetIamPolicy,
-    BigQueryTablesSetIamPolicy,
   )
 where
 

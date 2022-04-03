@@ -43,253 +43,253 @@ module Gogol.Monitoring
 
     -- ** monitoring.folders.timeSeries.list
     MonitoringFoldersTimeSeriesListResource,
+    MonitoringFoldersTimeSeriesList (..),
     newMonitoringFoldersTimeSeriesList,
-    MonitoringFoldersTimeSeriesList,
 
     -- ** monitoring.organizations.timeSeries.list
     MonitoringOrganizationsTimeSeriesListResource,
+    MonitoringOrganizationsTimeSeriesList (..),
     newMonitoringOrganizationsTimeSeriesList,
-    MonitoringOrganizationsTimeSeriesList,
 
     -- ** monitoring.projects.alertPolicies.create
     MonitoringProjectsAlertPoliciesCreateResource,
+    MonitoringProjectsAlertPoliciesCreate (..),
     newMonitoringProjectsAlertPoliciesCreate,
-    MonitoringProjectsAlertPoliciesCreate,
 
     -- ** monitoring.projects.alertPolicies.delete
     MonitoringProjectsAlertPoliciesDeleteResource,
+    MonitoringProjectsAlertPoliciesDelete (..),
     newMonitoringProjectsAlertPoliciesDelete,
-    MonitoringProjectsAlertPoliciesDelete,
 
     -- ** monitoring.projects.alertPolicies.get
     MonitoringProjectsAlertPoliciesGetResource,
+    MonitoringProjectsAlertPoliciesGet (..),
     newMonitoringProjectsAlertPoliciesGet,
-    MonitoringProjectsAlertPoliciesGet,
 
     -- ** monitoring.projects.alertPolicies.list
     MonitoringProjectsAlertPoliciesListResource,
+    MonitoringProjectsAlertPoliciesList (..),
     newMonitoringProjectsAlertPoliciesList,
-    MonitoringProjectsAlertPoliciesList,
 
     -- ** monitoring.projects.alertPolicies.patch
     MonitoringProjectsAlertPoliciesPatchResource,
+    MonitoringProjectsAlertPoliciesPatch (..),
     newMonitoringProjectsAlertPoliciesPatch,
-    MonitoringProjectsAlertPoliciesPatch,
 
     -- ** monitoring.projects.collectdTimeSeries.create
     MonitoringProjectsCollectdTimeSeriesCreateResource,
+    MonitoringProjectsCollectdTimeSeriesCreate (..),
     newMonitoringProjectsCollectdTimeSeriesCreate,
-    MonitoringProjectsCollectdTimeSeriesCreate,
 
     -- ** monitoring.projects.groups.create
     MonitoringProjectsGroupsCreateResource,
+    MonitoringProjectsGroupsCreate (..),
     newMonitoringProjectsGroupsCreate,
-    MonitoringProjectsGroupsCreate,
 
     -- ** monitoring.projects.groups.delete
     MonitoringProjectsGroupsDeleteResource,
+    MonitoringProjectsGroupsDelete (..),
     newMonitoringProjectsGroupsDelete,
-    MonitoringProjectsGroupsDelete,
 
     -- ** monitoring.projects.groups.get
     MonitoringProjectsGroupsGetResource,
+    MonitoringProjectsGroupsGet (..),
     newMonitoringProjectsGroupsGet,
-    MonitoringProjectsGroupsGet,
 
     -- ** monitoring.projects.groups.list
     MonitoringProjectsGroupsListResource,
+    MonitoringProjectsGroupsList (..),
     newMonitoringProjectsGroupsList,
-    MonitoringProjectsGroupsList,
 
     -- ** monitoring.projects.groups.members.list
     MonitoringProjectsGroupsMembersListResource,
+    MonitoringProjectsGroupsMembersList (..),
     newMonitoringProjectsGroupsMembersList,
-    MonitoringProjectsGroupsMembersList,
 
     -- ** monitoring.projects.groups.update
     MonitoringProjectsGroupsUpdateResource,
+    MonitoringProjectsGroupsUpdate (..),
     newMonitoringProjectsGroupsUpdate,
-    MonitoringProjectsGroupsUpdate,
 
     -- ** monitoring.projects.metricDescriptors.create
     MonitoringProjectsMetricDescriptorsCreateResource,
+    MonitoringProjectsMetricDescriptorsCreate (..),
     newMonitoringProjectsMetricDescriptorsCreate,
-    MonitoringProjectsMetricDescriptorsCreate,
 
     -- ** monitoring.projects.metricDescriptors.delete
     MonitoringProjectsMetricDescriptorsDeleteResource,
+    MonitoringProjectsMetricDescriptorsDelete (..),
     newMonitoringProjectsMetricDescriptorsDelete,
-    MonitoringProjectsMetricDescriptorsDelete,
 
     -- ** monitoring.projects.metricDescriptors.get
     MonitoringProjectsMetricDescriptorsGetResource,
+    MonitoringProjectsMetricDescriptorsGet (..),
     newMonitoringProjectsMetricDescriptorsGet,
-    MonitoringProjectsMetricDescriptorsGet,
 
     -- ** monitoring.projects.metricDescriptors.list
     MonitoringProjectsMetricDescriptorsListResource,
+    MonitoringProjectsMetricDescriptorsList (..),
     newMonitoringProjectsMetricDescriptorsList,
-    MonitoringProjectsMetricDescriptorsList,
 
     -- ** monitoring.projects.monitoredResourceDescriptors.get
     MonitoringProjectsMonitoredResourceDescriptorsGetResource,
+    MonitoringProjectsMonitoredResourceDescriptorsGet (..),
     newMonitoringProjectsMonitoredResourceDescriptorsGet,
-    MonitoringProjectsMonitoredResourceDescriptorsGet,
 
     -- ** monitoring.projects.monitoredResourceDescriptors.list
     MonitoringProjectsMonitoredResourceDescriptorsListResource,
+    MonitoringProjectsMonitoredResourceDescriptorsList (..),
     newMonitoringProjectsMonitoredResourceDescriptorsList,
-    MonitoringProjectsMonitoredResourceDescriptorsList,
 
     -- ** monitoring.projects.notificationChannelDescriptors.get
     MonitoringProjectsNotificationChannelDescriptorsGetResource,
+    MonitoringProjectsNotificationChannelDescriptorsGet (..),
     newMonitoringProjectsNotificationChannelDescriptorsGet,
-    MonitoringProjectsNotificationChannelDescriptorsGet,
 
     -- ** monitoring.projects.notificationChannelDescriptors.list
     MonitoringProjectsNotificationChannelDescriptorsListResource,
+    MonitoringProjectsNotificationChannelDescriptorsList (..),
     newMonitoringProjectsNotificationChannelDescriptorsList,
-    MonitoringProjectsNotificationChannelDescriptorsList,
 
     -- ** monitoring.projects.notificationChannels.create
     MonitoringProjectsNotificationChannelsCreateResource,
+    MonitoringProjectsNotificationChannelsCreate (..),
     newMonitoringProjectsNotificationChannelsCreate,
-    MonitoringProjectsNotificationChannelsCreate,
 
     -- ** monitoring.projects.notificationChannels.delete
     MonitoringProjectsNotificationChannelsDeleteResource,
+    MonitoringProjectsNotificationChannelsDelete (..),
     newMonitoringProjectsNotificationChannelsDelete,
-    MonitoringProjectsNotificationChannelsDelete,
 
     -- ** monitoring.projects.notificationChannels.get
     MonitoringProjectsNotificationChannelsGetResource,
+    MonitoringProjectsNotificationChannelsGet (..),
     newMonitoringProjectsNotificationChannelsGet,
-    MonitoringProjectsNotificationChannelsGet,
 
     -- ** monitoring.projects.notificationChannels.getVerificationCode
     MonitoringProjectsNotificationChannelsGetVerificationCodeResource,
+    MonitoringProjectsNotificationChannelsGetVerificationCode (..),
     newMonitoringProjectsNotificationChannelsGetVerificationCode,
-    MonitoringProjectsNotificationChannelsGetVerificationCode,
 
     -- ** monitoring.projects.notificationChannels.list
     MonitoringProjectsNotificationChannelsListResource,
+    MonitoringProjectsNotificationChannelsList (..),
     newMonitoringProjectsNotificationChannelsList,
-    MonitoringProjectsNotificationChannelsList,
 
     -- ** monitoring.projects.notificationChannels.patch
     MonitoringProjectsNotificationChannelsPatchResource,
+    MonitoringProjectsNotificationChannelsPatch (..),
     newMonitoringProjectsNotificationChannelsPatch,
-    MonitoringProjectsNotificationChannelsPatch,
 
     -- ** monitoring.projects.notificationChannels.sendVerificationCode
     MonitoringProjectsNotificationChannelsSendVerificationCodeResource,
+    MonitoringProjectsNotificationChannelsSendVerificationCode (..),
     newMonitoringProjectsNotificationChannelsSendVerificationCode,
-    MonitoringProjectsNotificationChannelsSendVerificationCode,
 
     -- ** monitoring.projects.notificationChannels.verify
     MonitoringProjectsNotificationChannelsVerifyResource,
+    MonitoringProjectsNotificationChannelsVerify (..),
     newMonitoringProjectsNotificationChannelsVerify,
-    MonitoringProjectsNotificationChannelsVerify,
 
     -- ** monitoring.projects.timeSeries.create
     MonitoringProjectsTimeSeriesCreateResource,
+    MonitoringProjectsTimeSeriesCreate (..),
     newMonitoringProjectsTimeSeriesCreate,
-    MonitoringProjectsTimeSeriesCreate,
 
     -- ** monitoring.projects.timeSeries.createService
     MonitoringProjectsTimeSeriesCreateServiceResource,
+    MonitoringProjectsTimeSeriesCreateService (..),
     newMonitoringProjectsTimeSeriesCreateService,
-    MonitoringProjectsTimeSeriesCreateService,
 
     -- ** monitoring.projects.timeSeries.list
     MonitoringProjectsTimeSeriesListResource,
+    MonitoringProjectsTimeSeriesList (..),
     newMonitoringProjectsTimeSeriesList,
-    MonitoringProjectsTimeSeriesList,
 
     -- ** monitoring.projects.timeSeries.query
     MonitoringProjectsTimeSeriesQueryResource,
+    MonitoringProjectsTimeSeriesQuery (..),
     newMonitoringProjectsTimeSeriesQuery,
-    MonitoringProjectsTimeSeriesQuery,
 
     -- ** monitoring.projects.uptimeCheckConfigs.create
     MonitoringProjectsUptimeCheckConfigsCreateResource,
+    MonitoringProjectsUptimeCheckConfigsCreate (..),
     newMonitoringProjectsUptimeCheckConfigsCreate,
-    MonitoringProjectsUptimeCheckConfigsCreate,
 
     -- ** monitoring.projects.uptimeCheckConfigs.delete
     MonitoringProjectsUptimeCheckConfigsDeleteResource,
+    MonitoringProjectsUptimeCheckConfigsDelete (..),
     newMonitoringProjectsUptimeCheckConfigsDelete,
-    MonitoringProjectsUptimeCheckConfigsDelete,
 
     -- ** monitoring.projects.uptimeCheckConfigs.get
     MonitoringProjectsUptimeCheckConfigsGetResource,
+    MonitoringProjectsUptimeCheckConfigsGet (..),
     newMonitoringProjectsUptimeCheckConfigsGet,
-    MonitoringProjectsUptimeCheckConfigsGet,
 
     -- ** monitoring.projects.uptimeCheckConfigs.list
     MonitoringProjectsUptimeCheckConfigsListResource,
+    MonitoringProjectsUptimeCheckConfigsList (..),
     newMonitoringProjectsUptimeCheckConfigsList,
-    MonitoringProjectsUptimeCheckConfigsList,
 
     -- ** monitoring.projects.uptimeCheckConfigs.patch
     MonitoringProjectsUptimeCheckConfigsPatchResource,
+    MonitoringProjectsUptimeCheckConfigsPatch (..),
     newMonitoringProjectsUptimeCheckConfigsPatch,
-    MonitoringProjectsUptimeCheckConfigsPatch,
 
     -- ** monitoring.services.create
     MonitoringServicesCreateResource,
+    MonitoringServicesCreate (..),
     newMonitoringServicesCreate,
-    MonitoringServicesCreate,
 
     -- ** monitoring.services.delete
     MonitoringServicesDeleteResource,
+    MonitoringServicesDelete (..),
     newMonitoringServicesDelete,
-    MonitoringServicesDelete,
 
     -- ** monitoring.services.get
     MonitoringServicesGetResource,
+    MonitoringServicesGet (..),
     newMonitoringServicesGet,
-    MonitoringServicesGet,
 
     -- ** monitoring.services.list
     MonitoringServicesListResource,
+    MonitoringServicesList (..),
     newMonitoringServicesList,
-    MonitoringServicesList,
 
     -- ** monitoring.services.patch
     MonitoringServicesPatchResource,
+    MonitoringServicesPatch (..),
     newMonitoringServicesPatch,
-    MonitoringServicesPatch,
 
     -- ** monitoring.services.serviceLevelObjectives.create
     MonitoringServicesServiceLevelObjectivesCreateResource,
+    MonitoringServicesServiceLevelObjectivesCreate (..),
     newMonitoringServicesServiceLevelObjectivesCreate,
-    MonitoringServicesServiceLevelObjectivesCreate,
 
     -- ** monitoring.services.serviceLevelObjectives.delete
     MonitoringServicesServiceLevelObjectivesDeleteResource,
+    MonitoringServicesServiceLevelObjectivesDelete (..),
     newMonitoringServicesServiceLevelObjectivesDelete,
-    MonitoringServicesServiceLevelObjectivesDelete,
 
     -- ** monitoring.services.serviceLevelObjectives.get
     MonitoringServicesServiceLevelObjectivesGetResource,
+    MonitoringServicesServiceLevelObjectivesGet (..),
     newMonitoringServicesServiceLevelObjectivesGet,
-    MonitoringServicesServiceLevelObjectivesGet,
 
     -- ** monitoring.services.serviceLevelObjectives.list
     MonitoringServicesServiceLevelObjectivesListResource,
+    MonitoringServicesServiceLevelObjectivesList (..),
     newMonitoringServicesServiceLevelObjectivesList,
-    MonitoringServicesServiceLevelObjectivesList,
 
     -- ** monitoring.services.serviceLevelObjectives.patch
     MonitoringServicesServiceLevelObjectivesPatchResource,
+    MonitoringServicesServiceLevelObjectivesPatch (..),
     newMonitoringServicesServiceLevelObjectivesPatch,
-    MonitoringServicesServiceLevelObjectivesPatch,
 
     -- ** monitoring.uptimeCheckIps.list
     MonitoringUptimeCheckIpsListResource,
+    MonitoringUptimeCheckIpsList (..),
     newMonitoringUptimeCheckIpsList,
-    MonitoringUptimeCheckIpsList,
 
     -- * Types
 

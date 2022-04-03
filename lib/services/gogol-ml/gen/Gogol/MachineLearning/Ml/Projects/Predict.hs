@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Predict
     MlProjectsPredictResource,
 
     -- ** Constructing a Request
+    MlProjectsPredict (..),
     newMlProjectsPredict,
-    MlProjectsPredict,
   )
 where
 

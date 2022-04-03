@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
     AdExchangeBuyerMarketplaceprivateauctionUpdateproposalResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal (..),
     newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal,
-    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal,
   )
 where
 

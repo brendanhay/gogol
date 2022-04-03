@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.List
     AppEngineAppsServicesListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesList (..),
     newAppEngineAppsServicesList,
-    AppEngineAppsServicesList,
   )
 where
 

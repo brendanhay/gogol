@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.StoredInfoTypes.Patch
     DLPOrganizationsStoredInfoTypesPatchResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsStoredInfoTypesPatch (..),
     newDLPOrganizationsStoredInfoTypesPatch,
-    DLPOrganizationsStoredInfoTypesPatch,
   )
 where
 

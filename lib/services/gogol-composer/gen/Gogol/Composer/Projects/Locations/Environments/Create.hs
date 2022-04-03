@@ -34,8 +34,8 @@ module Gogol.Composer.Projects.Locations.Environments.Create
     ComposerProjectsLocationsEnvironmentsCreateResource,
 
     -- ** Constructing a Request
+    ComposerProjectsLocationsEnvironmentsCreate (..),
     newComposerProjectsLocationsEnvironmentsCreate,
-    ComposerProjectsLocationsEnvironmentsCreate,
   )
 where
 

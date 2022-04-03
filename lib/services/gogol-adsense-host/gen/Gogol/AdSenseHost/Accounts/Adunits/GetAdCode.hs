@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
     AdSenseHostAccountsAdunitsGetAdCodeResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsAdunitsGetAdCode (..),
     newAdSenseHostAccountsAdunitsGetAdCode,
-    AdSenseHostAccountsAdunitsGetAdCode,
   )
 where
 

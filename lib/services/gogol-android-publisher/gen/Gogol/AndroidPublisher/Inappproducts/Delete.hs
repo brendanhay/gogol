@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Inappproducts.Delete
     AndroidPublisherInappproductsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidPublisherInappproductsDelete (..),
     newAndroidPublisherInappproductsDelete,
-    AndroidPublisherInappproductsDelete,
   )
 where
 

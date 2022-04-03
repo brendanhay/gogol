@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shoppingadsprogram.Get
     ContentShoppingadsprogramGetResource,
 
     -- ** Constructing a Request
+    ContentShoppingadsprogramGet (..),
     newContentShoppingadsprogramGet,
-    ContentShoppingadsprogramGet,
   )
 where
 

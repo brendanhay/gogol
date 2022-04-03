@@ -34,8 +34,8 @@ module Gogol.File.Projects.Locations.Instances.Snapshots.List
     FileProjectsLocationsInstancesSnapshotsListResource,
 
     -- ** Constructing a Request
+    FileProjectsLocationsInstancesSnapshotsList (..),
     newFileProjectsLocationsInstancesSnapshotsList,
-    FileProjectsLocationsInstancesSnapshotsList,
   )
 where
 

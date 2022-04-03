@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.Searchapplications.Delete
     CloudSearchSettingsSearchapplicationsDeleteResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsSearchapplicationsDelete (..),
     newCloudSearchSettingsSearchapplicationsDelete,
-    CloudSearchSettingsSearchapplicationsDelete,
   )
 where
 

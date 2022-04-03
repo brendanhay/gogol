@@ -34,8 +34,8 @@ module Gogol.YouTube.Playlists.List
     YouTubePlaylistsListResource,
 
     -- ** Constructing a Request
+    YouTubePlaylistsList (..),
     newYouTubePlaylistsList,
-    YouTubePlaylistsList,
   )
 where
 

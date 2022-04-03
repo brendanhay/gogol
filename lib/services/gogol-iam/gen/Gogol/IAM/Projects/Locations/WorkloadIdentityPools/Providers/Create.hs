@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Create
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreateResource,
 
     -- ** Constructing a Request
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
   )
 where
 

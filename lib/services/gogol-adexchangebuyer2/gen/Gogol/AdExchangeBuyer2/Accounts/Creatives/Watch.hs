@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.Watch
     AdExchangeBuyer2AccountsCreativesWatchResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsCreativesWatch (..),
     newAdExchangeBuyer2AccountsCreativesWatch,
-    AdExchangeBuyer2AccountsCreativesWatch,
   )
 where
 

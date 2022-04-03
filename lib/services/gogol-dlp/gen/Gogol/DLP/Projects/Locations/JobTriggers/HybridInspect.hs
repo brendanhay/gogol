@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.JobTriggers.HybridInspect
     DLPProjectsLocationsJobTriggersHybridInspectResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsJobTriggersHybridInspect (..),
     newDLPProjectsLocationsJobTriggersHybridInspect,
-    DLPProjectsLocationsJobTriggersHybridInspect,
   )
 where
 

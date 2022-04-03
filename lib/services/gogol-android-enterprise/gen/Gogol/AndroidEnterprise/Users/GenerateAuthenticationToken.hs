@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.GenerateAuthenticationToken
     AndroidEnterpriseUsersGenerateAuthenticationTokenResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersGenerateAuthenticationToken (..),
     newAndroidEnterpriseUsersGenerateAuthenticationToken,
-    AndroidEnterpriseUsersGenerateAuthenticationToken,
   )
 where
 

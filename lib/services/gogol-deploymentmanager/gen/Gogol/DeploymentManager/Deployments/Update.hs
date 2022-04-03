@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Update
     DeploymentManagerDeploymentsUpdateResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsUpdate (..),
     newDeploymentManagerDeploymentsUpdate,
-    DeploymentManagerDeploymentsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.ImportRows
     FusionTablesTableImportRowsResource,
 
     -- ** Constructing a Request
+    FusionTablesTableImportRows (..),
     newFusionTablesTableImportRows,
-    FusionTablesTableImportRows,
   )
 where
 

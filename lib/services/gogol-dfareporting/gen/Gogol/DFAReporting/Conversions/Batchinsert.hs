@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Conversions.Batchinsert
     DFAReportingConversionsBatchinsertResource,
 
     -- ** Constructing a Request
+    DFAReportingConversionsBatchinsert (..),
     newDFAReportingConversionsBatchinsert,
-    DFAReportingConversionsBatchinsert,
   )
 where
 

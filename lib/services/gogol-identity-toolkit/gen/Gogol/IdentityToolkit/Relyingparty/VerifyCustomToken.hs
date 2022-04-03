@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.VerifyCustomToken
     IdentityToolkitRelyingpartyVerifyCustomTokenResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyVerifyCustomToken (..),
     newIdentityToolkitRelyingpartyVerifyCustomToken,
-    IdentityToolkitRelyingpartyVerifyCustomToken,
   )
 where
 

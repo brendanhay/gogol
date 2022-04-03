@@ -34,8 +34,8 @@ module Gogol.SearchConsole.Webmasters.Sites.List
     WebmastersSitesListResource,
 
     -- ** Constructing a Request
+    WebmastersSitesList (..),
     newWebmastersSitesList,
-    WebmastersSitesList,
   )
 where
 

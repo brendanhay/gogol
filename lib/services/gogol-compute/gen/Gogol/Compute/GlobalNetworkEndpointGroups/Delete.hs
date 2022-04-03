@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalNetworkEndpointGroups.Delete
     ComputeGlobalNetworkEndpointGroupsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeGlobalNetworkEndpointGroupsDelete (..),
     newComputeGlobalNetworkEndpointGroupsDelete,
-    ComputeGlobalNetworkEndpointGroupsDelete,
   )
 where
 

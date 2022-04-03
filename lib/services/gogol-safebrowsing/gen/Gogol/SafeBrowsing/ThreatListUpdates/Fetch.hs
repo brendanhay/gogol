@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.ThreatListUpdates.Fetch
     SafeBrowsingThreatListUpdatesFetchResource,
 
     -- ** Constructing a Request
+    SafeBrowsingThreatListUpdatesFetch (..),
     newSafeBrowsingThreatListUpdatesFetch,
-    SafeBrowsingThreatListUpdatesFetch,
   )
 where
 

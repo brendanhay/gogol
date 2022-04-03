@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Chromeosdevices.MoveDevicesToOu
     DirectoryChromeosdevicesMoveDevicesToOuResource,
 
     -- ** Constructing a Request
+    DirectoryChromeosdevicesMoveDevicesToOu (..),
     newDirectoryChromeosdevicesMoveDevicesToOu,
-    DirectoryChromeosdevicesMoveDevicesToOu,
   )
 where
 

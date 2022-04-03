@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.ModifyCloudToDeviceC
     CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfigResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig (..),
     newCloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig,
-    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig,
   )
 where
 

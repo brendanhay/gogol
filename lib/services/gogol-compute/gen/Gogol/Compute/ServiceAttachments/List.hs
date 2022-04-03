@@ -34,8 +34,8 @@ module Gogol.Compute.ServiceAttachments.List
     ComputeServiceAttachmentsListResource,
 
     -- ** Constructing a Request
+    ComputeServiceAttachmentsList (..),
     newComputeServiceAttachmentsList,
-    ComputeServiceAttachmentsList,
   )
 where
 

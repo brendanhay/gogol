@@ -34,8 +34,8 @@ module Gogol.FusionTables.Column.Insert
     FusionTablesColumnInsertResource,
 
     -- ** Constructing a Request
+    FusionTablesColumnInsert (..),
     newFusionTablesColumnInsert,
-    FusionTablesColumnInsert,
   )
 where
 

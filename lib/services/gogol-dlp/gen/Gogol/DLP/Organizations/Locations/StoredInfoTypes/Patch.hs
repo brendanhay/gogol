@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.StoredInfoTypes.Patch
     DLPOrganizationsLocationsStoredInfoTypesPatchResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsStoredInfoTypesPatch (..),
     newDLPOrganizationsLocationsStoredInfoTypesPatch,
-    DLPOrganizationsLocationsStoredInfoTypesPatch,
   )
 where
 

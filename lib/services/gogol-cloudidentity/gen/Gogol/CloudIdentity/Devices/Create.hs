@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.Create
     CloudIdentityDevicesCreateResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesCreate (..),
     newCloudIdentityDevicesCreate,
-    CloudIdentityDevicesCreate,
   )
 where
 

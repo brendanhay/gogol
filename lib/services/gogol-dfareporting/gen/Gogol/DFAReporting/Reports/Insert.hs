@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Reports.Insert
     DFAReportingReportsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingReportsInsert (..),
     newDFAReportingReportsInsert,
-    DFAReportingReportsInsert,
   )
 where
 

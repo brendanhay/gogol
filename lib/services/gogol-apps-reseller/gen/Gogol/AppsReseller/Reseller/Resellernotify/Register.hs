@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Resellernotify.Register
     ResellerResellernotifyRegisterResource,
 
     -- ** Constructing a Request
+    ResellerResellernotifyRegister (..),
     newResellerResellernotifyRegister,
-    ResellerResellernotifyRegister,
   )
 where
 

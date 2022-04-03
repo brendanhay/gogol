@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.Insert
     AndroidEnterpriseUsersInsertResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersInsert (..),
     newAndroidEnterpriseUsersInsert,
-    AndroidEnterpriseUsersInsert,
   )
 where
 

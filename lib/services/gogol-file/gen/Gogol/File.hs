@@ -40,113 +40,113 @@ module Gogol.File
 
     -- ** file.projects.locations.backups.create
     FileProjectsLocationsBackupsCreateResource,
+    FileProjectsLocationsBackupsCreate (..),
     newFileProjectsLocationsBackupsCreate,
-    FileProjectsLocationsBackupsCreate,
 
     -- ** file.projects.locations.backups.delete
     FileProjectsLocationsBackupsDeleteResource,
+    FileProjectsLocationsBackupsDelete (..),
     newFileProjectsLocationsBackupsDelete,
-    FileProjectsLocationsBackupsDelete,
 
     -- ** file.projects.locations.backups.get
     FileProjectsLocationsBackupsGetResource,
+    FileProjectsLocationsBackupsGet (..),
     newFileProjectsLocationsBackupsGet,
-    FileProjectsLocationsBackupsGet,
 
     -- ** file.projects.locations.backups.list
     FileProjectsLocationsBackupsListResource,
+    FileProjectsLocationsBackupsList (..),
     newFileProjectsLocationsBackupsList,
-    FileProjectsLocationsBackupsList,
 
     -- ** file.projects.locations.backups.patch
     FileProjectsLocationsBackupsPatchResource,
+    FileProjectsLocationsBackupsPatch (..),
     newFileProjectsLocationsBackupsPatch,
-    FileProjectsLocationsBackupsPatch,
 
     -- ** file.projects.locations.get
     FileProjectsLocationsGetResource,
+    FileProjectsLocationsGet (..),
     newFileProjectsLocationsGet,
-    FileProjectsLocationsGet,
 
     -- ** file.projects.locations.instances.create
     FileProjectsLocationsInstancesCreateResource,
+    FileProjectsLocationsInstancesCreate (..),
     newFileProjectsLocationsInstancesCreate,
-    FileProjectsLocationsInstancesCreate,
 
     -- ** file.projects.locations.instances.delete
     FileProjectsLocationsInstancesDeleteResource,
+    FileProjectsLocationsInstancesDelete (..),
     newFileProjectsLocationsInstancesDelete,
-    FileProjectsLocationsInstancesDelete,
 
     -- ** file.projects.locations.instances.get
     FileProjectsLocationsInstancesGetResource,
+    FileProjectsLocationsInstancesGet (..),
     newFileProjectsLocationsInstancesGet,
-    FileProjectsLocationsInstancesGet,
 
     -- ** file.projects.locations.instances.list
     FileProjectsLocationsInstancesListResource,
+    FileProjectsLocationsInstancesList (..),
     newFileProjectsLocationsInstancesList,
-    FileProjectsLocationsInstancesList,
 
     -- ** file.projects.locations.instances.patch
     FileProjectsLocationsInstancesPatchResource,
+    FileProjectsLocationsInstancesPatch (..),
     newFileProjectsLocationsInstancesPatch,
-    FileProjectsLocationsInstancesPatch,
 
     -- ** file.projects.locations.instances.restore
     FileProjectsLocationsInstancesRestoreResource,
+    FileProjectsLocationsInstancesRestore (..),
     newFileProjectsLocationsInstancesRestore,
-    FileProjectsLocationsInstancesRestore,
 
     -- ** file.projects.locations.instances.snapshots.create
     FileProjectsLocationsInstancesSnapshotsCreateResource,
+    FileProjectsLocationsInstancesSnapshotsCreate (..),
     newFileProjectsLocationsInstancesSnapshotsCreate,
-    FileProjectsLocationsInstancesSnapshotsCreate,
 
     -- ** file.projects.locations.instances.snapshots.delete
     FileProjectsLocationsInstancesSnapshotsDeleteResource,
+    FileProjectsLocationsInstancesSnapshotsDelete (..),
     newFileProjectsLocationsInstancesSnapshotsDelete,
-    FileProjectsLocationsInstancesSnapshotsDelete,
 
     -- ** file.projects.locations.instances.snapshots.get
     FileProjectsLocationsInstancesSnapshotsGetResource,
+    FileProjectsLocationsInstancesSnapshotsGet (..),
     newFileProjectsLocationsInstancesSnapshotsGet,
-    FileProjectsLocationsInstancesSnapshotsGet,
 
     -- ** file.projects.locations.instances.snapshots.list
     FileProjectsLocationsInstancesSnapshotsListResource,
+    FileProjectsLocationsInstancesSnapshotsList (..),
     newFileProjectsLocationsInstancesSnapshotsList,
-    FileProjectsLocationsInstancesSnapshotsList,
 
     -- ** file.projects.locations.instances.snapshots.patch
     FileProjectsLocationsInstancesSnapshotsPatchResource,
+    FileProjectsLocationsInstancesSnapshotsPatch (..),
     newFileProjectsLocationsInstancesSnapshotsPatch,
-    FileProjectsLocationsInstancesSnapshotsPatch,
 
     -- ** file.projects.locations.list
     FileProjectsLocationsListResource,
+    FileProjectsLocationsList (..),
     newFileProjectsLocationsList,
-    FileProjectsLocationsList,
 
     -- ** file.projects.locations.operations.cancel
     FileProjectsLocationsOperationsCancelResource,
+    FileProjectsLocationsOperationsCancel (..),
     newFileProjectsLocationsOperationsCancel,
-    FileProjectsLocationsOperationsCancel,
 
     -- ** file.projects.locations.operations.delete
     FileProjectsLocationsOperationsDeleteResource,
+    FileProjectsLocationsOperationsDelete (..),
     newFileProjectsLocationsOperationsDelete,
-    FileProjectsLocationsOperationsDelete,
 
     -- ** file.projects.locations.operations.get
     FileProjectsLocationsOperationsGetResource,
+    FileProjectsLocationsOperationsGet (..),
     newFileProjectsLocationsOperationsGet,
-    FileProjectsLocationsOperationsGet,
 
     -- ** file.projects.locations.operations.list
     FileProjectsLocationsOperationsListResource,
+    FileProjectsLocationsOperationsList (..),
     newFileProjectsLocationsOperationsList,
-    FileProjectsLocationsOperationsList,
 
     -- * Types
 

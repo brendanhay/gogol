@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.CollectdTimeSeries.Create
     MonitoringProjectsCollectdTimeSeriesCreateResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsCollectdTimeSeriesCreate (..),
     newMonitoringProjectsCollectdTimeSeriesCreate,
-    MonitoringProjectsCollectdTimeSeriesCreate,
   )
 where
 

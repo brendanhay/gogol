@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.Groups.Create
     MonitoringProjectsGroupsCreateResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsGroupsCreate (..),
     newMonitoringProjectsGroupsCreate,
-    MonitoringProjectsGroupsCreate,
   )
 where
 

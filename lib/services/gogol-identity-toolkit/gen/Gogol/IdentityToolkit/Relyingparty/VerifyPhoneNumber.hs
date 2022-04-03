@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.VerifyPhoneNumber
     IdentityToolkitRelyingpartyVerifyPhoneNumberResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyVerifyPhoneNumber (..),
     newIdentityToolkitRelyingpartyVerifyPhoneNumber,
-    IdentityToolkitRelyingpartyVerifyPhoneNumber,
   )
 where
 

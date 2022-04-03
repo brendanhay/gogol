@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.AcceleratorTypes.Get
     TPUProjectsLocationsAcceleratorTypesGetResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsAcceleratorTypesGet (..),
     newTPUProjectsLocationsAcceleratorTypesGet,
-    TPUProjectsLocationsAcceleratorTypesGet,
   )
 where
 

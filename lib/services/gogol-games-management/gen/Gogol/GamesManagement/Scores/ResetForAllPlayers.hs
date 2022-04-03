@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Scores.ResetForAllPlayers
     GamesManagementScoresResetForAllPlayersResource,
 
     -- ** Constructing a Request
+    GamesManagementScoresResetForAllPlayers (..),
     newGamesManagementScoresResetForAllPlayers,
-    GamesManagementScoresResetForAllPlayers,
   )
 where
 

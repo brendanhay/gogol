@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
     AccessApprovalFoldersDeleteAccessApprovalSettingsResource,
 
     -- ** Constructing a Request
+    AccessApprovalFoldersDeleteAccessApprovalSettings (..),
     newAccessApprovalFoldersDeleteAccessApprovalSettings,
-    AccessApprovalFoldersDeleteAccessApprovalSettings,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Delete
     ServiceManagementServicesDeleteResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesDelete (..),
     newServiceManagementServicesDelete,
-    ServiceManagementServicesDelete,
   )
 where
 

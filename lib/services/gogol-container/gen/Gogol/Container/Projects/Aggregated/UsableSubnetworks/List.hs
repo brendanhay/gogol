@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
     ContainerProjectsAggregatedUsableSubnetworksListResource,
 
     -- ** Constructing a Request
+    ContainerProjectsAggregatedUsableSubnetworksList (..),
     newContainerProjectsAggregatedUsableSubnetworksList,
-    ContainerProjectsAggregatedUsableSubnetworksList,
   )
 where
 

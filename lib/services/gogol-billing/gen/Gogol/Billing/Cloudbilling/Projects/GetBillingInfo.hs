@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
     CloudbillingProjectsGetBillingInfoResource,
 
     -- ** Constructing a Request
+    CloudbillingProjectsGetBillingInfo (..),
     newCloudbillingProjectsGetBillingInfo,
-    CloudbillingProjectsGetBillingInfo,
   )
 where
 

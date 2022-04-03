@@ -34,8 +34,8 @@ module Gogol.Logging.Exclusions.Get
     LoggingExclusionsGetResource,
 
     -- ** Constructing a Request
+    LoggingExclusionsGet (..),
     newLoggingExclusionsGet,
-    LoggingExclusionsGet,
   )
 where
 

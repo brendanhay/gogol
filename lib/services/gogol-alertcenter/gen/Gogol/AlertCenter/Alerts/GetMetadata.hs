@@ -34,8 +34,8 @@ module Gogol.AlertCenter.Alerts.GetMetadata
     AlertCenterAlertsGetMetadataResource,
 
     -- ** Constructing a Request
+    AlertCenterAlertsGetMetadata (..),
     newAlertCenterAlertsGetMetadata,
-    AlertCenterAlertsGetMetadata,
   )
 where
 

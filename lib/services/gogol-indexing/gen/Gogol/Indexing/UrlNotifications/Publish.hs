@@ -34,8 +34,8 @@ module Gogol.Indexing.UrlNotifications.Publish
     IndexingUrlNotificationsPublishResource,
 
     -- ** Constructing a Request
+    IndexingUrlNotificationsPublish (..),
     newIndexingUrlNotificationsPublish,
-    IndexingUrlNotificationsPublish,
   )
 where
 

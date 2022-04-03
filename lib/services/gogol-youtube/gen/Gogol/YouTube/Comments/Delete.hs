@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.Delete
     YouTubeCommentsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsDelete (..),
     newYouTubeCommentsDelete,
-    YouTubeCommentsDelete,
   )
 where
 

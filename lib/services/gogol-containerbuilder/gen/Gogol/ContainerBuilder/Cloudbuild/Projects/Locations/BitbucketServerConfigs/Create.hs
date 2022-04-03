@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfi
     CloudbuildProjectsLocationsBitbucketServerConfigsCreateResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsBitbucketServerConfigsCreate (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsCreate,
-    CloudbuildProjectsLocationsBitbucketServerConfigsCreate,
   )
 where
 

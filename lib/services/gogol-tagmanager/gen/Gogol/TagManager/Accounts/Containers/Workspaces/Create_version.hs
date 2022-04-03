@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Create_version
     TagManagerAccountsContainersWorkspacesCreate_versionResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesCreate_version (..),
     newTagManagerAccountsContainersWorkspacesCreate_version,
-    TagManagerAccountsContainersWorkspacesCreate_version,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebpropertyUserLinks.Insert
     AnalyticsManagementWebpropertyUserLinksInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertyUserLinksInsert (..),
     newAnalyticsManagementWebpropertyUserLinksInsert,
-    AnalyticsManagementWebpropertyUserLinksInsert,
   )
 where
 

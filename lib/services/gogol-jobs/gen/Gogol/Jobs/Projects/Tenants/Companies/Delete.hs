@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Companies.Delete
     JobsProjectsTenantsCompaniesDeleteResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsCompaniesDelete (..),
     newJobsProjectsTenantsCompaniesDelete,
-    JobsProjectsTenantsCompaniesDelete,
   )
 where
 

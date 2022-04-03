@@ -37,13 +37,13 @@ module Gogol.CustomSearch
 
     -- ** search.cse.list
     SearchCseListResource,
+    SearchCseList (..),
     newSearchCseList,
-    SearchCseList,
 
     -- ** search.cse.siterestrict.list
     SearchCseSiterestrictListResource,
+    SearchCseSiterestrictList (..),
     newSearchCseSiterestrictList,
-    SearchCseSiterestrictList,
 
     -- * Types
 

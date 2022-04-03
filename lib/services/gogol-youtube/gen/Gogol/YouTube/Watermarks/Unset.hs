@@ -34,8 +34,8 @@ module Gogol.YouTube.Watermarks.Unset
     YouTubeWatermarksUnsetResource,
 
     -- ** Constructing a Request
+    YouTubeWatermarksUnset (..),
     newYouTubeWatermarksUnset,
-    YouTubeWatermarksUnset,
   )
 where
 

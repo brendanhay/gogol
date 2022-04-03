@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Update
     IAMProjectsServiceAccountsUpdateResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsUpdate (..),
     newIAMProjectsServiceAccountsUpdate,
-    IAMProjectsServiceAccountsUpdate,
   )
 where
 

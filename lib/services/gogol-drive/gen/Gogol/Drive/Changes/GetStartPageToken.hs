@@ -34,8 +34,8 @@ module Gogol.Drive.Changes.GetStartPageToken
     DriveChangesGetStartPageTokenResource,
 
     -- ** Constructing a Request
+    DriveChangesGetStartPageToken (..),
     newDriveChangesGetStartPageToken,
-    DriveChangesGetStartPageToken,
   )
 where
 

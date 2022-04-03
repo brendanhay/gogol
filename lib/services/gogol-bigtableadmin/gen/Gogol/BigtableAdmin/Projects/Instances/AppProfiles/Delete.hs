@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Delete
     BigtableAdminProjectsInstancesAppProfilesDeleteResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesAppProfilesDelete (..),
     newBigtableAdminProjectsInstancesAppProfilesDelete,
-    BigtableAdminProjectsInstancesAppProfilesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Images.SetLabels
     ComputeImagesSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeImagesSetLabels (..),
     newComputeImagesSetLabels,
-    ComputeImagesSetLabels,
   )
 where
 

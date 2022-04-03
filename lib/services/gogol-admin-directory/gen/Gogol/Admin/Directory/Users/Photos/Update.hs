@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Photos.Update
     DirectoryUsersPhotosUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryUsersPhotosUpdate (..),
     newDirectoryUsersPhotosUpdate,
-    DirectoryUsersPhotosUpdate,
   )
 where
 

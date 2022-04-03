@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Placements.Insert
     DFAReportingPlacementsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingPlacementsInsert (..),
     newDFAReportingPlacementsInsert,
-    DFAReportingPlacementsInsert,
   )
 where
 

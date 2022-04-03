@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.Create
     CloudKMSProjectsLocationsKeyRingsCreateResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsCreate,
-    CloudKMSProjectsLocationsKeyRingsCreate,
   )
 where
 

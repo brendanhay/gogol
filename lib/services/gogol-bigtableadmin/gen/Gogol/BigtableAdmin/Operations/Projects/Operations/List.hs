@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Operations.Projects.Operations.List
     BigtableAdminOperationsProjectsOperationsListResource,
 
     -- ** Constructing a Request
+    BigtableAdminOperationsProjectsOperationsList (..),
     newBigtableAdminOperationsProjectsOperationsList,
-    BigtableAdminOperationsProjectsOperationsList,
   )
 where
 

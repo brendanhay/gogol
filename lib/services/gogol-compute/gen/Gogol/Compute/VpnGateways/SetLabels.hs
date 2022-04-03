@@ -34,8 +34,8 @@ module Gogol.Compute.VpnGateways.SetLabels
     ComputeVpnGatewaysSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeVpnGatewaysSetLabels (..),
     newComputeVpnGatewaysSetLabels,
-    ComputeVpnGatewaysSetLabels,
   )
 where
 

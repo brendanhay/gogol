@@ -40,123 +40,123 @@ module Gogol.AccessApproval
 
     -- ** accessapproval.folders.approvalRequests.approve
     AccessApprovalFoldersApprovalRequestsApproveResource,
+    AccessApprovalFoldersApprovalRequestsApprove (..),
     newAccessApprovalFoldersApprovalRequestsApprove,
-    AccessApprovalFoldersApprovalRequestsApprove,
 
     -- ** accessapproval.folders.approvalRequests.dismiss
     AccessApprovalFoldersApprovalRequestsDismissResource,
+    AccessApprovalFoldersApprovalRequestsDismiss (..),
     newAccessApprovalFoldersApprovalRequestsDismiss,
-    AccessApprovalFoldersApprovalRequestsDismiss,
 
     -- ** accessapproval.folders.approvalRequests.get
     AccessApprovalFoldersApprovalRequestsGetResource,
+    AccessApprovalFoldersApprovalRequestsGet (..),
     newAccessApprovalFoldersApprovalRequestsGet,
-    AccessApprovalFoldersApprovalRequestsGet,
 
     -- ** accessapproval.folders.approvalRequests.list
     AccessApprovalFoldersApprovalRequestsListResource,
+    AccessApprovalFoldersApprovalRequestsList (..),
     newAccessApprovalFoldersApprovalRequestsList,
-    AccessApprovalFoldersApprovalRequestsList,
 
     -- ** accessapproval.folders.deleteAccessApprovalSettings
     AccessApprovalFoldersDeleteAccessApprovalSettingsResource,
+    AccessApprovalFoldersDeleteAccessApprovalSettings (..),
     newAccessApprovalFoldersDeleteAccessApprovalSettings,
-    AccessApprovalFoldersDeleteAccessApprovalSettings,
 
     -- ** accessapproval.folders.getAccessApprovalSettings
     AccessApprovalFoldersGetAccessApprovalSettingsResource,
+    AccessApprovalFoldersGetAccessApprovalSettings (..),
     newAccessApprovalFoldersGetAccessApprovalSettings,
-    AccessApprovalFoldersGetAccessApprovalSettings,
 
     -- ** accessapproval.folders.getServiceAccount
     AccessApprovalFoldersGetServiceAccountResource,
+    AccessApprovalFoldersGetServiceAccount (..),
     newAccessApprovalFoldersGetServiceAccount,
-    AccessApprovalFoldersGetServiceAccount,
 
     -- ** accessapproval.folders.updateAccessApprovalSettings
     AccessApprovalFoldersUpdateAccessApprovalSettingsResource,
+    AccessApprovalFoldersUpdateAccessApprovalSettings (..),
     newAccessApprovalFoldersUpdateAccessApprovalSettings,
-    AccessApprovalFoldersUpdateAccessApprovalSettings,
 
     -- ** accessapproval.organizations.approvalRequests.approve
     AccessApprovalOrganizationsApprovalRequestsApproveResource,
+    AccessApprovalOrganizationsApprovalRequestsApprove (..),
     newAccessApprovalOrganizationsApprovalRequestsApprove,
-    AccessApprovalOrganizationsApprovalRequestsApprove,
 
     -- ** accessapproval.organizations.approvalRequests.dismiss
     AccessApprovalOrganizationsApprovalRequestsDismissResource,
+    AccessApprovalOrganizationsApprovalRequestsDismiss (..),
     newAccessApprovalOrganizationsApprovalRequestsDismiss,
-    AccessApprovalOrganizationsApprovalRequestsDismiss,
 
     -- ** accessapproval.organizations.approvalRequests.get
     AccessApprovalOrganizationsApprovalRequestsGetResource,
+    AccessApprovalOrganizationsApprovalRequestsGet (..),
     newAccessApprovalOrganizationsApprovalRequestsGet,
-    AccessApprovalOrganizationsApprovalRequestsGet,
 
     -- ** accessapproval.organizations.approvalRequests.list
     AccessApprovalOrganizationsApprovalRequestsListResource,
+    AccessApprovalOrganizationsApprovalRequestsList (..),
     newAccessApprovalOrganizationsApprovalRequestsList,
-    AccessApprovalOrganizationsApprovalRequestsList,
 
     -- ** accessapproval.organizations.deleteAccessApprovalSettings
     AccessApprovalOrganizationsDeleteAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsDeleteAccessApprovalSettings (..),
     newAccessApprovalOrganizationsDeleteAccessApprovalSettings,
-    AccessApprovalOrganizationsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.organizations.getAccessApprovalSettings
     AccessApprovalOrganizationsGetAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsGetAccessApprovalSettings (..),
     newAccessApprovalOrganizationsGetAccessApprovalSettings,
-    AccessApprovalOrganizationsGetAccessApprovalSettings,
 
     -- ** accessapproval.organizations.getServiceAccount
     AccessApprovalOrganizationsGetServiceAccountResource,
+    AccessApprovalOrganizationsGetServiceAccount (..),
     newAccessApprovalOrganizationsGetServiceAccount,
-    AccessApprovalOrganizationsGetServiceAccount,
 
     -- ** accessapproval.organizations.updateAccessApprovalSettings
     AccessApprovalOrganizationsUpdateAccessApprovalSettingsResource,
+    AccessApprovalOrganizationsUpdateAccessApprovalSettings (..),
     newAccessApprovalOrganizationsUpdateAccessApprovalSettings,
-    AccessApprovalOrganizationsUpdateAccessApprovalSettings,
 
     -- ** accessapproval.projects.approvalRequests.approve
     AccessApprovalProjectsApprovalRequestsApproveResource,
+    AccessApprovalProjectsApprovalRequestsApprove (..),
     newAccessApprovalProjectsApprovalRequestsApprove,
-    AccessApprovalProjectsApprovalRequestsApprove,
 
     -- ** accessapproval.projects.approvalRequests.dismiss
     AccessApprovalProjectsApprovalRequestsDismissResource,
+    AccessApprovalProjectsApprovalRequestsDismiss (..),
     newAccessApprovalProjectsApprovalRequestsDismiss,
-    AccessApprovalProjectsApprovalRequestsDismiss,
 
     -- ** accessapproval.projects.approvalRequests.get
     AccessApprovalProjectsApprovalRequestsGetResource,
+    AccessApprovalProjectsApprovalRequestsGet (..),
     newAccessApprovalProjectsApprovalRequestsGet,
-    AccessApprovalProjectsApprovalRequestsGet,
 
     -- ** accessapproval.projects.approvalRequests.list
     AccessApprovalProjectsApprovalRequestsListResource,
+    AccessApprovalProjectsApprovalRequestsList (..),
     newAccessApprovalProjectsApprovalRequestsList,
-    AccessApprovalProjectsApprovalRequestsList,
 
     -- ** accessapproval.projects.deleteAccessApprovalSettings
     AccessApprovalProjectsDeleteAccessApprovalSettingsResource,
+    AccessApprovalProjectsDeleteAccessApprovalSettings (..),
     newAccessApprovalProjectsDeleteAccessApprovalSettings,
-    AccessApprovalProjectsDeleteAccessApprovalSettings,
 
     -- ** accessapproval.projects.getAccessApprovalSettings
     AccessApprovalProjectsGetAccessApprovalSettingsResource,
+    AccessApprovalProjectsGetAccessApprovalSettings (..),
     newAccessApprovalProjectsGetAccessApprovalSettings,
-    AccessApprovalProjectsGetAccessApprovalSettings,
 
     -- ** accessapproval.projects.getServiceAccount
     AccessApprovalProjectsGetServiceAccountResource,
+    AccessApprovalProjectsGetServiceAccount (..),
     newAccessApprovalProjectsGetServiceAccount,
-    AccessApprovalProjectsGetServiceAccount,
 
     -- ** accessapproval.projects.updateAccessApprovalSettings
     AccessApprovalProjectsUpdateAccessApprovalSettingsResource,
+    AccessApprovalProjectsUpdateAccessApprovalSettings (..),
     newAccessApprovalProjectsUpdateAccessApprovalSettings,
-    AccessApprovalProjectsUpdateAccessApprovalSettings,
 
     -- * Types
 

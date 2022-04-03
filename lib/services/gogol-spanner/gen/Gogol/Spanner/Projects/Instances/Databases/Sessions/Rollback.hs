@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Rollback
     SpannerProjectsInstancesDatabasesSessionsRollbackResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsRollback (..),
     newSpannerProjectsInstancesDatabasesSessionsRollback,
-    SpannerProjectsInstancesDatabasesSessionsRollback,
   )
 where
 

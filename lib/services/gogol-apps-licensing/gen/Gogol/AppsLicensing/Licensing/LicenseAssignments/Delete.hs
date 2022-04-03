@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Delete
     LicensingLicenseAssignmentsDeleteResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsDelete (..),
     newLicensingLicenseAssignmentsDelete,
-    LicensingLicenseAssignmentsDelete,
   )
 where
 

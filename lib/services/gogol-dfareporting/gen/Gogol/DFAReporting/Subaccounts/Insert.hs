@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Subaccounts.Insert
     DFAReportingSubaccountsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingSubaccountsInsert (..),
     newDFAReportingSubaccountsInsert,
-    DFAReportingSubaccountsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
     CloudFunctionsProjectsLocationsFunctionsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsTestIamPermissions (..),
     newCloudFunctionsProjectsLocationsFunctionsTestIamPermissions,
-    CloudFunctionsProjectsLocationsFunctionsTestIamPermissions,
   )
 where
 

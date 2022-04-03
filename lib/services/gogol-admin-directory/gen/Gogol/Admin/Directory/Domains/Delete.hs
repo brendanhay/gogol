@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Domains.Delete
     DirectoryDomainsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryDomainsDelete (..),
     newDirectoryDomainsDelete,
-    DirectoryDomainsDelete,
   )
 where
 

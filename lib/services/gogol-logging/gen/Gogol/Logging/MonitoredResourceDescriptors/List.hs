@@ -34,8 +34,8 @@ module Gogol.Logging.MonitoredResourceDescriptors.List
     LoggingMonitoredResourceDescriptorsListResource,
 
     -- ** Constructing a Request
+    LoggingMonitoredResourceDescriptorsList (..),
     newLoggingMonitoredResourceDescriptorsList,
-    LoggingMonitoredResourceDescriptorsList,
   )
 where
 

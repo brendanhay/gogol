@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Quick_preview
     TagManagerAccountsContainersWorkspacesQuick_previewResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesQuick_preview (..),
     newTagManagerAccountsContainersWorkspacesQuick_preview,
-    TagManagerAccountsContainersWorkspacesQuick_preview,
   )
 where
 

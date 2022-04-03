@@ -34,8 +34,8 @@ module Gogol.ProximityBeacon.Namespaces.Update
     ProximityBeaconNamespacesUpdateResource,
 
     -- ** Constructing a Request
+    ProximityBeaconNamespacesUpdate (..),
     newProximityBeaconNamespacesUpdate,
-    ProximityBeaconNamespacesUpdate,
   )
 where
 

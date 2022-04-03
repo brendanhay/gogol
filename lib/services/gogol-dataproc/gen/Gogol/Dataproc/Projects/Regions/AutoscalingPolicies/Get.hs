@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Get
     DataprocProjectsRegionsAutoscalingPoliciesGetResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsAutoscalingPoliciesGet (..),
     newDataprocProjectsRegionsAutoscalingPoliciesGet,
-    DataprocProjectsRegionsAutoscalingPoliciesGet,
   )
 where
 

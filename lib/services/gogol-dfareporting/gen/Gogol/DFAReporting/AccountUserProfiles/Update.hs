@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AccountUserProfiles.Update
     DFAReportingAccountUserProfilesUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingAccountUserProfilesUpdate (..),
     newDFAReportingAccountUserProfilesUpdate,
-    DFAReportingAccountUserProfilesUpdate,
   )
 where
 

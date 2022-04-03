@@ -40,13 +40,13 @@ module Gogol.CommentAnalyzer
 
     -- ** commentanalyzer.comments.analyze
     CommentAnalyzerCommentsAnalyzeResource,
+    CommentAnalyzerCommentsAnalyze (..),
     newCommentAnalyzerCommentsAnalyze,
-    CommentAnalyzerCommentsAnalyze,
 
     -- ** commentanalyzer.comments.suggestscore
     CommentAnalyzerCommentsSuggestscoreResource,
+    CommentAnalyzerCommentsSuggestscore (..),
     newCommentAnalyzerCommentsSuggestscore,
-    CommentAnalyzerCommentsSuggestscore,
 
     -- * Types
 

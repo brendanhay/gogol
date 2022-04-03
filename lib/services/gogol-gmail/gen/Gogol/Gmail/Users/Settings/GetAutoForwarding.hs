@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.GetAutoForwarding
     GmailUsersSettingsGetAutoForwardingResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsGetAutoForwarding (..),
     newGmailUsersSettingsGetAutoForwarding,
-    GmailUsersSettingsGetAutoForwarding,
   )
 where
 

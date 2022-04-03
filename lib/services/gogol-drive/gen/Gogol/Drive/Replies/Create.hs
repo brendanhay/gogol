@@ -34,8 +34,8 @@ module Gogol.Drive.Replies.Create
     DriveRepliesCreateResource,
 
     -- ** Constructing a Request
+    DriveRepliesCreate (..),
     newDriveRepliesCreate,
-    DriveRepliesCreate,
   )
 where
 

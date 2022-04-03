@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalForwardingRules.Delete
     ComputeGlobalForwardingRulesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeGlobalForwardingRulesDelete (..),
     newComputeGlobalForwardingRulesDelete,
-    ComputeGlobalForwardingRulesDelete,
   )
 where
 

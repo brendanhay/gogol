@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Testers.Get
     AndroidPublisherEditsTestersGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsTestersGet (..),
     newAndroidPublisherEditsTestersGet,
-    AndroidPublisherEditsTestersGet,
   )
 where
 

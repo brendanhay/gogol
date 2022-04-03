@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Operations.Cancel
     DatastoreProjectsOperationsCancelResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsOperationsCancel (..),
     newDatastoreProjectsOperationsCancel,
-    DatastoreProjectsOperationsCancel,
   )
 where
 

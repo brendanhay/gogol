@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.Delete
     StorageBucketsDeleteResource,
 
     -- ** Constructing a Request
+    StorageBucketsDelete (..),
     newStorageBucketsDelete,
-    StorageBucketsDelete,
   )
 where
 

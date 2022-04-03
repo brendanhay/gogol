@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Users.Update
     SqlUsersUpdateResource,
 
     -- ** Constructing a Request
+    SqlUsersUpdate (..),
     newSqlUsersUpdate,
-    SqlUsersUpdate,
   )
 where
 

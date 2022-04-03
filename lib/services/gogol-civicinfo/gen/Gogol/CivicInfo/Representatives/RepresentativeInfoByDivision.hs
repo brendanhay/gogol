@@ -34,8 +34,8 @@ module Gogol.CivicInfo.Representatives.RepresentativeInfoByDivision
     CivicInfoRepresentativesRepresentativeInfoByDivisionResource,
 
     -- ** Constructing a Request
+    CivicInfoRepresentativesRepresentativeInfoByDivision (..),
     newCivicInfoRepresentativesRepresentativeInfoByDivision,
-    CivicInfoRepresentativesRepresentativeInfoByDivision,
   )
 where
 

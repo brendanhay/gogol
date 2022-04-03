@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Readingpositions.SetPosition
     BooksMylibraryReadingpositionsSetPositionResource,
 
     -- ** Constructing a Request
+    BooksMylibraryReadingpositionsSetPosition (..),
     newBooksMylibraryReadingpositionsSetPosition,
-    BooksMylibraryReadingpositionsSetPosition,
   )
 where
 

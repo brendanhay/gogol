@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Surveys.Delete
     ConsumerSurveysSurveysDeleteResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysSurveysDelete (..),
     newConsumerSurveysSurveysDelete,
-    ConsumerSurveysSurveysDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Adclients.Urlchannels.List
     AdSenseAccountsAdclientsUrlchannelsListResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsAdclientsUrlchannelsList (..),
     newAdSenseAccountsAdclientsUrlchannelsList,
-    AdSenseAccountsAdclientsUrlchannelsList,
   )
 where
 

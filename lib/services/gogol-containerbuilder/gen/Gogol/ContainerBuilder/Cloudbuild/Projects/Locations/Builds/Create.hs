@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Create
     CloudbuildProjectsLocationsBuildsCreateResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsBuildsCreate (..),
     newCloudbuildProjectsLocationsBuildsCreate,
-    CloudbuildProjectsLocationsBuildsCreate,
   )
 where
 

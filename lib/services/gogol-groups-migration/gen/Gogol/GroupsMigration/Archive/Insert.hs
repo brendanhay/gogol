@@ -34,8 +34,8 @@ module Gogol.GroupsMigration.Archive.Insert
     GroupsMigrationArchiveInsertResource,
 
     -- ** Constructing a Request
+    GroupsMigrationArchiveInsert (..),
     newGroupsMigrationArchiveInsert,
-    GroupsMigrationArchiveInsert,
   )
 where
 

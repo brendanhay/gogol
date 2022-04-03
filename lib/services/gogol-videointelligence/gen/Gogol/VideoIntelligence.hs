@@ -40,8 +40,8 @@ module Gogol.VideoIntelligence
 
     -- ** videointelligence.videos.annotate
     VideoIntelligenceVideosAnnotateResource,
+    VideoIntelligenceVideosAnnotate (..),
     newVideoIntelligenceVideosAnnotate,
-    VideoIntelligenceVideosAnnotate,
 
     -- * Types
 

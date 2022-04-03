@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.List
     FireStoreProjectsDatabasesCollectionGroupsIndexesListResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesCollectionGroupsIndexesList (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesList,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesList,
   )
 where
 

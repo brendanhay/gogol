@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.GetIamPolicy
     HealthcareProjectsLocationsDatasetsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsGetIamPolicy,
   )
 where
 

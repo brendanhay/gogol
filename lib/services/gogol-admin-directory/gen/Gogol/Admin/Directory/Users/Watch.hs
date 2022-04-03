@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Watch
     DirectoryUsersWatchResource,
 
     -- ** Constructing a Request
+    DirectoryUsersWatch (..),
     newDirectoryUsersWatch,
-    DirectoryUsersWatch,
   )
 where
 

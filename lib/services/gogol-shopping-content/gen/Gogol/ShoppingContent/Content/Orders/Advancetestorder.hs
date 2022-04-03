@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Advancetestorder
     ContentOrdersAdvancetestorderResource,
 
     -- ** Constructing a Request
+    ContentOrdersAdvancetestorder (..),
     newContentOrdersAdvancetestorder,
-    ContentOrdersAdvancetestorder,
   )
 where
 

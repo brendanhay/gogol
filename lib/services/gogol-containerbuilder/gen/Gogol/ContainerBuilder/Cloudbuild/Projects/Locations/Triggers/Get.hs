@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Get
     CloudbuildProjectsLocationsTriggersGetResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsTriggersGet (..),
     newCloudbuildProjectsLocationsTriggersGet,
-    CloudbuildProjectsLocationsTriggersGet,
   )
 where
 

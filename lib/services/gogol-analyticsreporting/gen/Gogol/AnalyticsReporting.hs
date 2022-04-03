@@ -41,13 +41,13 @@ module Gogol.AnalyticsReporting
 
     -- ** analyticsreporting.reports.batchGet
     AnalyticsReportingReportsBatchGetResource,
+    AnalyticsReportingReportsBatchGet (..),
     newAnalyticsReportingReportsBatchGet,
-    AnalyticsReportingReportsBatchGet,
 
     -- ** analyticsreporting.userActivity.search
     AnalyticsReportingUserActivitySearchResource,
+    AnalyticsReportingUserActivitySearch (..),
     newAnalyticsReportingUserActivitySearch,
-    AnalyticsReportingUserActivitySearch,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Delete
     StorageObjectsDeleteResource,
 
     -- ** Constructing a Request
+    StorageObjectsDelete (..),
     newStorageObjectsDelete,
-    StorageObjectsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Products.Get
     AndroidPublisherPurchasesProductsGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesProductsGet (..),
     newAndroidPublisherPurchasesProductsGet,
-    AndroidPublisherPurchasesProductsGet,
   )
 where
 

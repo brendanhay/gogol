@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Grants.Delete
     AndroidPublisherGrantsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidPublisherGrantsDelete (..),
     newAndroidPublisherGrantsDelete,
-    AndroidPublisherGrantsDelete,
   )
 where
 

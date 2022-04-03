@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.ProfileFilterLinks.List
     AnalyticsManagementProfileFilterLinksListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfileFilterLinksList (..),
     newAnalyticsManagementProfileFilterLinksList,
-    AnalyticsManagementProfileFilterLinksList,
   )
 where
 

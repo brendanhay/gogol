@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.Delete
     ComputeFirewallsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsDelete (..),
     newComputeFirewallsDelete,
-    ComputeFirewallsDelete,
   )
 where
 

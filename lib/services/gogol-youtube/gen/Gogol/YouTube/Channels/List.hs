@@ -34,8 +34,8 @@ module Gogol.YouTube.Channels.List
     YouTubeChannelsListResource,
 
     -- ** Constructing a Request
+    YouTubeChannelsList (..),
     newYouTubeChannelsList,
-    YouTubeChannelsList,
   )
 where
 

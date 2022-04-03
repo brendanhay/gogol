@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
     AccessContextManagerOrganizationsGcpUserAccessBindingsListResource,
 
     -- ** Constructing a Request
+    AccessContextManagerOrganizationsGcpUserAccessBindingsList (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsList,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Installs.List
     AndroidEnterpriseInstallsListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseInstallsList (..),
     newAndroidEnterpriseInstallsList,
-    AndroidEnterpriseInstallsList,
   )
 where
 

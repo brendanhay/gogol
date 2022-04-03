@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.Create
     CloudTasksProjectsLocationsQueuesCreateResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesCreate (..),
     newCloudTasksProjectsLocationsQueuesCreate,
-    CloudTasksProjectsLocationsQueuesCreate,
   )
 where
 

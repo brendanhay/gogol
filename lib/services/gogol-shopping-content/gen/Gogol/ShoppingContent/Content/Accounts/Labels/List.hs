@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Labels.List
     ContentAccountsLabelsListResource,
 
     -- ** Constructing a Request
+    ContentAccountsLabelsList (..),
     newContentAccountsLabelsList,
-    ContentAccountsLabelsList,
   )
 where
 

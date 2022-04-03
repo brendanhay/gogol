@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagBindings.Delete
     CloudresourcemanagerTagBindingsDeleteResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagBindingsDelete (..),
     newCloudresourcemanagerTagBindingsDelete,
-    CloudresourcemanagerTagBindingsDelete,
   )
 where
 

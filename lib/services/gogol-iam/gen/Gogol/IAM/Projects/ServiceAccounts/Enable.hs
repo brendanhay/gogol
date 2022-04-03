@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Enable
     IAMProjectsServiceAccountsEnableResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsEnable (..),
     newIAMProjectsServiceAccountsEnable,
-    IAMProjectsServiceAccountsEnable,
   )
 where
 

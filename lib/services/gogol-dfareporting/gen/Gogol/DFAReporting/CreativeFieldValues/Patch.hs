@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeFieldValues.Patch
     DFAReportingCreativeFieldValuesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeFieldValuesPatch (..),
     newDFAReportingCreativeFieldValuesPatch,
-    DFAReportingCreativeFieldValuesPatch,
   )
 where
 

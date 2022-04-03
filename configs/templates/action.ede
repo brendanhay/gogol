@@ -11,8 +11,8 @@ module {{ action.ns }}
       {{ action.aliasName }}
 
     -- ** Constructing a Request
+    , {{ action.type.name }} (..)
     , {{ action.type.ctor.name }}
-    , {{ action.type.name }}
     ) where
 
 import qualified Gogol.Prelude as Core

@@ -34,8 +34,8 @@ module Gogol.BigQuery.Datasets.Update
     BigQueryDatasetsUpdateResource,
 
     -- ** Constructing a Request
+    BigQueryDatasetsUpdate (..),
     newBigQueryDatasetsUpdate,
-    BigQueryDatasetsUpdate,
   )
 where
 

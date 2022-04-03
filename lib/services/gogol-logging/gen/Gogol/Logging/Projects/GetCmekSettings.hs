@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.GetCmekSettings
     LoggingProjectsGetCmekSettingsResource,
 
     -- ** Constructing a Request
+    LoggingProjectsGetCmekSettings (..),
     newLoggingProjectsGetCmekSettings,
-    LoggingProjectsGetCmekSettings,
   )
 where
 

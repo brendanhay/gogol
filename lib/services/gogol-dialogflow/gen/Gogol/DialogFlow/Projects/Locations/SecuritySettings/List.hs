@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.SecuritySettings.List
     DialogFlowProjectsLocationsSecuritySettingsListResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsSecuritySettingsList (..),
     newDialogFlowProjectsLocationsSecuritySettingsList,
-    DialogFlowProjectsLocationsSecuritySettingsList,
   )
 where
 

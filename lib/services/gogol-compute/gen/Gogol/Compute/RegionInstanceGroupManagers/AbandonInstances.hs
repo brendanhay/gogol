@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.AbandonInstances
     ComputeRegionInstanceGroupManagersAbandonInstancesResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersAbandonInstances (..),
     newComputeRegionInstanceGroupManagersAbandonInstances,
-    ComputeRegionInstanceGroupManagersAbandonInstances,
   )
 where
 

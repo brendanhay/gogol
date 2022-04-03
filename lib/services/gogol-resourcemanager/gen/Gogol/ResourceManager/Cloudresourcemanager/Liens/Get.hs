@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Liens.Get
     CloudresourcemanagerLiensGetResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerLiensGet (..),
     newCloudresourcemanagerLiensGet,
-    CloudresourcemanagerLiensGet,
   )
 where
 

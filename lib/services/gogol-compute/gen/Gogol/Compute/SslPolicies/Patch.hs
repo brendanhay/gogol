@@ -34,8 +34,8 @@ module Gogol.Compute.SslPolicies.Patch
     ComputeSslPoliciesPatchResource,
 
     -- ** Constructing a Request
+    ComputeSslPoliciesPatch (..),
     newComputeSslPoliciesPatch,
-    ComputeSslPoliciesPatch,
   )
 where
 

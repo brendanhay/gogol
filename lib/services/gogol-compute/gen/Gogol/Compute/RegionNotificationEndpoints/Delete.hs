@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNotificationEndpoints.Delete
     ComputeRegionNotificationEndpointsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeRegionNotificationEndpointsDelete (..),
     newComputeRegionNotificationEndpointsDelete,
-    ComputeRegionNotificationEndpointsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Operations.Cancel
     ServiceConsumerManagementOperationsCancelResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementOperationsCancel (..),
     newServiceConsumerManagementOperationsCancel,
-    ServiceConsumerManagementOperationsCancel,
   )
 where
 

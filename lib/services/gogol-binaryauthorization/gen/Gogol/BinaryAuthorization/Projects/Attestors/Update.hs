@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.Attestors.Update
     BinaryAuthorizationProjectsAttestorsUpdateResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsAttestorsUpdate (..),
     newBinaryAuthorizationProjectsAttestorsUpdate,
-    BinaryAuthorizationProjectsAttestorsUpdate,
   )
 where
 

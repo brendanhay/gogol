@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.GetNatMappingInfo
     ComputeRoutersGetNatMappingInfoResource,
 
     -- ** Constructing a Request
+    ComputeRoutersGetNatMappingInfo (..),
     newComputeRoutersGetNatMappingInfo,
-    ComputeRoutersGetNatMappingInfo,
   )
 where
 

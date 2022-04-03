@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Webapps.Get
     AndroidEnterpriseWebappsGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseWebappsGet (..),
     newAndroidEnterpriseWebappsGet,
-    AndroidEnterpriseWebappsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Policies.Get
     AndroidManagementEnterprisesPoliciesGetResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesPoliciesGet (..),
     newAndroidManagementEnterprisesPoliciesGet,
-    AndroidManagementEnterprisesPoliciesGet,
   )
 where
 

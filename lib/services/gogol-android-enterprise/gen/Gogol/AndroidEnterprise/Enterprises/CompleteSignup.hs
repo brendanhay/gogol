@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.CompleteSignup
     AndroidEnterpriseEnterprisesCompleteSignupResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesCompleteSignup (..),
     newAndroidEnterpriseEnterprisesCompleteSignup,
-    AndroidEnterpriseEnterprisesCompleteSignup,
   )
 where
 

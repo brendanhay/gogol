@@ -42,23 +42,23 @@ module Gogol.Tracing
 
     -- ** tracing.projects.traces.batchWrite
     TracingProjectsTracesBatchWriteResource,
+    TracingProjectsTracesBatchWrite (..),
     newTracingProjectsTracesBatchWrite,
-    TracingProjectsTracesBatchWrite,
 
     -- ** tracing.projects.traces.list
     TracingProjectsTracesListResource,
+    TracingProjectsTracesList (..),
     newTracingProjectsTracesList,
-    TracingProjectsTracesList,
 
     -- ** tracing.projects.traces.listSpans
     TracingProjectsTracesListSpansResource,
+    TracingProjectsTracesListSpans (..),
     newTracingProjectsTracesListSpans,
-    TracingProjectsTracesListSpans,
 
     -- ** tracing.projects.traces.spans.create
     TracingProjectsTracesSpansCreateResource,
+    TracingProjectsTracesSpansCreate (..),
     newTracingProjectsTracesSpansCreate,
-    TracingProjectsTracesSpansCreate,
 
     -- * Types
 

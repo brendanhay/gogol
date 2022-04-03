@@ -34,8 +34,8 @@ module Gogol.Compute.Autoscalers.Get
     ComputeAutoscalersGetResource,
 
     -- ** Constructing a Request
+    ComputeAutoscalersGet (..),
     newComputeAutoscalersGet,
-    ComputeAutoscalersGet,
   )
 where
 

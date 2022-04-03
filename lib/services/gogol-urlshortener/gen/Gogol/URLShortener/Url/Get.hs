@@ -34,8 +34,8 @@ module Gogol.URLShortener.Url.Get
     URLShortenerUrlGetResource,
 
     -- ** Constructing a Request
+    URLShortenerUrlGet (..),
     newURLShortenerUrlGet,
-    URLShortenerUrlGet,
   )
 where
 

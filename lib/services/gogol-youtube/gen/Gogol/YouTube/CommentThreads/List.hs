@@ -34,8 +34,8 @@ module Gogol.YouTube.CommentThreads.List
     YouTubeCommentThreadsListResource,
 
     -- ** Constructing a Request
+    YouTubeCommentThreadsList (..),
     newYouTubeCommentThreadsList,
-    YouTubeCommentThreadsList,
   )
 where
 

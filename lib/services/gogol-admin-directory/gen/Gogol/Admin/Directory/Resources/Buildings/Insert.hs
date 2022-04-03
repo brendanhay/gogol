@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Buildings.Insert
     DirectoryResourcesBuildingsInsertResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesBuildingsInsert (..),
     newDirectoryResourcesBuildingsInsert,
-    DirectoryResourcesBuildingsInsert,
   )
 where
 

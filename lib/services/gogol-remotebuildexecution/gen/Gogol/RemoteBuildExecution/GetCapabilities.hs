@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.GetCapabilities
     RemoteBuildExecutionGetCapabilitiesResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionGetCapabilities (..),
     newRemoteBuildExecutionGetCapabilities,
-    RemoteBuildExecutionGetCapabilities,
   )
 where
 

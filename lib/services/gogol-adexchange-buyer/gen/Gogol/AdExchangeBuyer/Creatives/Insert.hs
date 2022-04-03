@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Creatives.Insert
     AdExchangeBuyerCreativesInsertResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerCreativesInsert (..),
     newAdExchangeBuyerCreativesInsert,
-    AdExchangeBuyerCreativesInsert,
   )
 where
 

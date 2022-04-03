@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkFirewallPolicies.Insert
     ComputeNetworkFirewallPoliciesInsertResource,
 
     -- ** Constructing a Request
+    ComputeNetworkFirewallPoliciesInsert (..),
     newComputeNetworkFirewallPoliciesInsert,
-    ComputeNetworkFirewallPoliciesInsert,
   )
 where
 

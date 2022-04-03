@@ -34,8 +34,8 @@ module Gogol.CloudErrorReporting.Projects.Groups.Get
     CloudErrorReportingProjectsGroupsGetResource,
 
     -- ** Constructing a Request
+    CloudErrorReportingProjectsGroupsGet (..),
     newCloudErrorReportingProjectsGroupsGet,
-    CloudErrorReportingProjectsGroupsGet,
   )
 where
 

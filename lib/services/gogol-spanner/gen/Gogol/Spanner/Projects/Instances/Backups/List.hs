@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Backups.List
     SpannerProjectsInstancesBackupsListResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesBackupsList (..),
     newSpannerProjectsInstancesBackupsList,
-    SpannerProjectsInstancesBackupsList,
   )
 where
 

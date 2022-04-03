@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Applications.Get
     AndroidManagementEnterprisesApplicationsGetResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesApplicationsGet (..),
     newAndroidManagementEnterprisesApplicationsGet,
-    AndroidManagementEnterprisesApplicationsGet,
   )
 where
 

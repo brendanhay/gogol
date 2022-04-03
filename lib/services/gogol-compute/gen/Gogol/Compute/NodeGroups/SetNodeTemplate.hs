@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.SetNodeTemplate
     ComputeNodeGroupsSetNodeTemplateResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsSetNodeTemplate (..),
     newComputeNodeGroupsSetNodeTemplate,
-    ComputeNodeGroupsSetNodeTemplate,
   )
 where
 

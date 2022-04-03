@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Insert
     DeploymentManagerDeploymentsInsertResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsInsert (..),
     newDeploymentManagerDeploymentsInsert,
-    DeploymentManagerDeploymentsInsert,
   )
 where
 

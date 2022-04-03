@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Requestphoneverification
     ContentAccountsRequestphoneverificationResource,
 
     -- ** Constructing a Request
+    ContentAccountsRequestphoneverification (..),
     newContentAccountsRequestphoneverification,
-    ContentAccountsRequestphoneverification,
   )
 where
 

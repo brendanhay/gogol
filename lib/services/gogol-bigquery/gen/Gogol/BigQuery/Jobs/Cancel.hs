@@ -34,8 +34,8 @@ module Gogol.BigQuery.Jobs.Cancel
     BigQueryJobsCancelResource,
 
     -- ** Constructing a Request
+    BigQueryJobsCancel (..),
     newBigQueryJobsCancel,
-    BigQueryJobsCancel,
   )
 where
 

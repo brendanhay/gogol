@@ -34,8 +34,8 @@ module Gogol.Logging.Organizations.Exclusions.Patch
     LoggingOrganizationsExclusionsPatchResource,
 
     -- ** Constructing a Request
+    LoggingOrganizationsExclusionsPatch (..),
     newLoggingOrganizationsExclusionsPatch,
-    LoggingOrganizationsExclusionsPatch,
   )
 where
 

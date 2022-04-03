@@ -34,8 +34,8 @@ module Gogol.Drive.Files.Watch
     DriveFilesWatchResource,
 
     -- ** Constructing a Request
+    DriveFilesWatch (..),
     newDriveFilesWatch,
-    DriveFilesWatch,
   )
 where
 

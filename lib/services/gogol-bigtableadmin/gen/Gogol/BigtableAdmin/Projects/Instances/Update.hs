@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Update
     BigtableAdminProjectsInstancesUpdateResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesUpdate (..),
     newBigtableAdminProjectsInstancesUpdate,
-    BigtableAdminProjectsInstancesUpdate,
   )
 where
 

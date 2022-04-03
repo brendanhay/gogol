@@ -34,8 +34,8 @@ module Gogol.People.OtherContacts.CopyOtherContactToMyContactsGroup
     PeopleOtherContactsCopyOtherContactToMyContactsGroupResource,
 
     -- ** Constructing a Request
+    PeopleOtherContactsCopyOtherContactToMyContactsGroup (..),
     newPeopleOtherContactsCopyOtherContactToMyContactsGroup,
-    PeopleOtherContactsCopyOtherContactToMyContactsGroup,
   )
 where
 

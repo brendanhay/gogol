@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.AlertPolicies.Get
     MonitoringProjectsAlertPoliciesGetResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsAlertPoliciesGet (..),
     newMonitoringProjectsAlertPoliciesGet,
-    MonitoringProjectsAlertPoliciesGet,
   )
 where
 

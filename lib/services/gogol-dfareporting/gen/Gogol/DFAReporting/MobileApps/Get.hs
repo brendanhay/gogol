@@ -34,8 +34,8 @@ module Gogol.DFAReporting.MobileApps.Get
     DFAReportingMobileAppsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingMobileAppsGet (..),
     newDFAReportingMobileAppsGet,
-    DFAReportingMobileAppsGet,
   )
 where
 

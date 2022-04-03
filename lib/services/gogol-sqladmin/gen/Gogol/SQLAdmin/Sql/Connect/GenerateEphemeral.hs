@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
     SqlConnectGenerateEphemeralResource,
 
     -- ** Constructing a Request
+    SqlConnectGenerateEphemeral (..),
     newSqlConnectGenerateEphemeral,
-    SqlConnectGenerateEphemeral,
   )
 where
 

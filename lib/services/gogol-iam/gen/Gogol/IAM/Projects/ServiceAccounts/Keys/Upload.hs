@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Keys.Upload
     IAMProjectsServiceAccountsKeysUploadResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsKeysUpload (..),
     newIAMProjectsServiceAccountsKeysUpload,
-    IAMProjectsServiceAccountsKeysUpload,
   )
 where
 

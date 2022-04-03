@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferOperations.Pause
     StorageTransferTransferOperationsPauseResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferOperationsPause (..),
     newStorageTransferTransferOperationsPause,
-    StorageTransferTransferOperationsPause,
   )
 where
 

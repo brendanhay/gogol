@@ -34,8 +34,8 @@ module Gogol.Script.Projects.Deployments.List
     ScriptProjectsDeploymentsListResource,
 
     -- ** Constructing a Request
+    ScriptProjectsDeploymentsList (..),
     newScriptProjectsDeploymentsList,
-    ScriptProjectsDeploymentsList,
   )
 where
 

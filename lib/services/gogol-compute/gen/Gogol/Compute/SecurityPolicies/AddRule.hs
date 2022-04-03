@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.AddRule
     ComputeSecurityPoliciesAddRuleResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesAddRule (..),
     newComputeSecurityPoliciesAddRule,
-    ComputeSecurityPoliciesAddRule,
   )
 where
 

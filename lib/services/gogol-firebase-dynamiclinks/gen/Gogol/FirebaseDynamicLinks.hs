@@ -40,28 +40,28 @@ module Gogol.FirebaseDynamicLinks
 
     -- ** firebasedynamiclinks.getLinkStats
     FirebaseDynamicLinksGetLinkStatsResource,
+    FirebaseDynamicLinksGetLinkStats (..),
     newFirebaseDynamicLinksGetLinkStats,
-    FirebaseDynamicLinksGetLinkStats,
 
     -- ** firebasedynamiclinks.installAttribution
     FirebaseDynamicLinksInstallAttributionResource,
+    FirebaseDynamicLinksInstallAttribution (..),
     newFirebaseDynamicLinksInstallAttribution,
-    FirebaseDynamicLinksInstallAttribution,
 
     -- ** firebasedynamiclinks.managedShortLinks.create
     FirebaseDynamicLinksManagedShortLinksCreateResource,
+    FirebaseDynamicLinksManagedShortLinksCreate (..),
     newFirebaseDynamicLinksManagedShortLinksCreate,
-    FirebaseDynamicLinksManagedShortLinksCreate,
 
     -- ** firebasedynamiclinks.reopenAttribution
     FirebaseDynamicLinksReopenAttributionResource,
+    FirebaseDynamicLinksReopenAttribution (..),
     newFirebaseDynamicLinksReopenAttribution,
-    FirebaseDynamicLinksReopenAttribution,
 
     -- ** firebasedynamiclinks.shortLinks.create
     FirebaseDynamicLinksShortLinksCreateResource,
+    FirebaseDynamicLinksShortLinksCreate (..),
     newFirebaseDynamicLinksShortLinksCreate,
-    FirebaseDynamicLinksShortLinksCreate,
 
     -- * Types
 

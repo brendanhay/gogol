@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.GetIamPolicy
     ComputeSnapshotsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsGetIamPolicy (..),
     newComputeSnapshotsGetIamPolicy,
-    ComputeSnapshotsGetIamPolicy,
   )
 where
 

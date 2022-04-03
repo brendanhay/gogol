@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveStreams.Delete
     YouTubeLiveStreamsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeLiveStreamsDelete (..),
     newYouTubeLiveStreamsDelete,
-    YouTubeLiveStreamsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Drafts.Delete
     GmailUsersDraftsDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersDraftsDelete (..),
     newGmailUsersDraftsDelete,
-    GmailUsersDraftsDelete,
   )
 where
 

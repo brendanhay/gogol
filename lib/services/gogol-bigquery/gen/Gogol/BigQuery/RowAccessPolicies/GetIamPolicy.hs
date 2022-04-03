@@ -34,8 +34,8 @@ module Gogol.BigQuery.RowAccessPolicies.GetIamPolicy
     BigQueryRowAccessPoliciesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    BigQueryRowAccessPoliciesGetIamPolicy (..),
     newBigQueryRowAccessPoliciesGetIamPolicy,
-    BigQueryRowAccessPoliciesGetIamPolicy,
   )
 where
 

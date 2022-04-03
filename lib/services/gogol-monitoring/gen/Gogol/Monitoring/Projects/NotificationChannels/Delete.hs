@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.NotificationChannels.Delete
     MonitoringProjectsNotificationChannelsDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsNotificationChannelsDelete (..),
     newMonitoringProjectsNotificationChannelsDelete,
-    MonitoringProjectsNotificationChannelsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.RemarketingAudience.Get
     AnalyticsManagementRemarketingAudienceGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementRemarketingAudienceGet (..),
     newAnalyticsManagementRemarketingAudienceGet,
-    AnalyticsManagementRemarketingAudienceGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.GetServiceAccount
     AndroidEnterpriseEnterprisesGetServiceAccountResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesGetServiceAccount (..),
     newAndroidEnterpriseEnterprisesGetServiceAccount,
-    AndroidEnterpriseEnterprisesGetServiceAccount,
   )
 where
 

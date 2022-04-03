@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Locations.Batches.Delete
     DataprocProjectsLocationsBatchesDeleteResource,
 
     -- ** Constructing a Request
+    DataprocProjectsLocationsBatchesDelete (..),
     newDataprocProjectsLocationsBatchesDelete,
-    DataprocProjectsLocationsBatchesDelete,
   )
 where
 

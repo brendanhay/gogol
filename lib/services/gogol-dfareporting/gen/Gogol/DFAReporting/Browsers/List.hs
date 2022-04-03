@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Browsers.List
     DFAReportingBrowsersListResource,
 
     -- ** Constructing a Request
+    DFAReportingBrowsersList (..),
     newDFAReportingBrowsersList,
-    DFAReportingBrowsersList,
   )
 where
 

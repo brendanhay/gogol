@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Locations.List
     BigtableAdminProjectsLocationsListResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsLocationsList (..),
     newBigtableAdminProjectsLocationsList,
-    BigtableAdminProjectsLocationsList,
   )
 where
 

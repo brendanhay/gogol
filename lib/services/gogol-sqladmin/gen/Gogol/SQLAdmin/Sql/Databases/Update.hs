@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.Update
     SqlDatabasesUpdateResource,
 
     -- ** Constructing a Request
+    SqlDatabasesUpdate (..),
     newSqlDatabasesUpdate,
-    SqlDatabasesUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Changes.List
     DriveChangesListResource,
 
     -- ** Constructing a Request
+    DriveChangesList (..),
     newDriveChangesList,
-    DriveChangesList,
   )
 where
 

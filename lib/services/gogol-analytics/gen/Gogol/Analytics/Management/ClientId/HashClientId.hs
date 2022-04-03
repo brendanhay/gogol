@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.ClientId.HashClientId
     AnalyticsManagementClientIdHashClientIdResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementClientIdHashClientId (..),
     newAnalyticsManagementClientIdHashClientId,
-    AnalyticsManagementClientIdHashClientId,
   )
 where
 

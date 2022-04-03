@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.Patch
     ComputeRegionInstanceGroupManagersPatchResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersPatch (..),
     newComputeRegionInstanceGroupManagersPatch,
-    ComputeRegionInstanceGroupManagersPatch,
   )
 where
 

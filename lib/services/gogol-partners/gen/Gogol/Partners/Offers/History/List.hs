@@ -34,8 +34,8 @@ module Gogol.Partners.Offers.History.List
     PartnersOffersHistoryListResource,
 
     -- ** Constructing a Request
+    PartnersOffersHistoryList (..),
     newPartnersOffersHistoryList,
-    PartnersOffersHistoryList,
   )
 where
 

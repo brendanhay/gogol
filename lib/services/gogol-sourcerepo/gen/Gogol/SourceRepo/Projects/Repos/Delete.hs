@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.Delete
     SourceRepoProjectsReposDeleteResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposDelete (..),
     newSourceRepoProjectsReposDelete,
-    SourceRepoProjectsReposDelete,
   )
 where
 

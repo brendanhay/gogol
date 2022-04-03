@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.BatchUpdate
     SheetsSpreadsheetsBatchUpdateResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsBatchUpdate (..),
     newSheetsSpreadsheetsBatchUpdate,
-    SheetsSpreadsheetsBatchUpdate,
   )
 where
 

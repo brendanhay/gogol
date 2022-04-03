@@ -34,8 +34,8 @@ module Gogol.Compute.PublicDelegatedPrefixes.List
     ComputePublicDelegatedPrefixesListResource,
 
     -- ** Constructing a Request
+    ComputePublicDelegatedPrefixesList (..),
     newComputePublicDelegatedPrefixesList,
-    ComputePublicDelegatedPrefixesList,
   )
 where
 

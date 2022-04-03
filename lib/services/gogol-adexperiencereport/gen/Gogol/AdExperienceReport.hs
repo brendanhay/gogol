@@ -37,13 +37,13 @@ module Gogol.AdExperienceReport
 
     -- ** adexperiencereport.sites.get
     AdExperienceReportSitesGetResource,
+    AdExperienceReportSitesGet (..),
     newAdExperienceReportSitesGet,
-    AdExperienceReportSitesGet,
 
     -- ** adexperiencereport.violatingSites.list
     AdExperienceReportViolatingSitesListResource,
+    AdExperienceReportViolatingSitesList (..),
     newAdExperienceReportViolatingSitesList,
-    AdExperienceReportViolatingSitesList,
 
     -- * Types
 

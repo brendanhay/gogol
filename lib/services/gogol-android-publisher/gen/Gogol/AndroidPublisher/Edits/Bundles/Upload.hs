@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Bundles.Upload
     AndroidPublisherEditsBundlesUploadResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsBundlesUpload (..),
     newAndroidPublisherEditsBundlesUpload,
-    AndroidPublisherEditsBundlesUpload,
   )
 where
 

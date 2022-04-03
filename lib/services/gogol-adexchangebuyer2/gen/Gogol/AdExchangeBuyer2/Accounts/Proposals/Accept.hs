@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.Accept
     AdExchangeBuyer2AccountsProposalsAcceptResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsAccept (..),
     newAdExchangeBuyer2AccountsProposalsAccept,
-    AdExchangeBuyer2AccountsProposalsAccept,
   )
 where
 

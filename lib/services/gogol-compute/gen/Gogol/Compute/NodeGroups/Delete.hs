@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.Delete
     ComputeNodeGroupsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsDelete (..),
     newComputeNodeGroupsDelete,
-    ComputeNodeGroupsDelete,
   )
 where
 

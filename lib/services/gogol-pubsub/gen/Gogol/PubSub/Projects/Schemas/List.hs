@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Schemas.List
     PubSubProjectsSchemasListResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSchemasList (..),
     newPubSubProjectsSchemasList,
-    PubSubProjectsSchemasList,
   )
 where
 

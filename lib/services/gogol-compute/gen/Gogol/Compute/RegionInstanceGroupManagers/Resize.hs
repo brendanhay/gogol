@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.Resize
     ComputeRegionInstanceGroupManagersResizeResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersResize (..),
     newComputeRegionInstanceGroupManagersResize,
-    ComputeRegionInstanceGroupManagersResize,
   )
 where
 

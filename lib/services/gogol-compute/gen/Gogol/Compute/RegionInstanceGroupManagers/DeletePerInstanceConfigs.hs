@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
     ComputeRegionInstanceGroupManagersDeletePerInstanceConfigsResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
   )
 where
 

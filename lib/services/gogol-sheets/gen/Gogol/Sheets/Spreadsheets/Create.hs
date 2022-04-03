@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Create
     SheetsSpreadsheetsCreateResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsCreate (..),
     newSheetsSpreadsheetsCreate,
-    SheetsSpreadsheetsCreate,
   )
 where
 

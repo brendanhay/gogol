@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.AddResourcePolicies
     ComputeRegionDisksAddResourcePoliciesResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksAddResourcePolicies (..),
     newComputeRegionDisksAddResourcePolicies,
-    ComputeRegionDisksAddResourcePolicies,
   )
 where
 

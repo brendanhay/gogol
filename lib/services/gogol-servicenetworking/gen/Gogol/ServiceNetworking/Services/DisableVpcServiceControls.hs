@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DisableVpcServiceControls
     ServiceNetworkingServicesDisableVpcServiceControlsResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDisableVpcServiceControls (..),
     newServiceNetworkingServicesDisableVpcServiceControls,
-    ServiceNetworkingServicesDisableVpcServiceControls,
   )
 where
 

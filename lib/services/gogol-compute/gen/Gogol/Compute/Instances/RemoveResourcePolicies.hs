@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.RemoveResourcePolicies
     ComputeInstancesRemoveResourcePoliciesResource,
 
     -- ** Constructing a Request
+    ComputeInstancesRemoveResourcePolicies (..),
     newComputeInstancesRemoveResourcePolicies,
-    ComputeInstancesRemoveResourcePolicies,
   )
 where
 

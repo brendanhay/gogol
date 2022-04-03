@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetScheduling
     ComputeInstancesSetSchedulingResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetScheduling (..),
     newComputeInstancesSetScheduling,
-    ComputeInstancesSetScheduling,
   )
 where
 

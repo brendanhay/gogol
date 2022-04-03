@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Folders.GetServiceAccount
     AccessApprovalFoldersGetServiceAccountResource,
 
     -- ** Constructing a Request
+    AccessApprovalFoldersGetServiceAccount (..),
     newAccessApprovalFoldersGetServiceAccount,
-    AccessApprovalFoldersGetServiceAccount,
   )
 where
 

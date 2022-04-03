@@ -34,8 +34,8 @@ module Gogol.Storage.Projects.HmacKeys.Update
     StorageProjectsHmacKeysUpdateResource,
 
     -- ** Constructing a Request
+    StorageProjectsHmacKeysUpdate (..),
     newStorageProjectsHmacKeysUpdate,
-    StorageProjectsHmacKeysUpdate,
   )
 where
 

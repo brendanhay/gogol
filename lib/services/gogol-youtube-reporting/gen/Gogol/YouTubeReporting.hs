@@ -41,43 +41,43 @@ module Gogol.YouTubeReporting
 
     -- ** youtubereporting.jobs.create
     YouTubeReportingJobsCreateResource,
+    YouTubeReportingJobsCreate (..),
     newYouTubeReportingJobsCreate,
-    YouTubeReportingJobsCreate,
 
     -- ** youtubereporting.jobs.delete
     YouTubeReportingJobsDeleteResource,
+    YouTubeReportingJobsDelete (..),
     newYouTubeReportingJobsDelete,
-    YouTubeReportingJobsDelete,
 
     -- ** youtubereporting.jobs.get
     YouTubeReportingJobsGetResource,
+    YouTubeReportingJobsGet (..),
     newYouTubeReportingJobsGet,
-    YouTubeReportingJobsGet,
 
     -- ** youtubereporting.jobs.list
     YouTubeReportingJobsListResource,
+    YouTubeReportingJobsList (..),
     newYouTubeReportingJobsList,
-    YouTubeReportingJobsList,
 
     -- ** youtubereporting.jobs.reports.get
     YouTubeReportingJobsReportsGetResource,
+    YouTubeReportingJobsReportsGet (..),
     newYouTubeReportingJobsReportsGet,
-    YouTubeReportingJobsReportsGet,
 
     -- ** youtubereporting.jobs.reports.list
     YouTubeReportingJobsReportsListResource,
+    YouTubeReportingJobsReportsList (..),
     newYouTubeReportingJobsReportsList,
-    YouTubeReportingJobsReportsList,
 
     -- ** youtubereporting.media.download
     YouTubeReportingMediaDownloadResource,
+    YouTubeReportingMediaDownload (..),
     newYouTubeReportingMediaDownload,
-    YouTubeReportingMediaDownload,
 
     -- ** youtubereporting.reportTypes.list
     YouTubeReportingReportTypesListResource,
+    YouTubeReportingReportTypesList (..),
     newYouTubeReportingReportTypesList,
-    YouTubeReportingReportTypesList,
 
     -- * Types
 

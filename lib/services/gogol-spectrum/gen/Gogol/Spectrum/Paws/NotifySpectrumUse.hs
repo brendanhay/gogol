@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.NotifySpectrumUse
     SpectrumPawsNotifySpectrumUseResource,
 
     -- ** Constructing a Request
+    SpectrumPawsNotifySpectrumUse (..),
     newSpectrumPawsNotifySpectrumUse,
-    SpectrumPawsNotifySpectrumUse,
   )
 where
 

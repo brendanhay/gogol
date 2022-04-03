@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.MoveDisk
     ComputeProjectsMoveDiskResource,
 
     -- ** Constructing a Request
+    ComputeProjectsMoveDisk (..),
     newComputeProjectsMoveDisk,
-    ComputeProjectsMoveDisk,
   )
 where
 

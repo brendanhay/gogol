@@ -40,508 +40,508 @@ module Gogol.DLP
 
     -- ** dlp.infoTypes.list
     DLPInfoTypesListResource,
+    DLPInfoTypesList (..),
     newDLPInfoTypesList,
-    DLPInfoTypesList,
 
     -- ** dlp.locations.infoTypes.list
     DLPLocationsInfoTypesListResource,
+    DLPLocationsInfoTypesList (..),
     newDLPLocationsInfoTypesList,
-    DLPLocationsInfoTypesList,
 
     -- ** dlp.organizations.deidentifyTemplates.create
     DLPOrganizationsDeidentifyTemplatesCreateResource,
+    DLPOrganizationsDeidentifyTemplatesCreate (..),
     newDLPOrganizationsDeidentifyTemplatesCreate,
-    DLPOrganizationsDeidentifyTemplatesCreate,
 
     -- ** dlp.organizations.deidentifyTemplates.delete
     DLPOrganizationsDeidentifyTemplatesDeleteResource,
+    DLPOrganizationsDeidentifyTemplatesDelete (..),
     newDLPOrganizationsDeidentifyTemplatesDelete,
-    DLPOrganizationsDeidentifyTemplatesDelete,
 
     -- ** dlp.organizations.deidentifyTemplates.get
     DLPOrganizationsDeidentifyTemplatesGetResource,
+    DLPOrganizationsDeidentifyTemplatesGet (..),
     newDLPOrganizationsDeidentifyTemplatesGet,
-    DLPOrganizationsDeidentifyTemplatesGet,
 
     -- ** dlp.organizations.deidentifyTemplates.list
     DLPOrganizationsDeidentifyTemplatesListResource,
+    DLPOrganizationsDeidentifyTemplatesList (..),
     newDLPOrganizationsDeidentifyTemplatesList,
-    DLPOrganizationsDeidentifyTemplatesList,
 
     -- ** dlp.organizations.deidentifyTemplates.patch
     DLPOrganizationsDeidentifyTemplatesPatchResource,
+    DLPOrganizationsDeidentifyTemplatesPatch (..),
     newDLPOrganizationsDeidentifyTemplatesPatch,
-    DLPOrganizationsDeidentifyTemplatesPatch,
 
     -- ** dlp.organizations.inspectTemplates.create
     DLPOrganizationsInspectTemplatesCreateResource,
+    DLPOrganizationsInspectTemplatesCreate (..),
     newDLPOrganizationsInspectTemplatesCreate,
-    DLPOrganizationsInspectTemplatesCreate,
 
     -- ** dlp.organizations.inspectTemplates.delete
     DLPOrganizationsInspectTemplatesDeleteResource,
+    DLPOrganizationsInspectTemplatesDelete (..),
     newDLPOrganizationsInspectTemplatesDelete,
-    DLPOrganizationsInspectTemplatesDelete,
 
     -- ** dlp.organizations.inspectTemplates.get
     DLPOrganizationsInspectTemplatesGetResource,
+    DLPOrganizationsInspectTemplatesGet (..),
     newDLPOrganizationsInspectTemplatesGet,
-    DLPOrganizationsInspectTemplatesGet,
 
     -- ** dlp.organizations.inspectTemplates.list
     DLPOrganizationsInspectTemplatesListResource,
+    DLPOrganizationsInspectTemplatesList (..),
     newDLPOrganizationsInspectTemplatesList,
-    DLPOrganizationsInspectTemplatesList,
 
     -- ** dlp.organizations.inspectTemplates.patch
     DLPOrganizationsInspectTemplatesPatchResource,
+    DLPOrganizationsInspectTemplatesPatch (..),
     newDLPOrganizationsInspectTemplatesPatch,
-    DLPOrganizationsInspectTemplatesPatch,
 
     -- ** dlp.organizations.locations.deidentifyTemplates.create
     DLPOrganizationsLocationsDeidentifyTemplatesCreateResource,
+    DLPOrganizationsLocationsDeidentifyTemplatesCreate (..),
     newDLPOrganizationsLocationsDeidentifyTemplatesCreate,
-    DLPOrganizationsLocationsDeidentifyTemplatesCreate,
 
     -- ** dlp.organizations.locations.deidentifyTemplates.delete
     DLPOrganizationsLocationsDeidentifyTemplatesDeleteResource,
+    DLPOrganizationsLocationsDeidentifyTemplatesDelete (..),
     newDLPOrganizationsLocationsDeidentifyTemplatesDelete,
-    DLPOrganizationsLocationsDeidentifyTemplatesDelete,
 
     -- ** dlp.organizations.locations.deidentifyTemplates.get
     DLPOrganizationsLocationsDeidentifyTemplatesGetResource,
+    DLPOrganizationsLocationsDeidentifyTemplatesGet (..),
     newDLPOrganizationsLocationsDeidentifyTemplatesGet,
-    DLPOrganizationsLocationsDeidentifyTemplatesGet,
 
     -- ** dlp.organizations.locations.deidentifyTemplates.list
     DLPOrganizationsLocationsDeidentifyTemplatesListResource,
+    DLPOrganizationsLocationsDeidentifyTemplatesList (..),
     newDLPOrganizationsLocationsDeidentifyTemplatesList,
-    DLPOrganizationsLocationsDeidentifyTemplatesList,
 
     -- ** dlp.organizations.locations.deidentifyTemplates.patch
     DLPOrganizationsLocationsDeidentifyTemplatesPatchResource,
+    DLPOrganizationsLocationsDeidentifyTemplatesPatch (..),
     newDLPOrganizationsLocationsDeidentifyTemplatesPatch,
-    DLPOrganizationsLocationsDeidentifyTemplatesPatch,
 
     -- ** dlp.organizations.locations.dlpJobs.list
     DLPOrganizationsLocationsDlpJobsListResource,
+    DLPOrganizationsLocationsDlpJobsList (..),
     newDLPOrganizationsLocationsDlpJobsList,
-    DLPOrganizationsLocationsDlpJobsList,
 
     -- ** dlp.organizations.locations.inspectTemplates.create
     DLPOrganizationsLocationsInspectTemplatesCreateResource,
+    DLPOrganizationsLocationsInspectTemplatesCreate (..),
     newDLPOrganizationsLocationsInspectTemplatesCreate,
-    DLPOrganizationsLocationsInspectTemplatesCreate,
 
     -- ** dlp.organizations.locations.inspectTemplates.delete
     DLPOrganizationsLocationsInspectTemplatesDeleteResource,
+    DLPOrganizationsLocationsInspectTemplatesDelete (..),
     newDLPOrganizationsLocationsInspectTemplatesDelete,
-    DLPOrganizationsLocationsInspectTemplatesDelete,
 
     -- ** dlp.organizations.locations.inspectTemplates.get
     DLPOrganizationsLocationsInspectTemplatesGetResource,
+    DLPOrganizationsLocationsInspectTemplatesGet (..),
     newDLPOrganizationsLocationsInspectTemplatesGet,
-    DLPOrganizationsLocationsInspectTemplatesGet,
 
     -- ** dlp.organizations.locations.inspectTemplates.list
     DLPOrganizationsLocationsInspectTemplatesListResource,
+    DLPOrganizationsLocationsInspectTemplatesList (..),
     newDLPOrganizationsLocationsInspectTemplatesList,
-    DLPOrganizationsLocationsInspectTemplatesList,
 
     -- ** dlp.organizations.locations.inspectTemplates.patch
     DLPOrganizationsLocationsInspectTemplatesPatchResource,
+    DLPOrganizationsLocationsInspectTemplatesPatch (..),
     newDLPOrganizationsLocationsInspectTemplatesPatch,
-    DLPOrganizationsLocationsInspectTemplatesPatch,
 
     -- ** dlp.organizations.locations.jobTriggers.create
     DLPOrganizationsLocationsJobTriggersCreateResource,
+    DLPOrganizationsLocationsJobTriggersCreate (..),
     newDLPOrganizationsLocationsJobTriggersCreate,
-    DLPOrganizationsLocationsJobTriggersCreate,
 
     -- ** dlp.organizations.locations.jobTriggers.delete
     DLPOrganizationsLocationsJobTriggersDeleteResource,
+    DLPOrganizationsLocationsJobTriggersDelete (..),
     newDLPOrganizationsLocationsJobTriggersDelete,
-    DLPOrganizationsLocationsJobTriggersDelete,
 
     -- ** dlp.organizations.locations.jobTriggers.get
     DLPOrganizationsLocationsJobTriggersGetResource,
+    DLPOrganizationsLocationsJobTriggersGet (..),
     newDLPOrganizationsLocationsJobTriggersGet,
-    DLPOrganizationsLocationsJobTriggersGet,
 
     -- ** dlp.organizations.locations.jobTriggers.list
     DLPOrganizationsLocationsJobTriggersListResource,
+    DLPOrganizationsLocationsJobTriggersList (..),
     newDLPOrganizationsLocationsJobTriggersList,
-    DLPOrganizationsLocationsJobTriggersList,
 
     -- ** dlp.organizations.locations.jobTriggers.patch
     DLPOrganizationsLocationsJobTriggersPatchResource,
+    DLPOrganizationsLocationsJobTriggersPatch (..),
     newDLPOrganizationsLocationsJobTriggersPatch,
-    DLPOrganizationsLocationsJobTriggersPatch,
 
     -- ** dlp.organizations.locations.storedInfoTypes.create
     DLPOrganizationsLocationsStoredInfoTypesCreateResource,
+    DLPOrganizationsLocationsStoredInfoTypesCreate (..),
     newDLPOrganizationsLocationsStoredInfoTypesCreate,
-    DLPOrganizationsLocationsStoredInfoTypesCreate,
 
     -- ** dlp.organizations.locations.storedInfoTypes.delete
     DLPOrganizationsLocationsStoredInfoTypesDeleteResource,
+    DLPOrganizationsLocationsStoredInfoTypesDelete (..),
     newDLPOrganizationsLocationsStoredInfoTypesDelete,
-    DLPOrganizationsLocationsStoredInfoTypesDelete,
 
     -- ** dlp.organizations.locations.storedInfoTypes.get
     DLPOrganizationsLocationsStoredInfoTypesGetResource,
+    DLPOrganizationsLocationsStoredInfoTypesGet (..),
     newDLPOrganizationsLocationsStoredInfoTypesGet,
-    DLPOrganizationsLocationsStoredInfoTypesGet,
 
     -- ** dlp.organizations.locations.storedInfoTypes.list
     DLPOrganizationsLocationsStoredInfoTypesListResource,
+    DLPOrganizationsLocationsStoredInfoTypesList (..),
     newDLPOrganizationsLocationsStoredInfoTypesList,
-    DLPOrganizationsLocationsStoredInfoTypesList,
 
     -- ** dlp.organizations.locations.storedInfoTypes.patch
     DLPOrganizationsLocationsStoredInfoTypesPatchResource,
+    DLPOrganizationsLocationsStoredInfoTypesPatch (..),
     newDLPOrganizationsLocationsStoredInfoTypesPatch,
-    DLPOrganizationsLocationsStoredInfoTypesPatch,
 
     -- ** dlp.organizations.storedInfoTypes.create
     DLPOrganizationsStoredInfoTypesCreateResource,
+    DLPOrganizationsStoredInfoTypesCreate (..),
     newDLPOrganizationsStoredInfoTypesCreate,
-    DLPOrganizationsStoredInfoTypesCreate,
 
     -- ** dlp.organizations.storedInfoTypes.delete
     DLPOrganizationsStoredInfoTypesDeleteResource,
+    DLPOrganizationsStoredInfoTypesDelete (..),
     newDLPOrganizationsStoredInfoTypesDelete,
-    DLPOrganizationsStoredInfoTypesDelete,
 
     -- ** dlp.organizations.storedInfoTypes.get
     DLPOrganizationsStoredInfoTypesGetResource,
+    DLPOrganizationsStoredInfoTypesGet (..),
     newDLPOrganizationsStoredInfoTypesGet,
-    DLPOrganizationsStoredInfoTypesGet,
 
     -- ** dlp.organizations.storedInfoTypes.list
     DLPOrganizationsStoredInfoTypesListResource,
+    DLPOrganizationsStoredInfoTypesList (..),
     newDLPOrganizationsStoredInfoTypesList,
-    DLPOrganizationsStoredInfoTypesList,
 
     -- ** dlp.organizations.storedInfoTypes.patch
     DLPOrganizationsStoredInfoTypesPatchResource,
+    DLPOrganizationsStoredInfoTypesPatch (..),
     newDLPOrganizationsStoredInfoTypesPatch,
-    DLPOrganizationsStoredInfoTypesPatch,
 
     -- ** dlp.projects.content.deidentify
     DLPProjectsContentDeidentifyResource,
+    DLPProjectsContentDeidentify (..),
     newDLPProjectsContentDeidentify,
-    DLPProjectsContentDeidentify,
 
     -- ** dlp.projects.content.inspect
     DLPProjectsContentInspectResource,
+    DLPProjectsContentInspect (..),
     newDLPProjectsContentInspect,
-    DLPProjectsContentInspect,
 
     -- ** dlp.projects.content.reidentify
     DLPProjectsContentReidentifyResource,
+    DLPProjectsContentReidentify (..),
     newDLPProjectsContentReidentify,
-    DLPProjectsContentReidentify,
 
     -- ** dlp.projects.deidentifyTemplates.create
     DLPProjectsDeidentifyTemplatesCreateResource,
+    DLPProjectsDeidentifyTemplatesCreate (..),
     newDLPProjectsDeidentifyTemplatesCreate,
-    DLPProjectsDeidentifyTemplatesCreate,
 
     -- ** dlp.projects.deidentifyTemplates.delete
     DLPProjectsDeidentifyTemplatesDeleteResource,
+    DLPProjectsDeidentifyTemplatesDelete (..),
     newDLPProjectsDeidentifyTemplatesDelete,
-    DLPProjectsDeidentifyTemplatesDelete,
 
     -- ** dlp.projects.deidentifyTemplates.get
     DLPProjectsDeidentifyTemplatesGetResource,
+    DLPProjectsDeidentifyTemplatesGet (..),
     newDLPProjectsDeidentifyTemplatesGet,
-    DLPProjectsDeidentifyTemplatesGet,
 
     -- ** dlp.projects.deidentifyTemplates.list
     DLPProjectsDeidentifyTemplatesListResource,
+    DLPProjectsDeidentifyTemplatesList (..),
     newDLPProjectsDeidentifyTemplatesList,
-    DLPProjectsDeidentifyTemplatesList,
 
     -- ** dlp.projects.deidentifyTemplates.patch
     DLPProjectsDeidentifyTemplatesPatchResource,
+    DLPProjectsDeidentifyTemplatesPatch (..),
     newDLPProjectsDeidentifyTemplatesPatch,
-    DLPProjectsDeidentifyTemplatesPatch,
 
     -- ** dlp.projects.dlpJobs.cancel
     DLPProjectsDlpJobsCancelResource,
+    DLPProjectsDlpJobsCancel (..),
     newDLPProjectsDlpJobsCancel,
-    DLPProjectsDlpJobsCancel,
 
     -- ** dlp.projects.dlpJobs.create
     DLPProjectsDlpJobsCreateResource,
+    DLPProjectsDlpJobsCreate (..),
     newDLPProjectsDlpJobsCreate,
-    DLPProjectsDlpJobsCreate,
 
     -- ** dlp.projects.dlpJobs.delete
     DLPProjectsDlpJobsDeleteResource,
+    DLPProjectsDlpJobsDelete (..),
     newDLPProjectsDlpJobsDelete,
-    DLPProjectsDlpJobsDelete,
 
     -- ** dlp.projects.dlpJobs.get
     DLPProjectsDlpJobsGetResource,
+    DLPProjectsDlpJobsGet (..),
     newDLPProjectsDlpJobsGet,
-    DLPProjectsDlpJobsGet,
 
     -- ** dlp.projects.dlpJobs.list
     DLPProjectsDlpJobsListResource,
+    DLPProjectsDlpJobsList (..),
     newDLPProjectsDlpJobsList,
-    DLPProjectsDlpJobsList,
 
     -- ** dlp.projects.image.redact
     DLPProjectsImageRedactResource,
+    DLPProjectsImageRedact (..),
     newDLPProjectsImageRedact,
-    DLPProjectsImageRedact,
 
     -- ** dlp.projects.inspectTemplates.create
     DLPProjectsInspectTemplatesCreateResource,
+    DLPProjectsInspectTemplatesCreate (..),
     newDLPProjectsInspectTemplatesCreate,
-    DLPProjectsInspectTemplatesCreate,
 
     -- ** dlp.projects.inspectTemplates.delete
     DLPProjectsInspectTemplatesDeleteResource,
+    DLPProjectsInspectTemplatesDelete (..),
     newDLPProjectsInspectTemplatesDelete,
-    DLPProjectsInspectTemplatesDelete,
 
     -- ** dlp.projects.inspectTemplates.get
     DLPProjectsInspectTemplatesGetResource,
+    DLPProjectsInspectTemplatesGet (..),
     newDLPProjectsInspectTemplatesGet,
-    DLPProjectsInspectTemplatesGet,
 
     -- ** dlp.projects.inspectTemplates.list
     DLPProjectsInspectTemplatesListResource,
+    DLPProjectsInspectTemplatesList (..),
     newDLPProjectsInspectTemplatesList,
-    DLPProjectsInspectTemplatesList,
 
     -- ** dlp.projects.inspectTemplates.patch
     DLPProjectsInspectTemplatesPatchResource,
+    DLPProjectsInspectTemplatesPatch (..),
     newDLPProjectsInspectTemplatesPatch,
-    DLPProjectsInspectTemplatesPatch,
 
     -- ** dlp.projects.jobTriggers.activate
     DLPProjectsJobTriggersActivateResource,
+    DLPProjectsJobTriggersActivate (..),
     newDLPProjectsJobTriggersActivate,
-    DLPProjectsJobTriggersActivate,
 
     -- ** dlp.projects.jobTriggers.create
     DLPProjectsJobTriggersCreateResource,
+    DLPProjectsJobTriggersCreate (..),
     newDLPProjectsJobTriggersCreate,
-    DLPProjectsJobTriggersCreate,
 
     -- ** dlp.projects.jobTriggers.delete
     DLPProjectsJobTriggersDeleteResource,
+    DLPProjectsJobTriggersDelete (..),
     newDLPProjectsJobTriggersDelete,
-    DLPProjectsJobTriggersDelete,
 
     -- ** dlp.projects.jobTriggers.get
     DLPProjectsJobTriggersGetResource,
+    DLPProjectsJobTriggersGet (..),
     newDLPProjectsJobTriggersGet,
-    DLPProjectsJobTriggersGet,
 
     -- ** dlp.projects.jobTriggers.list
     DLPProjectsJobTriggersListResource,
+    DLPProjectsJobTriggersList (..),
     newDLPProjectsJobTriggersList,
-    DLPProjectsJobTriggersList,
 
     -- ** dlp.projects.jobTriggers.patch
     DLPProjectsJobTriggersPatchResource,
+    DLPProjectsJobTriggersPatch (..),
     newDLPProjectsJobTriggersPatch,
-    DLPProjectsJobTriggersPatch,
 
     -- ** dlp.projects.locations.content.deidentify
     DLPProjectsLocationsContentDeidentifyResource,
+    DLPProjectsLocationsContentDeidentify (..),
     newDLPProjectsLocationsContentDeidentify,
-    DLPProjectsLocationsContentDeidentify,
 
     -- ** dlp.projects.locations.content.inspect
     DLPProjectsLocationsContentInspectResource,
+    DLPProjectsLocationsContentInspect (..),
     newDLPProjectsLocationsContentInspect,
-    DLPProjectsLocationsContentInspect,
 
     -- ** dlp.projects.locations.content.reidentify
     DLPProjectsLocationsContentReidentifyResource,
+    DLPProjectsLocationsContentReidentify (..),
     newDLPProjectsLocationsContentReidentify,
-    DLPProjectsLocationsContentReidentify,
 
     -- ** dlp.projects.locations.deidentifyTemplates.create
     DLPProjectsLocationsDeidentifyTemplatesCreateResource,
+    DLPProjectsLocationsDeidentifyTemplatesCreate (..),
     newDLPProjectsLocationsDeidentifyTemplatesCreate,
-    DLPProjectsLocationsDeidentifyTemplatesCreate,
 
     -- ** dlp.projects.locations.deidentifyTemplates.delete
     DLPProjectsLocationsDeidentifyTemplatesDeleteResource,
+    DLPProjectsLocationsDeidentifyTemplatesDelete (..),
     newDLPProjectsLocationsDeidentifyTemplatesDelete,
-    DLPProjectsLocationsDeidentifyTemplatesDelete,
 
     -- ** dlp.projects.locations.deidentifyTemplates.get
     DLPProjectsLocationsDeidentifyTemplatesGetResource,
+    DLPProjectsLocationsDeidentifyTemplatesGet (..),
     newDLPProjectsLocationsDeidentifyTemplatesGet,
-    DLPProjectsLocationsDeidentifyTemplatesGet,
 
     -- ** dlp.projects.locations.deidentifyTemplates.list
     DLPProjectsLocationsDeidentifyTemplatesListResource,
+    DLPProjectsLocationsDeidentifyTemplatesList (..),
     newDLPProjectsLocationsDeidentifyTemplatesList,
-    DLPProjectsLocationsDeidentifyTemplatesList,
 
     -- ** dlp.projects.locations.deidentifyTemplates.patch
     DLPProjectsLocationsDeidentifyTemplatesPatchResource,
+    DLPProjectsLocationsDeidentifyTemplatesPatch (..),
     newDLPProjectsLocationsDeidentifyTemplatesPatch,
-    DLPProjectsLocationsDeidentifyTemplatesPatch,
 
     -- ** dlp.projects.locations.dlpJobs.cancel
     DLPProjectsLocationsDlpJobsCancelResource,
+    DLPProjectsLocationsDlpJobsCancel (..),
     newDLPProjectsLocationsDlpJobsCancel,
-    DLPProjectsLocationsDlpJobsCancel,
 
     -- ** dlp.projects.locations.dlpJobs.create
     DLPProjectsLocationsDlpJobsCreateResource,
+    DLPProjectsLocationsDlpJobsCreate (..),
     newDLPProjectsLocationsDlpJobsCreate,
-    DLPProjectsLocationsDlpJobsCreate,
 
     -- ** dlp.projects.locations.dlpJobs.delete
     DLPProjectsLocationsDlpJobsDeleteResource,
+    DLPProjectsLocationsDlpJobsDelete (..),
     newDLPProjectsLocationsDlpJobsDelete,
-    DLPProjectsLocationsDlpJobsDelete,
 
     -- ** dlp.projects.locations.dlpJobs.finish
     DLPProjectsLocationsDlpJobsFinishResource,
+    DLPProjectsLocationsDlpJobsFinish (..),
     newDLPProjectsLocationsDlpJobsFinish,
-    DLPProjectsLocationsDlpJobsFinish,
 
     -- ** dlp.projects.locations.dlpJobs.get
     DLPProjectsLocationsDlpJobsGetResource,
+    DLPProjectsLocationsDlpJobsGet (..),
     newDLPProjectsLocationsDlpJobsGet,
-    DLPProjectsLocationsDlpJobsGet,
 
     -- ** dlp.projects.locations.dlpJobs.hybridInspect
     DLPProjectsLocationsDlpJobsHybridInspectResource,
+    DLPProjectsLocationsDlpJobsHybridInspect (..),
     newDLPProjectsLocationsDlpJobsHybridInspect,
-    DLPProjectsLocationsDlpJobsHybridInspect,
 
     -- ** dlp.projects.locations.dlpJobs.list
     DLPProjectsLocationsDlpJobsListResource,
+    DLPProjectsLocationsDlpJobsList (..),
     newDLPProjectsLocationsDlpJobsList,
-    DLPProjectsLocationsDlpJobsList,
 
     -- ** dlp.projects.locations.image.redact
     DLPProjectsLocationsImageRedactResource,
+    DLPProjectsLocationsImageRedact (..),
     newDLPProjectsLocationsImageRedact,
-    DLPProjectsLocationsImageRedact,
 
     -- ** dlp.projects.locations.inspectTemplates.create
     DLPProjectsLocationsInspectTemplatesCreateResource,
+    DLPProjectsLocationsInspectTemplatesCreate (..),
     newDLPProjectsLocationsInspectTemplatesCreate,
-    DLPProjectsLocationsInspectTemplatesCreate,
 
     -- ** dlp.projects.locations.inspectTemplates.delete
     DLPProjectsLocationsInspectTemplatesDeleteResource,
+    DLPProjectsLocationsInspectTemplatesDelete (..),
     newDLPProjectsLocationsInspectTemplatesDelete,
-    DLPProjectsLocationsInspectTemplatesDelete,
 
     -- ** dlp.projects.locations.inspectTemplates.get
     DLPProjectsLocationsInspectTemplatesGetResource,
+    DLPProjectsLocationsInspectTemplatesGet (..),
     newDLPProjectsLocationsInspectTemplatesGet,
-    DLPProjectsLocationsInspectTemplatesGet,
 
     -- ** dlp.projects.locations.inspectTemplates.list
     DLPProjectsLocationsInspectTemplatesListResource,
+    DLPProjectsLocationsInspectTemplatesList (..),
     newDLPProjectsLocationsInspectTemplatesList,
-    DLPProjectsLocationsInspectTemplatesList,
 
     -- ** dlp.projects.locations.inspectTemplates.patch
     DLPProjectsLocationsInspectTemplatesPatchResource,
+    DLPProjectsLocationsInspectTemplatesPatch (..),
     newDLPProjectsLocationsInspectTemplatesPatch,
-    DLPProjectsLocationsInspectTemplatesPatch,
 
     -- ** dlp.projects.locations.jobTriggers.activate
     DLPProjectsLocationsJobTriggersActivateResource,
+    DLPProjectsLocationsJobTriggersActivate (..),
     newDLPProjectsLocationsJobTriggersActivate,
-    DLPProjectsLocationsJobTriggersActivate,
 
     -- ** dlp.projects.locations.jobTriggers.create
     DLPProjectsLocationsJobTriggersCreateResource,
+    DLPProjectsLocationsJobTriggersCreate (..),
     newDLPProjectsLocationsJobTriggersCreate,
-    DLPProjectsLocationsJobTriggersCreate,
 
     -- ** dlp.projects.locations.jobTriggers.delete
     DLPProjectsLocationsJobTriggersDeleteResource,
+    DLPProjectsLocationsJobTriggersDelete (..),
     newDLPProjectsLocationsJobTriggersDelete,
-    DLPProjectsLocationsJobTriggersDelete,
 
     -- ** dlp.projects.locations.jobTriggers.get
     DLPProjectsLocationsJobTriggersGetResource,
+    DLPProjectsLocationsJobTriggersGet (..),
     newDLPProjectsLocationsJobTriggersGet,
-    DLPProjectsLocationsJobTriggersGet,
 
     -- ** dlp.projects.locations.jobTriggers.hybridInspect
     DLPProjectsLocationsJobTriggersHybridInspectResource,
+    DLPProjectsLocationsJobTriggersHybridInspect (..),
     newDLPProjectsLocationsJobTriggersHybridInspect,
-    DLPProjectsLocationsJobTriggersHybridInspect,
 
     -- ** dlp.projects.locations.jobTriggers.list
     DLPProjectsLocationsJobTriggersListResource,
+    DLPProjectsLocationsJobTriggersList (..),
     newDLPProjectsLocationsJobTriggersList,
-    DLPProjectsLocationsJobTriggersList,
 
     -- ** dlp.projects.locations.jobTriggers.patch
     DLPProjectsLocationsJobTriggersPatchResource,
+    DLPProjectsLocationsJobTriggersPatch (..),
     newDLPProjectsLocationsJobTriggersPatch,
-    DLPProjectsLocationsJobTriggersPatch,
 
     -- ** dlp.projects.locations.storedInfoTypes.create
     DLPProjectsLocationsStoredInfoTypesCreateResource,
+    DLPProjectsLocationsStoredInfoTypesCreate (..),
     newDLPProjectsLocationsStoredInfoTypesCreate,
-    DLPProjectsLocationsStoredInfoTypesCreate,
 
     -- ** dlp.projects.locations.storedInfoTypes.delete
     DLPProjectsLocationsStoredInfoTypesDeleteResource,
+    DLPProjectsLocationsStoredInfoTypesDelete (..),
     newDLPProjectsLocationsStoredInfoTypesDelete,
-    DLPProjectsLocationsStoredInfoTypesDelete,
 
     -- ** dlp.projects.locations.storedInfoTypes.get
     DLPProjectsLocationsStoredInfoTypesGetResource,
+    DLPProjectsLocationsStoredInfoTypesGet (..),
     newDLPProjectsLocationsStoredInfoTypesGet,
-    DLPProjectsLocationsStoredInfoTypesGet,
 
     -- ** dlp.projects.locations.storedInfoTypes.list
     DLPProjectsLocationsStoredInfoTypesListResource,
+    DLPProjectsLocationsStoredInfoTypesList (..),
     newDLPProjectsLocationsStoredInfoTypesList,
-    DLPProjectsLocationsStoredInfoTypesList,
 
     -- ** dlp.projects.locations.storedInfoTypes.patch
     DLPProjectsLocationsStoredInfoTypesPatchResource,
+    DLPProjectsLocationsStoredInfoTypesPatch (..),
     newDLPProjectsLocationsStoredInfoTypesPatch,
-    DLPProjectsLocationsStoredInfoTypesPatch,
 
     -- ** dlp.projects.storedInfoTypes.create
     DLPProjectsStoredInfoTypesCreateResource,
+    DLPProjectsStoredInfoTypesCreate (..),
     newDLPProjectsStoredInfoTypesCreate,
-    DLPProjectsStoredInfoTypesCreate,
 
     -- ** dlp.projects.storedInfoTypes.delete
     DLPProjectsStoredInfoTypesDeleteResource,
+    DLPProjectsStoredInfoTypesDelete (..),
     newDLPProjectsStoredInfoTypesDelete,
-    DLPProjectsStoredInfoTypesDelete,
 
     -- ** dlp.projects.storedInfoTypes.get
     DLPProjectsStoredInfoTypesGetResource,
+    DLPProjectsStoredInfoTypesGet (..),
     newDLPProjectsStoredInfoTypesGet,
-    DLPProjectsStoredInfoTypesGet,
 
     -- ** dlp.projects.storedInfoTypes.list
     DLPProjectsStoredInfoTypesListResource,
+    DLPProjectsStoredInfoTypesList (..),
     newDLPProjectsStoredInfoTypesList,
-    DLPProjectsStoredInfoTypesList,
 
     -- ** dlp.projects.storedInfoTypes.patch
     DLPProjectsStoredInfoTypesPatchResource,
+    DLPProjectsStoredInfoTypesPatch (..),
     newDLPProjectsStoredInfoTypesPatch,
-    DLPProjectsStoredInfoTypesPatch,
 
     -- * Types
 

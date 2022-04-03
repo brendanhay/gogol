@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.GetMetrics
     DataflowProjectsJobsGetMetricsResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsGetMetrics (..),
     newDataflowProjectsJobsGetMetrics,
-    DataflowProjectsJobsGetMetrics,
   )
 where
 

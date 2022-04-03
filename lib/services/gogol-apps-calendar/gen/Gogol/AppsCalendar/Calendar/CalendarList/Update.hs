@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.CalendarList.Update
     CalendarCalendarListUpdateResource,
 
     -- ** Constructing a Request
+    CalendarCalendarListUpdate (..),
     newCalendarCalendarListUpdate,
-    CalendarCalendarListUpdate,
   )
 where
 

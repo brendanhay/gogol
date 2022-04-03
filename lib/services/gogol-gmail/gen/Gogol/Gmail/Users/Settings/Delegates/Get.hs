@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.Delegates.Get
     GmailUsersSettingsDelegatesGetResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsDelegatesGet (..),
     newGmailUsersSettingsDelegatesGet,
-    GmailUsersSettingsDelegatesGet,
   )
 where
 

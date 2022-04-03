@@ -34,8 +34,8 @@ module Gogol.Storage.Projects.HmacKeys.Delete
     StorageProjectsHmacKeysDeleteResource,
 
     -- ** Constructing a Request
+    StorageProjectsHmacKeysDelete (..),
     newStorageProjectsHmacKeysDelete,
-    StorageProjectsHmacKeysDelete,
   )
 where
 

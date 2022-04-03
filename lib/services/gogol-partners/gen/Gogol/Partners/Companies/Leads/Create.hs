@@ -34,8 +34,8 @@ module Gogol.Partners.Companies.Leads.Create
     PartnersCompaniesLeadsCreateResource,
 
     -- ** Constructing a Request
+    PartnersCompaniesLeadsCreate (..),
     newPartnersCompaniesLeadsCreate,
-    PartnersCompaniesLeadsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Products.Get
     ContentProductsGetResource,
 
     -- ** Constructing a Request
+    ContentProductsGet (..),
     newContentProductsGet,
-    ContentProductsGet,
   )
 where
 

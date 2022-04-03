@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.AddPermissions
     VaultMattersAddPermissionsResource,
 
     -- ** Constructing a Request
+    VaultMattersAddPermissions (..),
     newVaultMattersAddPermissions,
-    VaultMattersAddPermissions,
   )
 where
 

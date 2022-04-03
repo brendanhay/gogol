@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.BatchGet
     FireStoreProjectsDatabasesDocumentsBatchGetResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsBatchGet (..),
     newFireStoreProjectsDatabasesDocumentsBatchGet,
-    FireStoreProjectsDatabasesDocumentsBatchGet,
   )
 where
 

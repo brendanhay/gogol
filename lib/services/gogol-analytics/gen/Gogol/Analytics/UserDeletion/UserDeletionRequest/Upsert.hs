@@ -34,8 +34,8 @@ module Gogol.Analytics.UserDeletion.UserDeletionRequest.Upsert
     AnalyticsUserDeletionUserDeletionRequestUpsertResource,
 
     -- ** Constructing a Request
+    AnalyticsUserDeletionUserDeletionRequestUpsert (..),
     newAnalyticsUserDeletionUserDeletionRequestUpsert,
-    AnalyticsUserDeletionUserDeletionRequestUpsert,
   )
 where
 

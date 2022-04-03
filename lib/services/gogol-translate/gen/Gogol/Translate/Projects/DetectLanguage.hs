@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.DetectLanguage
     TranslateProjectsDetectLanguageResource,
 
     -- ** Constructing a Request
+    TranslateProjectsDetectLanguage (..),
     newTranslateProjectsDetectLanguage,
-    TranslateProjectsDetectLanguage,
   )
 where
 

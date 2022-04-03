@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Get
     TasksTasksGetResource,
 
     -- ** Constructing a Request
+    TasksTasksGet (..),
     newTasksTasksGet,
-    TasksTasksGet,
   )
 where
 

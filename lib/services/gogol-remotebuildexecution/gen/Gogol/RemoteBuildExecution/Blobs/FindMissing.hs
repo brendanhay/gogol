@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.Blobs.FindMissing
     RemoteBuildExecutionBlobsFindMissingResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionBlobsFindMissing (..),
     newRemoteBuildExecutionBlobsFindMissing,
-    RemoteBuildExecutionBlobsFindMissing,
   )
 where
 

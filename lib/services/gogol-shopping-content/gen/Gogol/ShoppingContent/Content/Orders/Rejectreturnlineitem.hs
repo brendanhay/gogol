@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Rejectreturnlineitem
     ContentOrdersRejectreturnlineitemResource,
 
     -- ** Constructing a Request
+    ContentOrdersRejectreturnlineitem (..),
     newContentOrdersRejectreturnlineitem,
-    ContentOrdersRejectreturnlineitem,
   )
 where
 

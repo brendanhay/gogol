@@ -34,8 +34,8 @@ module Gogol.FusionTables.Template.Update
     FusionTablesTemplateUpdateResource,
 
     -- ** Constructing a Request
+    FusionTablesTemplateUpdate (..),
     newFusionTablesTemplateUpdate,
-    FusionTablesTemplateUpdate,
   )
 where
 

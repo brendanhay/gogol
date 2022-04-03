@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferJobs.Get
     StorageTransferTransferJobsGetResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferJobsGet (..),
     newStorageTransferTransferJobsGet,
-    StorageTransferTransferJobsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.GetIamPolicy
     StorageBucketsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    StorageBucketsGetIamPolicy (..),
     newStorageBucketsGetIamPolicy,
-    StorageBucketsGetIamPolicy,
   )
 where
 

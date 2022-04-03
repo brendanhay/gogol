@@ -34,8 +34,8 @@ module Gogol.CloudScheduler.Projects.Locations.Jobs.Delete
     CloudSchedulerProjectsLocationsJobsDeleteResource,
 
     -- ** Constructing a Request
+    CloudSchedulerProjectsLocationsJobsDelete (..),
     newCloudSchedulerProjectsLocationsJobsDelete,
-    CloudSchedulerProjectsLocationsJobsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Adclients.Customchannels.Get
     AdSenseAccountsAdclientsCustomchannelsGetResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsAdclientsCustomchannelsGet (..),
     newAdSenseAccountsAdclientsCustomchannelsGet,
-    AdSenseAccountsAdclientsCustomchannelsGet,
   )
 where
 

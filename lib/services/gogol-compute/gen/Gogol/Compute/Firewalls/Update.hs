@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.Update
     ComputeFirewallsUpdateResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsUpdate (..),
     newComputeFirewallsUpdate,
-    ComputeFirewallsUpdate,
   )
 where
 

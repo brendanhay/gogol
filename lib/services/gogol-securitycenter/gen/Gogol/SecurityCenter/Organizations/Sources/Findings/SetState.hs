@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.Findings.SetState
     SecurityCenterOrganizationsSourcesFindingsSetStateResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesFindingsSetState (..),
     newSecurityCenterOrganizationsSourcesFindingsSetState,
-    SecurityCenterOrganizationsSourcesFindingsSetState,
   )
 where
 

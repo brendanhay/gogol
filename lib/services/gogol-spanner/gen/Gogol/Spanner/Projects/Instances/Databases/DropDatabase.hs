@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.DropDatabase
     SpannerProjectsInstancesDatabasesDropDatabaseResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesDropDatabase (..),
     newSpannerProjectsInstancesDatabasesDropDatabase,
-    SpannerProjectsInstancesDatabasesDropDatabase,
   )
 where
 

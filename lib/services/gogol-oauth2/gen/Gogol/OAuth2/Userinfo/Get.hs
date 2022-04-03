@@ -32,8 +32,8 @@ module Gogol.OAuth2.Userinfo.Get
     OAuth2UserinfoGetResource,
 
     -- ** Constructing a Request
+    OAuth2UserinfoGet (..),
     newOAuth2UserinfoGet,
-    OAuth2UserinfoGet,
   )
 where
 

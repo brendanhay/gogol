@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Countryavailability.Get
     AndroidPublisherEditsCountryavailabilityGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsCountryavailabilityGet (..),
     newAndroidPublisherEditsCountryavailabilityGet,
-    AndroidPublisherEditsCountryavailabilityGet,
   )
 where
 

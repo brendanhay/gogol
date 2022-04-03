@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.Validate
     ComputeUrlMapsValidateResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsValidate (..),
     newComputeUrlMapsValidate,
-    ComputeUrlMapsValidate,
   )
 where
 

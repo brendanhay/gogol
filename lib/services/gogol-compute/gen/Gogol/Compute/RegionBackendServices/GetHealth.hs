@@ -34,8 +34,8 @@ module Gogol.Compute.RegionBackendServices.GetHealth
     ComputeRegionBackendServicesGetHealthResource,
 
     -- ** Constructing a Request
+    ComputeRegionBackendServicesGetHealth (..),
     newComputeRegionBackendServicesGetHealth,
-    ComputeRegionBackendServicesGetHealth,
   )
 where
 

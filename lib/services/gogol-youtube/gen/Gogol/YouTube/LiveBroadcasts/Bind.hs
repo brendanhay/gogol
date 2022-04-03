@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveBroadcasts.Bind
     YouTubeLiveBroadcastsBindResource,
 
     -- ** Constructing a Request
+    YouTubeLiveBroadcastsBind (..),
     newYouTubeLiveBroadcastsBind,
-    YouTubeLiveBroadcastsBind,
   )
 where
 

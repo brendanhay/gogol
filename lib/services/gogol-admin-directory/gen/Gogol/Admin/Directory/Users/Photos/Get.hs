@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Photos.Get
     DirectoryUsersPhotosGetResource,
 
     -- ** Constructing a Request
+    DirectoryUsersPhotosGet (..),
     newDirectoryUsersPhotosGet,
-    DirectoryUsersPhotosGet,
   )
 where
 

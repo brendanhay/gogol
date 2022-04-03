@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Schemas.Update
     DirectorySchemasUpdateResource,
 
     -- ** Constructing a Request
+    DirectorySchemasUpdate (..),
     newDirectorySchemasUpdate,
-    DirectorySchemasUpdate,
   )
 where
 

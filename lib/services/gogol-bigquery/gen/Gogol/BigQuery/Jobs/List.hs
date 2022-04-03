@@ -34,8 +34,8 @@ module Gogol.BigQuery.Jobs.List
     BigQueryJobsListResource,
 
     -- ** Constructing a Request
+    BigQueryJobsList (..),
     newBigQueryJobsList,
-    BigQueryJobsList,
   )
 where
 

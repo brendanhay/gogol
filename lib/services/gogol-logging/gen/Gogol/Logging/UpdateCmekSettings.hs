@@ -34,8 +34,8 @@ module Gogol.Logging.UpdateCmekSettings
     LoggingUpdateCmekSettingsResource,
 
     -- ** Constructing a Request
+    LoggingUpdateCmekSettings (..),
     newLoggingUpdateCmekSettings,
-    LoggingUpdateCmekSettings,
   )
 where
 

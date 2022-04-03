@@ -40,8 +40,8 @@ module Gogol.AppsActivity
 
     -- ** appsactivity.activities.list
     AppsActivityActivitiesListResource,
+    AppsActivityActivitiesList (..),
     newAppsActivityActivitiesList,
-    AppsActivityActivitiesList,
 
     -- * Types
 

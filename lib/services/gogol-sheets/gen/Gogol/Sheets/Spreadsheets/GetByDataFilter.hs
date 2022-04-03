@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.GetByDataFilter
     SheetsSpreadsheetsGetByDataFilterResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsGetByDataFilter (..),
     newSheetsSpreadsheetsGetByDataFilter,
-    SheetsSpreadsheetsGetByDataFilter,
   )
 where
 

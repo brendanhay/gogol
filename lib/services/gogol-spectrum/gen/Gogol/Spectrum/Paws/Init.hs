@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.Init
     SpectrumPawsInitResource,
 
     -- ** Constructing a Request
+    SpectrumPawsInit (..),
     newSpectrumPawsInit,
-    SpectrumPawsInit,
   )
 where
 

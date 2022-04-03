@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.Create
     CloudbillingBillingAccountsCreateResource,
 
     -- ** Constructing a Request
+    CloudbillingBillingAccountsCreate (..),
     newCloudbillingBillingAccountsCreate,
-    CloudbillingBillingAccountsCreate,
   )
 where
 

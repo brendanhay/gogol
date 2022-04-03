@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.SslCerts.Insert
     SqlSslCertsInsertResource,
 
     -- ** Constructing a Request
+    SqlSslCertsInsert (..),
     newSqlSslCertsInsert,
-    SqlSslCertsInsert,
   )
 where
 

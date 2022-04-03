@@ -34,8 +34,8 @@ module Gogol.BigQuery.Jobs.Insert
     BigQueryJobsInsertResource,
 
     -- ** Constructing a Request
+    BigQueryJobsInsert (..),
     newBigQueryJobsInsert,
-    BigQueryJobsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.QuickAdd
     CalendarEventsQuickAddResource,
 
     -- ** Constructing a Request
+    CalendarEventsQuickAdd (..),
     newCalendarEventsQuickAdd,
-    CalendarEventsQuickAdd,
   )
 where
 

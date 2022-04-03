@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Get
     GmailUsersMessagesGetResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesGet (..),
     newGmailUsersMessagesGet,
-    GmailUsersMessagesGet,
   )
 where
 

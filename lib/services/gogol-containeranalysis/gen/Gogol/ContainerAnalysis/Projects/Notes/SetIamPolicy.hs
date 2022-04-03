@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Notes.SetIamPolicy
     ContainerAnalysisProjectsNotesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsNotesSetIamPolicy (..),
     newContainerAnalysisProjectsNotesSetIamPolicy,
-    ContainerAnalysisProjectsNotesSetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.TranslateText
     TranslateProjectsTranslateTextResource,
 
     -- ** Constructing a Request
+    TranslateProjectsTranslateText (..),
     newTranslateProjectsTranslateText,
-    TranslateProjectsTranslateText,
   )
 where
 

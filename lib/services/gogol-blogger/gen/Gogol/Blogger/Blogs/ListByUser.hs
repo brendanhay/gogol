@@ -34,8 +34,8 @@ module Gogol.Blogger.Blogs.ListByUser
     BloggerBlogsListByUserResource,
 
     -- ** Constructing a Request
+    BloggerBlogsListByUser (..),
     newBloggerBlogsListByUser,
-    BloggerBlogsListByUser,
   )
 where
 

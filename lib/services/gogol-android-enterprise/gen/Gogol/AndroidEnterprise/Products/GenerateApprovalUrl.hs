@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.GenerateApprovalUrl
     AndroidEnterpriseProductsGenerateApprovalUrlResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsGenerateApprovalUrl (..),
     newAndroidEnterpriseProductsGenerateApprovalUrl,
-    AndroidEnterpriseProductsGenerateApprovalUrl,
   )
 where
 

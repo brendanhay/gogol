@@ -34,8 +34,8 @@ module Gogol.Storage.DefaultObjectAccessControls.Update
     StorageDefaultObjectAccessControlsUpdateResource,
 
     -- ** Constructing a Request
+    StorageDefaultObjectAccessControlsUpdate (..),
     newStorageDefaultObjectAccessControlsUpdate,
-    StorageDefaultObjectAccessControlsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Comments.List
     DriveCommentsListResource,
 
     -- ** Constructing a Request
+    DriveCommentsList (..),
     newDriveCommentsList,
-    DriveCommentsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Operations.SetIamPolicy
     DataprocProjectsRegionsOperationsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsOperationsSetIamPolicy (..),
     newDataprocProjectsRegionsOperationsSetIamPolicy,
-    DataprocProjectsRegionsOperationsSetIamPolicy,
   )
 where
 

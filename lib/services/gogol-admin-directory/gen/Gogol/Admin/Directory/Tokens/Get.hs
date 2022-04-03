@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Tokens.Get
     DirectoryTokensGetResource,
 
     -- ** Constructing a Request
+    DirectoryTokensGet (..),
     newDirectoryTokensGet,
-    DirectoryTokensGet,
   )
 where
 

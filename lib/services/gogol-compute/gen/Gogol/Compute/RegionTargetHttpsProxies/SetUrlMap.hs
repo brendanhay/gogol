@@ -34,8 +34,8 @@ module Gogol.Compute.RegionTargetHttpsProxies.SetUrlMap
     ComputeRegionTargetHttpsProxiesSetUrlMapResource,
 
     -- ** Constructing a Request
+    ComputeRegionTargetHttpsProxiesSetUrlMap (..),
     newComputeRegionTargetHttpsProxiesSetUrlMap,
-    ComputeRegionTargetHttpsProxiesSetUrlMap,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.UploadAccount
     IdentityToolkitRelyingpartyUploadAccountResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyUploadAccount (..),
     newIdentityToolkitRelyingpartyUploadAccount,
-    IdentityToolkitRelyingpartyUploadAccount,
   )
 where
 

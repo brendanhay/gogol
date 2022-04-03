@@ -36,8 +36,8 @@ module Gogol.CloudPrivateCatalogProducer.Operations.List
     CloudPrivateCatalogProducerOperationsListResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerOperationsList (..),
     newCloudPrivateCatalogProducerOperationsList,
-    CloudPrivateCatalogProducerOperationsList,
   )
 where
 

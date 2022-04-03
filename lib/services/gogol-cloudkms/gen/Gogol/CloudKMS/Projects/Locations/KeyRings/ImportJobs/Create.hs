@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Create
     CloudKMSProjectsLocationsKeyRingsImportJobsCreateResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsImportJobsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsCreate,
-    CloudKMSProjectsLocationsKeyRingsImportJobsCreate,
   )
 where
 

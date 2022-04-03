@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomDimensions.Insert
     AnalyticsManagementCustomDimensionsInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomDimensionsInsert (..),
     newAnalyticsManagementCustomDimensionsInsert,
-    AnalyticsManagementCustomDimensionsInsert,
   )
 where
 

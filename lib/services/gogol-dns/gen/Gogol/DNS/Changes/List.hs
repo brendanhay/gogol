@@ -34,8 +34,8 @@ module Gogol.DNS.Changes.List
     DNSChangesListResource,
 
     -- ** Constructing a Request
+    DNSChangesList (..),
     newDNSChangesList,
-    DNSChangesList,
   )
 where
 

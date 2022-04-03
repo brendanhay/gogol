@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Customers.Get
     DirectoryCustomersGetResource,
 
     -- ** Constructing a Request
+    DirectoryCustomersGet (..),
     newDirectoryCustomersGet,
-    DirectoryCustomersGet,
   )
 where
 

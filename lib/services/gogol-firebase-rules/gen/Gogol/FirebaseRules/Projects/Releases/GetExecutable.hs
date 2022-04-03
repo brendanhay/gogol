@@ -34,8 +34,8 @@ module Gogol.FirebaseRules.Projects.Releases.GetExecutable
     FirebaseRulesProjectsReleasesGetExecutableResource,
 
     -- ** Constructing a Request
+    FirebaseRulesProjectsReleasesGetExecutable (..),
     newFirebaseRulesProjectsReleasesGetExecutable,
-    FirebaseRulesProjectsReleasesGetExecutable,
   )
 where
 

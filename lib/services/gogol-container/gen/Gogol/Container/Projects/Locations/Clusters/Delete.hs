@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.Delete
     ContainerProjectsLocationsClustersDeleteResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersDelete (..),
     newContainerProjectsLocationsClustersDelete,
-    ContainerProjectsLocationsClustersDelete,
   )
 where
 

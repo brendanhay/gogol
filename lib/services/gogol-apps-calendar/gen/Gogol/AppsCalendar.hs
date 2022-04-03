@@ -44,188 +44,188 @@ module Gogol.AppsCalendar
 
     -- ** calendar.acl.delete
     CalendarAclDeleteResource,
+    CalendarAclDelete (..),
     newCalendarAclDelete,
-    CalendarAclDelete,
 
     -- ** calendar.acl.get
     CalendarAclGetResource,
+    CalendarAclGet (..),
     newCalendarAclGet,
-    CalendarAclGet,
 
     -- ** calendar.acl.insert
     CalendarAclInsertResource,
+    CalendarAclInsert (..),
     newCalendarAclInsert,
-    CalendarAclInsert,
 
     -- ** calendar.acl.list
     CalendarAclListResource,
+    CalendarAclList (..),
     newCalendarAclList,
-    CalendarAclList,
 
     -- ** calendar.acl.patch
     CalendarAclPatchResource,
+    CalendarAclPatch (..),
     newCalendarAclPatch,
-    CalendarAclPatch,
 
     -- ** calendar.acl.update
     CalendarAclUpdateResource,
+    CalendarAclUpdate (..),
     newCalendarAclUpdate,
-    CalendarAclUpdate,
 
     -- ** calendar.acl.watch
     CalendarAclWatchResource,
+    CalendarAclWatch (..),
     newCalendarAclWatch,
-    CalendarAclWatch,
 
     -- ** calendar.calendarList.delete
     CalendarCalendarListDeleteResource,
+    CalendarCalendarListDelete (..),
     newCalendarCalendarListDelete,
-    CalendarCalendarListDelete,
 
     -- ** calendar.calendarList.get
     CalendarCalendarListGetResource,
+    CalendarCalendarListGet (..),
     newCalendarCalendarListGet,
-    CalendarCalendarListGet,
 
     -- ** calendar.calendarList.insert
     CalendarCalendarListInsertResource,
+    CalendarCalendarListInsert (..),
     newCalendarCalendarListInsert,
-    CalendarCalendarListInsert,
 
     -- ** calendar.calendarList.list
     CalendarCalendarListListResource,
+    CalendarCalendarListList (..),
     newCalendarCalendarListList,
-    CalendarCalendarListList,
 
     -- ** calendar.calendarList.patch
     CalendarCalendarListPatchResource,
+    CalendarCalendarListPatch (..),
     newCalendarCalendarListPatch,
-    CalendarCalendarListPatch,
 
     -- ** calendar.calendarList.update
     CalendarCalendarListUpdateResource,
+    CalendarCalendarListUpdate (..),
     newCalendarCalendarListUpdate,
-    CalendarCalendarListUpdate,
 
     -- ** calendar.calendarList.watch
     CalendarCalendarListWatchResource,
+    CalendarCalendarListWatch (..),
     newCalendarCalendarListWatch,
-    CalendarCalendarListWatch,
 
     -- ** calendar.calendars.clear
     CalendarCalendarsClearResource,
+    CalendarCalendarsClear (..),
     newCalendarCalendarsClear,
-    CalendarCalendarsClear,
 
     -- ** calendar.calendars.delete
     CalendarCalendarsDeleteResource,
+    CalendarCalendarsDelete (..),
     newCalendarCalendarsDelete,
-    CalendarCalendarsDelete,
 
     -- ** calendar.calendars.get
     CalendarCalendarsGetResource,
+    CalendarCalendarsGet (..),
     newCalendarCalendarsGet,
-    CalendarCalendarsGet,
 
     -- ** calendar.calendars.insert
     CalendarCalendarsInsertResource,
+    CalendarCalendarsInsert (..),
     newCalendarCalendarsInsert,
-    CalendarCalendarsInsert,
 
     -- ** calendar.calendars.patch
     CalendarCalendarsPatchResource,
+    CalendarCalendarsPatch (..),
     newCalendarCalendarsPatch,
-    CalendarCalendarsPatch,
 
     -- ** calendar.calendars.update
     CalendarCalendarsUpdateResource,
+    CalendarCalendarsUpdate (..),
     newCalendarCalendarsUpdate,
-    CalendarCalendarsUpdate,
 
     -- ** calendar.channels.stop
     CalendarChannelsStopResource,
+    CalendarChannelsStop (..),
     newCalendarChannelsStop,
-    CalendarChannelsStop,
 
     -- ** calendar.colors.get
     CalendarColorsGetResource,
+    CalendarColorsGet (..),
     newCalendarColorsGet,
-    CalendarColorsGet,
 
     -- ** calendar.events.delete
     CalendarEventsDeleteResource,
+    CalendarEventsDelete (..),
     newCalendarEventsDelete,
-    CalendarEventsDelete,
 
     -- ** calendar.events.get
     CalendarEventsGetResource,
+    CalendarEventsGet (..),
     newCalendarEventsGet,
-    CalendarEventsGet,
 
     -- ** calendar.events.import
     CalendarEventsImportResource,
+    CalendarEventsImport (..),
     newCalendarEventsImport,
-    CalendarEventsImport,
 
     -- ** calendar.events.insert
     CalendarEventsInsertResource,
+    CalendarEventsInsert (..),
     newCalendarEventsInsert,
-    CalendarEventsInsert,
 
     -- ** calendar.events.instances
     CalendarEventsInstancesResource,
+    CalendarEventsInstances (..),
     newCalendarEventsInstances,
-    CalendarEventsInstances,
 
     -- ** calendar.events.list
     CalendarEventsListResource,
+    CalendarEventsList (..),
     newCalendarEventsList,
-    CalendarEventsList,
 
     -- ** calendar.events.move
     CalendarEventsMoveResource,
+    CalendarEventsMove (..),
     newCalendarEventsMove,
-    CalendarEventsMove,
 
     -- ** calendar.events.patch
     CalendarEventsPatchResource,
+    CalendarEventsPatch (..),
     newCalendarEventsPatch,
-    CalendarEventsPatch,
 
     -- ** calendar.events.quickAdd
     CalendarEventsQuickAddResource,
+    CalendarEventsQuickAdd (..),
     newCalendarEventsQuickAdd,
-    CalendarEventsQuickAdd,
 
     -- ** calendar.events.update
     CalendarEventsUpdateResource,
+    CalendarEventsUpdate (..),
     newCalendarEventsUpdate,
-    CalendarEventsUpdate,
 
     -- ** calendar.events.watch
     CalendarEventsWatchResource,
+    CalendarEventsWatch (..),
     newCalendarEventsWatch,
-    CalendarEventsWatch,
 
     -- ** calendar.freebusy.query
     CalendarFreebusyQueryResource,
+    CalendarFreebusyQuery (..),
     newCalendarFreebusyQuery,
-    CalendarFreebusyQuery,
 
     -- ** calendar.settings.get
     CalendarSettingsGetResource,
+    CalendarSettingsGet (..),
     newCalendarSettingsGet,
-    CalendarSettingsGet,
 
     -- ** calendar.settings.list
     CalendarSettingsListResource,
+    CalendarSettingsList (..),
     newCalendarSettingsList,
-    CalendarSettingsList,
 
     -- ** calendar.settings.watch
     CalendarSettingsWatchResource,
+    CalendarSettingsWatch (..),
     newCalendarSettingsWatch,
-    CalendarSettingsWatch,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.RemoveRule
     ComputeSecurityPoliciesRemoveRuleResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesRemoveRule (..),
     newComputeSecurityPoliciesRemoveRule,
-    ComputeSecurityPoliciesRemoveRule,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.Insert
     ComputeNodeGroupsInsertResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsInsert (..),
     newComputeNodeGroupsInsert,
-    ComputeNodeGroupsInsert,
   )
 where
 

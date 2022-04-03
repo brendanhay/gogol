@@ -34,8 +34,8 @@ module Gogol.DFAReporting.FloodlightActivities.Update
     DFAReportingFloodlightActivitiesUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingFloodlightActivitiesUpdate (..),
     newDFAReportingFloodlightActivitiesUpdate,
-    DFAReportingFloodlightActivitiesUpdate,
   )
 where
 

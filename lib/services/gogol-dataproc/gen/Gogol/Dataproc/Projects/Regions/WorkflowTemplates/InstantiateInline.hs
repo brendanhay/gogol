@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.InstantiateInline
     DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline (..),
     newDataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
-    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
   )
 where
 

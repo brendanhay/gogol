@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
     AndroidDeviceProvisioningPartnersDevicesClaimAsyncResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesClaimAsync (..),
     newAndroidDeviceProvisioningPartnersDevicesClaimAsync,
-    AndroidDeviceProvisioningPartnersDevicesClaimAsync,
   )
 where
 

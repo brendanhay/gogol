@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.TestIamPermissions
     DeploymentManagerDeploymentsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsTestIamPermissions (..),
     newDeploymentManagerDeploymentsTestIamPermissions,
-    DeploymentManagerDeploymentsTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Delete
     CloudresourcemanagerTagKeysDeleteResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagKeysDelete (..),
     newCloudresourcemanagerTagKeysDelete,
-    CloudresourcemanagerTagKeysDelete,
   )
 where
 

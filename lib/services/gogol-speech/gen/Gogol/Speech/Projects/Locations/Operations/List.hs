@@ -34,8 +34,8 @@ module Gogol.Speech.Projects.Locations.Operations.List
     SpeechProjectsLocationsOperationsListResource,
 
     -- ** Constructing a Request
+    SpeechProjectsLocationsOperationsList (..),
     newSpeechProjectsLocationsOperationsList,
-    SpeechProjectsLocationsOperationsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.SuperChatEvents.List
     YouTubeSuperChatEventsListResource,
 
     -- ** Constructing a Request
+    YouTubeSuperChatEventsList (..),
     newYouTubeSuperChatEventsList,
-    YouTubeSuperChatEventsList,
   )
 where
 

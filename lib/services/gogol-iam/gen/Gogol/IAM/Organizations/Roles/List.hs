@@ -34,8 +34,8 @@ module Gogol.IAM.Organizations.Roles.List
     IAMOrganizationsRolesListResource,
 
     -- ** Constructing a Request
+    IAMOrganizationsRolesList (..),
     newIAMOrganizationsRolesList,
-    IAMOrganizationsRolesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Updatelineitemshippingdetails
     ContentOrdersUpdatelineitemshippingdetailsResource,
 
     -- ** Constructing a Request
+    ContentOrdersUpdatelineitemshippingdetails (..),
     newContentOrdersUpdatelineitemshippingdetails,
-    ContentOrdersUpdatelineitemshippingdetails,
   )
 where
 

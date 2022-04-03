@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.Operations.WaitExecution
     RemoteBuildExecutionOperationsWaitExecutionResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionOperationsWaitExecution (..),
     newRemoteBuildExecutionOperationsWaitExecution,
-    RemoteBuildExecutionOperationsWaitExecution,
   )
 where
 

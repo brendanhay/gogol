@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.Insert
     ComputeFirewallsInsertResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsInsert (..),
     newComputeFirewallsInsert,
-    ComputeFirewallsInsert,
   )
 where
 

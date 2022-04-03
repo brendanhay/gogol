@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.Delegates.Delete
     GmailUsersSettingsDelegatesDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsDelegatesDelete (..),
     newGmailUsersSettingsDelegatesDelete,
-    GmailUsersSettingsDelegatesDelete,
   )
 where
 

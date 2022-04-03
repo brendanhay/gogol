@@ -61,308 +61,308 @@ module Gogol.Classroom
 
     -- ** classroom.courses.aliases.create
     ClassroomCoursesAliasesCreateResource,
+    ClassroomCoursesAliasesCreate (..),
     newClassroomCoursesAliasesCreate,
-    ClassroomCoursesAliasesCreate,
 
     -- ** classroom.courses.aliases.delete
     ClassroomCoursesAliasesDeleteResource,
+    ClassroomCoursesAliasesDelete (..),
     newClassroomCoursesAliasesDelete,
-    ClassroomCoursesAliasesDelete,
 
     -- ** classroom.courses.aliases.list
     ClassroomCoursesAliasesListResource,
+    ClassroomCoursesAliasesList (..),
     newClassroomCoursesAliasesList,
-    ClassroomCoursesAliasesList,
 
     -- ** classroom.courses.announcements.create
     ClassroomCoursesAnnouncementsCreateResource,
+    ClassroomCoursesAnnouncementsCreate (..),
     newClassroomCoursesAnnouncementsCreate,
-    ClassroomCoursesAnnouncementsCreate,
 
     -- ** classroom.courses.announcements.delete
     ClassroomCoursesAnnouncementsDeleteResource,
+    ClassroomCoursesAnnouncementsDelete (..),
     newClassroomCoursesAnnouncementsDelete,
-    ClassroomCoursesAnnouncementsDelete,
 
     -- ** classroom.courses.announcements.get
     ClassroomCoursesAnnouncementsGetResource,
+    ClassroomCoursesAnnouncementsGet (..),
     newClassroomCoursesAnnouncementsGet,
-    ClassroomCoursesAnnouncementsGet,
 
     -- ** classroom.courses.announcements.list
     ClassroomCoursesAnnouncementsListResource,
+    ClassroomCoursesAnnouncementsList (..),
     newClassroomCoursesAnnouncementsList,
-    ClassroomCoursesAnnouncementsList,
 
     -- ** classroom.courses.announcements.modifyAssignees
     ClassroomCoursesAnnouncementsModifyAssigneesResource,
+    ClassroomCoursesAnnouncementsModifyAssignees (..),
     newClassroomCoursesAnnouncementsModifyAssignees,
-    ClassroomCoursesAnnouncementsModifyAssignees,
 
     -- ** classroom.courses.announcements.patch
     ClassroomCoursesAnnouncementsPatchResource,
+    ClassroomCoursesAnnouncementsPatch (..),
     newClassroomCoursesAnnouncementsPatch,
-    ClassroomCoursesAnnouncementsPatch,
 
     -- ** classroom.courses.courseWork.create
     ClassroomCoursesCourseWorkCreateResource,
+    ClassroomCoursesCourseWorkCreate (..),
     newClassroomCoursesCourseWorkCreate,
-    ClassroomCoursesCourseWorkCreate,
 
     -- ** classroom.courses.courseWork.delete
     ClassroomCoursesCourseWorkDeleteResource,
+    ClassroomCoursesCourseWorkDelete (..),
     newClassroomCoursesCourseWorkDelete,
-    ClassroomCoursesCourseWorkDelete,
 
     -- ** classroom.courses.courseWork.get
     ClassroomCoursesCourseWorkGetResource,
+    ClassroomCoursesCourseWorkGet (..),
     newClassroomCoursesCourseWorkGet,
-    ClassroomCoursesCourseWorkGet,
 
     -- ** classroom.courses.courseWork.list
     ClassroomCoursesCourseWorkListResource,
+    ClassroomCoursesCourseWorkList (..),
     newClassroomCoursesCourseWorkList,
-    ClassroomCoursesCourseWorkList,
 
     -- ** classroom.courses.courseWork.modifyAssignees
     ClassroomCoursesCourseWorkModifyAssigneesResource,
+    ClassroomCoursesCourseWorkModifyAssignees (..),
     newClassroomCoursesCourseWorkModifyAssignees,
-    ClassroomCoursesCourseWorkModifyAssignees,
 
     -- ** classroom.courses.courseWork.patch
     ClassroomCoursesCourseWorkPatchResource,
+    ClassroomCoursesCourseWorkPatch (..),
     newClassroomCoursesCourseWorkPatch,
-    ClassroomCoursesCourseWorkPatch,
 
     -- ** classroom.courses.courseWork.studentSubmissions.get
     ClassroomCoursesCourseWorkStudentSubmissionsGetResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsGet (..),
     newClassroomCoursesCourseWorkStudentSubmissionsGet,
-    ClassroomCoursesCourseWorkStudentSubmissionsGet,
 
     -- ** classroom.courses.courseWork.studentSubmissions.list
     ClassroomCoursesCourseWorkStudentSubmissionsListResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsList (..),
     newClassroomCoursesCourseWorkStudentSubmissionsList,
-    ClassroomCoursesCourseWorkStudentSubmissionsList,
 
     -- ** classroom.courses.courseWork.studentSubmissions.modifyAttachments
     ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachmentsResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments (..),
     newClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
-    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
 
     -- ** classroom.courses.courseWork.studentSubmissions.patch
     ClassroomCoursesCourseWorkStudentSubmissionsPatchResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsPatch (..),
     newClassroomCoursesCourseWorkStudentSubmissionsPatch,
-    ClassroomCoursesCourseWorkStudentSubmissionsPatch,
 
     -- ** classroom.courses.courseWork.studentSubmissions.reclaim
     ClassroomCoursesCourseWorkStudentSubmissionsReclaimResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsReclaim (..),
     newClassroomCoursesCourseWorkStudentSubmissionsReclaim,
-    ClassroomCoursesCourseWorkStudentSubmissionsReclaim,
 
     -- ** classroom.courses.courseWork.studentSubmissions.return
     ClassroomCoursesCourseWorkStudentSubmissionsReturnResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsReturn (..),
     newClassroomCoursesCourseWorkStudentSubmissionsReturn,
-    ClassroomCoursesCourseWorkStudentSubmissionsReturn,
 
     -- ** classroom.courses.courseWork.studentSubmissions.turnIn
     ClassroomCoursesCourseWorkStudentSubmissionsTurnInResource,
+    ClassroomCoursesCourseWorkStudentSubmissionsTurnIn (..),
     newClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
-    ClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
 
     -- ** classroom.courses.courseWorkMaterials.create
     ClassroomCoursesCourseWorkMaterialsCreateResource,
+    ClassroomCoursesCourseWorkMaterialsCreate (..),
     newClassroomCoursesCourseWorkMaterialsCreate,
-    ClassroomCoursesCourseWorkMaterialsCreate,
 
     -- ** classroom.courses.courseWorkMaterials.delete
     ClassroomCoursesCourseWorkMaterialsDeleteResource,
+    ClassroomCoursesCourseWorkMaterialsDelete (..),
     newClassroomCoursesCourseWorkMaterialsDelete,
-    ClassroomCoursesCourseWorkMaterialsDelete,
 
     -- ** classroom.courses.courseWorkMaterials.get
     ClassroomCoursesCourseWorkMaterialsGetResource,
+    ClassroomCoursesCourseWorkMaterialsGet (..),
     newClassroomCoursesCourseWorkMaterialsGet,
-    ClassroomCoursesCourseWorkMaterialsGet,
 
     -- ** classroom.courses.courseWorkMaterials.list
     ClassroomCoursesCourseWorkMaterialsListResource,
+    ClassroomCoursesCourseWorkMaterialsList (..),
     newClassroomCoursesCourseWorkMaterialsList,
-    ClassroomCoursesCourseWorkMaterialsList,
 
     -- ** classroom.courses.courseWorkMaterials.patch
     ClassroomCoursesCourseWorkMaterialsPatchResource,
+    ClassroomCoursesCourseWorkMaterialsPatch (..),
     newClassroomCoursesCourseWorkMaterialsPatch,
-    ClassroomCoursesCourseWorkMaterialsPatch,
 
     -- ** classroom.courses.create
     ClassroomCoursesCreateResource,
+    ClassroomCoursesCreate (..),
     newClassroomCoursesCreate,
-    ClassroomCoursesCreate,
 
     -- ** classroom.courses.delete
     ClassroomCoursesDeleteResource,
+    ClassroomCoursesDelete (..),
     newClassroomCoursesDelete,
-    ClassroomCoursesDelete,
 
     -- ** classroom.courses.get
     ClassroomCoursesGetResource,
+    ClassroomCoursesGet (..),
     newClassroomCoursesGet,
-    ClassroomCoursesGet,
 
     -- ** classroom.courses.list
     ClassroomCoursesListResource,
+    ClassroomCoursesList (..),
     newClassroomCoursesList,
-    ClassroomCoursesList,
 
     -- ** classroom.courses.patch
     ClassroomCoursesPatchResource,
+    ClassroomCoursesPatch (..),
     newClassroomCoursesPatch,
-    ClassroomCoursesPatch,
 
     -- ** classroom.courses.students.create
     ClassroomCoursesStudentsCreateResource,
+    ClassroomCoursesStudentsCreate (..),
     newClassroomCoursesStudentsCreate,
-    ClassroomCoursesStudentsCreate,
 
     -- ** classroom.courses.students.delete
     ClassroomCoursesStudentsDeleteResource,
+    ClassroomCoursesStudentsDelete (..),
     newClassroomCoursesStudentsDelete,
-    ClassroomCoursesStudentsDelete,
 
     -- ** classroom.courses.students.get
     ClassroomCoursesStudentsGetResource,
+    ClassroomCoursesStudentsGet (..),
     newClassroomCoursesStudentsGet,
-    ClassroomCoursesStudentsGet,
 
     -- ** classroom.courses.students.list
     ClassroomCoursesStudentsListResource,
+    ClassroomCoursesStudentsList (..),
     newClassroomCoursesStudentsList,
-    ClassroomCoursesStudentsList,
 
     -- ** classroom.courses.teachers.create
     ClassroomCoursesTeachersCreateResource,
+    ClassroomCoursesTeachersCreate (..),
     newClassroomCoursesTeachersCreate,
-    ClassroomCoursesTeachersCreate,
 
     -- ** classroom.courses.teachers.delete
     ClassroomCoursesTeachersDeleteResource,
+    ClassroomCoursesTeachersDelete (..),
     newClassroomCoursesTeachersDelete,
-    ClassroomCoursesTeachersDelete,
 
     -- ** classroom.courses.teachers.get
     ClassroomCoursesTeachersGetResource,
+    ClassroomCoursesTeachersGet (..),
     newClassroomCoursesTeachersGet,
-    ClassroomCoursesTeachersGet,
 
     -- ** classroom.courses.teachers.list
     ClassroomCoursesTeachersListResource,
+    ClassroomCoursesTeachersList (..),
     newClassroomCoursesTeachersList,
-    ClassroomCoursesTeachersList,
 
     -- ** classroom.courses.topics.create
     ClassroomCoursesTopicsCreateResource,
+    ClassroomCoursesTopicsCreate (..),
     newClassroomCoursesTopicsCreate,
-    ClassroomCoursesTopicsCreate,
 
     -- ** classroom.courses.topics.delete
     ClassroomCoursesTopicsDeleteResource,
+    ClassroomCoursesTopicsDelete (..),
     newClassroomCoursesTopicsDelete,
-    ClassroomCoursesTopicsDelete,
 
     -- ** classroom.courses.topics.get
     ClassroomCoursesTopicsGetResource,
+    ClassroomCoursesTopicsGet (..),
     newClassroomCoursesTopicsGet,
-    ClassroomCoursesTopicsGet,
 
     -- ** classroom.courses.topics.list
     ClassroomCoursesTopicsListResource,
+    ClassroomCoursesTopicsList (..),
     newClassroomCoursesTopicsList,
-    ClassroomCoursesTopicsList,
 
     -- ** classroom.courses.topics.patch
     ClassroomCoursesTopicsPatchResource,
+    ClassroomCoursesTopicsPatch (..),
     newClassroomCoursesTopicsPatch,
-    ClassroomCoursesTopicsPatch,
 
     -- ** classroom.courses.update
     ClassroomCoursesUpdateResource,
+    ClassroomCoursesUpdate (..),
     newClassroomCoursesUpdate,
-    ClassroomCoursesUpdate,
 
     -- ** classroom.invitations.accept
     ClassroomInvitationsAcceptResource,
+    ClassroomInvitationsAccept (..),
     newClassroomInvitationsAccept,
-    ClassroomInvitationsAccept,
 
     -- ** classroom.invitations.create
     ClassroomInvitationsCreateResource,
+    ClassroomInvitationsCreate (..),
     newClassroomInvitationsCreate,
-    ClassroomInvitationsCreate,
 
     -- ** classroom.invitations.delete
     ClassroomInvitationsDeleteResource,
+    ClassroomInvitationsDelete (..),
     newClassroomInvitationsDelete,
-    ClassroomInvitationsDelete,
 
     -- ** classroom.invitations.get
     ClassroomInvitationsGetResource,
+    ClassroomInvitationsGet (..),
     newClassroomInvitationsGet,
-    ClassroomInvitationsGet,
 
     -- ** classroom.invitations.list
     ClassroomInvitationsListResource,
+    ClassroomInvitationsList (..),
     newClassroomInvitationsList,
-    ClassroomInvitationsList,
 
     -- ** classroom.registrations.create
     ClassroomRegistrationsCreateResource,
+    ClassroomRegistrationsCreate (..),
     newClassroomRegistrationsCreate,
-    ClassroomRegistrationsCreate,
 
     -- ** classroom.registrations.delete
     ClassroomRegistrationsDeleteResource,
+    ClassroomRegistrationsDelete (..),
     newClassroomRegistrationsDelete,
-    ClassroomRegistrationsDelete,
 
     -- ** classroom.userProfiles.get
     ClassroomUserProfilesGetResource,
+    ClassroomUserProfilesGet (..),
     newClassroomUserProfilesGet,
-    ClassroomUserProfilesGet,
 
     -- ** classroom.userProfiles.guardianInvitations.create
     ClassroomUserProfilesGuardianInvitationsCreateResource,
+    ClassroomUserProfilesGuardianInvitationsCreate (..),
     newClassroomUserProfilesGuardianInvitationsCreate,
-    ClassroomUserProfilesGuardianInvitationsCreate,
 
     -- ** classroom.userProfiles.guardianInvitations.get
     ClassroomUserProfilesGuardianInvitationsGetResource,
+    ClassroomUserProfilesGuardianInvitationsGet (..),
     newClassroomUserProfilesGuardianInvitationsGet,
-    ClassroomUserProfilesGuardianInvitationsGet,
 
     -- ** classroom.userProfiles.guardianInvitations.list
     ClassroomUserProfilesGuardianInvitationsListResource,
+    ClassroomUserProfilesGuardianInvitationsList (..),
     newClassroomUserProfilesGuardianInvitationsList,
-    ClassroomUserProfilesGuardianInvitationsList,
 
     -- ** classroom.userProfiles.guardianInvitations.patch
     ClassroomUserProfilesGuardianInvitationsPatchResource,
+    ClassroomUserProfilesGuardianInvitationsPatch (..),
     newClassroomUserProfilesGuardianInvitationsPatch,
-    ClassroomUserProfilesGuardianInvitationsPatch,
 
     -- ** classroom.userProfiles.guardians.delete
     ClassroomUserProfilesGuardiansDeleteResource,
+    ClassroomUserProfilesGuardiansDelete (..),
     newClassroomUserProfilesGuardiansDelete,
-    ClassroomUserProfilesGuardiansDelete,
 
     -- ** classroom.userProfiles.guardians.get
     ClassroomUserProfilesGuardiansGetResource,
+    ClassroomUserProfilesGuardiansGet (..),
     newClassroomUserProfilesGuardiansGet,
-    ClassroomUserProfilesGuardiansGet,
 
     -- ** classroom.userProfiles.guardians.list
     ClassroomUserProfilesGuardiansListResource,
+    ClassroomUserProfilesGuardiansList (..),
     newClassroomUserProfilesGuardiansList,
-    ClassroomUserProfilesGuardiansList,
 
     -- * Types
 

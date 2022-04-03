@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Buckets.Get
     LoggingBillingAccountsBucketsGetResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsBucketsGet (..),
     newLoggingBillingAccountsBucketsGet,
-    LoggingBillingAccountsBucketsGet,
   )
 where
 

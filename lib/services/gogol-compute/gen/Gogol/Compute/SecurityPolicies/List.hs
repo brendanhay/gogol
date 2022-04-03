@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.List
     ComputeSecurityPoliciesListResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesList (..),
     newComputeSecurityPoliciesList,
-    ComputeSecurityPoliciesList,
   )
 where
 

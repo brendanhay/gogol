@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.ListCollectionIds
     FireStoreProjectsDatabasesDocumentsListCollectionIdsResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsListCollectionIds (..),
     newFireStoreProjectsDatabasesDocumentsListCollectionIds,
-    FireStoreProjectsDatabasesDocumentsListCollectionIds,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Operations.Delete
     SecurityCenterOrganizationsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsOperationsDelete (..),
     newSecurityCenterOrganizationsOperationsDelete,
-    SecurityCenterOrganizationsOperationsDelete,
   )
 where
 

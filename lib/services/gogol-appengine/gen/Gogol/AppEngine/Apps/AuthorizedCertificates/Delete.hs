@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.AuthorizedCertificates.Delete
     AppEngineAppsAuthorizedCertificatesDeleteResource,
 
     -- ** Constructing a Request
+    AppEngineAppsAuthorizedCertificatesDelete (..),
     newAppEngineAppsAuthorizedCertificatesDelete,
-    AppEngineAppsAuthorizedCertificatesDelete,
   )
 where
 

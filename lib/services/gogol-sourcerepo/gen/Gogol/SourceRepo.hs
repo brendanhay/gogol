@@ -43,58 +43,58 @@ module Gogol.SourceRepo
 
     -- ** sourcerepo.projects.getConfig
     SourceRepoProjectsGetConfigResource,
+    SourceRepoProjectsGetConfig (..),
     newSourceRepoProjectsGetConfig,
-    SourceRepoProjectsGetConfig,
 
     -- ** sourcerepo.projects.repos.create
     SourceRepoProjectsReposCreateResource,
+    SourceRepoProjectsReposCreate (..),
     newSourceRepoProjectsReposCreate,
-    SourceRepoProjectsReposCreate,
 
     -- ** sourcerepo.projects.repos.delete
     SourceRepoProjectsReposDeleteResource,
+    SourceRepoProjectsReposDelete (..),
     newSourceRepoProjectsReposDelete,
-    SourceRepoProjectsReposDelete,
 
     -- ** sourcerepo.projects.repos.get
     SourceRepoProjectsReposGetResource,
+    SourceRepoProjectsReposGet (..),
     newSourceRepoProjectsReposGet,
-    SourceRepoProjectsReposGet,
 
     -- ** sourcerepo.projects.repos.getIamPolicy
     SourceRepoProjectsReposGetIamPolicyResource,
+    SourceRepoProjectsReposGetIamPolicy (..),
     newSourceRepoProjectsReposGetIamPolicy,
-    SourceRepoProjectsReposGetIamPolicy,
 
     -- ** sourcerepo.projects.repos.list
     SourceRepoProjectsReposListResource,
+    SourceRepoProjectsReposList (..),
     newSourceRepoProjectsReposList,
-    SourceRepoProjectsReposList,
 
     -- ** sourcerepo.projects.repos.patch
     SourceRepoProjectsReposPatchResource,
+    SourceRepoProjectsReposPatch (..),
     newSourceRepoProjectsReposPatch,
-    SourceRepoProjectsReposPatch,
 
     -- ** sourcerepo.projects.repos.setIamPolicy
     SourceRepoProjectsReposSetIamPolicyResource,
+    SourceRepoProjectsReposSetIamPolicy (..),
     newSourceRepoProjectsReposSetIamPolicy,
-    SourceRepoProjectsReposSetIamPolicy,
 
     -- ** sourcerepo.projects.repos.sync
     SourceRepoProjectsReposSyncResource,
+    SourceRepoProjectsReposSync (..),
     newSourceRepoProjectsReposSync,
-    SourceRepoProjectsReposSync,
 
     -- ** sourcerepo.projects.repos.testIamPermissions
     SourceRepoProjectsReposTestIamPermissionsResource,
+    SourceRepoProjectsReposTestIamPermissions (..),
     newSourceRepoProjectsReposTestIamPermissions,
-    SourceRepoProjectsReposTestIamPermissions,
 
     -- ** sourcerepo.projects.updateConfig
     SourceRepoProjectsUpdateConfigResource,
+    SourceRepoProjectsUpdateConfig (..),
     newSourceRepoProjectsUpdateConfig,
-    SourceRepoProjectsUpdateConfig,
 
     -- * Types
 

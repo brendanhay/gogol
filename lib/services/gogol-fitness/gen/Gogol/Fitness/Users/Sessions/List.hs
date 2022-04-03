@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.Sessions.List
     FitnessUsersSessionsListResource,
 
     -- ** Constructing a Request
+    FitnessUsersSessionsList (..),
     newFitnessUsersSessionsList,
-    FitnessUsersSessionsList,
   )
 where
 

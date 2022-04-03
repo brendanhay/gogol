@@ -43,213 +43,213 @@ module Gogol.Dataflow
 
     -- ** dataflow.projects.deleteSnapshots
     DataflowProjectsDeleteSnapshotsResource,
+    DataflowProjectsDeleteSnapshots (..),
     newDataflowProjectsDeleteSnapshots,
-    DataflowProjectsDeleteSnapshots,
 
     -- ** dataflow.projects.jobs.aggregated
     DataflowProjectsJobsAggregatedResource,
+    DataflowProjectsJobsAggregated (..),
     newDataflowProjectsJobsAggregated,
-    DataflowProjectsJobsAggregated,
 
     -- ** dataflow.projects.jobs.create
     DataflowProjectsJobsCreateResource,
+    DataflowProjectsJobsCreate (..),
     newDataflowProjectsJobsCreate,
-    DataflowProjectsJobsCreate,
 
     -- ** dataflow.projects.jobs.debug.getConfig
     DataflowProjectsJobsDebugGetConfigResource,
+    DataflowProjectsJobsDebugGetConfig (..),
     newDataflowProjectsJobsDebugGetConfig,
-    DataflowProjectsJobsDebugGetConfig,
 
     -- ** dataflow.projects.jobs.debug.sendCapture
     DataflowProjectsJobsDebugSendCaptureResource,
+    DataflowProjectsJobsDebugSendCapture (..),
     newDataflowProjectsJobsDebugSendCapture,
-    DataflowProjectsJobsDebugSendCapture,
 
     -- ** dataflow.projects.jobs.get
     DataflowProjectsJobsGetResource,
+    DataflowProjectsJobsGet (..),
     newDataflowProjectsJobsGet,
-    DataflowProjectsJobsGet,
 
     -- ** dataflow.projects.jobs.getMetrics
     DataflowProjectsJobsGetMetricsResource,
+    DataflowProjectsJobsGetMetrics (..),
     newDataflowProjectsJobsGetMetrics,
-    DataflowProjectsJobsGetMetrics,
 
     -- ** dataflow.projects.jobs.list
     DataflowProjectsJobsListResource,
+    DataflowProjectsJobsList (..),
     newDataflowProjectsJobsList,
-    DataflowProjectsJobsList,
 
     -- ** dataflow.projects.jobs.messages.list
     DataflowProjectsJobsMessagesListResource,
+    DataflowProjectsJobsMessagesList (..),
     newDataflowProjectsJobsMessagesList,
-    DataflowProjectsJobsMessagesList,
 
     -- ** dataflow.projects.jobs.snapshot
     DataflowProjectsJobsSnapshotResource,
+    DataflowProjectsJobsSnapshot (..),
     newDataflowProjectsJobsSnapshot,
-    DataflowProjectsJobsSnapshot,
 
     -- ** dataflow.projects.jobs.update
     DataflowProjectsJobsUpdateResource,
+    DataflowProjectsJobsUpdate (..),
     newDataflowProjectsJobsUpdate,
-    DataflowProjectsJobsUpdate,
 
     -- ** dataflow.projects.jobs.workItems.lease
     DataflowProjectsJobsWorkItemsLeaseResource,
+    DataflowProjectsJobsWorkItemsLease (..),
     newDataflowProjectsJobsWorkItemsLease,
-    DataflowProjectsJobsWorkItemsLease,
 
     -- ** dataflow.projects.jobs.workItems.reportStatus
     DataflowProjectsJobsWorkItemsReportStatusResource,
+    DataflowProjectsJobsWorkItemsReportStatus (..),
     newDataflowProjectsJobsWorkItemsReportStatus,
-    DataflowProjectsJobsWorkItemsReportStatus,
 
     -- ** dataflow.projects.locations.flexTemplates.launch
     DataflowProjectsLocationsFlexTemplatesLaunchResource,
+    DataflowProjectsLocationsFlexTemplatesLaunch (..),
     newDataflowProjectsLocationsFlexTemplatesLaunch,
-    DataflowProjectsLocationsFlexTemplatesLaunch,
 
     -- ** dataflow.projects.locations.jobs.create
     DataflowProjectsLocationsJobsCreateResource,
+    DataflowProjectsLocationsJobsCreate (..),
     newDataflowProjectsLocationsJobsCreate,
-    DataflowProjectsLocationsJobsCreate,
 
     -- ** dataflow.projects.locations.jobs.debug.getConfig
     DataflowProjectsLocationsJobsDebugGetConfigResource,
+    DataflowProjectsLocationsJobsDebugGetConfig (..),
     newDataflowProjectsLocationsJobsDebugGetConfig,
-    DataflowProjectsLocationsJobsDebugGetConfig,
 
     -- ** dataflow.projects.locations.jobs.debug.sendCapture
     DataflowProjectsLocationsJobsDebugSendCaptureResource,
+    DataflowProjectsLocationsJobsDebugSendCapture (..),
     newDataflowProjectsLocationsJobsDebugSendCapture,
-    DataflowProjectsLocationsJobsDebugSendCapture,
 
     -- ** dataflow.projects.locations.jobs.get
     DataflowProjectsLocationsJobsGetResource,
+    DataflowProjectsLocationsJobsGet (..),
     newDataflowProjectsLocationsJobsGet,
-    DataflowProjectsLocationsJobsGet,
 
     -- ** dataflow.projects.locations.jobs.getExecutionDetails
     DataflowProjectsLocationsJobsGetExecutionDetailsResource,
+    DataflowProjectsLocationsJobsGetExecutionDetails (..),
     newDataflowProjectsLocationsJobsGetExecutionDetails,
-    DataflowProjectsLocationsJobsGetExecutionDetails,
 
     -- ** dataflow.projects.locations.jobs.getMetrics
     DataflowProjectsLocationsJobsGetMetricsResource,
+    DataflowProjectsLocationsJobsGetMetrics (..),
     newDataflowProjectsLocationsJobsGetMetrics,
-    DataflowProjectsLocationsJobsGetMetrics,
 
     -- ** dataflow.projects.locations.jobs.list
     DataflowProjectsLocationsJobsListResource,
+    DataflowProjectsLocationsJobsList (..),
     newDataflowProjectsLocationsJobsList,
-    DataflowProjectsLocationsJobsList,
 
     -- ** dataflow.projects.locations.jobs.messages.list
     DataflowProjectsLocationsJobsMessagesListResource,
+    DataflowProjectsLocationsJobsMessagesList (..),
     newDataflowProjectsLocationsJobsMessagesList,
-    DataflowProjectsLocationsJobsMessagesList,
 
     -- ** dataflow.projects.locations.jobs.snapshot
     DataflowProjectsLocationsJobsSnapshotResource,
+    DataflowProjectsLocationsJobsSnapshot (..),
     newDataflowProjectsLocationsJobsSnapshot,
-    DataflowProjectsLocationsJobsSnapshot,
 
     -- ** dataflow.projects.locations.jobs.snapshots.list
     DataflowProjectsLocationsJobsSnapshotsListResource,
+    DataflowProjectsLocationsJobsSnapshotsList (..),
     newDataflowProjectsLocationsJobsSnapshotsList,
-    DataflowProjectsLocationsJobsSnapshotsList,
 
     -- ** dataflow.projects.locations.jobs.stages.getExecutionDetails
     DataflowProjectsLocationsJobsStagesGetExecutionDetailsResource,
+    DataflowProjectsLocationsJobsStagesGetExecutionDetails (..),
     newDataflowProjectsLocationsJobsStagesGetExecutionDetails,
-    DataflowProjectsLocationsJobsStagesGetExecutionDetails,
 
     -- ** dataflow.projects.locations.jobs.update
     DataflowProjectsLocationsJobsUpdateResource,
+    DataflowProjectsLocationsJobsUpdate (..),
     newDataflowProjectsLocationsJobsUpdate,
-    DataflowProjectsLocationsJobsUpdate,
 
     -- ** dataflow.projects.locations.jobs.workItems.lease
     DataflowProjectsLocationsJobsWorkItemsLeaseResource,
+    DataflowProjectsLocationsJobsWorkItemsLease (..),
     newDataflowProjectsLocationsJobsWorkItemsLease,
-    DataflowProjectsLocationsJobsWorkItemsLease,
 
     -- ** dataflow.projects.locations.jobs.workItems.reportStatus
     DataflowProjectsLocationsJobsWorkItemsReportStatusResource,
+    DataflowProjectsLocationsJobsWorkItemsReportStatus (..),
     newDataflowProjectsLocationsJobsWorkItemsReportStatus,
-    DataflowProjectsLocationsJobsWorkItemsReportStatus,
 
     -- ** dataflow.projects.locations.snapshots.delete
     DataflowProjectsLocationsSnapshotsDeleteResource,
+    DataflowProjectsLocationsSnapshotsDelete (..),
     newDataflowProjectsLocationsSnapshotsDelete,
-    DataflowProjectsLocationsSnapshotsDelete,
 
     -- ** dataflow.projects.locations.snapshots.get
     DataflowProjectsLocationsSnapshotsGetResource,
+    DataflowProjectsLocationsSnapshotsGet (..),
     newDataflowProjectsLocationsSnapshotsGet,
-    DataflowProjectsLocationsSnapshotsGet,
 
     -- ** dataflow.projects.locations.snapshots.list
     DataflowProjectsLocationsSnapshotsListResource,
+    DataflowProjectsLocationsSnapshotsList (..),
     newDataflowProjectsLocationsSnapshotsList,
-    DataflowProjectsLocationsSnapshotsList,
 
     -- ** dataflow.projects.locations.sql.validate
     DataflowProjectsLocationsSqlValidateResource,
+    DataflowProjectsLocationsSqlValidate (..),
     newDataflowProjectsLocationsSqlValidate,
-    DataflowProjectsLocationsSqlValidate,
 
     -- ** dataflow.projects.locations.templates.create
     DataflowProjectsLocationsTemplatesCreateResource,
+    DataflowProjectsLocationsTemplatesCreate (..),
     newDataflowProjectsLocationsTemplatesCreate,
-    DataflowProjectsLocationsTemplatesCreate,
 
     -- ** dataflow.projects.locations.templates.get
     DataflowProjectsLocationsTemplatesGetResource,
+    DataflowProjectsLocationsTemplatesGet (..),
     newDataflowProjectsLocationsTemplatesGet,
-    DataflowProjectsLocationsTemplatesGet,
 
     -- ** dataflow.projects.locations.templates.launch
     DataflowProjectsLocationsTemplatesLaunchResource,
+    DataflowProjectsLocationsTemplatesLaunch (..),
     newDataflowProjectsLocationsTemplatesLaunch,
-    DataflowProjectsLocationsTemplatesLaunch,
 
     -- ** dataflow.projects.locations.workerMessages
     DataflowProjectsLocationsWorkerMessagesResource,
+    DataflowProjectsLocationsWorkerMessages (..),
     newDataflowProjectsLocationsWorkerMessages,
-    DataflowProjectsLocationsWorkerMessages,
 
     -- ** dataflow.projects.snapshots.get
     DataflowProjectsSnapshotsGetResource,
+    DataflowProjectsSnapshotsGet (..),
     newDataflowProjectsSnapshotsGet,
-    DataflowProjectsSnapshotsGet,
 
     -- ** dataflow.projects.snapshots.list
     DataflowProjectsSnapshotsListResource,
+    DataflowProjectsSnapshotsList (..),
     newDataflowProjectsSnapshotsList,
-    DataflowProjectsSnapshotsList,
 
     -- ** dataflow.projects.templates.create
     DataflowProjectsTemplatesCreateResource,
+    DataflowProjectsTemplatesCreate (..),
     newDataflowProjectsTemplatesCreate,
-    DataflowProjectsTemplatesCreate,
 
     -- ** dataflow.projects.templates.get
     DataflowProjectsTemplatesGetResource,
+    DataflowProjectsTemplatesGet (..),
     newDataflowProjectsTemplatesGet,
-    DataflowProjectsTemplatesGet,
 
     -- ** dataflow.projects.templates.launch
     DataflowProjectsTemplatesLaunchResource,
+    DataflowProjectsTemplatesLaunch (..),
     newDataflowProjectsTemplatesLaunch,
-    DataflowProjectsTemplatesLaunch,
 
     -- ** dataflow.projects.workerMessages
     DataflowProjectsWorkerMessagesResource,
+    DataflowProjectsWorkerMessages (..),
     newDataflowProjectsWorkerMessages,
-    DataflowProjectsWorkerMessages,
 
     -- * Types
 

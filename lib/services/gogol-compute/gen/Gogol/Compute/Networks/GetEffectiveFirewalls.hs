@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.GetEffectiveFirewalls
     ComputeNetworksGetEffectiveFirewallsResource,
 
     -- ** Constructing a Request
+    ComputeNetworksGetEffectiveFirewalls (..),
     newComputeNetworksGetEffectiveFirewalls,
-    ComputeNetworksGetEffectiveFirewalls,
   )
 where
 

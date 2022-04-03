@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutpages.Delete
     AndroidEnterpriseStorelayoutpagesDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutpagesDelete (..),
     newAndroidEnterpriseStorelayoutpagesDelete,
-    AndroidEnterpriseStorelayoutpagesDelete,
   )
 where
 

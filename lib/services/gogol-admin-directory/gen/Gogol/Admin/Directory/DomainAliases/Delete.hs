@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.DomainAliases.Delete
     DirectoryDomainAliasesDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryDomainAliasesDelete (..),
     newDirectoryDomainAliasesDelete,
-    DirectoryDomainAliasesDelete,
   )
 where
 

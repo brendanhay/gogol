@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeGroups.Update
     DFAReportingCreativeGroupsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeGroupsUpdate (..),
     newDFAReportingCreativeGroupsUpdate,
-    DFAReportingCreativeGroupsUpdate,
   )
 where
 

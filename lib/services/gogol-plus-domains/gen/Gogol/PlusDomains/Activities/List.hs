@@ -34,8 +34,8 @@ module Gogol.PlusDomains.Activities.List
     PlusDomainsActivitiesListResource,
 
     -- ** Constructing a Request
+    PlusDomainsActivitiesList (..),
     newPlusDomainsActivitiesList,
-    PlusDomainsActivitiesList,
   )
 where
 

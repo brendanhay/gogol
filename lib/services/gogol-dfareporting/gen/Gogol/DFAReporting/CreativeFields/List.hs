@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeFields.List
     DFAReportingCreativeFieldsListResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeFieldsList (..),
     newDFAReportingCreativeFieldsList,
-    DFAReportingCreativeFieldsList,
   )
 where
 

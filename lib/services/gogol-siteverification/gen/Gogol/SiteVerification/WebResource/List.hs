@@ -34,8 +34,8 @@ module Gogol.SiteVerification.WebResource.List
     SiteVerificationWebResourceListResource,
 
     -- ** Constructing a Request
+    SiteVerificationWebResourceList (..),
     newSiteVerificationWebResourceList,
-    SiteVerificationWebResourceList,
   )
 where
 

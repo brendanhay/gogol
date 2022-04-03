@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Annotations.Delete
     BooksMylibraryAnnotationsDeleteResource,
 
     -- ** Constructing a Request
+    BooksMylibraryAnnotationsDelete (..),
     newBooksMylibraryAnnotationsDelete,
-    BooksMylibraryAnnotationsDelete,
   )
 where
 

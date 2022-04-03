@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.Start
     WebSecurityScannerProjectsScanConfigsStartResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsStart (..),
     newWebSecurityScannerProjectsScanConfigsStart,
-    WebSecurityScannerProjectsScanConfigsStart,
   )
 where
 

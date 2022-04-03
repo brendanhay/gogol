@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Roles.Update
     DirectoryRolesUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryRolesUpdate (..),
     newDirectoryRolesUpdate,
-    DirectoryRolesUpdate,
   )
 where
 

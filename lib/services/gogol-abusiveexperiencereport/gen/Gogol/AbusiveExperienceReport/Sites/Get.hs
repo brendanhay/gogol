@@ -34,8 +34,8 @@ module Gogol.AbusiveExperienceReport.Sites.Get
     AbusiveExperienceReportSitesGetResource,
 
     -- ** Constructing a Request
+    AbusiveExperienceReportSitesGet (..),
     newAbusiveExperienceReportSitesGet,
-    AbusiveExperienceReportSitesGet,
   )
 where
 

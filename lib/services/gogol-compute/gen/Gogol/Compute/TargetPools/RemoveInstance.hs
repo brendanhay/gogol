@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.RemoveInstance
     ComputeTargetPoolsRemoveInstanceResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsRemoveInstance (..),
     newComputeTargetPoolsRemoveInstance,
-    ComputeTargetPoolsRemoveInstance,
   )
 where
 

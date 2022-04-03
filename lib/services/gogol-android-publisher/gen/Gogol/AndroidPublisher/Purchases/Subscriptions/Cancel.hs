@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Cancel
     AndroidPublisherPurchasesSubscriptionsCancelResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsCancel (..),
     newAndroidPublisherPurchasesSubscriptionsCancel,
-    AndroidPublisherPurchasesSubscriptionsCancel,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Applications.ListHidden
     GamesManagementApplicationsListHiddenResource,
 
     -- ** Constructing a Request
+    GamesManagementApplicationsListHidden (..),
     newGamesManagementApplicationsListHidden,
-    GamesManagementApplicationsListHidden,
   )
 where
 

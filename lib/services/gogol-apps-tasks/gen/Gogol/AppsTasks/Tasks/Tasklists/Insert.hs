@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Tasklists.Insert
     TasksTasklistsInsertResource,
 
     -- ** Constructing a Request
+    TasksTasklistsInsert (..),
     newTasksTasklistsInsert,
-    TasksTasklistsInsert,
   )
 where
 

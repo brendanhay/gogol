@@ -41,73 +41,73 @@ module Gogol.AppsTasks
 
     -- ** tasks.tasklists.delete
     TasksTasklistsDeleteResource,
+    TasksTasklistsDelete (..),
     newTasksTasklistsDelete,
-    TasksTasklistsDelete,
 
     -- ** tasks.tasklists.get
     TasksTasklistsGetResource,
+    TasksTasklistsGet (..),
     newTasksTasklistsGet,
-    TasksTasklistsGet,
 
     -- ** tasks.tasklists.insert
     TasksTasklistsInsertResource,
+    TasksTasklistsInsert (..),
     newTasksTasklistsInsert,
-    TasksTasklistsInsert,
 
     -- ** tasks.tasklists.list
     TasksTasklistsListResource,
+    TasksTasklistsList (..),
     newTasksTasklistsList,
-    TasksTasklistsList,
 
     -- ** tasks.tasklists.patch
     TasksTasklistsPatchResource,
+    TasksTasklistsPatch (..),
     newTasksTasklistsPatch,
-    TasksTasklistsPatch,
 
     -- ** tasks.tasklists.update
     TasksTasklistsUpdateResource,
+    TasksTasklistsUpdate (..),
     newTasksTasklistsUpdate,
-    TasksTasklistsUpdate,
 
     -- ** tasks.tasks.clear
     TasksTasksClearResource,
+    TasksTasksClear (..),
     newTasksTasksClear,
-    TasksTasksClear,
 
     -- ** tasks.tasks.delete
     TasksTasksDeleteResource,
+    TasksTasksDelete (..),
     newTasksTasksDelete,
-    TasksTasksDelete,
 
     -- ** tasks.tasks.get
     TasksTasksGetResource,
+    TasksTasksGet (..),
     newTasksTasksGet,
-    TasksTasksGet,
 
     -- ** tasks.tasks.insert
     TasksTasksInsertResource,
+    TasksTasksInsert (..),
     newTasksTasksInsert,
-    TasksTasksInsert,
 
     -- ** tasks.tasks.list
     TasksTasksListResource,
+    TasksTasksList (..),
     newTasksTasksList,
-    TasksTasksList,
 
     -- ** tasks.tasks.move
     TasksTasksMoveResource,
+    TasksTasksMove (..),
     newTasksTasksMove,
-    TasksTasksMove,
 
     -- ** tasks.tasks.patch
     TasksTasksPatchResource,
+    TasksTasksPatch (..),
     newTasksTasksPatch,
-    TasksTasksPatch,
 
     -- ** tasks.tasks.update
     TasksTasksUpdateResource,
+    TasksTasksUpdate (..),
     newTasksTasksUpdate,
-    TasksTasksUpdate,
 
     -- * Types
 

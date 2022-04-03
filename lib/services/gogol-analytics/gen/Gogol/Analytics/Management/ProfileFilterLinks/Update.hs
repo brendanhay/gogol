@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.ProfileFilterLinks.Update
     AnalyticsManagementProfileFilterLinksUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfileFilterLinksUpdate (..),
     newAnalyticsManagementProfileFilterLinksUpdate,
-    AnalyticsManagementProfileFilterLinksUpdate,
   )
 where
 

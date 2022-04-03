@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.DataSources.List
     BigQueryDataTransferProjectsDataSourcesListResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsDataSourcesList (..),
     newBigQueryDataTransferProjectsDataSourcesList,
-    BigQueryDataTransferProjectsDataSourcesList,
   )
 where
 

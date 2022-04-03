@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Annotations.Summary
     BooksMylibraryAnnotationsSummaryResource,
 
     -- ** Constructing a Request
+    BooksMylibraryAnnotationsSummary (..),
     newBooksMylibraryAnnotationsSummary,
-    BooksMylibraryAnnotationsSummary,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.Cancel
     MlProjectsJobsCancelResource,
 
     -- ** Constructing a Request
+    MlProjectsJobsCancel (..),
     newMlProjectsJobsCancel,
-    MlProjectsJobsCancel,
   )
 where
 

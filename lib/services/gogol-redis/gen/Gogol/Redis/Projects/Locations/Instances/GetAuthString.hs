@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.GetAuthString
     RedisProjectsLocationsInstancesGetAuthStringResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesGetAuthString (..),
     newRedisProjectsLocationsInstancesGetAuthString,
-    RedisProjectsLocationsInstancesGetAuthString,
   )
 where
 

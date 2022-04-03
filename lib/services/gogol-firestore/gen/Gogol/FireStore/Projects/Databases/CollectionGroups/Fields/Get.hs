@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Get
     FireStoreProjectsDatabasesCollectionGroupsFieldsGetResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesCollectionGroupsFieldsGet (..),
     newFireStoreProjectsDatabasesCollectionGroupsFieldsGet,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsGet,
   )
 where
 

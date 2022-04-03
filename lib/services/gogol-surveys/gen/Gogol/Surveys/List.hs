@@ -34,8 +34,8 @@ module Gogol.Surveys.List
     SurveysSurveysListResource,
 
     -- ** Constructing a Request
+    SurveysSurveysList (..),
     newSurveysSurveysList,
-    SurveysSurveysList,
   )
 where
 

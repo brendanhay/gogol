@@ -34,8 +34,8 @@ module Gogol.People.GetBatchGet
     PeoplePeopleGetBatchGetResource,
 
     -- ** Constructing a Request
+    PeoplePeopleGetBatchGet (..),
     newPeoplePeopleGetBatchGet,
-    PeoplePeopleGetBatchGet,
   )
 where
 

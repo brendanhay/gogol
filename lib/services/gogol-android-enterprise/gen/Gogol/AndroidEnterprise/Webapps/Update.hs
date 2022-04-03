@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Webapps.Update
     AndroidEnterpriseWebappsUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseWebappsUpdate (..),
     newAndroidEnterpriseWebappsUpdate,
-    AndroidEnterpriseWebappsUpdate,
   )
 where
 

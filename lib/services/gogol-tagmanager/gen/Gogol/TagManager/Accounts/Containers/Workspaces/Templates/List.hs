@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Templates.List
     TagManagerAccountsContainersWorkspacesTemplatesListResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTemplatesList (..),
     newTagManagerAccountsContainersWorkspacesTemplatesList,
-    TagManagerAccountsContainersWorkspacesTemplatesList,
   )
 where
 

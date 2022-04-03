@@ -34,8 +34,8 @@ module Gogol.Compute.NodeTemplates.Insert
     ComputeNodeTemplatesInsertResource,
 
     -- ** Constructing a Request
+    ComputeNodeTemplatesInsert (..),
     newComputeNodeTemplatesInsert,
-    ComputeNodeTemplatesInsert,
   )
 where
 

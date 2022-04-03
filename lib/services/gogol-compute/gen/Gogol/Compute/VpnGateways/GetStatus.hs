@@ -34,8 +34,8 @@ module Gogol.Compute.VpnGateways.GetStatus
     ComputeVpnGatewaysGetStatusResource,
 
     -- ** Constructing a Request
+    ComputeVpnGatewaysGetStatus (..),
     newComputeVpnGatewaysGetStatus,
-    ComputeVpnGatewaysGetStatus,
   )
 where
 

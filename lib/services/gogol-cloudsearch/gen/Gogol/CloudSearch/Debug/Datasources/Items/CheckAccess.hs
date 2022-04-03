@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Debug.Datasources.Items.CheckAccess
     CloudSearchDebugDatasourcesItemsCheckAccessResource,
 
     -- ** Constructing a Request
+    CloudSearchDebugDatasourcesItemsCheckAccess (..),
     newCloudSearchDebugDatasourcesItemsCheckAccess,
-    CloudSearchDebugDatasourcesItemsCheckAccess,
   )
 where
 

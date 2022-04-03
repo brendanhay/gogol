@@ -34,8 +34,8 @@ module Gogol.Compute.InterconnectAttachments.Insert
     ComputeInterconnectAttachmentsInsertResource,
 
     -- ** Constructing a Request
+    ComputeInterconnectAttachmentsInsert (..),
     newComputeInterconnectAttachmentsInsert,
-    ComputeInterconnectAttachmentsInsert,
   )
 where
 

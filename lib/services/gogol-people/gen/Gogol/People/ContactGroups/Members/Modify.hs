@@ -34,8 +34,8 @@ module Gogol.People.ContactGroups.Members.Modify
     PeopleContactGroupsMembersModifyResource,
 
     -- ** Constructing a Request
+    PeopleContactGroupsMembersModify (..),
     newPeopleContactGroupsMembersModify,
-    PeopleContactGroupsMembersModify,
   )
 where
 

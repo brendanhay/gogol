@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Patch
     DeploymentManagerDeploymentsPatchResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsPatch (..),
     newDeploymentManagerDeploymentsPatch,
-    DeploymentManagerDeploymentsPatch,
   )
 where
 

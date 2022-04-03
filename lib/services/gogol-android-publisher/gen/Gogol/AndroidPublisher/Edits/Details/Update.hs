@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Details.Update
     AndroidPublisherEditsDetailsUpdateResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsDetailsUpdate (..),
     newAndroidPublisherEditsDetailsUpdate,
-    AndroidPublisherEditsDetailsUpdate,
   )
 where
 

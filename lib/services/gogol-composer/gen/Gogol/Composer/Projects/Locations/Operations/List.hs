@@ -34,8 +34,8 @@ module Gogol.Composer.Projects.Locations.Operations.List
     ComposerProjectsLocationsOperationsListResource,
 
     -- ** Constructing a Request
+    ComposerProjectsLocationsOperationsList (..),
     newComposerProjectsLocationsOperationsList,
-    ComposerProjectsLocationsOperationsList,
   )
 where
 

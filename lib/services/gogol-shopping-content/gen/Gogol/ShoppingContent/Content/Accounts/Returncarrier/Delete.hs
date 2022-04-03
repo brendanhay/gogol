@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Returncarrier.Delete
     ContentAccountsReturncarrierDeleteResource,
 
     -- ** Constructing a Request
+    ContentAccountsReturncarrierDelete (..),
     newContentAccountsReturncarrierDelete,
-    ContentAccountsReturncarrierDelete,
   )
 where
 

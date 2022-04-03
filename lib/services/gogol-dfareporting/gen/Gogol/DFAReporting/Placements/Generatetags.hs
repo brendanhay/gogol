@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Placements.Generatetags
     DFAReportingPlacementsGeneratetagsResource,
 
     -- ** Constructing a Request
+    DFAReportingPlacementsGeneratetags (..),
     newDFAReportingPlacementsGeneratetags,
-    DFAReportingPlacementsGeneratetags,
   )
 where
 

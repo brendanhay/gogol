@@ -34,8 +34,8 @@ module Gogol.Storage.Channels.Stop
     StorageChannelsStopResource,
 
     -- ** Constructing a Request
+    StorageChannelsStop (..),
     newStorageChannelsStop,
-    StorageChannelsStop,
   )
 where
 

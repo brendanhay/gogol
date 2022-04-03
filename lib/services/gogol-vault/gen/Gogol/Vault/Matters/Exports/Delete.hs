@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Exports.Delete
     VaultMattersExportsDeleteResource,
 
     -- ** Constructing a Request
+    VaultMattersExportsDelete (..),
     newVaultMattersExportsDelete,
-    VaultMattersExportsDelete,
   )
 where
 

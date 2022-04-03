@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Photos.Patch
     DirectoryUsersPhotosPatchResource,
 
     -- ** Constructing a Request
+    DirectoryUsersPhotosPatch (..),
     newDirectoryUsersPhotosPatch,
-    DirectoryUsersPhotosPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AdvertiserGroups.Delete
     DFAReportingAdvertiserGroupsDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertiserGroupsDelete (..),
     newDFAReportingAdvertiserGroupsDelete,
-    DFAReportingAdvertiserGroupsDelete,
   )
 where
 

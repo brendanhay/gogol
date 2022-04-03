@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Students.Create
     ClassroomCoursesStudentsCreateResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesStudentsCreate (..),
     newClassroomCoursesStudentsCreate,
-    ClassroomCoursesStudentsCreate,
   )
 where
 

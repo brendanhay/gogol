@@ -34,8 +34,8 @@ module Gogol.Analytics.Provisioning.CreateAccountTicket
     AnalyticsProvisioningCreateAccountTicketResource,
 
     -- ** Constructing a Request
+    AnalyticsProvisioningCreateAccountTicket (..),
     newAnalyticsProvisioningCreateAccountTicket,
-    AnalyticsProvisioningCreateAccountTicket,
   )
 where
 

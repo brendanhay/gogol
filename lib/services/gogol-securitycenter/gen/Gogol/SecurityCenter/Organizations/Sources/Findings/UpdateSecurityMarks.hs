@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.Findings.UpdateSecurityMarks
     SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarksResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks (..),
     newSecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
-    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
   )
 where
 

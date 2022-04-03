@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.ProfileUserLinks.Insert
     AnalyticsManagementProfileUserLinksInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfileUserLinksInsert (..),
     newAnalyticsManagementProfileUserLinksInsert,
-    AnalyticsManagementProfileUserLinksInsert,
   )
 where
 

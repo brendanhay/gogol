@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadapk
     AndroidPublisherInternalappsharingartifactsUploadapkResource,
 
     -- ** Constructing a Request
+    AndroidPublisherInternalappsharingartifactsUploadapk (..),
     newAndroidPublisherInternalappsharingartifactsUploadapk,
-    AndroidPublisherInternalappsharingartifactsUploadapk,
   )
 where
 

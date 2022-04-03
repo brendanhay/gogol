@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
     CloudKMSProjectsLocationsGenerateRandomBytesResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsGenerateRandomBytes (..),
     newCloudKMSProjectsLocationsGenerateRandomBytes,
-    CloudKMSProjectsLocationsGenerateRandomBytes,
   )
 where
 

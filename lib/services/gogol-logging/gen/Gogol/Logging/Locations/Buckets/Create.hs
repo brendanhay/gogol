@@ -34,8 +34,8 @@ module Gogol.Logging.Locations.Buckets.Create
     LoggingLocationsBucketsCreateResource,
 
     -- ** Constructing a Request
+    LoggingLocationsBucketsCreate (..),
     newLoggingLocationsBucketsCreate,
-    LoggingLocationsBucketsCreate,
   )
 where
 

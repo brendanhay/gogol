@@ -34,8 +34,8 @@ module Gogol.BigQuery.Projects.List
     BigQueryProjectsListResource,
 
     -- ** Constructing a Request
+    BigQueryProjectsList (..),
     newBigQueryProjectsList,
-    BigQueryProjectsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionCommitments.Update
     ComputeRegionCommitmentsUpdateResource,
 
     -- ** Constructing a Request
+    ComputeRegionCommitmentsUpdate (..),
     newComputeRegionCommitmentsUpdate,
-    ComputeRegionCommitmentsUpdate,
   )
 where
 

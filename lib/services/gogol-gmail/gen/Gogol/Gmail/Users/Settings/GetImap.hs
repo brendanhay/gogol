@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.GetImap
     GmailUsersSettingsGetImapResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsGetImap (..),
     newGmailUsersSettingsGetImap,
-    GmailUsersSettingsGetImap,
   )
 where
 

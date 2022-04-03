@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Csses.Get
     ContentCssesGetResource,
 
     -- ** Constructing a Request
+    ContentCssesGet (..),
     newContentCssesGet,
-    ContentCssesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Assets.List
     SecurityCenterOrganizationsAssetsListResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsAssetsList (..),
     newSecurityCenterOrganizationsAssetsList,
-    SecurityCenterOrganizationsAssetsList,
   )
 where
 

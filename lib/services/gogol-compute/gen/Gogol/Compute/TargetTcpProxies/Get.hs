@@ -34,8 +34,8 @@ module Gogol.Compute.TargetTcpProxies.Get
     ComputeTargetTcpProxiesGetResource,
 
     -- ** Constructing a Request
+    ComputeTargetTcpProxiesGet (..),
     newComputeTargetTcpProxiesGet,
-    ComputeTargetTcpProxiesGet,
   )
 where
 

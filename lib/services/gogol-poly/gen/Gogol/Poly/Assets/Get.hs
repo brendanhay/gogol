@@ -34,8 +34,8 @@ module Gogol.Poly.Assets.Get
     PolyAssetsGetResource,
 
     -- ** Constructing a Request
+    PolyAssetsGet (..),
     newPolyAssetsGet,
-    PolyAssetsGet,
   )
 where
 

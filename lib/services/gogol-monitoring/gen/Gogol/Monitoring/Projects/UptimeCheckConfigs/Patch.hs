@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.UptimeCheckConfigs.Patch
     MonitoringProjectsUptimeCheckConfigsPatchResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsUptimeCheckConfigsPatch (..),
     newMonitoringProjectsUptimeCheckConfigsPatch,
-    MonitoringProjectsUptimeCheckConfigsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Holds.AddHeldAccounts
     VaultMattersHoldsAddHeldAccountsResource,
 
     -- ** Constructing a Request
+    VaultMattersHoldsAddHeldAccounts (..),
     newVaultMattersHoldsAddHeldAccounts,
-    VaultMattersHoldsAddHeldAccounts,
   )
 where
 

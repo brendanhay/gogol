@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Stop
     GmailUsersStopResource,
 
     -- ** Constructing a Request
+    GmailUsersStop (..),
     newGmailUsersStop,
-    GmailUsersStop,
   )
 where
 

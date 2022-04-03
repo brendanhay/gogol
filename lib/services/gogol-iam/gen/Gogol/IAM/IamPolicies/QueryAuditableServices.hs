@@ -34,8 +34,8 @@ module Gogol.IAM.IamPolicies.QueryAuditableServices
     IAMIamPoliciesQueryAuditableServicesResource,
 
     -- ** Constructing a Request
+    IAMIamPoliciesQueryAuditableServices (..),
     newIAMIamPoliciesQueryAuditableServices,
-    IAMIamPoliciesQueryAuditableServices,
   )
 where
 

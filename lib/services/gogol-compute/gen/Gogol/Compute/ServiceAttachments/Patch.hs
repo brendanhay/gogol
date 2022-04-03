@@ -34,8 +34,8 @@ module Gogol.Compute.ServiceAttachments.Patch
     ComputeServiceAttachmentsPatchResource,
 
     -- ** Constructing a Request
+    ComputeServiceAttachmentsPatch (..),
     newComputeServiceAttachmentsPatch,
-    ComputeServiceAttachmentsPatch,
   )
 where
 

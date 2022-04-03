@@ -34,8 +34,8 @@ module Gogol.Classroom.Registrations.Delete
     ClassroomRegistrationsDeleteResource,
 
     -- ** Constructing a Request
+    ClassroomRegistrationsDelete (..),
     newClassroomRegistrationsDelete,
-    ClassroomRegistrationsDelete,
   )
 where
 

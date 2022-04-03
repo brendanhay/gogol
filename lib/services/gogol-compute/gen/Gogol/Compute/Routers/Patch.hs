@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.Patch
     ComputeRoutersPatchResource,
 
     -- ** Constructing a Request
+    ComputeRoutersPatch (..),
     newComputeRoutersPatch,
-    ComputeRoutersPatch,
   )
 where
 

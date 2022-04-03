@@ -34,8 +34,8 @@ module Gogol.FirebaseDynamicLinks.ShortLinks.Create
     FirebaseDynamicLinksShortLinksCreateResource,
 
     -- ** Constructing a Request
+    FirebaseDynamicLinksShortLinksCreate (..),
     newFirebaseDynamicLinksShortLinksCreate,
-    FirebaseDynamicLinksShortLinksCreate,
   )
 where
 

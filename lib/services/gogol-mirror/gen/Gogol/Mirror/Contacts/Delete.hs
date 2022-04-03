@@ -34,8 +34,8 @@ module Gogol.Mirror.Contacts.Delete
     MirrorContactsDeleteResource,
 
     -- ** Constructing a Request
+    MirrorContactsDelete (..),
     newMirrorContactsDelete,
-    MirrorContactsDelete,
   )
 where
 

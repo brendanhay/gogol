@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.EmailLinkSignin
     IdentityToolkitRelyingpartyEmailLinkSigninResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyEmailLinkSignin (..),
     newIdentityToolkitRelyingpartyEmailLinkSignin,
-    IdentityToolkitRelyingpartyEmailLinkSignin,
   )
 where
 

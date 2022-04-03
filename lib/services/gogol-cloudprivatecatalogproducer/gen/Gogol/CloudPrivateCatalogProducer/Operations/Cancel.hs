@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Operations.Cancel
     CloudPrivateCatalogProducerOperationsCancelResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerOperationsCancel (..),
     newCloudPrivateCatalogProducerOperationsCancel,
-    CloudPrivateCatalogProducerOperationsCancel,
   )
 where
 

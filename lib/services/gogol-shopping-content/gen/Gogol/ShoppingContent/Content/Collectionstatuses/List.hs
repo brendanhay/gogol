@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Collectionstatuses.List
     ContentCollectionstatusesListResource,
 
     -- ** Constructing a Request
+    ContentCollectionstatusesList (..),
     newContentCollectionstatusesList,
-    ContentCollectionstatusesList,
   )
 where
 

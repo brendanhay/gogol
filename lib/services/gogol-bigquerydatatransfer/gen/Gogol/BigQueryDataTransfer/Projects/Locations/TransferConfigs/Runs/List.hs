@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
     BigQueryDataTransferProjectsLocationsTransferConfigsRunsListResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsList (..),
     newBigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
-    BigQueryDataTransferProjectsLocationsTransferConfigsRunsList,
   )
 where
 

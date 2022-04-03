@@ -34,8 +34,8 @@ module Gogol.Drive.Teamdrives.Update
     DriveTeamdrivesUpdateResource,
 
     -- ** Constructing a Request
+    DriveTeamdrivesUpdate (..),
     newDriveTeamdrivesUpdate,
-    DriveTeamdrivesUpdate,
   )
 where
 

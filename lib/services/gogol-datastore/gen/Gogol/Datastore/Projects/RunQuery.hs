@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.RunQuery
     DatastoreProjectsRunQueryResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsRunQuery (..),
     newDatastoreProjectsRunQuery,
-    DatastoreProjectsRunQuery,
   )
 where
 

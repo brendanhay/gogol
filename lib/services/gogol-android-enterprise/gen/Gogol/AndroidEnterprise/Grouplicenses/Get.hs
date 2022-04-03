@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Grouplicenses.Get
     AndroidEnterpriseGrouplicensesGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseGrouplicensesGet (..),
     newAndroidEnterpriseGrouplicensesGet,
-    AndroidEnterpriseGrouplicensesGet,
   )
 where
 

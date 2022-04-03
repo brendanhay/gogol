@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Profiles.Update
     AnalyticsManagementProfilesUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfilesUpdate (..),
     newAnalyticsManagementProfilesUpdate,
-    AnalyticsManagementProfilesUpdate,
   )
 where
 

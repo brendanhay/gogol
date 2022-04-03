@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.Resume
     AdExchangeBuyer2AccountsProposalsResumeResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsResume (..),
     newAdExchangeBuyer2AccountsProposalsResume,
-    AdExchangeBuyer2AccountsProposalsResume,
   )
 where
 

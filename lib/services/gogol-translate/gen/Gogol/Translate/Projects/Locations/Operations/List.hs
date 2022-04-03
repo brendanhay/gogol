@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.Locations.Operations.List
     TranslateProjectsLocationsOperationsListResource,
 
     -- ** Constructing a Request
+    TranslateProjectsLocationsOperationsList (..),
     newTranslateProjectsLocationsOperationsList,
-    TranslateProjectsLocationsOperationsList,
   )
 where
 

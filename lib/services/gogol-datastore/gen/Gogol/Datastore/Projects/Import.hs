@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Import
     DatastoreProjectsImportResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsImport (..),
     newDatastoreProjectsImport,
-    DatastoreProjectsImport,
   )
 where
 

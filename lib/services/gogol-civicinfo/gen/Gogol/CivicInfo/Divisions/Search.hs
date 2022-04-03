@@ -34,8 +34,8 @@ module Gogol.CivicInfo.Divisions.Search
     CivicInfoDivisionsSearchResource,
 
     -- ** Constructing a Request
+    CivicInfoDivisionsSearch (..),
     newCivicInfoDivisionsSearch,
-    CivicInfoDivisionsSearch,
   )
 where
 

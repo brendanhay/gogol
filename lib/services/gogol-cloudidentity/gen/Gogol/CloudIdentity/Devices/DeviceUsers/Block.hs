@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.Block
     CloudIdentityDevicesDeviceUsersBlockResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersBlock (..),
     newCloudIdentityDevicesDeviceUsersBlock,
-    CloudIdentityDevicesDeviceUsersBlock,
   )
 where
 

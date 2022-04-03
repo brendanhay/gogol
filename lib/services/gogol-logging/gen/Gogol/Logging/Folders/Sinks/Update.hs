@@ -34,8 +34,8 @@ module Gogol.Logging.Folders.Sinks.Update
     LoggingFoldersSinksUpdateResource,
 
     -- ** Constructing a Request
+    LoggingFoldersSinksUpdate (..),
     newLoggingFoldersSinksUpdate,
-    LoggingFoldersSinksUpdate,
   )
 where
 

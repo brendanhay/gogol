@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Update
     LicensingLicenseAssignmentsUpdateResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsUpdate (..),
     newLicensingLicenseAssignmentsUpdate,
-    LicensingLicenseAssignmentsUpdate,
   )
 where
 

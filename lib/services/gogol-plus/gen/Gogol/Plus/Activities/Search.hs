@@ -34,8 +34,8 @@ module Gogol.Plus.Activities.Search
     PlusActivitiesSearchResource,
 
     -- ** Constructing a Request
+    PlusActivitiesSearch (..),
     newPlusActivitiesSearch,
-    PlusActivitiesSearch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Licenses.SetIamPolicy
     ComputeLicensesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeLicensesSetIamPolicy (..),
     newComputeLicensesSetIamPolicy,
-    ComputeLicensesSetIamPolicy,
   )
 where
 

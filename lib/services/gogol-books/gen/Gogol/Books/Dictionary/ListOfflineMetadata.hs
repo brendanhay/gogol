@@ -34,8 +34,8 @@ module Gogol.Books.Dictionary.ListOfflineMetadata
     BooksDictionaryListOfflineMetadataResource,
 
     -- ** Constructing a Request
+    BooksDictionaryListOfflineMetadata (..),
     newBooksDictionaryListOfflineMetadata,
-    BooksDictionaryListOfflineMetadata,
   )
 where
 

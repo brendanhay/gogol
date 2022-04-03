@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.SignJwt
     IAMProjectsServiceAccountsSignJwtResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsSignJwt (..),
     newIAMProjectsServiceAccountsSignJwt,
-    IAMProjectsServiceAccountsSignJwt,
   )
 where
 

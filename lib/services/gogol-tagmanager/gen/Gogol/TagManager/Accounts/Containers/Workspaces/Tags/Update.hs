@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Update
     TagManagerAccountsContainersWorkspacesTagsUpdateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTagsUpdate (..),
     newTagManagerAccountsContainersWorkspacesTagsUpdate,
-    TagManagerAccountsContainersWorkspacesTagsUpdate,
   )
 where
 

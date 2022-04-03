@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Replicas.Restart
     ReplicaPoolReplicasRestartResource,
 
     -- ** Constructing a Request
+    ReplicaPoolReplicasRestart (..),
     newReplicaPoolReplicasRestart,
-    ReplicaPoolReplicasRestart,
   )
 where
 

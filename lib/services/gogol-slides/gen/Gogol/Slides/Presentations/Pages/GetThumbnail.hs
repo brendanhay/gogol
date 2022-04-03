@@ -34,8 +34,8 @@ module Gogol.Slides.Presentations.Pages.GetThumbnail
     SlidesPresentationsPagesGetThumbnailResource,
 
     -- ** Constructing a Request
+    SlidesPresentationsPagesGetThumbnail (..),
     newSlidesPresentationsPagesGetThumbnail,
-    SlidesPresentationsPagesGetThumbnail,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Files.GenerateIds
     DriveFilesGenerateIdsResource,
 
     -- ** Constructing a Request
+    DriveFilesGenerateIds (..),
     newDriveFilesGenerateIds,
-    DriveFilesGenerateIds,
   )
 where
 

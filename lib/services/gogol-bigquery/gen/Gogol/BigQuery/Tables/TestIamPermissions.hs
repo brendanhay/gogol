@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.TestIamPermissions
     BigQueryTablesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    BigQueryTablesTestIamPermissions (..),
     newBigQueryTablesTestIamPermissions,
-    BigQueryTablesTestIamPermissions,
   )
 where
 

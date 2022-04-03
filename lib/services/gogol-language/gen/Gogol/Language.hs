@@ -41,33 +41,33 @@ module Gogol.Language
 
     -- ** language.documents.analyzeEntities
     LanguageDocumentsAnalyzeEntitiesResource,
+    LanguageDocumentsAnalyzeEntities (..),
     newLanguageDocumentsAnalyzeEntities,
-    LanguageDocumentsAnalyzeEntities,
 
     -- ** language.documents.analyzeEntitySentiment
     LanguageDocumentsAnalyzeEntitySentimentResource,
+    LanguageDocumentsAnalyzeEntitySentiment (..),
     newLanguageDocumentsAnalyzeEntitySentiment,
-    LanguageDocumentsAnalyzeEntitySentiment,
 
     -- ** language.documents.analyzeSentiment
     LanguageDocumentsAnalyzeSentimentResource,
+    LanguageDocumentsAnalyzeSentiment (..),
     newLanguageDocumentsAnalyzeSentiment,
-    LanguageDocumentsAnalyzeSentiment,
 
     -- ** language.documents.analyzeSyntax
     LanguageDocumentsAnalyzeSyntaxResource,
+    LanguageDocumentsAnalyzeSyntax (..),
     newLanguageDocumentsAnalyzeSyntax,
-    LanguageDocumentsAnalyzeSyntax,
 
     -- ** language.documents.annotateText
     LanguageDocumentsAnnotateTextResource,
+    LanguageDocumentsAnnotateText (..),
     newLanguageDocumentsAnnotateText,
-    LanguageDocumentsAnnotateText,
 
     -- ** language.documents.classifyText
     LanguageDocumentsClassifyTextResource,
+    LanguageDocumentsClassifyText (..),
     newLanguageDocumentsClassifyText,
-    LanguageDocumentsClassifyText,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DnsRecordSets.Add
     ServiceNetworkingServicesDnsRecordSetsAddResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDnsRecordSetsAdd (..),
     newServiceNetworkingServicesDnsRecordSetsAdd,
-    ServiceNetworkingServicesDnsRecordSetsAdd,
   )
 where
 

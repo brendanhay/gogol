@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Updatelabels
     ContentAccountsUpdatelabelsResource,
 
     -- ** Constructing a Request
+    ContentAccountsUpdatelabels (..),
     newContentAccountsUpdatelabels,
-    ContentAccountsUpdatelabels,
   )
 where
 

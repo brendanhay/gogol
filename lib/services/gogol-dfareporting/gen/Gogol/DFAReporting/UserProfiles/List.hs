@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserProfiles.List
     DFAReportingUserProfilesListResource,
 
     -- ** Constructing a Request
+    DFAReportingUserProfilesList (..),
     newDFAReportingUserProfilesList,
-    DFAReportingUserProfilesList,
   )
 where
 

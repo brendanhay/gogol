@@ -34,8 +34,8 @@ module Gogol.Compute.Images.TestIamPermissions
     ComputeImagesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeImagesTestIamPermissions (..),
     newComputeImagesTestIamPermissions,
-    ComputeImagesTestIamPermissions,
   )
 where
 

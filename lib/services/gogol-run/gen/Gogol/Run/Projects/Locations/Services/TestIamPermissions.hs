@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.TestIamPermissions
     RunProjectsLocationsServicesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesTestIamPermissions (..),
     newRunProjectsLocationsServicesTestIamPermissions,
-    RunProjectsLocationsServicesTestIamPermissions,
   )
 where
 

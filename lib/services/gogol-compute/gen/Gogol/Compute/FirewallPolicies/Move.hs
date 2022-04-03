@@ -34,8 +34,8 @@ module Gogol.Compute.FirewallPolicies.Move
     ComputeFirewallPoliciesMoveResource,
 
     -- ** Constructing a Request
+    ComputeFirewallPoliciesMove (..),
     newComputeFirewallPoliciesMove,
-    ComputeFirewallPoliciesMove,
   )
 where
 

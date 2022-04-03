@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Stop
     MlProjectsLocationsStudiesTrialsStopResource,
 
     -- ** Constructing a Request
+    MlProjectsLocationsStudiesTrialsStop (..),
     newMlProjectsLocationsStudiesTrialsStop,
-    MlProjectsLocationsStudiesTrialsStop,
   )
 where
 

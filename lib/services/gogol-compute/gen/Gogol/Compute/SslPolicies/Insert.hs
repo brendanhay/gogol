@@ -34,8 +34,8 @@ module Gogol.Compute.SslPolicies.Insert
     ComputeSslPoliciesInsertResource,
 
     -- ** Constructing a Request
+    ComputeSslPoliciesInsert (..),
     newComputeSslPoliciesInsert,
-    ComputeSslPoliciesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Uploads.DeleteUploadData
     AnalyticsManagementUploadsDeleteUploadDataResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementUploadsDeleteUploadData (..),
     newAnalyticsManagementUploadsDeleteUploadData,
-    AnalyticsManagementUploadsDeleteUploadData,
   )
 where
 

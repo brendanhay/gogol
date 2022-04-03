@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.List
     AdminCustomersChromePrintersListResource,
 
     -- ** Constructing a Request
+    AdminCustomersChromePrintersList (..),
     newAdminCustomersChromePrintersList,
-    AdminCustomersChromePrintersList,
   )
 where
 

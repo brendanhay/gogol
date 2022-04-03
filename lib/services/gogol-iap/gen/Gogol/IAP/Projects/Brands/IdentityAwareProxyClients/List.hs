@@ -34,8 +34,8 @@ module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
     IAPProjectsBrandsIdentityAwareProxyClientsListResource,
 
     -- ** Constructing a Request
+    IAPProjectsBrandsIdentityAwareProxyClientsList (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsList,
-    IAPProjectsBrandsIdentityAwareProxyClientsList,
   )
 where
 

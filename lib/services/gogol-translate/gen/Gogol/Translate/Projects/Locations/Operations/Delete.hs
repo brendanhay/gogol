@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.Locations.Operations.Delete
     TranslateProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    TranslateProjectsLocationsOperationsDelete (..),
     newTranslateProjectsLocationsOperationsDelete,
-    TranslateProjectsLocationsOperationsDelete,
   )
 where
 

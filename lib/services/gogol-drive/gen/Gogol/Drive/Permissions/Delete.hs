@@ -34,8 +34,8 @@ module Gogol.Drive.Permissions.Delete
     DrivePermissionsDeleteResource,
 
     -- ** Constructing a Request
+    DrivePermissionsDelete (..),
     newDrivePermissionsDelete,
-    DrivePermissionsDelete,
   )
 where
 

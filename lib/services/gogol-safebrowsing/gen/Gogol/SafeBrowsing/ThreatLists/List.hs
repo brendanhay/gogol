@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.ThreatLists.List
     SafeBrowsingThreatListsListResource,
 
     -- ** Constructing a Request
+    SafeBrowsingThreatListsList (..),
     newSafeBrowsingThreatListsList,
-    SafeBrowsingThreatListsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.Upgrade
     RedisProjectsLocationsInstancesUpgradeResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesUpgrade (..),
     newRedisProjectsLocationsInstancesUpgrade,
-    RedisProjectsLocationsInstancesUpgrade,
   )
 where
 

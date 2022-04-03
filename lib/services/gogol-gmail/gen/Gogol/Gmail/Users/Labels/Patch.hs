@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Labels.Patch
     GmailUsersLabelsPatchResource,
 
     -- ** Constructing a Request
+    GmailUsersLabelsPatch (..),
     newGmailUsersLabelsPatch,
-    GmailUsersLabelsPatch,
   )
 where
 

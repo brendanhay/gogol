@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Versions.Live
     TagManagerAccountsContainersVersionsLiveResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersVersionsLive (..),
     newTagManagerAccountsContainersVersionsLive,
-    TagManagerAccountsContainersVersionsLive,
   )
 where
 

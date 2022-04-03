@@ -34,8 +34,8 @@ module Gogol.YouTube.I18nRegions.List
     YouTubeI18nRegionsListResource,
 
     -- ** Constructing a Request
+    YouTubeI18nRegionsList (..),
     newYouTubeI18nRegionsList,
-    YouTubeI18nRegionsList,
   )
 where
 

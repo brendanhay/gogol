@@ -34,8 +34,8 @@ module Gogol.DFAReporting.EventTags.Update
     DFAReportingEventTagsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingEventTagsUpdate (..),
     newDFAReportingEventTagsUpdate,
-    DFAReportingEventTagsUpdate,
   )
 where
 

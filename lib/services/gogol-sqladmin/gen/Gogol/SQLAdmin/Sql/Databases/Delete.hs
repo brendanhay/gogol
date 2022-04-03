@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.Delete
     SqlDatabasesDeleteResource,
 
     -- ** Constructing a Request
+    SqlDatabasesDelete (..),
     newSqlDatabasesDelete,
-    SqlDatabasesDelete,
   )
 where
 

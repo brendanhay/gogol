@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.List
     GamesAchievementsListResource,
 
     -- ** Constructing a Request
+    GamesAchievementsList (..),
     newGamesAchievementsList,
-    GamesAchievementsList,
   )
 where
 

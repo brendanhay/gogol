@@ -34,8 +34,8 @@ module Gogol.File.Projects.Locations.Instances.Restore
     FileProjectsLocationsInstancesRestoreResource,
 
     -- ** Constructing a Request
+    FileProjectsLocationsInstancesRestore (..),
     newFileProjectsLocationsInstancesRestore,
-    FileProjectsLocationsInstancesRestore,
   )
 where
 

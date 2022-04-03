@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Calendars.Update
     DirectoryResourcesCalendarsUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesCalendarsUpdate (..),
     newDirectoryResourcesCalendarsUpdate,
-    DirectoryResourcesCalendarsUpdate,
   )
 where
 

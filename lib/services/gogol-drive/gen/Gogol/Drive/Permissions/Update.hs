@@ -34,8 +34,8 @@ module Gogol.Drive.Permissions.Update
     DrivePermissionsUpdateResource,
 
     -- ** Constructing a Request
+    DrivePermissionsUpdate (..),
     newDrivePermissionsUpdate,
-    DrivePermissionsUpdate,
   )
 where
 

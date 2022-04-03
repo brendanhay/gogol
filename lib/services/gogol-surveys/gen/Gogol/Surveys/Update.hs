@@ -34,8 +34,8 @@ module Gogol.Surveys.Update
     SurveysSurveysUpdateResource,
 
     -- ** Constructing a Request
+    SurveysSurveysUpdate (..),
     newSurveysSurveysUpdate,
-    SurveysSurveysUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Marketplacenotes.List
     AdExchangeBuyerMarketplacenotesListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerMarketplacenotesList (..),
     newAdExchangeBuyerMarketplacenotesList,
-    AdExchangeBuyerMarketplacenotesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Serviceaccountkeys.Insert
     AndroidEnterpriseServiceaccountkeysInsertResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseServiceaccountkeysInsert (..),
     newAndroidEnterpriseServiceaccountkeysInsert,
-    AndroidEnterpriseServiceaccountkeysInsert,
   )
 where
 

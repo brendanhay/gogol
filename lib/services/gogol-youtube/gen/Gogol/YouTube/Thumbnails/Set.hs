@@ -34,8 +34,8 @@ module Gogol.YouTube.Thumbnails.Set
     YouTubeThumbnailsSetResource,
 
     -- ** Constructing a Request
+    YouTubeThumbnailsSet (..),
     newYouTubeThumbnailsSet,
-    YouTubeThumbnailsSet,
   )
 where
 

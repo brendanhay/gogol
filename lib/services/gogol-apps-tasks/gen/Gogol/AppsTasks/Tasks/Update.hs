@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Update
     TasksTasksUpdateResource,
 
     -- ** Constructing a Request
+    TasksTasksUpdate (..),
     newTasksTasksUpdate,
-    TasksTasksUpdate,
   )
 where
 

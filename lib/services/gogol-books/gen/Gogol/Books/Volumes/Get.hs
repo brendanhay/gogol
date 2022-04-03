@@ -34,8 +34,8 @@ module Gogol.Books.Volumes.Get
     BooksVolumesGetResource,
 
     -- ** Constructing a Request
+    BooksVolumesGet (..),
     newBooksVolumesGet,
-    BooksVolumesGet,
   )
 where
 

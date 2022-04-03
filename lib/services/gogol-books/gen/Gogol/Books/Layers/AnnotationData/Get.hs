@@ -34,8 +34,8 @@ module Gogol.Books.Layers.AnnotationData.Get
     BooksLayersAnnotationDataGetResource,
 
     -- ** Constructing a Request
+    BooksLayersAnnotationDataGet (..),
     newBooksLayersAnnotationDataGet,
-    BooksLayersAnnotationDataGet,
   )
 where
 

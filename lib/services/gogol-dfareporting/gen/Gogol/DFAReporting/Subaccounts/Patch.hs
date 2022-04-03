@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Subaccounts.Patch
     DFAReportingSubaccountsPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingSubaccountsPatch (..),
     newDFAReportingSubaccountsPatch,
-    DFAReportingSubaccountsPatch,
   )
 where
 

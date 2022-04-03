@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.FindingTypeStats.L
     WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsListResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Storage.Projects.ServiceAccount.Get
     StorageProjectsServiceAccountGetResource,
 
     -- ** Constructing a Request
+    StorageProjectsServiceAccountGet (..),
     newStorageProjectsServiceAccountGet,
-    StorageProjectsServiceAccountGet,
   )
 where
 

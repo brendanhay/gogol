@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Regions.Patch
     ContentRegionsPatchResource,
 
     -- ** Constructing a Request
+    ContentRegionsPatch (..),
     newContentRegionsPatch,
-    ContentRegionsPatch,
   )
 where
 

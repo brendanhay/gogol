@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.AggregatedList
     ComputeTargetPoolsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsAggregatedList (..),
     newComputeTargetPoolsAggregatedList,
-    ComputeTargetPoolsAggregatedList,
   )
 where
 

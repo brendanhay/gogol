@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Values.Append
     SheetsSpreadsheetsValuesAppendResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsValuesAppend (..),
     newSheetsSpreadsheetsValuesAppend,
-    SheetsSpreadsheetsValuesAppend,
   )
 where
 

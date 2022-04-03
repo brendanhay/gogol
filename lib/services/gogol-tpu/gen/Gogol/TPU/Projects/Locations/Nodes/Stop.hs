@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Nodes.Stop
     TPUProjectsLocationsNodesStopResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsNodesStop (..),
     newTPUProjectsLocationsNodesStop,
-    TPUProjectsLocationsNodesStop,
   )
 where
 

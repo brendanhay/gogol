@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
     ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachmentsResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments (..),
     newClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
-    ClassroomCoursesCourseWorkStudentSubmissionsModifyAttachments,
   )
 where
 

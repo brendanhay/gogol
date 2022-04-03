@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.List
     CloudKMSProjectsLocationsKeyRingsCryptoKeysListResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysList (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysList,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysList,
   )
 where
 

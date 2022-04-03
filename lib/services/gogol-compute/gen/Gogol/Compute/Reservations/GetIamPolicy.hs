@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.GetIamPolicy
     ComputeReservationsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeReservationsGetIamPolicy (..),
     newComputeReservationsGetIamPolicy,
-    ComputeReservationsGetIamPolicy,
   )
 where
 

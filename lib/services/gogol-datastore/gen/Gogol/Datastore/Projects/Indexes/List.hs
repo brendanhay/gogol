@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Indexes.List
     DatastoreProjectsIndexesListResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsIndexesList (..),
     newDatastoreProjectsIndexesList,
-    DatastoreProjectsIndexesList,
   )
 where
 

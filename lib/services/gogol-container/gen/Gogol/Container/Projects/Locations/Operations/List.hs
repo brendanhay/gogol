@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Operations.List
     ContainerProjectsLocationsOperationsListResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsOperationsList (..),
     newContainerProjectsLocationsOperationsList,
-    ContainerProjectsLocationsOperationsList,
   )
 where
 

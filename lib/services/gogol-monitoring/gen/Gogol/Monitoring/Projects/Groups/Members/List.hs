@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.Groups.Members.List
     MonitoringProjectsGroupsMembersListResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsGroupsMembersList (..),
     newMonitoringProjectsGroupsMembersList,
-    MonitoringProjectsGroupsMembersList,
   )
 where
 

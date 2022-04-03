@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Jobs.List
     DataprocProjectsRegionsJobsListResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsJobsList (..),
     newDataprocProjectsRegionsJobsList,
-    DataprocProjectsRegionsJobsList,
   )
 where
 

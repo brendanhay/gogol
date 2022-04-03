@@ -34,8 +34,8 @@ module Gogol.DFAReporting.PlacementStrategies.Delete
     DFAReportingPlacementStrategiesDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingPlacementStrategiesDelete (..),
     newDFAReportingPlacementStrategiesDelete,
-    DFAReportingPlacementStrategiesDelete,
   )
 where
 

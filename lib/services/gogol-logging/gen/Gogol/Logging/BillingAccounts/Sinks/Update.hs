@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Sinks.Update
     LoggingBillingAccountsSinksUpdateResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsSinksUpdate (..),
     newLoggingBillingAccountsSinksUpdate,
-    LoggingBillingAccountsSinksUpdate,
   )
 where
 

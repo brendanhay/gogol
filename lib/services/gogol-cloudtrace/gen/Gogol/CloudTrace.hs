@@ -41,13 +41,13 @@ module Gogol.CloudTrace
 
     -- ** cloudtrace.projects.traces.batchWrite
     CloudTraceProjectsTracesBatchWriteResource,
+    CloudTraceProjectsTracesBatchWrite (..),
     newCloudTraceProjectsTracesBatchWrite,
-    CloudTraceProjectsTracesBatchWrite,
 
     -- ** cloudtrace.projects.traces.spans.createSpan
     CloudTraceProjectsTracesSpansCreateSpanResource,
+    CloudTraceProjectsTracesSpansCreateSpan (..),
     newCloudTraceProjectsTracesSpansCreateSpan,
-    CloudTraceProjectsTracesSpansCreateSpan,
 
     -- * Types
 

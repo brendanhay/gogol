@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
     AndroidPublisherInternalappsharingartifactsUploadbundleResource,
 
     -- ** Constructing a Request
+    AndroidPublisherInternalappsharingartifactsUploadbundle (..),
     newAndroidPublisherInternalappsharingartifactsUploadbundle,
-    AndroidPublisherInternalappsharingartifactsUploadbundle,
   )
 where
 

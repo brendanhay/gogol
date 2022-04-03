@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Operations.Cancel
     TPUProjectsLocationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsOperationsCancel (..),
     newTPUProjectsLocationsOperationsCancel,
-    TPUProjectsLocationsOperationsCancel,
   )
 where
 

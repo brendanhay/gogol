@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Reviews.List
     AndroidPublisherReviewsListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherReviewsList (..),
     newAndroidPublisherReviewsList,
-    AndroidPublisherReviewsList,
   )
 where
 

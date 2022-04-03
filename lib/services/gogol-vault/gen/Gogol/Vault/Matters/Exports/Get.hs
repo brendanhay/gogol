@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Exports.Get
     VaultMattersExportsGetResource,
 
     -- ** Constructing a Request
+    VaultMattersExportsGet (..),
     newVaultMattersExportsGet,
-    VaultMattersExportsGet,
   )
 where
 

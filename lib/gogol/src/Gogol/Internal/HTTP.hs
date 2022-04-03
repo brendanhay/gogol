@@ -23,7 +23,7 @@ import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Builder as Build
 import GHC.Exts (toList)
-import Gogol.Auth (authorize, KnownScopes)
+import Gogol.Auth (KnownScopes, authorize)
 import Gogol.Env (Env (..))
 import Gogol.Internal.Logger (logDebug)
 import Gogol.Internal.Multipart

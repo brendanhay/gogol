@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AdvertiserLandingPages.List
     DFAReportingAdvertiserLandingPagesListResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertiserLandingPagesList (..),
     newDFAReportingAdvertiserLandingPagesList,
-    DFAReportingAdvertiserLandingPagesList,
   )
 where
 

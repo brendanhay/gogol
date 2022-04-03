@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Move
     CloudresourcemanagerFoldersMoveResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersMove (..),
     newCloudresourcemanagerFoldersMove,
-    CloudresourcemanagerFoldersMove,
   )
 where
 

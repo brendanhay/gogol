@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.Lookup
     CloudIdentityDevicesDeviceUsersLookupResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersLookup (..),
     newCloudIdentityDevicesDeviceUsersLookup,
-    CloudIdentityDevicesDeviceUsersLookup,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudScheduler.Projects.Locations.Jobs.Pause
     CloudSchedulerProjectsLocationsJobsPauseResource,
 
     -- ** Constructing a Request
+    CloudSchedulerProjectsLocationsJobsPause (..),
     newCloudSchedulerProjectsLocationsJobsPause,
-    CloudSchedulerProjectsLocationsJobsPause,
   )
 where
 

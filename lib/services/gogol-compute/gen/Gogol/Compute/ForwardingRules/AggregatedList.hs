@@ -34,8 +34,8 @@ module Gogol.Compute.ForwardingRules.AggregatedList
     ComputeForwardingRulesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeForwardingRulesAggregatedList (..),
     newComputeForwardingRulesAggregatedList,
-    ComputeForwardingRulesAggregatedList,
   )
 where
 

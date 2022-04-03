@@ -34,8 +34,8 @@ module Gogol.Composer.Projects.Locations.ImageVersions.List
     ComposerProjectsLocationsImageVersionsListResource,
 
     -- ** Constructing a Request
+    ComposerProjectsLocationsImageVersionsList (..),
     newComposerProjectsLocationsImageVersionsList,
-    ComposerProjectsLocationsImageVersionsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Tokens.Delete
     DirectoryTokensDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryTokensDelete (..),
     newDirectoryTokensDelete,
-    DirectoryTokensDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.ChangeSeats
     ResellerSubscriptionsChangeSeatsResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsChangeSeats (..),
     newResellerSubscriptionsChangeSeats,
-    ResellerSubscriptionsChangeSeats,
   )
 where
 

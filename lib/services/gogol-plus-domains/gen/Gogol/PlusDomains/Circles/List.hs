@@ -34,8 +34,8 @@ module Gogol.PlusDomains.Circles.List
     PlusDomainsCirclesListResource,
 
     -- ** Constructing a Request
+    PlusDomainsCirclesList (..),
     newPlusDomainsCirclesList,
-    PlusDomainsCirclesList,
   )
 where
 

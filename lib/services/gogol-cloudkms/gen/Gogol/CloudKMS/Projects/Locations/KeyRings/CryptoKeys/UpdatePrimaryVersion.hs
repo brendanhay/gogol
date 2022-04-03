@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersio
     CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
   )
 where
 

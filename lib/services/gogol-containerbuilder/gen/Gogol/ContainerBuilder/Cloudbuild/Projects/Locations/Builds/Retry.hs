@@ -35,8 +35,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Builds.Retry
     CloudbuildProjectsLocationsBuildsRetryResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsBuildsRetry (..),
     newCloudbuildProjectsLocationsBuildsRetry,
-    CloudbuildProjectsLocationsBuildsRetry,
   )
 where
 

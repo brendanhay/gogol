@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Delete
     AdminCustomersChromePrintersDeleteResource,
 
     -- ** Constructing a Request
+    AdminCustomersChromePrintersDelete (..),
     newAdminCustomersChromePrintersDelete,
-    AdminCustomersChromePrintersDelete,
   )
 where
 

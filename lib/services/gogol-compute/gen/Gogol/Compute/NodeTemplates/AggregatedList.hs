@@ -34,8 +34,8 @@ module Gogol.Compute.NodeTemplates.AggregatedList
     ComputeNodeTemplatesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeNodeTemplatesAggregatedList (..),
     newComputeNodeTemplatesAggregatedList,
-    ComputeNodeTemplatesAggregatedList,
   )
 where
 

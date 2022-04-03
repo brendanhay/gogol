@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.Dataset.Aggregate
     FitnessUsersDatasetAggregateResource,
 
     -- ** Constructing a Request
+    FitnessUsersDatasetAggregate (..),
     newFitnessUsersDatasetAggregate,
-    FitnessUsersDatasetAggregate,
   )
 where
 

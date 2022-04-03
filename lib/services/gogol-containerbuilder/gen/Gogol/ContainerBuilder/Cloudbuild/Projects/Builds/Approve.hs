@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Builds.Approve
     CloudbuildProjectsBuildsApproveResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsBuildsApprove (..),
     newCloudbuildProjectsBuildsApprove,
-    CloudbuildProjectsBuildsApprove,
   )
 where
 

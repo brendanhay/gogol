@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DynamicTargetingKeys.Delete
     DFAReportingDynamicTargetingKeysDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingDynamicTargetingKeysDelete (..),
     newDFAReportingDynamicTargetingKeysDelete,
-    DFAReportingDynamicTargetingKeysDelete,
   )
 where
 

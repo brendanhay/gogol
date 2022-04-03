@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.Delete
     ResellerSubscriptionsDeleteResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsDelete (..),
     newResellerSubscriptionsDelete,
-    ResellerSubscriptionsDelete,
   )
 where
 

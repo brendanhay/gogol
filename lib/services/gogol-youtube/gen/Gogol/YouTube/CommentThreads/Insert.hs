@@ -34,8 +34,8 @@ module Gogol.YouTube.CommentThreads.Insert
     YouTubeCommentThreadsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeCommentThreadsInsert (..),
     newYouTubeCommentThreadsInsert,
-    YouTubeCommentThreadsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Undelete
     CloudPrivateCatalogProducerCatalogsUndeleteResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsUndelete (..),
     newCloudPrivateCatalogProducerCatalogsUndelete,
-    CloudPrivateCatalogProducerCatalogsUndelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Rollback
     DatastoreProjectsRollbackResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsRollback (..),
     newDatastoreProjectsRollback,
-    DatastoreProjectsRollback,
   )
 where
 

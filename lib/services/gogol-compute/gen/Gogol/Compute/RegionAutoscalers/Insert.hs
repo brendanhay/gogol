@@ -34,8 +34,8 @@ module Gogol.Compute.RegionAutoscalers.Insert
     ComputeRegionAutoscalersInsertResource,
 
     -- ** Constructing a Request
+    ComputeRegionAutoscalersInsert (..),
     newComputeRegionAutoscalersInsert,
-    ComputeRegionAutoscalersInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetMetadata
     ComputeInstancesSetMetadataResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetMetadata (..),
     newComputeInstancesSetMetadata,
-    ComputeInstancesSetMetadata,
   )
 where
 

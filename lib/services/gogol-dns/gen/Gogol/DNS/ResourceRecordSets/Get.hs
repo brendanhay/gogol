@@ -34,8 +34,8 @@ module Gogol.DNS.ResourceRecordSets.Get
     DNSResourceRecordSetsGetResource,
 
     -- ** Constructing a Request
+    DNSResourceRecordSetsGet (..),
     newDNSResourceRecordSetsGet,
-    DNSResourceRecordSetsGet,
   )
 where
 

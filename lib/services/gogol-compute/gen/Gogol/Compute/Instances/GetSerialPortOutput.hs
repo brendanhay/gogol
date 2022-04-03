@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.GetSerialPortOutput
     ComputeInstancesGetSerialPortOutputResource,
 
     -- ** Constructing a Request
+    ComputeInstancesGetSerialPortOutput (..),
     newComputeInstancesGetSerialPortOutput,
-    ComputeInstancesGetSerialPortOutput,
   )
 where
 

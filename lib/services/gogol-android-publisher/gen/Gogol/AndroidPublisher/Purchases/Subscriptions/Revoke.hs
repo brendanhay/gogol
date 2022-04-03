@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Revoke
     AndroidPublisherPurchasesSubscriptionsRevokeResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsRevoke (..),
     newAndroidPublisherPurchasesSubscriptionsRevoke,
-    AndroidPublisherPurchasesSubscriptionsRevoke,
   )
 where
 

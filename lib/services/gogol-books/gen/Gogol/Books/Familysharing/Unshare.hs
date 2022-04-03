@@ -34,8 +34,8 @@ module Gogol.Books.Familysharing.Unshare
     BooksFamilysharingUnshareResource,
 
     -- ** Constructing a Request
+    BooksFamilysharingUnshare (..),
     newBooksFamilysharingUnshare,
-    BooksFamilysharingUnshare,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.MobileCarriers.Get
     DFAReportingMobileCarriersGetResource,
 
     -- ** Constructing a Request
+    DFAReportingMobileCarriersGet (..),
     newDFAReportingMobileCarriersGet,
-    DFAReportingMobileCarriersGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveStreams.List
     YouTubeLiveStreamsListResource,
 
     -- ** Constructing a Request
+    YouTubeLiveStreamsList (..),
     newYouTubeLiveStreamsList,
-    YouTubeLiveStreamsList,
   )
 where
 

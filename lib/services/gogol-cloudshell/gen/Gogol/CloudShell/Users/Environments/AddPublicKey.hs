@@ -34,8 +34,8 @@ module Gogol.CloudShell.Users.Environments.AddPublicKey
     CloudShellUsersEnvironmentsAddPublicKeyResource,
 
     -- ** Constructing a Request
+    CloudShellUsersEnvironmentsAddPublicKey (..),
     newCloudShellUsersEnvironmentsAddPublicKey,
-    CloudShellUsersEnvironmentsAddPublicKey,
   )
 where
 

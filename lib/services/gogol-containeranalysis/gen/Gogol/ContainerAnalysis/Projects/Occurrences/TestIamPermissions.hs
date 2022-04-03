@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
     ContainerAnalysisProjectsOccurrencesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesTestIamPermissions (..),
     newContainerAnalysisProjectsOccurrencesTestIamPermissions,
-    ContainerAnalysisProjectsOccurrencesTestIamPermissions,
   )
 where
 

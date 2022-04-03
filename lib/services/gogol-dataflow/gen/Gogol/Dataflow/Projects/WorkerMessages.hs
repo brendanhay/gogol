@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.WorkerMessages
     DataflowProjectsWorkerMessagesResource,
 
     -- ** Constructing a Request
+    DataflowProjectsWorkerMessages (..),
     newDataflowProjectsWorkerMessages,
-    DataflowProjectsWorkerMessages,
   )
 where
 

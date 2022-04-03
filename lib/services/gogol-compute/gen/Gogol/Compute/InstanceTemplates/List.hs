@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceTemplates.List
     ComputeInstanceTemplatesListResource,
 
     -- ** Constructing a Request
+    ComputeInstanceTemplatesList (..),
     newComputeInstanceTemplatesList,
-    ComputeInstanceTemplatesList,
   )
 where
 

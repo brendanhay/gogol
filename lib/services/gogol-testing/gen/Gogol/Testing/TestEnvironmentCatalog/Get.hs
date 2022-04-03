@@ -34,8 +34,8 @@ module Gogol.Testing.TestEnvironmentCatalog.Get
     TestingTestEnvironmentCatalogGetResource,
 
     -- ** Constructing a Request
+    TestingTestEnvironmentCatalogGet (..),
     newTestingTestEnvironmentCatalogGet,
-    TestingTestEnvironmentCatalogGet,
   )
 where
 

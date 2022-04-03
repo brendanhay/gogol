@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Operations.Delete
     ServiceConsumerManagementOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementOperationsDelete (..),
     newServiceConsumerManagementOperationsDelete,
-    ServiceConsumerManagementOperationsDelete,
   )
 where
 

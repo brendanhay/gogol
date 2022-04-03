@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Flags.List
     SqlFlagsListResource,
 
     -- ** Constructing a Request
+    SqlFlagsList (..),
     newSqlFlagsList,
-    SqlFlagsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroups.AggregatedList
     ComputeInstanceGroupsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupsAggregatedList (..),
     newComputeInstanceGroupsAggregatedList,
-    ComputeInstanceGroupsAggregatedList,
   )
 where
 

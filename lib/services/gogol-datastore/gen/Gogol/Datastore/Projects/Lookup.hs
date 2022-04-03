@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Lookup
     DatastoreProjectsLookupResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsLookup (..),
     newDatastoreProjectsLookup,
-    DatastoreProjectsLookup,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Folders.Sinks.Create
     LoggingFoldersSinksCreateResource,
 
     -- ** Constructing a Request
+    LoggingFoldersSinksCreate (..),
     newLoggingFoldersSinksCreate,
-    LoggingFoldersSinksCreate,
   )
 where
 

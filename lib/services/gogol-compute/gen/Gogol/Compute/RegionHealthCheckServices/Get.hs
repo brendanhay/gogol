@@ -34,8 +34,8 @@ module Gogol.Compute.RegionHealthCheckServices.Get
     ComputeRegionHealthCheckServicesGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionHealthCheckServicesGet (..),
     newComputeRegionHealthCheckServicesGet,
-    ComputeRegionHealthCheckServicesGet,
   )
 where
 

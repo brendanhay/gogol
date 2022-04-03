@@ -40,93 +40,93 @@ module Gogol.CloudTasks
 
     -- ** cloudtasks.projects.locations.get
     CloudTasksProjectsLocationsGetResource,
+    CloudTasksProjectsLocationsGet (..),
     newCloudTasksProjectsLocationsGet,
-    CloudTasksProjectsLocationsGet,
 
     -- ** cloudtasks.projects.locations.list
     CloudTasksProjectsLocationsListResource,
+    CloudTasksProjectsLocationsList (..),
     newCloudTasksProjectsLocationsList,
-    CloudTasksProjectsLocationsList,
 
     -- ** cloudtasks.projects.locations.queues.create
     CloudTasksProjectsLocationsQueuesCreateResource,
+    CloudTasksProjectsLocationsQueuesCreate (..),
     newCloudTasksProjectsLocationsQueuesCreate,
-    CloudTasksProjectsLocationsQueuesCreate,
 
     -- ** cloudtasks.projects.locations.queues.delete
     CloudTasksProjectsLocationsQueuesDeleteResource,
+    CloudTasksProjectsLocationsQueuesDelete (..),
     newCloudTasksProjectsLocationsQueuesDelete,
-    CloudTasksProjectsLocationsQueuesDelete,
 
     -- ** cloudtasks.projects.locations.queues.get
     CloudTasksProjectsLocationsQueuesGetResource,
+    CloudTasksProjectsLocationsQueuesGet (..),
     newCloudTasksProjectsLocationsQueuesGet,
-    CloudTasksProjectsLocationsQueuesGet,
 
     -- ** cloudtasks.projects.locations.queues.getIamPolicy
     CloudTasksProjectsLocationsQueuesGetIamPolicyResource,
+    CloudTasksProjectsLocationsQueuesGetIamPolicy (..),
     newCloudTasksProjectsLocationsQueuesGetIamPolicy,
-    CloudTasksProjectsLocationsQueuesGetIamPolicy,
 
     -- ** cloudtasks.projects.locations.queues.list
     CloudTasksProjectsLocationsQueuesListResource,
+    CloudTasksProjectsLocationsQueuesList (..),
     newCloudTasksProjectsLocationsQueuesList,
-    CloudTasksProjectsLocationsQueuesList,
 
     -- ** cloudtasks.projects.locations.queues.patch
     CloudTasksProjectsLocationsQueuesPatchResource,
+    CloudTasksProjectsLocationsQueuesPatch (..),
     newCloudTasksProjectsLocationsQueuesPatch,
-    CloudTasksProjectsLocationsQueuesPatch,
 
     -- ** cloudtasks.projects.locations.queues.pause
     CloudTasksProjectsLocationsQueuesPauseResource,
+    CloudTasksProjectsLocationsQueuesPause (..),
     newCloudTasksProjectsLocationsQueuesPause,
-    CloudTasksProjectsLocationsQueuesPause,
 
     -- ** cloudtasks.projects.locations.queues.purge
     CloudTasksProjectsLocationsQueuesPurgeResource,
+    CloudTasksProjectsLocationsQueuesPurge (..),
     newCloudTasksProjectsLocationsQueuesPurge,
-    CloudTasksProjectsLocationsQueuesPurge,
 
     -- ** cloudtasks.projects.locations.queues.resume
     CloudTasksProjectsLocationsQueuesResumeResource,
+    CloudTasksProjectsLocationsQueuesResume (..),
     newCloudTasksProjectsLocationsQueuesResume,
-    CloudTasksProjectsLocationsQueuesResume,
 
     -- ** cloudtasks.projects.locations.queues.setIamPolicy
     CloudTasksProjectsLocationsQueuesSetIamPolicyResource,
+    CloudTasksProjectsLocationsQueuesSetIamPolicy (..),
     newCloudTasksProjectsLocationsQueuesSetIamPolicy,
-    CloudTasksProjectsLocationsQueuesSetIamPolicy,
 
     -- ** cloudtasks.projects.locations.queues.tasks.create
     CloudTasksProjectsLocationsQueuesTasksCreateResource,
+    CloudTasksProjectsLocationsQueuesTasksCreate (..),
     newCloudTasksProjectsLocationsQueuesTasksCreate,
-    CloudTasksProjectsLocationsQueuesTasksCreate,
 
     -- ** cloudtasks.projects.locations.queues.tasks.delete
     CloudTasksProjectsLocationsQueuesTasksDeleteResource,
+    CloudTasksProjectsLocationsQueuesTasksDelete (..),
     newCloudTasksProjectsLocationsQueuesTasksDelete,
-    CloudTasksProjectsLocationsQueuesTasksDelete,
 
     -- ** cloudtasks.projects.locations.queues.tasks.get
     CloudTasksProjectsLocationsQueuesTasksGetResource,
+    CloudTasksProjectsLocationsQueuesTasksGet (..),
     newCloudTasksProjectsLocationsQueuesTasksGet,
-    CloudTasksProjectsLocationsQueuesTasksGet,
 
     -- ** cloudtasks.projects.locations.queues.tasks.list
     CloudTasksProjectsLocationsQueuesTasksListResource,
+    CloudTasksProjectsLocationsQueuesTasksList (..),
     newCloudTasksProjectsLocationsQueuesTasksList,
-    CloudTasksProjectsLocationsQueuesTasksList,
 
     -- ** cloudtasks.projects.locations.queues.tasks.run
     CloudTasksProjectsLocationsQueuesTasksRunResource,
+    CloudTasksProjectsLocationsQueuesTasksRun (..),
     newCloudTasksProjectsLocationsQueuesTasksRun,
-    CloudTasksProjectsLocationsQueuesTasksRun,
 
     -- ** cloudtasks.projects.locations.queues.testIamPermissions
     CloudTasksProjectsLocationsQueuesTestIamPermissionsResource,
+    CloudTasksProjectsLocationsQueuesTestIamPermissions (..),
     newCloudTasksProjectsLocationsQueuesTestIamPermissions,
-    CloudTasksProjectsLocationsQueuesTestIamPermissions,
 
     -- * Types
 

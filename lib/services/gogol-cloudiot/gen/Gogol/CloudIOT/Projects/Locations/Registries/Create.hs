@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Create
     CloudIOTProjectsLocationsRegistriesCreateResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesCreate (..),
     newCloudIOTProjectsLocationsRegistriesCreate,
-    CloudIOTProjectsLocationsRegistriesCreate,
   )
 where
 

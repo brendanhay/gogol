@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Folders.UpdateAccessApprovalSettings
     AccessApprovalFoldersUpdateAccessApprovalSettingsResource,
 
     -- ** Constructing a Request
+    AccessApprovalFoldersUpdateAccessApprovalSettings (..),
     newAccessApprovalFoldersUpdateAccessApprovalSettings,
-    AccessApprovalFoldersUpdateAccessApprovalSettings,
   )
 where
 

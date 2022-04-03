@@ -34,8 +34,8 @@ module Gogol.BigQuery.Routines.Delete
     BigQueryRoutinesDeleteResource,
 
     -- ** Constructing a Request
+    BigQueryRoutinesDelete (..),
     newBigQueryRoutinesDelete,
-    BigQueryRoutinesDelete,
   )
 where
 

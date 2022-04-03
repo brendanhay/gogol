@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Pools.Resize
     ReplicaPoolPoolsResizeResource,
 
     -- ** Constructing a Request
+    ReplicaPoolPoolsResize (..),
     newReplicaPoolPoolsResize,
-    ReplicaPoolPoolsResize,
   )
 where
 

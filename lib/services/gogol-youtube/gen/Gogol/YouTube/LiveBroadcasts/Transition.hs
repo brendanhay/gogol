@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveBroadcasts.Transition
     YouTubeLiveBroadcastsTransitionResource,
 
     -- ** Constructing a Request
+    YouTubeLiveBroadcastsTransition (..),
     newYouTubeLiveBroadcastsTransition,
-    YouTubeLiveBroadcastsTransition,
   )
 where
 

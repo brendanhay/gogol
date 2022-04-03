@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Entitlements.Delete
     AndroidEnterpriseEntitlementsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEntitlementsDelete (..),
     newAndroidEnterpriseEntitlementsDelete,
-    AndroidEnterpriseEntitlementsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Import
     DialogFlowProjectsLocationsAgentsTestCasesImportResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesImport (..),
     newDialogFlowProjectsLocationsAgentsTestCasesImport,
-    DialogFlowProjectsLocationsAgentsTestCasesImport,
   )
 where
 

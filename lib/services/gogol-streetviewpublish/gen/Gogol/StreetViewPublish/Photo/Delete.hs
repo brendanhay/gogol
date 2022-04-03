@@ -34,8 +34,8 @@ module Gogol.StreetViewPublish.Photo.Delete
     StreetViewPublishPhotoDeleteResource,
 
     -- ** Constructing a Request
+    StreetViewPublishPhotoDelete (..),
     newStreetViewPublishPhotoDelete,
-    StreetViewPublishPhotoDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.Patch
     DataFusionProjectsLocationsInstancesPatchResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesPatch (..),
     newDataFusionProjectsLocationsInstancesPatch,
-    DataFusionProjectsLocationsInstancesPatch,
   )
 where
 

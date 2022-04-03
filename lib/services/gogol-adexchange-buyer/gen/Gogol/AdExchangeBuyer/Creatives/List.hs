@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Creatives.List
     AdExchangeBuyerCreativesListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerCreativesList (..),
     newAdExchangeBuyerCreativesList,
-    AdExchangeBuyerCreativesList,
   )
 where
 

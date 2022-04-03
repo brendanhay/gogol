@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Permissions.Get
     AndroidEnterprisePermissionsGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterprisePermissionsGet (..),
     newAndroidEnterprisePermissionsGet,
-    AndroidEnterprisePermissionsGet,
   )
 where
 

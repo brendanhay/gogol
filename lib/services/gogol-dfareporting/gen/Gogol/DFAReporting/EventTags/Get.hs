@@ -34,8 +34,8 @@ module Gogol.DFAReporting.EventTags.Get
     DFAReportingEventTagsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingEventTagsGet (..),
     newDFAReportingEventTagsGet,
-    DFAReportingEventTagsGet,
   )
 where
 

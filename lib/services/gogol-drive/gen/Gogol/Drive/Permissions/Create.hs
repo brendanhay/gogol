@@ -34,8 +34,8 @@ module Gogol.Drive.Permissions.Create
     DrivePermissionsCreateResource,
 
     -- ** Constructing a Request
+    DrivePermissionsCreate (..),
     newDrivePermissionsCreate,
-    DrivePermissionsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Reports.Generate
     AdSenseAccountsReportsGenerateResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsReportsGenerate (..),
     newAdSenseAccountsReportsGenerate,
-    AdSenseAccountsReportsGenerate,
   )
 where
 

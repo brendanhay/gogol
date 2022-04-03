@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Domains.Insert
     DirectoryDomainsInsertResource,
 
     -- ** Constructing a Request
+    DirectoryDomainsInsert (..),
     newDirectoryDomainsInsert,
-    DirectoryDomainsInsert,
   )
 where
 

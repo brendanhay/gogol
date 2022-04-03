@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.Groups.Delete
     MonitoringProjectsGroupsDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsGroupsDelete (..),
     newMonitoringProjectsGroupsDelete,
-    MonitoringProjectsGroupsDelete,
   )
 where
 

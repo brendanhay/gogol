@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Players.Unhide
     GamesManagementPlayersUnhideResource,
 
     -- ** Constructing a Request
+    GamesManagementPlayersUnhide (..),
     newGamesManagementPlayersUnhide,
-    GamesManagementPlayersUnhide,
   )
 where
 

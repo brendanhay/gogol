@@ -34,8 +34,8 @@ module Gogol.Books.Series.Membership.Get
     BooksSeriesMembershipGetResource,
 
     -- ** Constructing a Request
+    BooksSeriesMembershipGet (..),
     newBooksSeriesMembershipGet,
-    BooksSeriesMembershipGet,
   )
 where
 

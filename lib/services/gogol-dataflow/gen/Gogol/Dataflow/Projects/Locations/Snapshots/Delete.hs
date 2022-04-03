@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Snapshots.Delete
     DataflowProjectsLocationsSnapshotsDeleteResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsSnapshotsDelete (..),
     newDataflowProjectsLocationsSnapshotsDelete,
-    DataflowProjectsLocationsSnapshotsDelete,
   )
 where
 

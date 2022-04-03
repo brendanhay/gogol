@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
     ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigsResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
   )
 where
 

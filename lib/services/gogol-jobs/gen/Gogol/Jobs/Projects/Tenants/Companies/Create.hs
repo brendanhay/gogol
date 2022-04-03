@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Companies.Create
     JobsProjectsTenantsCompaniesCreateResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsCompaniesCreate (..),
     newJobsProjectsTenantsCompaniesCreate,
-    JobsProjectsTenantsCompaniesCreate,
   )
 where
 

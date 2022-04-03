@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderreturns.Acknowledge
     ContentOrderreturnsAcknowledgeResource,
 
     -- ** Constructing a Request
+    ContentOrderreturnsAcknowledge (..),
     newContentOrderreturnsAcknowledge,
-    ContentOrderreturnsAcknowledge,
   )
 where
 

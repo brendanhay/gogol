@@ -41,248 +41,248 @@ module Gogol.SQLAdmin
 
     -- ** sql.backupRuns.delete
     SqlBackupRunsDeleteResource,
+    SqlBackupRunsDelete (..),
     newSqlBackupRunsDelete,
-    SqlBackupRunsDelete,
 
     -- ** sql.backupRuns.get
     SqlBackupRunsGetResource,
+    SqlBackupRunsGet (..),
     newSqlBackupRunsGet,
-    SqlBackupRunsGet,
 
     -- ** sql.backupRuns.insert
     SqlBackupRunsInsertResource,
+    SqlBackupRunsInsert (..),
     newSqlBackupRunsInsert,
-    SqlBackupRunsInsert,
 
     -- ** sql.backupRuns.list
     SqlBackupRunsListResource,
+    SqlBackupRunsList (..),
     newSqlBackupRunsList,
-    SqlBackupRunsList,
 
     -- ** sql.connect.generateEphemeral
     SqlConnectGenerateEphemeralResource,
+    SqlConnectGenerateEphemeral (..),
     newSqlConnectGenerateEphemeral,
-    SqlConnectGenerateEphemeral,
 
     -- ** sql.connect.get
     SqlConnectGetResource,
+    SqlConnectGet (..),
     newSqlConnectGet,
-    SqlConnectGet,
 
     -- ** sql.databases.delete
     SqlDatabasesDeleteResource,
+    SqlDatabasesDelete (..),
     newSqlDatabasesDelete,
-    SqlDatabasesDelete,
 
     -- ** sql.databases.get
     SqlDatabasesGetResource,
+    SqlDatabasesGet (..),
     newSqlDatabasesGet,
-    SqlDatabasesGet,
 
     -- ** sql.databases.insert
     SqlDatabasesInsertResource,
+    SqlDatabasesInsert (..),
     newSqlDatabasesInsert,
-    SqlDatabasesInsert,
 
     -- ** sql.databases.list
     SqlDatabasesListResource,
+    SqlDatabasesList (..),
     newSqlDatabasesList,
-    SqlDatabasesList,
 
     -- ** sql.databases.patch
     SqlDatabasesPatchResource,
+    SqlDatabasesPatch (..),
     newSqlDatabasesPatch,
-    SqlDatabasesPatch,
 
     -- ** sql.databases.update
     SqlDatabasesUpdateResource,
+    SqlDatabasesUpdate (..),
     newSqlDatabasesUpdate,
-    SqlDatabasesUpdate,
 
     -- ** sql.flags.list
     SqlFlagsListResource,
+    SqlFlagsList (..),
     newSqlFlagsList,
-    SqlFlagsList,
 
     -- ** sql.instances.addServerCa
     SqlInstancesAddServerCaResource,
+    SqlInstancesAddServerCa (..),
     newSqlInstancesAddServerCa,
-    SqlInstancesAddServerCa,
 
     -- ** sql.instances.clone
     SqlInstancesCloneResource,
+    SqlInstancesClone (..),
     newSqlInstancesClone,
-    SqlInstancesClone,
 
     -- ** sql.instances.delete
     SqlInstancesDeleteResource,
+    SqlInstancesDelete (..),
     newSqlInstancesDelete,
-    SqlInstancesDelete,
 
     -- ** sql.instances.demoteMaster
     SqlInstancesDemoteMasterResource,
+    SqlInstancesDemoteMaster (..),
     newSqlInstancesDemoteMaster,
-    SqlInstancesDemoteMaster,
 
     -- ** sql.instances.export
     SqlInstancesExportResource,
+    SqlInstancesExport (..),
     newSqlInstancesExport,
-    SqlInstancesExport,
 
     -- ** sql.instances.failover
     SqlInstancesFailoverResource,
+    SqlInstancesFailover (..),
     newSqlInstancesFailover,
-    SqlInstancesFailover,
 
     -- ** sql.instances.get
     SqlInstancesGetResource,
+    SqlInstancesGet (..),
     newSqlInstancesGet,
-    SqlInstancesGet,
 
     -- ** sql.instances.import
     SqlInstancesImportResource,
+    SqlInstancesImport (..),
     newSqlInstancesImport,
-    SqlInstancesImport,
 
     -- ** sql.instances.insert
     SqlInstancesInsertResource,
+    SqlInstancesInsert (..),
     newSqlInstancesInsert,
-    SqlInstancesInsert,
 
     -- ** sql.instances.list
     SqlInstancesListResource,
+    SqlInstancesList (..),
     newSqlInstancesList,
-    SqlInstancesList,
 
     -- ** sql.instances.listServerCas
     SqlInstancesListServerCasResource,
+    SqlInstancesListServerCas (..),
     newSqlInstancesListServerCas,
-    SqlInstancesListServerCas,
 
     -- ** sql.instances.patch
     SqlInstancesPatchResource,
+    SqlInstancesPatch (..),
     newSqlInstancesPatch,
-    SqlInstancesPatch,
 
     -- ** sql.instances.promoteReplica
     SqlInstancesPromoteReplicaResource,
+    SqlInstancesPromoteReplica (..),
     newSqlInstancesPromoteReplica,
-    SqlInstancesPromoteReplica,
 
     -- ** sql.instances.resetSslConfig
     SqlInstancesResetSslConfigResource,
+    SqlInstancesResetSslConfig (..),
     newSqlInstancesResetSslConfig,
-    SqlInstancesResetSslConfig,
 
     -- ** sql.instances.restart
     SqlInstancesRestartResource,
+    SqlInstancesRestart (..),
     newSqlInstancesRestart,
-    SqlInstancesRestart,
 
     -- ** sql.instances.restoreBackup
     SqlInstancesRestoreBackupResource,
+    SqlInstancesRestoreBackup (..),
     newSqlInstancesRestoreBackup,
-    SqlInstancesRestoreBackup,
 
     -- ** sql.instances.rotateServerCa
     SqlInstancesRotateServerCaResource,
+    SqlInstancesRotateServerCa (..),
     newSqlInstancesRotateServerCa,
-    SqlInstancesRotateServerCa,
 
     -- ** sql.instances.startReplica
     SqlInstancesStartReplicaResource,
+    SqlInstancesStartReplica (..),
     newSqlInstancesStartReplica,
-    SqlInstancesStartReplica,
 
     -- ** sql.instances.stopReplica
     SqlInstancesStopReplicaResource,
+    SqlInstancesStopReplica (..),
     newSqlInstancesStopReplica,
-    SqlInstancesStopReplica,
 
     -- ** sql.instances.truncateLog
     SqlInstancesTruncateLogResource,
+    SqlInstancesTruncateLog (..),
     newSqlInstancesTruncateLog,
-    SqlInstancesTruncateLog,
 
     -- ** sql.instances.update
     SqlInstancesUpdateResource,
+    SqlInstancesUpdate (..),
     newSqlInstancesUpdate,
-    SqlInstancesUpdate,
 
     -- ** sql.operations.get
     SqlOperationsGetResource,
+    SqlOperationsGet (..),
     newSqlOperationsGet,
-    SqlOperationsGet,
 
     -- ** sql.operations.list
     SqlOperationsListResource,
+    SqlOperationsList (..),
     newSqlOperationsList,
-    SqlOperationsList,
 
     -- ** sql.projects.instances.rescheduleMaintenance
     SqlProjectsInstancesRescheduleMaintenanceResource,
+    SqlProjectsInstancesRescheduleMaintenance (..),
     newSqlProjectsInstancesRescheduleMaintenance,
-    SqlProjectsInstancesRescheduleMaintenance,
 
     -- ** sql.projects.instances.startExternalSync
     SqlProjectsInstancesStartExternalSyncResource,
+    SqlProjectsInstancesStartExternalSync (..),
     newSqlProjectsInstancesStartExternalSync,
-    SqlProjectsInstancesStartExternalSync,
 
     -- ** sql.projects.instances.verifyExternalSyncSettings
     SqlProjectsInstancesVerifyExternalSyncSettingsResource,
+    SqlProjectsInstancesVerifyExternalSyncSettings (..),
     newSqlProjectsInstancesVerifyExternalSyncSettings,
-    SqlProjectsInstancesVerifyExternalSyncSettings,
 
     -- ** sql.sslCerts.createEphemeral
     SqlSslCertsCreateEphemeralResource,
+    SqlSslCertsCreateEphemeral (..),
     newSqlSslCertsCreateEphemeral,
-    SqlSslCertsCreateEphemeral,
 
     -- ** sql.sslCerts.delete
     SqlSslCertsDeleteResource,
+    SqlSslCertsDelete (..),
     newSqlSslCertsDelete,
-    SqlSslCertsDelete,
 
     -- ** sql.sslCerts.get
     SqlSslCertsGetResource,
+    SqlSslCertsGet (..),
     newSqlSslCertsGet,
-    SqlSslCertsGet,
 
     -- ** sql.sslCerts.insert
     SqlSslCertsInsertResource,
+    SqlSslCertsInsert (..),
     newSqlSslCertsInsert,
-    SqlSslCertsInsert,
 
     -- ** sql.sslCerts.list
     SqlSslCertsListResource,
+    SqlSslCertsList (..),
     newSqlSslCertsList,
-    SqlSslCertsList,
 
     -- ** sql.tiers.list
     SqlTiersListResource,
+    SqlTiersList (..),
     newSqlTiersList,
-    SqlTiersList,
 
     -- ** sql.users.delete
     SqlUsersDeleteResource,
+    SqlUsersDelete (..),
     newSqlUsersDelete,
-    SqlUsersDelete,
 
     -- ** sql.users.insert
     SqlUsersInsertResource,
+    SqlUsersInsert (..),
     newSqlUsersInsert,
-    SqlUsersInsert,
 
     -- ** sql.users.list
     SqlUsersListResource,
+    SqlUsersList (..),
     newSqlUsersList,
-    SqlUsersList,
 
     -- ** sql.users.update
     SqlUsersUpdateResource,
+    SqlUsersUpdate (..),
     newSqlUsersUpdate,
-    SqlUsersUpdate,
 
     -- * Types
 

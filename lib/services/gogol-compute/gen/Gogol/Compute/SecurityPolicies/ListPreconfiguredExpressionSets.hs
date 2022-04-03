@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.ListPreconfiguredExpressionSets
     ComputeSecurityPoliciesListPreconfiguredExpressionSetsResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesListPreconfiguredExpressionSets (..),
     newComputeSecurityPoliciesListPreconfiguredExpressionSets,
-    ComputeSecurityPoliciesListPreconfiguredExpressionSets,
   )
 where
 

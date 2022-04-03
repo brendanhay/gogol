@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Locations.List
     LoggingBillingAccountsLocationsListResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsLocationsList (..),
     newLoggingBillingAccountsLocationsList,
-    LoggingBillingAccountsLocationsList,
   )
 where
 

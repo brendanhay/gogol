@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AccountActiveAdSummaries.Get
     DFAReportingAccountActiveAdSummariesGetResource,
 
     -- ** Constructing a Request
+    DFAReportingAccountActiveAdSummariesGet (..),
     newDFAReportingAccountActiveAdSummariesGet,
-    DFAReportingAccountActiveAdSummariesGet,
   )
 where
 

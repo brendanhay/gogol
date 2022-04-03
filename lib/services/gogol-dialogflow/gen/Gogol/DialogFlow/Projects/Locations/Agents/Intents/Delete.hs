@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Intents.Delete
     DialogFlowProjectsLocationsAgentsIntentsDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsIntentsDelete (..),
     newDialogFlowProjectsLocationsAgentsIntentsDelete,
-    DialogFlowProjectsLocationsAgentsIntentsDelete,
   )
 where
 

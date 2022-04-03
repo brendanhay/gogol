@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDiskTypes.Get
     ComputeRegionDiskTypesGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionDiskTypesGet (..),
     newComputeRegionDiskTypesGet,
-    ComputeRegionDiskTypesGet,
   )
 where
 

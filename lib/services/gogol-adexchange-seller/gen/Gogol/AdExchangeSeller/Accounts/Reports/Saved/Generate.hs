@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Reports.Saved.Generate
     AdExchangeSellerAccountsReportsSavedGenerateResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsReportsSavedGenerate (..),
     newAdExchangeSellerAccountsReportsSavedGenerate,
-    AdExchangeSellerAccountsReportsSavedGenerate,
   )
 where
 

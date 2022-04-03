@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Get
     ReplicaPoolUpdaterRollingUpdatesGetResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterRollingUpdatesGet (..),
     newReplicaPoolUpdaterRollingUpdatesGet,
-    ReplicaPoolUpdaterRollingUpdatesGet,
   )
 where
 

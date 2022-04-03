@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.WebApps.Create
     AndroidManagementEnterprisesWebAppsCreateResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesWebAppsCreate (..),
     newAndroidManagementEnterprisesWebAppsCreate,
-    AndroidManagementEnterprisesWebAppsCreate,
   )
 where
 

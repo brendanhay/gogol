@@ -34,8 +34,8 @@ module Gogol.BigQuery.Datasets.Insert
     BigQueryDatasetsInsertResource,
 
     -- ** Constructing a Request
+    BigQueryDatasetsInsert (..),
     newBigQueryDatasetsInsert,
-    BigQueryDatasetsInsert,
   )
 where
 

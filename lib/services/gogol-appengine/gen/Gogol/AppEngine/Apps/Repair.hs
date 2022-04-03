@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Repair
     AppEngineAppsRepairResource,
 
     -- ** Constructing a Request
+    AppEngineAppsRepair (..),
     newAppEngineAppsRepair,
-    AppEngineAppsRepair,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.GetScans
     SpannerProjectsInstancesDatabasesGetScansResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesGetScans (..),
     newSpannerProjectsInstancesDatabasesGetScans,
-    SpannerProjectsInstancesDatabasesGetScans,
   )
 where
 

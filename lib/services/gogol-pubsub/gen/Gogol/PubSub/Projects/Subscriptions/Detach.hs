@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.Detach
     PubSubProjectsSubscriptionsDetachResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsDetach (..),
     newPubSubProjectsSubscriptionsDetach,
-    PubSubProjectsSubscriptionsDetach,
   )
 where
 

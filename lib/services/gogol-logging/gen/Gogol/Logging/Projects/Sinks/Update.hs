@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Sinks.Update
     LoggingProjectsSinksUpdateResource,
 
     -- ** Constructing a Request
+    LoggingProjectsSinksUpdate (..),
     newLoggingProjectsSinksUpdate,
-    LoggingProjectsSinksUpdate,
   )
 where
 

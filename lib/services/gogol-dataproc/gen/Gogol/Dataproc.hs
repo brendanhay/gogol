@@ -40,353 +40,353 @@ module Gogol.Dataproc
 
     -- ** dataproc.projects.locations.autoscalingPolicies.create
     DataprocProjectsLocationsAutoscalingPoliciesCreateResource,
+    DataprocProjectsLocationsAutoscalingPoliciesCreate (..),
     newDataprocProjectsLocationsAutoscalingPoliciesCreate,
-    DataprocProjectsLocationsAutoscalingPoliciesCreate,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.delete
     DataprocProjectsLocationsAutoscalingPoliciesDeleteResource,
+    DataprocProjectsLocationsAutoscalingPoliciesDelete (..),
     newDataprocProjectsLocationsAutoscalingPoliciesDelete,
-    DataprocProjectsLocationsAutoscalingPoliciesDelete,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.get
     DataprocProjectsLocationsAutoscalingPoliciesGetResource,
+    DataprocProjectsLocationsAutoscalingPoliciesGet (..),
     newDataprocProjectsLocationsAutoscalingPoliciesGet,
-    DataprocProjectsLocationsAutoscalingPoliciesGet,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.getIamPolicy
     DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicyResource,
+    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy (..),
     newDataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
-    DataprocProjectsLocationsAutoscalingPoliciesGetIamPolicy,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.list
     DataprocProjectsLocationsAutoscalingPoliciesListResource,
+    DataprocProjectsLocationsAutoscalingPoliciesList (..),
     newDataprocProjectsLocationsAutoscalingPoliciesList,
-    DataprocProjectsLocationsAutoscalingPoliciesList,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.setIamPolicy
     DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicyResource,
+    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy (..),
     newDataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
-    DataprocProjectsLocationsAutoscalingPoliciesSetIamPolicy,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.testIamPermissions
     DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissionsResource,
+    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions (..),
     newDataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
-    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
 
     -- ** dataproc.projects.locations.autoscalingPolicies.update
     DataprocProjectsLocationsAutoscalingPoliciesUpdateResource,
+    DataprocProjectsLocationsAutoscalingPoliciesUpdate (..),
     newDataprocProjectsLocationsAutoscalingPoliciesUpdate,
-    DataprocProjectsLocationsAutoscalingPoliciesUpdate,
 
     -- ** dataproc.projects.locations.batches.create
     DataprocProjectsLocationsBatchesCreateResource,
+    DataprocProjectsLocationsBatchesCreate (..),
     newDataprocProjectsLocationsBatchesCreate,
-    DataprocProjectsLocationsBatchesCreate,
 
     -- ** dataproc.projects.locations.batches.delete
     DataprocProjectsLocationsBatchesDeleteResource,
+    DataprocProjectsLocationsBatchesDelete (..),
     newDataprocProjectsLocationsBatchesDelete,
-    DataprocProjectsLocationsBatchesDelete,
 
     -- ** dataproc.projects.locations.batches.get
     DataprocProjectsLocationsBatchesGetResource,
+    DataprocProjectsLocationsBatchesGet (..),
     newDataprocProjectsLocationsBatchesGet,
-    DataprocProjectsLocationsBatchesGet,
 
     -- ** dataproc.projects.locations.batches.list
     DataprocProjectsLocationsBatchesListResource,
+    DataprocProjectsLocationsBatchesList (..),
     newDataprocProjectsLocationsBatchesList,
-    DataprocProjectsLocationsBatchesList,
 
     -- ** dataproc.projects.locations.workflowTemplates.create
     DataprocProjectsLocationsWorkflowTemplatesCreateResource,
+    DataprocProjectsLocationsWorkflowTemplatesCreate (..),
     newDataprocProjectsLocationsWorkflowTemplatesCreate,
-    DataprocProjectsLocationsWorkflowTemplatesCreate,
 
     -- ** dataproc.projects.locations.workflowTemplates.delete
     DataprocProjectsLocationsWorkflowTemplatesDeleteResource,
+    DataprocProjectsLocationsWorkflowTemplatesDelete (..),
     newDataprocProjectsLocationsWorkflowTemplatesDelete,
-    DataprocProjectsLocationsWorkflowTemplatesDelete,
 
     -- ** dataproc.projects.locations.workflowTemplates.get
     DataprocProjectsLocationsWorkflowTemplatesGetResource,
+    DataprocProjectsLocationsWorkflowTemplatesGet (..),
     newDataprocProjectsLocationsWorkflowTemplatesGet,
-    DataprocProjectsLocationsWorkflowTemplatesGet,
 
     -- ** dataproc.projects.locations.workflowTemplates.getIamPolicy
     DataprocProjectsLocationsWorkflowTemplatesGetIamPolicyResource,
+    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicy (..),
     newDataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
-    DataprocProjectsLocationsWorkflowTemplatesGetIamPolicy,
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiate
     DataprocProjectsLocationsWorkflowTemplatesInstantiateResource,
+    DataprocProjectsLocationsWorkflowTemplatesInstantiate (..),
     newDataprocProjectsLocationsWorkflowTemplatesInstantiate,
-    DataprocProjectsLocationsWorkflowTemplatesInstantiate,
 
     -- ** dataproc.projects.locations.workflowTemplates.instantiateInline
     DataprocProjectsLocationsWorkflowTemplatesInstantiateInlineResource,
+    DataprocProjectsLocationsWorkflowTemplatesInstantiateInline (..),
     newDataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
-    DataprocProjectsLocationsWorkflowTemplatesInstantiateInline,
 
     -- ** dataproc.projects.locations.workflowTemplates.list
     DataprocProjectsLocationsWorkflowTemplatesListResource,
+    DataprocProjectsLocationsWorkflowTemplatesList (..),
     newDataprocProjectsLocationsWorkflowTemplatesList,
-    DataprocProjectsLocationsWorkflowTemplatesList,
 
     -- ** dataproc.projects.locations.workflowTemplates.setIamPolicy
     DataprocProjectsLocationsWorkflowTemplatesSetIamPolicyResource,
+    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicy (..),
     newDataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
-    DataprocProjectsLocationsWorkflowTemplatesSetIamPolicy,
 
     -- ** dataproc.projects.locations.workflowTemplates.testIamPermissions
     DataprocProjectsLocationsWorkflowTemplatesTestIamPermissionsResource,
+    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissions (..),
     newDataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
-    DataprocProjectsLocationsWorkflowTemplatesTestIamPermissions,
 
     -- ** dataproc.projects.locations.workflowTemplates.update
     DataprocProjectsLocationsWorkflowTemplatesUpdateResource,
+    DataprocProjectsLocationsWorkflowTemplatesUpdate (..),
     newDataprocProjectsLocationsWorkflowTemplatesUpdate,
-    DataprocProjectsLocationsWorkflowTemplatesUpdate,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.create
     DataprocProjectsRegionsAutoscalingPoliciesCreateResource,
+    DataprocProjectsRegionsAutoscalingPoliciesCreate (..),
     newDataprocProjectsRegionsAutoscalingPoliciesCreate,
-    DataprocProjectsRegionsAutoscalingPoliciesCreate,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.delete
     DataprocProjectsRegionsAutoscalingPoliciesDeleteResource,
+    DataprocProjectsRegionsAutoscalingPoliciesDelete (..),
     newDataprocProjectsRegionsAutoscalingPoliciesDelete,
-    DataprocProjectsRegionsAutoscalingPoliciesDelete,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.get
     DataprocProjectsRegionsAutoscalingPoliciesGetResource,
+    DataprocProjectsRegionsAutoscalingPoliciesGet (..),
     newDataprocProjectsRegionsAutoscalingPoliciesGet,
-    DataprocProjectsRegionsAutoscalingPoliciesGet,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.getIamPolicy
     DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicyResource,
+    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy (..),
     newDataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
-    DataprocProjectsRegionsAutoscalingPoliciesGetIamPolicy,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.list
     DataprocProjectsRegionsAutoscalingPoliciesListResource,
+    DataprocProjectsRegionsAutoscalingPoliciesList (..),
     newDataprocProjectsRegionsAutoscalingPoliciesList,
-    DataprocProjectsRegionsAutoscalingPoliciesList,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.setIamPolicy
     DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicyResource,
+    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy (..),
     newDataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
-    DataprocProjectsRegionsAutoscalingPoliciesSetIamPolicy,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.testIamPermissions
     DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissionsResource,
+    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions (..),
     newDataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
-    DataprocProjectsRegionsAutoscalingPoliciesTestIamPermissions,
 
     -- ** dataproc.projects.regions.autoscalingPolicies.update
     DataprocProjectsRegionsAutoscalingPoliciesUpdateResource,
+    DataprocProjectsRegionsAutoscalingPoliciesUpdate (..),
     newDataprocProjectsRegionsAutoscalingPoliciesUpdate,
-    DataprocProjectsRegionsAutoscalingPoliciesUpdate,
 
     -- ** dataproc.projects.regions.clusters.create
     DataprocProjectsRegionsClustersCreateResource,
+    DataprocProjectsRegionsClustersCreate (..),
     newDataprocProjectsRegionsClustersCreate,
-    DataprocProjectsRegionsClustersCreate,
 
     -- ** dataproc.projects.regions.clusters.delete
     DataprocProjectsRegionsClustersDeleteResource,
+    DataprocProjectsRegionsClustersDelete (..),
     newDataprocProjectsRegionsClustersDelete,
-    DataprocProjectsRegionsClustersDelete,
 
     -- ** dataproc.projects.regions.clusters.diagnose
     DataprocProjectsRegionsClustersDiagnoseResource,
+    DataprocProjectsRegionsClustersDiagnose (..),
     newDataprocProjectsRegionsClustersDiagnose,
-    DataprocProjectsRegionsClustersDiagnose,
 
     -- ** dataproc.projects.regions.clusters.get
     DataprocProjectsRegionsClustersGetResource,
+    DataprocProjectsRegionsClustersGet (..),
     newDataprocProjectsRegionsClustersGet,
-    DataprocProjectsRegionsClustersGet,
 
     -- ** dataproc.projects.regions.clusters.getIamPolicy
     DataprocProjectsRegionsClustersGetIamPolicyResource,
+    DataprocProjectsRegionsClustersGetIamPolicy (..),
     newDataprocProjectsRegionsClustersGetIamPolicy,
-    DataprocProjectsRegionsClustersGetIamPolicy,
 
     -- ** dataproc.projects.regions.clusters.injectCredentials
     DataprocProjectsRegionsClustersInjectCredentialsResource,
+    DataprocProjectsRegionsClustersInjectCredentials (..),
     newDataprocProjectsRegionsClustersInjectCredentials,
-    DataprocProjectsRegionsClustersInjectCredentials,
 
     -- ** dataproc.projects.regions.clusters.list
     DataprocProjectsRegionsClustersListResource,
+    DataprocProjectsRegionsClustersList (..),
     newDataprocProjectsRegionsClustersList,
-    DataprocProjectsRegionsClustersList,
 
     -- ** dataproc.projects.regions.clusters.patch
     DataprocProjectsRegionsClustersPatchResource,
+    DataprocProjectsRegionsClustersPatch (..),
     newDataprocProjectsRegionsClustersPatch,
-    DataprocProjectsRegionsClustersPatch,
 
     -- ** dataproc.projects.regions.clusters.repair
     DataprocProjectsRegionsClustersRepairResource,
+    DataprocProjectsRegionsClustersRepair (..),
     newDataprocProjectsRegionsClustersRepair,
-    DataprocProjectsRegionsClustersRepair,
 
     -- ** dataproc.projects.regions.clusters.setIamPolicy
     DataprocProjectsRegionsClustersSetIamPolicyResource,
+    DataprocProjectsRegionsClustersSetIamPolicy (..),
     newDataprocProjectsRegionsClustersSetIamPolicy,
-    DataprocProjectsRegionsClustersSetIamPolicy,
 
     -- ** dataproc.projects.regions.clusters.start
     DataprocProjectsRegionsClustersStartResource,
+    DataprocProjectsRegionsClustersStart (..),
     newDataprocProjectsRegionsClustersStart,
-    DataprocProjectsRegionsClustersStart,
 
     -- ** dataproc.projects.regions.clusters.stop
     DataprocProjectsRegionsClustersStopResource,
+    DataprocProjectsRegionsClustersStop (..),
     newDataprocProjectsRegionsClustersStop,
-    DataprocProjectsRegionsClustersStop,
 
     -- ** dataproc.projects.regions.clusters.testIamPermissions
     DataprocProjectsRegionsClustersTestIamPermissionsResource,
+    DataprocProjectsRegionsClustersTestIamPermissions (..),
     newDataprocProjectsRegionsClustersTestIamPermissions,
-    DataprocProjectsRegionsClustersTestIamPermissions,
 
     -- ** dataproc.projects.regions.jobs.cancel
     DataprocProjectsRegionsJobsCancelResource,
+    DataprocProjectsRegionsJobsCancel (..),
     newDataprocProjectsRegionsJobsCancel,
-    DataprocProjectsRegionsJobsCancel,
 
     -- ** dataproc.projects.regions.jobs.delete
     DataprocProjectsRegionsJobsDeleteResource,
+    DataprocProjectsRegionsJobsDelete (..),
     newDataprocProjectsRegionsJobsDelete,
-    DataprocProjectsRegionsJobsDelete,
 
     -- ** dataproc.projects.regions.jobs.get
     DataprocProjectsRegionsJobsGetResource,
+    DataprocProjectsRegionsJobsGet (..),
     newDataprocProjectsRegionsJobsGet,
-    DataprocProjectsRegionsJobsGet,
 
     -- ** dataproc.projects.regions.jobs.getIamPolicy
     DataprocProjectsRegionsJobsGetIamPolicyResource,
+    DataprocProjectsRegionsJobsGetIamPolicy (..),
     newDataprocProjectsRegionsJobsGetIamPolicy,
-    DataprocProjectsRegionsJobsGetIamPolicy,
 
     -- ** dataproc.projects.regions.jobs.list
     DataprocProjectsRegionsJobsListResource,
+    DataprocProjectsRegionsJobsList (..),
     newDataprocProjectsRegionsJobsList,
-    DataprocProjectsRegionsJobsList,
 
     -- ** dataproc.projects.regions.jobs.patch
     DataprocProjectsRegionsJobsPatchResource,
+    DataprocProjectsRegionsJobsPatch (..),
     newDataprocProjectsRegionsJobsPatch,
-    DataprocProjectsRegionsJobsPatch,
 
     -- ** dataproc.projects.regions.jobs.setIamPolicy
     DataprocProjectsRegionsJobsSetIamPolicyResource,
+    DataprocProjectsRegionsJobsSetIamPolicy (..),
     newDataprocProjectsRegionsJobsSetIamPolicy,
-    DataprocProjectsRegionsJobsSetIamPolicy,
 
     -- ** dataproc.projects.regions.jobs.submit
     DataprocProjectsRegionsJobsSubmitResource,
+    DataprocProjectsRegionsJobsSubmit (..),
     newDataprocProjectsRegionsJobsSubmit,
-    DataprocProjectsRegionsJobsSubmit,
 
     -- ** dataproc.projects.regions.jobs.submitAsOperation
     DataprocProjectsRegionsJobsSubmitAsOperationResource,
+    DataprocProjectsRegionsJobsSubmitAsOperation (..),
     newDataprocProjectsRegionsJobsSubmitAsOperation,
-    DataprocProjectsRegionsJobsSubmitAsOperation,
 
     -- ** dataproc.projects.regions.jobs.testIamPermissions
     DataprocProjectsRegionsJobsTestIamPermissionsResource,
+    DataprocProjectsRegionsJobsTestIamPermissions (..),
     newDataprocProjectsRegionsJobsTestIamPermissions,
-    DataprocProjectsRegionsJobsTestIamPermissions,
 
     -- ** dataproc.projects.regions.operations.cancel
     DataprocProjectsRegionsOperationsCancelResource,
+    DataprocProjectsRegionsOperationsCancel (..),
     newDataprocProjectsRegionsOperationsCancel,
-    DataprocProjectsRegionsOperationsCancel,
 
     -- ** dataproc.projects.regions.operations.delete
     DataprocProjectsRegionsOperationsDeleteResource,
+    DataprocProjectsRegionsOperationsDelete (..),
     newDataprocProjectsRegionsOperationsDelete,
-    DataprocProjectsRegionsOperationsDelete,
 
     -- ** dataproc.projects.regions.operations.get
     DataprocProjectsRegionsOperationsGetResource,
+    DataprocProjectsRegionsOperationsGet (..),
     newDataprocProjectsRegionsOperationsGet,
-    DataprocProjectsRegionsOperationsGet,
 
     -- ** dataproc.projects.regions.operations.getIamPolicy
     DataprocProjectsRegionsOperationsGetIamPolicyResource,
+    DataprocProjectsRegionsOperationsGetIamPolicy (..),
     newDataprocProjectsRegionsOperationsGetIamPolicy,
-    DataprocProjectsRegionsOperationsGetIamPolicy,
 
     -- ** dataproc.projects.regions.operations.list
     DataprocProjectsRegionsOperationsListResource,
+    DataprocProjectsRegionsOperationsList (..),
     newDataprocProjectsRegionsOperationsList,
-    DataprocProjectsRegionsOperationsList,
 
     -- ** dataproc.projects.regions.operations.setIamPolicy
     DataprocProjectsRegionsOperationsSetIamPolicyResource,
+    DataprocProjectsRegionsOperationsSetIamPolicy (..),
     newDataprocProjectsRegionsOperationsSetIamPolicy,
-    DataprocProjectsRegionsOperationsSetIamPolicy,
 
     -- ** dataproc.projects.regions.operations.testIamPermissions
     DataprocProjectsRegionsOperationsTestIamPermissionsResource,
+    DataprocProjectsRegionsOperationsTestIamPermissions (..),
     newDataprocProjectsRegionsOperationsTestIamPermissions,
-    DataprocProjectsRegionsOperationsTestIamPermissions,
 
     -- ** dataproc.projects.regions.workflowTemplates.create
     DataprocProjectsRegionsWorkflowTemplatesCreateResource,
+    DataprocProjectsRegionsWorkflowTemplatesCreate (..),
     newDataprocProjectsRegionsWorkflowTemplatesCreate,
-    DataprocProjectsRegionsWorkflowTemplatesCreate,
 
     -- ** dataproc.projects.regions.workflowTemplates.delete
     DataprocProjectsRegionsWorkflowTemplatesDeleteResource,
+    DataprocProjectsRegionsWorkflowTemplatesDelete (..),
     newDataprocProjectsRegionsWorkflowTemplatesDelete,
-    DataprocProjectsRegionsWorkflowTemplatesDelete,
 
     -- ** dataproc.projects.regions.workflowTemplates.get
     DataprocProjectsRegionsWorkflowTemplatesGetResource,
+    DataprocProjectsRegionsWorkflowTemplatesGet (..),
     newDataprocProjectsRegionsWorkflowTemplatesGet,
-    DataprocProjectsRegionsWorkflowTemplatesGet,
 
     -- ** dataproc.projects.regions.workflowTemplates.getIamPolicy
     DataprocProjectsRegionsWorkflowTemplatesGetIamPolicyResource,
+    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy (..),
     newDataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
-    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiate
     DataprocProjectsRegionsWorkflowTemplatesInstantiateResource,
+    DataprocProjectsRegionsWorkflowTemplatesInstantiate (..),
     newDataprocProjectsRegionsWorkflowTemplatesInstantiate,
-    DataprocProjectsRegionsWorkflowTemplatesInstantiate,
 
     -- ** dataproc.projects.regions.workflowTemplates.instantiateInline
     DataprocProjectsRegionsWorkflowTemplatesInstantiateInlineResource,
+    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline (..),
     newDataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
-    DataprocProjectsRegionsWorkflowTemplatesInstantiateInline,
 
     -- ** dataproc.projects.regions.workflowTemplates.list
     DataprocProjectsRegionsWorkflowTemplatesListResource,
+    DataprocProjectsRegionsWorkflowTemplatesList (..),
     newDataprocProjectsRegionsWorkflowTemplatesList,
-    DataprocProjectsRegionsWorkflowTemplatesList,
 
     -- ** dataproc.projects.regions.workflowTemplates.setIamPolicy
     DataprocProjectsRegionsWorkflowTemplatesSetIamPolicyResource,
+    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy (..),
     newDataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
-    DataprocProjectsRegionsWorkflowTemplatesSetIamPolicy,
 
     -- ** dataproc.projects.regions.workflowTemplates.testIamPermissions
     DataprocProjectsRegionsWorkflowTemplatesTestIamPermissionsResource,
+    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions (..),
     newDataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
-    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
 
     -- ** dataproc.projects.regions.workflowTemplates.update
     DataprocProjectsRegionsWorkflowTemplatesUpdateResource,
+    DataprocProjectsRegionsWorkflowTemplatesUpdate (..),
     newDataprocProjectsRegionsWorkflowTemplatesUpdate,
-    DataprocProjectsRegionsWorkflowTemplatesUpdate,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Annotations.List
     BooksMylibraryAnnotationsListResource,
 
     -- ** Constructing a Request
+    BooksMylibraryAnnotationsList (..),
     newBooksMylibraryAnnotationsList,
-    BooksMylibraryAnnotationsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Webapps.Insert
     AndroidEnterpriseWebappsInsertResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseWebappsInsert (..),
     newAndroidEnterpriseWebappsInsert,
-    AndroidEnterpriseWebappsInsert,
   )
 where
 

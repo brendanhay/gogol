@@ -35,8 +35,8 @@ module Gogol.Spanner.Projects.Instances.Patch
     SpannerProjectsInstancesPatchResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesPatch (..),
     newSpannerProjectsInstancesPatch,
-    SpannerProjectsInstancesPatch,
   )
 where
 

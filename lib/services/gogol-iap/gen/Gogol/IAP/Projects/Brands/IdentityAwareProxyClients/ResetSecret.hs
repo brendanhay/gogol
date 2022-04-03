@@ -34,8 +34,8 @@ module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
     IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource,
 
     -- ** Constructing a Request
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
-    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
   )
 where
 

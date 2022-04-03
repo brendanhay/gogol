@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
     SheetsSpreadsheetsDeveloperMetadataGetResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsDeveloperMetadataGet (..),
     newSheetsSpreadsheetsDeveloperMetadataGet,
-    SheetsSpreadsheetsDeveloperMetadataGet,
   )
 where
 

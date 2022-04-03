@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Subaccounts.Update
     DFAReportingSubaccountsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingSubaccountsUpdate (..),
     newDFAReportingSubaccountsUpdate,
-    DFAReportingSubaccountsUpdate,
   )
 where
 

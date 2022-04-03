@@ -34,8 +34,8 @@ module Gogol.FusionTables.Column.Delete
     FusionTablesColumnDeleteResource,
 
     -- ** Constructing a Request
+    FusionTablesColumnDelete (..),
     newFusionTablesColumnDelete,
-    FusionTablesColumnDelete,
   )
 where
 

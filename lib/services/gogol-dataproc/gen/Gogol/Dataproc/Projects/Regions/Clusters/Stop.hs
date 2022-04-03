@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Stop
     DataprocProjectsRegionsClustersStopResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersStop (..),
     newDataprocProjectsRegionsClustersStop,
-    DataprocProjectsRegionsClustersStop,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Notes.List
     ContainerAnalysisProjectsNotesListResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsNotesList (..),
     newContainerAnalysisProjectsNotesList,
-    ContainerAnalysisProjectsNotesList,
   )
 where
 

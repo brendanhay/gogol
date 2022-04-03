@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounttax.Custombatch
     ContentAccounttaxCustombatchResource,
 
     -- ** Constructing a Request
+    ContentAccounttaxCustombatch (..),
     newContentAccounttaxCustombatch,
-    ContentAccounttaxCustombatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
     BigtableAdminProjectsInstancesClustersPartialUpdateClusterResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesClustersPartialUpdateCluster (..),
     newBigtableAdminProjectsInstancesClustersPartialUpdateCluster,
-    BigtableAdminProjectsInstancesClustersPartialUpdateCluster,
   )
 where
 

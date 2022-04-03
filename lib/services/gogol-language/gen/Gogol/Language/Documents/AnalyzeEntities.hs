@@ -34,8 +34,8 @@ module Gogol.Language.Documents.AnalyzeEntities
     LanguageDocumentsAnalyzeEntitiesResource,
 
     -- ** Constructing a Request
+    LanguageDocumentsAnalyzeEntities (..),
     newLanguageDocumentsAnalyzeEntities,
-    LanguageDocumentsAnalyzeEntities,
   )
 where
 

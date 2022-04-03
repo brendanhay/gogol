@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.GetSupportedLanguages
     TranslateProjectsGetSupportedLanguagesResource,
 
     -- ** Constructing a Request
+    TranslateProjectsGetSupportedLanguages (..),
     newTranslateProjectsGetSupportedLanguages,
-    TranslateProjectsGetSupportedLanguages,
   )
 where
 

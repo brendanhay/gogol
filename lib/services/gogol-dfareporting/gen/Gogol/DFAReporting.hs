@@ -42,1023 +42,1023 @@ module Gogol.DFAReporting
 
     -- ** dfareporting.accountActiveAdSummaries.get
     DFAReportingAccountActiveAdSummariesGetResource,
+    DFAReportingAccountActiveAdSummariesGet (..),
     newDFAReportingAccountActiveAdSummariesGet,
-    DFAReportingAccountActiveAdSummariesGet,
 
     -- ** dfareporting.accountPermissionGroups.get
     DFAReportingAccountPermissionGroupsGetResource,
+    DFAReportingAccountPermissionGroupsGet (..),
     newDFAReportingAccountPermissionGroupsGet,
-    DFAReportingAccountPermissionGroupsGet,
 
     -- ** dfareporting.accountPermissionGroups.list
     DFAReportingAccountPermissionGroupsListResource,
+    DFAReportingAccountPermissionGroupsList (..),
     newDFAReportingAccountPermissionGroupsList,
-    DFAReportingAccountPermissionGroupsList,
 
     -- ** dfareporting.accountPermissions.get
     DFAReportingAccountPermissionsGetResource,
+    DFAReportingAccountPermissionsGet (..),
     newDFAReportingAccountPermissionsGet,
-    DFAReportingAccountPermissionsGet,
 
     -- ** dfareporting.accountPermissions.list
     DFAReportingAccountPermissionsListResource,
+    DFAReportingAccountPermissionsList (..),
     newDFAReportingAccountPermissionsList,
-    DFAReportingAccountPermissionsList,
 
     -- ** dfareporting.accountUserProfiles.get
     DFAReportingAccountUserProfilesGetResource,
+    DFAReportingAccountUserProfilesGet (..),
     newDFAReportingAccountUserProfilesGet,
-    DFAReportingAccountUserProfilesGet,
 
     -- ** dfareporting.accountUserProfiles.insert
     DFAReportingAccountUserProfilesInsertResource,
+    DFAReportingAccountUserProfilesInsert (..),
     newDFAReportingAccountUserProfilesInsert,
-    DFAReportingAccountUserProfilesInsert,
 
     -- ** dfareporting.accountUserProfiles.list
     DFAReportingAccountUserProfilesListResource,
+    DFAReportingAccountUserProfilesList (..),
     newDFAReportingAccountUserProfilesList,
-    DFAReportingAccountUserProfilesList,
 
     -- ** dfareporting.accountUserProfiles.patch
     DFAReportingAccountUserProfilesPatchResource,
+    DFAReportingAccountUserProfilesPatch (..),
     newDFAReportingAccountUserProfilesPatch,
-    DFAReportingAccountUserProfilesPatch,
 
     -- ** dfareporting.accountUserProfiles.update
     DFAReportingAccountUserProfilesUpdateResource,
+    DFAReportingAccountUserProfilesUpdate (..),
     newDFAReportingAccountUserProfilesUpdate,
-    DFAReportingAccountUserProfilesUpdate,
 
     -- ** dfareporting.accounts.get
     DFAReportingAccountsGetResource,
+    DFAReportingAccountsGet (..),
     newDFAReportingAccountsGet,
-    DFAReportingAccountsGet,
 
     -- ** dfareporting.accounts.list
     DFAReportingAccountsListResource,
+    DFAReportingAccountsList (..),
     newDFAReportingAccountsList,
-    DFAReportingAccountsList,
 
     -- ** dfareporting.accounts.patch
     DFAReportingAccountsPatchResource,
+    DFAReportingAccountsPatch (..),
     newDFAReportingAccountsPatch,
-    DFAReportingAccountsPatch,
 
     -- ** dfareporting.accounts.update
     DFAReportingAccountsUpdateResource,
+    DFAReportingAccountsUpdate (..),
     newDFAReportingAccountsUpdate,
-    DFAReportingAccountsUpdate,
 
     -- ** dfareporting.ads.get
     DFAReportingAdsGetResource,
+    DFAReportingAdsGet (..),
     newDFAReportingAdsGet,
-    DFAReportingAdsGet,
 
     -- ** dfareporting.ads.insert
     DFAReportingAdsInsertResource,
+    DFAReportingAdsInsert (..),
     newDFAReportingAdsInsert,
-    DFAReportingAdsInsert,
 
     -- ** dfareporting.ads.list
     DFAReportingAdsListResource,
+    DFAReportingAdsList (..),
     newDFAReportingAdsList,
-    DFAReportingAdsList,
 
     -- ** dfareporting.ads.patch
     DFAReportingAdsPatchResource,
+    DFAReportingAdsPatch (..),
     newDFAReportingAdsPatch,
-    DFAReportingAdsPatch,
 
     -- ** dfareporting.ads.update
     DFAReportingAdsUpdateResource,
+    DFAReportingAdsUpdate (..),
     newDFAReportingAdsUpdate,
-    DFAReportingAdsUpdate,
 
     -- ** dfareporting.advertiserGroups.delete
     DFAReportingAdvertiserGroupsDeleteResource,
+    DFAReportingAdvertiserGroupsDelete (..),
     newDFAReportingAdvertiserGroupsDelete,
-    DFAReportingAdvertiserGroupsDelete,
 
     -- ** dfareporting.advertiserGroups.get
     DFAReportingAdvertiserGroupsGetResource,
+    DFAReportingAdvertiserGroupsGet (..),
     newDFAReportingAdvertiserGroupsGet,
-    DFAReportingAdvertiserGroupsGet,
 
     -- ** dfareporting.advertiserGroups.insert
     DFAReportingAdvertiserGroupsInsertResource,
+    DFAReportingAdvertiserGroupsInsert (..),
     newDFAReportingAdvertiserGroupsInsert,
-    DFAReportingAdvertiserGroupsInsert,
 
     -- ** dfareporting.advertiserGroups.list
     DFAReportingAdvertiserGroupsListResource,
+    DFAReportingAdvertiserGroupsList (..),
     newDFAReportingAdvertiserGroupsList,
-    DFAReportingAdvertiserGroupsList,
 
     -- ** dfareporting.advertiserGroups.patch
     DFAReportingAdvertiserGroupsPatchResource,
+    DFAReportingAdvertiserGroupsPatch (..),
     newDFAReportingAdvertiserGroupsPatch,
-    DFAReportingAdvertiserGroupsPatch,
 
     -- ** dfareporting.advertiserGroups.update
     DFAReportingAdvertiserGroupsUpdateResource,
+    DFAReportingAdvertiserGroupsUpdate (..),
     newDFAReportingAdvertiserGroupsUpdate,
-    DFAReportingAdvertiserGroupsUpdate,
 
     -- ** dfareporting.advertiserLandingPages.get
     DFAReportingAdvertiserLandingPagesGetResource,
+    DFAReportingAdvertiserLandingPagesGet (..),
     newDFAReportingAdvertiserLandingPagesGet,
-    DFAReportingAdvertiserLandingPagesGet,
 
     -- ** dfareporting.advertiserLandingPages.insert
     DFAReportingAdvertiserLandingPagesInsertResource,
+    DFAReportingAdvertiserLandingPagesInsert (..),
     newDFAReportingAdvertiserLandingPagesInsert,
-    DFAReportingAdvertiserLandingPagesInsert,
 
     -- ** dfareporting.advertiserLandingPages.list
     DFAReportingAdvertiserLandingPagesListResource,
+    DFAReportingAdvertiserLandingPagesList (..),
     newDFAReportingAdvertiserLandingPagesList,
-    DFAReportingAdvertiserLandingPagesList,
 
     -- ** dfareporting.advertiserLandingPages.patch
     DFAReportingAdvertiserLandingPagesPatchResource,
+    DFAReportingAdvertiserLandingPagesPatch (..),
     newDFAReportingAdvertiserLandingPagesPatch,
-    DFAReportingAdvertiserLandingPagesPatch,
 
     -- ** dfareporting.advertiserLandingPages.update
     DFAReportingAdvertiserLandingPagesUpdateResource,
+    DFAReportingAdvertiserLandingPagesUpdate (..),
     newDFAReportingAdvertiserLandingPagesUpdate,
-    DFAReportingAdvertiserLandingPagesUpdate,
 
     -- ** dfareporting.advertisers.get
     DFAReportingAdvertisersGetResource,
+    DFAReportingAdvertisersGet (..),
     newDFAReportingAdvertisersGet,
-    DFAReportingAdvertisersGet,
 
     -- ** dfareporting.advertisers.insert
     DFAReportingAdvertisersInsertResource,
+    DFAReportingAdvertisersInsert (..),
     newDFAReportingAdvertisersInsert,
-    DFAReportingAdvertisersInsert,
 
     -- ** dfareporting.advertisers.list
     DFAReportingAdvertisersListResource,
+    DFAReportingAdvertisersList (..),
     newDFAReportingAdvertisersList,
-    DFAReportingAdvertisersList,
 
     -- ** dfareporting.advertisers.patch
     DFAReportingAdvertisersPatchResource,
+    DFAReportingAdvertisersPatch (..),
     newDFAReportingAdvertisersPatch,
-    DFAReportingAdvertisersPatch,
 
     -- ** dfareporting.advertisers.update
     DFAReportingAdvertisersUpdateResource,
+    DFAReportingAdvertisersUpdate (..),
     newDFAReportingAdvertisersUpdate,
-    DFAReportingAdvertisersUpdate,
 
     -- ** dfareporting.browsers.list
     DFAReportingBrowsersListResource,
+    DFAReportingBrowsersList (..),
     newDFAReportingBrowsersList,
-    DFAReportingBrowsersList,
 
     -- ** dfareporting.campaignCreativeAssociations.insert
     DFAReportingCampaignCreativeAssociationsInsertResource,
+    DFAReportingCampaignCreativeAssociationsInsert (..),
     newDFAReportingCampaignCreativeAssociationsInsert,
-    DFAReportingCampaignCreativeAssociationsInsert,
 
     -- ** dfareporting.campaignCreativeAssociations.list
     DFAReportingCampaignCreativeAssociationsListResource,
+    DFAReportingCampaignCreativeAssociationsList (..),
     newDFAReportingCampaignCreativeAssociationsList,
-    DFAReportingCampaignCreativeAssociationsList,
 
     -- ** dfareporting.campaigns.get
     DFAReportingCampaignsGetResource,
+    DFAReportingCampaignsGet (..),
     newDFAReportingCampaignsGet,
-    DFAReportingCampaignsGet,
 
     -- ** dfareporting.campaigns.insert
     DFAReportingCampaignsInsertResource,
+    DFAReportingCampaignsInsert (..),
     newDFAReportingCampaignsInsert,
-    DFAReportingCampaignsInsert,
 
     -- ** dfareporting.campaigns.list
     DFAReportingCampaignsListResource,
+    DFAReportingCampaignsList (..),
     newDFAReportingCampaignsList,
-    DFAReportingCampaignsList,
 
     -- ** dfareporting.campaigns.patch
     DFAReportingCampaignsPatchResource,
+    DFAReportingCampaignsPatch (..),
     newDFAReportingCampaignsPatch,
-    DFAReportingCampaignsPatch,
 
     -- ** dfareporting.campaigns.update
     DFAReportingCampaignsUpdateResource,
+    DFAReportingCampaignsUpdate (..),
     newDFAReportingCampaignsUpdate,
-    DFAReportingCampaignsUpdate,
 
     -- ** dfareporting.changeLogs.get
     DFAReportingChangeLogsGetResource,
+    DFAReportingChangeLogsGet (..),
     newDFAReportingChangeLogsGet,
-    DFAReportingChangeLogsGet,
 
     -- ** dfareporting.changeLogs.list
     DFAReportingChangeLogsListResource,
+    DFAReportingChangeLogsList (..),
     newDFAReportingChangeLogsList,
-    DFAReportingChangeLogsList,
 
     -- ** dfareporting.cities.list
     DFAReportingCitiesListResource,
+    DFAReportingCitiesList (..),
     newDFAReportingCitiesList,
-    DFAReportingCitiesList,
 
     -- ** dfareporting.connectionTypes.get
     DFAReportingConnectionTypesGetResource,
+    DFAReportingConnectionTypesGet (..),
     newDFAReportingConnectionTypesGet,
-    DFAReportingConnectionTypesGet,
 
     -- ** dfareporting.connectionTypes.list
     DFAReportingConnectionTypesListResource,
+    DFAReportingConnectionTypesList (..),
     newDFAReportingConnectionTypesList,
-    DFAReportingConnectionTypesList,
 
     -- ** dfareporting.contentCategories.delete
     DFAReportingContentCategoriesDeleteResource,
+    DFAReportingContentCategoriesDelete (..),
     newDFAReportingContentCategoriesDelete,
-    DFAReportingContentCategoriesDelete,
 
     -- ** dfareporting.contentCategories.get
     DFAReportingContentCategoriesGetResource,
+    DFAReportingContentCategoriesGet (..),
     newDFAReportingContentCategoriesGet,
-    DFAReportingContentCategoriesGet,
 
     -- ** dfareporting.contentCategories.insert
     DFAReportingContentCategoriesInsertResource,
+    DFAReportingContentCategoriesInsert (..),
     newDFAReportingContentCategoriesInsert,
-    DFAReportingContentCategoriesInsert,
 
     -- ** dfareporting.contentCategories.list
     DFAReportingContentCategoriesListResource,
+    DFAReportingContentCategoriesList (..),
     newDFAReportingContentCategoriesList,
-    DFAReportingContentCategoriesList,
 
     -- ** dfareporting.contentCategories.patch
     DFAReportingContentCategoriesPatchResource,
+    DFAReportingContentCategoriesPatch (..),
     newDFAReportingContentCategoriesPatch,
-    DFAReportingContentCategoriesPatch,
 
     -- ** dfareporting.contentCategories.update
     DFAReportingContentCategoriesUpdateResource,
+    DFAReportingContentCategoriesUpdate (..),
     newDFAReportingContentCategoriesUpdate,
-    DFAReportingContentCategoriesUpdate,
 
     -- ** dfareporting.conversions.batchinsert
     DFAReportingConversionsBatchinsertResource,
+    DFAReportingConversionsBatchinsert (..),
     newDFAReportingConversionsBatchinsert,
-    DFAReportingConversionsBatchinsert,
 
     -- ** dfareporting.conversions.batchupdate
     DFAReportingConversionsBatchupdateResource,
+    DFAReportingConversionsBatchupdate (..),
     newDFAReportingConversionsBatchupdate,
-    DFAReportingConversionsBatchupdate,
 
     -- ** dfareporting.countries.get
     DFAReportingCountriesGetResource,
+    DFAReportingCountriesGet (..),
     newDFAReportingCountriesGet,
-    DFAReportingCountriesGet,
 
     -- ** dfareporting.countries.list
     DFAReportingCountriesListResource,
+    DFAReportingCountriesList (..),
     newDFAReportingCountriesList,
-    DFAReportingCountriesList,
 
     -- ** dfareporting.creativeAssets.insert
     DFAReportingCreativeAssetsInsertResource,
+    DFAReportingCreativeAssetsInsert (..),
     newDFAReportingCreativeAssetsInsert,
-    DFAReportingCreativeAssetsInsert,
 
     -- ** dfareporting.creativeFieldValues.delete
     DFAReportingCreativeFieldValuesDeleteResource,
+    DFAReportingCreativeFieldValuesDelete (..),
     newDFAReportingCreativeFieldValuesDelete,
-    DFAReportingCreativeFieldValuesDelete,
 
     -- ** dfareporting.creativeFieldValues.get
     DFAReportingCreativeFieldValuesGetResource,
+    DFAReportingCreativeFieldValuesGet (..),
     newDFAReportingCreativeFieldValuesGet,
-    DFAReportingCreativeFieldValuesGet,
 
     -- ** dfareporting.creativeFieldValues.insert
     DFAReportingCreativeFieldValuesInsertResource,
+    DFAReportingCreativeFieldValuesInsert (..),
     newDFAReportingCreativeFieldValuesInsert,
-    DFAReportingCreativeFieldValuesInsert,
 
     -- ** dfareporting.creativeFieldValues.list
     DFAReportingCreativeFieldValuesListResource,
+    DFAReportingCreativeFieldValuesList (..),
     newDFAReportingCreativeFieldValuesList,
-    DFAReportingCreativeFieldValuesList,
 
     -- ** dfareporting.creativeFieldValues.patch
     DFAReportingCreativeFieldValuesPatchResource,
+    DFAReportingCreativeFieldValuesPatch (..),
     newDFAReportingCreativeFieldValuesPatch,
-    DFAReportingCreativeFieldValuesPatch,
 
     -- ** dfareporting.creativeFieldValues.update
     DFAReportingCreativeFieldValuesUpdateResource,
+    DFAReportingCreativeFieldValuesUpdate (..),
     newDFAReportingCreativeFieldValuesUpdate,
-    DFAReportingCreativeFieldValuesUpdate,
 
     -- ** dfareporting.creativeFields.delete
     DFAReportingCreativeFieldsDeleteResource,
+    DFAReportingCreativeFieldsDelete (..),
     newDFAReportingCreativeFieldsDelete,
-    DFAReportingCreativeFieldsDelete,
 
     -- ** dfareporting.creativeFields.get
     DFAReportingCreativeFieldsGetResource,
+    DFAReportingCreativeFieldsGet (..),
     newDFAReportingCreativeFieldsGet,
-    DFAReportingCreativeFieldsGet,
 
     -- ** dfareporting.creativeFields.insert
     DFAReportingCreativeFieldsInsertResource,
+    DFAReportingCreativeFieldsInsert (..),
     newDFAReportingCreativeFieldsInsert,
-    DFAReportingCreativeFieldsInsert,
 
     -- ** dfareporting.creativeFields.list
     DFAReportingCreativeFieldsListResource,
+    DFAReportingCreativeFieldsList (..),
     newDFAReportingCreativeFieldsList,
-    DFAReportingCreativeFieldsList,
 
     -- ** dfareporting.creativeFields.patch
     DFAReportingCreativeFieldsPatchResource,
+    DFAReportingCreativeFieldsPatch (..),
     newDFAReportingCreativeFieldsPatch,
-    DFAReportingCreativeFieldsPatch,
 
     -- ** dfareporting.creativeFields.update
     DFAReportingCreativeFieldsUpdateResource,
+    DFAReportingCreativeFieldsUpdate (..),
     newDFAReportingCreativeFieldsUpdate,
-    DFAReportingCreativeFieldsUpdate,
 
     -- ** dfareporting.creativeGroups.get
     DFAReportingCreativeGroupsGetResource,
+    DFAReportingCreativeGroupsGet (..),
     newDFAReportingCreativeGroupsGet,
-    DFAReportingCreativeGroupsGet,
 
     -- ** dfareporting.creativeGroups.insert
     DFAReportingCreativeGroupsInsertResource,
+    DFAReportingCreativeGroupsInsert (..),
     newDFAReportingCreativeGroupsInsert,
-    DFAReportingCreativeGroupsInsert,
 
     -- ** dfareporting.creativeGroups.list
     DFAReportingCreativeGroupsListResource,
+    DFAReportingCreativeGroupsList (..),
     newDFAReportingCreativeGroupsList,
-    DFAReportingCreativeGroupsList,
 
     -- ** dfareporting.creativeGroups.patch
     DFAReportingCreativeGroupsPatchResource,
+    DFAReportingCreativeGroupsPatch (..),
     newDFAReportingCreativeGroupsPatch,
-    DFAReportingCreativeGroupsPatch,
 
     -- ** dfareporting.creativeGroups.update
     DFAReportingCreativeGroupsUpdateResource,
+    DFAReportingCreativeGroupsUpdate (..),
     newDFAReportingCreativeGroupsUpdate,
-    DFAReportingCreativeGroupsUpdate,
 
     -- ** dfareporting.creatives.get
     DFAReportingCreativesGetResource,
+    DFAReportingCreativesGet (..),
     newDFAReportingCreativesGet,
-    DFAReportingCreativesGet,
 
     -- ** dfareporting.creatives.insert
     DFAReportingCreativesInsertResource,
+    DFAReportingCreativesInsert (..),
     newDFAReportingCreativesInsert,
-    DFAReportingCreativesInsert,
 
     -- ** dfareporting.creatives.list
     DFAReportingCreativesListResource,
+    DFAReportingCreativesList (..),
     newDFAReportingCreativesList,
-    DFAReportingCreativesList,
 
     -- ** dfareporting.creatives.patch
     DFAReportingCreativesPatchResource,
+    DFAReportingCreativesPatch (..),
     newDFAReportingCreativesPatch,
-    DFAReportingCreativesPatch,
 
     -- ** dfareporting.creatives.update
     DFAReportingCreativesUpdateResource,
+    DFAReportingCreativesUpdate (..),
     newDFAReportingCreativesUpdate,
-    DFAReportingCreativesUpdate,
 
     -- ** dfareporting.dimensionValues.query
     DFAReportingDimensionValuesQueryResource,
+    DFAReportingDimensionValuesQuery (..),
     newDFAReportingDimensionValuesQuery,
-    DFAReportingDimensionValuesQuery,
 
     -- ** dfareporting.directorySites.get
     DFAReportingDirectorySitesGetResource,
+    DFAReportingDirectorySitesGet (..),
     newDFAReportingDirectorySitesGet,
-    DFAReportingDirectorySitesGet,
 
     -- ** dfareporting.directorySites.insert
     DFAReportingDirectorySitesInsertResource,
+    DFAReportingDirectorySitesInsert (..),
     newDFAReportingDirectorySitesInsert,
-    DFAReportingDirectorySitesInsert,
 
     -- ** dfareporting.directorySites.list
     DFAReportingDirectorySitesListResource,
+    DFAReportingDirectorySitesList (..),
     newDFAReportingDirectorySitesList,
-    DFAReportingDirectorySitesList,
 
     -- ** dfareporting.dynamicTargetingKeys.delete
     DFAReportingDynamicTargetingKeysDeleteResource,
+    DFAReportingDynamicTargetingKeysDelete (..),
     newDFAReportingDynamicTargetingKeysDelete,
-    DFAReportingDynamicTargetingKeysDelete,
 
     -- ** dfareporting.dynamicTargetingKeys.insert
     DFAReportingDynamicTargetingKeysInsertResource,
+    DFAReportingDynamicTargetingKeysInsert (..),
     newDFAReportingDynamicTargetingKeysInsert,
-    DFAReportingDynamicTargetingKeysInsert,
 
     -- ** dfareporting.dynamicTargetingKeys.list
     DFAReportingDynamicTargetingKeysListResource,
+    DFAReportingDynamicTargetingKeysList (..),
     newDFAReportingDynamicTargetingKeysList,
-    DFAReportingDynamicTargetingKeysList,
 
     -- ** dfareporting.eventTags.delete
     DFAReportingEventTagsDeleteResource,
+    DFAReportingEventTagsDelete (..),
     newDFAReportingEventTagsDelete,
-    DFAReportingEventTagsDelete,
 
     -- ** dfareporting.eventTags.get
     DFAReportingEventTagsGetResource,
+    DFAReportingEventTagsGet (..),
     newDFAReportingEventTagsGet,
-    DFAReportingEventTagsGet,
 
     -- ** dfareporting.eventTags.insert
     DFAReportingEventTagsInsertResource,
+    DFAReportingEventTagsInsert (..),
     newDFAReportingEventTagsInsert,
-    DFAReportingEventTagsInsert,
 
     -- ** dfareporting.eventTags.list
     DFAReportingEventTagsListResource,
+    DFAReportingEventTagsList (..),
     newDFAReportingEventTagsList,
-    DFAReportingEventTagsList,
 
     -- ** dfareporting.eventTags.patch
     DFAReportingEventTagsPatchResource,
+    DFAReportingEventTagsPatch (..),
     newDFAReportingEventTagsPatch,
-    DFAReportingEventTagsPatch,
 
     -- ** dfareporting.eventTags.update
     DFAReportingEventTagsUpdateResource,
+    DFAReportingEventTagsUpdate (..),
     newDFAReportingEventTagsUpdate,
-    DFAReportingEventTagsUpdate,
 
     -- ** dfareporting.files.get
     DFAReportingFilesGetResource,
+    DFAReportingFilesGet (..),
     newDFAReportingFilesGet,
-    DFAReportingFilesGet,
 
     -- ** dfareporting.files.list
     DFAReportingFilesListResource,
+    DFAReportingFilesList (..),
     newDFAReportingFilesList,
-    DFAReportingFilesList,
 
     -- ** dfareporting.floodlightActivities.delete
     DFAReportingFloodlightActivitiesDeleteResource,
+    DFAReportingFloodlightActivitiesDelete (..),
     newDFAReportingFloodlightActivitiesDelete,
-    DFAReportingFloodlightActivitiesDelete,
 
     -- ** dfareporting.floodlightActivities.generatetag
     DFAReportingFloodlightActivitiesGeneratetagResource,
+    DFAReportingFloodlightActivitiesGeneratetag (..),
     newDFAReportingFloodlightActivitiesGeneratetag,
-    DFAReportingFloodlightActivitiesGeneratetag,
 
     -- ** dfareporting.floodlightActivities.get
     DFAReportingFloodlightActivitiesGetResource,
+    DFAReportingFloodlightActivitiesGet (..),
     newDFAReportingFloodlightActivitiesGet,
-    DFAReportingFloodlightActivitiesGet,
 
     -- ** dfareporting.floodlightActivities.insert
     DFAReportingFloodlightActivitiesInsertResource,
+    DFAReportingFloodlightActivitiesInsert (..),
     newDFAReportingFloodlightActivitiesInsert,
-    DFAReportingFloodlightActivitiesInsert,
 
     -- ** dfareporting.floodlightActivities.list
     DFAReportingFloodlightActivitiesListResource,
+    DFAReportingFloodlightActivitiesList (..),
     newDFAReportingFloodlightActivitiesList,
-    DFAReportingFloodlightActivitiesList,
 
     -- ** dfareporting.floodlightActivities.patch
     DFAReportingFloodlightActivitiesPatchResource,
+    DFAReportingFloodlightActivitiesPatch (..),
     newDFAReportingFloodlightActivitiesPatch,
-    DFAReportingFloodlightActivitiesPatch,
 
     -- ** dfareporting.floodlightActivities.update
     DFAReportingFloodlightActivitiesUpdateResource,
+    DFAReportingFloodlightActivitiesUpdate (..),
     newDFAReportingFloodlightActivitiesUpdate,
-    DFAReportingFloodlightActivitiesUpdate,
 
     -- ** dfareporting.floodlightActivityGroups.get
     DFAReportingFloodlightActivityGroupsGetResource,
+    DFAReportingFloodlightActivityGroupsGet (..),
     newDFAReportingFloodlightActivityGroupsGet,
-    DFAReportingFloodlightActivityGroupsGet,
 
     -- ** dfareporting.floodlightActivityGroups.insert
     DFAReportingFloodlightActivityGroupsInsertResource,
+    DFAReportingFloodlightActivityGroupsInsert (..),
     newDFAReportingFloodlightActivityGroupsInsert,
-    DFAReportingFloodlightActivityGroupsInsert,
 
     -- ** dfareporting.floodlightActivityGroups.list
     DFAReportingFloodlightActivityGroupsListResource,
+    DFAReportingFloodlightActivityGroupsList (..),
     newDFAReportingFloodlightActivityGroupsList,
-    DFAReportingFloodlightActivityGroupsList,
 
     -- ** dfareporting.floodlightActivityGroups.patch
     DFAReportingFloodlightActivityGroupsPatchResource,
+    DFAReportingFloodlightActivityGroupsPatch (..),
     newDFAReportingFloodlightActivityGroupsPatch,
-    DFAReportingFloodlightActivityGroupsPatch,
 
     -- ** dfareporting.floodlightActivityGroups.update
     DFAReportingFloodlightActivityGroupsUpdateResource,
+    DFAReportingFloodlightActivityGroupsUpdate (..),
     newDFAReportingFloodlightActivityGroupsUpdate,
-    DFAReportingFloodlightActivityGroupsUpdate,
 
     -- ** dfareporting.floodlightConfigurations.get
     DFAReportingFloodlightConfigurationsGetResource,
+    DFAReportingFloodlightConfigurationsGet (..),
     newDFAReportingFloodlightConfigurationsGet,
-    DFAReportingFloodlightConfigurationsGet,
 
     -- ** dfareporting.floodlightConfigurations.list
     DFAReportingFloodlightConfigurationsListResource,
+    DFAReportingFloodlightConfigurationsList (..),
     newDFAReportingFloodlightConfigurationsList,
-    DFAReportingFloodlightConfigurationsList,
 
     -- ** dfareporting.floodlightConfigurations.patch
     DFAReportingFloodlightConfigurationsPatchResource,
+    DFAReportingFloodlightConfigurationsPatch (..),
     newDFAReportingFloodlightConfigurationsPatch,
-    DFAReportingFloodlightConfigurationsPatch,
 
     -- ** dfareporting.floodlightConfigurations.update
     DFAReportingFloodlightConfigurationsUpdateResource,
+    DFAReportingFloodlightConfigurationsUpdate (..),
     newDFAReportingFloodlightConfigurationsUpdate,
-    DFAReportingFloodlightConfigurationsUpdate,
 
     -- ** dfareporting.inventoryItems.get
     DFAReportingInventoryItemsGetResource,
+    DFAReportingInventoryItemsGet (..),
     newDFAReportingInventoryItemsGet,
-    DFAReportingInventoryItemsGet,
 
     -- ** dfareporting.inventoryItems.list
     DFAReportingInventoryItemsListResource,
+    DFAReportingInventoryItemsList (..),
     newDFAReportingInventoryItemsList,
-    DFAReportingInventoryItemsList,
 
     -- ** dfareporting.languages.list
     DFAReportingLanguagesListResource,
+    DFAReportingLanguagesList (..),
     newDFAReportingLanguagesList,
-    DFAReportingLanguagesList,
 
     -- ** dfareporting.metros.list
     DFAReportingMetrosListResource,
+    DFAReportingMetrosList (..),
     newDFAReportingMetrosList,
-    DFAReportingMetrosList,
 
     -- ** dfareporting.mobileApps.get
     DFAReportingMobileAppsGetResource,
+    DFAReportingMobileAppsGet (..),
     newDFAReportingMobileAppsGet,
-    DFAReportingMobileAppsGet,
 
     -- ** dfareporting.mobileApps.list
     DFAReportingMobileAppsListResource,
+    DFAReportingMobileAppsList (..),
     newDFAReportingMobileAppsList,
-    DFAReportingMobileAppsList,
 
     -- ** dfareporting.mobileCarriers.get
     DFAReportingMobileCarriersGetResource,
+    DFAReportingMobileCarriersGet (..),
     newDFAReportingMobileCarriersGet,
-    DFAReportingMobileCarriersGet,
 
     -- ** dfareporting.mobileCarriers.list
     DFAReportingMobileCarriersListResource,
+    DFAReportingMobileCarriersList (..),
     newDFAReportingMobileCarriersList,
-    DFAReportingMobileCarriersList,
 
     -- ** dfareporting.operatingSystemVersions.get
     DFAReportingOperatingSystemVersionsGetResource,
+    DFAReportingOperatingSystemVersionsGet (..),
     newDFAReportingOperatingSystemVersionsGet,
-    DFAReportingOperatingSystemVersionsGet,
 
     -- ** dfareporting.operatingSystemVersions.list
     DFAReportingOperatingSystemVersionsListResource,
+    DFAReportingOperatingSystemVersionsList (..),
     newDFAReportingOperatingSystemVersionsList,
-    DFAReportingOperatingSystemVersionsList,
 
     -- ** dfareporting.operatingSystems.get
     DFAReportingOperatingSystemsGetResource,
+    DFAReportingOperatingSystemsGet (..),
     newDFAReportingOperatingSystemsGet,
-    DFAReportingOperatingSystemsGet,
 
     -- ** dfareporting.operatingSystems.list
     DFAReportingOperatingSystemsListResource,
+    DFAReportingOperatingSystemsList (..),
     newDFAReportingOperatingSystemsList,
-    DFAReportingOperatingSystemsList,
 
     -- ** dfareporting.orderDocuments.get
     DFAReportingOrderDocumentsGetResource,
+    DFAReportingOrderDocumentsGet (..),
     newDFAReportingOrderDocumentsGet,
-    DFAReportingOrderDocumentsGet,
 
     -- ** dfareporting.orderDocuments.list
     DFAReportingOrderDocumentsListResource,
+    DFAReportingOrderDocumentsList (..),
     newDFAReportingOrderDocumentsList,
-    DFAReportingOrderDocumentsList,
 
     -- ** dfareporting.orders.get
     DFAReportingOrdersGetResource,
+    DFAReportingOrdersGet (..),
     newDFAReportingOrdersGet,
-    DFAReportingOrdersGet,
 
     -- ** dfareporting.orders.list
     DFAReportingOrdersListResource,
+    DFAReportingOrdersList (..),
     newDFAReportingOrdersList,
-    DFAReportingOrdersList,
 
     -- ** dfareporting.placementGroups.get
     DFAReportingPlacementGroupsGetResource,
+    DFAReportingPlacementGroupsGet (..),
     newDFAReportingPlacementGroupsGet,
-    DFAReportingPlacementGroupsGet,
 
     -- ** dfareporting.placementGroups.insert
     DFAReportingPlacementGroupsInsertResource,
+    DFAReportingPlacementGroupsInsert (..),
     newDFAReportingPlacementGroupsInsert,
-    DFAReportingPlacementGroupsInsert,
 
     -- ** dfareporting.placementGroups.list
     DFAReportingPlacementGroupsListResource,
+    DFAReportingPlacementGroupsList (..),
     newDFAReportingPlacementGroupsList,
-    DFAReportingPlacementGroupsList,
 
     -- ** dfareporting.placementGroups.patch
     DFAReportingPlacementGroupsPatchResource,
+    DFAReportingPlacementGroupsPatch (..),
     newDFAReportingPlacementGroupsPatch,
-    DFAReportingPlacementGroupsPatch,
 
     -- ** dfareporting.placementGroups.update
     DFAReportingPlacementGroupsUpdateResource,
+    DFAReportingPlacementGroupsUpdate (..),
     newDFAReportingPlacementGroupsUpdate,
-    DFAReportingPlacementGroupsUpdate,
 
     -- ** dfareporting.placementStrategies.delete
     DFAReportingPlacementStrategiesDeleteResource,
+    DFAReportingPlacementStrategiesDelete (..),
     newDFAReportingPlacementStrategiesDelete,
-    DFAReportingPlacementStrategiesDelete,
 
     -- ** dfareporting.placementStrategies.get
     DFAReportingPlacementStrategiesGetResource,
+    DFAReportingPlacementStrategiesGet (..),
     newDFAReportingPlacementStrategiesGet,
-    DFAReportingPlacementStrategiesGet,
 
     -- ** dfareporting.placementStrategies.insert
     DFAReportingPlacementStrategiesInsertResource,
+    DFAReportingPlacementStrategiesInsert (..),
     newDFAReportingPlacementStrategiesInsert,
-    DFAReportingPlacementStrategiesInsert,
 
     -- ** dfareporting.placementStrategies.list
     DFAReportingPlacementStrategiesListResource,
+    DFAReportingPlacementStrategiesList (..),
     newDFAReportingPlacementStrategiesList,
-    DFAReportingPlacementStrategiesList,
 
     -- ** dfareporting.placementStrategies.patch
     DFAReportingPlacementStrategiesPatchResource,
+    DFAReportingPlacementStrategiesPatch (..),
     newDFAReportingPlacementStrategiesPatch,
-    DFAReportingPlacementStrategiesPatch,
 
     -- ** dfareporting.placementStrategies.update
     DFAReportingPlacementStrategiesUpdateResource,
+    DFAReportingPlacementStrategiesUpdate (..),
     newDFAReportingPlacementStrategiesUpdate,
-    DFAReportingPlacementStrategiesUpdate,
 
     -- ** dfareporting.placements.generatetags
     DFAReportingPlacementsGeneratetagsResource,
+    DFAReportingPlacementsGeneratetags (..),
     newDFAReportingPlacementsGeneratetags,
-    DFAReportingPlacementsGeneratetags,
 
     -- ** dfareporting.placements.get
     DFAReportingPlacementsGetResource,
+    DFAReportingPlacementsGet (..),
     newDFAReportingPlacementsGet,
-    DFAReportingPlacementsGet,
 
     -- ** dfareporting.placements.insert
     DFAReportingPlacementsInsertResource,
+    DFAReportingPlacementsInsert (..),
     newDFAReportingPlacementsInsert,
-    DFAReportingPlacementsInsert,
 
     -- ** dfareporting.placements.list
     DFAReportingPlacementsListResource,
+    DFAReportingPlacementsList (..),
     newDFAReportingPlacementsList,
-    DFAReportingPlacementsList,
 
     -- ** dfareporting.placements.patch
     DFAReportingPlacementsPatchResource,
+    DFAReportingPlacementsPatch (..),
     newDFAReportingPlacementsPatch,
-    DFAReportingPlacementsPatch,
 
     -- ** dfareporting.placements.update
     DFAReportingPlacementsUpdateResource,
+    DFAReportingPlacementsUpdate (..),
     newDFAReportingPlacementsUpdate,
-    DFAReportingPlacementsUpdate,
 
     -- ** dfareporting.platformTypes.get
     DFAReportingPlatformTypesGetResource,
+    DFAReportingPlatformTypesGet (..),
     newDFAReportingPlatformTypesGet,
-    DFAReportingPlatformTypesGet,
 
     -- ** dfareporting.platformTypes.list
     DFAReportingPlatformTypesListResource,
+    DFAReportingPlatformTypesList (..),
     newDFAReportingPlatformTypesList,
-    DFAReportingPlatformTypesList,
 
     -- ** dfareporting.postalCodes.get
     DFAReportingPostalCodesGetResource,
+    DFAReportingPostalCodesGet (..),
     newDFAReportingPostalCodesGet,
-    DFAReportingPostalCodesGet,
 
     -- ** dfareporting.postalCodes.list
     DFAReportingPostalCodesListResource,
+    DFAReportingPostalCodesList (..),
     newDFAReportingPostalCodesList,
-    DFAReportingPostalCodesList,
 
     -- ** dfareporting.projects.get
     DFAReportingProjectsGetResource,
+    DFAReportingProjectsGet (..),
     newDFAReportingProjectsGet,
-    DFAReportingProjectsGet,
 
     -- ** dfareporting.projects.list
     DFAReportingProjectsListResource,
+    DFAReportingProjectsList (..),
     newDFAReportingProjectsList,
-    DFAReportingProjectsList,
 
     -- ** dfareporting.regions.list
     DFAReportingRegionsListResource,
+    DFAReportingRegionsList (..),
     newDFAReportingRegionsList,
-    DFAReportingRegionsList,
 
     -- ** dfareporting.remarketingListShares.get
     DFAReportingRemarketingListSharesGetResource,
+    DFAReportingRemarketingListSharesGet (..),
     newDFAReportingRemarketingListSharesGet,
-    DFAReportingRemarketingListSharesGet,
 
     -- ** dfareporting.remarketingListShares.patch
     DFAReportingRemarketingListSharesPatchResource,
+    DFAReportingRemarketingListSharesPatch (..),
     newDFAReportingRemarketingListSharesPatch,
-    DFAReportingRemarketingListSharesPatch,
 
     -- ** dfareporting.remarketingListShares.update
     DFAReportingRemarketingListSharesUpdateResource,
+    DFAReportingRemarketingListSharesUpdate (..),
     newDFAReportingRemarketingListSharesUpdate,
-    DFAReportingRemarketingListSharesUpdate,
 
     -- ** dfareporting.remarketingLists.get
     DFAReportingRemarketingListsGetResource,
+    DFAReportingRemarketingListsGet (..),
     newDFAReportingRemarketingListsGet,
-    DFAReportingRemarketingListsGet,
 
     -- ** dfareporting.remarketingLists.insert
     DFAReportingRemarketingListsInsertResource,
+    DFAReportingRemarketingListsInsert (..),
     newDFAReportingRemarketingListsInsert,
-    DFAReportingRemarketingListsInsert,
 
     -- ** dfareporting.remarketingLists.list
     DFAReportingRemarketingListsListResource,
+    DFAReportingRemarketingListsList (..),
     newDFAReportingRemarketingListsList,
-    DFAReportingRemarketingListsList,
 
     -- ** dfareporting.remarketingLists.patch
     DFAReportingRemarketingListsPatchResource,
+    DFAReportingRemarketingListsPatch (..),
     newDFAReportingRemarketingListsPatch,
-    DFAReportingRemarketingListsPatch,
 
     -- ** dfareporting.remarketingLists.update
     DFAReportingRemarketingListsUpdateResource,
+    DFAReportingRemarketingListsUpdate (..),
     newDFAReportingRemarketingListsUpdate,
-    DFAReportingRemarketingListsUpdate,
 
     -- ** dfareporting.reports.compatibleFields.query
     DFAReportingReportsCompatibleFieldsQueryResource,
+    DFAReportingReportsCompatibleFieldsQuery (..),
     newDFAReportingReportsCompatibleFieldsQuery,
-    DFAReportingReportsCompatibleFieldsQuery,
 
     -- ** dfareporting.reports.delete
     DFAReportingReportsDeleteResource,
+    DFAReportingReportsDelete (..),
     newDFAReportingReportsDelete,
-    DFAReportingReportsDelete,
 
     -- ** dfareporting.reports.files.get
     DFAReportingReportsFilesGetResource,
+    DFAReportingReportsFilesGet (..),
     newDFAReportingReportsFilesGet,
-    DFAReportingReportsFilesGet,
 
     -- ** dfareporting.reports.files.list
     DFAReportingReportsFilesListResource,
+    DFAReportingReportsFilesList (..),
     newDFAReportingReportsFilesList,
-    DFAReportingReportsFilesList,
 
     -- ** dfareporting.reports.get
     DFAReportingReportsGetResource,
+    DFAReportingReportsGet (..),
     newDFAReportingReportsGet,
-    DFAReportingReportsGet,
 
     -- ** dfareporting.reports.insert
     DFAReportingReportsInsertResource,
+    DFAReportingReportsInsert (..),
     newDFAReportingReportsInsert,
-    DFAReportingReportsInsert,
 
     -- ** dfareporting.reports.list
     DFAReportingReportsListResource,
+    DFAReportingReportsList (..),
     newDFAReportingReportsList,
-    DFAReportingReportsList,
 
     -- ** dfareporting.reports.patch
     DFAReportingReportsPatchResource,
+    DFAReportingReportsPatch (..),
     newDFAReportingReportsPatch,
-    DFAReportingReportsPatch,
 
     -- ** dfareporting.reports.run
     DFAReportingReportsRunResource,
+    DFAReportingReportsRun (..),
     newDFAReportingReportsRun,
-    DFAReportingReportsRun,
 
     -- ** dfareporting.reports.update
     DFAReportingReportsUpdateResource,
+    DFAReportingReportsUpdate (..),
     newDFAReportingReportsUpdate,
-    DFAReportingReportsUpdate,
 
     -- ** dfareporting.sites.get
     DFAReportingSitesGetResource,
+    DFAReportingSitesGet (..),
     newDFAReportingSitesGet,
-    DFAReportingSitesGet,
 
     -- ** dfareporting.sites.insert
     DFAReportingSitesInsertResource,
+    DFAReportingSitesInsert (..),
     newDFAReportingSitesInsert,
-    DFAReportingSitesInsert,
 
     -- ** dfareporting.sites.list
     DFAReportingSitesListResource,
+    DFAReportingSitesList (..),
     newDFAReportingSitesList,
-    DFAReportingSitesList,
 
     -- ** dfareporting.sites.patch
     DFAReportingSitesPatchResource,
+    DFAReportingSitesPatch (..),
     newDFAReportingSitesPatch,
-    DFAReportingSitesPatch,
 
     -- ** dfareporting.sites.update
     DFAReportingSitesUpdateResource,
+    DFAReportingSitesUpdate (..),
     newDFAReportingSitesUpdate,
-    DFAReportingSitesUpdate,
 
     -- ** dfareporting.sizes.get
     DFAReportingSizesGetResource,
+    DFAReportingSizesGet (..),
     newDFAReportingSizesGet,
-    DFAReportingSizesGet,
 
     -- ** dfareporting.sizes.insert
     DFAReportingSizesInsertResource,
+    DFAReportingSizesInsert (..),
     newDFAReportingSizesInsert,
-    DFAReportingSizesInsert,
 
     -- ** dfareporting.sizes.list
     DFAReportingSizesListResource,
+    DFAReportingSizesList (..),
     newDFAReportingSizesList,
-    DFAReportingSizesList,
 
     -- ** dfareporting.subaccounts.get
     DFAReportingSubaccountsGetResource,
+    DFAReportingSubaccountsGet (..),
     newDFAReportingSubaccountsGet,
-    DFAReportingSubaccountsGet,
 
     -- ** dfareporting.subaccounts.insert
     DFAReportingSubaccountsInsertResource,
+    DFAReportingSubaccountsInsert (..),
     newDFAReportingSubaccountsInsert,
-    DFAReportingSubaccountsInsert,
 
     -- ** dfareporting.subaccounts.list
     DFAReportingSubaccountsListResource,
+    DFAReportingSubaccountsList (..),
     newDFAReportingSubaccountsList,
-    DFAReportingSubaccountsList,
 
     -- ** dfareporting.subaccounts.patch
     DFAReportingSubaccountsPatchResource,
+    DFAReportingSubaccountsPatch (..),
     newDFAReportingSubaccountsPatch,
-    DFAReportingSubaccountsPatch,
 
     -- ** dfareporting.subaccounts.update
     DFAReportingSubaccountsUpdateResource,
+    DFAReportingSubaccountsUpdate (..),
     newDFAReportingSubaccountsUpdate,
-    DFAReportingSubaccountsUpdate,
 
     -- ** dfareporting.targetableRemarketingLists.get
     DFAReportingTargetableRemarketingListsGetResource,
+    DFAReportingTargetableRemarketingListsGet (..),
     newDFAReportingTargetableRemarketingListsGet,
-    DFAReportingTargetableRemarketingListsGet,
 
     -- ** dfareporting.targetableRemarketingLists.list
     DFAReportingTargetableRemarketingListsListResource,
+    DFAReportingTargetableRemarketingListsList (..),
     newDFAReportingTargetableRemarketingListsList,
-    DFAReportingTargetableRemarketingListsList,
 
     -- ** dfareporting.targetingTemplates.get
     DFAReportingTargetingTemplatesGetResource,
+    DFAReportingTargetingTemplatesGet (..),
     newDFAReportingTargetingTemplatesGet,
-    DFAReportingTargetingTemplatesGet,
 
     -- ** dfareporting.targetingTemplates.insert
     DFAReportingTargetingTemplatesInsertResource,
+    DFAReportingTargetingTemplatesInsert (..),
     newDFAReportingTargetingTemplatesInsert,
-    DFAReportingTargetingTemplatesInsert,
 
     -- ** dfareporting.targetingTemplates.list
     DFAReportingTargetingTemplatesListResource,
+    DFAReportingTargetingTemplatesList (..),
     newDFAReportingTargetingTemplatesList,
-    DFAReportingTargetingTemplatesList,
 
     -- ** dfareporting.targetingTemplates.patch
     DFAReportingTargetingTemplatesPatchResource,
+    DFAReportingTargetingTemplatesPatch (..),
     newDFAReportingTargetingTemplatesPatch,
-    DFAReportingTargetingTemplatesPatch,
 
     -- ** dfareporting.targetingTemplates.update
     DFAReportingTargetingTemplatesUpdateResource,
+    DFAReportingTargetingTemplatesUpdate (..),
     newDFAReportingTargetingTemplatesUpdate,
-    DFAReportingTargetingTemplatesUpdate,
 
     -- ** dfareporting.userProfiles.get
     DFAReportingUserProfilesGetResource,
+    DFAReportingUserProfilesGet (..),
     newDFAReportingUserProfilesGet,
-    DFAReportingUserProfilesGet,
 
     -- ** dfareporting.userProfiles.list
     DFAReportingUserProfilesListResource,
+    DFAReportingUserProfilesList (..),
     newDFAReportingUserProfilesList,
-    DFAReportingUserProfilesList,
 
     -- ** dfareporting.userRolePermissionGroups.get
     DFAReportingUserRolePermissionGroupsGetResource,
+    DFAReportingUserRolePermissionGroupsGet (..),
     newDFAReportingUserRolePermissionGroupsGet,
-    DFAReportingUserRolePermissionGroupsGet,
 
     -- ** dfareporting.userRolePermissionGroups.list
     DFAReportingUserRolePermissionGroupsListResource,
+    DFAReportingUserRolePermissionGroupsList (..),
     newDFAReportingUserRolePermissionGroupsList,
-    DFAReportingUserRolePermissionGroupsList,
 
     -- ** dfareporting.userRolePermissions.get
     DFAReportingUserRolePermissionsGetResource,
+    DFAReportingUserRolePermissionsGet (..),
     newDFAReportingUserRolePermissionsGet,
-    DFAReportingUserRolePermissionsGet,
 
     -- ** dfareporting.userRolePermissions.list
     DFAReportingUserRolePermissionsListResource,
+    DFAReportingUserRolePermissionsList (..),
     newDFAReportingUserRolePermissionsList,
-    DFAReportingUserRolePermissionsList,
 
     -- ** dfareporting.userRoles.delete
     DFAReportingUserRolesDeleteResource,
+    DFAReportingUserRolesDelete (..),
     newDFAReportingUserRolesDelete,
-    DFAReportingUserRolesDelete,
 
     -- ** dfareporting.userRoles.get
     DFAReportingUserRolesGetResource,
+    DFAReportingUserRolesGet (..),
     newDFAReportingUserRolesGet,
-    DFAReportingUserRolesGet,
 
     -- ** dfareporting.userRoles.insert
     DFAReportingUserRolesInsertResource,
+    DFAReportingUserRolesInsert (..),
     newDFAReportingUserRolesInsert,
-    DFAReportingUserRolesInsert,
 
     -- ** dfareporting.userRoles.list
     DFAReportingUserRolesListResource,
+    DFAReportingUserRolesList (..),
     newDFAReportingUserRolesList,
-    DFAReportingUserRolesList,
 
     -- ** dfareporting.userRoles.patch
     DFAReportingUserRolesPatchResource,
+    DFAReportingUserRolesPatch (..),
     newDFAReportingUserRolesPatch,
-    DFAReportingUserRolesPatch,
 
     -- ** dfareporting.userRoles.update
     DFAReportingUserRolesUpdateResource,
+    DFAReportingUserRolesUpdate (..),
     newDFAReportingUserRolesUpdate,
-    DFAReportingUserRolesUpdate,
 
     -- ** dfareporting.videoFormats.get
     DFAReportingVideoFormatsGetResource,
+    DFAReportingVideoFormatsGet (..),
     newDFAReportingVideoFormatsGet,
-    DFAReportingVideoFormatsGet,
 
     -- ** dfareporting.videoFormats.list
     DFAReportingVideoFormatsListResource,
+    DFAReportingVideoFormatsList (..),
     newDFAReportingVideoFormatsList,
-    DFAReportingVideoFormatsList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Refunditem
     ContentOrdersRefunditemResource,
 
     -- ** Constructing a Request
+    ContentOrdersRefunditem (..),
     newContentOrdersRefunditem,
-    ContentOrdersRefunditem,
   )
 where
 

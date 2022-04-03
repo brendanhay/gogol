@@ -40,18 +40,18 @@ module Gogol.GroupsSettings
 
     -- ** groupsSettings.groups.get
     GroupsSettingsGroupsGetResource,
+    GroupsSettingsGroupsGet (..),
     newGroupsSettingsGroupsGet,
-    GroupsSettingsGroupsGet,
 
     -- ** groupsSettings.groups.patch
     GroupsSettingsGroupsPatchResource,
+    GroupsSettingsGroupsPatch (..),
     newGroupsSettingsGroupsPatch,
-    GroupsSettingsGroupsPatch,
 
     -- ** groupsSettings.groups.update
     GroupsSettingsGroupsUpdateResource,
+    GroupsSettingsGroupsUpdate (..),
     newGroupsSettingsGroupsUpdate,
-    GroupsSettingsGroupsUpdate,
 
     -- * Types
 

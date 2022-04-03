@@ -34,8 +34,8 @@ module Gogol.DNS.ManagedZoneOperations.Get
     DNSManagedZoneOperationsGetResource,
 
     -- ** Constructing a Request
+    DNSManagedZoneOperationsGet (..),
     newDNSManagedZoneOperationsGet,
-    DNSManagedZoneOperationsGet,
   )
 where
 

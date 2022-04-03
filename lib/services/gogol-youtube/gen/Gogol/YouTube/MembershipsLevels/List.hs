@@ -34,8 +34,8 @@ module Gogol.YouTube.MembershipsLevels.List
     YouTubeMembershipsLevelsListResource,
 
     -- ** Constructing a Request
+    YouTubeMembershipsLevelsList (..),
     newYouTubeMembershipsLevelsList,
-    YouTubeMembershipsLevelsList,
   )
 where
 

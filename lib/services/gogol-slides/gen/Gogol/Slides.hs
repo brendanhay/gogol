@@ -46,28 +46,28 @@ module Gogol.Slides
 
     -- ** slides.presentations.batchUpdate
     SlidesPresentationsBatchUpdateResource,
+    SlidesPresentationsBatchUpdate (..),
     newSlidesPresentationsBatchUpdate,
-    SlidesPresentationsBatchUpdate,
 
     -- ** slides.presentations.create
     SlidesPresentationsCreateResource,
+    SlidesPresentationsCreate (..),
     newSlidesPresentationsCreate,
-    SlidesPresentationsCreate,
 
     -- ** slides.presentations.get
     SlidesPresentationsGetResource,
+    SlidesPresentationsGet (..),
     newSlidesPresentationsGet,
-    SlidesPresentationsGet,
 
     -- ** slides.presentations.pages.get
     SlidesPresentationsPagesGetResource,
+    SlidesPresentationsPagesGet (..),
     newSlidesPresentationsPagesGet,
-    SlidesPresentationsPagesGet,
 
     -- ** slides.presentations.pages.getThumbnail
     SlidesPresentationsPagesGetThumbnailResource,
+    SlidesPresentationsPagesGetThumbnail (..),
     newSlidesPresentationsPagesGetThumbnail,
-    SlidesPresentationsPagesGetThumbnail,
 
     -- * Types
 

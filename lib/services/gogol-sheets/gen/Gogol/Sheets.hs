@@ -44,88 +44,88 @@ module Gogol.Sheets
 
     -- ** sheets.spreadsheets.batchUpdate
     SheetsSpreadsheetsBatchUpdateResource,
+    SheetsSpreadsheetsBatchUpdate (..),
     newSheetsSpreadsheetsBatchUpdate,
-    SheetsSpreadsheetsBatchUpdate,
 
     -- ** sheets.spreadsheets.create
     SheetsSpreadsheetsCreateResource,
+    SheetsSpreadsheetsCreate (..),
     newSheetsSpreadsheetsCreate,
-    SheetsSpreadsheetsCreate,
 
     -- ** sheets.spreadsheets.developerMetadata.get
     SheetsSpreadsheetsDeveloperMetadataGetResource,
+    SheetsSpreadsheetsDeveloperMetadataGet (..),
     newSheetsSpreadsheetsDeveloperMetadataGet,
-    SheetsSpreadsheetsDeveloperMetadataGet,
 
     -- ** sheets.spreadsheets.developerMetadata.search
     SheetsSpreadsheetsDeveloperMetadataSearchResource,
+    SheetsSpreadsheetsDeveloperMetadataSearch (..),
     newSheetsSpreadsheetsDeveloperMetadataSearch,
-    SheetsSpreadsheetsDeveloperMetadataSearch,
 
     -- ** sheets.spreadsheets.get
     SheetsSpreadsheetsGetResource,
+    SheetsSpreadsheetsGet (..),
     newSheetsSpreadsheetsGet,
-    SheetsSpreadsheetsGet,
 
     -- ** sheets.spreadsheets.getByDataFilter
     SheetsSpreadsheetsGetByDataFilterResource,
+    SheetsSpreadsheetsGetByDataFilter (..),
     newSheetsSpreadsheetsGetByDataFilter,
-    SheetsSpreadsheetsGetByDataFilter,
 
     -- ** sheets.spreadsheets.sheets.copyTo
     SheetsSpreadsheetsSheetsCopyToResource,
+    SheetsSpreadsheetsSheetsCopyTo (..),
     newSheetsSpreadsheetsSheetsCopyTo,
-    SheetsSpreadsheetsSheetsCopyTo,
 
     -- ** sheets.spreadsheets.values.append
     SheetsSpreadsheetsValuesAppendResource,
+    SheetsSpreadsheetsValuesAppend (..),
     newSheetsSpreadsheetsValuesAppend,
-    SheetsSpreadsheetsValuesAppend,
 
     -- ** sheets.spreadsheets.values.batchClear
     SheetsSpreadsheetsValuesBatchClearResource,
+    SheetsSpreadsheetsValuesBatchClear (..),
     newSheetsSpreadsheetsValuesBatchClear,
-    SheetsSpreadsheetsValuesBatchClear,
 
     -- ** sheets.spreadsheets.values.batchClearByDataFilter
     SheetsSpreadsheetsValuesBatchClearByDataFilterResource,
+    SheetsSpreadsheetsValuesBatchClearByDataFilter (..),
     newSheetsSpreadsheetsValuesBatchClearByDataFilter,
-    SheetsSpreadsheetsValuesBatchClearByDataFilter,
 
     -- ** sheets.spreadsheets.values.batchGet
     SheetsSpreadsheetsValuesBatchGetResource,
+    SheetsSpreadsheetsValuesBatchGet (..),
     newSheetsSpreadsheetsValuesBatchGet,
-    SheetsSpreadsheetsValuesBatchGet,
 
     -- ** sheets.spreadsheets.values.batchGetByDataFilter
     SheetsSpreadsheetsValuesBatchGetByDataFilterResource,
+    SheetsSpreadsheetsValuesBatchGetByDataFilter (..),
     newSheetsSpreadsheetsValuesBatchGetByDataFilter,
-    SheetsSpreadsheetsValuesBatchGetByDataFilter,
 
     -- ** sheets.spreadsheets.values.batchUpdate
     SheetsSpreadsheetsValuesBatchUpdateResource,
+    SheetsSpreadsheetsValuesBatchUpdate (..),
     newSheetsSpreadsheetsValuesBatchUpdate,
-    SheetsSpreadsheetsValuesBatchUpdate,
 
     -- ** sheets.spreadsheets.values.batchUpdateByDataFilter
     SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter (..),
     newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
-    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
 
     -- ** sheets.spreadsheets.values.clear
     SheetsSpreadsheetsValuesClearResource,
+    SheetsSpreadsheetsValuesClear (..),
     newSheetsSpreadsheetsValuesClear,
-    SheetsSpreadsheetsValuesClear,
 
     -- ** sheets.spreadsheets.values.get
     SheetsSpreadsheetsValuesGetResource,
+    SheetsSpreadsheetsValuesGet (..),
     newSheetsSpreadsheetsValuesGet,
-    SheetsSpreadsheetsValuesGet,
 
     -- ** sheets.spreadsheets.values.update
     SheetsSpreadsheetsValuesUpdateResource,
+    SheetsSpreadsheetsValuesUpdate (..),
     newSheetsSpreadsheetsValuesUpdate,
-    SheetsSpreadsheetsValuesUpdate,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.Revisions.List
     RunProjectsLocationsServicesRevisionsListResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesRevisionsList (..),
     newRunProjectsLocationsServicesRevisionsList,
-    RunProjectsLocationsServicesRevisionsList,
   )
 where
 

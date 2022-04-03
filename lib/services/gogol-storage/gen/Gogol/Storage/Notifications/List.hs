@@ -34,8 +34,8 @@ module Gogol.Storage.Notifications.List
     StorageNotificationsListResource,
 
     -- ** Constructing a Request
+    StorageNotificationsList (..),
     newStorageNotificationsList,
-    StorageNotificationsList,
   )
 where
 

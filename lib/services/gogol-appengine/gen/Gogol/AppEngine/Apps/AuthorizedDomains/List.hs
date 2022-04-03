@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.AuthorizedDomains.List
     AppEngineAppsAuthorizedDomainsListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsAuthorizedDomainsList (..),
     newAppEngineAppsAuthorizedDomainsList,
-    AppEngineAppsAuthorizedDomainsList,
   )
 where
 

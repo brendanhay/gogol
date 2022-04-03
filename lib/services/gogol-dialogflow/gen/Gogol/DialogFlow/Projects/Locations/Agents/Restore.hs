@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Restore
     DialogFlowProjectsLocationsAgentsRestoreResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsRestore (..),
     newDialogFlowProjectsLocationsAgentsRestore,
-    DialogFlowProjectsLocationsAgentsRestore,
   )
 where
 

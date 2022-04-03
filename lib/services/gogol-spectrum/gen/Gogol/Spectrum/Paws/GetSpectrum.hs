@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.GetSpectrum
     SpectrumPawsGetSpectrumResource,
 
     -- ** Constructing a Request
+    SpectrumPawsGetSpectrum (..),
     newSpectrumPawsGetSpectrum,
-    SpectrumPawsGetSpectrum,
   )
 where
 

@@ -47,233 +47,233 @@ module Gogol.Drive
 
     -- ** drive.about.get
     DriveAboutGetResource,
+    DriveAboutGet (..),
     newDriveAboutGet,
-    DriveAboutGet,
 
     -- ** drive.changes.getStartPageToken
     DriveChangesGetStartPageTokenResource,
+    DriveChangesGetStartPageToken (..),
     newDriveChangesGetStartPageToken,
-    DriveChangesGetStartPageToken,
 
     -- ** drive.changes.list
     DriveChangesListResource,
+    DriveChangesList (..),
     newDriveChangesList,
-    DriveChangesList,
 
     -- ** drive.changes.watch
     DriveChangesWatchResource,
+    DriveChangesWatch (..),
     newDriveChangesWatch,
-    DriveChangesWatch,
 
     -- ** drive.channels.stop
     DriveChannelsStopResource,
+    DriveChannelsStop (..),
     newDriveChannelsStop,
-    DriveChannelsStop,
 
     -- ** drive.comments.create
     DriveCommentsCreateResource,
+    DriveCommentsCreate (..),
     newDriveCommentsCreate,
-    DriveCommentsCreate,
 
     -- ** drive.comments.delete
     DriveCommentsDeleteResource,
+    DriveCommentsDelete (..),
     newDriveCommentsDelete,
-    DriveCommentsDelete,
 
     -- ** drive.comments.get
     DriveCommentsGetResource,
+    DriveCommentsGet (..),
     newDriveCommentsGet,
-    DriveCommentsGet,
 
     -- ** drive.comments.list
     DriveCommentsListResource,
+    DriveCommentsList (..),
     newDriveCommentsList,
-    DriveCommentsList,
 
     -- ** drive.comments.update
     DriveCommentsUpdateResource,
+    DriveCommentsUpdate (..),
     newDriveCommentsUpdate,
-    DriveCommentsUpdate,
 
     -- ** drive.drives.create
     DriveDrivesCreateResource,
+    DriveDrivesCreate (..),
     newDriveDrivesCreate,
-    DriveDrivesCreate,
 
     -- ** drive.drives.delete
     DriveDrivesDeleteResource,
+    DriveDrivesDelete (..),
     newDriveDrivesDelete,
-    DriveDrivesDelete,
 
     -- ** drive.drives.get
     DriveDrivesGetResource,
+    DriveDrivesGet (..),
     newDriveDrivesGet,
-    DriveDrivesGet,
 
     -- ** drive.drives.hide
     DriveDrivesHideResource,
+    DriveDrivesHide (..),
     newDriveDrivesHide,
-    DriveDrivesHide,
 
     -- ** drive.drives.list
     DriveDrivesListResource,
+    DriveDrivesList (..),
     newDriveDrivesList,
-    DriveDrivesList,
 
     -- ** drive.drives.unhide
     DriveDrivesUnhideResource,
+    DriveDrivesUnhide (..),
     newDriveDrivesUnhide,
-    DriveDrivesUnhide,
 
     -- ** drive.drives.update
     DriveDrivesUpdateResource,
+    DriveDrivesUpdate (..),
     newDriveDrivesUpdate,
-    DriveDrivesUpdate,
 
     -- ** drive.files.copy
     DriveFilesCopyResource,
+    DriveFilesCopy (..),
     newDriveFilesCopy,
-    DriveFilesCopy,
 
     -- ** drive.files.create
     DriveFilesCreateResource,
+    DriveFilesCreate (..),
     newDriveFilesCreate,
-    DriveFilesCreate,
 
     -- ** drive.files.delete
     DriveFilesDeleteResource,
+    DriveFilesDelete (..),
     newDriveFilesDelete,
-    DriveFilesDelete,
 
     -- ** drive.files.emptyTrash
     DriveFilesEmptyTrashResource,
+    DriveFilesEmptyTrash (..),
     newDriveFilesEmptyTrash,
-    DriveFilesEmptyTrash,
 
     -- ** drive.files.export
     DriveFilesExportResource,
+    DriveFilesExport (..),
     newDriveFilesExport,
-    DriveFilesExport,
 
     -- ** drive.files.generateIds
     DriveFilesGenerateIdsResource,
+    DriveFilesGenerateIds (..),
     newDriveFilesGenerateIds,
-    DriveFilesGenerateIds,
 
     -- ** drive.files.get
     DriveFilesGetResource,
+    DriveFilesGet (..),
     newDriveFilesGet,
-    DriveFilesGet,
 
     -- ** drive.files.list
     DriveFilesListResource,
+    DriveFilesList (..),
     newDriveFilesList,
-    DriveFilesList,
 
     -- ** drive.files.update
     DriveFilesUpdateResource,
+    DriveFilesUpdate (..),
     newDriveFilesUpdate,
-    DriveFilesUpdate,
 
     -- ** drive.files.watch
     DriveFilesWatchResource,
+    DriveFilesWatch (..),
     newDriveFilesWatch,
-    DriveFilesWatch,
 
     -- ** drive.permissions.create
     DrivePermissionsCreateResource,
+    DrivePermissionsCreate (..),
     newDrivePermissionsCreate,
-    DrivePermissionsCreate,
 
     -- ** drive.permissions.delete
     DrivePermissionsDeleteResource,
+    DrivePermissionsDelete (..),
     newDrivePermissionsDelete,
-    DrivePermissionsDelete,
 
     -- ** drive.permissions.get
     DrivePermissionsGetResource,
+    DrivePermissionsGet (..),
     newDrivePermissionsGet,
-    DrivePermissionsGet,
 
     -- ** drive.permissions.list
     DrivePermissionsListResource,
+    DrivePermissionsList (..),
     newDrivePermissionsList,
-    DrivePermissionsList,
 
     -- ** drive.permissions.update
     DrivePermissionsUpdateResource,
+    DrivePermissionsUpdate (..),
     newDrivePermissionsUpdate,
-    DrivePermissionsUpdate,
 
     -- ** drive.replies.create
     DriveRepliesCreateResource,
+    DriveRepliesCreate (..),
     newDriveRepliesCreate,
-    DriveRepliesCreate,
 
     -- ** drive.replies.delete
     DriveRepliesDeleteResource,
+    DriveRepliesDelete (..),
     newDriveRepliesDelete,
-    DriveRepliesDelete,
 
     -- ** drive.replies.get
     DriveRepliesGetResource,
+    DriveRepliesGet (..),
     newDriveRepliesGet,
-    DriveRepliesGet,
 
     -- ** drive.replies.list
     DriveRepliesListResource,
+    DriveRepliesList (..),
     newDriveRepliesList,
-    DriveRepliesList,
 
     -- ** drive.replies.update
     DriveRepliesUpdateResource,
+    DriveRepliesUpdate (..),
     newDriveRepliesUpdate,
-    DriveRepliesUpdate,
 
     -- ** drive.revisions.delete
     DriveRevisionsDeleteResource,
+    DriveRevisionsDelete (..),
     newDriveRevisionsDelete,
-    DriveRevisionsDelete,
 
     -- ** drive.revisions.get
     DriveRevisionsGetResource,
+    DriveRevisionsGet (..),
     newDriveRevisionsGet,
-    DriveRevisionsGet,
 
     -- ** drive.revisions.list
     DriveRevisionsListResource,
+    DriveRevisionsList (..),
     newDriveRevisionsList,
-    DriveRevisionsList,
 
     -- ** drive.revisions.update
     DriveRevisionsUpdateResource,
+    DriveRevisionsUpdate (..),
     newDriveRevisionsUpdate,
-    DriveRevisionsUpdate,
 
     -- ** drive.teamdrives.create
     DriveTeamdrivesCreateResource,
+    DriveTeamdrivesCreate (..),
     newDriveTeamdrivesCreate,
-    DriveTeamdrivesCreate,
 
     -- ** drive.teamdrives.delete
     DriveTeamdrivesDeleteResource,
+    DriveTeamdrivesDelete (..),
     newDriveTeamdrivesDelete,
-    DriveTeamdrivesDelete,
 
     -- ** drive.teamdrives.get
     DriveTeamdrivesGetResource,
+    DriveTeamdrivesGet (..),
     newDriveTeamdrivesGet,
-    DriveTeamdrivesGet,
 
     -- ** drive.teamdrives.list
     DriveTeamdrivesListResource,
+    DriveTeamdrivesList (..),
     newDriveTeamdrivesList,
-    DriveTeamdrivesList,
 
     -- ** drive.teamdrives.update
     DriveTeamdrivesUpdateResource,
+    DriveTeamdrivesUpdate (..),
     newDriveTeamdrivesUpdate,
-    DriveTeamdrivesUpdate,
 
     -- * Types
 

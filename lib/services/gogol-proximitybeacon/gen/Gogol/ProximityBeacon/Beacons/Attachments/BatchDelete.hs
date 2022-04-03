@@ -38,8 +38,8 @@ module Gogol.ProximityBeacon.Beacons.Attachments.BatchDelete
     ProximityBeaconBeaconsAttachmentsBatchDeleteResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsAttachmentsBatchDelete (..),
     newProximityBeaconBeaconsAttachmentsBatchDelete,
-    ProximityBeaconBeaconsAttachmentsBatchDelete,
   )
 where
 

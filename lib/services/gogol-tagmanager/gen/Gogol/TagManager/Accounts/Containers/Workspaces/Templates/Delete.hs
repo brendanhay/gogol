@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Delete
     TagManagerAccountsContainersWorkspacesTemplatesDeleteResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTemplatesDelete (..),
     newTagManagerAccountsContainersWorkspacesTemplatesDelete,
-    TagManagerAccountsContainersWorkspacesTemplatesDelete,
   )
 where
 

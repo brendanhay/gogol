@@ -34,8 +34,8 @@ module Gogol.CommentAnalyzer.Comments.Suggestscore
     CommentAnalyzerCommentsSuggestscoreResource,
 
     -- ** Constructing a Request
+    CommentAnalyzerCommentsSuggestscore (..),
     newCommentAnalyzerCommentsSuggestscore,
-    CommentAnalyzerCommentsSuggestscore,
   )
 where
 

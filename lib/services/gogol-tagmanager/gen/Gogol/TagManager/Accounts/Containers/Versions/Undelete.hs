@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Versions.Undelete
     TagManagerAccountsContainersVersionsUndeleteResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersVersionsUndelete (..),
     newTagManagerAccountsContainersVersionsUndelete,
-    TagManagerAccountsContainersVersionsUndelete,
   )
 where
 

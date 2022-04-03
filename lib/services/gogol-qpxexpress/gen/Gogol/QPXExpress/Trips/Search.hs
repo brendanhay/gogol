@@ -34,8 +34,8 @@ module Gogol.QPXExpress.Trips.Search
     QPXExpressTripsSearchResource,
 
     -- ** Constructing a Request
+    QPXExpressTripsSearch (..),
     newQPXExpressTripsSearch,
-    QPXExpressTripsSearch,
   )
 where
 

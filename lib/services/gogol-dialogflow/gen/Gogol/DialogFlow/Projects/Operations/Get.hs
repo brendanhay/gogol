@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Operations.Get
     DialogFlowProjectsOperationsGetResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsOperationsGet (..),
     newDialogFlowProjectsOperationsGet,
-    DialogFlowProjectsOperationsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.FloodlightActivities.Generatetag
     DFAReportingFloodlightActivitiesGeneratetagResource,
 
     -- ** Constructing a Request
+    DFAReportingFloodlightActivitiesGeneratetag (..),
     newDFAReportingFloodlightActivitiesGeneratetag,
-    DFAReportingFloodlightActivitiesGeneratetag,
   )
 where
 

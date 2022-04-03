@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.Patch
     CalendarEventsPatchResource,
 
     -- ** Constructing a Request
+    CalendarEventsPatch (..),
     newCalendarEventsPatch,
-    CalendarEventsPatch,
   )
 where
 

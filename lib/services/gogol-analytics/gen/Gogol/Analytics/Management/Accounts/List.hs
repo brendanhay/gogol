@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Accounts.List
     AnalyticsManagementAccountsListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementAccountsList (..),
     newAnalyticsManagementAccountsList,
-    AnalyticsManagementAccountsList,
   )
 where
 

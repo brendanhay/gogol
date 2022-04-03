@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.GoogleServiceAccounts.Get
     StorageTransferGoogleServiceAccountsGetResource,
 
     -- ** Constructing a Request
+    StorageTransferGoogleServiceAccountsGet (..),
     newStorageTransferGoogleServiceAccountsGet,
-    StorageTransferGoogleServiceAccountsGet,
   )
 where
 

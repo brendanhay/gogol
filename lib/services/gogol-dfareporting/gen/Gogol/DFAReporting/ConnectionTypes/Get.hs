@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ConnectionTypes.Get
     DFAReportingConnectionTypesGetResource,
 
     -- ** Constructing a Request
+    DFAReportingConnectionTypesGet (..),
     newDFAReportingConnectionTypesGet,
-    DFAReportingConnectionTypesGet,
   )
 where
 

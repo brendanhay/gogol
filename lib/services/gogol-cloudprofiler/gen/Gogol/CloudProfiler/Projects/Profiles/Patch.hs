@@ -34,8 +34,8 @@ module Gogol.CloudProfiler.Projects.Profiles.Patch
     CloudProfilerProjectsProfilesPatchResource,
 
     -- ** Constructing a Request
+    CloudProfilerProjectsProfilesPatch (..),
     newCloudProfilerProjectsProfilesPatch,
-    CloudProfilerProjectsProfilesPatch,
   )
 where
 

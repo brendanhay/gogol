@@ -34,8 +34,8 @@ module Gogol.YouTube.PlaylistItems.Update
     YouTubePlaylistItemsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubePlaylistItemsUpdate (..),
     newYouTubePlaylistItemsUpdate,
-    YouTubePlaylistItemsUpdate,
   )
 where
 

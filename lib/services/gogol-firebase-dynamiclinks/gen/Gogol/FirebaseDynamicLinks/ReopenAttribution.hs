@@ -34,8 +34,8 @@ module Gogol.FirebaseDynamicLinks.ReopenAttribution
     FirebaseDynamicLinksReopenAttributionResource,
 
     -- ** Constructing a Request
+    FirebaseDynamicLinksReopenAttribution (..),
     newFirebaseDynamicLinksReopenAttribution,
-    FirebaseDynamicLinksReopenAttribution,
   )
 where
 

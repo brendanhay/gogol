@@ -34,8 +34,8 @@ module Gogol.Admin.Reports.EntityUsageReports.Get
     ReportsEntityUsageReportsGetResource,
 
     -- ** Constructing a Request
+    ReportsEntityUsageReportsGet (..),
     newReportsEntityUsageReportsGet,
-    ReportsEntityUsageReportsGet,
   )
 where
 

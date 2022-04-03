@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Insert
     ContentAccountsInsertResource,
 
     -- ** Constructing a Request
+    ContentAccountsInsert (..),
     newContentAccountsInsert,
-    ContentAccountsInsert,
   )
 where
 

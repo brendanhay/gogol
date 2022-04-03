@@ -34,8 +34,8 @@ module Gogol.BigQuery.Datasets.Patch
     BigQueryDatasetsPatchResource,
 
     -- ** Constructing a Request
+    BigQueryDatasetsPatch (..),
     newBigQueryDatasetsPatch,
-    BigQueryDatasetsPatch,
   )
 where
 

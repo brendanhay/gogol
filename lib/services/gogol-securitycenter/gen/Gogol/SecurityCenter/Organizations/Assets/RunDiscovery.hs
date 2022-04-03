@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Assets.RunDiscovery
     SecurityCenterOrganizationsAssetsRunDiscoveryResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsAssetsRunDiscovery (..),
     newSecurityCenterOrganizationsAssetsRunDiscovery,
-    SecurityCenterOrganizationsAssetsRunDiscovery,
   )
 where
 

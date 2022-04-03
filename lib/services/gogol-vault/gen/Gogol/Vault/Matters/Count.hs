@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Count
     VaultMattersCountResource,
 
     -- ** Constructing a Request
+    VaultMattersCount (..),
     newVaultMattersCount,
-    VaultMattersCount,
   )
 where
 

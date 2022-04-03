@@ -34,8 +34,8 @@ module Gogol.Logging.Exclusions.Delete
     LoggingExclusionsDeleteResource,
 
     -- ** Constructing a Request
+    LoggingExclusionsDelete (..),
     newLoggingExclusionsDelete,
-    LoggingExclusionsDelete,
   )
 where
 

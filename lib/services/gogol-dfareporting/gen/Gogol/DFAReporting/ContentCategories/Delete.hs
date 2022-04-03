@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ContentCategories.Delete
     DFAReportingContentCategoriesDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingContentCategoriesDelete (..),
     newDFAReportingContentCategoriesDelete,
-    DFAReportingContentCategoriesDelete,
   )
 where
 

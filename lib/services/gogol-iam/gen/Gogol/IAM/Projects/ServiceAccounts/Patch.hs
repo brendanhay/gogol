@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Patch
     IAMProjectsServiceAccountsPatchResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsPatch (..),
     newIAMProjectsServiceAccountsPatch,
-    IAMProjectsServiceAccountsPatch,
   )
 where
 

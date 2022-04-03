@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.StopReplica
     SqlInstancesStopReplicaResource,
 
     -- ** Constructing a Request
+    SqlInstancesStopReplica (..),
     newSqlInstancesStopReplica,
-    SqlInstancesStopReplica,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkEndpointGroups.Insert
     ComputeRegionNetworkEndpointGroupsInsertResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkEndpointGroupsInsert (..),
     newComputeRegionNetworkEndpointGroupsInsert,
-    ComputeRegionNetworkEndpointGroupsInsert,
   )
 where
 

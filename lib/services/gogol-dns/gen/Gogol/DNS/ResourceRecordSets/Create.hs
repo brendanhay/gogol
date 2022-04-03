@@ -34,8 +34,8 @@ module Gogol.DNS.ResourceRecordSets.Create
     DNSResourceRecordSetsCreateResource,
 
     -- ** Constructing a Request
+    DNSResourceRecordSetsCreate (..),
     newDNSResourceRecordSetsCreate,
-    DNSResourceRecordSetsCreate,
   )
 where
 

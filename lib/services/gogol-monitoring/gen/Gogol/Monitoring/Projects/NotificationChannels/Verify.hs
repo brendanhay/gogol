@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.NotificationChannels.Verify
     MonitoringProjectsNotificationChannelsVerifyResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsNotificationChannelsVerify (..),
     newMonitoringProjectsNotificationChannelsVerify,
-    MonitoringProjectsNotificationChannelsVerify,
   )
 where
 

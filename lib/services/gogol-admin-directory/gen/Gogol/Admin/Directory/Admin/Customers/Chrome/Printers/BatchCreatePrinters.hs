@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchCreatePrinters
     AdminCustomersChromePrintersBatchCreatePrintersResource,
 
     -- ** Constructing a Request
+    AdminCustomersChromePrintersBatchCreatePrinters (..),
     newAdminCustomersChromePrintersBatchCreatePrinters,
-    AdminCustomersChromePrintersBatchCreatePrinters,
   )
 where
 

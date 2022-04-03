@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.TestIamPermissions
     ComputeReservationsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeReservationsTestIamPermissions (..),
     newComputeReservationsTestIamPermissions,
-    ComputeReservationsTestIamPermissions,
   )
 where
 

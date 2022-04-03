@@ -34,8 +34,8 @@ module Gogol.IAM.Organizations.Roles.Patch
     IAMOrganizationsRolesPatchResource,
 
     -- ** Constructing a Request
+    IAMOrganizationsRolesPatch (..),
     newIAMOrganizationsRolesPatch,
-    IAMOrganizationsRolesPatch,
   )
 where
 

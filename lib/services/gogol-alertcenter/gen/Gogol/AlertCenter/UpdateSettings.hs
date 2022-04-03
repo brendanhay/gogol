@@ -34,8 +34,8 @@ module Gogol.AlertCenter.UpdateSettings
     AlertCenterUpdateSettingsResource,
 
     -- ** Constructing a Request
+    AlertCenterUpdateSettings (..),
     newAlertCenterUpdateSettings,
-    AlertCenterUpdateSettings,
   )
 where
 

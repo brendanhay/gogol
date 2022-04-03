@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Proposals.Patch
     AdExchangeBuyerProposalsPatchResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerProposalsPatch (..),
     newAdExchangeBuyerProposalsPatch,
-    AdExchangeBuyerProposalsPatch,
   )
 where
 

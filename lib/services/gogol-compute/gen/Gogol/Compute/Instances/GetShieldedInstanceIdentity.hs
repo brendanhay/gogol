@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.GetShieldedInstanceIdentity
     ComputeInstancesGetShieldedInstanceIdentityResource,
 
     -- ** Constructing a Request
+    ComputeInstancesGetShieldedInstanceIdentity (..),
     newComputeInstancesGetShieldedInstanceIdentity,
-    ComputeInstancesGetShieldedInstanceIdentity,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.SshPublicKeys.Delete
     OSLoginUsersSshPublicKeysDeleteResource,
 
     -- ** Constructing a Request
+    OSLoginUsersSshPublicKeysDelete (..),
     newOSLoginUsersSshPublicKeysDelete,
-    OSLoginUsersSshPublicKeysDelete,
   )
 where
 

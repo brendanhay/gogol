@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
     BigtableAdminProjectsInstancesClustersBackupsGetResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesClustersBackupsGet (..),
     newBigtableAdminProjectsInstancesClustersBackupsGet,
-    BigtableAdminProjectsInstancesClustersBackupsGet,
   )
 where
 

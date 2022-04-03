@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.Approve
     AndroidEnterpriseProductsApproveResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsApprove (..),
     newAndroidEnterpriseProductsApprove,
-    AndroidEnterpriseProductsApprove,
   )
 where
 

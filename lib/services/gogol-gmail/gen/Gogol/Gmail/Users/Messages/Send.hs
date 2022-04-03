@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Send
     GmailUsersMessagesSendResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesSend (..),
     newGmailUsersMessagesSend,
-    GmailUsersMessagesSend,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Surveys.Stop
     SurveysSurveysStopResource,
 
     -- ** Constructing a Request
+    SurveysSurveysStop (..),
     newSurveysSurveysStop,
-    SurveysSurveysStop,
   )
 where
 

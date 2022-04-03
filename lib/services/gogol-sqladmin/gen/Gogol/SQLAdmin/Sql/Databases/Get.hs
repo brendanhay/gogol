@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.Get
     SqlDatabasesGetResource,
 
     -- ** Constructing a Request
+    SqlDatabasesGet (..),
     newSqlDatabasesGet,
-    SqlDatabasesGet,
   )
 where
 

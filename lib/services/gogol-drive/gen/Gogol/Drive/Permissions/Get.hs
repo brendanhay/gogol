@@ -34,8 +34,8 @@ module Gogol.Drive.Permissions.Get
     DrivePermissionsGetResource,
 
     -- ** Constructing a Request
+    DrivePermissionsGet (..),
     newDrivePermissionsGet,
-    DrivePermissionsGet,
   )
 where
 

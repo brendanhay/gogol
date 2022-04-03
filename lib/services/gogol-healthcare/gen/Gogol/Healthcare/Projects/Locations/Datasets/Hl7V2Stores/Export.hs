@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Export
     HealthcareProjectsLocationsDatasetsHl7V2StoresExportResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsHl7V2StoresExport (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresExport,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresExport,
   )
 where
 

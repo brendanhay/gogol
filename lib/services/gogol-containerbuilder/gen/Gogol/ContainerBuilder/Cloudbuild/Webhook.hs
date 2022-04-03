@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Webhook
     CloudbuildWebhookResource,
 
     -- ** Constructing a Request
+    CloudbuildWebhook (..),
     newCloudbuildWebhook,
-    CloudbuildWebhook,
   )
 where
 

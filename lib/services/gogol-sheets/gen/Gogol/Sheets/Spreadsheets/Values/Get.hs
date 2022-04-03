@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Values.Get
     SheetsSpreadsheetsValuesGetResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsValuesGet (..),
     newSheetsSpreadsheetsValuesGet,
-    SheetsSpreadsheetsValuesGet,
   )
 where
 

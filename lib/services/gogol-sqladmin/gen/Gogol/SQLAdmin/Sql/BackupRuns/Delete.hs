@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.BackupRuns.Delete
     SqlBackupRunsDeleteResource,
 
     -- ** Constructing a Request
+    SqlBackupRunsDelete (..),
     newSqlBackupRunsDelete,
-    SqlBackupRunsDelete,
   )
 where
 

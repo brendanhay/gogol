@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Countries.List
     DFAReportingCountriesListResource,
 
     -- ** Constructing a Request
+    DFAReportingCountriesList (..),
     newDFAReportingCountriesList,
-    DFAReportingCountriesList,
   )
 where
 

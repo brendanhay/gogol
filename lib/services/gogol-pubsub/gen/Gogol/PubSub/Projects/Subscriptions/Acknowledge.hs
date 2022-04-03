@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.Acknowledge
     PubSubProjectsSubscriptionsAcknowledgeResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsAcknowledge (..),
     newPubSubProjectsSubscriptionsAcknowledge,
-    PubSubProjectsSubscriptionsAcknowledge,
   )
 where
 

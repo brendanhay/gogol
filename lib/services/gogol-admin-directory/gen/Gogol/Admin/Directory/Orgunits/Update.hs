@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Orgunits.Update
     DirectoryOrgunitsUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryOrgunitsUpdate (..),
     newDirectoryOrgunitsUpdate,
-    DirectoryOrgunitsUpdate,
   )
 where
 

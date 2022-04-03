@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Snapshots.TestIamPermissions
     PubSubProjectsSnapshotsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSnapshotsTestIamPermissions (..),
     newPubSubProjectsSnapshotsTestIamPermissions,
-    PubSubProjectsSnapshotsTestIamPermissions,
   )
 where
 

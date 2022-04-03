@@ -34,8 +34,8 @@ module Gogol.Books.Familysharing.GetFamilyInfo
     BooksFamilysharingGetFamilyInfoResource,
 
     -- ** Constructing a Request
+    BooksFamilysharingGetFamilyInfo (..),
     newBooksFamilysharingGetFamilyInfo,
-    BooksFamilysharingGetFamilyInfo,
   )
 where
 

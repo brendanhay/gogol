@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Versions.Set_latest
     TagManagerAccountsContainersVersionsSet_latestResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersVersionsSet_latest (..),
     newTagManagerAccountsContainersVersionsSet_latest,
-    TagManagerAccountsContainersVersionsSet_latest,
   )
 where
 

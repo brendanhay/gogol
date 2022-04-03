@@ -34,8 +34,8 @@ module Gogol.FusionTables.Column.List
     FusionTablesColumnListResource,
 
     -- ** Constructing a Request
+    FusionTablesColumnList (..),
     newFusionTablesColumnList,
-    FusionTablesColumnList,
   )
 where
 

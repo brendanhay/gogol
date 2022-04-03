@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.Insert
     ComputeSecurityPoliciesInsertResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesInsert (..),
     newComputeSecurityPoliciesInsert,
-    ComputeSecurityPoliciesInsert,
   )
 where
 

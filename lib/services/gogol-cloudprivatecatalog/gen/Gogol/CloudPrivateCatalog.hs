@@ -40,48 +40,48 @@ module Gogol.CloudPrivateCatalog
 
     -- ** cloudprivatecatalog.folders.catalogs.search
     CloudPrivateCatalogFoldersCatalogsSearchResource,
+    CloudPrivateCatalogFoldersCatalogsSearch (..),
     newCloudPrivateCatalogFoldersCatalogsSearch,
-    CloudPrivateCatalogFoldersCatalogsSearch,
 
     -- ** cloudprivatecatalog.folders.products.search
     CloudPrivateCatalogFoldersProductsSearchResource,
+    CloudPrivateCatalogFoldersProductsSearch (..),
     newCloudPrivateCatalogFoldersProductsSearch,
-    CloudPrivateCatalogFoldersProductsSearch,
 
     -- ** cloudprivatecatalog.folders.versions.search
     CloudPrivateCatalogFoldersVersionsSearchResource,
+    CloudPrivateCatalogFoldersVersionsSearch (..),
     newCloudPrivateCatalogFoldersVersionsSearch,
-    CloudPrivateCatalogFoldersVersionsSearch,
 
     -- ** cloudprivatecatalog.organizations.catalogs.search
     CloudPrivateCatalogOrganizationsCatalogsSearchResource,
+    CloudPrivateCatalogOrganizationsCatalogsSearch (..),
     newCloudPrivateCatalogOrganizationsCatalogsSearch,
-    CloudPrivateCatalogOrganizationsCatalogsSearch,
 
     -- ** cloudprivatecatalog.organizations.products.search
     CloudPrivateCatalogOrganizationsProductsSearchResource,
+    CloudPrivateCatalogOrganizationsProductsSearch (..),
     newCloudPrivateCatalogOrganizationsProductsSearch,
-    CloudPrivateCatalogOrganizationsProductsSearch,
 
     -- ** cloudprivatecatalog.organizations.versions.search
     CloudPrivateCatalogOrganizationsVersionsSearchResource,
+    CloudPrivateCatalogOrganizationsVersionsSearch (..),
     newCloudPrivateCatalogOrganizationsVersionsSearch,
-    CloudPrivateCatalogOrganizationsVersionsSearch,
 
     -- ** cloudprivatecatalog.projects.catalogs.search
     CloudPrivateCatalogProjectsCatalogsSearchResource,
+    CloudPrivateCatalogProjectsCatalogsSearch (..),
     newCloudPrivateCatalogProjectsCatalogsSearch,
-    CloudPrivateCatalogProjectsCatalogsSearch,
 
     -- ** cloudprivatecatalog.projects.products.search
     CloudPrivateCatalogProjectsProductsSearchResource,
+    CloudPrivateCatalogProjectsProductsSearch (..),
     newCloudPrivateCatalogProjectsProductsSearch,
-    CloudPrivateCatalogProjectsProductsSearch,
 
     -- ** cloudprivatecatalog.projects.versions.search
     CloudPrivateCatalogProjectsVersionsSearchResource,
+    CloudPrivateCatalogProjectsVersionsSearch (..),
     newCloudPrivateCatalogProjectsVersionsSearch,
-    CloudPrivateCatalogProjectsVersionsSearch,
 
     -- * Types
 

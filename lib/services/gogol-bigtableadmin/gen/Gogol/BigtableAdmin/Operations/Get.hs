@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Operations.Get
     BigtableAdminOperationsGetResource,
 
     -- ** Constructing a Request
+    BigtableAdminOperationsGet (..),
     newBigtableAdminOperationsGet,
-    BigtableAdminOperationsGet,
   )
 where
 

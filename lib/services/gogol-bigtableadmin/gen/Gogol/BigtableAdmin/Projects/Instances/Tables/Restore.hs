@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.Restore
     BigtableAdminProjectsInstancesTablesRestoreResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesRestore (..),
     newBigtableAdminProjectsInstancesTablesRestore,
-    BigtableAdminProjectsInstancesTablesRestore,
   )
 where
 

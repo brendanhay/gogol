@@ -34,8 +34,8 @@ module Gogol.Compute.PacketMirrorings.AggregatedList
     ComputePacketMirroringsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputePacketMirroringsAggregatedList (..),
     newComputePacketMirroringsAggregatedList,
-    ComputePacketMirroringsAggregatedList,
   )
 where
 

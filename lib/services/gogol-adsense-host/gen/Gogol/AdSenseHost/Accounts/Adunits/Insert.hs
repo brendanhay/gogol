@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Adunits.Insert
     AdSenseHostAccountsAdunitsInsertResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsAdunitsInsert (..),
     newAdSenseHostAccountsAdunitsInsert,
-    AdSenseHostAccountsAdunitsInsert,
   )
 where
 

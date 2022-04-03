@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Calendars.Delete
     DirectoryResourcesCalendarsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesCalendarsDelete (..),
     newDirectoryResourcesCalendarsDelete,
-    DirectoryResourcesCalendarsDelete,
   )
 where
 

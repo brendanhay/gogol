@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Configs.Submit
     ServiceManagementServicesConfigsSubmitResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesConfigsSubmit (..),
     newServiceManagementServicesConfigsSubmit,
-    ServiceManagementServicesConfigsSubmit,
   )
 where
 

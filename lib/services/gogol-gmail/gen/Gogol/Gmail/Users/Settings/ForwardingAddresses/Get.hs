@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.ForwardingAddresses.Get
     GmailUsersSettingsForwardingAddressesGetResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsForwardingAddressesGet (..),
     newGmailUsersSettingsForwardingAddressesGet,
-    GmailUsersSettingsForwardingAddressesGet,
   )
 where
 

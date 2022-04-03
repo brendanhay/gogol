@@ -34,8 +34,8 @@ module Gogol.Blogger.Comments.ListByBlog
     BloggerCommentsListByBlogResource,
 
     -- ** Constructing a Request
+    BloggerCommentsListByBlog (..),
     newBloggerCommentsListByBlog,
-    BloggerCommentsListByBlog,
   )
 where
 

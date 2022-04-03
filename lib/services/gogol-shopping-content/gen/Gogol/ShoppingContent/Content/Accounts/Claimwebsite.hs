@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Claimwebsite
     ContentAccountsClaimwebsiteResource,
 
     -- ** Constructing a Request
+    ContentAccountsClaimwebsite (..),
     newContentAccountsClaimwebsite,
-    ContentAccountsClaimwebsite,
   )
 where
 

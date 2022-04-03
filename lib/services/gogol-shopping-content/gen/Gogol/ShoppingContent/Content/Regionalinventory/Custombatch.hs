@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Regionalinventory.Custombatch
     ContentRegionalinventoryCustombatchResource,
 
     -- ** Constructing a Request
+    ContentRegionalinventoryCustombatch (..),
     newContentRegionalinventoryCustombatch,
-    ContentRegionalinventoryCustombatch,
   )
 where
 

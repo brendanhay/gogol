@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.TestIamPermissions
     ComputeSubnetworksTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksTestIamPermissions (..),
     newComputeSubnetworksTestIamPermissions,
-    ComputeSubnetworksTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Onboard
     ContentBuyongoogleprogramsOnboardResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsOnboard (..),
     newContentBuyongoogleprogramsOnboard,
-    ContentBuyongoogleprogramsOnboard,
   )
 where
 

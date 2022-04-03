@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.Export
     RedisProjectsLocationsInstancesExportResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesExport (..),
     newRedisProjectsLocationsInstancesExport,
-    RedisProjectsLocationsInstancesExport,
   )
 where
 

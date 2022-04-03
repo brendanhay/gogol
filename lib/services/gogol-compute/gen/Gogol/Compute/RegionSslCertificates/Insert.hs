@@ -34,8 +34,8 @@ module Gogol.Compute.RegionSslCertificates.Insert
     ComputeRegionSslCertificatesInsertResource,
 
     -- ** Constructing a Request
+    ComputeRegionSslCertificatesInsert (..),
     newComputeRegionSslCertificatesInsert,
-    ComputeRegionSslCertificatesInsert,
   )
 where
 

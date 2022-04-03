@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Buildings.Delete
     DirectoryResourcesBuildingsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesBuildingsDelete (..),
     newDirectoryResourcesBuildingsDelete,
-    DirectoryResourcesBuildingsDelete,
   )
 where
 

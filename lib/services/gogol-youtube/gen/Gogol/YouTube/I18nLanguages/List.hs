@@ -34,8 +34,8 @@ module Gogol.YouTube.I18nLanguages.List
     YouTubeI18nLanguagesListResource,
 
     -- ** Constructing a Request
+    YouTubeI18nLanguagesList (..),
     newYouTubeI18nLanguagesList,
-    YouTubeI18nLanguagesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Storage.ObjectAccessControls.Insert
     StorageObjectAccessControlsInsertResource,
 
     -- ** Constructing a Request
+    StorageObjectAccessControlsInsert (..),
     newStorageObjectAccessControlsInsert,
-    StorageObjectAccessControlsInsert,
   )
 where
 

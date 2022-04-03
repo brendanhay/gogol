@@ -34,8 +34,8 @@ module Gogol.WebmasterTools.Webmasters.Sitemaps.List
     WebmastersSitemapsListResource,
 
     -- ** Constructing a Request
+    WebmastersSitemapsList (..),
     newWebmastersSitemapsList,
-    WebmastersSitemapsList,
   )
 where
 

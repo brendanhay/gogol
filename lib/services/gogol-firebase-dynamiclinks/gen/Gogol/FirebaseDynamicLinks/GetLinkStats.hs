@@ -34,8 +34,8 @@ module Gogol.FirebaseDynamicLinks.GetLinkStats
     FirebaseDynamicLinksGetLinkStatsResource,
 
     -- ** Constructing a Request
+    FirebaseDynamicLinksGetLinkStats (..),
     newFirebaseDynamicLinksGetLinkStats,
-    FirebaseDynamicLinksGetLinkStats,
   )
 where
 

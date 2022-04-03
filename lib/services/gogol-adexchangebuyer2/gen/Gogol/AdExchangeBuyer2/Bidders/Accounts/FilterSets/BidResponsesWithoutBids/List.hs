@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.BidResponsesWithoutBid
     AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList,
   )
 where
 

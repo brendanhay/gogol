@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.UptimeCheckConfigs.List
     MonitoringProjectsUptimeCheckConfigsListResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsUptimeCheckConfigsList (..),
     newMonitoringProjectsUptimeCheckConfigsList,
-    MonitoringProjectsUptimeCheckConfigsList,
   )
 where
 

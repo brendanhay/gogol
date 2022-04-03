@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Roles.Patch
     DirectoryRolesPatchResource,
 
     -- ** Constructing a Request
+    DirectoryRolesPatch (..),
     newDirectoryRolesPatch,
-    DirectoryRolesPatch,
   )
 where
 

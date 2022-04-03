@@ -34,8 +34,8 @@ module Gogol.Partners.ClientMessages.Log
     PartnersClientMessagesLogResource,
 
     -- ** Constructing a Request
+    PartnersClientMessagesLog (..),
     newPartnersClientMessagesLog,
-    PartnersClientMessagesLog,
   )
 where
 

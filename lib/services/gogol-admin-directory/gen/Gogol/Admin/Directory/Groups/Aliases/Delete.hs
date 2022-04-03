@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Groups.Aliases.Delete
     DirectoryGroupsAliasesDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryGroupsAliasesDelete (..),
     newDirectoryGroupsAliasesDelete,
-    DirectoryGroupsAliasesDelete,
   )
 where
 

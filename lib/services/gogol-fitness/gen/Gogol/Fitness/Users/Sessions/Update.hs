@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.Sessions.Update
     FitnessUsersSessionsUpdateResource,
 
     -- ** Constructing a Request
+    FitnessUsersSessionsUpdate (..),
     newFitnessUsersSessionsUpdate,
-    FitnessUsersSessionsUpdate,
   )
 where
 

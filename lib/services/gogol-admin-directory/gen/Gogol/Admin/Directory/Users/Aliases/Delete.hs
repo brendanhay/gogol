@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Aliases.Delete
     DirectoryUsersAliasesDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryUsersAliasesDelete (..),
     newDirectoryUsersAliasesDelete,
-    DirectoryUsersAliasesDelete,
   )
 where
 

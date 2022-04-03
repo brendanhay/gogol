@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Subaccounts.List
     DFAReportingSubaccountsListResource,
 
     -- ** Constructing a Request
+    DFAReportingSubaccountsList (..),
     newDFAReportingSubaccountsList,
-    DFAReportingSubaccountsList,
   )
 where
 

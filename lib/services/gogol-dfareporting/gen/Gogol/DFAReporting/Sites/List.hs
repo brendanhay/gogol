@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Sites.List
     DFAReportingSitesListResource,
 
     -- ** Constructing a Request
+    DFAReportingSitesList (..),
     newDFAReportingSitesList,
-    DFAReportingSitesList,
   )
 where
 

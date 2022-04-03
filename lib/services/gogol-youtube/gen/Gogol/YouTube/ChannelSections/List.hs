@@ -34,8 +34,8 @@ module Gogol.YouTube.ChannelSections.List
     YouTubeChannelSectionsListResource,
 
     -- ** Constructing a Request
+    YouTubeChannelSectionsList (..),
     newYouTubeChannelSectionsList,
-    YouTubeChannelSectionsList,
   )
 where
 

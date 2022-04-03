@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.UpdateAccessConfig
     ComputeInstancesUpdateAccessConfigResource,
 
     -- ** Constructing a Request
+    ComputeInstancesUpdateAccessConfig (..),
     newComputeInstancesUpdateAccessConfig,
-    ComputeInstancesUpdateAccessConfig,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.UpdateImap
     GmailUsersSettingsUpdateImapResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsUpdateImap (..),
     newGmailUsersSettingsUpdateImap,
-    GmailUsersSettingsUpdateImap,
   )
 where
 

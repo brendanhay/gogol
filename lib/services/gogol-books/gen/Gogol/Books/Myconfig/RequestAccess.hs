@@ -34,8 +34,8 @@ module Gogol.Books.Myconfig.RequestAccess
     BooksMyconfigRequestAccessResource,
 
     -- ** Constructing a Request
+    BooksMyconfigRequestAccess (..),
     newBooksMyconfigRequestAccess,
-    BooksMyconfigRequestAccess,
   )
 where
 

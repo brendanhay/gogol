@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Mobiledevices.Action
     DirectoryMobiledevicesActionResource,
 
     -- ** Constructing a Request
+    DirectoryMobiledevicesAction (..),
     newDirectoryMobiledevicesAction,
-    DirectoryMobiledevicesAction,
   )
 where
 

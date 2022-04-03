@@ -34,8 +34,8 @@ module Gogol.YouTubeAnalytics.GroupItems.List
     YouTubeAnalyticsGroupItemsListResource,
 
     -- ** Constructing a Request
+    YouTubeAnalyticsGroupItemsList (..),
     newYouTubeAnalyticsGroupItemsList,
-    YouTubeAnalyticsGroupItemsList,
   )
 where
 

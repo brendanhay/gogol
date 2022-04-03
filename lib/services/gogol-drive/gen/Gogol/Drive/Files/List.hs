@@ -34,8 +34,8 @@ module Gogol.Drive.Files.List
     DriveFilesListResource,
 
     -- ** Constructing a Request
+    DriveFilesList (..),
     newDriveFilesList,
-    DriveFilesList,
   )
 where
 

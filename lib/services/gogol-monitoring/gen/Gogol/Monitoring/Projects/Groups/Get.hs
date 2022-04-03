@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.Groups.Get
     MonitoringProjectsGroupsGetResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsGroupsGet (..),
     newMonitoringProjectsGroupsGet,
-    MonitoringProjectsGroupsGet,
   )
 where
 

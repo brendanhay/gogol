@@ -41,18 +41,18 @@ module Gogol.RuntimeConfig
 
     -- ** runtimeconfig.operations.cancel
     RuntimeConfigOperationsCancelResource,
+    RuntimeConfigOperationsCancel (..),
     newRuntimeConfigOperationsCancel,
-    RuntimeConfigOperationsCancel,
 
     -- ** runtimeconfig.operations.delete
     RuntimeConfigOperationsDeleteResource,
+    RuntimeConfigOperationsDelete (..),
     newRuntimeConfigOperationsDelete,
-    RuntimeConfigOperationsDelete,
 
     -- ** runtimeconfig.operations.list
     RuntimeConfigOperationsListResource,
+    RuntimeConfigOperationsList (..),
     newRuntimeConfigOperationsList,
-    RuntimeConfigOperationsList,
 
     -- * Types
 

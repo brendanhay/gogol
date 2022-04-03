@@ -34,8 +34,8 @@ module Gogol.Compute.PacketMirrorings.Insert
     ComputePacketMirroringsInsertResource,
 
     -- ** Constructing a Request
+    ComputePacketMirroringsInsert (..),
     newComputePacketMirroringsInsert,
-    ComputePacketMirroringsInsert,
   )
 where
 

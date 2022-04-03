@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.AchievementConfigurations.Insert
     GamesConfigurationAchievementConfigurationsInsertResource,
 
     -- ** Constructing a Request
+    GamesConfigurationAchievementConfigurationsInsert (..),
     newGamesConfigurationAchievementConfigurationsInsert,
-    GamesConfigurationAchievementConfigurationsInsert,
   )
 where
 

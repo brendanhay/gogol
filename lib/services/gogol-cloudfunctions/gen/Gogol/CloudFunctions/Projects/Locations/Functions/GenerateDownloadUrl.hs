@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl (..),
     newCloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl,
-    CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl,
   )
 where
 

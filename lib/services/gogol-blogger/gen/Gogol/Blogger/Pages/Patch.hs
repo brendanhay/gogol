@@ -34,8 +34,8 @@ module Gogol.Blogger.Pages.Patch
     BloggerPagesPatchResource,
 
     -- ** Constructing a Request
+    BloggerPagesPatch (..),
     newBloggerPagesPatch,
-    BloggerPagesPatch,
   )
 where
 

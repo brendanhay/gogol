@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.DeleteAccount
     IdentityToolkitRelyingpartyDeleteAccountResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyDeleteAccount (..),
     newIdentityToolkitRelyingpartyDeleteAccount,
-    IdentityToolkitRelyingpartyDeleteAccount,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderreturns.Labels.Create
     ContentOrderreturnsLabelsCreateResource,
 
     -- ** Constructing a Request
+    ContentOrderreturnsLabelsCreate (..),
     newContentOrderreturnsLabelsCreate,
-    ContentOrderreturnsLabelsCreate,
   )
 where
 

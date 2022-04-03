@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomDimensions.Patch
     AnalyticsManagementCustomDimensionsPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomDimensionsPatch (..),
     newAnalyticsManagementCustomDimensionsPatch,
-    AnalyticsManagementCustomDimensionsPatch,
   )
 where
 

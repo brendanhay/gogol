@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Alerts.List
     AdExchangeSellerAccountsAlertsListResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsAlertsList (..),
     newAdExchangeSellerAccountsAlertsList,
-    AdExchangeSellerAccountsAlertsList,
   )
 where
 

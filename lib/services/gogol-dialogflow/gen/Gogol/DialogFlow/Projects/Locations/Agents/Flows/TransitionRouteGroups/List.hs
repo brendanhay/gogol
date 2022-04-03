@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Li
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsListResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList,
   )
 where
 

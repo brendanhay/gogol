@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.List
     IAMProjectsServiceAccountsListResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsList (..),
     newIAMProjectsServiceAccountsList,
-    IAMProjectsServiceAccountsList,
   )
 where
 

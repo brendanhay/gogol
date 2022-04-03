@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.GetAppRestrictionsSchema
     AndroidEnterpriseProductsGetAppRestrictionsSchemaResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsGetAppRestrictionsSchema (..),
     newAndroidEnterpriseProductsGetAppRestrictionsSchema,
-    AndroidEnterpriseProductsGetAppRestrictionsSchema,
   )
 where
 

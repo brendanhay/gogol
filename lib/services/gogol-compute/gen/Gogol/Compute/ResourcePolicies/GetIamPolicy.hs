@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.GetIamPolicy
     ComputeResourcePoliciesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesGetIamPolicy (..),
     newComputeResourcePoliciesGetIamPolicy,
-    ComputeResourcePoliciesGetIamPolicy,
   )
 where
 

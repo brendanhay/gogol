@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AccountPermissionGroups.Get
     DFAReportingAccountPermissionGroupsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingAccountPermissionGroupsGet (..),
     newDFAReportingAccountPermissionGroupsGet,
-    DFAReportingAccountPermissionGroupsGet,
   )
 where
 

@@ -36,8 +36,8 @@ module Gogol.ProximityBeacon.Beacons.Delete
     ProximityBeaconBeaconsDeleteResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsDelete (..),
     newProximityBeaconBeaconsDelete,
-    ProximityBeaconBeaconsDelete,
   )
 where
 

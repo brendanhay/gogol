@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Validate
     AndroidPublisherEditsValidateResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsValidate (..),
     newAndroidPublisherEditsValidate,
-    AndroidPublisherEditsValidate,
   )
 where
 

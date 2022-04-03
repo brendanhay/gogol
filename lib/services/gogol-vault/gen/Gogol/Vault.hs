@@ -41,168 +41,168 @@ module Gogol.Vault
 
     -- ** vault.matters.addPermissions
     VaultMattersAddPermissionsResource,
+    VaultMattersAddPermissions (..),
     newVaultMattersAddPermissions,
-    VaultMattersAddPermissions,
 
     -- ** vault.matters.close
     VaultMattersCloseResource,
+    VaultMattersClose (..),
     newVaultMattersClose,
-    VaultMattersClose,
 
     -- ** vault.matters.count
     VaultMattersCountResource,
+    VaultMattersCount (..),
     newVaultMattersCount,
-    VaultMattersCount,
 
     -- ** vault.matters.create
     VaultMattersCreateResource,
+    VaultMattersCreate (..),
     newVaultMattersCreate,
-    VaultMattersCreate,
 
     -- ** vault.matters.delete
     VaultMattersDeleteResource,
+    VaultMattersDelete (..),
     newVaultMattersDelete,
-    VaultMattersDelete,
 
     -- ** vault.matters.exports.create
     VaultMattersExportsCreateResource,
+    VaultMattersExportsCreate (..),
     newVaultMattersExportsCreate,
-    VaultMattersExportsCreate,
 
     -- ** vault.matters.exports.delete
     VaultMattersExportsDeleteResource,
+    VaultMattersExportsDelete (..),
     newVaultMattersExportsDelete,
-    VaultMattersExportsDelete,
 
     -- ** vault.matters.exports.get
     VaultMattersExportsGetResource,
+    VaultMattersExportsGet (..),
     newVaultMattersExportsGet,
-    VaultMattersExportsGet,
 
     -- ** vault.matters.exports.list
     VaultMattersExportsListResource,
+    VaultMattersExportsList (..),
     newVaultMattersExportsList,
-    VaultMattersExportsList,
 
     -- ** vault.matters.get
     VaultMattersGetResource,
+    VaultMattersGet (..),
     newVaultMattersGet,
-    VaultMattersGet,
 
     -- ** vault.matters.holds.accounts.create
     VaultMattersHoldsAccountsCreateResource,
+    VaultMattersHoldsAccountsCreate (..),
     newVaultMattersHoldsAccountsCreate,
-    VaultMattersHoldsAccountsCreate,
 
     -- ** vault.matters.holds.accounts.delete
     VaultMattersHoldsAccountsDeleteResource,
+    VaultMattersHoldsAccountsDelete (..),
     newVaultMattersHoldsAccountsDelete,
-    VaultMattersHoldsAccountsDelete,
 
     -- ** vault.matters.holds.accounts.list
     VaultMattersHoldsAccountsListResource,
+    VaultMattersHoldsAccountsList (..),
     newVaultMattersHoldsAccountsList,
-    VaultMattersHoldsAccountsList,
 
     -- ** vault.matters.holds.addHeldAccounts
     VaultMattersHoldsAddHeldAccountsResource,
+    VaultMattersHoldsAddHeldAccounts (..),
     newVaultMattersHoldsAddHeldAccounts,
-    VaultMattersHoldsAddHeldAccounts,
 
     -- ** vault.matters.holds.create
     VaultMattersHoldsCreateResource,
+    VaultMattersHoldsCreate (..),
     newVaultMattersHoldsCreate,
-    VaultMattersHoldsCreate,
 
     -- ** vault.matters.holds.delete
     VaultMattersHoldsDeleteResource,
+    VaultMattersHoldsDelete (..),
     newVaultMattersHoldsDelete,
-    VaultMattersHoldsDelete,
 
     -- ** vault.matters.holds.get
     VaultMattersHoldsGetResource,
+    VaultMattersHoldsGet (..),
     newVaultMattersHoldsGet,
-    VaultMattersHoldsGet,
 
     -- ** vault.matters.holds.list
     VaultMattersHoldsListResource,
+    VaultMattersHoldsList (..),
     newVaultMattersHoldsList,
-    VaultMattersHoldsList,
 
     -- ** vault.matters.holds.removeHeldAccounts
     VaultMattersHoldsRemoveHeldAccountsResource,
+    VaultMattersHoldsRemoveHeldAccounts (..),
     newVaultMattersHoldsRemoveHeldAccounts,
-    VaultMattersHoldsRemoveHeldAccounts,
 
     -- ** vault.matters.holds.update
     VaultMattersHoldsUpdateResource,
+    VaultMattersHoldsUpdate (..),
     newVaultMattersHoldsUpdate,
-    VaultMattersHoldsUpdate,
 
     -- ** vault.matters.list
     VaultMattersListResource,
+    VaultMattersList (..),
     newVaultMattersList,
-    VaultMattersList,
 
     -- ** vault.matters.removePermissions
     VaultMattersRemovePermissionsResource,
+    VaultMattersRemovePermissions (..),
     newVaultMattersRemovePermissions,
-    VaultMattersRemovePermissions,
 
     -- ** vault.matters.reopen
     VaultMattersReopenResource,
+    VaultMattersReopen (..),
     newVaultMattersReopen,
-    VaultMattersReopen,
 
     -- ** vault.matters.savedQueries.create
     VaultMattersSavedQueriesCreateResource,
+    VaultMattersSavedQueriesCreate (..),
     newVaultMattersSavedQueriesCreate,
-    VaultMattersSavedQueriesCreate,
 
     -- ** vault.matters.savedQueries.delete
     VaultMattersSavedQueriesDeleteResource,
+    VaultMattersSavedQueriesDelete (..),
     newVaultMattersSavedQueriesDelete,
-    VaultMattersSavedQueriesDelete,
 
     -- ** vault.matters.savedQueries.get
     VaultMattersSavedQueriesGetResource,
+    VaultMattersSavedQueriesGet (..),
     newVaultMattersSavedQueriesGet,
-    VaultMattersSavedQueriesGet,
 
     -- ** vault.matters.savedQueries.list
     VaultMattersSavedQueriesListResource,
+    VaultMattersSavedQueriesList (..),
     newVaultMattersSavedQueriesList,
-    VaultMattersSavedQueriesList,
 
     -- ** vault.matters.undelete
     VaultMattersUndeleteResource,
+    VaultMattersUndelete (..),
     newVaultMattersUndelete,
-    VaultMattersUndelete,
 
     -- ** vault.matters.update
     VaultMattersUpdateResource,
+    VaultMattersUpdate (..),
     newVaultMattersUpdate,
-    VaultMattersUpdate,
 
     -- ** vault.operations.cancel
     VaultOperationsCancelResource,
+    VaultOperationsCancel (..),
     newVaultOperationsCancel,
-    VaultOperationsCancel,
 
     -- ** vault.operations.delete
     VaultOperationsDeleteResource,
+    VaultOperationsDelete (..),
     newVaultOperationsDelete,
-    VaultOperationsDelete,
 
     -- ** vault.operations.get
     VaultOperationsGetResource,
+    VaultOperationsGet (..),
     newVaultOperationsGet,
-    VaultOperationsGet,
 
     -- ** vault.operations.list
     VaultOperationsListResource,
+    VaultOperationsList (..),
     newVaultOperationsList,
-    VaultOperationsList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.Patch
     ComputeUrlMapsPatchResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsPatch (..),
     newComputeUrlMapsPatch,
-    ComputeUrlMapsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.Delete
     BloggerPostsDeleteResource,
 
     -- ** Constructing a Request
+    BloggerPostsDelete (..),
     newBloggerPostsDelete,
-    BloggerPostsDelete,
   )
 where
 

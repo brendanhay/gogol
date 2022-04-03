@@ -34,8 +34,8 @@ module Gogol.Classroom.UserProfiles.Guardians.Delete
     ClassroomUserProfilesGuardiansDeleteResource,
 
     -- ** Constructing a Request
+    ClassroomUserProfilesGuardiansDelete (..),
     newClassroomUserProfilesGuardiansDelete,
-    ClassroomUserProfilesGuardiansDelete,
   )
 where
 

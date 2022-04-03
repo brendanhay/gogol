@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.PerformanceReport.List
     AdExchangeBuyerPerformanceReportListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerPerformanceReportList (..),
     newAdExchangeBuyerPerformanceReportList,
-    AdExchangeBuyerPerformanceReportList,
   )
 where
 

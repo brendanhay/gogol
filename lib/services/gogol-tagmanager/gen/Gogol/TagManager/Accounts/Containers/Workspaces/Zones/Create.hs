@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Create
     TagManagerAccountsContainersWorkspacesZonesCreateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesZonesCreate (..),
     newTagManagerAccountsContainersWorkspacesZonesCreate,
-    TagManagerAccountsContainersWorkspacesZonesCreate,
   )
 where
 

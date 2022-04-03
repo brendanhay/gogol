@@ -34,8 +34,8 @@ module Gogol.FirebaseDynamicLinks.InstallAttribution
     FirebaseDynamicLinksInstallAttributionResource,
 
     -- ** Constructing a Request
+    FirebaseDynamicLinksInstallAttribution (..),
     newFirebaseDynamicLinksInstallAttribution,
-    FirebaseDynamicLinksInstallAttribution,
   )
 where
 

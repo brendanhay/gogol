@@ -34,8 +34,8 @@ module Gogol.Games.Metagame.ListCategoriesByPlayer
     GamesMetagameListCategoriesByPlayerResource,
 
     -- ** Constructing a Request
+    GamesMetagameListCategoriesByPlayer (..),
     newGamesMetagameListCategoriesByPlayer,
-    GamesMetagameListCategoriesByPlayer,
   )
 where
 

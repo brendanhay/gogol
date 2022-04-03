@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.AlertPolicies.Delete
     MonitoringProjectsAlertPoliciesDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsAlertPoliciesDelete (..),
     newMonitoringProjectsAlertPoliciesDelete,
-    MonitoringProjectsAlertPoliciesDelete,
   )
 where
 

@@ -43,93 +43,93 @@ module Gogol.DeploymentManager
 
     -- ** deploymentmanager.deployments.cancelPreview
     DeploymentManagerDeploymentsCancelPreviewResource,
+    DeploymentManagerDeploymentsCancelPreview (..),
     newDeploymentManagerDeploymentsCancelPreview,
-    DeploymentManagerDeploymentsCancelPreview,
 
     -- ** deploymentmanager.deployments.delete
     DeploymentManagerDeploymentsDeleteResource,
+    DeploymentManagerDeploymentsDelete (..),
     newDeploymentManagerDeploymentsDelete,
-    DeploymentManagerDeploymentsDelete,
 
     -- ** deploymentmanager.deployments.get
     DeploymentManagerDeploymentsGetResource,
+    DeploymentManagerDeploymentsGet (..),
     newDeploymentManagerDeploymentsGet,
-    DeploymentManagerDeploymentsGet,
 
     -- ** deploymentmanager.deployments.getIamPolicy
     DeploymentManagerDeploymentsGetIamPolicyResource,
+    DeploymentManagerDeploymentsGetIamPolicy (..),
     newDeploymentManagerDeploymentsGetIamPolicy,
-    DeploymentManagerDeploymentsGetIamPolicy,
 
     -- ** deploymentmanager.deployments.insert
     DeploymentManagerDeploymentsInsertResource,
+    DeploymentManagerDeploymentsInsert (..),
     newDeploymentManagerDeploymentsInsert,
-    DeploymentManagerDeploymentsInsert,
 
     -- ** deploymentmanager.deployments.list
     DeploymentManagerDeploymentsListResource,
+    DeploymentManagerDeploymentsList (..),
     newDeploymentManagerDeploymentsList,
-    DeploymentManagerDeploymentsList,
 
     -- ** deploymentmanager.deployments.patch
     DeploymentManagerDeploymentsPatchResource,
+    DeploymentManagerDeploymentsPatch (..),
     newDeploymentManagerDeploymentsPatch,
-    DeploymentManagerDeploymentsPatch,
 
     -- ** deploymentmanager.deployments.setIamPolicy
     DeploymentManagerDeploymentsSetIamPolicyResource,
+    DeploymentManagerDeploymentsSetIamPolicy (..),
     newDeploymentManagerDeploymentsSetIamPolicy,
-    DeploymentManagerDeploymentsSetIamPolicy,
 
     -- ** deploymentmanager.deployments.stop
     DeploymentManagerDeploymentsStopResource,
+    DeploymentManagerDeploymentsStop (..),
     newDeploymentManagerDeploymentsStop,
-    DeploymentManagerDeploymentsStop,
 
     -- ** deploymentmanager.deployments.testIamPermissions
     DeploymentManagerDeploymentsTestIamPermissionsResource,
+    DeploymentManagerDeploymentsTestIamPermissions (..),
     newDeploymentManagerDeploymentsTestIamPermissions,
-    DeploymentManagerDeploymentsTestIamPermissions,
 
     -- ** deploymentmanager.deployments.update
     DeploymentManagerDeploymentsUpdateResource,
+    DeploymentManagerDeploymentsUpdate (..),
     newDeploymentManagerDeploymentsUpdate,
-    DeploymentManagerDeploymentsUpdate,
 
     -- ** deploymentmanager.manifests.get
     DeploymentManagerManifestsGetResource,
+    DeploymentManagerManifestsGet (..),
     newDeploymentManagerManifestsGet,
-    DeploymentManagerManifestsGet,
 
     -- ** deploymentmanager.manifests.list
     DeploymentManagerManifestsListResource,
+    DeploymentManagerManifestsList (..),
     newDeploymentManagerManifestsList,
-    DeploymentManagerManifestsList,
 
     -- ** deploymentmanager.operations.get
     DeploymentManagerOperationsGetResource,
+    DeploymentManagerOperationsGet (..),
     newDeploymentManagerOperationsGet,
-    DeploymentManagerOperationsGet,
 
     -- ** deploymentmanager.operations.list
     DeploymentManagerOperationsListResource,
+    DeploymentManagerOperationsList (..),
     newDeploymentManagerOperationsList,
-    DeploymentManagerOperationsList,
 
     -- ** deploymentmanager.resources.get
     DeploymentManagerResourcesGetResource,
+    DeploymentManagerResourcesGet (..),
     newDeploymentManagerResourcesGet,
-    DeploymentManagerResourcesGet,
 
     -- ** deploymentmanager.resources.list
     DeploymentManagerResourcesListResource,
+    DeploymentManagerResourcesList (..),
     newDeploymentManagerResourcesList,
-    DeploymentManagerResourcesList,
 
     -- ** deploymentmanager.types.list
     DeploymentManagerTypesListResource,
+    DeploymentManagerTypesList (..),
     newDeploymentManagerTypesList,
-    DeploymentManagerTypesList,
 
     -- * Types
 

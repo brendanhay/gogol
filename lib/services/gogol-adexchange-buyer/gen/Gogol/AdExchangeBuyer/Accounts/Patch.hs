@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Accounts.Patch
     AdExchangeBuyerAccountsPatchResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerAccountsPatch (..),
     newAdExchangeBuyerAccountsPatch,
-    AdExchangeBuyerAccountsPatch,
   )
 where
 

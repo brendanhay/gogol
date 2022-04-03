@@ -34,8 +34,8 @@ module Gogol.FirebaseHosting.Operations.Delete
     FirebaseHostingOperationsDeleteResource,
 
     -- ** Constructing a Request
+    FirebaseHostingOperationsDelete (..),
     newFirebaseHostingOperationsDelete,
-    FirebaseHostingOperationsDelete,
   )
 where
 

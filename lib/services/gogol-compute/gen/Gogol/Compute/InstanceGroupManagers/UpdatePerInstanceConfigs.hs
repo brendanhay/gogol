@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
     ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupManagersUpdatePerInstanceConfigs (..),
     newComputeInstanceGroupManagersUpdatePerInstanceConfigs,
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigs,
   )
 where
 

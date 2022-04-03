@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Operations.Delete
     ServiceUsageOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ServiceUsageOperationsDelete (..),
     newServiceUsageOperationsDelete,
-    ServiceUsageOperationsDelete,
   )
 where
 

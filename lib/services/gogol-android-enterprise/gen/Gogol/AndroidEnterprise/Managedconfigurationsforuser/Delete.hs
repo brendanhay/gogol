@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Managedconfigurationsforuser.Delete
     AndroidEnterpriseManagedconfigurationsforuserDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseManagedconfigurationsforuserDelete (..),
     newAndroidEnterpriseManagedconfigurationsforuserDelete,
-    AndroidEnterpriseManagedconfigurationsforuserDelete,
   )
 where
 

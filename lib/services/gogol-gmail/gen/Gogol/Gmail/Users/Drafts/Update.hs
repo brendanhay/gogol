@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Drafts.Update
     GmailUsersDraftsUpdateResource,
 
     -- ** Constructing a Request
+    GmailUsersDraftsUpdate (..),
     newGmailUsersDraftsUpdate,
-    GmailUsersDraftsUpdate,
   )
 where
 

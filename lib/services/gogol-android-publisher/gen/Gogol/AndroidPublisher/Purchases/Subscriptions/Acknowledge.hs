@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Acknowledge
     AndroidPublisherPurchasesSubscriptionsAcknowledgeResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsAcknowledge (..),
     newAndroidPublisherPurchasesSubscriptionsAcknowledge,
-    AndroidPublisherPurchasesSubscriptionsAcknowledge,
   )
 where
 

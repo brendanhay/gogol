@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Schemas.Patch
     DirectorySchemasPatchResource,
 
     -- ** Constructing a Request
+    DirectorySchemasPatch (..),
     newDirectorySchemasPatch,
-    DirectorySchemasPatch,
   )
 where
 

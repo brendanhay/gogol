@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.GetLanguage
     GmailUsersSettingsGetLanguageResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsGetLanguage (..),
     newGmailUsersSettingsGetLanguage,
-    GmailUsersSettingsGetLanguage,
   )
 where
 

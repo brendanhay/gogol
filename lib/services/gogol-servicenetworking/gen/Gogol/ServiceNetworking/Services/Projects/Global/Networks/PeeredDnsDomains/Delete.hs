@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomain
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDeleteResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete (..),
     newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete,
-    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete,
   )
 where
 

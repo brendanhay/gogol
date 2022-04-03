@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.StartReplica
     SqlInstancesStartReplicaResource,
 
     -- ** Constructing a Request
+    SqlInstancesStartReplica (..),
     newSqlInstancesStartReplica,
-    SqlInstancesStartReplica,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Folders.Exclusions.Create
     LoggingFoldersExclusionsCreateResource,
 
     -- ** Constructing a Request
+    LoggingFoldersExclusionsCreate (..),
     newLoggingFoldersExclusionsCreate,
-    LoggingFoldersExclusionsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.Delete
     CloudFunctionsProjectsLocationsFunctionsDeleteResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsDelete (..),
     newCloudFunctionsProjectsLocationsFunctionsDelete,
-    CloudFunctionsProjectsLocationsFunctionsDelete,
   )
 where
 

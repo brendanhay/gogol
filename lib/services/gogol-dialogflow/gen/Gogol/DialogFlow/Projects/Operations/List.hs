@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Operations.List
     DialogFlowProjectsOperationsListResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsOperationsList (..),
     newDialogFlowProjectsOperationsList,
-    DialogFlowProjectsOperationsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Customers.Configurations.Patch
     AndroidDeviceProvisioningCustomersConfigurationsPatchResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningCustomersConfigurationsPatch (..),
     newAndroidDeviceProvisioningCustomersConfigurationsPatch,
-    AndroidDeviceProvisioningCustomersConfigurationsPatch,
   )
 where
 

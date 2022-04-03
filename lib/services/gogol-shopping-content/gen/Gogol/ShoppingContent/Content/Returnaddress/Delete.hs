@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnaddress.Delete
     ContentReturnaddressDeleteResource,
 
     -- ** Constructing a Request
+    ContentReturnaddressDelete (..),
     newContentReturnaddressDelete,
-    ContentReturnaddressDelete,
   )
 where
 

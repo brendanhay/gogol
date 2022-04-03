@@ -34,8 +34,8 @@ module Gogol.Logging.Entries.Write
     LoggingEntriesWriteResource,
 
     -- ** Constructing a Request
+    LoggingEntriesWrite (..),
     newLoggingEntriesWrite,
-    LoggingEntriesWrite,
   )
 where
 

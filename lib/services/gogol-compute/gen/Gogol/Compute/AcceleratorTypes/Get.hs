@@ -34,8 +34,8 @@ module Gogol.Compute.AcceleratorTypes.Get
     ComputeAcceleratorTypesGetResource,
 
     -- ** Constructing a Request
+    ComputeAcceleratorTypesGet (..),
     newComputeAcceleratorTypesGet,
-    ComputeAcceleratorTypesGet,
   )
 where
 

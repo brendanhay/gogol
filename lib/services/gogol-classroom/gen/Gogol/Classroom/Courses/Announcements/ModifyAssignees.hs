@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Announcements.ModifyAssignees
     ClassroomCoursesAnnouncementsModifyAssigneesResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesAnnouncementsModifyAssignees (..),
     newClassroomCoursesAnnouncementsModifyAssignees,
-    ClassroomCoursesAnnouncementsModifyAssignees,
   )
 where
 

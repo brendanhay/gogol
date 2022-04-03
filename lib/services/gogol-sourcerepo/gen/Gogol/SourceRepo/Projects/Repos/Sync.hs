@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.Sync
     SourceRepoProjectsReposSyncResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposSync (..),
     newSourceRepoProjectsReposSync,
-    SourceRepoProjectsReposSync,
   )
 where
 

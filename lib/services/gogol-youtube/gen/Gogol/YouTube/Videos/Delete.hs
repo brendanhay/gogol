@@ -34,8 +34,8 @@ module Gogol.YouTube.Videos.Delete
     YouTubeVideosDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeVideosDelete (..),
     newYouTubeVideosDelete,
-    YouTubeVideosDelete,
   )
 where
 

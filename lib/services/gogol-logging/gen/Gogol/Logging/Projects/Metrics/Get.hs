@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Metrics.Get
     LoggingProjectsMetricsGetResource,
 
     -- ** Constructing a Request
+    LoggingProjectsMetricsGet (..),
     newLoggingProjectsMetricsGet,
-    LoggingProjectsMetricsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.ActionResults.Update
     RemoteBuildExecutionActionResultsUpdateResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionActionResultsUpdate (..),
     newRemoteBuildExecutionActionResultsUpdate,
-    RemoteBuildExecutionActionResultsUpdate,
   )
 where
 

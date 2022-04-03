@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
     ContainerAnalysisProjectsOccurrencesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesGetIamPolicy (..),
     newContainerAnalysisProjectsOccurrencesGetIamPolicy,
-    ContainerAnalysisProjectsOccurrencesGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IAP.TestIamPermissions
     IAPTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    IAPTestIamPermissions (..),
     newIAPTestIamPermissions,
-    IAPTestIamPermissions,
   )
 where
 

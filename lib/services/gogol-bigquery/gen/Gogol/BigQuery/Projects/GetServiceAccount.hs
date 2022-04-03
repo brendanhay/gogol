@@ -34,8 +34,8 @@ module Gogol.BigQuery.Projects.GetServiceAccount
     BigQueryProjectsGetServiceAccountResource,
 
     -- ** Constructing a Request
+    BigQueryProjectsGetServiceAccount (..),
     newBigQueryProjectsGetServiceAccount,
-    BigQueryProjectsGetServiceAccount,
   )
 where
 

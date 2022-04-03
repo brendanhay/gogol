@@ -34,8 +34,8 @@ module Gogol.Logging.Organizations.Locations.Buckets.Delete
     LoggingOrganizationsLocationsBucketsDeleteResource,
 
     -- ** Constructing a Request
+    LoggingOrganizationsLocationsBucketsDelete (..),
     newLoggingOrganizationsLocationsBucketsDelete,
-    LoggingOrganizationsLocationsBucketsDelete,
   )
 where
 

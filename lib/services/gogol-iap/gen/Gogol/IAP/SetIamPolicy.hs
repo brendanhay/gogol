@@ -34,8 +34,8 @@ module Gogol.IAP.SetIamPolicy
     IAPSetIamPolicyResource,
 
     -- ** Constructing a Request
+    IAPSetIamPolicy (..),
     newIAPSetIamPolicy,
-    IAPSetIamPolicy,
   )
 where
 

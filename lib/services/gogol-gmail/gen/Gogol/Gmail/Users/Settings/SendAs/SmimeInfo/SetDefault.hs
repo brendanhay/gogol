@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.SetDefault
     GmailUsersSettingsSendAsSmimeInfoSetDefaultResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsSmimeInfoSetDefault (..),
     newGmailUsersSettingsSendAsSmimeInfoSetDefault,
-    GmailUsersSettingsSendAsSmimeInfoSetDefault,
   )
 where
 

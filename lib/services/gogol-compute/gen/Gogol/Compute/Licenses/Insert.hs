@@ -34,8 +34,8 @@ module Gogol.Compute.Licenses.Insert
     ComputeLicensesInsertResource,
 
     -- ** Constructing a Request
+    ComputeLicensesInsert (..),
     newComputeLicensesInsert,
-    ComputeLicensesInsert,
   )
 where
 

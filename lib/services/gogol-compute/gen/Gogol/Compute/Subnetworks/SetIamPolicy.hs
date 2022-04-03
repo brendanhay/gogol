@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.SetIamPolicy
     ComputeSubnetworksSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksSetIamPolicy (..),
     newComputeSubnetworksSetIamPolicy,
-    ComputeSubnetworksSetIamPolicy,
   )
 where
 

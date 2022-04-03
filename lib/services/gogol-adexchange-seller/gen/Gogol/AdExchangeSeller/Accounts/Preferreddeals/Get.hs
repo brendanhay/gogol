@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Preferreddeals.Get
     AdExchangeSellerAccountsPreferreddealsGetResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsPreferreddealsGet (..),
     newAdExchangeSellerAccountsPreferreddealsGet,
-    AdExchangeSellerAccountsPreferreddealsGet,
   )
 where
 

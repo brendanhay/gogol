@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Nodes.Patch
     TPUProjectsLocationsNodesPatchResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsNodesPatch (..),
     newTPUProjectsLocationsNodesPatch,
-    TPUProjectsLocationsNodesPatch,
   )
 where
 

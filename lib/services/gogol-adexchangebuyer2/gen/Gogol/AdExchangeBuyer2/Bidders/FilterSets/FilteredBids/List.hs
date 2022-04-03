@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBids.List
     AdExchangeBuyer2BiddersFilterSetsFilteredBidsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsFilteredBidsList,
-    AdExchangeBuyer2BiddersFilterSetsFilteredBidsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Connections.List
     ServiceNetworkingServicesConnectionsListResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesConnectionsList (..),
     newServiceNetworkingServicesConnectionsList,
-    ServiceNetworkingServicesConnectionsList,
   )
 where
 

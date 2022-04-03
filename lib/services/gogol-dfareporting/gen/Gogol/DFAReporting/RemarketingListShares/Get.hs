@@ -34,8 +34,8 @@ module Gogol.DFAReporting.RemarketingListShares.Get
     DFAReportingRemarketingListSharesGetResource,
 
     -- ** Constructing a Request
+    DFAReportingRemarketingListSharesGet (..),
     newDFAReportingRemarketingListSharesGet,
-    DFAReportingRemarketingListSharesGet,
   )
 where
 

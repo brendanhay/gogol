@@ -34,8 +34,8 @@ module Gogol.StreetViewPublish.Photos.BatchDelete
     StreetViewPublishPhotosBatchDeleteResource,
 
     -- ** Constructing a Request
+    StreetViewPublishPhotosBatchDelete (..),
     newStreetViewPublishPhotosBatchDelete,
-    StreetViewPublishPhotosBatchDelete,
   )
 where
 

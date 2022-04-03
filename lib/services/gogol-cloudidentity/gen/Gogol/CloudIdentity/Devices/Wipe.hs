@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.Wipe
     CloudIdentityDevicesWipeResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesWipe (..),
     newCloudIdentityDevicesWipe,
-    CloudIdentityDevicesWipe,
   )
 where
 

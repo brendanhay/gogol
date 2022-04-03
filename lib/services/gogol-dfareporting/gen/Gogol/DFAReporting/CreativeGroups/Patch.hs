@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeGroups.Patch
     DFAReportingCreativeGroupsPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeGroupsPatch (..),
     newDFAReportingCreativeGroupsPatch,
-    DFAReportingCreativeGroupsPatch,
   )
 where
 

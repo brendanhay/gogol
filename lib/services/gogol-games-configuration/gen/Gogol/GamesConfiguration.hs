@@ -40,58 +40,58 @@ module Gogol.GamesConfiguration
 
     -- ** gamesConfiguration.achievementConfigurations.delete
     GamesConfigurationAchievementConfigurationsDeleteResource,
+    GamesConfigurationAchievementConfigurationsDelete (..),
     newGamesConfigurationAchievementConfigurationsDelete,
-    GamesConfigurationAchievementConfigurationsDelete,
 
     -- ** gamesConfiguration.achievementConfigurations.get
     GamesConfigurationAchievementConfigurationsGetResource,
+    GamesConfigurationAchievementConfigurationsGet (..),
     newGamesConfigurationAchievementConfigurationsGet,
-    GamesConfigurationAchievementConfigurationsGet,
 
     -- ** gamesConfiguration.achievementConfigurations.insert
     GamesConfigurationAchievementConfigurationsInsertResource,
+    GamesConfigurationAchievementConfigurationsInsert (..),
     newGamesConfigurationAchievementConfigurationsInsert,
-    GamesConfigurationAchievementConfigurationsInsert,
 
     -- ** gamesConfiguration.achievementConfigurations.list
     GamesConfigurationAchievementConfigurationsListResource,
+    GamesConfigurationAchievementConfigurationsList (..),
     newGamesConfigurationAchievementConfigurationsList,
-    GamesConfigurationAchievementConfigurationsList,
 
     -- ** gamesConfiguration.achievementConfigurations.update
     GamesConfigurationAchievementConfigurationsUpdateResource,
+    GamesConfigurationAchievementConfigurationsUpdate (..),
     newGamesConfigurationAchievementConfigurationsUpdate,
-    GamesConfigurationAchievementConfigurationsUpdate,
 
     -- ** gamesConfiguration.imageConfigurations.upload
     GamesConfigurationImageConfigurationsUploadResource,
+    GamesConfigurationImageConfigurationsUpload (..),
     newGamesConfigurationImageConfigurationsUpload,
-    GamesConfigurationImageConfigurationsUpload,
 
     -- ** gamesConfiguration.leaderboardConfigurations.delete
     GamesConfigurationLeaderboardConfigurationsDeleteResource,
+    GamesConfigurationLeaderboardConfigurationsDelete (..),
     newGamesConfigurationLeaderboardConfigurationsDelete,
-    GamesConfigurationLeaderboardConfigurationsDelete,
 
     -- ** gamesConfiguration.leaderboardConfigurations.get
     GamesConfigurationLeaderboardConfigurationsGetResource,
+    GamesConfigurationLeaderboardConfigurationsGet (..),
     newGamesConfigurationLeaderboardConfigurationsGet,
-    GamesConfigurationLeaderboardConfigurationsGet,
 
     -- ** gamesConfiguration.leaderboardConfigurations.insert
     GamesConfigurationLeaderboardConfigurationsInsertResource,
+    GamesConfigurationLeaderboardConfigurationsInsert (..),
     newGamesConfigurationLeaderboardConfigurationsInsert,
-    GamesConfigurationLeaderboardConfigurationsInsert,
 
     -- ** gamesConfiguration.leaderboardConfigurations.list
     GamesConfigurationLeaderboardConfigurationsListResource,
+    GamesConfigurationLeaderboardConfigurationsList (..),
     newGamesConfigurationLeaderboardConfigurationsList,
-    GamesConfigurationLeaderboardConfigurationsList,
 
     -- ** gamesConfiguration.leaderboardConfigurations.update
     GamesConfigurationLeaderboardConfigurationsUpdateResource,
+    GamesConfigurationLeaderboardConfigurationsUpdate (..),
     newGamesConfigurationLeaderboardConfigurationsUpdate,
-    GamesConfigurationLeaderboardConfigurationsUpdate,
 
     -- * Types
 

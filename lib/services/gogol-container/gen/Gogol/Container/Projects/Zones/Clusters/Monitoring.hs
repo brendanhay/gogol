@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.Monitoring
     ContainerProjectsZonesClustersMonitoringResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersMonitoring (..),
     newContainerProjectsZonesClustersMonitoring,
-    ContainerProjectsZonesClustersMonitoring,
   )
 where
 

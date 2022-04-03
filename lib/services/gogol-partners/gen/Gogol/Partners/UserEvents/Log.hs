@@ -34,8 +34,8 @@ module Gogol.Partners.UserEvents.Log
     PartnersUserEventsLogResource,
 
     -- ** Constructing a Request
+    PartnersUserEventsLog (..),
     newPartnersUserEventsLog,
-    PartnersUserEventsLog,
   )
 where
 

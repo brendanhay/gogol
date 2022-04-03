@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.PretargetingConfig.List
     AdExchangeBuyerPretargetingConfigListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerPretargetingConfigList (..),
     newAdExchangeBuyerPretargetingConfigList,
-    AdExchangeBuyerPretargetingConfigList,
   )
 where
 

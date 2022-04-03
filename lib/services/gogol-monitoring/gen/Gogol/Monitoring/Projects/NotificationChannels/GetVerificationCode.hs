@@ -35,8 +35,8 @@ module Gogol.Monitoring.Projects.NotificationChannels.GetVerificationCode
     MonitoringProjectsNotificationChannelsGetVerificationCodeResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsNotificationChannelsGetVerificationCode (..),
     newMonitoringProjectsNotificationChannelsGetVerificationCode,
-    MonitoringProjectsNotificationChannelsGetVerificationCode,
   )
 where
 

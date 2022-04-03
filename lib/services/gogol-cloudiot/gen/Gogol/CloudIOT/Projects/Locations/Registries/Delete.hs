@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Delete
     CloudIOTProjectsLocationsRegistriesDeleteResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesDelete (..),
     newCloudIOTProjectsLocationsRegistriesDelete,
-    CloudIOTProjectsLocationsRegistriesDelete,
   )
 where
 

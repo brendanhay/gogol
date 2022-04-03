@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
     CloudbillingBillingAccountsProjectsListResource,
 
     -- ** Constructing a Request
+    CloudbillingBillingAccountsProjectsList (..),
     newCloudbillingBillingAccountsProjectsList,
-    CloudbillingBillingAccountsProjectsList,
   )
 where
 

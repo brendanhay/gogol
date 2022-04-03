@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Messages.Delete
     ChatSpacesMessagesDeleteResource,
 
     -- ** Constructing a Request
+    ChatSpacesMessagesDelete (..),
     newChatSpacesMessagesDelete,
-    ChatSpacesMessagesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.GetIamPolicy
     CloudTasksProjectsLocationsQueuesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesGetIamPolicy (..),
     newCloudTasksProjectsLocationsQueuesGetIamPolicy,
-    CloudTasksProjectsLocationsQueuesGetIamPolicy,
   )
 where
 

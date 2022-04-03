@@ -34,8 +34,8 @@ module Gogol.Compute.Images.Patch
     ComputeImagesPatchResource,
 
     -- ** Constructing a Request
+    ComputeImagesPatch (..),
     newComputeImagesPatch,
-    ComputeImagesPatch,
   )
 where
 

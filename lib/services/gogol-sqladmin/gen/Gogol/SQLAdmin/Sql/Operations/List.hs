@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Operations.List
     SqlOperationsListResource,
 
     -- ** Constructing a Request
+    SqlOperationsList (..),
     newSqlOperationsList,
-    SqlOperationsList,
   )
 where
 

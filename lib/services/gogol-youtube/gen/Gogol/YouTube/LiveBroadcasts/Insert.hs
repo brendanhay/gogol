@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveBroadcasts.Insert
     YouTubeLiveBroadcastsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeLiveBroadcastsInsert (..),
     newYouTubeLiveBroadcastsInsert,
-    YouTubeLiveBroadcastsInsert,
   )
 where
 

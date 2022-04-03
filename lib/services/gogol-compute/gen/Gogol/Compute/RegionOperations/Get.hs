@@ -34,8 +34,8 @@ module Gogol.Compute.RegionOperations.Get
     ComputeRegionOperationsGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionOperationsGet (..),
     newComputeRegionOperationsGet,
-    ComputeRegionOperationsGet,
   )
 where
 

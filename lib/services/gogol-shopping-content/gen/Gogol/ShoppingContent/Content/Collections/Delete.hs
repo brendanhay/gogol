@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Collections.Delete
     ContentCollectionsDeleteResource,
 
     -- ** Constructing a Request
+    ContentCollectionsDelete (..),
     newContentCollectionsDelete,
-    ContentCollectionsDelete,
   )
 where
 

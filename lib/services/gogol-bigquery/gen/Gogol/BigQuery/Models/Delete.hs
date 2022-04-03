@@ -34,8 +34,8 @@ module Gogol.BigQuery.Models.Delete
     BigQueryModelsDeleteResource,
 
     -- ** Constructing a Request
+    BigQueryModelsDelete (..),
     newBigQueryModelsDelete,
-    BigQueryModelsDelete,
   )
 where
 

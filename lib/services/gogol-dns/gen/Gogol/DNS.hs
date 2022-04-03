@@ -43,188 +43,188 @@ module Gogol.DNS
 
     -- ** dns.changes.create
     DNSChangesCreateResource,
+    DNSChangesCreate (..),
     newDNSChangesCreate,
-    DNSChangesCreate,
 
     -- ** dns.changes.get
     DNSChangesGetResource,
+    DNSChangesGet (..),
     newDNSChangesGet,
-    DNSChangesGet,
 
     -- ** dns.changes.list
     DNSChangesListResource,
+    DNSChangesList (..),
     newDNSChangesList,
-    DNSChangesList,
 
     -- ** dns.dnsKeys.get
     DNSDnsKeysGetResource,
+    DNSDnsKeysGet (..),
     newDNSDnsKeysGet,
-    DNSDnsKeysGet,
 
     -- ** dns.dnsKeys.list
     DNSDnsKeysListResource,
+    DNSDnsKeysList (..),
     newDNSDnsKeysList,
-    DNSDnsKeysList,
 
     -- ** dns.managedZoneOperations.get
     DNSManagedZoneOperationsGetResource,
+    DNSManagedZoneOperationsGet (..),
     newDNSManagedZoneOperationsGet,
-    DNSManagedZoneOperationsGet,
 
     -- ** dns.managedZoneOperations.list
     DNSManagedZoneOperationsListResource,
+    DNSManagedZoneOperationsList (..),
     newDNSManagedZoneOperationsList,
-    DNSManagedZoneOperationsList,
 
     -- ** dns.managedZones.create
     DNSManagedZonesCreateResource,
+    DNSManagedZonesCreate (..),
     newDNSManagedZonesCreate,
-    DNSManagedZonesCreate,
 
     -- ** dns.managedZones.delete
     DNSManagedZonesDeleteResource,
+    DNSManagedZonesDelete (..),
     newDNSManagedZonesDelete,
-    DNSManagedZonesDelete,
 
     -- ** dns.managedZones.get
     DNSManagedZonesGetResource,
+    DNSManagedZonesGet (..),
     newDNSManagedZonesGet,
-    DNSManagedZonesGet,
 
     -- ** dns.managedZones.list
     DNSManagedZonesListResource,
+    DNSManagedZonesList (..),
     newDNSManagedZonesList,
-    DNSManagedZonesList,
 
     -- ** dns.managedZones.patch
     DNSManagedZonesPatchResource,
+    DNSManagedZonesPatch (..),
     newDNSManagedZonesPatch,
-    DNSManagedZonesPatch,
 
     -- ** dns.managedZones.update
     DNSManagedZonesUpdateResource,
+    DNSManagedZonesUpdate (..),
     newDNSManagedZonesUpdate,
-    DNSManagedZonesUpdate,
 
     -- ** dns.policies.create
     DNSPoliciesCreateResource,
+    DNSPoliciesCreate (..),
     newDNSPoliciesCreate,
-    DNSPoliciesCreate,
 
     -- ** dns.policies.delete
     DNSPoliciesDeleteResource,
+    DNSPoliciesDelete (..),
     newDNSPoliciesDelete,
-    DNSPoliciesDelete,
 
     -- ** dns.policies.get
     DNSPoliciesGetResource,
+    DNSPoliciesGet (..),
     newDNSPoliciesGet,
-    DNSPoliciesGet,
 
     -- ** dns.policies.list
     DNSPoliciesListResource,
+    DNSPoliciesList (..),
     newDNSPoliciesList,
-    DNSPoliciesList,
 
     -- ** dns.policies.patch
     DNSPoliciesPatchResource,
+    DNSPoliciesPatch (..),
     newDNSPoliciesPatch,
-    DNSPoliciesPatch,
 
     -- ** dns.policies.update
     DNSPoliciesUpdateResource,
+    DNSPoliciesUpdate (..),
     newDNSPoliciesUpdate,
-    DNSPoliciesUpdate,
 
     -- ** dns.projects.get
     DNSProjectsGetResource,
+    DNSProjectsGet (..),
     newDNSProjectsGet,
-    DNSProjectsGet,
 
     -- ** dns.resourceRecordSets.create
     DNSResourceRecordSetsCreateResource,
+    DNSResourceRecordSetsCreate (..),
     newDNSResourceRecordSetsCreate,
-    DNSResourceRecordSetsCreate,
 
     -- ** dns.resourceRecordSets.delete
     DNSResourceRecordSetsDeleteResource,
+    DNSResourceRecordSetsDelete (..),
     newDNSResourceRecordSetsDelete,
-    DNSResourceRecordSetsDelete,
 
     -- ** dns.resourceRecordSets.get
     DNSResourceRecordSetsGetResource,
+    DNSResourceRecordSetsGet (..),
     newDNSResourceRecordSetsGet,
-    DNSResourceRecordSetsGet,
 
     -- ** dns.resourceRecordSets.list
     DNSResourceRecordSetsListResource,
+    DNSResourceRecordSetsList (..),
     newDNSResourceRecordSetsList,
-    DNSResourceRecordSetsList,
 
     -- ** dns.resourceRecordSets.patch
     DNSResourceRecordSetsPatchResource,
+    DNSResourceRecordSetsPatch (..),
     newDNSResourceRecordSetsPatch,
-    DNSResourceRecordSetsPatch,
 
     -- ** dns.responsePolicies.create
     DNSResponsePoliciesCreateResource,
+    DNSResponsePoliciesCreate (..),
     newDNSResponsePoliciesCreate,
-    DNSResponsePoliciesCreate,
 
     -- ** dns.responsePolicies.delete
     DNSResponsePoliciesDeleteResource,
+    DNSResponsePoliciesDelete (..),
     newDNSResponsePoliciesDelete,
-    DNSResponsePoliciesDelete,
 
     -- ** dns.responsePolicies.get
     DNSResponsePoliciesGetResource,
+    DNSResponsePoliciesGet (..),
     newDNSResponsePoliciesGet,
-    DNSResponsePoliciesGet,
 
     -- ** dns.responsePolicies.list
     DNSResponsePoliciesListResource,
+    DNSResponsePoliciesList (..),
     newDNSResponsePoliciesList,
-    DNSResponsePoliciesList,
 
     -- ** dns.responsePolicies.patch
     DNSResponsePoliciesPatchResource,
+    DNSResponsePoliciesPatch (..),
     newDNSResponsePoliciesPatch,
-    DNSResponsePoliciesPatch,
 
     -- ** dns.responsePolicies.update
     DNSResponsePoliciesUpdateResource,
+    DNSResponsePoliciesUpdate (..),
     newDNSResponsePoliciesUpdate,
-    DNSResponsePoliciesUpdate,
 
     -- ** dns.responsePolicyRules.create
     DNSResponsePolicyRulesCreateResource,
+    DNSResponsePolicyRulesCreate (..),
     newDNSResponsePolicyRulesCreate,
-    DNSResponsePolicyRulesCreate,
 
     -- ** dns.responsePolicyRules.delete
     DNSResponsePolicyRulesDeleteResource,
+    DNSResponsePolicyRulesDelete (..),
     newDNSResponsePolicyRulesDelete,
-    DNSResponsePolicyRulesDelete,
 
     -- ** dns.responsePolicyRules.get
     DNSResponsePolicyRulesGetResource,
+    DNSResponsePolicyRulesGet (..),
     newDNSResponsePolicyRulesGet,
-    DNSResponsePolicyRulesGet,
 
     -- ** dns.responsePolicyRules.list
     DNSResponsePolicyRulesListResource,
+    DNSResponsePolicyRulesList (..),
     newDNSResponsePolicyRulesList,
-    DNSResponsePolicyRulesList,
 
     -- ** dns.responsePolicyRules.patch
     DNSResponsePolicyRulesPatchResource,
+    DNSResponsePolicyRulesPatch (..),
     newDNSResponsePolicyRulesPatch,
-    DNSResponsePolicyRulesPatch,
 
     -- ** dns.responsePolicyRules.update
     DNSResponsePolicyRulesUpdateResource,
+    DNSResponsePolicyRulesUpdate (..),
     newDNSResponsePolicyRulesUpdate,
-    DNSResponsePolicyRulesUpdate,
 
     -- * Types
 

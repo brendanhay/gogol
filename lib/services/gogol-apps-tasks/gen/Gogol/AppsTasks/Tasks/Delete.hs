@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Delete
     TasksTasksDeleteResource,
 
     -- ** Constructing a Request
+    TasksTasksDelete (..),
     newTasksTasksDelete,
-    TasksTasksDelete,
   )
 where
 

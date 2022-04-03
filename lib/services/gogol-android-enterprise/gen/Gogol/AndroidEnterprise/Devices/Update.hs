@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Devices.Update
     AndroidEnterpriseDevicesUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseDevicesUpdate (..),
     newAndroidEnterpriseDevicesUpdate,
-    AndroidEnterpriseDevicesUpdate,
   )
 where
 

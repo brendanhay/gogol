@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Createtestreturn
     ContentOrdersCreatetestreturnResource,
 
     -- ** Constructing a Request
+    ContentOrdersCreatetestreturn (..),
     newContentOrdersCreatetestreturn,
-    ContentOrdersCreatetestreturn,
   )
 where
 

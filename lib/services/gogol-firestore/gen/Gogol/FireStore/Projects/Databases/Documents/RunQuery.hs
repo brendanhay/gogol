@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.RunQuery
     FireStoreProjectsDatabasesDocumentsRunQueryResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsRunQuery (..),
     newFireStoreProjectsDatabasesDocumentsRunQuery,
-    FireStoreProjectsDatabasesDocumentsRunQuery,
   )
 where
 

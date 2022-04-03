@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Customchannels.List
     AdSenseHostCustomchannelsListResource,
 
     -- ** Constructing a Request
+    AdSenseHostCustomchannelsList (..),
     newAdSenseHostCustomchannelsList,
-    AdSenseHostCustomchannelsList,
   )
 where
 

@@ -41,103 +41,103 @@ module Gogol.Translate
 
     -- ** translate.projects.detectLanguage
     TranslateProjectsDetectLanguageResource,
+    TranslateProjectsDetectLanguage (..),
     newTranslateProjectsDetectLanguage,
-    TranslateProjectsDetectLanguage,
 
     -- ** translate.projects.getSupportedLanguages
     TranslateProjectsGetSupportedLanguagesResource,
+    TranslateProjectsGetSupportedLanguages (..),
     newTranslateProjectsGetSupportedLanguages,
-    TranslateProjectsGetSupportedLanguages,
 
     -- ** translate.projects.locations.batchTranslateDocument
     TranslateProjectsLocationsBatchTranslateDocumentResource,
+    TranslateProjectsLocationsBatchTranslateDocument (..),
     newTranslateProjectsLocationsBatchTranslateDocument,
-    TranslateProjectsLocationsBatchTranslateDocument,
 
     -- ** translate.projects.locations.batchTranslateText
     TranslateProjectsLocationsBatchTranslateTextResource,
+    TranslateProjectsLocationsBatchTranslateText (..),
     newTranslateProjectsLocationsBatchTranslateText,
-    TranslateProjectsLocationsBatchTranslateText,
 
     -- ** translate.projects.locations.detectLanguage
     TranslateProjectsLocationsDetectLanguageResource,
+    TranslateProjectsLocationsDetectLanguage (..),
     newTranslateProjectsLocationsDetectLanguage,
-    TranslateProjectsLocationsDetectLanguage,
 
     -- ** translate.projects.locations.get
     TranslateProjectsLocationsGetResource,
+    TranslateProjectsLocationsGet (..),
     newTranslateProjectsLocationsGet,
-    TranslateProjectsLocationsGet,
 
     -- ** translate.projects.locations.getSupportedLanguages
     TranslateProjectsLocationsGetSupportedLanguagesResource,
+    TranslateProjectsLocationsGetSupportedLanguages (..),
     newTranslateProjectsLocationsGetSupportedLanguages,
-    TranslateProjectsLocationsGetSupportedLanguages,
 
     -- ** translate.projects.locations.glossaries.create
     TranslateProjectsLocationsGlossariesCreateResource,
+    TranslateProjectsLocationsGlossariesCreate (..),
     newTranslateProjectsLocationsGlossariesCreate,
-    TranslateProjectsLocationsGlossariesCreate,
 
     -- ** translate.projects.locations.glossaries.delete
     TranslateProjectsLocationsGlossariesDeleteResource,
+    TranslateProjectsLocationsGlossariesDelete (..),
     newTranslateProjectsLocationsGlossariesDelete,
-    TranslateProjectsLocationsGlossariesDelete,
 
     -- ** translate.projects.locations.glossaries.get
     TranslateProjectsLocationsGlossariesGetResource,
+    TranslateProjectsLocationsGlossariesGet (..),
     newTranslateProjectsLocationsGlossariesGet,
-    TranslateProjectsLocationsGlossariesGet,
 
     -- ** translate.projects.locations.glossaries.list
     TranslateProjectsLocationsGlossariesListResource,
+    TranslateProjectsLocationsGlossariesList (..),
     newTranslateProjectsLocationsGlossariesList,
-    TranslateProjectsLocationsGlossariesList,
 
     -- ** translate.projects.locations.list
     TranslateProjectsLocationsListResource,
+    TranslateProjectsLocationsList (..),
     newTranslateProjectsLocationsList,
-    TranslateProjectsLocationsList,
 
     -- ** translate.projects.locations.operations.cancel
     TranslateProjectsLocationsOperationsCancelResource,
+    TranslateProjectsLocationsOperationsCancel (..),
     newTranslateProjectsLocationsOperationsCancel,
-    TranslateProjectsLocationsOperationsCancel,
 
     -- ** translate.projects.locations.operations.delete
     TranslateProjectsLocationsOperationsDeleteResource,
+    TranslateProjectsLocationsOperationsDelete (..),
     newTranslateProjectsLocationsOperationsDelete,
-    TranslateProjectsLocationsOperationsDelete,
 
     -- ** translate.projects.locations.operations.get
     TranslateProjectsLocationsOperationsGetResource,
+    TranslateProjectsLocationsOperationsGet (..),
     newTranslateProjectsLocationsOperationsGet,
-    TranslateProjectsLocationsOperationsGet,
 
     -- ** translate.projects.locations.operations.list
     TranslateProjectsLocationsOperationsListResource,
+    TranslateProjectsLocationsOperationsList (..),
     newTranslateProjectsLocationsOperationsList,
-    TranslateProjectsLocationsOperationsList,
 
     -- ** translate.projects.locations.operations.wait
     TranslateProjectsLocationsOperationsWaitResource,
+    TranslateProjectsLocationsOperationsWait (..),
     newTranslateProjectsLocationsOperationsWait,
-    TranslateProjectsLocationsOperationsWait,
 
     -- ** translate.projects.locations.translateDocument
     TranslateProjectsLocationsTranslateDocumentResource,
+    TranslateProjectsLocationsTranslateDocument (..),
     newTranslateProjectsLocationsTranslateDocument,
-    TranslateProjectsLocationsTranslateDocument,
 
     -- ** translate.projects.locations.translateText
     TranslateProjectsLocationsTranslateTextResource,
+    TranslateProjectsLocationsTranslateText (..),
     newTranslateProjectsLocationsTranslateText,
-    TranslateProjectsLocationsTranslateText,
 
     -- ** translate.projects.translateText
     TranslateProjectsTranslateTextResource,
+    TranslateProjectsTranslateText (..),
     newTranslateProjectsTranslateText,
-    TranslateProjectsTranslateText,
 
     -- * Types
 

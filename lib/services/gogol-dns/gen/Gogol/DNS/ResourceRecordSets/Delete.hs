@@ -34,8 +34,8 @@ module Gogol.DNS.ResourceRecordSets.Delete
     DNSResourceRecordSetsDeleteResource,
 
     -- ** Constructing a Request
+    DNSResourceRecordSetsDelete (..),
     newDNSResourceRecordSetsDelete,
-    DNSResourceRecordSetsDelete,
   )
 where
 

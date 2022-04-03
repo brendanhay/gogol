@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Threads.Untrash
     GmailUsersThreadsUntrashResource,
 
     -- ** Constructing a Request
+    GmailUsersThreadsUntrash (..),
     newGmailUsersThreadsUntrash,
-    GmailUsersThreadsUntrash,
   )
 where
 

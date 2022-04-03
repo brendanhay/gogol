@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.PartitionQuery
     FireStoreProjectsDatabasesDocumentsPartitionQueryResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsPartitionQuery (..),
     newFireStoreProjectsDatabasesDocumentsPartitionQuery,
-    FireStoreProjectsDatabasesDocumentsPartitionQuery,
   )
 where
 

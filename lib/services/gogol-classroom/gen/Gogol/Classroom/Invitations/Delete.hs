@@ -34,8 +34,8 @@ module Gogol.Classroom.Invitations.Delete
     ClassroomInvitationsDeleteResource,
 
     -- ** Constructing a Request
+    ClassroomInvitationsDelete (..),
     newClassroomInvitationsDelete,
-    ClassroomInvitationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeeds.Delete
     ContentDatafeedsDeleteResource,
 
     -- ** Constructing a Request
+    ContentDatafeedsDelete (..),
     newContentDatafeedsDelete,
-    ContentDatafeedsDelete,
   )
 where
 

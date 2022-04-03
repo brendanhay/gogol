@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.Delete
     ComputeReservationsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeReservationsDelete (..),
     newComputeReservationsDelete,
-    ComputeReservationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Canceltestorderbycustomer
     ContentOrdersCanceltestorderbycustomerResource,
 
     -- ** Constructing a Request
+    ContentOrdersCanceltestorderbycustomer (..),
     newContentOrdersCanceltestorderbycustomer,
-    ContentOrdersCanceltestorderbycustomer,
   )
 where
 

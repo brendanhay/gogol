@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
     FireStoreProjectsDatabasesCollectionGroupsIndexesDeleteResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesCollectionGroupsIndexesDelete (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
   )
 where
 

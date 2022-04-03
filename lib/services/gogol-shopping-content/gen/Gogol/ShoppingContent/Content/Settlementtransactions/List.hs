@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Settlementtransactions.List
     ContentSettlementtransactionsListResource,
 
     -- ** Constructing a Request
+    ContentSettlementtransactionsList (..),
     newContentSettlementtransactionsList,
-    ContentSettlementtransactionsList,
   )
 where
 

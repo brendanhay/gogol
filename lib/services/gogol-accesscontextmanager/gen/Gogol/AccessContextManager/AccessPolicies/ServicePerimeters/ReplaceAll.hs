@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.ReplaceAll
     AccessContextManagerAccessPoliciesServicePerimetersReplaceAllResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesServicePerimetersReplaceAll (..),
     newAccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
-    AccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
   )
 where
 

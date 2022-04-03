@@ -34,8 +34,8 @@ module Gogol.Compute.TargetTcpProxies.List
     ComputeTargetTcpProxiesListResource,
 
     -- ** Constructing a Request
+    ComputeTargetTcpProxiesList (..),
     newComputeTargetTcpProxiesList,
-    ComputeTargetTcpProxiesList,
   )
 where
 

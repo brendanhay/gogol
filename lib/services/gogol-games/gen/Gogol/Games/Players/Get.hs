@@ -34,8 +34,8 @@ module Gogol.Games.Players.Get
     GamesPlayersGetResource,
 
     -- ** Constructing a Request
+    GamesPlayersGet (..),
     newGamesPlayersGet,
-    GamesPlayersGet,
   )
 where
 

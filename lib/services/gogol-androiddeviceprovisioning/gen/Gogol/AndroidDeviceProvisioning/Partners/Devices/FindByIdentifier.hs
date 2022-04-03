@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
     AndroidDeviceProvisioningPartnersDevicesFindByIdentifierResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesFindByIdentifier (..),
     newAndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
-    AndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
   )
 where
 

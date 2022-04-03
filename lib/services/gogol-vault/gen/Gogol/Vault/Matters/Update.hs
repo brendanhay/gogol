@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Update
     VaultMattersUpdateResource,
 
     -- ** Constructing a Request
+    VaultMattersUpdate (..),
     newVaultMattersUpdate,
-    VaultMattersUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.Publish
     BloggerPostsPublishResource,
 
     -- ** Constructing a Request
+    BloggerPostsPublish (..),
     newBloggerPostsPublish,
-    BloggerPostsPublish,
   )
 where
 

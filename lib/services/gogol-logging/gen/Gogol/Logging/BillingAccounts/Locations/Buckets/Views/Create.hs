@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Create
     LoggingBillingAccountsLocationsBucketsViewsCreateResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsLocationsBucketsViewsCreate (..),
     newLoggingBillingAccountsLocationsBucketsViewsCreate,
-    LoggingBillingAccountsLocationsBucketsViewsCreate,
   )
 where
 

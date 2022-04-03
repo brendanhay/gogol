@@ -34,8 +34,8 @@ module Gogol.DigitalAssetLinks.Assetlinks.BulkCheck
     DigitalAssetLinksAssetlinksBulkCheckResource,
 
     -- ** Constructing a Request
+    DigitalAssetLinksAssetlinksBulkCheck (..),
     newDigitalAssetLinksAssetlinksBulkCheck,
-    DigitalAssetLinksAssetlinksBulkCheck,
   )
 where
 

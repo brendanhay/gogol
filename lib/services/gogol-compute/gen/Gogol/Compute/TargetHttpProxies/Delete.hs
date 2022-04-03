@@ -34,8 +34,8 @@ module Gogol.Compute.TargetHttpProxies.Delete
     ComputeTargetHttpProxiesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeTargetHttpProxiesDelete (..),
     newComputeTargetHttpProxiesDelete,
-    ComputeTargetHttpProxiesDelete,
   )
 where
 

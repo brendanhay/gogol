@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroups.ListInstances
     ComputeRegionInstanceGroupsListInstancesResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupsListInstances (..),
     newComputeRegionInstanceGroupsListInstances,
-    ComputeRegionInstanceGroupsListInstances,
   )
 where
 

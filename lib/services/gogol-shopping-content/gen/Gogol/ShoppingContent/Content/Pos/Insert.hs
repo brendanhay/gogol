@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Pos.Insert
     ContentPosInsertResource,
 
     -- ** Constructing a Request
+    ContentPosInsert (..),
     newContentPosInsert,
-    ContentPosInsert,
   )
 where
 

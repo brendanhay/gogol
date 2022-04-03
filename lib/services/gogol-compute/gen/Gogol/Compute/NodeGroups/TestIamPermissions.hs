@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.TestIamPermissions
     ComputeNodeGroupsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsTestIamPermissions (..),
     newComputeNodeGroupsTestIamPermissions,
-    ComputeNodeGroupsTestIamPermissions,
   )
 where
 

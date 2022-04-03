@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.SendCommandToDevice
     CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDeviceResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice (..),
     newCloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice,
-    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice,
   )
 where
 

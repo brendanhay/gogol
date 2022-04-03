@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Update
     StorageObjectsUpdateResource,
 
     -- ** Constructing a Request
+    StorageObjectsUpdate (..),
     newStorageObjectsUpdate,
-    StorageObjectsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Firewall.IngressRules.Delete
     AppEngineAppsFirewallIngressRulesDeleteResource,
 
     -- ** Constructing a Request
+    AppEngineAppsFirewallIngressRulesDelete (..),
     newAppEngineAppsFirewallIngressRulesDelete,
-    AppEngineAppsFirewallIngressRulesDelete,
   )
 where
 

@@ -42,53 +42,53 @@ module Gogol.ServiceUsage
 
     -- ** serviceusage.operations.cancel
     ServiceUsageOperationsCancelResource,
+    ServiceUsageOperationsCancel (..),
     newServiceUsageOperationsCancel,
-    ServiceUsageOperationsCancel,
 
     -- ** serviceusage.operations.delete
     ServiceUsageOperationsDeleteResource,
+    ServiceUsageOperationsDelete (..),
     newServiceUsageOperationsDelete,
-    ServiceUsageOperationsDelete,
 
     -- ** serviceusage.operations.get
     ServiceUsageOperationsGetResource,
+    ServiceUsageOperationsGet (..),
     newServiceUsageOperationsGet,
-    ServiceUsageOperationsGet,
 
     -- ** serviceusage.operations.list
     ServiceUsageOperationsListResource,
+    ServiceUsageOperationsList (..),
     newServiceUsageOperationsList,
-    ServiceUsageOperationsList,
 
     -- ** serviceusage.services.batchEnable
     ServiceUsageServicesBatchEnableResource,
+    ServiceUsageServicesBatchEnable (..),
     newServiceUsageServicesBatchEnable,
-    ServiceUsageServicesBatchEnable,
 
     -- ** serviceusage.services.batchGet
     ServiceUsageServicesBatchGetResource,
+    ServiceUsageServicesBatchGet (..),
     newServiceUsageServicesBatchGet,
-    ServiceUsageServicesBatchGet,
 
     -- ** serviceusage.services.disable
     ServiceUsageServicesDisableResource,
+    ServiceUsageServicesDisable (..),
     newServiceUsageServicesDisable,
-    ServiceUsageServicesDisable,
 
     -- ** serviceusage.services.enable
     ServiceUsageServicesEnableResource,
+    ServiceUsageServicesEnable (..),
     newServiceUsageServicesEnable,
-    ServiceUsageServicesEnable,
 
     -- ** serviceusage.services.get
     ServiceUsageServicesGetResource,
+    ServiceUsageServicesGet (..),
     newServiceUsageServicesGet,
-    ServiceUsageServicesGet,
 
     -- ** serviceusage.services.list
     ServiceUsageServicesListResource,
+    ServiceUsageServicesList (..),
     newServiceUsageServicesList,
-    ServiceUsageServicesList,
 
     -- * Types
 

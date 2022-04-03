@@ -34,8 +34,8 @@ module Gogol.Compute.RegionSslCertificates.Get
     ComputeRegionSslCertificatesGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionSslCertificatesGet (..),
     newComputeRegionSslCertificatesGet,
-    ComputeRegionSslCertificatesGet,
   )
 where
 

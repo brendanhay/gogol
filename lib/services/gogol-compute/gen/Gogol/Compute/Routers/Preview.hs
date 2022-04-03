@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.Preview
     ComputeRoutersPreviewResource,
 
     -- ** Constructing a Request
+    ComputeRoutersPreview (..),
     newComputeRoutersPreview,
-    ComputeRoutersPreview,
   )
 where
 

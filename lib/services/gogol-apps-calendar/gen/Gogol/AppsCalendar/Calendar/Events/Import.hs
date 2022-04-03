@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.Import
     CalendarEventsImportResource,
 
     -- ** Constructing a Request
+    CalendarEventsImport (..),
     newCalendarEventsImport,
-    CalendarEventsImport,
   )
 where
 

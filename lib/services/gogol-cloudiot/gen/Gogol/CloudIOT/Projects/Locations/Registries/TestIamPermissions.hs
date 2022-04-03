@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.TestIamPermissions
     CloudIOTProjectsLocationsRegistriesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesTestIamPermissions (..),
     newCloudIOTProjectsLocationsRegistriesTestIamPermissions,
-    CloudIOTProjectsLocationsRegistriesTestIamPermissions,
   )
 where
 

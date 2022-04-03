@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferJobs.Patch
     StorageTransferTransferJobsPatchResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferJobsPatch (..),
     newStorageTransferTransferJobsPatch,
-    StorageTransferTransferJobsPatch,
   )
 where
 

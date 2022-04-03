@@ -34,8 +34,8 @@ module Gogol.Compute.RegionBackendServices.Patch
     ComputeRegionBackendServicesPatchResource,
 
     -- ** Constructing a Request
+    ComputeRegionBackendServicesPatch (..),
     newComputeRegionBackendServicesPatch,
-    ComputeRegionBackendServicesPatch,
   )
 where
 

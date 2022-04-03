@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Delete
     ComputeInstancesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeInstancesDelete (..),
     newComputeInstancesDelete,
-    ComputeInstancesDelete,
   )
 where
 

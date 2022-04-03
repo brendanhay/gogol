@@ -34,8 +34,8 @@ module Gogol.Drive.Permissions.List
     DrivePermissionsListResource,
 
     -- ** Constructing a Request
+    DrivePermissionsList (..),
     newDrivePermissionsList,
-    DrivePermissionsList,
   )
 where
 

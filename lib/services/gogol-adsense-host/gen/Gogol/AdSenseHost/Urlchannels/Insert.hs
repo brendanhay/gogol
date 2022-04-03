@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Urlchannels.Insert
     AdSenseHostUrlchannelsInsertResource,
 
     -- ** Constructing a Request
+    AdSenseHostUrlchannelsInsert (..),
     newAdSenseHostUrlchannelsInsert,
-    AdSenseHostUrlchannelsInsert,
   )
 where
 

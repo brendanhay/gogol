@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Jobs.BatchDelete
     JobsProjectsTenantsJobsBatchDeleteResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsJobsBatchDelete (..),
     newJobsProjectsTenantsJobsBatchDelete,
-    JobsProjectsTenantsJobsBatchDelete,
   )
 where
 

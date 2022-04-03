@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
     ComputeInstancesSetShieldedInstanceIntegrityPolicyResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetShieldedInstanceIntegrityPolicy (..),
     newComputeInstancesSetShieldedInstanceIntegrityPolicy,
-    ComputeInstancesSetShieldedInstanceIntegrityPolicy,
   )
 where
 

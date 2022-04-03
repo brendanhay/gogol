@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.ClientStates.List
     CloudIdentityDevicesDeviceUsersClientStatesListResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersClientStatesList (..),
     newCloudIdentityDevicesDeviceUsersClientStatesList,
-    CloudIdentityDevicesDeviceUsersClientStatesList,
   )
 where
 

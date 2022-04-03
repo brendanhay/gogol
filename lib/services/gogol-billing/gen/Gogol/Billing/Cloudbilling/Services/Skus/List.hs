@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.Services.Skus.List
     CloudbillingServicesSkusListResource,
 
     -- ** Constructing a Request
+    CloudbillingServicesSkusList (..),
     newCloudbillingServicesSkusList,
-    CloudbillingServicesSkusList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Delete
     MlProjectsLocationsStudiesDeleteResource,
 
     -- ** Constructing a Request
+    MlProjectsLocationsStudiesDelete (..),
     newMlProjectsLocationsStudiesDelete,
-    MlProjectsLocationsStudiesDelete,
   )
 where
 

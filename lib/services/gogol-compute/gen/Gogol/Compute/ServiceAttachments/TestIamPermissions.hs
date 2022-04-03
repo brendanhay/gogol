@@ -34,8 +34,8 @@ module Gogol.Compute.ServiceAttachments.TestIamPermissions
     ComputeServiceAttachmentsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeServiceAttachmentsTestIamPermissions (..),
     newComputeServiceAttachmentsTestIamPermissions,
-    ComputeServiceAttachmentsTestIamPermissions,
   )
 where
 

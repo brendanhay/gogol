@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.SetIamPolicy
     DeploymentManagerDeploymentsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsSetIamPolicy (..),
     newDeploymentManagerDeploymentsSetIamPolicy,
-    DeploymentManagerDeploymentsSetIamPolicy,
   )
 where
 

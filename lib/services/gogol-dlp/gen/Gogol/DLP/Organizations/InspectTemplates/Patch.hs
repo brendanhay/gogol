@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.InspectTemplates.Patch
     DLPOrganizationsInspectTemplatesPatchResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsInspectTemplatesPatch (..),
     newDLPOrganizationsInspectTemplatesPatch,
-    DLPOrganizationsInspectTemplatesPatch,
   )
 where
 

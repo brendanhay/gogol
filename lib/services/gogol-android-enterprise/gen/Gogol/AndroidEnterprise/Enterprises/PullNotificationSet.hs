@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.PullNotificationSet
     AndroidEnterpriseEnterprisesPullNotificationSetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesPullNotificationSet (..),
     newAndroidEnterpriseEnterprisesPullNotificationSet,
-    AndroidEnterpriseEnterprisesPullNotificationSet,
   )
 where
 

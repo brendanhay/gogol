@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Freelistingsprogram.Requestreview
     ContentFreelistingsprogramRequestreviewResource,
 
     -- ** Constructing a Request
+    ContentFreelistingsprogramRequestreview (..),
     newContentFreelistingsprogramRequestreview,
-    ContentFreelistingsprogramRequestreview,
   )
 where
 

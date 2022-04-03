@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.TimeSeries.List
     MonitoringProjectsTimeSeriesListResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsTimeSeriesList (..),
     newMonitoringProjectsTimeSeriesList,
-    MonitoringProjectsTimeSeriesList,
   )
 where
 

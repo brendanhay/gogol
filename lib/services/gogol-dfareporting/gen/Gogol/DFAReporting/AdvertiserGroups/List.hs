@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AdvertiserGroups.List
     DFAReportingAdvertiserGroupsListResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertiserGroupsList (..),
     newDFAReportingAdvertiserGroupsList,
-    DFAReportingAdvertiserGroupsList,
   )
 where
 

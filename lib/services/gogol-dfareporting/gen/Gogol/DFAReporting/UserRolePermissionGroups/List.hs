@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRolePermissionGroups.List
     DFAReportingUserRolePermissionGroupsListResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolePermissionGroupsList (..),
     newDFAReportingUserRolePermissionGroupsList,
-    DFAReportingUserRolePermissionGroupsList,
   )
 where
 

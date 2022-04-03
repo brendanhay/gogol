@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.GetCustomer
     CloudSearchSettingsGetCustomerResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsGetCustomer (..),
     newCloudSearchSettingsGetCustomer,
-    CloudSearchSettingsGetCustomer,
   )
 where
 

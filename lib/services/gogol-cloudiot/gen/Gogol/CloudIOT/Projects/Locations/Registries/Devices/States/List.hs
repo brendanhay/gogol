@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.States.List
     CloudIOTProjectsLocationsRegistriesDevicesStatesListResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesDevicesStatesList (..),
     newCloudIOTProjectsLocationsRegistriesDevicesStatesList,
-    CloudIOTProjectsLocationsRegistriesDevicesStatesList,
   )
 where
 

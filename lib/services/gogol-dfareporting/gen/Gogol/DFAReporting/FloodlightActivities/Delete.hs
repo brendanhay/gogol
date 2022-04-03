@@ -34,8 +34,8 @@ module Gogol.DFAReporting.FloodlightActivities.Delete
     DFAReportingFloodlightActivitiesDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingFloodlightActivitiesDelete (..),
     newDFAReportingFloodlightActivitiesDelete,
-    DFAReportingFloodlightActivitiesDelete,
   )
 where
 

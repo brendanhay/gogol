@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Devices.Operations.Cancel
     AndroidManagementEnterprisesDevicesOperationsCancelResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesDevicesOperationsCancel (..),
     newAndroidManagementEnterprisesDevicesOperationsCancel,
-    AndroidManagementEnterprisesDevicesOperationsCancel,
   )
 where
 

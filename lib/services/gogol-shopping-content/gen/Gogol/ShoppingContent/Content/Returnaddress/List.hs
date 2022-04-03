@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnaddress.List
     ContentReturnaddressListResource,
 
     -- ** Constructing a Request
+    ContentReturnaddressList (..),
     newContentReturnaddressList,
-    ContentReturnaddressList,
   )
 where
 

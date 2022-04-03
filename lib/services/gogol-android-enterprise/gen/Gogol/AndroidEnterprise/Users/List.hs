@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.List
     AndroidEnterpriseUsersListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersList (..),
     newAndroidEnterpriseUsersList,
-    AndroidEnterpriseUsersList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DNS.ManagedZones.Delete
     DNSManagedZonesDeleteResource,
 
     -- ** Constructing a Request
+    DNSManagedZonesDelete (..),
     newDNSManagedZonesDelete,
-    DNSManagedZonesDelete,
   )
 where
 

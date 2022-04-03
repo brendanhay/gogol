@@ -37,33 +37,33 @@ module Gogol.Spectrum
 
     -- ** spectrum.paws.getSpectrum
     SpectrumPawsGetSpectrumResource,
+    SpectrumPawsGetSpectrum (..),
     newSpectrumPawsGetSpectrum,
-    SpectrumPawsGetSpectrum,
 
     -- ** spectrum.paws.getSpectrumBatch
     SpectrumPawsGetSpectrumBatchResource,
+    SpectrumPawsGetSpectrumBatch (..),
     newSpectrumPawsGetSpectrumBatch,
-    SpectrumPawsGetSpectrumBatch,
 
     -- ** spectrum.paws.init
     SpectrumPawsInitResource,
+    SpectrumPawsInit (..),
     newSpectrumPawsInit,
-    SpectrumPawsInit,
 
     -- ** spectrum.paws.notifySpectrumUse
     SpectrumPawsNotifySpectrumUseResource,
+    SpectrumPawsNotifySpectrumUse (..),
     newSpectrumPawsNotifySpectrumUse,
-    SpectrumPawsNotifySpectrumUse,
 
     -- ** spectrum.paws.register
     SpectrumPawsRegisterResource,
+    SpectrumPawsRegister (..),
     newSpectrumPawsRegister,
-    SpectrumPawsRegister,
 
     -- ** spectrum.paws.verifyDevice
     SpectrumPawsVerifyDeviceResource,
+    SpectrumPawsVerifyDevice (..),
     newSpectrumPawsVerifyDevice,
-    SpectrumPawsVerifyDevice,
 
     -- * Types
 

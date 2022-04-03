@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.SetUsageExportBucket
     ComputeProjectsSetUsageExportBucketResource,
 
     -- ** Constructing a Request
+    ComputeProjectsSetUsageExportBucket (..),
     newComputeProjectsSetUsageExportBucket,
-    ComputeProjectsSetUsageExportBucket,
   )
 where
 

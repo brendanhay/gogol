@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
     TagManagerAccountsContainersWorkspacesGetStatusResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesGetStatus (..),
     newTagManagerAccountsContainersWorkspacesGetStatus,
-    TagManagerAccountsContainersWorkspacesGetStatus,
   )
 where
 

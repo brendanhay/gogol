@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Schemas.Validate
     PubSubProjectsSchemasValidateResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSchemasValidate (..),
     newPubSubProjectsSchemasValidate,
-    PubSubProjectsSchemasValidate,
   )
 where
 

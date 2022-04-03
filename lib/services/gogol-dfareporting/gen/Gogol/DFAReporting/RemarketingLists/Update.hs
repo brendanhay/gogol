@@ -34,8 +34,8 @@ module Gogol.DFAReporting.RemarketingLists.Update
     DFAReportingRemarketingListsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingRemarketingListsUpdate (..),
     newDFAReportingRemarketingListsUpdate,
-    DFAReportingRemarketingListsUpdate,
   )
 where
 

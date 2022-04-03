@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Operations.Get
     ContainerProjectsLocationsOperationsGetResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsOperationsGet (..),
     newContainerProjectsLocationsOperationsGet,
-    ContainerProjectsLocationsOperationsGet,
   )
 where
 

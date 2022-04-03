@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.Searchapplications.Reset
     CloudSearchSettingsSearchapplicationsResetResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsSearchapplicationsReset (..),
     newCloudSearchSettingsSearchapplicationsReset,
-    CloudSearchSettingsSearchapplicationsReset,
   )
 where
 

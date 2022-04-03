@@ -41,563 +41,563 @@ module Gogol.DialogFlow
 
     -- ** dialogflow.projects.locations.agents.changelogs.get
     DialogFlowProjectsLocationsAgentsChangelogsGetResource,
+    DialogFlowProjectsLocationsAgentsChangelogsGet (..),
     newDialogFlowProjectsLocationsAgentsChangelogsGet,
-    DialogFlowProjectsLocationsAgentsChangelogsGet,
 
     -- ** dialogflow.projects.locations.agents.changelogs.list
     DialogFlowProjectsLocationsAgentsChangelogsListResource,
+    DialogFlowProjectsLocationsAgentsChangelogsList (..),
     newDialogFlowProjectsLocationsAgentsChangelogsList,
-    DialogFlowProjectsLocationsAgentsChangelogsList,
 
     -- ** dialogflow.projects.locations.agents.create
     DialogFlowProjectsLocationsAgentsCreateResource,
+    DialogFlowProjectsLocationsAgentsCreate (..),
     newDialogFlowProjectsLocationsAgentsCreate,
-    DialogFlowProjectsLocationsAgentsCreate,
 
     -- ** dialogflow.projects.locations.agents.delete
     DialogFlowProjectsLocationsAgentsDeleteResource,
+    DialogFlowProjectsLocationsAgentsDelete (..),
     newDialogFlowProjectsLocationsAgentsDelete,
-    DialogFlowProjectsLocationsAgentsDelete,
 
     -- ** dialogflow.projects.locations.agents.entityTypes.create
     DialogFlowProjectsLocationsAgentsEntityTypesCreateResource,
+    DialogFlowProjectsLocationsAgentsEntityTypesCreate (..),
     newDialogFlowProjectsLocationsAgentsEntityTypesCreate,
-    DialogFlowProjectsLocationsAgentsEntityTypesCreate,
 
     -- ** dialogflow.projects.locations.agents.entityTypes.delete
     DialogFlowProjectsLocationsAgentsEntityTypesDeleteResource,
+    DialogFlowProjectsLocationsAgentsEntityTypesDelete (..),
     newDialogFlowProjectsLocationsAgentsEntityTypesDelete,
-    DialogFlowProjectsLocationsAgentsEntityTypesDelete,
 
     -- ** dialogflow.projects.locations.agents.entityTypes.get
     DialogFlowProjectsLocationsAgentsEntityTypesGetResource,
+    DialogFlowProjectsLocationsAgentsEntityTypesGet (..),
     newDialogFlowProjectsLocationsAgentsEntityTypesGet,
-    DialogFlowProjectsLocationsAgentsEntityTypesGet,
 
     -- ** dialogflow.projects.locations.agents.entityTypes.list
     DialogFlowProjectsLocationsAgentsEntityTypesListResource,
+    DialogFlowProjectsLocationsAgentsEntityTypesList (..),
     newDialogFlowProjectsLocationsAgentsEntityTypesList,
-    DialogFlowProjectsLocationsAgentsEntityTypesList,
 
     -- ** dialogflow.projects.locations.agents.entityTypes.patch
     DialogFlowProjectsLocationsAgentsEntityTypesPatchResource,
+    DialogFlowProjectsLocationsAgentsEntityTypesPatch (..),
     newDialogFlowProjectsLocationsAgentsEntityTypesPatch,
-    DialogFlowProjectsLocationsAgentsEntityTypesPatch,
 
     -- ** dialogflow.projects.locations.agents.environments.continuousTestResults.list
     DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList,
 
     -- ** dialogflow.projects.locations.agents.environments.create
     DialogFlowProjectsLocationsAgentsEnvironmentsCreateResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsCreate (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsCreate,
-    DialogFlowProjectsLocationsAgentsEnvironmentsCreate,
 
     -- ** dialogflow.projects.locations.agents.environments.delete
     DialogFlowProjectsLocationsAgentsEnvironmentsDeleteResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsDelete (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsDelete,
-    DialogFlowProjectsLocationsAgentsEnvironmentsDelete,
 
     -- ** dialogflow.projects.locations.agents.environments.deployFlow
     DialogFlowProjectsLocationsAgentsEnvironmentsDeployFlowResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsDeployFlow (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsDeployFlow,
-    DialogFlowProjectsLocationsAgentsEnvironmentsDeployFlow,
 
     -- ** dialogflow.projects.locations.agents.environments.deployments.get
     DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsGetResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsGet (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsGet,
-    DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsGet,
 
     -- ** dialogflow.projects.locations.agents.environments.deployments.list
     DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsListResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsDeploymentsList,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.create
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsCreateResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsCreate (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsCreate,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsCreate,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.delete
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsDeleteResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsDelete (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsDelete,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsDelete,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.get
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsGetResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsGet (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsGet,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsGet,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.list
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsListResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.patch
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatchResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.start
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStartResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart,
 
     -- ** dialogflow.projects.locations.agents.environments.experiments.stop
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStopResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStop (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStop,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStop,
 
     -- ** dialogflow.projects.locations.agents.environments.get
     DialogFlowProjectsLocationsAgentsEnvironmentsGetResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsGet (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsGet,
-    DialogFlowProjectsLocationsAgentsEnvironmentsGet,
 
     -- ** dialogflow.projects.locations.agents.environments.list
     DialogFlowProjectsLocationsAgentsEnvironmentsListResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsList,
 
     -- ** dialogflow.projects.locations.agents.environments.lookupEnvironmentHistory
     DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistoryResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory,
-    DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory,
 
     -- ** dialogflow.projects.locations.agents.environments.patch
     DialogFlowProjectsLocationsAgentsEnvironmentsPatchResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsPatch (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsPatch,
-    DialogFlowProjectsLocationsAgentsEnvironmentsPatch,
 
     -- ** dialogflow.projects.locations.agents.environments.runContinuousTest
     DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTestResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest,
-    DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.detectIntent
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntentResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.entityTypes.create
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreateResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.entityTypes.delete
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesDeleteResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesDelete (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesDelete,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesDelete,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.entityTypes.get
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesGetResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesGet (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesGet,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesGet,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.entityTypes.list
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesListResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesList,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.entityTypes.patch
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesPatchResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesPatch (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesPatch,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesPatch,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.fulfillIntent
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntentResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent,
 
     -- ** dialogflow.projects.locations.agents.environments.sessions.matchIntent
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsMatchIntentResource,
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsMatchIntent (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsMatchIntent,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsMatchIntent,
 
     -- ** dialogflow.projects.locations.agents.export
     DialogFlowProjectsLocationsAgentsExportResource,
+    DialogFlowProjectsLocationsAgentsExport (..),
     newDialogFlowProjectsLocationsAgentsExport,
-    DialogFlowProjectsLocationsAgentsExport,
 
     -- ** dialogflow.projects.locations.agents.flows.create
     DialogFlowProjectsLocationsAgentsFlowsCreateResource,
+    DialogFlowProjectsLocationsAgentsFlowsCreate (..),
     newDialogFlowProjectsLocationsAgentsFlowsCreate,
-    DialogFlowProjectsLocationsAgentsFlowsCreate,
 
     -- ** dialogflow.projects.locations.agents.flows.delete
     DialogFlowProjectsLocationsAgentsFlowsDeleteResource,
+    DialogFlowProjectsLocationsAgentsFlowsDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsDelete,
-    DialogFlowProjectsLocationsAgentsFlowsDelete,
 
     -- ** dialogflow.projects.locations.agents.flows.export
     DialogFlowProjectsLocationsAgentsFlowsExportResource,
+    DialogFlowProjectsLocationsAgentsFlowsExport (..),
     newDialogFlowProjectsLocationsAgentsFlowsExport,
-    DialogFlowProjectsLocationsAgentsFlowsExport,
 
     -- ** dialogflow.projects.locations.agents.flows.get
     DialogFlowProjectsLocationsAgentsFlowsGetResource,
+    DialogFlowProjectsLocationsAgentsFlowsGet (..),
     newDialogFlowProjectsLocationsAgentsFlowsGet,
-    DialogFlowProjectsLocationsAgentsFlowsGet,
 
     -- ** dialogflow.projects.locations.agents.flows.getValidationResult
     DialogFlowProjectsLocationsAgentsFlowsGetValidationResultResource,
+    DialogFlowProjectsLocationsAgentsFlowsGetValidationResult (..),
     newDialogFlowProjectsLocationsAgentsFlowsGetValidationResult,
-    DialogFlowProjectsLocationsAgentsFlowsGetValidationResult,
 
     -- ** dialogflow.projects.locations.agents.flows.import
     DialogFlowProjectsLocationsAgentsFlowsImportResource,
+    DialogFlowProjectsLocationsAgentsFlowsImport (..),
     newDialogFlowProjectsLocationsAgentsFlowsImport,
-    DialogFlowProjectsLocationsAgentsFlowsImport,
 
     -- ** dialogflow.projects.locations.agents.flows.list
     DialogFlowProjectsLocationsAgentsFlowsListResource,
+    DialogFlowProjectsLocationsAgentsFlowsList (..),
     newDialogFlowProjectsLocationsAgentsFlowsList,
-    DialogFlowProjectsLocationsAgentsFlowsList,
 
     -- ** dialogflow.projects.locations.agents.flows.pages.create
     DialogFlowProjectsLocationsAgentsFlowsPagesCreateResource,
+    DialogFlowProjectsLocationsAgentsFlowsPagesCreate (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesCreate,
-    DialogFlowProjectsLocationsAgentsFlowsPagesCreate,
 
     -- ** dialogflow.projects.locations.agents.flows.pages.delete
     DialogFlowProjectsLocationsAgentsFlowsPagesDeleteResource,
+    DialogFlowProjectsLocationsAgentsFlowsPagesDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesDelete,
-    DialogFlowProjectsLocationsAgentsFlowsPagesDelete,
 
     -- ** dialogflow.projects.locations.agents.flows.pages.get
     DialogFlowProjectsLocationsAgentsFlowsPagesGetResource,
+    DialogFlowProjectsLocationsAgentsFlowsPagesGet (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesGet,
-    DialogFlowProjectsLocationsAgentsFlowsPagesGet,
 
     -- ** dialogflow.projects.locations.agents.flows.pages.list
     DialogFlowProjectsLocationsAgentsFlowsPagesListResource,
+    DialogFlowProjectsLocationsAgentsFlowsPagesList (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesList,
-    DialogFlowProjectsLocationsAgentsFlowsPagesList,
 
     -- ** dialogflow.projects.locations.agents.flows.pages.patch
     DialogFlowProjectsLocationsAgentsFlowsPagesPatchResource,
+    DialogFlowProjectsLocationsAgentsFlowsPagesPatch (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesPatch,
-    DialogFlowProjectsLocationsAgentsFlowsPagesPatch,
 
     -- ** dialogflow.projects.locations.agents.flows.patch
     DialogFlowProjectsLocationsAgentsFlowsPatchResource,
+    DialogFlowProjectsLocationsAgentsFlowsPatch (..),
     newDialogFlowProjectsLocationsAgentsFlowsPatch,
-    DialogFlowProjectsLocationsAgentsFlowsPatch,
 
     -- ** dialogflow.projects.locations.agents.flows.train
     DialogFlowProjectsLocationsAgentsFlowsTrainResource,
+    DialogFlowProjectsLocationsAgentsFlowsTrain (..),
     newDialogFlowProjectsLocationsAgentsFlowsTrain,
-    DialogFlowProjectsLocationsAgentsFlowsTrain,
 
     -- ** dialogflow.projects.locations.agents.flows.transitionRouteGroups.create
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreateResource,
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreate (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreate,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreate,
 
     -- ** dialogflow.projects.locations.agents.flows.transitionRouteGroups.delete
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDeleteResource,
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete,
 
     -- ** dialogflow.projects.locations.agents.flows.transitionRouteGroups.get
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsGetResource,
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsGet (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsGet,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsGet,
 
     -- ** dialogflow.projects.locations.agents.flows.transitionRouteGroups.list
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsListResource,
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList,
 
     -- ** dialogflow.projects.locations.agents.flows.transitionRouteGroups.patch
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatchResource,
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatch (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatch,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatch,
 
     -- ** dialogflow.projects.locations.agents.flows.validate
     DialogFlowProjectsLocationsAgentsFlowsValidateResource,
+    DialogFlowProjectsLocationsAgentsFlowsValidate (..),
     newDialogFlowProjectsLocationsAgentsFlowsValidate,
-    DialogFlowProjectsLocationsAgentsFlowsValidate,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.compareVersions
     DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersionsResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.create
     DialogFlowProjectsLocationsAgentsFlowsVersionsCreateResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsCreate (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsCreate,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsCreate,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.delete
     DialogFlowProjectsLocationsAgentsFlowsVersionsDeleteResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsDelete,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsDelete,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.get
     DialogFlowProjectsLocationsAgentsFlowsVersionsGetResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsGet (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsGet,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsGet,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.list
     DialogFlowProjectsLocationsAgentsFlowsVersionsListResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsList (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsList,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsList,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.load
     DialogFlowProjectsLocationsAgentsFlowsVersionsLoadResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsLoad (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsLoad,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsLoad,
 
     -- ** dialogflow.projects.locations.agents.flows.versions.patch
     DialogFlowProjectsLocationsAgentsFlowsVersionsPatchResource,
+    DialogFlowProjectsLocationsAgentsFlowsVersionsPatch (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsPatch,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsPatch,
 
     -- ** dialogflow.projects.locations.agents.get
     DialogFlowProjectsLocationsAgentsGetResource,
+    DialogFlowProjectsLocationsAgentsGet (..),
     newDialogFlowProjectsLocationsAgentsGet,
-    DialogFlowProjectsLocationsAgentsGet,
 
     -- ** dialogflow.projects.locations.agents.getValidationResult
     DialogFlowProjectsLocationsAgentsGetValidationResultResource,
+    DialogFlowProjectsLocationsAgentsGetValidationResult (..),
     newDialogFlowProjectsLocationsAgentsGetValidationResult,
-    DialogFlowProjectsLocationsAgentsGetValidationResult,
 
     -- ** dialogflow.projects.locations.agents.intents.create
     DialogFlowProjectsLocationsAgentsIntentsCreateResource,
+    DialogFlowProjectsLocationsAgentsIntentsCreate (..),
     newDialogFlowProjectsLocationsAgentsIntentsCreate,
-    DialogFlowProjectsLocationsAgentsIntentsCreate,
 
     -- ** dialogflow.projects.locations.agents.intents.delete
     DialogFlowProjectsLocationsAgentsIntentsDeleteResource,
+    DialogFlowProjectsLocationsAgentsIntentsDelete (..),
     newDialogFlowProjectsLocationsAgentsIntentsDelete,
-    DialogFlowProjectsLocationsAgentsIntentsDelete,
 
     -- ** dialogflow.projects.locations.agents.intents.get
     DialogFlowProjectsLocationsAgentsIntentsGetResource,
+    DialogFlowProjectsLocationsAgentsIntentsGet (..),
     newDialogFlowProjectsLocationsAgentsIntentsGet,
-    DialogFlowProjectsLocationsAgentsIntentsGet,
 
     -- ** dialogflow.projects.locations.agents.intents.list
     DialogFlowProjectsLocationsAgentsIntentsListResource,
+    DialogFlowProjectsLocationsAgentsIntentsList (..),
     newDialogFlowProjectsLocationsAgentsIntentsList,
-    DialogFlowProjectsLocationsAgentsIntentsList,
 
     -- ** dialogflow.projects.locations.agents.intents.patch
     DialogFlowProjectsLocationsAgentsIntentsPatchResource,
+    DialogFlowProjectsLocationsAgentsIntentsPatch (..),
     newDialogFlowProjectsLocationsAgentsIntentsPatch,
-    DialogFlowProjectsLocationsAgentsIntentsPatch,
 
     -- ** dialogflow.projects.locations.agents.list
     DialogFlowProjectsLocationsAgentsListResource,
+    DialogFlowProjectsLocationsAgentsList (..),
     newDialogFlowProjectsLocationsAgentsList,
-    DialogFlowProjectsLocationsAgentsList,
 
     -- ** dialogflow.projects.locations.agents.patch
     DialogFlowProjectsLocationsAgentsPatchResource,
+    DialogFlowProjectsLocationsAgentsPatch (..),
     newDialogFlowProjectsLocationsAgentsPatch,
-    DialogFlowProjectsLocationsAgentsPatch,
 
     -- ** dialogflow.projects.locations.agents.restore
     DialogFlowProjectsLocationsAgentsRestoreResource,
+    DialogFlowProjectsLocationsAgentsRestore (..),
     newDialogFlowProjectsLocationsAgentsRestore,
-    DialogFlowProjectsLocationsAgentsRestore,
 
     -- ** dialogflow.projects.locations.agents.sessions.detectIntent
     DialogFlowProjectsLocationsAgentsSessionsDetectIntentResource,
+    DialogFlowProjectsLocationsAgentsSessionsDetectIntent (..),
     newDialogFlowProjectsLocationsAgentsSessionsDetectIntent,
-    DialogFlowProjectsLocationsAgentsSessionsDetectIntent,
 
     -- ** dialogflow.projects.locations.agents.sessions.entityTypes.create
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesCreateResource,
+    DialogFlowProjectsLocationsAgentsSessionsEntityTypesCreate (..),
     newDialogFlowProjectsLocationsAgentsSessionsEntityTypesCreate,
-    DialogFlowProjectsLocationsAgentsSessionsEntityTypesCreate,
 
     -- ** dialogflow.projects.locations.agents.sessions.entityTypes.delete
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesDeleteResource,
+    DialogFlowProjectsLocationsAgentsSessionsEntityTypesDelete (..),
     newDialogFlowProjectsLocationsAgentsSessionsEntityTypesDelete,
-    DialogFlowProjectsLocationsAgentsSessionsEntityTypesDelete,
 
     -- ** dialogflow.projects.locations.agents.sessions.entityTypes.get
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesGetResource,
+    DialogFlowProjectsLocationsAgentsSessionsEntityTypesGet (..),
     newDialogFlowProjectsLocationsAgentsSessionsEntityTypesGet,
-    DialogFlowProjectsLocationsAgentsSessionsEntityTypesGet,
 
     -- ** dialogflow.projects.locations.agents.sessions.entityTypes.list
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesListResource,
+    DialogFlowProjectsLocationsAgentsSessionsEntityTypesList (..),
     newDialogFlowProjectsLocationsAgentsSessionsEntityTypesList,
-    DialogFlowProjectsLocationsAgentsSessionsEntityTypesList,
 
     -- ** dialogflow.projects.locations.agents.sessions.entityTypes.patch
     DialogFlowProjectsLocationsAgentsSessionsEntityTypesPatchResource,
+    DialogFlowProjectsLocationsAgentsSessionsEntityTypesPatch (..),
     newDialogFlowProjectsLocationsAgentsSessionsEntityTypesPatch,
-    DialogFlowProjectsLocationsAgentsSessionsEntityTypesPatch,
 
     -- ** dialogflow.projects.locations.agents.sessions.fulfillIntent
     DialogFlowProjectsLocationsAgentsSessionsFulfillIntentResource,
+    DialogFlowProjectsLocationsAgentsSessionsFulfillIntent (..),
     newDialogFlowProjectsLocationsAgentsSessionsFulfillIntent,
-    DialogFlowProjectsLocationsAgentsSessionsFulfillIntent,
 
     -- ** dialogflow.projects.locations.agents.sessions.matchIntent
     DialogFlowProjectsLocationsAgentsSessionsMatchIntentResource,
+    DialogFlowProjectsLocationsAgentsSessionsMatchIntent (..),
     newDialogFlowProjectsLocationsAgentsSessionsMatchIntent,
-    DialogFlowProjectsLocationsAgentsSessionsMatchIntent,
 
     -- ** dialogflow.projects.locations.agents.testCases.batchDelete
     DialogFlowProjectsLocationsAgentsTestCasesBatchDeleteResource,
+    DialogFlowProjectsLocationsAgentsTestCasesBatchDelete (..),
     newDialogFlowProjectsLocationsAgentsTestCasesBatchDelete,
-    DialogFlowProjectsLocationsAgentsTestCasesBatchDelete,
 
     -- ** dialogflow.projects.locations.agents.testCases.batchRun
     DialogFlowProjectsLocationsAgentsTestCasesBatchRunResource,
+    DialogFlowProjectsLocationsAgentsTestCasesBatchRun (..),
     newDialogFlowProjectsLocationsAgentsTestCasesBatchRun,
-    DialogFlowProjectsLocationsAgentsTestCasesBatchRun,
 
     -- ** dialogflow.projects.locations.agents.testCases.calculateCoverage
     DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverageResource,
+    DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage (..),
     newDialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage,
-    DialogFlowProjectsLocationsAgentsTestCasesCalculateCoverage,
 
     -- ** dialogflow.projects.locations.agents.testCases.create
     DialogFlowProjectsLocationsAgentsTestCasesCreateResource,
+    DialogFlowProjectsLocationsAgentsTestCasesCreate (..),
     newDialogFlowProjectsLocationsAgentsTestCasesCreate,
-    DialogFlowProjectsLocationsAgentsTestCasesCreate,
 
     -- ** dialogflow.projects.locations.agents.testCases.export
     DialogFlowProjectsLocationsAgentsTestCasesExportResource,
+    DialogFlowProjectsLocationsAgentsTestCasesExport (..),
     newDialogFlowProjectsLocationsAgentsTestCasesExport,
-    DialogFlowProjectsLocationsAgentsTestCasesExport,
 
     -- ** dialogflow.projects.locations.agents.testCases.get
     DialogFlowProjectsLocationsAgentsTestCasesGetResource,
+    DialogFlowProjectsLocationsAgentsTestCasesGet (..),
     newDialogFlowProjectsLocationsAgentsTestCasesGet,
-    DialogFlowProjectsLocationsAgentsTestCasesGet,
 
     -- ** dialogflow.projects.locations.agents.testCases.import
     DialogFlowProjectsLocationsAgentsTestCasesImportResource,
+    DialogFlowProjectsLocationsAgentsTestCasesImport (..),
     newDialogFlowProjectsLocationsAgentsTestCasesImport,
-    DialogFlowProjectsLocationsAgentsTestCasesImport,
 
     -- ** dialogflow.projects.locations.agents.testCases.list
     DialogFlowProjectsLocationsAgentsTestCasesListResource,
+    DialogFlowProjectsLocationsAgentsTestCasesList (..),
     newDialogFlowProjectsLocationsAgentsTestCasesList,
-    DialogFlowProjectsLocationsAgentsTestCasesList,
 
     -- ** dialogflow.projects.locations.agents.testCases.patch
     DialogFlowProjectsLocationsAgentsTestCasesPatchResource,
+    DialogFlowProjectsLocationsAgentsTestCasesPatch (..),
     newDialogFlowProjectsLocationsAgentsTestCasesPatch,
-    DialogFlowProjectsLocationsAgentsTestCasesPatch,
 
     -- ** dialogflow.projects.locations.agents.testCases.results.get
     DialogFlowProjectsLocationsAgentsTestCasesResultsGetResource,
+    DialogFlowProjectsLocationsAgentsTestCasesResultsGet (..),
     newDialogFlowProjectsLocationsAgentsTestCasesResultsGet,
-    DialogFlowProjectsLocationsAgentsTestCasesResultsGet,
 
     -- ** dialogflow.projects.locations.agents.testCases.results.list
     DialogFlowProjectsLocationsAgentsTestCasesResultsListResource,
+    DialogFlowProjectsLocationsAgentsTestCasesResultsList (..),
     newDialogFlowProjectsLocationsAgentsTestCasesResultsList,
-    DialogFlowProjectsLocationsAgentsTestCasesResultsList,
 
     -- ** dialogflow.projects.locations.agents.testCases.run
     DialogFlowProjectsLocationsAgentsTestCasesRunResource,
+    DialogFlowProjectsLocationsAgentsTestCasesRun (..),
     newDialogFlowProjectsLocationsAgentsTestCasesRun,
-    DialogFlowProjectsLocationsAgentsTestCasesRun,
 
     -- ** dialogflow.projects.locations.agents.validate
     DialogFlowProjectsLocationsAgentsValidateResource,
+    DialogFlowProjectsLocationsAgentsValidate (..),
     newDialogFlowProjectsLocationsAgentsValidate,
-    DialogFlowProjectsLocationsAgentsValidate,
 
     -- ** dialogflow.projects.locations.agents.webhooks.create
     DialogFlowProjectsLocationsAgentsWebhooksCreateResource,
+    DialogFlowProjectsLocationsAgentsWebhooksCreate (..),
     newDialogFlowProjectsLocationsAgentsWebhooksCreate,
-    DialogFlowProjectsLocationsAgentsWebhooksCreate,
 
     -- ** dialogflow.projects.locations.agents.webhooks.delete
     DialogFlowProjectsLocationsAgentsWebhooksDeleteResource,
+    DialogFlowProjectsLocationsAgentsWebhooksDelete (..),
     newDialogFlowProjectsLocationsAgentsWebhooksDelete,
-    DialogFlowProjectsLocationsAgentsWebhooksDelete,
 
     -- ** dialogflow.projects.locations.agents.webhooks.get
     DialogFlowProjectsLocationsAgentsWebhooksGetResource,
+    DialogFlowProjectsLocationsAgentsWebhooksGet (..),
     newDialogFlowProjectsLocationsAgentsWebhooksGet,
-    DialogFlowProjectsLocationsAgentsWebhooksGet,
 
     -- ** dialogflow.projects.locations.agents.webhooks.list
     DialogFlowProjectsLocationsAgentsWebhooksListResource,
+    DialogFlowProjectsLocationsAgentsWebhooksList (..),
     newDialogFlowProjectsLocationsAgentsWebhooksList,
-    DialogFlowProjectsLocationsAgentsWebhooksList,
 
     -- ** dialogflow.projects.locations.agents.webhooks.patch
     DialogFlowProjectsLocationsAgentsWebhooksPatchResource,
+    DialogFlowProjectsLocationsAgentsWebhooksPatch (..),
     newDialogFlowProjectsLocationsAgentsWebhooksPatch,
-    DialogFlowProjectsLocationsAgentsWebhooksPatch,
 
     -- ** dialogflow.projects.locations.get
     DialogFlowProjectsLocationsGetResource,
+    DialogFlowProjectsLocationsGet (..),
     newDialogFlowProjectsLocationsGet,
-    DialogFlowProjectsLocationsGet,
 
     -- ** dialogflow.projects.locations.list
     DialogFlowProjectsLocationsListResource,
+    DialogFlowProjectsLocationsList (..),
     newDialogFlowProjectsLocationsList,
-    DialogFlowProjectsLocationsList,
 
     -- ** dialogflow.projects.locations.operations.cancel
     DialogFlowProjectsLocationsOperationsCancelResource,
+    DialogFlowProjectsLocationsOperationsCancel (..),
     newDialogFlowProjectsLocationsOperationsCancel,
-    DialogFlowProjectsLocationsOperationsCancel,
 
     -- ** dialogflow.projects.locations.operations.get
     DialogFlowProjectsLocationsOperationsGetResource,
+    DialogFlowProjectsLocationsOperationsGet (..),
     newDialogFlowProjectsLocationsOperationsGet,
-    DialogFlowProjectsLocationsOperationsGet,
 
     -- ** dialogflow.projects.locations.operations.list
     DialogFlowProjectsLocationsOperationsListResource,
+    DialogFlowProjectsLocationsOperationsList (..),
     newDialogFlowProjectsLocationsOperationsList,
-    DialogFlowProjectsLocationsOperationsList,
 
     -- ** dialogflow.projects.locations.securitySettings.create
     DialogFlowProjectsLocationsSecuritySettingsCreateResource,
+    DialogFlowProjectsLocationsSecuritySettingsCreate (..),
     newDialogFlowProjectsLocationsSecuritySettingsCreate,
-    DialogFlowProjectsLocationsSecuritySettingsCreate,
 
     -- ** dialogflow.projects.locations.securitySettings.delete
     DialogFlowProjectsLocationsSecuritySettingsDeleteResource,
+    DialogFlowProjectsLocationsSecuritySettingsDelete (..),
     newDialogFlowProjectsLocationsSecuritySettingsDelete,
-    DialogFlowProjectsLocationsSecuritySettingsDelete,
 
     -- ** dialogflow.projects.locations.securitySettings.get
     DialogFlowProjectsLocationsSecuritySettingsGetResource,
+    DialogFlowProjectsLocationsSecuritySettingsGet (..),
     newDialogFlowProjectsLocationsSecuritySettingsGet,
-    DialogFlowProjectsLocationsSecuritySettingsGet,
 
     -- ** dialogflow.projects.locations.securitySettings.list
     DialogFlowProjectsLocationsSecuritySettingsListResource,
+    DialogFlowProjectsLocationsSecuritySettingsList (..),
     newDialogFlowProjectsLocationsSecuritySettingsList,
-    DialogFlowProjectsLocationsSecuritySettingsList,
 
     -- ** dialogflow.projects.locations.securitySettings.patch
     DialogFlowProjectsLocationsSecuritySettingsPatchResource,
+    DialogFlowProjectsLocationsSecuritySettingsPatch (..),
     newDialogFlowProjectsLocationsSecuritySettingsPatch,
-    DialogFlowProjectsLocationsSecuritySettingsPatch,
 
     -- ** dialogflow.projects.operations.cancel
     DialogFlowProjectsOperationsCancelResource,
+    DialogFlowProjectsOperationsCancel (..),
     newDialogFlowProjectsOperationsCancel,
-    DialogFlowProjectsOperationsCancel,
 
     -- ** dialogflow.projects.operations.get
     DialogFlowProjectsOperationsGetResource,
+    DialogFlowProjectsOperationsGet (..),
     newDialogFlowProjectsOperationsGet,
-    DialogFlowProjectsOperationsGet,
 
     -- ** dialogflow.projects.operations.list
     DialogFlowProjectsOperationsListResource,
+    DialogFlowProjectsOperationsList (..),
     newDialogFlowProjectsOperationsList,
-    DialogFlowProjectsOperationsList,
 
     -- * Types
 

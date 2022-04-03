@@ -34,8 +34,8 @@ module Gogol.DFAReporting.EventTags.Delete
     DFAReportingEventTagsDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingEventTagsDelete (..),
     newDFAReportingEventTagsDelete,
-    DFAReportingEventTagsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
     ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource,
 
     -- ** Constructing a Request
+    ClouddebuggerDebuggerDebuggeesBreakpointsDelete (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsDelete,
-    ClouddebuggerDebuggerDebuggeesBreakpointsDelete,
   )
 where
 

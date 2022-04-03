@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Calendars.List
     DirectoryResourcesCalendarsListResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesCalendarsList (..),
     newDirectoryResourcesCalendarsList,
-    DirectoryResourcesCalendarsList,
   )
 where
 

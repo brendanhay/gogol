@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Channels.Stop
     AdminChannelsStopResource,
 
     -- ** Constructing a Request
+    AdminChannelsStop (..),
     newAdminChannelsStop,
-    AdminChannelsStop,
   )
 where
 

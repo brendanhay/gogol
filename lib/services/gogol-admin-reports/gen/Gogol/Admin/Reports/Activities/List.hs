@@ -34,8 +34,8 @@ module Gogol.Admin.Reports.Activities.List
     ReportsActivitiesListResource,
 
     -- ** Constructing a Request
+    ReportsActivitiesList (..),
     newReportsActivitiesList,
-    ReportsActivitiesList,
   )
 where
 

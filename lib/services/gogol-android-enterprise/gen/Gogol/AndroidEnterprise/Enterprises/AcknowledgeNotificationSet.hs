@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
     AndroidEnterpriseEnterprisesAcknowledgeNotificationSetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesAcknowledgeNotificationSet (..),
     newAndroidEnterpriseEnterprisesAcknowledgeNotificationSet,
-    AndroidEnterpriseEnterprisesAcknowledgeNotificationSet,
   )
 where
 

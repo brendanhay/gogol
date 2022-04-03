@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Experiments.Patch
     AnalyticsManagementExperimentsPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementExperimentsPatch (..),
     newAnalyticsManagementExperimentsPatch,
-    AnalyticsManagementExperimentsPatch,
   )
 where
 

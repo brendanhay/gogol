@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Watch
     GmailUsersWatchResource,
 
     -- ** Constructing a Request
+    GmailUsersWatch (..),
     newGmailUsersWatch,
-    GmailUsersWatch,
   )
 where
 

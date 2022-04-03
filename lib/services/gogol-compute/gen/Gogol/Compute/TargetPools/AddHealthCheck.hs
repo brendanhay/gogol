@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.AddHealthCheck
     ComputeTargetPoolsAddHealthCheckResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsAddHealthCheck (..),
     newComputeTargetPoolsAddHealthCheck,
-    ComputeTargetPoolsAddHealthCheck,
   )
 where
 

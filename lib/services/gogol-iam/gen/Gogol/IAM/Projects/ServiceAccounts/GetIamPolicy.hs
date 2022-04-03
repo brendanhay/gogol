@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.GetIamPolicy
     IAMProjectsServiceAccountsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsGetIamPolicy (..),
     newIAMProjectsServiceAccountsGetIamPolicy,
-    IAMProjectsServiceAccountsGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.AchievementConfigurations.Get
     GamesConfigurationAchievementConfigurationsGetResource,
 
     -- ** Constructing a Request
+    GamesConfigurationAchievementConfigurationsGet (..),
     newGamesConfigurationAchievementConfigurationsGet,
-    GamesConfigurationAchievementConfigurationsGet,
   )
 where
 

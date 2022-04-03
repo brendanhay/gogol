@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.TenancyUnits.List
     ServiceConsumerManagementServicesTenancyUnitsListResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesTenancyUnitsList (..),
     newServiceConsumerManagementServicesTenancyUnitsList,
-    ServiceConsumerManagementServicesTenancyUnitsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.ApplyUpdatesToInstances
     ComputeRegionInstanceGroupManagersApplyUpdatesToInstancesResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersApplyUpdatesToInstances (..),
     newComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
-    ComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
   )
 where
 

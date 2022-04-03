@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.GetSettings
     LoggingBillingAccountsGetSettingsResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsGetSettings (..),
     newLoggingBillingAccountsGetSettings,
-    LoggingBillingAccountsGetSettings,
   )
 where
 

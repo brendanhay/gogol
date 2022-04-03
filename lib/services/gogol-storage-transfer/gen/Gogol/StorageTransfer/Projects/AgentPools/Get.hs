@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.Projects.AgentPools.Get
     StorageTransferProjectsAgentPoolsGetResource,
 
     -- ** Constructing a Request
+    StorageTransferProjectsAgentPoolsGet (..),
     newStorageTransferProjectsAgentPoolsGet,
-    StorageTransferProjectsAgentPoolsGet,
   )
 where
 

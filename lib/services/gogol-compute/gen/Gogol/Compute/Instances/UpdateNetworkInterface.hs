@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.UpdateNetworkInterface
     ComputeInstancesUpdateNetworkInterfaceResource,
 
     -- ** Constructing a Request
+    ComputeInstancesUpdateNetworkInterface (..),
     newComputeInstancesUpdateNetworkInterface,
-    ComputeInstancesUpdateNetworkInterface,
   )
 where
 

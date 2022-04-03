@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Insert
     GmailUsersMessagesInsertResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesInsert (..),
     newGmailUsersMessagesInsert,
-    GmailUsersMessagesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnaddress.Insert
     ContentReturnaddressInsertResource,
 
     -- ** Constructing a Request
+    ContentReturnaddressInsert (..),
     newContentReturnaddressInsert,
-    ContentReturnaddressInsert,
   )
 where
 

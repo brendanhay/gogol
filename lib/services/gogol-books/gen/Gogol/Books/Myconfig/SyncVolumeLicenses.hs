@@ -34,8 +34,8 @@ module Gogol.Books.Myconfig.SyncVolumeLicenses
     BooksMyconfigSyncVolumeLicensesResource,
 
     -- ** Constructing a Request
+    BooksMyconfigSyncVolumeLicenses (..),
     newBooksMyconfigSyncVolumeLicenses,
-    BooksMyconfigSyncVolumeLicenses,
   )
 where
 

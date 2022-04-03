@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
     AccessApprovalOrganizationsApprovalRequestsDismissResource,
 
     -- ** Constructing a Request
+    AccessApprovalOrganizationsApprovalRequestsDismiss (..),
     newAccessApprovalOrganizationsApprovalRequestsDismiss,
-    AccessApprovalOrganizationsApprovalRequestsDismiss,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Runtimes.List
     CloudFunctionsProjectsLocationsRuntimesListResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsRuntimesList (..),
     newCloudFunctionsProjectsLocationsRuntimesList,
-    CloudFunctionsProjectsLocationsRuntimesList,
   )
 where
 

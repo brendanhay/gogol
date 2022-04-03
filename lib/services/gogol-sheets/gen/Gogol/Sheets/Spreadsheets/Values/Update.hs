@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Values.Update
     SheetsSpreadsheetsValuesUpdateResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsValuesUpdate (..),
     newSheetsSpreadsheetsValuesUpdate,
-    SheetsSpreadsheetsValuesUpdate,
   )
 where
 

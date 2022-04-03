@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.Operations.Get
     AccessContextManagerOperationsGetResource,
 
     -- ** Constructing a Request
+    AccessContextManagerOperationsGet (..),
     newAccessContextManagerOperationsGet,
-    AccessContextManagerOperationsGet,
   )
 where
 

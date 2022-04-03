@@ -34,8 +34,8 @@ module Gogol.Compute.Interconnects.Delete
     ComputeInterconnectsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeInterconnectsDelete (..),
     newComputeInterconnectsDelete,
-    ComputeInterconnectsDelete,
   )
 where
 

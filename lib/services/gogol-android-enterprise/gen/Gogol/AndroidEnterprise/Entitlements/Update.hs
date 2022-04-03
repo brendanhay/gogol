@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Entitlements.Update
     AndroidEnterpriseEntitlementsUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEntitlementsUpdate (..),
     newAndroidEnterpriseEntitlementsUpdate,
-    AndroidEnterpriseEntitlementsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
     AdExchangeBuyer2AccountsClientsInvitationsCreateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsClientsInvitationsCreate (..),
     newAdExchangeBuyer2AccountsClientsInvitationsCreate,
-    AdExchangeBuyer2AccountsClientsInvitationsCreate,
   )
 where
 

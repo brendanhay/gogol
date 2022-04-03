@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.List
     ComputeRegionDisksListResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksList (..),
     newComputeRegionDisksList,
-    ComputeRegionDisksList,
   )
 where
 

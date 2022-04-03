@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.GetSpectrumBatch
     SpectrumPawsGetSpectrumBatchResource,
 
     -- ** Constructing a Request
+    SpectrumPawsGetSpectrumBatch (..),
     newSpectrumPawsGetSpectrumBatch,
-    SpectrumPawsGetSpectrumBatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Genomics.Projects.Workers.CheckIn
     GenomicsProjectsWorkersCheckInResource,
 
     -- ** Constructing a Request
+    GenomicsProjectsWorkersCheckIn (..),
     newGenomicsProjectsWorkersCheckIn,
-    GenomicsProjectsWorkersCheckIn,
   )
 where
 

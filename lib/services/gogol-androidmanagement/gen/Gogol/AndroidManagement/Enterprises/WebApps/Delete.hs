@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.WebApps.Delete
     AndroidManagementEnterprisesWebAppsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesWebAppsDelete (..),
     newAndroidManagementEnterprisesWebAppsDelete,
-    AndroidManagementEnterprisesWebAppsDelete,
   )
 where
 

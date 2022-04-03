@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.DomainMappings.Patch
     AppEngineAppsDomainMappingsPatchResource,
 
     -- ** Constructing a Request
+    AppEngineAppsDomainMappingsPatch (..),
     newAppEngineAppsDomainMappingsPatch,
-    AppEngineAppsDomainMappingsPatch,
   )
 where
 

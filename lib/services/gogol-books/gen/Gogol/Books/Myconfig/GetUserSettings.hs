@@ -34,8 +34,8 @@ module Gogol.Books.Myconfig.GetUserSettings
     BooksMyconfigGetUserSettingsResource,
 
     -- ** Constructing a Request
+    BooksMyconfigGetUserSettings (..),
     newBooksMyconfigGetUserSettings,
-    BooksMyconfigGetUserSettings,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.PlaylistItems.Insert
     YouTubePlaylistItemsInsertResource,
 
     -- ** Constructing a Request
+    YouTubePlaylistItemsInsert (..),
     newYouTubePlaylistItemsInsert,
-    YouTubePlaylistItemsInsert,
   )
 where
 

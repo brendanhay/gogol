@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
     AdExchangeBuyer2AccountsCreativesDealAssociationsRemoveResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsCreativesDealAssociationsRemove (..),
     newAdExchangeBuyer2AccountsCreativesDealAssociationsRemove,
-    AdExchangeBuyer2AccountsCreativesDealAssociationsRemove,
   )
 where
 

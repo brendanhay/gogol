@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Orgunits.List
     DirectoryOrgunitsListResource,
 
     -- ** Constructing a Request
+    DirectoryOrgunitsList (..),
     newDirectoryOrgunitsList,
-    DirectoryOrgunitsList,
   )
 where
 

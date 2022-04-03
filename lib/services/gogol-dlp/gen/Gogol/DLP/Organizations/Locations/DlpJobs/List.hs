@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.DlpJobs.List
     DLPOrganizationsLocationsDlpJobsListResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsDlpJobsList (..),
     newDLPOrganizationsLocationsDlpJobsList,
-    DLPOrganizationsLocationsDlpJobsList,
   )
 where
 

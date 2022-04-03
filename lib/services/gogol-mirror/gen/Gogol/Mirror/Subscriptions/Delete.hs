@@ -34,8 +34,8 @@ module Gogol.Mirror.Subscriptions.Delete
     MirrorSubscriptionsDeleteResource,
 
     -- ** Constructing a Request
+    MirrorSubscriptionsDelete (..),
     newMirrorSubscriptionsDelete,
-    MirrorSubscriptionsDelete,
   )
 where
 

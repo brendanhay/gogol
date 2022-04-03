@@ -34,8 +34,8 @@ module Gogol.Compute.ServiceAttachments.GetIamPolicy
     ComputeServiceAttachmentsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeServiceAttachmentsGetIamPolicy (..),
     newComputeServiceAttachmentsGetIamPolicy,
-    ComputeServiceAttachmentsGetIamPolicy,
   )
 where
 

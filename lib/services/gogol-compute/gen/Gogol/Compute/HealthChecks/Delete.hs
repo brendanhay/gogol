@@ -34,8 +34,8 @@ module Gogol.Compute.HealthChecks.Delete
     ComputeHealthChecksDeleteResource,
 
     -- ** Constructing a Request
+    ComputeHealthChecksDelete (..),
     newComputeHealthChecksDelete,
-    ComputeHealthChecksDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Pools.List
     ReplicaPoolPoolsListResource,
 
     -- ** Constructing a Request
+    ReplicaPoolPoolsList (..),
     newReplicaPoolPoolsList,
-    ReplicaPoolPoolsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Comments.Get
     DriveCommentsGetResource,
 
     -- ** Constructing a Request
+    DriveCommentsGet (..),
     newDriveCommentsGet,
-    DriveCommentsGet,
   )
 where
 

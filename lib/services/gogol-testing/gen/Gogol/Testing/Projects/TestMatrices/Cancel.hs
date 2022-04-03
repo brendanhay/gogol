@@ -34,8 +34,8 @@ module Gogol.Testing.Projects.TestMatrices.Cancel
     TestingProjectsTestMatricesCancelResource,
 
     -- ** Constructing a Request
+    TestingProjectsTestMatricesCancel (..),
     newTestingProjectsTestMatricesCancel,
-    TestingProjectsTestMatricesCancel,
   )
 where
 

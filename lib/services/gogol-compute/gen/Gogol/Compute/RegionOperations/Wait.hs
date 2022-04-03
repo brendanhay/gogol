@@ -34,8 +34,8 @@ module Gogol.Compute.RegionOperations.Wait
     ComputeRegionOperationsWaitResource,
 
     -- ** Constructing a Request
+    ComputeRegionOperationsWait (..),
     newComputeRegionOperationsWait,
-    ComputeRegionOperationsWait,
   )
 where
 

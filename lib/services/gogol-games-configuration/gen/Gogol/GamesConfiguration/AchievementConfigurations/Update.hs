@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.AchievementConfigurations.Update
     GamesConfigurationAchievementConfigurationsUpdateResource,
 
     -- ** Constructing a Request
+    GamesConfigurationAchievementConfigurationsUpdate (..),
     newGamesConfigurationAchievementConfigurationsUpdate,
-    GamesConfigurationAchievementConfigurationsUpdate,
   )
 where
 

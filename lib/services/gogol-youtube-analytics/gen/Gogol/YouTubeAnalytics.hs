@@ -44,43 +44,43 @@ module Gogol.YouTubeAnalytics
 
     -- ** youtubeAnalytics.groupItems.delete
     YouTubeAnalyticsGroupItemsDeleteResource,
+    YouTubeAnalyticsGroupItemsDelete (..),
     newYouTubeAnalyticsGroupItemsDelete,
-    YouTubeAnalyticsGroupItemsDelete,
 
     -- ** youtubeAnalytics.groupItems.insert
     YouTubeAnalyticsGroupItemsInsertResource,
+    YouTubeAnalyticsGroupItemsInsert (..),
     newYouTubeAnalyticsGroupItemsInsert,
-    YouTubeAnalyticsGroupItemsInsert,
 
     -- ** youtubeAnalytics.groupItems.list
     YouTubeAnalyticsGroupItemsListResource,
+    YouTubeAnalyticsGroupItemsList (..),
     newYouTubeAnalyticsGroupItemsList,
-    YouTubeAnalyticsGroupItemsList,
 
     -- ** youtubeAnalytics.groups.delete
     YouTubeAnalyticsGroupsDeleteResource,
+    YouTubeAnalyticsGroupsDelete (..),
     newYouTubeAnalyticsGroupsDelete,
-    YouTubeAnalyticsGroupsDelete,
 
     -- ** youtubeAnalytics.groups.insert
     YouTubeAnalyticsGroupsInsertResource,
+    YouTubeAnalyticsGroupsInsert (..),
     newYouTubeAnalyticsGroupsInsert,
-    YouTubeAnalyticsGroupsInsert,
 
     -- ** youtubeAnalytics.groups.list
     YouTubeAnalyticsGroupsListResource,
+    YouTubeAnalyticsGroupsList (..),
     newYouTubeAnalyticsGroupsList,
-    YouTubeAnalyticsGroupsList,
 
     -- ** youtubeAnalytics.groups.update
     YouTubeAnalyticsGroupsUpdateResource,
+    YouTubeAnalyticsGroupsUpdate (..),
     newYouTubeAnalyticsGroupsUpdate,
-    YouTubeAnalyticsGroupsUpdate,
 
     -- ** youtubeAnalytics.reports.query
     YouTubeAnalyticsReportsQueryResource,
+    YouTubeAnalyticsReportsQuery (..),
     newYouTubeAnalyticsReportsQuery,
-    YouTubeAnalyticsReportsQuery,
 
     -- * Types
 

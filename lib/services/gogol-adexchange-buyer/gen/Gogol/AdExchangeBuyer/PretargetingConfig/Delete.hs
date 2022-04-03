@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.PretargetingConfig.Delete
     AdExchangeBuyerPretargetingConfigDeleteResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerPretargetingConfigDelete (..),
     newAdExchangeBuyerPretargetingConfigDelete,
-    AdExchangeBuyerPretargetingConfigDelete,
   )
 where
 

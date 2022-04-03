@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.EncodedUpdates.Get
     SafeBrowsingEncodedUpdatesGetResource,
 
     -- ** Constructing a Request
+    SafeBrowsingEncodedUpdatesGet (..),
     newSafeBrowsingEncodedUpdatesGet,
-    SafeBrowsingEncodedUpdatesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroups.AddInstances
     ComputeInstanceGroupsAddInstancesResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupsAddInstances (..),
     newComputeInstanceGroupsAddInstances,
-    ComputeInstanceGroupsAddInstances,
   )
 where
 

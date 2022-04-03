@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.Delete
     MonitoringServicesDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringServicesDelete (..),
     newMonitoringServicesDelete,
-    MonitoringServicesDelete,
   )
 where
 

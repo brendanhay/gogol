@@ -34,8 +34,8 @@ module Gogol.Chat.Rooms.Messages
     ChatRoomsMessagesResource,
 
     -- ** Constructing a Request
+    ChatRoomsMessages (..),
     newChatRoomsMessages,
-    ChatRoomsMessages,
   )
 where
 

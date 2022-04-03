@@ -34,8 +34,8 @@ module Gogol.Chat.Dms.Conversations.Messages
     ChatDmsConversationsMessagesResource,
 
     -- ** Constructing a Request
+    ChatDmsConversationsMessages (..),
     newChatDmsConversationsMessages,
-    ChatDmsConversationsMessages,
   )
 where
 

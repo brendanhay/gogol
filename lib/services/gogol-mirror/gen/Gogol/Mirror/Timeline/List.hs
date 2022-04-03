@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.List
     MirrorTimelineListResource,
 
     -- ** Constructing a Request
+    MirrorTimelineList (..),
     newMirrorTimelineList,
-    MirrorTimelineList,
   )
 where
 

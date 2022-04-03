@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Surveys.Update
     ConsumerSurveysSurveysUpdateResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysSurveysUpdate (..),
     newConsumerSurveysSurveysUpdate,
-    ConsumerSurveysSurveysUpdate,
   )
 where
 

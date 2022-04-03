@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Calendars.Patch
     DirectoryResourcesCalendarsPatchResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesCalendarsPatch (..),
     newDirectoryResourcesCalendarsPatch,
-    DirectoryResourcesCalendarsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DNS.Policies.Patch
     DNSPoliciesPatchResource,
 
     -- ** Constructing a Request
+    DNSPoliciesPatch (..),
     newDNSPoliciesPatch,
-    DNSPoliciesPatch,
   )
 where
 

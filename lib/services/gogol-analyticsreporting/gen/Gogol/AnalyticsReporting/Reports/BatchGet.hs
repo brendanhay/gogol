@@ -34,8 +34,8 @@ module Gogol.AnalyticsReporting.Reports.BatchGet
     AnalyticsReportingReportsBatchGetResource,
 
     -- ** Constructing a Request
+    AnalyticsReportingReportsBatchGet (..),
     newAnalyticsReportingReportsBatchGet,
-    AnalyticsReportingReportsBatchGet,
   )
 where
 

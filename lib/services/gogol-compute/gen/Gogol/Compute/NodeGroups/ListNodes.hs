@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.ListNodes
     ComputeNodeGroupsListNodesResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsListNodes (..),
     newComputeNodeGroupsListNodes,
-    ComputeNodeGroupsListNodes,
   )
 where
 

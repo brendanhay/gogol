@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Holds.Delete
     VaultMattersHoldsDeleteResource,
 
     -- ** Constructing a Request
+    VaultMattersHoldsDelete (..),
     newVaultMattersHoldsDelete,
-    VaultMattersHoldsDelete,
   )
 where
 

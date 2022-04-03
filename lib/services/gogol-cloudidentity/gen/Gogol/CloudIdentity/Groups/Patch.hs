@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Patch
     CloudIdentityGroupsPatchResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsPatch (..),
     newCloudIdentityGroupsPatch,
-    CloudIdentityGroupsPatch,
   )
 where
 

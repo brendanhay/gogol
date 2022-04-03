@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.AutoscalingPolicies.Delete
     DataprocProjectsRegionsAutoscalingPoliciesDeleteResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsAutoscalingPoliciesDelete (..),
     newDataprocProjectsRegionsAutoscalingPoliciesDelete,
-    DataprocProjectsRegionsAutoscalingPoliciesDelete,
   )
 where
 

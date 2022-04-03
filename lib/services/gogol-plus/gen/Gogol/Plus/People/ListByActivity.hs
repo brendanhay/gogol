@@ -34,8 +34,8 @@ module Gogol.Plus.People.ListByActivity
     PlusPeopleListByActivityResource,
 
     -- ** Constructing a Request
+    PlusPeopleListByActivity (..),
     newPlusPeopleListByActivity,
-    PlusPeopleListByActivity,
   )
 where
 

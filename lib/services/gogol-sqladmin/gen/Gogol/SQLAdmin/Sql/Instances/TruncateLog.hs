@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.TruncateLog
     SqlInstancesTruncateLogResource,
 
     -- ** Constructing a Request
+    SqlInstancesTruncateLog (..),
     newSqlInstancesTruncateLog,
-    SqlInstancesTruncateLog,
   )
 where
 

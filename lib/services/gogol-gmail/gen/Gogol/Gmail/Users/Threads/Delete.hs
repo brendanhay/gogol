@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Threads.Delete
     GmailUsersThreadsDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersThreadsDelete (..),
     newGmailUsersThreadsDelete,
-    GmailUsersThreadsDelete,
   )
 where
 

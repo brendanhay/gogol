@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Operations.Cancel
     ServiceUsageOperationsCancelResource,
 
     -- ** Constructing a Request
+    ServiceUsageOperationsCancel (..),
     newServiceUsageOperationsCancel,
-    ServiceUsageOperationsCancel,
   )
 where
 

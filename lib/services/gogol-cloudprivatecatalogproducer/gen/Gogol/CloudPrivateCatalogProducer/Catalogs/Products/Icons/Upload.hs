@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
     CloudPrivateCatalogProducerCatalogsProductsIconsUploadResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsProductsIconsUpload (..),
     newCloudPrivateCatalogProducerCatalogsProductsIconsUpload,
-    CloudPrivateCatalogProducerCatalogsProductsIconsUpload,
   )
 where
 

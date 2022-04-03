@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Marketplacenotes.Insert
     AdExchangeBuyerMarketplacenotesInsertResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerMarketplacenotesInsert (..),
     newAdExchangeBuyerMarketplacenotesInsert,
-    AdExchangeBuyerMarketplacenotesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Operations.List
     SecurityCenterOrganizationsOperationsListResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsOperationsList (..),
     newSecurityCenterOrganizationsOperationsList,
-    SecurityCenterOrganizationsOperationsList,
   )
 where
 

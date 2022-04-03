@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.Get
     ComputeSnapshotsGetResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsGet (..),
     newComputeSnapshotsGet,
-    ComputeSnapshotsGet,
   )
 where
 

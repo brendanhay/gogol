@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.List
     MonitoringServicesServiceLevelObjectivesListResource,
 
     -- ** Constructing a Request
+    MonitoringServicesServiceLevelObjectivesList (..),
     newMonitoringServicesServiceLevelObjectivesList,
-    MonitoringServicesServiceLevelObjectivesList,
   )
 where
 

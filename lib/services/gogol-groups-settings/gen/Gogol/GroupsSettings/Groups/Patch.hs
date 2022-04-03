@@ -34,8 +34,8 @@ module Gogol.GroupsSettings.Groups.Patch
     GroupsSettingsGroupsPatchResource,
 
     -- ** Constructing a Request
+    GroupsSettingsGroupsPatch (..),
     newGroupsSettingsGroupsPatch,
-    GroupsSettingsGroupsPatch,
   )
 where
 

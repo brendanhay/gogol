@@ -42,58 +42,58 @@ module Gogol.ConsumerSurveys
 
     -- ** consumersurveys.mobileapppanels.get
     ConsumerSurveysMobileapppanelsGetResource,
+    ConsumerSurveysMobileapppanelsGet (..),
     newConsumerSurveysMobileapppanelsGet,
-    ConsumerSurveysMobileapppanelsGet,
 
     -- ** consumersurveys.mobileapppanels.list
     ConsumerSurveysMobileapppanelsListResource,
+    ConsumerSurveysMobileapppanelsList (..),
     newConsumerSurveysMobileapppanelsList,
-    ConsumerSurveysMobileapppanelsList,
 
     -- ** consumersurveys.mobileapppanels.update
     ConsumerSurveysMobileapppanelsUpdateResource,
+    ConsumerSurveysMobileapppanelsUpdate (..),
     newConsumerSurveysMobileapppanelsUpdate,
-    ConsumerSurveysMobileapppanelsUpdate,
 
     -- ** consumersurveys.results.get
     ConsumerSurveysResultsGetResource,
+    ConsumerSurveysResultsGet (..),
     newConsumerSurveysResultsGet,
-    ConsumerSurveysResultsGet,
 
     -- ** consumersurveys.surveys.delete
     ConsumerSurveysSurveysDeleteResource,
+    ConsumerSurveysSurveysDelete (..),
     newConsumerSurveysSurveysDelete,
-    ConsumerSurveysSurveysDelete,
 
     -- ** consumersurveys.surveys.get
     ConsumerSurveysSurveysGetResource,
+    ConsumerSurveysSurveysGet (..),
     newConsumerSurveysSurveysGet,
-    ConsumerSurveysSurveysGet,
 
     -- ** consumersurveys.surveys.insert
     ConsumerSurveysSurveysInsertResource,
+    ConsumerSurveysSurveysInsert (..),
     newConsumerSurveysSurveysInsert,
-    ConsumerSurveysSurveysInsert,
 
     -- ** consumersurveys.surveys.list
     ConsumerSurveysSurveysListResource,
+    ConsumerSurveysSurveysList (..),
     newConsumerSurveysSurveysList,
-    ConsumerSurveysSurveysList,
 
     -- ** consumersurveys.surveys.start
     ConsumerSurveysSurveysStartResource,
+    ConsumerSurveysSurveysStart (..),
     newConsumerSurveysSurveysStart,
-    ConsumerSurveysSurveysStart,
 
     -- ** consumersurveys.surveys.stop
     ConsumerSurveysSurveysStopResource,
+    ConsumerSurveysSurveysStop (..),
     newConsumerSurveysSurveysStop,
-    ConsumerSurveysSurveysStop,
 
     -- ** consumersurveys.surveys.update
     ConsumerSurveysSurveysUpdateResource,
+    ConsumerSurveysSurveysUpdate (..),
     newConsumerSurveysSurveysUpdate,
-    ConsumerSurveysSurveysUpdate,
 
     -- * Types
 

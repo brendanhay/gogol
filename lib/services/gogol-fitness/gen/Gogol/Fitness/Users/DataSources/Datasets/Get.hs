@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.DataSources.Datasets.Get
     FitnessUsersDataSourcesDatasetsGetResource,
 
     -- ** Constructing a Request
+    FitnessUsersDataSourcesDatasetsGet (..),
     newFitnessUsersDataSourcesDatasetsGet,
-    FitnessUsersDataSourcesDatasetsGet,
   )
 where
 

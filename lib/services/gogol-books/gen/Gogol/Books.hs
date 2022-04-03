@@ -40,258 +40,258 @@ module Gogol.Books
 
     -- ** books.bookshelves.get
     BooksBookshelvesGetResource,
+    BooksBookshelvesGet (..),
     newBooksBookshelvesGet,
-    BooksBookshelvesGet,
 
     -- ** books.bookshelves.list
     BooksBookshelvesListResource,
+    BooksBookshelvesList (..),
     newBooksBookshelvesList,
-    BooksBookshelvesList,
 
     -- ** books.bookshelves.volumes.list
     BooksBookshelvesVolumesListResource,
+    BooksBookshelvesVolumesList (..),
     newBooksBookshelvesVolumesList,
-    BooksBookshelvesVolumesList,
 
     -- ** books.cloudloading.addBook
     BooksCloudloadingAddBookResource,
+    BooksCloudloadingAddBook (..),
     newBooksCloudloadingAddBook,
-    BooksCloudloadingAddBook,
 
     -- ** books.cloudloading.deleteBook
     BooksCloudloadingDeleteBookResource,
+    BooksCloudloadingDeleteBook (..),
     newBooksCloudloadingDeleteBook,
-    BooksCloudloadingDeleteBook,
 
     -- ** books.cloudloading.updateBook
     BooksCloudloadingUpdateBookResource,
+    BooksCloudloadingUpdateBook (..),
     newBooksCloudloadingUpdateBook,
-    BooksCloudloadingUpdateBook,
 
     -- ** books.dictionary.listOfflineMetadata
     BooksDictionaryListOfflineMetadataResource,
+    BooksDictionaryListOfflineMetadata (..),
     newBooksDictionaryListOfflineMetadata,
-    BooksDictionaryListOfflineMetadata,
 
     -- ** books.familysharing.getFamilyInfo
     BooksFamilysharingGetFamilyInfoResource,
+    BooksFamilysharingGetFamilyInfo (..),
     newBooksFamilysharingGetFamilyInfo,
-    BooksFamilysharingGetFamilyInfo,
 
     -- ** books.familysharing.share
     BooksFamilysharingShareResource,
+    BooksFamilysharingShare (..),
     newBooksFamilysharingShare,
-    BooksFamilysharingShare,
 
     -- ** books.familysharing.unshare
     BooksFamilysharingUnshareResource,
+    BooksFamilysharingUnshare (..),
     newBooksFamilysharingUnshare,
-    BooksFamilysharingUnshare,
 
     -- ** books.layers.annotationData.get
     BooksLayersAnnotationDataGetResource,
+    BooksLayersAnnotationDataGet (..),
     newBooksLayersAnnotationDataGet,
-    BooksLayersAnnotationDataGet,
 
     -- ** books.layers.annotationData.list
     BooksLayersAnnotationDataListResource,
+    BooksLayersAnnotationDataList (..),
     newBooksLayersAnnotationDataList,
-    BooksLayersAnnotationDataList,
 
     -- ** books.layers.get
     BooksLayersGetResource,
+    BooksLayersGet (..),
     newBooksLayersGet,
-    BooksLayersGet,
 
     -- ** books.layers.list
     BooksLayersListResource,
+    BooksLayersList (..),
     newBooksLayersList,
-    BooksLayersList,
 
     -- ** books.layers.volumeAnnotations.get
     BooksLayersVolumeAnnotationsGetResource,
+    BooksLayersVolumeAnnotationsGet (..),
     newBooksLayersVolumeAnnotationsGet,
-    BooksLayersVolumeAnnotationsGet,
 
     -- ** books.layers.volumeAnnotations.list
     BooksLayersVolumeAnnotationsListResource,
+    BooksLayersVolumeAnnotationsList (..),
     newBooksLayersVolumeAnnotationsList,
-    BooksLayersVolumeAnnotationsList,
 
     -- ** books.myconfig.getUserSettings
     BooksMyconfigGetUserSettingsResource,
+    BooksMyconfigGetUserSettings (..),
     newBooksMyconfigGetUserSettings,
-    BooksMyconfigGetUserSettings,
 
     -- ** books.myconfig.releaseDownloadAccess
     BooksMyconfigReleaseDownloadAccessResource,
+    BooksMyconfigReleaseDownloadAccess (..),
     newBooksMyconfigReleaseDownloadAccess,
-    BooksMyconfigReleaseDownloadAccess,
 
     -- ** books.myconfig.requestAccess
     BooksMyconfigRequestAccessResource,
+    BooksMyconfigRequestAccess (..),
     newBooksMyconfigRequestAccess,
-    BooksMyconfigRequestAccess,
 
     -- ** books.myconfig.syncVolumeLicenses
     BooksMyconfigSyncVolumeLicensesResource,
+    BooksMyconfigSyncVolumeLicenses (..),
     newBooksMyconfigSyncVolumeLicenses,
-    BooksMyconfigSyncVolumeLicenses,
 
     -- ** books.myconfig.updateUserSettings
     BooksMyconfigUpdateUserSettingsResource,
+    BooksMyconfigUpdateUserSettings (..),
     newBooksMyconfigUpdateUserSettings,
-    BooksMyconfigUpdateUserSettings,
 
     -- ** books.mylibrary.annotations.delete
     BooksMylibraryAnnotationsDeleteResource,
+    BooksMylibraryAnnotationsDelete (..),
     newBooksMylibraryAnnotationsDelete,
-    BooksMylibraryAnnotationsDelete,
 
     -- ** books.mylibrary.annotations.insert
     BooksMylibraryAnnotationsInsertResource,
+    BooksMylibraryAnnotationsInsert (..),
     newBooksMylibraryAnnotationsInsert,
-    BooksMylibraryAnnotationsInsert,
 
     -- ** books.mylibrary.annotations.list
     BooksMylibraryAnnotationsListResource,
+    BooksMylibraryAnnotationsList (..),
     newBooksMylibraryAnnotationsList,
-    BooksMylibraryAnnotationsList,
 
     -- ** books.mylibrary.annotations.summary
     BooksMylibraryAnnotationsSummaryResource,
+    BooksMylibraryAnnotationsSummary (..),
     newBooksMylibraryAnnotationsSummary,
-    BooksMylibraryAnnotationsSummary,
 
     -- ** books.mylibrary.annotations.update
     BooksMylibraryAnnotationsUpdateResource,
+    BooksMylibraryAnnotationsUpdate (..),
     newBooksMylibraryAnnotationsUpdate,
-    BooksMylibraryAnnotationsUpdate,
 
     -- ** books.mylibrary.bookshelves.addVolume
     BooksMylibraryBookshelvesAddVolumeResource,
+    BooksMylibraryBookshelvesAddVolume (..),
     newBooksMylibraryBookshelvesAddVolume,
-    BooksMylibraryBookshelvesAddVolume,
 
     -- ** books.mylibrary.bookshelves.clearVolumes
     BooksMylibraryBookshelvesClearVolumesResource,
+    BooksMylibraryBookshelvesClearVolumes (..),
     newBooksMylibraryBookshelvesClearVolumes,
-    BooksMylibraryBookshelvesClearVolumes,
 
     -- ** books.mylibrary.bookshelves.get
     BooksMylibraryBookshelvesGetResource,
+    BooksMylibraryBookshelvesGet (..),
     newBooksMylibraryBookshelvesGet,
-    BooksMylibraryBookshelvesGet,
 
     -- ** books.mylibrary.bookshelves.list
     BooksMylibraryBookshelvesListResource,
+    BooksMylibraryBookshelvesList (..),
     newBooksMylibraryBookshelvesList,
-    BooksMylibraryBookshelvesList,
 
     -- ** books.mylibrary.bookshelves.moveVolume
     BooksMylibraryBookshelvesMoveVolumeResource,
+    BooksMylibraryBookshelvesMoveVolume (..),
     newBooksMylibraryBookshelvesMoveVolume,
-    BooksMylibraryBookshelvesMoveVolume,
 
     -- ** books.mylibrary.bookshelves.removeVolume
     BooksMylibraryBookshelvesRemoveVolumeResource,
+    BooksMylibraryBookshelvesRemoveVolume (..),
     newBooksMylibraryBookshelvesRemoveVolume,
-    BooksMylibraryBookshelvesRemoveVolume,
 
     -- ** books.mylibrary.bookshelves.volumes.list
     BooksMylibraryBookshelvesVolumesListResource,
+    BooksMylibraryBookshelvesVolumesList (..),
     newBooksMylibraryBookshelvesVolumesList,
-    BooksMylibraryBookshelvesVolumesList,
 
     -- ** books.mylibrary.readingpositions.get
     BooksMylibraryReadingpositionsGetResource,
+    BooksMylibraryReadingpositionsGet (..),
     newBooksMylibraryReadingpositionsGet,
-    BooksMylibraryReadingpositionsGet,
 
     -- ** books.mylibrary.readingpositions.setPosition
     BooksMylibraryReadingpositionsSetPositionResource,
+    BooksMylibraryReadingpositionsSetPosition (..),
     newBooksMylibraryReadingpositionsSetPosition,
-    BooksMylibraryReadingpositionsSetPosition,
 
     -- ** books.notification.get
     BooksNotificationGetResource,
+    BooksNotificationGet (..),
     newBooksNotificationGet,
-    BooksNotificationGet,
 
     -- ** books.onboarding.listCategories
     BooksOnboardingListCategoriesResource,
+    BooksOnboardingListCategories (..),
     newBooksOnboardingListCategories,
-    BooksOnboardingListCategories,
 
     -- ** books.onboarding.listCategoryVolumes
     BooksOnboardingListCategoryVolumesResource,
+    BooksOnboardingListCategoryVolumes (..),
     newBooksOnboardingListCategoryVolumes,
-    BooksOnboardingListCategoryVolumes,
 
     -- ** books.personalizedstream.get
     BooksPersonalizedstreamGetResource,
+    BooksPersonalizedstreamGet (..),
     newBooksPersonalizedstreamGet,
-    BooksPersonalizedstreamGet,
 
     -- ** books.promooffer.accept
     BooksPromoofferAcceptResource,
+    BooksPromoofferAccept (..),
     newBooksPromoofferAccept,
-    BooksPromoofferAccept,
 
     -- ** books.promooffer.dismiss
     BooksPromoofferDismissResource,
+    BooksPromoofferDismiss (..),
     newBooksPromoofferDismiss,
-    BooksPromoofferDismiss,
 
     -- ** books.promooffer.get
     BooksPromoofferGetResource,
+    BooksPromoofferGet (..),
     newBooksPromoofferGet,
-    BooksPromoofferGet,
 
     -- ** books.series.get
     BooksSeriesGetResource,
+    BooksSeriesGet (..),
     newBooksSeriesGet,
-    BooksSeriesGet,
 
     -- ** books.series.membership.get
     BooksSeriesMembershipGetResource,
+    BooksSeriesMembershipGet (..),
     newBooksSeriesMembershipGet,
-    BooksSeriesMembershipGet,
 
     -- ** books.volumes.associated.list
     BooksVolumesAssociatedListResource,
+    BooksVolumesAssociatedList (..),
     newBooksVolumesAssociatedList,
-    BooksVolumesAssociatedList,
 
     -- ** books.volumes.get
     BooksVolumesGetResource,
+    BooksVolumesGet (..),
     newBooksVolumesGet,
-    BooksVolumesGet,
 
     -- ** books.volumes.list
     BooksVolumesListResource,
+    BooksVolumesList (..),
     newBooksVolumesList,
-    BooksVolumesList,
 
     -- ** books.volumes.mybooks.list
     BooksVolumesMybooksListResource,
+    BooksVolumesMybooksList (..),
     newBooksVolumesMybooksList,
-    BooksVolumesMybooksList,
 
     -- ** books.volumes.recommended.list
     BooksVolumesRecommendedListResource,
+    BooksVolumesRecommendedList (..),
     newBooksVolumesRecommendedList,
-    BooksVolumesRecommendedList,
 
     -- ** books.volumes.recommended.rate
     BooksVolumesRecommendedRateResource,
+    BooksVolumesRecommendedRate (..),
     newBooksVolumesRecommendedRate,
-    BooksVolumesRecommendedRate,
 
     -- ** books.volumes.useruploaded.list
     BooksVolumesUseruploadedListResource,
+    BooksVolumesUseruploadedList (..),
     newBooksVolumesUseruploadedList,
-    BooksVolumesUseruploadedList,
 
     -- * Types
 

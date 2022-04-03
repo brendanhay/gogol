@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Inappproducts.Patch
     AndroidPublisherInappproductsPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherInappproductsPatch (..),
     newAndroidPublisherInappproductsPatch,
-    AndroidPublisherInappproductsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutclusters.Insert
     AndroidEnterpriseStorelayoutclustersInsertResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutclustersInsert (..),
     newAndroidEnterpriseStorelayoutclustersInsert,
-    AndroidEnterpriseStorelayoutclustersInsert,
   )
 where
 

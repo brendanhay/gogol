@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Users.Create
     AndroidPublisherUsersCreateResource,
 
     -- ** Constructing a Request
+    AndroidPublisherUsersCreate (..),
     newAndroidPublisherUsersCreate,
-    AndroidPublisherUsersCreate,
   )
 where
 

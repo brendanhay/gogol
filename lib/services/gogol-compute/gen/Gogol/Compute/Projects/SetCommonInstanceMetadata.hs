@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.SetCommonInstanceMetadata
     ComputeProjectsSetCommonInstanceMetadataResource,
 
     -- ** Constructing a Request
+    ComputeProjectsSetCommonInstanceMetadata (..),
     newComputeProjectsSetCommonInstanceMetadata,
-    ComputeProjectsSetCommonInstanceMetadata,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Operations.Cancel
     HealthcareProjectsLocationsDatasetsOperationsCancelResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsOperationsCancel (..),
     newHealthcareProjectsLocationsDatasetsOperationsCancel,
-    HealthcareProjectsLocationsDatasetsOperationsCancel,
   )
 where
 

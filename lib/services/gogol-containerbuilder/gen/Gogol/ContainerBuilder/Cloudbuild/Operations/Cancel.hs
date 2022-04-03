@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Operations.Cancel
     CloudbuildOperationsCancelResource,
 
     -- ** Constructing a Request
+    CloudbuildOperationsCancel (..),
     newCloudbuildOperationsCancel,
-    CloudbuildOperationsCancel,
   )
 where
 

@@ -48,233 +48,233 @@ module Gogol.BigtableAdmin
 
     -- ** bigtableadmin.operations.cancel
     BigtableAdminOperationsCancelResource,
+    BigtableAdminOperationsCancel (..),
     newBigtableAdminOperationsCancel,
-    BigtableAdminOperationsCancel,
 
     -- ** bigtableadmin.operations.delete
     BigtableAdminOperationsDeleteResource,
+    BigtableAdminOperationsDelete (..),
     newBigtableAdminOperationsDelete,
-    BigtableAdminOperationsDelete,
 
     -- ** bigtableadmin.operations.get
     BigtableAdminOperationsGetResource,
+    BigtableAdminOperationsGet (..),
     newBigtableAdminOperationsGet,
-    BigtableAdminOperationsGet,
 
     -- ** bigtableadmin.operations.projects.operations.list
     BigtableAdminOperationsProjectsOperationsListResource,
+    BigtableAdminOperationsProjectsOperationsList (..),
     newBigtableAdminOperationsProjectsOperationsList,
-    BigtableAdminOperationsProjectsOperationsList,
 
     -- ** bigtableadmin.projects.instances.appProfiles.create
     BigtableAdminProjectsInstancesAppProfilesCreateResource,
+    BigtableAdminProjectsInstancesAppProfilesCreate (..),
     newBigtableAdminProjectsInstancesAppProfilesCreate,
-    BigtableAdminProjectsInstancesAppProfilesCreate,
 
     -- ** bigtableadmin.projects.instances.appProfiles.delete
     BigtableAdminProjectsInstancesAppProfilesDeleteResource,
+    BigtableAdminProjectsInstancesAppProfilesDelete (..),
     newBigtableAdminProjectsInstancesAppProfilesDelete,
-    BigtableAdminProjectsInstancesAppProfilesDelete,
 
     -- ** bigtableadmin.projects.instances.appProfiles.get
     BigtableAdminProjectsInstancesAppProfilesGetResource,
+    BigtableAdminProjectsInstancesAppProfilesGet (..),
     newBigtableAdminProjectsInstancesAppProfilesGet,
-    BigtableAdminProjectsInstancesAppProfilesGet,
 
     -- ** bigtableadmin.projects.instances.appProfiles.list
     BigtableAdminProjectsInstancesAppProfilesListResource,
+    BigtableAdminProjectsInstancesAppProfilesList (..),
     newBigtableAdminProjectsInstancesAppProfilesList,
-    BigtableAdminProjectsInstancesAppProfilesList,
 
     -- ** bigtableadmin.projects.instances.appProfiles.patch
     BigtableAdminProjectsInstancesAppProfilesPatchResource,
+    BigtableAdminProjectsInstancesAppProfilesPatch (..),
     newBigtableAdminProjectsInstancesAppProfilesPatch,
-    BigtableAdminProjectsInstancesAppProfilesPatch,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.create
     BigtableAdminProjectsInstancesClustersBackupsCreateResource,
+    BigtableAdminProjectsInstancesClustersBackupsCreate (..),
     newBigtableAdminProjectsInstancesClustersBackupsCreate,
-    BigtableAdminProjectsInstancesClustersBackupsCreate,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.delete
     BigtableAdminProjectsInstancesClustersBackupsDeleteResource,
+    BigtableAdminProjectsInstancesClustersBackupsDelete (..),
     newBigtableAdminProjectsInstancesClustersBackupsDelete,
-    BigtableAdminProjectsInstancesClustersBackupsDelete,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.get
     BigtableAdminProjectsInstancesClustersBackupsGetResource,
+    BigtableAdminProjectsInstancesClustersBackupsGet (..),
     newBigtableAdminProjectsInstancesClustersBackupsGet,
-    BigtableAdminProjectsInstancesClustersBackupsGet,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.getIamPolicy
     BigtableAdminProjectsInstancesClustersBackupsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesClustersBackupsGetIamPolicy (..),
     newBigtableAdminProjectsInstancesClustersBackupsGetIamPolicy,
-    BigtableAdminProjectsInstancesClustersBackupsGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.list
     BigtableAdminProjectsInstancesClustersBackupsListResource,
+    BigtableAdminProjectsInstancesClustersBackupsList (..),
     newBigtableAdminProjectsInstancesClustersBackupsList,
-    BigtableAdminProjectsInstancesClustersBackupsList,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.patch
     BigtableAdminProjectsInstancesClustersBackupsPatchResource,
+    BigtableAdminProjectsInstancesClustersBackupsPatch (..),
     newBigtableAdminProjectsInstancesClustersBackupsPatch,
-    BigtableAdminProjectsInstancesClustersBackupsPatch,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.setIamPolicy
     BigtableAdminProjectsInstancesClustersBackupsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy (..),
     newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy,
-    BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.clusters.backups.testIamPermissions
     BigtableAdminProjectsInstancesClustersBackupsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesClustersBackupsTestIamPermissions (..),
     newBigtableAdminProjectsInstancesClustersBackupsTestIamPermissions,
-    BigtableAdminProjectsInstancesClustersBackupsTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.clusters.create
     BigtableAdminProjectsInstancesClustersCreateResource,
+    BigtableAdminProjectsInstancesClustersCreate (..),
     newBigtableAdminProjectsInstancesClustersCreate,
-    BigtableAdminProjectsInstancesClustersCreate,
 
     -- ** bigtableadmin.projects.instances.clusters.delete
     BigtableAdminProjectsInstancesClustersDeleteResource,
+    BigtableAdminProjectsInstancesClustersDelete (..),
     newBigtableAdminProjectsInstancesClustersDelete,
-    BigtableAdminProjectsInstancesClustersDelete,
 
     -- ** bigtableadmin.projects.instances.clusters.get
     BigtableAdminProjectsInstancesClustersGetResource,
+    BigtableAdminProjectsInstancesClustersGet (..),
     newBigtableAdminProjectsInstancesClustersGet,
-    BigtableAdminProjectsInstancesClustersGet,
 
     -- ** bigtableadmin.projects.instances.clusters.list
     BigtableAdminProjectsInstancesClustersListResource,
+    BigtableAdminProjectsInstancesClustersList (..),
     newBigtableAdminProjectsInstancesClustersList,
-    BigtableAdminProjectsInstancesClustersList,
 
     -- ** bigtableadmin.projects.instances.clusters.partialUpdateCluster
     BigtableAdminProjectsInstancesClustersPartialUpdateClusterResource,
+    BigtableAdminProjectsInstancesClustersPartialUpdateCluster (..),
     newBigtableAdminProjectsInstancesClustersPartialUpdateCluster,
-    BigtableAdminProjectsInstancesClustersPartialUpdateCluster,
 
     -- ** bigtableadmin.projects.instances.clusters.update
     BigtableAdminProjectsInstancesClustersUpdateResource,
+    BigtableAdminProjectsInstancesClustersUpdate (..),
     newBigtableAdminProjectsInstancesClustersUpdate,
-    BigtableAdminProjectsInstancesClustersUpdate,
 
     -- ** bigtableadmin.projects.instances.create
     BigtableAdminProjectsInstancesCreateResource,
+    BigtableAdminProjectsInstancesCreate (..),
     newBigtableAdminProjectsInstancesCreate,
-    BigtableAdminProjectsInstancesCreate,
 
     -- ** bigtableadmin.projects.instances.delete
     BigtableAdminProjectsInstancesDeleteResource,
+    BigtableAdminProjectsInstancesDelete (..),
     newBigtableAdminProjectsInstancesDelete,
-    BigtableAdminProjectsInstancesDelete,
 
     -- ** bigtableadmin.projects.instances.get
     BigtableAdminProjectsInstancesGetResource,
+    BigtableAdminProjectsInstancesGet (..),
     newBigtableAdminProjectsInstancesGet,
-    BigtableAdminProjectsInstancesGet,
 
     -- ** bigtableadmin.projects.instances.getIamPolicy
     BigtableAdminProjectsInstancesGetIamPolicyResource,
+    BigtableAdminProjectsInstancesGetIamPolicy (..),
     newBigtableAdminProjectsInstancesGetIamPolicy,
-    BigtableAdminProjectsInstancesGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.list
     BigtableAdminProjectsInstancesListResource,
+    BigtableAdminProjectsInstancesList (..),
     newBigtableAdminProjectsInstancesList,
-    BigtableAdminProjectsInstancesList,
 
     -- ** bigtableadmin.projects.instances.partialUpdateInstance
     BigtableAdminProjectsInstancesPartialUpdateInstanceResource,
+    BigtableAdminProjectsInstancesPartialUpdateInstance (..),
     newBigtableAdminProjectsInstancesPartialUpdateInstance,
-    BigtableAdminProjectsInstancesPartialUpdateInstance,
 
     -- ** bigtableadmin.projects.instances.setIamPolicy
     BigtableAdminProjectsInstancesSetIamPolicyResource,
+    BigtableAdminProjectsInstancesSetIamPolicy (..),
     newBigtableAdminProjectsInstancesSetIamPolicy,
-    BigtableAdminProjectsInstancesSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.checkConsistency
     BigtableAdminProjectsInstancesTablesCheckConsistencyResource,
+    BigtableAdminProjectsInstancesTablesCheckConsistency (..),
     newBigtableAdminProjectsInstancesTablesCheckConsistency,
-    BigtableAdminProjectsInstancesTablesCheckConsistency,
 
     -- ** bigtableadmin.projects.instances.tables.create
     BigtableAdminProjectsInstancesTablesCreateResource,
+    BigtableAdminProjectsInstancesTablesCreate (..),
     newBigtableAdminProjectsInstancesTablesCreate,
-    BigtableAdminProjectsInstancesTablesCreate,
 
     -- ** bigtableadmin.projects.instances.tables.delete
     BigtableAdminProjectsInstancesTablesDeleteResource,
+    BigtableAdminProjectsInstancesTablesDelete (..),
     newBigtableAdminProjectsInstancesTablesDelete,
-    BigtableAdminProjectsInstancesTablesDelete,
 
     -- ** bigtableadmin.projects.instances.tables.dropRowRange
     BigtableAdminProjectsInstancesTablesDropRowRangeResource,
+    BigtableAdminProjectsInstancesTablesDropRowRange (..),
     newBigtableAdminProjectsInstancesTablesDropRowRange,
-    BigtableAdminProjectsInstancesTablesDropRowRange,
 
     -- ** bigtableadmin.projects.instances.tables.generateConsistencyToken
     BigtableAdminProjectsInstancesTablesGenerateConsistencyTokenResource,
+    BigtableAdminProjectsInstancesTablesGenerateConsistencyToken (..),
     newBigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
-    BigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
 
     -- ** bigtableadmin.projects.instances.tables.get
     BigtableAdminProjectsInstancesTablesGetResource,
+    BigtableAdminProjectsInstancesTablesGet (..),
     newBigtableAdminProjectsInstancesTablesGet,
-    BigtableAdminProjectsInstancesTablesGet,
 
     -- ** bigtableadmin.projects.instances.tables.getIamPolicy
     BigtableAdminProjectsInstancesTablesGetIamPolicyResource,
+    BigtableAdminProjectsInstancesTablesGetIamPolicy (..),
     newBigtableAdminProjectsInstancesTablesGetIamPolicy,
-    BigtableAdminProjectsInstancesTablesGetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.list
     BigtableAdminProjectsInstancesTablesListResource,
+    BigtableAdminProjectsInstancesTablesList (..),
     newBigtableAdminProjectsInstancesTablesList,
-    BigtableAdminProjectsInstancesTablesList,
 
     -- ** bigtableadmin.projects.instances.tables.modifyColumnFamilies
     BigtableAdminProjectsInstancesTablesModifyColumnFamiliesResource,
+    BigtableAdminProjectsInstancesTablesModifyColumnFamilies (..),
     newBigtableAdminProjectsInstancesTablesModifyColumnFamilies,
-    BigtableAdminProjectsInstancesTablesModifyColumnFamilies,
 
     -- ** bigtableadmin.projects.instances.tables.restore
     BigtableAdminProjectsInstancesTablesRestoreResource,
+    BigtableAdminProjectsInstancesTablesRestore (..),
     newBigtableAdminProjectsInstancesTablesRestore,
-    BigtableAdminProjectsInstancesTablesRestore,
 
     -- ** bigtableadmin.projects.instances.tables.setIamPolicy
     BigtableAdminProjectsInstancesTablesSetIamPolicyResource,
+    BigtableAdminProjectsInstancesTablesSetIamPolicy (..),
     newBigtableAdminProjectsInstancesTablesSetIamPolicy,
-    BigtableAdminProjectsInstancesTablesSetIamPolicy,
 
     -- ** bigtableadmin.projects.instances.tables.testIamPermissions
     BigtableAdminProjectsInstancesTablesTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesTablesTestIamPermissions (..),
     newBigtableAdminProjectsInstancesTablesTestIamPermissions,
-    BigtableAdminProjectsInstancesTablesTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.testIamPermissions
     BigtableAdminProjectsInstancesTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesTestIamPermissions (..),
     newBigtableAdminProjectsInstancesTestIamPermissions,
-    BigtableAdminProjectsInstancesTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.update
     BigtableAdminProjectsInstancesUpdateResource,
+    BigtableAdminProjectsInstancesUpdate (..),
     newBigtableAdminProjectsInstancesUpdate,
-    BigtableAdminProjectsInstancesUpdate,
 
     -- ** bigtableadmin.projects.locations.get
     BigtableAdminProjectsLocationsGetResource,
+    BigtableAdminProjectsLocationsGet (..),
     newBigtableAdminProjectsLocationsGet,
-    BigtableAdminProjectsLocationsGet,
 
     -- ** bigtableadmin.projects.locations.list
     BigtableAdminProjectsLocationsListResource,
+    BigtableAdminProjectsLocationsList (..),
     newBigtableAdminProjectsLocationsList,
-    BigtableAdminProjectsLocationsList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.ChangeRenewalSettings
     ResellerSubscriptionsChangeRenewalSettingsResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsChangeRenewalSettings (..),
     newResellerSubscriptionsChangeRenewalSettings,
-    ResellerSubscriptionsChangeRenewalSettings,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.GetVacation
     GmailUsersSettingsGetVacationResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsGetVacation (..),
     newGmailUsersSettingsGetVacation,
-    GmailUsersSettingsGetVacation,
   )
 where
 

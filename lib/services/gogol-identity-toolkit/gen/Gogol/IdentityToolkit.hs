@@ -41,103 +41,103 @@ module Gogol.IdentityToolkit
 
     -- ** identitytoolkit.relyingparty.createAuthUri
     IdentityToolkitRelyingpartyCreateAuthUriResource,
+    IdentityToolkitRelyingpartyCreateAuthUri (..),
     newIdentityToolkitRelyingpartyCreateAuthUri,
-    IdentityToolkitRelyingpartyCreateAuthUri,
 
     -- ** identitytoolkit.relyingparty.deleteAccount
     IdentityToolkitRelyingpartyDeleteAccountResource,
+    IdentityToolkitRelyingpartyDeleteAccount (..),
     newIdentityToolkitRelyingpartyDeleteAccount,
-    IdentityToolkitRelyingpartyDeleteAccount,
 
     -- ** identitytoolkit.relyingparty.downloadAccount
     IdentityToolkitRelyingpartyDownloadAccountResource,
+    IdentityToolkitRelyingpartyDownloadAccount (..),
     newIdentityToolkitRelyingpartyDownloadAccount,
-    IdentityToolkitRelyingpartyDownloadAccount,
 
     -- ** identitytoolkit.relyingparty.emailLinkSignin
     IdentityToolkitRelyingpartyEmailLinkSigninResource,
+    IdentityToolkitRelyingpartyEmailLinkSignin (..),
     newIdentityToolkitRelyingpartyEmailLinkSignin,
-    IdentityToolkitRelyingpartyEmailLinkSignin,
 
     -- ** identitytoolkit.relyingparty.getAccountInfo
     IdentityToolkitRelyingpartyGetAccountInfoResource,
+    IdentityToolkitRelyingpartyGetAccountInfo (..),
     newIdentityToolkitRelyingpartyGetAccountInfo,
-    IdentityToolkitRelyingpartyGetAccountInfo,
 
     -- ** identitytoolkit.relyingparty.getOobConfirmationCode
     IdentityToolkitRelyingpartyGetOobConfirmationCodeResource,
+    IdentityToolkitRelyingpartyGetOobConfirmationCode (..),
     newIdentityToolkitRelyingpartyGetOobConfirmationCode,
-    IdentityToolkitRelyingpartyGetOobConfirmationCode,
 
     -- ** identitytoolkit.relyingparty.getProjectConfig
     IdentityToolkitRelyingpartyGetProjectConfigResource,
+    IdentityToolkitRelyingpartyGetProjectConfig (..),
     newIdentityToolkitRelyingpartyGetProjectConfig,
-    IdentityToolkitRelyingpartyGetProjectConfig,
 
     -- ** identitytoolkit.relyingparty.getPublicKeys
     IdentityToolkitRelyingpartyGetPublicKeysResource,
+    IdentityToolkitRelyingpartyGetPublicKeys (..),
     newIdentityToolkitRelyingpartyGetPublicKeys,
-    IdentityToolkitRelyingpartyGetPublicKeys,
 
     -- ** identitytoolkit.relyingparty.getRecaptchaParam
     IdentityToolkitRelyingpartyGetRecaptchaParamResource,
+    IdentityToolkitRelyingpartyGetRecaptchaParam (..),
     newIdentityToolkitRelyingpartyGetRecaptchaParam,
-    IdentityToolkitRelyingpartyGetRecaptchaParam,
 
     -- ** identitytoolkit.relyingparty.resetPassword
     IdentityToolkitRelyingpartyResetPasswordResource,
+    IdentityToolkitRelyingpartyResetPassword (..),
     newIdentityToolkitRelyingpartyResetPassword,
-    IdentityToolkitRelyingpartyResetPassword,
 
     -- ** identitytoolkit.relyingparty.sendVerificationCode
     IdentityToolkitRelyingpartySendVerificationCodeResource,
+    IdentityToolkitRelyingpartySendVerificationCode (..),
     newIdentityToolkitRelyingpartySendVerificationCode,
-    IdentityToolkitRelyingpartySendVerificationCode,
 
     -- ** identitytoolkit.relyingparty.setAccountInfo
     IdentityToolkitRelyingpartySetAccountInfoResource,
+    IdentityToolkitRelyingpartySetAccountInfo (..),
     newIdentityToolkitRelyingpartySetAccountInfo,
-    IdentityToolkitRelyingpartySetAccountInfo,
 
     -- ** identitytoolkit.relyingparty.setProjectConfig
     IdentityToolkitRelyingpartySetProjectConfigResource,
+    IdentityToolkitRelyingpartySetProjectConfig (..),
     newIdentityToolkitRelyingpartySetProjectConfig,
-    IdentityToolkitRelyingpartySetProjectConfig,
 
     -- ** identitytoolkit.relyingparty.signOutUser
     IdentityToolkitRelyingpartySignOutUserResource,
+    IdentityToolkitRelyingpartySignOutUser (..),
     newIdentityToolkitRelyingpartySignOutUser,
-    IdentityToolkitRelyingpartySignOutUser,
 
     -- ** identitytoolkit.relyingparty.signupNewUser
     IdentityToolkitRelyingpartySignupNewUserResource,
+    IdentityToolkitRelyingpartySignupNewUser (..),
     newIdentityToolkitRelyingpartySignupNewUser,
-    IdentityToolkitRelyingpartySignupNewUser,
 
     -- ** identitytoolkit.relyingparty.uploadAccount
     IdentityToolkitRelyingpartyUploadAccountResource,
+    IdentityToolkitRelyingpartyUploadAccount (..),
     newIdentityToolkitRelyingpartyUploadAccount,
-    IdentityToolkitRelyingpartyUploadAccount,
 
     -- ** identitytoolkit.relyingparty.verifyAssertion
     IdentityToolkitRelyingpartyVerifyAssertionResource,
+    IdentityToolkitRelyingpartyVerifyAssertion (..),
     newIdentityToolkitRelyingpartyVerifyAssertion,
-    IdentityToolkitRelyingpartyVerifyAssertion,
 
     -- ** identitytoolkit.relyingparty.verifyCustomToken
     IdentityToolkitRelyingpartyVerifyCustomTokenResource,
+    IdentityToolkitRelyingpartyVerifyCustomToken (..),
     newIdentityToolkitRelyingpartyVerifyCustomToken,
-    IdentityToolkitRelyingpartyVerifyCustomToken,
 
     -- ** identitytoolkit.relyingparty.verifyPassword
     IdentityToolkitRelyingpartyVerifyPasswordResource,
+    IdentityToolkitRelyingpartyVerifyPassword (..),
     newIdentityToolkitRelyingpartyVerifyPassword,
-    IdentityToolkitRelyingpartyVerifyPassword,
 
     -- ** identitytoolkit.relyingparty.verifyPhoneNumber
     IdentityToolkitRelyingpartyVerifyPhoneNumberResource,
+    IdentityToolkitRelyingpartyVerifyPhoneNumber (..),
     newIdentityToolkitRelyingpartyVerifyPhoneNumber,
-    IdentityToolkitRelyingpartyVerifyPhoneNumber,
 
     -- * Types
 

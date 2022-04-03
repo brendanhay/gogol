@@ -34,8 +34,8 @@ module Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
     SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource,
 
     -- ** Constructing a Request
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun (..),
     newSearchConsoleUrlTestingToolsMobileFriendlyTestRun,
-    SearchConsoleUrlTestingToolsMobileFriendlyTestRun,
   )
 where
 

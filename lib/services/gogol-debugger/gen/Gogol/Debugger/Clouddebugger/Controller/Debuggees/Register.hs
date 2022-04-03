@@ -34,8 +34,8 @@ module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
     ClouddebuggerControllerDebuggeesRegisterResource,
 
     -- ** Constructing a Request
+    ClouddebuggerControllerDebuggeesRegister (..),
     newClouddebuggerControllerDebuggeesRegister,
-    ClouddebuggerControllerDebuggeesRegister,
   )
 where
 

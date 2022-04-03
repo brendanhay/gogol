@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Instantiate
     DataprocProjectsLocationsWorkflowTemplatesInstantiateResource,
 
     -- ** Constructing a Request
+    DataprocProjectsLocationsWorkflowTemplatesInstantiate (..),
     newDataprocProjectsLocationsWorkflowTemplatesInstantiate,
-    DataprocProjectsLocationsWorkflowTemplatesInstantiate,
   )
 where
 

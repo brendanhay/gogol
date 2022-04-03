@@ -45,183 +45,183 @@ module Gogol.CloudIdentity
 
     -- ** cloudidentity.devices.cancelWipe
     CloudIdentityDevicesCancelWipeResource,
+    CloudIdentityDevicesCancelWipe (..),
     newCloudIdentityDevicesCancelWipe,
-    CloudIdentityDevicesCancelWipe,
 
     -- ** cloudidentity.devices.create
     CloudIdentityDevicesCreateResource,
+    CloudIdentityDevicesCreate (..),
     newCloudIdentityDevicesCreate,
-    CloudIdentityDevicesCreate,
 
     -- ** cloudidentity.devices.delete
     CloudIdentityDevicesDeleteResource,
+    CloudIdentityDevicesDelete (..),
     newCloudIdentityDevicesDelete,
-    CloudIdentityDevicesDelete,
 
     -- ** cloudidentity.devices.deviceUsers.approve
     CloudIdentityDevicesDeviceUsersApproveResource,
+    CloudIdentityDevicesDeviceUsersApprove (..),
     newCloudIdentityDevicesDeviceUsersApprove,
-    CloudIdentityDevicesDeviceUsersApprove,
 
     -- ** cloudidentity.devices.deviceUsers.block
     CloudIdentityDevicesDeviceUsersBlockResource,
+    CloudIdentityDevicesDeviceUsersBlock (..),
     newCloudIdentityDevicesDeviceUsersBlock,
-    CloudIdentityDevicesDeviceUsersBlock,
 
     -- ** cloudidentity.devices.deviceUsers.cancelWipe
     CloudIdentityDevicesDeviceUsersCancelWipeResource,
+    CloudIdentityDevicesDeviceUsersCancelWipe (..),
     newCloudIdentityDevicesDeviceUsersCancelWipe,
-    CloudIdentityDevicesDeviceUsersCancelWipe,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.get
     CloudIdentityDevicesDeviceUsersClientStatesGetResource,
+    CloudIdentityDevicesDeviceUsersClientStatesGet (..),
     newCloudIdentityDevicesDeviceUsersClientStatesGet,
-    CloudIdentityDevicesDeviceUsersClientStatesGet,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.list
     CloudIdentityDevicesDeviceUsersClientStatesListResource,
+    CloudIdentityDevicesDeviceUsersClientStatesList (..),
     newCloudIdentityDevicesDeviceUsersClientStatesList,
-    CloudIdentityDevicesDeviceUsersClientStatesList,
 
     -- ** cloudidentity.devices.deviceUsers.clientStates.patch
     CloudIdentityDevicesDeviceUsersClientStatesPatchResource,
+    CloudIdentityDevicesDeviceUsersClientStatesPatch (..),
     newCloudIdentityDevicesDeviceUsersClientStatesPatch,
-    CloudIdentityDevicesDeviceUsersClientStatesPatch,
 
     -- ** cloudidentity.devices.deviceUsers.delete
     CloudIdentityDevicesDeviceUsersDeleteResource,
+    CloudIdentityDevicesDeviceUsersDelete (..),
     newCloudIdentityDevicesDeviceUsersDelete,
-    CloudIdentityDevicesDeviceUsersDelete,
 
     -- ** cloudidentity.devices.deviceUsers.get
     CloudIdentityDevicesDeviceUsersGetResource,
+    CloudIdentityDevicesDeviceUsersGet (..),
     newCloudIdentityDevicesDeviceUsersGet,
-    CloudIdentityDevicesDeviceUsersGet,
 
     -- ** cloudidentity.devices.deviceUsers.list
     CloudIdentityDevicesDeviceUsersListResource,
+    CloudIdentityDevicesDeviceUsersList (..),
     newCloudIdentityDevicesDeviceUsersList,
-    CloudIdentityDevicesDeviceUsersList,
 
     -- ** cloudidentity.devices.deviceUsers.lookup
     CloudIdentityDevicesDeviceUsersLookupResource,
+    CloudIdentityDevicesDeviceUsersLookup (..),
     newCloudIdentityDevicesDeviceUsersLookup,
-    CloudIdentityDevicesDeviceUsersLookup,
 
     -- ** cloudidentity.devices.deviceUsers.wipe
     CloudIdentityDevicesDeviceUsersWipeResource,
+    CloudIdentityDevicesDeviceUsersWipe (..),
     newCloudIdentityDevicesDeviceUsersWipe,
-    CloudIdentityDevicesDeviceUsersWipe,
 
     -- ** cloudidentity.devices.get
     CloudIdentityDevicesGetResource,
+    CloudIdentityDevicesGet (..),
     newCloudIdentityDevicesGet,
-    CloudIdentityDevicesGet,
 
     -- ** cloudidentity.devices.list
     CloudIdentityDevicesListResource,
+    CloudIdentityDevicesList (..),
     newCloudIdentityDevicesList,
-    CloudIdentityDevicesList,
 
     -- ** cloudidentity.devices.wipe
     CloudIdentityDevicesWipeResource,
+    CloudIdentityDevicesWipe (..),
     newCloudIdentityDevicesWipe,
-    CloudIdentityDevicesWipe,
 
     -- ** cloudidentity.groups.create
     CloudIdentityGroupsCreateResource,
+    CloudIdentityGroupsCreate (..),
     newCloudIdentityGroupsCreate,
-    CloudIdentityGroupsCreate,
 
     -- ** cloudidentity.groups.delete
     CloudIdentityGroupsDeleteResource,
+    CloudIdentityGroupsDelete (..),
     newCloudIdentityGroupsDelete,
-    CloudIdentityGroupsDelete,
 
     -- ** cloudidentity.groups.get
     CloudIdentityGroupsGetResource,
+    CloudIdentityGroupsGet (..),
     newCloudIdentityGroupsGet,
-    CloudIdentityGroupsGet,
 
     -- ** cloudidentity.groups.getSecuritySettings
     CloudIdentityGroupsGetSecuritySettingsResource,
+    CloudIdentityGroupsGetSecuritySettings (..),
     newCloudIdentityGroupsGetSecuritySettings,
-    CloudIdentityGroupsGetSecuritySettings,
 
     -- ** cloudidentity.groups.list
     CloudIdentityGroupsListResource,
+    CloudIdentityGroupsList (..),
     newCloudIdentityGroupsList,
-    CloudIdentityGroupsList,
 
     -- ** cloudidentity.groups.lookup
     CloudIdentityGroupsLookupResource,
+    CloudIdentityGroupsLookup (..),
     newCloudIdentityGroupsLookup,
-    CloudIdentityGroupsLookup,
 
     -- ** cloudidentity.groups.memberships.checkTransitiveMembership
     CloudIdentityGroupsMembershipsCheckTransitiveMembershipResource,
+    CloudIdentityGroupsMembershipsCheckTransitiveMembership (..),
     newCloudIdentityGroupsMembershipsCheckTransitiveMembership,
-    CloudIdentityGroupsMembershipsCheckTransitiveMembership,
 
     -- ** cloudidentity.groups.memberships.create
     CloudIdentityGroupsMembershipsCreateResource,
+    CloudIdentityGroupsMembershipsCreate (..),
     newCloudIdentityGroupsMembershipsCreate,
-    CloudIdentityGroupsMembershipsCreate,
 
     -- ** cloudidentity.groups.memberships.delete
     CloudIdentityGroupsMembershipsDeleteResource,
+    CloudIdentityGroupsMembershipsDelete (..),
     newCloudIdentityGroupsMembershipsDelete,
-    CloudIdentityGroupsMembershipsDelete,
 
     -- ** cloudidentity.groups.memberships.get
     CloudIdentityGroupsMembershipsGetResource,
+    CloudIdentityGroupsMembershipsGet (..),
     newCloudIdentityGroupsMembershipsGet,
-    CloudIdentityGroupsMembershipsGet,
 
     -- ** cloudidentity.groups.memberships.getMembershipGraph
     CloudIdentityGroupsMembershipsGetMembershipGraphResource,
+    CloudIdentityGroupsMembershipsGetMembershipGraph (..),
     newCloudIdentityGroupsMembershipsGetMembershipGraph,
-    CloudIdentityGroupsMembershipsGetMembershipGraph,
 
     -- ** cloudidentity.groups.memberships.list
     CloudIdentityGroupsMembershipsListResource,
+    CloudIdentityGroupsMembershipsList (..),
     newCloudIdentityGroupsMembershipsList,
-    CloudIdentityGroupsMembershipsList,
 
     -- ** cloudidentity.groups.memberships.lookup
     CloudIdentityGroupsMembershipsLookupResource,
+    CloudIdentityGroupsMembershipsLookup (..),
     newCloudIdentityGroupsMembershipsLookup,
-    CloudIdentityGroupsMembershipsLookup,
 
     -- ** cloudidentity.groups.memberships.modifyMembershipRoles
     CloudIdentityGroupsMembershipsModifyMembershipRolesResource,
+    CloudIdentityGroupsMembershipsModifyMembershipRoles (..),
     newCloudIdentityGroupsMembershipsModifyMembershipRoles,
-    CloudIdentityGroupsMembershipsModifyMembershipRoles,
 
     -- ** cloudidentity.groups.memberships.searchTransitiveGroups
     CloudIdentityGroupsMembershipsSearchTransitiveGroupsResource,
+    CloudIdentityGroupsMembershipsSearchTransitiveGroups (..),
     newCloudIdentityGroupsMembershipsSearchTransitiveGroups,
-    CloudIdentityGroupsMembershipsSearchTransitiveGroups,
 
     -- ** cloudidentity.groups.memberships.searchTransitiveMemberships
     CloudIdentityGroupsMembershipsSearchTransitiveMembershipsResource,
+    CloudIdentityGroupsMembershipsSearchTransitiveMemberships (..),
     newCloudIdentityGroupsMembershipsSearchTransitiveMemberships,
-    CloudIdentityGroupsMembershipsSearchTransitiveMemberships,
 
     -- ** cloudidentity.groups.patch
     CloudIdentityGroupsPatchResource,
+    CloudIdentityGroupsPatch (..),
     newCloudIdentityGroupsPatch,
-    CloudIdentityGroupsPatch,
 
     -- ** cloudidentity.groups.search
     CloudIdentityGroupsSearchResource,
+    CloudIdentityGroupsSearch (..),
     newCloudIdentityGroupsSearch,
-    CloudIdentityGroupsSearch,
 
     -- ** cloudidentity.groups.updateSecuritySettings
     CloudIdentityGroupsUpdateSecuritySettingsResource,
+    CloudIdentityGroupsUpdateSecuritySettings (..),
     newCloudIdentityGroupsUpdateSecuritySettings,
-    CloudIdentityGroupsUpdateSecuritySettings,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.LockRetentionPolicy
     StorageBucketsLockRetentionPolicyResource,
 
     -- ** Constructing a Request
+    StorageBucketsLockRetentionPolicy (..),
     newStorageBucketsLockRetentionPolicy,
-    StorageBucketsLockRetentionPolicy,
   )
 where
 

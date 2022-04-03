@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.StartPaidService
     ResellerSubscriptionsStartPaidServiceResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsStartPaidService (..),
     newResellerSubscriptionsStartPaidService,
-    ResellerSubscriptionsStartPaidService,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Services.Nlp.AnalyzeEntities
     HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsServicesNlpAnalyzeEntities (..),
     newHealthcareProjectsLocationsServicesNlpAnalyzeEntities,
-    HealthcareProjectsLocationsServicesNlpAnalyzeEntities,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Disks.Get
     ComputeDisksGetResource,
 
     -- ** Constructing a Request
+    ComputeDisksGet (..),
     newComputeDisksGet,
-    ComputeDisksGet,
   )
 where
 

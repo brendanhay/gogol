@@ -34,8 +34,8 @@ module Gogol.Mirror.Contacts.Patch
     MirrorContactsPatchResource,
 
     -- ** Constructing a Request
+    MirrorContactsPatch (..),
     newMirrorContactsPatch,
-    MirrorContactsPatch,
   )
 where
 

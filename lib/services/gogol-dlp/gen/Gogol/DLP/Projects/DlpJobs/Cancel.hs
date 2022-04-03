@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.DlpJobs.Cancel
     DLPProjectsDlpJobsCancelResource,
 
     -- ** Constructing a Request
+    DLPProjectsDlpJobsCancel (..),
     newDLPProjectsDlpJobsCancel,
-    DLPProjectsDlpJobsCancel,
   )
 where
 

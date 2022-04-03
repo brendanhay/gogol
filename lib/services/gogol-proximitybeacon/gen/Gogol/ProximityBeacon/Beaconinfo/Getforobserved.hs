@@ -34,8 +34,8 @@ module Gogol.ProximityBeacon.Beaconinfo.Getforobserved
     ProximityBeaconBeaconinfoGetforobservedResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconinfoGetforobserved (..),
     newProximityBeaconBeaconinfoGetforobserved,
-    ProximityBeaconBeaconinfoGetforobserved,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.Blobs.BatchUpdate
     RemoteBuildExecutionBlobsBatchUpdateResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionBlobsBatchUpdate (..),
     newRemoteBuildExecutionBlobsBatchUpdate,
-    RemoteBuildExecutionBlobsBatchUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.BatchCreate
     ContainerAnalysisProjectsOccurrencesBatchCreateResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesBatchCreate (..),
     newContainerAnalysisProjectsOccurrencesBatchCreate,
-    ContainerAnalysisProjectsOccurrencesBatchCreate,
   )
 where
 

@@ -41,168 +41,168 @@ module Gogol.Blogger
 
     -- ** blogger.blogUserInfos.get
     BloggerBlogUserInfosGetResource,
+    BloggerBlogUserInfosGet (..),
     newBloggerBlogUserInfosGet,
-    BloggerBlogUserInfosGet,
 
     -- ** blogger.blogs.get
     BloggerBlogsGetResource,
+    BloggerBlogsGet (..),
     newBloggerBlogsGet,
-    BloggerBlogsGet,
 
     -- ** blogger.blogs.getByUrl
     BloggerBlogsGetByUrlResource,
+    BloggerBlogsGetByUrl (..),
     newBloggerBlogsGetByUrl,
-    BloggerBlogsGetByUrl,
 
     -- ** blogger.blogs.listByUser
     BloggerBlogsListByUserResource,
+    BloggerBlogsListByUser (..),
     newBloggerBlogsListByUser,
-    BloggerBlogsListByUser,
 
     -- ** blogger.comments.approve
     BloggerCommentsApproveResource,
+    BloggerCommentsApprove (..),
     newBloggerCommentsApprove,
-    BloggerCommentsApprove,
 
     -- ** blogger.comments.delete
     BloggerCommentsDeleteResource,
+    BloggerCommentsDelete (..),
     newBloggerCommentsDelete,
-    BloggerCommentsDelete,
 
     -- ** blogger.comments.get
     BloggerCommentsGetResource,
+    BloggerCommentsGet (..),
     newBloggerCommentsGet,
-    BloggerCommentsGet,
 
     -- ** blogger.comments.list
     BloggerCommentsListResource,
+    BloggerCommentsList (..),
     newBloggerCommentsList,
-    BloggerCommentsList,
 
     -- ** blogger.comments.listByBlog
     BloggerCommentsListByBlogResource,
+    BloggerCommentsListByBlog (..),
     newBloggerCommentsListByBlog,
-    BloggerCommentsListByBlog,
 
     -- ** blogger.comments.markAsSpam
     BloggerCommentsMarkAsSpamResource,
+    BloggerCommentsMarkAsSpam (..),
     newBloggerCommentsMarkAsSpam,
-    BloggerCommentsMarkAsSpam,
 
     -- ** blogger.comments.removeContent
     BloggerCommentsRemoveContentResource,
+    BloggerCommentsRemoveContent (..),
     newBloggerCommentsRemoveContent,
-    BloggerCommentsRemoveContent,
 
     -- ** blogger.pageViews.get
     BloggerPageViewsGetResource,
+    BloggerPageViewsGet (..),
     newBloggerPageViewsGet,
-    BloggerPageViewsGet,
 
     -- ** blogger.pages.delete
     BloggerPagesDeleteResource,
+    BloggerPagesDelete (..),
     newBloggerPagesDelete,
-    BloggerPagesDelete,
 
     -- ** blogger.pages.get
     BloggerPagesGetResource,
+    BloggerPagesGet (..),
     newBloggerPagesGet,
-    BloggerPagesGet,
 
     -- ** blogger.pages.insert
     BloggerPagesInsertResource,
+    BloggerPagesInsert (..),
     newBloggerPagesInsert,
-    BloggerPagesInsert,
 
     -- ** blogger.pages.list
     BloggerPagesListResource,
+    BloggerPagesList (..),
     newBloggerPagesList,
-    BloggerPagesList,
 
     -- ** blogger.pages.patch
     BloggerPagesPatchResource,
+    BloggerPagesPatch (..),
     newBloggerPagesPatch,
-    BloggerPagesPatch,
 
     -- ** blogger.pages.publish
     BloggerPagesPublishResource,
+    BloggerPagesPublish (..),
     newBloggerPagesPublish,
-    BloggerPagesPublish,
 
     -- ** blogger.pages.revert
     BloggerPagesRevertResource,
+    BloggerPagesRevert (..),
     newBloggerPagesRevert,
-    BloggerPagesRevert,
 
     -- ** blogger.pages.update
     BloggerPagesUpdateResource,
+    BloggerPagesUpdate (..),
     newBloggerPagesUpdate,
-    BloggerPagesUpdate,
 
     -- ** blogger.postUserInfos.get
     BloggerPostUserInfosGetResource,
+    BloggerPostUserInfosGet (..),
     newBloggerPostUserInfosGet,
-    BloggerPostUserInfosGet,
 
     -- ** blogger.postUserInfos.list
     BloggerPostUserInfosListResource,
+    BloggerPostUserInfosList (..),
     newBloggerPostUserInfosList,
-    BloggerPostUserInfosList,
 
     -- ** blogger.posts.delete
     BloggerPostsDeleteResource,
+    BloggerPostsDelete (..),
     newBloggerPostsDelete,
-    BloggerPostsDelete,
 
     -- ** blogger.posts.get
     BloggerPostsGetResource,
+    BloggerPostsGet (..),
     newBloggerPostsGet,
-    BloggerPostsGet,
 
     -- ** blogger.posts.getByPath
     BloggerPostsGetByPathResource,
+    BloggerPostsGetByPath (..),
     newBloggerPostsGetByPath,
-    BloggerPostsGetByPath,
 
     -- ** blogger.posts.insert
     BloggerPostsInsertResource,
+    BloggerPostsInsert (..),
     newBloggerPostsInsert,
-    BloggerPostsInsert,
 
     -- ** blogger.posts.list
     BloggerPostsListResource,
+    BloggerPostsList (..),
     newBloggerPostsList,
-    BloggerPostsList,
 
     -- ** blogger.posts.patch
     BloggerPostsPatchResource,
+    BloggerPostsPatch (..),
     newBloggerPostsPatch,
-    BloggerPostsPatch,
 
     -- ** blogger.posts.publish
     BloggerPostsPublishResource,
+    BloggerPostsPublish (..),
     newBloggerPostsPublish,
-    BloggerPostsPublish,
 
     -- ** blogger.posts.revert
     BloggerPostsRevertResource,
+    BloggerPostsRevert (..),
     newBloggerPostsRevert,
-    BloggerPostsRevert,
 
     -- ** blogger.posts.search
     BloggerPostsSearchResource,
+    BloggerPostsSearch (..),
     newBloggerPostsSearch,
-    BloggerPostsSearch,
 
     -- ** blogger.posts.update
     BloggerPostsUpdateResource,
+    BloggerPostsUpdate (..),
     newBloggerPostsUpdate,
-    BloggerPostsUpdate,
 
     -- ** blogger.users.get
     BloggerUsersGetResource,
+    BloggerUsersGet (..),
     newBloggerUsersGet,
-    BloggerUsersGet,
 
     -- * Types
 

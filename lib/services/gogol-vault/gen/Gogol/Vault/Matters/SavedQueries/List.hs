@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.SavedQueries.List
     VaultMattersSavedQueriesListResource,
 
     -- ** Constructing a Request
+    VaultMattersSavedQueriesList (..),
     newVaultMattersSavedQueriesList,
-    VaultMattersSavedQueriesList,
   )
 where
 

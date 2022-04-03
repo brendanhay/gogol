@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Get
     ContentBuyongoogleprogramsGetResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsGet (..),
     newContentBuyongoogleprogramsGet,
-    ContentBuyongoogleprogramsGet,
   )
 where
 

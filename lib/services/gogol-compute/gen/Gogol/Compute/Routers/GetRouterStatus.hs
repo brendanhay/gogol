@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.GetRouterStatus
     ComputeRoutersGetRouterStatusResource,
 
     -- ** Constructing a Request
+    ComputeRoutersGetRouterStatus (..),
     newComputeRoutersGetRouterStatus,
-    ComputeRoutersGetRouterStatus,
   )
 where
 

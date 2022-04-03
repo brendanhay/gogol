@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Colors.Get
     CalendarColorsGetResource,
 
     -- ** Constructing a Request
+    CalendarColorsGet (..),
     newCalendarColorsGet,
-    CalendarColorsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.DiskTypes.AggregatedList
     ComputeDiskTypesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeDiskTypesAggregatedList (..),
     newComputeDiskTypesAggregatedList,
-    ComputeDiskTypesAggregatedList,
   )
 where
 

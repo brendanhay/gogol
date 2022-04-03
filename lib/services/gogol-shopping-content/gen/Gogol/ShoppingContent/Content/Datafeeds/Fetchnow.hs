@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeeds.Fetchnow
     ContentDatafeedsFetchnowResource,
 
     -- ** Constructing a Request
+    ContentDatafeedsFetchnow (..),
     newContentDatafeedsFetchnow,
-    ContentDatafeedsFetchnow,
   )
 where
 

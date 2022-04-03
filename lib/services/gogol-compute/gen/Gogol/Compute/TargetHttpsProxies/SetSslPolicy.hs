@@ -34,8 +34,8 @@ module Gogol.Compute.TargetHttpsProxies.SetSslPolicy
     ComputeTargetHttpsProxiesSetSslPolicyResource,
 
     -- ** Constructing a Request
+    ComputeTargetHttpsProxiesSetSslPolicy (..),
     newComputeTargetHttpsProxiesSetSslPolicy,
-    ComputeTargetHttpsProxiesSetSslPolicy,
   )
 where
 

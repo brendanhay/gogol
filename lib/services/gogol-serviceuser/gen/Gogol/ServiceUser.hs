@@ -42,23 +42,23 @@ module Gogol.ServiceUser
 
     -- ** serviceuser.projects.services.disable
     ServiceUserProjectsServicesDisableResource,
+    ServiceUserProjectsServicesDisable (..),
     newServiceUserProjectsServicesDisable,
-    ServiceUserProjectsServicesDisable,
 
     -- ** serviceuser.projects.services.enable
     ServiceUserProjectsServicesEnableResource,
+    ServiceUserProjectsServicesEnable (..),
     newServiceUserProjectsServicesEnable,
-    ServiceUserProjectsServicesEnable,
 
     -- ** serviceuser.projects.services.list
     ServiceUserProjectsServicesListResource,
+    ServiceUserProjectsServicesList (..),
     newServiceUserProjectsServicesList,
-    ServiceUserProjectsServicesList,
 
     -- ** serviceuser.services.search
     ServiceUserServicesSearchResource,
+    ServiceUserServicesSearch (..),
     newServiceUserServicesSearch,
-    ServiceUserServicesSearch,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Policies.List
     AndroidManagementEnterprisesPoliciesListResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesPoliciesList (..),
     newAndroidManagementEnterprisesPoliciesList,
-    AndroidManagementEnterprisesPoliciesList,
   )
 where
 

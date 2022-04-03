@@ -34,8 +34,8 @@ module Gogol.Drive.Channels.Stop
     DriveChannelsStopResource,
 
     -- ** Constructing a Request
+    DriveChannelsStop (..),
     newDriveChannelsStop,
-    DriveChannelsStop,
   )
 where
 

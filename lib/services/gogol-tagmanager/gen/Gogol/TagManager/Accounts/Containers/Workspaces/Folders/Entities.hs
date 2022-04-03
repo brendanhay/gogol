@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Entities
     TagManagerAccountsContainersWorkspacesFoldersEntitiesResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesFoldersEntities (..),
     newTagManagerAccountsContainersWorkspacesFoldersEntities,
-    TagManagerAccountsContainersWorkspacesFoldersEntities,
   )
 where
 

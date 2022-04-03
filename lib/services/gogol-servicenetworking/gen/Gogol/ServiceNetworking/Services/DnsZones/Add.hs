@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DnsZones.Add
     ServiceNetworkingServicesDnsZonesAddResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDnsZonesAdd (..),
     newServiceNetworkingServicesDnsZonesAdd,
-    ServiceNetworkingServicesDnsZonesAdd,
   )
 where
 

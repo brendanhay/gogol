@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.Delete
     ComputeTargetPoolsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsDelete (..),
     newComputeTargetPoolsDelete,
-    ComputeTargetPoolsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.UpdateMetadataAsync
     AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsyncResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync (..),
     newAndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
-    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
   )
 where
 

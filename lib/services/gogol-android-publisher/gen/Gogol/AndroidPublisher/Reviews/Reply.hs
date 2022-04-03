@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Reviews.Reply
     AndroidPublisherReviewsReplyResource,
 
     -- ** Constructing a Request
+    AndroidPublisherReviewsReply (..),
     newAndroidPublisherReviewsReply,
-    AndroidPublisherReviewsReply,
   )
 where
 

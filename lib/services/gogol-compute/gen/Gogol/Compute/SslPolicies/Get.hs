@@ -34,8 +34,8 @@ module Gogol.Compute.SslPolicies.Get
     ComputeSslPoliciesGetResource,
 
     -- ** Constructing a Request
+    ComputeSslPoliciesGet (..),
     newComputeSslPoliciesGet,
-    ComputeSslPoliciesGet,
   )
 where
 

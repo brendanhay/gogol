@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Patch
     CloudbuildProjectsTriggersPatchResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsTriggersPatch (..),
     newCloudbuildProjectsTriggersPatch,
-    CloudbuildProjectsTriggersPatch,
   )
 where
 

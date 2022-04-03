@@ -40,88 +40,88 @@ module Gogol.Redis
 
     -- ** redis.projects.locations.get
     RedisProjectsLocationsGetResource,
+    RedisProjectsLocationsGet (..),
     newRedisProjectsLocationsGet,
-    RedisProjectsLocationsGet,
 
     -- ** redis.projects.locations.instances.create
     RedisProjectsLocationsInstancesCreateResource,
+    RedisProjectsLocationsInstancesCreate (..),
     newRedisProjectsLocationsInstancesCreate,
-    RedisProjectsLocationsInstancesCreate,
 
     -- ** redis.projects.locations.instances.delete
     RedisProjectsLocationsInstancesDeleteResource,
+    RedisProjectsLocationsInstancesDelete (..),
     newRedisProjectsLocationsInstancesDelete,
-    RedisProjectsLocationsInstancesDelete,
 
     -- ** redis.projects.locations.instances.export
     RedisProjectsLocationsInstancesExportResource,
+    RedisProjectsLocationsInstancesExport (..),
     newRedisProjectsLocationsInstancesExport,
-    RedisProjectsLocationsInstancesExport,
 
     -- ** redis.projects.locations.instances.failover
     RedisProjectsLocationsInstancesFailoverResource,
+    RedisProjectsLocationsInstancesFailover (..),
     newRedisProjectsLocationsInstancesFailover,
-    RedisProjectsLocationsInstancesFailover,
 
     -- ** redis.projects.locations.instances.get
     RedisProjectsLocationsInstancesGetResource,
+    RedisProjectsLocationsInstancesGet (..),
     newRedisProjectsLocationsInstancesGet,
-    RedisProjectsLocationsInstancesGet,
 
     -- ** redis.projects.locations.instances.getAuthString
     RedisProjectsLocationsInstancesGetAuthStringResource,
+    RedisProjectsLocationsInstancesGetAuthString (..),
     newRedisProjectsLocationsInstancesGetAuthString,
-    RedisProjectsLocationsInstancesGetAuthString,
 
     -- ** redis.projects.locations.instances.import
     RedisProjectsLocationsInstancesImportResource,
+    RedisProjectsLocationsInstancesImport (..),
     newRedisProjectsLocationsInstancesImport,
-    RedisProjectsLocationsInstancesImport,
 
     -- ** redis.projects.locations.instances.list
     RedisProjectsLocationsInstancesListResource,
+    RedisProjectsLocationsInstancesList (..),
     newRedisProjectsLocationsInstancesList,
-    RedisProjectsLocationsInstancesList,
 
     -- ** redis.projects.locations.instances.patch
     RedisProjectsLocationsInstancesPatchResource,
+    RedisProjectsLocationsInstancesPatch (..),
     newRedisProjectsLocationsInstancesPatch,
-    RedisProjectsLocationsInstancesPatch,
 
     -- ** redis.projects.locations.instances.rescheduleMaintenance
     RedisProjectsLocationsInstancesRescheduleMaintenanceResource,
+    RedisProjectsLocationsInstancesRescheduleMaintenance (..),
     newRedisProjectsLocationsInstancesRescheduleMaintenance,
-    RedisProjectsLocationsInstancesRescheduleMaintenance,
 
     -- ** redis.projects.locations.instances.upgrade
     RedisProjectsLocationsInstancesUpgradeResource,
+    RedisProjectsLocationsInstancesUpgrade (..),
     newRedisProjectsLocationsInstancesUpgrade,
-    RedisProjectsLocationsInstancesUpgrade,
 
     -- ** redis.projects.locations.list
     RedisProjectsLocationsListResource,
+    RedisProjectsLocationsList (..),
     newRedisProjectsLocationsList,
-    RedisProjectsLocationsList,
 
     -- ** redis.projects.locations.operations.cancel
     RedisProjectsLocationsOperationsCancelResource,
+    RedisProjectsLocationsOperationsCancel (..),
     newRedisProjectsLocationsOperationsCancel,
-    RedisProjectsLocationsOperationsCancel,
 
     -- ** redis.projects.locations.operations.delete
     RedisProjectsLocationsOperationsDeleteResource,
+    RedisProjectsLocationsOperationsDelete (..),
     newRedisProjectsLocationsOperationsDelete,
-    RedisProjectsLocationsOperationsDelete,
 
     -- ** redis.projects.locations.operations.get
     RedisProjectsLocationsOperationsGetResource,
+    RedisProjectsLocationsOperationsGet (..),
     newRedisProjectsLocationsOperationsGet,
-    RedisProjectsLocationsOperationsGet,
 
     -- ** redis.projects.locations.operations.list
     RedisProjectsLocationsOperationsListResource,
+    RedisProjectsLocationsOperationsList (..),
     newRedisProjectsLocationsOperationsList,
-    RedisProjectsLocationsOperationsList,
 
     -- * Types
 

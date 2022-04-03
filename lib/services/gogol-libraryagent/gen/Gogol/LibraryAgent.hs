@@ -40,33 +40,33 @@ module Gogol.LibraryAgent
 
     -- ** libraryagent.shelves.books.borrow
     LibraryAgentShelvesBooksBorrowResource,
+    LibraryAgentShelvesBooksBorrow (..),
     newLibraryAgentShelvesBooksBorrow,
-    LibraryAgentShelvesBooksBorrow,
 
     -- ** libraryagent.shelves.books.get
     LibraryAgentShelvesBooksGetResource,
+    LibraryAgentShelvesBooksGet (..),
     newLibraryAgentShelvesBooksGet,
-    LibraryAgentShelvesBooksGet,
 
     -- ** libraryagent.shelves.books.list
     LibraryAgentShelvesBooksListResource,
+    LibraryAgentShelvesBooksList (..),
     newLibraryAgentShelvesBooksList,
-    LibraryAgentShelvesBooksList,
 
     -- ** libraryagent.shelves.books.return
     LibraryAgentShelvesBooksReturnResource,
+    LibraryAgentShelvesBooksReturn (..),
     newLibraryAgentShelvesBooksReturn,
-    LibraryAgentShelvesBooksReturn,
 
     -- ** libraryagent.shelves.get
     LibraryAgentShelvesGetResource,
+    LibraryAgentShelvesGet (..),
     newLibraryAgentShelvesGet,
-    LibraryAgentShelvesGet,
 
     -- ** libraryagent.shelves.list
     LibraryAgentShelvesListResource,
+    LibraryAgentShelvesList (..),
     newLibraryAgentShelvesList,
-    LibraryAgentShelvesList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.UpdateOrganizationSettings
     SecurityCenterOrganizationsUpdateOrganizationSettingsResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsUpdateOrganizationSettings (..),
     newSecurityCenterOrganizationsUpdateOrganizationSettings,
-    SecurityCenterOrganizationsUpdateOrganizationSettings,
   )
 where
 

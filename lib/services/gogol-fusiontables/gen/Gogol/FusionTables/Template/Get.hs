@@ -34,8 +34,8 @@ module Gogol.FusionTables.Template.Get
     FusionTablesTemplateGetResource,
 
     -- ** Constructing a Request
+    FusionTablesTemplateGet (..),
     newFusionTablesTemplateGet,
-    FusionTablesTemplateGet,
   )
 where
 

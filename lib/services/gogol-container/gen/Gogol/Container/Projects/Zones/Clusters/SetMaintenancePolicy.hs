@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.SetMaintenancePolicy
     ContainerProjectsZonesClustersSetMaintenancePolicyResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersSetMaintenancePolicy (..),
     newContainerProjectsZonesClustersSetMaintenancePolicy,
-    ContainerProjectsZonesClustersSetMaintenancePolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.TargetVpnGateways.Delete
     ComputeTargetVpnGatewaysDeleteResource,
 
     -- ** Constructing a Request
+    ComputeTargetVpnGatewaysDelete (..),
     newComputeTargetVpnGatewaysDelete,
-    ComputeTargetVpnGatewaysDelete,
   )
 where
 

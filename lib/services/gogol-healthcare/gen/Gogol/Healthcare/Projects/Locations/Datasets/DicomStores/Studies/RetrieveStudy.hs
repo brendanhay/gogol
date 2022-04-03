@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Retrieve
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudyResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy,
   )
 where
 

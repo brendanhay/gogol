@@ -34,8 +34,8 @@ module Gogol.DNS.ManagedZones.Patch
     DNSManagedZonesPatchResource,
 
     -- ** Constructing a Request
+    DNSManagedZonesPatch (..),
     newDNSManagedZonesPatch,
-    DNSManagedZonesPatch,
   )
 where
 

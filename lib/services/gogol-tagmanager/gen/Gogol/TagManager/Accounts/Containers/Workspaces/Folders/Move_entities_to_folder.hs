@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Move_entities_to_
     TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folderResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder (..),
     newTagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
-    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Patch
     CloudresourcemanagerProjectsPatchResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerProjectsPatch (..),
     newCloudresourcemanagerProjectsPatch,
-    CloudresourcemanagerProjectsPatch,
   )
 where
 

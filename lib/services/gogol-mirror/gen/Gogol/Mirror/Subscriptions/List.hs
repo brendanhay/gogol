@@ -34,8 +34,8 @@ module Gogol.Mirror.Subscriptions.List
     MirrorSubscriptionsListResource,
 
     -- ** Constructing a Request
+    MirrorSubscriptionsList (..),
     newMirrorSubscriptionsList,
-    MirrorSubscriptionsList,
   )
 where
 

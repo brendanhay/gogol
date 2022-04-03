@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Operations.Get
     ServiceConsumerManagementOperationsGetResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementOperationsGet (..),
     newServiceConsumerManagementOperationsGet,
-    ServiceConsumerManagementOperationsGet,
   )
 where
 

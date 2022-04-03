@@ -34,8 +34,8 @@ module Gogol.Compute.TargetTcpProxies.SetBackendService
     ComputeTargetTcpProxiesSetBackendServiceResource,
 
     -- ** Constructing a Request
+    ComputeTargetTcpProxiesSetBackendService (..),
     newComputeTargetTcpProxiesSetBackendService,
-    ComputeTargetTcpProxiesSetBackendService,
   )
 where
 

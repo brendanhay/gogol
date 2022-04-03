@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Patch
     DataprocProjectsRegionsClustersPatchResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersPatch (..),
     newDataprocProjectsRegionsClustersPatch,
-    DataprocProjectsRegionsClustersPatch,
   )
 where
 

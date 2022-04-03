@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.DeidentifyTemplates.Patch
     DLPOrganizationsDeidentifyTemplatesPatchResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsDeidentifyTemplatesPatch (..),
     newDLPOrganizationsDeidentifyTemplatesPatch,
-    DLPOrganizationsDeidentifyTemplatesPatch,
   )
 where
 

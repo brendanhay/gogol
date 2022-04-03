@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Freebusy.Query
     CalendarFreebusyQueryResource,
 
     -- ** Constructing a Request
+    CalendarFreebusyQuery (..),
     newCalendarFreebusyQuery,
-    CalendarFreebusyQuery,
   )
 where
 

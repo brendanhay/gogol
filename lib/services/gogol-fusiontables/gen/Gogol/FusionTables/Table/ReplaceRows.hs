@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.ReplaceRows
     FusionTablesTableReplaceRowsResource,
 
     -- ** Constructing a Request
+    FusionTablesTableReplaceRows (..),
     newFusionTablesTableReplaceRows,
-    FusionTablesTableReplaceRows,
   )
 where
 

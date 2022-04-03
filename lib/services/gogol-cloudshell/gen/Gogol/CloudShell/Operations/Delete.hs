@@ -34,8 +34,8 @@ module Gogol.CloudShell.Operations.Delete
     CloudShellOperationsDeleteResource,
 
     -- ** Constructing a Request
+    CloudShellOperationsDelete (..),
     newCloudShellOperationsDelete,
-    CloudShellOperationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Returncarrier.List
     ContentAccountsReturncarrierListResource,
 
     -- ** Constructing a Request
+    ContentAccountsReturncarrierList (..),
     newContentAccountsReturncarrierList,
-    ContentAccountsReturncarrierList,
   )
 where
 

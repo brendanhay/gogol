@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.InstanceConfigs.Get
     SpannerProjectsInstanceConfigsGetResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstanceConfigsGet (..),
     newSpannerProjectsInstanceConfigsGet,
-    SpannerProjectsInstanceConfigsGet,
   )
 where
 

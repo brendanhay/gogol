@@ -34,8 +34,8 @@ module Gogol.Drive.Teamdrives.Get
     DriveTeamdrivesGetResource,
 
     -- ** Constructing a Request
+    DriveTeamdrivesGet (..),
     newDriveTeamdrivesGet,
-    DriveTeamdrivesGet,
   )
 where
 

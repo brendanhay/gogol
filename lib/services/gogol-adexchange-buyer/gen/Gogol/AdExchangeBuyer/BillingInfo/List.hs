@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.BillingInfo.List
     AdExchangeBuyerBillingInfoListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerBillingInfoList (..),
     newAdExchangeBuyerBillingInfoList,
-    AdExchangeBuyerBillingInfoList,
   )
 where
 

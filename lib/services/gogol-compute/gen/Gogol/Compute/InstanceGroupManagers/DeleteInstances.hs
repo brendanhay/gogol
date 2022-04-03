@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroupManagers.DeleteInstances
     ComputeInstanceGroupManagersDeleteInstancesResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupManagersDeleteInstances (..),
     newComputeInstanceGroupManagersDeleteInstances,
-    ComputeInstanceGroupManagersDeleteInstances,
   )
 where
 

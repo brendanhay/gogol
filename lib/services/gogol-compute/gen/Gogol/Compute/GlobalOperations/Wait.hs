@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalOperations.Wait
     ComputeGlobalOperationsWaitResource,
 
     -- ** Constructing a Request
+    ComputeGlobalOperationsWait (..),
     newComputeGlobalOperationsWait,
-    ComputeGlobalOperationsWait,
   )
 where
 

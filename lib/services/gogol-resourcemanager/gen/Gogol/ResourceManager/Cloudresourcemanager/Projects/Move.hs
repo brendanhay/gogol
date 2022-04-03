@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Move
     CloudresourcemanagerProjectsMoveResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerProjectsMove (..),
     newCloudresourcemanagerProjectsMove,
-    CloudresourcemanagerProjectsMove,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Csses.Updatelabels
     ContentCssesUpdatelabelsResource,
 
     -- ** Constructing a Request
+    ContentCssesUpdatelabels (..),
     newContentCssesUpdatelabels,
-    ContentCssesUpdatelabels,
   )
 where
 

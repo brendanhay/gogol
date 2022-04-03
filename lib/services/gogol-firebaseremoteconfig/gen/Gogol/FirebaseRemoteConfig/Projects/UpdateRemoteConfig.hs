@@ -35,8 +35,8 @@ module Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
     FirebaseRemoteConfigProjectsUpdateRemoteConfigResource,
 
     -- ** Constructing a Request
+    FirebaseRemoteConfigProjectsUpdateRemoteConfig (..),
     newFirebaseRemoteConfigProjectsUpdateRemoteConfig,
-    FirebaseRemoteConfigProjectsUpdateRemoteConfig,
   )
 where
 

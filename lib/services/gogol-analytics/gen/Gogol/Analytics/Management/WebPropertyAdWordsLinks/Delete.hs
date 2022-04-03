@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebPropertyAdWordsLinks.Delete
     AnalyticsManagementWebPropertyAdWordsLinksDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebPropertyAdWordsLinksDelete (..),
     newAnalyticsManagementWebPropertyAdWordsLinksDelete,
-    AnalyticsManagementWebPropertyAdWordsLinksDelete,
   )
 where
 

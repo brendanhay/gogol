@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Services.BatchEnable
     ServiceUsageServicesBatchEnableResource,
 
     -- ** Constructing a Request
+    ServiceUsageServicesBatchEnable (..),
     newServiceUsageServicesBatchEnable,
-    ServiceUsageServicesBatchEnable,
   )
 where
 

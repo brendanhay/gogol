@@ -41,8 +41,8 @@ module Gogol.DriveActivity
 
     -- ** driveactivity.activity.query
     DriveActivityActivityQueryResource,
+    DriveActivityActivityQuery (..),
     newDriveActivityActivityQuery,
-    DriveActivityActivityQuery,
 
     -- * Types
 

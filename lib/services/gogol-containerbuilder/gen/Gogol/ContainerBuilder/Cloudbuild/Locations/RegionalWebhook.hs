@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Locations.RegionalWebhook
     CloudbuildLocationsRegionalWebhookResource,
 
     -- ** Constructing a Request
+    CloudbuildLocationsRegionalWebhook (..),
     newCloudbuildLocationsRegionalWebhook,
-    CloudbuildLocationsRegionalWebhook,
   )
 where
 

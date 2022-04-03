@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Adunits.List
     AdSenseHostAccountsAdunitsListResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsAdunitsList (..),
     newAdSenseHostAccountsAdunitsList,
-    AdSenseHostAccountsAdunitsList,
   )
 where
 

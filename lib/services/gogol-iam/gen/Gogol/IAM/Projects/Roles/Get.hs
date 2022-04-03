@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.Roles.Get
     IAMProjectsRolesGetResource,
 
     -- ** Constructing a Request
+    IAMProjectsRolesGet (..),
     newIAMProjectsRolesGet,
-    IAMProjectsRolesGet,
   )
 where
 

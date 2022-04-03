@@ -34,8 +34,8 @@ module Gogol.Compute.FirewallPolicies.Get
     ComputeFirewallPoliciesGetResource,
 
     -- ** Constructing a Request
+    ComputeFirewallPoliciesGet (..),
     newComputeFirewallPoliciesGet,
-    ComputeFirewallPoliciesGet,
   )
 where
 

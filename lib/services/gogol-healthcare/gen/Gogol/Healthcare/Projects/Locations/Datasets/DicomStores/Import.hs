@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Import
     HealthcareProjectsLocationsDatasetsDicomStoresImportResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresImport (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresImport,
-    HealthcareProjectsLocationsDatasetsDicomStoresImport,
   )
 where
 

@@ -41,33 +41,33 @@ module Gogol.Genomics
 
     -- ** genomics.pipelines.run
     GenomicsPipelinesRunResource,
+    GenomicsPipelinesRun (..),
     newGenomicsPipelinesRun,
-    GenomicsPipelinesRun,
 
     -- ** genomics.projects.operations.cancel
     GenomicsProjectsOperationsCancelResource,
+    GenomicsProjectsOperationsCancel (..),
     newGenomicsProjectsOperationsCancel,
-    GenomicsProjectsOperationsCancel,
 
     -- ** genomics.projects.operations.get
     GenomicsProjectsOperationsGetResource,
+    GenomicsProjectsOperationsGet (..),
     newGenomicsProjectsOperationsGet,
-    GenomicsProjectsOperationsGet,
 
     -- ** genomics.projects.operations.list
     GenomicsProjectsOperationsListResource,
+    GenomicsProjectsOperationsList (..),
     newGenomicsProjectsOperationsList,
-    GenomicsProjectsOperationsList,
 
     -- ** genomics.projects.workers.checkIn
     GenomicsProjectsWorkersCheckInResource,
+    GenomicsProjectsWorkersCheckIn (..),
     newGenomicsProjectsWorkersCheckIn,
-    GenomicsProjectsWorkersCheckIn,
 
     -- ** genomics.workers.checkIn
     GenomicsWorkersCheckInResource,
+    GenomicsWorkersCheckIn (..),
     newGenomicsWorkersCheckIn,
-    GenomicsWorkersCheckIn,
 
     -- * Types
 

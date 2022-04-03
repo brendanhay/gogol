@@ -40,33 +40,33 @@ module Gogol.CloudErrorReporting
 
     -- ** clouderrorreporting.projects.deleteEvents
     CloudErrorReportingProjectsDeleteEventsResource,
+    CloudErrorReportingProjectsDeleteEvents (..),
     newCloudErrorReportingProjectsDeleteEvents,
-    CloudErrorReportingProjectsDeleteEvents,
 
     -- ** clouderrorreporting.projects.events.list
     CloudErrorReportingProjectsEventsListResource,
+    CloudErrorReportingProjectsEventsList (..),
     newCloudErrorReportingProjectsEventsList,
-    CloudErrorReportingProjectsEventsList,
 
     -- ** clouderrorreporting.projects.events.report
     CloudErrorReportingProjectsEventsReportResource,
+    CloudErrorReportingProjectsEventsReport (..),
     newCloudErrorReportingProjectsEventsReport,
-    CloudErrorReportingProjectsEventsReport,
 
     -- ** clouderrorreporting.projects.groupStats.list
     CloudErrorReportingProjectsGroupStatsListResource,
+    CloudErrorReportingProjectsGroupStatsList (..),
     newCloudErrorReportingProjectsGroupStatsList,
-    CloudErrorReportingProjectsGroupStatsList,
 
     -- ** clouderrorreporting.projects.groups.get
     CloudErrorReportingProjectsGroupsGetResource,
+    CloudErrorReportingProjectsGroupsGet (..),
     newCloudErrorReportingProjectsGroupsGet,
-    CloudErrorReportingProjectsGroupsGet,
 
     -- ** clouderrorreporting.projects.groups.update
     CloudErrorReportingProjectsGroupsUpdateResource,
+    CloudErrorReportingProjectsGroupsUpdate (..),
     newCloudErrorReportingProjectsGroupsUpdate,
-    CloudErrorReportingProjectsGroupsUpdate,
 
     -- * Types
 

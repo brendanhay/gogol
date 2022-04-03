@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.GenerateServiceIdentity
     TPUProjectsLocationsGenerateServiceIdentityResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsGenerateServiceIdentity (..),
     newTPUProjectsLocationsGenerateServiceIdentity,
-    TPUProjectsLocationsGenerateServiceIdentity,
   )
 where
 

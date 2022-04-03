@@ -34,8 +34,8 @@ module Gogol.Compute.TargetInstances.Get
     ComputeTargetInstancesGetResource,
 
     -- ** Constructing a Request
+    ComputeTargetInstancesGet (..),
     newComputeTargetInstancesGet,
-    ComputeTargetInstancesGet,
   )
 where
 

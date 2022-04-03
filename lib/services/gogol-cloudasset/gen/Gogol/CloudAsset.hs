@@ -40,13 +40,13 @@ module Gogol.CloudAsset
 
     -- ** cloudasset.exportAssets
     CloudAssetExportAssetsResource,
+    CloudAssetExportAssets (..),
     newCloudAssetExportAssets,
-    CloudAssetExportAssets,
 
     -- ** cloudasset.operations.get
     CloudAssetOperationsGetResource,
+    CloudAssetOperationsGet (..),
     newCloudAssetOperationsGet,
-    CloudAssetOperationsGet,
 
     -- * Types
 

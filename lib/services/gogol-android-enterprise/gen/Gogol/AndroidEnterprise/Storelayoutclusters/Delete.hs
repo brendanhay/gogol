@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutclusters.Delete
     AndroidEnterpriseStorelayoutclustersDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutclustersDelete (..),
     newAndroidEnterpriseStorelayoutclustersDelete,
-    AndroidEnterpriseStorelayoutclustersDelete,
   )
 where
 

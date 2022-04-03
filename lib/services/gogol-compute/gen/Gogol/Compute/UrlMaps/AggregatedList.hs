@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.AggregatedList
     ComputeUrlMapsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsAggregatedList (..),
     newComputeUrlMapsAggregatedList,
-    ComputeUrlMapsAggregatedList,
   )
 where
 

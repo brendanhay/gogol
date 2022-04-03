@@ -35,8 +35,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Create
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirCreate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirCreate,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirCreate,
   )
 where
 

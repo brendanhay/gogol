@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.BatchModify
     GmailUsersMessagesBatchModifyResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesBatchModify (..),
     newGmailUsersMessagesBatchModify,
-    GmailUsersMessagesBatchModify,
   )
 where
 

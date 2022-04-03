@@ -34,8 +34,8 @@ module Gogol.YouTube.Playlists.Delete
     YouTubePlaylistsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubePlaylistsDelete (..),
     newYouTubePlaylistsDelete,
-    YouTubePlaylistsDelete,
   )
 where
 

@@ -37,13 +37,13 @@ module Gogol.FirebaseRemoteConfig
 
     -- ** firebaseremoteconfig.projects.getRemoteConfig
     FirebaseRemoteConfigProjectsGetRemoteConfigResource,
+    FirebaseRemoteConfigProjectsGetRemoteConfig (..),
     newFirebaseRemoteConfigProjectsGetRemoteConfig,
-    FirebaseRemoteConfigProjectsGetRemoteConfig,
 
     -- ** firebaseremoteconfig.projects.updateRemoteConfig
     FirebaseRemoteConfigProjectsUpdateRemoteConfigResource,
+    FirebaseRemoteConfigProjectsUpdateRemoteConfig (..),
     newFirebaseRemoteConfigProjectsUpdateRemoteConfig,
-    FirebaseRemoteConfigProjectsUpdateRemoteConfig,
 
     -- * Types
 

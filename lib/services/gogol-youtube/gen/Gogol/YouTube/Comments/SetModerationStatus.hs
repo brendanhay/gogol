@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.SetModerationStatus
     YouTubeCommentsSetModerationStatusResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsSetModerationStatus (..),
     newYouTubeCommentsSetModerationStatus,
-    YouTubeCommentsSetModerationStatus,
   )
 where
 

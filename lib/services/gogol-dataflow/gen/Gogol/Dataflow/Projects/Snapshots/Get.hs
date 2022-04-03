@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Snapshots.Get
     DataflowProjectsSnapshotsGetResource,
 
     -- ** Constructing a Request
+    DataflowProjectsSnapshotsGet (..),
     newDataflowProjectsSnapshotsGet,
-    DataflowProjectsSnapshotsGet,
   )
 where
 

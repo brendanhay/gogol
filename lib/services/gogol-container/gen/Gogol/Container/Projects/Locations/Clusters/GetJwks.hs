@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.GetJwks
     ContainerProjectsLocationsClustersGetJwksResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersGetJwks (..),
     newContainerProjectsLocationsClustersGetJwks,
-    ContainerProjectsLocationsClustersGetJwks,
   )
 where
 

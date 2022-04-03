@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Setlineitemmetadata
     ContentOrdersSetlineitemmetadataResource,
 
     -- ** Constructing a Request
+    ContentOrdersSetlineitemmetadata (..),
     newContentOrdersSetlineitemmetadata,
-    ContentOrdersSetlineitemmetadata,
   )
 where
 

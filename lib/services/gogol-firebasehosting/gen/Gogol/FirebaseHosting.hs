@@ -37,18 +37,18 @@ module Gogol.FirebaseHosting
 
     -- ** firebasehosting.operations.cancel
     FirebaseHostingOperationsCancelResource,
+    FirebaseHostingOperationsCancel (..),
     newFirebaseHostingOperationsCancel,
-    FirebaseHostingOperationsCancel,
 
     -- ** firebasehosting.operations.delete
     FirebaseHostingOperationsDeleteResource,
+    FirebaseHostingOperationsDelete (..),
     newFirebaseHostingOperationsDelete,
-    FirebaseHostingOperationsDelete,
 
     -- ** firebasehosting.operations.list
     FirebaseHostingOperationsListResource,
+    FirebaseHostingOperationsList (..),
     newFirebaseHostingOperationsList,
-    FirebaseHostingOperationsList,
 
     -- * Types
 

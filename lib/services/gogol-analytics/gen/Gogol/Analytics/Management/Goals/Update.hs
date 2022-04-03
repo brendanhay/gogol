@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Goals.Update
     AnalyticsManagementGoalsUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementGoalsUpdate (..),
     newAnalyticsManagementGoalsUpdate,
-    AnalyticsManagementGoalsUpdate,
   )
 where
 

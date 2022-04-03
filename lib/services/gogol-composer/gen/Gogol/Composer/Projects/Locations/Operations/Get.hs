@@ -34,8 +34,8 @@ module Gogol.Composer.Projects.Locations.Operations.Get
     ComposerProjectsLocationsOperationsGetResource,
 
     -- ** Constructing a Request
+    ComposerProjectsLocationsOperationsGet (..),
     newComposerProjectsLocationsOperationsGet,
-    ComposerProjectsLocationsOperationsGet,
   )
 where
 

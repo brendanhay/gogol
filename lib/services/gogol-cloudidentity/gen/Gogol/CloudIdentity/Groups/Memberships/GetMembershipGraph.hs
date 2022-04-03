@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.GetMembershipGraph
     CloudIdentityGroupsMembershipsGetMembershipGraphResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsGetMembershipGraph (..),
     newCloudIdentityGroupsMembershipsGetMembershipGraph,
-    CloudIdentityGroupsMembershipsGetMembershipGraph,
   )
 where
 

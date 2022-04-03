@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.List
     FireStoreProjectsDatabasesListResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesList (..),
     newFireStoreProjectsDatabasesList,
-    FireStoreProjectsDatabasesList,
   )
 where
 

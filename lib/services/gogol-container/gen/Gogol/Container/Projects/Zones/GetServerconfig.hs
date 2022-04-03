@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.GetServerconfig
     ContainerProjectsZonesGetServerconfigResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesGetServerconfig (..),
     newContainerProjectsZonesGetServerconfig,
-    ContainerProjectsZonesGetServerconfig,
   )
 where
 

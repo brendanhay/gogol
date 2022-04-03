@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Operations.Lro.List
     CloudSearchOperationsLroListResource,
 
     -- ** Constructing a Request
+    CloudSearchOperationsLroList (..),
     newCloudSearchOperationsLroList,
-    CloudSearchOperationsLroList,
   )
 where
 

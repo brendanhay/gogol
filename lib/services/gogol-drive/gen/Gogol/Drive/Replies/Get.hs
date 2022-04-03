@@ -34,8 +34,8 @@ module Gogol.Drive.Replies.Get
     DriveRepliesGetResource,
 
     -- ** Constructing a Request
+    DriveRepliesGet (..),
     newDriveRepliesGet,
-    DriveRepliesGet,
   )
 where
 

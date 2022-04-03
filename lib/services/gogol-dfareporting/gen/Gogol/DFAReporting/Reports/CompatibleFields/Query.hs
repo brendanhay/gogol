@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Reports.CompatibleFields.Query
     DFAReportingReportsCompatibleFieldsQueryResource,
 
     -- ** Constructing a Request
+    DFAReportingReportsCompatibleFieldsQuery (..),
     newDFAReportingReportsCompatibleFieldsQuery,
-    DFAReportingReportsCompatibleFieldsQuery,
   )
 where
 

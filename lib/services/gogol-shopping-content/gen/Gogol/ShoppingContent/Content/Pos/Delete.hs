@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Pos.Delete
     ContentPosDeleteResource,
 
     -- ** Constructing a Request
+    ContentPosDelete (..),
     newContentPosDelete,
-    ContentPosDelete,
   )
 where
 

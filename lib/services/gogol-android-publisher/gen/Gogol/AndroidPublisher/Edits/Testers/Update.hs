@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Testers.Update
     AndroidPublisherEditsTestersUpdateResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsTestersUpdate (..),
     newAndroidPublisherEditsTestersUpdate,
-    AndroidPublisherEditsTestersUpdate,
   )
 where
 

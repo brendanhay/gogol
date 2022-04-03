@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Metros.List
     DFAReportingMetrosListResource,
 
     -- ** Constructing a Request
+    DFAReportingMetrosList (..),
     newDFAReportingMetrosList,
-    DFAReportingMetrosList,
   )
 where
 

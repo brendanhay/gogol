@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Version_headers.List
     TagManagerAccountsContainersVersion_headersListResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersVersion_headersList (..),
     newTagManagerAccountsContainersVersion_headersList,
-    TagManagerAccountsContainersVersion_headersList,
   )
 where
 

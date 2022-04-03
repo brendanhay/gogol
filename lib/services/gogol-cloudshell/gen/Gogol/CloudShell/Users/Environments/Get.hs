@@ -34,8 +34,8 @@ module Gogol.CloudShell.Users.Environments.Get
     CloudShellUsersEnvironmentsGetResource,
 
     -- ** Constructing a Request
+    CloudShellUsersEnvironmentsGet (..),
     newCloudShellUsersEnvironmentsGet,
-    CloudShellUsersEnvironmentsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Mirror.Accounts.Insert
     MirrorAccountsInsertResource,
 
     -- ** Constructing a Request
+    MirrorAccountsInsert (..),
     newMirrorAccountsInsert,
-    MirrorAccountsInsert,
   )
 where
 

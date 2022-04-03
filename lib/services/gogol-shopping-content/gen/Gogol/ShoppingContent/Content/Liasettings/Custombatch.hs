@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Custombatch
     ContentLiasettingsCustombatchResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsCustombatch (..),
     newContentLiasettingsCustombatch,
-    ContentLiasettingsCustombatch,
   )
 where
 

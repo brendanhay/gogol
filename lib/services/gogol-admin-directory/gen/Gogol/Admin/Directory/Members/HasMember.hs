@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.HasMember
     DirectoryMembersHasMemberResource,
 
     -- ** Constructing a Request
+    DirectoryMembersHasMember (..),
     newDirectoryMembersHasMember,
-    DirectoryMembersHasMember,
   )
 where
 

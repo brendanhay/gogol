@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.SetLabels
     ComputeRegionDisksSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksSetLabels (..),
     newComputeRegionDisksSetLabels,
-    ComputeRegionDisksSetLabels,
   )
 where
 

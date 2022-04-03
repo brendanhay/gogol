@@ -34,8 +34,8 @@ module Gogol.Genomics.Projects.Operations.List
     GenomicsProjectsOperationsListResource,
 
     -- ** Constructing a Request
+    GenomicsProjectsOperationsList (..),
     newGenomicsProjectsOperationsList,
-    GenomicsProjectsOperationsList,
   )
 where
 

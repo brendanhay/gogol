@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.List
     TPUProjectsLocationsListResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsList (..),
     newTPUProjectsLocationsList,
-    TPUProjectsLocationsList,
   )
 where
 

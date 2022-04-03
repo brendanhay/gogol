@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Repricingrules.Patch
     ContentRepricingrulesPatchResource,
 
     -- ** Constructing a Request
+    ContentRepricingrulesPatch (..),
     newContentRepricingrulesPatch,
-    ContentRepricingrulesPatch,
   )
 where
 

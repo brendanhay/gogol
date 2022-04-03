@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.GithubEnterpriseConfigs.Patch
     CloudbuildProjectsGithubEnterpriseConfigsPatchResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsGithubEnterpriseConfigsPatch (..),
     newCloudbuildProjectsGithubEnterpriseConfigsPatch,
-    CloudbuildProjectsGithubEnterpriseConfigsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.TargetTcpProxies.SetProxyHeader
     ComputeTargetTcpProxiesSetProxyHeaderResource,
 
     -- ** Constructing a Request
+    ComputeTargetTcpProxiesSetProxyHeader (..),
     newComputeTargetTcpProxiesSetProxyHeader,
-    ComputeTargetTcpProxiesSetProxyHeader,
   )
 where
 

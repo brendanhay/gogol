@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Setposdataprovider
     ContentLiasettingsSetposdataproviderResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsSetposdataprovider (..),
     newContentLiasettingsSetposdataprovider,
-    ContentLiasettingsSetposdataprovider,
   )
 where
 

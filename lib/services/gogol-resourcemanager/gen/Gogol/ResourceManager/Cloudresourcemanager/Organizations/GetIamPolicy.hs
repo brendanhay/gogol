@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Organizations.GetIamPolicy
     CloudresourcemanagerOrganizationsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerOrganizationsGetIamPolicy (..),
     newCloudresourcemanagerOrganizationsGetIamPolicy,
-    CloudresourcemanagerOrganizationsGetIamPolicy,
   )
 where
 

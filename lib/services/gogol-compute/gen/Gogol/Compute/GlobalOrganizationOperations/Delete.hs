@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalOrganizationOperations.Delete
     ComputeGlobalOrganizationOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeGlobalOrganizationOperationsDelete (..),
     newComputeGlobalOrganizationOperationsDelete,
-    ComputeGlobalOrganizationOperationsDelete,
   )
 where
 

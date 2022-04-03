@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.AuthorizedCertificates.Patch
     AppEngineAppsAuthorizedCertificatesPatchResource,
 
     -- ** Constructing a Request
+    AppEngineAppsAuthorizedCertificatesPatch (..),
     newAppEngineAppsAuthorizedCertificatesPatch,
-    AppEngineAppsAuthorizedCertificatesPatch,
   )
 where
 

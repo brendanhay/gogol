@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
     SecurityCenterOrganizationsSourcesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesGetIamPolicy (..),
     newSecurityCenterOrganizationsSourcesGetIamPolicy,
-    SecurityCenterOrganizationsSourcesGetIamPolicy,
   )
 where
 

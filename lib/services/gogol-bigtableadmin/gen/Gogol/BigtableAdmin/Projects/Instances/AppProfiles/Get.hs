@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Get
     BigtableAdminProjectsInstancesAppProfilesGetResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesAppProfilesGet (..),
     newBigtableAdminProjectsInstancesAppProfilesGet,
-    BigtableAdminProjectsInstancesAppProfilesGet,
   )
 where
 

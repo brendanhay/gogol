@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatModerators.List
     YouTubeLiveChatModeratorsListResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatModeratorsList (..),
     newYouTubeLiveChatModeratorsList,
-    YouTubeLiveChatModeratorsList,
   )
 where
 

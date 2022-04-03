@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
     BigtableAdminProjectsInstancesTablesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesTestIamPermissions (..),
     newBigtableAdminProjectsInstancesTablesTestIamPermissions,
-    BigtableAdminProjectsInstancesTablesTestIamPermissions,
   )
 where
 

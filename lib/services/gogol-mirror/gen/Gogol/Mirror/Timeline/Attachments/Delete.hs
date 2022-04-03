@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.Attachments.Delete
     MirrorTimelineAttachmentsDeleteResource,
 
     -- ** Constructing a Request
+    MirrorTimelineAttachmentsDelete (..),
     newMirrorTimelineAttachmentsDelete,
-    MirrorTimelineAttachmentsDelete,
   )
 where
 

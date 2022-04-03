@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.Insert
     SqlDatabasesInsertResource,
 
     -- ** Constructing a Request
+    SqlDatabasesInsert (..),
     newSqlDatabasesInsert,
-    SqlDatabasesInsert,
   )
 where
 

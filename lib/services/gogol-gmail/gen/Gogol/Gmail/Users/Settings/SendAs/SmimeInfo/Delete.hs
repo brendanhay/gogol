@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Delete
     GmailUsersSettingsSendAsSmimeInfoDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsSmimeInfoDelete (..),
     newGmailUsersSettingsSendAsSmimeInfoDelete,
-    GmailUsersSettingsSendAsSmimeInfoDelete,
   )
 where
 

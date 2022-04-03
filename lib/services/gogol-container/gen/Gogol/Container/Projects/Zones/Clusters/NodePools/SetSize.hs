@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
     ContainerProjectsZonesClustersNodePoolsSetSizeResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersNodePoolsSetSize (..),
     newContainerProjectsZonesClustersNodePoolsSetSize,
-    ContainerProjectsZonesClustersNodePoolsSetSize,
   )
 where
 

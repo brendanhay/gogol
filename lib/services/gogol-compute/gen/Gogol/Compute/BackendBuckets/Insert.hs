@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.Insert
     ComputeBackendBucketsInsertResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsInsert (..),
     newComputeBackendBucketsInsert,
-    ComputeBackendBucketsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Locations.Buckets.List
     LoggingProjectsLocationsBucketsListResource,
 
     -- ** Constructing a Request
+    LoggingProjectsLocationsBucketsList (..),
     newLoggingProjectsLocationsBucketsList,
-    LoggingProjectsLocationsBucketsList,
   )
 where
 

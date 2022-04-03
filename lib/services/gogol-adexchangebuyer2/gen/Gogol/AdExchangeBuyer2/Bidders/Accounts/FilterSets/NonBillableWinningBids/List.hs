@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.NonBillableWinningBids
     AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList,
   )
 where
 

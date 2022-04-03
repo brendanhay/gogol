@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
     DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersionsResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions,
   )
 where
 

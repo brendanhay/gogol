@@ -43,113 +43,113 @@ module Gogol.ServiceManagement
 
     -- ** servicemanagement.operations.get
     ServiceManagementOperationsGetResource,
+    ServiceManagementOperationsGet (..),
     newServiceManagementOperationsGet,
-    ServiceManagementOperationsGet,
 
     -- ** servicemanagement.operations.list
     ServiceManagementOperationsListResource,
+    ServiceManagementOperationsList (..),
     newServiceManagementOperationsList,
-    ServiceManagementOperationsList,
 
     -- ** servicemanagement.services.configs.create
     ServiceManagementServicesConfigsCreateResource,
+    ServiceManagementServicesConfigsCreate (..),
     newServiceManagementServicesConfigsCreate,
-    ServiceManagementServicesConfigsCreate,
 
     -- ** servicemanagement.services.configs.get
     ServiceManagementServicesConfigsGetResource,
+    ServiceManagementServicesConfigsGet (..),
     newServiceManagementServicesConfigsGet,
-    ServiceManagementServicesConfigsGet,
 
     -- ** servicemanagement.services.configs.list
     ServiceManagementServicesConfigsListResource,
+    ServiceManagementServicesConfigsList (..),
     newServiceManagementServicesConfigsList,
-    ServiceManagementServicesConfigsList,
 
     -- ** servicemanagement.services.configs.submit
     ServiceManagementServicesConfigsSubmitResource,
+    ServiceManagementServicesConfigsSubmit (..),
     newServiceManagementServicesConfigsSubmit,
-    ServiceManagementServicesConfigsSubmit,
 
     -- ** servicemanagement.services.consumers.getIamPolicy
     ServiceManagementServicesConsumersGetIamPolicyResource,
+    ServiceManagementServicesConsumersGetIamPolicy (..),
     newServiceManagementServicesConsumersGetIamPolicy,
-    ServiceManagementServicesConsumersGetIamPolicy,
 
     -- ** servicemanagement.services.consumers.setIamPolicy
     ServiceManagementServicesConsumersSetIamPolicyResource,
+    ServiceManagementServicesConsumersSetIamPolicy (..),
     newServiceManagementServicesConsumersSetIamPolicy,
-    ServiceManagementServicesConsumersSetIamPolicy,
 
     -- ** servicemanagement.services.consumers.testIamPermissions
     ServiceManagementServicesConsumersTestIamPermissionsResource,
+    ServiceManagementServicesConsumersTestIamPermissions (..),
     newServiceManagementServicesConsumersTestIamPermissions,
-    ServiceManagementServicesConsumersTestIamPermissions,
 
     -- ** servicemanagement.services.create
     ServiceManagementServicesCreateResource,
+    ServiceManagementServicesCreate (..),
     newServiceManagementServicesCreate,
-    ServiceManagementServicesCreate,
 
     -- ** servicemanagement.services.delete
     ServiceManagementServicesDeleteResource,
+    ServiceManagementServicesDelete (..),
     newServiceManagementServicesDelete,
-    ServiceManagementServicesDelete,
 
     -- ** servicemanagement.services.generateConfigReport
     ServiceManagementServicesGenerateConfigReportResource,
+    ServiceManagementServicesGenerateConfigReport (..),
     newServiceManagementServicesGenerateConfigReport,
-    ServiceManagementServicesGenerateConfigReport,
 
     -- ** servicemanagement.services.get
     ServiceManagementServicesGetResource,
+    ServiceManagementServicesGet (..),
     newServiceManagementServicesGet,
-    ServiceManagementServicesGet,
 
     -- ** servicemanagement.services.getConfig
     ServiceManagementServicesGetConfigResource,
+    ServiceManagementServicesGetConfig (..),
     newServiceManagementServicesGetConfig,
-    ServiceManagementServicesGetConfig,
 
     -- ** servicemanagement.services.getIamPolicy
     ServiceManagementServicesGetIamPolicyResource,
+    ServiceManagementServicesGetIamPolicy (..),
     newServiceManagementServicesGetIamPolicy,
-    ServiceManagementServicesGetIamPolicy,
 
     -- ** servicemanagement.services.list
     ServiceManagementServicesListResource,
+    ServiceManagementServicesList (..),
     newServiceManagementServicesList,
-    ServiceManagementServicesList,
 
     -- ** servicemanagement.services.rollouts.create
     ServiceManagementServicesRolloutsCreateResource,
+    ServiceManagementServicesRolloutsCreate (..),
     newServiceManagementServicesRolloutsCreate,
-    ServiceManagementServicesRolloutsCreate,
 
     -- ** servicemanagement.services.rollouts.get
     ServiceManagementServicesRolloutsGetResource,
+    ServiceManagementServicesRolloutsGet (..),
     newServiceManagementServicesRolloutsGet,
-    ServiceManagementServicesRolloutsGet,
 
     -- ** servicemanagement.services.rollouts.list
     ServiceManagementServicesRolloutsListResource,
+    ServiceManagementServicesRolloutsList (..),
     newServiceManagementServicesRolloutsList,
-    ServiceManagementServicesRolloutsList,
 
     -- ** servicemanagement.services.setIamPolicy
     ServiceManagementServicesSetIamPolicyResource,
+    ServiceManagementServicesSetIamPolicy (..),
     newServiceManagementServicesSetIamPolicy,
-    ServiceManagementServicesSetIamPolicy,
 
     -- ** servicemanagement.services.testIamPermissions
     ServiceManagementServicesTestIamPermissionsResource,
+    ServiceManagementServicesTestIamPermissions (..),
     newServiceManagementServicesTestIamPermissions,
-    ServiceManagementServicesTestIamPermissions,
 
     -- ** servicemanagement.services.undelete
     ServiceManagementServicesUndeleteResource,
+    ServiceManagementServicesUndelete (..),
     newServiceManagementServicesUndelete,
-    ServiceManagementServicesUndelete,
 
     -- * Types
 

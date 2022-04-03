@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Authinfo
     ContentAccountsAuthinfoResource,
 
     -- ** Constructing a Request
+    ContentAccountsAuthinfo (..),
     newContentAccountsAuthinfo,
-    ContentAccountsAuthinfo,
   )
 where
 

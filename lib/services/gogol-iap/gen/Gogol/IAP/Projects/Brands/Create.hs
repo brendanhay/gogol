@@ -34,8 +34,8 @@ module Gogol.IAP.Projects.Brands.Create
     IAPProjectsBrandsCreateResource,
 
     -- ** Constructing a Request
+    IAPProjectsBrandsCreate (..),
     newIAPProjectsBrandsCreate,
-    IAPProjectsBrandsCreate,
   )
 where
 

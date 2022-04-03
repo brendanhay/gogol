@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Cancel
     ReplicaPoolUpdaterRollingUpdatesCancelResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterRollingUpdatesCancel (..),
     newReplicaPoolUpdaterRollingUpdatesCancel,
-    ReplicaPoolUpdaterRollingUpdatesCancel,
   )
 where
 

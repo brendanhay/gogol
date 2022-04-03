@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Tiers.List
     SqlTiersListResource,
 
     -- ** Constructing a Request
+    SqlTiersList (..),
     newSqlTiersList,
-    SqlTiersList,
   )
 where
 

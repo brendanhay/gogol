@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.StoredInfoTypes.Create
     DLPOrganizationsLocationsStoredInfoTypesCreateResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsStoredInfoTypesCreate (..),
     newDLPOrganizationsLocationsStoredInfoTypesCreate,
-    DLPOrganizationsLocationsStoredInfoTypesCreate,
   )
 where
 

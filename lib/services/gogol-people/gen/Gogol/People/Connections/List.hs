@@ -34,8 +34,8 @@ module Gogol.People.Connections.List
     PeoplePeopleConnectionsListResource,
 
     -- ** Constructing a Request
+    PeoplePeopleConnectionsList (..),
     newPeoplePeopleConnectionsList,
-    PeoplePeopleConnectionsList,
   )
 where
 

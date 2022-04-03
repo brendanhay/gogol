@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.FullHashes.Find
     SafeBrowsingFullHashesFindResource,
 
     -- ** Constructing a Request
+    SafeBrowsingFullHashesFind (..),
     newSafeBrowsingFullHashesFind,
-    SafeBrowsingFullHashesFind,
   )
 where
 

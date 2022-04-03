@@ -34,8 +34,8 @@ module Gogol.Genomics.Pipelines.Run
     GenomicsPipelinesRunResource,
 
     -- ** Constructing a Request
+    GenomicsPipelinesRun (..),
     newGenomicsPipelinesRun,
-    GenomicsPipelinesRun,
   )
 where
 

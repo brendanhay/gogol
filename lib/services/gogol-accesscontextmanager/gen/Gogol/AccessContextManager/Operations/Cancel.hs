@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.Operations.Cancel
     AccessContextManagerOperationsCancelResource,
 
     -- ** Constructing a Request
+    AccessContextManagerOperationsCancel (..),
     newAccessContextManagerOperationsCancel,
-    AccessContextManagerOperationsCancel,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SiteVerification.WebResource.Patch
     SiteVerificationWebResourcePatchResource,
 
     -- ** Constructing a Request
+    SiteVerificationWebResourcePatch (..),
     newSiteVerificationWebResourcePatch,
-    SiteVerificationWebResourcePatch,
   )
 where
 

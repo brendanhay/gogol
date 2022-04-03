@@ -34,8 +34,8 @@ module Gogol.People.ContactGroups.BatchGet
     PeopleContactGroupsBatchGetResource,
 
     -- ** Constructing a Request
+    PeopleContactGroupsBatchGet (..),
     newPeopleContactGroupsBatchGet,
-    PeopleContactGroupsBatchGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceControl.Services.Report
     ServiceControlServicesReportResource,
 
     -- ** Constructing a Request
+    ServiceControlServicesReport (..),
     newServiceControlServicesReport,
-    ServiceControlServicesReport,
   )
 where
 

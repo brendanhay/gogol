@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Sinks.Patch
     LoggingBillingAccountsSinksPatchResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsSinksPatch (..),
     newLoggingBillingAccountsSinksPatch,
-    LoggingBillingAccountsSinksPatch,
   )
 where
 

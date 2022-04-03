@@ -34,8 +34,8 @@ module Gogol.FactCheckTools.Pages.Delete
     FactCheckToolsPagesDeleteResource,
 
     -- ** Constructing a Request
+    FactCheckToolsPagesDelete (..),
     newFactCheckToolsPagesDelete,
-    FactCheckToolsPagesDelete,
   )
 where
 

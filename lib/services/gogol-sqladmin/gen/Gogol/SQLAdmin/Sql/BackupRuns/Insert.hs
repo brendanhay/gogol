@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.BackupRuns.Insert
     SqlBackupRunsInsertResource,
 
     -- ** Constructing a Request
+    SqlBackupRunsInsert (..),
     newSqlBackupRunsInsert,
-    SqlBackupRunsInsert,
   )
 where
 

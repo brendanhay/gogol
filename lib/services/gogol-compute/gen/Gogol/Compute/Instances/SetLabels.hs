@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetLabels
     ComputeInstancesSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetLabels (..),
     newComputeInstancesSetLabels,
-    ComputeInstancesSetLabels,
   )
 where
 

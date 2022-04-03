@@ -34,8 +34,8 @@ module Gogol.Books.Promooffer.Accept
     BooksPromoofferAcceptResource,
 
     -- ** Constructing a Request
+    BooksPromoofferAccept (..),
     newBooksPromoofferAccept,
-    BooksPromoofferAccept,
   )
 where
 

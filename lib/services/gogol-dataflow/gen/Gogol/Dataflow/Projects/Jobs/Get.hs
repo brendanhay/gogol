@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.Get
     DataflowProjectsJobsGetResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsGet (..),
     newDataflowProjectsJobsGet,
-    DataflowProjectsJobsGet,
   )
 where
 

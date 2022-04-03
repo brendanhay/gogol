@@ -34,8 +34,8 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
     DoubleclickbidmanagerQueriesDeletequeryResource,
 
     -- ** Constructing a Request
+    DoubleclickbidmanagerQueriesDeletequery (..),
     newDoubleclickbidmanagerQueriesDeletequery,
-    DoubleclickbidmanagerQueriesDeletequery,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.SslCerts.Delete
     SqlSslCertsDeleteResource,
 
     -- ** Constructing a Request
+    SqlSslCertsDelete (..),
     newSqlSslCertsDelete,
-    SqlSslCertsDelete,
   )
 where
 

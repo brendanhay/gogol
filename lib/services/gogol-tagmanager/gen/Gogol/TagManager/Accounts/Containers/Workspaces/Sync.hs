@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Sync
     TagManagerAccountsContainersWorkspacesSyncResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesSync (..),
     newTagManagerAccountsContainersWorkspacesSync,
-    TagManagerAccountsContainersWorkspacesSync,
   )
 where
 

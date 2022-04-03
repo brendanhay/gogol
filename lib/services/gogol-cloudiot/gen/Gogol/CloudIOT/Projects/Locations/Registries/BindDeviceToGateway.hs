@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.BindDeviceToGateway
     CloudIOTProjectsLocationsRegistriesBindDeviceToGatewayResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesBindDeviceToGateway (..),
     newCloudIOTProjectsLocationsRegistriesBindDeviceToGateway,
-    CloudIOTProjectsLocationsRegistriesBindDeviceToGateway,
   )
 where
 

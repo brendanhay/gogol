@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
     CloudbillingBillingAccountsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudbillingBillingAccountsTestIamPermissions (..),
     newCloudbillingBillingAccountsTestIamPermissions,
-    CloudbillingBillingAccountsTestIamPermissions,
   )
 where
 

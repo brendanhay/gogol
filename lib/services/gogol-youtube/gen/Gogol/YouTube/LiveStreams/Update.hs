@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveStreams.Update
     YouTubeLiveStreamsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeLiveStreamsUpdate (..),
     newYouTubeLiveStreamsUpdate,
-    YouTubeLiveStreamsUpdate,
   )
 where
 

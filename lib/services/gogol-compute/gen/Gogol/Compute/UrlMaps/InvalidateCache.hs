@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.InvalidateCache
     ComputeUrlMapsInvalidateCacheResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsInvalidateCache (..),
     newComputeUrlMapsInvalidateCache,
-    ComputeUrlMapsInvalidateCache,
   )
 where
 

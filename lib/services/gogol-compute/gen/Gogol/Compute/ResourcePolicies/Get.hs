@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.Get
     ComputeResourcePoliciesGetResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesGet (..),
     newComputeResourcePoliciesGet,
-    ComputeResourcePoliciesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.SslCerts.List
     SqlSslCertsListResource,
 
     -- ** Constructing a Request
+    SqlSslCertsList (..),
     newSqlSslCertsList,
-    SqlSslCertsList,
   )
 where
 

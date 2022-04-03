@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.UpdateLanguage
     GmailUsersSettingsUpdateLanguageResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsUpdateLanguage (..),
     newGmailUsersSettingsUpdateLanguage,
-    GmailUsersSettingsUpdateLanguage,
   )
 where
 

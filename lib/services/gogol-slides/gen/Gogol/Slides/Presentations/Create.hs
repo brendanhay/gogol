@@ -34,8 +34,8 @@ module Gogol.Slides.Presentations.Create
     SlidesPresentationsCreateResource,
 
     -- ** Constructing a Request
+    SlidesPresentationsCreate (..),
     newSlidesPresentationsCreate,
-    SlidesPresentationsCreate,
   )
 where
 

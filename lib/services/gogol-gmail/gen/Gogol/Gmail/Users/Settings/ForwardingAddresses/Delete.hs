@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.ForwardingAddresses.Delete
     GmailUsersSettingsForwardingAddressesDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsForwardingAddressesDelete (..),
     newGmailUsersSettingsForwardingAddressesDelete,
-    GmailUsersSettingsForwardingAddressesDelete,
   )
 where
 

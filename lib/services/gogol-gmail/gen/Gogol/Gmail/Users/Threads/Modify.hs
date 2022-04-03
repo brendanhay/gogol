@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Threads.Modify
     GmailUsersThreadsModifyResource,
 
     -- ** Constructing a Request
+    GmailUsersThreadsModify (..),
     newGmailUsersThreadsModify,
-    GmailUsersThreadsModify,
   )
 where
 

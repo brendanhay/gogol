@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroupManagers.ListManagedInstances
     ComputeInstanceGroupManagersListManagedInstancesResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupManagersListManagedInstances (..),
     newComputeInstanceGroupManagersListManagedInstances,
-    ComputeInstanceGroupManagersListManagedInstances,
   )
 where
 

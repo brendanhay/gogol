@@ -41,118 +41,118 @@ module Gogol.CloudIOT
 
     -- ** cloudiot.projects.locations.registries.bindDeviceToGateway
     CloudIOTProjectsLocationsRegistriesBindDeviceToGatewayResource,
+    CloudIOTProjectsLocationsRegistriesBindDeviceToGateway (..),
     newCloudIOTProjectsLocationsRegistriesBindDeviceToGateway,
-    CloudIOTProjectsLocationsRegistriesBindDeviceToGateway,
 
     -- ** cloudiot.projects.locations.registries.create
     CloudIOTProjectsLocationsRegistriesCreateResource,
+    CloudIOTProjectsLocationsRegistriesCreate (..),
     newCloudIOTProjectsLocationsRegistriesCreate,
-    CloudIOTProjectsLocationsRegistriesCreate,
 
     -- ** cloudiot.projects.locations.registries.delete
     CloudIOTProjectsLocationsRegistriesDeleteResource,
+    CloudIOTProjectsLocationsRegistriesDelete (..),
     newCloudIOTProjectsLocationsRegistriesDelete,
-    CloudIOTProjectsLocationsRegistriesDelete,
 
     -- ** cloudiot.projects.locations.registries.devices.configVersions.list
     CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsListResource,
+    CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList (..),
     newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList,
-    CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList,
 
     -- ** cloudiot.projects.locations.registries.devices.create
     CloudIOTProjectsLocationsRegistriesDevicesCreateResource,
+    CloudIOTProjectsLocationsRegistriesDevicesCreate (..),
     newCloudIOTProjectsLocationsRegistriesDevicesCreate,
-    CloudIOTProjectsLocationsRegistriesDevicesCreate,
 
     -- ** cloudiot.projects.locations.registries.devices.delete
     CloudIOTProjectsLocationsRegistriesDevicesDeleteResource,
+    CloudIOTProjectsLocationsRegistriesDevicesDelete (..),
     newCloudIOTProjectsLocationsRegistriesDevicesDelete,
-    CloudIOTProjectsLocationsRegistriesDevicesDelete,
 
     -- ** cloudiot.projects.locations.registries.devices.get
     CloudIOTProjectsLocationsRegistriesDevicesGetResource,
+    CloudIOTProjectsLocationsRegistriesDevicesGet (..),
     newCloudIOTProjectsLocationsRegistriesDevicesGet,
-    CloudIOTProjectsLocationsRegistriesDevicesGet,
 
     -- ** cloudiot.projects.locations.registries.devices.list
     CloudIOTProjectsLocationsRegistriesDevicesListResource,
+    CloudIOTProjectsLocationsRegistriesDevicesList (..),
     newCloudIOTProjectsLocationsRegistriesDevicesList,
-    CloudIOTProjectsLocationsRegistriesDevicesList,
 
     -- ** cloudiot.projects.locations.registries.devices.modifyCloudToDeviceConfig
     CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfigResource,
+    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig (..),
     newCloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig,
-    CloudIOTProjectsLocationsRegistriesDevicesModifyCloudToDeviceConfig,
 
     -- ** cloudiot.projects.locations.registries.devices.patch
     CloudIOTProjectsLocationsRegistriesDevicesPatchResource,
+    CloudIOTProjectsLocationsRegistriesDevicesPatch (..),
     newCloudIOTProjectsLocationsRegistriesDevicesPatch,
-    CloudIOTProjectsLocationsRegistriesDevicesPatch,
 
     -- ** cloudiot.projects.locations.registries.devices.sendCommandToDevice
     CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDeviceResource,
+    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice (..),
     newCloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice,
-    CloudIOTProjectsLocationsRegistriesDevicesSendCommandToDevice,
 
     -- ** cloudiot.projects.locations.registries.devices.states.list
     CloudIOTProjectsLocationsRegistriesDevicesStatesListResource,
+    CloudIOTProjectsLocationsRegistriesDevicesStatesList (..),
     newCloudIOTProjectsLocationsRegistriesDevicesStatesList,
-    CloudIOTProjectsLocationsRegistriesDevicesStatesList,
 
     -- ** cloudiot.projects.locations.registries.get
     CloudIOTProjectsLocationsRegistriesGetResource,
+    CloudIOTProjectsLocationsRegistriesGet (..),
     newCloudIOTProjectsLocationsRegistriesGet,
-    CloudIOTProjectsLocationsRegistriesGet,
 
     -- ** cloudiot.projects.locations.registries.getIamPolicy
     CloudIOTProjectsLocationsRegistriesGetIamPolicyResource,
+    CloudIOTProjectsLocationsRegistriesGetIamPolicy (..),
     newCloudIOTProjectsLocationsRegistriesGetIamPolicy,
-    CloudIOTProjectsLocationsRegistriesGetIamPolicy,
 
     -- ** cloudiot.projects.locations.registries.groups.devices.list
     CloudIOTProjectsLocationsRegistriesGroupsDevicesListResource,
+    CloudIOTProjectsLocationsRegistriesGroupsDevicesList (..),
     newCloudIOTProjectsLocationsRegistriesGroupsDevicesList,
-    CloudIOTProjectsLocationsRegistriesGroupsDevicesList,
 
     -- ** cloudiot.projects.locations.registries.groups.getIamPolicy
     CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicyResource,
+    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy (..),
     newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy,
-    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy,
 
     -- ** cloudiot.projects.locations.registries.groups.setIamPolicy
     CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicyResource,
+    CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy (..),
     newCloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy,
-    CloudIOTProjectsLocationsRegistriesGroupsSetIamPolicy,
 
     -- ** cloudiot.projects.locations.registries.groups.testIamPermissions
     CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissionsResource,
+    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions (..),
     newCloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions,
-    CloudIOTProjectsLocationsRegistriesGroupsTestIamPermissions,
 
     -- ** cloudiot.projects.locations.registries.list
     CloudIOTProjectsLocationsRegistriesListResource,
+    CloudIOTProjectsLocationsRegistriesList (..),
     newCloudIOTProjectsLocationsRegistriesList,
-    CloudIOTProjectsLocationsRegistriesList,
 
     -- ** cloudiot.projects.locations.registries.patch
     CloudIOTProjectsLocationsRegistriesPatchResource,
+    CloudIOTProjectsLocationsRegistriesPatch (..),
     newCloudIOTProjectsLocationsRegistriesPatch,
-    CloudIOTProjectsLocationsRegistriesPatch,
 
     -- ** cloudiot.projects.locations.registries.setIamPolicy
     CloudIOTProjectsLocationsRegistriesSetIamPolicyResource,
+    CloudIOTProjectsLocationsRegistriesSetIamPolicy (..),
     newCloudIOTProjectsLocationsRegistriesSetIamPolicy,
-    CloudIOTProjectsLocationsRegistriesSetIamPolicy,
 
     -- ** cloudiot.projects.locations.registries.testIamPermissions
     CloudIOTProjectsLocationsRegistriesTestIamPermissionsResource,
+    CloudIOTProjectsLocationsRegistriesTestIamPermissions (..),
     newCloudIOTProjectsLocationsRegistriesTestIamPermissions,
-    CloudIOTProjectsLocationsRegistriesTestIamPermissions,
 
     -- ** cloudiot.projects.locations.registries.unbindDeviceFromGateway
     CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGatewayResource,
+    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway (..),
     newCloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway,
-    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway,
 
     -- * Types
 

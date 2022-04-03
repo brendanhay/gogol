@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.SetPrivateIpGoogleAccess
     ComputeSubnetworksSetPrivateIpGoogleAccessResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksSetPrivateIpGoogleAccess (..),
     newComputeSubnetworksSetPrivateIpGoogleAccess,
-    ComputeSubnetworksSetPrivateIpGoogleAccess,
   )
 where
 

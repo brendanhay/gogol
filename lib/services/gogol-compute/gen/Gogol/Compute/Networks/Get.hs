@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.Get
     ComputeNetworksGetResource,
 
     -- ** Constructing a Request
+    ComputeNetworksGet (..),
     newComputeNetworksGet,
-    ComputeNetworksGet,
   )
 where
 

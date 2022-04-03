@@ -34,8 +34,8 @@ module Gogol.Compute.MachineImages.Get
     ComputeMachineImagesGetResource,
 
     -- ** Constructing a Request
+    ComputeMachineImagesGet (..),
     newComputeMachineImagesGet,
-    ComputeMachineImagesGet,
   )
 where
 

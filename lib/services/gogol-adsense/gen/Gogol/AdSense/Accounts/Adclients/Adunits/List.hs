@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Adclients.Adunits.List
     AdSenseAccountsAdclientsAdunitsListResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsAdclientsAdunitsList (..),
     newAdSenseAccountsAdclientsAdunitsList,
-    AdSenseAccountsAdclientsAdunitsList,
   )
 where
 

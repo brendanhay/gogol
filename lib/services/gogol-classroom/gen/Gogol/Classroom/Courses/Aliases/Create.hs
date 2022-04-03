@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Aliases.Create
     ClassroomCoursesAliasesCreateResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesAliasesCreate (..),
     newClassroomCoursesAliasesCreate,
-    ClassroomCoursesAliasesCreate,
   )
 where
 

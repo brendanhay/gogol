@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.Resize
     ComputeReservationsResizeResource,
 
     -- ** Constructing a Request
+    ComputeReservationsResize (..),
     newComputeReservationsResize,
-    ComputeReservationsResize,
   )
 where
 

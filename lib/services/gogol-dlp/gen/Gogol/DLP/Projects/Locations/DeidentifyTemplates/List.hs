@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.DeidentifyTemplates.List
     DLPProjectsLocationsDeidentifyTemplatesListResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsDeidentifyTemplatesList (..),
     newDLPProjectsLocationsDeidentifyTemplatesList,
-    DLPProjectsLocationsDeidentifyTemplatesList,
   )
 where
 

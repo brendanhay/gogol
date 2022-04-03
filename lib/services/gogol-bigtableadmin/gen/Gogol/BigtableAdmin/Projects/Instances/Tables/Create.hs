@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.Create
     BigtableAdminProjectsInstancesTablesCreateResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesCreate (..),
     newBigtableAdminProjectsInstancesTablesCreate,
-    BigtableAdminProjectsInstancesTablesCreate,
   )
 where
 

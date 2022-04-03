@@ -34,8 +34,8 @@ module Gogol.Compute.TargetSslProxies.SetSslCertificates
     ComputeTargetSslProxiesSetSslCertificatesResource,
 
     -- ** Constructing a Request
+    ComputeTargetSslProxiesSetSslCertificates (..),
     newComputeTargetSslProxiesSetSslCertificates,
-    ComputeTargetSslProxiesSetSslCertificates,
   )
 where
 

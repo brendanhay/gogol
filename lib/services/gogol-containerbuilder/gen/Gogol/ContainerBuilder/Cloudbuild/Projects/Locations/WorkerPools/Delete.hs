@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.WorkerPools.Delete
     CloudbuildProjectsLocationsWorkerPoolsDeleteResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsWorkerPoolsDelete (..),
     newCloudbuildProjectsLocationsWorkerPoolsDelete,
-    CloudbuildProjectsLocationsWorkerPoolsDelete,
   )
 where
 

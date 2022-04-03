@@ -34,8 +34,8 @@ module Gogol.People.SearchDirectoryPeople
     PeoplePeopleSearchDirectoryPeopleResource,
 
     -- ** Constructing a Request
+    PeoplePeopleSearchDirectoryPeople (..),
     newPeoplePeopleSearchDirectoryPeople,
-    PeoplePeopleSearchDirectoryPeople,
   )
 where
 

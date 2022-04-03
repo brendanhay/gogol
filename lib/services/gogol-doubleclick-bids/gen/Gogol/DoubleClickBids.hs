@@ -40,33 +40,33 @@ module Gogol.DoubleClickBids
 
     -- ** doubleclickbidmanager.queries.createquery
     DoubleclickbidmanagerQueriesCreatequeryResource,
+    DoubleclickbidmanagerQueriesCreatequery (..),
     newDoubleclickbidmanagerQueriesCreatequery,
-    DoubleclickbidmanagerQueriesCreatequery,
 
     -- ** doubleclickbidmanager.queries.deletequery
     DoubleclickbidmanagerQueriesDeletequeryResource,
+    DoubleclickbidmanagerQueriesDeletequery (..),
     newDoubleclickbidmanagerQueriesDeletequery,
-    DoubleclickbidmanagerQueriesDeletequery,
 
     -- ** doubleclickbidmanager.queries.getquery
     DoubleclickbidmanagerQueriesGetqueryResource,
+    DoubleclickbidmanagerQueriesGetquery (..),
     newDoubleclickbidmanagerQueriesGetquery,
-    DoubleclickbidmanagerQueriesGetquery,
 
     -- ** doubleclickbidmanager.queries.listqueries
     DoubleclickbidmanagerQueriesListqueriesResource,
+    DoubleclickbidmanagerQueriesListqueries (..),
     newDoubleclickbidmanagerQueriesListqueries,
-    DoubleclickbidmanagerQueriesListqueries,
 
     -- ** doubleclickbidmanager.queries.runquery
     DoubleclickbidmanagerQueriesRunqueryResource,
+    DoubleclickbidmanagerQueriesRunquery (..),
     newDoubleclickbidmanagerQueriesRunquery,
-    DoubleclickbidmanagerQueriesRunquery,
 
     -- ** doubleclickbidmanager.reports.listreports
     DoubleclickbidmanagerReportsListreportsResource,
+    DoubleclickbidmanagerReportsListreports (..),
     newDoubleclickbidmanagerReportsListreports,
-    DoubleclickbidmanagerReportsListreports,
 
     -- * Types
 

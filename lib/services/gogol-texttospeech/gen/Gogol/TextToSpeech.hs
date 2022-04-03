@@ -40,13 +40,13 @@ module Gogol.TextToSpeech
 
     -- ** texttospeech.text.synthesize
     TextToSpeechTextSynthesizeResource,
+    TextToSpeechTextSynthesize (..),
     newTextToSpeechTextSynthesize,
-    TextToSpeechTextSynthesize,
 
     -- ** texttospeech.voices.list
     TextToSpeechVoicesListResource,
+    TextToSpeechVoicesList (..),
     newTextToSpeechVoicesList,
-    TextToSpeechVoicesList,
 
     -- * Types
 

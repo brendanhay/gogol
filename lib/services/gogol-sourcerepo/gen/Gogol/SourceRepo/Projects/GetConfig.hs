@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.GetConfig
     SourceRepoProjectsGetConfigResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsGetConfig (..),
     newSourceRepoProjectsGetConfig,
-    SourceRepoProjectsGetConfig,
   )
 where
 

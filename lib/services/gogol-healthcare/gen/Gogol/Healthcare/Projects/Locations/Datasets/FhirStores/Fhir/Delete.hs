@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Delete
     HealthcareProjectsLocationsDatasetsFhirStoresFhirDeleteResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirDelete (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirDelete,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirDelete,
   )
 where
 

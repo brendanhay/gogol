@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Versions.Publish
     TagManagerAccountsContainersVersionsPublishResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersVersionsPublish (..),
     newTagManagerAccountsContainersVersionsPublish,
-    TagManagerAccountsContainersVersionsPublish,
   )
 where
 

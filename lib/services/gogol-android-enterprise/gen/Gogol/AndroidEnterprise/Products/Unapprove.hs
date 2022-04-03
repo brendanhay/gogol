@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.Unapprove
     AndroidEnterpriseProductsUnapproveResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsUnapprove (..),
     newAndroidEnterpriseProductsUnapprove,
-    AndroidEnterpriseProductsUnapprove,
   )
 where
 

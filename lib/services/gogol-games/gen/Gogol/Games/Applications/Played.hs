@@ -34,8 +34,8 @@ module Gogol.Games.Applications.Played
     GamesApplicationsPlayedResource,
 
     -- ** Constructing a Request
+    GamesApplicationsPlayed (..),
     newGamesApplicationsPlayed,
-    GamesApplicationsPlayed,
   )
 where
 

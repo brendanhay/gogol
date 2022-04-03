@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.RotateServerCa
     SqlInstancesRotateServerCaResource,
 
     -- ** Constructing a Request
+    SqlInstancesRotateServerCa (..),
     newSqlInstancesRotateServerCa,
-    SqlInstancesRotateServerCa,
   )
 where
 

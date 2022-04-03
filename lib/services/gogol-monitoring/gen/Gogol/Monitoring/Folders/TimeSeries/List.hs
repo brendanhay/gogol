@@ -34,8 +34,8 @@ module Gogol.Monitoring.Folders.TimeSeries.List
     MonitoringFoldersTimeSeriesListResource,
 
     -- ** Constructing a Request
+    MonitoringFoldersTimeSeriesList (..),
     newMonitoringFoldersTimeSeriesList,
-    MonitoringFoldersTimeSeriesList,
   )
 where
 

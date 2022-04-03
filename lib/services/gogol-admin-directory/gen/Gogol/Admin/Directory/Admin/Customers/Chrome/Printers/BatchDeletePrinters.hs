@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
     AdminCustomersChromePrintersBatchDeletePrintersResource,
 
     -- ** Constructing a Request
+    AdminCustomersChromePrintersBatchDeletePrinters (..),
     newAdminCustomersChromePrintersBatchDeletePrinters,
-    AdminCustomersChromePrintersBatchDeletePrinters,
   )
 where
 

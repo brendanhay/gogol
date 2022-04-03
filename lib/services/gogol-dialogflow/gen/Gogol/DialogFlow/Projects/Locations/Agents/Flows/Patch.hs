@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Patch
     DialogFlowProjectsLocationsAgentsFlowsPatchResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsPatch (..),
     newDialogFlowProjectsLocationsAgentsFlowsPatch,
-    DialogFlowProjectsLocationsAgentsFlowsPatch,
   )
 where
 

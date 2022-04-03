@@ -34,8 +34,8 @@ module Gogol.Compute.MachineImages.Insert
     ComputeMachineImagesInsertResource,
 
     -- ** Constructing a Request
+    ComputeMachineImagesInsert (..),
     newComputeMachineImagesInsert,
-    ComputeMachineImagesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Creatives.RemoveDeal
     AdExchangeBuyerCreativesRemoveDealResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerCreativesRemoveDeal (..),
     newAdExchangeBuyerCreativesRemoveDeal,
-    AdExchangeBuyerCreativesRemoveDeal,
   )
 where
 

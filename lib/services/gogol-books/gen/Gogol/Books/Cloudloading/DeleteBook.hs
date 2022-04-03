@@ -34,8 +34,8 @@ module Gogol.Books.Cloudloading.DeleteBook
     BooksCloudloadingDeleteBookResource,
 
     -- ** Constructing a Request
+    BooksCloudloadingDeleteBook (..),
     newBooksCloudloadingDeleteBook,
-    BooksCloudloadingDeleteBook,
   )
 where
 

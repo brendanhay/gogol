@@ -57,83 +57,83 @@ module Gogol.Script
 
     -- ** script.processes.list
     ScriptProcessesListResource,
+    ScriptProcessesList (..),
     newScriptProcessesList,
-    ScriptProcessesList,
 
     -- ** script.processes.listScriptProcesses
     ScriptProcessesListScriptProcessesResource,
+    ScriptProcessesListScriptProcesses (..),
     newScriptProcessesListScriptProcesses,
-    ScriptProcessesListScriptProcesses,
 
     -- ** script.projects.create
     ScriptProjectsCreateResource,
+    ScriptProjectsCreate (..),
     newScriptProjectsCreate,
-    ScriptProjectsCreate,
 
     -- ** script.projects.deployments.create
     ScriptProjectsDeploymentsCreateResource,
+    ScriptProjectsDeploymentsCreate (..),
     newScriptProjectsDeploymentsCreate,
-    ScriptProjectsDeploymentsCreate,
 
     -- ** script.projects.deployments.delete
     ScriptProjectsDeploymentsDeleteResource,
+    ScriptProjectsDeploymentsDelete (..),
     newScriptProjectsDeploymentsDelete,
-    ScriptProjectsDeploymentsDelete,
 
     -- ** script.projects.deployments.get
     ScriptProjectsDeploymentsGetResource,
+    ScriptProjectsDeploymentsGet (..),
     newScriptProjectsDeploymentsGet,
-    ScriptProjectsDeploymentsGet,
 
     -- ** script.projects.deployments.list
     ScriptProjectsDeploymentsListResource,
+    ScriptProjectsDeploymentsList (..),
     newScriptProjectsDeploymentsList,
-    ScriptProjectsDeploymentsList,
 
     -- ** script.projects.deployments.update
     ScriptProjectsDeploymentsUpdateResource,
+    ScriptProjectsDeploymentsUpdate (..),
     newScriptProjectsDeploymentsUpdate,
-    ScriptProjectsDeploymentsUpdate,
 
     -- ** script.projects.get
     ScriptProjectsGetResource,
+    ScriptProjectsGet (..),
     newScriptProjectsGet,
-    ScriptProjectsGet,
 
     -- ** script.projects.getContent
     ScriptProjectsGetContentResource,
+    ScriptProjectsGetContent (..),
     newScriptProjectsGetContent,
-    ScriptProjectsGetContent,
 
     -- ** script.projects.getMetrics
     ScriptProjectsGetMetricsResource,
+    ScriptProjectsGetMetrics (..),
     newScriptProjectsGetMetrics,
-    ScriptProjectsGetMetrics,
 
     -- ** script.projects.updateContent
     ScriptProjectsUpdateContentResource,
+    ScriptProjectsUpdateContent (..),
     newScriptProjectsUpdateContent,
-    ScriptProjectsUpdateContent,
 
     -- ** script.projects.versions.create
     ScriptProjectsVersionsCreateResource,
+    ScriptProjectsVersionsCreate (..),
     newScriptProjectsVersionsCreate,
-    ScriptProjectsVersionsCreate,
 
     -- ** script.projects.versions.get
     ScriptProjectsVersionsGetResource,
+    ScriptProjectsVersionsGet (..),
     newScriptProjectsVersionsGet,
-    ScriptProjectsVersionsGet,
 
     -- ** script.projects.versions.list
     ScriptProjectsVersionsListResource,
+    ScriptProjectsVersionsList (..),
     newScriptProjectsVersionsList,
-    ScriptProjectsVersionsList,
 
     -- ** script.scripts.run
     ScriptScriptsRunResource,
+    ScriptScriptsRun (..),
     newScriptScriptsRun,
-    ScriptScriptsRun,
 
     -- * Types
 

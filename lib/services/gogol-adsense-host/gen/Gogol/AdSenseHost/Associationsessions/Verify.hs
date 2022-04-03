@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Associationsessions.Verify
     AdSenseHostAssociationsessionsVerifyResource,
 
     -- ** Constructing a Request
+    AdSenseHostAssociationsessionsVerify (..),
     newAdSenseHostAssociationsessionsVerify,
-    AdSenseHostAssociationsessionsVerify,
   )
 where
 

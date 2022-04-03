@@ -37,8 +37,8 @@ module Gogol.AcceleratedMobilePageUrl
 
     -- ** acceleratedmobilepageurl.ampUrls.batchGet
     AcceleratedMobilePageUrlAmpUrlsBatchGetResource,
+    AcceleratedMobilePageUrlAmpUrlsBatchGet (..),
     newAcceleratedMobilePageUrlAmpUrlsBatchGet,
-    AcceleratedMobilePageUrlAmpUrlsBatchGet,
 
     -- * Types
 

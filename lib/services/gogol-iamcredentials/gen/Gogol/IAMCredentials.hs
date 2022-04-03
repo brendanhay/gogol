@@ -40,23 +40,23 @@ module Gogol.IAMCredentials
 
     -- ** iamcredentials.projects.serviceAccounts.generateAccessToken
     IAMCredentialsProjectsServiceAccountsGenerateAccessTokenResource,
+    IAMCredentialsProjectsServiceAccountsGenerateAccessToken (..),
     newIAMCredentialsProjectsServiceAccountsGenerateAccessToken,
-    IAMCredentialsProjectsServiceAccountsGenerateAccessToken,
 
     -- ** iamcredentials.projects.serviceAccounts.generateIdToken
     IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
+    IAMCredentialsProjectsServiceAccountsGenerateIdToken (..),
     newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
-    IAMCredentialsProjectsServiceAccountsGenerateIdToken,
 
     -- ** iamcredentials.projects.serviceAccounts.signBlob
     IAMCredentialsProjectsServiceAccountsSignBlobResource,
+    IAMCredentialsProjectsServiceAccountsSignBlob (..),
     newIAMCredentialsProjectsServiceAccountsSignBlob,
-    IAMCredentialsProjectsServiceAccountsSignBlob,
 
     -- ** iamcredentials.projects.serviceAccounts.signJwt
     IAMCredentialsProjectsServiceAccountsSignJwtResource,
+    IAMCredentialsProjectsServiceAccountsSignJwt (..),
     newIAMCredentialsProjectsServiceAccountsSignJwt,
-    IAMCredentialsProjectsServiceAccountsSignJwt,
 
     -- * Types
 

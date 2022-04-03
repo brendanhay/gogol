@@ -34,8 +34,8 @@ module Gogol.DFAReporting.FloodlightActivityGroups.Patch
     DFAReportingFloodlightActivityGroupsPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingFloodlightActivityGroupsPatch (..),
     newDFAReportingFloodlightActivityGroupsPatch,
-    DFAReportingFloodlightActivityGroupsPatch,
   )
 where
 

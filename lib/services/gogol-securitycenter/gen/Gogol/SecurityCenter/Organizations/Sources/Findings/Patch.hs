@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.Findings.Patch
     SecurityCenterOrganizationsSourcesFindingsPatchResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesFindingsPatch (..),
     newSecurityCenterOrganizationsSourcesFindingsPatch,
-    SecurityCenterOrganizationsSourcesFindingsPatch,
   )
 where
 

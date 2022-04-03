@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalOperations.AggregatedList
     ComputeGlobalOperationsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeGlobalOperationsAggregatedList (..),
     newComputeGlobalOperationsAggregatedList,
-    ComputeGlobalOperationsAggregatedList,
   )
 where
 

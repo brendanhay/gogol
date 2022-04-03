@@ -34,8 +34,8 @@ module Gogol.DNS.Changes.Get
     DNSChangesGetResource,
 
     -- ** Constructing a Request
+    DNSChangesGet (..),
     newDNSChangesGet,
-    DNSChangesGet,
   )
 where
 

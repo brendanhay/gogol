@@ -34,8 +34,8 @@ module Gogol.Compute.MachineTypes.Get
     ComputeMachineTypesGetResource,
 
     -- ** Constructing a Request
+    ComputeMachineTypesGet (..),
     newComputeMachineTypesGet,
-    ComputeMachineTypesGet,
   )
 where
 

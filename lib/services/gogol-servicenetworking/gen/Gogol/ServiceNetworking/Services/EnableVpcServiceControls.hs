@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.EnableVpcServiceControls
     ServiceNetworkingServicesEnableVpcServiceControlsResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesEnableVpcServiceControls (..),
     newServiceNetworkingServicesEnableVpcServiceControls,
-    ServiceNetworkingServicesEnableVpcServiceControls,
   )
 where
 

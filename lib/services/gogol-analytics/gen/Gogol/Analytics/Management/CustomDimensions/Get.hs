@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomDimensions.Get
     AnalyticsManagementCustomDimensionsGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomDimensionsGet (..),
     newAnalyticsManagementCustomDimensionsGet,
-    AnalyticsManagementCustomDimensionsGet,
   )
 where
 

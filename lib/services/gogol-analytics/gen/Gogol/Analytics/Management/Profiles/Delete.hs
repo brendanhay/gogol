@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Profiles.Delete
     AnalyticsManagementProfilesDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfilesDelete (..),
     newAnalyticsManagementProfilesDelete,
-    AnalyticsManagementProfilesDelete,
   )
 where
 

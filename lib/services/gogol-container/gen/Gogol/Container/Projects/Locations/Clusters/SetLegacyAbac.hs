@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.SetLegacyAbac
     ContainerProjectsLocationsClustersSetLegacyAbacResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersSetLegacyAbac (..),
     newContainerProjectsLocationsClustersSetLegacyAbac,
-    ContainerProjectsLocationsClustersSetLegacyAbac,
   )
 where
 

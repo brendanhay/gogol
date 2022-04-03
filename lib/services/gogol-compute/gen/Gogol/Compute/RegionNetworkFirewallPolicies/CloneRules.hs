@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.CloneRules
     ComputeRegionNetworkFirewallPoliciesCloneRulesResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesCloneRules (..),
     newComputeRegionNetworkFirewallPoliciesCloneRules,
-    ComputeRegionNetworkFirewallPoliciesCloneRules,
   )
 where
 

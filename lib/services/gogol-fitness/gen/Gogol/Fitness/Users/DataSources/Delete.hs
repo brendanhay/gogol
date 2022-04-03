@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.DataSources.Delete
     FitnessUsersDataSourcesDeleteResource,
 
     -- ** Constructing a Request
+    FitnessUsersDataSourcesDelete (..),
     newFitnessUsersDataSourcesDelete,
-    FitnessUsersDataSourcesDelete,
   )
 where
 

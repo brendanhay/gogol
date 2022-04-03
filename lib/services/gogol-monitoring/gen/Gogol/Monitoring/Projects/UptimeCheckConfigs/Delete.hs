@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.UptimeCheckConfigs.Delete
     MonitoringProjectsUptimeCheckConfigsDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsUptimeCheckConfigsDelete (..),
     newMonitoringProjectsUptimeCheckConfigsDelete,
-    MonitoringProjectsUptimeCheckConfigsDelete,
   )
 where
 

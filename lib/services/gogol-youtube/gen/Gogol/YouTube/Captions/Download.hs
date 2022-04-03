@@ -34,8 +34,8 @@ module Gogol.YouTube.Captions.Download
     YouTubeCaptionsDownloadResource,
 
     -- ** Constructing a Request
+    YouTubeCaptionsDownload (..),
     newYouTubeCaptionsDownload,
-    YouTubeCaptionsDownload,
   )
 where
 

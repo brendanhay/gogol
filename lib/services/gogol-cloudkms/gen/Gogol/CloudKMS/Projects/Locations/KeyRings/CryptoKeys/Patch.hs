@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Patch
     CloudKMSProjectsLocationsKeyRingsCryptoKeysPatchResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatch (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
   )
 where
 

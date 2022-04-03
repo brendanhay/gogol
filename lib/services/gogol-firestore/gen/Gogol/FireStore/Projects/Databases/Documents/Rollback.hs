@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.Rollback
     FireStoreProjectsDatabasesDocumentsRollbackResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsRollback (..),
     newFireStoreProjectsDatabasesDocumentsRollback,
-    FireStoreProjectsDatabasesDocumentsRollback,
   )
 where
 

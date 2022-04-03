@@ -34,8 +34,8 @@ module Gogol.IAM.Permissions.QueryTestablePermissions
     IAMPermissionsQueryTestablePermissionsResource,
 
     -- ** Constructing a Request
+    IAMPermissionsQueryTestablePermissions (..),
     newIAMPermissionsQueryTestablePermissions,
-    IAMPermissionsQueryTestablePermissions,
   )
 where
 

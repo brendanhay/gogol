@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Media.Upload
     CloudSearchMediaUploadResource,
 
     -- ** Constructing a Request
+    CloudSearchMediaUpload (..),
     newCloudSearchMediaUpload,
-    CloudSearchMediaUpload,
   )
 where
 

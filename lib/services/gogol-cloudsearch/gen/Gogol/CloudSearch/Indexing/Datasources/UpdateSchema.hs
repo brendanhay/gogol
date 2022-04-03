@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.UpdateSchema
     CloudSearchIndexingDatasourcesUpdateSchemaResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesUpdateSchema (..),
     newCloudSearchIndexingDatasourcesUpdateSchema,
-    CloudSearchIndexingDatasourcesUpdateSchema,
   )
 where
 

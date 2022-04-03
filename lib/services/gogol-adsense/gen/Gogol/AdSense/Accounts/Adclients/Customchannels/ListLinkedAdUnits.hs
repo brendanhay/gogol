@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Adclients.Customchannels.ListLinkedAdUnits
     AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits (..),
     newAdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
-    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
   )
 where
 

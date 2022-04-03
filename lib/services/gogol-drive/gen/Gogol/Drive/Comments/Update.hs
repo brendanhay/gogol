@@ -34,8 +34,8 @@ module Gogol.Drive.Comments.Update
     DriveCommentsUpdateResource,
 
     -- ** Constructing a Request
+    DriveCommentsUpdate (..),
     newDriveCommentsUpdate,
-    DriveCommentsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.DataSources.Update
     FitnessUsersDataSourcesUpdateResource,
 
     -- ** Constructing a Request
+    FitnessUsersDataSourcesUpdate (..),
     newFitnessUsersDataSourcesUpdate,
-    FitnessUsersDataSourcesUpdate,
   )
 where
 

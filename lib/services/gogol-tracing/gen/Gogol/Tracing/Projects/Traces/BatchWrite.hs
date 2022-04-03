@@ -34,8 +34,8 @@ module Gogol.Tracing.Projects.Traces.BatchWrite
     TracingProjectsTracesBatchWriteResource,
 
     -- ** Constructing a Request
+    TracingProjectsTracesBatchWrite (..),
     newTracingProjectsTracesBatchWrite,
-    TracingProjectsTracesBatchWrite,
   )
 where
 

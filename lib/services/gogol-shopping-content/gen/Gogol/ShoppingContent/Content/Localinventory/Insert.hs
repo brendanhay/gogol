@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Localinventory.Insert
     ContentLocalinventoryInsertResource,
 
     -- ** Constructing a Request
+    ContentLocalinventoryInsert (..),
     newContentLocalinventoryInsert,
-    ContentLocalinventoryInsert,
   )
 where
 

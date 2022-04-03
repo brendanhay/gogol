@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeGroups.Get
     DFAReportingCreativeGroupsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeGroupsGet (..),
     newDFAReportingCreativeGroupsGet,
-    DFAReportingCreativeGroupsGet,
   )
 where
 

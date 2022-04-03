@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.Commit
     FireStoreProjectsDatabasesDocumentsCommitResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsCommit (..),
     newFireStoreProjectsDatabasesDocumentsCommit,
-    FireStoreProjectsDatabasesDocumentsCommit,
   )
 where
 

@@ -40,73 +40,73 @@ module Gogol.ServiceConsumerManagement
 
     -- ** serviceconsumermanagement.operations.cancel
     ServiceConsumerManagementOperationsCancelResource,
+    ServiceConsumerManagementOperationsCancel (..),
     newServiceConsumerManagementOperationsCancel,
-    ServiceConsumerManagementOperationsCancel,
 
     -- ** serviceconsumermanagement.operations.delete
     ServiceConsumerManagementOperationsDeleteResource,
+    ServiceConsumerManagementOperationsDelete (..),
     newServiceConsumerManagementOperationsDelete,
-    ServiceConsumerManagementOperationsDelete,
 
     -- ** serviceconsumermanagement.operations.get
     ServiceConsumerManagementOperationsGetResource,
+    ServiceConsumerManagementOperationsGet (..),
     newServiceConsumerManagementOperationsGet,
-    ServiceConsumerManagementOperationsGet,
 
     -- ** serviceconsumermanagement.operations.list
     ServiceConsumerManagementOperationsListResource,
+    ServiceConsumerManagementOperationsList (..),
     newServiceConsumerManagementOperationsList,
-    ServiceConsumerManagementOperationsList,
 
     -- ** serviceconsumermanagement.services.search
     ServiceConsumerManagementServicesSearchResource,
+    ServiceConsumerManagementServicesSearch (..),
     newServiceConsumerManagementServicesSearch,
-    ServiceConsumerManagementServicesSearch,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.addProject
     ServiceConsumerManagementServicesTenancyUnitsAddProjectResource,
+    ServiceConsumerManagementServicesTenancyUnitsAddProject (..),
     newServiceConsumerManagementServicesTenancyUnitsAddProject,
-    ServiceConsumerManagementServicesTenancyUnitsAddProject,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.applyProjectConfig
     ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfigResource,
+    ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig (..),
     newServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig,
-    ServiceConsumerManagementServicesTenancyUnitsApplyProjectConfig,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.attachProject
     ServiceConsumerManagementServicesTenancyUnitsAttachProjectResource,
+    ServiceConsumerManagementServicesTenancyUnitsAttachProject (..),
     newServiceConsumerManagementServicesTenancyUnitsAttachProject,
-    ServiceConsumerManagementServicesTenancyUnitsAttachProject,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.create
     ServiceConsumerManagementServicesTenancyUnitsCreateResource,
+    ServiceConsumerManagementServicesTenancyUnitsCreate (..),
     newServiceConsumerManagementServicesTenancyUnitsCreate,
-    ServiceConsumerManagementServicesTenancyUnitsCreate,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.delete
     ServiceConsumerManagementServicesTenancyUnitsDeleteResource,
+    ServiceConsumerManagementServicesTenancyUnitsDelete (..),
     newServiceConsumerManagementServicesTenancyUnitsDelete,
-    ServiceConsumerManagementServicesTenancyUnitsDelete,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.deleteProject
     ServiceConsumerManagementServicesTenancyUnitsDeleteProjectResource,
+    ServiceConsumerManagementServicesTenancyUnitsDeleteProject (..),
     newServiceConsumerManagementServicesTenancyUnitsDeleteProject,
-    ServiceConsumerManagementServicesTenancyUnitsDeleteProject,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.list
     ServiceConsumerManagementServicesTenancyUnitsListResource,
+    ServiceConsumerManagementServicesTenancyUnitsList (..),
     newServiceConsumerManagementServicesTenancyUnitsList,
-    ServiceConsumerManagementServicesTenancyUnitsList,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.removeProject
     ServiceConsumerManagementServicesTenancyUnitsRemoveProjectResource,
+    ServiceConsumerManagementServicesTenancyUnitsRemoveProject (..),
     newServiceConsumerManagementServicesTenancyUnitsRemoveProject,
-    ServiceConsumerManagementServicesTenancyUnitsRemoveProject,
 
     -- ** serviceconsumermanagement.services.tenancyUnits.undeleteProject
     ServiceConsumerManagementServicesTenancyUnitsUndeleteProjectResource,
+    ServiceConsumerManagementServicesTenancyUnitsUndeleteProject (..),
     newServiceConsumerManagementServicesTenancyUnitsUndeleteProject,
-    ServiceConsumerManagementServicesTenancyUnitsUndeleteProject,
 
     -- * Types
 

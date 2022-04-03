@@ -34,8 +34,8 @@ module Gogol.Vision.Files.AsyncBatchAnnotate
     VisionFilesAsyncBatchAnnotateResource,
 
     -- ** Constructing a Request
+    VisionFilesAsyncBatchAnnotate (..),
     newVisionFilesAsyncBatchAnnotate,
-    VisionFilesAsyncBatchAnnotate,
   )
 where
 

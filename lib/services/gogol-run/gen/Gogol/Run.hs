@@ -40,73 +40,73 @@ module Gogol.Run
 
     -- ** run.projects.locations.operations.delete
     RunProjectsLocationsOperationsDeleteResource,
+    RunProjectsLocationsOperationsDelete (..),
     newRunProjectsLocationsOperationsDelete,
-    RunProjectsLocationsOperationsDelete,
 
     -- ** run.projects.locations.operations.get
     RunProjectsLocationsOperationsGetResource,
+    RunProjectsLocationsOperationsGet (..),
     newRunProjectsLocationsOperationsGet,
-    RunProjectsLocationsOperationsGet,
 
     -- ** run.projects.locations.operations.list
     RunProjectsLocationsOperationsListResource,
+    RunProjectsLocationsOperationsList (..),
     newRunProjectsLocationsOperationsList,
-    RunProjectsLocationsOperationsList,
 
     -- ** run.projects.locations.services.create
     RunProjectsLocationsServicesCreateResource,
+    RunProjectsLocationsServicesCreate (..),
     newRunProjectsLocationsServicesCreate,
-    RunProjectsLocationsServicesCreate,
 
     -- ** run.projects.locations.services.delete
     RunProjectsLocationsServicesDeleteResource,
+    RunProjectsLocationsServicesDelete (..),
     newRunProjectsLocationsServicesDelete,
-    RunProjectsLocationsServicesDelete,
 
     -- ** run.projects.locations.services.get
     RunProjectsLocationsServicesGetResource,
+    RunProjectsLocationsServicesGet (..),
     newRunProjectsLocationsServicesGet,
-    RunProjectsLocationsServicesGet,
 
     -- ** run.projects.locations.services.getIamPolicy
     RunProjectsLocationsServicesGetIamPolicyResource,
+    RunProjectsLocationsServicesGetIamPolicy (..),
     newRunProjectsLocationsServicesGetIamPolicy,
-    RunProjectsLocationsServicesGetIamPolicy,
 
     -- ** run.projects.locations.services.list
     RunProjectsLocationsServicesListResource,
+    RunProjectsLocationsServicesList (..),
     newRunProjectsLocationsServicesList,
-    RunProjectsLocationsServicesList,
 
     -- ** run.projects.locations.services.patch
     RunProjectsLocationsServicesPatchResource,
+    RunProjectsLocationsServicesPatch (..),
     newRunProjectsLocationsServicesPatch,
-    RunProjectsLocationsServicesPatch,
 
     -- ** run.projects.locations.services.revisions.delete
     RunProjectsLocationsServicesRevisionsDeleteResource,
+    RunProjectsLocationsServicesRevisionsDelete (..),
     newRunProjectsLocationsServicesRevisionsDelete,
-    RunProjectsLocationsServicesRevisionsDelete,
 
     -- ** run.projects.locations.services.revisions.get
     RunProjectsLocationsServicesRevisionsGetResource,
+    RunProjectsLocationsServicesRevisionsGet (..),
     newRunProjectsLocationsServicesRevisionsGet,
-    RunProjectsLocationsServicesRevisionsGet,
 
     -- ** run.projects.locations.services.revisions.list
     RunProjectsLocationsServicesRevisionsListResource,
+    RunProjectsLocationsServicesRevisionsList (..),
     newRunProjectsLocationsServicesRevisionsList,
-    RunProjectsLocationsServicesRevisionsList,
 
     -- ** run.projects.locations.services.setIamPolicy
     RunProjectsLocationsServicesSetIamPolicyResource,
+    RunProjectsLocationsServicesSetIamPolicy (..),
     newRunProjectsLocationsServicesSetIamPolicy,
-    RunProjectsLocationsServicesSetIamPolicy,
 
     -- ** run.projects.locations.services.testIamPermissions
     RunProjectsLocationsServicesTestIamPermissionsResource,
+    RunProjectsLocationsServicesTestIamPermissions (..),
     newRunProjectsLocationsServicesTestIamPermissions,
-    RunProjectsLocationsServicesTestIamPermissions,
 
     -- * Types
 

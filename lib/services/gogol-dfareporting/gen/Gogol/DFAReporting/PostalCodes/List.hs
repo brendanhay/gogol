@@ -34,8 +34,8 @@ module Gogol.DFAReporting.PostalCodes.List
     DFAReportingPostalCodesListResource,
 
     -- ** Constructing a Request
+    DFAReportingPostalCodesList (..),
     newDFAReportingPostalCodesList,
-    DFAReportingPostalCodesList,
   )
 where
 

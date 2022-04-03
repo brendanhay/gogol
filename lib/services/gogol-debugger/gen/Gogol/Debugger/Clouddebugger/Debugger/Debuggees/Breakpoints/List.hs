@@ -34,8 +34,8 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
     ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
 
     -- ** Constructing a Request
+    ClouddebuggerDebuggerDebuggeesBreakpointsList (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsList,
-    ClouddebuggerDebuggerDebuggeesBreakpointsList,
   )
 where
 

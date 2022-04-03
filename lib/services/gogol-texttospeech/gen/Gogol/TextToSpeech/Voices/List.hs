@@ -34,8 +34,8 @@ module Gogol.TextToSpeech.Voices.List
     TextToSpeechVoicesListResource,
 
     -- ** Constructing a Request
+    TextToSpeechVoicesList (..),
     newTextToSpeechVoicesList,
-    TextToSpeechVoicesList,
   )
 where
 

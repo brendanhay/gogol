@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.Content.Inspect
     DLPProjectsLocationsContentInspectResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsContentInspect (..),
     newDLPProjectsLocationsContentInspect,
-    DLPProjectsLocationsContentInspect,
   )
 where
 

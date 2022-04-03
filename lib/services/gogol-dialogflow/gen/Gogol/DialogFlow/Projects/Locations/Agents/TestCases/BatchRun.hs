@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchRun
     DialogFlowProjectsLocationsAgentsTestCasesBatchRunResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesBatchRun (..),
     newDialogFlowProjectsLocationsAgentsTestCasesBatchRun,
-    DialogFlowProjectsLocationsAgentsTestCasesBatchRun,
   )
 where
 

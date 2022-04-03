@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Schemas.Insert
     DirectorySchemasInsertResource,
 
     -- ** Constructing a Request
+    DirectorySchemasInsert (..),
     newDirectorySchemasInsert,
-    DirectorySchemasInsert,
   )
 where
 

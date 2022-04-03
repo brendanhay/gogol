@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.Attestors.SetIamPolicy
     BinaryAuthorizationProjectsAttestorsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsAttestorsSetIamPolicy (..),
     newBinaryAuthorizationProjectsAttestorsSetIamPolicy,
-    BinaryAuthorizationProjectsAttestorsSetIamPolicy,
   )
 where
 

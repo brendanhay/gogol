@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Asps.Delete
     DirectoryAspsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryAspsDelete (..),
     newDirectoryAspsDelete,
-    DirectoryAspsDelete,
   )
 where
 

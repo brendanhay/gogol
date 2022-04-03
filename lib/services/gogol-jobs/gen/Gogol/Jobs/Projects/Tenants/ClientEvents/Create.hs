@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.ClientEvents.Create
     JobsProjectsTenantsClientEventsCreateResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsClientEventsCreate (..),
     newJobsProjectsTenantsClientEventsCreate,
-    JobsProjectsTenantsClientEventsCreate,
   )
 where
 

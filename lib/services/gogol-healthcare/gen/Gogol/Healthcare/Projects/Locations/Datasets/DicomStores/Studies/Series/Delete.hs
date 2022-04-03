@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.D
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDeleteResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete,
   )
 where
 

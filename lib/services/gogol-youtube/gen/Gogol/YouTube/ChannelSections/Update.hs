@@ -34,8 +34,8 @@ module Gogol.YouTube.ChannelSections.Update
     YouTubeChannelSectionsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeChannelSectionsUpdate (..),
     newYouTubeChannelSectionsUpdate,
-    YouTubeChannelSectionsUpdate,
   )
 where
 

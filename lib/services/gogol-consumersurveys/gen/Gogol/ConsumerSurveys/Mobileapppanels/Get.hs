@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Mobileapppanels.Get
     ConsumerSurveysMobileapppanelsGetResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysMobileapppanelsGet (..),
     newConsumerSurveysMobileapppanelsGet,
-    ConsumerSurveysMobileapppanelsGet,
   )
 where
 

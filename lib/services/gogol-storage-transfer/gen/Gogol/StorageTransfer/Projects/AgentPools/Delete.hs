@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.Projects.AgentPools.Delete
     StorageTransferProjectsAgentPoolsDeleteResource,
 
     -- ** Constructing a Request
+    StorageTransferProjectsAgentPoolsDelete (..),
     newStorageTransferProjectsAgentPoolsDelete,
-    StorageTransferProjectsAgentPoolsDelete,
   )
 where
 

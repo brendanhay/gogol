@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.GetLoginProfile
     OSLoginUsersGetLoginProfileResource,
 
     -- ** Constructing a Request
+    OSLoginUsersGetLoginProfile (..),
     newOSLoginUsersGetLoginProfile,
-    OSLoginUsersGetLoginProfile,
   )
 where
 

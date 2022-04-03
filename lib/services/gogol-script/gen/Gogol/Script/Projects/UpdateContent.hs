@@ -34,8 +34,8 @@ module Gogol.Script.Projects.UpdateContent
     ScriptProjectsUpdateContentResource,
 
     -- ** Constructing a Request
+    ScriptProjectsUpdateContent (..),
     newScriptProjectsUpdateContent,
-    ScriptProjectsUpdateContent,
   )
 where
 

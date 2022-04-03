@@ -34,8 +34,8 @@ module Gogol.CloudProfiler.Projects.Profiles.CreateOffline
     CloudProfilerProjectsProfilesCreateOfflineResource,
 
     -- ** Constructing a Request
+    CloudProfilerProjectsProfilesCreateOffline (..),
     newCloudProfilerProjectsProfilesCreateOffline,
-    CloudProfilerProjectsProfilesCreateOffline,
   )
 where
 

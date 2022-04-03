@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalAddresses.Insert
     ComputeGlobalAddressesInsertResource,
 
     -- ** Constructing a Request
+    ComputeGlobalAddressesInsert (..),
     newComputeGlobalAddressesInsert,
-    ComputeGlobalAddressesInsert,
   )
 where
 

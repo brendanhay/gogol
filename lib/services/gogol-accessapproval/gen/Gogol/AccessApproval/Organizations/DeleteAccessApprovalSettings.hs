@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
     AccessApprovalOrganizationsDeleteAccessApprovalSettingsResource,
 
     -- ** Constructing a Request
+    AccessApprovalOrganizationsDeleteAccessApprovalSettings (..),
     newAccessApprovalOrganizationsDeleteAccessApprovalSettings,
-    AccessApprovalOrganizationsDeleteAccessApprovalSettings,
   )
 where
 

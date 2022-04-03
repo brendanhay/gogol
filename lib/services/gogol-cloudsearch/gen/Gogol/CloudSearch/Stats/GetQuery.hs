@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Stats.GetQuery
     CloudSearchStatsGetQueryResource,
 
     -- ** Constructing a Request
+    CloudSearchStatsGetQuery (..),
     newCloudSearchStatsGetQuery,
-    CloudSearchStatsGetQuery,
   )
 where
 

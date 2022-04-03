@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Organizations.TestIamPermissio
     CloudresourcemanagerOrganizationsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerOrganizationsTestIamPermissions (..),
     newCloudresourcemanagerOrganizationsTestIamPermissions,
-    CloudresourcemanagerOrganizationsTestIamPermissions,
   )
 where
 

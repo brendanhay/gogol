@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.GetIamPolicy
     DataprocProjectsRegionsClustersGetIamPolicyResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersGetIamPolicy (..),
     newDataprocProjectsRegionsClustersGetIamPolicy,
-    DataprocProjectsRegionsClustersGetIamPolicy,
   )
 where
 

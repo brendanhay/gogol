@@ -34,8 +34,8 @@ module Gogol.CloudErrorReporting.Projects.DeleteEvents
     CloudErrorReportingProjectsDeleteEventsResource,
 
     -- ** Constructing a Request
+    CloudErrorReportingProjectsDeleteEvents (..),
     newCloudErrorReportingProjectsDeleteEvents,
-    CloudErrorReportingProjectsDeleteEvents,
   )
 where
 

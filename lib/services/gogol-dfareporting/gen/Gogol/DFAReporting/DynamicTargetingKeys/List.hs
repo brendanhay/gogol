@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DynamicTargetingKeys.List
     DFAReportingDynamicTargetingKeysListResource,
 
     -- ** Constructing a Request
+    DFAReportingDynamicTargetingKeysList (..),
     newDFAReportingDynamicTargetingKeysList,
-    DFAReportingDynamicTargetingKeysList,
   )
 where
 

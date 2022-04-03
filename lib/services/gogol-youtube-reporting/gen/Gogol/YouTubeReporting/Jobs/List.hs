@@ -34,8 +34,8 @@ module Gogol.YouTubeReporting.Jobs.List
     YouTubeReportingJobsListResource,
 
     -- ** Constructing a Request
+    YouTubeReportingJobsList (..),
     newYouTubeReportingJobsList,
-    YouTubeReportingJobsList,
   )
 where
 

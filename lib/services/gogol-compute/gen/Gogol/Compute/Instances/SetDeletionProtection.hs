@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetDeletionProtection
     ComputeInstancesSetDeletionProtectionResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetDeletionProtection (..),
     newComputeInstancesSetDeletionProtection,
-    ComputeInstancesSetDeletionProtection,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.Patch
     ContainerAnalysisProjectsOccurrencesPatchResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesPatch (..),
     newContainerAnalysisProjectsOccurrencesPatch,
-    ContainerAnalysisProjectsOccurrencesPatch,
   )
 where
 

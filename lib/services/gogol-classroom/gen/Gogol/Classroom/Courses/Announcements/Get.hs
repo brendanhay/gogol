@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Announcements.Get
     ClassroomCoursesAnnouncementsGetResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesAnnouncementsGet (..),
     newClassroomCoursesAnnouncementsGet,
-    ClassroomCoursesAnnouncementsGet,
   )
 where
 

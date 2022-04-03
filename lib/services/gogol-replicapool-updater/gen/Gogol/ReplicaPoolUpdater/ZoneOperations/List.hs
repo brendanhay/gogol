@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.ZoneOperations.List
     ReplicaPoolUpdaterZoneOperationsListResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterZoneOperationsList (..),
     newReplicaPoolUpdaterZoneOperationsList,
-    ReplicaPoolUpdaterZoneOperationsList,
   )
 where
 

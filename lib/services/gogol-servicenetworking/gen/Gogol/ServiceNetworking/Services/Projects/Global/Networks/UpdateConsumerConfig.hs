@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Projects.Global.Networks.UpdateConsumerC
     ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig (..),
     newServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig,
-    ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig,
   )
 where
 

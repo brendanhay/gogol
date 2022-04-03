@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.GetConfig
     MlProjectsGetConfigResource,
 
     -- ** Constructing a Request
+    MlProjectsGetConfig (..),
     newMlProjectsGetConfig,
-    MlProjectsGetConfig,
   )
 where
 

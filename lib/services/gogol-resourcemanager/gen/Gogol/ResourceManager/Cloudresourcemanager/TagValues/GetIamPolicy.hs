@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
     CloudresourcemanagerTagValuesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagValuesGetIamPolicy (..),
     newCloudresourcemanagerTagValuesGetIamPolicy,
-    CloudresourcemanagerTagValuesGetIamPolicy,
   )
 where
 

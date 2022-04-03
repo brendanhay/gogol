@@ -38,8 +38,8 @@ module Gogol.ProximityBeacon.Beacons.Attachments.List
     ProximityBeaconBeaconsAttachmentsListResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsAttachmentsList (..),
     newProximityBeaconBeaconsAttachmentsList,
-    ProximityBeaconBeaconsAttachmentsList,
   )
 where
 

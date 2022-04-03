@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.TestIamPermissions
     SecurityCenterOrganizationsSourcesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesTestIamPermissions (..),
     newSecurityCenterOrganizationsSourcesTestIamPermissions,
-    SecurityCenterOrganizationsSourcesTestIamPermissions,
   )
 where
 

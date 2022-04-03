@@ -34,8 +34,8 @@ module Gogol.Compute.Routers.Update
     ComputeRoutersUpdateResource,
 
     -- ** Constructing a Request
+    ComputeRoutersUpdate (..),
     newComputeRoutersUpdate,
-    ComputeRoutersUpdate,
   )
 where
 

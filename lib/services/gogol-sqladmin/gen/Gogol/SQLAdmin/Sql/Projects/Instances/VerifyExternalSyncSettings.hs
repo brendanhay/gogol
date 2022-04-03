@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
     SqlProjectsInstancesVerifyExternalSyncSettingsResource,
 
     -- ** Constructing a Request
+    SqlProjectsInstancesVerifyExternalSyncSettings (..),
     newSqlProjectsInstancesVerifyExternalSyncSettings,
-    SqlProjectsInstancesVerifyExternalSyncSettings,
   )
 where
 

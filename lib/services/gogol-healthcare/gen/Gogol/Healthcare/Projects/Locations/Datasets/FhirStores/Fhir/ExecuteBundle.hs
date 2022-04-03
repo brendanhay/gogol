@@ -35,8 +35,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ExecuteBundl
     HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundleResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle,
   )
 where
 

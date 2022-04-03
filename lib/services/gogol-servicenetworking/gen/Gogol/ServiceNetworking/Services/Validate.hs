@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Validate
     ServiceNetworkingServicesValidateResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesValidate (..),
     newServiceNetworkingServicesValidate,
-    ServiceNetworkingServicesValidate,
   )
 where
 

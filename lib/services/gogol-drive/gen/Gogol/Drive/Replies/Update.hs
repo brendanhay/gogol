@@ -34,8 +34,8 @@ module Gogol.Drive.Replies.Update
     DriveRepliesUpdateResource,
 
     -- ** Constructing a Request
+    DriveRepliesUpdate (..),
     newDriveRepliesUpdate,
-    DriveRepliesUpdate,
   )
 where
 

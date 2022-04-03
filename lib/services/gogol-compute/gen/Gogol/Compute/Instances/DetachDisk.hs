@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.DetachDisk
     ComputeInstancesDetachDiskResource,
 
     -- ** Constructing a Request
+    ComputeInstancesDetachDisk (..),
     newComputeInstancesDetachDisk,
-    ComputeInstancesDetachDisk,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigQuery.RowAccessPolicies.List
     BigQueryRowAccessPoliciesListResource,
 
     -- ** Constructing a Request
+    BigQueryRowAccessPoliciesList (..),
     newBigQueryRowAccessPoliciesList,
-    BigQueryRowAccessPoliciesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.FusionTables.Task.Get
     FusionTablesTaskGetResource,
 
     -- ** Constructing a Request
+    FusionTablesTaskGet (..),
     newFusionTablesTaskGet,
-    FusionTablesTaskGet,
   )
 where
 

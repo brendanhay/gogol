@@ -34,8 +34,8 @@ module Gogol.Admin.Reports.Activities.Watch
     ReportsActivitiesWatchResource,
 
     -- ** Constructing a Request
+    ReportsActivitiesWatch (..),
     newReportsActivitiesWatch,
-    ReportsActivitiesWatch,
   )
 where
 

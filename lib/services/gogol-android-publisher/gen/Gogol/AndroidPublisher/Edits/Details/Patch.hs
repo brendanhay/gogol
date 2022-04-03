@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Details.Patch
     AndroidPublisherEditsDetailsPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsDetailsPatch (..),
     newAndroidPublisherEditsDetailsPatch,
-    AndroidPublisherEditsDetailsPatch,
   )
 where
 

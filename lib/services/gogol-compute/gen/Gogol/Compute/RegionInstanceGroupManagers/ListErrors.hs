@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.ListErrors
     ComputeRegionInstanceGroupManagersListErrorsResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersListErrors (..),
     newComputeRegionInstanceGroupManagersListErrors,
-    ComputeRegionInstanceGroupManagersListErrors,
   )
 where
 

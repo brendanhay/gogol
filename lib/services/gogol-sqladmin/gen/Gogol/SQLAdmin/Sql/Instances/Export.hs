@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Export
     SqlInstancesExportResource,
 
     -- ** Constructing a Request
+    SqlInstancesExport (..),
     newSqlInstancesExport,
-    SqlInstancesExport,
   )
 where
 

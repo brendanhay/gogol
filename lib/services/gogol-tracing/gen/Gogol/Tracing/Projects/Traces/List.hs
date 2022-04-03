@@ -34,8 +34,8 @@ module Gogol.Tracing.Projects.Traces.List
     TracingProjectsTracesListResource,
 
     -- ** Constructing a Request
+    TracingProjectsTracesList (..),
     newTracingProjectsTracesList,
-    TracingProjectsTracesList,
   )
 where
 

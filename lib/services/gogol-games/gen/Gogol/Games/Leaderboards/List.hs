@@ -34,8 +34,8 @@ module Gogol.Games.Leaderboards.List
     GamesLeaderboardsListResource,
 
     -- ** Constructing a Request
+    GamesLeaderboardsList (..),
     newGamesLeaderboardsList,
-    GamesLeaderboardsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Bookshelves.List
     BooksMylibraryBookshelvesListResource,
 
     -- ** Constructing a Request
+    BooksMylibraryBookshelvesList (..),
     newBooksMylibraryBookshelvesList,
-    BooksMylibraryBookshelvesList,
   )
 where
 

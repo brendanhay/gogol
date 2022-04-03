@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Deobfuscationfiles.Upload
     AndroidPublisherEditsDeobfuscationfilesUploadResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsDeobfuscationfilesUpload (..),
     newAndroidPublisherEditsDeobfuscationfilesUpload,
-    AndroidPublisherEditsDeobfuscationfilesUpload,
   )
 where
 

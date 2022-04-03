@@ -34,8 +34,8 @@ module Gogol.Compute.RegionSslCertificates.Delete
     ComputeRegionSslCertificatesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeRegionSslCertificatesDelete (..),
     newComputeRegionSslCertificatesDelete,
-    ComputeRegionSslCertificatesDelete,
   )
 where
 

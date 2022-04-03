@@ -34,8 +34,8 @@ module Gogol.Plus.People.Search
     PlusPeopleSearchResource,
 
     -- ** Constructing a Request
+    PlusPeopleSearch (..),
     newPlusPeopleSearch,
-    PlusPeopleSearch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.Insert
     BigQueryTablesInsertResource,
 
     -- ** Constructing a Request
+    BigQueryTablesInsert (..),
     newBigQueryTablesInsert,
-    BigQueryTablesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Blogger.PageViews.Get
     BloggerPageViewsGetResource,
 
     -- ** Constructing a Request
+    BloggerPageViewsGet (..),
     newBloggerPageViewsGet,
-    BloggerPageViewsGet,
   )
 where
 

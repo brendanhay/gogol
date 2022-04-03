@@ -35,8 +35,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Create
     CloudresourcemanagerFoldersCreateResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersCreate (..),
     newCloudresourcemanagerFoldersCreate,
-    CloudresourcemanagerFoldersCreate,
   )
 where
 

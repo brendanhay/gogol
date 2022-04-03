@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.DeidentifyTemplates.Create
     DLPProjectsLocationsDeidentifyTemplatesCreateResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsDeidentifyTemplatesCreate (..),
     newDLPProjectsLocationsDeidentifyTemplatesCreate,
-    DLPProjectsLocationsDeidentifyTemplatesCreate,
   )
 where
 

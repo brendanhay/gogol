@@ -40,378 +40,378 @@ module Gogol.AndroidEnterprise
 
     -- ** androidenterprise.devices.forceReportUpload
     AndroidEnterpriseDevicesForceReportUploadResource,
+    AndroidEnterpriseDevicesForceReportUpload (..),
     newAndroidEnterpriseDevicesForceReportUpload,
-    AndroidEnterpriseDevicesForceReportUpload,
 
     -- ** androidenterprise.devices.get
     AndroidEnterpriseDevicesGetResource,
+    AndroidEnterpriseDevicesGet (..),
     newAndroidEnterpriseDevicesGet,
-    AndroidEnterpriseDevicesGet,
 
     -- ** androidenterprise.devices.getState
     AndroidEnterpriseDevicesGetStateResource,
+    AndroidEnterpriseDevicesGetState (..),
     newAndroidEnterpriseDevicesGetState,
-    AndroidEnterpriseDevicesGetState,
 
     -- ** androidenterprise.devices.list
     AndroidEnterpriseDevicesListResource,
+    AndroidEnterpriseDevicesList (..),
     newAndroidEnterpriseDevicesList,
-    AndroidEnterpriseDevicesList,
 
     -- ** androidenterprise.devices.setState
     AndroidEnterpriseDevicesSetStateResource,
+    AndroidEnterpriseDevicesSetState (..),
     newAndroidEnterpriseDevicesSetState,
-    AndroidEnterpriseDevicesSetState,
 
     -- ** androidenterprise.devices.update
     AndroidEnterpriseDevicesUpdateResource,
+    AndroidEnterpriseDevicesUpdate (..),
     newAndroidEnterpriseDevicesUpdate,
-    AndroidEnterpriseDevicesUpdate,
 
     -- ** androidenterprise.enterprises.acknowledgeNotificationSet
     AndroidEnterpriseEnterprisesAcknowledgeNotificationSetResource,
+    AndroidEnterpriseEnterprisesAcknowledgeNotificationSet (..),
     newAndroidEnterpriseEnterprisesAcknowledgeNotificationSet,
-    AndroidEnterpriseEnterprisesAcknowledgeNotificationSet,
 
     -- ** androidenterprise.enterprises.completeSignup
     AndroidEnterpriseEnterprisesCompleteSignupResource,
+    AndroidEnterpriseEnterprisesCompleteSignup (..),
     newAndroidEnterpriseEnterprisesCompleteSignup,
-    AndroidEnterpriseEnterprisesCompleteSignup,
 
     -- ** androidenterprise.enterprises.createWebToken
     AndroidEnterpriseEnterprisesCreateWebTokenResource,
+    AndroidEnterpriseEnterprisesCreateWebToken (..),
     newAndroidEnterpriseEnterprisesCreateWebToken,
-    AndroidEnterpriseEnterprisesCreateWebToken,
 
     -- ** androidenterprise.enterprises.enroll
     AndroidEnterpriseEnterprisesEnrollResource,
+    AndroidEnterpriseEnterprisesEnroll (..),
     newAndroidEnterpriseEnterprisesEnroll,
-    AndroidEnterpriseEnterprisesEnroll,
 
     -- ** androidenterprise.enterprises.generateSignupUrl
     AndroidEnterpriseEnterprisesGenerateSignupUrlResource,
+    AndroidEnterpriseEnterprisesGenerateSignupUrl (..),
     newAndroidEnterpriseEnterprisesGenerateSignupUrl,
-    AndroidEnterpriseEnterprisesGenerateSignupUrl,
 
     -- ** androidenterprise.enterprises.get
     AndroidEnterpriseEnterprisesGetResource,
+    AndroidEnterpriseEnterprisesGet (..),
     newAndroidEnterpriseEnterprisesGet,
-    AndroidEnterpriseEnterprisesGet,
 
     -- ** androidenterprise.enterprises.getServiceAccount
     AndroidEnterpriseEnterprisesGetServiceAccountResource,
+    AndroidEnterpriseEnterprisesGetServiceAccount (..),
     newAndroidEnterpriseEnterprisesGetServiceAccount,
-    AndroidEnterpriseEnterprisesGetServiceAccount,
 
     -- ** androidenterprise.enterprises.getStoreLayout
     AndroidEnterpriseEnterprisesGetStoreLayoutResource,
+    AndroidEnterpriseEnterprisesGetStoreLayout (..),
     newAndroidEnterpriseEnterprisesGetStoreLayout,
-    AndroidEnterpriseEnterprisesGetStoreLayout,
 
     -- ** androidenterprise.enterprises.list
     AndroidEnterpriseEnterprisesListResource,
+    AndroidEnterpriseEnterprisesList (..),
     newAndroidEnterpriseEnterprisesList,
-    AndroidEnterpriseEnterprisesList,
 
     -- ** androidenterprise.enterprises.pullNotificationSet
     AndroidEnterpriseEnterprisesPullNotificationSetResource,
+    AndroidEnterpriseEnterprisesPullNotificationSet (..),
     newAndroidEnterpriseEnterprisesPullNotificationSet,
-    AndroidEnterpriseEnterprisesPullNotificationSet,
 
     -- ** androidenterprise.enterprises.sendTestPushNotification
     AndroidEnterpriseEnterprisesSendTestPushNotificationResource,
+    AndroidEnterpriseEnterprisesSendTestPushNotification (..),
     newAndroidEnterpriseEnterprisesSendTestPushNotification,
-    AndroidEnterpriseEnterprisesSendTestPushNotification,
 
     -- ** androidenterprise.enterprises.setAccount
     AndroidEnterpriseEnterprisesSetAccountResource,
+    AndroidEnterpriseEnterprisesSetAccount (..),
     newAndroidEnterpriseEnterprisesSetAccount,
-    AndroidEnterpriseEnterprisesSetAccount,
 
     -- ** androidenterprise.enterprises.setStoreLayout
     AndroidEnterpriseEnterprisesSetStoreLayoutResource,
+    AndroidEnterpriseEnterprisesSetStoreLayout (..),
     newAndroidEnterpriseEnterprisesSetStoreLayout,
-    AndroidEnterpriseEnterprisesSetStoreLayout,
 
     -- ** androidenterprise.enterprises.unenroll
     AndroidEnterpriseEnterprisesUnenrollResource,
+    AndroidEnterpriseEnterprisesUnenroll (..),
     newAndroidEnterpriseEnterprisesUnenroll,
-    AndroidEnterpriseEnterprisesUnenroll,
 
     -- ** androidenterprise.entitlements.delete
     AndroidEnterpriseEntitlementsDeleteResource,
+    AndroidEnterpriseEntitlementsDelete (..),
     newAndroidEnterpriseEntitlementsDelete,
-    AndroidEnterpriseEntitlementsDelete,
 
     -- ** androidenterprise.entitlements.get
     AndroidEnterpriseEntitlementsGetResource,
+    AndroidEnterpriseEntitlementsGet (..),
     newAndroidEnterpriseEntitlementsGet,
-    AndroidEnterpriseEntitlementsGet,
 
     -- ** androidenterprise.entitlements.list
     AndroidEnterpriseEntitlementsListResource,
+    AndroidEnterpriseEntitlementsList (..),
     newAndroidEnterpriseEntitlementsList,
-    AndroidEnterpriseEntitlementsList,
 
     -- ** androidenterprise.entitlements.update
     AndroidEnterpriseEntitlementsUpdateResource,
+    AndroidEnterpriseEntitlementsUpdate (..),
     newAndroidEnterpriseEntitlementsUpdate,
-    AndroidEnterpriseEntitlementsUpdate,
 
     -- ** androidenterprise.grouplicenses.get
     AndroidEnterpriseGrouplicensesGetResource,
+    AndroidEnterpriseGrouplicensesGet (..),
     newAndroidEnterpriseGrouplicensesGet,
-    AndroidEnterpriseGrouplicensesGet,
 
     -- ** androidenterprise.grouplicenses.list
     AndroidEnterpriseGrouplicensesListResource,
+    AndroidEnterpriseGrouplicensesList (..),
     newAndroidEnterpriseGrouplicensesList,
-    AndroidEnterpriseGrouplicensesList,
 
     -- ** androidenterprise.grouplicenseusers.list
     AndroidEnterpriseGrouplicenseusersListResource,
+    AndroidEnterpriseGrouplicenseusersList (..),
     newAndroidEnterpriseGrouplicenseusersList,
-    AndroidEnterpriseGrouplicenseusersList,
 
     -- ** androidenterprise.installs.delete
     AndroidEnterpriseInstallsDeleteResource,
+    AndroidEnterpriseInstallsDelete (..),
     newAndroidEnterpriseInstallsDelete,
-    AndroidEnterpriseInstallsDelete,
 
     -- ** androidenterprise.installs.get
     AndroidEnterpriseInstallsGetResource,
+    AndroidEnterpriseInstallsGet (..),
     newAndroidEnterpriseInstallsGet,
-    AndroidEnterpriseInstallsGet,
 
     -- ** androidenterprise.installs.list
     AndroidEnterpriseInstallsListResource,
+    AndroidEnterpriseInstallsList (..),
     newAndroidEnterpriseInstallsList,
-    AndroidEnterpriseInstallsList,
 
     -- ** androidenterprise.installs.update
     AndroidEnterpriseInstallsUpdateResource,
+    AndroidEnterpriseInstallsUpdate (..),
     newAndroidEnterpriseInstallsUpdate,
-    AndroidEnterpriseInstallsUpdate,
 
     -- ** androidenterprise.managedconfigurationsfordevice.delete
     AndroidEnterpriseManagedconfigurationsfordeviceDeleteResource,
+    AndroidEnterpriseManagedconfigurationsfordeviceDelete (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceDelete,
-    AndroidEnterpriseManagedconfigurationsfordeviceDelete,
 
     -- ** androidenterprise.managedconfigurationsfordevice.get
     AndroidEnterpriseManagedconfigurationsfordeviceGetResource,
+    AndroidEnterpriseManagedconfigurationsfordeviceGet (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceGet,
-    AndroidEnterpriseManagedconfigurationsfordeviceGet,
 
     -- ** androidenterprise.managedconfigurationsfordevice.list
     AndroidEnterpriseManagedconfigurationsfordeviceListResource,
+    AndroidEnterpriseManagedconfigurationsfordeviceList (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceList,
-    AndroidEnterpriseManagedconfigurationsfordeviceList,
 
     -- ** androidenterprise.managedconfigurationsfordevice.update
     AndroidEnterpriseManagedconfigurationsfordeviceUpdateResource,
+    AndroidEnterpriseManagedconfigurationsfordeviceUpdate (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceUpdate,
-    AndroidEnterpriseManagedconfigurationsfordeviceUpdate,
 
     -- ** androidenterprise.managedconfigurationsforuser.delete
     AndroidEnterpriseManagedconfigurationsforuserDeleteResource,
+    AndroidEnterpriseManagedconfigurationsforuserDelete (..),
     newAndroidEnterpriseManagedconfigurationsforuserDelete,
-    AndroidEnterpriseManagedconfigurationsforuserDelete,
 
     -- ** androidenterprise.managedconfigurationsforuser.get
     AndroidEnterpriseManagedconfigurationsforuserGetResource,
+    AndroidEnterpriseManagedconfigurationsforuserGet (..),
     newAndroidEnterpriseManagedconfigurationsforuserGet,
-    AndroidEnterpriseManagedconfigurationsforuserGet,
 
     -- ** androidenterprise.managedconfigurationsforuser.list
     AndroidEnterpriseManagedconfigurationsforuserListResource,
+    AndroidEnterpriseManagedconfigurationsforuserList (..),
     newAndroidEnterpriseManagedconfigurationsforuserList,
-    AndroidEnterpriseManagedconfigurationsforuserList,
 
     -- ** androidenterprise.managedconfigurationsforuser.update
     AndroidEnterpriseManagedconfigurationsforuserUpdateResource,
+    AndroidEnterpriseManagedconfigurationsforuserUpdate (..),
     newAndroidEnterpriseManagedconfigurationsforuserUpdate,
-    AndroidEnterpriseManagedconfigurationsforuserUpdate,
 
     -- ** androidenterprise.managedconfigurationssettings.list
     AndroidEnterpriseManagedconfigurationssettingsListResource,
+    AndroidEnterpriseManagedconfigurationssettingsList (..),
     newAndroidEnterpriseManagedconfigurationssettingsList,
-    AndroidEnterpriseManagedconfigurationssettingsList,
 
     -- ** androidenterprise.permissions.get
     AndroidEnterprisePermissionsGetResource,
+    AndroidEnterprisePermissionsGet (..),
     newAndroidEnterprisePermissionsGet,
-    AndroidEnterprisePermissionsGet,
 
     -- ** androidenterprise.products.approve
     AndroidEnterpriseProductsApproveResource,
+    AndroidEnterpriseProductsApprove (..),
     newAndroidEnterpriseProductsApprove,
-    AndroidEnterpriseProductsApprove,
 
     -- ** androidenterprise.products.generateApprovalUrl
     AndroidEnterpriseProductsGenerateApprovalUrlResource,
+    AndroidEnterpriseProductsGenerateApprovalUrl (..),
     newAndroidEnterpriseProductsGenerateApprovalUrl,
-    AndroidEnterpriseProductsGenerateApprovalUrl,
 
     -- ** androidenterprise.products.get
     AndroidEnterpriseProductsGetResource,
+    AndroidEnterpriseProductsGet (..),
     newAndroidEnterpriseProductsGet,
-    AndroidEnterpriseProductsGet,
 
     -- ** androidenterprise.products.getAppRestrictionsSchema
     AndroidEnterpriseProductsGetAppRestrictionsSchemaResource,
+    AndroidEnterpriseProductsGetAppRestrictionsSchema (..),
     newAndroidEnterpriseProductsGetAppRestrictionsSchema,
-    AndroidEnterpriseProductsGetAppRestrictionsSchema,
 
     -- ** androidenterprise.products.getPermissions
     AndroidEnterpriseProductsGetPermissionsResource,
+    AndroidEnterpriseProductsGetPermissions (..),
     newAndroidEnterpriseProductsGetPermissions,
-    AndroidEnterpriseProductsGetPermissions,
 
     -- ** androidenterprise.products.list
     AndroidEnterpriseProductsListResource,
+    AndroidEnterpriseProductsList (..),
     newAndroidEnterpriseProductsList,
-    AndroidEnterpriseProductsList,
 
     -- ** androidenterprise.products.unapprove
     AndroidEnterpriseProductsUnapproveResource,
+    AndroidEnterpriseProductsUnapprove (..),
     newAndroidEnterpriseProductsUnapprove,
-    AndroidEnterpriseProductsUnapprove,
 
     -- ** androidenterprise.serviceaccountkeys.delete
     AndroidEnterpriseServiceaccountkeysDeleteResource,
+    AndroidEnterpriseServiceaccountkeysDelete (..),
     newAndroidEnterpriseServiceaccountkeysDelete,
-    AndroidEnterpriseServiceaccountkeysDelete,
 
     -- ** androidenterprise.serviceaccountkeys.insert
     AndroidEnterpriseServiceaccountkeysInsertResource,
+    AndroidEnterpriseServiceaccountkeysInsert (..),
     newAndroidEnterpriseServiceaccountkeysInsert,
-    AndroidEnterpriseServiceaccountkeysInsert,
 
     -- ** androidenterprise.serviceaccountkeys.list
     AndroidEnterpriseServiceaccountkeysListResource,
+    AndroidEnterpriseServiceaccountkeysList (..),
     newAndroidEnterpriseServiceaccountkeysList,
-    AndroidEnterpriseServiceaccountkeysList,
 
     -- ** androidenterprise.storelayoutclusters.delete
     AndroidEnterpriseStorelayoutclustersDeleteResource,
+    AndroidEnterpriseStorelayoutclustersDelete (..),
     newAndroidEnterpriseStorelayoutclustersDelete,
-    AndroidEnterpriseStorelayoutclustersDelete,
 
     -- ** androidenterprise.storelayoutclusters.get
     AndroidEnterpriseStorelayoutclustersGetResource,
+    AndroidEnterpriseStorelayoutclustersGet (..),
     newAndroidEnterpriseStorelayoutclustersGet,
-    AndroidEnterpriseStorelayoutclustersGet,
 
     -- ** androidenterprise.storelayoutclusters.insert
     AndroidEnterpriseStorelayoutclustersInsertResource,
+    AndroidEnterpriseStorelayoutclustersInsert (..),
     newAndroidEnterpriseStorelayoutclustersInsert,
-    AndroidEnterpriseStorelayoutclustersInsert,
 
     -- ** androidenterprise.storelayoutclusters.list
     AndroidEnterpriseStorelayoutclustersListResource,
+    AndroidEnterpriseStorelayoutclustersList (..),
     newAndroidEnterpriseStorelayoutclustersList,
-    AndroidEnterpriseStorelayoutclustersList,
 
     -- ** androidenterprise.storelayoutclusters.update
     AndroidEnterpriseStorelayoutclustersUpdateResource,
+    AndroidEnterpriseStorelayoutclustersUpdate (..),
     newAndroidEnterpriseStorelayoutclustersUpdate,
-    AndroidEnterpriseStorelayoutclustersUpdate,
 
     -- ** androidenterprise.storelayoutpages.delete
     AndroidEnterpriseStorelayoutpagesDeleteResource,
+    AndroidEnterpriseStorelayoutpagesDelete (..),
     newAndroidEnterpriseStorelayoutpagesDelete,
-    AndroidEnterpriseStorelayoutpagesDelete,
 
     -- ** androidenterprise.storelayoutpages.get
     AndroidEnterpriseStorelayoutpagesGetResource,
+    AndroidEnterpriseStorelayoutpagesGet (..),
     newAndroidEnterpriseStorelayoutpagesGet,
-    AndroidEnterpriseStorelayoutpagesGet,
 
     -- ** androidenterprise.storelayoutpages.insert
     AndroidEnterpriseStorelayoutpagesInsertResource,
+    AndroidEnterpriseStorelayoutpagesInsert (..),
     newAndroidEnterpriseStorelayoutpagesInsert,
-    AndroidEnterpriseStorelayoutpagesInsert,
 
     -- ** androidenterprise.storelayoutpages.list
     AndroidEnterpriseStorelayoutpagesListResource,
+    AndroidEnterpriseStorelayoutpagesList (..),
     newAndroidEnterpriseStorelayoutpagesList,
-    AndroidEnterpriseStorelayoutpagesList,
 
     -- ** androidenterprise.storelayoutpages.update
     AndroidEnterpriseStorelayoutpagesUpdateResource,
+    AndroidEnterpriseStorelayoutpagesUpdate (..),
     newAndroidEnterpriseStorelayoutpagesUpdate,
-    AndroidEnterpriseStorelayoutpagesUpdate,
 
     -- ** androidenterprise.users.delete
     AndroidEnterpriseUsersDeleteResource,
+    AndroidEnterpriseUsersDelete (..),
     newAndroidEnterpriseUsersDelete,
-    AndroidEnterpriseUsersDelete,
 
     -- ** androidenterprise.users.generateAuthenticationToken
     AndroidEnterpriseUsersGenerateAuthenticationTokenResource,
+    AndroidEnterpriseUsersGenerateAuthenticationToken (..),
     newAndroidEnterpriseUsersGenerateAuthenticationToken,
-    AndroidEnterpriseUsersGenerateAuthenticationToken,
 
     -- ** androidenterprise.users.get
     AndroidEnterpriseUsersGetResource,
+    AndroidEnterpriseUsersGet (..),
     newAndroidEnterpriseUsersGet,
-    AndroidEnterpriseUsersGet,
 
     -- ** androidenterprise.users.getAvailableProductSet
     AndroidEnterpriseUsersGetAvailableProductSetResource,
+    AndroidEnterpriseUsersGetAvailableProductSet (..),
     newAndroidEnterpriseUsersGetAvailableProductSet,
-    AndroidEnterpriseUsersGetAvailableProductSet,
 
     -- ** androidenterprise.users.insert
     AndroidEnterpriseUsersInsertResource,
+    AndroidEnterpriseUsersInsert (..),
     newAndroidEnterpriseUsersInsert,
-    AndroidEnterpriseUsersInsert,
 
     -- ** androidenterprise.users.list
     AndroidEnterpriseUsersListResource,
+    AndroidEnterpriseUsersList (..),
     newAndroidEnterpriseUsersList,
-    AndroidEnterpriseUsersList,
 
     -- ** androidenterprise.users.revokeDeviceAccess
     AndroidEnterpriseUsersRevokeDeviceAccessResource,
+    AndroidEnterpriseUsersRevokeDeviceAccess (..),
     newAndroidEnterpriseUsersRevokeDeviceAccess,
-    AndroidEnterpriseUsersRevokeDeviceAccess,
 
     -- ** androidenterprise.users.setAvailableProductSet
     AndroidEnterpriseUsersSetAvailableProductSetResource,
+    AndroidEnterpriseUsersSetAvailableProductSet (..),
     newAndroidEnterpriseUsersSetAvailableProductSet,
-    AndroidEnterpriseUsersSetAvailableProductSet,
 
     -- ** androidenterprise.users.update
     AndroidEnterpriseUsersUpdateResource,
+    AndroidEnterpriseUsersUpdate (..),
     newAndroidEnterpriseUsersUpdate,
-    AndroidEnterpriseUsersUpdate,
 
     -- ** androidenterprise.webapps.delete
     AndroidEnterpriseWebappsDeleteResource,
+    AndroidEnterpriseWebappsDelete (..),
     newAndroidEnterpriseWebappsDelete,
-    AndroidEnterpriseWebappsDelete,
 
     -- ** androidenterprise.webapps.get
     AndroidEnterpriseWebappsGetResource,
+    AndroidEnterpriseWebappsGet (..),
     newAndroidEnterpriseWebappsGet,
-    AndroidEnterpriseWebappsGet,
 
     -- ** androidenterprise.webapps.insert
     AndroidEnterpriseWebappsInsertResource,
+    AndroidEnterpriseWebappsInsert (..),
     newAndroidEnterpriseWebappsInsert,
-    AndroidEnterpriseWebappsInsert,
 
     -- ** androidenterprise.webapps.list
     AndroidEnterpriseWebappsListResource,
+    AndroidEnterpriseWebappsList (..),
     newAndroidEnterpriseWebappsList,
-    AndroidEnterpriseWebappsList,
 
     -- ** androidenterprise.webapps.update
     AndroidEnterpriseWebappsUpdateResource,
+    AndroidEnterpriseWebappsUpdate (..),
     newAndroidEnterpriseWebappsUpdate,
-    AndroidEnterpriseWebappsUpdate,
 
     -- * Types
 

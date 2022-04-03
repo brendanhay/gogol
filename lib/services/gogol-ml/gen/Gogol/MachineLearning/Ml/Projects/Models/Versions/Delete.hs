@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Models.Versions.Delete
     MlProjectsModelsVersionsDeleteResource,
 
     -- ** Constructing a Request
+    MlProjectsModelsVersionsDelete (..),
     newMlProjectsModelsVersionsDelete,
-    MlProjectsModelsVersionsDelete,
   )
 where
 

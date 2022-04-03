@@ -34,8 +34,8 @@ module Gogol.AlertCenter.Alerts.Delete
     AlertCenterAlertsDeleteResource,
 
     -- ** Constructing a Request
+    AlertCenterAlertsDelete (..),
     newAlertCenterAlertsDelete,
-    AlertCenterAlertsDelete,
   )
 where
 

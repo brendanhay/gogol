@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Search
     CloudIdentityGroupsSearchResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsSearch (..),
     newCloudIdentityGroupsSearch,
-    CloudIdentityGroupsSearch,
   )
 where
 

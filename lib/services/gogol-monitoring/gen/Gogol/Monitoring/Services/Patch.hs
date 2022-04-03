@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.Patch
     MonitoringServicesPatchResource,
 
     -- ** Constructing a Request
+    MonitoringServicesPatch (..),
     newMonitoringServicesPatch,
-    MonitoringServicesPatch,
   )
 where
 

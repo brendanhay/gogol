@@ -34,8 +34,8 @@ module Gogol.Compute.PacketMirrorings.TestIamPermissions
     ComputePacketMirroringsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputePacketMirroringsTestIamPermissions (..),
     newComputePacketMirroringsTestIamPermissions,
-    ComputePacketMirroringsTestIamPermissions,
   )
 where
 

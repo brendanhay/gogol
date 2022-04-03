@@ -34,8 +34,8 @@ module Gogol.Books.Myconfig.ReleaseDownloadAccess
     BooksMyconfigReleaseDownloadAccessResource,
 
     -- ** Constructing a Request
+    BooksMyconfigReleaseDownloadAccess (..),
     newBooksMyconfigReleaseDownloadAccess,
-    BooksMyconfigReleaseDownloadAccess,
   )
 where
 

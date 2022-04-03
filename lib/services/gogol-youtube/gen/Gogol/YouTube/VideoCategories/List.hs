@@ -34,8 +34,8 @@ module Gogol.YouTube.VideoCategories.List
     YouTubeVideoCategoriesListResource,
 
     -- ** Constructing a Request
+    YouTubeVideoCategoriesList (..),
     newYouTubeVideoCategoriesList,
-    YouTubeVideoCategoriesList,
   )
 where
 

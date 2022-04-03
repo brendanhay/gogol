@@ -41,148 +41,148 @@ module Gogol.Games
 
     -- ** games.achievementDefinitions.list
     GamesAchievementDefinitionsListResource,
+    GamesAchievementDefinitionsList (..),
     newGamesAchievementDefinitionsList,
-    GamesAchievementDefinitionsList,
 
     -- ** games.achievements.increment
     GamesAchievementsIncrementResource,
+    GamesAchievementsIncrement (..),
     newGamesAchievementsIncrement,
-    GamesAchievementsIncrement,
 
     -- ** games.achievements.list
     GamesAchievementsListResource,
+    GamesAchievementsList (..),
     newGamesAchievementsList,
-    GamesAchievementsList,
 
     -- ** games.achievements.reveal
     GamesAchievementsRevealResource,
+    GamesAchievementsReveal (..),
     newGamesAchievementsReveal,
-    GamesAchievementsReveal,
 
     -- ** games.achievements.setStepsAtLeast
     GamesAchievementsSetStepsAtLeastResource,
+    GamesAchievementsSetStepsAtLeast (..),
     newGamesAchievementsSetStepsAtLeast,
-    GamesAchievementsSetStepsAtLeast,
 
     -- ** games.achievements.unlock
     GamesAchievementsUnlockResource,
+    GamesAchievementsUnlock (..),
     newGamesAchievementsUnlock,
-    GamesAchievementsUnlock,
 
     -- ** games.achievements.updateMultiple
     GamesAchievementsUpdateMultipleResource,
+    GamesAchievementsUpdateMultiple (..),
     newGamesAchievementsUpdateMultiple,
-    GamesAchievementsUpdateMultiple,
 
     -- ** games.applications.get
     GamesApplicationsGetResource,
+    GamesApplicationsGet (..),
     newGamesApplicationsGet,
-    GamesApplicationsGet,
 
     -- ** games.applications.getEndPoint
     GamesApplicationsGetEndPointResource,
+    GamesApplicationsGetEndPoint (..),
     newGamesApplicationsGetEndPoint,
-    GamesApplicationsGetEndPoint,
 
     -- ** games.applications.played
     GamesApplicationsPlayedResource,
+    GamesApplicationsPlayed (..),
     newGamesApplicationsPlayed,
-    GamesApplicationsPlayed,
 
     -- ** games.applications.verify
     GamesApplicationsVerifyResource,
+    GamesApplicationsVerify (..),
     newGamesApplicationsVerify,
-    GamesApplicationsVerify,
 
     -- ** games.events.listByPlayer
     GamesEventsListByPlayerResource,
+    GamesEventsListByPlayer (..),
     newGamesEventsListByPlayer,
-    GamesEventsListByPlayer,
 
     -- ** games.events.listDefinitions
     GamesEventsListDefinitionsResource,
+    GamesEventsListDefinitions (..),
     newGamesEventsListDefinitions,
-    GamesEventsListDefinitions,
 
     -- ** games.events.record
     GamesEventsRecordResource,
+    GamesEventsRecord (..),
     newGamesEventsRecord,
-    GamesEventsRecord,
 
     -- ** games.leaderboards.get
     GamesLeaderboardsGetResource,
+    GamesLeaderboardsGet (..),
     newGamesLeaderboardsGet,
-    GamesLeaderboardsGet,
 
     -- ** games.leaderboards.list
     GamesLeaderboardsListResource,
+    GamesLeaderboardsList (..),
     newGamesLeaderboardsList,
-    GamesLeaderboardsList,
 
     -- ** games.metagame.getMetagameConfig
     GamesMetagameGetMetagameConfigResource,
+    GamesMetagameGetMetagameConfig (..),
     newGamesMetagameGetMetagameConfig,
-    GamesMetagameGetMetagameConfig,
 
     -- ** games.metagame.listCategoriesByPlayer
     GamesMetagameListCategoriesByPlayerResource,
+    GamesMetagameListCategoriesByPlayer (..),
     newGamesMetagameListCategoriesByPlayer,
-    GamesMetagameListCategoriesByPlayer,
 
     -- ** games.players.get
     GamesPlayersGetResource,
+    GamesPlayersGet (..),
     newGamesPlayersGet,
-    GamesPlayersGet,
 
     -- ** games.players.list
     GamesPlayersListResource,
+    GamesPlayersList (..),
     newGamesPlayersList,
-    GamesPlayersList,
 
     -- ** games.revisions.check
     GamesRevisionsCheckResource,
+    GamesRevisionsCheck (..),
     newGamesRevisionsCheck,
-    GamesRevisionsCheck,
 
     -- ** games.scores.get
     GamesScoresGetResource,
+    GamesScoresGet (..),
     newGamesScoresGet,
-    GamesScoresGet,
 
     -- ** games.scores.list
     GamesScoresListResource,
+    GamesScoresList (..),
     newGamesScoresList,
-    GamesScoresList,
 
     -- ** games.scores.listWindow
     GamesScoresListWindowResource,
+    GamesScoresListWindow (..),
     newGamesScoresListWindow,
-    GamesScoresListWindow,
 
     -- ** games.scores.submit
     GamesScoresSubmitResource,
+    GamesScoresSubmit (..),
     newGamesScoresSubmit,
-    GamesScoresSubmit,
 
     -- ** games.scores.submitMultiple
     GamesScoresSubmitMultipleResource,
+    GamesScoresSubmitMultiple (..),
     newGamesScoresSubmitMultiple,
-    GamesScoresSubmitMultiple,
 
     -- ** games.snapshots.get
     GamesSnapshotsGetResource,
+    GamesSnapshotsGet (..),
     newGamesSnapshotsGet,
-    GamesSnapshotsGet,
 
     -- ** games.snapshots.list
     GamesSnapshotsListResource,
+    GamesSnapshotsList (..),
     newGamesSnapshotsList,
-    GamesSnapshotsList,
 
     -- ** games.stats.get
     GamesStatsGetResource,
+    GamesStatsGet (..),
     newGamesStatsGet,
-    GamesStatsGet,
 
     -- * Types
 

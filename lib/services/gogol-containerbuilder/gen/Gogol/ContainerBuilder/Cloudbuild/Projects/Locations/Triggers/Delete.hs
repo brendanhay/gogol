@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Triggers.Delete
     CloudbuildProjectsLocationsTriggersDeleteResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsTriggersDelete (..),
     newCloudbuildProjectsLocationsTriggersDelete,
-    CloudbuildProjectsLocationsTriggersDelete,
   )
 where
 

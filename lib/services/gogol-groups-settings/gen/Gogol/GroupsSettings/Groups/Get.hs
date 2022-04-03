@@ -34,8 +34,8 @@ module Gogol.GroupsSettings.Groups.Get
     GroupsSettingsGroupsGetResource,
 
     -- ** Constructing a Request
+    GroupsSettingsGroupsGet (..),
     newGroupsSettingsGroupsGet,
-    GroupsSettingsGroupsGet,
   )
 where
 

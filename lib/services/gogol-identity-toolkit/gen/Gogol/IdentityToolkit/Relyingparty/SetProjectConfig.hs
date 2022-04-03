@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.SetProjectConfig
     IdentityToolkitRelyingpartySetProjectConfigResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartySetProjectConfig (..),
     newIdentityToolkitRelyingpartySetProjectConfig,
-    IdentityToolkitRelyingpartySetProjectConfig,
   )
 where
 

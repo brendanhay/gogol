@@ -34,8 +34,8 @@ module Gogol.YouTube.Captions.Delete
     YouTubeCaptionsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeCaptionsDelete (..),
     newYouTubeCaptionsDelete,
-    YouTubeCaptionsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Associations.Create
     CloudPrivateCatalogProducerCatalogsAssociationsCreateResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsAssociationsCreate (..),
     newCloudPrivateCatalogProducerCatalogsAssociationsCreate,
-    CloudPrivateCatalogProducerCatalogsAssociationsCreate,
   )
 where
 

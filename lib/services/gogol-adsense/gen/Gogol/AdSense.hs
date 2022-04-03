@@ -41,113 +41,113 @@ module Gogol.AdSense
 
     -- ** adsense.accounts.adclients.adunits.get
     AdSenseAccountsAdclientsAdunitsGetResource,
+    AdSenseAccountsAdclientsAdunitsGet (..),
     newAdSenseAccountsAdclientsAdunitsGet,
-    AdSenseAccountsAdclientsAdunitsGet,
 
     -- ** adsense.accounts.adclients.adunits.getAdcode
     AdSenseAccountsAdclientsAdunitsGetAdcodeResource,
+    AdSenseAccountsAdclientsAdunitsGetAdcode (..),
     newAdSenseAccountsAdclientsAdunitsGetAdcode,
-    AdSenseAccountsAdclientsAdunitsGetAdcode,
 
     -- ** adsense.accounts.adclients.adunits.list
     AdSenseAccountsAdclientsAdunitsListResource,
+    AdSenseAccountsAdclientsAdunitsList (..),
     newAdSenseAccountsAdclientsAdunitsList,
-    AdSenseAccountsAdclientsAdunitsList,
 
     -- ** adsense.accounts.adclients.adunits.listLinkedCustomChannels
     AdSenseAccountsAdclientsAdunitsListLinkedCustomChannelsResource,
+    AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels (..),
     newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels,
-    AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels,
 
     -- ** adsense.accounts.adclients.customchannels.get
     AdSenseAccountsAdclientsCustomchannelsGetResource,
+    AdSenseAccountsAdclientsCustomchannelsGet (..),
     newAdSenseAccountsAdclientsCustomchannelsGet,
-    AdSenseAccountsAdclientsCustomchannelsGet,
 
     -- ** adsense.accounts.adclients.customchannels.list
     AdSenseAccountsAdclientsCustomchannelsListResource,
+    AdSenseAccountsAdclientsCustomchannelsList (..),
     newAdSenseAccountsAdclientsCustomchannelsList,
-    AdSenseAccountsAdclientsCustomchannelsList,
 
     -- ** adsense.accounts.adclients.customchannels.listLinkedAdUnits
     AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResource,
+    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits (..),
     newAdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
-    AdSenseAccountsAdclientsCustomchannelsListLinkedAdUnits,
 
     -- ** adsense.accounts.adclients.getAdcode
     AdSenseAccountsAdclientsGetAdcodeResource,
+    AdSenseAccountsAdclientsGetAdcode (..),
     newAdSenseAccountsAdclientsGetAdcode,
-    AdSenseAccountsAdclientsGetAdcode,
 
     -- ** adsense.accounts.adclients.list
     AdSenseAccountsAdclientsListResource,
+    AdSenseAccountsAdclientsList (..),
     newAdSenseAccountsAdclientsList,
-    AdSenseAccountsAdclientsList,
 
     -- ** adsense.accounts.adclients.urlchannels.list
     AdSenseAccountsAdclientsUrlchannelsListResource,
+    AdSenseAccountsAdclientsUrlchannelsList (..),
     newAdSenseAccountsAdclientsUrlchannelsList,
-    AdSenseAccountsAdclientsUrlchannelsList,
 
     -- ** adsense.accounts.alerts.list
     AdSenseAccountsAlertsListResource,
+    AdSenseAccountsAlertsList (..),
     newAdSenseAccountsAlertsList,
-    AdSenseAccountsAlertsList,
 
     -- ** adsense.accounts.get
     AdSenseAccountsGetResource,
+    AdSenseAccountsGet (..),
     newAdSenseAccountsGet,
-    AdSenseAccountsGet,
 
     -- ** adsense.accounts.list
     AdSenseAccountsListResource,
+    AdSenseAccountsList (..),
     newAdSenseAccountsList,
-    AdSenseAccountsList,
 
     -- ** adsense.accounts.listChildAccounts
     AdSenseAccountsListChildAccountsResource,
+    AdSenseAccountsListChildAccounts (..),
     newAdSenseAccountsListChildAccounts,
-    AdSenseAccountsListChildAccounts,
 
     -- ** adsense.accounts.payments.list
     AdSenseAccountsPaymentsListResource,
+    AdSenseAccountsPaymentsList (..),
     newAdSenseAccountsPaymentsList,
-    AdSenseAccountsPaymentsList,
 
     -- ** adsense.accounts.reports.generate
     AdSenseAccountsReportsGenerateResource,
+    AdSenseAccountsReportsGenerate (..),
     newAdSenseAccountsReportsGenerate,
-    AdSenseAccountsReportsGenerate,
 
     -- ** adsense.accounts.reports.generateCsv
     AdSenseAccountsReportsGenerateCsvResource,
+    AdSenseAccountsReportsGenerateCsv (..),
     newAdSenseAccountsReportsGenerateCsv,
-    AdSenseAccountsReportsGenerateCsv,
 
     -- ** adsense.accounts.reports.saved.generate
     AdSenseAccountsReportsSavedGenerateResource,
+    AdSenseAccountsReportsSavedGenerate (..),
     newAdSenseAccountsReportsSavedGenerate,
-    AdSenseAccountsReportsSavedGenerate,
 
     -- ** adsense.accounts.reports.saved.generateCsv
     AdSenseAccountsReportsSavedGenerateCsvResource,
+    AdSenseAccountsReportsSavedGenerateCsv (..),
     newAdSenseAccountsReportsSavedGenerateCsv,
-    AdSenseAccountsReportsSavedGenerateCsv,
 
     -- ** adsense.accounts.reports.saved.list
     AdSenseAccountsReportsSavedListResource,
+    AdSenseAccountsReportsSavedList (..),
     newAdSenseAccountsReportsSavedList,
-    AdSenseAccountsReportsSavedList,
 
     -- ** adsense.accounts.sites.get
     AdSenseAccountsSitesGetResource,
+    AdSenseAccountsSitesGet (..),
     newAdSenseAccountsSitesGet,
-    AdSenseAccountsSitesGet,
 
     -- ** adsense.accounts.sites.list
     AdSenseAccountsSitesListResource,
+    AdSenseAccountsSitesList (..),
     newAdSenseAccountsSitesList,
-    AdSenseAccountsSitesList,
 
     -- * Types
 

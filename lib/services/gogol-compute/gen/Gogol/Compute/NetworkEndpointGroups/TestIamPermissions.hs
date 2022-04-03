@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
     ComputeNetworkEndpointGroupsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeNetworkEndpointGroupsTestIamPermissions (..),
     newComputeNetworkEndpointGroupsTestIamPermissions,
-    ComputeNetworkEndpointGroupsTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.SetLogging
     ContainerProjectsLocationsClustersSetLoggingResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersSetLogging (..),
     newContainerProjectsLocationsClustersSetLogging,
-    ContainerProjectsLocationsClustersSetLogging,
   )
 where
 

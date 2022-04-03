@@ -34,8 +34,8 @@ module Gogol.Compute.PublicAdvertisedPrefixes.List
     ComputePublicAdvertisedPrefixesListResource,
 
     -- ** Constructing a Request
+    ComputePublicAdvertisedPrefixesList (..),
     newComputePublicAdvertisedPrefixesList,
-    ComputePublicAdvertisedPrefixesList,
   )
 where
 

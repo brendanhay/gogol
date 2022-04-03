@@ -37,23 +37,23 @@ module Gogol.Poly
 
     -- ** poly.assets.get
     PolyAssetsGetResource,
+    PolyAssetsGet (..),
     newPolyAssetsGet,
-    PolyAssetsGet,
 
     -- ** poly.assets.list
     PolyAssetsListResource,
+    PolyAssetsList (..),
     newPolyAssetsList,
-    PolyAssetsList,
 
     -- ** poly.users.assets.list
     PolyUsersAssetsListResource,
+    PolyUsersAssetsList (..),
     newPolyUsersAssetsList,
-    PolyUsersAssetsList,
 
     -- ** poly.users.likedassets.list
     PolyUsersLikedassetsListResource,
+    PolyUsersLikedassetsList (..),
     newPolyUsersLikedassetsList,
-    PolyUsersLikedassetsList,
 
     -- * Types
 

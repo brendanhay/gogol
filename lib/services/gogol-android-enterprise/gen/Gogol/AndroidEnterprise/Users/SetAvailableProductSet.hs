@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.SetAvailableProductSet
     AndroidEnterpriseUsersSetAvailableProductSetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersSetAvailableProductSet (..),
     newAndroidEnterpriseUsersSetAvailableProductSet,
-    AndroidEnterpriseUsersSetAvailableProductSet,
   )
 where
 

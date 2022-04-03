@@ -34,8 +34,8 @@ module Gogol.CloudTrace.Projects.Traces.BatchWrite
     CloudTraceProjectsTracesBatchWriteResource,
 
     -- ** Constructing a Request
+    CloudTraceProjectsTracesBatchWrite (..),
     newCloudTraceProjectsTracesBatchWrite,
-    CloudTraceProjectsTracesBatchWrite,
   )
 where
 

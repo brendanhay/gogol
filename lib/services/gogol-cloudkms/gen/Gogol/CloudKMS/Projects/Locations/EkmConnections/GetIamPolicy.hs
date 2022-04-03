@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
     CloudKMSProjectsLocationsEkmConnectionsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicy (..),
     newCloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
-    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Folders.ApprovalRequests.Approve
     AccessApprovalFoldersApprovalRequestsApproveResource,
 
     -- ** Constructing a Request
+    AccessApprovalFoldersApprovalRequestsApprove (..),
     newAccessApprovalFoldersApprovalRequestsApprove,
-    AccessApprovalFoldersApprovalRequestsApprove,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Rollouts.Get
     ServiceManagementServicesRolloutsGetResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesRolloutsGet (..),
     newServiceManagementServicesRolloutsGet,
-    ServiceManagementServicesRolloutsGet,
   )
 where
 

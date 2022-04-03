@@ -34,8 +34,8 @@ module Gogol.CloudErrorReporting.Projects.Events.Report
     CloudErrorReportingProjectsEventsReportResource,
 
     -- ** Constructing a Request
+    CloudErrorReportingProjectsEventsReport (..),
     newCloudErrorReportingProjectsEventsReport,
-    CloudErrorReportingProjectsEventsReport,
   )
 where
 

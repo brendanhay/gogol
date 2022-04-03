@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Sources.Findings.Create
     SecurityCenterOrganizationsSourcesFindingsCreateResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsSourcesFindingsCreate (..),
     newSecurityCenterOrganizationsSourcesFindingsCreate,
-    SecurityCenterOrganizationsSourcesFindingsCreate,
   )
 where
 

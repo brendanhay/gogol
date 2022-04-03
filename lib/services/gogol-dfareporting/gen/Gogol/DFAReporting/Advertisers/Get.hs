@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Advertisers.Get
     DFAReportingAdvertisersGetResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertisersGet (..),
     newDFAReportingAdvertisersGet,
-    DFAReportingAdvertisersGet,
   )
 where
 

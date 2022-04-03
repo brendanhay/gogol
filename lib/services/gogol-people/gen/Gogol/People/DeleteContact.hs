@@ -34,8 +34,8 @@ module Gogol.People.DeleteContact
     PeoplePeopleDeleteContactResource,
 
     -- ** Constructing a Request
+    PeoplePeopleDeleteContact (..),
     newPeoplePeopleDeleteContact,
-    PeoplePeopleDeleteContact,
   )
 where
 
