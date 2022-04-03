@@ -164,6 +164,9 @@ newStorageObjectsInsert bucket payload =
       userProject = Core.Nothing
     }
 
+
+class AllowScope request scope where
+
 instance Core.GoogleRequest StorageObjectsInsert where
   type Rs StorageObjectsInsert = Object
   type

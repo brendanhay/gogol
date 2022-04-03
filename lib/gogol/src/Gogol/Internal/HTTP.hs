@@ -23,7 +23,7 @@ import qualified Data.Text.Encoding as Text
 import qualified Data.Text.Lazy as LText
 import qualified Data.Text.Lazy.Builder as Build
 import GHC.Exts (toList)
-import Gogol.Auth (HasScopeFor, authorize)
+import Gogol.Auth (authorize, KnownScopes)
 import Gogol.Env (Env (..))
 import Gogol.Internal.Logger (logDebug)
 import Gogol.Internal.Multipart
@@ -41,14 +41,15 @@ import Network.HTTP.Types
 --
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
-perform ::
+unsafeRequest ::
   ( MonadResource m,
-    HasScopeFor a scopes
+    GoogleRequest a,
+    KnownScopes scopes
   ) =>
   Env scopes ->
   a ->
   m (Either Error (Rs a))
-perform Env {..} x =
+unsafeRequest Env {..} x =
   liftResourceT (transResourceT (`catches` handlers) go)
   where
     Request {..} = _cliRequest
