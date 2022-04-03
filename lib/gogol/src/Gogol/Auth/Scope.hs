@@ -21,6 +21,8 @@ module Gogol.Auth.Scope
     type AllowRequest,
     type AllowScope,
     type AllowScopes,
+    type Intersect,
+    type Elem,
 
     -- ** Modifying type-level lists of scopes
     allow,
