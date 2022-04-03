@@ -6,6 +6,9 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-#, LANGUAGE, UndecidableInstances, BangPatterns, ConstraintKinds, DataKinds, DeriveFunctor, DeriveGeneric, FlexibleContexts, FlexibleInstances, GADTs, GeneralizedNewtypeDeriving, LambdaCase, MultiParamTypeClasses, NoStarIsType, RankNTypes, RoleAnnotations, ScopedTypeVariables, StandaloneDeriving, TupleSections, TypeApplications, TypeFamilies, TypeOperators, #-}
 
 -- |
 -- Module      : Gogol.Auth.Scope
@@ -17,23 +20,23 @@
 --
 -- Helpers for specifying and using type-level OAuth scopes.
 module Gogol.Auth.Scope
-  ( -- * Scope constraints
-    type AllowRequest,
-    type AllowScope,
-    type AllowScopes,
-    type Intersect,
-    type Elem,
+  -- ( -- * Scope constraints
+  --   type AllowRequest,
+  --   type AllowScope,
+  --   type AllowScopes,
+  --   type Intersect,
+  --   type Elem,
 
-    -- ** Modifying type-level lists of scopes
-    allow,
-    forbid,
-    (!),
+  --   -- ** Modifying type-level lists of scopes
+  --   allow,
+  --   forbid,
+  --   (!),
 
-    -- * Manipulating scope values
-    KnownScopes (..),
-    concatScopes,
-    queryEncodeScopes,
-  )
+  --   -- * Manipulating scope values
+  --   KnownScopes (..),
+  --   concatScopes,
+  --   queryEncodeScopes,
+  -- )
 where
 
 import Data.ByteString (ByteString)
@@ -45,10 +48,11 @@ import qualified Data.Text.Encoding as Text
 import Data.Type.Bool (type If, type (||))
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
-import GHC.TypeLits
 import Gogol.Internal.Auth (Credentials)
 import Gogol.Types (GoogleRequest (..), OAuthScope (..))
 import Network.HTTP.Types (urlEncode)
+import Data.Kind
+import GHC.TypeLits
 
 type AllowRequest a scopes = (GoogleRequest a, KnownScopes scopes, AllowScopes (Scopes a) scopes)
 
@@ -94,6 +98,20 @@ type AllowRequest a scopes = (GoogleRequest a, KnownScopes scopes, AllowScopes (
 --
 -- /See:/ 'HasScopeFor'.
 type AllowScope name scopes = (KnownScopes scopes, AllowScopes '[name] scopes)
+
+
+class HasScope (scope :: Symbol) (context :: [Symbol]) where
+
+instance TypeError
+  ( 'Text "One scope from '"
+    ':<>: 'ShowType scope
+    ':<>: 'Text "' s missing from the context"
+  ) => HasScope scope '[] where
+
+instance {-# OVERLAPPING #-} HasScope scope (scope ': context) where
+
+instance HasScope scope context => HasScope name (scope ': context) where
+
 
 -- | 'Constraint' proving at least _one_ scope from @required@ exists in @scopes@.
 --
