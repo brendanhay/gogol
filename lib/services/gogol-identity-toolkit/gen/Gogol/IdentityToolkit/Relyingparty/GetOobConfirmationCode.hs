@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.GetOobConfirmationCode
     IdentityToolkitRelyingpartyGetOobConfirmationCodeResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyGetOobConfirmationCode (..),
     newIdentityToolkitRelyingpartyGetOobConfirmationCode,
-    IdentityToolkitRelyingpartyGetOobConfirmationCode,
   )
 where
 

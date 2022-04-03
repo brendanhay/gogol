@@ -34,8 +34,8 @@ module Gogol.Vault.Operations.Delete
     VaultOperationsDeleteResource,
 
     -- ** Constructing a Request
+    VaultOperationsDelete (..),
     newVaultOperationsDelete,
-    VaultOperationsDelete,
   )
 where
 

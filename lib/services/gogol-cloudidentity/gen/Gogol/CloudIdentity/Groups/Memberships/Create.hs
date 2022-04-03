@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.Create
     CloudIdentityGroupsMembershipsCreateResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsCreate (..),
     newCloudIdentityGroupsMembershipsCreate,
-    CloudIdentityGroupsMembershipsCreate,
   )
 where
 

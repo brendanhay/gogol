@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Companies.Patch
     JobsProjectsTenantsCompaniesPatchResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsCompaniesPatch (..),
     newJobsProjectsTenantsCompaniesPatch,
-    JobsProjectsTenantsCompaniesPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.AdvertiserGroups.Insert
     DFAReportingAdvertiserGroupsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingAdvertiserGroupsInsert (..),
     newDFAReportingAdvertiserGroupsInsert,
-    DFAReportingAdvertiserGroupsInsert,
   )
 where
 

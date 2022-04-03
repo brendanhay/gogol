@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Explain
     MlProjectsExplainResource,
 
     -- ** Constructing a Request
+    MlProjectsExplain (..),
     newMlProjectsExplain,
-    MlProjectsExplain,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Services.Disable
     ServiceUsageServicesDisableResource,
 
     -- ** Constructing a Request
+    ServiceUsageServicesDisable (..),
     newServiceUsageServicesDisable,
-    ServiceUsageServicesDisable,
   )
 where
 

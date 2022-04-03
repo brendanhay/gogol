@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Operations.Get
     ServiceUsageOperationsGetResource,
 
     -- ** Constructing a Request
+    ServiceUsageOperationsGet (..),
     newServiceUsageOperationsGet,
-    ServiceUsageOperationsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.ImageFamilyViews.Get
     ComputeImageFamilyViewsGetResource,
 
     -- ** Constructing a Request
+    ComputeImageFamilyViewsGet (..),
     newComputeImageFamilyViewsGet,
-    ComputeImageFamilyViewsGet,
   )
 where
 

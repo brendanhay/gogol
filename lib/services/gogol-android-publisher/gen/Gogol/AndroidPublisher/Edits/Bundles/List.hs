@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Bundles.List
     AndroidPublisherEditsBundlesListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsBundlesList (..),
     newAndroidPublisherEditsBundlesList,
-    AndroidPublisherEditsBundlesList,
   )
 where
 

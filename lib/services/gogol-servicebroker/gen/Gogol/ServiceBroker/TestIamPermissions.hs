@@ -36,8 +36,8 @@ module Gogol.ServiceBroker.TestIamPermissions
     ServiceBrokerTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ServiceBrokerTestIamPermissions (..),
     newServiceBrokerTestIamPermissions,
-    ServiceBrokerTestIamPermissions,
   )
 where
 

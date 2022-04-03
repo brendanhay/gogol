@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.TestIamPermissions
     SpannerProjectsInstancesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesTestIamPermissions (..),
     newSpannerProjectsInstancesTestIamPermissions,
-    SpannerProjectsInstancesTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.StoredInfoTypes.Delete
     DLPProjectsStoredInfoTypesDeleteResource,
 
     -- ** Constructing a Request
+    DLPProjectsStoredInfoTypesDelete (..),
     newDLPProjectsStoredInfoTypesDelete,
-    DLPProjectsStoredInfoTypesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Alerts.List
     AdSenseAccountsAlertsListResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsAlertsList (..),
     newAdSenseAccountsAlertsList,
-    AdSenseAccountsAlertsList,
   )
 where
 

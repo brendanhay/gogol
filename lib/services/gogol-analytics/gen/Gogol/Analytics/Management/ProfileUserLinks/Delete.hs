@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.ProfileUserLinks.Delete
     AnalyticsManagementProfileUserLinksDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfileUserLinksDelete (..),
     newAnalyticsManagementProfileUserLinksDelete,
-    AnalyticsManagementProfileUserLinksDelete,
   )
 where
 

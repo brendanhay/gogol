@@ -34,8 +34,8 @@ module Gogol.Mirror.Settings.Get
     MirrorSettingsGetResource,
 
     -- ** Constructing a Request
+    MirrorSettingsGet (..),
     newMirrorSettingsGet,
-    MirrorSettingsGet,
   )
 where
 

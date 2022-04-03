@@ -34,8 +34,8 @@ module Gogol.Books.Volumes.Associated.List
     BooksVolumesAssociatedListResource,
 
     -- ** Constructing a Request
+    BooksVolumesAssociatedList (..),
     newBooksVolumesAssociatedList,
-    BooksVolumesAssociatedList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.TestIamPermissions
     ComputeRegionDisksTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksTestIamPermissions (..),
     newComputeRegionDisksTestIamPermissions,
-    ComputeRegionDisksTestIamPermissions,
   )
 where
 

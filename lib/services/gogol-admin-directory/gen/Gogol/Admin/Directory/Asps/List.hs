@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Asps.List
     DirectoryAspsListResource,
 
     -- ** Constructing a Request
+    DirectoryAspsList (..),
     newDirectoryAspsList,
-    DirectoryAspsList,
   )
 where
 

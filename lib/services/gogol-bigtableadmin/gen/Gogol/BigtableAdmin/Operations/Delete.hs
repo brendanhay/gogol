@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Operations.Delete
     BigtableAdminOperationsDeleteResource,
 
     -- ** Constructing a Request
+    BigtableAdminOperationsDelete (..),
     newBigtableAdminOperationsDelete,
-    BigtableAdminOperationsDelete,
   )
 where
 

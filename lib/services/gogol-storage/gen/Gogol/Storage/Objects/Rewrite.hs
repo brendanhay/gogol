@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Rewrite
     StorageObjectsRewriteResource,
 
     -- ** Constructing a Request
+    StorageObjectsRewrite (..),
     newStorageObjectsRewrite,
-    StorageObjectsRewrite,
   )
 where
 

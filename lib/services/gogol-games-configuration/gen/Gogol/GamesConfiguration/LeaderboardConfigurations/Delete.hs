@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
     GamesConfigurationLeaderboardConfigurationsDeleteResource,
 
     -- ** Constructing a Request
+    GamesConfigurationLeaderboardConfigurationsDelete (..),
     newGamesConfigurationLeaderboardConfigurationsDelete,
-    GamesConfigurationLeaderboardConfigurationsDelete,
   )
 where
 

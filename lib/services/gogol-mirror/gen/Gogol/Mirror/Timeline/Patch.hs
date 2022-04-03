@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.Patch
     MirrorTimelinePatchResource,
 
     -- ** Constructing a Request
+    MirrorTimelinePatch (..),
     newMirrorTimelinePatch,
-    MirrorTimelinePatch,
   )
 where
 

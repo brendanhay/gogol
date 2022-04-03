@@ -34,8 +34,8 @@ module Gogol.Partners.Users.DeleteCompanyRelation
     PartnersUsersDeleteCompanyRelationResource,
 
     -- ** Constructing a Request
+    PartnersUsersDeleteCompanyRelation (..),
     newPartnersUsersDeleteCompanyRelation,
-    PartnersUsersDeleteCompanyRelation,
   )
 where
 

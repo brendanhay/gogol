@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
     SpannerProjectsInstancesDatabasesSessionsCreateResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsCreate (..),
     newSpannerProjectsInstancesDatabasesSessionsCreate,
-    SpannerProjectsInstancesDatabasesSessionsCreate,
   )
 where
 

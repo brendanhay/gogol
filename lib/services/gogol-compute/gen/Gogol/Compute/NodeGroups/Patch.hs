@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.Patch
     ComputeNodeGroupsPatchResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsPatch (..),
     newComputeNodeGroupsPatch,
-    ComputeNodeGroupsPatch,
   )
 where
 

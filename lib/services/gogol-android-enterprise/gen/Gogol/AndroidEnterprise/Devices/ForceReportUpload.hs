@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Devices.ForceReportUpload
     AndroidEnterpriseDevicesForceReportUploadResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseDevicesForceReportUpload (..),
     newAndroidEnterpriseDevicesForceReportUpload,
-    AndroidEnterpriseDevicesForceReportUpload,
   )
 where
 

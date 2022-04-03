@@ -34,8 +34,8 @@ module Gogol.CivicInfo.Representatives.RepresentativeInfoByAddress
     CivicInfoRepresentativesRepresentativeInfoByAddressResource,
 
     -- ** Constructing a Request
+    CivicInfoRepresentativesRepresentativeInfoByAddress (..),
     newCivicInfoRepresentativesRepresentativeInfoByAddress,
-    CivicInfoRepresentativesRepresentativeInfoByAddress,
   )
 where
 

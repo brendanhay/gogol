@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.Delete
     FusionTablesTableDeleteResource,
 
     -- ** Constructing a Request
+    FusionTablesTableDelete (..),
     newFusionTablesTableDelete,
-    FusionTablesTableDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.PublicDelegatedPrefixes.Delete
     ComputePublicDelegatedPrefixesDeleteResource,
 
     -- ** Constructing a Request
+    ComputePublicDelegatedPrefixesDelete (..),
     newComputePublicDelegatedPrefixesDelete,
-    ComputePublicDelegatedPrefixesDelete,
   )
 where
 

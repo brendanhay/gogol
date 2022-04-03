@@ -34,8 +34,8 @@ module Gogol.Analytics.Provisioning.CreateAccountTree
     AnalyticsProvisioningCreateAccountTreeResource,
 
     -- ** Constructing a Request
+    AnalyticsProvisioningCreateAccountTree (..),
     newAnalyticsProvisioningCreateAccountTree,
-    AnalyticsProvisioningCreateAccountTree,
   )
 where
 

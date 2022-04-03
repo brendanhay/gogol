@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Update
     SqlInstancesUpdateResource,
 
     -- ** Constructing a Request
+    SqlInstancesUpdate (..),
     newSqlInstancesUpdate,
-    SqlInstancesUpdate,
   )
 where
 

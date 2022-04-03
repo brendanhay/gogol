@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatMessages.Insert
     YouTubeLiveChatMessagesInsertResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatMessagesInsert (..),
     newYouTubeLiveChatMessagesInsert,
-    YouTubeLiveChatMessagesInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappin
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive,
   )
 where
 

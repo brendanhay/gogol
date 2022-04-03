@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Aliases.Insert
     DirectoryUsersAliasesInsertResource,
 
     -- ** Constructing a Request
+    DirectoryUsersAliasesInsert (..),
     newDirectoryUsersAliasesInsert,
-    DirectoryUsersAliasesInsert,
   )
 where
 

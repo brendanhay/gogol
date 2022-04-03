@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Delete
     DialogFlowProjectsLocationsAgentsWebhooksDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsWebhooksDelete (..),
     newDialogFlowProjectsLocationsAgentsWebhooksDelete,
-    DialogFlowProjectsLocationsAgentsWebhooksDelete,
   )
 where
 

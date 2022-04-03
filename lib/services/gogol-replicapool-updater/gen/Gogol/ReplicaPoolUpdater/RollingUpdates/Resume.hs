@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Resume
     ReplicaPoolUpdaterRollingUpdatesResumeResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterRollingUpdatesResume (..),
     newReplicaPoolUpdaterRollingUpdatesResume,
-    ReplicaPoolUpdaterRollingUpdatesResume,
   )
 where
 

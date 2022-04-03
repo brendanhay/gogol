@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Events.ResetMultipleForAllPlayers
     GamesManagementEventsResetMultipleForAllPlayersResource,
 
     -- ** Constructing a Request
+    GamesManagementEventsResetMultipleForAllPlayers (..),
     newGamesManagementEventsResetMultipleForAllPlayers,
-    GamesManagementEventsResetMultipleForAllPlayers,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Vision.Projects.Locations.Images.AsyncBatchAnnotate
     VisionProjectsLocationsImagesAsyncBatchAnnotateResource,
 
     -- ** Constructing a Request
+    VisionProjectsLocationsImagesAsyncBatchAnnotate (..),
     newVisionProjectsLocationsImagesAsyncBatchAnnotate,
-    VisionProjectsLocationsImagesAsyncBatchAnnotate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Images.Get
     ComputeImagesGetResource,
 
     -- ** Constructing a Request
+    ComputeImagesGet (..),
     newComputeImagesGet,
-    ComputeImagesGet,
   )
 where
 

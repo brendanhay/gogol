@@ -34,8 +34,8 @@ module Gogol.YouTube.VideoAbuseReportReasons.List
     YouTubeVideoAbuseReportReasonsListResource,
 
     -- ** Constructing a Request
+    YouTubeVideoAbuseReportReasonsList (..),
     newYouTubeVideoAbuseReportReasonsList,
-    YouTubeVideoAbuseReportReasonsList,
   )
 where
 

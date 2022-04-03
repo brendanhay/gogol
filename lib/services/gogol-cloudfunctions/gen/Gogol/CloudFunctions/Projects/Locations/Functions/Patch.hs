@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.Patch
     CloudFunctionsProjectsLocationsFunctionsPatchResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsPatch (..),
     newCloudFunctionsProjectsLocationsFunctionsPatch,
-    CloudFunctionsProjectsLocationsFunctionsPatch,
   )
 where
 

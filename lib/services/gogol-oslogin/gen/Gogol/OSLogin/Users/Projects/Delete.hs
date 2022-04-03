@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.Projects.Delete
     OSLoginUsersProjectsDeleteResource,
 
     -- ** Constructing a Request
+    OSLoginUsersProjectsDelete (..),
     newOSLoginUsersProjectsDelete,
-    OSLoginUsersProjectsDelete,
   )
 where
 

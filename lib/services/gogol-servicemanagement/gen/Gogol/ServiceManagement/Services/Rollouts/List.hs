@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Rollouts.List
     ServiceManagementServicesRolloutsListResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesRolloutsList (..),
     newServiceManagementServicesRolloutsList,
-    ServiceManagementServicesRolloutsList,
   )
 where
 

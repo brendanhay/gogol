@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Create
     DataprocProjectsRegionsClustersCreateResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersCreate (..),
     newDataprocProjectsRegionsClustersCreate,
-    DataprocProjectsRegionsClustersCreate,
   )
 where
 

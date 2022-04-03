@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Locations.Buckets.Undelete
     LoggingBillingAccountsLocationsBucketsUndeleteResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsLocationsBucketsUndelete (..),
     newLoggingBillingAccountsLocationsBucketsUndelete,
-    LoggingBillingAccountsLocationsBucketsUndelete,
   )
 where
 

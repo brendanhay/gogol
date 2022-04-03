@@ -36,8 +36,8 @@ module Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     PlayMoviesPartnerAccountsStoreInfosCountryGetResource,
 
     -- ** Constructing a Request
+    PlayMoviesPartnerAccountsStoreInfosCountryGet (..),
     newPlayMoviesPartnerAccountsStoreInfosCountryGet,
-    PlayMoviesPartnerAccountsStoreInfosCountryGet,
   )
 where
 

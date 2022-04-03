@@ -40,48 +40,48 @@ module Gogol.RemoteBuildExecution
 
     -- ** remotebuildexecution.actionResults.get
     RemoteBuildExecutionActionResultsGetResource,
+    RemoteBuildExecutionActionResultsGet (..),
     newRemoteBuildExecutionActionResultsGet,
-    RemoteBuildExecutionActionResultsGet,
 
     -- ** remotebuildexecution.actionResults.update
     RemoteBuildExecutionActionResultsUpdateResource,
+    RemoteBuildExecutionActionResultsUpdate (..),
     newRemoteBuildExecutionActionResultsUpdate,
-    RemoteBuildExecutionActionResultsUpdate,
 
     -- ** remotebuildexecution.actions.execute
     RemoteBuildExecutionActionsExecuteResource,
+    RemoteBuildExecutionActionsExecute (..),
     newRemoteBuildExecutionActionsExecute,
-    RemoteBuildExecutionActionsExecute,
 
     -- ** remotebuildexecution.blobs.batchRead
     RemoteBuildExecutionBlobsBatchReadResource,
+    RemoteBuildExecutionBlobsBatchRead (..),
     newRemoteBuildExecutionBlobsBatchRead,
-    RemoteBuildExecutionBlobsBatchRead,
 
     -- ** remotebuildexecution.blobs.batchUpdate
     RemoteBuildExecutionBlobsBatchUpdateResource,
+    RemoteBuildExecutionBlobsBatchUpdate (..),
     newRemoteBuildExecutionBlobsBatchUpdate,
-    RemoteBuildExecutionBlobsBatchUpdate,
 
     -- ** remotebuildexecution.blobs.findMissing
     RemoteBuildExecutionBlobsFindMissingResource,
+    RemoteBuildExecutionBlobsFindMissing (..),
     newRemoteBuildExecutionBlobsFindMissing,
-    RemoteBuildExecutionBlobsFindMissing,
 
     -- ** remotebuildexecution.blobs.getTree
     RemoteBuildExecutionBlobsGetTreeResource,
+    RemoteBuildExecutionBlobsGetTree (..),
     newRemoteBuildExecutionBlobsGetTree,
-    RemoteBuildExecutionBlobsGetTree,
 
     -- ** remotebuildexecution.getCapabilities
     RemoteBuildExecutionGetCapabilitiesResource,
+    RemoteBuildExecutionGetCapabilities (..),
     newRemoteBuildExecutionGetCapabilities,
-    RemoteBuildExecutionGetCapabilities,
 
     -- ** remotebuildexecution.operations.waitExecution
     RemoteBuildExecutionOperationsWaitExecutionResource,
+    RemoteBuildExecutionOperationsWaitExecution (..),
     newRemoteBuildExecutionOperationsWaitExecution,
-    RemoteBuildExecutionOperationsWaitExecution,
 
     -- * Types
 

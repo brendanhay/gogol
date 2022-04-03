@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.CompleteQuery
     JobsProjectsTenantsCompleteQueryResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsCompleteQuery (..),
     newJobsProjectsTenantsCompleteQuery,
-    JobsProjectsTenantsCompleteQuery,
   )
 where
 

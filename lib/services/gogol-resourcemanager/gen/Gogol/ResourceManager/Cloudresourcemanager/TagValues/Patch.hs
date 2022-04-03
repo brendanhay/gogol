@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
     CloudresourcemanagerTagValuesPatchResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagValuesPatch (..),
     newCloudresourcemanagerTagValuesPatch,
-    CloudresourcemanagerTagValuesPatch,
   )
 where
 

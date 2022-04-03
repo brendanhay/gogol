@@ -34,8 +34,8 @@ module Gogol.Blogger.Comments.Approve
     BloggerCommentsApproveResource,
 
     -- ** Constructing a Request
+    BloggerCommentsApprove (..),
     newBloggerCommentsApprove,
-    BloggerCommentsApprove,
   )
 where
 

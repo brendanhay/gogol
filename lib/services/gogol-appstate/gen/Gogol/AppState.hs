@@ -40,28 +40,28 @@ module Gogol.AppState
 
     -- ** appstate.states.clear
     AppStateStatesClearResource,
+    AppStateStatesClear (..),
     newAppStateStatesClear,
-    AppStateStatesClear,
 
     -- ** appstate.states.delete
     AppStateStatesDeleteResource,
+    AppStateStatesDelete (..),
     newAppStateStatesDelete,
-    AppStateStatesDelete,
 
     -- ** appstate.states.get
     AppStateStatesGetResource,
+    AppStateStatesGet (..),
     newAppStateStatesGet,
-    AppStateStatesGet,
 
     -- ** appstate.states.list
     AppStateStatesListResource,
+    AppStateStatesList (..),
     newAppStateStatesList,
-    AppStateStatesList,
 
     -- ** appstate.states.update
     AppStateStatesUpdateResource,
+    AppStateStatesUpdate (..),
     newAppStateStatesUpdate,
-    AppStateStatesUpdate,
 
     -- * Types
 

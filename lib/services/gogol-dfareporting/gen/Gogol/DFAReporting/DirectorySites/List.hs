@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DirectorySites.List
     DFAReportingDirectorySitesListResource,
 
     -- ** Constructing a Request
+    DFAReportingDirectorySitesList (..),
     newDFAReportingDirectorySitesList,
-    DFAReportingDirectorySitesList,
   )
 where
 

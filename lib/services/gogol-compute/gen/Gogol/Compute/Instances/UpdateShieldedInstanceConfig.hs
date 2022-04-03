@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.UpdateShieldedInstanceConfig
     ComputeInstancesUpdateShieldedInstanceConfigResource,
 
     -- ** Constructing a Request
+    ComputeInstancesUpdateShieldedInstanceConfig (..),
     newComputeInstancesUpdateShieldedInstanceConfig,
-    ComputeInstancesUpdateShieldedInstanceConfig,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.PublicAdvertisedPrefixes.Delete
     ComputePublicAdvertisedPrefixesDeleteResource,
 
     -- ** Constructing a Request
+    ComputePublicAdvertisedPrefixesDelete (..),
     newComputePublicAdvertisedPrefixesDelete,
-    ComputePublicAdvertisedPrefixesDelete,
   )
 where
 

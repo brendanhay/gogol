@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.TimeSeries.CreateService
     MonitoringProjectsTimeSeriesCreateServiceResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsTimeSeriesCreateService (..),
     newMonitoringProjectsTimeSeriesCreateService,
-    MonitoringProjectsTimeSeriesCreateService,
   )
 where
 

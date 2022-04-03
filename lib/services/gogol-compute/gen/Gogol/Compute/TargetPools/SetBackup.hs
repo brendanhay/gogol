@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.SetBackup
     ComputeTargetPoolsSetBackupResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsSetBackup (..),
     newComputeTargetPoolsSetBackup,
-    ComputeTargetPoolsSetBackup,
   )
 where
 

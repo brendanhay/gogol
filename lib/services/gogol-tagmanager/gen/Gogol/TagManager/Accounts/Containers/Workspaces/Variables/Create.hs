@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Variables.Create
     TagManagerAccountsContainersWorkspacesVariablesCreateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesVariablesCreate (..),
     newTagManagerAccountsContainersWorkspacesVariablesCreate,
-    TagManagerAccountsContainersWorkspacesVariablesCreate,
   )
 where
 

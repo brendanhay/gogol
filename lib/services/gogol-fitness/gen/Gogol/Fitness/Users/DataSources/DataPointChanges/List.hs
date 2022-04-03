@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.DataSources.DataPointChanges.List
     FitnessUsersDataSourcesDataPointChangesListResource,
 
     -- ** Constructing a Request
+    FitnessUsersDataSourcesDataPointChangesList (..),
     newFitnessUsersDataSourcesDataPointChangesList,
-    FitnessUsersDataSourcesDataPointChangesList,
   )
 where
 

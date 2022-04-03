@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Get
     StorageObjectsGetResource,
 
     -- ** Constructing a Request
+    StorageObjectsGet (..),
     newStorageObjectsGet,
-    StorageObjectsGet,
   )
 where
 

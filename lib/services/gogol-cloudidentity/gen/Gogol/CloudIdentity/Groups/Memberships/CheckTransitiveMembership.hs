@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
     CloudIdentityGroupsMembershipsCheckTransitiveMembershipResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsCheckTransitiveMembership (..),
     newCloudIdentityGroupsMembershipsCheckTransitiveMembership,
-    CloudIdentityGroupsMembershipsCheckTransitiveMembership,
   )
 where
 

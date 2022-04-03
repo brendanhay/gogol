@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.Patch
     SourceRepoProjectsReposPatchResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposPatch (..),
     newSourceRepoProjectsReposPatch,
-    SourceRepoProjectsReposPatch,
   )
 where
 

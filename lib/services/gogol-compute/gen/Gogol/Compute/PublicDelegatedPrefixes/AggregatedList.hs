@@ -34,8 +34,8 @@ module Gogol.Compute.PublicDelegatedPrefixes.AggregatedList
     ComputePublicDelegatedPrefixesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputePublicDelegatedPrefixesAggregatedList (..),
     newComputePublicDelegatedPrefixesAggregatedList,
-    ComputePublicDelegatedPrefixesAggregatedList,
   )
 where
 

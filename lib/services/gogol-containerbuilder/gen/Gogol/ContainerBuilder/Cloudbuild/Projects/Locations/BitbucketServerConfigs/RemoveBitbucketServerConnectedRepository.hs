@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfi
     CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepositoryResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository,
-    CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository,
   )
 where
 

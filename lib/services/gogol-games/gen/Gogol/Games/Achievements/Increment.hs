@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.Increment
     GamesAchievementsIncrementResource,
 
     -- ** Constructing a Request
+    GamesAchievementsIncrement (..),
     newGamesAchievementsIncrement,
-    GamesAchievementsIncrement,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.DataTransfer.Applications.Get
     DatatransferApplicationsGetResource,
 
     -- ** Constructing a Request
+    DatatransferApplicationsGet (..),
     newDatatransferApplicationsGet,
-    DatatransferApplicationsGet,
   )
 where
 

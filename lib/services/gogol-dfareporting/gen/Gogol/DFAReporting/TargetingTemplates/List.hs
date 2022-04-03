@@ -34,8 +34,8 @@ module Gogol.DFAReporting.TargetingTemplates.List
     DFAReportingTargetingTemplatesListResource,
 
     -- ** Constructing a Request
+    DFAReportingTargetingTemplatesList (..),
     newDFAReportingTargetingTemplatesList,
-    DFAReportingTargetingTemplatesList,
   )
 where
 

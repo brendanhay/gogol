@@ -34,8 +34,8 @@ module Gogol.CloudErrorReporting.Projects.GroupStats.List
     CloudErrorReportingProjectsGroupStatsListResource,
 
     -- ** Constructing a Request
+    CloudErrorReportingProjectsGroupStatsList (..),
     newCloudErrorReportingProjectsGroupStatsList,
-    CloudErrorReportingProjectsGroupStatsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.Datasources.Create
     CloudSearchSettingsDatasourcesCreateResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsDatasourcesCreate (..),
     newCloudSearchSettingsDatasourcesCreate,
-    CloudSearchSettingsDatasourcesCreate,
   )
 where
 

@@ -35,8 +35,8 @@ module Gogol.PubSub.Projects.Snapshots.Create
     PubSubProjectsSnapshotsCreateResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSnapshotsCreate (..),
     newPubSubProjectsSnapshotsCreate,
-    PubSubProjectsSnapshotsCreate,
   )
 where
 

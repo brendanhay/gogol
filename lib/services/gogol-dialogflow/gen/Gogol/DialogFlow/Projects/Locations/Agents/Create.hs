@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Create
     DialogFlowProjectsLocationsAgentsCreateResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsCreate (..),
     newDialogFlowProjectsLocationsAgentsCreate,
-    DialogFlowProjectsLocationsAgentsCreate,
   )
 where
 

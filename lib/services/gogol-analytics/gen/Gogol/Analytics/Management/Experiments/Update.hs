@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Experiments.Update
     AnalyticsManagementExperimentsUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementExperimentsUpdate (..),
     newAnalyticsManagementExperimentsUpdate,
-    AnalyticsManagementExperimentsUpdate,
   )
 where
 

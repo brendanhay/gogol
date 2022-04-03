@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.Delete
     ComputeSecurityPoliciesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesDelete (..),
     newComputeSecurityPoliciesDelete,
-    ComputeSecurityPoliciesDelete,
   )
 where
 

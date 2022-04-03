@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.SecuritySettings.Delete
     DialogFlowProjectsLocationsSecuritySettingsDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsSecuritySettingsDelete (..),
     newDialogFlowProjectsLocationsSecuritySettingsDelete,
-    DialogFlowProjectsLocationsSecuritySettingsDelete,
   )
 where
 

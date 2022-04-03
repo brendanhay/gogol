@@ -34,8 +34,8 @@ module Gogol.FactCheckTools.Claims.Search
     FactCheckToolsClaimsSearchResource,
 
     -- ** Constructing a Request
+    FactCheckToolsClaimsSearch (..),
     newFactCheckToolsClaimsSearch,
-    FactCheckToolsClaimsSearch,
   )
 where
 

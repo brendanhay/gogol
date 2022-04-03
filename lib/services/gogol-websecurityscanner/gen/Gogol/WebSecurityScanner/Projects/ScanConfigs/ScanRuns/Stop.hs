@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Stop
     WebSecurityScannerProjectsScanConfigsScanRunsStopResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsScanRunsStop (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsStop,
-    WebSecurityScannerProjectsScanConfigsScanRunsStop,
   )
 where
 

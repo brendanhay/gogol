@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Profiles.Patch
     AnalyticsManagementProfilesPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfilesPatch (..),
     newAnalyticsManagementProfilesPatch,
-    AnalyticsManagementProfilesPatch,
   )
 where
 

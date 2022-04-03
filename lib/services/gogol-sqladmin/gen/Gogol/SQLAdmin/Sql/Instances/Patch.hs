@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Patch
     SqlInstancesPatchResource,
 
     -- ** Constructing a Request
+    SqlInstancesPatch (..),
     newSqlInstancesPatch,
-    SqlInstancesPatch,
   )
 where
 

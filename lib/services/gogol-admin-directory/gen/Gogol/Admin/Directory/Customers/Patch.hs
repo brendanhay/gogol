@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Customers.Patch
     DirectoryCustomersPatchResource,
 
     -- ** Constructing a Request
+    DirectoryCustomersPatch (..),
     newDirectoryCustomersPatch,
-    DirectoryCustomersPatch,
   )
 where
 

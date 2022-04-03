@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
     ContentShoppingadsprogramRequestreviewResource,
 
     -- ** Constructing a Request
+    ContentShoppingadsprogramRequestreview (..),
     newContentShoppingadsprogramRequestreview,
-    ContentShoppingadsprogramRequestreview,
   )
 where
 

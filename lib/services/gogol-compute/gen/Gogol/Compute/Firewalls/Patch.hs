@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.Patch
     ComputeFirewallsPatchResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsPatch (..),
     newComputeFirewallsPatch,
-    ComputeFirewallsPatch,
   )
 where
 

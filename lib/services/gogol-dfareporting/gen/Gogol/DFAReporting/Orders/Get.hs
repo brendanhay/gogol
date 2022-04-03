@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Orders.Get
     DFAReportingOrdersGetResource,
 
     -- ** Constructing a Request
+    DFAReportingOrdersGet (..),
     newDFAReportingOrdersGet,
-    DFAReportingOrdersGet,
   )
 where
 

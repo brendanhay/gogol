@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.TestIamPermissions
     ComputeSnapshotsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsTestIamPermissions (..),
     newComputeSnapshotsTestIamPermissions,
-    ComputeSnapshotsTestIamPermissions,
   )
 where
 

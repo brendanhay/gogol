@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.GetSchema
     CloudSearchIndexingDatasourcesGetSchemaResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesGetSchema (..),
     newCloudSearchIndexingDatasourcesGetSchema,
-    CloudSearchIndexingDatasourcesGetSchema,
   )
 where
 

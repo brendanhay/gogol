@@ -34,8 +34,8 @@ module Gogol.Blogger.Comments.RemoveContent
     BloggerCommentsRemoveContentResource,
 
     -- ** Constructing a Request
+    BloggerCommentsRemoveContent (..),
     newBloggerCommentsRemoveContent,
-    BloggerCommentsRemoveContent,
   )
 where
 

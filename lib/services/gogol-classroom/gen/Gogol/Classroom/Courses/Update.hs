@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Update
     ClassroomCoursesUpdateResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesUpdate (..),
     newClassroomCoursesUpdate,
-    ClassroomCoursesUpdate,
   )
 where
 

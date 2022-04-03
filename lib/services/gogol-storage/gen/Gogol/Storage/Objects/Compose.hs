@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Compose
     StorageObjectsComposeResource,
 
     -- ** Constructing a Request
+    StorageObjectsCompose (..),
     newStorageObjectsCompose,
-    StorageObjectsCompose,
   )
 where
 

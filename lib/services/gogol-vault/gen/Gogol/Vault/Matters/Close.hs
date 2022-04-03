@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Close
     VaultMattersCloseResource,
 
     -- ** Constructing a Request
+    VaultMattersClose (..),
     newVaultMattersClose,
-    VaultMattersClose,
   )
 where
 

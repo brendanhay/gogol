@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.TestIamPermissions
     ServiceManagementServicesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesTestIamPermissions (..),
     newServiceManagementServicesTestIamPermissions,
-    ServiceManagementServicesTestIamPermissions,
   )
 where
 

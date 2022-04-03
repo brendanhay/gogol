@@ -34,8 +34,8 @@ module Gogol.Compute.Images.Deprecate
     ComputeImagesDeprecateResource,
 
     -- ** Constructing a Request
+    ComputeImagesDeprecate (..),
     newComputeImagesDeprecate,
-    ComputeImagesDeprecate,
   )
 where
 

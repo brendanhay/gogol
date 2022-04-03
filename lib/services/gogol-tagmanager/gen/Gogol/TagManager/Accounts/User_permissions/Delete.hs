@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.User_permissions.Delete
     TagManagerAccountsUser_permissionsDeleteResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsUser_permissionsDelete (..),
     newTagManagerAccountsUser_permissionsDelete,
-    TagManagerAccountsUser_permissionsDelete,
   )
 where
 

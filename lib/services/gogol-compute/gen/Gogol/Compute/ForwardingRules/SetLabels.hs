@@ -34,8 +34,8 @@ module Gogol.Compute.ForwardingRules.SetLabels
     ComputeForwardingRulesSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeForwardingRulesSetLabels (..),
     newComputeForwardingRulesSetLabels,
-    ComputeForwardingRulesSetLabels,
   )
 where
 

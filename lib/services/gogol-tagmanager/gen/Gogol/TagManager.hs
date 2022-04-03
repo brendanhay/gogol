@@ -46,433 +46,433 @@ module Gogol.TagManager
 
     -- ** tagmanager.accounts.containers.create
     TagManagerAccountsContainersCreateResource,
+    TagManagerAccountsContainersCreate (..),
     newTagManagerAccountsContainersCreate,
-    TagManagerAccountsContainersCreate,
 
     -- ** tagmanager.accounts.containers.delete
     TagManagerAccountsContainersDeleteResource,
+    TagManagerAccountsContainersDelete (..),
     newTagManagerAccountsContainersDelete,
-    TagManagerAccountsContainersDelete,
 
     -- ** tagmanager.accounts.containers.environments.create
     TagManagerAccountsContainersEnvironmentsCreateResource,
+    TagManagerAccountsContainersEnvironmentsCreate (..),
     newTagManagerAccountsContainersEnvironmentsCreate,
-    TagManagerAccountsContainersEnvironmentsCreate,
 
     -- ** tagmanager.accounts.containers.environments.delete
     TagManagerAccountsContainersEnvironmentsDeleteResource,
+    TagManagerAccountsContainersEnvironmentsDelete (..),
     newTagManagerAccountsContainersEnvironmentsDelete,
-    TagManagerAccountsContainersEnvironmentsDelete,
 
     -- ** tagmanager.accounts.containers.environments.get
     TagManagerAccountsContainersEnvironmentsGetResource,
+    TagManagerAccountsContainersEnvironmentsGet (..),
     newTagManagerAccountsContainersEnvironmentsGet,
-    TagManagerAccountsContainersEnvironmentsGet,
 
     -- ** tagmanager.accounts.containers.environments.list
     TagManagerAccountsContainersEnvironmentsListResource,
+    TagManagerAccountsContainersEnvironmentsList (..),
     newTagManagerAccountsContainersEnvironmentsList,
-    TagManagerAccountsContainersEnvironmentsList,
 
     -- ** tagmanager.accounts.containers.environments.reauthorize
     TagManagerAccountsContainersEnvironmentsReauthorizeResource,
+    TagManagerAccountsContainersEnvironmentsReauthorize (..),
     newTagManagerAccountsContainersEnvironmentsReauthorize,
-    TagManagerAccountsContainersEnvironmentsReauthorize,
 
     -- ** tagmanager.accounts.containers.environments.update
     TagManagerAccountsContainersEnvironmentsUpdateResource,
+    TagManagerAccountsContainersEnvironmentsUpdate (..),
     newTagManagerAccountsContainersEnvironmentsUpdate,
-    TagManagerAccountsContainersEnvironmentsUpdate,
 
     -- ** tagmanager.accounts.containers.get
     TagManagerAccountsContainersGetResource,
+    TagManagerAccountsContainersGet (..),
     newTagManagerAccountsContainersGet,
-    TagManagerAccountsContainersGet,
 
     -- ** tagmanager.accounts.containers.list
     TagManagerAccountsContainersListResource,
+    TagManagerAccountsContainersList (..),
     newTagManagerAccountsContainersList,
-    TagManagerAccountsContainersList,
 
     -- ** tagmanager.accounts.containers.update
     TagManagerAccountsContainersUpdateResource,
+    TagManagerAccountsContainersUpdate (..),
     newTagManagerAccountsContainersUpdate,
-    TagManagerAccountsContainersUpdate,
 
     -- ** tagmanager.accounts.containers.version_headers.latest
     TagManagerAccountsContainersVersion_headersLatestResource,
+    TagManagerAccountsContainersVersion_headersLatest (..),
     newTagManagerAccountsContainersVersion_headersLatest,
-    TagManagerAccountsContainersVersion_headersLatest,
 
     -- ** tagmanager.accounts.containers.version_headers.list
     TagManagerAccountsContainersVersion_headersListResource,
+    TagManagerAccountsContainersVersion_headersList (..),
     newTagManagerAccountsContainersVersion_headersList,
-    TagManagerAccountsContainersVersion_headersList,
 
     -- ** tagmanager.accounts.containers.versions.delete
     TagManagerAccountsContainersVersionsDeleteResource,
+    TagManagerAccountsContainersVersionsDelete (..),
     newTagManagerAccountsContainersVersionsDelete,
-    TagManagerAccountsContainersVersionsDelete,
 
     -- ** tagmanager.accounts.containers.versions.get
     TagManagerAccountsContainersVersionsGetResource,
+    TagManagerAccountsContainersVersionsGet (..),
     newTagManagerAccountsContainersVersionsGet,
-    TagManagerAccountsContainersVersionsGet,
 
     -- ** tagmanager.accounts.containers.versions.live
     TagManagerAccountsContainersVersionsLiveResource,
+    TagManagerAccountsContainersVersionsLive (..),
     newTagManagerAccountsContainersVersionsLive,
-    TagManagerAccountsContainersVersionsLive,
 
     -- ** tagmanager.accounts.containers.versions.publish
     TagManagerAccountsContainersVersionsPublishResource,
+    TagManagerAccountsContainersVersionsPublish (..),
     newTagManagerAccountsContainersVersionsPublish,
-    TagManagerAccountsContainersVersionsPublish,
 
     -- ** tagmanager.accounts.containers.versions.set_latest
     TagManagerAccountsContainersVersionsSet_latestResource,
+    TagManagerAccountsContainersVersionsSet_latest (..),
     newTagManagerAccountsContainersVersionsSet_latest,
-    TagManagerAccountsContainersVersionsSet_latest,
 
     -- ** tagmanager.accounts.containers.versions.undelete
     TagManagerAccountsContainersVersionsUndeleteResource,
+    TagManagerAccountsContainersVersionsUndelete (..),
     newTagManagerAccountsContainersVersionsUndelete,
-    TagManagerAccountsContainersVersionsUndelete,
 
     -- ** tagmanager.accounts.containers.versions.update
     TagManagerAccountsContainersVersionsUpdateResource,
+    TagManagerAccountsContainersVersionsUpdate (..),
     newTagManagerAccountsContainersVersionsUpdate,
-    TagManagerAccountsContainersVersionsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.create
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesCreateResource,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesCreate (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesCreate,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.delete
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesDeleteResource,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.list
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesListResource,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesList (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
 
     -- ** tagmanager.accounts.containers.workspaces.built_in_variables.revert
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevertResource,
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.create
     TagManagerAccountsContainersWorkspacesClientsCreateResource,
+    TagManagerAccountsContainersWorkspacesClientsCreate (..),
     newTagManagerAccountsContainersWorkspacesClientsCreate,
-    TagManagerAccountsContainersWorkspacesClientsCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.delete
     TagManagerAccountsContainersWorkspacesClientsDeleteResource,
+    TagManagerAccountsContainersWorkspacesClientsDelete (..),
     newTagManagerAccountsContainersWorkspacesClientsDelete,
-    TagManagerAccountsContainersWorkspacesClientsDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.get
     TagManagerAccountsContainersWorkspacesClientsGetResource,
+    TagManagerAccountsContainersWorkspacesClientsGet (..),
     newTagManagerAccountsContainersWorkspacesClientsGet,
-    TagManagerAccountsContainersWorkspacesClientsGet,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.list
     TagManagerAccountsContainersWorkspacesClientsListResource,
+    TagManagerAccountsContainersWorkspacesClientsList (..),
     newTagManagerAccountsContainersWorkspacesClientsList,
-    TagManagerAccountsContainersWorkspacesClientsList,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.revert
     TagManagerAccountsContainersWorkspacesClientsRevertResource,
+    TagManagerAccountsContainersWorkspacesClientsRevert (..),
     newTagManagerAccountsContainersWorkspacesClientsRevert,
-    TagManagerAccountsContainersWorkspacesClientsRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.clients.update
     TagManagerAccountsContainersWorkspacesClientsUpdateResource,
+    TagManagerAccountsContainersWorkspacesClientsUpdate (..),
     newTagManagerAccountsContainersWorkspacesClientsUpdate,
-    TagManagerAccountsContainersWorkspacesClientsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.create
     TagManagerAccountsContainersWorkspacesCreateResource,
+    TagManagerAccountsContainersWorkspacesCreate (..),
     newTagManagerAccountsContainersWorkspacesCreate,
-    TagManagerAccountsContainersWorkspacesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.create_version
     TagManagerAccountsContainersWorkspacesCreate_versionResource,
+    TagManagerAccountsContainersWorkspacesCreate_version (..),
     newTagManagerAccountsContainersWorkspacesCreate_version,
-    TagManagerAccountsContainersWorkspacesCreate_version,
 
     -- ** tagmanager.accounts.containers.workspaces.delete
     TagManagerAccountsContainersWorkspacesDeleteResource,
+    TagManagerAccountsContainersWorkspacesDelete (..),
     newTagManagerAccountsContainersWorkspacesDelete,
-    TagManagerAccountsContainersWorkspacesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.create
     TagManagerAccountsContainersWorkspacesFoldersCreateResource,
+    TagManagerAccountsContainersWorkspacesFoldersCreate (..),
     newTagManagerAccountsContainersWorkspacesFoldersCreate,
-    TagManagerAccountsContainersWorkspacesFoldersCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.delete
     TagManagerAccountsContainersWorkspacesFoldersDeleteResource,
+    TagManagerAccountsContainersWorkspacesFoldersDelete (..),
     newTagManagerAccountsContainersWorkspacesFoldersDelete,
-    TagManagerAccountsContainersWorkspacesFoldersDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.entities
     TagManagerAccountsContainersWorkspacesFoldersEntitiesResource,
+    TagManagerAccountsContainersWorkspacesFoldersEntities (..),
     newTagManagerAccountsContainersWorkspacesFoldersEntities,
-    TagManagerAccountsContainersWorkspacesFoldersEntities,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.get
     TagManagerAccountsContainersWorkspacesFoldersGetResource,
+    TagManagerAccountsContainersWorkspacesFoldersGet (..),
     newTagManagerAccountsContainersWorkspacesFoldersGet,
-    TagManagerAccountsContainersWorkspacesFoldersGet,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.list
     TagManagerAccountsContainersWorkspacesFoldersListResource,
+    TagManagerAccountsContainersWorkspacesFoldersList (..),
     newTagManagerAccountsContainersWorkspacesFoldersList,
-    TagManagerAccountsContainersWorkspacesFoldersList,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.move_entities_to_folder
     TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folderResource,
+    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder (..),
     newTagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
-    TagManagerAccountsContainersWorkspacesFoldersMove_entities_to_folder,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.revert
     TagManagerAccountsContainersWorkspacesFoldersRevertResource,
+    TagManagerAccountsContainersWorkspacesFoldersRevert (..),
     newTagManagerAccountsContainersWorkspacesFoldersRevert,
-    TagManagerAccountsContainersWorkspacesFoldersRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.folders.update
     TagManagerAccountsContainersWorkspacesFoldersUpdateResource,
+    TagManagerAccountsContainersWorkspacesFoldersUpdate (..),
     newTagManagerAccountsContainersWorkspacesFoldersUpdate,
-    TagManagerAccountsContainersWorkspacesFoldersUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.get
     TagManagerAccountsContainersWorkspacesGetResource,
+    TagManagerAccountsContainersWorkspacesGet (..),
     newTagManagerAccountsContainersWorkspacesGet,
-    TagManagerAccountsContainersWorkspacesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.getStatus
     TagManagerAccountsContainersWorkspacesGetStatusResource,
+    TagManagerAccountsContainersWorkspacesGetStatus (..),
     newTagManagerAccountsContainersWorkspacesGetStatus,
-    TagManagerAccountsContainersWorkspacesGetStatus,
 
     -- ** tagmanager.accounts.containers.workspaces.list
     TagManagerAccountsContainersWorkspacesListResource,
+    TagManagerAccountsContainersWorkspacesList (..),
     newTagManagerAccountsContainersWorkspacesList,
-    TagManagerAccountsContainersWorkspacesList,
 
     -- ** tagmanager.accounts.containers.workspaces.quick_preview
     TagManagerAccountsContainersWorkspacesQuick_previewResource,
+    TagManagerAccountsContainersWorkspacesQuick_preview (..),
     newTagManagerAccountsContainersWorkspacesQuick_preview,
-    TagManagerAccountsContainersWorkspacesQuick_preview,
 
     -- ** tagmanager.accounts.containers.workspaces.resolve_conflict
     TagManagerAccountsContainersWorkspacesResolve_conflictResource,
+    TagManagerAccountsContainersWorkspacesResolve_conflict (..),
     newTagManagerAccountsContainersWorkspacesResolve_conflict,
-    TagManagerAccountsContainersWorkspacesResolve_conflict,
 
     -- ** tagmanager.accounts.containers.workspaces.sync
     TagManagerAccountsContainersWorkspacesSyncResource,
+    TagManagerAccountsContainersWorkspacesSync (..),
     newTagManagerAccountsContainersWorkspacesSync,
-    TagManagerAccountsContainersWorkspacesSync,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.create
     TagManagerAccountsContainersWorkspacesTagsCreateResource,
+    TagManagerAccountsContainersWorkspacesTagsCreate (..),
     newTagManagerAccountsContainersWorkspacesTagsCreate,
-    TagManagerAccountsContainersWorkspacesTagsCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.delete
     TagManagerAccountsContainersWorkspacesTagsDeleteResource,
+    TagManagerAccountsContainersWorkspacesTagsDelete (..),
     newTagManagerAccountsContainersWorkspacesTagsDelete,
-    TagManagerAccountsContainersWorkspacesTagsDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.get
     TagManagerAccountsContainersWorkspacesTagsGetResource,
+    TagManagerAccountsContainersWorkspacesTagsGet (..),
     newTagManagerAccountsContainersWorkspacesTagsGet,
-    TagManagerAccountsContainersWorkspacesTagsGet,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.list
     TagManagerAccountsContainersWorkspacesTagsListResource,
+    TagManagerAccountsContainersWorkspacesTagsList (..),
     newTagManagerAccountsContainersWorkspacesTagsList,
-    TagManagerAccountsContainersWorkspacesTagsList,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.revert
     TagManagerAccountsContainersWorkspacesTagsRevertResource,
+    TagManagerAccountsContainersWorkspacesTagsRevert (..),
     newTagManagerAccountsContainersWorkspacesTagsRevert,
-    TagManagerAccountsContainersWorkspacesTagsRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.tags.update
     TagManagerAccountsContainersWorkspacesTagsUpdateResource,
+    TagManagerAccountsContainersWorkspacesTagsUpdate (..),
     newTagManagerAccountsContainersWorkspacesTagsUpdate,
-    TagManagerAccountsContainersWorkspacesTagsUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.create
     TagManagerAccountsContainersWorkspacesTemplatesCreateResource,
+    TagManagerAccountsContainersWorkspacesTemplatesCreate (..),
     newTagManagerAccountsContainersWorkspacesTemplatesCreate,
-    TagManagerAccountsContainersWorkspacesTemplatesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.delete
     TagManagerAccountsContainersWorkspacesTemplatesDeleteResource,
+    TagManagerAccountsContainersWorkspacesTemplatesDelete (..),
     newTagManagerAccountsContainersWorkspacesTemplatesDelete,
-    TagManagerAccountsContainersWorkspacesTemplatesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.get
     TagManagerAccountsContainersWorkspacesTemplatesGetResource,
+    TagManagerAccountsContainersWorkspacesTemplatesGet (..),
     newTagManagerAccountsContainersWorkspacesTemplatesGet,
-    TagManagerAccountsContainersWorkspacesTemplatesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.list
     TagManagerAccountsContainersWorkspacesTemplatesListResource,
+    TagManagerAccountsContainersWorkspacesTemplatesList (..),
     newTagManagerAccountsContainersWorkspacesTemplatesList,
-    TagManagerAccountsContainersWorkspacesTemplatesList,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.revert
     TagManagerAccountsContainersWorkspacesTemplatesRevertResource,
+    TagManagerAccountsContainersWorkspacesTemplatesRevert (..),
     newTagManagerAccountsContainersWorkspacesTemplatesRevert,
-    TagManagerAccountsContainersWorkspacesTemplatesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.templates.update
     TagManagerAccountsContainersWorkspacesTemplatesUpdateResource,
+    TagManagerAccountsContainersWorkspacesTemplatesUpdate (..),
     newTagManagerAccountsContainersWorkspacesTemplatesUpdate,
-    TagManagerAccountsContainersWorkspacesTemplatesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.create
     TagManagerAccountsContainersWorkspacesTriggersCreateResource,
+    TagManagerAccountsContainersWorkspacesTriggersCreate (..),
     newTagManagerAccountsContainersWorkspacesTriggersCreate,
-    TagManagerAccountsContainersWorkspacesTriggersCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.delete
     TagManagerAccountsContainersWorkspacesTriggersDeleteResource,
+    TagManagerAccountsContainersWorkspacesTriggersDelete (..),
     newTagManagerAccountsContainersWorkspacesTriggersDelete,
-    TagManagerAccountsContainersWorkspacesTriggersDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.get
     TagManagerAccountsContainersWorkspacesTriggersGetResource,
+    TagManagerAccountsContainersWorkspacesTriggersGet (..),
     newTagManagerAccountsContainersWorkspacesTriggersGet,
-    TagManagerAccountsContainersWorkspacesTriggersGet,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.list
     TagManagerAccountsContainersWorkspacesTriggersListResource,
+    TagManagerAccountsContainersWorkspacesTriggersList (..),
     newTagManagerAccountsContainersWorkspacesTriggersList,
-    TagManagerAccountsContainersWorkspacesTriggersList,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.revert
     TagManagerAccountsContainersWorkspacesTriggersRevertResource,
+    TagManagerAccountsContainersWorkspacesTriggersRevert (..),
     newTagManagerAccountsContainersWorkspacesTriggersRevert,
-    TagManagerAccountsContainersWorkspacesTriggersRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.triggers.update
     TagManagerAccountsContainersWorkspacesTriggersUpdateResource,
+    TagManagerAccountsContainersWorkspacesTriggersUpdate (..),
     newTagManagerAccountsContainersWorkspacesTriggersUpdate,
-    TagManagerAccountsContainersWorkspacesTriggersUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.update
     TagManagerAccountsContainersWorkspacesUpdateResource,
+    TagManagerAccountsContainersWorkspacesUpdate (..),
     newTagManagerAccountsContainersWorkspacesUpdate,
-    TagManagerAccountsContainersWorkspacesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.create
     TagManagerAccountsContainersWorkspacesVariablesCreateResource,
+    TagManagerAccountsContainersWorkspacesVariablesCreate (..),
     newTagManagerAccountsContainersWorkspacesVariablesCreate,
-    TagManagerAccountsContainersWorkspacesVariablesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.delete
     TagManagerAccountsContainersWorkspacesVariablesDeleteResource,
+    TagManagerAccountsContainersWorkspacesVariablesDelete (..),
     newTagManagerAccountsContainersWorkspacesVariablesDelete,
-    TagManagerAccountsContainersWorkspacesVariablesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.get
     TagManagerAccountsContainersWorkspacesVariablesGetResource,
+    TagManagerAccountsContainersWorkspacesVariablesGet (..),
     newTagManagerAccountsContainersWorkspacesVariablesGet,
-    TagManagerAccountsContainersWorkspacesVariablesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.list
     TagManagerAccountsContainersWorkspacesVariablesListResource,
+    TagManagerAccountsContainersWorkspacesVariablesList (..),
     newTagManagerAccountsContainersWorkspacesVariablesList,
-    TagManagerAccountsContainersWorkspacesVariablesList,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.revert
     TagManagerAccountsContainersWorkspacesVariablesRevertResource,
+    TagManagerAccountsContainersWorkspacesVariablesRevert (..),
     newTagManagerAccountsContainersWorkspacesVariablesRevert,
-    TagManagerAccountsContainersWorkspacesVariablesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.variables.update
     TagManagerAccountsContainersWorkspacesVariablesUpdateResource,
+    TagManagerAccountsContainersWorkspacesVariablesUpdate (..),
     newTagManagerAccountsContainersWorkspacesVariablesUpdate,
-    TagManagerAccountsContainersWorkspacesVariablesUpdate,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.create
     TagManagerAccountsContainersWorkspacesZonesCreateResource,
+    TagManagerAccountsContainersWorkspacesZonesCreate (..),
     newTagManagerAccountsContainersWorkspacesZonesCreate,
-    TagManagerAccountsContainersWorkspacesZonesCreate,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.delete
     TagManagerAccountsContainersWorkspacesZonesDeleteResource,
+    TagManagerAccountsContainersWorkspacesZonesDelete (..),
     newTagManagerAccountsContainersWorkspacesZonesDelete,
-    TagManagerAccountsContainersWorkspacesZonesDelete,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.get
     TagManagerAccountsContainersWorkspacesZonesGetResource,
+    TagManagerAccountsContainersWorkspacesZonesGet (..),
     newTagManagerAccountsContainersWorkspacesZonesGet,
-    TagManagerAccountsContainersWorkspacesZonesGet,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.list
     TagManagerAccountsContainersWorkspacesZonesListResource,
+    TagManagerAccountsContainersWorkspacesZonesList (..),
     newTagManagerAccountsContainersWorkspacesZonesList,
-    TagManagerAccountsContainersWorkspacesZonesList,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.revert
     TagManagerAccountsContainersWorkspacesZonesRevertResource,
+    TagManagerAccountsContainersWorkspacesZonesRevert (..),
     newTagManagerAccountsContainersWorkspacesZonesRevert,
-    TagManagerAccountsContainersWorkspacesZonesRevert,
 
     -- ** tagmanager.accounts.containers.workspaces.zones.update
     TagManagerAccountsContainersWorkspacesZonesUpdateResource,
+    TagManagerAccountsContainersWorkspacesZonesUpdate (..),
     newTagManagerAccountsContainersWorkspacesZonesUpdate,
-    TagManagerAccountsContainersWorkspacesZonesUpdate,
 
     -- ** tagmanager.accounts.get
     TagManagerAccountsGetResource,
+    TagManagerAccountsGet (..),
     newTagManagerAccountsGet,
-    TagManagerAccountsGet,
 
     -- ** tagmanager.accounts.list
     TagManagerAccountsListResource,
+    TagManagerAccountsList (..),
     newTagManagerAccountsList,
-    TagManagerAccountsList,
 
     -- ** tagmanager.accounts.update
     TagManagerAccountsUpdateResource,
+    TagManagerAccountsUpdate (..),
     newTagManagerAccountsUpdate,
-    TagManagerAccountsUpdate,
 
     -- ** tagmanager.accounts.user_permissions.create
     TagManagerAccountsUser_permissionsCreateResource,
+    TagManagerAccountsUser_permissionsCreate (..),
     newTagManagerAccountsUser_permissionsCreate,
-    TagManagerAccountsUser_permissionsCreate,
 
     -- ** tagmanager.accounts.user_permissions.delete
     TagManagerAccountsUser_permissionsDeleteResource,
+    TagManagerAccountsUser_permissionsDelete (..),
     newTagManagerAccountsUser_permissionsDelete,
-    TagManagerAccountsUser_permissionsDelete,
 
     -- ** tagmanager.accounts.user_permissions.get
     TagManagerAccountsUser_permissionsGetResource,
+    TagManagerAccountsUser_permissionsGet (..),
     newTagManagerAccountsUser_permissionsGet,
-    TagManagerAccountsUser_permissionsGet,
 
     -- ** tagmanager.accounts.user_permissions.list
     TagManagerAccountsUser_permissionsListResource,
+    TagManagerAccountsUser_permissionsList (..),
     newTagManagerAccountsUser_permissionsList,
-    TagManagerAccountsUser_permissionsList,
 
     -- ** tagmanager.accounts.user_permissions.update
     TagManagerAccountsUser_permissionsUpdateResource,
+    TagManagerAccountsUser_permissionsUpdate (..),
     newTagManagerAccountsUser_permissionsUpdate,
-    TagManagerAccountsUser_permissionsUpdate,
 
     -- * Types
 

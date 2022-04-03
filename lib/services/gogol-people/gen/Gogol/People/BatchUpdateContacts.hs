@@ -34,8 +34,8 @@ module Gogol.People.BatchUpdateContacts
     PeoplePeopleBatchUpdateContactsResource,
 
     -- ** Constructing a Request
+    PeoplePeopleBatchUpdateContacts (..),
     newPeoplePeopleBatchUpdateContacts,
-    PeoplePeopleBatchUpdateContacts,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Search
     CloudresourcemanagerFoldersSearchResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersSearch (..),
     newCloudresourcemanagerFoldersSearch,
-    CloudresourcemanagerFoldersSearch,
   )
 where
 

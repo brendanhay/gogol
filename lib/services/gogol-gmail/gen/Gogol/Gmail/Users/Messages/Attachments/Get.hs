@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Attachments.Get
     GmailUsersMessagesAttachmentsGetResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesAttachmentsGet (..),
     newGmailUsersMessagesAttachmentsGet,
-    GmailUsersMessagesAttachmentsGet,
   )
 where
 

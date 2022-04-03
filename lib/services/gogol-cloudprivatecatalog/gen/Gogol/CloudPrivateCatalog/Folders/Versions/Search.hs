@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalog.Folders.Versions.Search
     CloudPrivateCatalogFoldersVersionsSearchResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogFoldersVersionsSearch (..),
     newCloudPrivateCatalogFoldersVersionsSearch,
-    CloudPrivateCatalogFoldersVersionsSearch,
   )
 where
 

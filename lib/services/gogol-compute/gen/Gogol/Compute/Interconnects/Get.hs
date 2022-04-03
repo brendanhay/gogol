@@ -34,8 +34,8 @@ module Gogol.Compute.Interconnects.Get
     ComputeInterconnectsGetResource,
 
     -- ** Constructing a Request
+    ComputeInterconnectsGet (..),
     newComputeInterconnectsGet,
-    ComputeInterconnectsGet,
   )
 where
 

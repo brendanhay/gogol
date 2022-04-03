@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Managedconfigurationsfordevice.Update
     AndroidEnterpriseManagedconfigurationsfordeviceUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseManagedconfigurationsfordeviceUpdate (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceUpdate,
-    AndroidEnterpriseManagedconfigurationsfordeviceUpdate,
   )
 where
 

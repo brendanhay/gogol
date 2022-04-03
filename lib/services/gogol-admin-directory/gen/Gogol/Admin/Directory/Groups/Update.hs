@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Groups.Update
     DirectoryGroupsUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryGroupsUpdate (..),
     newDirectoryGroupsUpdate,
-    DirectoryGroupsUpdate,
   )
 where
 

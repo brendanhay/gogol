@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.GenerateConsistencyToken
     BigtableAdminProjectsInstancesTablesGenerateConsistencyTokenResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesGenerateConsistencyToken (..),
     newBigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
-    BigtableAdminProjectsInstancesTablesGenerateConsistencyToken,
   )
 where
 

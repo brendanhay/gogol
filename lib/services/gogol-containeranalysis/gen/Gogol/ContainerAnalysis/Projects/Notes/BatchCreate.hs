@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Notes.BatchCreate
     ContainerAnalysisProjectsNotesBatchCreateResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsNotesBatchCreate (..),
     newContainerAnalysisProjectsNotesBatchCreate,
-    ContainerAnalysisProjectsNotesBatchCreate,
   )
 where
 

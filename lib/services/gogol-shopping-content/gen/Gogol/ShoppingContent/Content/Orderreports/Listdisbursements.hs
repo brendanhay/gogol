@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderreports.Listdisbursements
     ContentOrderreportsListdisbursementsResource,
 
     -- ** Constructing a Request
+    ContentOrderreportsListdisbursements (..),
     newContentOrderreportsListdisbursements,
-    ContentOrderreportsListdisbursements,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Videos.ReportAbuse
     YouTubeVideosReportAbuseResource,
 
     -- ** Constructing a Request
+    YouTubeVideosReportAbuse (..),
     newYouTubeVideosReportAbuse,
-    YouTubeVideosReportAbuse,
   )
 where
 

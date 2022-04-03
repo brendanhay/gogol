@@ -34,8 +34,8 @@ module Gogol.DLP.Locations.InfoTypes.List
     DLPLocationsInfoTypesListResource,
 
     -- ** Constructing a Request
+    DLPLocationsInfoTypesList (..),
     newDLPLocationsInfoTypesList,
-    DLPLocationsInfoTypesList,
   )
 where
 

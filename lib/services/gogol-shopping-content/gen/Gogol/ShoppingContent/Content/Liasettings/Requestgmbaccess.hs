@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Requestgmbaccess
     ContentLiasettingsRequestgmbaccessResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsRequestgmbaccess (..),
     newContentLiasettingsRequestgmbaccess,
-    ContentLiasettingsRequestgmbaccess,
   )
 where
 

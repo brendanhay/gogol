@@ -34,8 +34,8 @@ module Gogol.Drive.Files.EmptyTrash
     DriveFilesEmptyTrashResource,
 
     -- ** Constructing a Request
+    DriveFilesEmptyTrash (..),
     newDriveFilesEmptyTrash,
-    DriveFilesEmptyTrash,
   )
 where
 

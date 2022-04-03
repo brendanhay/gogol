@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.SignupUrls.Create
     AndroidManagementSignupUrlsCreateResource,
 
     -- ** Constructing a Request
+    AndroidManagementSignupUrlsCreate (..),
     newAndroidManagementSignupUrlsCreate,
-    AndroidManagementSignupUrlsCreate,
   )
 where
 

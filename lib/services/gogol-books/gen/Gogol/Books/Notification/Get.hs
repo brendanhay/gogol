@@ -34,8 +34,8 @@ module Gogol.Books.Notification.Get
     BooksNotificationGetResource,
 
     -- ** Constructing a Request
+    BooksNotificationGet (..),
     newBooksNotificationGet,
-    BooksNotificationGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferJobs.Run
     StorageTransferTransferJobsRunResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferJobsRun (..),
     newStorageTransferTransferJobsRun,
-    StorageTransferTransferJobsRun,
   )
 where
 

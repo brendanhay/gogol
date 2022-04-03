@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Bookshelves.Get
     BooksMylibraryBookshelvesGetResource,
 
     -- ** Constructing a Request
+    BooksMylibraryBookshelvesGet (..),
     newBooksMylibraryBookshelvesGet,
-    BooksMylibraryBookshelvesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Zones.Get
     ComputeZonesGetResource,
 
     -- ** Constructing a Request
+    ComputeZonesGet (..),
     newComputeZonesGet,
-    ComputeZonesGet,
   )
 where
 

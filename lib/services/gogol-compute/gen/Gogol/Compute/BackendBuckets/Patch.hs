@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.Patch
     ComputeBackendBucketsPatchResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsPatch (..),
     newComputeBackendBucketsPatch,
-    ComputeBackendBucketsPatch,
   )
 where
 

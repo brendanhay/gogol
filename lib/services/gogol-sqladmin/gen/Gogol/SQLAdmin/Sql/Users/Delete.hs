@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Users.Delete
     SqlUsersDeleteResource,
 
     -- ** Constructing a Request
+    SqlUsersDelete (..),
     newSqlUsersDelete,
-    SqlUsersDelete,
   )
 where
 

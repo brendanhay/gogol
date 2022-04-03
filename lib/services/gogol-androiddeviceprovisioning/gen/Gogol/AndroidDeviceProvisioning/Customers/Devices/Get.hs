@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Customers.Devices.Get
     AndroidDeviceProvisioningCustomersDevicesGetResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningCustomersDevicesGet (..),
     newAndroidDeviceProvisioningCustomersDevicesGet,
-    AndroidDeviceProvisioningCustomersDevicesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.AttachDisk
     ComputeInstancesAttachDiskResource,
 
     -- ** Constructing a Request
+    ComputeInstancesAttachDisk (..),
     newComputeInstancesAttachDisk,
-    ComputeInstancesAttachDisk,
   )
 where
 

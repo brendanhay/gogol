@@ -34,8 +34,8 @@ module Gogol.YouTube.ThirdPartyLinks.Delete
     YouTubeThirdPartyLinksDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeThirdPartyLinksDelete (..),
     newYouTubeThirdPartyLinksDelete,
-    YouTubeThirdPartyLinksDelete,
   )
 where
 

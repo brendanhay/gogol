@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.RemovePermissions
     VaultMattersRemovePermissionsResource,
 
     -- ** Constructing a Request
+    VaultMattersRemovePermissions (..),
     newVaultMattersRemovePermissions,
-    VaultMattersRemovePermissions,
   )
 where
 

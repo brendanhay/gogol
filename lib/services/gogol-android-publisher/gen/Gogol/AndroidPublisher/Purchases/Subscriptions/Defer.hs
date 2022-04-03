@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Defer
     AndroidPublisherPurchasesSubscriptionsDeferResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsDefer (..),
     newAndroidPublisherPurchasesSubscriptionsDefer,
-    AndroidPublisherPurchasesSubscriptionsDefer,
   )
 where
 

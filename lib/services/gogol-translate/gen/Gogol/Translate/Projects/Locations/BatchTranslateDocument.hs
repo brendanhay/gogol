@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.Locations.BatchTranslateDocument
     TranslateProjectsLocationsBatchTranslateDocumentResource,
 
     -- ** Constructing a Request
+    TranslateProjectsLocationsBatchTranslateDocument (..),
     newTranslateProjectsLocationsBatchTranslateDocument,
-    TranslateProjectsLocationsBatchTranslateDocument,
   )
 where
 

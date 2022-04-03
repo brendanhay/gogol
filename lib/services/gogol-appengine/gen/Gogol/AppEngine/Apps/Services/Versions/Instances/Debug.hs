@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Versions.Instances.Debug
     AppEngineAppsServicesVersionsInstancesDebugResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesVersionsInstancesDebug (..),
     newAppEngineAppsServicesVersionsInstancesDebug,
-    AppEngineAppsServicesVersionsInstancesDebug,
   )
 where
 

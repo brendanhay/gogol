@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Serviceaccountkeys.Delete
     AndroidEnterpriseServiceaccountkeysDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseServiceaccountkeysDelete (..),
     newAndroidEnterpriseServiceaccountkeysDelete,
-    AndroidEnterpriseServiceaccountkeysDelete,
   )
 where
 

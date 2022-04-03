@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.SetStepsAtLeast
     GamesAchievementsSetStepsAtLeastResource,
 
     -- ** Constructing a Request
+    GamesAchievementsSetStepsAtLeast (..),
     newGamesAchievementsSetStepsAtLeast,
-    GamesAchievementsSetStepsAtLeast,
   )
 where
 

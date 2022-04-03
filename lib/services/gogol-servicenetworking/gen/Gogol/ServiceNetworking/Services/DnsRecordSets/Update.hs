@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DnsRecordSets.Update
     ServiceNetworkingServicesDnsRecordSetsUpdateResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDnsRecordSetsUpdate (..),
     newServiceNetworkingServicesDnsRecordSetsUpdate,
-    ServiceNetworkingServicesDnsRecordSetsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Spanner.Scans.List
     SpannerScansListResource,
 
     -- ** Constructing a Request
+    SpannerScansList (..),
     newSpannerScansList,
-    SpannerScansList,
   )
 where
 

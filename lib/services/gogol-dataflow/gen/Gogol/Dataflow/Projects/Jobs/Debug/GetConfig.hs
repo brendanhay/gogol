@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.Debug.GetConfig
     DataflowProjectsJobsDebugGetConfigResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsDebugGetConfig (..),
     newDataflowProjectsJobsDebugGetConfig,
-    DataflowProjectsJobsDebugGetConfig,
   )
 where
 

@@ -43,48 +43,48 @@ module Gogol.Plus
 
     -- ** plus.activities.get
     PlusActivitiesGetResource,
+    PlusActivitiesGet (..),
     newPlusActivitiesGet,
-    PlusActivitiesGet,
 
     -- ** plus.activities.list
     PlusActivitiesListResource,
+    PlusActivitiesList (..),
     newPlusActivitiesList,
-    PlusActivitiesList,
 
     -- ** plus.activities.search
     PlusActivitiesSearchResource,
+    PlusActivitiesSearch (..),
     newPlusActivitiesSearch,
-    PlusActivitiesSearch,
 
     -- ** plus.comments.get
     PlusCommentsGetResource,
+    PlusCommentsGet (..),
     newPlusCommentsGet,
-    PlusCommentsGet,
 
     -- ** plus.comments.list
     PlusCommentsListResource,
+    PlusCommentsList (..),
     newPlusCommentsList,
-    PlusCommentsList,
 
     -- ** plus.people.get
     PlusPeopleGetResource,
+    PlusPeopleGet (..),
     newPlusPeopleGet,
-    PlusPeopleGet,
 
     -- ** plus.people.list
     PlusPeopleListResource,
+    PlusPeopleList (..),
     newPlusPeopleList,
-    PlusPeopleList,
 
     -- ** plus.people.listByActivity
     PlusPeopleListByActivityResource,
+    PlusPeopleListByActivity (..),
     newPlusPeopleListByActivity,
-    PlusPeopleListByActivity,
 
     -- ** plus.people.search
     PlusPeopleSearchResource,
+    PlusPeopleSearch (..),
     newPlusPeopleSearch,
-    PlusPeopleSearch,
 
     -- * Types
 

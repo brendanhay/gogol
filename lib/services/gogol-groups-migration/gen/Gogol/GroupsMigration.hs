@@ -40,8 +40,8 @@ module Gogol.GroupsMigration
 
     -- ** groupsmigration.archive.insert
     GroupsMigrationArchiveInsertResource,
+    GroupsMigrationArchiveInsert (..),
     newGroupsMigrationArchiveInsert,
-    GroupsMigrationArchiveInsert,
 
     -- * Types
 

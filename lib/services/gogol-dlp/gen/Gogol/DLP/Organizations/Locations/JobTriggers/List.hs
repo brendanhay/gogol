@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.JobTriggers.List
     DLPOrganizationsLocationsJobTriggersListResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsJobTriggersList (..),
     newDLPOrganizationsLocationsJobTriggersList,
-    DLPOrganizationsLocationsJobTriggersList,
   )
 where
 

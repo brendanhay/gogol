@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Urlchannels.List
     AdSenseHostUrlchannelsListResource,
 
     -- ** Constructing a Request
+    AdSenseHostUrlchannelsList (..),
     newAdSenseHostUrlchannelsList,
-    AdSenseHostUrlchannelsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Projects.Global.Networks.Get
     ServiceNetworkingServicesProjectsGlobalNetworksGetResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesProjectsGlobalNetworksGet (..),
     newServiceNetworkingServicesProjectsGlobalNetworksGet,
-    ServiceNetworkingServicesProjectsGlobalNetworksGet,
   )
 where
 

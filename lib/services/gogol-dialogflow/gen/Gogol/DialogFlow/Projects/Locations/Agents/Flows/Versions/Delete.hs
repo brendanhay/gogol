@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Delete
     DialogFlowProjectsLocationsAgentsFlowsVersionsDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsVersionsDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsDelete,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsDelete,
   )
 where
 

@@ -40,8 +40,8 @@ module Gogol.PageSpeed
 
     -- ** pagespeedonline.pagespeedapi.runpagespeed
     PagespeedonlinePagespeedapiRunpagespeedResource,
+    PagespeedonlinePagespeedapiRunpagespeed (..),
     newPagespeedonlinePagespeedapiRunpagespeed,
-    PagespeedonlinePagespeedapiRunpagespeed,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.GetScreenshot
     ComputeInstancesGetScreenshotResource,
 
     -- ** Constructing a Request
+    ComputeInstancesGetScreenshot (..),
     newComputeInstancesGetScreenshot,
-    ComputeInstancesGetScreenshot,
   )
 where
 

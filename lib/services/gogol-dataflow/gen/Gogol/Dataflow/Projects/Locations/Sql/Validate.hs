@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Sql.Validate
     DataflowProjectsLocationsSqlValidateResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsSqlValidate (..),
     newDataflowProjectsLocationsSqlValidate,
-    DataflowProjectsLocationsSqlValidate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Patch
     AppEngineAppsServicesPatchResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesPatch (..),
     newAppEngineAppsServicesPatch,
-    AppEngineAppsServicesPatch,
   )
 where
 

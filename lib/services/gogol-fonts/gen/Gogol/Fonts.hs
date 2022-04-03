@@ -37,8 +37,8 @@ module Gogol.Fonts
 
     -- ** webfonts.webfonts.list
     WebfontsWebfontsListResource,
+    WebfontsWebfontsList (..),
     newWebfontsWebfontsList,
-    WebfontsWebfontsList,
 
     -- * Types
 

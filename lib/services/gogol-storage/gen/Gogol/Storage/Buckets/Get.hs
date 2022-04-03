@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.Get
     StorageBucketsGetResource,
 
     -- ** Constructing a Request
+    StorageBucketsGet (..),
     newStorageBucketsGet,
-    StorageBucketsGet,
   )
 where
 

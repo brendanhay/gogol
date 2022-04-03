@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.Update
     StorageBucketsUpdateResource,
 
     -- ** Constructing a Request
+    StorageBucketsUpdate (..),
     newStorageBucketsUpdate,
-    StorageBucketsUpdate,
   )
 where
 

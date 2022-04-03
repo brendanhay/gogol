@@ -41,28 +41,28 @@ module Gogol.Admin.DataTransfer
 
     -- ** datatransfer.applications.get
     DatatransferApplicationsGetResource,
+    DatatransferApplicationsGet (..),
     newDatatransferApplicationsGet,
-    DatatransferApplicationsGet,
 
     -- ** datatransfer.applications.list
     DatatransferApplicationsListResource,
+    DatatransferApplicationsList (..),
     newDatatransferApplicationsList,
-    DatatransferApplicationsList,
 
     -- ** datatransfer.transfers.get
     DatatransferTransfersGetResource,
+    DatatransferTransfersGet (..),
     newDatatransferTransfersGet,
-    DatatransferTransfersGet,
 
     -- ** datatransfer.transfers.insert
     DatatransferTransfersInsertResource,
+    DatatransferTransfersInsert (..),
     newDatatransferTransfersInsert,
-    DatatransferTransfersInsert,
 
     -- ** datatransfer.transfers.list
     DatatransferTransfersListResource,
+    DatatransferTransfersList (..),
     newDatatransferTransfersList,
-    DatatransferTransfersList,
 
     -- * Types
 

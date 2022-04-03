@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.EnrollDataSources
     BigQueryDataTransferProjectsEnrollDataSourcesResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsEnrollDataSources (..),
     newBigQueryDataTransferProjectsEnrollDataSources,
-    BigQueryDataTransferProjectsEnrollDataSources,
   )
 where
 

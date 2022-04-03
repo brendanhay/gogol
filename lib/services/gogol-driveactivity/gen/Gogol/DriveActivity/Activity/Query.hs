@@ -34,8 +34,8 @@ module Gogol.DriveActivity.Activity.Query
     DriveActivityActivityQueryResource,
 
     -- ** Constructing a Request
+    DriveActivityActivityQuery (..),
     newDriveActivityActivityQuery,
-    DriveActivityActivityQuery,
   )
 where
 

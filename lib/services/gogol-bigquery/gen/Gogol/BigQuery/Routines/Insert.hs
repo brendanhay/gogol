@@ -34,8 +34,8 @@ module Gogol.BigQuery.Routines.Insert
     BigQueryRoutinesInsertResource,
 
     -- ** Constructing a Request
+    BigQueryRoutinesInsert (..),
     newBigQueryRoutinesInsert,
-    BigQueryRoutinesInsert,
   )
 where
 

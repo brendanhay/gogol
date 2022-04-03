@@ -34,8 +34,8 @@ module Gogol.Storage.Notifications.Delete
     StorageNotificationsDeleteResource,
 
     -- ** Constructing a Request
+    StorageNotificationsDelete (..),
     newStorageNotificationsDelete,
-    StorageNotificationsDelete,
   )
 where
 

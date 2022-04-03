@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Webproperties.Insert
     AnalyticsManagementWebpropertiesInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertiesInsert (..),
     newAnalyticsManagementWebpropertiesInsert,
-    AnalyticsManagementWebpropertiesInsert,
   )
 where
 

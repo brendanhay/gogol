@@ -40,283 +40,283 @@ module Gogol.ContainerBuilder
 
     -- ** cloudbuild.locations.regionalWebhook
     CloudbuildLocationsRegionalWebhookResource,
+    CloudbuildLocationsRegionalWebhook (..),
     newCloudbuildLocationsRegionalWebhook,
-    CloudbuildLocationsRegionalWebhook,
 
     -- ** cloudbuild.operations.cancel
     CloudbuildOperationsCancelResource,
+    CloudbuildOperationsCancel (..),
     newCloudbuildOperationsCancel,
-    CloudbuildOperationsCancel,
 
     -- ** cloudbuild.operations.get
     CloudbuildOperationsGetResource,
+    CloudbuildOperationsGet (..),
     newCloudbuildOperationsGet,
-    CloudbuildOperationsGet,
 
     -- ** cloudbuild.projects.builds.approve
     CloudbuildProjectsBuildsApproveResource,
+    CloudbuildProjectsBuildsApprove (..),
     newCloudbuildProjectsBuildsApprove,
-    CloudbuildProjectsBuildsApprove,
 
     -- ** cloudbuild.projects.builds.cancel
     CloudbuildProjectsBuildsCancelResource,
+    CloudbuildProjectsBuildsCancel (..),
     newCloudbuildProjectsBuildsCancel,
-    CloudbuildProjectsBuildsCancel,
 
     -- ** cloudbuild.projects.builds.create
     CloudbuildProjectsBuildsCreateResource,
+    CloudbuildProjectsBuildsCreate (..),
     newCloudbuildProjectsBuildsCreate,
-    CloudbuildProjectsBuildsCreate,
 
     -- ** cloudbuild.projects.builds.get
     CloudbuildProjectsBuildsGetResource,
+    CloudbuildProjectsBuildsGet (..),
     newCloudbuildProjectsBuildsGet,
-    CloudbuildProjectsBuildsGet,
 
     -- ** cloudbuild.projects.builds.list
     CloudbuildProjectsBuildsListResource,
+    CloudbuildProjectsBuildsList (..),
     newCloudbuildProjectsBuildsList,
-    CloudbuildProjectsBuildsList,
 
     -- ** cloudbuild.projects.builds.retry
     CloudbuildProjectsBuildsRetryResource,
+    CloudbuildProjectsBuildsRetry (..),
     newCloudbuildProjectsBuildsRetry,
-    CloudbuildProjectsBuildsRetry,
 
     -- ** cloudbuild.projects.githubEnterpriseConfigs.create
     CloudbuildProjectsGithubEnterpriseConfigsCreateResource,
+    CloudbuildProjectsGithubEnterpriseConfigsCreate (..),
     newCloudbuildProjectsGithubEnterpriseConfigsCreate,
-    CloudbuildProjectsGithubEnterpriseConfigsCreate,
 
     -- ** cloudbuild.projects.githubEnterpriseConfigs.delete
     CloudbuildProjectsGithubEnterpriseConfigsDeleteResource,
+    CloudbuildProjectsGithubEnterpriseConfigsDelete (..),
     newCloudbuildProjectsGithubEnterpriseConfigsDelete,
-    CloudbuildProjectsGithubEnterpriseConfigsDelete,
 
     -- ** cloudbuild.projects.githubEnterpriseConfigs.get
     CloudbuildProjectsGithubEnterpriseConfigsGetResource,
+    CloudbuildProjectsGithubEnterpriseConfigsGet (..),
     newCloudbuildProjectsGithubEnterpriseConfigsGet,
-    CloudbuildProjectsGithubEnterpriseConfigsGet,
 
     -- ** cloudbuild.projects.githubEnterpriseConfigs.list
     CloudbuildProjectsGithubEnterpriseConfigsListResource,
+    CloudbuildProjectsGithubEnterpriseConfigsList (..),
     newCloudbuildProjectsGithubEnterpriseConfigsList,
-    CloudbuildProjectsGithubEnterpriseConfigsList,
 
     -- ** cloudbuild.projects.githubEnterpriseConfigs.patch
     CloudbuildProjectsGithubEnterpriseConfigsPatchResource,
+    CloudbuildProjectsGithubEnterpriseConfigsPatch (..),
     newCloudbuildProjectsGithubEnterpriseConfigsPatch,
-    CloudbuildProjectsGithubEnterpriseConfigsPatch,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.addBitbucketServerConnectedRepository
     CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepositoryResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository,
-    CloudbuildProjectsLocationsBitbucketServerConfigsAddBitbucketServerConnectedRepository,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.connectedRepositories.batchCreate
     CloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreateResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreate (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreate,
-    CloudbuildProjectsLocationsBitbucketServerConfigsConnectedRepositoriesBatchCreate,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.create
     CloudbuildProjectsLocationsBitbucketServerConfigsCreateResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsCreate (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsCreate,
-    CloudbuildProjectsLocationsBitbucketServerConfigsCreate,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.delete
     CloudbuildProjectsLocationsBitbucketServerConfigsDeleteResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsDelete (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsDelete,
-    CloudbuildProjectsLocationsBitbucketServerConfigsDelete,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.get
     CloudbuildProjectsLocationsBitbucketServerConfigsGetResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsGet (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsGet,
-    CloudbuildProjectsLocationsBitbucketServerConfigsGet,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.list
     CloudbuildProjectsLocationsBitbucketServerConfigsListResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsList (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsList,
-    CloudbuildProjectsLocationsBitbucketServerConfigsList,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.patch
     CloudbuildProjectsLocationsBitbucketServerConfigsPatchResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsPatch (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsPatch,
-    CloudbuildProjectsLocationsBitbucketServerConfigsPatch,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.removeBitbucketServerConnectedRepository
     CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepositoryResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository,
-    CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository,
 
     -- ** cloudbuild.projects.locations.bitbucketServerConfigs.repos.list
     CloudbuildProjectsLocationsBitbucketServerConfigsReposListResource,
+    CloudbuildProjectsLocationsBitbucketServerConfigsReposList (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsReposList,
-    CloudbuildProjectsLocationsBitbucketServerConfigsReposList,
 
     -- ** cloudbuild.projects.locations.builds.approve
     CloudbuildProjectsLocationsBuildsApproveResource,
+    CloudbuildProjectsLocationsBuildsApprove (..),
     newCloudbuildProjectsLocationsBuildsApprove,
-    CloudbuildProjectsLocationsBuildsApprove,
 
     -- ** cloudbuild.projects.locations.builds.cancel
     CloudbuildProjectsLocationsBuildsCancelResource,
+    CloudbuildProjectsLocationsBuildsCancel (..),
     newCloudbuildProjectsLocationsBuildsCancel,
-    CloudbuildProjectsLocationsBuildsCancel,
 
     -- ** cloudbuild.projects.locations.builds.create
     CloudbuildProjectsLocationsBuildsCreateResource,
+    CloudbuildProjectsLocationsBuildsCreate (..),
     newCloudbuildProjectsLocationsBuildsCreate,
-    CloudbuildProjectsLocationsBuildsCreate,
 
     -- ** cloudbuild.projects.locations.builds.get
     CloudbuildProjectsLocationsBuildsGetResource,
+    CloudbuildProjectsLocationsBuildsGet (..),
     newCloudbuildProjectsLocationsBuildsGet,
-    CloudbuildProjectsLocationsBuildsGet,
 
     -- ** cloudbuild.projects.locations.builds.list
     CloudbuildProjectsLocationsBuildsListResource,
+    CloudbuildProjectsLocationsBuildsList (..),
     newCloudbuildProjectsLocationsBuildsList,
-    CloudbuildProjectsLocationsBuildsList,
 
     -- ** cloudbuild.projects.locations.builds.retry
     CloudbuildProjectsLocationsBuildsRetryResource,
+    CloudbuildProjectsLocationsBuildsRetry (..),
     newCloudbuildProjectsLocationsBuildsRetry,
-    CloudbuildProjectsLocationsBuildsRetry,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.create
     CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateResource,
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsCreate (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsCreate,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsCreate,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.delete
     CloudbuildProjectsLocationsGithubEnterpriseConfigsDeleteResource,
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsDelete (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsDelete,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsDelete,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.get
     CloudbuildProjectsLocationsGithubEnterpriseConfigsGetResource,
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsGet (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsGet,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsGet,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.list
     CloudbuildProjectsLocationsGithubEnterpriseConfigsListResource,
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsList (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsList,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsList,
 
     -- ** cloudbuild.projects.locations.githubEnterpriseConfigs.patch
     CloudbuildProjectsLocationsGithubEnterpriseConfigsPatchResource,
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsPatch (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsPatch,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsPatch,
 
     -- ** cloudbuild.projects.locations.operations.cancel
     CloudbuildProjectsLocationsOperationsCancelResource,
+    CloudbuildProjectsLocationsOperationsCancel (..),
     newCloudbuildProjectsLocationsOperationsCancel,
-    CloudbuildProjectsLocationsOperationsCancel,
 
     -- ** cloudbuild.projects.locations.operations.get
     CloudbuildProjectsLocationsOperationsGetResource,
+    CloudbuildProjectsLocationsOperationsGet (..),
     newCloudbuildProjectsLocationsOperationsGet,
-    CloudbuildProjectsLocationsOperationsGet,
 
     -- ** cloudbuild.projects.locations.triggers.create
     CloudbuildProjectsLocationsTriggersCreateResource,
+    CloudbuildProjectsLocationsTriggersCreate (..),
     newCloudbuildProjectsLocationsTriggersCreate,
-    CloudbuildProjectsLocationsTriggersCreate,
 
     -- ** cloudbuild.projects.locations.triggers.delete
     CloudbuildProjectsLocationsTriggersDeleteResource,
+    CloudbuildProjectsLocationsTriggersDelete (..),
     newCloudbuildProjectsLocationsTriggersDelete,
-    CloudbuildProjectsLocationsTriggersDelete,
 
     -- ** cloudbuild.projects.locations.triggers.get
     CloudbuildProjectsLocationsTriggersGetResource,
+    CloudbuildProjectsLocationsTriggersGet (..),
     newCloudbuildProjectsLocationsTriggersGet,
-    CloudbuildProjectsLocationsTriggersGet,
 
     -- ** cloudbuild.projects.locations.triggers.list
     CloudbuildProjectsLocationsTriggersListResource,
+    CloudbuildProjectsLocationsTriggersList (..),
     newCloudbuildProjectsLocationsTriggersList,
-    CloudbuildProjectsLocationsTriggersList,
 
     -- ** cloudbuild.projects.locations.triggers.patch
     CloudbuildProjectsLocationsTriggersPatchResource,
+    CloudbuildProjectsLocationsTriggersPatch (..),
     newCloudbuildProjectsLocationsTriggersPatch,
-    CloudbuildProjectsLocationsTriggersPatch,
 
     -- ** cloudbuild.projects.locations.triggers.run
     CloudbuildProjectsLocationsTriggersRunResource,
+    CloudbuildProjectsLocationsTriggersRun (..),
     newCloudbuildProjectsLocationsTriggersRun,
-    CloudbuildProjectsLocationsTriggersRun,
 
     -- ** cloudbuild.projects.locations.triggers.webhook
     CloudbuildProjectsLocationsTriggersWebhookResource,
+    CloudbuildProjectsLocationsTriggersWebhook (..),
     newCloudbuildProjectsLocationsTriggersWebhook,
-    CloudbuildProjectsLocationsTriggersWebhook,
 
     -- ** cloudbuild.projects.locations.workerPools.create
     CloudbuildProjectsLocationsWorkerPoolsCreateResource,
+    CloudbuildProjectsLocationsWorkerPoolsCreate (..),
     newCloudbuildProjectsLocationsWorkerPoolsCreate,
-    CloudbuildProjectsLocationsWorkerPoolsCreate,
 
     -- ** cloudbuild.projects.locations.workerPools.delete
     CloudbuildProjectsLocationsWorkerPoolsDeleteResource,
+    CloudbuildProjectsLocationsWorkerPoolsDelete (..),
     newCloudbuildProjectsLocationsWorkerPoolsDelete,
-    CloudbuildProjectsLocationsWorkerPoolsDelete,
 
     -- ** cloudbuild.projects.locations.workerPools.get
     CloudbuildProjectsLocationsWorkerPoolsGetResource,
+    CloudbuildProjectsLocationsWorkerPoolsGet (..),
     newCloudbuildProjectsLocationsWorkerPoolsGet,
-    CloudbuildProjectsLocationsWorkerPoolsGet,
 
     -- ** cloudbuild.projects.locations.workerPools.list
     CloudbuildProjectsLocationsWorkerPoolsListResource,
+    CloudbuildProjectsLocationsWorkerPoolsList (..),
     newCloudbuildProjectsLocationsWorkerPoolsList,
-    CloudbuildProjectsLocationsWorkerPoolsList,
 
     -- ** cloudbuild.projects.locations.workerPools.patch
     CloudbuildProjectsLocationsWorkerPoolsPatchResource,
+    CloudbuildProjectsLocationsWorkerPoolsPatch (..),
     newCloudbuildProjectsLocationsWorkerPoolsPatch,
-    CloudbuildProjectsLocationsWorkerPoolsPatch,
 
     -- ** cloudbuild.projects.triggers.create
     CloudbuildProjectsTriggersCreateResource,
+    CloudbuildProjectsTriggersCreate (..),
     newCloudbuildProjectsTriggersCreate,
-    CloudbuildProjectsTriggersCreate,
 
     -- ** cloudbuild.projects.triggers.delete
     CloudbuildProjectsTriggersDeleteResource,
+    CloudbuildProjectsTriggersDelete (..),
     newCloudbuildProjectsTriggersDelete,
-    CloudbuildProjectsTriggersDelete,
 
     -- ** cloudbuild.projects.triggers.get
     CloudbuildProjectsTriggersGetResource,
+    CloudbuildProjectsTriggersGet (..),
     newCloudbuildProjectsTriggersGet,
-    CloudbuildProjectsTriggersGet,
 
     -- ** cloudbuild.projects.triggers.list
     CloudbuildProjectsTriggersListResource,
+    CloudbuildProjectsTriggersList (..),
     newCloudbuildProjectsTriggersList,
-    CloudbuildProjectsTriggersList,
 
     -- ** cloudbuild.projects.triggers.patch
     CloudbuildProjectsTriggersPatchResource,
+    CloudbuildProjectsTriggersPatch (..),
     newCloudbuildProjectsTriggersPatch,
-    CloudbuildProjectsTriggersPatch,
 
     -- ** cloudbuild.projects.triggers.run
     CloudbuildProjectsTriggersRunResource,
+    CloudbuildProjectsTriggersRun (..),
     newCloudbuildProjectsTriggersRun,
-    CloudbuildProjectsTriggersRun,
 
     -- ** cloudbuild.projects.triggers.webhook
     CloudbuildProjectsTriggersWebhookResource,
+    CloudbuildProjectsTriggersWebhook (..),
     newCloudbuildProjectsTriggersWebhook,
-    CloudbuildProjectsTriggersWebhook,
 
     -- ** cloudbuild.webhook
     CloudbuildWebhookResource,
+    CloudbuildWebhook (..),
     newCloudbuildWebhook,
-    CloudbuildWebhook,
 
     -- * Types
 

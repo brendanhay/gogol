@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.MakeAdmin
     DirectoryUsersMakeAdminResource,
 
     -- ** Constructing a Request
+    DirectoryUsersMakeAdmin (..),
     newDirectoryUsersMakeAdmin,
-    DirectoryUsersMakeAdmin,
   )
 where
 

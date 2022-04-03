@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Labels.Update
     GmailUsersLabelsUpdateResource,
 
     -- ** Constructing a Request
+    GmailUsersLabelsUpdate (..),
     newGmailUsersLabelsUpdate,
-    GmailUsersLabelsUpdate,
   )
 where
 

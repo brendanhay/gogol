@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Versions.List
     AppEngineAppsServicesVersionsListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesVersionsList (..),
     newAppEngineAppsServicesVersionsList,
-    AppEngineAppsServicesVersionsList,
   )
 where
 

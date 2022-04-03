@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRoles.Patch
     DFAReportingUserRolesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolesPatch (..),
     newDFAReportingUserRolesPatch,
-    DFAReportingUserRolesPatch,
   )
 where
 

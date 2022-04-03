@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Operations.Delete
     SpannerProjectsInstancesOperationsDeleteResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesOperationsDelete (..),
     newSpannerProjectsInstancesOperationsDelete,
-    SpannerProjectsInstancesOperationsDelete,
   )
 where
 

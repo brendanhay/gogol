@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Delete
     SqlInstancesDeleteResource,
 
     -- ** Constructing a Request
+    SqlInstancesDelete (..),
     newSqlInstancesDelete,
-    SqlInstancesDelete,
   )
 where
 

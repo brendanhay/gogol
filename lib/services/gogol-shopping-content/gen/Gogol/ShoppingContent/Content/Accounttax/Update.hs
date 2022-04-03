@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounttax.Update
     ContentAccounttaxUpdateResource,
 
     -- ** Constructing a Request
+    ContentAccounttaxUpdate (..),
     newContentAccounttaxUpdate,
-    ContentAccounttaxUpdate,
   )
 where
 

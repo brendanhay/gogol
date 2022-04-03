@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.Insert
     ComputeNetworksInsertResource,
 
     -- ** Constructing a Request
+    ComputeNetworksInsert (..),
     newComputeNetworksInsert,
-    ComputeNetworksInsert,
   )
 where
 

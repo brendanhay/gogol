@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.SendTestPushNotification
     AndroidEnterpriseEnterprisesSendTestPushNotificationResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesSendTestPushNotification (..),
     newAndroidEnterpriseEnterprisesSendTestPushNotification,
-    AndroidEnterpriseEnterprisesSendTestPushNotification,
   )
 where
 

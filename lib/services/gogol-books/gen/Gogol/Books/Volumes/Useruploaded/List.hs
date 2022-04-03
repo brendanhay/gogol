@@ -34,8 +34,8 @@ module Gogol.Books.Volumes.Useruploaded.List
     BooksVolumesUseruploadedListResource,
 
     -- ** Constructing a Request
+    BooksVolumesUseruploadedList (..),
     newBooksVolumesUseruploadedList,
-    BooksVolumesUseruploadedList,
   )
 where
 

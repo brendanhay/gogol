@@ -34,8 +34,8 @@ module Gogol.Compute.MachineTypes.AggregatedList
     ComputeMachineTypesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeMachineTypesAggregatedList (..),
     newComputeMachineTypesAggregatedList,
-    ComputeMachineTypesAggregatedList,
   )
 where
 

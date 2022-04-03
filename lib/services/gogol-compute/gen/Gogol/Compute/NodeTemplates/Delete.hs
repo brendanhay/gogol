@@ -34,8 +34,8 @@ module Gogol.Compute.NodeTemplates.Delete
     ComputeNodeTemplatesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeNodeTemplatesDelete (..),
     newComputeNodeTemplatesDelete,
-    ComputeNodeTemplatesDelete,
   )
 where
 

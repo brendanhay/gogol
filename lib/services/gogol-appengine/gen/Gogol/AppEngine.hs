@@ -42,193 +42,193 @@ module Gogol.AppEngine
 
     -- ** appengine.apps.authorizedCertificates.create
     AppEngineAppsAuthorizedCertificatesCreateResource,
+    AppEngineAppsAuthorizedCertificatesCreate (..),
     newAppEngineAppsAuthorizedCertificatesCreate,
-    AppEngineAppsAuthorizedCertificatesCreate,
 
     -- ** appengine.apps.authorizedCertificates.delete
     AppEngineAppsAuthorizedCertificatesDeleteResource,
+    AppEngineAppsAuthorizedCertificatesDelete (..),
     newAppEngineAppsAuthorizedCertificatesDelete,
-    AppEngineAppsAuthorizedCertificatesDelete,
 
     -- ** appengine.apps.authorizedCertificates.get
     AppEngineAppsAuthorizedCertificatesGetResource,
+    AppEngineAppsAuthorizedCertificatesGet (..),
     newAppEngineAppsAuthorizedCertificatesGet,
-    AppEngineAppsAuthorizedCertificatesGet,
 
     -- ** appengine.apps.authorizedCertificates.list
     AppEngineAppsAuthorizedCertificatesListResource,
+    AppEngineAppsAuthorizedCertificatesList (..),
     newAppEngineAppsAuthorizedCertificatesList,
-    AppEngineAppsAuthorizedCertificatesList,
 
     -- ** appengine.apps.authorizedCertificates.patch
     AppEngineAppsAuthorizedCertificatesPatchResource,
+    AppEngineAppsAuthorizedCertificatesPatch (..),
     newAppEngineAppsAuthorizedCertificatesPatch,
-    AppEngineAppsAuthorizedCertificatesPatch,
 
     -- ** appengine.apps.authorizedDomains.list
     AppEngineAppsAuthorizedDomainsListResource,
+    AppEngineAppsAuthorizedDomainsList (..),
     newAppEngineAppsAuthorizedDomainsList,
-    AppEngineAppsAuthorizedDomainsList,
 
     -- ** appengine.apps.create
     AppEngineAppsCreateResource,
+    AppEngineAppsCreate (..),
     newAppEngineAppsCreate,
-    AppEngineAppsCreate,
 
     -- ** appengine.apps.domainMappings.create
     AppEngineAppsDomainMappingsCreateResource,
+    AppEngineAppsDomainMappingsCreate (..),
     newAppEngineAppsDomainMappingsCreate,
-    AppEngineAppsDomainMappingsCreate,
 
     -- ** appengine.apps.domainMappings.delete
     AppEngineAppsDomainMappingsDeleteResource,
+    AppEngineAppsDomainMappingsDelete (..),
     newAppEngineAppsDomainMappingsDelete,
-    AppEngineAppsDomainMappingsDelete,
 
     -- ** appengine.apps.domainMappings.get
     AppEngineAppsDomainMappingsGetResource,
+    AppEngineAppsDomainMappingsGet (..),
     newAppEngineAppsDomainMappingsGet,
-    AppEngineAppsDomainMappingsGet,
 
     -- ** appengine.apps.domainMappings.list
     AppEngineAppsDomainMappingsListResource,
+    AppEngineAppsDomainMappingsList (..),
     newAppEngineAppsDomainMappingsList,
-    AppEngineAppsDomainMappingsList,
 
     -- ** appengine.apps.domainMappings.patch
     AppEngineAppsDomainMappingsPatchResource,
+    AppEngineAppsDomainMappingsPatch (..),
     newAppEngineAppsDomainMappingsPatch,
-    AppEngineAppsDomainMappingsPatch,
 
     -- ** appengine.apps.firewall.ingressRules.batchUpdate
     AppEngineAppsFirewallIngressRulesBatchUpdateResource,
+    AppEngineAppsFirewallIngressRulesBatchUpdate (..),
     newAppEngineAppsFirewallIngressRulesBatchUpdate,
-    AppEngineAppsFirewallIngressRulesBatchUpdate,
 
     -- ** appengine.apps.firewall.ingressRules.create
     AppEngineAppsFirewallIngressRulesCreateResource,
+    AppEngineAppsFirewallIngressRulesCreate (..),
     newAppEngineAppsFirewallIngressRulesCreate,
-    AppEngineAppsFirewallIngressRulesCreate,
 
     -- ** appengine.apps.firewall.ingressRules.delete
     AppEngineAppsFirewallIngressRulesDeleteResource,
+    AppEngineAppsFirewallIngressRulesDelete (..),
     newAppEngineAppsFirewallIngressRulesDelete,
-    AppEngineAppsFirewallIngressRulesDelete,
 
     -- ** appengine.apps.firewall.ingressRules.get
     AppEngineAppsFirewallIngressRulesGetResource,
+    AppEngineAppsFirewallIngressRulesGet (..),
     newAppEngineAppsFirewallIngressRulesGet,
-    AppEngineAppsFirewallIngressRulesGet,
 
     -- ** appengine.apps.firewall.ingressRules.list
     AppEngineAppsFirewallIngressRulesListResource,
+    AppEngineAppsFirewallIngressRulesList (..),
     newAppEngineAppsFirewallIngressRulesList,
-    AppEngineAppsFirewallIngressRulesList,
 
     -- ** appengine.apps.firewall.ingressRules.patch
     AppEngineAppsFirewallIngressRulesPatchResource,
+    AppEngineAppsFirewallIngressRulesPatch (..),
     newAppEngineAppsFirewallIngressRulesPatch,
-    AppEngineAppsFirewallIngressRulesPatch,
 
     -- ** appengine.apps.get
     AppEngineAppsGetResource,
+    AppEngineAppsGet (..),
     newAppEngineAppsGet,
-    AppEngineAppsGet,
 
     -- ** appengine.apps.locations.get
     AppEngineAppsLocationsGetResource,
+    AppEngineAppsLocationsGet (..),
     newAppEngineAppsLocationsGet,
-    AppEngineAppsLocationsGet,
 
     -- ** appengine.apps.locations.list
     AppEngineAppsLocationsListResource,
+    AppEngineAppsLocationsList (..),
     newAppEngineAppsLocationsList,
-    AppEngineAppsLocationsList,
 
     -- ** appengine.apps.operations.get
     AppEngineAppsOperationsGetResource,
+    AppEngineAppsOperationsGet (..),
     newAppEngineAppsOperationsGet,
-    AppEngineAppsOperationsGet,
 
     -- ** appengine.apps.operations.list
     AppEngineAppsOperationsListResource,
+    AppEngineAppsOperationsList (..),
     newAppEngineAppsOperationsList,
-    AppEngineAppsOperationsList,
 
     -- ** appengine.apps.patch
     AppEngineAppsPatchResource,
+    AppEngineAppsPatch (..),
     newAppEngineAppsPatch,
-    AppEngineAppsPatch,
 
     -- ** appengine.apps.repair
     AppEngineAppsRepairResource,
+    AppEngineAppsRepair (..),
     newAppEngineAppsRepair,
-    AppEngineAppsRepair,
 
     -- ** appengine.apps.services.delete
     AppEngineAppsServicesDeleteResource,
+    AppEngineAppsServicesDelete (..),
     newAppEngineAppsServicesDelete,
-    AppEngineAppsServicesDelete,
 
     -- ** appengine.apps.services.get
     AppEngineAppsServicesGetResource,
+    AppEngineAppsServicesGet (..),
     newAppEngineAppsServicesGet,
-    AppEngineAppsServicesGet,
 
     -- ** appengine.apps.services.list
     AppEngineAppsServicesListResource,
+    AppEngineAppsServicesList (..),
     newAppEngineAppsServicesList,
-    AppEngineAppsServicesList,
 
     -- ** appengine.apps.services.patch
     AppEngineAppsServicesPatchResource,
+    AppEngineAppsServicesPatch (..),
     newAppEngineAppsServicesPatch,
-    AppEngineAppsServicesPatch,
 
     -- ** appengine.apps.services.versions.create
     AppEngineAppsServicesVersionsCreateResource,
+    AppEngineAppsServicesVersionsCreate (..),
     newAppEngineAppsServicesVersionsCreate,
-    AppEngineAppsServicesVersionsCreate,
 
     -- ** appengine.apps.services.versions.delete
     AppEngineAppsServicesVersionsDeleteResource,
+    AppEngineAppsServicesVersionsDelete (..),
     newAppEngineAppsServicesVersionsDelete,
-    AppEngineAppsServicesVersionsDelete,
 
     -- ** appengine.apps.services.versions.get
     AppEngineAppsServicesVersionsGetResource,
+    AppEngineAppsServicesVersionsGet (..),
     newAppEngineAppsServicesVersionsGet,
-    AppEngineAppsServicesVersionsGet,
 
     -- ** appengine.apps.services.versions.instances.debug
     AppEngineAppsServicesVersionsInstancesDebugResource,
+    AppEngineAppsServicesVersionsInstancesDebug (..),
     newAppEngineAppsServicesVersionsInstancesDebug,
-    AppEngineAppsServicesVersionsInstancesDebug,
 
     -- ** appengine.apps.services.versions.instances.delete
     AppEngineAppsServicesVersionsInstancesDeleteResource,
+    AppEngineAppsServicesVersionsInstancesDelete (..),
     newAppEngineAppsServicesVersionsInstancesDelete,
-    AppEngineAppsServicesVersionsInstancesDelete,
 
     -- ** appengine.apps.services.versions.instances.get
     AppEngineAppsServicesVersionsInstancesGetResource,
+    AppEngineAppsServicesVersionsInstancesGet (..),
     newAppEngineAppsServicesVersionsInstancesGet,
-    AppEngineAppsServicesVersionsInstancesGet,
 
     -- ** appengine.apps.services.versions.instances.list
     AppEngineAppsServicesVersionsInstancesListResource,
+    AppEngineAppsServicesVersionsInstancesList (..),
     newAppEngineAppsServicesVersionsInstancesList,
-    AppEngineAppsServicesVersionsInstancesList,
 
     -- ** appengine.apps.services.versions.list
     AppEngineAppsServicesVersionsListResource,
+    AppEngineAppsServicesVersionsList (..),
     newAppEngineAppsServicesVersionsList,
-    AppEngineAppsServicesVersionsList,
 
     -- ** appengine.apps.services.versions.patch
     AppEngineAppsServicesVersionsPatchResource,
+    AppEngineAppsServicesVersionsPatch (..),
     newAppEngineAppsServicesVersionsPatch,
-    AppEngineAppsServicesVersionsPatch,
 
     -- * Types
 

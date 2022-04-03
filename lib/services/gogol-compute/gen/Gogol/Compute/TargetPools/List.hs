@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.List
     ComputeTargetPoolsListResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsList (..),
     newComputeTargetPoolsList,
-    ComputeTargetPoolsList,
   )
 where
 

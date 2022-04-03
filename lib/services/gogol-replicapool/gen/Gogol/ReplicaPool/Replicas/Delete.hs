@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Replicas.Delete
     ReplicaPoolReplicasDeleteResource,
 
     -- ** Constructing a Request
+    ReplicaPoolReplicasDelete (..),
     newReplicaPoolReplicasDelete,
-    ReplicaPoolReplicasDelete,
   )
 where
 

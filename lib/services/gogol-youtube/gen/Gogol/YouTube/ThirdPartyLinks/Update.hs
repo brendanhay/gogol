@@ -34,8 +34,8 @@ module Gogol.YouTube.ThirdPartyLinks.Update
     YouTubeThirdPartyLinksUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeThirdPartyLinksUpdate (..),
     newYouTubeThirdPartyLinksUpdate,
-    YouTubeThirdPartyLinksUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.Get
     BigQueryTablesGetResource,
 
     -- ** Constructing a Request
+    BigQueryTablesGet (..),
     newBigQueryTablesGet,
-    BigQueryTablesGet,
   )
 where
 

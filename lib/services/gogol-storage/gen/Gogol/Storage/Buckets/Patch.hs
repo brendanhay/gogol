@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.Patch
     StorageBucketsPatchResource,
 
     -- ** Constructing a Request
+    StorageBucketsPatch (..),
     newStorageBucketsPatch,
-    StorageBucketsPatch,
   )
 where
 

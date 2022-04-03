@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.UpdateDisplayDevice
     ComputeInstancesUpdateDisplayDeviceResource,
 
     -- ** Constructing a Request
+    ComputeInstancesUpdateDisplayDevice (..),
     newComputeInstancesUpdateDisplayDevice,
-    ComputeInstancesUpdateDisplayDevice,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DoubleClickSearch.Reports.Get
     DoubleClickSearchReportsGetResource,
 
     -- ** Constructing a Request
+    DoubleClickSearchReportsGet (..),
     newDoubleClickSearchReportsGet,
-    DoubleClickSearchReportsGet,
   )
 where
 

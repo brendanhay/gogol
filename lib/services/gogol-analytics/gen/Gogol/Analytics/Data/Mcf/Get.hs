@@ -34,8 +34,8 @@ module Gogol.Analytics.Data.Mcf.Get
     AnalyticsDataMcfGetResource,
 
     -- ** Constructing a Request
+    AnalyticsDataMcfGet (..),
     newAnalyticsDataMcfGet,
-    AnalyticsDataMcfGet,
   )
 where
 

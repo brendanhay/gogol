@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Holds.RemoveHeldAccounts
     VaultMattersHoldsRemoveHeldAccountsResource,
 
     -- ** Constructing a Request
+    VaultMattersHoldsRemoveHeldAccounts (..),
     newVaultMattersHoldsRemoveHeldAccounts,
-    VaultMattersHoldsRemoveHeldAccounts,
   )
 where
 

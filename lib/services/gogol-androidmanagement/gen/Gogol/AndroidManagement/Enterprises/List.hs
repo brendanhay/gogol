@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.List
     AndroidManagementEnterprisesListResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesList (..),
     newAndroidManagementEnterprisesList,
-    AndroidManagementEnterprisesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Features.Rename
     DirectoryResourcesFeaturesRenameResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesFeaturesRename (..),
     newDirectoryResourcesFeaturesRename,
-    DirectoryResourcesFeaturesRename,
   )
 where
 

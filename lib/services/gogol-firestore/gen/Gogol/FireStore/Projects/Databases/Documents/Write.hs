@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.Write
     FireStoreProjectsDatabasesDocumentsWriteResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsWrite (..),
     newFireStoreProjectsDatabasesDocumentsWrite,
-    FireStoreProjectsDatabasesDocumentsWrite,
   )
 where
 

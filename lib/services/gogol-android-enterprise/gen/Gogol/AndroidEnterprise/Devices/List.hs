@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Devices.List
     AndroidEnterpriseDevicesListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseDevicesList (..),
     newAndroidEnterpriseDevicesList,
-    AndroidEnterpriseDevicesList,
   )
 where
 

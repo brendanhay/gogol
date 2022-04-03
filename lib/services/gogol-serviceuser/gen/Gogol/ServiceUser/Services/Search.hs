@@ -36,8 +36,8 @@ module Gogol.ServiceUser.Services.Search
     ServiceUserServicesSearchResource,
 
     -- ** Constructing a Request
+    ServiceUserServicesSearch (..),
     newServiceUserServicesSearch,
-    ServiceUserServicesSearch,
   )
 where
 

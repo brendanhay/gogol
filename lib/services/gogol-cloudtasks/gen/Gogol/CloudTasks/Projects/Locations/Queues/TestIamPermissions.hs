@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
     CloudTasksProjectsLocationsQueuesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesTestIamPermissions (..),
     newCloudTasksProjectsLocationsQueuesTestIamPermissions,
-    CloudTasksProjectsLocationsQueuesTestIamPermissions,
   )
 where
 

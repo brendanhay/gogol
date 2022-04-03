@@ -37,88 +37,88 @@ module Gogol.Partners
 
     -- ** partners.analytics.list
     PartnersAnalyticsListResource,
+    PartnersAnalyticsList (..),
     newPartnersAnalyticsList,
-    PartnersAnalyticsList,
 
     -- ** partners.clientMessages.log
     PartnersClientMessagesLogResource,
+    PartnersClientMessagesLog (..),
     newPartnersClientMessagesLog,
-    PartnersClientMessagesLog,
 
     -- ** partners.companies.get
     PartnersCompaniesGetResource,
+    PartnersCompaniesGet (..),
     newPartnersCompaniesGet,
-    PartnersCompaniesGet,
 
     -- ** partners.companies.leads.create
     PartnersCompaniesLeadsCreateResource,
+    PartnersCompaniesLeadsCreate (..),
     newPartnersCompaniesLeadsCreate,
-    PartnersCompaniesLeadsCreate,
 
     -- ** partners.companies.list
     PartnersCompaniesListResource,
+    PartnersCompaniesList (..),
     newPartnersCompaniesList,
-    PartnersCompaniesList,
 
     -- ** partners.getPartnersstatus
     PartnersGetPartnersstatusResource,
+    PartnersGetPartnersstatus (..),
     newPartnersGetPartnersstatus,
-    PartnersGetPartnersstatus,
 
     -- ** partners.leads.list
     PartnersLeadsListResource,
+    PartnersLeadsList (..),
     newPartnersLeadsList,
-    PartnersLeadsList,
 
     -- ** partners.offers.history.list
     PartnersOffersHistoryListResource,
+    PartnersOffersHistoryList (..),
     newPartnersOffersHistoryList,
-    PartnersOffersHistoryList,
 
     -- ** partners.offers.list
     PartnersOffersListResource,
+    PartnersOffersList (..),
     newPartnersOffersList,
-    PartnersOffersList,
 
     -- ** partners.updateCompanies
     PartnersUpdateCompaniesResource,
+    PartnersUpdateCompanies (..),
     newPartnersUpdateCompanies,
-    PartnersUpdateCompanies,
 
     -- ** partners.updateLeads
     PartnersUpdateLeadsResource,
+    PartnersUpdateLeads (..),
     newPartnersUpdateLeads,
-    PartnersUpdateLeads,
 
     -- ** partners.userEvents.log
     PartnersUserEventsLogResource,
+    PartnersUserEventsLog (..),
     newPartnersUserEventsLog,
-    PartnersUserEventsLog,
 
     -- ** partners.userStates.list
     PartnersUserStatesListResource,
+    PartnersUserStatesList (..),
     newPartnersUserStatesList,
-    PartnersUserStatesList,
 
     -- ** partners.users.createCompanyRelation
     PartnersUsersCreateCompanyRelationResource,
+    PartnersUsersCreateCompanyRelation (..),
     newPartnersUsersCreateCompanyRelation,
-    PartnersUsersCreateCompanyRelation,
 
     -- ** partners.users.deleteCompanyRelation
     PartnersUsersDeleteCompanyRelationResource,
+    PartnersUsersDeleteCompanyRelation (..),
     newPartnersUsersDeleteCompanyRelation,
-    PartnersUsersDeleteCompanyRelation,
 
     -- ** partners.users.get
     PartnersUsersGetResource,
+    PartnersUsersGet (..),
     newPartnersUsersGet,
-    PartnersUsersGet,
 
     -- ** partners.users.updateProfile
     PartnersUsersUpdateProfileResource,
+    PartnersUsersUpdateProfile (..),
     newPartnersUsersUpdateProfile,
-    PartnersUsersUpdateProfile,
 
     -- * Types
 

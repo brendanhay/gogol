@@ -41,58 +41,58 @@ module Gogol.SearchConsole
 
     -- ** searchconsole.urlInspection.index.inspect
     SearchConsoleUrlInspectionIndexInspectResource,
+    SearchConsoleUrlInspectionIndexInspect (..),
     newSearchConsoleUrlInspectionIndexInspect,
-    SearchConsoleUrlInspectionIndexInspect,
 
     -- ** searchconsole.urlTestingTools.mobileFriendlyTest.run
     SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource,
+    SearchConsoleUrlTestingToolsMobileFriendlyTestRun (..),
     newSearchConsoleUrlTestingToolsMobileFriendlyTestRun,
-    SearchConsoleUrlTestingToolsMobileFriendlyTestRun,
 
     -- ** webmasters.searchanalytics.query
     WebmastersSearchanalyticsQueryResource,
+    WebmastersSearchanalyticsQuery (..),
     newWebmastersSearchanalyticsQuery,
-    WebmastersSearchanalyticsQuery,
 
     -- ** webmasters.sitemaps.delete
     WebmastersSitemapsDeleteResource,
+    WebmastersSitemapsDelete (..),
     newWebmastersSitemapsDelete,
-    WebmastersSitemapsDelete,
 
     -- ** webmasters.sitemaps.get
     WebmastersSitemapsGetResource,
+    WebmastersSitemapsGet (..),
     newWebmastersSitemapsGet,
-    WebmastersSitemapsGet,
 
     -- ** webmasters.sitemaps.list
     WebmastersSitemapsListResource,
+    WebmastersSitemapsList (..),
     newWebmastersSitemapsList,
-    WebmastersSitemapsList,
 
     -- ** webmasters.sitemaps.submit
     WebmastersSitemapsSubmitResource,
+    WebmastersSitemapsSubmit (..),
     newWebmastersSitemapsSubmit,
-    WebmastersSitemapsSubmit,
 
     -- ** webmasters.sites.add
     WebmastersSitesAddResource,
+    WebmastersSitesAdd (..),
     newWebmastersSitesAdd,
-    WebmastersSitesAdd,
 
     -- ** webmasters.sites.delete
     WebmastersSitesDeleteResource,
+    WebmastersSitesDelete (..),
     newWebmastersSitesDelete,
-    WebmastersSitesDelete,
 
     -- ** webmasters.sites.get
     WebmastersSitesGetResource,
+    WebmastersSitesGet (..),
     newWebmastersSitesGet,
-    WebmastersSitesGet,
 
     -- ** webmasters.sites.list
     WebmastersSitesListResource,
+    WebmastersSitesList (..),
     newWebmastersSitesList,
-    WebmastersSitesList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.AllocateIds
     DatastoreProjectsAllocateIdsResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsAllocateIds (..),
     newDatastoreProjectsAllocateIds,
-    DatastoreProjectsAllocateIds,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Commit
     DatastoreProjectsCommitResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsCommit (..),
     newDatastoreProjectsCommit,
-    DatastoreProjectsCommit,
   )
 where
 

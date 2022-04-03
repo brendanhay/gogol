@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Experiments.Delete
     AnalyticsManagementExperimentsDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementExperimentsDelete (..),
     newAnalyticsManagementExperimentsDelete,
-    AnalyticsManagementExperimentsDelete,
   )
 where
 

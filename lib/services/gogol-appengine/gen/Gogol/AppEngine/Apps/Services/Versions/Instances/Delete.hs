@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Versions.Instances.Delete
     AppEngineAppsServicesVersionsInstancesDeleteResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesVersionsInstancesDelete (..),
     newAppEngineAppsServicesVersionsInstancesDelete,
-    AppEngineAppsServicesVersionsInstancesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.BackendServices.Update
     ComputeBackendServicesUpdateResource,
 
     -- ** Constructing a Request
+    ComputeBackendServicesUpdate (..),
     newComputeBackendServicesUpdate,
-    ComputeBackendServicesUpdate,
   )
 where
 

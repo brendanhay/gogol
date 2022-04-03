@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Copy
     CloudPrivateCatalogProducerCatalogsProductsCopyResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsProductsCopy (..),
     newCloudPrivateCatalogProducerCatalogsProductsCopy,
-    CloudPrivateCatalogProducerCatalogsProductsCopy,
   )
 where
 

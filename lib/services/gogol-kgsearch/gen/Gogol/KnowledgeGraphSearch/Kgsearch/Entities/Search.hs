@@ -34,8 +34,8 @@ module Gogol.KnowledgeGraphSearch.Kgsearch.Entities.Search
     KgsearchEntitiesSearchResource,
 
     -- ** Constructing a Request
+    KgsearchEntitiesSearch (..),
     newKgsearchEntitiesSearch,
-    KgsearchEntitiesSearch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Surveys.Start
     SurveysSurveysStartResource,
 
     -- ** Constructing a Request
+    SurveysSurveysStart (..),
     newSurveysSurveysStart,
-    SurveysSurveysStart,
   )
 where
 

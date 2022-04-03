@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.Operations.Delete
     AccessContextManagerOperationsDeleteResource,
 
     -- ** Constructing a Request
+    AccessContextManagerOperationsDelete (..),
     newAccessContextManagerOperationsDelete,
-    AccessContextManagerOperationsDelete,
   )
 where
 

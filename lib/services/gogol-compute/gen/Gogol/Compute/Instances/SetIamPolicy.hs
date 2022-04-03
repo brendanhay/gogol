@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetIamPolicy
     ComputeInstancesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetIamPolicy (..),
     newComputeInstancesSetIamPolicy,
-    ComputeInstancesSetIamPolicy,
   )
 where
 

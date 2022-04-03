@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebpropertyUserLinks.Update
     AnalyticsManagementWebpropertyUserLinksUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertyUserLinksUpdate (..),
     newAnalyticsManagementWebpropertyUserLinksUpdate,
-    AnalyticsManagementWebpropertyUserLinksUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudShell.Operations.Cancel
     CloudShellOperationsCancelResource,
 
     -- ** Constructing a Request
+    CloudShellOperationsCancel (..),
     newCloudShellOperationsCancel,
-    CloudShellOperationsCancel,
   )
 where
 

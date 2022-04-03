@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Filters.Delete
     AnalyticsManagementFiltersDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementFiltersDelete (..),
     newAnalyticsManagementFiltersDelete,
-    AnalyticsManagementFiltersDelete,
   )
 where
 

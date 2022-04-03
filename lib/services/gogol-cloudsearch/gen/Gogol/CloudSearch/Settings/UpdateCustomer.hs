@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.UpdateCustomer
     CloudSearchSettingsUpdateCustomerResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsUpdateCustomer (..),
     newCloudSearchSettingsUpdateCustomer,
-    CloudSearchSettingsUpdateCustomer,
   )
 where
 

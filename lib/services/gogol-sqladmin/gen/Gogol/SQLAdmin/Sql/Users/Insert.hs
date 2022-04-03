@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Users.Insert
     SqlUsersInsertResource,
 
     -- ** Constructing a Request
+    SqlUsersInsert (..),
     newSqlUsersInsert,
-    SqlUsersInsert,
   )
 where
 

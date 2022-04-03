@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.Patch
     MlProjectsJobsPatchResource,
 
     -- ** Constructing a Request
+    MlProjectsJobsPatch (..),
     newMlProjectsJobsPatch,
-    MlProjectsJobsPatch,
   )
 where
 

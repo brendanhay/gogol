@@ -34,8 +34,8 @@ module Gogol.AnalyticsReporting.UserActivity.Search
     AnalyticsReportingUserActivitySearchResource,
 
     -- ** Constructing a Request
+    AnalyticsReportingUserActivitySearch (..),
     newAnalyticsReportingUserActivitySearch,
-    AnalyticsReportingUserActivitySearch,
   )
 where
 

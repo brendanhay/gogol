@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
     SpannerProjectsInstancesDatabasesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesGetIamPolicy (..),
     newSpannerProjectsInstancesDatabasesGetIamPolicy,
-    SpannerProjectsInstancesDatabasesGetIamPolicy,
   )
 where
 

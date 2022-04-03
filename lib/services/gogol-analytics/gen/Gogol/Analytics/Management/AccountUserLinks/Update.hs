@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.AccountUserLinks.Update
     AnalyticsManagementAccountUserLinksUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementAccountUserLinksUpdate (..),
     newAnalyticsManagementAccountUserLinksUpdate,
-    AnalyticsManagementAccountUserLinksUpdate,
   )
 where
 

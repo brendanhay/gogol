@@ -34,8 +34,8 @@ module Gogol.Chat.Media.Download
     ChatMediaDownloadResource,
 
     -- ** Constructing a Request
+    ChatMediaDownload (..),
     newChatMediaDownload,
-    ChatMediaDownload,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Language.Documents.AnalyzeEntitySentiment
     LanguageDocumentsAnalyzeEntitySentimentResource,
 
     -- ** Constructing a Request
+    LanguageDocumentsAnalyzeEntitySentiment (..),
     newLanguageDocumentsAnalyzeEntitySentiment,
-    LanguageDocumentsAnalyzeEntitySentiment,
   )
 where
 

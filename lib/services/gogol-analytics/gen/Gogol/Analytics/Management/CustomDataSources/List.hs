@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomDataSources.List
     AnalyticsManagementCustomDataSourcesListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomDataSourcesList (..),
     newAnalyticsManagementCustomDataSourcesList,
-    AnalyticsManagementCustomDataSourcesList,
   )
 where
 

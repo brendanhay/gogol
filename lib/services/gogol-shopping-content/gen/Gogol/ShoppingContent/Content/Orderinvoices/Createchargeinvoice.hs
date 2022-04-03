@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderinvoices.Createchargeinvoice
     ContentOrderinvoicesCreatechargeinvoiceResource,
 
     -- ** Constructing a Request
+    ContentOrderinvoicesCreatechargeinvoice (..),
     newContentOrderinvoicesCreatechargeinvoice,
-    ContentOrderinvoicesCreatechargeinvoice,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Jobs.BatchUpdate
     JobsProjectsTenantsJobsBatchUpdateResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsJobsBatchUpdate (..),
     newJobsProjectsTenantsJobsBatchUpdate,
-    JobsProjectsTenantsJobsBatchUpdate,
   )
 where
 

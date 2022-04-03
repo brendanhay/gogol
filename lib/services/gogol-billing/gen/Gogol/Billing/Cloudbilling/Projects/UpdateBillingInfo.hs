@@ -35,8 +35,8 @@ module Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
     CloudbillingProjectsUpdateBillingInfoResource,
 
     -- ** Constructing a Request
+    CloudbillingProjectsUpdateBillingInfo (..),
     newCloudbillingProjectsUpdateBillingInfo,
-    CloudbillingProjectsUpdateBillingInfo,
   )
 where
 

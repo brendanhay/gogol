@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.Resume
     CloudTasksProjectsLocationsQueuesResumeResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesResume (..),
     newCloudTasksProjectsLocationsQueuesResume,
-    CloudTasksProjectsLocationsQueuesResume,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Templates.Launch
     DataflowProjectsLocationsTemplatesLaunchResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsTemplatesLaunch (..),
     newDataflowProjectsLocationsTemplatesLaunch,
-    DataflowProjectsLocationsTemplatesLaunch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Connections.DeleteConnection
     ServiceNetworkingServicesConnectionsDeleteConnectionResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesConnectionsDeleteConnection (..),
     newServiceNetworkingServicesConnectionsDeleteConnection,
-    ServiceNetworkingServicesConnectionsDeleteConnection,
   )
 where
 

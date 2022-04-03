@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Devices.SetState
     AndroidEnterpriseDevicesSetStateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseDevicesSetState (..),
     newAndroidEnterpriseDevicesSetState,
-    AndroidEnterpriseDevicesSetState,
   )
 where
 

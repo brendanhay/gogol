@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Get
     SqlInstancesGetResource,
 
     -- ** Constructing a Request
+    SqlInstancesGet (..),
     newSqlInstancesGet,
-    SqlInstancesGet,
   )
 where
 

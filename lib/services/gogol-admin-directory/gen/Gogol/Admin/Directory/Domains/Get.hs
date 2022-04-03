@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Domains.Get
     DirectoryDomainsGetResource,
 
     -- ** Constructing a Request
+    DirectoryDomainsGet (..),
     newDirectoryDomainsGet,
-    DirectoryDomainsGet,
   )
 where
 

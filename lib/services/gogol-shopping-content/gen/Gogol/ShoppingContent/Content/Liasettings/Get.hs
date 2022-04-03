@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Get
     ContentLiasettingsGetResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsGet (..),
     newContentLiasettingsGet,
-    ContentLiasettingsGet,
   )
 where
 

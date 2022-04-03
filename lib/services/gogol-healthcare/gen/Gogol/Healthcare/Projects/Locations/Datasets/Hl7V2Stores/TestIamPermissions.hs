@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.TestIamPermissio
     HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions,
   )
 where
 

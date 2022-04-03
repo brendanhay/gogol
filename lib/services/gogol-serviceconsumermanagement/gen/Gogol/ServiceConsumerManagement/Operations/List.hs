@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Operations.List
     ServiceConsumerManagementOperationsListResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementOperationsList (..),
     newServiceConsumerManagementOperationsList,
-    ServiceConsumerManagementOperationsList,
   )
 where
 

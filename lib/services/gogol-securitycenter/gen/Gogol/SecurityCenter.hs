@@ -40,143 +40,143 @@ module Gogol.SecurityCenter
 
     -- ** securitycenter.organizations.assets.group
     SecurityCenterOrganizationsAssetsGroupResource,
+    SecurityCenterOrganizationsAssetsGroup (..),
     newSecurityCenterOrganizationsAssetsGroup,
-    SecurityCenterOrganizationsAssetsGroup,
 
     -- ** securitycenter.organizations.assets.list
     SecurityCenterOrganizationsAssetsListResource,
+    SecurityCenterOrganizationsAssetsList (..),
     newSecurityCenterOrganizationsAssetsList,
-    SecurityCenterOrganizationsAssetsList,
 
     -- ** securitycenter.organizations.assets.runDiscovery
     SecurityCenterOrganizationsAssetsRunDiscoveryResource,
+    SecurityCenterOrganizationsAssetsRunDiscovery (..),
     newSecurityCenterOrganizationsAssetsRunDiscovery,
-    SecurityCenterOrganizationsAssetsRunDiscovery,
 
     -- ** securitycenter.organizations.assets.updateSecurityMarks
     SecurityCenterOrganizationsAssetsUpdateSecurityMarksResource,
+    SecurityCenterOrganizationsAssetsUpdateSecurityMarks (..),
     newSecurityCenterOrganizationsAssetsUpdateSecurityMarks,
-    SecurityCenterOrganizationsAssetsUpdateSecurityMarks,
 
     -- ** securitycenter.organizations.getOrganizationSettings
     SecurityCenterOrganizationsGetOrganizationSettingsResource,
+    SecurityCenterOrganizationsGetOrganizationSettings (..),
     newSecurityCenterOrganizationsGetOrganizationSettings,
-    SecurityCenterOrganizationsGetOrganizationSettings,
 
     -- ** securitycenter.organizations.notificationConfigs.create
     SecurityCenterOrganizationsNotificationConfigsCreateResource,
+    SecurityCenterOrganizationsNotificationConfigsCreate (..),
     newSecurityCenterOrganizationsNotificationConfigsCreate,
-    SecurityCenterOrganizationsNotificationConfigsCreate,
 
     -- ** securitycenter.organizations.notificationConfigs.delete
     SecurityCenterOrganizationsNotificationConfigsDeleteResource,
+    SecurityCenterOrganizationsNotificationConfigsDelete (..),
     newSecurityCenterOrganizationsNotificationConfigsDelete,
-    SecurityCenterOrganizationsNotificationConfigsDelete,
 
     -- ** securitycenter.organizations.notificationConfigs.get
     SecurityCenterOrganizationsNotificationConfigsGetResource,
+    SecurityCenterOrganizationsNotificationConfigsGet (..),
     newSecurityCenterOrganizationsNotificationConfigsGet,
-    SecurityCenterOrganizationsNotificationConfigsGet,
 
     -- ** securitycenter.organizations.notificationConfigs.list
     SecurityCenterOrganizationsNotificationConfigsListResource,
+    SecurityCenterOrganizationsNotificationConfigsList (..),
     newSecurityCenterOrganizationsNotificationConfigsList,
-    SecurityCenterOrganizationsNotificationConfigsList,
 
     -- ** securitycenter.organizations.notificationConfigs.patch
     SecurityCenterOrganizationsNotificationConfigsPatchResource,
+    SecurityCenterOrganizationsNotificationConfigsPatch (..),
     newSecurityCenterOrganizationsNotificationConfigsPatch,
-    SecurityCenterOrganizationsNotificationConfigsPatch,
 
     -- ** securitycenter.organizations.operations.cancel
     SecurityCenterOrganizationsOperationsCancelResource,
+    SecurityCenterOrganizationsOperationsCancel (..),
     newSecurityCenterOrganizationsOperationsCancel,
-    SecurityCenterOrganizationsOperationsCancel,
 
     -- ** securitycenter.organizations.operations.delete
     SecurityCenterOrganizationsOperationsDeleteResource,
+    SecurityCenterOrganizationsOperationsDelete (..),
     newSecurityCenterOrganizationsOperationsDelete,
-    SecurityCenterOrganizationsOperationsDelete,
 
     -- ** securitycenter.organizations.operations.get
     SecurityCenterOrganizationsOperationsGetResource,
+    SecurityCenterOrganizationsOperationsGet (..),
     newSecurityCenterOrganizationsOperationsGet,
-    SecurityCenterOrganizationsOperationsGet,
 
     -- ** securitycenter.organizations.operations.list
     SecurityCenterOrganizationsOperationsListResource,
+    SecurityCenterOrganizationsOperationsList (..),
     newSecurityCenterOrganizationsOperationsList,
-    SecurityCenterOrganizationsOperationsList,
 
     -- ** securitycenter.organizations.sources.create
     SecurityCenterOrganizationsSourcesCreateResource,
+    SecurityCenterOrganizationsSourcesCreate (..),
     newSecurityCenterOrganizationsSourcesCreate,
-    SecurityCenterOrganizationsSourcesCreate,
 
     -- ** securitycenter.organizations.sources.findings.create
     SecurityCenterOrganizationsSourcesFindingsCreateResource,
+    SecurityCenterOrganizationsSourcesFindingsCreate (..),
     newSecurityCenterOrganizationsSourcesFindingsCreate,
-    SecurityCenterOrganizationsSourcesFindingsCreate,
 
     -- ** securitycenter.organizations.sources.findings.group
     SecurityCenterOrganizationsSourcesFindingsGroupResource,
+    SecurityCenterOrganizationsSourcesFindingsGroup (..),
     newSecurityCenterOrganizationsSourcesFindingsGroup,
-    SecurityCenterOrganizationsSourcesFindingsGroup,
 
     -- ** securitycenter.organizations.sources.findings.list
     SecurityCenterOrganizationsSourcesFindingsListResource,
+    SecurityCenterOrganizationsSourcesFindingsList (..),
     newSecurityCenterOrganizationsSourcesFindingsList,
-    SecurityCenterOrganizationsSourcesFindingsList,
 
     -- ** securitycenter.organizations.sources.findings.patch
     SecurityCenterOrganizationsSourcesFindingsPatchResource,
+    SecurityCenterOrganizationsSourcesFindingsPatch (..),
     newSecurityCenterOrganizationsSourcesFindingsPatch,
-    SecurityCenterOrganizationsSourcesFindingsPatch,
 
     -- ** securitycenter.organizations.sources.findings.setState
     SecurityCenterOrganizationsSourcesFindingsSetStateResource,
+    SecurityCenterOrganizationsSourcesFindingsSetState (..),
     newSecurityCenterOrganizationsSourcesFindingsSetState,
-    SecurityCenterOrganizationsSourcesFindingsSetState,
 
     -- ** securitycenter.organizations.sources.findings.updateSecurityMarks
     SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarksResource,
+    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks (..),
     newSecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
-    SecurityCenterOrganizationsSourcesFindingsUpdateSecurityMarks,
 
     -- ** securitycenter.organizations.sources.get
     SecurityCenterOrganizationsSourcesGetResource,
+    SecurityCenterOrganizationsSourcesGet (..),
     newSecurityCenterOrganizationsSourcesGet,
-    SecurityCenterOrganizationsSourcesGet,
 
     -- ** securitycenter.organizations.sources.getIamPolicy
     SecurityCenterOrganizationsSourcesGetIamPolicyResource,
+    SecurityCenterOrganizationsSourcesGetIamPolicy (..),
     newSecurityCenterOrganizationsSourcesGetIamPolicy,
-    SecurityCenterOrganizationsSourcesGetIamPolicy,
 
     -- ** securitycenter.organizations.sources.list
     SecurityCenterOrganizationsSourcesListResource,
+    SecurityCenterOrganizationsSourcesList (..),
     newSecurityCenterOrganizationsSourcesList,
-    SecurityCenterOrganizationsSourcesList,
 
     -- ** securitycenter.organizations.sources.patch
     SecurityCenterOrganizationsSourcesPatchResource,
+    SecurityCenterOrganizationsSourcesPatch (..),
     newSecurityCenterOrganizationsSourcesPatch,
-    SecurityCenterOrganizationsSourcesPatch,
 
     -- ** securitycenter.organizations.sources.setIamPolicy
     SecurityCenterOrganizationsSourcesSetIamPolicyResource,
+    SecurityCenterOrganizationsSourcesSetIamPolicy (..),
     newSecurityCenterOrganizationsSourcesSetIamPolicy,
-    SecurityCenterOrganizationsSourcesSetIamPolicy,
 
     -- ** securitycenter.organizations.sources.testIamPermissions
     SecurityCenterOrganizationsSourcesTestIamPermissionsResource,
+    SecurityCenterOrganizationsSourcesTestIamPermissions (..),
     newSecurityCenterOrganizationsSourcesTestIamPermissions,
-    SecurityCenterOrganizationsSourcesTestIamPermissions,
 
     -- ** securitycenter.organizations.updateOrganizationSettings
     SecurityCenterOrganizationsUpdateOrganizationSettingsResource,
+    SecurityCenterOrganizationsUpdateOrganizationSettings (..),
     newSecurityCenterOrganizationsUpdateOrganizationSettings,
-    SecurityCenterOrganizationsUpdateOrganizationSettings,
 
     -- * Types
 

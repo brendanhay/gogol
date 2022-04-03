@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.JobTriggers.Activate
     DLPProjectsLocationsJobTriggersActivateResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsJobTriggersActivate (..),
     newDLPProjectsLocationsJobTriggersActivate,
-    DLPProjectsLocationsJobTriggersActivate,
   )
 where
 

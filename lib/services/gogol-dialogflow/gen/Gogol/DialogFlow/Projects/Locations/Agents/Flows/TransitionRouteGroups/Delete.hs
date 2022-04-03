@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.De
     DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete (..),
     newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete,
-    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete,
   )
 where
 

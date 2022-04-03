@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Chromeosdevices.List
     DirectoryChromeosdevicesListResource,
 
     -- ** Constructing a Request
+    DirectoryChromeosdevicesList (..),
     newDirectoryChromeosdevicesList,
-    DirectoryChromeosdevicesList,
   )
 where
 

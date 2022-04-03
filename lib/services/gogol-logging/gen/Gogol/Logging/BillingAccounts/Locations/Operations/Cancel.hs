@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
     LoggingBillingAccountsLocationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsLocationsOperationsCancel (..),
     newLoggingBillingAccountsLocationsOperationsCancel,
-    LoggingBillingAccountsLocationsOperationsCancel,
   )
 where
 

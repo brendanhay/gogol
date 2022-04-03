@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Models.Versions.SetDefault
     MlProjectsModelsVersionsSetDefaultResource,
 
     -- ** Constructing a Request
+    MlProjectsModelsVersionsSetDefault (..),
     newMlProjectsModelsVersionsSetDefault,
-    MlProjectsModelsVersionsSetDefault,
   )
 where
 

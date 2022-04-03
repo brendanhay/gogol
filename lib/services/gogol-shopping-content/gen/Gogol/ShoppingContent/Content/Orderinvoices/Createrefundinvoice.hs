@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderinvoices.Createrefundinvoice
     ContentOrderinvoicesCreaterefundinvoiceResource,
 
     -- ** Constructing a Request
+    ContentOrderinvoicesCreaterefundinvoice (..),
     newContentOrderinvoicesCreaterefundinvoice,
-    ContentOrderinvoicesCreaterefundinvoice,
   )
 where
 

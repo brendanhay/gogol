@@ -34,8 +34,8 @@ module Gogol.Drive.Drives.Hide
     DriveDrivesHideResource,
 
     -- ** Constructing a Request
+    DriveDrivesHide (..),
     newDriveDrivesHide,
-    DriveDrivesHide,
   )
 where
 

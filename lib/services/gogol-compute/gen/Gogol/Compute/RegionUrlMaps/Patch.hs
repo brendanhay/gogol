@@ -34,8 +34,8 @@ module Gogol.Compute.RegionUrlMaps.Patch
     ComputeRegionUrlMapsPatchResource,
 
     -- ** Constructing a Request
+    ComputeRegionUrlMapsPatch (..),
     newComputeRegionUrlMapsPatch,
-    ComputeRegionUrlMapsPatch,
   )
 where
 

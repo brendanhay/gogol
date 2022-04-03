@@ -34,8 +34,8 @@ module Gogol.FusionTables.Column.Patch
     FusionTablesColumnPatchResource,
 
     -- ** Constructing a Request
+    FusionTablesColumnPatch (..),
     newFusionTablesColumnPatch,
-    FusionTablesColumnPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.Get
     ComputeBackendBucketsGetResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsGet (..),
     newComputeBackendBucketsGet,
-    ComputeBackendBucketsGet,
   )
 where
 

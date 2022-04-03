@@ -34,8 +34,8 @@ module Gogol.Drive.Files.Copy
     DriveFilesCopyResource,
 
     -- ** Constructing a Request
+    DriveFilesCopy (..),
     newDriveFilesCopy,
-    DriveFilesCopy,
   )
 where
 

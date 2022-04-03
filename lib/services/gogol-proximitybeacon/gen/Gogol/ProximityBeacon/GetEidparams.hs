@@ -34,8 +34,8 @@ module Gogol.ProximityBeacon.GetEidparams
     ProximityBeaconGetEidparamsResource,
 
     -- ** Constructing a Request
+    ProximityBeaconGetEidparams (..),
     newProximityBeaconGetEidparams,
-    ProximityBeaconGetEidparams,
   )
 where
 

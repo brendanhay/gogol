@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.CreateAuthUri
     IdentityToolkitRelyingpartyCreateAuthUriResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyCreateAuthUri (..),
     newIdentityToolkitRelyingpartyCreateAuthUri,
-    IdentityToolkitRelyingpartyCreateAuthUri,
   )
 where
 

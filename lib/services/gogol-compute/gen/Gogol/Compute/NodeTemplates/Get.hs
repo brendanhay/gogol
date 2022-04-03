@@ -34,8 +34,8 @@ module Gogol.Compute.NodeTemplates.Get
     ComputeNodeTemplatesGetResource,
 
     -- ** Constructing a Request
+    ComputeNodeTemplatesGet (..),
     newComputeNodeTemplatesGet,
-    ComputeNodeTemplatesGet,
   )
 where
 

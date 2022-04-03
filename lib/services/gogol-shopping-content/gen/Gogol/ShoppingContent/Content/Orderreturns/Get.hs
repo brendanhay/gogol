@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orderreturns.Get
     ContentOrderreturnsGetResource,
 
     -- ** Constructing a Request
+    ContentOrderreturnsGet (..),
     newContentOrderreturnsGet,
-    ContentOrderreturnsGet,
   )
 where
 

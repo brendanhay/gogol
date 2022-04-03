@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.GetGuestAttributes
     ComputeInstancesGetGuestAttributesResource,
 
     -- ** Constructing a Request
+    ComputeInstancesGetGuestAttributes (..),
     newComputeInstancesGetGuestAttributes,
-    ComputeInstancesGetGuestAttributes,
   )
 where
 

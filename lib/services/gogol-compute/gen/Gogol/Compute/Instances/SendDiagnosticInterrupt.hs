@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SendDiagnosticInterrupt
     ComputeInstancesSendDiagnosticInterruptResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSendDiagnosticInterrupt (..),
     newComputeInstancesSendDiagnosticInterrupt,
-    ComputeInstancesSendDiagnosticInterrupt,
   )
 where
 

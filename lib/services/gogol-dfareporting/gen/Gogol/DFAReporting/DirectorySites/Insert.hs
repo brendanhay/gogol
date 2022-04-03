@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DirectorySites.Insert
     DFAReportingDirectorySitesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingDirectorySitesInsert (..),
     newDFAReportingDirectorySitesInsert,
-    DFAReportingDirectorySitesInsert,
   )
 where
 

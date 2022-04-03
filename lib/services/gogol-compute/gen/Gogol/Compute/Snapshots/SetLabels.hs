@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.SetLabels
     ComputeSnapshotsSetLabelsResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsSetLabels (..),
     newComputeSnapshotsSetLabels,
-    ComputeSnapshotsSetLabels,
   )
 where
 

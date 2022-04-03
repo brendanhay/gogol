@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConf
     CloudbuildProjectsLocationsGithubEnterpriseConfigsDeleteResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsDelete (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsDelete,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.Create
     PubSubProjectsSubscriptionsCreateResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsCreate (..),
     newPubSubProjectsSubscriptionsCreate,
-    PubSubProjectsSubscriptionsCreate,
   )
 where
 

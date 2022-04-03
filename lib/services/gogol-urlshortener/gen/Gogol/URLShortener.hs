@@ -40,18 +40,18 @@ module Gogol.URLShortener
 
     -- ** urlshortener.url.get
     URLShortenerUrlGetResource,
+    URLShortenerUrlGet (..),
     newURLShortenerUrlGet,
-    URLShortenerUrlGet,
 
     -- ** urlshortener.url.insert
     URLShortenerUrlInsertResource,
+    URLShortenerUrlInsert (..),
     newURLShortenerUrlInsert,
-    URLShortenerUrlInsert,
 
     -- ** urlshortener.url.list
     URLShortenerUrlListResource,
+    URLShortenerUrlList (..),
     newURLShortenerUrlList,
-    URLShortenerUrlList,
 
     -- * Types
 

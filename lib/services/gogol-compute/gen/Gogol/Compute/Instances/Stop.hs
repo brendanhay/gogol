@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Stop
     ComputeInstancesStopResource,
 
     -- ** Constructing a Request
+    ComputeInstancesStop (..),
     newComputeInstancesStop,
-    ComputeInstancesStop,
   )
 where
 

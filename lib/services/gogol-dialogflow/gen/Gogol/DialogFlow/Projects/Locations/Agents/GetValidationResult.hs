@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.GetValidationResult
     DialogFlowProjectsLocationsAgentsGetValidationResultResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsGetValidationResult (..),
     newDialogFlowProjectsLocationsAgentsGetValidationResult,
-    DialogFlowProjectsLocationsAgentsGetValidationResult,
   )
 where
 

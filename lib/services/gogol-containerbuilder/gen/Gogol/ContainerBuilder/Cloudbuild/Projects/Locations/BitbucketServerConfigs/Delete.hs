@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfi
     CloudbuildProjectsLocationsBitbucketServerConfigsDeleteResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsBitbucketServerConfigsDelete (..),
     newCloudbuildProjectsLocationsBitbucketServerConfigsDelete,
-    CloudbuildProjectsLocationsBitbucketServerConfigsDelete,
   )
 where
 

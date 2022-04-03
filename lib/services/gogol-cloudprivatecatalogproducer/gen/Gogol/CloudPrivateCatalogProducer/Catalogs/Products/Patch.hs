@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Patch
     CloudPrivateCatalogProducerCatalogsProductsPatchResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsProductsPatch (..),
     newCloudPrivateCatalogProducerCatalogsProductsPatch,
-    CloudPrivateCatalogProducerCatalogsProductsPatch,
   )
 where
 

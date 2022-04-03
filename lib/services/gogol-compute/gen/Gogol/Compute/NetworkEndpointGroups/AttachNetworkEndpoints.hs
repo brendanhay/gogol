@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
     ComputeNetworkEndpointGroupsAttachNetworkEndpointsResource,
 
     -- ** Constructing a Request
+    ComputeNetworkEndpointGroupsAttachNetworkEndpoints (..),
     newComputeNetworkEndpointGroupsAttachNetworkEndpoints,
-    ComputeNetworkEndpointGroupsAttachNetworkEndpoints,
   )
 where
 

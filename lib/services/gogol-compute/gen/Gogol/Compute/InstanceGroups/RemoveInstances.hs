@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroups.RemoveInstances
     ComputeInstanceGroupsRemoveInstancesResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupsRemoveInstances (..),
     newComputeInstanceGroupsRemoveInstances,
-    ComputeInstanceGroupsRemoveInstances,
   )
 where
 

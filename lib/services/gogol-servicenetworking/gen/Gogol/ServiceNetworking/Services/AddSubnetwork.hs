@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.AddSubnetwork
     ServiceNetworkingServicesAddSubnetworkResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesAddSubnetwork (..),
     newServiceNetworkingServicesAddSubnetwork,
-    ServiceNetworkingServicesAddSubnetwork,
   )
 where
 

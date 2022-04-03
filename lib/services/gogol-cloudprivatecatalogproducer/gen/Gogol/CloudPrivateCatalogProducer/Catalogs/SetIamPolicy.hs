@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.SetIamPolicy
     CloudPrivateCatalogProducerCatalogsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy (..),
     newCloudPrivateCatalogProducerCatalogsSetIamPolicy,
-    CloudPrivateCatalogProducerCatalogsSetIamPolicy,
   )
 where
 

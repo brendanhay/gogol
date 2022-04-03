@@ -34,8 +34,8 @@ module Gogol.SourceRepo.Projects.Repos.TestIamPermissions
     SourceRepoProjectsReposTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    SourceRepoProjectsReposTestIamPermissions (..),
     newSourceRepoProjectsReposTestIamPermissions,
-    SourceRepoProjectsReposTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Captions.Insert
     YouTubeCaptionsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeCaptionsInsert (..),
     newYouTubeCaptionsInsert,
-    YouTubeCaptionsInsert,
   )
 where
 

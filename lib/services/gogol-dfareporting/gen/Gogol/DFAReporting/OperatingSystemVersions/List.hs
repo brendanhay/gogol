@@ -34,8 +34,8 @@ module Gogol.DFAReporting.OperatingSystemVersions.List
     DFAReportingOperatingSystemVersionsListResource,
 
     -- ** Constructing a Request
+    DFAReportingOperatingSystemVersionsList (..),
     newDFAReportingOperatingSystemVersionsList,
-    DFAReportingOperatingSystemVersionsList,
   )
 where
 

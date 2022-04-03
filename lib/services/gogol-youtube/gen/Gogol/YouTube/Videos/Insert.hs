@@ -34,8 +34,8 @@ module Gogol.YouTube.Videos.Insert
     YouTubeVideosInsertResource,
 
     -- ** Constructing a Request
+    YouTubeVideosInsert (..),
     newYouTubeVideosInsert,
-    YouTubeVideosInsert,
   )
 where
 

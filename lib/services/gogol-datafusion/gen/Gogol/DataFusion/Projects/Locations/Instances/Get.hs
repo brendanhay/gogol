@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.Get
     DataFusionProjectsLocationsInstancesGetResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesGet (..),
     newDataFusionProjectsLocationsInstancesGet,
-    DataFusionProjectsLocationsInstancesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Suspend
     ComputeInstancesSuspendResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSuspend (..),
     newComputeInstancesSuspend,
-    ComputeInstancesSuspend,
   )
 where
 

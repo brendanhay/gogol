@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.RoleAssignments.Delete
     DirectoryRoleAssignmentsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryRoleAssignmentsDelete (..),
     newDirectoryRoleAssignmentsDelete,
-    DirectoryRoleAssignmentsDelete,
   )
 where
 

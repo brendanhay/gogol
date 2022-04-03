@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveGroups
     CloudIdentityGroupsMembershipsSearchTransitiveGroupsResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsSearchTransitiveGroups (..),
     newCloudIdentityGroupsMembershipsSearchTransitiveGroups,
-    CloudIdentityGroupsMembershipsSearchTransitiveGroups,
   )
 where
 

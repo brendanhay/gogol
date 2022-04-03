@@ -34,8 +34,8 @@ module Gogol.Compute.Routes.Delete
     ComputeRoutesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeRoutesDelete (..),
     newComputeRoutesDelete,
-    ComputeRoutesDelete,
   )
 where
 

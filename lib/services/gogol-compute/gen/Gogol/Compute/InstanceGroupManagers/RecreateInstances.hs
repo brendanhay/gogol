@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceGroupManagers.RecreateInstances
     ComputeInstanceGroupManagersRecreateInstancesResource,
 
     -- ** Constructing a Request
+    ComputeInstanceGroupManagersRecreateInstances (..),
     newComputeInstanceGroupManagersRecreateInstances,
-    ComputeInstanceGroupManagersRecreateInstances,
   )
 where
 

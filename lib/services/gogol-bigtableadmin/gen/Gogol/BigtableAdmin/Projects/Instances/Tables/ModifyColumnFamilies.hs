@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
     BigtableAdminProjectsInstancesTablesModifyColumnFamiliesResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesModifyColumnFamilies (..),
     newBigtableAdminProjectsInstancesTablesModifyColumnFamilies,
-    BigtableAdminProjectsInstancesTablesModifyColumnFamilies,
   )
 where
 

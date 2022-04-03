@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.Failover
     RedisProjectsLocationsInstancesFailoverResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesFailover (..),
     newRedisProjectsLocationsInstancesFailover,
-    RedisProjectsLocationsInstancesFailover,
   )
 where
 

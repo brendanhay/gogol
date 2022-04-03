@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.SwitchToCustomMode
     ComputeNetworksSwitchToCustomModeResource,
 
     -- ** Constructing a Request
+    ComputeNetworksSwitchToCustomMode (..),
     newComputeNetworksSwitchToCustomMode,
-    ComputeNetworksSwitchToCustomMode,
   )
 where
 

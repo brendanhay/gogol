@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Surveys.Start
     ConsumerSurveysSurveysStartResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysSurveysStart (..),
     newConsumerSurveysSurveysStart,
-    ConsumerSurveysSurveysStart,
   )
 where
 

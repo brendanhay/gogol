@@ -34,8 +34,8 @@ module Gogol.StreetViewPublish.Photos.BatchUpdate
     StreetViewPublishPhotosBatchUpdateResource,
 
     -- ** Constructing a Request
+    StreetViewPublishPhotosBatchUpdate (..),
     newStreetViewPublishPhotosBatchUpdate,
-    StreetViewPublishPhotosBatchUpdate,
   )
 where
 

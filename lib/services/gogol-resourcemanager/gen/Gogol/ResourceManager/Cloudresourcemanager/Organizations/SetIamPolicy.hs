@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Organizations.SetIamPolicy
     CloudresourcemanagerOrganizationsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerOrganizationsSetIamPolicy (..),
     newCloudresourcemanagerOrganizationsSetIamPolicy,
-    CloudresourcemanagerOrganizationsSetIamPolicy,
   )
 where
 

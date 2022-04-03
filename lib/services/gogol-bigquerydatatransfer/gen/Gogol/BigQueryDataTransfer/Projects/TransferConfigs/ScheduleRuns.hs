@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.TransferConfigs.ScheduleRuns
     BigQueryDataTransferProjectsTransferConfigsScheduleRunsResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsTransferConfigsScheduleRuns (..),
     newBigQueryDataTransferProjectsTransferConfigsScheduleRuns,
-    BigQueryDataTransferProjectsTransferConfigsScheduleRuns,
   )
 where
 

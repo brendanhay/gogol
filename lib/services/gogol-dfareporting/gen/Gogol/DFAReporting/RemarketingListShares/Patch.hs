@@ -34,8 +34,8 @@ module Gogol.DFAReporting.RemarketingListShares.Patch
     DFAReportingRemarketingListSharesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingRemarketingListSharesPatch (..),
     newDFAReportingRemarketingListSharesPatch,
-    DFAReportingRemarketingListSharesPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AlertCenter.Alerts.BatchUndelete
     AlertCenterAlertsBatchUndeleteResource,
 
     -- ** Constructing a Request
+    AlertCenterAlertsBatchUndelete (..),
     newAlertCenterAlertsBatchUndelete,
-    AlertCenterAlertsBatchUndelete,
   )
 where
 

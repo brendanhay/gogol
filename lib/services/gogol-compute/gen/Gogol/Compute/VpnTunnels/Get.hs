@@ -34,8 +34,8 @@ module Gogol.Compute.VpnTunnels.Get
     ComputeVpnTunnelsGetResource,
 
     -- ** Constructing a Request
+    ComputeVpnTunnelsGet (..),
     newComputeVpnTunnelsGet,
-    ComputeVpnTunnelsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.Get
     AndroidEnterpriseProductsGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsGet (..),
     newAndroidEnterpriseProductsGet,
-    AndroidEnterpriseProductsGet,
   )
 where
 

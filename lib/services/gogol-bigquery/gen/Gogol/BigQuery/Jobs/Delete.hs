@@ -34,8 +34,8 @@ module Gogol.BigQuery.Jobs.Delete
     BigQueryJobsDeleteResource,
 
     -- ** Constructing a Request
+    BigQueryJobsDelete (..),
     newBigQueryJobsDelete,
-    BigQueryJobsDelete,
   )
 where
 

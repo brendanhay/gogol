@@ -34,8 +34,8 @@ module Gogol.Script.Projects.GetMetrics
     ScriptProjectsGetMetricsResource,
 
     -- ** Constructing a Request
+    ScriptProjectsGetMetrics (..),
     newScriptProjectsGetMetrics,
-    ScriptProjectsGetMetrics,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Conversions.Batchupdate
     DFAReportingConversionsBatchupdateResource,
 
     -- ** Constructing a Request
+    DFAReportingConversionsBatchupdate (..),
     newDFAReportingConversionsBatchupdate,
-    DFAReportingConversionsBatchupdate,
   )
 where
 

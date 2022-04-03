@@ -40,38 +40,38 @@ module Gogol.AppsLicensing
 
     -- ** licensing.licenseAssignments.delete
     LicensingLicenseAssignmentsDeleteResource,
+    LicensingLicenseAssignmentsDelete (..),
     newLicensingLicenseAssignmentsDelete,
-    LicensingLicenseAssignmentsDelete,
 
     -- ** licensing.licenseAssignments.get
     LicensingLicenseAssignmentsGetResource,
+    LicensingLicenseAssignmentsGet (..),
     newLicensingLicenseAssignmentsGet,
-    LicensingLicenseAssignmentsGet,
 
     -- ** licensing.licenseAssignments.insert
     LicensingLicenseAssignmentsInsertResource,
+    LicensingLicenseAssignmentsInsert (..),
     newLicensingLicenseAssignmentsInsert,
-    LicensingLicenseAssignmentsInsert,
 
     -- ** licensing.licenseAssignments.listForProduct
     LicensingLicenseAssignmentsListForProductResource,
+    LicensingLicenseAssignmentsListForProduct (..),
     newLicensingLicenseAssignmentsListForProduct,
-    LicensingLicenseAssignmentsListForProduct,
 
     -- ** licensing.licenseAssignments.listForProductAndSku
     LicensingLicenseAssignmentsListForProductAndSkuResource,
+    LicensingLicenseAssignmentsListForProductAndSku (..),
     newLicensingLicenseAssignmentsListForProductAndSku,
-    LicensingLicenseAssignmentsListForProductAndSku,
 
     -- ** licensing.licenseAssignments.patch
     LicensingLicenseAssignmentsPatchResource,
+    LicensingLicenseAssignmentsPatch (..),
     newLicensingLicenseAssignmentsPatch,
-    LicensingLicenseAssignmentsPatch,
 
     -- ** licensing.licenseAssignments.update
     LicensingLicenseAssignmentsUpdateResource,
+    LicensingLicenseAssignmentsUpdate (..),
     newLicensingLicenseAssignmentsUpdate,
-    LicensingLicenseAssignmentsUpdate,
 
     -- * Types
 

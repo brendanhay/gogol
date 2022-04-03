@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Locations.Batches.Get
     DataprocProjectsLocationsBatchesGetResource,
 
     -- ** Constructing a Request
+    DataprocProjectsLocationsBatchesGet (..),
     newDataprocProjectsLocationsBatchesGet,
-    DataprocProjectsLocationsBatchesGet,
   )
 where
 

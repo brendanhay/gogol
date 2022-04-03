@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.GithubEnterpriseConf
     CloudbuildProjectsLocationsGithubEnterpriseConfigsListResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsGithubEnterpriseConfigsList (..),
     newCloudbuildProjectsLocationsGithubEnterpriseConfigsList,
-    CloudbuildProjectsLocationsGithubEnterpriseConfigsList,
   )
 where
 

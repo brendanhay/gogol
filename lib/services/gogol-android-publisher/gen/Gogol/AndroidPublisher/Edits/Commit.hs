@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Commit
     AndroidPublisherEditsCommitResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsCommit (..),
     newAndroidPublisherEditsCommit,
-    AndroidPublisherEditsCommit,
   )
 where
 

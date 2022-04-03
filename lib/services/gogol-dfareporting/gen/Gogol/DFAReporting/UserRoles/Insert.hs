@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRoles.Insert
     DFAReportingUserRolesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolesInsert (..),
     newDFAReportingUserRolesInsert,
-    DFAReportingUserRolesInsert,
   )
 where
 

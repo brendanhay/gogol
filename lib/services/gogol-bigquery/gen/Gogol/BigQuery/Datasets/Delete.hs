@@ -34,8 +34,8 @@ module Gogol.BigQuery.Datasets.Delete
     BigQueryDatasetsDeleteResource,
 
     -- ** Constructing a Request
+    BigQueryDatasetsDelete (..),
     newBigQueryDatasetsDelete,
-    BigQueryDatasetsDelete,
   )
 where
 

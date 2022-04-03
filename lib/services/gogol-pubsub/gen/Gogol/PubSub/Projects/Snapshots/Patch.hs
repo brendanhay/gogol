@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Snapshots.Patch
     PubSubProjectsSnapshotsPatchResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSnapshotsPatch (..),
     newPubSubProjectsSnapshotsPatch,
-    PubSubProjectsSnapshotsPatch,
   )
 where
 

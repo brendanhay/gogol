@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Users.List
     AndroidPublisherUsersListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherUsersList (..),
     newAndroidPublisherUsersList,
-    AndroidPublisherUsersList,
   )
 where
 

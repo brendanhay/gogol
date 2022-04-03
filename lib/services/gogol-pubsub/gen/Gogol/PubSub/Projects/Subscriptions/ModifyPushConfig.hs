@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.ModifyPushConfig
     PubSubProjectsSubscriptionsModifyPushConfigResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsModifyPushConfig (..),
     newPubSubProjectsSubscriptionsModifyPushConfig,
-    PubSubProjectsSubscriptionsModifyPushConfig,
   )
 where
 

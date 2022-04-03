@@ -34,8 +34,8 @@ module Gogol.FirebaseRules.Projects.Test
     FirebaseRulesProjectsTestResource,
 
     -- ** Constructing a Request
+    FirebaseRulesProjectsTest (..),
     newFirebaseRulesProjectsTest,
-    FirebaseRulesProjectsTest,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.TestIamPermissions
     ComputeInstancesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeInstancesTestIamPermissions (..),
     newComputeInstancesTestIamPermissions,
-    ComputeInstancesTestIamPermissions,
   )
 where
 

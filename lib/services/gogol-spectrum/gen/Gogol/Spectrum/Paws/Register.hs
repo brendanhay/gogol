@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.Register
     SpectrumPawsRegisterResource,
 
     -- ** Constructing a Request
+    SpectrumPawsRegister (..),
     newSpectrumPawsRegister,
-    SpectrumPawsRegister,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Restart
     SqlInstancesRestartResource,
 
     -- ** Constructing a Request
+    SqlInstancesRestart (..),
     newSqlInstancesRestart,
-    SqlInstancesRestart,
   )
 where
 

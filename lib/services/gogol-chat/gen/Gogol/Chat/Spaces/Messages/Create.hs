@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Messages.Create
     ChatSpacesMessagesCreateResource,
 
     -- ** Constructing a Request
+    ChatSpacesMessagesCreate (..),
     newChatSpacesMessagesCreate,
-    ChatSpacesMessagesCreate,
   )
 where
 

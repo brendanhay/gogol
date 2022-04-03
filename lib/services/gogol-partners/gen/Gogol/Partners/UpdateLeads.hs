@@ -34,8 +34,8 @@ module Gogol.Partners.UpdateLeads
     PartnersUpdateLeadsResource,
 
     -- ** Constructing a Request
+    PartnersUpdateLeads (..),
     newPartnersUpdateLeads,
-    PartnersUpdateLeads,
   )
 where
 

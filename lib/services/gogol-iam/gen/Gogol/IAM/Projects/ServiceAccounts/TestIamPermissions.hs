@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.TestIamPermissions
     IAMProjectsServiceAccountsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsTestIamPermissions (..),
     newIAMProjectsServiceAccountsTestIamPermissions,
-    IAMProjectsServiceAccountsTestIamPermissions,
   )
 where
 

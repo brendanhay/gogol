@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.Enroll
     AndroidEnterpriseEnterprisesEnrollResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesEnroll (..),
     newAndroidEnterpriseEnterprisesEnroll,
-    AndroidEnterpriseEnterprisesEnroll,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Managedconfigurationsfordevice.List
     AndroidEnterpriseManagedconfigurationsfordeviceListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseManagedconfigurationsfordeviceList (..),
     newAndroidEnterpriseManagedconfigurationsfordeviceList,
-    AndroidEnterpriseManagedconfigurationsfordeviceList,
   )
 where
 

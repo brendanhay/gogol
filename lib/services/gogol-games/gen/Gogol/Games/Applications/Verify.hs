@@ -34,8 +34,8 @@ module Gogol.Games.Applications.Verify
     GamesApplicationsVerifyResource,
 
     -- ** Constructing a Request
+    GamesApplicationsVerify (..),
     newGamesApplicationsVerify,
-    GamesApplicationsVerify,
   )
 where
 

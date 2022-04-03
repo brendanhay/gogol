@@ -35,8 +35,8 @@ module Gogol.Classroom.UserProfiles.Guardians.List
     ClassroomUserProfilesGuardiansListResource,
 
     -- ** Constructing a Request
+    ClassroomUserProfilesGuardiansList (..),
     newClassroomUserProfilesGuardiansList,
-    ClassroomUserProfilesGuardiansList,
   )
 where
 

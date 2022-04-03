@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.RevokeDeviceAccess
     AndroidEnterpriseUsersRevokeDeviceAccessResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersRevokeDeviceAccess (..),
     newAndroidEnterpriseUsersRevokeDeviceAccess,
-    AndroidEnterpriseUsersRevokeDeviceAccess,
   )
 where
 

@@ -44,263 +44,263 @@ module Gogol.Storage
 
     -- ** storage.bucketAccessControls.delete
     StorageBucketAccessControlsDeleteResource,
+    StorageBucketAccessControlsDelete (..),
     newStorageBucketAccessControlsDelete,
-    StorageBucketAccessControlsDelete,
 
     -- ** storage.bucketAccessControls.get
     StorageBucketAccessControlsGetResource,
+    StorageBucketAccessControlsGet (..),
     newStorageBucketAccessControlsGet,
-    StorageBucketAccessControlsGet,
 
     -- ** storage.bucketAccessControls.insert
     StorageBucketAccessControlsInsertResource,
+    StorageBucketAccessControlsInsert (..),
     newStorageBucketAccessControlsInsert,
-    StorageBucketAccessControlsInsert,
 
     -- ** storage.bucketAccessControls.list
     StorageBucketAccessControlsListResource,
+    StorageBucketAccessControlsList (..),
     newStorageBucketAccessControlsList,
-    StorageBucketAccessControlsList,
 
     -- ** storage.bucketAccessControls.patch
     StorageBucketAccessControlsPatchResource,
+    StorageBucketAccessControlsPatch (..),
     newStorageBucketAccessControlsPatch,
-    StorageBucketAccessControlsPatch,
 
     -- ** storage.bucketAccessControls.update
     StorageBucketAccessControlsUpdateResource,
+    StorageBucketAccessControlsUpdate (..),
     newStorageBucketAccessControlsUpdate,
-    StorageBucketAccessControlsUpdate,
 
     -- ** storage.buckets.delete
     StorageBucketsDeleteResource,
+    StorageBucketsDelete (..),
     newStorageBucketsDelete,
-    StorageBucketsDelete,
 
     -- ** storage.buckets.get
     StorageBucketsGetResource,
+    StorageBucketsGet (..),
     newStorageBucketsGet,
-    StorageBucketsGet,
 
     -- ** storage.buckets.getIamPolicy
     StorageBucketsGetIamPolicyResource,
+    StorageBucketsGetIamPolicy (..),
     newStorageBucketsGetIamPolicy,
-    StorageBucketsGetIamPolicy,
 
     -- ** storage.buckets.insert
     StorageBucketsInsertResource,
+    StorageBucketsInsert (..),
     newStorageBucketsInsert,
-    StorageBucketsInsert,
 
     -- ** storage.buckets.list
     StorageBucketsListResource,
+    StorageBucketsList (..),
     newStorageBucketsList,
-    StorageBucketsList,
 
     -- ** storage.buckets.lockRetentionPolicy
     StorageBucketsLockRetentionPolicyResource,
+    StorageBucketsLockRetentionPolicy (..),
     newStorageBucketsLockRetentionPolicy,
-    StorageBucketsLockRetentionPolicy,
 
     -- ** storage.buckets.patch
     StorageBucketsPatchResource,
+    StorageBucketsPatch (..),
     newStorageBucketsPatch,
-    StorageBucketsPatch,
 
     -- ** storage.buckets.setIamPolicy
     StorageBucketsSetIamPolicyResource,
+    StorageBucketsSetIamPolicy (..),
     newStorageBucketsSetIamPolicy,
-    StorageBucketsSetIamPolicy,
 
     -- ** storage.buckets.testIamPermissions
     StorageBucketsTestIamPermissionsResource,
+    StorageBucketsTestIamPermissions (..),
     newStorageBucketsTestIamPermissions,
-    StorageBucketsTestIamPermissions,
 
     -- ** storage.buckets.update
     StorageBucketsUpdateResource,
+    StorageBucketsUpdate (..),
     newStorageBucketsUpdate,
-    StorageBucketsUpdate,
 
     -- ** storage.channels.stop
     StorageChannelsStopResource,
+    StorageChannelsStop (..),
     newStorageChannelsStop,
-    StorageChannelsStop,
 
     -- ** storage.defaultObjectAccessControls.delete
     StorageDefaultObjectAccessControlsDeleteResource,
+    StorageDefaultObjectAccessControlsDelete (..),
     newStorageDefaultObjectAccessControlsDelete,
-    StorageDefaultObjectAccessControlsDelete,
 
     -- ** storage.defaultObjectAccessControls.get
     StorageDefaultObjectAccessControlsGetResource,
+    StorageDefaultObjectAccessControlsGet (..),
     newStorageDefaultObjectAccessControlsGet,
-    StorageDefaultObjectAccessControlsGet,
 
     -- ** storage.defaultObjectAccessControls.insert
     StorageDefaultObjectAccessControlsInsertResource,
+    StorageDefaultObjectAccessControlsInsert (..),
     newStorageDefaultObjectAccessControlsInsert,
-    StorageDefaultObjectAccessControlsInsert,
 
     -- ** storage.defaultObjectAccessControls.list
     StorageDefaultObjectAccessControlsListResource,
+    StorageDefaultObjectAccessControlsList (..),
     newStorageDefaultObjectAccessControlsList,
-    StorageDefaultObjectAccessControlsList,
 
     -- ** storage.defaultObjectAccessControls.patch
     StorageDefaultObjectAccessControlsPatchResource,
+    StorageDefaultObjectAccessControlsPatch (..),
     newStorageDefaultObjectAccessControlsPatch,
-    StorageDefaultObjectAccessControlsPatch,
 
     -- ** storage.defaultObjectAccessControls.update
     StorageDefaultObjectAccessControlsUpdateResource,
+    StorageDefaultObjectAccessControlsUpdate (..),
     newStorageDefaultObjectAccessControlsUpdate,
-    StorageDefaultObjectAccessControlsUpdate,
 
     -- ** storage.notifications.delete
     StorageNotificationsDeleteResource,
+    StorageNotificationsDelete (..),
     newStorageNotificationsDelete,
-    StorageNotificationsDelete,
 
     -- ** storage.notifications.get
     StorageNotificationsGetResource,
+    StorageNotificationsGet (..),
     newStorageNotificationsGet,
-    StorageNotificationsGet,
 
     -- ** storage.notifications.insert
     StorageNotificationsInsertResource,
+    StorageNotificationsInsert (..),
     newStorageNotificationsInsert,
-    StorageNotificationsInsert,
 
     -- ** storage.notifications.list
     StorageNotificationsListResource,
+    StorageNotificationsList (..),
     newStorageNotificationsList,
-    StorageNotificationsList,
 
     -- ** storage.objectAccessControls.delete
     StorageObjectAccessControlsDeleteResource,
+    StorageObjectAccessControlsDelete (..),
     newStorageObjectAccessControlsDelete,
-    StorageObjectAccessControlsDelete,
 
     -- ** storage.objectAccessControls.get
     StorageObjectAccessControlsGetResource,
+    StorageObjectAccessControlsGet (..),
     newStorageObjectAccessControlsGet,
-    StorageObjectAccessControlsGet,
 
     -- ** storage.objectAccessControls.insert
     StorageObjectAccessControlsInsertResource,
+    StorageObjectAccessControlsInsert (..),
     newStorageObjectAccessControlsInsert,
-    StorageObjectAccessControlsInsert,
 
     -- ** storage.objectAccessControls.list
     StorageObjectAccessControlsListResource,
+    StorageObjectAccessControlsList (..),
     newStorageObjectAccessControlsList,
-    StorageObjectAccessControlsList,
 
     -- ** storage.objectAccessControls.patch
     StorageObjectAccessControlsPatchResource,
+    StorageObjectAccessControlsPatch (..),
     newStorageObjectAccessControlsPatch,
-    StorageObjectAccessControlsPatch,
 
     -- ** storage.objectAccessControls.update
     StorageObjectAccessControlsUpdateResource,
+    StorageObjectAccessControlsUpdate (..),
     newStorageObjectAccessControlsUpdate,
-    StorageObjectAccessControlsUpdate,
 
     -- ** storage.objects.compose
     StorageObjectsComposeResource,
+    StorageObjectsCompose (..),
     newStorageObjectsCompose,
-    StorageObjectsCompose,
 
     -- ** storage.objects.copy
     StorageObjectsCopyResource,
+    StorageObjectsCopy (..),
     newStorageObjectsCopy,
-    StorageObjectsCopy,
 
     -- ** storage.objects.delete
     StorageObjectsDeleteResource,
+    StorageObjectsDelete (..),
     newStorageObjectsDelete,
-    StorageObjectsDelete,
 
     -- ** storage.objects.get
     StorageObjectsGetResource,
+    StorageObjectsGet (..),
     newStorageObjectsGet,
-    StorageObjectsGet,
 
     -- ** storage.objects.getIamPolicy
     StorageObjectsGetIamPolicyResource,
+    StorageObjectsGetIamPolicy (..),
     newStorageObjectsGetIamPolicy,
-    StorageObjectsGetIamPolicy,
 
     -- ** storage.objects.insert
     StorageObjectsInsertResource,
+    StorageObjectsInsert (..),
     newStorageObjectsInsert,
-    StorageObjectsInsert,
 
     -- ** storage.objects.list
     StorageObjectsListResource,
+    StorageObjectsList (..),
     newStorageObjectsList,
-    StorageObjectsList,
 
     -- ** storage.objects.patch
     StorageObjectsPatchResource,
+    StorageObjectsPatch (..),
     newStorageObjectsPatch,
-    StorageObjectsPatch,
 
     -- ** storage.objects.rewrite
     StorageObjectsRewriteResource,
+    StorageObjectsRewrite (..),
     newStorageObjectsRewrite,
-    StorageObjectsRewrite,
 
     -- ** storage.objects.setIamPolicy
     StorageObjectsSetIamPolicyResource,
+    StorageObjectsSetIamPolicy (..),
     newStorageObjectsSetIamPolicy,
-    StorageObjectsSetIamPolicy,
 
     -- ** storage.objects.testIamPermissions
     StorageObjectsTestIamPermissionsResource,
+    StorageObjectsTestIamPermissions (..),
     newStorageObjectsTestIamPermissions,
-    StorageObjectsTestIamPermissions,
 
     -- ** storage.objects.update
     StorageObjectsUpdateResource,
+    StorageObjectsUpdate (..),
     newStorageObjectsUpdate,
-    StorageObjectsUpdate,
 
     -- ** storage.objects.watchAll
     StorageObjectsWatchAllResource,
+    StorageObjectsWatchAll (..),
     newStorageObjectsWatchAll,
-    StorageObjectsWatchAll,
 
     -- ** storage.projects.hmacKeys.create
     StorageProjectsHmacKeysCreateResource,
+    StorageProjectsHmacKeysCreate (..),
     newStorageProjectsHmacKeysCreate,
-    StorageProjectsHmacKeysCreate,
 
     -- ** storage.projects.hmacKeys.delete
     StorageProjectsHmacKeysDeleteResource,
+    StorageProjectsHmacKeysDelete (..),
     newStorageProjectsHmacKeysDelete,
-    StorageProjectsHmacKeysDelete,
 
     -- ** storage.projects.hmacKeys.get
     StorageProjectsHmacKeysGetResource,
+    StorageProjectsHmacKeysGet (..),
     newStorageProjectsHmacKeysGet,
-    StorageProjectsHmacKeysGet,
 
     -- ** storage.projects.hmacKeys.list
     StorageProjectsHmacKeysListResource,
+    StorageProjectsHmacKeysList (..),
     newStorageProjectsHmacKeysList,
-    StorageProjectsHmacKeysList,
 
     -- ** storage.projects.hmacKeys.update
     StorageProjectsHmacKeysUpdateResource,
+    StorageProjectsHmacKeysUpdate (..),
     newStorageProjectsHmacKeysUpdate,
-    StorageProjectsHmacKeysUpdate,
 
     -- ** storage.projects.serviceAccount.get
     StorageProjectsServiceAccountGetResource,
+    StorageProjectsServiceAccountGet (..),
     newStorageProjectsServiceAccountGet,
-    StorageProjectsServiceAccountGet,
 
     -- * Types
 

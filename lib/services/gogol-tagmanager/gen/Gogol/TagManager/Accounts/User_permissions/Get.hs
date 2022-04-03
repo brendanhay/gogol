@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.User_permissions.Get
     TagManagerAccountsUser_permissionsGetResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsUser_permissionsGet (..),
     newTagManagerAccountsUser_permissionsGet,
-    TagManagerAccountsUser_permissionsGet,
   )
 where
 

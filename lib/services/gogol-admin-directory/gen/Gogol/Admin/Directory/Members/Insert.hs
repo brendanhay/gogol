@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.Insert
     DirectoryMembersInsertResource,
 
     -- ** Constructing a Request
+    DirectoryMembersInsert (..),
     newDirectoryMembersInsert,
-    DirectoryMembersInsert,
   )
 where
 

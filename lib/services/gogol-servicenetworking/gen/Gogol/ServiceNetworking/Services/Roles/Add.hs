@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Roles.Add
     ServiceNetworkingServicesRolesAddResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesRolesAdd (..),
     newServiceNetworkingServicesRolesAdd,
-    ServiceNetworkingServicesRolesAdd,
   )
 where
 

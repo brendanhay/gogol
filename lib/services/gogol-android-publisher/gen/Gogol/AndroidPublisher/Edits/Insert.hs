@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Insert
     AndroidPublisherEditsInsertResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsInsert (..),
     newAndroidPublisherEditsInsert,
-    AndroidPublisherEditsInsert,
   )
 where
 

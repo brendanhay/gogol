@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.RestoreBackup
     SqlInstancesRestoreBackupResource,
 
     -- ** Constructing a Request
+    SqlInstancesRestoreBackup (..),
     newSqlInstancesRestoreBackup,
-    SqlInstancesRestoreBackup,
   )
 where
 

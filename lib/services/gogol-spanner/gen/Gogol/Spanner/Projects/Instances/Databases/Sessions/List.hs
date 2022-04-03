@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.List
     SpannerProjectsInstancesDatabasesSessionsListResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsList (..),
     newSpannerProjectsInstancesDatabasesSessionsList,
-    SpannerProjectsInstancesDatabasesSessionsList,
   )
 where
 

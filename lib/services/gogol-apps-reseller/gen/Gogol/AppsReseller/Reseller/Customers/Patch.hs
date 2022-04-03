@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Customers.Patch
     ResellerCustomersPatchResource,
 
     -- ** Constructing a Request
+    ResellerCustomersPatch (..),
     newResellerCustomersPatch,
-    ResellerCustomersPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Folders.Sinks.Delete
     LoggingFoldersSinksDeleteResource,
 
     -- ** Constructing a Request
+    LoggingFoldersSinksDelete (..),
     newLoggingFoldersSinksDelete,
-    LoggingFoldersSinksDelete,
   )
 where
 

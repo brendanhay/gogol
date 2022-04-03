@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.Restart
     DataFusionProjectsLocationsInstancesRestartResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesRestart (..),
     newDataFusionProjectsLocationsInstancesRestart,
-    DataFusionProjectsLocationsInstancesRestart,
   )
 where
 

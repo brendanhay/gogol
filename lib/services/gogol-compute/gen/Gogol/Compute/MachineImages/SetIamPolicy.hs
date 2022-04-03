@@ -34,8 +34,8 @@ module Gogol.Compute.MachineImages.SetIamPolicy
     ComputeMachineImagesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeMachineImagesSetIamPolicy (..),
     newComputeMachineImagesSetIamPolicy,
-    ComputeMachineImagesSetIamPolicy,
   )
 where
 

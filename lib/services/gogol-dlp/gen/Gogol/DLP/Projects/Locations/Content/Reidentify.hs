@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.Content.Reidentify
     DLPProjectsLocationsContentReidentifyResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsContentReidentify (..),
     newDLPProjectsLocationsContentReidentify,
-    DLPProjectsLocationsContentReidentify,
   )
 where
 

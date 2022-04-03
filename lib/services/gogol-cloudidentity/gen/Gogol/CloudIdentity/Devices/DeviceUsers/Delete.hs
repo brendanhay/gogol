@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.Delete
     CloudIdentityDevicesDeviceUsersDeleteResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersDelete (..),
     newCloudIdentityDevicesDeviceUsersDelete,
-    CloudIdentityDevicesDeviceUsersDelete,
   )
 where
 

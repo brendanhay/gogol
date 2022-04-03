@@ -41,88 +41,88 @@ module Gogol.Datastore
 
     -- ** datastore.projects.allocateIds
     DatastoreProjectsAllocateIdsResource,
+    DatastoreProjectsAllocateIds (..),
     newDatastoreProjectsAllocateIds,
-    DatastoreProjectsAllocateIds,
 
     -- ** datastore.projects.beginTransaction
     DatastoreProjectsBeginTransactionResource,
+    DatastoreProjectsBeginTransaction (..),
     newDatastoreProjectsBeginTransaction,
-    DatastoreProjectsBeginTransaction,
 
     -- ** datastore.projects.commit
     DatastoreProjectsCommitResource,
+    DatastoreProjectsCommit (..),
     newDatastoreProjectsCommit,
-    DatastoreProjectsCommit,
 
     -- ** datastore.projects.export
     DatastoreProjectsExportResource,
+    DatastoreProjectsExport (..),
     newDatastoreProjectsExport,
-    DatastoreProjectsExport,
 
     -- ** datastore.projects.import
     DatastoreProjectsImportResource,
+    DatastoreProjectsImport (..),
     newDatastoreProjectsImport,
-    DatastoreProjectsImport,
 
     -- ** datastore.projects.indexes.create
     DatastoreProjectsIndexesCreateResource,
+    DatastoreProjectsIndexesCreate (..),
     newDatastoreProjectsIndexesCreate,
-    DatastoreProjectsIndexesCreate,
 
     -- ** datastore.projects.indexes.delete
     DatastoreProjectsIndexesDeleteResource,
+    DatastoreProjectsIndexesDelete (..),
     newDatastoreProjectsIndexesDelete,
-    DatastoreProjectsIndexesDelete,
 
     -- ** datastore.projects.indexes.get
     DatastoreProjectsIndexesGetResource,
+    DatastoreProjectsIndexesGet (..),
     newDatastoreProjectsIndexesGet,
-    DatastoreProjectsIndexesGet,
 
     -- ** datastore.projects.indexes.list
     DatastoreProjectsIndexesListResource,
+    DatastoreProjectsIndexesList (..),
     newDatastoreProjectsIndexesList,
-    DatastoreProjectsIndexesList,
 
     -- ** datastore.projects.lookup
     DatastoreProjectsLookupResource,
+    DatastoreProjectsLookup (..),
     newDatastoreProjectsLookup,
-    DatastoreProjectsLookup,
 
     -- ** datastore.projects.operations.cancel
     DatastoreProjectsOperationsCancelResource,
+    DatastoreProjectsOperationsCancel (..),
     newDatastoreProjectsOperationsCancel,
-    DatastoreProjectsOperationsCancel,
 
     -- ** datastore.projects.operations.delete
     DatastoreProjectsOperationsDeleteResource,
+    DatastoreProjectsOperationsDelete (..),
     newDatastoreProjectsOperationsDelete,
-    DatastoreProjectsOperationsDelete,
 
     -- ** datastore.projects.operations.get
     DatastoreProjectsOperationsGetResource,
+    DatastoreProjectsOperationsGet (..),
     newDatastoreProjectsOperationsGet,
-    DatastoreProjectsOperationsGet,
 
     -- ** datastore.projects.operations.list
     DatastoreProjectsOperationsListResource,
+    DatastoreProjectsOperationsList (..),
     newDatastoreProjectsOperationsList,
-    DatastoreProjectsOperationsList,
 
     -- ** datastore.projects.reserveIds
     DatastoreProjectsReserveIdsResource,
+    DatastoreProjectsReserveIds (..),
     newDatastoreProjectsReserveIds,
-    DatastoreProjectsReserveIds,
 
     -- ** datastore.projects.rollback
     DatastoreProjectsRollbackResource,
+    DatastoreProjectsRollback (..),
     newDatastoreProjectsRollback,
-    DatastoreProjectsRollback,
 
     -- ** datastore.projects.runQuery
     DatastoreProjectsRunQueryResource,
+    DatastoreProjectsRunQuery (..),
     newDatastoreProjectsRunQuery,
-    DatastoreProjectsRunQuery,
 
     -- * Types
 

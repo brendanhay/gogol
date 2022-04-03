@@ -34,8 +34,8 @@ module Gogol.ServiceBroker.GetIamPolicy
     ServiceBrokerGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ServiceBrokerGetIamPolicy (..),
     newServiceBrokerGetIamPolicy,
-    ServiceBrokerGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.SignOutUser
     IdentityToolkitRelyingpartySignOutUserResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartySignOutUser (..),
     newIdentityToolkitRelyingpartySignOutUser,
-    IdentityToolkitRelyingpartySignOutUser,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Logs.List
     LoggingLogsListResource,
 
     -- ** Constructing a Request
+    LoggingLogsList (..),
     newLoggingLogsList,
-    LoggingLogsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.User_permissions.Update
     TagManagerAccountsUser_permissionsUpdateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsUser_permissionsUpdate (..),
     newTagManagerAccountsUser_permissionsUpdate,
-    TagManagerAccountsUser_permissionsUpdate,
   )
 where
 

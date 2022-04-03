@@ -34,8 +34,8 @@ module Gogol.Compute.RegionHealthChecks.Delete
     ComputeRegionHealthChecksDeleteResource,
 
     -- ** Constructing a Request
+    ComputeRegionHealthChecksDelete (..),
     newComputeRegionHealthChecksDelete,
-    ComputeRegionHealthChecksDelete,
   )
 where
 

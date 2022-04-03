@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Topics.GetIamPolicy
     PubSubProjectsTopicsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    PubSubProjectsTopicsGetIamPolicy (..),
     newPubSubProjectsTopicsGetIamPolicy,
-    PubSubProjectsTopicsGetIamPolicy,
   )
 where
 

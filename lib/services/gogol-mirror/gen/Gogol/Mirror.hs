@@ -41,123 +41,123 @@ module Gogol.Mirror
 
     -- ** mirror.accounts.insert
     MirrorAccountsInsertResource,
+    MirrorAccountsInsert (..),
     newMirrorAccountsInsert,
-    MirrorAccountsInsert,
 
     -- ** mirror.contacts.delete
     MirrorContactsDeleteResource,
+    MirrorContactsDelete (..),
     newMirrorContactsDelete,
-    MirrorContactsDelete,
 
     -- ** mirror.contacts.get
     MirrorContactsGetResource,
+    MirrorContactsGet (..),
     newMirrorContactsGet,
-    MirrorContactsGet,
 
     -- ** mirror.contacts.insert
     MirrorContactsInsertResource,
+    MirrorContactsInsert (..),
     newMirrorContactsInsert,
-    MirrorContactsInsert,
 
     -- ** mirror.contacts.list
     MirrorContactsListResource,
+    MirrorContactsList (..),
     newMirrorContactsList,
-    MirrorContactsList,
 
     -- ** mirror.contacts.patch
     MirrorContactsPatchResource,
+    MirrorContactsPatch (..),
     newMirrorContactsPatch,
-    MirrorContactsPatch,
 
     -- ** mirror.contacts.update
     MirrorContactsUpdateResource,
+    MirrorContactsUpdate (..),
     newMirrorContactsUpdate,
-    MirrorContactsUpdate,
 
     -- ** mirror.locations.get
     MirrorLocationsGetResource,
+    MirrorLocationsGet (..),
     newMirrorLocationsGet,
-    MirrorLocationsGet,
 
     -- ** mirror.locations.list
     MirrorLocationsListResource,
+    MirrorLocationsList (..),
     newMirrorLocationsList,
-    MirrorLocationsList,
 
     -- ** mirror.settings.get
     MirrorSettingsGetResource,
+    MirrorSettingsGet (..),
     newMirrorSettingsGet,
-    MirrorSettingsGet,
 
     -- ** mirror.subscriptions.delete
     MirrorSubscriptionsDeleteResource,
+    MirrorSubscriptionsDelete (..),
     newMirrorSubscriptionsDelete,
-    MirrorSubscriptionsDelete,
 
     -- ** mirror.subscriptions.insert
     MirrorSubscriptionsInsertResource,
+    MirrorSubscriptionsInsert (..),
     newMirrorSubscriptionsInsert,
-    MirrorSubscriptionsInsert,
 
     -- ** mirror.subscriptions.list
     MirrorSubscriptionsListResource,
+    MirrorSubscriptionsList (..),
     newMirrorSubscriptionsList,
-    MirrorSubscriptionsList,
 
     -- ** mirror.subscriptions.update
     MirrorSubscriptionsUpdateResource,
+    MirrorSubscriptionsUpdate (..),
     newMirrorSubscriptionsUpdate,
-    MirrorSubscriptionsUpdate,
 
     -- ** mirror.timeline.attachments.delete
     MirrorTimelineAttachmentsDeleteResource,
+    MirrorTimelineAttachmentsDelete (..),
     newMirrorTimelineAttachmentsDelete,
-    MirrorTimelineAttachmentsDelete,
 
     -- ** mirror.timeline.attachments.get
     MirrorTimelineAttachmentsGetResource,
+    MirrorTimelineAttachmentsGet (..),
     newMirrorTimelineAttachmentsGet,
-    MirrorTimelineAttachmentsGet,
 
     -- ** mirror.timeline.attachments.insert
     MirrorTimelineAttachmentsInsertResource,
+    MirrorTimelineAttachmentsInsert (..),
     newMirrorTimelineAttachmentsInsert,
-    MirrorTimelineAttachmentsInsert,
 
     -- ** mirror.timeline.attachments.list
     MirrorTimelineAttachmentsListResource,
+    MirrorTimelineAttachmentsList (..),
     newMirrorTimelineAttachmentsList,
-    MirrorTimelineAttachmentsList,
 
     -- ** mirror.timeline.delete
     MirrorTimelineDeleteResource,
+    MirrorTimelineDelete (..),
     newMirrorTimelineDelete,
-    MirrorTimelineDelete,
 
     -- ** mirror.timeline.get
     MirrorTimelineGetResource,
+    MirrorTimelineGet (..),
     newMirrorTimelineGet,
-    MirrorTimelineGet,
 
     -- ** mirror.timeline.insert
     MirrorTimelineInsertResource,
+    MirrorTimelineInsert (..),
     newMirrorTimelineInsert,
-    MirrorTimelineInsert,
 
     -- ** mirror.timeline.list
     MirrorTimelineListResource,
+    MirrorTimelineList (..),
     newMirrorTimelineList,
-    MirrorTimelineList,
 
     -- ** mirror.timeline.patch
     MirrorTimelinePatchResource,
+    MirrorTimelinePatch (..),
     newMirrorTimelinePatch,
-    MirrorTimelinePatch,
 
     -- ** mirror.timeline.update
     MirrorTimelineUpdateResource,
+    MirrorTimelineUpdate (..),
     newMirrorTimelineUpdate,
-    MirrorTimelineUpdate,
 
     -- * Types
 

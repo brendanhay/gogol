@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Schemas.Get
     PubSubProjectsSchemasGetResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSchemasGet (..),
     newPubSubProjectsSchemasGet,
-    PubSubProjectsSchemasGet,
   )
 where
 

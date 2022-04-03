@@ -68,593 +68,593 @@ module Gogol.Admin.Directory
 
     -- ** admin.channels.stop
     AdminChannelsStopResource,
+    AdminChannelsStop (..),
     newAdminChannelsStop,
-    AdminChannelsStop,
 
     -- ** admin.customer.devices.chromeos.commands.get
     AdminCustomerDevicesChromeosCommandsGetResource,
+    AdminCustomerDevicesChromeosCommandsGet (..),
     newAdminCustomerDevicesChromeosCommandsGet,
-    AdminCustomerDevicesChromeosCommandsGet,
 
     -- ** admin.customer.devices.chromeos.issueCommand
     AdminCustomerDevicesChromeosIssueCommandResource,
+    AdminCustomerDevicesChromeosIssueCommand (..),
     newAdminCustomerDevicesChromeosIssueCommand,
-    AdminCustomerDevicesChromeosIssueCommand,
 
     -- ** admin.customers.chrome.printers.batchCreatePrinters
     AdminCustomersChromePrintersBatchCreatePrintersResource,
+    AdminCustomersChromePrintersBatchCreatePrinters (..),
     newAdminCustomersChromePrintersBatchCreatePrinters,
-    AdminCustomersChromePrintersBatchCreatePrinters,
 
     -- ** admin.customers.chrome.printers.batchDeletePrinters
     AdminCustomersChromePrintersBatchDeletePrintersResource,
+    AdminCustomersChromePrintersBatchDeletePrinters (..),
     newAdminCustomersChromePrintersBatchDeletePrinters,
-    AdminCustomersChromePrintersBatchDeletePrinters,
 
     -- ** admin.customers.chrome.printers.create
     AdminCustomersChromePrintersCreateResource,
+    AdminCustomersChromePrintersCreate (..),
     newAdminCustomersChromePrintersCreate,
-    AdminCustomersChromePrintersCreate,
 
     -- ** admin.customers.chrome.printers.delete
     AdminCustomersChromePrintersDeleteResource,
+    AdminCustomersChromePrintersDelete (..),
     newAdminCustomersChromePrintersDelete,
-    AdminCustomersChromePrintersDelete,
 
     -- ** admin.customers.chrome.printers.get
     AdminCustomersChromePrintersGetResource,
+    AdminCustomersChromePrintersGet (..),
     newAdminCustomersChromePrintersGet,
-    AdminCustomersChromePrintersGet,
 
     -- ** admin.customers.chrome.printers.list
     AdminCustomersChromePrintersListResource,
+    AdminCustomersChromePrintersList (..),
     newAdminCustomersChromePrintersList,
-    AdminCustomersChromePrintersList,
 
     -- ** admin.customers.chrome.printers.listPrinterModels
     AdminCustomersChromePrintersListPrinterModelsResource,
+    AdminCustomersChromePrintersListPrinterModels (..),
     newAdminCustomersChromePrintersListPrinterModels,
-    AdminCustomersChromePrintersListPrinterModels,
 
     -- ** admin.customers.chrome.printers.patch
     AdminCustomersChromePrintersPatchResource,
+    AdminCustomersChromePrintersPatch (..),
     newAdminCustomersChromePrintersPatch,
-    AdminCustomersChromePrintersPatch,
 
     -- ** directory.asps.delete
     DirectoryAspsDeleteResource,
+    DirectoryAspsDelete (..),
     newDirectoryAspsDelete,
-    DirectoryAspsDelete,
 
     -- ** directory.asps.get
     DirectoryAspsGetResource,
+    DirectoryAspsGet (..),
     newDirectoryAspsGet,
-    DirectoryAspsGet,
 
     -- ** directory.asps.list
     DirectoryAspsListResource,
+    DirectoryAspsList (..),
     newDirectoryAspsList,
-    DirectoryAspsList,
 
     -- ** directory.chromeosdevices.action
     DirectoryChromeosdevicesActionResource,
+    DirectoryChromeosdevicesAction (..),
     newDirectoryChromeosdevicesAction,
-    DirectoryChromeosdevicesAction,
 
     -- ** directory.chromeosdevices.get
     DirectoryChromeosdevicesGetResource,
+    DirectoryChromeosdevicesGet (..),
     newDirectoryChromeosdevicesGet,
-    DirectoryChromeosdevicesGet,
 
     -- ** directory.chromeosdevices.list
     DirectoryChromeosdevicesListResource,
+    DirectoryChromeosdevicesList (..),
     newDirectoryChromeosdevicesList,
-    DirectoryChromeosdevicesList,
 
     -- ** directory.chromeosdevices.moveDevicesToOu
     DirectoryChromeosdevicesMoveDevicesToOuResource,
+    DirectoryChromeosdevicesMoveDevicesToOu (..),
     newDirectoryChromeosdevicesMoveDevicesToOu,
-    DirectoryChromeosdevicesMoveDevicesToOu,
 
     -- ** directory.chromeosdevices.patch
     DirectoryChromeosdevicesPatchResource,
+    DirectoryChromeosdevicesPatch (..),
     newDirectoryChromeosdevicesPatch,
-    DirectoryChromeosdevicesPatch,
 
     -- ** directory.chromeosdevices.update
     DirectoryChromeosdevicesUpdateResource,
+    DirectoryChromeosdevicesUpdate (..),
     newDirectoryChromeosdevicesUpdate,
-    DirectoryChromeosdevicesUpdate,
 
     -- ** directory.customers.get
     DirectoryCustomersGetResource,
+    DirectoryCustomersGet (..),
     newDirectoryCustomersGet,
-    DirectoryCustomersGet,
 
     -- ** directory.customers.patch
     DirectoryCustomersPatchResource,
+    DirectoryCustomersPatch (..),
     newDirectoryCustomersPatch,
-    DirectoryCustomersPatch,
 
     -- ** directory.customers.update
     DirectoryCustomersUpdateResource,
+    DirectoryCustomersUpdate (..),
     newDirectoryCustomersUpdate,
-    DirectoryCustomersUpdate,
 
     -- ** directory.domainAliases.delete
     DirectoryDomainAliasesDeleteResource,
+    DirectoryDomainAliasesDelete (..),
     newDirectoryDomainAliasesDelete,
-    DirectoryDomainAliasesDelete,
 
     -- ** directory.domainAliases.get
     DirectoryDomainAliasesGetResource,
+    DirectoryDomainAliasesGet (..),
     newDirectoryDomainAliasesGet,
-    DirectoryDomainAliasesGet,
 
     -- ** directory.domainAliases.insert
     DirectoryDomainAliasesInsertResource,
+    DirectoryDomainAliasesInsert (..),
     newDirectoryDomainAliasesInsert,
-    DirectoryDomainAliasesInsert,
 
     -- ** directory.domainAliases.list
     DirectoryDomainAliasesListResource,
+    DirectoryDomainAliasesList (..),
     newDirectoryDomainAliasesList,
-    DirectoryDomainAliasesList,
 
     -- ** directory.domains.delete
     DirectoryDomainsDeleteResource,
+    DirectoryDomainsDelete (..),
     newDirectoryDomainsDelete,
-    DirectoryDomainsDelete,
 
     -- ** directory.domains.get
     DirectoryDomainsGetResource,
+    DirectoryDomainsGet (..),
     newDirectoryDomainsGet,
-    DirectoryDomainsGet,
 
     -- ** directory.domains.insert
     DirectoryDomainsInsertResource,
+    DirectoryDomainsInsert (..),
     newDirectoryDomainsInsert,
-    DirectoryDomainsInsert,
 
     -- ** directory.domains.list
     DirectoryDomainsListResource,
+    DirectoryDomainsList (..),
     newDirectoryDomainsList,
-    DirectoryDomainsList,
 
     -- ** directory.groups.aliases.delete
     DirectoryGroupsAliasesDeleteResource,
+    DirectoryGroupsAliasesDelete (..),
     newDirectoryGroupsAliasesDelete,
-    DirectoryGroupsAliasesDelete,
 
     -- ** directory.groups.aliases.insert
     DirectoryGroupsAliasesInsertResource,
+    DirectoryGroupsAliasesInsert (..),
     newDirectoryGroupsAliasesInsert,
-    DirectoryGroupsAliasesInsert,
 
     -- ** directory.groups.aliases.list
     DirectoryGroupsAliasesListResource,
+    DirectoryGroupsAliasesList (..),
     newDirectoryGroupsAliasesList,
-    DirectoryGroupsAliasesList,
 
     -- ** directory.groups.delete
     DirectoryGroupsDeleteResource,
+    DirectoryGroupsDelete (..),
     newDirectoryGroupsDelete,
-    DirectoryGroupsDelete,
 
     -- ** directory.groups.get
     DirectoryGroupsGetResource,
+    DirectoryGroupsGet (..),
     newDirectoryGroupsGet,
-    DirectoryGroupsGet,
 
     -- ** directory.groups.insert
     DirectoryGroupsInsertResource,
+    DirectoryGroupsInsert (..),
     newDirectoryGroupsInsert,
-    DirectoryGroupsInsert,
 
     -- ** directory.groups.list
     DirectoryGroupsListResource,
+    DirectoryGroupsList (..),
     newDirectoryGroupsList,
-    DirectoryGroupsList,
 
     -- ** directory.groups.patch
     DirectoryGroupsPatchResource,
+    DirectoryGroupsPatch (..),
     newDirectoryGroupsPatch,
-    DirectoryGroupsPatch,
 
     -- ** directory.groups.update
     DirectoryGroupsUpdateResource,
+    DirectoryGroupsUpdate (..),
     newDirectoryGroupsUpdate,
-    DirectoryGroupsUpdate,
 
     -- ** directory.members.delete
     DirectoryMembersDeleteResource,
+    DirectoryMembersDelete (..),
     newDirectoryMembersDelete,
-    DirectoryMembersDelete,
 
     -- ** directory.members.get
     DirectoryMembersGetResource,
+    DirectoryMembersGet (..),
     newDirectoryMembersGet,
-    DirectoryMembersGet,
 
     -- ** directory.members.hasMember
     DirectoryMembersHasMemberResource,
+    DirectoryMembersHasMember (..),
     newDirectoryMembersHasMember,
-    DirectoryMembersHasMember,
 
     -- ** directory.members.insert
     DirectoryMembersInsertResource,
+    DirectoryMembersInsert (..),
     newDirectoryMembersInsert,
-    DirectoryMembersInsert,
 
     -- ** directory.members.list
     DirectoryMembersListResource,
+    DirectoryMembersList (..),
     newDirectoryMembersList,
-    DirectoryMembersList,
 
     -- ** directory.members.patch
     DirectoryMembersPatchResource,
+    DirectoryMembersPatch (..),
     newDirectoryMembersPatch,
-    DirectoryMembersPatch,
 
     -- ** directory.members.update
     DirectoryMembersUpdateResource,
+    DirectoryMembersUpdate (..),
     newDirectoryMembersUpdate,
-    DirectoryMembersUpdate,
 
     -- ** directory.mobiledevices.action
     DirectoryMobiledevicesActionResource,
+    DirectoryMobiledevicesAction (..),
     newDirectoryMobiledevicesAction,
-    DirectoryMobiledevicesAction,
 
     -- ** directory.mobiledevices.delete
     DirectoryMobiledevicesDeleteResource,
+    DirectoryMobiledevicesDelete (..),
     newDirectoryMobiledevicesDelete,
-    DirectoryMobiledevicesDelete,
 
     -- ** directory.mobiledevices.get
     DirectoryMobiledevicesGetResource,
+    DirectoryMobiledevicesGet (..),
     newDirectoryMobiledevicesGet,
-    DirectoryMobiledevicesGet,
 
     -- ** directory.mobiledevices.list
     DirectoryMobiledevicesListResource,
+    DirectoryMobiledevicesList (..),
     newDirectoryMobiledevicesList,
-    DirectoryMobiledevicesList,
 
     -- ** directory.orgunits.delete
     DirectoryOrgunitsDeleteResource,
+    DirectoryOrgunitsDelete (..),
     newDirectoryOrgunitsDelete,
-    DirectoryOrgunitsDelete,
 
     -- ** directory.orgunits.get
     DirectoryOrgunitsGetResource,
+    DirectoryOrgunitsGet (..),
     newDirectoryOrgunitsGet,
-    DirectoryOrgunitsGet,
 
     -- ** directory.orgunits.insert
     DirectoryOrgunitsInsertResource,
+    DirectoryOrgunitsInsert (..),
     newDirectoryOrgunitsInsert,
-    DirectoryOrgunitsInsert,
 
     -- ** directory.orgunits.list
     DirectoryOrgunitsListResource,
+    DirectoryOrgunitsList (..),
     newDirectoryOrgunitsList,
-    DirectoryOrgunitsList,
 
     -- ** directory.orgunits.patch
     DirectoryOrgunitsPatchResource,
+    DirectoryOrgunitsPatch (..),
     newDirectoryOrgunitsPatch,
-    DirectoryOrgunitsPatch,
 
     -- ** directory.orgunits.update
     DirectoryOrgunitsUpdateResource,
+    DirectoryOrgunitsUpdate (..),
     newDirectoryOrgunitsUpdate,
-    DirectoryOrgunitsUpdate,
 
     -- ** directory.privileges.list
     DirectoryPrivilegesListResource,
+    DirectoryPrivilegesList (..),
     newDirectoryPrivilegesList,
-    DirectoryPrivilegesList,
 
     -- ** directory.resources.buildings.delete
     DirectoryResourcesBuildingsDeleteResource,
+    DirectoryResourcesBuildingsDelete (..),
     newDirectoryResourcesBuildingsDelete,
-    DirectoryResourcesBuildingsDelete,
 
     -- ** directory.resources.buildings.get
     DirectoryResourcesBuildingsGetResource,
+    DirectoryResourcesBuildingsGet (..),
     newDirectoryResourcesBuildingsGet,
-    DirectoryResourcesBuildingsGet,
 
     -- ** directory.resources.buildings.insert
     DirectoryResourcesBuildingsInsertResource,
+    DirectoryResourcesBuildingsInsert (..),
     newDirectoryResourcesBuildingsInsert,
-    DirectoryResourcesBuildingsInsert,
 
     -- ** directory.resources.buildings.list
     DirectoryResourcesBuildingsListResource,
+    DirectoryResourcesBuildingsList (..),
     newDirectoryResourcesBuildingsList,
-    DirectoryResourcesBuildingsList,
 
     -- ** directory.resources.buildings.patch
     DirectoryResourcesBuildingsPatchResource,
+    DirectoryResourcesBuildingsPatch (..),
     newDirectoryResourcesBuildingsPatch,
-    DirectoryResourcesBuildingsPatch,
 
     -- ** directory.resources.buildings.update
     DirectoryResourcesBuildingsUpdateResource,
+    DirectoryResourcesBuildingsUpdate (..),
     newDirectoryResourcesBuildingsUpdate,
-    DirectoryResourcesBuildingsUpdate,
 
     -- ** directory.resources.calendars.delete
     DirectoryResourcesCalendarsDeleteResource,
+    DirectoryResourcesCalendarsDelete (..),
     newDirectoryResourcesCalendarsDelete,
-    DirectoryResourcesCalendarsDelete,
 
     -- ** directory.resources.calendars.get
     DirectoryResourcesCalendarsGetResource,
+    DirectoryResourcesCalendarsGet (..),
     newDirectoryResourcesCalendarsGet,
-    DirectoryResourcesCalendarsGet,
 
     -- ** directory.resources.calendars.insert
     DirectoryResourcesCalendarsInsertResource,
+    DirectoryResourcesCalendarsInsert (..),
     newDirectoryResourcesCalendarsInsert,
-    DirectoryResourcesCalendarsInsert,
 
     -- ** directory.resources.calendars.list
     DirectoryResourcesCalendarsListResource,
+    DirectoryResourcesCalendarsList (..),
     newDirectoryResourcesCalendarsList,
-    DirectoryResourcesCalendarsList,
 
     -- ** directory.resources.calendars.patch
     DirectoryResourcesCalendarsPatchResource,
+    DirectoryResourcesCalendarsPatch (..),
     newDirectoryResourcesCalendarsPatch,
-    DirectoryResourcesCalendarsPatch,
 
     -- ** directory.resources.calendars.update
     DirectoryResourcesCalendarsUpdateResource,
+    DirectoryResourcesCalendarsUpdate (..),
     newDirectoryResourcesCalendarsUpdate,
-    DirectoryResourcesCalendarsUpdate,
 
     -- ** directory.resources.features.delete
     DirectoryResourcesFeaturesDeleteResource,
+    DirectoryResourcesFeaturesDelete (..),
     newDirectoryResourcesFeaturesDelete,
-    DirectoryResourcesFeaturesDelete,
 
     -- ** directory.resources.features.get
     DirectoryResourcesFeaturesGetResource,
+    DirectoryResourcesFeaturesGet (..),
     newDirectoryResourcesFeaturesGet,
-    DirectoryResourcesFeaturesGet,
 
     -- ** directory.resources.features.insert
     DirectoryResourcesFeaturesInsertResource,
+    DirectoryResourcesFeaturesInsert (..),
     newDirectoryResourcesFeaturesInsert,
-    DirectoryResourcesFeaturesInsert,
 
     -- ** directory.resources.features.list
     DirectoryResourcesFeaturesListResource,
+    DirectoryResourcesFeaturesList (..),
     newDirectoryResourcesFeaturesList,
-    DirectoryResourcesFeaturesList,
 
     -- ** directory.resources.features.patch
     DirectoryResourcesFeaturesPatchResource,
+    DirectoryResourcesFeaturesPatch (..),
     newDirectoryResourcesFeaturesPatch,
-    DirectoryResourcesFeaturesPatch,
 
     -- ** directory.resources.features.rename
     DirectoryResourcesFeaturesRenameResource,
+    DirectoryResourcesFeaturesRename (..),
     newDirectoryResourcesFeaturesRename,
-    DirectoryResourcesFeaturesRename,
 
     -- ** directory.resources.features.update
     DirectoryResourcesFeaturesUpdateResource,
+    DirectoryResourcesFeaturesUpdate (..),
     newDirectoryResourcesFeaturesUpdate,
-    DirectoryResourcesFeaturesUpdate,
 
     -- ** directory.roleAssignments.delete
     DirectoryRoleAssignmentsDeleteResource,
+    DirectoryRoleAssignmentsDelete (..),
     newDirectoryRoleAssignmentsDelete,
-    DirectoryRoleAssignmentsDelete,
 
     -- ** directory.roleAssignments.get
     DirectoryRoleAssignmentsGetResource,
+    DirectoryRoleAssignmentsGet (..),
     newDirectoryRoleAssignmentsGet,
-    DirectoryRoleAssignmentsGet,
 
     -- ** directory.roleAssignments.insert
     DirectoryRoleAssignmentsInsertResource,
+    DirectoryRoleAssignmentsInsert (..),
     newDirectoryRoleAssignmentsInsert,
-    DirectoryRoleAssignmentsInsert,
 
     -- ** directory.roleAssignments.list
     DirectoryRoleAssignmentsListResource,
+    DirectoryRoleAssignmentsList (..),
     newDirectoryRoleAssignmentsList,
-    DirectoryRoleAssignmentsList,
 
     -- ** directory.roles.delete
     DirectoryRolesDeleteResource,
+    DirectoryRolesDelete (..),
     newDirectoryRolesDelete,
-    DirectoryRolesDelete,
 
     -- ** directory.roles.get
     DirectoryRolesGetResource,
+    DirectoryRolesGet (..),
     newDirectoryRolesGet,
-    DirectoryRolesGet,
 
     -- ** directory.roles.insert
     DirectoryRolesInsertResource,
+    DirectoryRolesInsert (..),
     newDirectoryRolesInsert,
-    DirectoryRolesInsert,
 
     -- ** directory.roles.list
     DirectoryRolesListResource,
+    DirectoryRolesList (..),
     newDirectoryRolesList,
-    DirectoryRolesList,
 
     -- ** directory.roles.patch
     DirectoryRolesPatchResource,
+    DirectoryRolesPatch (..),
     newDirectoryRolesPatch,
-    DirectoryRolesPatch,
 
     -- ** directory.roles.update
     DirectoryRolesUpdateResource,
+    DirectoryRolesUpdate (..),
     newDirectoryRolesUpdate,
-    DirectoryRolesUpdate,
 
     -- ** directory.schemas.delete
     DirectorySchemasDeleteResource,
+    DirectorySchemasDelete (..),
     newDirectorySchemasDelete,
-    DirectorySchemasDelete,
 
     -- ** directory.schemas.get
     DirectorySchemasGetResource,
+    DirectorySchemasGet (..),
     newDirectorySchemasGet,
-    DirectorySchemasGet,
 
     -- ** directory.schemas.insert
     DirectorySchemasInsertResource,
+    DirectorySchemasInsert (..),
     newDirectorySchemasInsert,
-    DirectorySchemasInsert,
 
     -- ** directory.schemas.list
     DirectorySchemasListResource,
+    DirectorySchemasList (..),
     newDirectorySchemasList,
-    DirectorySchemasList,
 
     -- ** directory.schemas.patch
     DirectorySchemasPatchResource,
+    DirectorySchemasPatch (..),
     newDirectorySchemasPatch,
-    DirectorySchemasPatch,
 
     -- ** directory.schemas.update
     DirectorySchemasUpdateResource,
+    DirectorySchemasUpdate (..),
     newDirectorySchemasUpdate,
-    DirectorySchemasUpdate,
 
     -- ** directory.tokens.delete
     DirectoryTokensDeleteResource,
+    DirectoryTokensDelete (..),
     newDirectoryTokensDelete,
-    DirectoryTokensDelete,
 
     -- ** directory.tokens.get
     DirectoryTokensGetResource,
+    DirectoryTokensGet (..),
     newDirectoryTokensGet,
-    DirectoryTokensGet,
 
     -- ** directory.tokens.list
     DirectoryTokensListResource,
+    DirectoryTokensList (..),
     newDirectoryTokensList,
-    DirectoryTokensList,
 
     -- ** directory.twoStepVerification.turnOff
     DirectoryTwoStepVerificationTurnOffResource,
+    DirectoryTwoStepVerificationTurnOff (..),
     newDirectoryTwoStepVerificationTurnOff,
-    DirectoryTwoStepVerificationTurnOff,
 
     -- ** directory.users.aliases.delete
     DirectoryUsersAliasesDeleteResource,
+    DirectoryUsersAliasesDelete (..),
     newDirectoryUsersAliasesDelete,
-    DirectoryUsersAliasesDelete,
 
     -- ** directory.users.aliases.insert
     DirectoryUsersAliasesInsertResource,
+    DirectoryUsersAliasesInsert (..),
     newDirectoryUsersAliasesInsert,
-    DirectoryUsersAliasesInsert,
 
     -- ** directory.users.aliases.list
     DirectoryUsersAliasesListResource,
+    DirectoryUsersAliasesList (..),
     newDirectoryUsersAliasesList,
-    DirectoryUsersAliasesList,
 
     -- ** directory.users.aliases.watch
     DirectoryUsersAliasesWatchResource,
+    DirectoryUsersAliasesWatch (..),
     newDirectoryUsersAliasesWatch,
-    DirectoryUsersAliasesWatch,
 
     -- ** directory.users.delete
     DirectoryUsersDeleteResource,
+    DirectoryUsersDelete (..),
     newDirectoryUsersDelete,
-    DirectoryUsersDelete,
 
     -- ** directory.users.get
     DirectoryUsersGetResource,
+    DirectoryUsersGet (..),
     newDirectoryUsersGet,
-    DirectoryUsersGet,
 
     -- ** directory.users.insert
     DirectoryUsersInsertResource,
+    DirectoryUsersInsert (..),
     newDirectoryUsersInsert,
-    DirectoryUsersInsert,
 
     -- ** directory.users.list
     DirectoryUsersListResource,
+    DirectoryUsersList (..),
     newDirectoryUsersList,
-    DirectoryUsersList,
 
     -- ** directory.users.makeAdmin
     DirectoryUsersMakeAdminResource,
+    DirectoryUsersMakeAdmin (..),
     newDirectoryUsersMakeAdmin,
-    DirectoryUsersMakeAdmin,
 
     -- ** directory.users.patch
     DirectoryUsersPatchResource,
+    DirectoryUsersPatch (..),
     newDirectoryUsersPatch,
-    DirectoryUsersPatch,
 
     -- ** directory.users.photos.delete
     DirectoryUsersPhotosDeleteResource,
+    DirectoryUsersPhotosDelete (..),
     newDirectoryUsersPhotosDelete,
-    DirectoryUsersPhotosDelete,
 
     -- ** directory.users.photos.get
     DirectoryUsersPhotosGetResource,
+    DirectoryUsersPhotosGet (..),
     newDirectoryUsersPhotosGet,
-    DirectoryUsersPhotosGet,
 
     -- ** directory.users.photos.patch
     DirectoryUsersPhotosPatchResource,
+    DirectoryUsersPhotosPatch (..),
     newDirectoryUsersPhotosPatch,
-    DirectoryUsersPhotosPatch,
 
     -- ** directory.users.photos.update
     DirectoryUsersPhotosUpdateResource,
+    DirectoryUsersPhotosUpdate (..),
     newDirectoryUsersPhotosUpdate,
-    DirectoryUsersPhotosUpdate,
 
     -- ** directory.users.signOut
     DirectoryUsersSignOutResource,
+    DirectoryUsersSignOut (..),
     newDirectoryUsersSignOut,
-    DirectoryUsersSignOut,
 
     -- ** directory.users.undelete
     DirectoryUsersUndeleteResource,
+    DirectoryUsersUndelete (..),
     newDirectoryUsersUndelete,
-    DirectoryUsersUndelete,
 
     -- ** directory.users.update
     DirectoryUsersUpdateResource,
+    DirectoryUsersUpdate (..),
     newDirectoryUsersUpdate,
-    DirectoryUsersUpdate,
 
     -- ** directory.users.watch
     DirectoryUsersWatchResource,
+    DirectoryUsersWatch (..),
     newDirectoryUsersWatch,
-    DirectoryUsersWatch,
 
     -- ** directory.verificationCodes.generate
     DirectoryVerificationCodesGenerateResource,
+    DirectoryVerificationCodesGenerate (..),
     newDirectoryVerificationCodesGenerate,
-    DirectoryVerificationCodesGenerate,
 
     -- ** directory.verificationCodes.invalidate
     DirectoryVerificationCodesInvalidateResource,
+    DirectoryVerificationCodesInvalidate (..),
     newDirectoryVerificationCodesInvalidate,
-    DirectoryVerificationCodesInvalidate,
 
     -- ** directory.verificationCodes.list
     DirectoryVerificationCodesListResource,
+    DirectoryVerificationCodesList (..),
     newDirectoryVerificationCodesList,
-    DirectoryVerificationCodesList,
 
     -- * Types
 

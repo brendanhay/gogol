@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.AuthorizedCertificates.List
     AppEngineAppsAuthorizedCertificatesListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsAuthorizedCertificatesList (..),
     newAppEngineAppsAuthorizedCertificatesList,
-    AppEngineAppsAuthorizedCertificatesList,
   )
 where
 

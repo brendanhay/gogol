@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Intents.Patch
     DialogFlowProjectsLocationsAgentsIntentsPatchResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsIntentsPatch (..),
     newDialogFlowProjectsLocationsAgentsIntentsPatch,
-    DialogFlowProjectsLocationsAgentsIntentsPatch,
   )
 where
 

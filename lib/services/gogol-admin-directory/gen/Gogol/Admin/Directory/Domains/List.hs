@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Domains.List
     DirectoryDomainsListResource,
 
     -- ** Constructing a Request
+    DirectoryDomainsList (..),
     newDirectoryDomainsList,
-    DirectoryDomainsList,
   )
 where
 

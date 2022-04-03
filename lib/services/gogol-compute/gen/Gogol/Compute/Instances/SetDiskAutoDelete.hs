@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetDiskAutoDelete
     ComputeInstancesSetDiskAutoDeleteResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetDiskAutoDelete (..),
     newComputeInstancesSetDiskAutoDelete,
-    ComputeInstancesSetDiskAutoDelete,
   )
 where
 

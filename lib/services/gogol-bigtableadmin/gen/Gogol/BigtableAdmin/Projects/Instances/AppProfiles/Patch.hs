@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Patch
     BigtableAdminProjectsInstancesAppProfilesPatchResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesAppProfilesPatch (..),
     newBigtableAdminProjectsInstancesAppProfilesPatch,
-    BigtableAdminProjectsInstancesAppProfilesPatch,
   )
 where
 

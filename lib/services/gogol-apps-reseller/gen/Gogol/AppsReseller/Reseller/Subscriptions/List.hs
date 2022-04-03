@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.List
     ResellerSubscriptionsListResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsList (..),
     newResellerSubscriptionsList,
-    ResellerSubscriptionsList,
   )
 where
 

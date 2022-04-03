@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Snapshots.Delete
     PubSubProjectsSnapshotsDeleteResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSnapshotsDelete (..),
     newPubSubProjectsSnapshotsDelete,
-    PubSubProjectsSnapshotsDelete,
   )
 where
 

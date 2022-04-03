@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.RoleAssignments.Get
     DirectoryRoleAssignmentsGetResource,
 
     -- ** Constructing a Request
+    DirectoryRoleAssignmentsGet (..),
     newDirectoryRoleAssignmentsGet,
-    DirectoryRoleAssignmentsGet,
   )
 where
 

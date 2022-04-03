@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.Update
     DirectoryMembersUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryMembersUpdate (..),
     newDirectoryMembersUpdate,
-    DirectoryMembersUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Companies.Get
     JobsProjectsTenantsCompaniesGetResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsCompaniesGet (..),
     newJobsProjectsTenantsCompaniesGet,
-    JobsProjectsTenantsCompaniesGet,
   )
 where
 

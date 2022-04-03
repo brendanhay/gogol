@@ -34,8 +34,8 @@ module Gogol.VideoIntelligence.Videos.Annotate
     VideoIntelligenceVideosAnnotateResource,
 
     -- ** Constructing a Request
+    VideoIntelligenceVideosAnnotate (..),
     newVideoIntelligenceVideosAnnotate,
-    VideoIntelligenceVideosAnnotate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AlertCenter.GetSettings
     AlertCenterGetSettingsResource,
 
     -- ** Constructing a Request
+    AlertCenterGetSettings (..),
     newAlertCenterGetSettings,
-    AlertCenterGetSettings,
   )
 where
 

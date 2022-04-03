@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.StoredInfoTypes.Get
     DLPOrganizationsStoredInfoTypesGetResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsStoredInfoTypesGet (..),
     newDLPOrganizationsStoredInfoTypesGet,
-    DLPOrganizationsStoredInfoTypesGet,
   )
 where
 

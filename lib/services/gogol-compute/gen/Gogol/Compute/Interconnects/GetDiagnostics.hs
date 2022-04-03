@@ -34,8 +34,8 @@ module Gogol.Compute.Interconnects.GetDiagnostics
     ComputeInterconnectsGetDiagnosticsResource,
 
     -- ** Constructing a Request
+    ComputeInterconnectsGetDiagnostics (..),
     newComputeInterconnectsGetDiagnostics,
-    ComputeInterconnectsGetDiagnostics,
   )
 where
 

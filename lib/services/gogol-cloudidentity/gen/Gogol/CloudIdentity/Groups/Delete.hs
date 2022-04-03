@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Delete
     CloudIdentityGroupsDeleteResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsDelete (..),
     newCloudIdentityGroupsDelete,
-    CloudIdentityGroupsDelete,
   )
 where
 

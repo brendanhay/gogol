@@ -34,8 +34,8 @@ module Gogol.Logging.Folders.Locations.Operations.Get
     LoggingFoldersLocationsOperationsGetResource,
 
     -- ** Constructing a Request
+    LoggingFoldersLocationsOperationsGet (..),
     newLoggingFoldersLocationsOperationsGet,
-    LoggingFoldersLocationsOperationsGet,
   )
 where
 

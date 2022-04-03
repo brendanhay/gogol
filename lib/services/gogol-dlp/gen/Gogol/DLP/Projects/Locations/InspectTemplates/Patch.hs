@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.InspectTemplates.Patch
     DLPProjectsLocationsInspectTemplatesPatchResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsInspectTemplatesPatch (..),
     newDLPProjectsLocationsInspectTemplatesPatch,
-    DLPProjectsLocationsInspectTemplatesPatch,
   )
 where
 

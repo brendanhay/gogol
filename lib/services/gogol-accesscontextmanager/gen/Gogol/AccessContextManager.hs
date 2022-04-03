@@ -40,163 +40,163 @@ module Gogol.AccessContextManager
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.create
     AccessContextManagerAccessPoliciesAccessLevelsCreateResource,
+    AccessContextManagerAccessPoliciesAccessLevelsCreate (..),
     newAccessContextManagerAccessPoliciesAccessLevelsCreate,
-    AccessContextManagerAccessPoliciesAccessLevelsCreate,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.delete
     AccessContextManagerAccessPoliciesAccessLevelsDeleteResource,
+    AccessContextManagerAccessPoliciesAccessLevelsDelete (..),
     newAccessContextManagerAccessPoliciesAccessLevelsDelete,
-    AccessContextManagerAccessPoliciesAccessLevelsDelete,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.get
     AccessContextManagerAccessPoliciesAccessLevelsGetResource,
+    AccessContextManagerAccessPoliciesAccessLevelsGet (..),
     newAccessContextManagerAccessPoliciesAccessLevelsGet,
-    AccessContextManagerAccessPoliciesAccessLevelsGet,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.list
     AccessContextManagerAccessPoliciesAccessLevelsListResource,
+    AccessContextManagerAccessPoliciesAccessLevelsList (..),
     newAccessContextManagerAccessPoliciesAccessLevelsList,
-    AccessContextManagerAccessPoliciesAccessLevelsList,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.patch
     AccessContextManagerAccessPoliciesAccessLevelsPatchResource,
+    AccessContextManagerAccessPoliciesAccessLevelsPatch (..),
     newAccessContextManagerAccessPoliciesAccessLevelsPatch,
-    AccessContextManagerAccessPoliciesAccessLevelsPatch,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.replaceAll
     AccessContextManagerAccessPoliciesAccessLevelsReplaceAllResource,
+    AccessContextManagerAccessPoliciesAccessLevelsReplaceAll (..),
     newAccessContextManagerAccessPoliciesAccessLevelsReplaceAll,
-    AccessContextManagerAccessPoliciesAccessLevelsReplaceAll,
 
     -- ** accesscontextmanager.accessPolicies.accessLevels.testIamPermissions
     AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissionsResource,
+    AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions (..),
     newAccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions,
-    AccessContextManagerAccessPoliciesAccessLevelsTestIamPermissions,
 
     -- ** accesscontextmanager.accessPolicies.create
     AccessContextManagerAccessPoliciesCreateResource,
+    AccessContextManagerAccessPoliciesCreate (..),
     newAccessContextManagerAccessPoliciesCreate,
-    AccessContextManagerAccessPoliciesCreate,
 
     -- ** accesscontextmanager.accessPolicies.delete
     AccessContextManagerAccessPoliciesDeleteResource,
+    AccessContextManagerAccessPoliciesDelete (..),
     newAccessContextManagerAccessPoliciesDelete,
-    AccessContextManagerAccessPoliciesDelete,
 
     -- ** accesscontextmanager.accessPolicies.get
     AccessContextManagerAccessPoliciesGetResource,
+    AccessContextManagerAccessPoliciesGet (..),
     newAccessContextManagerAccessPoliciesGet,
-    AccessContextManagerAccessPoliciesGet,
 
     -- ** accesscontextmanager.accessPolicies.getIamPolicy
     AccessContextManagerAccessPoliciesGetIamPolicyResource,
+    AccessContextManagerAccessPoliciesGetIamPolicy (..),
     newAccessContextManagerAccessPoliciesGetIamPolicy,
-    AccessContextManagerAccessPoliciesGetIamPolicy,
 
     -- ** accesscontextmanager.accessPolicies.list
     AccessContextManagerAccessPoliciesListResource,
+    AccessContextManagerAccessPoliciesList (..),
     newAccessContextManagerAccessPoliciesList,
-    AccessContextManagerAccessPoliciesList,
 
     -- ** accesscontextmanager.accessPolicies.patch
     AccessContextManagerAccessPoliciesPatchResource,
+    AccessContextManagerAccessPoliciesPatch (..),
     newAccessContextManagerAccessPoliciesPatch,
-    AccessContextManagerAccessPoliciesPatch,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.commit
     AccessContextManagerAccessPoliciesServicePerimetersCommitResource,
+    AccessContextManagerAccessPoliciesServicePerimetersCommit (..),
     newAccessContextManagerAccessPoliciesServicePerimetersCommit,
-    AccessContextManagerAccessPoliciesServicePerimetersCommit,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.create
     AccessContextManagerAccessPoliciesServicePerimetersCreateResource,
+    AccessContextManagerAccessPoliciesServicePerimetersCreate (..),
     newAccessContextManagerAccessPoliciesServicePerimetersCreate,
-    AccessContextManagerAccessPoliciesServicePerimetersCreate,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.delete
     AccessContextManagerAccessPoliciesServicePerimetersDeleteResource,
+    AccessContextManagerAccessPoliciesServicePerimetersDelete (..),
     newAccessContextManagerAccessPoliciesServicePerimetersDelete,
-    AccessContextManagerAccessPoliciesServicePerimetersDelete,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.get
     AccessContextManagerAccessPoliciesServicePerimetersGetResource,
+    AccessContextManagerAccessPoliciesServicePerimetersGet (..),
     newAccessContextManagerAccessPoliciesServicePerimetersGet,
-    AccessContextManagerAccessPoliciesServicePerimetersGet,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.list
     AccessContextManagerAccessPoliciesServicePerimetersListResource,
+    AccessContextManagerAccessPoliciesServicePerimetersList (..),
     newAccessContextManagerAccessPoliciesServicePerimetersList,
-    AccessContextManagerAccessPoliciesServicePerimetersList,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.patch
     AccessContextManagerAccessPoliciesServicePerimetersPatchResource,
+    AccessContextManagerAccessPoliciesServicePerimetersPatch (..),
     newAccessContextManagerAccessPoliciesServicePerimetersPatch,
-    AccessContextManagerAccessPoliciesServicePerimetersPatch,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.replaceAll
     AccessContextManagerAccessPoliciesServicePerimetersReplaceAllResource,
+    AccessContextManagerAccessPoliciesServicePerimetersReplaceAll (..),
     newAccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
-    AccessContextManagerAccessPoliciesServicePerimetersReplaceAll,
 
     -- ** accesscontextmanager.accessPolicies.servicePerimeters.testIamPermissions
     AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissionsResource,
+    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions (..),
     newAccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
-    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
 
     -- ** accesscontextmanager.accessPolicies.setIamPolicy
     AccessContextManagerAccessPoliciesSetIamPolicyResource,
+    AccessContextManagerAccessPoliciesSetIamPolicy (..),
     newAccessContextManagerAccessPoliciesSetIamPolicy,
-    AccessContextManagerAccessPoliciesSetIamPolicy,
 
     -- ** accesscontextmanager.accessPolicies.testIamPermissions
     AccessContextManagerAccessPoliciesTestIamPermissionsResource,
+    AccessContextManagerAccessPoliciesTestIamPermissions (..),
     newAccessContextManagerAccessPoliciesTestIamPermissions,
-    AccessContextManagerAccessPoliciesTestIamPermissions,
 
     -- ** accesscontextmanager.operations.cancel
     AccessContextManagerOperationsCancelResource,
+    AccessContextManagerOperationsCancel (..),
     newAccessContextManagerOperationsCancel,
-    AccessContextManagerOperationsCancel,
 
     -- ** accesscontextmanager.operations.delete
     AccessContextManagerOperationsDeleteResource,
+    AccessContextManagerOperationsDelete (..),
     newAccessContextManagerOperationsDelete,
-    AccessContextManagerOperationsDelete,
 
     -- ** accesscontextmanager.operations.get
     AccessContextManagerOperationsGetResource,
+    AccessContextManagerOperationsGet (..),
     newAccessContextManagerOperationsGet,
-    AccessContextManagerOperationsGet,
 
     -- ** accesscontextmanager.operations.list
     AccessContextManagerOperationsListResource,
+    AccessContextManagerOperationsList (..),
     newAccessContextManagerOperationsList,
-    AccessContextManagerOperationsList,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.create
     AccessContextManagerOrganizationsGcpUserAccessBindingsCreateResource,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsCreate (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsCreate,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsCreate,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.delete
     AccessContextManagerOrganizationsGcpUserAccessBindingsDeleteResource,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsDelete (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.get
     AccessContextManagerOrganizationsGcpUserAccessBindingsGetResource,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsGet (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsGet,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsGet,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.list
     AccessContextManagerOrganizationsGcpUserAccessBindingsListResource,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsList (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsList,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsList,
 
     -- ** accesscontextmanager.organizations.gcpUserAccessBindings.patch
     AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource,
+    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
 
     -- * Types
 

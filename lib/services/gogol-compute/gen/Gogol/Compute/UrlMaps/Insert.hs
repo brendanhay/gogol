@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.Insert
     ComputeUrlMapsInsertResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsInsert (..),
     newComputeUrlMapsInsert,
-    ComputeUrlMapsInsert,
   )
 where
 

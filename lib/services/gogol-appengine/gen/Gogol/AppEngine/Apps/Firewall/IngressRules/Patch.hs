@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Firewall.IngressRules.Patch
     AppEngineAppsFirewallIngressRulesPatchResource,
 
     -- ** Constructing a Request
+    AppEngineAppsFirewallIngressRulesPatch (..),
     newAppEngineAppsFirewallIngressRulesPatch,
-    AppEngineAppsFirewallIngressRulesPatch,
   )
 where
 

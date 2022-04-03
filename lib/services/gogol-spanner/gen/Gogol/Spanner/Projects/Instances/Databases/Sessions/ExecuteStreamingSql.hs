@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSql
     SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSqlResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql (..),
     newSpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
-    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
   )
 where
 

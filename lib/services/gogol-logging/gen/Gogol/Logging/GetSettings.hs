@@ -34,8 +34,8 @@ module Gogol.Logging.GetSettings
     LoggingGetSettingsResource,
 
     -- ** Constructing a Request
+    LoggingGetSettings (..),
     newLoggingGetSettings,
-    LoggingGetSettings,
   )
 where
 

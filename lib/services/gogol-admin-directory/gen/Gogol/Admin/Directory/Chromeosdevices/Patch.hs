@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Chromeosdevices.Patch
     DirectoryChromeosdevicesPatchResource,
 
     -- ** Constructing a Request
+    DirectoryChromeosdevicesPatch (..),
     newDirectoryChromeosdevicesPatch,
-    DirectoryChromeosdevicesPatch,
   )
 where
 

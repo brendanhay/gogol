@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.EnableXpnResource
     ComputeProjectsEnableXpnResourceResource,
 
     -- ** Constructing a Request
+    ComputeProjectsEnableXpnResource (..),
     newComputeProjectsEnableXpnResource,
-    ComputeProjectsEnableXpnResource,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Filters.Patch
     AnalyticsManagementFiltersPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementFiltersPatch (..),
     newAnalyticsManagementFiltersPatch,
-    AnalyticsManagementFiltersPatch,
   )
 where
 

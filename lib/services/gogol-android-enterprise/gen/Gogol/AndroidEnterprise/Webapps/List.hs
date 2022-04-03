@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Webapps.List
     AndroidEnterpriseWebappsListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseWebappsList (..),
     newAndroidEnterpriseWebappsList,
-    AndroidEnterpriseWebappsList,
   )
 where
 

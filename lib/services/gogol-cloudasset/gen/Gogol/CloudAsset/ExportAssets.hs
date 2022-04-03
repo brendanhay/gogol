@@ -34,8 +34,8 @@ module Gogol.CloudAsset.ExportAssets
     CloudAssetExportAssetsResource,
 
     -- ** Constructing a Request
+    CloudAssetExportAssets (..),
     newCloudAssetExportAssets,
-    CloudAssetExportAssets,
   )
 where
 

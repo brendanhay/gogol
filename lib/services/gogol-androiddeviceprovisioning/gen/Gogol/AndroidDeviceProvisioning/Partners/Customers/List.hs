@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Customers.List
     AndroidDeviceProvisioningPartnersCustomersListResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersCustomersList (..),
     newAndroidDeviceProvisioningPartnersCustomersList,
-    AndroidDeviceProvisioningPartnersCustomersList,
   )
 where
 

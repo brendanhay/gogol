@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferOperations.Resume
     StorageTransferTransferOperationsResumeResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferOperationsResume (..),
     newStorageTransferTransferOperationsResume,
-    StorageTransferTransferOperationsResume,
   )
 where
 

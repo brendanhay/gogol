@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.Insert
     StorageObjectsInsertResource,
 
     -- ** Constructing a Request
+    StorageObjectsInsert (..),
     newStorageObjectsInsert,
-    StorageObjectsInsert,
   )
 where
 
@@ -163,9 +163,6 @@ newStorageObjectsInsert bucket payload =
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
-
-
-class AllowScope request scope where
 
 instance Core.GoogleRequest StorageObjectsInsert where
   type Rs StorageObjectsInsert = Object

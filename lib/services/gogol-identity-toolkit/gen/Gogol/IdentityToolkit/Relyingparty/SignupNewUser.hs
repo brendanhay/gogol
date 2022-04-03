@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.SignupNewUser
     IdentityToolkitRelyingpartySignupNewUserResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartySignupNewUser (..),
     newIdentityToolkitRelyingpartySignupNewUser,
-    IdentityToolkitRelyingpartySignupNewUser,
   )
 where
 

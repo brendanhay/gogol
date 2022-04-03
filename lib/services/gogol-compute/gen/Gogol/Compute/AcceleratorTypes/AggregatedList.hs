@@ -34,8 +34,8 @@ module Gogol.Compute.AcceleratorTypes.AggregatedList
     ComputeAcceleratorTypesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeAcceleratorTypesAggregatedList (..),
     newComputeAcceleratorTypesAggregatedList,
-    ComputeAcceleratorTypesAggregatedList,
   )
 where
 

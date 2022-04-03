@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Sessions.MatchIntent
     DialogFlowProjectsLocationsAgentsSessionsMatchIntentResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsSessionsMatchIntent (..),
     newDialogFlowProjectsLocationsAgentsSessionsMatchIntent,
-    DialogFlowProjectsLocationsAgentsSessionsMatchIntent,
   )
 where
 

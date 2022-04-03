@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DimensionValues.Query
     DFAReportingDimensionValuesQueryResource,
 
     -- ** Constructing a Request
+    DFAReportingDimensionValuesQuery (..),
     newDFAReportingDimensionValuesQuery,
-    DFAReportingDimensionValuesQuery,
   )
 where
 

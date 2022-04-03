@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.Delete
     AdExchangeBuyer2BiddersAccountsFilterSetsDeleteResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersAccountsFilterSetsDelete (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsDelete,
-    AdExchangeBuyer2BiddersAccountsFilterSetsDelete,
   )
 where
 

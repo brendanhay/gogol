@@ -40,193 +40,193 @@ module Gogol.AdExchangeBuyer
 
     -- ** adexchangebuyer.accounts.get
     AdExchangeBuyerAccountsGetResource,
+    AdExchangeBuyerAccountsGet (..),
     newAdExchangeBuyerAccountsGet,
-    AdExchangeBuyerAccountsGet,
 
     -- ** adexchangebuyer.accounts.list
     AdExchangeBuyerAccountsListResource,
+    AdExchangeBuyerAccountsList (..),
     newAdExchangeBuyerAccountsList,
-    AdExchangeBuyerAccountsList,
 
     -- ** adexchangebuyer.accounts.patch
     AdExchangeBuyerAccountsPatchResource,
+    AdExchangeBuyerAccountsPatch (..),
     newAdExchangeBuyerAccountsPatch,
-    AdExchangeBuyerAccountsPatch,
 
     -- ** adexchangebuyer.accounts.update
     AdExchangeBuyerAccountsUpdateResource,
+    AdExchangeBuyerAccountsUpdate (..),
     newAdExchangeBuyerAccountsUpdate,
-    AdExchangeBuyerAccountsUpdate,
 
     -- ** adexchangebuyer.billingInfo.get
     AdExchangeBuyerBillingInfoGetResource,
+    AdExchangeBuyerBillingInfoGet (..),
     newAdExchangeBuyerBillingInfoGet,
-    AdExchangeBuyerBillingInfoGet,
 
     -- ** adexchangebuyer.billingInfo.list
     AdExchangeBuyerBillingInfoListResource,
+    AdExchangeBuyerBillingInfoList (..),
     newAdExchangeBuyerBillingInfoList,
-    AdExchangeBuyerBillingInfoList,
 
     -- ** adexchangebuyer.budget.get
     AdExchangeBuyerBudgetGetResource,
+    AdExchangeBuyerBudgetGet (..),
     newAdExchangeBuyerBudgetGet,
-    AdExchangeBuyerBudgetGet,
 
     -- ** adexchangebuyer.budget.patch
     AdExchangeBuyerBudgetPatchResource,
+    AdExchangeBuyerBudgetPatch (..),
     newAdExchangeBuyerBudgetPatch,
-    AdExchangeBuyerBudgetPatch,
 
     -- ** adexchangebuyer.budget.update
     AdExchangeBuyerBudgetUpdateResource,
+    AdExchangeBuyerBudgetUpdate (..),
     newAdExchangeBuyerBudgetUpdate,
-    AdExchangeBuyerBudgetUpdate,
 
     -- ** adexchangebuyer.creatives.addDeal
     AdExchangeBuyerCreativesAddDealResource,
+    AdExchangeBuyerCreativesAddDeal (..),
     newAdExchangeBuyerCreativesAddDeal,
-    AdExchangeBuyerCreativesAddDeal,
 
     -- ** adexchangebuyer.creatives.get
     AdExchangeBuyerCreativesGetResource,
+    AdExchangeBuyerCreativesGet (..),
     newAdExchangeBuyerCreativesGet,
-    AdExchangeBuyerCreativesGet,
 
     -- ** adexchangebuyer.creatives.insert
     AdExchangeBuyerCreativesInsertResource,
+    AdExchangeBuyerCreativesInsert (..),
     newAdExchangeBuyerCreativesInsert,
-    AdExchangeBuyerCreativesInsert,
 
     -- ** adexchangebuyer.creatives.list
     AdExchangeBuyerCreativesListResource,
+    AdExchangeBuyerCreativesList (..),
     newAdExchangeBuyerCreativesList,
-    AdExchangeBuyerCreativesList,
 
     -- ** adexchangebuyer.creatives.listDeals
     AdExchangeBuyerCreativesListDealsResource,
+    AdExchangeBuyerCreativesListDeals (..),
     newAdExchangeBuyerCreativesListDeals,
-    AdExchangeBuyerCreativesListDeals,
 
     -- ** adexchangebuyer.creatives.removeDeal
     AdExchangeBuyerCreativesRemoveDealResource,
+    AdExchangeBuyerCreativesRemoveDeal (..),
     newAdExchangeBuyerCreativesRemoveDeal,
-    AdExchangeBuyerCreativesRemoveDeal,
 
     -- ** adexchangebuyer.marketplacedeals.delete
     AdExchangeBuyerMarketplacedealsDeleteResource,
+    AdExchangeBuyerMarketplacedealsDelete (..),
     newAdExchangeBuyerMarketplacedealsDelete,
-    AdExchangeBuyerMarketplacedealsDelete,
 
     -- ** adexchangebuyer.marketplacedeals.insert
     AdExchangeBuyerMarketplacedealsInsertResource,
+    AdExchangeBuyerMarketplacedealsInsert (..),
     newAdExchangeBuyerMarketplacedealsInsert,
-    AdExchangeBuyerMarketplacedealsInsert,
 
     -- ** adexchangebuyer.marketplacedeals.list
     AdExchangeBuyerMarketplacedealsListResource,
+    AdExchangeBuyerMarketplacedealsList (..),
     newAdExchangeBuyerMarketplacedealsList,
-    AdExchangeBuyerMarketplacedealsList,
 
     -- ** adexchangebuyer.marketplacedeals.update
     AdExchangeBuyerMarketplacedealsUpdateResource,
+    AdExchangeBuyerMarketplacedealsUpdate (..),
     newAdExchangeBuyerMarketplacedealsUpdate,
-    AdExchangeBuyerMarketplacedealsUpdate,
 
     -- ** adexchangebuyer.marketplacenotes.insert
     AdExchangeBuyerMarketplacenotesInsertResource,
+    AdExchangeBuyerMarketplacenotesInsert (..),
     newAdExchangeBuyerMarketplacenotesInsert,
-    AdExchangeBuyerMarketplacenotesInsert,
 
     -- ** adexchangebuyer.marketplacenotes.list
     AdExchangeBuyerMarketplacenotesListResource,
+    AdExchangeBuyerMarketplacenotesList (..),
     newAdExchangeBuyerMarketplacenotesList,
-    AdExchangeBuyerMarketplacenotesList,
 
     -- ** adexchangebuyer.marketplaceprivateauction.updateproposal
     AdExchangeBuyerMarketplaceprivateauctionUpdateproposalResource,
+    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal (..),
     newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal,
-    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal,
 
     -- ** adexchangebuyer.performanceReport.list
     AdExchangeBuyerPerformanceReportListResource,
+    AdExchangeBuyerPerformanceReportList (..),
     newAdExchangeBuyerPerformanceReportList,
-    AdExchangeBuyerPerformanceReportList,
 
     -- ** adexchangebuyer.pretargetingConfig.delete
     AdExchangeBuyerPretargetingConfigDeleteResource,
+    AdExchangeBuyerPretargetingConfigDelete (..),
     newAdExchangeBuyerPretargetingConfigDelete,
-    AdExchangeBuyerPretargetingConfigDelete,
 
     -- ** adexchangebuyer.pretargetingConfig.get
     AdExchangeBuyerPretargetingConfigGetResource,
+    AdExchangeBuyerPretargetingConfigGet (..),
     newAdExchangeBuyerPretargetingConfigGet,
-    AdExchangeBuyerPretargetingConfigGet,
 
     -- ** adexchangebuyer.pretargetingConfig.insert
     AdExchangeBuyerPretargetingConfigInsertResource,
+    AdExchangeBuyerPretargetingConfigInsert (..),
     newAdExchangeBuyerPretargetingConfigInsert,
-    AdExchangeBuyerPretargetingConfigInsert,
 
     -- ** adexchangebuyer.pretargetingConfig.list
     AdExchangeBuyerPretargetingConfigListResource,
+    AdExchangeBuyerPretargetingConfigList (..),
     newAdExchangeBuyerPretargetingConfigList,
-    AdExchangeBuyerPretargetingConfigList,
 
     -- ** adexchangebuyer.pretargetingConfig.patch
     AdExchangeBuyerPretargetingConfigPatchResource,
+    AdExchangeBuyerPretargetingConfigPatch (..),
     newAdExchangeBuyerPretargetingConfigPatch,
-    AdExchangeBuyerPretargetingConfigPatch,
 
     -- ** adexchangebuyer.pretargetingConfig.update
     AdExchangeBuyerPretargetingConfigUpdateResource,
+    AdExchangeBuyerPretargetingConfigUpdate (..),
     newAdExchangeBuyerPretargetingConfigUpdate,
-    AdExchangeBuyerPretargetingConfigUpdate,
 
     -- ** adexchangebuyer.products.get
     AdExchangeBuyerProductsGetResource,
+    AdExchangeBuyerProductsGet (..),
     newAdExchangeBuyerProductsGet,
-    AdExchangeBuyerProductsGet,
 
     -- ** adexchangebuyer.products.search
     AdExchangeBuyerProductsSearchResource,
+    AdExchangeBuyerProductsSearch (..),
     newAdExchangeBuyerProductsSearch,
-    AdExchangeBuyerProductsSearch,
 
     -- ** adexchangebuyer.proposals.get
     AdExchangeBuyerProposalsGetResource,
+    AdExchangeBuyerProposalsGet (..),
     newAdExchangeBuyerProposalsGet,
-    AdExchangeBuyerProposalsGet,
 
     -- ** adexchangebuyer.proposals.insert
     AdExchangeBuyerProposalsInsertResource,
+    AdExchangeBuyerProposalsInsert (..),
     newAdExchangeBuyerProposalsInsert,
-    AdExchangeBuyerProposalsInsert,
 
     -- ** adexchangebuyer.proposals.patch
     AdExchangeBuyerProposalsPatchResource,
+    AdExchangeBuyerProposalsPatch (..),
     newAdExchangeBuyerProposalsPatch,
-    AdExchangeBuyerProposalsPatch,
 
     -- ** adexchangebuyer.proposals.search
     AdExchangeBuyerProposalsSearchResource,
+    AdExchangeBuyerProposalsSearch (..),
     newAdExchangeBuyerProposalsSearch,
-    AdExchangeBuyerProposalsSearch,
 
     -- ** adexchangebuyer.proposals.setupcomplete
     AdExchangeBuyerProposalsSetupcompleteResource,
+    AdExchangeBuyerProposalsSetupcomplete (..),
     newAdExchangeBuyerProposalsSetupcomplete,
-    AdExchangeBuyerProposalsSetupcomplete,
 
     -- ** adexchangebuyer.proposals.update
     AdExchangeBuyerProposalsUpdateResource,
+    AdExchangeBuyerProposalsUpdate (..),
     newAdExchangeBuyerProposalsUpdate,
-    AdExchangeBuyerProposalsUpdate,
 
     -- ** adexchangebuyer.pubprofiles.list
     AdExchangeBuyerPubprofilesListResource,
+    AdExchangeBuyerPubprofilesList (..),
     newAdExchangeBuyerPubprofilesList,
-    AdExchangeBuyerPubprofilesList,
 
     -- * Types
 

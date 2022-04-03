@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.Unclaim
     AndroidDeviceProvisioningPartnersDevicesUnclaimResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesUnclaim (..),
     newAndroidDeviceProvisioningPartnersDevicesUnclaim,
-    AndroidDeviceProvisioningPartnersDevicesUnclaim,
   )
 where
 

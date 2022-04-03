@@ -34,8 +34,8 @@ module Gogol.Script.Scripts.Run
     ScriptScriptsRunResource,
 
     -- ** Constructing a Request
+    ScriptScriptsRun (..),
     newScriptScriptsRun,
-    ScriptScriptsRun,
   )
 where
 

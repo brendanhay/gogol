@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetMachineType
     ComputeInstancesSetMachineTypeResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetMachineType (..),
     newComputeInstancesSetMachineType,
-    ComputeInstancesSetMachineType,
   )
 where
 

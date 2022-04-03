@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Activate
     ContentBuyongoogleprogramsActivateResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsActivate (..),
     newContentBuyongoogleprogramsActivate,
-    ContentBuyongoogleprogramsActivate,
   )
 where
 

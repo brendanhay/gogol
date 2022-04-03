@@ -40,148 +40,148 @@ module Gogol.CloudPrivateCatalogProducer
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.create
     CloudPrivateCatalogProducerCatalogsAssociationsCreateResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsCreate (..),
     newCloudPrivateCatalogProducerCatalogsAssociationsCreate,
-    CloudPrivateCatalogProducerCatalogsAssociationsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.delete
     CloudPrivateCatalogProducerCatalogsAssociationsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsDelete (..),
     newCloudPrivateCatalogProducerCatalogsAssociationsDelete,
-    CloudPrivateCatalogProducerCatalogsAssociationsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.get
     CloudPrivateCatalogProducerCatalogsAssociationsGetResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsGet (..),
     newCloudPrivateCatalogProducerCatalogsAssociationsGet,
-    CloudPrivateCatalogProducerCatalogsAssociationsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.associations.list
     CloudPrivateCatalogProducerCatalogsAssociationsListResource,
+    CloudPrivateCatalogProducerCatalogsAssociationsList (..),
     newCloudPrivateCatalogProducerCatalogsAssociationsList,
-    CloudPrivateCatalogProducerCatalogsAssociationsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.create
     CloudPrivateCatalogProducerCatalogsCreateResource,
+    CloudPrivateCatalogProducerCatalogsCreate (..),
     newCloudPrivateCatalogProducerCatalogsCreate,
-    CloudPrivateCatalogProducerCatalogsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.delete
     CloudPrivateCatalogProducerCatalogsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsDelete (..),
     newCloudPrivateCatalogProducerCatalogsDelete,
-    CloudPrivateCatalogProducerCatalogsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.get
     CloudPrivateCatalogProducerCatalogsGetResource,
+    CloudPrivateCatalogProducerCatalogsGet (..),
     newCloudPrivateCatalogProducerCatalogsGet,
-    CloudPrivateCatalogProducerCatalogsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.getIamPolicy
     CloudPrivateCatalogProducerCatalogsGetIamPolicyResource,
+    CloudPrivateCatalogProducerCatalogsGetIamPolicy (..),
     newCloudPrivateCatalogProducerCatalogsGetIamPolicy,
-    CloudPrivateCatalogProducerCatalogsGetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.list
     CloudPrivateCatalogProducerCatalogsListResource,
+    CloudPrivateCatalogProducerCatalogsList (..),
     newCloudPrivateCatalogProducerCatalogsList,
-    CloudPrivateCatalogProducerCatalogsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.patch
     CloudPrivateCatalogProducerCatalogsPatchResource,
+    CloudPrivateCatalogProducerCatalogsPatch (..),
     newCloudPrivateCatalogProducerCatalogsPatch,
-    CloudPrivateCatalogProducerCatalogsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.copy
     CloudPrivateCatalogProducerCatalogsProductsCopyResource,
+    CloudPrivateCatalogProducerCatalogsProductsCopy (..),
     newCloudPrivateCatalogProducerCatalogsProductsCopy,
-    CloudPrivateCatalogProducerCatalogsProductsCopy,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.create
     CloudPrivateCatalogProducerCatalogsProductsCreateResource,
+    CloudPrivateCatalogProducerCatalogsProductsCreate (..),
     newCloudPrivateCatalogProducerCatalogsProductsCreate,
-    CloudPrivateCatalogProducerCatalogsProductsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.delete
     CloudPrivateCatalogProducerCatalogsProductsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsProductsDelete (..),
     newCloudPrivateCatalogProducerCatalogsProductsDelete,
-    CloudPrivateCatalogProducerCatalogsProductsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.get
     CloudPrivateCatalogProducerCatalogsProductsGetResource,
+    CloudPrivateCatalogProducerCatalogsProductsGet (..),
     newCloudPrivateCatalogProducerCatalogsProductsGet,
-    CloudPrivateCatalogProducerCatalogsProductsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.icons.upload
     CloudPrivateCatalogProducerCatalogsProductsIconsUploadResource,
+    CloudPrivateCatalogProducerCatalogsProductsIconsUpload (..),
     newCloudPrivateCatalogProducerCatalogsProductsIconsUpload,
-    CloudPrivateCatalogProducerCatalogsProductsIconsUpload,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.list
     CloudPrivateCatalogProducerCatalogsProductsListResource,
+    CloudPrivateCatalogProducerCatalogsProductsList (..),
     newCloudPrivateCatalogProducerCatalogsProductsList,
-    CloudPrivateCatalogProducerCatalogsProductsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.patch
     CloudPrivateCatalogProducerCatalogsProductsPatchResource,
+    CloudPrivateCatalogProducerCatalogsProductsPatch (..),
     newCloudPrivateCatalogProducerCatalogsProductsPatch,
-    CloudPrivateCatalogProducerCatalogsProductsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.create
     CloudPrivateCatalogProducerCatalogsProductsVersionsCreateResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsCreate (..),
     newCloudPrivateCatalogProducerCatalogsProductsVersionsCreate,
-    CloudPrivateCatalogProducerCatalogsProductsVersionsCreate,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.delete
     CloudPrivateCatalogProducerCatalogsProductsVersionsDeleteResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsDelete (..),
     newCloudPrivateCatalogProducerCatalogsProductsVersionsDelete,
-    CloudPrivateCatalogProducerCatalogsProductsVersionsDelete,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.get
     CloudPrivateCatalogProducerCatalogsProductsVersionsGetResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsGet (..),
     newCloudPrivateCatalogProducerCatalogsProductsVersionsGet,
-    CloudPrivateCatalogProducerCatalogsProductsVersionsGet,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.list
     CloudPrivateCatalogProducerCatalogsProductsVersionsListResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsList (..),
     newCloudPrivateCatalogProducerCatalogsProductsVersionsList,
-    CloudPrivateCatalogProducerCatalogsProductsVersionsList,
 
     -- ** cloudprivatecatalogproducer.catalogs.products.versions.patch
     CloudPrivateCatalogProducerCatalogsProductsVersionsPatchResource,
+    CloudPrivateCatalogProducerCatalogsProductsVersionsPatch (..),
     newCloudPrivateCatalogProducerCatalogsProductsVersionsPatch,
-    CloudPrivateCatalogProducerCatalogsProductsVersionsPatch,
 
     -- ** cloudprivatecatalogproducer.catalogs.setIamPolicy
     CloudPrivateCatalogProducerCatalogsSetIamPolicyResource,
+    CloudPrivateCatalogProducerCatalogsSetIamPolicy (..),
     newCloudPrivateCatalogProducerCatalogsSetIamPolicy,
-    CloudPrivateCatalogProducerCatalogsSetIamPolicy,
 
     -- ** cloudprivatecatalogproducer.catalogs.testIamPermissions
     CloudPrivateCatalogProducerCatalogsTestIamPermissionsResource,
+    CloudPrivateCatalogProducerCatalogsTestIamPermissions (..),
     newCloudPrivateCatalogProducerCatalogsTestIamPermissions,
-    CloudPrivateCatalogProducerCatalogsTestIamPermissions,
 
     -- ** cloudprivatecatalogproducer.catalogs.undelete
     CloudPrivateCatalogProducerCatalogsUndeleteResource,
+    CloudPrivateCatalogProducerCatalogsUndelete (..),
     newCloudPrivateCatalogProducerCatalogsUndelete,
-    CloudPrivateCatalogProducerCatalogsUndelete,
 
     -- ** cloudprivatecatalogproducer.operations.cancel
     CloudPrivateCatalogProducerOperationsCancelResource,
+    CloudPrivateCatalogProducerOperationsCancel (..),
     newCloudPrivateCatalogProducerOperationsCancel,
-    CloudPrivateCatalogProducerOperationsCancel,
 
     -- ** cloudprivatecatalogproducer.operations.delete
     CloudPrivateCatalogProducerOperationsDeleteResource,
+    CloudPrivateCatalogProducerOperationsDelete (..),
     newCloudPrivateCatalogProducerOperationsDelete,
-    CloudPrivateCatalogProducerOperationsDelete,
 
     -- ** cloudprivatecatalogproducer.operations.get
     CloudPrivateCatalogProducerOperationsGetResource,
+    CloudPrivateCatalogProducerOperationsGet (..),
     newCloudPrivateCatalogProducerOperationsGet,
-    CloudPrivateCatalogProducerOperationsGet,
 
     -- ** cloudprivatecatalogproducer.operations.list
     CloudPrivateCatalogProducerOperationsListResource,
+    CloudPrivateCatalogProducerOperationsList (..),
     newCloudPrivateCatalogProducerOperationsList,
-    CloudPrivateCatalogProducerOperationsList,
 
     -- * Types
 

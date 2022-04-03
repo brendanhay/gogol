@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Patch
     DialogFlowProjectsLocationsAgentsTestCasesPatchResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesPatch (..),
     newDialogFlowProjectsLocationsAgentsTestCasesPatch,
-    DialogFlowProjectsLocationsAgentsTestCasesPatch,
   )
 where
 

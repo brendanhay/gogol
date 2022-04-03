@@ -34,8 +34,8 @@ module Gogol.Mirror.Contacts.Insert
     MirrorContactsInsertResource,
 
     -- ** Constructing a Request
+    MirrorContactsInsert (..),
     newMirrorContactsInsert,
-    MirrorContactsInsert,
   )
 where
 

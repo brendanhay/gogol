@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Failover
     SqlInstancesFailoverResource,
 
     -- ** Constructing a Request
+    SqlInstancesFailover (..),
     newSqlInstancesFailover,
-    SqlInstancesFailover,
   )
 where
 

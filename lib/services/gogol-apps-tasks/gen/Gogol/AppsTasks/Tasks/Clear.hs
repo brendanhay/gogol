@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Clear
     TasksTasksClearResource,
 
     -- ** Constructing a Request
+    TasksTasksClear (..),
     newTasksTasksClear,
-    TasksTasksClear,
   )
 where
 

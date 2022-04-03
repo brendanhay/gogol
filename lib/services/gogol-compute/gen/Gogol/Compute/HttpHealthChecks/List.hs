@@ -34,8 +34,8 @@ module Gogol.Compute.HttpHealthChecks.List
     ComputeHttpHealthChecksListResource,
 
     -- ** Constructing a Request
+    ComputeHttpHealthChecksList (..),
     newComputeHttpHealthChecksList,
-    ComputeHttpHealthChecksList,
   )
 where
 

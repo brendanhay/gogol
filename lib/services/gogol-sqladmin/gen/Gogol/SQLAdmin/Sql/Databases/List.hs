@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.List
     SqlDatabasesListResource,
 
     -- ** Constructing a Request
+    SqlDatabasesList (..),
     newSqlDatabasesList,
-    SqlDatabasesList,
   )
 where
 

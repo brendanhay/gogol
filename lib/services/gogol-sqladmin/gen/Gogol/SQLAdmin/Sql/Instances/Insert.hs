@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Insert
     SqlInstancesInsertResource,
 
     -- ** Constructing a Request
+    SqlInstancesInsert (..),
     newSqlInstancesInsert,
-    SqlInstancesInsert,
   )
 where
 

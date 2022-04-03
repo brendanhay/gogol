@@ -34,8 +34,8 @@ module Gogol.Spectrum.Paws.VerifyDevice
     SpectrumPawsVerifyDeviceResource,
 
     -- ** Constructing a Request
+    SpectrumPawsVerifyDevice (..),
     newSpectrumPawsVerifyDevice,
-    SpectrumPawsVerifyDevice,
   )
 where
 

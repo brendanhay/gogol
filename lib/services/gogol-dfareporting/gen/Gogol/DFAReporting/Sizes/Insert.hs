@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Sizes.Insert
     DFAReportingSizesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingSizesInsert (..),
     newDFAReportingSizesInsert,
-    DFAReportingSizesInsert,
   )
 where
 

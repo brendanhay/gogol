@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Refund
     AndroidPublisherPurchasesSubscriptionsRefundResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsRefund (..),
     newAndroidPublisherPurchasesSubscriptionsRefund,
-    AndroidPublisherPurchasesSubscriptionsRefund,
   )
 where
 

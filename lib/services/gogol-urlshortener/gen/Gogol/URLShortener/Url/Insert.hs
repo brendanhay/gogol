@@ -34,8 +34,8 @@ module Gogol.URLShortener.Url.Insert
     URLShortenerUrlInsertResource,
 
     -- ** Constructing a Request
+    URLShortenerUrlInsert (..),
     newURLShortenerUrlInsert,
-    URLShortenerUrlInsert,
   )
 where
 

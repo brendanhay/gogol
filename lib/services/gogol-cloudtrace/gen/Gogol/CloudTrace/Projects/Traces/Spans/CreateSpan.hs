@@ -34,8 +34,8 @@ module Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan
     CloudTraceProjectsTracesSpansCreateSpanResource,
 
     -- ** Constructing a Request
+    CloudTraceProjectsTracesSpansCreateSpan (..),
     newCloudTraceProjectsTracesSpansCreateSpan,
-    CloudTraceProjectsTracesSpansCreateSpan,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceControl.Services.Check
     ServiceControlServicesCheckResource,
 
     -- ** Constructing a Request
+    ServiceControlServicesCheck (..),
     newServiceControlServicesCheck,
-    ServiceControlServicesCheck,
   )
 where
 

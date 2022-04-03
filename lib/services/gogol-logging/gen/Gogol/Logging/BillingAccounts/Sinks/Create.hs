@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Sinks.Create
     LoggingBillingAccountsSinksCreateResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsSinksCreate (..),
     newLoggingBillingAccountsSinksCreate,
-    LoggingBillingAccountsSinksCreate,
   )
 where
 

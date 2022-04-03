@@ -34,8 +34,8 @@ module Gogol.Compute.VpnGateways.List
     ComputeVpnGatewaysListResource,
 
     -- ** Constructing a Request
+    ComputeVpnGatewaysList (..),
     newComputeVpnGatewaysList,
-    ComputeVpnGatewaysList,
   )
 where
 

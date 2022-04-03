@@ -41,33 +41,33 @@ module Gogol.Admin.Reports
 
     -- ** admin.channels.stop
     AdminChannelsStopResource,
+    AdminChannelsStop (..),
     newAdminChannelsStop,
-    AdminChannelsStop,
 
     -- ** reports.activities.list
     ReportsActivitiesListResource,
+    ReportsActivitiesList (..),
     newReportsActivitiesList,
-    ReportsActivitiesList,
 
     -- ** reports.activities.watch
     ReportsActivitiesWatchResource,
+    ReportsActivitiesWatch (..),
     newReportsActivitiesWatch,
-    ReportsActivitiesWatch,
 
     -- ** reports.customerUsageReports.get
     ReportsCustomerUsageReportsGetResource,
+    ReportsCustomerUsageReportsGet (..),
     newReportsCustomerUsageReportsGet,
-    ReportsCustomerUsageReportsGet,
 
     -- ** reports.entityUsageReports.get
     ReportsEntityUsageReportsGetResource,
+    ReportsEntityUsageReportsGet (..),
     newReportsEntityUsageReportsGet,
-    ReportsEntityUsageReportsGet,
 
     -- ** reports.userUsageReport.get
     ReportsUserUsageReportGetResource,
+    ReportsUserUsageReportGet (..),
     newReportsUserUsageReportGet,
-    ReportsUserUsageReportGet,
 
     -- * Types
 

@@ -37,13 +37,13 @@ module Gogol.Discovery
 
     -- ** discovery.apis.getRest
     DiscoveryApisGetRestResource,
+    DiscoveryApisGetRest (..),
     newDiscoveryApisGetRest,
-    DiscoveryApisGetRest,
 
     -- ** discovery.apis.list
     DiscoveryApisListResource,
+    DiscoveryApisList (..),
     newDiscoveryApisList,
-    DiscoveryApisList,
 
     -- * Types
 

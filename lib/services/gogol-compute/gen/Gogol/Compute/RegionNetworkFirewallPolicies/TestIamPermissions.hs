@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
     ComputeRegionNetworkFirewallPoliciesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesTestIamPermissions (..),
     newComputeRegionNetworkFirewallPoliciesTestIamPermissions,
-    ComputeRegionNetworkFirewallPoliciesTestIamPermissions,
   )
 where
 

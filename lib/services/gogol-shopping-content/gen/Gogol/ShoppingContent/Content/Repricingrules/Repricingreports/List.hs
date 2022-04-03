@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Repricingrules.Repricingreports.List
     ContentRepricingrulesRepricingreportsListResource,
 
     -- ** Constructing a Request
+    ContentRepricingrulesRepricingreportsList (..),
     newContentRepricingrulesRepricingreportsList,
-    ContentRepricingrulesRepricingreportsList,
   )
 where
 

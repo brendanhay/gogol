@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.GetPublicKeys
     IdentityToolkitRelyingpartyGetPublicKeysResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyGetPublicKeys (..),
     newIdentityToolkitRelyingpartyGetPublicKeys,
-    IdentityToolkitRelyingpartyGetPublicKeys,
   )
 where
 

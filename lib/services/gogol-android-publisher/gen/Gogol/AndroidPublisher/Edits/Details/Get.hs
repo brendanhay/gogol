@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Details.Get
     AndroidPublisherEditsDetailsGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsDetailsGet (..),
     newAndroidPublisherEditsDetailsGet,
-    AndroidPublisherEditsDetailsGet,
   )
 where
 

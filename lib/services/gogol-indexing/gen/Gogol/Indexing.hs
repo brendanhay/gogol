@@ -40,13 +40,13 @@ module Gogol.Indexing
 
     -- ** indexing.urlNotifications.getMetadata
     IndexingUrlNotificationsGetMetadataResource,
+    IndexingUrlNotificationsGetMetadata (..),
     newIndexingUrlNotificationsGetMetadata,
-    IndexingUrlNotificationsGetMetadata,
 
     -- ** indexing.urlNotifications.publish
     IndexingUrlNotificationsPublishResource,
+    IndexingUrlNotificationsPublish (..),
     newIndexingUrlNotificationsPublish,
-    IndexingUrlNotificationsPublish,
 
     -- * Types
 

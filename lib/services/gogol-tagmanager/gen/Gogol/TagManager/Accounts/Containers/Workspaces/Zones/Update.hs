@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Zones.Update
     TagManagerAccountsContainersWorkspacesZonesUpdateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesZonesUpdate (..),
     newTagManagerAccountsContainersWorkspacesZonesUpdate,
-    TagManagerAccountsContainersWorkspacesZonesUpdate,
   )
 where
 

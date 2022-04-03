@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Bookshelves.ClearVolumes
     BooksMylibraryBookshelvesClearVolumesResource,
 
     -- ** Constructing a Request
+    BooksMylibraryBookshelvesClearVolumes (..),
     newBooksMylibraryBookshelvesClearVolumes,
-    BooksMylibraryBookshelvesClearVolumes,
   )
 where
 

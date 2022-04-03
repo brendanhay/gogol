@@ -34,8 +34,8 @@ module Gogol.Blogger.Comments.Get
     BloggerCommentsGetResource,
 
     -- ** Constructing a Request
+    BloggerCommentsGet (..),
     newBloggerCommentsGet,
-    BloggerCommentsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Revisions.List
     DriveRevisionsListResource,
 
     -- ** Constructing a Request
+    DriveRevisionsList (..),
     newDriveRevisionsList,
-    DriveRevisionsList,
   )
 where
 

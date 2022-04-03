@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.Delete
     ComputeResourcePoliciesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesDelete (..),
     newComputeResourcePoliciesDelete,
-    ComputeResourcePoliciesDelete,
   )
 where
 

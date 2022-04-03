@@ -46,378 +46,378 @@ module Gogol.YouTube
 
     -- ** youtube.abuseReports.insert
     YouTubeAbuseReportsInsertResource,
+    YouTubeAbuseReportsInsert (..),
     newYouTubeAbuseReportsInsert,
-    YouTubeAbuseReportsInsert,
 
     -- ** youtube.activities.list
     YouTubeActivitiesListResource,
+    YouTubeActivitiesList (..),
     newYouTubeActivitiesList,
-    YouTubeActivitiesList,
 
     -- ** youtube.captions.delete
     YouTubeCaptionsDeleteResource,
+    YouTubeCaptionsDelete (..),
     newYouTubeCaptionsDelete,
-    YouTubeCaptionsDelete,
 
     -- ** youtube.captions.download
     YouTubeCaptionsDownloadResource,
+    YouTubeCaptionsDownload (..),
     newYouTubeCaptionsDownload,
-    YouTubeCaptionsDownload,
 
     -- ** youtube.captions.insert
     YouTubeCaptionsInsertResource,
+    YouTubeCaptionsInsert (..),
     newYouTubeCaptionsInsert,
-    YouTubeCaptionsInsert,
 
     -- ** youtube.captions.list
     YouTubeCaptionsListResource,
+    YouTubeCaptionsList (..),
     newYouTubeCaptionsList,
-    YouTubeCaptionsList,
 
     -- ** youtube.captions.update
     YouTubeCaptionsUpdateResource,
+    YouTubeCaptionsUpdate (..),
     newYouTubeCaptionsUpdate,
-    YouTubeCaptionsUpdate,
 
     -- ** youtube.channelBanners.insert
     YouTubeChannelBannersInsertResource,
+    YouTubeChannelBannersInsert (..),
     newYouTubeChannelBannersInsert,
-    YouTubeChannelBannersInsert,
 
     -- ** youtube.channelSections.delete
     YouTubeChannelSectionsDeleteResource,
+    YouTubeChannelSectionsDelete (..),
     newYouTubeChannelSectionsDelete,
-    YouTubeChannelSectionsDelete,
 
     -- ** youtube.channelSections.insert
     YouTubeChannelSectionsInsertResource,
+    YouTubeChannelSectionsInsert (..),
     newYouTubeChannelSectionsInsert,
-    YouTubeChannelSectionsInsert,
 
     -- ** youtube.channelSections.list
     YouTubeChannelSectionsListResource,
+    YouTubeChannelSectionsList (..),
     newYouTubeChannelSectionsList,
-    YouTubeChannelSectionsList,
 
     -- ** youtube.channelSections.update
     YouTubeChannelSectionsUpdateResource,
+    YouTubeChannelSectionsUpdate (..),
     newYouTubeChannelSectionsUpdate,
-    YouTubeChannelSectionsUpdate,
 
     -- ** youtube.channels.list
     YouTubeChannelsListResource,
+    YouTubeChannelsList (..),
     newYouTubeChannelsList,
-    YouTubeChannelsList,
 
     -- ** youtube.channels.update
     YouTubeChannelsUpdateResource,
+    YouTubeChannelsUpdate (..),
     newYouTubeChannelsUpdate,
-    YouTubeChannelsUpdate,
 
     -- ** youtube.commentThreads.insert
     YouTubeCommentThreadsInsertResource,
+    YouTubeCommentThreadsInsert (..),
     newYouTubeCommentThreadsInsert,
-    YouTubeCommentThreadsInsert,
 
     -- ** youtube.commentThreads.list
     YouTubeCommentThreadsListResource,
+    YouTubeCommentThreadsList (..),
     newYouTubeCommentThreadsList,
-    YouTubeCommentThreadsList,
 
     -- ** youtube.comments.delete
     YouTubeCommentsDeleteResource,
+    YouTubeCommentsDelete (..),
     newYouTubeCommentsDelete,
-    YouTubeCommentsDelete,
 
     -- ** youtube.comments.insert
     YouTubeCommentsInsertResource,
+    YouTubeCommentsInsert (..),
     newYouTubeCommentsInsert,
-    YouTubeCommentsInsert,
 
     -- ** youtube.comments.list
     YouTubeCommentsListResource,
+    YouTubeCommentsList (..),
     newYouTubeCommentsList,
-    YouTubeCommentsList,
 
     -- ** youtube.comments.markAsSpam
     YouTubeCommentsMarkAsSpamResource,
+    YouTubeCommentsMarkAsSpam (..),
     newYouTubeCommentsMarkAsSpam,
-    YouTubeCommentsMarkAsSpam,
 
     -- ** youtube.comments.setModerationStatus
     YouTubeCommentsSetModerationStatusResource,
+    YouTubeCommentsSetModerationStatus (..),
     newYouTubeCommentsSetModerationStatus,
-    YouTubeCommentsSetModerationStatus,
 
     -- ** youtube.comments.update
     YouTubeCommentsUpdateResource,
+    YouTubeCommentsUpdate (..),
     newYouTubeCommentsUpdate,
-    YouTubeCommentsUpdate,
 
     -- ** youtube.i18nLanguages.list
     YouTubeI18nLanguagesListResource,
+    YouTubeI18nLanguagesList (..),
     newYouTubeI18nLanguagesList,
-    YouTubeI18nLanguagesList,
 
     -- ** youtube.i18nRegions.list
     YouTubeI18nRegionsListResource,
+    YouTubeI18nRegionsList (..),
     newYouTubeI18nRegionsList,
-    YouTubeI18nRegionsList,
 
     -- ** youtube.liveBroadcasts.bind
     YouTubeLiveBroadcastsBindResource,
+    YouTubeLiveBroadcastsBind (..),
     newYouTubeLiveBroadcastsBind,
-    YouTubeLiveBroadcastsBind,
 
     -- ** youtube.liveBroadcasts.delete
     YouTubeLiveBroadcastsDeleteResource,
+    YouTubeLiveBroadcastsDelete (..),
     newYouTubeLiveBroadcastsDelete,
-    YouTubeLiveBroadcastsDelete,
 
     -- ** youtube.liveBroadcasts.insert
     YouTubeLiveBroadcastsInsertResource,
+    YouTubeLiveBroadcastsInsert (..),
     newYouTubeLiveBroadcastsInsert,
-    YouTubeLiveBroadcastsInsert,
 
     -- ** youtube.liveBroadcasts.list
     YouTubeLiveBroadcastsListResource,
+    YouTubeLiveBroadcastsList (..),
     newYouTubeLiveBroadcastsList,
-    YouTubeLiveBroadcastsList,
 
     -- ** youtube.liveBroadcasts.transition
     YouTubeLiveBroadcastsTransitionResource,
+    YouTubeLiveBroadcastsTransition (..),
     newYouTubeLiveBroadcastsTransition,
-    YouTubeLiveBroadcastsTransition,
 
     -- ** youtube.liveBroadcasts.update
     YouTubeLiveBroadcastsUpdateResource,
+    YouTubeLiveBroadcastsUpdate (..),
     newYouTubeLiveBroadcastsUpdate,
-    YouTubeLiveBroadcastsUpdate,
 
     -- ** youtube.liveChatBans.delete
     YouTubeLiveChatBansDeleteResource,
+    YouTubeLiveChatBansDelete (..),
     newYouTubeLiveChatBansDelete,
-    YouTubeLiveChatBansDelete,
 
     -- ** youtube.liveChatBans.insert
     YouTubeLiveChatBansInsertResource,
+    YouTubeLiveChatBansInsert (..),
     newYouTubeLiveChatBansInsert,
-    YouTubeLiveChatBansInsert,
 
     -- ** youtube.liveChatMessages.delete
     YouTubeLiveChatMessagesDeleteResource,
+    YouTubeLiveChatMessagesDelete (..),
     newYouTubeLiveChatMessagesDelete,
-    YouTubeLiveChatMessagesDelete,
 
     -- ** youtube.liveChatMessages.insert
     YouTubeLiveChatMessagesInsertResource,
+    YouTubeLiveChatMessagesInsert (..),
     newYouTubeLiveChatMessagesInsert,
-    YouTubeLiveChatMessagesInsert,
 
     -- ** youtube.liveChatMessages.list
     YouTubeLiveChatMessagesListResource,
+    YouTubeLiveChatMessagesList (..),
     newYouTubeLiveChatMessagesList,
-    YouTubeLiveChatMessagesList,
 
     -- ** youtube.liveChatModerators.delete
     YouTubeLiveChatModeratorsDeleteResource,
+    YouTubeLiveChatModeratorsDelete (..),
     newYouTubeLiveChatModeratorsDelete,
-    YouTubeLiveChatModeratorsDelete,
 
     -- ** youtube.liveChatModerators.insert
     YouTubeLiveChatModeratorsInsertResource,
+    YouTubeLiveChatModeratorsInsert (..),
     newYouTubeLiveChatModeratorsInsert,
-    YouTubeLiveChatModeratorsInsert,
 
     -- ** youtube.liveChatModerators.list
     YouTubeLiveChatModeratorsListResource,
+    YouTubeLiveChatModeratorsList (..),
     newYouTubeLiveChatModeratorsList,
-    YouTubeLiveChatModeratorsList,
 
     -- ** youtube.liveStreams.delete
     YouTubeLiveStreamsDeleteResource,
+    YouTubeLiveStreamsDelete (..),
     newYouTubeLiveStreamsDelete,
-    YouTubeLiveStreamsDelete,
 
     -- ** youtube.liveStreams.insert
     YouTubeLiveStreamsInsertResource,
+    YouTubeLiveStreamsInsert (..),
     newYouTubeLiveStreamsInsert,
-    YouTubeLiveStreamsInsert,
 
     -- ** youtube.liveStreams.list
     YouTubeLiveStreamsListResource,
+    YouTubeLiveStreamsList (..),
     newYouTubeLiveStreamsList,
-    YouTubeLiveStreamsList,
 
     -- ** youtube.liveStreams.update
     YouTubeLiveStreamsUpdateResource,
+    YouTubeLiveStreamsUpdate (..),
     newYouTubeLiveStreamsUpdate,
-    YouTubeLiveStreamsUpdate,
 
     -- ** youtube.members.list
     YouTubeMembersListResource,
+    YouTubeMembersList (..),
     newYouTubeMembersList,
-    YouTubeMembersList,
 
     -- ** youtube.membershipsLevels.list
     YouTubeMembershipsLevelsListResource,
+    YouTubeMembershipsLevelsList (..),
     newYouTubeMembershipsLevelsList,
-    YouTubeMembershipsLevelsList,
 
     -- ** youtube.playlistItems.delete
     YouTubePlaylistItemsDeleteResource,
+    YouTubePlaylistItemsDelete (..),
     newYouTubePlaylistItemsDelete,
-    YouTubePlaylistItemsDelete,
 
     -- ** youtube.playlistItems.insert
     YouTubePlaylistItemsInsertResource,
+    YouTubePlaylistItemsInsert (..),
     newYouTubePlaylistItemsInsert,
-    YouTubePlaylistItemsInsert,
 
     -- ** youtube.playlistItems.list
     YouTubePlaylistItemsListResource,
+    YouTubePlaylistItemsList (..),
     newYouTubePlaylistItemsList,
-    YouTubePlaylistItemsList,
 
     -- ** youtube.playlistItems.update
     YouTubePlaylistItemsUpdateResource,
+    YouTubePlaylistItemsUpdate (..),
     newYouTubePlaylistItemsUpdate,
-    YouTubePlaylistItemsUpdate,
 
     -- ** youtube.playlists.delete
     YouTubePlaylistsDeleteResource,
+    YouTubePlaylistsDelete (..),
     newYouTubePlaylistsDelete,
-    YouTubePlaylistsDelete,
 
     -- ** youtube.playlists.insert
     YouTubePlaylistsInsertResource,
+    YouTubePlaylistsInsert (..),
     newYouTubePlaylistsInsert,
-    YouTubePlaylistsInsert,
 
     -- ** youtube.playlists.list
     YouTubePlaylistsListResource,
+    YouTubePlaylistsList (..),
     newYouTubePlaylistsList,
-    YouTubePlaylistsList,
 
     -- ** youtube.playlists.update
     YouTubePlaylistsUpdateResource,
+    YouTubePlaylistsUpdate (..),
     newYouTubePlaylistsUpdate,
-    YouTubePlaylistsUpdate,
 
     -- ** youtube.search.list
     YouTubeSearchListResource,
+    YouTubeSearchList (..),
     newYouTubeSearchList,
-    YouTubeSearchList,
 
     -- ** youtube.subscriptions.delete
     YouTubeSubscriptionsDeleteResource,
+    YouTubeSubscriptionsDelete (..),
     newYouTubeSubscriptionsDelete,
-    YouTubeSubscriptionsDelete,
 
     -- ** youtube.subscriptions.insert
     YouTubeSubscriptionsInsertResource,
+    YouTubeSubscriptionsInsert (..),
     newYouTubeSubscriptionsInsert,
-    YouTubeSubscriptionsInsert,
 
     -- ** youtube.subscriptions.list
     YouTubeSubscriptionsListResource,
+    YouTubeSubscriptionsList (..),
     newYouTubeSubscriptionsList,
-    YouTubeSubscriptionsList,
 
     -- ** youtube.superChatEvents.list
     YouTubeSuperChatEventsListResource,
+    YouTubeSuperChatEventsList (..),
     newYouTubeSuperChatEventsList,
-    YouTubeSuperChatEventsList,
 
     -- ** youtube.tests.insert
     YouTubeTestsInsertResource,
+    YouTubeTestsInsert (..),
     newYouTubeTestsInsert,
-    YouTubeTestsInsert,
 
     -- ** youtube.thirdPartyLinks.delete
     YouTubeThirdPartyLinksDeleteResource,
+    YouTubeThirdPartyLinksDelete (..),
     newYouTubeThirdPartyLinksDelete,
-    YouTubeThirdPartyLinksDelete,
 
     -- ** youtube.thirdPartyLinks.insert
     YouTubeThirdPartyLinksInsertResource,
+    YouTubeThirdPartyLinksInsert (..),
     newYouTubeThirdPartyLinksInsert,
-    YouTubeThirdPartyLinksInsert,
 
     -- ** youtube.thirdPartyLinks.list
     YouTubeThirdPartyLinksListResource,
+    YouTubeThirdPartyLinksList (..),
     newYouTubeThirdPartyLinksList,
-    YouTubeThirdPartyLinksList,
 
     -- ** youtube.thirdPartyLinks.update
     YouTubeThirdPartyLinksUpdateResource,
+    YouTubeThirdPartyLinksUpdate (..),
     newYouTubeThirdPartyLinksUpdate,
-    YouTubeThirdPartyLinksUpdate,
 
     -- ** youtube.thumbnails.set
     YouTubeThumbnailsSetResource,
+    YouTubeThumbnailsSet (..),
     newYouTubeThumbnailsSet,
-    YouTubeThumbnailsSet,
 
     -- ** youtube.videoAbuseReportReasons.list
     YouTubeVideoAbuseReportReasonsListResource,
+    YouTubeVideoAbuseReportReasonsList (..),
     newYouTubeVideoAbuseReportReasonsList,
-    YouTubeVideoAbuseReportReasonsList,
 
     -- ** youtube.videoCategories.list
     YouTubeVideoCategoriesListResource,
+    YouTubeVideoCategoriesList (..),
     newYouTubeVideoCategoriesList,
-    YouTubeVideoCategoriesList,
 
     -- ** youtube.videos.delete
     YouTubeVideosDeleteResource,
+    YouTubeVideosDelete (..),
     newYouTubeVideosDelete,
-    YouTubeVideosDelete,
 
     -- ** youtube.videos.getRating
     YouTubeVideosGetRatingResource,
+    YouTubeVideosGetRating (..),
     newYouTubeVideosGetRating,
-    YouTubeVideosGetRating,
 
     -- ** youtube.videos.insert
     YouTubeVideosInsertResource,
+    YouTubeVideosInsert (..),
     newYouTubeVideosInsert,
-    YouTubeVideosInsert,
 
     -- ** youtube.videos.list
     YouTubeVideosListResource,
+    YouTubeVideosList (..),
     newYouTubeVideosList,
-    YouTubeVideosList,
 
     -- ** youtube.videos.rate
     YouTubeVideosRateResource,
+    YouTubeVideosRate (..),
     newYouTubeVideosRate,
-    YouTubeVideosRate,
 
     -- ** youtube.videos.reportAbuse
     YouTubeVideosReportAbuseResource,
+    YouTubeVideosReportAbuse (..),
     newYouTubeVideosReportAbuse,
-    YouTubeVideosReportAbuse,
 
     -- ** youtube.videos.update
     YouTubeVideosUpdateResource,
+    YouTubeVideosUpdate (..),
     newYouTubeVideosUpdate,
-    YouTubeVideosUpdate,
 
     -- ** youtube.watermarks.set
     YouTubeWatermarksSetResource,
+    YouTubeWatermarksSet (..),
     newYouTubeWatermarksSet,
-    YouTubeWatermarksSet,
 
     -- ** youtube.watermarks.unset
     YouTubeWatermarksUnsetResource,
+    YouTubeWatermarksUnset (..),
     newYouTubeWatermarksUnset,
-    YouTubeWatermarksUnset,
 
     -- ** youtube.youtube.v3.updateCommentThreads
     YouTubeYoutubeV3UpdateCommentThreadsResource,
+    YouTubeYoutubeV3UpdateCommentThreads (..),
     newYouTubeYoutubeV3UpdateCommentThreads,
-    YouTubeYoutubeV3UpdateCommentThreads,
 
     -- * Types
 

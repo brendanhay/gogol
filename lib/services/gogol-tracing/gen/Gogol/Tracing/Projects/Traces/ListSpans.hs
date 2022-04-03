@@ -34,8 +34,8 @@ module Gogol.Tracing.Projects.Traces.ListSpans
     TracingProjectsTracesListSpansResource,
 
     -- ** Constructing a Request
+    TracingProjectsTracesListSpans (..),
     newTracingProjectsTracesListSpans,
-    TracingProjectsTracesListSpans,
   )
 where
 

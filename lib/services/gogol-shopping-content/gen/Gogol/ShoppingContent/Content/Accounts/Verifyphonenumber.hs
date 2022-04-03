@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Verifyphonenumber
     ContentAccountsVerifyphonenumberResource,
 
     -- ** Constructing a Request
+    ContentAccountsVerifyphonenumber (..),
     newContentAccountsVerifyphonenumber,
-    ContentAccountsVerifyphonenumber,
   )
 where
 

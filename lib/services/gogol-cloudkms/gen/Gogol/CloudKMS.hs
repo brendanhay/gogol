@@ -41,223 +41,223 @@ module Gogol.CloudKMS
 
     -- ** cloudkms.projects.locations.ekmConnections.create
     CloudKMSProjectsLocationsEkmConnectionsCreateResource,
+    CloudKMSProjectsLocationsEkmConnectionsCreate (..),
     newCloudKMSProjectsLocationsEkmConnectionsCreate,
-    CloudKMSProjectsLocationsEkmConnectionsCreate,
 
     -- ** cloudkms.projects.locations.ekmConnections.get
     CloudKMSProjectsLocationsEkmConnectionsGetResource,
+    CloudKMSProjectsLocationsEkmConnectionsGet (..),
     newCloudKMSProjectsLocationsEkmConnectionsGet,
-    CloudKMSProjectsLocationsEkmConnectionsGet,
 
     -- ** cloudkms.projects.locations.ekmConnections.getIamPolicy
     CloudKMSProjectsLocationsEkmConnectionsGetIamPolicyResource,
+    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicy (..),
     newCloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
-    CloudKMSProjectsLocationsEkmConnectionsGetIamPolicy,
 
     -- ** cloudkms.projects.locations.ekmConnections.list
     CloudKMSProjectsLocationsEkmConnectionsListResource,
+    CloudKMSProjectsLocationsEkmConnectionsList (..),
     newCloudKMSProjectsLocationsEkmConnectionsList,
-    CloudKMSProjectsLocationsEkmConnectionsList,
 
     -- ** cloudkms.projects.locations.ekmConnections.patch
     CloudKMSProjectsLocationsEkmConnectionsPatchResource,
+    CloudKMSProjectsLocationsEkmConnectionsPatch (..),
     newCloudKMSProjectsLocationsEkmConnectionsPatch,
-    CloudKMSProjectsLocationsEkmConnectionsPatch,
 
     -- ** cloudkms.projects.locations.ekmConnections.setIamPolicy
     CloudKMSProjectsLocationsEkmConnectionsSetIamPolicyResource,
+    CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy (..),
     newCloudKMSProjectsLocationsEkmConnectionsSetIamPolicy,
-    CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy,
 
     -- ** cloudkms.projects.locations.ekmConnections.testIamPermissions
     CloudKMSProjectsLocationsEkmConnectionsTestIamPermissionsResource,
+    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions (..),
     newCloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
-    CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
 
     -- ** cloudkms.projects.locations.generateRandomBytes
     CloudKMSProjectsLocationsGenerateRandomBytesResource,
+    CloudKMSProjectsLocationsGenerateRandomBytes (..),
     newCloudKMSProjectsLocationsGenerateRandomBytes,
-    CloudKMSProjectsLocationsGenerateRandomBytes,
 
     -- ** cloudkms.projects.locations.get
     CloudKMSProjectsLocationsGetResource,
+    CloudKMSProjectsLocationsGet (..),
     newCloudKMSProjectsLocationsGet,
-    CloudKMSProjectsLocationsGet,
 
     -- ** cloudkms.projects.locations.keyRings.create
     CloudKMSProjectsLocationsKeyRingsCreateResource,
+    CloudKMSProjectsLocationsKeyRingsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsCreate,
-    CloudKMSProjectsLocationsKeyRingsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.create
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCreateResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCreate,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricDecrypt
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecryptResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricDecrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricSign
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSignResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymmetricSign,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.create
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.destroy
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroyResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestroy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGet,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.getPublicKey
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKey,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImportResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsList,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macSign
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSignResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macVerify
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerifyResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerify (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerify,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVerify,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.patch
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestore,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
     CloudKMSProjectsLocationsKeyRingsCryptoKeysDecryptResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysDecrypt (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysDecrypt,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysDecrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
     CloudKMSProjectsLocationsKeyRingsCryptoKeysEncryptResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysEncrypt (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysEncrypt,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysEncrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.get
     CloudKMSProjectsLocationsKeyRingsCryptoKeysGetResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysGet,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGet,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
     CloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.list
     CloudKMSProjectsLocationsKeyRingsCryptoKeysListResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysList (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysList,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysList,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.patch
     CloudKMSProjectsLocationsKeyRingsCryptoKeysPatchResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatch (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysPatch,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
     CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
     CloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissionsResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissions (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissions,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysTestIamPermissions,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
     CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion,
 
     -- ** cloudkms.projects.locations.keyRings.get
     CloudKMSProjectsLocationsKeyRingsGetResource,
+    CloudKMSProjectsLocationsKeyRingsGet (..),
     newCloudKMSProjectsLocationsKeyRingsGet,
-    CloudKMSProjectsLocationsKeyRingsGet,
 
     -- ** cloudkms.projects.locations.keyRings.getIamPolicy
     CloudKMSProjectsLocationsKeyRingsGetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsGetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsGetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.create
     CloudKMSProjectsLocationsKeyRingsImportJobsCreateResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsCreate,
-    CloudKMSProjectsLocationsKeyRingsImportJobsCreate,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.get
     CloudKMSProjectsLocationsKeyRingsImportJobsGetResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsGet (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsGet,
-    CloudKMSProjectsLocationsKeyRingsImportJobsGet,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
     CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.list
     CloudKMSProjectsLocationsKeyRingsImportJobsListResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsList (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsList,
-    CloudKMSProjectsLocationsKeyRingsImportJobsList,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
     CloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsImportJobsSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
     CloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissionsResource,
+    CloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissions (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissions,
-    CloudKMSProjectsLocationsKeyRingsImportJobsTestIamPermissions,
 
     -- ** cloudkms.projects.locations.keyRings.list
     CloudKMSProjectsLocationsKeyRingsListResource,
+    CloudKMSProjectsLocationsKeyRingsList (..),
     newCloudKMSProjectsLocationsKeyRingsList,
-    CloudKMSProjectsLocationsKeyRingsList,
 
     -- ** cloudkms.projects.locations.keyRings.setIamPolicy
     CloudKMSProjectsLocationsKeyRingsSetIamPolicyResource,
+    CloudKMSProjectsLocationsKeyRingsSetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsSetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsSetIamPolicy,
 
     -- ** cloudkms.projects.locations.keyRings.testIamPermissions
     CloudKMSProjectsLocationsKeyRingsTestIamPermissionsResource,
+    CloudKMSProjectsLocationsKeyRingsTestIamPermissions (..),
     newCloudKMSProjectsLocationsKeyRingsTestIamPermissions,
-    CloudKMSProjectsLocationsKeyRingsTestIamPermissions,
 
     -- ** cloudkms.projects.locations.list
     CloudKMSProjectsLocationsListResource,
+    CloudKMSProjectsLocationsList (..),
     newCloudKMSProjectsLocationsList,
-    CloudKMSProjectsLocationsList,
 
     -- * Types
 

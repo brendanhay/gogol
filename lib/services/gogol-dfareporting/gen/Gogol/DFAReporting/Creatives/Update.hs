@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Creatives.Update
     DFAReportingCreativesUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativesUpdate (..),
     newDFAReportingCreativesUpdate,
-    DFAReportingCreativesUpdate,
   )
 where
 

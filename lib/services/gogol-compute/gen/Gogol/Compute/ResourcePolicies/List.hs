@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.List
     ComputeResourcePoliciesListResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesList (..),
     newComputeResourcePoliciesList,
-    ComputeResourcePoliciesList,
   )
 where
 

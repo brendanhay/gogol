@@ -34,8 +34,8 @@ module Gogol.Compute.Disks.Insert
     ComputeDisksInsertResource,
 
     -- ** Constructing a Request
+    ComputeDisksInsert (..),
     newComputeDisksInsert,
-    ComputeDisksInsert,
   )
 where
 

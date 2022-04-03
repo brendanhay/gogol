@@ -34,8 +34,8 @@ module Gogol.Storage.Projects.HmacKeys.Create
     StorageProjectsHmacKeysCreateResource,
 
     -- ** Constructing a Request
+    StorageProjectsHmacKeysCreate (..),
     newStorageProjectsHmacKeysCreate,
-    StorageProjectsHmacKeysCreate,
   )
 where
 

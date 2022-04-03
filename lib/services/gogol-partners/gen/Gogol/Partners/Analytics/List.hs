@@ -34,8 +34,8 @@ module Gogol.Partners.Analytics.List
     PartnersAnalyticsListResource,
 
     -- ** Constructing a Request
+    PartnersAnalyticsList (..),
     newPartnersAnalyticsList,
-    PartnersAnalyticsList,
   )
 where
 

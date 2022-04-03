@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Messages.Attachments.Get
     ChatSpacesMessagesAttachmentsGetResource,
 
     -- ** Constructing a Request
+    ChatSpacesMessagesAttachmentsGet (..),
     newChatSpacesMessagesAttachmentsGet,
-    ChatSpacesMessagesAttachmentsGet,
   )
 where
 

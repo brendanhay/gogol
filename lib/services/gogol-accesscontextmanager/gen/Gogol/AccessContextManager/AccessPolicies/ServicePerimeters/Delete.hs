@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Delete
     AccessContextManagerAccessPoliciesServicePerimetersDeleteResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesServicePerimetersDelete (..),
     newAccessContextManagerAccessPoliciesServicePerimetersDelete,
-    AccessContextManagerAccessPoliciesServicePerimetersDelete,
   )
 where
 

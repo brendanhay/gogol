@@ -34,8 +34,8 @@ module Gogol.Books.Onboarding.ListCategoryVolumes
     BooksOnboardingListCategoryVolumesResource,
 
     -- ** Constructing a Request
+    BooksOnboardingListCategoryVolumes (..),
     newBooksOnboardingListCategoryVolumes,
-    BooksOnboardingListCategoryVolumes,
   )
 where
 

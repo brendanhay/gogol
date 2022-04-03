@@ -36,8 +36,8 @@ module Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
     PlayMoviesPartnerAccountsStoreInfosListResource,
 
     -- ** Constructing a Request
+    PlayMoviesPartnerAccountsStoreInfosList (..),
     newPlayMoviesPartnerAccountsStoreInfosList,
-    PlayMoviesPartnerAccountsStoreInfosList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Create
     IAMProjectsServiceAccountsCreateResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsCreate (..),
     newIAMProjectsServiceAccountsCreate,
-    IAMProjectsServiceAccountsCreate,
   )
 where
 

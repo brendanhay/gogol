@@ -37,8 +37,8 @@ module Gogol.AppEngine.Apps.Services.Versions.Patch
     AppEngineAppsServicesVersionsPatchResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesVersionsPatch (..),
     newAppEngineAppsServicesVersionsPatch,
-    AppEngineAppsServicesVersionsPatch,
   )
 where
 

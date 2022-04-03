@@ -34,8 +34,8 @@ module Gogol.Compute.Routes.Get
     ComputeRoutesGetResource,
 
     -- ** Constructing a Request
+    ComputeRoutesGet (..),
     newComputeRoutesGet,
-    ComputeRoutesGet,
   )
 where
 

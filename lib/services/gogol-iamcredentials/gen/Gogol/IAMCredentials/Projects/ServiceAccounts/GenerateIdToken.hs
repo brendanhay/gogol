@@ -34,8 +34,8 @@ module Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
     IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
 
     -- ** Constructing a Request
+    IAMCredentialsProjectsServiceAccountsGenerateIdToken (..),
     newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
-    IAMCredentialsProjectsServiceAccountsGenerateIdToken,
   )
 where
 

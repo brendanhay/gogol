@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.DomainMappings.Delete
     AppEngineAppsDomainMappingsDeleteResource,
 
     -- ** Constructing a Request
+    AppEngineAppsDomainMappingsDelete (..),
     newAppEngineAppsDomainMappingsDelete,
-    AppEngineAppsDomainMappingsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Mobiledevices.Delete
     DirectoryMobiledevicesDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryMobiledevicesDelete (..),
     newDirectoryMobiledevicesDelete,
-    DirectoryMobiledevicesDelete,
   )
 where
 

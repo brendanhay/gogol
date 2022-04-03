@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Index
     CloudSearchIndexingDatasourcesItemsIndexResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsIndex (..),
     newCloudSearchIndexingDatasourcesItemsIndex,
-    CloudSearchIndexingDatasourcesItemsIndex,
   )
 where
 

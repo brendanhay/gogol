@@ -35,8 +35,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.QueryAccessibl
     HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDataResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData,
-    HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData,
   )
 where
 

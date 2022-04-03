@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Services.Enable
     ServiceUsageServicesEnableResource,
 
     -- ** Constructing a Request
+    ServiceUsageServicesEnable (..),
     newServiceUsageServicesEnable,
-    ServiceUsageServicesEnable,
   )
 where
 

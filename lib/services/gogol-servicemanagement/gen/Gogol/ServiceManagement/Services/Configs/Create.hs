@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Configs.Create
     ServiceManagementServicesConfigsCreateResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesConfigsCreate (..),
     newServiceManagementServicesConfigsCreate,
-    ServiceManagementServicesConfigsCreate,
   )
 where
 

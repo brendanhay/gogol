@@ -34,8 +34,8 @@ module Gogol.CivicInfo.Elections.ElectionQuery
     CivicInfoElectionsElectionQueryResource,
 
     -- ** Constructing a Request
+    CivicInfoElectionsElectionQuery (..),
     newCivicInfoElectionsElectionQuery,
-    CivicInfoElectionsElectionQuery,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.Insert
     YouTubeCommentsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsInsert (..),
     newYouTubeCommentsInsert,
-    YouTubeCommentsInsert,
   )
 where
 

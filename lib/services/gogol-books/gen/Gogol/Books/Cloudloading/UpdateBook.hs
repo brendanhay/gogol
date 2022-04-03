@@ -34,8 +34,8 @@ module Gogol.Books.Cloudloading.UpdateBook
     BooksCloudloadingUpdateBookResource,
 
     -- ** Constructing a Request
+    BooksCloudloadingUpdateBook (..),
     newBooksCloudloadingUpdateBook,
-    BooksCloudloadingUpdateBook,
   )
 where
 

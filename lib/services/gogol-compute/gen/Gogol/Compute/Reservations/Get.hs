@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.Get
     ComputeReservationsGetResource,
 
     -- ** Constructing a Request
+    ComputeReservationsGet (..),
     newComputeReservationsGet,
-    ComputeReservationsGet,
   )
 where
 

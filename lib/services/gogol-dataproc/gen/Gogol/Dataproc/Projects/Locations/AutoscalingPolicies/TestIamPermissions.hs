@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
     DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions (..),
     newDataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
-    DataprocProjectsLocationsAutoscalingPoliciesTestIamPermissions,
   )
 where
 

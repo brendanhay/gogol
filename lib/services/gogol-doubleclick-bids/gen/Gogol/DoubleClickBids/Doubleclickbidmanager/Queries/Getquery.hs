@@ -34,8 +34,8 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
     DoubleclickbidmanagerQueriesGetqueryResource,
 
     -- ** Constructing a Request
+    DoubleclickbidmanagerQueriesGetquery (..),
     newDoubleclickbidmanagerQueriesGetquery,
-    DoubleclickbidmanagerQueriesGetquery,
   )
 where
 

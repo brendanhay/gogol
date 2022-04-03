@@ -40,88 +40,88 @@ module Gogol.ProximityBeacon
 
     -- ** proximitybeacon.beaconinfo.getforobserved
     ProximityBeaconBeaconinfoGetforobservedResource,
+    ProximityBeaconBeaconinfoGetforobserved (..),
     newProximityBeaconBeaconinfoGetforobserved,
-    ProximityBeaconBeaconinfoGetforobserved,
 
     -- ** proximitybeacon.beacons.activate
     ProximityBeaconBeaconsActivateResource,
+    ProximityBeaconBeaconsActivate (..),
     newProximityBeaconBeaconsActivate,
-    ProximityBeaconBeaconsActivate,
 
     -- ** proximitybeacon.beacons.attachments.batchDelete
     ProximityBeaconBeaconsAttachmentsBatchDeleteResource,
+    ProximityBeaconBeaconsAttachmentsBatchDelete (..),
     newProximityBeaconBeaconsAttachmentsBatchDelete,
-    ProximityBeaconBeaconsAttachmentsBatchDelete,
 
     -- ** proximitybeacon.beacons.attachments.create
     ProximityBeaconBeaconsAttachmentsCreateResource,
+    ProximityBeaconBeaconsAttachmentsCreate (..),
     newProximityBeaconBeaconsAttachmentsCreate,
-    ProximityBeaconBeaconsAttachmentsCreate,
 
     -- ** proximitybeacon.beacons.attachments.delete
     ProximityBeaconBeaconsAttachmentsDeleteResource,
+    ProximityBeaconBeaconsAttachmentsDelete (..),
     newProximityBeaconBeaconsAttachmentsDelete,
-    ProximityBeaconBeaconsAttachmentsDelete,
 
     -- ** proximitybeacon.beacons.attachments.list
     ProximityBeaconBeaconsAttachmentsListResource,
+    ProximityBeaconBeaconsAttachmentsList (..),
     newProximityBeaconBeaconsAttachmentsList,
-    ProximityBeaconBeaconsAttachmentsList,
 
     -- ** proximitybeacon.beacons.deactivate
     ProximityBeaconBeaconsDeactivateResource,
+    ProximityBeaconBeaconsDeactivate (..),
     newProximityBeaconBeaconsDeactivate,
-    ProximityBeaconBeaconsDeactivate,
 
     -- ** proximitybeacon.beacons.decommission
     ProximityBeaconBeaconsDecommissionResource,
+    ProximityBeaconBeaconsDecommission (..),
     newProximityBeaconBeaconsDecommission,
-    ProximityBeaconBeaconsDecommission,
 
     -- ** proximitybeacon.beacons.delete
     ProximityBeaconBeaconsDeleteResource,
+    ProximityBeaconBeaconsDelete (..),
     newProximityBeaconBeaconsDelete,
-    ProximityBeaconBeaconsDelete,
 
     -- ** proximitybeacon.beacons.diagnostics.list
     ProximityBeaconBeaconsDiagnosticsListResource,
+    ProximityBeaconBeaconsDiagnosticsList (..),
     newProximityBeaconBeaconsDiagnosticsList,
-    ProximityBeaconBeaconsDiagnosticsList,
 
     -- ** proximitybeacon.beacons.get
     ProximityBeaconBeaconsGetResource,
+    ProximityBeaconBeaconsGet (..),
     newProximityBeaconBeaconsGet,
-    ProximityBeaconBeaconsGet,
 
     -- ** proximitybeacon.beacons.list
     ProximityBeaconBeaconsListResource,
+    ProximityBeaconBeaconsList (..),
     newProximityBeaconBeaconsList,
-    ProximityBeaconBeaconsList,
 
     -- ** proximitybeacon.beacons.register
     ProximityBeaconBeaconsRegisterResource,
+    ProximityBeaconBeaconsRegister (..),
     newProximityBeaconBeaconsRegister,
-    ProximityBeaconBeaconsRegister,
 
     -- ** proximitybeacon.beacons.update
     ProximityBeaconBeaconsUpdateResource,
+    ProximityBeaconBeaconsUpdate (..),
     newProximityBeaconBeaconsUpdate,
-    ProximityBeaconBeaconsUpdate,
 
     -- ** proximitybeacon.getEidparams
     ProximityBeaconGetEidparamsResource,
+    ProximityBeaconGetEidparams (..),
     newProximityBeaconGetEidparams,
-    ProximityBeaconGetEidparams,
 
     -- ** proximitybeacon.namespaces.list
     ProximityBeaconNamespacesListResource,
+    ProximityBeaconNamespacesList (..),
     newProximityBeaconNamespacesList,
-    ProximityBeaconNamespacesList,
 
     -- ** proximitybeacon.namespaces.update
     ProximityBeaconNamespacesUpdateResource,
+    ProximityBeaconNamespacesUpdate (..),
     newProximityBeaconNamespacesUpdate,
-    ProximityBeaconNamespacesUpdate,
 
     -- * Types
 

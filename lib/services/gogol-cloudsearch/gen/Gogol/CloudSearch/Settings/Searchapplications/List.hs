@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.Searchapplications.List
     CloudSearchSettingsSearchapplicationsListResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsSearchapplicationsList (..),
     newCloudSearchSettingsSearchapplicationsList,
-    CloudSearchSettingsSearchapplicationsList,
   )
 where
 

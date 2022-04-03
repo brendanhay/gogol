@@ -34,8 +34,8 @@ module Gogol.RemoteBuildExecution.Blobs.GetTree
     RemoteBuildExecutionBlobsGetTreeResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionBlobsGetTree (..),
     newRemoteBuildExecutionBlobsGetTree,
-    RemoteBuildExecutionBlobsGetTree,
   )
 where
 

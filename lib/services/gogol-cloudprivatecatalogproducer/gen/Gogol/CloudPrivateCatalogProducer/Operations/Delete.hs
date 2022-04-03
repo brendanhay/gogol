@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Operations.Delete
     CloudPrivateCatalogProducerOperationsDeleteResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerOperationsDelete (..),
     newCloudPrivateCatalogProducerOperationsDelete,
-    CloudPrivateCatalogProducerOperationsDelete,
   )
 where
 

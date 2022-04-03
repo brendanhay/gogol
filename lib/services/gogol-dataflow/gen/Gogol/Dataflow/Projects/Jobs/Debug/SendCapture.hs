@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.Debug.SendCapture
     DataflowProjectsJobsDebugSendCaptureResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsDebugSendCapture (..),
     newDataflowProjectsJobsDebugSendCapture,
-    DataflowProjectsJobsDebugSendCapture,
   )
 where
 

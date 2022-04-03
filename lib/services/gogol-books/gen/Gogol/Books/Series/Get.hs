@@ -34,8 +34,8 @@ module Gogol.Books.Series.Get
     BooksSeriesGetResource,
 
     -- ** Constructing a Request
+    BooksSeriesGet (..),
     newBooksSeriesGet,
-    BooksSeriesGet,
   )
 where
 

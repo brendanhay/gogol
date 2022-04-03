@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Generatedapks.Download
     AndroidPublisherGeneratedapksDownloadResource,
 
     -- ** Constructing a Request
+    AndroidPublisherGeneratedapksDownload (..),
     newAndroidPublisherGeneratedapksDownload,
-    AndroidPublisherGeneratedapksDownload,
   )
 where
 

@@ -47,53 +47,53 @@ module Gogol.PlusDomains
 
     -- ** plusDomains.activities.get
     PlusDomainsActivitiesGetResource,
+    PlusDomainsActivitiesGet (..),
     newPlusDomainsActivitiesGet,
-    PlusDomainsActivitiesGet,
 
     -- ** plusDomains.activities.list
     PlusDomainsActivitiesListResource,
+    PlusDomainsActivitiesList (..),
     newPlusDomainsActivitiesList,
-    PlusDomainsActivitiesList,
 
     -- ** plusDomains.audiences.list
     PlusDomainsAudiencesListResource,
+    PlusDomainsAudiencesList (..),
     newPlusDomainsAudiencesList,
-    PlusDomainsAudiencesList,
 
     -- ** plusDomains.circles.list
     PlusDomainsCirclesListResource,
+    PlusDomainsCirclesList (..),
     newPlusDomainsCirclesList,
-    PlusDomainsCirclesList,
 
     -- ** plusDomains.comments.get
     PlusDomainsCommentsGetResource,
+    PlusDomainsCommentsGet (..),
     newPlusDomainsCommentsGet,
-    PlusDomainsCommentsGet,
 
     -- ** plusDomains.comments.list
     PlusDomainsCommentsListResource,
+    PlusDomainsCommentsList (..),
     newPlusDomainsCommentsList,
-    PlusDomainsCommentsList,
 
     -- ** plusDomains.media.insert
     PlusDomainsMediaInsertResource,
+    PlusDomainsMediaInsert (..),
     newPlusDomainsMediaInsert,
-    PlusDomainsMediaInsert,
 
     -- ** plusDomains.people.get
     PlusDomainsPeopleGetResource,
+    PlusDomainsPeopleGet (..),
     newPlusDomainsPeopleGet,
-    PlusDomainsPeopleGet,
 
     -- ** plusDomains.people.list
     PlusDomainsPeopleListResource,
+    PlusDomainsPeopleList (..),
     newPlusDomainsPeopleList,
-    PlusDomainsPeopleList,
 
     -- ** plusDomains.people.listByActivity
     PlusDomainsPeopleListByActivityResource,
+    PlusDomainsPeopleListByActivity (..),
     newPlusDomainsPeopleListByActivity,
-    PlusDomainsPeopleListByActivity,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Changes.Watch
     DriveChangesWatchResource,
 
     -- ** Constructing a Request
+    DriveChangesWatch (..),
     newDriveChangesWatch,
-    DriveChangesWatch,
   )
 where
 

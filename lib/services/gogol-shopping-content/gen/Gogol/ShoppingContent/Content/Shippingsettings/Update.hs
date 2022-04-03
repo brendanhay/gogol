@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shippingsettings.Update
     ContentShippingsettingsUpdateResource,
 
     -- ** Constructing a Request
+    ContentShippingsettingsUpdate (..),
     newContentShippingsettingsUpdate,
-    ContentShippingsettingsUpdate,
   )
 where
 

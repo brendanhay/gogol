@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Delete
     AppEngineAppsServicesDeleteResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesDelete (..),
     newAppEngineAppsServicesDelete,
-    AppEngineAppsServicesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.MarkAsSpam
     YouTubeCommentsMarkAsSpamResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsMarkAsSpam (..),
     newYouTubeCommentsMarkAsSpam,
-    YouTubeCommentsMarkAsSpam,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Customers.Devices.RemoveConfiguration
     AndroidDeviceProvisioningCustomersDevicesRemoveConfigurationResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration (..),
     newAndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
-    AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
   )
 where
 

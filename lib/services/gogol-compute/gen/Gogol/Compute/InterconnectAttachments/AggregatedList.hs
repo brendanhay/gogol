@@ -34,8 +34,8 @@ module Gogol.Compute.InterconnectAttachments.AggregatedList
     ComputeInterconnectAttachmentsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeInterconnectAttachmentsAggregatedList (..),
     newComputeInterconnectAttachmentsAggregatedList,
-    ComputeInterconnectAttachmentsAggregatedList,
   )
 where
 

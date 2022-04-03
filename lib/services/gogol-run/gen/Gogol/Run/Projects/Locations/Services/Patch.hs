@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.Patch
     RunProjectsLocationsServicesPatchResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesPatch (..),
     newRunProjectsLocationsServicesPatch,
-    RunProjectsLocationsServicesPatch,
   )
 where
 

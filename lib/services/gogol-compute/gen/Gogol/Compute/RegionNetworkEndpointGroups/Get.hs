@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkEndpointGroups.Get
     ComputeRegionNetworkEndpointGroupsGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkEndpointGroupsGet (..),
     newComputeRegionNetworkEndpointGroupsGet,
-    ComputeRegionNetworkEndpointGroupsGet,
   )
 where
 

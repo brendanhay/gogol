@@ -34,8 +34,8 @@ module Gogol.Script.Projects.Create
     ScriptProjectsCreateResource,
 
     -- ** Constructing a Request
+    ScriptProjectsCreate (..),
     newScriptProjectsCreate,
-    ScriptProjectsCreate,
   )
 where
 

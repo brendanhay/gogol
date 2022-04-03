@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Gettestordertemplate
     ContentOrdersGettestordertemplateResource,
 
     -- ** Constructing a Request
+    ContentOrdersGettestordertemplate (..),
     newContentOrdersGettestordertemplate,
-    ContentOrdersGettestordertemplate,
   )
 where
 

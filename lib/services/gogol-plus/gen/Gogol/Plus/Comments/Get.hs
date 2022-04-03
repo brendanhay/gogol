@@ -34,8 +34,8 @@ module Gogol.Plus.Comments.Get
     PlusCommentsGetResource,
 
     -- ** Constructing a Request
+    PlusCommentsGet (..),
     newPlusCommentsGet,
-    PlusCommentsGet,
   )
 where
 

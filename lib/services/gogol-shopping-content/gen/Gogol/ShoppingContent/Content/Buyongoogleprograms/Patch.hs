@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Patch
     ContentBuyongoogleprogramsPatchResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsPatch (..),
     newContentBuyongoogleprogramsPatch,
-    ContentBuyongoogleprogramsPatch,
   )
 where
 

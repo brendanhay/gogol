@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Update
     ComputeInstancesUpdateResource,
 
     -- ** Constructing a Request
+    ComputeInstancesUpdate (..),
     newComputeInstancesUpdate,
-    ComputeInstancesUpdate,
   )
 where
 

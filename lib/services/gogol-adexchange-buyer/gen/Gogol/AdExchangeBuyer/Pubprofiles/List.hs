@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Pubprofiles.List
     AdExchangeBuyerPubprofilesListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerPubprofilesList (..),
     newAdExchangeBuyerPubprofilesList,
-    AdExchangeBuyerPubprofilesList,
   )
 where
 

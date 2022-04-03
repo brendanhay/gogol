@@ -34,8 +34,8 @@ module Gogol.AppsActivity.Activities.List
     AppsActivityActivitiesListResource,
 
     -- ** Constructing a Request
+    AppsActivityActivitiesList (..),
     newAppsActivityActivitiesList,
-    AppsActivityActivitiesList,
   )
 where
 

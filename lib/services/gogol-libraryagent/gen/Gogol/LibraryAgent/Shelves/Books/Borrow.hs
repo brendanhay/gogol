@@ -34,8 +34,8 @@ module Gogol.LibraryAgent.Shelves.Books.Borrow
     LibraryAgentShelvesBooksBorrowResource,
 
     -- ** Constructing a Request
+    LibraryAgentShelvesBooksBorrow (..),
     newLibraryAgentShelvesBooksBorrow,
-    LibraryAgentShelvesBooksBorrow,
   )
 where
 

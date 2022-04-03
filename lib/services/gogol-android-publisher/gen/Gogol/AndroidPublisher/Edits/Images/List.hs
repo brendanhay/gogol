@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Images.List
     AndroidPublisherEditsImagesListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsImagesList (..),
     newAndroidPublisherEditsImagesList,
-    AndroidPublisherEditsImagesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Drive.About.Get
     DriveAboutGetResource,
 
     -- ** Constructing a Request
+    DriveAboutGet (..),
     newDriveAboutGet,
-    DriveAboutGet,
   )
 where
 

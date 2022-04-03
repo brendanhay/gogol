@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebPropertyAdWordsLinks.Patch
     AnalyticsManagementWebPropertyAdWordsLinksPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebPropertyAdWordsLinksPatch (..),
     newAnalyticsManagementWebPropertyAdWordsLinksPatch,
-    AnalyticsManagementWebPropertyAdWordsLinksPatch,
   )
 where
 

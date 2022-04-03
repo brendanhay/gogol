@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Credentials.Create
     ContentAccountsCredentialsCreateResource,
 
     -- ** Constructing a Request
+    ContentAccountsCredentialsCreate (..),
     newContentAccountsCredentialsCreate,
-    ContentAccountsCredentialsCreate,
   )
 where
 

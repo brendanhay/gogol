@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.NotificationChannelDescriptors.List
     MonitoringProjectsNotificationChannelDescriptorsListResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsNotificationChannelDescriptorsList (..),
     newMonitoringProjectsNotificationChannelDescriptorsList,
-    MonitoringProjectsNotificationChannelDescriptorsList,
   )
 where
 

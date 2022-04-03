@@ -34,8 +34,8 @@ module Gogol.Manufacturers.Accounts.Products.Get
     ManufacturersAccountsProductsGetResource,
 
     -- ** Constructing a Request
+    ManufacturersAccountsProductsGet (..),
     newManufacturersAccountsProductsGet,
-    ManufacturersAccountsProductsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionTargetHttpProxies.Get
     ComputeRegionTargetHttpProxiesGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionTargetHttpProxiesGet (..),
     newComputeRegionTargetHttpProxiesGet,
-    ComputeRegionTargetHttpProxiesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Operations.Get
     FireStoreProjectsDatabasesOperationsGetResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesOperationsGet (..),
     newFireStoreProjectsDatabasesOperationsGet,
-    FireStoreProjectsDatabasesOperationsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Fonts.Webfonts.List
     WebfontsWebfontsListResource,
 
     -- ** Constructing a Request
+    WebfontsWebfontsList (..),
     newWebfontsWebfontsList,
-    WebfontsWebfontsList,
   )
 where
 

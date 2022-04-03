@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Trash
     GmailUsersMessagesTrashResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesTrash (..),
     newGmailUsersMessagesTrash,
-    GmailUsersMessagesTrash,
   )
 where
 

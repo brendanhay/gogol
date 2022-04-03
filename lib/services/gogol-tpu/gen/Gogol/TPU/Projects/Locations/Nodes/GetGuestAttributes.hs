@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Nodes.GetGuestAttributes
     TPUProjectsLocationsNodesGetGuestAttributesResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsNodesGetGuestAttributes (..),
     newTPUProjectsLocationsNodesGetGuestAttributes,
-    TPUProjectsLocationsNodesGetGuestAttributes,
   )
 where
 

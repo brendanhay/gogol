@@ -51,123 +51,123 @@ module Gogol.People
 
     -- ** people.contactGroups.batchGet
     PeopleContactGroupsBatchGetResource,
+    PeopleContactGroupsBatchGet (..),
     newPeopleContactGroupsBatchGet,
-    PeopleContactGroupsBatchGet,
 
     -- ** people.contactGroups.create
     PeopleContactGroupsCreateResource,
+    PeopleContactGroupsCreate (..),
     newPeopleContactGroupsCreate,
-    PeopleContactGroupsCreate,
 
     -- ** people.contactGroups.delete
     PeopleContactGroupsDeleteResource,
+    PeopleContactGroupsDelete (..),
     newPeopleContactGroupsDelete,
-    PeopleContactGroupsDelete,
 
     -- ** people.contactGroups.get
     PeopleContactGroupsGetResource,
+    PeopleContactGroupsGet (..),
     newPeopleContactGroupsGet,
-    PeopleContactGroupsGet,
 
     -- ** people.contactGroups.list
     PeopleContactGroupsListResource,
+    PeopleContactGroupsList (..),
     newPeopleContactGroupsList,
-    PeopleContactGroupsList,
 
     -- ** people.contactGroups.members.modify
     PeopleContactGroupsMembersModifyResource,
+    PeopleContactGroupsMembersModify (..),
     newPeopleContactGroupsMembersModify,
-    PeopleContactGroupsMembersModify,
 
     -- ** people.contactGroups.update
     PeopleContactGroupsUpdateResource,
+    PeopleContactGroupsUpdate (..),
     newPeopleContactGroupsUpdate,
-    PeopleContactGroupsUpdate,
 
     -- ** people.otherContacts.copyOtherContactToMyContactsGroup
     PeopleOtherContactsCopyOtherContactToMyContactsGroupResource,
+    PeopleOtherContactsCopyOtherContactToMyContactsGroup (..),
     newPeopleOtherContactsCopyOtherContactToMyContactsGroup,
-    PeopleOtherContactsCopyOtherContactToMyContactsGroup,
 
     -- ** people.otherContacts.list
     PeopleOtherContactsListResource,
+    PeopleOtherContactsList (..),
     newPeopleOtherContactsList,
-    PeopleOtherContactsList,
 
     -- ** people.otherContacts.search
     PeopleOtherContactsSearchResource,
+    PeopleOtherContactsSearch (..),
     newPeopleOtherContactsSearch,
-    PeopleOtherContactsSearch,
 
     -- ** people.people.batchCreateContacts
     PeoplePeopleBatchCreateContactsResource,
+    PeoplePeopleBatchCreateContacts (..),
     newPeoplePeopleBatchCreateContacts,
-    PeoplePeopleBatchCreateContacts,
 
     -- ** people.people.batchDeleteContacts
     PeoplePeopleBatchDeleteContactsResource,
+    PeoplePeopleBatchDeleteContacts (..),
     newPeoplePeopleBatchDeleteContacts,
-    PeoplePeopleBatchDeleteContacts,
 
     -- ** people.people.batchUpdateContacts
     PeoplePeopleBatchUpdateContactsResource,
+    PeoplePeopleBatchUpdateContacts (..),
     newPeoplePeopleBatchUpdateContacts,
-    PeoplePeopleBatchUpdateContacts,
 
     -- ** people.people.connections.list
     PeoplePeopleConnectionsListResource,
+    PeoplePeopleConnectionsList (..),
     newPeoplePeopleConnectionsList,
-    PeoplePeopleConnectionsList,
 
     -- ** people.people.createContact
     PeoplePeopleCreateContactResource,
+    PeoplePeopleCreateContact (..),
     newPeoplePeopleCreateContact,
-    PeoplePeopleCreateContact,
 
     -- ** people.people.deleteContact
     PeoplePeopleDeleteContactResource,
+    PeoplePeopleDeleteContact (..),
     newPeoplePeopleDeleteContact,
-    PeoplePeopleDeleteContact,
 
     -- ** people.people.deleteContactPhoto
     PeoplePeopleDeleteContactPhotoResource,
+    PeoplePeopleDeleteContactPhoto (..),
     newPeoplePeopleDeleteContactPhoto,
-    PeoplePeopleDeleteContactPhoto,
 
     -- ** people.people.get
     PeoplePeopleGetResource,
+    PeoplePeopleGet (..),
     newPeoplePeopleGet,
-    PeoplePeopleGet,
 
     -- ** people.people.getBatchGet
     PeoplePeopleGetBatchGetResource,
+    PeoplePeopleGetBatchGet (..),
     newPeoplePeopleGetBatchGet,
-    PeoplePeopleGetBatchGet,
 
     -- ** people.people.listDirectoryPeople
     PeoplePeopleListDirectoryPeopleResource,
+    PeoplePeopleListDirectoryPeople (..),
     newPeoplePeopleListDirectoryPeople,
-    PeoplePeopleListDirectoryPeople,
 
     -- ** people.people.searchContacts
     PeoplePeopleSearchContactsResource,
+    PeoplePeopleSearchContacts (..),
     newPeoplePeopleSearchContacts,
-    PeoplePeopleSearchContacts,
 
     -- ** people.people.searchDirectoryPeople
     PeoplePeopleSearchDirectoryPeopleResource,
+    PeoplePeopleSearchDirectoryPeople (..),
     newPeoplePeopleSearchDirectoryPeople,
-    PeoplePeopleSearchDirectoryPeople,
 
     -- ** people.people.updateContact
     PeoplePeopleUpdateContactResource,
+    PeoplePeopleUpdateContact (..),
     newPeoplePeopleUpdateContact,
-    PeoplePeopleUpdateContact,
 
     -- ** people.people.updateContactPhoto
     PeoplePeopleUpdateContactPhotoResource,
+    PeoplePeopleUpdateContactPhoto (..),
     newPeoplePeopleUpdateContactPhoto,
-    PeoplePeopleUpdateContactPhoto,
 
     -- * Types
 

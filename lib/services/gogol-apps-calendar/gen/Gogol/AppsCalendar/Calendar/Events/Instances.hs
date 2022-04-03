@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.Instances
     CalendarEventsInstancesResource,
 
     -- ** Constructing a Request
+    CalendarEventsInstances (..),
     newCalendarEventsInstances,
-    CalendarEventsInstances,
   )
 where
 

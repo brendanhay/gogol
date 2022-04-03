@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
     AdminCustomerDevicesChromeosCommandsGetResource,
 
     -- ** Constructing a Request
+    AdminCustomerDevicesChromeosCommandsGet (..),
     newAdminCustomerDevicesChromeosCommandsGet,
-    AdminCustomerDevicesChromeosCommandsGet,
   )
 where
 

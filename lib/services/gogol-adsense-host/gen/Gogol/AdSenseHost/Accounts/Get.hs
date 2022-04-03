@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Get
     AdSenseHostAccountsGetResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsGet (..),
     newAdSenseHostAccountsGet,
-    AdSenseHostAccountsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.LibraryAgent.Shelves.Books.Return
     LibraryAgentShelvesBooksReturnResource,
 
     -- ** Constructing a Request
+    LibraryAgentShelvesBooksReturn (..),
     newLibraryAgentShelvesBooksReturn,
-    LibraryAgentShelvesBooksReturn,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkFirewallPolicies.Patch
     ComputeNetworkFirewallPoliciesPatchResource,
 
     -- ** Constructing a Request
+    ComputeNetworkFirewallPoliciesPatch (..),
     newComputeNetworkFirewallPoliciesPatch,
-    ComputeNetworkFirewallPoliciesPatch,
   )
 where
 

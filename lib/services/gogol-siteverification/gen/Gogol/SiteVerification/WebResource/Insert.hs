@@ -34,8 +34,8 @@ module Gogol.SiteVerification.WebResource.Insert
     SiteVerificationWebResourceInsertResource,
 
     -- ** Constructing a Request
+    SiteVerificationWebResourceInsert (..),
     newSiteVerificationWebResourceInsert,
-    SiteVerificationWebResourceInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.SetIamPolicy
     CloudresourcemanagerFoldersSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersSetIamPolicy (..),
     newCloudresourcemanagerFoldersSetIamPolicy,
-    CloudresourcemanagerFoldersSetIamPolicy,
   )
 where
 

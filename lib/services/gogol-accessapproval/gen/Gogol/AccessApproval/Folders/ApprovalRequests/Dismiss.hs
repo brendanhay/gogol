@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
     AccessApprovalFoldersApprovalRequestsDismissResource,
 
     -- ** Constructing a Request
+    AccessApprovalFoldersApprovalRequestsDismiss (..),
     newAccessApprovalFoldersApprovalRequestsDismiss,
-    AccessApprovalFoldersApprovalRequestsDismiss,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Operations.Cancel
     DialogFlowProjectsLocationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsOperationsCancel (..),
     newDialogFlowProjectsLocationsOperationsCancel,
-    DialogFlowProjectsLocationsOperationsCancel,
   )
 where
 

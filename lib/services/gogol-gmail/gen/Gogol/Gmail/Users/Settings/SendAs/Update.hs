@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.Update
     GmailUsersSettingsSendAsUpdateResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsUpdate (..),
     newGmailUsersSettingsSendAsUpdate,
-    GmailUsersSettingsSendAsUpdate,
   )
 where
 

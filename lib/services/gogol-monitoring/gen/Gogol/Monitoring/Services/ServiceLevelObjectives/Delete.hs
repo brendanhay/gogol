@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.Delete
     MonitoringServicesServiceLevelObjectivesDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringServicesServiceLevelObjectivesDelete (..),
     newMonitoringServicesServiceLevelObjectivesDelete,
-    MonitoringServicesServiceLevelObjectivesDelete,
   )
 where
 

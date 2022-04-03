@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.Patch
     MonitoringServicesServiceLevelObjectivesPatchResource,
 
     -- ** Constructing a Request
+    MonitoringServicesServiceLevelObjectivesPatch (..),
     newMonitoringServicesServiceLevelObjectivesPatch,
-    MonitoringServicesServiceLevelObjectivesPatch,
   )
 where
 

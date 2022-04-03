@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.Patch
     ClassroomCoursesCourseWorkPatchResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkPatch (..),
     newClassroomCoursesCourseWorkPatch,
-    ClassroomCoursesCourseWorkPatch,
   )
 where
 

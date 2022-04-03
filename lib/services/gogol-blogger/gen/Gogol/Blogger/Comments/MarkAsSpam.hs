@@ -34,8 +34,8 @@ module Gogol.Blogger.Comments.MarkAsSpam
     BloggerCommentsMarkAsSpamResource,
 
     -- ** Constructing a Request
+    BloggerCommentsMarkAsSpam (..),
     newBloggerCommentsMarkAsSpam,
-    BloggerCommentsMarkAsSpam,
   )
 where
 

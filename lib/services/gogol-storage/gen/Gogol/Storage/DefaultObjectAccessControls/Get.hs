@@ -34,8 +34,8 @@ module Gogol.Storage.DefaultObjectAccessControls.Get
     StorageDefaultObjectAccessControlsGetResource,
 
     -- ** Constructing a Request
+    StorageDefaultObjectAccessControlsGet (..),
     newStorageDefaultObjectAccessControlsGet,
-    StorageDefaultObjectAccessControlsGet,
   )
 where
 

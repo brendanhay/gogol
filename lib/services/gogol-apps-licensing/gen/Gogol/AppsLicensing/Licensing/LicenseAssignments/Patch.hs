@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Patch
     LicensingLicenseAssignmentsPatchResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsPatch (..),
     newLicensingLicenseAssignmentsPatch,
-    LicensingLicenseAssignmentsPatch,
   )
 where
 

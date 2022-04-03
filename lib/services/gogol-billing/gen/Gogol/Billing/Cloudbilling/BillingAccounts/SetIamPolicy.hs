@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
     CloudbillingBillingAccountsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudbillingBillingAccountsSetIamPolicy (..),
     newCloudbillingBillingAccountsSetIamPolicy,
-    CloudbillingBillingAccountsSetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.ResetSslConfig
     SqlInstancesResetSslConfigResource,
 
     -- ** Constructing a Request
+    SqlInstancesResetSslConfig (..),
     newSqlInstancesResetSslConfig,
-    SqlInstancesResetSslConfig,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Sinks.Delete
     LoggingBillingAccountsSinksDeleteResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsSinksDelete (..),
     newLoggingBillingAccountsSinksDelete,
-    LoggingBillingAccountsSinksDelete,
   )
 where
 

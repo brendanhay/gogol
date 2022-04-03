@@ -34,8 +34,8 @@ module Gogol.AlertCenter.Alerts.Feedback.Create
     AlertCenterAlertsFeedbackCreateResource,
 
     -- ** Constructing a Request
+    AlertCenterAlertsFeedbackCreate (..),
     newAlertCenterAlertsFeedbackCreate,
-    AlertCenterAlertsFeedbackCreate,
   )
 where
 

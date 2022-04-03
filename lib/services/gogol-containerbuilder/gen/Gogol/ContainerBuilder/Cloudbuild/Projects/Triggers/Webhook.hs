@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Triggers.Webhook
     CloudbuildProjectsTriggersWebhookResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsTriggersWebhook (..),
     newCloudbuildProjectsTriggersWebhook,
-    CloudbuildProjectsTriggersWebhook,
   )
 where
 

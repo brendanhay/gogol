@@ -34,8 +34,8 @@ module Gogol.Drive.Drives.Create
     DriveDrivesCreateResource,
 
     -- ** Constructing a Request
+    DriveDrivesCreate (..),
     newDriveDrivesCreate,
-    DriveDrivesCreate,
   )
 where
 

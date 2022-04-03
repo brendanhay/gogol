@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ContentCategories.List
     DFAReportingContentCategoriesListResource,
 
     -- ** Constructing a Request
+    DFAReportingContentCategoriesList (..),
     newDFAReportingContentCategoriesList,
-    DFAReportingContentCategoriesList,
   )
 where
 

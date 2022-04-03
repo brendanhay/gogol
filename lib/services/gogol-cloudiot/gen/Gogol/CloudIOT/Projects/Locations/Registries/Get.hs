@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Get
     CloudIOTProjectsLocationsRegistriesGetResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesGet (..),
     newCloudIOTProjectsLocationsRegistriesGet,
-    CloudIOTProjectsLocationsRegistriesGet,
   )
 where
 

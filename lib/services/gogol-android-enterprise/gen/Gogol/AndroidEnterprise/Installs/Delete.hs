@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Installs.Delete
     AndroidEnterpriseInstallsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseInstallsDelete (..),
     newAndroidEnterpriseInstallsDelete,
-    AndroidEnterpriseInstallsDelete,
   )
 where
 

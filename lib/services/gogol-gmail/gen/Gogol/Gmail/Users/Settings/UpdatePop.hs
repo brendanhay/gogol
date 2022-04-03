@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.UpdatePop
     GmailUsersSettingsUpdatePopResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsUpdatePop (..),
     newGmailUsersSettingsUpdatePop,
-    GmailUsersSettingsUpdatePop,
   )
 where
 

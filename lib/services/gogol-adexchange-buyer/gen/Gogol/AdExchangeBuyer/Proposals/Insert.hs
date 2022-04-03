@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Proposals.Insert
     AdExchangeBuyerProposalsInsertResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerProposalsInsert (..),
     newAdExchangeBuyerProposalsInsert,
-    AdExchangeBuyerProposalsInsert,
   )
 where
 

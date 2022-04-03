@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Operations.Delete
     FireStoreProjectsDatabasesOperationsDeleteResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesOperationsDelete (..),
     newFireStoreProjectsDatabasesOperationsDelete,
-    FireStoreProjectsDatabasesOperationsDelete,
   )
 where
 

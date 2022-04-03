@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Environments.Reauthorize
     TagManagerAccountsContainersEnvironmentsReauthorizeResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersEnvironmentsReauthorize (..),
     newTagManagerAccountsContainersEnvironmentsReauthorize,
-    TagManagerAccountsContainersEnvironmentsReauthorize,
   )
 where
 

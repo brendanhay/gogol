@@ -36,8 +36,8 @@ module Gogol.ProximityBeacon.Beacons.Decommission
     ProximityBeaconBeaconsDecommissionResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsDecommission (..),
     newProximityBeaconBeaconsDecommission,
-    ProximityBeaconBeaconsDecommission,
   )
 where
 

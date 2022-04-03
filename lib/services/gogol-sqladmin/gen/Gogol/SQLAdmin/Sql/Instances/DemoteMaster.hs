@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.DemoteMaster
     SqlInstancesDemoteMasterResource,
 
     -- ** Constructing a Request
+    SqlInstancesDemoteMaster (..),
     newSqlInstancesDemoteMaster,
-    SqlInstancesDemoteMaster,
   )
 where
 

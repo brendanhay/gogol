@@ -41,118 +41,118 @@ module Gogol.Jobs
 
     -- ** jobs.projects.operations.get
     JobsProjectsOperationsGetResource,
+    JobsProjectsOperationsGet (..),
     newJobsProjectsOperationsGet,
-    JobsProjectsOperationsGet,
 
     -- ** jobs.projects.tenants.clientEvents.create
     JobsProjectsTenantsClientEventsCreateResource,
+    JobsProjectsTenantsClientEventsCreate (..),
     newJobsProjectsTenantsClientEventsCreate,
-    JobsProjectsTenantsClientEventsCreate,
 
     -- ** jobs.projects.tenants.companies.create
     JobsProjectsTenantsCompaniesCreateResource,
+    JobsProjectsTenantsCompaniesCreate (..),
     newJobsProjectsTenantsCompaniesCreate,
-    JobsProjectsTenantsCompaniesCreate,
 
     -- ** jobs.projects.tenants.companies.delete
     JobsProjectsTenantsCompaniesDeleteResource,
+    JobsProjectsTenantsCompaniesDelete (..),
     newJobsProjectsTenantsCompaniesDelete,
-    JobsProjectsTenantsCompaniesDelete,
 
     -- ** jobs.projects.tenants.companies.get
     JobsProjectsTenantsCompaniesGetResource,
+    JobsProjectsTenantsCompaniesGet (..),
     newJobsProjectsTenantsCompaniesGet,
-    JobsProjectsTenantsCompaniesGet,
 
     -- ** jobs.projects.tenants.companies.list
     JobsProjectsTenantsCompaniesListResource,
+    JobsProjectsTenantsCompaniesList (..),
     newJobsProjectsTenantsCompaniesList,
-    JobsProjectsTenantsCompaniesList,
 
     -- ** jobs.projects.tenants.companies.patch
     JobsProjectsTenantsCompaniesPatchResource,
+    JobsProjectsTenantsCompaniesPatch (..),
     newJobsProjectsTenantsCompaniesPatch,
-    JobsProjectsTenantsCompaniesPatch,
 
     -- ** jobs.projects.tenants.completeQuery
     JobsProjectsTenantsCompleteQueryResource,
+    JobsProjectsTenantsCompleteQuery (..),
     newJobsProjectsTenantsCompleteQuery,
-    JobsProjectsTenantsCompleteQuery,
 
     -- ** jobs.projects.tenants.create
     JobsProjectsTenantsCreateResource,
+    JobsProjectsTenantsCreate (..),
     newJobsProjectsTenantsCreate,
-    JobsProjectsTenantsCreate,
 
     -- ** jobs.projects.tenants.delete
     JobsProjectsTenantsDeleteResource,
+    JobsProjectsTenantsDelete (..),
     newJobsProjectsTenantsDelete,
-    JobsProjectsTenantsDelete,
 
     -- ** jobs.projects.tenants.get
     JobsProjectsTenantsGetResource,
+    JobsProjectsTenantsGet (..),
     newJobsProjectsTenantsGet,
-    JobsProjectsTenantsGet,
 
     -- ** jobs.projects.tenants.jobs.batchCreate
     JobsProjectsTenantsJobsBatchCreateResource,
+    JobsProjectsTenantsJobsBatchCreate (..),
     newJobsProjectsTenantsJobsBatchCreate,
-    JobsProjectsTenantsJobsBatchCreate,
 
     -- ** jobs.projects.tenants.jobs.batchDelete
     JobsProjectsTenantsJobsBatchDeleteResource,
+    JobsProjectsTenantsJobsBatchDelete (..),
     newJobsProjectsTenantsJobsBatchDelete,
-    JobsProjectsTenantsJobsBatchDelete,
 
     -- ** jobs.projects.tenants.jobs.batchUpdate
     JobsProjectsTenantsJobsBatchUpdateResource,
+    JobsProjectsTenantsJobsBatchUpdate (..),
     newJobsProjectsTenantsJobsBatchUpdate,
-    JobsProjectsTenantsJobsBatchUpdate,
 
     -- ** jobs.projects.tenants.jobs.create
     JobsProjectsTenantsJobsCreateResource,
+    JobsProjectsTenantsJobsCreate (..),
     newJobsProjectsTenantsJobsCreate,
-    JobsProjectsTenantsJobsCreate,
 
     -- ** jobs.projects.tenants.jobs.delete
     JobsProjectsTenantsJobsDeleteResource,
+    JobsProjectsTenantsJobsDelete (..),
     newJobsProjectsTenantsJobsDelete,
-    JobsProjectsTenantsJobsDelete,
 
     -- ** jobs.projects.tenants.jobs.get
     JobsProjectsTenantsJobsGetResource,
+    JobsProjectsTenantsJobsGet (..),
     newJobsProjectsTenantsJobsGet,
-    JobsProjectsTenantsJobsGet,
 
     -- ** jobs.projects.tenants.jobs.list
     JobsProjectsTenantsJobsListResource,
+    JobsProjectsTenantsJobsList (..),
     newJobsProjectsTenantsJobsList,
-    JobsProjectsTenantsJobsList,
 
     -- ** jobs.projects.tenants.jobs.patch
     JobsProjectsTenantsJobsPatchResource,
+    JobsProjectsTenantsJobsPatch (..),
     newJobsProjectsTenantsJobsPatch,
-    JobsProjectsTenantsJobsPatch,
 
     -- ** jobs.projects.tenants.jobs.search
     JobsProjectsTenantsJobsSearchResource,
+    JobsProjectsTenantsJobsSearch (..),
     newJobsProjectsTenantsJobsSearch,
-    JobsProjectsTenantsJobsSearch,
 
     -- ** jobs.projects.tenants.jobs.searchForAlert
     JobsProjectsTenantsJobsSearchForAlertResource,
+    JobsProjectsTenantsJobsSearchForAlert (..),
     newJobsProjectsTenantsJobsSearchForAlert,
-    JobsProjectsTenantsJobsSearchForAlert,
 
     -- ** jobs.projects.tenants.list
     JobsProjectsTenantsListResource,
+    JobsProjectsTenantsList (..),
     newJobsProjectsTenantsList,
-    JobsProjectsTenantsList,
 
     -- ** jobs.projects.tenants.patch
     JobsProjectsTenantsPatchResource,
+    JobsProjectsTenantsPatch (..),
     newJobsProjectsTenantsPatch,
-    JobsProjectsTenantsPatch,
 
     -- * Types
 

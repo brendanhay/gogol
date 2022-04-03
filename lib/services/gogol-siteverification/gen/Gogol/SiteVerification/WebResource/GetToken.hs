@@ -34,8 +34,8 @@ module Gogol.SiteVerification.WebResource.GetToken
     SiteVerificationWebResourceGetTokenResource,
 
     -- ** Constructing a Request
+    SiteVerificationWebResourceGetToken (..),
     newSiteVerificationWebResourceGetToken,
-    SiteVerificationWebResourceGetToken,
   )
 where
 

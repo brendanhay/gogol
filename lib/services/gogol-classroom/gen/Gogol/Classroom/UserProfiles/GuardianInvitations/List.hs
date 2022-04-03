@@ -34,8 +34,8 @@ module Gogol.Classroom.UserProfiles.GuardianInvitations.List
     ClassroomUserProfilesGuardianInvitationsListResource,
 
     -- ** Constructing a Request
+    ClassroomUserProfilesGuardianInvitationsList (..),
     newClassroomUserProfilesGuardianInvitationsList,
-    ClassroomUserProfilesGuardianInvitationsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Books.Personalizedstream.Get
     BooksPersonalizedstreamGetResource,
 
     -- ** Constructing a Request
+    BooksPersonalizedstreamGet (..),
     newBooksPersonalizedstreamGet,
-    BooksPersonalizedstreamGet,
   )
 where
 

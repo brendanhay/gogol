@@ -34,8 +34,8 @@ module Gogol.Blogger.Pages.List
     BloggerPagesListResource,
 
     -- ** Constructing a Request
+    BloggerPagesList (..),
     newBloggerPagesList,
-    BloggerPagesList,
   )
 where
 

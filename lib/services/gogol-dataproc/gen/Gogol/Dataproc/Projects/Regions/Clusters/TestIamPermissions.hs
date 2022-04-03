@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.TestIamPermissions
     DataprocProjectsRegionsClustersTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersTestIamPermissions (..),
     newDataprocProjectsRegionsClustersTestIamPermissions,
-    DataprocProjectsRegionsClustersTestIamPermissions,
   )
 where
 

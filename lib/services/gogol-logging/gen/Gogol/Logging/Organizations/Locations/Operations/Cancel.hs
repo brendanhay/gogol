@@ -34,8 +34,8 @@ module Gogol.Logging.Organizations.Locations.Operations.Cancel
     LoggingOrganizationsLocationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    LoggingOrganizationsLocationsOperationsCancel (..),
     newLoggingOrganizationsLocationsOperationsCancel,
-    LoggingOrganizationsLocationsOperationsCancel,
   )
 where
 

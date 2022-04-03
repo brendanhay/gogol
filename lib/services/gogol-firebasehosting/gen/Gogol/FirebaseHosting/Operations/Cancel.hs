@@ -34,8 +34,8 @@ module Gogol.FirebaseHosting.Operations.Cancel
     FirebaseHostingOperationsCancelResource,
 
     -- ** Constructing a Request
+    FirebaseHostingOperationsCancel (..),
     newFirebaseHostingOperationsCancel,
-    FirebaseHostingOperationsCancel,
   )
 where
 

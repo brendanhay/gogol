@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.UpdatePolicy
     BinaryAuthorizationProjectsUpdatePolicyResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsUpdatePolicy (..),
     newBinaryAuthorizationProjectsUpdatePolicy,
-    BinaryAuthorizationProjectsUpdatePolicy,
   )
 where
 

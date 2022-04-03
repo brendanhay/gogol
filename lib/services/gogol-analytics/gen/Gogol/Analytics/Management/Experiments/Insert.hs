@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Experiments.Insert
     AnalyticsManagementExperimentsInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementExperimentsInsert (..),
     newAnalyticsManagementExperimentsInsert,
-    AnalyticsManagementExperimentsInsert,
   )
 where
 

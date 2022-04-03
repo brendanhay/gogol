@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
     CloudKMSProjectsLocationsEkmConnectionsCreateResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsEkmConnectionsCreate (..),
     newCloudKMSProjectsLocationsEkmConnectionsCreate,
-    CloudKMSProjectsLocationsEkmConnectionsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Logging.Entries.Tail
     LoggingEntriesTailResource,
 
     -- ** Constructing a Request
+    LoggingEntriesTail (..),
     newLoggingEntriesTail,
-    LoggingEntriesTail,
   )
 where
 

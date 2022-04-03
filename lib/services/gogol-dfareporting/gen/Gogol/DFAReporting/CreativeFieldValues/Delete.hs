@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CreativeFieldValues.Delete
     DFAReportingCreativeFieldValuesDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativeFieldValuesDelete (..),
     newDFAReportingCreativeFieldValuesDelete,
-    DFAReportingCreativeFieldValuesDelete,
   )
 where
 

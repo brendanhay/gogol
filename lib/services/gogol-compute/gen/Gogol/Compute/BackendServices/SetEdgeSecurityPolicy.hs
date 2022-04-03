@@ -34,8 +34,8 @@ module Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
     ComputeBackendServicesSetEdgeSecurityPolicyResource,
 
     -- ** Constructing a Request
+    ComputeBackendServicesSetEdgeSecurityPolicy (..),
     newComputeBackendServicesSetEdgeSecurityPolicy,
-    ComputeBackendServicesSetEdgeSecurityPolicy,
   )
 where
 

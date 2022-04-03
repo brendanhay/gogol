@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Accounts.Update
     DFAReportingAccountsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingAccountsUpdate (..),
     newDFAReportingAccountsUpdate,
-    DFAReportingAccountsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Script.Processes.List
     ScriptProcessesListResource,
 
     -- ** Constructing a Request
+    ScriptProcessesList (..),
     newScriptProcessesList,
-    ScriptProcessesList,
   )
 where
 

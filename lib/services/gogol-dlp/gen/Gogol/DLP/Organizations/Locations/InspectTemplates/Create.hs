@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.InspectTemplates.Create
     DLPOrganizationsLocationsInspectTemplatesCreateResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsInspectTemplatesCreate (..),
     newDLPOrganizationsLocationsInspectTemplatesCreate,
-    DLPOrganizationsLocationsInspectTemplatesCreate,
   )
 where
 

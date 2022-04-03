@@ -34,8 +34,8 @@ module Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
     PagespeedonlinePagespeedapiRunpagespeedResource,
 
     -- ** Constructing a Request
+    PagespeedonlinePagespeedapiRunpagespeed (..),
     newPagespeedonlinePagespeedapiRunpagespeed,
-    PagespeedonlinePagespeedapiRunpagespeed,
   )
 where
 

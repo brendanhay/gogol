@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatMessages.List
     YouTubeLiveChatMessagesListResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatMessagesList (..),
     newYouTubeLiveChatMessagesList,
-    YouTubeLiveChatMessagesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.SearchRange
     ServiceNetworkingServicesSearchRangeResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesSearchRange (..),
     newServiceNetworkingServicesSearchRange,
-    ServiceNetworkingServicesSearchRange,
   )
 where
 

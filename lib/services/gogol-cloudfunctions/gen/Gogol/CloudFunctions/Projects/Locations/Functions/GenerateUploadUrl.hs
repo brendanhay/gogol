@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrlResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl (..),
     newCloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl,
-    CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl,
   )
 where
 

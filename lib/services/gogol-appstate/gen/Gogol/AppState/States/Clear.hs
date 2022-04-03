@@ -34,8 +34,8 @@ module Gogol.AppState.States.Clear
     AppStateStatesClearResource,
 
     -- ** Constructing a Request
+    AppStateStatesClear (..),
     newAppStateStatesClear,
-    AppStateStatesClear,
   )
 where
 

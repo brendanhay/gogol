@@ -34,8 +34,8 @@ module Gogol.Storage.ObjectAccessControls.Update
     StorageObjectAccessControlsUpdateResource,
 
     -- ** Constructing a Request
+    StorageObjectAccessControlsUpdate (..),
     newStorageObjectAccessControlsUpdate,
-    StorageObjectAccessControlsUpdate,
   )
 where
 

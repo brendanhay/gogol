@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Users.Delete
     AndroidPublisherUsersDeleteResource,
 
     -- ** Constructing a Request
+    AndroidPublisherUsersDelete (..),
     newAndroidPublisherUsersDelete,
-    AndroidPublisherUsersDelete,
   )
 where
 

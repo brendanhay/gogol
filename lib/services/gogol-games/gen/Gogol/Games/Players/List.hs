@@ -34,8 +34,8 @@ module Gogol.Games.Players.List
     GamesPlayersListResource,
 
     -- ** Constructing a Request
+    GamesPlayersList (..),
     newGamesPlayersList,
-    GamesPlayersList,
   )
 where
 

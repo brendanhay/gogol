@@ -34,8 +34,8 @@ module Gogol.FusionTables.Task.List
     FusionTablesTaskListResource,
 
     -- ** Constructing a Request
+    FusionTablesTaskList (..),
     newFusionTablesTaskList,
-    FusionTablesTaskList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Games.Applications.GetEndPoint
     GamesApplicationsGetEndPointResource,
 
     -- ** Constructing a Request
+    GamesApplicationsGetEndPoint (..),
     newGamesApplicationsGetEndPoint,
-    GamesApplicationsGetEndPoint,
   )
 where
 

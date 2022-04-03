@@ -34,8 +34,8 @@ module Gogol.BigQuery.Models.Patch
     BigQueryModelsPatchResource,
 
     -- ** Constructing a Request
+    BigQueryModelsPatch (..),
     newBigQueryModelsPatch,
-    BigQueryModelsPatch,
   )
 where
 

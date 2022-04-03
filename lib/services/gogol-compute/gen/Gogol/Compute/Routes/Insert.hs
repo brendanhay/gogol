@@ -34,8 +34,8 @@ module Gogol.Compute.Routes.Insert
     ComputeRoutesInsertResource,
 
     -- ** Constructing a Request
+    ComputeRoutesInsert (..),
     newComputeRoutesInsert,
-    ComputeRoutesInsert,
   )
 where
 

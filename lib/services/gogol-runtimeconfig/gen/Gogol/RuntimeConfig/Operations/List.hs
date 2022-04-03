@@ -34,8 +34,8 @@ module Gogol.RuntimeConfig.Operations.List
     RuntimeConfigOperationsListResource,
 
     -- ** Constructing a Request
+    RuntimeConfigOperationsList (..),
     newRuntimeConfigOperationsList,
-    RuntimeConfigOperationsList,
   )
 where
 

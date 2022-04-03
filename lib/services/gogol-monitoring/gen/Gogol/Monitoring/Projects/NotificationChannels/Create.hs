@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.NotificationChannels.Create
     MonitoringProjectsNotificationChannelsCreateResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsNotificationChannelsCreate (..),
     newMonitoringProjectsNotificationChannelsCreate,
-    MonitoringProjectsNotificationChannelsCreate,
   )
 where
 

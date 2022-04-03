@@ -34,8 +34,8 @@ module Gogol.AcceleratedMobilePageUrl.AmpUrls.BatchGet
     AcceleratedMobilePageUrlAmpUrlsBatchGetResource,
 
     -- ** Constructing a Request
+    AcceleratedMobilePageUrlAmpUrlsBatchGet (..),
     newAcceleratedMobilePageUrlAmpUrlsBatchGet,
-    AcceleratedMobilePageUrlAmpUrlsBatchGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.UpdateMaster
     ContainerProjectsLocationsClustersUpdateMasterResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersUpdateMaster (..),
     newContainerProjectsLocationsClustersUpdateMaster,
-    ContainerProjectsLocationsClustersUpdateMaster,
   )
 where
 

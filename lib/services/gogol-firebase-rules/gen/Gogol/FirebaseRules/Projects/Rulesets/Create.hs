@@ -34,8 +34,8 @@ module Gogol.FirebaseRules.Projects.Rulesets.Create
     FirebaseRulesProjectsRulesetsCreateResource,
 
     -- ** Constructing a Request
+    FirebaseRulesProjectsRulesetsCreate (..),
     newFirebaseRulesProjectsRulesetsCreate,
-    FirebaseRulesProjectsRulesetsCreate,
   )
 where
 

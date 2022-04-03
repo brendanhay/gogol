@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.AggregatedList
     ComputeResourcePoliciesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesAggregatedList (..),
     newComputeResourcePoliciesAggregatedList,
-    ComputeResourcePoliciesAggregatedList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.Delete
     WebSecurityScannerProjectsScanConfigsDeleteResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsDelete (..),
     newWebSecurityScannerProjectsScanConfigsDelete,
-    WebSecurityScannerProjectsScanConfigsDelete,
   )
 where
 

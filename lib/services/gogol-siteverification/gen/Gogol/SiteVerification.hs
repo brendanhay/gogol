@@ -41,38 +41,38 @@ module Gogol.SiteVerification
 
     -- ** siteVerification.webResource.delete
     SiteVerificationWebResourceDeleteResource,
+    SiteVerificationWebResourceDelete (..),
     newSiteVerificationWebResourceDelete,
-    SiteVerificationWebResourceDelete,
 
     -- ** siteVerification.webResource.get
     SiteVerificationWebResourceGetResource,
+    SiteVerificationWebResourceGet (..),
     newSiteVerificationWebResourceGet,
-    SiteVerificationWebResourceGet,
 
     -- ** siteVerification.webResource.getToken
     SiteVerificationWebResourceGetTokenResource,
+    SiteVerificationWebResourceGetToken (..),
     newSiteVerificationWebResourceGetToken,
-    SiteVerificationWebResourceGetToken,
 
     -- ** siteVerification.webResource.insert
     SiteVerificationWebResourceInsertResource,
+    SiteVerificationWebResourceInsert (..),
     newSiteVerificationWebResourceInsert,
-    SiteVerificationWebResourceInsert,
 
     -- ** siteVerification.webResource.list
     SiteVerificationWebResourceListResource,
+    SiteVerificationWebResourceList (..),
     newSiteVerificationWebResourceList,
-    SiteVerificationWebResourceList,
 
     -- ** siteVerification.webResource.patch
     SiteVerificationWebResourcePatchResource,
+    SiteVerificationWebResourcePatch (..),
     newSiteVerificationWebResourcePatch,
-    SiteVerificationWebResourcePatch,
 
     -- ** siteVerification.webResource.update
     SiteVerificationWebResourceUpdateResource,
+    SiteVerificationWebResourceUpdate (..),
     newSiteVerificationWebResourceUpdate,
-    SiteVerificationWebResourceUpdate,
 
     -- * Types
 

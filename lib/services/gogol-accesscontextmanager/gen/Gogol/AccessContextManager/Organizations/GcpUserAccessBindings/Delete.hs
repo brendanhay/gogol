@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
     AccessContextManagerOrganizationsGcpUserAccessBindingsDeleteResource,
 
     -- ** Constructing a Request
+    AccessContextManagerOrganizationsGcpUserAccessBindingsDelete (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
-    AccessContextManagerOrganizationsGcpUserAccessBindingsDelete,
   )
 where
 

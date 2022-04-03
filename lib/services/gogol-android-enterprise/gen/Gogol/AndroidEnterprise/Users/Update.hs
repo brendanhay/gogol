@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.Update
     AndroidEnterpriseUsersUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersUpdate (..),
     newAndroidEnterpriseUsersUpdate,
-    AndroidEnterpriseUsersUpdate,
   )
 where
 

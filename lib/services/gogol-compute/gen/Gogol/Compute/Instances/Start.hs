@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Start
     ComputeInstancesStartResource,
 
     -- ** Constructing a Request
+    ComputeInstancesStart (..),
     newComputeInstancesStart,
-    ComputeInstancesStart,
   )
 where
 

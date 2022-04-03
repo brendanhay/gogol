@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Grants.Patch
     AndroidPublisherGrantsPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherGrantsPatch (..),
     newAndroidPublisherGrantsPatch,
-    AndroidPublisherGrantsPatch,
   )
 where
 

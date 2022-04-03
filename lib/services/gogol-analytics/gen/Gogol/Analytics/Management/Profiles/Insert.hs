@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Profiles.Insert
     AnalyticsManagementProfilesInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfilesInsert (..),
     newAnalyticsManagementProfilesInsert,
-    AnalyticsManagementProfilesInsert,
   )
 where
 

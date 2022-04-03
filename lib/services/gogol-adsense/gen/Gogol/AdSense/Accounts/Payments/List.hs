@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Payments.List
     AdSenseAccountsPaymentsListResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsPaymentsList (..),
     newAdSenseAccountsPaymentsList,
-    AdSenseAccountsPaymentsList,
   )
 where
 

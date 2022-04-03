@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceTemplates.GetIamPolicy
     ComputeInstanceTemplatesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeInstanceTemplatesGetIamPolicy (..),
     newComputeInstanceTemplatesGetIamPolicy,
-    ComputeInstanceTemplatesGetIamPolicy,
   )
 where
 

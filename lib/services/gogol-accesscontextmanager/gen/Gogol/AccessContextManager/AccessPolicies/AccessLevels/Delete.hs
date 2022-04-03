@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.AccessLevels.Delete
     AccessContextManagerAccessPoliciesAccessLevelsDeleteResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesAccessLevelsDelete (..),
     newAccessContextManagerAccessPoliciesAccessLevelsDelete,
-    AccessContextManagerAccessPoliciesAccessLevelsDelete,
   )
 where
 

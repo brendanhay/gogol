@@ -34,8 +34,8 @@ module Gogol.DFAReporting.PlacementStrategies.Insert
     DFAReportingPlacementStrategiesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingPlacementStrategiesInsert (..),
     newDFAReportingPlacementStrategiesInsert,
-    DFAReportingPlacementStrategiesInsert,
   )
 where
 

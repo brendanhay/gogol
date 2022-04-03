@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Operations.List
     CloudFunctionsProjectsLocationsOperationsListResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsOperationsList (..),
     newCloudFunctionsProjectsLocationsOperationsList,
-    CloudFunctionsProjectsLocationsOperationsList,
   )
 where
 

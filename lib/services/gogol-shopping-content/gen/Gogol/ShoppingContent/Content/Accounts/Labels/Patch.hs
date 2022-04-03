@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Labels.Patch
     ContentAccountsLabelsPatchResource,
 
     -- ** Constructing a Request
+    ContentAccountsLabelsPatch (..),
     newContentAccountsLabelsPatch,
-    ContentAccountsLabelsPatch,
   )
 where
 

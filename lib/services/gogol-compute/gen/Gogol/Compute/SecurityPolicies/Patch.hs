@@ -34,8 +34,8 @@ module Gogol.Compute.SecurityPolicies.Patch
     ComputeSecurityPoliciesPatchResource,
 
     -- ** Constructing a Request
+    ComputeSecurityPoliciesPatch (..),
     newComputeSecurityPoliciesPatch,
-    ComputeSecurityPoliciesPatch,
   )
 where
 

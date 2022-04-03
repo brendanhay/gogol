@@ -34,8 +34,8 @@ module Gogol.YouTube.Activities.List
     YouTubeActivitiesListResource,
 
     -- ** Constructing a Request
+    YouTubeActivitiesList (..),
     newYouTubeActivitiesList,
-    YouTubeActivitiesList,
   )
 where
 

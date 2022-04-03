@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Get
     DialogFlowProjectsLocationsGetResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsGet (..),
     newDialogFlowProjectsLocationsGet,
-    DialogFlowProjectsLocationsGet,
   )
 where
 

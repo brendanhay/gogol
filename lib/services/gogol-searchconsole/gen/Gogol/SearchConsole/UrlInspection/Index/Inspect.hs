@@ -34,8 +34,8 @@ module Gogol.SearchConsole.UrlInspection.Index.Inspect
     SearchConsoleUrlInspectionIndexInspectResource,
 
     -- ** Constructing a Request
+    SearchConsoleUrlInspectionIndexInspect (..),
     newSearchConsoleUrlInspectionIndexInspect,
-    SearchConsoleUrlInspectionIndexInspect,
   )
 where
 

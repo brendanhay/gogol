@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Get
     CloudresourcemanagerTagKeysGetResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagKeysGet (..),
     newCloudresourcemanagerTagKeysGet,
-    CloudresourcemanagerTagKeysGet,
   )
 where
 

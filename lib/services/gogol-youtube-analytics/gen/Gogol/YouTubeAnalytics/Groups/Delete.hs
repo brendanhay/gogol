@@ -34,8 +34,8 @@ module Gogol.YouTubeAnalytics.Groups.Delete
     YouTubeAnalyticsGroupsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeAnalyticsGroupsDelete (..),
     newYouTubeAnalyticsGroupsDelete,
-    YouTubeAnalyticsGroupsDelete,
   )
 where
 

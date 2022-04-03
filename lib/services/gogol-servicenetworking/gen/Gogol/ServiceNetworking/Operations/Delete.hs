@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Operations.Delete
     ServiceNetworkingOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingOperationsDelete (..),
     newServiceNetworkingOperationsDelete,
-    ServiceNetworkingOperationsDelete,
   )
 where
 

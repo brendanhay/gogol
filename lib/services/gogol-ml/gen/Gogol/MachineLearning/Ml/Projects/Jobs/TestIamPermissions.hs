@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.TestIamPermissions
     MlProjectsJobsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    MlProjectsJobsTestIamPermissions (..),
     newMlProjectsJobsTestIamPermissions,
-    MlProjectsJobsTestIamPermissions,
   )
 where
 

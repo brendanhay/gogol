@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
     ContainerProjectsZonesClustersNodePoolsRollbackResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersNodePoolsRollback (..),
     newContainerProjectsZonesClustersNodePoolsRollback,
-    ContainerProjectsZonesClustersNodePoolsRollback,
   )
 where
 

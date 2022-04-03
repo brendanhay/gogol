@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
     AndroidDeviceProvisioningPartnersDevicesMetadataResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesMetadata (..),
     newAndroidDeviceProvisioningPartnersDevicesMetadata,
-    AndroidDeviceProvisioningPartnersDevicesMetadata,
   )
 where
 

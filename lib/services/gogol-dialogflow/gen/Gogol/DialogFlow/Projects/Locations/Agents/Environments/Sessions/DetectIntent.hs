@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.DetectIn
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntentResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsDetectIntent,
   )
 where
 

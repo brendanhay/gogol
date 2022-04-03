@@ -34,8 +34,8 @@ module Gogol.Admin.DataTransfer.Applications.List
     DatatransferApplicationsListResource,
 
     -- ** Constructing a Request
+    DatatransferApplicationsList (..),
     newDatatransferApplicationsList,
-    DatatransferApplicationsList,
   )
 where
 

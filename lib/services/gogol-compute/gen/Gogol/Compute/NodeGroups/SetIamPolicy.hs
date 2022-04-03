@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.SetIamPolicy
     ComputeNodeGroupsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsSetIamPolicy (..),
     newComputeNodeGroupsSetIamPolicy,
-    ComputeNodeGroupsSetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.LookupEnvironment
     DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistoryResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory,
-    DialogFlowProjectsLocationsAgentsEnvironmentsLookupEnvironmentHistory,
   )
 where
 

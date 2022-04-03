@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.WatchAll
     StorageObjectsWatchAllResource,
 
     -- ** Constructing a Request
+    StorageObjectsWatchAll (..),
     newStorageObjectsWatchAll,
-    StorageObjectsWatchAll,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Webhooks.Create
     DialogFlowProjectsLocationsAgentsWebhooksCreateResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsWebhooksCreate (..),
     newDialogFlowProjectsLocationsAgentsWebhooksCreate,
-    DialogFlowProjectsLocationsAgentsWebhooksCreate,
   )
 where
 

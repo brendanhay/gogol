@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Cancellineitem
     ContentOrdersCancellineitemResource,
 
     -- ** Constructing a Request
+    ContentOrdersCancellineitem (..),
     newContentOrdersCancellineitem,
-    ContentOrdersCancellineitem,
   )
 where
 

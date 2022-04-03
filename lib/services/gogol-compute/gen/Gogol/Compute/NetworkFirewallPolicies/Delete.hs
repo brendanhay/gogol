@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkFirewallPolicies.Delete
     ComputeNetworkFirewallPoliciesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeNetworkFirewallPoliciesDelete (..),
     newComputeNetworkFirewallPoliciesDelete,
-    ComputeNetworkFirewallPoliciesDelete,
   )
 where
 

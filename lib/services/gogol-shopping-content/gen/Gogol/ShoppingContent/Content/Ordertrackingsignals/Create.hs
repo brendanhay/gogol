@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Ordertrackingsignals.Create
     ContentOrdertrackingsignalsCreateResource,
 
     -- ** Constructing a Request
+    ContentOrdertrackingsignalsCreate (..),
     newContentOrdertrackingsignalsCreate,
-    ContentOrdertrackingsignalsCreate,
   )
 where
 

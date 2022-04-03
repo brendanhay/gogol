@@ -34,8 +34,8 @@ module Gogol.CommentAnalyzer.Comments.Analyze
     CommentAnalyzerCommentsAnalyzeResource,
 
     -- ** Constructing a Request
+    CommentAnalyzerCommentsAnalyze (..),
     newCommentAnalyzerCommentsAnalyze,
-    CommentAnalyzerCommentsAnalyze,
   )
 where
 

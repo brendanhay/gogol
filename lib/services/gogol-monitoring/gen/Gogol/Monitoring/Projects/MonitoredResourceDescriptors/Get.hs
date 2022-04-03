@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.MonitoredResourceDescriptors.Get
     MonitoringProjectsMonitoredResourceDescriptorsGetResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsMonitoredResourceDescriptorsGet (..),
     newMonitoringProjectsMonitoredResourceDescriptorsGet,
-    MonitoringProjectsMonitoredResourceDescriptorsGet,
   )
 where
 

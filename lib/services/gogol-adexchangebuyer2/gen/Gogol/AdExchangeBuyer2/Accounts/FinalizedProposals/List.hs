@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.List
     AdExchangeBuyer2AccountsFinalizedProposalsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsFinalizedProposalsList (..),
     newAdExchangeBuyer2AccountsFinalizedProposalsList,
-    AdExchangeBuyer2AccountsFinalizedProposalsList,
   )
 where
 

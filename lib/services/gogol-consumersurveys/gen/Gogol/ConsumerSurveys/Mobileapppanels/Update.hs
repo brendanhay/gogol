@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Mobileapppanels.Update
     ConsumerSurveysMobileapppanelsUpdateResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysMobileapppanelsUpdate (..),
     newConsumerSurveysMobileapppanelsUpdate,
-    ConsumerSurveysMobileapppanelsUpdate,
   )
 where
 

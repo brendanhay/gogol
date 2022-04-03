@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.CaptureOrder
     ContentOrdersCaptureOrderResource,
 
     -- ** Constructing a Request
+    ContentOrdersCaptureOrder (..),
     newContentOrdersCaptureOrder,
-    ContentOrdersCaptureOrder,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Delete
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesDeleteResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.List
     RedisProjectsLocationsInstancesListResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesList (..),
     newRedisProjectsLocationsInstancesList,
-    RedisProjectsLocationsInstancesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.UpdateMultiple
     GamesAchievementsUpdateMultipleResource,
 
     -- ** Constructing a Request
+    GamesAchievementsUpdateMultiple (..),
     newGamesAchievementsUpdateMultiple,
-    GamesAchievementsUpdateMultiple,
   )
 where
 

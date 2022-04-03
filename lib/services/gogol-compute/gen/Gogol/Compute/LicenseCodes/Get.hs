@@ -34,8 +34,8 @@ module Gogol.Compute.LicenseCodes.Get
     ComputeLicenseCodesGetResource,
 
     -- ** Constructing a Request
+    ComputeLicenseCodesGet (..),
     newComputeLicenseCodesGet,
-    ComputeLicenseCodesGet,
   )
 where
 

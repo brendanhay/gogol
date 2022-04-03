@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.NotificationConfigs.Delete
     SecurityCenterOrganizationsNotificationConfigsDeleteResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsNotificationConfigsDelete (..),
     newSecurityCenterOrganizationsNotificationConfigsDelete,
-    SecurityCenterOrganizationsNotificationConfigsDelete,
   )
 where
 

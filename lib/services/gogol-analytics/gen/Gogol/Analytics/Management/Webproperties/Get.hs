@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Webproperties.Get
     AnalyticsManagementWebpropertiesGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertiesGet (..),
     newAnalyticsManagementWebpropertiesGet,
-    AnalyticsManagementWebpropertiesGet,
   )
 where
 

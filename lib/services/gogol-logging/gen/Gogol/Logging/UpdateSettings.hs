@@ -34,8 +34,8 @@ module Gogol.Logging.UpdateSettings
     LoggingUpdateSettingsResource,
 
     -- ** Constructing a Request
+    LoggingUpdateSettings (..),
     newLoggingUpdateSettings,
-    LoggingUpdateSettings,
   )
 where
 

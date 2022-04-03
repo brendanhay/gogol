@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.Patch
     ComputeSubnetworksPatchResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksPatch (..),
     newComputeSubnetworksPatch,
-    ComputeSubnetworksPatch,
   )
 where
 

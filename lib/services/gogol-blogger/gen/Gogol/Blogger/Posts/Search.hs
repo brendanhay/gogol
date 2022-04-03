@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.Search
     BloggerPostsSearchResource,
 
     -- ** Constructing a Request
+    BloggerPostsSearch (..),
     newBloggerPostsSearch,
-    BloggerPostsSearch,
   )
 where
 

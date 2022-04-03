@@ -34,8 +34,8 @@ module Gogol.Compute.RegionHealthChecks.Patch
     ComputeRegionHealthChecksPatchResource,
 
     -- ** Constructing a Request
+    ComputeRegionHealthChecksPatch (..),
     newComputeRegionHealthChecksPatch,
-    ComputeRegionHealthChecksPatch,
   )
 where
 

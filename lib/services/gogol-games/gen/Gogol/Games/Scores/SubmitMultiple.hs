@@ -34,8 +34,8 @@ module Gogol.Games.Scores.SubmitMultiple
     GamesScoresSubmitMultipleResource,
 
     -- ** Constructing a Request
+    GamesScoresSubmitMultiple (..),
     newGamesScoresSubmitMultiple,
-    GamesScoresSubmitMultiple,
   )
 where
 

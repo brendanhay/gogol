@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.AccountSummaries.List
     AnalyticsManagementAccountSummariesListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementAccountSummariesList (..),
     newAnalyticsManagementAccountSummariesList,
-    AnalyticsManagementAccountSummariesList,
   )
 where
 

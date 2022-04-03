@@ -34,8 +34,8 @@ module Gogol.IAM.Roles.QueryGrantableRoles
     IAMRolesQueryGrantableRolesResource,
 
     -- ** Constructing a Request
+    IAMRolesQueryGrantableRoles (..),
     newIAMRolesQueryGrantableRoles,
-    IAMRolesQueryGrantableRoles,
   )
 where
 

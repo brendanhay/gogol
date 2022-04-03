@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Topics.List
     PubSubProjectsTopicsListResource,
 
     -- ** Constructing a Request
+    PubSubProjectsTopicsList (..),
     newPubSubProjectsTopicsList,
-    PubSubProjectsTopicsList,
   )
 where
 

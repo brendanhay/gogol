@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWorkMaterials.Get
     ClassroomCoursesCourseWorkMaterialsGetResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkMaterialsGet (..),
     newClassroomCoursesCourseWorkMaterialsGet,
-    ClassroomCoursesCourseWorkMaterialsGet,
   )
 where
 

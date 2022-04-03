@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.DeidentifyTemplates.Delete
     DLPOrganizationsDeidentifyTemplatesDeleteResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsDeidentifyTemplatesDelete (..),
     newDLPOrganizationsDeidentifyTemplatesDelete,
-    DLPOrganizationsDeidentifyTemplatesDelete,
   )
 where
 

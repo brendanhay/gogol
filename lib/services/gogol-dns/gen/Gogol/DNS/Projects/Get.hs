@@ -34,8 +34,8 @@ module Gogol.DNS.Projects.Get
     DNSProjectsGetResource,
 
     -- ** Constructing a Request
+    DNSProjectsGet (..),
     newDNSProjectsGet,
-    DNSProjectsGet,
   )
 where
 

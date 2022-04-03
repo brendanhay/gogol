@@ -40,143 +40,143 @@ module Gogol.AndroidManagement
 
     -- ** androidmanagement.enterprises.applications.get
     AndroidManagementEnterprisesApplicationsGetResource,
+    AndroidManagementEnterprisesApplicationsGet (..),
     newAndroidManagementEnterprisesApplicationsGet,
-    AndroidManagementEnterprisesApplicationsGet,
 
     -- ** androidmanagement.enterprises.create
     AndroidManagementEnterprisesCreateResource,
+    AndroidManagementEnterprisesCreate (..),
     newAndroidManagementEnterprisesCreate,
-    AndroidManagementEnterprisesCreate,
 
     -- ** androidmanagement.enterprises.delete
     AndroidManagementEnterprisesDeleteResource,
+    AndroidManagementEnterprisesDelete (..),
     newAndroidManagementEnterprisesDelete,
-    AndroidManagementEnterprisesDelete,
 
     -- ** androidmanagement.enterprises.devices.delete
     AndroidManagementEnterprisesDevicesDeleteResource,
+    AndroidManagementEnterprisesDevicesDelete (..),
     newAndroidManagementEnterprisesDevicesDelete,
-    AndroidManagementEnterprisesDevicesDelete,
 
     -- ** androidmanagement.enterprises.devices.get
     AndroidManagementEnterprisesDevicesGetResource,
+    AndroidManagementEnterprisesDevicesGet (..),
     newAndroidManagementEnterprisesDevicesGet,
-    AndroidManagementEnterprisesDevicesGet,
 
     -- ** androidmanagement.enterprises.devices.issueCommand
     AndroidManagementEnterprisesDevicesIssueCommandResource,
+    AndroidManagementEnterprisesDevicesIssueCommand (..),
     newAndroidManagementEnterprisesDevicesIssueCommand,
-    AndroidManagementEnterprisesDevicesIssueCommand,
 
     -- ** androidmanagement.enterprises.devices.list
     AndroidManagementEnterprisesDevicesListResource,
+    AndroidManagementEnterprisesDevicesList (..),
     newAndroidManagementEnterprisesDevicesList,
-    AndroidManagementEnterprisesDevicesList,
 
     -- ** androidmanagement.enterprises.devices.operations.cancel
     AndroidManagementEnterprisesDevicesOperationsCancelResource,
+    AndroidManagementEnterprisesDevicesOperationsCancel (..),
     newAndroidManagementEnterprisesDevicesOperationsCancel,
-    AndroidManagementEnterprisesDevicesOperationsCancel,
 
     -- ** androidmanagement.enterprises.devices.operations.delete
     AndroidManagementEnterprisesDevicesOperationsDeleteResource,
+    AndroidManagementEnterprisesDevicesOperationsDelete (..),
     newAndroidManagementEnterprisesDevicesOperationsDelete,
-    AndroidManagementEnterprisesDevicesOperationsDelete,
 
     -- ** androidmanagement.enterprises.devices.operations.get
     AndroidManagementEnterprisesDevicesOperationsGetResource,
+    AndroidManagementEnterprisesDevicesOperationsGet (..),
     newAndroidManagementEnterprisesDevicesOperationsGet,
-    AndroidManagementEnterprisesDevicesOperationsGet,
 
     -- ** androidmanagement.enterprises.devices.operations.list
     AndroidManagementEnterprisesDevicesOperationsListResource,
+    AndroidManagementEnterprisesDevicesOperationsList (..),
     newAndroidManagementEnterprisesDevicesOperationsList,
-    AndroidManagementEnterprisesDevicesOperationsList,
 
     -- ** androidmanagement.enterprises.devices.patch
     AndroidManagementEnterprisesDevicesPatchResource,
+    AndroidManagementEnterprisesDevicesPatch (..),
     newAndroidManagementEnterprisesDevicesPatch,
-    AndroidManagementEnterprisesDevicesPatch,
 
     -- ** androidmanagement.enterprises.enrollmentTokens.create
     AndroidManagementEnterprisesEnrollmentTokensCreateResource,
+    AndroidManagementEnterprisesEnrollmentTokensCreate (..),
     newAndroidManagementEnterprisesEnrollmentTokensCreate,
-    AndroidManagementEnterprisesEnrollmentTokensCreate,
 
     -- ** androidmanagement.enterprises.enrollmentTokens.delete
     AndroidManagementEnterprisesEnrollmentTokensDeleteResource,
+    AndroidManagementEnterprisesEnrollmentTokensDelete (..),
     newAndroidManagementEnterprisesEnrollmentTokensDelete,
-    AndroidManagementEnterprisesEnrollmentTokensDelete,
 
     -- ** androidmanagement.enterprises.get
     AndroidManagementEnterprisesGetResource,
+    AndroidManagementEnterprisesGet (..),
     newAndroidManagementEnterprisesGet,
-    AndroidManagementEnterprisesGet,
 
     -- ** androidmanagement.enterprises.list
     AndroidManagementEnterprisesListResource,
+    AndroidManagementEnterprisesList (..),
     newAndroidManagementEnterprisesList,
-    AndroidManagementEnterprisesList,
 
     -- ** androidmanagement.enterprises.patch
     AndroidManagementEnterprisesPatchResource,
+    AndroidManagementEnterprisesPatch (..),
     newAndroidManagementEnterprisesPatch,
-    AndroidManagementEnterprisesPatch,
 
     -- ** androidmanagement.enterprises.policies.delete
     AndroidManagementEnterprisesPoliciesDeleteResource,
+    AndroidManagementEnterprisesPoliciesDelete (..),
     newAndroidManagementEnterprisesPoliciesDelete,
-    AndroidManagementEnterprisesPoliciesDelete,
 
     -- ** androidmanagement.enterprises.policies.get
     AndroidManagementEnterprisesPoliciesGetResource,
+    AndroidManagementEnterprisesPoliciesGet (..),
     newAndroidManagementEnterprisesPoliciesGet,
-    AndroidManagementEnterprisesPoliciesGet,
 
     -- ** androidmanagement.enterprises.policies.list
     AndroidManagementEnterprisesPoliciesListResource,
+    AndroidManagementEnterprisesPoliciesList (..),
     newAndroidManagementEnterprisesPoliciesList,
-    AndroidManagementEnterprisesPoliciesList,
 
     -- ** androidmanagement.enterprises.policies.patch
     AndroidManagementEnterprisesPoliciesPatchResource,
+    AndroidManagementEnterprisesPoliciesPatch (..),
     newAndroidManagementEnterprisesPoliciesPatch,
-    AndroidManagementEnterprisesPoliciesPatch,
 
     -- ** androidmanagement.enterprises.webApps.create
     AndroidManagementEnterprisesWebAppsCreateResource,
+    AndroidManagementEnterprisesWebAppsCreate (..),
     newAndroidManagementEnterprisesWebAppsCreate,
-    AndroidManagementEnterprisesWebAppsCreate,
 
     -- ** androidmanagement.enterprises.webApps.delete
     AndroidManagementEnterprisesWebAppsDeleteResource,
+    AndroidManagementEnterprisesWebAppsDelete (..),
     newAndroidManagementEnterprisesWebAppsDelete,
-    AndroidManagementEnterprisesWebAppsDelete,
 
     -- ** androidmanagement.enterprises.webApps.get
     AndroidManagementEnterprisesWebAppsGetResource,
+    AndroidManagementEnterprisesWebAppsGet (..),
     newAndroidManagementEnterprisesWebAppsGet,
-    AndroidManagementEnterprisesWebAppsGet,
 
     -- ** androidmanagement.enterprises.webApps.list
     AndroidManagementEnterprisesWebAppsListResource,
+    AndroidManagementEnterprisesWebAppsList (..),
     newAndroidManagementEnterprisesWebAppsList,
-    AndroidManagementEnterprisesWebAppsList,
 
     -- ** androidmanagement.enterprises.webApps.patch
     AndroidManagementEnterprisesWebAppsPatchResource,
+    AndroidManagementEnterprisesWebAppsPatch (..),
     newAndroidManagementEnterprisesWebAppsPatch,
-    AndroidManagementEnterprisesWebAppsPatch,
 
     -- ** androidmanagement.enterprises.webTokens.create
     AndroidManagementEnterprisesWebTokensCreateResource,
+    AndroidManagementEnterprisesWebTokensCreate (..),
     newAndroidManagementEnterprisesWebTokensCreate,
-    AndroidManagementEnterprisesWebTokensCreate,
 
     -- ** androidmanagement.signupUrls.create
     AndroidManagementSignupUrlsCreateResource,
+    AndroidManagementSignupUrlsCreate (..),
     newAndroidManagementSignupUrlsCreate,
-    AndroidManagementSignupUrlsCreate,
 
     -- * Types
 

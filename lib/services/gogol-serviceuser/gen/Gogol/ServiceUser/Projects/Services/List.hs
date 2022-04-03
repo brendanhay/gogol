@@ -34,8 +34,8 @@ module Gogol.ServiceUser.Projects.Services.List
     ServiceUserProjectsServicesListResource,
 
     -- ** Constructing a Request
+    ServiceUserProjectsServicesList (..),
     newServiceUserProjectsServicesList,
-    ServiceUserProjectsServicesList,
   )
 where
 

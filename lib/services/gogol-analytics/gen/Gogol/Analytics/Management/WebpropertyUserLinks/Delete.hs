@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebpropertyUserLinks.Delete
     AnalyticsManagementWebpropertyUserLinksDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertyUserLinksDelete (..),
     newAnalyticsManagementWebpropertyUserLinksDelete,
-    AnalyticsManagementWebpropertyUserLinksDelete,
   )
 where
 

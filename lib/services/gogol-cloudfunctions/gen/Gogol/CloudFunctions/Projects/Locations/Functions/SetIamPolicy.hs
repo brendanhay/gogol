@@ -34,8 +34,8 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudFunctionsProjectsLocationsFunctionsSetIamPolicy (..),
     newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy,
-    CloudFunctionsProjectsLocationsFunctionsSetIamPolicy,
   )
 where
 

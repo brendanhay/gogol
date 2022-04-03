@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Orgunits.Insert
     DirectoryOrgunitsInsertResource,
 
     -- ** Constructing a Request
+    DirectoryOrgunitsInsert (..),
     newDirectoryOrgunitsInsert,
-    DirectoryOrgunitsInsert,
   )
 where
 

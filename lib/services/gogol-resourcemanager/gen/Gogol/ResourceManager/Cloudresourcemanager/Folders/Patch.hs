@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Patch
     CloudresourcemanagerFoldersPatchResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersPatch (..),
     newCloudresourcemanagerFoldersPatch,
-    CloudresourcemanagerFoldersPatch,
   )
 where
 

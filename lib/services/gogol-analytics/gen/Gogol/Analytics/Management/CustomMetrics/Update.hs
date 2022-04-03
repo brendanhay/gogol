@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomMetrics.Update
     AnalyticsManagementCustomMetricsUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomMetricsUpdate (..),
     newAnalyticsManagementCustomMetricsUpdate,
-    AnalyticsManagementCustomMetricsUpdate,
   )
 where
 

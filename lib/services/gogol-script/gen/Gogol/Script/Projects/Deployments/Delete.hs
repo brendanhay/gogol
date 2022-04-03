@@ -34,8 +34,8 @@ module Gogol.Script.Projects.Deployments.Delete
     ScriptProjectsDeploymentsDeleteResource,
 
     -- ** Constructing a Request
+    ScriptProjectsDeploymentsDelete (..),
     newScriptProjectsDeploymentsDelete,
-    ScriptProjectsDeploymentsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Liens.Delete
     CloudresourcemanagerLiensDeleteResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerLiensDelete (..),
     newCloudresourcemanagerLiensDelete,
-    CloudresourcemanagerLiensDelete,
   )
 where
 

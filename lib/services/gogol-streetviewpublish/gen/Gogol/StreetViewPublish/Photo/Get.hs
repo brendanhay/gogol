@@ -34,8 +34,8 @@ module Gogol.StreetViewPublish.Photo.Get
     StreetViewPublishPhotoGetResource,
 
     -- ** Constructing a Request
+    StreetViewPublishPhotoGet (..),
     newStreetViewPublishPhotoGet,
-    StreetViewPublishPhotoGet,
   )
 where
 

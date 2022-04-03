@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Start
     DataprocProjectsRegionsClustersStartResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersStart (..),
     newDataprocProjectsRegionsClustersStart,
-    DataprocProjectsRegionsClustersStart,
   )
 where
 

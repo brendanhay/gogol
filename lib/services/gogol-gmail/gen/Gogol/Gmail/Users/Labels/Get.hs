@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Labels.Get
     GmailUsersLabelsGetResource,
 
     -- ** Constructing a Request
+    GmailUsersLabelsGet (..),
     newGmailUsersLabelsGet,
-    GmailUsersLabelsGet,
   )
 where
 

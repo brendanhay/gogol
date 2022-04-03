@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
     SqlSslCertsCreateEphemeralResource,
 
     -- ** Constructing a Request
+    SqlSslCertsCreateEphemeral (..),
     newSqlSslCertsCreateEphemeral,
-    SqlSslCertsCreateEphemeral,
   )
 where
 

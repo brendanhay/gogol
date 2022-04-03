@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Operations.List
     SpannerProjectsInstancesOperationsListResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesOperationsList (..),
     newSpannerProjectsInstancesOperationsList,
-    SpannerProjectsInstancesOperationsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomDimensions.Update
     AnalyticsManagementCustomDimensionsUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomDimensionsUpdate (..),
     newAnalyticsManagementCustomDimensionsUpdate,
-    AnalyticsManagementCustomDimensionsUpdate,
   )
 where
 

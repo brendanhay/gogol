@@ -35,8 +35,8 @@ module Gogol.Classroom.Registrations.Create
     ClassroomRegistrationsCreateResource,
 
     -- ** Constructing a Request
+    ClassroomRegistrationsCreate (..),
     newClassroomRegistrationsCreate,
-    ClassroomRegistrationsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Calendars.Delete
     CalendarCalendarsDeleteResource,
 
     -- ** Constructing a Request
+    CalendarCalendarsDelete (..),
     newCalendarCalendarsDelete,
-    CalendarCalendarsDelete,
   )
 where
 

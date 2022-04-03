@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shippingsettings.Custombatch
     ContentShippingsettingsCustombatchResource,
 
     -- ** Constructing a Request
+    ContentShippingsettingsCustombatch (..),
     newContentShippingsettingsCustombatch,
-    ContentShippingsettingsCustombatch,
   )
 where
 

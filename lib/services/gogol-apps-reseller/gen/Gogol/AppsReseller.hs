@@ -41,88 +41,88 @@ module Gogol.AppsReseller
 
     -- ** reseller.customers.get
     ResellerCustomersGetResource,
+    ResellerCustomersGet (..),
     newResellerCustomersGet,
-    ResellerCustomersGet,
 
     -- ** reseller.customers.insert
     ResellerCustomersInsertResource,
+    ResellerCustomersInsert (..),
     newResellerCustomersInsert,
-    ResellerCustomersInsert,
 
     -- ** reseller.customers.patch
     ResellerCustomersPatchResource,
+    ResellerCustomersPatch (..),
     newResellerCustomersPatch,
-    ResellerCustomersPatch,
 
     -- ** reseller.customers.update
     ResellerCustomersUpdateResource,
+    ResellerCustomersUpdate (..),
     newResellerCustomersUpdate,
-    ResellerCustomersUpdate,
 
     -- ** reseller.resellernotify.getwatchdetails
     ResellerResellernotifyGetwatchdetailsResource,
+    ResellerResellernotifyGetwatchdetails (..),
     newResellerResellernotifyGetwatchdetails,
-    ResellerResellernotifyGetwatchdetails,
 
     -- ** reseller.resellernotify.register
     ResellerResellernotifyRegisterResource,
+    ResellerResellernotifyRegister (..),
     newResellerResellernotifyRegister,
-    ResellerResellernotifyRegister,
 
     -- ** reseller.resellernotify.unregister
     ResellerResellernotifyUnregisterResource,
+    ResellerResellernotifyUnregister (..),
     newResellerResellernotifyUnregister,
-    ResellerResellernotifyUnregister,
 
     -- ** reseller.subscriptions.activate
     ResellerSubscriptionsActivateResource,
+    ResellerSubscriptionsActivate (..),
     newResellerSubscriptionsActivate,
-    ResellerSubscriptionsActivate,
 
     -- ** reseller.subscriptions.changePlan
     ResellerSubscriptionsChangePlanResource,
+    ResellerSubscriptionsChangePlan (..),
     newResellerSubscriptionsChangePlan,
-    ResellerSubscriptionsChangePlan,
 
     -- ** reseller.subscriptions.changeRenewalSettings
     ResellerSubscriptionsChangeRenewalSettingsResource,
+    ResellerSubscriptionsChangeRenewalSettings (..),
     newResellerSubscriptionsChangeRenewalSettings,
-    ResellerSubscriptionsChangeRenewalSettings,
 
     -- ** reseller.subscriptions.changeSeats
     ResellerSubscriptionsChangeSeatsResource,
+    ResellerSubscriptionsChangeSeats (..),
     newResellerSubscriptionsChangeSeats,
-    ResellerSubscriptionsChangeSeats,
 
     -- ** reseller.subscriptions.delete
     ResellerSubscriptionsDeleteResource,
+    ResellerSubscriptionsDelete (..),
     newResellerSubscriptionsDelete,
-    ResellerSubscriptionsDelete,
 
     -- ** reseller.subscriptions.get
     ResellerSubscriptionsGetResource,
+    ResellerSubscriptionsGet (..),
     newResellerSubscriptionsGet,
-    ResellerSubscriptionsGet,
 
     -- ** reseller.subscriptions.insert
     ResellerSubscriptionsInsertResource,
+    ResellerSubscriptionsInsert (..),
     newResellerSubscriptionsInsert,
-    ResellerSubscriptionsInsert,
 
     -- ** reseller.subscriptions.list
     ResellerSubscriptionsListResource,
+    ResellerSubscriptionsList (..),
     newResellerSubscriptionsList,
-    ResellerSubscriptionsList,
 
     -- ** reseller.subscriptions.startPaidService
     ResellerSubscriptionsStartPaidServiceResource,
+    ResellerSubscriptionsStartPaidService (..),
     newResellerSubscriptionsStartPaidService,
-    ResellerSubscriptionsStartPaidService,
 
     -- ** reseller.subscriptions.suspend
     ResellerSubscriptionsSuspendResource,
+    ResellerSubscriptionsSuspend (..),
     newResellerSubscriptionsSuspend,
-    ResellerSubscriptionsSuspend,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.List
     DataFusionProjectsLocationsListResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsList (..),
     newDataFusionProjectsLocationsList,
-    DataFusionProjectsLocationsList,
   )
 where
 

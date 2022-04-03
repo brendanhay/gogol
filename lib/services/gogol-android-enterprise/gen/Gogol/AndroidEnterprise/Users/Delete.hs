@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Users.Delete
     AndroidEnterpriseUsersDeleteResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseUsersDelete (..),
     newAndroidEnterpriseUsersDelete,
-    AndroidEnterpriseUsersDelete,
   )
 where
 

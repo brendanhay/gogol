@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DnsZones.Remove
     ServiceNetworkingServicesDnsZonesRemoveResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDnsZonesRemove (..),
     newServiceNetworkingServicesDnsZonesRemove,
-    ServiceNetworkingServicesDnsZonesRemove,
   )
 where
 

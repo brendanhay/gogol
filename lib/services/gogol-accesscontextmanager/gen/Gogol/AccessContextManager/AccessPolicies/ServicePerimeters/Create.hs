@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Create
     AccessContextManagerAccessPoliciesServicePerimetersCreateResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesServicePerimetersCreate (..),
     newAccessContextManagerAccessPoliciesServicePerimetersCreate,
-    AccessContextManagerAccessPoliciesServicePerimetersCreate,
   )
 where
 

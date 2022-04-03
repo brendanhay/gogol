@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.Attachments.Get
     MirrorTimelineAttachmentsGetResource,
 
     -- ** Constructing a Request
+    MirrorTimelineAttachmentsGet (..),
     newMirrorTimelineAttachmentsGet,
-    MirrorTimelineAttachmentsGet,
   )
 where
 

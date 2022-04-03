@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Deidentify
     HealthcareProjectsLocationsDatasetsDicomStoresDeidentifyResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresDeidentify (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresDeidentify,
-    HealthcareProjectsLocationsDatasetsDicomStoresDeidentify,
   )
 where
 

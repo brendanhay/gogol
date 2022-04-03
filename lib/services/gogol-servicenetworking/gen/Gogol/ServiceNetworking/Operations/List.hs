@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Operations.List
     ServiceNetworkingOperationsListResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingOperationsList (..),
     newServiceNetworkingOperationsList,
-    ServiceNetworkingOperationsList,
   )
 where
 

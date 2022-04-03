@@ -34,8 +34,8 @@ module Gogol.File.Projects.Locations.Instances.Snapshots.Delete
     FileProjectsLocationsInstancesSnapshotsDeleteResource,
 
     -- ** Constructing a Request
+    FileProjectsLocationsInstancesSnapshotsDelete (..),
     newFileProjectsLocationsInstancesSnapshotsDelete,
-    FileProjectsLocationsInstancesSnapshotsDelete,
   )
 where
 

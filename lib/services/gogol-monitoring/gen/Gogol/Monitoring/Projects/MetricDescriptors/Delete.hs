@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.MetricDescriptors.Delete
     MonitoringProjectsMetricDescriptorsDeleteResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsMetricDescriptorsDelete (..),
     newMonitoringProjectsMetricDescriptorsDelete,
-    MonitoringProjectsMetricDescriptorsDelete,
   )
 where
 

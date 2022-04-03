@@ -34,8 +34,8 @@ module Gogol.Chat.Rooms.Webhooks
     ChatRoomsWebhooksResource,
 
     -- ** Constructing a Request
+    ChatRoomsWebhooks (..),
     newChatRoomsWebhooks,
-    ChatRoomsWebhooks,
   )
 where
 

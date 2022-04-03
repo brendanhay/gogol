@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Reports.Run
     DFAReportingReportsRunResource,
 
     -- ** Constructing a Request
+    DFAReportingReportsRun (..),
     newDFAReportingReportsRun,
-    DFAReportingReportsRun,
   )
 where
 

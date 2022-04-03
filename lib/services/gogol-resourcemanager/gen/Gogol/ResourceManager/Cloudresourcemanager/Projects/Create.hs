@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Create
     CloudresourcemanagerProjectsCreateResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerProjectsCreate (..),
     newCloudresourcemanagerProjectsCreate,
-    CloudresourcemanagerProjectsCreate,
   )
 where
 

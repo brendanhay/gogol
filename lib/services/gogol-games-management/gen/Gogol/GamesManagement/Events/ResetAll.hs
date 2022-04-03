@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Events.ResetAll
     GamesManagementEventsResetAllResource,
 
     -- ** Constructing a Request
+    GamesManagementEventsResetAll (..),
     newGamesManagementEventsResetAll,
-    GamesManagementEventsResetAll,
   )
 where
 

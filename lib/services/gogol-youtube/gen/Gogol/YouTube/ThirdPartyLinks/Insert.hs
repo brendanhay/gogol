@@ -34,8 +34,8 @@ module Gogol.YouTube.ThirdPartyLinks.Insert
     YouTubeThirdPartyLinksInsertResource,
 
     -- ** Constructing a Request
+    YouTubeThirdPartyLinksInsert (..),
     newYouTubeThirdPartyLinksInsert,
-    YouTubeThirdPartyLinksInsert,
   )
 where
 

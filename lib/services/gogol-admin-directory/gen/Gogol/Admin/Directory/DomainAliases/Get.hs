@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.DomainAliases.Get
     DirectoryDomainAliasesGetResource,
 
     -- ** Constructing a Request
+    DirectoryDomainAliasesGet (..),
     newDirectoryDomainAliasesGet,
-    DirectoryDomainAliasesGet,
   )
 where
 

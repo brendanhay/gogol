@@ -36,8 +36,8 @@ module Gogol.ServiceUser.Projects.Services.Enable
     ServiceUserProjectsServicesEnableResource,
 
     -- ** Constructing a Request
+    ServiceUserProjectsServicesEnable (..),
     newServiceUserProjectsServicesEnable,
-    ServiceUserProjectsServicesEnable,
   )
 where
 

@@ -40,8 +40,8 @@ module Gogol.PlayCustomApp
 
     -- ** playcustomapp.accounts.customApps.create
     PlayCustomAppAccountsCustomAppsCreateResource,
+    PlayCustomAppAccountsCustomAppsCreate (..),
     newPlayCustomAppAccountsCustomAppsCreate,
-    PlayCustomAppAccountsCustomAppsCreate,
 
     -- * Types
 

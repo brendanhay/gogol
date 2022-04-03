@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnaddress.Custombatch
     ContentReturnaddressCustombatchResource,
 
     -- ** Constructing a Request
+    ContentReturnaddressCustombatch (..),
     newContentReturnaddressCustombatch,
-    ContentReturnaddressCustombatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.Get
     ComputeFirewallsGetResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsGet (..),
     newComputeFirewallsGet,
-    ComputeFirewallsGet,
   )
 where
 

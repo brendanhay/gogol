@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Jobs.Cancel
     DataprocProjectsRegionsJobsCancelResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsJobsCancel (..),
     newDataprocProjectsRegionsJobsCancel,
-    DataprocProjectsRegionsJobsCancel,
   )
 where
 

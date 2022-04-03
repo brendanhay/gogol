@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.AddNote
     AdExchangeBuyer2AccountsProposalsAddNoteResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsAddNote (..),
     newAdExchangeBuyer2AccountsProposalsAddNote,
-    AdExchangeBuyer2AccountsProposalsAddNote,
   )
 where
 

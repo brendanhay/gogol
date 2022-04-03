@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.Update
     ComputeReservationsUpdateResource,
 
     -- ** Constructing a Request
+    ComputeReservationsUpdate (..),
     newComputeReservationsUpdate,
-    ComputeReservationsUpdate,
   )
 where
 

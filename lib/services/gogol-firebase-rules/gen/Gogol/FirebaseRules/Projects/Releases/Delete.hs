@@ -34,8 +34,8 @@ module Gogol.FirebaseRules.Projects.Releases.Delete
     FirebaseRulesProjectsReleasesDeleteResource,
 
     -- ** Constructing a Request
+    FirebaseRulesProjectsReleasesDelete (..),
     newFirebaseRulesProjectsReleasesDelete,
-    FirebaseRulesProjectsReleasesDelete,
   )
 where
 

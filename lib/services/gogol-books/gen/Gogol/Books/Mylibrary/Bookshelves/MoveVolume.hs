@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Bookshelves.MoveVolume
     BooksMylibraryBookshelvesMoveVolumeResource,
 
     -- ** Constructing a Request
+    BooksMylibraryBookshelvesMoveVolume (..),
     newBooksMylibraryBookshelvesMoveVolume,
-    BooksMylibraryBookshelvesMoveVolume,
   )
 where
 

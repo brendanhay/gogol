@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Connect.Get
     SqlConnectGetResource,
 
     -- ** Constructing a Request
+    SqlConnectGet (..),
     newSqlConnectGet,
-    SqlConnectGet,
   )
 where
 

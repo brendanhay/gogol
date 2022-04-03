@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnpolicyonline.Patch
     ContentReturnpolicyonlinePatchResource,
 
     -- ** Constructing a Request
+    ContentReturnpolicyonlinePatch (..),
     newContentReturnpolicyonlinePatch,
-    ContentReturnpolicyonlinePatch,
   )
 where
 

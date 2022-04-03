@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
     TagManagerAccountsContainersWorkspacesResolve_conflictResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesResolve_conflict (..),
     newTagManagerAccountsContainersWorkspacesResolve_conflict,
-    TagManagerAccountsContainersWorkspacesResolve_conflict,
   )
 where
 

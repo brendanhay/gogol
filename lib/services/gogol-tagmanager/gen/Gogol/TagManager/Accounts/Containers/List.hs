@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.List
     TagManagerAccountsContainersListResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersList (..),
     newTagManagerAccountsContainersList,
-    TagManagerAccountsContainersList,
   )
 where
 

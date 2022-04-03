@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Delet
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevisionResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Goals.Insert
     AnalyticsManagementGoalsInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementGoalsInsert (..),
     newAnalyticsManagementGoalsInsert,
-    AnalyticsManagementGoalsInsert,
   )
 where
 

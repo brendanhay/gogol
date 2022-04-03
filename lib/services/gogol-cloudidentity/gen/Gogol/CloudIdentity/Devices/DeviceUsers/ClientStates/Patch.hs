@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.ClientStates.Patch
     CloudIdentityDevicesDeviceUsersClientStatesPatchResource,
 
     -- ** Constructing a Request
+    CloudIdentityDevicesDeviceUsersClientStatesPatch (..),
     newCloudIdentityDevicesDeviceUsersClientStatesPatch,
-    CloudIdentityDevicesDeviceUsersClientStatesPatch,
   )
 where
 

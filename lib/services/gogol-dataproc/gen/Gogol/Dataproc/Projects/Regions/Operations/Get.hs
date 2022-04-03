@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Operations.Get
     DataprocProjectsRegionsOperationsGetResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsOperationsGet (..),
     newDataprocProjectsRegionsOperationsGet,
-    DataprocProjectsRegionsOperationsGet,
   )
 where
 

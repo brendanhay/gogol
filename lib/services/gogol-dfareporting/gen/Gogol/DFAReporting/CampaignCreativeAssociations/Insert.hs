@@ -34,8 +34,8 @@ module Gogol.DFAReporting.CampaignCreativeAssociations.Insert
     DFAReportingCampaignCreativeAssociationsInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingCampaignCreativeAssociationsInsert (..),
     newDFAReportingCampaignCreativeAssociationsInsert,
-    DFAReportingCampaignCreativeAssociationsInsert,
   )
 where
 

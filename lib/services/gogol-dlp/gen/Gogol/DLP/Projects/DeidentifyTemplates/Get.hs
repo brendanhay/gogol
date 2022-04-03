@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.DeidentifyTemplates.Get
     DLPProjectsDeidentifyTemplatesGetResource,
 
     -- ** Constructing a Request
+    DLPProjectsDeidentifyTemplatesGet (..),
     newDLPProjectsDeidentifyTemplatesGet,
-    DLPProjectsDeidentifyTemplatesGet,
   )
 where
 

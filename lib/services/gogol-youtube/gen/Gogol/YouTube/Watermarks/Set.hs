@@ -34,8 +34,8 @@ module Gogol.YouTube.Watermarks.Set
     YouTubeWatermarksSetResource,
 
     -- ** Constructing a Request
+    YouTubeWatermarksSet (..),
     newYouTubeWatermarksSet,
-    YouTubeWatermarksSet,
   )
 where
 

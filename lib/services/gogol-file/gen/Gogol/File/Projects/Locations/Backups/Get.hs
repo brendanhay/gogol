@@ -34,8 +34,8 @@ module Gogol.File.Projects.Locations.Backups.Get
     FileProjectsLocationsBackupsGetResource,
 
     -- ** Constructing a Request
+    FileProjectsLocationsBackupsGet (..),
     newFileProjectsLocationsBackupsGet,
-    FileProjectsLocationsBackupsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Operations.Delete
     DataFusionProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsOperationsDelete (..),
     newDataFusionProjectsLocationsOperationsDelete,
-    DataFusionProjectsLocationsOperationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppState.States.Update
     AppStateStatesUpdateResource,
 
     -- ** Constructing a Request
+    AppStateStatesUpdate (..),
     newAppStateStatesUpdate,
-    AppStateStatesUpdate,
   )
 where
 

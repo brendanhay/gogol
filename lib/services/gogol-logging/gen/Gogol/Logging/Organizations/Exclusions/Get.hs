@@ -34,8 +34,8 @@ module Gogol.Logging.Organizations.Exclusions.Get
     LoggingOrganizationsExclusionsGetResource,
 
     -- ** Constructing a Request
+    LoggingOrganizationsExclusionsGet (..),
     newLoggingOrganizationsExclusionsGet,
-    LoggingOrganizationsExclusionsGet,
   )
 where
 

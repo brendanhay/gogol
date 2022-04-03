@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutpages.Get
     AndroidEnterpriseStorelayoutpagesGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutpagesGet (..),
     newAndroidEnterpriseStorelayoutpagesGet,
-    AndroidEnterpriseStorelayoutpagesGet,
   )
 where
 

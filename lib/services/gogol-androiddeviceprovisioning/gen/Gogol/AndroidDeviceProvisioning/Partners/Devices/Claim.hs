@@ -34,8 +34,8 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.Claim
     AndroidDeviceProvisioningPartnersDevicesClaimResource,
 
     -- ** Constructing a Request
+    AndroidDeviceProvisioningPartnersDevicesClaim (..),
     newAndroidDeviceProvisioningPartnersDevicesClaim,
-    AndroidDeviceProvisioningPartnersDevicesClaim,
   )
 where
 

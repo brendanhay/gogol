@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.AchievementConfigurations.Delete
     GamesConfigurationAchievementConfigurationsDeleteResource,
 
     -- ** Constructing a Request
+    GamesConfigurationAchievementConfigurationsDelete (..),
     newGamesConfigurationAchievementConfigurationsDelete,
-    GamesConfigurationAchievementConfigurationsDelete,
   )
 where
 

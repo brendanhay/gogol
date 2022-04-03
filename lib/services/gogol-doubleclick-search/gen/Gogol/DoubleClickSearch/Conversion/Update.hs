@@ -34,8 +34,8 @@ module Gogol.DoubleClickSearch.Conversion.Update
     DoubleClickSearchConversionUpdateResource,
 
     -- ** Constructing a Request
+    DoubleClickSearchConversionUpdate (..),
     newDoubleClickSearchConversionUpdate,
-    DoubleClickSearchConversionUpdate,
   )
 where
 

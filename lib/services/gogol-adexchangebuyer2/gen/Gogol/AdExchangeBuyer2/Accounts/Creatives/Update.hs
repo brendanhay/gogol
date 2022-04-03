@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.Update
     AdExchangeBuyer2AccountsCreativesUpdateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsCreativesUpdate (..),
     newAdExchangeBuyer2AccountsCreativesUpdate,
-    AdExchangeBuyer2AccountsCreativesUpdate,
   )
 where
 

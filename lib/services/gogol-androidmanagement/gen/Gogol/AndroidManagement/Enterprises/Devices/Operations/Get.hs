@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Devices.Operations.Get
     AndroidManagementEnterprisesDevicesOperationsGetResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesDevicesOperationsGet (..),
     newAndroidManagementEnterprisesDevicesOperationsGet,
-    AndroidManagementEnterprisesDevicesOperationsGet,
   )
 where
 

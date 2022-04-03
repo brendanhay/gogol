@@ -34,8 +34,8 @@ module Gogol.Monitoring.UptimeCheckIps.List
     MonitoringUptimeCheckIpsListResource,
 
     -- ** Constructing a Request
+    MonitoringUptimeCheckIpsList (..),
     newMonitoringUptimeCheckIpsList,
-    MonitoringUptimeCheckIpsList,
   )
 where
 

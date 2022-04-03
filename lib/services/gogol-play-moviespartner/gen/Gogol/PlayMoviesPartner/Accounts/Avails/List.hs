@@ -36,8 +36,8 @@ module Gogol.PlayMoviesPartner.Accounts.Avails.List
     PlayMoviesPartnerAccountsAvailsListResource,
 
     -- ** Constructing a Request
+    PlayMoviesPartnerAccountsAvailsList (..),
     newPlayMoviesPartnerAccountsAvailsList,
-    PlayMoviesPartnerAccountsAvailsList,
   )
 where
 

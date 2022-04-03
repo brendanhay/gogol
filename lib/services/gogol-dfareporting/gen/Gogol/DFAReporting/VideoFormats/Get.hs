@@ -34,8 +34,8 @@ module Gogol.DFAReporting.VideoFormats.Get
     DFAReportingVideoFormatsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingVideoFormatsGet (..),
     newDFAReportingVideoFormatsGet,
-    DFAReportingVideoFormatsGet,
   )
 where
 

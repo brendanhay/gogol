@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Shippingsettings.Getsupportedpickupservices
     ContentShippingsettingsGetsupportedpickupservicesResource,
 
     -- ** Constructing a Request
+    ContentShippingsettingsGetsupportedpickupservices (..),
     newContentShippingsettingsGetsupportedpickupservices,
-    ContentShippingsettingsGetsupportedpickupservices,
   )
 where
 

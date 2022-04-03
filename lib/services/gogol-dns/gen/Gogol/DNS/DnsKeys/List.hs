@@ -34,8 +34,8 @@ module Gogol.DNS.DnsKeys.List
     DNSDnsKeysListResource,
 
     -- ** Constructing a Request
+    DNSDnsKeysList (..),
     newDNSDnsKeysList,
-    DNSDnsKeysList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.DataSources.CheckValidCreds
     BigQueryDataTransferProjectsDataSourcesCheckValidCredsResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsDataSourcesCheckValidCreds (..),
     newBigQueryDataTransferProjectsDataSourcesCheckValidCreds,
-    BigQueryDataTransferProjectsDataSourcesCheckValidCreds,
   )
 where
 

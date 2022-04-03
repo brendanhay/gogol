@@ -34,8 +34,8 @@ module Gogol.Books.Layers.VolumeAnnotations.Get
     BooksLayersVolumeAnnotationsGetResource,
 
     -- ** Constructing a Request
+    BooksLayersVolumeAnnotationsGet (..),
     newBooksLayersVolumeAnnotationsGet,
-    BooksLayersVolumeAnnotationsGet,
   )
 where
 

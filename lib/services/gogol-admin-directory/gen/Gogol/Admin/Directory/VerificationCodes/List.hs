@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.VerificationCodes.List
     DirectoryVerificationCodesListResource,
 
     -- ** Constructing a Request
+    DirectoryVerificationCodesList (..),
     newDirectoryVerificationCodesList,
-    DirectoryVerificationCodesList,
   )
 where
 

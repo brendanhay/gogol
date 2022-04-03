@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
     SpannerProjectsInstancesDatabasesSessionsBeginTransactionResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsBeginTransaction (..),
     newSpannerProjectsInstancesDatabasesSessionsBeginTransaction,
-    SpannerProjectsInstancesDatabasesSessionsBeginTransaction,
   )
 where
 

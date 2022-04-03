@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomain
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsListResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList (..),
     newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList,
-    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList,
   )
 where
 

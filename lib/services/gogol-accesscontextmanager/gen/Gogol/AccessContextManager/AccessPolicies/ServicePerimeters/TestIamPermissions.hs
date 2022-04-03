@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.TestIamPermis
     AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions (..),
     newAccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
-    AccessContextManagerAccessPoliciesServicePerimetersTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Books.Layers.AnnotationData.List
     BooksLayersAnnotationDataListResource,
 
     -- ** Constructing a Request
+    BooksLayersAnnotationDataList (..),
     newBooksLayersAnnotationDataList,
-    BooksLayersAnnotationDataList,
   )
 where
 

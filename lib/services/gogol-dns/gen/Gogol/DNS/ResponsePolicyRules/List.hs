@@ -34,8 +34,8 @@ module Gogol.DNS.ResponsePolicyRules.List
     DNSResponsePolicyRulesListResource,
 
     -- ** Constructing a Request
+    DNSResponsePolicyRulesList (..),
     newDNSResponsePolicyRulesList,
-    DNSResponsePolicyRulesList,
   )
 where
 

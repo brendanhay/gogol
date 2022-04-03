@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.List
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesListResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesList (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesList,
   )
 where
 

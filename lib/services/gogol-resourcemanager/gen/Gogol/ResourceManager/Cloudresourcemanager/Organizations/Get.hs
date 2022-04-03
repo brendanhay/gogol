@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Organizations.Get
     CloudresourcemanagerOrganizationsGetResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerOrganizationsGet (..),
     newCloudresourcemanagerOrganizationsGet,
-    CloudresourcemanagerOrganizationsGet,
   )
 where
 

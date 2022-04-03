@@ -34,8 +34,8 @@ module Gogol.IAM.Organizations.Roles.Delete
     IAMOrganizationsRolesDeleteResource,
 
     -- ** Constructing a Request
+    IAMOrganizationsRolesDelete (..),
     newIAMOrganizationsRolesDelete,
-    IAMOrganizationsRolesDelete,
   )
 where
 

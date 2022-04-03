@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Content.Deidentify
     DLPProjectsContentDeidentifyResource,
 
     -- ** Constructing a Request
+    DLPProjectsContentDeidentify (..),
     newDLPProjectsContentDeidentify,
-    DLPProjectsContentDeidentify,
   )
 where
 

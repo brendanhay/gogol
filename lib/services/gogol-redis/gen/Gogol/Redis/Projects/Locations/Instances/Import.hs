@@ -34,8 +34,8 @@ module Gogol.Redis.Projects.Locations.Instances.Import
     RedisProjectsLocationsInstancesImportResource,
 
     -- ** Constructing a Request
+    RedisProjectsLocationsInstancesImport (..),
     newRedisProjectsLocationsInstancesImport,
-    RedisProjectsLocationsInstancesImport,
   )
 where
 

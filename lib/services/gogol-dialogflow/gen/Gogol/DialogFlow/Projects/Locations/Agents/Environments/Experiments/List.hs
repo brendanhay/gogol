@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.List
     DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsListResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList,
-    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsList,
   )
 where
 

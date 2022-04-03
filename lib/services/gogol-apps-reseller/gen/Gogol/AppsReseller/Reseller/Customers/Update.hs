@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Customers.Update
     ResellerCustomersUpdateResource,
 
     -- ** Constructing a Request
+    ResellerCustomersUpdate (..),
     newResellerCustomersUpdate,
-    ResellerCustomersUpdate,
   )
 where
 

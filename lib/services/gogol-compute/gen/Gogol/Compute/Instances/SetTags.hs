@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetTags
     ComputeInstancesSetTagsResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetTags (..),
     newComputeInstancesSetTags,
-    ComputeInstancesSetTags,
   )
 where
 

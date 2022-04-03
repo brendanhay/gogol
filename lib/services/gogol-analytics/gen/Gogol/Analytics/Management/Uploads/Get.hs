@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Uploads.Get
     AnalyticsManagementUploadsGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementUploadsGet (..),
     newAnalyticsManagementUploadsGet,
-    AnalyticsManagementUploadsGet,
   )
 where
 

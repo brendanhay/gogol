@@ -34,8 +34,8 @@ module Gogol.Vault.Operations.List
     VaultOperationsListResource,
 
     -- ** Constructing a Request
+    VaultOperationsList (..),
     newVaultOperationsList,
-    VaultOperationsList,
   )
 where
 

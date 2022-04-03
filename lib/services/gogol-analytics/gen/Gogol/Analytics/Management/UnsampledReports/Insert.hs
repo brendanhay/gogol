@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.UnsampledReports.Insert
     AnalyticsManagementUnsampledReportsInsertResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementUnsampledReportsInsert (..),
     newAnalyticsManagementUnsampledReportsInsert,
-    AnalyticsManagementUnsampledReportsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.JobTriggers.Patch
     DLPProjectsJobTriggersPatchResource,
 
     -- ** Constructing a Request
+    DLPProjectsJobTriggersPatch (..),
     newDLPProjectsJobTriggersPatch,
-    DLPProjectsJobTriggersPatch,
   )
 where
 

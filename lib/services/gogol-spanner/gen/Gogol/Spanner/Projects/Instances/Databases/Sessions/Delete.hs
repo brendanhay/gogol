@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Delete
     SpannerProjectsInstancesDatabasesSessionsDeleteResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsDelete (..),
     newSpannerProjectsInstancesDatabasesSessionsDelete,
-    SpannerProjectsInstancesDatabasesSessionsDelete,
   )
 where
 

@@ -42,298 +42,298 @@ module Gogol.Spanner
 
     -- ** spanner.projects.instanceConfigs.get
     SpannerProjectsInstanceConfigsGetResource,
+    SpannerProjectsInstanceConfigsGet (..),
     newSpannerProjectsInstanceConfigsGet,
-    SpannerProjectsInstanceConfigsGet,
 
     -- ** spanner.projects.instanceConfigs.list
     SpannerProjectsInstanceConfigsListResource,
+    SpannerProjectsInstanceConfigsList (..),
     newSpannerProjectsInstanceConfigsList,
-    SpannerProjectsInstanceConfigsList,
 
     -- ** spanner.projects.instances.backupOperations.list
     SpannerProjectsInstancesBackupOperationsListResource,
+    SpannerProjectsInstancesBackupOperationsList (..),
     newSpannerProjectsInstancesBackupOperationsList,
-    SpannerProjectsInstancesBackupOperationsList,
 
     -- ** spanner.projects.instances.backups.create
     SpannerProjectsInstancesBackupsCreateResource,
+    SpannerProjectsInstancesBackupsCreate (..),
     newSpannerProjectsInstancesBackupsCreate,
-    SpannerProjectsInstancesBackupsCreate,
 
     -- ** spanner.projects.instances.backups.delete
     SpannerProjectsInstancesBackupsDeleteResource,
+    SpannerProjectsInstancesBackupsDelete (..),
     newSpannerProjectsInstancesBackupsDelete,
-    SpannerProjectsInstancesBackupsDelete,
 
     -- ** spanner.projects.instances.backups.get
     SpannerProjectsInstancesBackupsGetResource,
+    SpannerProjectsInstancesBackupsGet (..),
     newSpannerProjectsInstancesBackupsGet,
-    SpannerProjectsInstancesBackupsGet,
 
     -- ** spanner.projects.instances.backups.getIamPolicy
     SpannerProjectsInstancesBackupsGetIamPolicyResource,
+    SpannerProjectsInstancesBackupsGetIamPolicy (..),
     newSpannerProjectsInstancesBackupsGetIamPolicy,
-    SpannerProjectsInstancesBackupsGetIamPolicy,
 
     -- ** spanner.projects.instances.backups.list
     SpannerProjectsInstancesBackupsListResource,
+    SpannerProjectsInstancesBackupsList (..),
     newSpannerProjectsInstancesBackupsList,
-    SpannerProjectsInstancesBackupsList,
 
     -- ** spanner.projects.instances.backups.operations.cancel
     SpannerProjectsInstancesBackupsOperationsCancelResource,
+    SpannerProjectsInstancesBackupsOperationsCancel (..),
     newSpannerProjectsInstancesBackupsOperationsCancel,
-    SpannerProjectsInstancesBackupsOperationsCancel,
 
     -- ** spanner.projects.instances.backups.operations.delete
     SpannerProjectsInstancesBackupsOperationsDeleteResource,
+    SpannerProjectsInstancesBackupsOperationsDelete (..),
     newSpannerProjectsInstancesBackupsOperationsDelete,
-    SpannerProjectsInstancesBackupsOperationsDelete,
 
     -- ** spanner.projects.instances.backups.operations.get
     SpannerProjectsInstancesBackupsOperationsGetResource,
+    SpannerProjectsInstancesBackupsOperationsGet (..),
     newSpannerProjectsInstancesBackupsOperationsGet,
-    SpannerProjectsInstancesBackupsOperationsGet,
 
     -- ** spanner.projects.instances.backups.operations.list
     SpannerProjectsInstancesBackupsOperationsListResource,
+    SpannerProjectsInstancesBackupsOperationsList (..),
     newSpannerProjectsInstancesBackupsOperationsList,
-    SpannerProjectsInstancesBackupsOperationsList,
 
     -- ** spanner.projects.instances.backups.patch
     SpannerProjectsInstancesBackupsPatchResource,
+    SpannerProjectsInstancesBackupsPatch (..),
     newSpannerProjectsInstancesBackupsPatch,
-    SpannerProjectsInstancesBackupsPatch,
 
     -- ** spanner.projects.instances.backups.setIamPolicy
     SpannerProjectsInstancesBackupsSetIamPolicyResource,
+    SpannerProjectsInstancesBackupsSetIamPolicy (..),
     newSpannerProjectsInstancesBackupsSetIamPolicy,
-    SpannerProjectsInstancesBackupsSetIamPolicy,
 
     -- ** spanner.projects.instances.backups.testIamPermissions
     SpannerProjectsInstancesBackupsTestIamPermissionsResource,
+    SpannerProjectsInstancesBackupsTestIamPermissions (..),
     newSpannerProjectsInstancesBackupsTestIamPermissions,
-    SpannerProjectsInstancesBackupsTestIamPermissions,
 
     -- ** spanner.projects.instances.create
     SpannerProjectsInstancesCreateResource,
+    SpannerProjectsInstancesCreate (..),
     newSpannerProjectsInstancesCreate,
-    SpannerProjectsInstancesCreate,
 
     -- ** spanner.projects.instances.databaseOperations.list
     SpannerProjectsInstancesDatabaseOperationsListResource,
+    SpannerProjectsInstancesDatabaseOperationsList (..),
     newSpannerProjectsInstancesDatabaseOperationsList,
-    SpannerProjectsInstancesDatabaseOperationsList,
 
     -- ** spanner.projects.instances.databases.create
     SpannerProjectsInstancesDatabasesCreateResource,
+    SpannerProjectsInstancesDatabasesCreate (..),
     newSpannerProjectsInstancesDatabasesCreate,
-    SpannerProjectsInstancesDatabasesCreate,
 
     -- ** spanner.projects.instances.databases.dropDatabase
     SpannerProjectsInstancesDatabasesDropDatabaseResource,
+    SpannerProjectsInstancesDatabasesDropDatabase (..),
     newSpannerProjectsInstancesDatabasesDropDatabase,
-    SpannerProjectsInstancesDatabasesDropDatabase,
 
     -- ** spanner.projects.instances.databases.get
     SpannerProjectsInstancesDatabasesGetResource,
+    SpannerProjectsInstancesDatabasesGet (..),
     newSpannerProjectsInstancesDatabasesGet,
-    SpannerProjectsInstancesDatabasesGet,
 
     -- ** spanner.projects.instances.databases.getDdl
     SpannerProjectsInstancesDatabasesGetDdlResource,
+    SpannerProjectsInstancesDatabasesGetDdl (..),
     newSpannerProjectsInstancesDatabasesGetDdl,
-    SpannerProjectsInstancesDatabasesGetDdl,
 
     -- ** spanner.projects.instances.databases.getIamPolicy
     SpannerProjectsInstancesDatabasesGetIamPolicyResource,
+    SpannerProjectsInstancesDatabasesGetIamPolicy (..),
     newSpannerProjectsInstancesDatabasesGetIamPolicy,
-    SpannerProjectsInstancesDatabasesGetIamPolicy,
 
     -- ** spanner.projects.instances.databases.getScans
     SpannerProjectsInstancesDatabasesGetScansResource,
+    SpannerProjectsInstancesDatabasesGetScans (..),
     newSpannerProjectsInstancesDatabasesGetScans,
-    SpannerProjectsInstancesDatabasesGetScans,
 
     -- ** spanner.projects.instances.databases.list
     SpannerProjectsInstancesDatabasesListResource,
+    SpannerProjectsInstancesDatabasesList (..),
     newSpannerProjectsInstancesDatabasesList,
-    SpannerProjectsInstancesDatabasesList,
 
     -- ** spanner.projects.instances.databases.operations.cancel
     SpannerProjectsInstancesDatabasesOperationsCancelResource,
+    SpannerProjectsInstancesDatabasesOperationsCancel (..),
     newSpannerProjectsInstancesDatabasesOperationsCancel,
-    SpannerProjectsInstancesDatabasesOperationsCancel,
 
     -- ** spanner.projects.instances.databases.operations.delete
     SpannerProjectsInstancesDatabasesOperationsDeleteResource,
+    SpannerProjectsInstancesDatabasesOperationsDelete (..),
     newSpannerProjectsInstancesDatabasesOperationsDelete,
-    SpannerProjectsInstancesDatabasesOperationsDelete,
 
     -- ** spanner.projects.instances.databases.operations.get
     SpannerProjectsInstancesDatabasesOperationsGetResource,
+    SpannerProjectsInstancesDatabasesOperationsGet (..),
     newSpannerProjectsInstancesDatabasesOperationsGet,
-    SpannerProjectsInstancesDatabasesOperationsGet,
 
     -- ** spanner.projects.instances.databases.operations.list
     SpannerProjectsInstancesDatabasesOperationsListResource,
+    SpannerProjectsInstancesDatabasesOperationsList (..),
     newSpannerProjectsInstancesDatabasesOperationsList,
-    SpannerProjectsInstancesDatabasesOperationsList,
 
     -- ** spanner.projects.instances.databases.restore
     SpannerProjectsInstancesDatabasesRestoreResource,
+    SpannerProjectsInstancesDatabasesRestore (..),
     newSpannerProjectsInstancesDatabasesRestore,
-    SpannerProjectsInstancesDatabasesRestore,
 
     -- ** spanner.projects.instances.databases.sessions.batchCreate
     SpannerProjectsInstancesDatabasesSessionsBatchCreateResource,
+    SpannerProjectsInstancesDatabasesSessionsBatchCreate (..),
     newSpannerProjectsInstancesDatabasesSessionsBatchCreate,
-    SpannerProjectsInstancesDatabasesSessionsBatchCreate,
 
     -- ** spanner.projects.instances.databases.sessions.beginTransaction
     SpannerProjectsInstancesDatabasesSessionsBeginTransactionResource,
+    SpannerProjectsInstancesDatabasesSessionsBeginTransaction (..),
     newSpannerProjectsInstancesDatabasesSessionsBeginTransaction,
-    SpannerProjectsInstancesDatabasesSessionsBeginTransaction,
 
     -- ** spanner.projects.instances.databases.sessions.commit
     SpannerProjectsInstancesDatabasesSessionsCommitResource,
+    SpannerProjectsInstancesDatabasesSessionsCommit (..),
     newSpannerProjectsInstancesDatabasesSessionsCommit,
-    SpannerProjectsInstancesDatabasesSessionsCommit,
 
     -- ** spanner.projects.instances.databases.sessions.create
     SpannerProjectsInstancesDatabasesSessionsCreateResource,
+    SpannerProjectsInstancesDatabasesSessionsCreate (..),
     newSpannerProjectsInstancesDatabasesSessionsCreate,
-    SpannerProjectsInstancesDatabasesSessionsCreate,
 
     -- ** spanner.projects.instances.databases.sessions.delete
     SpannerProjectsInstancesDatabasesSessionsDeleteResource,
+    SpannerProjectsInstancesDatabasesSessionsDelete (..),
     newSpannerProjectsInstancesDatabasesSessionsDelete,
-    SpannerProjectsInstancesDatabasesSessionsDelete,
 
     -- ** spanner.projects.instances.databases.sessions.executeBatchDml
     SpannerProjectsInstancesDatabasesSessionsExecuteBatchDmlResource,
+    SpannerProjectsInstancesDatabasesSessionsExecuteBatchDml (..),
     newSpannerProjectsInstancesDatabasesSessionsExecuteBatchDml,
-    SpannerProjectsInstancesDatabasesSessionsExecuteBatchDml,
 
     -- ** spanner.projects.instances.databases.sessions.executeSql
     SpannerProjectsInstancesDatabasesSessionsExecuteSqlResource,
+    SpannerProjectsInstancesDatabasesSessionsExecuteSql (..),
     newSpannerProjectsInstancesDatabasesSessionsExecuteSql,
-    SpannerProjectsInstancesDatabasesSessionsExecuteSql,
 
     -- ** spanner.projects.instances.databases.sessions.executeStreamingSql
     SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSqlResource,
+    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql (..),
     newSpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
-    SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql,
 
     -- ** spanner.projects.instances.databases.sessions.get
     SpannerProjectsInstancesDatabasesSessionsGetResource,
+    SpannerProjectsInstancesDatabasesSessionsGet (..),
     newSpannerProjectsInstancesDatabasesSessionsGet,
-    SpannerProjectsInstancesDatabasesSessionsGet,
 
     -- ** spanner.projects.instances.databases.sessions.list
     SpannerProjectsInstancesDatabasesSessionsListResource,
+    SpannerProjectsInstancesDatabasesSessionsList (..),
     newSpannerProjectsInstancesDatabasesSessionsList,
-    SpannerProjectsInstancesDatabasesSessionsList,
 
     -- ** spanner.projects.instances.databases.sessions.partitionQuery
     SpannerProjectsInstancesDatabasesSessionsPartitionQueryResource,
+    SpannerProjectsInstancesDatabasesSessionsPartitionQuery (..),
     newSpannerProjectsInstancesDatabasesSessionsPartitionQuery,
-    SpannerProjectsInstancesDatabasesSessionsPartitionQuery,
 
     -- ** spanner.projects.instances.databases.sessions.partitionRead
     SpannerProjectsInstancesDatabasesSessionsPartitionReadResource,
+    SpannerProjectsInstancesDatabasesSessionsPartitionRead (..),
     newSpannerProjectsInstancesDatabasesSessionsPartitionRead,
-    SpannerProjectsInstancesDatabasesSessionsPartitionRead,
 
     -- ** spanner.projects.instances.databases.sessions.read
     SpannerProjectsInstancesDatabasesSessionsReadResource,
+    SpannerProjectsInstancesDatabasesSessionsRead (..),
     newSpannerProjectsInstancesDatabasesSessionsRead,
-    SpannerProjectsInstancesDatabasesSessionsRead,
 
     -- ** spanner.projects.instances.databases.sessions.rollback
     SpannerProjectsInstancesDatabasesSessionsRollbackResource,
+    SpannerProjectsInstancesDatabasesSessionsRollback (..),
     newSpannerProjectsInstancesDatabasesSessionsRollback,
-    SpannerProjectsInstancesDatabasesSessionsRollback,
 
     -- ** spanner.projects.instances.databases.sessions.streamingRead
     SpannerProjectsInstancesDatabasesSessionsStreamingReadResource,
+    SpannerProjectsInstancesDatabasesSessionsStreamingRead (..),
     newSpannerProjectsInstancesDatabasesSessionsStreamingRead,
-    SpannerProjectsInstancesDatabasesSessionsStreamingRead,
 
     -- ** spanner.projects.instances.databases.setIamPolicy
     SpannerProjectsInstancesDatabasesSetIamPolicyResource,
+    SpannerProjectsInstancesDatabasesSetIamPolicy (..),
     newSpannerProjectsInstancesDatabasesSetIamPolicy,
-    SpannerProjectsInstancesDatabasesSetIamPolicy,
 
     -- ** spanner.projects.instances.databases.testIamPermissions
     SpannerProjectsInstancesDatabasesTestIamPermissionsResource,
+    SpannerProjectsInstancesDatabasesTestIamPermissions (..),
     newSpannerProjectsInstancesDatabasesTestIamPermissions,
-    SpannerProjectsInstancesDatabasesTestIamPermissions,
 
     -- ** spanner.projects.instances.databases.updateDdl
     SpannerProjectsInstancesDatabasesUpdateDdlResource,
+    SpannerProjectsInstancesDatabasesUpdateDdl (..),
     newSpannerProjectsInstancesDatabasesUpdateDdl,
-    SpannerProjectsInstancesDatabasesUpdateDdl,
 
     -- ** spanner.projects.instances.delete
     SpannerProjectsInstancesDeleteResource,
+    SpannerProjectsInstancesDelete (..),
     newSpannerProjectsInstancesDelete,
-    SpannerProjectsInstancesDelete,
 
     -- ** spanner.projects.instances.get
     SpannerProjectsInstancesGetResource,
+    SpannerProjectsInstancesGet (..),
     newSpannerProjectsInstancesGet,
-    SpannerProjectsInstancesGet,
 
     -- ** spanner.projects.instances.getIamPolicy
     SpannerProjectsInstancesGetIamPolicyResource,
+    SpannerProjectsInstancesGetIamPolicy (..),
     newSpannerProjectsInstancesGetIamPolicy,
-    SpannerProjectsInstancesGetIamPolicy,
 
     -- ** spanner.projects.instances.list
     SpannerProjectsInstancesListResource,
+    SpannerProjectsInstancesList (..),
     newSpannerProjectsInstancesList,
-    SpannerProjectsInstancesList,
 
     -- ** spanner.projects.instances.operations.cancel
     SpannerProjectsInstancesOperationsCancelResource,
+    SpannerProjectsInstancesOperationsCancel (..),
     newSpannerProjectsInstancesOperationsCancel,
-    SpannerProjectsInstancesOperationsCancel,
 
     -- ** spanner.projects.instances.operations.delete
     SpannerProjectsInstancesOperationsDeleteResource,
+    SpannerProjectsInstancesOperationsDelete (..),
     newSpannerProjectsInstancesOperationsDelete,
-    SpannerProjectsInstancesOperationsDelete,
 
     -- ** spanner.projects.instances.operations.get
     SpannerProjectsInstancesOperationsGetResource,
+    SpannerProjectsInstancesOperationsGet (..),
     newSpannerProjectsInstancesOperationsGet,
-    SpannerProjectsInstancesOperationsGet,
 
     -- ** spanner.projects.instances.operations.list
     SpannerProjectsInstancesOperationsListResource,
+    SpannerProjectsInstancesOperationsList (..),
     newSpannerProjectsInstancesOperationsList,
-    SpannerProjectsInstancesOperationsList,
 
     -- ** spanner.projects.instances.patch
     SpannerProjectsInstancesPatchResource,
+    SpannerProjectsInstancesPatch (..),
     newSpannerProjectsInstancesPatch,
-    SpannerProjectsInstancesPatch,
 
     -- ** spanner.projects.instances.setIamPolicy
     SpannerProjectsInstancesSetIamPolicyResource,
+    SpannerProjectsInstancesSetIamPolicy (..),
     newSpannerProjectsInstancesSetIamPolicy,
-    SpannerProjectsInstancesSetIamPolicy,
 
     -- ** spanner.projects.instances.testIamPermissions
     SpannerProjectsInstancesTestIamPermissionsResource,
+    SpannerProjectsInstancesTestIamPermissions (..),
     newSpannerProjectsInstancesTestIamPermissions,
-    SpannerProjectsInstancesTestIamPermissions,
 
     -- ** spanner.scans.list
     SpannerScansListResource,
+    SpannerScansList (..),
     newSpannerScansList,
-    SpannerScansList,
 
     -- * Types
 

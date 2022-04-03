@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.Unenroll
     AndroidEnterpriseEnterprisesUnenrollResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesUnenroll (..),
     newAndroidEnterpriseEnterprisesUnenroll,
-    AndroidEnterpriseEnterprisesUnenroll,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Keys.Delete
     IAMProjectsServiceAccountsKeysDeleteResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsKeysDelete (..),
     newIAMProjectsServiceAccountsKeysDelete,
-    IAMProjectsServiceAccountsKeysDelete,
   )
 where
 

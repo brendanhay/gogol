@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.WebPropertyAdWordsLinks.Update
     AnalyticsManagementWebPropertyAdWordsLinksUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebPropertyAdWordsLinksUpdate (..),
     newAnalyticsManagementWebPropertyAdWordsLinksUpdate,
-    AnalyticsManagementWebPropertyAdWordsLinksUpdate,
   )
 where
 

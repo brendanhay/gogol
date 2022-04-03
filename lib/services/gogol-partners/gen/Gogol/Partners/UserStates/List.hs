@@ -34,8 +34,8 @@ module Gogol.Partners.UserStates.List
     PartnersUserStatesListResource,
 
     -- ** Constructing a Request
+    PartnersUserStatesList (..),
     newPartnersUserStatesList,
-    PartnersUserStatesList,
   )
 where
 

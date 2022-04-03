@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Stats.Session.Searchapplications.Get
     CloudSearchStatsSessionSearchapplicationsGetResource,
 
     -- ** Constructing a Request
+    CloudSearchStatsSessionSearchapplicationsGet (..),
     newCloudSearchStatsSessionSearchapplicationsGet,
-    CloudSearchStatsSessionSearchapplicationsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Versions.Instances.Get
     AppEngineAppsServicesVersionsInstancesGetResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesVersionsInstancesGet (..),
     newAppEngineAppsServicesVersionsInstancesGet,
-    AppEngineAppsServicesVersionsInstancesGet,
   )
 where
 

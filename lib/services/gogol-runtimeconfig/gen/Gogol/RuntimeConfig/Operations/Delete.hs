@@ -34,8 +34,8 @@ module Gogol.RuntimeConfig.Operations.Delete
     RuntimeConfigOperationsDeleteResource,
 
     -- ** Constructing a Request
+    RuntimeConfigOperationsDelete (..),
     newRuntimeConfigOperationsDelete,
-    RuntimeConfigOperationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.GetProfile
     GmailUsersGetProfileResource,
 
     -- ** Constructing a Request
+    GmailUsersGetProfile (..),
     newGmailUsersGetProfile,
-    GmailUsersGetProfile,
   )
 where
 

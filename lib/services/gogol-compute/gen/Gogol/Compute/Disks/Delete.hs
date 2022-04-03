@@ -34,8 +34,8 @@ module Gogol.Compute.Disks.Delete
     ComputeDisksDeleteResource,
 
     -- ** Constructing a Request
+    ComputeDisksDelete (..),
     newComputeDisksDelete,
-    ComputeDisksDelete,
   )
 where
 

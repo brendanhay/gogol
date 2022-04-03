@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Operations.Cancel
     BigtableAdminOperationsCancelResource,
 
     -- ** Constructing a Request
+    BigtableAdminOperationsCancel (..),
     newBigtableAdminOperationsCancel,
-    BigtableAdminOperationsCancel,
   )
 where
 

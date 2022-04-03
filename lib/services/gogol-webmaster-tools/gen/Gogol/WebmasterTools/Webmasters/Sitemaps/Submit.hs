@@ -34,8 +34,8 @@ module Gogol.WebmasterTools.Webmasters.Sitemaps.Submit
     WebmastersSitemapsSubmitResource,
 
     -- ** Constructing a Request
+    WebmastersSitemapsSubmit (..),
     newWebmastersSitemapsSubmit,
-    WebmastersSitemapsSubmit,
   )
 where
 

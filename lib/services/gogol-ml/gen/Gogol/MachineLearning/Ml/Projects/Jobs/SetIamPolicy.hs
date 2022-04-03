@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.SetIamPolicy
     MlProjectsJobsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    MlProjectsJobsSetIamPolicy (..),
     newMlProjectsJobsSetIamPolicy,
-    MlProjectsJobsSetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Slides.Presentations.BatchUpdate
     SlidesPresentationsBatchUpdateResource,
 
     -- ** Constructing a Request
+    SlidesPresentationsBatchUpdate (..),
     newSlidesPresentationsBatchUpdate,
-    SlidesPresentationsBatchUpdate,
   )
 where
 

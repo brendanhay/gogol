@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.Verify
     GmailUsersSettingsSendAsVerifyResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsVerify (..),
     newGmailUsersSettingsSendAsVerify,
-    GmailUsersSettingsSendAsVerify,
   )
 where
 

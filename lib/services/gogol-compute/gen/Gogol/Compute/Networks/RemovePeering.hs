@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.RemovePeering
     ComputeNetworksRemovePeeringResource,
 
     -- ** Constructing a Request
+    ComputeNetworksRemovePeering (..),
     newComputeNetworksRemovePeering,
-    ComputeNetworksRemovePeering,
   )
 where
 

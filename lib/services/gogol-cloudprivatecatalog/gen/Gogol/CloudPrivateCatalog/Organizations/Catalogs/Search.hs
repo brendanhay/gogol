@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalog.Organizations.Catalogs.Search
     CloudPrivateCatalogOrganizationsCatalogsSearchResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogOrganizationsCatalogsSearch (..),
     newCloudPrivateCatalogOrganizationsCatalogsSearch,
-    CloudPrivateCatalogOrganizationsCatalogsSearch,
   )
 where
 

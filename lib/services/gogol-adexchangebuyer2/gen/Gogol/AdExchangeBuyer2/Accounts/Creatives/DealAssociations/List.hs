@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
     AdExchangeBuyer2AccountsCreativesDealAssociationsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsCreativesDealAssociationsList (..),
     newAdExchangeBuyer2AccountsCreativesDealAssociationsList,
-    AdExchangeBuyer2AccountsCreativesDealAssociationsList,
   )
 where
 

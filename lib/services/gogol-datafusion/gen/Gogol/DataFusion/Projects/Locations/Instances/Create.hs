@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.Create
     DataFusionProjectsLocationsInstancesCreateResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesCreate (..),
     newDataFusionProjectsLocationsInstancesCreate,
-    DataFusionProjectsLocationsInstancesCreate,
   )
 where
 

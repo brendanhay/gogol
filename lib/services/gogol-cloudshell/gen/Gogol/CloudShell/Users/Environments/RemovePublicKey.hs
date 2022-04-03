@@ -34,8 +34,8 @@ module Gogol.CloudShell.Users.Environments.RemovePublicKey
     CloudShellUsersEnvironmentsRemovePublicKeyResource,
 
     -- ** Constructing a Request
+    CloudShellUsersEnvironmentsRemovePublicKey (..),
     newCloudShellUsersEnvironmentsRemovePublicKey,
-    CloudShellUsersEnvironmentsRemovePublicKey,
   )
 where
 

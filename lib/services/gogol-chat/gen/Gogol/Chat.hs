@@ -37,88 +37,88 @@ module Gogol.Chat
 
     -- ** chat.dms.conversations.messages
     ChatDmsConversationsMessagesResource,
+    ChatDmsConversationsMessages (..),
     newChatDmsConversationsMessages,
-    ChatDmsConversationsMessages,
 
     -- ** chat.dms.messages
     ChatDmsMessagesResource,
+    ChatDmsMessages (..),
     newChatDmsMessages,
-    ChatDmsMessages,
 
     -- ** chat.dms.webhooks
     ChatDmsWebhooksResource,
+    ChatDmsWebhooks (..),
     newChatDmsWebhooks,
-    ChatDmsWebhooks,
 
     -- ** chat.media.download
     ChatMediaDownloadResource,
+    ChatMediaDownload (..),
     newChatMediaDownload,
-    ChatMediaDownload,
 
     -- ** chat.rooms.conversations.messages
     ChatRoomsConversationsMessagesResource,
+    ChatRoomsConversationsMessages (..),
     newChatRoomsConversationsMessages,
-    ChatRoomsConversationsMessages,
 
     -- ** chat.rooms.messages
     ChatRoomsMessagesResource,
+    ChatRoomsMessages (..),
     newChatRoomsMessages,
-    ChatRoomsMessages,
 
     -- ** chat.rooms.webhooks
     ChatRoomsWebhooksResource,
+    ChatRoomsWebhooks (..),
     newChatRoomsWebhooks,
-    ChatRoomsWebhooks,
 
     -- ** chat.spaces.get
     ChatSpacesGetResource,
+    ChatSpacesGet (..),
     newChatSpacesGet,
-    ChatSpacesGet,
 
     -- ** chat.spaces.list
     ChatSpacesListResource,
+    ChatSpacesList (..),
     newChatSpacesList,
-    ChatSpacesList,
 
     -- ** chat.spaces.members.get
     ChatSpacesMembersGetResource,
+    ChatSpacesMembersGet (..),
     newChatSpacesMembersGet,
-    ChatSpacesMembersGet,
 
     -- ** chat.spaces.members.list
     ChatSpacesMembersListResource,
+    ChatSpacesMembersList (..),
     newChatSpacesMembersList,
-    ChatSpacesMembersList,
 
     -- ** chat.spaces.messages.attachments.get
     ChatSpacesMessagesAttachmentsGetResource,
+    ChatSpacesMessagesAttachmentsGet (..),
     newChatSpacesMessagesAttachmentsGet,
-    ChatSpacesMessagesAttachmentsGet,
 
     -- ** chat.spaces.messages.create
     ChatSpacesMessagesCreateResource,
+    ChatSpacesMessagesCreate (..),
     newChatSpacesMessagesCreate,
-    ChatSpacesMessagesCreate,
 
     -- ** chat.spaces.messages.delete
     ChatSpacesMessagesDeleteResource,
+    ChatSpacesMessagesDelete (..),
     newChatSpacesMessagesDelete,
-    ChatSpacesMessagesDelete,
 
     -- ** chat.spaces.messages.get
     ChatSpacesMessagesGetResource,
+    ChatSpacesMessagesGet (..),
     newChatSpacesMessagesGet,
-    ChatSpacesMessagesGet,
 
     -- ** chat.spaces.messages.update
     ChatSpacesMessagesUpdateResource,
+    ChatSpacesMessagesUpdate (..),
     newChatSpacesMessagesUpdate,
-    ChatSpacesMessagesUpdate,
 
     -- ** chat.spaces.webhooks
     ChatSpacesWebhooksResource,
+    ChatSpacesWebhooks (..),
     newChatSpacesWebhooks,
-    ChatSpacesWebhooks,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.Delete
     PubSubProjectsSubscriptionsDeleteResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsDelete (..),
     newPubSubProjectsSubscriptionsDelete,
-    PubSubProjectsSubscriptionsDelete,
   )
 where
 

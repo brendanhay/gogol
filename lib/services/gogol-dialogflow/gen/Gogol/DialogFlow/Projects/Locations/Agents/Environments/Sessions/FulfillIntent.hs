@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.FulfillI
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntentResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsFulfillIntent,
   )
 where
 

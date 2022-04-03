@@ -34,8 +34,8 @@ module Gogol.BigQuery.Datasets.List
     BigQueryDatasetsListResource,
 
     -- ** Constructing a Request
+    BigQueryDatasetsList (..),
     newBigQueryDatasetsList,
-    BigQueryDatasetsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Goals.Patch
     AnalyticsManagementGoalsPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementGoalsPatch (..),
     newAnalyticsManagementGoalsPatch,
-    AnalyticsManagementGoalsPatch,
   )
 where
 

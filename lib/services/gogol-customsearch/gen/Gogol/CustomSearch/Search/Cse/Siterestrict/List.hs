@@ -34,8 +34,8 @@ module Gogol.CustomSearch.Search.Cse.Siterestrict.List
     SearchCseSiterestrictListResource,
 
     -- ** Constructing a Request
+    SearchCseSiterestrictList (..),
     newSearchCseSiterestrictList,
-    SearchCseSiterestrictList,
   )
 where
 

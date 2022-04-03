@@ -44,18 +44,18 @@ module Gogol.Docs
 
     -- ** docs.documents.batchUpdate
     DocsDocumentsBatchUpdateResource,
+    DocsDocumentsBatchUpdate (..),
     newDocsDocumentsBatchUpdate,
-    DocsDocumentsBatchUpdate,
 
     -- ** docs.documents.create
     DocsDocumentsCreateResource,
+    DocsDocumentsCreate (..),
     newDocsDocumentsCreate,
-    DocsDocumentsCreate,
 
     -- ** docs.documents.get
     DocsDocumentsGetResource,
+    DocsDocumentsGet (..),
     newDocsDocumentsGet,
-    DocsDocumentsGet,
 
     -- * Types
 

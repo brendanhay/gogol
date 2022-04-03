@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
     ComputeRegionInstanceGroupManagersSetInstanceTemplateResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupManagersSetInstanceTemplate (..),
     newComputeRegionInstanceGroupManagersSetInstanceTemplate,
-    ComputeRegionInstanceGroupManagersSetInstanceTemplate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DNS.Policies.Create
     DNSPoliciesCreateResource,
 
     -- ** Constructing a Request
+    DNSPoliciesCreate (..),
     newDNSPoliciesCreate,
-    DNSPoliciesCreate,
   )
 where
 

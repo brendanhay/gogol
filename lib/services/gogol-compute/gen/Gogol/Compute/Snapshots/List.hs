@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.List
     ComputeSnapshotsListResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsList (..),
     newComputeSnapshotsList,
-    ComputeSnapshotsList,
   )
 where
 

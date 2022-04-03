@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Get
     CloudresourcemanagerFoldersGetResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersGet (..),
     newCloudresourcemanagerFoldersGet,
-    CloudresourcemanagerFoldersGet,
   )
 where
 

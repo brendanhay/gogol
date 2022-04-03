@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.UnbindDeviceFromGateway
     CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGatewayResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway (..),
     newCloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway,
-    CloudIOTProjectsLocationsRegistriesUnbindDeviceFromGateway,
   )
 where
 

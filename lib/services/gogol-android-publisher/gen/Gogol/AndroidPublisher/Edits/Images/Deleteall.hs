@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Images.Deleteall
     AndroidPublisherEditsImagesDeleteallResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsImagesDeleteall (..),
     newAndroidPublisherEditsImagesDeleteall,
-    AndroidPublisherEditsImagesDeleteall,
   )
 where
 

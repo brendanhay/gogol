@@ -34,8 +34,8 @@ module Gogol.Genomics.Projects.Operations.Cancel
     GenomicsProjectsOperationsCancelResource,
 
     -- ** Constructing a Request
+    GenomicsProjectsOperationsCancel (..),
     newGenomicsProjectsOperationsCancel,
-    GenomicsProjectsOperationsCancel,
   )
 where
 

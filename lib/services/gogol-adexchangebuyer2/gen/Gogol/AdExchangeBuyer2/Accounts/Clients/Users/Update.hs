@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Clients.Users.Update
     AdExchangeBuyer2AccountsClientsUsersUpdateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsClientsUsersUpdate (..),
     newAdExchangeBuyer2AccountsClientsUsersUpdate,
-    AdExchangeBuyer2AccountsClientsUsersUpdate,
   )
 where
 

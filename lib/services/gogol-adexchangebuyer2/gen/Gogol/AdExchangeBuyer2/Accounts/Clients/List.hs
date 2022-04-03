@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Clients.List
     AdExchangeBuyer2AccountsClientsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsClientsList (..),
     newAdExchangeBuyer2AccountsClientsList,
-    AdExchangeBuyer2AccountsClientsList,
   )
 where
 

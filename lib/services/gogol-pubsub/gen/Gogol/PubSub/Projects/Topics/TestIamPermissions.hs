@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Topics.TestIamPermissions
     PubSubProjectsTopicsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    PubSubProjectsTopicsTestIamPermissions (..),
     newPubSubProjectsTopicsTestIamPermissions,
-    PubSubProjectsTopicsTestIamPermissions,
   )
 where
 

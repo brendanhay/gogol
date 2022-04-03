@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Operations.List
     HealthcareProjectsLocationsDatasetsOperationsListResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsOperationsList (..),
     newHealthcareProjectsLocationsDatasetsOperationsList,
-    HealthcareProjectsLocationsDatasetsOperationsList,
   )
 where
 

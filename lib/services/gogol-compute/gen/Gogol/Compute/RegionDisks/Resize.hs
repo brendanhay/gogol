@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.Resize
     ComputeRegionDisksResizeResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksResize (..),
     newComputeRegionDisksResize,
-    ComputeRegionDisksResize,
   )
 where
 

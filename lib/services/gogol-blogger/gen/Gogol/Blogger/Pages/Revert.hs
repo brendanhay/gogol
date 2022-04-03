@@ -34,8 +34,8 @@ module Gogol.Blogger.Pages.Revert
     BloggerPagesRevertResource,
 
     -- ** Constructing a Request
+    BloggerPagesRevert (..),
     newBloggerPagesRevert,
-    BloggerPagesRevert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
     DoubleclickbidmanagerReportsListreportsResource,
 
     -- ** Constructing a Request
+    DoubleclickbidmanagerReportsListreports (..),
     newDoubleclickbidmanagerReportsListreports,
-    DoubleclickbidmanagerReportsListreports,
   )
 where
 

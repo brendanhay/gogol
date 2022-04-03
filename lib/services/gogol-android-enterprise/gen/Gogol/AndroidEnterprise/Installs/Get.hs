@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Installs.Get
     AndroidEnterpriseInstallsGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseInstallsGet (..),
     newAndroidEnterpriseInstallsGet,
-    AndroidEnterpriseInstallsGet,
   )
 where
 

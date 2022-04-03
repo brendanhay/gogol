@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.Roles.Patch
     IAMProjectsRolesPatchResource,
 
     -- ** Constructing a Request
+    IAMProjectsRolesPatch (..),
     newIAMProjectsRolesPatch,
-    IAMProjectsRolesPatch,
   )
 where
 

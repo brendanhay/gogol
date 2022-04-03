@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Tasklists.Patch
     TasksTasklistsPatchResource,
 
     -- ** Constructing a Request
+    TasksTasklistsPatch (..),
     newTasksTasklistsPatch,
-    TasksTasklistsPatch,
   )
 where
 

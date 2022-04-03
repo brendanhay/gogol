@@ -61,68 +61,68 @@ module Gogol.Fitness
 
     -- ** fitness.users.dataSources.create
     FitnessUsersDataSourcesCreateResource,
+    FitnessUsersDataSourcesCreate (..),
     newFitnessUsersDataSourcesCreate,
-    FitnessUsersDataSourcesCreate,
 
     -- ** fitness.users.dataSources.dataPointChanges.list
     FitnessUsersDataSourcesDataPointChangesListResource,
+    FitnessUsersDataSourcesDataPointChangesList (..),
     newFitnessUsersDataSourcesDataPointChangesList,
-    FitnessUsersDataSourcesDataPointChangesList,
 
     -- ** fitness.users.dataSources.datasets.delete
     FitnessUsersDataSourcesDatasetsDeleteResource,
+    FitnessUsersDataSourcesDatasetsDelete (..),
     newFitnessUsersDataSourcesDatasetsDelete,
-    FitnessUsersDataSourcesDatasetsDelete,
 
     -- ** fitness.users.dataSources.datasets.get
     FitnessUsersDataSourcesDatasetsGetResource,
+    FitnessUsersDataSourcesDatasetsGet (..),
     newFitnessUsersDataSourcesDatasetsGet,
-    FitnessUsersDataSourcesDatasetsGet,
 
     -- ** fitness.users.dataSources.datasets.patch
     FitnessUsersDataSourcesDatasetsPatchResource,
+    FitnessUsersDataSourcesDatasetsPatch (..),
     newFitnessUsersDataSourcesDatasetsPatch,
-    FitnessUsersDataSourcesDatasetsPatch,
 
     -- ** fitness.users.dataSources.delete
     FitnessUsersDataSourcesDeleteResource,
+    FitnessUsersDataSourcesDelete (..),
     newFitnessUsersDataSourcesDelete,
-    FitnessUsersDataSourcesDelete,
 
     -- ** fitness.users.dataSources.get
     FitnessUsersDataSourcesGetResource,
+    FitnessUsersDataSourcesGet (..),
     newFitnessUsersDataSourcesGet,
-    FitnessUsersDataSourcesGet,
 
     -- ** fitness.users.dataSources.list
     FitnessUsersDataSourcesListResource,
+    FitnessUsersDataSourcesList (..),
     newFitnessUsersDataSourcesList,
-    FitnessUsersDataSourcesList,
 
     -- ** fitness.users.dataSources.update
     FitnessUsersDataSourcesUpdateResource,
+    FitnessUsersDataSourcesUpdate (..),
     newFitnessUsersDataSourcesUpdate,
-    FitnessUsersDataSourcesUpdate,
 
     -- ** fitness.users.dataset.aggregate
     FitnessUsersDatasetAggregateResource,
+    FitnessUsersDatasetAggregate (..),
     newFitnessUsersDatasetAggregate,
-    FitnessUsersDatasetAggregate,
 
     -- ** fitness.users.sessions.delete
     FitnessUsersSessionsDeleteResource,
+    FitnessUsersSessionsDelete (..),
     newFitnessUsersSessionsDelete,
-    FitnessUsersSessionsDelete,
 
     -- ** fitness.users.sessions.list
     FitnessUsersSessionsListResource,
+    FitnessUsersSessionsList (..),
     newFitnessUsersSessionsList,
-    FitnessUsersSessionsList,
 
     -- ** fitness.users.sessions.update
     FitnessUsersSessionsUpdateResource,
+    FitnessUsersSessionsUpdate (..),
     newFitnessUsersSessionsUpdate,
-    FitnessUsersSessionsUpdate,
 
     -- * Types
 

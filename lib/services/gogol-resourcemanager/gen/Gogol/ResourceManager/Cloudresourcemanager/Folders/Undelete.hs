@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Folders.Undelete
     CloudresourcemanagerFoldersUndeleteResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerFoldersUndelete (..),
     newCloudresourcemanagerFoldersUndelete,
-    CloudresourcemanagerFoldersUndelete,
   )
 where
 

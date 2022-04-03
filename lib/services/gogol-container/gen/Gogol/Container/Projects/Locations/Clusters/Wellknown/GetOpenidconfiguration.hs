@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfigurat
     ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration (..),
     newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
-    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
   )
 where
 

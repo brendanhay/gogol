@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.RemarketingAudience.Delete
     AnalyticsManagementRemarketingAudienceDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementRemarketingAudienceDelete (..),
     newAnalyticsManagementRemarketingAudienceDelete,
-    AnalyticsManagementRemarketingAudienceDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.Suspend
     ResellerSubscriptionsSuspendResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsSuspend (..),
     newResellerSubscriptionsSuspend,
-    ResellerSubscriptionsSuspend,
   )
 where
 

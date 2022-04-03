@@ -34,8 +34,8 @@ module Gogol.Manufacturers.Accounts.Products.Update
     ManufacturersAccountsProductsUpdateResource,
 
     -- ** Constructing a Request
+    ManufacturersAccountsProductsUpdate (..),
     newManufacturersAccountsProductsUpdate,
-    ManufacturersAccountsProductsUpdate,
   )
 where
 

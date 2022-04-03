@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
     AdminCustomerDevicesChromeosIssueCommandResource,
 
     -- ** Constructing a Request
+    AdminCustomerDevicesChromeosIssueCommand (..),
     newAdminCustomerDevicesChromeosIssueCommand,
-    AdminCustomerDevicesChromeosIssueCommand,
   )
 where
 

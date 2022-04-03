@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Urlchannels.List
     AdExchangeSellerAccountsUrlchannelsListResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsUrlchannelsList (..),
     newAdExchangeSellerAccountsUrlchannelsList,
-    AdExchangeSellerAccountsUrlchannelsList,
   )
 where
 

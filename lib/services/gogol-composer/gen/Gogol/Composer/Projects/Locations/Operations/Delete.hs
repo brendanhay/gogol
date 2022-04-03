@@ -34,8 +34,8 @@ module Gogol.Composer.Projects.Locations.Operations.Delete
     ComposerProjectsLocationsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ComposerProjectsLocationsOperationsDelete (..),
     newComposerProjectsLocationsOperationsDelete,
-    ComposerProjectsLocationsOperationsDelete,
   )
 where
 

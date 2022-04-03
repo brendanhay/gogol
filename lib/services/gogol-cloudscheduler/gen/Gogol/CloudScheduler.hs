@@ -40,53 +40,53 @@ module Gogol.CloudScheduler
 
     -- ** cloudscheduler.projects.locations.get
     CloudSchedulerProjectsLocationsGetResource,
+    CloudSchedulerProjectsLocationsGet (..),
     newCloudSchedulerProjectsLocationsGet,
-    CloudSchedulerProjectsLocationsGet,
 
     -- ** cloudscheduler.projects.locations.jobs.create
     CloudSchedulerProjectsLocationsJobsCreateResource,
+    CloudSchedulerProjectsLocationsJobsCreate (..),
     newCloudSchedulerProjectsLocationsJobsCreate,
-    CloudSchedulerProjectsLocationsJobsCreate,
 
     -- ** cloudscheduler.projects.locations.jobs.delete
     CloudSchedulerProjectsLocationsJobsDeleteResource,
+    CloudSchedulerProjectsLocationsJobsDelete (..),
     newCloudSchedulerProjectsLocationsJobsDelete,
-    CloudSchedulerProjectsLocationsJobsDelete,
 
     -- ** cloudscheduler.projects.locations.jobs.get
     CloudSchedulerProjectsLocationsJobsGetResource,
+    CloudSchedulerProjectsLocationsJobsGet (..),
     newCloudSchedulerProjectsLocationsJobsGet,
-    CloudSchedulerProjectsLocationsJobsGet,
 
     -- ** cloudscheduler.projects.locations.jobs.list
     CloudSchedulerProjectsLocationsJobsListResource,
+    CloudSchedulerProjectsLocationsJobsList (..),
     newCloudSchedulerProjectsLocationsJobsList,
-    CloudSchedulerProjectsLocationsJobsList,
 
     -- ** cloudscheduler.projects.locations.jobs.patch
     CloudSchedulerProjectsLocationsJobsPatchResource,
+    CloudSchedulerProjectsLocationsJobsPatch (..),
     newCloudSchedulerProjectsLocationsJobsPatch,
-    CloudSchedulerProjectsLocationsJobsPatch,
 
     -- ** cloudscheduler.projects.locations.jobs.pause
     CloudSchedulerProjectsLocationsJobsPauseResource,
+    CloudSchedulerProjectsLocationsJobsPause (..),
     newCloudSchedulerProjectsLocationsJobsPause,
-    CloudSchedulerProjectsLocationsJobsPause,
 
     -- ** cloudscheduler.projects.locations.jobs.resume
     CloudSchedulerProjectsLocationsJobsResumeResource,
+    CloudSchedulerProjectsLocationsJobsResume (..),
     newCloudSchedulerProjectsLocationsJobsResume,
-    CloudSchedulerProjectsLocationsJobsResume,
 
     -- ** cloudscheduler.projects.locations.jobs.run
     CloudSchedulerProjectsLocationsJobsRunResource,
+    CloudSchedulerProjectsLocationsJobsRun (..),
     newCloudSchedulerProjectsLocationsJobsRun,
-    CloudSchedulerProjectsLocationsJobsRun,
 
     -- ** cloudscheduler.projects.locations.list
     CloudSchedulerProjectsLocationsListResource,
+    CloudSchedulerProjectsLocationsList (..),
     newCloudSchedulerProjectsLocationsList,
-    CloudSchedulerProjectsLocationsList,
 
     -- * Types
 

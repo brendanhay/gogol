@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.SetAccountInfo
     IdentityToolkitRelyingpartySetAccountInfoResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartySetAccountInfo (..),
     newIdentityToolkitRelyingpartySetAccountInfo,
-    IdentityToolkitRelyingpartySetAccountInfo,
   )
 where
 

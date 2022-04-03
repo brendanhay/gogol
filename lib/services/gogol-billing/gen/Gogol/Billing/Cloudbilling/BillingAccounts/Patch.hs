@@ -34,8 +34,8 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.Patch
     CloudbillingBillingAccountsPatchResource,
 
     -- ** Constructing a Request
+    CloudbillingBillingAccountsPatch (..),
     newCloudbillingBillingAccountsPatch,
-    CloudbillingBillingAccountsPatch,
   )
 where
 

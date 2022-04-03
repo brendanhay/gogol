@@ -34,8 +34,8 @@ module Gogol.Compute.PacketMirrorings.Delete
     ComputePacketMirroringsDeleteResource,
 
     -- ** Constructing a Request
+    ComputePacketMirroringsDelete (..),
     newComputePacketMirroringsDelete,
-    ComputePacketMirroringsDelete,
   )
 where
 

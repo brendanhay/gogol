@@ -34,8 +34,8 @@ module Gogol.TextToSpeech.Text.Synthesize
     TextToSpeechTextSynthesizeResource,
 
     -- ** Constructing a Request
+    TextToSpeechTextSynthesize (..),
     newTextToSpeechTextSynthesize,
-    TextToSpeechTextSynthesize,
   )
 where
 

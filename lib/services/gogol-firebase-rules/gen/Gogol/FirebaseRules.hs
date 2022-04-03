@@ -42,58 +42,58 @@ module Gogol.FirebaseRules
 
     -- ** firebaserules.projects.releases.create
     FirebaseRulesProjectsReleasesCreateResource,
+    FirebaseRulesProjectsReleasesCreate (..),
     newFirebaseRulesProjectsReleasesCreate,
-    FirebaseRulesProjectsReleasesCreate,
 
     -- ** firebaserules.projects.releases.delete
     FirebaseRulesProjectsReleasesDeleteResource,
+    FirebaseRulesProjectsReleasesDelete (..),
     newFirebaseRulesProjectsReleasesDelete,
-    FirebaseRulesProjectsReleasesDelete,
 
     -- ** firebaserules.projects.releases.get
     FirebaseRulesProjectsReleasesGetResource,
+    FirebaseRulesProjectsReleasesGet (..),
     newFirebaseRulesProjectsReleasesGet,
-    FirebaseRulesProjectsReleasesGet,
 
     -- ** firebaserules.projects.releases.getExecutable
     FirebaseRulesProjectsReleasesGetExecutableResource,
+    FirebaseRulesProjectsReleasesGetExecutable (..),
     newFirebaseRulesProjectsReleasesGetExecutable,
-    FirebaseRulesProjectsReleasesGetExecutable,
 
     -- ** firebaserules.projects.releases.list
     FirebaseRulesProjectsReleasesListResource,
+    FirebaseRulesProjectsReleasesList (..),
     newFirebaseRulesProjectsReleasesList,
-    FirebaseRulesProjectsReleasesList,
 
     -- ** firebaserules.projects.releases.patch
     FirebaseRulesProjectsReleasesPatchResource,
+    FirebaseRulesProjectsReleasesPatch (..),
     newFirebaseRulesProjectsReleasesPatch,
-    FirebaseRulesProjectsReleasesPatch,
 
     -- ** firebaserules.projects.rulesets.create
     FirebaseRulesProjectsRulesetsCreateResource,
+    FirebaseRulesProjectsRulesetsCreate (..),
     newFirebaseRulesProjectsRulesetsCreate,
-    FirebaseRulesProjectsRulesetsCreate,
 
     -- ** firebaserules.projects.rulesets.delete
     FirebaseRulesProjectsRulesetsDeleteResource,
+    FirebaseRulesProjectsRulesetsDelete (..),
     newFirebaseRulesProjectsRulesetsDelete,
-    FirebaseRulesProjectsRulesetsDelete,
 
     -- ** firebaserules.projects.rulesets.get
     FirebaseRulesProjectsRulesetsGetResource,
+    FirebaseRulesProjectsRulesetsGet (..),
     newFirebaseRulesProjectsRulesetsGet,
-    FirebaseRulesProjectsRulesetsGet,
 
     -- ** firebaserules.projects.rulesets.list
     FirebaseRulesProjectsRulesetsListResource,
+    FirebaseRulesProjectsRulesetsList (..),
     newFirebaseRulesProjectsRulesetsList,
-    FirebaseRulesProjectsRulesetsList,
 
     -- ** firebaserules.projects.test
     FirebaseRulesProjectsTestResource,
+    FirebaseRulesProjectsTest (..),
     newFirebaseRulesProjectsTest,
-    FirebaseRulesProjectsTest,
 
     -- * Types
 

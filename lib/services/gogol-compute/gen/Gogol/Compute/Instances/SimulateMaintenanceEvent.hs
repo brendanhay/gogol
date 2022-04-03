@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SimulateMaintenanceEvent
     ComputeInstancesSimulateMaintenanceEventResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSimulateMaintenanceEvent (..),
     newComputeInstancesSimulateMaintenanceEvent,
-    ComputeInstancesSimulateMaintenanceEvent,
   )
 where
 

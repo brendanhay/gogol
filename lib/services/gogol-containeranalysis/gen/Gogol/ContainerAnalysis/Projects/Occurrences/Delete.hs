@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.Delete
     ContainerAnalysisProjectsOccurrencesDeleteResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesDelete (..),
     newContainerAnalysisProjectsOccurrencesDelete,
-    ContainerAnalysisProjectsOccurrencesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
     HealthcareProjectsLocationsDatasetsFhirStoresPatchResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsFhirStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresPatch,
-    HealthcareProjectsLocationsDatasetsFhirStoresPatch,
   )
 where
 

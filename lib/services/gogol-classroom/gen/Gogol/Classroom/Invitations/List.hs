@@ -34,8 +34,8 @@ module Gogol.Classroom.Invitations.List
     ClassroomInvitationsListResource,
 
     -- ** Constructing a Request
+    ClassroomInvitationsList (..),
     newClassroomInvitationsList,
-    ClassroomInvitationsList,
   )
 where
 

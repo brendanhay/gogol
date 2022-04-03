@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.VerificationCodes.Generate
     DirectoryVerificationCodesGenerateResource,
 
     -- ** Constructing a Request
+    DirectoryVerificationCodesGenerate (..),
     newDirectoryVerificationCodesGenerate,
-    DirectoryVerificationCodesGenerate,
   )
 where
 

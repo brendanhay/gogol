@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Requestreview
     ContentBuyongoogleprogramsRequestreviewResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsRequestreview (..),
     newContentBuyongoogleprogramsRequestreview,
-    ContentBuyongoogleprogramsRequestreview,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.Videos.GetRating
     YouTubeVideosGetRatingResource,
 
     -- ** Constructing a Request
+    YouTubeVideosGetRating (..),
     newYouTubeVideosGetRating,
-    YouTubeVideosGetRating,
   )
 where
 

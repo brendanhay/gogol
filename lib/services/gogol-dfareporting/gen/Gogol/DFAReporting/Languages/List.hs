@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Languages.List
     DFAReportingLanguagesListResource,
 
     -- ** Constructing a Request
+    DFAReportingLanguagesList (..),
     newDFAReportingLanguagesList,
-    DFAReportingLanguagesList,
   )
 where
 

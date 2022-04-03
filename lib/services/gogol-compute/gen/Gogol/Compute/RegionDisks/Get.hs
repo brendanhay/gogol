@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.Get
     ComputeRegionDisksGetResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksGet (..),
     newComputeRegionDisksGet,
-    ComputeRegionDisksGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.Get
     ContainerAnalysisProjectsOccurrencesGetResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsOccurrencesGet (..),
     newContainerAnalysisProjectsOccurrencesGet,
-    ContainerAnalysisProjectsOccurrencesGet,
   )
 where
 

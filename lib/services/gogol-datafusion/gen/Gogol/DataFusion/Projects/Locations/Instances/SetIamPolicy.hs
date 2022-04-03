@@ -34,8 +34,8 @@ module Gogol.DataFusion.Projects.Locations.Instances.SetIamPolicy
     DataFusionProjectsLocationsInstancesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    DataFusionProjectsLocationsInstancesSetIamPolicy (..),
     newDataFusionProjectsLocationsInstancesSetIamPolicy,
-    DataFusionProjectsLocationsInstancesSetIamPolicy,
   )
 where
 

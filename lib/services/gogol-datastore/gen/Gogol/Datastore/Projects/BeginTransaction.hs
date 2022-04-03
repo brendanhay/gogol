@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.BeginTransaction
     DatastoreProjectsBeginTransactionResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsBeginTransaction (..),
     newDatastoreProjectsBeginTransaction,
-    DatastoreProjectsBeginTransaction,
   )
 where
 

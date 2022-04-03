@@ -34,8 +34,8 @@ module Gogol.Compute.NodeGroups.AggregatedList
     ComputeNodeGroupsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeNodeGroupsAggregatedList (..),
     newComputeNodeGroupsAggregatedList,
-    ComputeNodeGroupsAggregatedList,
   )
 where
 

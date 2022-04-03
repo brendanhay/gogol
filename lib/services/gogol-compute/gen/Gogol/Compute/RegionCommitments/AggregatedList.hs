@@ -34,8 +34,8 @@ module Gogol.Compute.RegionCommitments.AggregatedList
     ComputeRegionCommitmentsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeRegionCommitmentsAggregatedList (..),
     newComputeRegionCommitmentsAggregatedList,
-    ComputeRegionCommitmentsAggregatedList,
   )
 where
 

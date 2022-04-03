@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.Locations.Operations.Wait
     TranslateProjectsLocationsOperationsWaitResource,
 
     -- ** Constructing a Request
+    TranslateProjectsLocationsOperationsWait (..),
     newTranslateProjectsLocationsOperationsWait,
-    TranslateProjectsLocationsOperationsWait,
   )
 where
 

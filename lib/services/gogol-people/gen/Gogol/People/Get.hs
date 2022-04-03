@@ -34,8 +34,8 @@ module Gogol.People.Get
     PeoplePeopleGetResource,
 
     -- ** Constructing a Request
+    PeoplePeopleGet (..),
     newPeoplePeopleGet,
-    PeoplePeopleGet,
   )
 where
 

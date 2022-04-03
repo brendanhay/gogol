@@ -34,8 +34,8 @@ module Gogol.BigQuery.Routines.Update
     BigQueryRoutinesUpdateResource,
 
     -- ** Constructing a Request
+    BigQueryRoutinesUpdate (..),
     newBigQueryRoutinesUpdate,
-    BigQueryRoutinesUpdate,
   )
 where
 

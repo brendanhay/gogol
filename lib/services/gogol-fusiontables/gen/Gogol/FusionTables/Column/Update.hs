@@ -34,8 +34,8 @@ module Gogol.FusionTables.Column.Update
     FusionTablesColumnUpdateResource,
 
     -- ** Constructing a Request
+    FusionTablesColumnUpdate (..),
     newFusionTablesColumnUpdate,
-    FusionTablesColumnUpdate,
   )
 where
 

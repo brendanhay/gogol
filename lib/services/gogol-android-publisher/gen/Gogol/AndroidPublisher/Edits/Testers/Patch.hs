@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Testers.Patch
     AndroidPublisherEditsTestersPatchResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsTestersPatch (..),
     newAndroidPublisherEditsTestersPatch,
-    AndroidPublisherEditsTestersPatch,
   )
 where
 

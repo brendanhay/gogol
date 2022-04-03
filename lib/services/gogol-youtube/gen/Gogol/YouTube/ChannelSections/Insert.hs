@@ -34,8 +34,8 @@ module Gogol.YouTube.ChannelSections.Insert
     YouTubeChannelSectionsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeChannelSectionsInsert (..),
     newYouTubeChannelSectionsInsert,
-    YouTubeChannelSectionsInsert,
   )
 where
 

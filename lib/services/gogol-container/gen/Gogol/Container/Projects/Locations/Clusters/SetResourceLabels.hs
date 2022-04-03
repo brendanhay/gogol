@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.SetResourceLabels
     ContainerProjectsLocationsClustersSetResourceLabelsResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersSetResourceLabels (..),
     newContainerProjectsLocationsClustersSetResourceLabels,
-    ContainerProjectsLocationsClustersSetResourceLabels,
   )
 where
 

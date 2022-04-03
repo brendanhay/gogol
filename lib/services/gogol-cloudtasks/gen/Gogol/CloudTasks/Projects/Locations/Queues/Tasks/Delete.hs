@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Delete
     CloudTasksProjectsLocationsQueuesTasksDeleteResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesTasksDelete (..),
     newCloudTasksProjectsLocationsQueuesTasksDelete,
-    CloudTasksProjectsLocationsQueuesTasksDelete,
   )
 where
 

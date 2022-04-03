@@ -34,8 +34,8 @@ module Gogol.DLP.Organizations.Locations.StoredInfoTypes.Delete
     DLPOrganizationsLocationsStoredInfoTypesDeleteResource,
 
     -- ** Constructing a Request
+    DLPOrganizationsLocationsStoredInfoTypesDelete (..),
     newDLPOrganizationsLocationsStoredInfoTypesDelete,
-    DLPOrganizationsLocationsStoredInfoTypesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Operations.List
     AppEngineAppsOperationsListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsOperationsList (..),
     newAppEngineAppsOperationsList,
-    AppEngineAppsOperationsList,
   )
 where
 

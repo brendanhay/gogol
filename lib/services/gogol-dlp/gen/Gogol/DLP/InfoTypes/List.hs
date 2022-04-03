@@ -34,8 +34,8 @@ module Gogol.DLP.InfoTypes.List
     DLPInfoTypesListResource,
 
     -- ** Constructing a Request
+    DLPInfoTypesList (..),
     newDLPInfoTypesList,
-    DLPInfoTypesList,
   )
 where
 

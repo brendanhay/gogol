@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.NodePools.Update
     ContainerProjectsZonesClustersNodePoolsUpdateResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersNodePoolsUpdate (..),
     newContainerProjectsZonesClustersNodePoolsUpdate,
-    ContainerProjectsZonesClustersNodePoolsUpdate,
   )
 where
 

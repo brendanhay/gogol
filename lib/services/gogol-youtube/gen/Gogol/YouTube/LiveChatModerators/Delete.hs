@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatModerators.Delete
     YouTubeLiveChatModeratorsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatModeratorsDelete (..),
     newYouTubeLiveChatModeratorsDelete,
-    YouTubeLiveChatModeratorsDelete,
   )
 where
 

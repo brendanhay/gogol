@@ -34,8 +34,8 @@ module Gogol.Games.Snapshots.Get
     GamesSnapshotsGetResource,
 
     -- ** Constructing a Request
+    GamesSnapshotsGet (..),
     newGamesSnapshotsGet,
-    GamesSnapshotsGet,
   )
 where
 

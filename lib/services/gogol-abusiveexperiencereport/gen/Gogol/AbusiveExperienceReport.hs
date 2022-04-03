@@ -37,13 +37,13 @@ module Gogol.AbusiveExperienceReport
 
     -- ** abusiveexperiencereport.sites.get
     AbusiveExperienceReportSitesGetResource,
+    AbusiveExperienceReportSitesGet (..),
     newAbusiveExperienceReportSitesGet,
-    AbusiveExperienceReportSitesGet,
 
     -- ** abusiveexperiencereport.violatingSites.list
     AbusiveExperienceReportViolatingSitesListResource,
+    AbusiveExperienceReportViolatingSitesList (..),
     newAbusiveExperienceReportViolatingSitesList,
-    AbusiveExperienceReportViolatingSitesList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.PlusDomains.Audiences.List
     PlusDomainsAudiencesListResource,
 
     -- ** Constructing a Request
+    PlusDomainsAudiencesList (..),
     newPlusDomainsAudiencesList,
-    PlusDomainsAudiencesList,
   )
 where
 

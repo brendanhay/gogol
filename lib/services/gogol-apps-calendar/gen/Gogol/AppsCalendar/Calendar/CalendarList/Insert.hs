@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.CalendarList.Insert
     CalendarCalendarListInsertResource,
 
     -- ** Constructing a Request
+    CalendarCalendarListInsert (..),
     newCalendarCalendarListInsert,
-    CalendarCalendarListInsert,
   )
 where
 

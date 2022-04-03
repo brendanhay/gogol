@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Jobs.Delete
     DataprocProjectsRegionsJobsDeleteResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsJobsDelete (..),
     newDataprocProjectsRegionsJobsDelete,
-    DataprocProjectsRegionsJobsDelete,
   )
 where
 

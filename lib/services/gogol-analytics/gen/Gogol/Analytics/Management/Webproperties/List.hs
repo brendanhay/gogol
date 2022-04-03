@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Webproperties.List
     AnalyticsManagementWebpropertiesListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertiesList (..),
     newAnalyticsManagementWebpropertiesList,
-    AnalyticsManagementWebpropertiesList,
   )
 where
 

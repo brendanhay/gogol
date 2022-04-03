@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalForwardingRules.Patch
     ComputeGlobalForwardingRulesPatchResource,
 
     -- ** Constructing a Request
+    ComputeGlobalForwardingRulesPatch (..),
     newComputeGlobalForwardingRulesPatch,
-    ComputeGlobalForwardingRulesPatch,
   )
 where
 

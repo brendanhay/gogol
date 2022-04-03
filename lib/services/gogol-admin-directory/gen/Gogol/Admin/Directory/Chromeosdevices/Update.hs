@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Chromeosdevices.Update
     DirectoryChromeosdevicesUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryChromeosdevicesUpdate (..),
     newDirectoryChromeosdevicesUpdate,
-    DirectoryChromeosdevicesUpdate,
   )
 where
 

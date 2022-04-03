@@ -34,8 +34,8 @@ module Gogol.Books.Promooffer.Dismiss
     BooksPromoofferDismissResource,
 
     -- ** Constructing a Request
+    BooksPromoofferDismiss (..),
     newBooksPromoofferDismiss,
-    BooksPromoofferDismiss,
   )
 where
 

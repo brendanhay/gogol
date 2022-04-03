@@ -34,8 +34,8 @@ module Gogol.Manufacturers.Accounts.Products.Delete
     ManufacturersAccountsProductsDeleteResource,
 
     -- ** Constructing a Request
+    ManufacturersAccountsProductsDelete (..),
     newManufacturersAccountsProductsDelete,
-    ManufacturersAccountsProductsDelete,
   )
 where
 

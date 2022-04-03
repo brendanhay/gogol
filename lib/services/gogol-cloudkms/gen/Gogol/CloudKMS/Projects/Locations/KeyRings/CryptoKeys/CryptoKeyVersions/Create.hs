@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.C
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate,
   )
 where
 

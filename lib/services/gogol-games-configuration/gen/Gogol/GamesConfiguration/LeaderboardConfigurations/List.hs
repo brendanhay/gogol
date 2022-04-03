@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.LeaderboardConfigurations.List
     GamesConfigurationLeaderboardConfigurationsListResource,
 
     -- ** Constructing a Request
+    GamesConfigurationLeaderboardConfigurationsList (..),
     newGamesConfigurationLeaderboardConfigurationsList,
-    GamesConfigurationLeaderboardConfigurationsList,
   )
 where
 

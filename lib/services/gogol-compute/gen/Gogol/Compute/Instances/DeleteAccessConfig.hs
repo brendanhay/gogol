@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.DeleteAccessConfig
     ComputeInstancesDeleteAccessConfigResource,
 
     -- ** Constructing a Request
+    ComputeInstancesDeleteAccessConfig (..),
     newComputeInstancesDeleteAccessConfig,
-    ComputeInstancesDeleteAccessConfig,
   )
 where
 

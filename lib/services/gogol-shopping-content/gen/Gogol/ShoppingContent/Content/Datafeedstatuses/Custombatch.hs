@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeedstatuses.Custombatch
     ContentDatafeedstatusesCustombatchResource,
 
     -- ** Constructing a Request
+    ContentDatafeedstatusesCustombatch (..),
     newContentDatafeedstatusesCustombatch,
-    ContentDatafeedstatusesCustombatch,
   )
 where
 

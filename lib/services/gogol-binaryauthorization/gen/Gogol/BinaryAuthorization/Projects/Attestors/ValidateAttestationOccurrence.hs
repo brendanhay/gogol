@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrenc
     BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence (..),
     newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence,
-    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence,
   )
 where
 

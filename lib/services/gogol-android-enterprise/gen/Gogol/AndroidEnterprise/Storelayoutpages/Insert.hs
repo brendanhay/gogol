@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutpages.Insert
     AndroidEnterpriseStorelayoutpagesInsertResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutpagesInsert (..),
     newAndroidEnterpriseStorelayoutpagesInsert,
-    AndroidEnterpriseStorelayoutpagesInsert,
   )
 where
 

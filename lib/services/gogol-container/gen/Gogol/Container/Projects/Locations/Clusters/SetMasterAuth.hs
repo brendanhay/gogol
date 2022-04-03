@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.SetMasterAuth
     ContainerProjectsLocationsClustersSetMasterAuthResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersSetMasterAuth (..),
     newContainerProjectsLocationsClustersSetMasterAuth,
-    ContainerProjectsLocationsClustersSetMasterAuth,
   )
 where
 

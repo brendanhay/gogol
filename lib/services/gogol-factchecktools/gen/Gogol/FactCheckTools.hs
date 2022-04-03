@@ -40,33 +40,33 @@ module Gogol.FactCheckTools
 
     -- ** factchecktools.claims.search
     FactCheckToolsClaimsSearchResource,
+    FactCheckToolsClaimsSearch (..),
     newFactCheckToolsClaimsSearch,
-    FactCheckToolsClaimsSearch,
 
     -- ** factchecktools.pages.create
     FactCheckToolsPagesCreateResource,
+    FactCheckToolsPagesCreate (..),
     newFactCheckToolsPagesCreate,
-    FactCheckToolsPagesCreate,
 
     -- ** factchecktools.pages.delete
     FactCheckToolsPagesDeleteResource,
+    FactCheckToolsPagesDelete (..),
     newFactCheckToolsPagesDelete,
-    FactCheckToolsPagesDelete,
 
     -- ** factchecktools.pages.get
     FactCheckToolsPagesGetResource,
+    FactCheckToolsPagesGet (..),
     newFactCheckToolsPagesGet,
-    FactCheckToolsPagesGet,
 
     -- ** factchecktools.pages.list
     FactCheckToolsPagesListResource,
+    FactCheckToolsPagesList (..),
     newFactCheckToolsPagesList,
-    FactCheckToolsPagesList,
 
     -- ** factchecktools.pages.update
     FactCheckToolsPagesUpdateResource,
+    FactCheckToolsPagesUpdate (..),
     newFactCheckToolsPagesUpdate,
-    FactCheckToolsPagesUpdate,
 
     -- * Types
 

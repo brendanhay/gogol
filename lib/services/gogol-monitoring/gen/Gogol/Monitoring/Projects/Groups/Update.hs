@@ -34,8 +34,8 @@ module Gogol.Monitoring.Projects.Groups.Update
     MonitoringProjectsGroupsUpdateResource,
 
     -- ** Constructing a Request
+    MonitoringProjectsGroupsUpdate (..),
     newMonitoringProjectsGroupsUpdate,
-    MonitoringProjectsGroupsUpdate,
   )
 where
 

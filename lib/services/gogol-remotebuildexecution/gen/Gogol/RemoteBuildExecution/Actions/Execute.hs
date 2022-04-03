@@ -37,8 +37,8 @@ module Gogol.RemoteBuildExecution.Actions.Execute
     RemoteBuildExecutionActionsExecuteResource,
 
     -- ** Constructing a Request
+    RemoteBuildExecutionActionsExecute (..),
     newRemoteBuildExecutionActionsExecute,
-    RemoteBuildExecutionActionsExecute,
   )
 where
 

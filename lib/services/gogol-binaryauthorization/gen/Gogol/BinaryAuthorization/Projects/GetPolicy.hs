@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.GetPolicy
     BinaryAuthorizationProjectsGetPolicyResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsGetPolicy (..),
     newBinaryAuthorizationProjectsGetPolicy,
-    BinaryAuthorizationProjectsGetPolicy,
   )
 where
 

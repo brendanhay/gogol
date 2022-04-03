@@ -45,53 +45,53 @@ module Gogol.ReplicaPool
 
     -- ** replicapool.pools.delete
     ReplicaPoolPoolsDeleteResource,
+    ReplicaPoolPoolsDelete (..),
     newReplicaPoolPoolsDelete,
-    ReplicaPoolPoolsDelete,
 
     -- ** replicapool.pools.get
     ReplicaPoolPoolsGetResource,
+    ReplicaPoolPoolsGet (..),
     newReplicaPoolPoolsGet,
-    ReplicaPoolPoolsGet,
 
     -- ** replicapool.pools.insert
     ReplicaPoolPoolsInsertResource,
+    ReplicaPoolPoolsInsert (..),
     newReplicaPoolPoolsInsert,
-    ReplicaPoolPoolsInsert,
 
     -- ** replicapool.pools.list
     ReplicaPoolPoolsListResource,
+    ReplicaPoolPoolsList (..),
     newReplicaPoolPoolsList,
-    ReplicaPoolPoolsList,
 
     -- ** replicapool.pools.resize
     ReplicaPoolPoolsResizeResource,
+    ReplicaPoolPoolsResize (..),
     newReplicaPoolPoolsResize,
-    ReplicaPoolPoolsResize,
 
     -- ** replicapool.pools.updatetemplate
     ReplicaPoolPoolsUpdatetemplateResource,
+    ReplicaPoolPoolsUpdatetemplate (..),
     newReplicaPoolPoolsUpdatetemplate,
-    ReplicaPoolPoolsUpdatetemplate,
 
     -- ** replicapool.replicas.delete
     ReplicaPoolReplicasDeleteResource,
+    ReplicaPoolReplicasDelete (..),
     newReplicaPoolReplicasDelete,
-    ReplicaPoolReplicasDelete,
 
     -- ** replicapool.replicas.get
     ReplicaPoolReplicasGetResource,
+    ReplicaPoolReplicasGet (..),
     newReplicaPoolReplicasGet,
-    ReplicaPoolReplicasGet,
 
     -- ** replicapool.replicas.list
     ReplicaPoolReplicasListResource,
+    ReplicaPoolReplicasList (..),
     newReplicaPoolReplicasList,
-    ReplicaPoolReplicasList,
 
     -- ** replicapool.replicas.restart
     ReplicaPoolReplicasRestartResource,
+    ReplicaPoolReplicasRestart (..),
     newReplicaPoolReplicasRestart,
-    ReplicaPoolReplicasRestart,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Compute.SslPolicies.Delete
     ComputeSslPoliciesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeSslPoliciesDelete (..),
     newComputeSslPoliciesDelete,
-    ComputeSslPoliciesDelete,
   )
 where
 

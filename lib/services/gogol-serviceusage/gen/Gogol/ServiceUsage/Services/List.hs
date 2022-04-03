@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Services.List
     ServiceUsageServicesListResource,
 
     -- ** Constructing a Request
+    ServiceUsageServicesList (..),
     newServiceUsageServicesList,
-    ServiceUsageServicesList,
   )
 where
 

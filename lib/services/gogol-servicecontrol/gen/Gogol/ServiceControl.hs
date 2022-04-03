@@ -41,13 +41,13 @@ module Gogol.ServiceControl
 
     -- ** servicecontrol.services.check
     ServiceControlServicesCheckResource,
+    ServiceControlServicesCheck (..),
     newServiceControlServicesCheck,
-    ServiceControlServicesCheck,
 
     -- ** servicecontrol.services.report
     ServiceControlServicesReportResource,
+    ServiceControlServicesReport (..),
     newServiceControlServicesReport,
-    ServiceControlServicesReport,
 
     -- * Types
 

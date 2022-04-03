@@ -34,8 +34,8 @@ module Gogol.Games.Events.ListDefinitions
     GamesEventsListDefinitionsResource,
 
     -- ** Constructing a Request
+    GamesEventsListDefinitions (..),
     newGamesEventsListDefinitions,
-    GamesEventsListDefinitions,
   )
 where
 

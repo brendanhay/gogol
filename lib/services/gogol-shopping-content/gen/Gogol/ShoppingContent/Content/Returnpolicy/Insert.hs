@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnpolicy.Insert
     ContentReturnpolicyInsertResource,
 
     -- ** Constructing a Request
+    ContentReturnpolicyInsert (..),
     newContentReturnpolicyInsert,
-    ContentReturnpolicyInsert,
   )
 where
 

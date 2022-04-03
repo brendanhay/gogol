@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.Get
     ComputeProjectsGetResource,
 
     -- ** Constructing a Request
+    ComputeProjectsGet (..),
     newComputeProjectsGet,
-    ComputeProjectsGet,
   )
 where
 

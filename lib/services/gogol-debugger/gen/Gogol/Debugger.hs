@@ -41,43 +41,43 @@ module Gogol.Debugger
 
     -- ** clouddebugger.controller.debuggees.breakpoints.list
     ClouddebuggerControllerDebuggeesBreakpointsListResource,
+    ClouddebuggerControllerDebuggeesBreakpointsList (..),
     newClouddebuggerControllerDebuggeesBreakpointsList,
-    ClouddebuggerControllerDebuggeesBreakpointsList,
 
     -- ** clouddebugger.controller.debuggees.breakpoints.update
     ClouddebuggerControllerDebuggeesBreakpointsUpdateResource,
+    ClouddebuggerControllerDebuggeesBreakpointsUpdate (..),
     newClouddebuggerControllerDebuggeesBreakpointsUpdate,
-    ClouddebuggerControllerDebuggeesBreakpointsUpdate,
 
     -- ** clouddebugger.controller.debuggees.register
     ClouddebuggerControllerDebuggeesRegisterResource,
+    ClouddebuggerControllerDebuggeesRegister (..),
     newClouddebuggerControllerDebuggeesRegister,
-    ClouddebuggerControllerDebuggeesRegister,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.delete
     ClouddebuggerDebuggerDebuggeesBreakpointsDeleteResource,
+    ClouddebuggerDebuggerDebuggeesBreakpointsDelete (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsDelete,
-    ClouddebuggerDebuggerDebuggeesBreakpointsDelete,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.get
     ClouddebuggerDebuggerDebuggeesBreakpointsGetResource,
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsGet,
-    ClouddebuggerDebuggerDebuggeesBreakpointsGet,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.list
     ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
+    ClouddebuggerDebuggerDebuggeesBreakpointsList (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsList,
-    ClouddebuggerDebuggerDebuggeesBreakpointsList,
 
     -- ** clouddebugger.debugger.debuggees.breakpoints.set
     ClouddebuggerDebuggerDebuggeesBreakpointsSetResource,
+    ClouddebuggerDebuggerDebuggeesBreakpointsSet (..),
     newClouddebuggerDebuggerDebuggeesBreakpointsSet,
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet,
 
     -- ** clouddebugger.debugger.debuggees.list
     ClouddebuggerDebuggerDebuggeesListResource,
+    ClouddebuggerDebuggerDebuggeesList (..),
     newClouddebuggerDebuggerDebuggeesList,
-    ClouddebuggerDebuggerDebuggeesList,
 
     -- * Types
 

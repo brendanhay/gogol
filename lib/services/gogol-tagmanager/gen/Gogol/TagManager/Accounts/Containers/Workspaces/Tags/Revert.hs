@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Revert
     TagManagerAccountsContainersWorkspacesTagsRevertResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTagsRevert (..),
     newTagManagerAccountsContainersWorkspacesTagsRevert,
-    TagManagerAccountsContainersWorkspacesTagsRevert,
   )
 where
 

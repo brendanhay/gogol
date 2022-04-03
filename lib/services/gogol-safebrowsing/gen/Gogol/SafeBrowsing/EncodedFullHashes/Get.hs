@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.EncodedFullHashes.Get
     SafeBrowsingEncodedFullHashesGetResource,
 
     -- ** Constructing a Request
+    SafeBrowsingEncodedFullHashesGet (..),
     newSafeBrowsingEncodedFullHashesGet,
-    SafeBrowsingEncodedFullHashesGet,
   )
 where
 

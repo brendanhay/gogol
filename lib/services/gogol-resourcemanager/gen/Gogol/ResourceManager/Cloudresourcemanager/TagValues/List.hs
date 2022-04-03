@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
     CloudresourcemanagerTagValuesListResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagValuesList (..),
     newCloudresourcemanagerTagValuesList,
-    CloudresourcemanagerTagValuesList,
   )
 where
 

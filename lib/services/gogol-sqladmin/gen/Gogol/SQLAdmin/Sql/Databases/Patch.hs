@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Databases.Patch
     SqlDatabasesPatchResource,
 
     -- ** Constructing a Request
+    SqlDatabasesPatch (..),
     newSqlDatabasesPatch,
-    SqlDatabasesPatch,
   )
 where
 

@@ -40,358 +40,358 @@ module Gogol.AndroidPublisher
 
     -- ** androidpublisher.edits.apks.addexternallyhosted
     AndroidPublisherEditsApksAddexternallyhostedResource,
+    AndroidPublisherEditsApksAddexternallyhosted (..),
     newAndroidPublisherEditsApksAddexternallyhosted,
-    AndroidPublisherEditsApksAddexternallyhosted,
 
     -- ** androidpublisher.edits.apks.list
     AndroidPublisherEditsApksListResource,
+    AndroidPublisherEditsApksList (..),
     newAndroidPublisherEditsApksList,
-    AndroidPublisherEditsApksList,
 
     -- ** androidpublisher.edits.apks.upload
     AndroidPublisherEditsApksUploadResource,
+    AndroidPublisherEditsApksUpload (..),
     newAndroidPublisherEditsApksUpload,
-    AndroidPublisherEditsApksUpload,
 
     -- ** androidpublisher.edits.bundles.list
     AndroidPublisherEditsBundlesListResource,
+    AndroidPublisherEditsBundlesList (..),
     newAndroidPublisherEditsBundlesList,
-    AndroidPublisherEditsBundlesList,
 
     -- ** androidpublisher.edits.bundles.upload
     AndroidPublisherEditsBundlesUploadResource,
+    AndroidPublisherEditsBundlesUpload (..),
     newAndroidPublisherEditsBundlesUpload,
-    AndroidPublisherEditsBundlesUpload,
 
     -- ** androidpublisher.edits.commit
     AndroidPublisherEditsCommitResource,
+    AndroidPublisherEditsCommit (..),
     newAndroidPublisherEditsCommit,
-    AndroidPublisherEditsCommit,
 
     -- ** androidpublisher.edits.countryavailability.get
     AndroidPublisherEditsCountryavailabilityGetResource,
+    AndroidPublisherEditsCountryavailabilityGet (..),
     newAndroidPublisherEditsCountryavailabilityGet,
-    AndroidPublisherEditsCountryavailabilityGet,
 
     -- ** androidpublisher.edits.delete
     AndroidPublisherEditsDeleteResource,
+    AndroidPublisherEditsDelete (..),
     newAndroidPublisherEditsDelete,
-    AndroidPublisherEditsDelete,
 
     -- ** androidpublisher.edits.deobfuscationfiles.upload
     AndroidPublisherEditsDeobfuscationfilesUploadResource,
+    AndroidPublisherEditsDeobfuscationfilesUpload (..),
     newAndroidPublisherEditsDeobfuscationfilesUpload,
-    AndroidPublisherEditsDeobfuscationfilesUpload,
 
     -- ** androidpublisher.edits.details.get
     AndroidPublisherEditsDetailsGetResource,
+    AndroidPublisherEditsDetailsGet (..),
     newAndroidPublisherEditsDetailsGet,
-    AndroidPublisherEditsDetailsGet,
 
     -- ** androidpublisher.edits.details.patch
     AndroidPublisherEditsDetailsPatchResource,
+    AndroidPublisherEditsDetailsPatch (..),
     newAndroidPublisherEditsDetailsPatch,
-    AndroidPublisherEditsDetailsPatch,
 
     -- ** androidpublisher.edits.details.update
     AndroidPublisherEditsDetailsUpdateResource,
+    AndroidPublisherEditsDetailsUpdate (..),
     newAndroidPublisherEditsDetailsUpdate,
-    AndroidPublisherEditsDetailsUpdate,
 
     -- ** androidpublisher.edits.expansionfiles.get
     AndroidPublisherEditsExpansionfilesGetResource,
+    AndroidPublisherEditsExpansionfilesGet (..),
     newAndroidPublisherEditsExpansionfilesGet,
-    AndroidPublisherEditsExpansionfilesGet,
 
     -- ** androidpublisher.edits.expansionfiles.patch
     AndroidPublisherEditsExpansionfilesPatchResource,
+    AndroidPublisherEditsExpansionfilesPatch (..),
     newAndroidPublisherEditsExpansionfilesPatch,
-    AndroidPublisherEditsExpansionfilesPatch,
 
     -- ** androidpublisher.edits.expansionfiles.update
     AndroidPublisherEditsExpansionfilesUpdateResource,
+    AndroidPublisherEditsExpansionfilesUpdate (..),
     newAndroidPublisherEditsExpansionfilesUpdate,
-    AndroidPublisherEditsExpansionfilesUpdate,
 
     -- ** androidpublisher.edits.expansionfiles.upload
     AndroidPublisherEditsExpansionfilesUploadResource,
+    AndroidPublisherEditsExpansionfilesUpload (..),
     newAndroidPublisherEditsExpansionfilesUpload,
-    AndroidPublisherEditsExpansionfilesUpload,
 
     -- ** androidpublisher.edits.get
     AndroidPublisherEditsGetResource,
+    AndroidPublisherEditsGet (..),
     newAndroidPublisherEditsGet,
-    AndroidPublisherEditsGet,
 
     -- ** androidpublisher.edits.images.delete
     AndroidPublisherEditsImagesDeleteResource,
+    AndroidPublisherEditsImagesDelete (..),
     newAndroidPublisherEditsImagesDelete,
-    AndroidPublisherEditsImagesDelete,
 
     -- ** androidpublisher.edits.images.deleteall
     AndroidPublisherEditsImagesDeleteallResource,
+    AndroidPublisherEditsImagesDeleteall (..),
     newAndroidPublisherEditsImagesDeleteall,
-    AndroidPublisherEditsImagesDeleteall,
 
     -- ** androidpublisher.edits.images.list
     AndroidPublisherEditsImagesListResource,
+    AndroidPublisherEditsImagesList (..),
     newAndroidPublisherEditsImagesList,
-    AndroidPublisherEditsImagesList,
 
     -- ** androidpublisher.edits.images.upload
     AndroidPublisherEditsImagesUploadResource,
+    AndroidPublisherEditsImagesUpload (..),
     newAndroidPublisherEditsImagesUpload,
-    AndroidPublisherEditsImagesUpload,
 
     -- ** androidpublisher.edits.insert
     AndroidPublisherEditsInsertResource,
+    AndroidPublisherEditsInsert (..),
     newAndroidPublisherEditsInsert,
-    AndroidPublisherEditsInsert,
 
     -- ** androidpublisher.edits.listings.delete
     AndroidPublisherEditsListingsDeleteResource,
+    AndroidPublisherEditsListingsDelete (..),
     newAndroidPublisherEditsListingsDelete,
-    AndroidPublisherEditsListingsDelete,
 
     -- ** androidpublisher.edits.listings.deleteall
     AndroidPublisherEditsListingsDeleteallResource,
+    AndroidPublisherEditsListingsDeleteall (..),
     newAndroidPublisherEditsListingsDeleteall,
-    AndroidPublisherEditsListingsDeleteall,
 
     -- ** androidpublisher.edits.listings.get
     AndroidPublisherEditsListingsGetResource,
+    AndroidPublisherEditsListingsGet (..),
     newAndroidPublisherEditsListingsGet,
-    AndroidPublisherEditsListingsGet,
 
     -- ** androidpublisher.edits.listings.list
     AndroidPublisherEditsListingsListResource,
+    AndroidPublisherEditsListingsList (..),
     newAndroidPublisherEditsListingsList,
-    AndroidPublisherEditsListingsList,
 
     -- ** androidpublisher.edits.listings.patch
     AndroidPublisherEditsListingsPatchResource,
+    AndroidPublisherEditsListingsPatch (..),
     newAndroidPublisherEditsListingsPatch,
-    AndroidPublisherEditsListingsPatch,
 
     -- ** androidpublisher.edits.listings.update
     AndroidPublisherEditsListingsUpdateResource,
+    AndroidPublisherEditsListingsUpdate (..),
     newAndroidPublisherEditsListingsUpdate,
-    AndroidPublisherEditsListingsUpdate,
 
     -- ** androidpublisher.edits.testers.get
     AndroidPublisherEditsTestersGetResource,
+    AndroidPublisherEditsTestersGet (..),
     newAndroidPublisherEditsTestersGet,
-    AndroidPublisherEditsTestersGet,
 
     -- ** androidpublisher.edits.testers.patch
     AndroidPublisherEditsTestersPatchResource,
+    AndroidPublisherEditsTestersPatch (..),
     newAndroidPublisherEditsTestersPatch,
-    AndroidPublisherEditsTestersPatch,
 
     -- ** androidpublisher.edits.testers.update
     AndroidPublisherEditsTestersUpdateResource,
+    AndroidPublisherEditsTestersUpdate (..),
     newAndroidPublisherEditsTestersUpdate,
-    AndroidPublisherEditsTestersUpdate,
 
     -- ** androidpublisher.edits.tracks.get
     AndroidPublisherEditsTracksGetResource,
+    AndroidPublisherEditsTracksGet (..),
     newAndroidPublisherEditsTracksGet,
-    AndroidPublisherEditsTracksGet,
 
     -- ** androidpublisher.edits.tracks.list
     AndroidPublisherEditsTracksListResource,
+    AndroidPublisherEditsTracksList (..),
     newAndroidPublisherEditsTracksList,
-    AndroidPublisherEditsTracksList,
 
     -- ** androidpublisher.edits.tracks.patch
     AndroidPublisherEditsTracksPatchResource,
+    AndroidPublisherEditsTracksPatch (..),
     newAndroidPublisherEditsTracksPatch,
-    AndroidPublisherEditsTracksPatch,
 
     -- ** androidpublisher.edits.tracks.update
     AndroidPublisherEditsTracksUpdateResource,
+    AndroidPublisherEditsTracksUpdate (..),
     newAndroidPublisherEditsTracksUpdate,
-    AndroidPublisherEditsTracksUpdate,
 
     -- ** androidpublisher.edits.validate
     AndroidPublisherEditsValidateResource,
+    AndroidPublisherEditsValidate (..),
     newAndroidPublisherEditsValidate,
-    AndroidPublisherEditsValidate,
 
     -- ** androidpublisher.generatedapks.download
     AndroidPublisherGeneratedapksDownloadResource,
+    AndroidPublisherGeneratedapksDownload (..),
     newAndroidPublisherGeneratedapksDownload,
-    AndroidPublisherGeneratedapksDownload,
 
     -- ** androidpublisher.generatedapks.list
     AndroidPublisherGeneratedapksListResource,
+    AndroidPublisherGeneratedapksList (..),
     newAndroidPublisherGeneratedapksList,
-    AndroidPublisherGeneratedapksList,
 
     -- ** androidpublisher.grants.create
     AndroidPublisherGrantsCreateResource,
+    AndroidPublisherGrantsCreate (..),
     newAndroidPublisherGrantsCreate,
-    AndroidPublisherGrantsCreate,
 
     -- ** androidpublisher.grants.delete
     AndroidPublisherGrantsDeleteResource,
+    AndroidPublisherGrantsDelete (..),
     newAndroidPublisherGrantsDelete,
-    AndroidPublisherGrantsDelete,
 
     -- ** androidpublisher.grants.patch
     AndroidPublisherGrantsPatchResource,
+    AndroidPublisherGrantsPatch (..),
     newAndroidPublisherGrantsPatch,
-    AndroidPublisherGrantsPatch,
 
     -- ** androidpublisher.inappproducts.delete
     AndroidPublisherInappproductsDeleteResource,
+    AndroidPublisherInappproductsDelete (..),
     newAndroidPublisherInappproductsDelete,
-    AndroidPublisherInappproductsDelete,
 
     -- ** androidpublisher.inappproducts.get
     AndroidPublisherInappproductsGetResource,
+    AndroidPublisherInappproductsGet (..),
     newAndroidPublisherInappproductsGet,
-    AndroidPublisherInappproductsGet,
 
     -- ** androidpublisher.inappproducts.insert
     AndroidPublisherInappproductsInsertResource,
+    AndroidPublisherInappproductsInsert (..),
     newAndroidPublisherInappproductsInsert,
-    AndroidPublisherInappproductsInsert,
 
     -- ** androidpublisher.inappproducts.list
     AndroidPublisherInappproductsListResource,
+    AndroidPublisherInappproductsList (..),
     newAndroidPublisherInappproductsList,
-    AndroidPublisherInappproductsList,
 
     -- ** androidpublisher.inappproducts.patch
     AndroidPublisherInappproductsPatchResource,
+    AndroidPublisherInappproductsPatch (..),
     newAndroidPublisherInappproductsPatch,
-    AndroidPublisherInappproductsPatch,
 
     -- ** androidpublisher.inappproducts.update
     AndroidPublisherInappproductsUpdateResource,
+    AndroidPublisherInappproductsUpdate (..),
     newAndroidPublisherInappproductsUpdate,
-    AndroidPublisherInappproductsUpdate,
 
     -- ** androidpublisher.internalappsharingartifacts.uploadapk
     AndroidPublisherInternalappsharingartifactsUploadapkResource,
+    AndroidPublisherInternalappsharingartifactsUploadapk (..),
     newAndroidPublisherInternalappsharingartifactsUploadapk,
-    AndroidPublisherInternalappsharingartifactsUploadapk,
 
     -- ** androidpublisher.internalappsharingartifacts.uploadbundle
     AndroidPublisherInternalappsharingartifactsUploadbundleResource,
+    AndroidPublisherInternalappsharingartifactsUploadbundle (..),
     newAndroidPublisherInternalappsharingartifactsUploadbundle,
-    AndroidPublisherInternalappsharingartifactsUploadbundle,
 
     -- ** androidpublisher.monetization.convertRegionPrices
     AndroidPublisherMonetizationConvertRegionPricesResource,
+    AndroidPublisherMonetizationConvertRegionPrices (..),
     newAndroidPublisherMonetizationConvertRegionPrices,
-    AndroidPublisherMonetizationConvertRegionPrices,
 
     -- ** androidpublisher.orders.refund
     AndroidPublisherOrdersRefundResource,
+    AndroidPublisherOrdersRefund (..),
     newAndroidPublisherOrdersRefund,
-    AndroidPublisherOrdersRefund,
 
     -- ** androidpublisher.purchases.products.acknowledge
     AndroidPublisherPurchasesProductsAcknowledgeResource,
+    AndroidPublisherPurchasesProductsAcknowledge (..),
     newAndroidPublisherPurchasesProductsAcknowledge,
-    AndroidPublisherPurchasesProductsAcknowledge,
 
     -- ** androidpublisher.purchases.products.get
     AndroidPublisherPurchasesProductsGetResource,
+    AndroidPublisherPurchasesProductsGet (..),
     newAndroidPublisherPurchasesProductsGet,
-    AndroidPublisherPurchasesProductsGet,
 
     -- ** androidpublisher.purchases.subscriptions.acknowledge
     AndroidPublisherPurchasesSubscriptionsAcknowledgeResource,
+    AndroidPublisherPurchasesSubscriptionsAcknowledge (..),
     newAndroidPublisherPurchasesSubscriptionsAcknowledge,
-    AndroidPublisherPurchasesSubscriptionsAcknowledge,
 
     -- ** androidpublisher.purchases.subscriptions.cancel
     AndroidPublisherPurchasesSubscriptionsCancelResource,
+    AndroidPublisherPurchasesSubscriptionsCancel (..),
     newAndroidPublisherPurchasesSubscriptionsCancel,
-    AndroidPublisherPurchasesSubscriptionsCancel,
 
     -- ** androidpublisher.purchases.subscriptions.defer
     AndroidPublisherPurchasesSubscriptionsDeferResource,
+    AndroidPublisherPurchasesSubscriptionsDefer (..),
     newAndroidPublisherPurchasesSubscriptionsDefer,
-    AndroidPublisherPurchasesSubscriptionsDefer,
 
     -- ** androidpublisher.purchases.subscriptions.get
     AndroidPublisherPurchasesSubscriptionsGetResource,
+    AndroidPublisherPurchasesSubscriptionsGet (..),
     newAndroidPublisherPurchasesSubscriptionsGet,
-    AndroidPublisherPurchasesSubscriptionsGet,
 
     -- ** androidpublisher.purchases.subscriptions.refund
     AndroidPublisherPurchasesSubscriptionsRefundResource,
+    AndroidPublisherPurchasesSubscriptionsRefund (..),
     newAndroidPublisherPurchasesSubscriptionsRefund,
-    AndroidPublisherPurchasesSubscriptionsRefund,
 
     -- ** androidpublisher.purchases.subscriptions.revoke
     AndroidPublisherPurchasesSubscriptionsRevokeResource,
+    AndroidPublisherPurchasesSubscriptionsRevoke (..),
     newAndroidPublisherPurchasesSubscriptionsRevoke,
-    AndroidPublisherPurchasesSubscriptionsRevoke,
 
     -- ** androidpublisher.purchases.voidedpurchases.list
     AndroidPublisherPurchasesVoidedpurchasesListResource,
+    AndroidPublisherPurchasesVoidedpurchasesList (..),
     newAndroidPublisherPurchasesVoidedpurchasesList,
-    AndroidPublisherPurchasesVoidedpurchasesList,
 
     -- ** androidpublisher.reviews.get
     AndroidPublisherReviewsGetResource,
+    AndroidPublisherReviewsGet (..),
     newAndroidPublisherReviewsGet,
-    AndroidPublisherReviewsGet,
 
     -- ** androidpublisher.reviews.list
     AndroidPublisherReviewsListResource,
+    AndroidPublisherReviewsList (..),
     newAndroidPublisherReviewsList,
-    AndroidPublisherReviewsList,
 
     -- ** androidpublisher.reviews.reply
     AndroidPublisherReviewsReplyResource,
+    AndroidPublisherReviewsReply (..),
     newAndroidPublisherReviewsReply,
-    AndroidPublisherReviewsReply,
 
     -- ** androidpublisher.systemapks.variants.create
     AndroidPublisherSystemapksVariantsCreateResource,
+    AndroidPublisherSystemapksVariantsCreate (..),
     newAndroidPublisherSystemapksVariantsCreate,
-    AndroidPublisherSystemapksVariantsCreate,
 
     -- ** androidpublisher.systemapks.variants.download
     AndroidPublisherSystemapksVariantsDownloadResource,
+    AndroidPublisherSystemapksVariantsDownload (..),
     newAndroidPublisherSystemapksVariantsDownload,
-    AndroidPublisherSystemapksVariantsDownload,
 
     -- ** androidpublisher.systemapks.variants.get
     AndroidPublisherSystemapksVariantsGetResource,
+    AndroidPublisherSystemapksVariantsGet (..),
     newAndroidPublisherSystemapksVariantsGet,
-    AndroidPublisherSystemapksVariantsGet,
 
     -- ** androidpublisher.systemapks.variants.list
     AndroidPublisherSystemapksVariantsListResource,
+    AndroidPublisherSystemapksVariantsList (..),
     newAndroidPublisherSystemapksVariantsList,
-    AndroidPublisherSystemapksVariantsList,
 
     -- ** androidpublisher.users.create
     AndroidPublisherUsersCreateResource,
+    AndroidPublisherUsersCreate (..),
     newAndroidPublisherUsersCreate,
-    AndroidPublisherUsersCreate,
 
     -- ** androidpublisher.users.delete
     AndroidPublisherUsersDeleteResource,
+    AndroidPublisherUsersDelete (..),
     newAndroidPublisherUsersDelete,
-    AndroidPublisherUsersDelete,
 
     -- ** androidpublisher.users.list
     AndroidPublisherUsersListResource,
+    AndroidPublisherUsersList (..),
     newAndroidPublisherUsersList,
-    AndroidPublisherUsersList,
 
     -- ** androidpublisher.users.patch
     AndroidPublisherUsersPatchResource,
+    AndroidPublisherUsersPatch (..),
     newAndroidPublisherUsersPatch,
-    AndroidPublisherUsersPatch,
 
     -- * Types
 

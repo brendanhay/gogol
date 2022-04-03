@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.SshPublicKeys.Create
     OSLoginUsersSshPublicKeysCreateResource,
 
     -- ** Constructing a Request
+    OSLoginUsersSshPublicKeysCreate (..),
     newOSLoginUsersSshPublicKeysCreate,
-    OSLoginUsersSshPublicKeysCreate,
   )
 where
 

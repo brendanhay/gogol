@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Adunits.Update
     AdSenseHostAccountsAdunitsUpdateResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsAdunitsUpdate (..),
     newAdSenseHostAccountsAdunitsUpdate,
-    AdSenseHostAccountsAdunitsUpdate,
   )
 where
 

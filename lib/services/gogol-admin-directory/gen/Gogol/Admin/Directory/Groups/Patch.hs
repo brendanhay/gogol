@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Groups.Patch
     DirectoryGroupsPatchResource,
 
     -- ** Constructing a Request
+    DirectoryGroupsPatch (..),
     newDirectoryGroupsPatch,
-    DirectoryGroupsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Schemas.List
     DirectorySchemasListResource,
 
     -- ** Constructing a Request
+    DirectorySchemasList (..),
     newDirectorySchemasList,
-    DirectorySchemasList,
   )
 where
 

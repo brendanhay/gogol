@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Players.Hide
     GamesManagementPlayersHideResource,
 
     -- ** Constructing a Request
+    GamesManagementPlayersHide (..),
     newGamesManagementPlayersHide,
-    GamesManagementPlayersHide,
   )
 where
 

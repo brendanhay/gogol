@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.SshPublicKeys.Patch
     OSLoginUsersSshPublicKeysPatchResource,
 
     -- ** Constructing a Request
+    OSLoginUsersSshPublicKeysPatch (..),
     newOSLoginUsersSshPublicKeysPatch,
-    OSLoginUsersSshPublicKeysPatch,
   )
 where
 

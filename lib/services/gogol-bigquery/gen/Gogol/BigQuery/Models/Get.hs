@@ -34,8 +34,8 @@ module Gogol.BigQuery.Models.Get
     BigQueryModelsGetResource,
 
     -- ** Constructing a Request
+    BigQueryModelsGet (..),
     newBigQueryModelsGet,
-    BigQueryModelsGet,
   )
 where
 

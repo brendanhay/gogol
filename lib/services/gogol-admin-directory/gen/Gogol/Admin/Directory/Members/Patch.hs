@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.Patch
     DirectoryMembersPatchResource,
 
     -- ** Constructing a Request
+    DirectoryMembersPatch (..),
     newDirectoryMembersPatch,
-    DirectoryMembersPatch,
   )
 where
 

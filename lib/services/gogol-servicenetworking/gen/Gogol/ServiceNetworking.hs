@@ -41,123 +41,123 @@ module Gogol.ServiceNetworking
 
     -- ** servicenetworking.operations.cancel
     ServiceNetworkingOperationsCancelResource,
+    ServiceNetworkingOperationsCancel (..),
     newServiceNetworkingOperationsCancel,
-    ServiceNetworkingOperationsCancel,
 
     -- ** servicenetworking.operations.delete
     ServiceNetworkingOperationsDeleteResource,
+    ServiceNetworkingOperationsDelete (..),
     newServiceNetworkingOperationsDelete,
-    ServiceNetworkingOperationsDelete,
 
     -- ** servicenetworking.operations.get
     ServiceNetworkingOperationsGetResource,
+    ServiceNetworkingOperationsGet (..),
     newServiceNetworkingOperationsGet,
-    ServiceNetworkingOperationsGet,
 
     -- ** servicenetworking.operations.list
     ServiceNetworkingOperationsListResource,
+    ServiceNetworkingOperationsList (..),
     newServiceNetworkingOperationsList,
-    ServiceNetworkingOperationsList,
 
     -- ** servicenetworking.services.addSubnetwork
     ServiceNetworkingServicesAddSubnetworkResource,
+    ServiceNetworkingServicesAddSubnetwork (..),
     newServiceNetworkingServicesAddSubnetwork,
-    ServiceNetworkingServicesAddSubnetwork,
 
     -- ** servicenetworking.services.connections.create
     ServiceNetworkingServicesConnectionsCreateResource,
+    ServiceNetworkingServicesConnectionsCreate (..),
     newServiceNetworkingServicesConnectionsCreate,
-    ServiceNetworkingServicesConnectionsCreate,
 
     -- ** servicenetworking.services.connections.deleteConnection
     ServiceNetworkingServicesConnectionsDeleteConnectionResource,
+    ServiceNetworkingServicesConnectionsDeleteConnection (..),
     newServiceNetworkingServicesConnectionsDeleteConnection,
-    ServiceNetworkingServicesConnectionsDeleteConnection,
 
     -- ** servicenetworking.services.connections.list
     ServiceNetworkingServicesConnectionsListResource,
+    ServiceNetworkingServicesConnectionsList (..),
     newServiceNetworkingServicesConnectionsList,
-    ServiceNetworkingServicesConnectionsList,
 
     -- ** servicenetworking.services.connections.patch
     ServiceNetworkingServicesConnectionsPatchResource,
+    ServiceNetworkingServicesConnectionsPatch (..),
     newServiceNetworkingServicesConnectionsPatch,
-    ServiceNetworkingServicesConnectionsPatch,
 
     -- ** servicenetworking.services.disableVpcServiceControls
     ServiceNetworkingServicesDisableVpcServiceControlsResource,
+    ServiceNetworkingServicesDisableVpcServiceControls (..),
     newServiceNetworkingServicesDisableVpcServiceControls,
-    ServiceNetworkingServicesDisableVpcServiceControls,
 
     -- ** servicenetworking.services.dnsRecordSets.add
     ServiceNetworkingServicesDnsRecordSetsAddResource,
+    ServiceNetworkingServicesDnsRecordSetsAdd (..),
     newServiceNetworkingServicesDnsRecordSetsAdd,
-    ServiceNetworkingServicesDnsRecordSetsAdd,
 
     -- ** servicenetworking.services.dnsRecordSets.remove
     ServiceNetworkingServicesDnsRecordSetsRemoveResource,
+    ServiceNetworkingServicesDnsRecordSetsRemove (..),
     newServiceNetworkingServicesDnsRecordSetsRemove,
-    ServiceNetworkingServicesDnsRecordSetsRemove,
 
     -- ** servicenetworking.services.dnsRecordSets.update
     ServiceNetworkingServicesDnsRecordSetsUpdateResource,
+    ServiceNetworkingServicesDnsRecordSetsUpdate (..),
     newServiceNetworkingServicesDnsRecordSetsUpdate,
-    ServiceNetworkingServicesDnsRecordSetsUpdate,
 
     -- ** servicenetworking.services.dnsZones.add
     ServiceNetworkingServicesDnsZonesAddResource,
+    ServiceNetworkingServicesDnsZonesAdd (..),
     newServiceNetworkingServicesDnsZonesAdd,
-    ServiceNetworkingServicesDnsZonesAdd,
 
     -- ** servicenetworking.services.dnsZones.remove
     ServiceNetworkingServicesDnsZonesRemoveResource,
+    ServiceNetworkingServicesDnsZonesRemove (..),
     newServiceNetworkingServicesDnsZonesRemove,
-    ServiceNetworkingServicesDnsZonesRemove,
 
     -- ** servicenetworking.services.enableVpcServiceControls
     ServiceNetworkingServicesEnableVpcServiceControlsResource,
+    ServiceNetworkingServicesEnableVpcServiceControls (..),
     newServiceNetworkingServicesEnableVpcServiceControls,
-    ServiceNetworkingServicesEnableVpcServiceControls,
 
     -- ** servicenetworking.services.projects.global.networks.get
     ServiceNetworkingServicesProjectsGlobalNetworksGetResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksGet (..),
     newServiceNetworkingServicesProjectsGlobalNetworksGet,
-    ServiceNetworkingServicesProjectsGlobalNetworksGet,
 
     -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.create
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsCreateResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsCreate (..),
     newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsCreate,
-    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsCreate,
 
     -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.delete
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDeleteResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete (..),
     newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete,
-    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsDelete,
 
     -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.list
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsListResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList (..),
     newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList,
-    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList,
 
     -- ** servicenetworking.services.projects.global.networks.updateConsumerConfig
     ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig (..),
     newServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig,
-    ServiceNetworkingServicesProjectsGlobalNetworksUpdateConsumerConfig,
 
     -- ** servicenetworking.services.roles.add
     ServiceNetworkingServicesRolesAddResource,
+    ServiceNetworkingServicesRolesAdd (..),
     newServiceNetworkingServicesRolesAdd,
-    ServiceNetworkingServicesRolesAdd,
 
     -- ** servicenetworking.services.searchRange
     ServiceNetworkingServicesSearchRangeResource,
+    ServiceNetworkingServicesSearchRange (..),
     newServiceNetworkingServicesSearchRange,
-    ServiceNetworkingServicesSearchRange,
 
     -- ** servicenetworking.services.validate
     ServiceNetworkingServicesValidateResource,
+    ServiceNetworkingServicesValidate (..),
     newServiceNetworkingServicesValidate,
-    ServiceNetworkingServicesValidate,
 
     -- * Types
 

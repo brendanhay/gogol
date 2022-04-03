@@ -34,8 +34,8 @@ module Gogol.IAP.UpdateIapSettings
     IAPUpdateIapSettingsResource,
 
     -- ** Constructing a Request
+    IAPUpdateIapSettings (..),
     newIAPUpdateIapSettings,
-    IAPUpdateIapSettings,
   )
 where
 

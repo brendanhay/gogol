@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.StartIpRotation
     ContainerProjectsLocationsClustersStartIpRotationResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersStartIpRotation (..),
     newContainerProjectsLocationsClustersStartIpRotation,
-    ContainerProjectsLocationsClustersStartIpRotation,
   )
 where
 

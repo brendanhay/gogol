@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.List
     ClassroomCoursesCourseWorkListResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkList (..),
     newClassroomCoursesCourseWorkList,
-    ClassroomCoursesCourseWorkList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudProfiler.Projects.Profiles.Create
     CloudProfilerProjectsProfilesCreateResource,
 
     -- ** Constructing a Request
+    CloudProfilerProjectsProfilesCreate (..),
     newCloudProfilerProjectsProfilesCreate,
-    CloudProfilerProjectsProfilesCreate,
   )
 where
 

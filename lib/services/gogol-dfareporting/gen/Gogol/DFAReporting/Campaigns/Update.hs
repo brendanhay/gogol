@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Campaigns.Update
     DFAReportingCampaignsUpdateResource,
 
     -- ** Constructing a Request
+    DFAReportingCampaignsUpdate (..),
     newDFAReportingCampaignsUpdate,
-    DFAReportingCampaignsUpdate,
   )
 where
 

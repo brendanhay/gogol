@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Photos.Delete
     DirectoryUsersPhotosDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryUsersPhotosDelete (..),
     newDirectoryUsersPhotosDelete,
-    DirectoryUsersPhotosDelete,
   )
 where
 

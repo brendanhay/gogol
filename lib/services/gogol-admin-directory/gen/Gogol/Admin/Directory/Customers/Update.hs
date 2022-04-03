@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Customers.Update
     DirectoryCustomersUpdateResource,
 
     -- ** Constructing a Request
+    DirectoryCustomersUpdate (..),
     newDirectoryCustomersUpdate,
-    DirectoryCustomersUpdate,
   )
 where
 

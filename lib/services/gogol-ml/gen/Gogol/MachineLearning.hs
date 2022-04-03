@@ -41,233 +41,233 @@ module Gogol.MachineLearning
 
     -- ** ml.projects.explain
     MlProjectsExplainResource,
+    MlProjectsExplain (..),
     newMlProjectsExplain,
-    MlProjectsExplain,
 
     -- ** ml.projects.getConfig
     MlProjectsGetConfigResource,
+    MlProjectsGetConfig (..),
     newMlProjectsGetConfig,
-    MlProjectsGetConfig,
 
     -- ** ml.projects.jobs.cancel
     MlProjectsJobsCancelResource,
+    MlProjectsJobsCancel (..),
     newMlProjectsJobsCancel,
-    MlProjectsJobsCancel,
 
     -- ** ml.projects.jobs.create
     MlProjectsJobsCreateResource,
+    MlProjectsJobsCreate (..),
     newMlProjectsJobsCreate,
-    MlProjectsJobsCreate,
 
     -- ** ml.projects.jobs.get
     MlProjectsJobsGetResource,
+    MlProjectsJobsGet (..),
     newMlProjectsJobsGet,
-    MlProjectsJobsGet,
 
     -- ** ml.projects.jobs.getIamPolicy
     MlProjectsJobsGetIamPolicyResource,
+    MlProjectsJobsGetIamPolicy (..),
     newMlProjectsJobsGetIamPolicy,
-    MlProjectsJobsGetIamPolicy,
 
     -- ** ml.projects.jobs.list
     MlProjectsJobsListResource,
+    MlProjectsJobsList (..),
     newMlProjectsJobsList,
-    MlProjectsJobsList,
 
     -- ** ml.projects.jobs.patch
     MlProjectsJobsPatchResource,
+    MlProjectsJobsPatch (..),
     newMlProjectsJobsPatch,
-    MlProjectsJobsPatch,
 
     -- ** ml.projects.jobs.setIamPolicy
     MlProjectsJobsSetIamPolicyResource,
+    MlProjectsJobsSetIamPolicy (..),
     newMlProjectsJobsSetIamPolicy,
-    MlProjectsJobsSetIamPolicy,
 
     -- ** ml.projects.jobs.testIamPermissions
     MlProjectsJobsTestIamPermissionsResource,
+    MlProjectsJobsTestIamPermissions (..),
     newMlProjectsJobsTestIamPermissions,
-    MlProjectsJobsTestIamPermissions,
 
     -- ** ml.projects.locations.get
     MlProjectsLocationsGetResource,
+    MlProjectsLocationsGet (..),
     newMlProjectsLocationsGet,
-    MlProjectsLocationsGet,
 
     -- ** ml.projects.locations.list
     MlProjectsLocationsListResource,
+    MlProjectsLocationsList (..),
     newMlProjectsLocationsList,
-    MlProjectsLocationsList,
 
     -- ** ml.projects.locations.operations.cancel
     MlProjectsLocationsOperationsCancelResource,
+    MlProjectsLocationsOperationsCancel (..),
     newMlProjectsLocationsOperationsCancel,
-    MlProjectsLocationsOperationsCancel,
 
     -- ** ml.projects.locations.operations.get
     MlProjectsLocationsOperationsGetResource,
+    MlProjectsLocationsOperationsGet (..),
     newMlProjectsLocationsOperationsGet,
-    MlProjectsLocationsOperationsGet,
 
     -- ** ml.projects.locations.studies.create
     MlProjectsLocationsStudiesCreateResource,
+    MlProjectsLocationsStudiesCreate (..),
     newMlProjectsLocationsStudiesCreate,
-    MlProjectsLocationsStudiesCreate,
 
     -- ** ml.projects.locations.studies.delete
     MlProjectsLocationsStudiesDeleteResource,
+    MlProjectsLocationsStudiesDelete (..),
     newMlProjectsLocationsStudiesDelete,
-    MlProjectsLocationsStudiesDelete,
 
     -- ** ml.projects.locations.studies.get
     MlProjectsLocationsStudiesGetResource,
+    MlProjectsLocationsStudiesGet (..),
     newMlProjectsLocationsStudiesGet,
-    MlProjectsLocationsStudiesGet,
 
     -- ** ml.projects.locations.studies.list
     MlProjectsLocationsStudiesListResource,
+    MlProjectsLocationsStudiesList (..),
     newMlProjectsLocationsStudiesList,
-    MlProjectsLocationsStudiesList,
 
     -- ** ml.projects.locations.studies.trials.addMeasurement
     MlProjectsLocationsStudiesTrialsAddMeasurementResource,
+    MlProjectsLocationsStudiesTrialsAddMeasurement (..),
     newMlProjectsLocationsStudiesTrialsAddMeasurement,
-    MlProjectsLocationsStudiesTrialsAddMeasurement,
 
     -- ** ml.projects.locations.studies.trials.checkEarlyStoppingState
     MlProjectsLocationsStudiesTrialsCheckEarlyStoppingStateResource,
+    MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState (..),
     newMlProjectsLocationsStudiesTrialsCheckEarlyStoppingState,
-    MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState,
 
     -- ** ml.projects.locations.studies.trials.complete
     MlProjectsLocationsStudiesTrialsCompleteResource,
+    MlProjectsLocationsStudiesTrialsComplete (..),
     newMlProjectsLocationsStudiesTrialsComplete,
-    MlProjectsLocationsStudiesTrialsComplete,
 
     -- ** ml.projects.locations.studies.trials.create
     MlProjectsLocationsStudiesTrialsCreateResource,
+    MlProjectsLocationsStudiesTrialsCreate (..),
     newMlProjectsLocationsStudiesTrialsCreate,
-    MlProjectsLocationsStudiesTrialsCreate,
 
     -- ** ml.projects.locations.studies.trials.delete
     MlProjectsLocationsStudiesTrialsDeleteResource,
+    MlProjectsLocationsStudiesTrialsDelete (..),
     newMlProjectsLocationsStudiesTrialsDelete,
-    MlProjectsLocationsStudiesTrialsDelete,
 
     -- ** ml.projects.locations.studies.trials.get
     MlProjectsLocationsStudiesTrialsGetResource,
+    MlProjectsLocationsStudiesTrialsGet (..),
     newMlProjectsLocationsStudiesTrialsGet,
-    MlProjectsLocationsStudiesTrialsGet,
 
     -- ** ml.projects.locations.studies.trials.list
     MlProjectsLocationsStudiesTrialsListResource,
+    MlProjectsLocationsStudiesTrialsList (..),
     newMlProjectsLocationsStudiesTrialsList,
-    MlProjectsLocationsStudiesTrialsList,
 
     -- ** ml.projects.locations.studies.trials.listOptimalTrials
     MlProjectsLocationsStudiesTrialsListOptimalTrialsResource,
+    MlProjectsLocationsStudiesTrialsListOptimalTrials (..),
     newMlProjectsLocationsStudiesTrialsListOptimalTrials,
-    MlProjectsLocationsStudiesTrialsListOptimalTrials,
 
     -- ** ml.projects.locations.studies.trials.stop
     MlProjectsLocationsStudiesTrialsStopResource,
+    MlProjectsLocationsStudiesTrialsStop (..),
     newMlProjectsLocationsStudiesTrialsStop,
-    MlProjectsLocationsStudiesTrialsStop,
 
     -- ** ml.projects.locations.studies.trials.suggest
     MlProjectsLocationsStudiesTrialsSuggestResource,
+    MlProjectsLocationsStudiesTrialsSuggest (..),
     newMlProjectsLocationsStudiesTrialsSuggest,
-    MlProjectsLocationsStudiesTrialsSuggest,
 
     -- ** ml.projects.models.create
     MlProjectsModelsCreateResource,
+    MlProjectsModelsCreate (..),
     newMlProjectsModelsCreate,
-    MlProjectsModelsCreate,
 
     -- ** ml.projects.models.delete
     MlProjectsModelsDeleteResource,
+    MlProjectsModelsDelete (..),
     newMlProjectsModelsDelete,
-    MlProjectsModelsDelete,
 
     -- ** ml.projects.models.get
     MlProjectsModelsGetResource,
+    MlProjectsModelsGet (..),
     newMlProjectsModelsGet,
-    MlProjectsModelsGet,
 
     -- ** ml.projects.models.getIamPolicy
     MlProjectsModelsGetIamPolicyResource,
+    MlProjectsModelsGetIamPolicy (..),
     newMlProjectsModelsGetIamPolicy,
-    MlProjectsModelsGetIamPolicy,
 
     -- ** ml.projects.models.list
     MlProjectsModelsListResource,
+    MlProjectsModelsList (..),
     newMlProjectsModelsList,
-    MlProjectsModelsList,
 
     -- ** ml.projects.models.patch
     MlProjectsModelsPatchResource,
+    MlProjectsModelsPatch (..),
     newMlProjectsModelsPatch,
-    MlProjectsModelsPatch,
 
     -- ** ml.projects.models.setIamPolicy
     MlProjectsModelsSetIamPolicyResource,
+    MlProjectsModelsSetIamPolicy (..),
     newMlProjectsModelsSetIamPolicy,
-    MlProjectsModelsSetIamPolicy,
 
     -- ** ml.projects.models.testIamPermissions
     MlProjectsModelsTestIamPermissionsResource,
+    MlProjectsModelsTestIamPermissions (..),
     newMlProjectsModelsTestIamPermissions,
-    MlProjectsModelsTestIamPermissions,
 
     -- ** ml.projects.models.versions.create
     MlProjectsModelsVersionsCreateResource,
+    MlProjectsModelsVersionsCreate (..),
     newMlProjectsModelsVersionsCreate,
-    MlProjectsModelsVersionsCreate,
 
     -- ** ml.projects.models.versions.delete
     MlProjectsModelsVersionsDeleteResource,
+    MlProjectsModelsVersionsDelete (..),
     newMlProjectsModelsVersionsDelete,
-    MlProjectsModelsVersionsDelete,
 
     -- ** ml.projects.models.versions.get
     MlProjectsModelsVersionsGetResource,
+    MlProjectsModelsVersionsGet (..),
     newMlProjectsModelsVersionsGet,
-    MlProjectsModelsVersionsGet,
 
     -- ** ml.projects.models.versions.list
     MlProjectsModelsVersionsListResource,
+    MlProjectsModelsVersionsList (..),
     newMlProjectsModelsVersionsList,
-    MlProjectsModelsVersionsList,
 
     -- ** ml.projects.models.versions.patch
     MlProjectsModelsVersionsPatchResource,
+    MlProjectsModelsVersionsPatch (..),
     newMlProjectsModelsVersionsPatch,
-    MlProjectsModelsVersionsPatch,
 
     -- ** ml.projects.models.versions.setDefault
     MlProjectsModelsVersionsSetDefaultResource,
+    MlProjectsModelsVersionsSetDefault (..),
     newMlProjectsModelsVersionsSetDefault,
-    MlProjectsModelsVersionsSetDefault,
 
     -- ** ml.projects.operations.cancel
     MlProjectsOperationsCancelResource,
+    MlProjectsOperationsCancel (..),
     newMlProjectsOperationsCancel,
-    MlProjectsOperationsCancel,
 
     -- ** ml.projects.operations.get
     MlProjectsOperationsGetResource,
+    MlProjectsOperationsGet (..),
     newMlProjectsOperationsGet,
-    MlProjectsOperationsGet,
 
     -- ** ml.projects.operations.list
     MlProjectsOperationsListResource,
+    MlProjectsOperationsList (..),
     newMlProjectsOperationsList,
-    MlProjectsOperationsList,
 
     -- ** ml.projects.predict
     MlProjectsPredictResource,
+    MlProjectsPredict (..),
     newMlProjectsPredict,
-    MlProjectsPredict,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Nodes.Delete
     TPUProjectsLocationsNodesDeleteResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsNodesDelete (..),
     newTPUProjectsLocationsNodesDelete,
-    TPUProjectsLocationsNodesDelete,
   )
 where
 

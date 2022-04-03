@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Policies.Patch
     AndroidManagementEnterprisesPoliciesPatchResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesPoliciesPatch (..),
     newAndroidManagementEnterprisesPoliciesPatch,
-    AndroidManagementEnterprisesPoliciesPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Setinventoryverificationcontact
     ContentLiasettingsSetinventoryverificationcontactResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsSetinventoryverificationcontact (..),
     newContentLiasettingsSetinventoryverificationcontact,
-    ContentLiasettingsSetinventoryverificationcontact,
   )
 where
 

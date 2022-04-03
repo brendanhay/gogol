@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.GetPop
     GmailUsersSettingsGetPopResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsGetPop (..),
     newGmailUsersSettingsGetPop,
-    GmailUsersSettingsGetPop,
   )
 where
 

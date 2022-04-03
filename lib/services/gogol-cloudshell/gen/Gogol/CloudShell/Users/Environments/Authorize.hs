@@ -34,8 +34,8 @@ module Gogol.CloudShell.Users.Environments.Authorize
     CloudShellUsersEnvironmentsAuthorizeResource,
 
     -- ** Constructing a Request
+    CloudShellUsersEnvironmentsAuthorize (..),
     newCloudShellUsersEnvironmentsAuthorize,
-    CloudShellUsersEnvironmentsAuthorize,
   )
 where
 

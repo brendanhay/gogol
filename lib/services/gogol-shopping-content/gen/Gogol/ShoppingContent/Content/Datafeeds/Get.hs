@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeeds.Get
     ContentDatafeedsGetResource,
 
     -- ** Constructing a Request
+    ContentDatafeedsGet (..),
     newContentDatafeedsGet,
-    ContentDatafeedsGet,
   )
 where
 

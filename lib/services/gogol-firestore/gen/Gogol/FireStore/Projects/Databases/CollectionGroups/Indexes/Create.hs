@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
     FireStoreProjectsDatabasesCollectionGroupsIndexesCreateResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
   )
 where
 

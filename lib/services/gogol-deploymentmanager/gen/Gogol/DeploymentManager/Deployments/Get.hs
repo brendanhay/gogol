@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Get
     DeploymentManagerDeploymentsGetResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsGet (..),
     newDeploymentManagerDeploymentsGet,
-    DeploymentManagerDeploymentsGet,
   )
 where
 

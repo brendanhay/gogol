@@ -34,8 +34,8 @@ module Gogol.Compute.UrlMaps.Get
     ComputeUrlMapsGetResource,
 
     -- ** Constructing a Request
+    ComputeUrlMapsGet (..),
     newComputeUrlMapsGet,
-    ComputeUrlMapsGet,
   )
 where
 

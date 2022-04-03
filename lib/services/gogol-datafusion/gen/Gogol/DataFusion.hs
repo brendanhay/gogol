@@ -40,83 +40,83 @@ module Gogol.DataFusion
 
     -- ** datafusion.projects.locations.get
     DataFusionProjectsLocationsGetResource,
+    DataFusionProjectsLocationsGet (..),
     newDataFusionProjectsLocationsGet,
-    DataFusionProjectsLocationsGet,
 
     -- ** datafusion.projects.locations.instances.create
     DataFusionProjectsLocationsInstancesCreateResource,
+    DataFusionProjectsLocationsInstancesCreate (..),
     newDataFusionProjectsLocationsInstancesCreate,
-    DataFusionProjectsLocationsInstancesCreate,
 
     -- ** datafusion.projects.locations.instances.delete
     DataFusionProjectsLocationsInstancesDeleteResource,
+    DataFusionProjectsLocationsInstancesDelete (..),
     newDataFusionProjectsLocationsInstancesDelete,
-    DataFusionProjectsLocationsInstancesDelete,
 
     -- ** datafusion.projects.locations.instances.get
     DataFusionProjectsLocationsInstancesGetResource,
+    DataFusionProjectsLocationsInstancesGet (..),
     newDataFusionProjectsLocationsInstancesGet,
-    DataFusionProjectsLocationsInstancesGet,
 
     -- ** datafusion.projects.locations.instances.getIamPolicy
     DataFusionProjectsLocationsInstancesGetIamPolicyResource,
+    DataFusionProjectsLocationsInstancesGetIamPolicy (..),
     newDataFusionProjectsLocationsInstancesGetIamPolicy,
-    DataFusionProjectsLocationsInstancesGetIamPolicy,
 
     -- ** datafusion.projects.locations.instances.list
     DataFusionProjectsLocationsInstancesListResource,
+    DataFusionProjectsLocationsInstancesList (..),
     newDataFusionProjectsLocationsInstancesList,
-    DataFusionProjectsLocationsInstancesList,
 
     -- ** datafusion.projects.locations.instances.patch
     DataFusionProjectsLocationsInstancesPatchResource,
+    DataFusionProjectsLocationsInstancesPatch (..),
     newDataFusionProjectsLocationsInstancesPatch,
-    DataFusionProjectsLocationsInstancesPatch,
 
     -- ** datafusion.projects.locations.instances.restart
     DataFusionProjectsLocationsInstancesRestartResource,
+    DataFusionProjectsLocationsInstancesRestart (..),
     newDataFusionProjectsLocationsInstancesRestart,
-    DataFusionProjectsLocationsInstancesRestart,
 
     -- ** datafusion.projects.locations.instances.setIamPolicy
     DataFusionProjectsLocationsInstancesSetIamPolicyResource,
+    DataFusionProjectsLocationsInstancesSetIamPolicy (..),
     newDataFusionProjectsLocationsInstancesSetIamPolicy,
-    DataFusionProjectsLocationsInstancesSetIamPolicy,
 
     -- ** datafusion.projects.locations.instances.testIamPermissions
     DataFusionProjectsLocationsInstancesTestIamPermissionsResource,
+    DataFusionProjectsLocationsInstancesTestIamPermissions (..),
     newDataFusionProjectsLocationsInstancesTestIamPermissions,
-    DataFusionProjectsLocationsInstancesTestIamPermissions,
 
     -- ** datafusion.projects.locations.list
     DataFusionProjectsLocationsListResource,
+    DataFusionProjectsLocationsList (..),
     newDataFusionProjectsLocationsList,
-    DataFusionProjectsLocationsList,
 
     -- ** datafusion.projects.locations.operations.cancel
     DataFusionProjectsLocationsOperationsCancelResource,
+    DataFusionProjectsLocationsOperationsCancel (..),
     newDataFusionProjectsLocationsOperationsCancel,
-    DataFusionProjectsLocationsOperationsCancel,
 
     -- ** datafusion.projects.locations.operations.delete
     DataFusionProjectsLocationsOperationsDeleteResource,
+    DataFusionProjectsLocationsOperationsDelete (..),
     newDataFusionProjectsLocationsOperationsDelete,
-    DataFusionProjectsLocationsOperationsDelete,
 
     -- ** datafusion.projects.locations.operations.get
     DataFusionProjectsLocationsOperationsGetResource,
+    DataFusionProjectsLocationsOperationsGet (..),
     newDataFusionProjectsLocationsOperationsGet,
-    DataFusionProjectsLocationsOperationsGet,
 
     -- ** datafusion.projects.locations.operations.list
     DataFusionProjectsLocationsOperationsListResource,
+    DataFusionProjectsLocationsOperationsList (..),
     newDataFusionProjectsLocationsOperationsList,
-    DataFusionProjectsLocationsOperationsList,
 
     -- ** datafusion.projects.locations.versions.list
     DataFusionProjectsLocationsVersionsListResource,
+    DataFusionProjectsLocationsVersionsList (..),
     newDataFusionProjectsLocationsVersionsList,
-    DataFusionProjectsLocationsVersionsList,
 
     -- * Types
 

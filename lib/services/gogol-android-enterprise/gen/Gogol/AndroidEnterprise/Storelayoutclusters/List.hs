@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Storelayoutclusters.List
     AndroidEnterpriseStorelayoutclustersListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseStorelayoutclustersList (..),
     newAndroidEnterpriseStorelayoutclustersList,
-    AndroidEnterpriseStorelayoutclustersList,
   )
 where
 

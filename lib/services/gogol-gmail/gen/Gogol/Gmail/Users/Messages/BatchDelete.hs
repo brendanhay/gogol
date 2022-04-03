@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.BatchDelete
     GmailUsersMessagesBatchDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesBatchDelete (..),
     newGmailUsersMessagesBatchDelete,
-    GmailUsersMessagesBatchDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExperienceReport.Sites.Get
     AdExperienceReportSitesGetResource,
 
     -- ** Constructing a Request
+    AdExperienceReportSitesGet (..),
     newAdExperienceReportSitesGet,
-    AdExperienceReportSitesGet,
   )
 where
 

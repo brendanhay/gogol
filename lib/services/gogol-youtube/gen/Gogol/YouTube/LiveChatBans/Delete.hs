@@ -34,8 +34,8 @@ module Gogol.YouTube.LiveChatBans.Delete
     YouTubeLiveChatBansDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeLiveChatBansDelete (..),
     newYouTubeLiveChatBansDelete,
-    YouTubeLiveChatBansDelete,
   )
 where
 

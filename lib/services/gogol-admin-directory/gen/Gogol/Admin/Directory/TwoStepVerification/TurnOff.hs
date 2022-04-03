@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.TwoStepVerification.TurnOff
     DirectoryTwoStepVerificationTurnOffResource,
 
     -- ** Constructing a Request
+    DirectoryTwoStepVerificationTurnOff (..),
     newDirectoryTwoStepVerificationTurnOff,
-    DirectoryTwoStepVerificationTurnOff,
   )
 where
 

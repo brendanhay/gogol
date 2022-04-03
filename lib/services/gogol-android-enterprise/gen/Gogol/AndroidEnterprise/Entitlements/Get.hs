@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Entitlements.Get
     AndroidEnterpriseEntitlementsGetResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEntitlementsGet (..),
     newAndroidEnterpriseEntitlementsGet,
-    AndroidEnterpriseEntitlementsGet,
   )
 where
 

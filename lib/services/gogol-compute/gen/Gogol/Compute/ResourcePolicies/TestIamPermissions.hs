@@ -34,8 +34,8 @@ module Gogol.Compute.ResourcePolicies.TestIamPermissions
     ComputeResourcePoliciesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeResourcePoliciesTestIamPermissions (..),
     newComputeResourcePoliciesTestIamPermissions,
-    ComputeResourcePoliciesTestIamPermissions,
   )
 where
 

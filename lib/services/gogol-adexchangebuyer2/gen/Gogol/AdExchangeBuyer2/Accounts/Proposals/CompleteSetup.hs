@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
     AdExchangeBuyer2AccountsProposalsCompleteSetupResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsCompleteSetup (..),
     newAdExchangeBuyer2AccountsProposalsCompleteSetup,
-    AdExchangeBuyer2AccountsProposalsCompleteSetup,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForSeries
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries,
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries,
   )
 where
 

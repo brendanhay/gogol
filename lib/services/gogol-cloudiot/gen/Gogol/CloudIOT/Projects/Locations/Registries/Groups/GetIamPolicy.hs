@@ -34,8 +34,8 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
     CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy (..),
     newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy,
-    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Values.BatchClear
     SheetsSpreadsheetsValuesBatchClearResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsValuesBatchClear (..),
     newSheetsSpreadsheetsValuesBatchClear,
-    SheetsSpreadsheetsValuesBatchClear,
   )
 where
 

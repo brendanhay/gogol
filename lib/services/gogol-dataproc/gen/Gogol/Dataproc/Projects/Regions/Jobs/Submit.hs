@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Jobs.Submit
     DataprocProjectsRegionsJobsSubmitResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsJobsSubmit (..),
     newDataprocProjectsRegionsJobsSubmit,
-    DataprocProjectsRegionsJobsSubmit,
   )
 where
 

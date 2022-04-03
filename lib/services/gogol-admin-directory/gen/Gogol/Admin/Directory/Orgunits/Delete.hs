@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Orgunits.Delete
     DirectoryOrgunitsDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryOrgunitsDelete (..),
     newDirectoryOrgunitsDelete,
-    DirectoryOrgunitsDelete,
   )
 where
 

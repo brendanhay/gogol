@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.List
     CloudKMSProjectsLocationsListResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsList (..),
     newCloudKMSProjectsLocationsList,
-    CloudKMSProjectsLocationsList,
   )
 where
 

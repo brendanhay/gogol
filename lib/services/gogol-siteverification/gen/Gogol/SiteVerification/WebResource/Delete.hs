@@ -34,8 +34,8 @@ module Gogol.SiteVerification.WebResource.Delete
     SiteVerificationWebResourceDeleteResource,
 
     -- ** Constructing a Request
+    SiteVerificationWebResourceDelete (..),
     newSiteVerificationWebResourceDelete,
-    SiteVerificationWebResourceDelete,
   )
 where
 

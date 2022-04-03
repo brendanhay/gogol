@@ -34,8 +34,8 @@ module Gogol.Compute.TargetGrpcProxies.Get
     ComputeTargetGrpcProxiesGetResource,
 
     -- ** Constructing a Request
+    ComputeTargetGrpcProxiesGet (..),
     newComputeTargetGrpcProxiesGet,
-    ComputeTargetGrpcProxiesGet,
   )
 where
 

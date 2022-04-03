@@ -34,8 +34,8 @@ module Gogol.GamesManagement.Achievements.ResetAllForAllPlayers
     GamesManagementAchievementsResetAllForAllPlayersResource,
 
     -- ** Constructing a Request
+    GamesManagementAchievementsResetAllForAllPlayers (..),
     newGamesManagementAchievementsResetAllForAllPlayers,
-    GamesManagementAchievementsResetAllForAllPlayers,
   )
 where
 

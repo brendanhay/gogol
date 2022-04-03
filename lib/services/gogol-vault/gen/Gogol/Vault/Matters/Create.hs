@@ -34,8 +34,8 @@ module Gogol.Vault.Matters.Create
     VaultMattersCreateResource,
 
     -- ** Constructing a Request
+    VaultMattersCreate (..),
     newVaultMattersCreate,
-    VaultMattersCreate,
   )
 where
 

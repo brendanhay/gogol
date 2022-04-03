@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ContentCategories.Insert
     DFAReportingContentCategoriesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingContentCategoriesInsert (..),
     newDFAReportingContentCategoriesInsert,
-    DFAReportingContentCategoriesInsert,
   )
 where
 

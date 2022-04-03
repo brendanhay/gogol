@@ -40,293 +40,293 @@ module Gogol.IAM
 
     -- ** iam.iamPolicies.lintPolicy
     IAMIamPoliciesLintPolicyResource,
+    IAMIamPoliciesLintPolicy (..),
     newIAMIamPoliciesLintPolicy,
-    IAMIamPoliciesLintPolicy,
 
     -- ** iam.iamPolicies.queryAuditableServices
     IAMIamPoliciesQueryAuditableServicesResource,
+    IAMIamPoliciesQueryAuditableServices (..),
     newIAMIamPoliciesQueryAuditableServices,
-    IAMIamPoliciesQueryAuditableServices,
 
     -- ** iam.locations.workforcePools.operations.get
     IAMLocationsWorkforcePoolsOperationsGetResource,
+    IAMLocationsWorkforcePoolsOperationsGet (..),
     newIAMLocationsWorkforcePoolsOperationsGet,
-    IAMLocationsWorkforcePoolsOperationsGet,
 
     -- ** iam.locations.workforcePools.providers.keys.operations.get
     IAMLocationsWorkforcePoolsProvidersKeysOperationsGetResource,
+    IAMLocationsWorkforcePoolsProvidersKeysOperationsGet (..),
     newIAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
-    IAMLocationsWorkforcePoolsProvidersKeysOperationsGet,
 
     -- ** iam.locations.workforcePools.providers.operations.get
     IAMLocationsWorkforcePoolsProvidersOperationsGetResource,
+    IAMLocationsWorkforcePoolsProvidersOperationsGet (..),
     newIAMLocationsWorkforcePoolsProvidersOperationsGet,
-    IAMLocationsWorkforcePoolsProvidersOperationsGet,
 
     -- ** iam.locations.workforcePools.subjects.operations.get
     IAMLocationsWorkforcePoolsSubjectsOperationsGetResource,
+    IAMLocationsWorkforcePoolsSubjectsOperationsGet (..),
     newIAMLocationsWorkforcePoolsSubjectsOperationsGet,
-    IAMLocationsWorkforcePoolsSubjectsOperationsGet,
 
     -- ** iam.organizations.roles.create
     IAMOrganizationsRolesCreateResource,
+    IAMOrganizationsRolesCreate (..),
     newIAMOrganizationsRolesCreate,
-    IAMOrganizationsRolesCreate,
 
     -- ** iam.organizations.roles.delete
     IAMOrganizationsRolesDeleteResource,
+    IAMOrganizationsRolesDelete (..),
     newIAMOrganizationsRolesDelete,
-    IAMOrganizationsRolesDelete,
 
     -- ** iam.organizations.roles.get
     IAMOrganizationsRolesGetResource,
+    IAMOrganizationsRolesGet (..),
     newIAMOrganizationsRolesGet,
-    IAMOrganizationsRolesGet,
 
     -- ** iam.organizations.roles.list
     IAMOrganizationsRolesListResource,
+    IAMOrganizationsRolesList (..),
     newIAMOrganizationsRolesList,
-    IAMOrganizationsRolesList,
 
     -- ** iam.organizations.roles.patch
     IAMOrganizationsRolesPatchResource,
+    IAMOrganizationsRolesPatch (..),
     newIAMOrganizationsRolesPatch,
-    IAMOrganizationsRolesPatch,
 
     -- ** iam.organizations.roles.undelete
     IAMOrganizationsRolesUndeleteResource,
+    IAMOrganizationsRolesUndelete (..),
     newIAMOrganizationsRolesUndelete,
-    IAMOrganizationsRolesUndelete,
 
     -- ** iam.permissions.queryTestablePermissions
     IAMPermissionsQueryTestablePermissionsResource,
+    IAMPermissionsQueryTestablePermissions (..),
     newIAMPermissionsQueryTestablePermissions,
-    IAMPermissionsQueryTestablePermissions,
 
     -- ** iam.projects.locations.workloadIdentityPools.create
     IAMProjectsLocationsWorkloadIdentityPoolsCreateResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsCreate (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsCreate,
-    IAMProjectsLocationsWorkloadIdentityPoolsCreate,
 
     -- ** iam.projects.locations.workloadIdentityPools.delete
     IAMProjectsLocationsWorkloadIdentityPoolsDeleteResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsDelete (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsDelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsDelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.get
     IAMProjectsLocationsWorkloadIdentityPoolsGetResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsGet (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.list
     IAMProjectsLocationsWorkloadIdentityPoolsListResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsList (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsList,
-    IAMProjectsLocationsWorkloadIdentityPoolsList,
 
     -- ** iam.projects.locations.workloadIdentityPools.operations.get
     IAMProjectsLocationsWorkloadIdentityPoolsOperationsGetResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGet (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.patch
     IAMProjectsLocationsWorkloadIdentityPoolsPatchResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsPatch (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsPatch,
-    IAMProjectsLocationsWorkloadIdentityPoolsPatch,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.create
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreateResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersCreate,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.delete
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersDeleteResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersDelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.get
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersGetResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGet (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.keys.operations.get
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGetResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersKeysOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.list
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersListResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersList (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersList,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.operations.get
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGetResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersOperationsGet,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.patch
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatchResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersPatch,
 
     -- ** iam.projects.locations.workloadIdentityPools.providers.undelete
     IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndeleteResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsProvidersUndelete,
 
     -- ** iam.projects.locations.workloadIdentityPools.undelete
     IAMProjectsLocationsWorkloadIdentityPoolsUndeleteResource,
+    IAMProjectsLocationsWorkloadIdentityPoolsUndelete (..),
     newIAMProjectsLocationsWorkloadIdentityPoolsUndelete,
-    IAMProjectsLocationsWorkloadIdentityPoolsUndelete,
 
     -- ** iam.projects.roles.create
     IAMProjectsRolesCreateResource,
+    IAMProjectsRolesCreate (..),
     newIAMProjectsRolesCreate,
-    IAMProjectsRolesCreate,
 
     -- ** iam.projects.roles.delete
     IAMProjectsRolesDeleteResource,
+    IAMProjectsRolesDelete (..),
     newIAMProjectsRolesDelete,
-    IAMProjectsRolesDelete,
 
     -- ** iam.projects.roles.get
     IAMProjectsRolesGetResource,
+    IAMProjectsRolesGet (..),
     newIAMProjectsRolesGet,
-    IAMProjectsRolesGet,
 
     -- ** iam.projects.roles.list
     IAMProjectsRolesListResource,
+    IAMProjectsRolesList (..),
     newIAMProjectsRolesList,
-    IAMProjectsRolesList,
 
     -- ** iam.projects.roles.patch
     IAMProjectsRolesPatchResource,
+    IAMProjectsRolesPatch (..),
     newIAMProjectsRolesPatch,
-    IAMProjectsRolesPatch,
 
     -- ** iam.projects.roles.undelete
     IAMProjectsRolesUndeleteResource,
+    IAMProjectsRolesUndelete (..),
     newIAMProjectsRolesUndelete,
-    IAMProjectsRolesUndelete,
 
     -- ** iam.projects.serviceAccounts.create
     IAMProjectsServiceAccountsCreateResource,
+    IAMProjectsServiceAccountsCreate (..),
     newIAMProjectsServiceAccountsCreate,
-    IAMProjectsServiceAccountsCreate,
 
     -- ** iam.projects.serviceAccounts.delete
     IAMProjectsServiceAccountsDeleteResource,
+    IAMProjectsServiceAccountsDelete (..),
     newIAMProjectsServiceAccountsDelete,
-    IAMProjectsServiceAccountsDelete,
 
     -- ** iam.projects.serviceAccounts.disable
     IAMProjectsServiceAccountsDisableResource,
+    IAMProjectsServiceAccountsDisable (..),
     newIAMProjectsServiceAccountsDisable,
-    IAMProjectsServiceAccountsDisable,
 
     -- ** iam.projects.serviceAccounts.enable
     IAMProjectsServiceAccountsEnableResource,
+    IAMProjectsServiceAccountsEnable (..),
     newIAMProjectsServiceAccountsEnable,
-    IAMProjectsServiceAccountsEnable,
 
     -- ** iam.projects.serviceAccounts.get
     IAMProjectsServiceAccountsGetResource,
+    IAMProjectsServiceAccountsGet (..),
     newIAMProjectsServiceAccountsGet,
-    IAMProjectsServiceAccountsGet,
 
     -- ** iam.projects.serviceAccounts.getIamPolicy
     IAMProjectsServiceAccountsGetIamPolicyResource,
+    IAMProjectsServiceAccountsGetIamPolicy (..),
     newIAMProjectsServiceAccountsGetIamPolicy,
-    IAMProjectsServiceAccountsGetIamPolicy,
 
     -- ** iam.projects.serviceAccounts.keys.create
     IAMProjectsServiceAccountsKeysCreateResource,
+    IAMProjectsServiceAccountsKeysCreate (..),
     newIAMProjectsServiceAccountsKeysCreate,
-    IAMProjectsServiceAccountsKeysCreate,
 
     -- ** iam.projects.serviceAccounts.keys.delete
     IAMProjectsServiceAccountsKeysDeleteResource,
+    IAMProjectsServiceAccountsKeysDelete (..),
     newIAMProjectsServiceAccountsKeysDelete,
-    IAMProjectsServiceAccountsKeysDelete,
 
     -- ** iam.projects.serviceAccounts.keys.disable
     IAMProjectsServiceAccountsKeysDisableResource,
+    IAMProjectsServiceAccountsKeysDisable (..),
     newIAMProjectsServiceAccountsKeysDisable,
-    IAMProjectsServiceAccountsKeysDisable,
 
     -- ** iam.projects.serviceAccounts.keys.enable
     IAMProjectsServiceAccountsKeysEnableResource,
+    IAMProjectsServiceAccountsKeysEnable (..),
     newIAMProjectsServiceAccountsKeysEnable,
-    IAMProjectsServiceAccountsKeysEnable,
 
     -- ** iam.projects.serviceAccounts.keys.get
     IAMProjectsServiceAccountsKeysGetResource,
+    IAMProjectsServiceAccountsKeysGet (..),
     newIAMProjectsServiceAccountsKeysGet,
-    IAMProjectsServiceAccountsKeysGet,
 
     -- ** iam.projects.serviceAccounts.keys.list
     IAMProjectsServiceAccountsKeysListResource,
+    IAMProjectsServiceAccountsKeysList (..),
     newIAMProjectsServiceAccountsKeysList,
-    IAMProjectsServiceAccountsKeysList,
 
     -- ** iam.projects.serviceAccounts.keys.upload
     IAMProjectsServiceAccountsKeysUploadResource,
+    IAMProjectsServiceAccountsKeysUpload (..),
     newIAMProjectsServiceAccountsKeysUpload,
-    IAMProjectsServiceAccountsKeysUpload,
 
     -- ** iam.projects.serviceAccounts.list
     IAMProjectsServiceAccountsListResource,
+    IAMProjectsServiceAccountsList (..),
     newIAMProjectsServiceAccountsList,
-    IAMProjectsServiceAccountsList,
 
     -- ** iam.projects.serviceAccounts.patch
     IAMProjectsServiceAccountsPatchResource,
+    IAMProjectsServiceAccountsPatch (..),
     newIAMProjectsServiceAccountsPatch,
-    IAMProjectsServiceAccountsPatch,
 
     -- ** iam.projects.serviceAccounts.setIamPolicy
     IAMProjectsServiceAccountsSetIamPolicyResource,
+    IAMProjectsServiceAccountsSetIamPolicy (..),
     newIAMProjectsServiceAccountsSetIamPolicy,
-    IAMProjectsServiceAccountsSetIamPolicy,
 
     -- ** iam.projects.serviceAccounts.signBlob
     IAMProjectsServiceAccountsSignBlobResource,
+    IAMProjectsServiceAccountsSignBlob (..),
     newIAMProjectsServiceAccountsSignBlob,
-    IAMProjectsServiceAccountsSignBlob,
 
     -- ** iam.projects.serviceAccounts.signJwt
     IAMProjectsServiceAccountsSignJwtResource,
+    IAMProjectsServiceAccountsSignJwt (..),
     newIAMProjectsServiceAccountsSignJwt,
-    IAMProjectsServiceAccountsSignJwt,
 
     -- ** iam.projects.serviceAccounts.testIamPermissions
     IAMProjectsServiceAccountsTestIamPermissionsResource,
+    IAMProjectsServiceAccountsTestIamPermissions (..),
     newIAMProjectsServiceAccountsTestIamPermissions,
-    IAMProjectsServiceAccountsTestIamPermissions,
 
     -- ** iam.projects.serviceAccounts.undelete
     IAMProjectsServiceAccountsUndeleteResource,
+    IAMProjectsServiceAccountsUndelete (..),
     newIAMProjectsServiceAccountsUndelete,
-    IAMProjectsServiceAccountsUndelete,
 
     -- ** iam.projects.serviceAccounts.update
     IAMProjectsServiceAccountsUpdateResource,
+    IAMProjectsServiceAccountsUpdate (..),
     newIAMProjectsServiceAccountsUpdate,
-    IAMProjectsServiceAccountsUpdate,
 
     -- ** iam.roles.get
     IAMRolesGetResource,
+    IAMRolesGet (..),
     newIAMRolesGet,
-    IAMRolesGet,
 
     -- ** iam.roles.list
     IAMRolesListResource,
+    IAMRolesList (..),
     newIAMRolesList,
-    IAMRolesList,
 
     -- ** iam.roles.queryGrantableRoles
     IAMRolesQueryGrantableRolesResource,
+    IAMRolesQueryGrantableRoles (..),
     newIAMRolesQueryGrantableRoles,
-    IAMRolesQueryGrantableRoles,
 
     -- * Types
 

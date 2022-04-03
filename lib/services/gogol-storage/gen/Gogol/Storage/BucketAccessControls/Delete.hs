@@ -34,8 +34,8 @@ module Gogol.Storage.BucketAccessControls.Delete
     StorageBucketAccessControlsDeleteResource,
 
     -- ** Constructing a Request
+    StorageBucketAccessControlsDelete (..),
     newStorageBucketAccessControlsDelete,
-    StorageBucketAccessControlsDelete,
   )
 where
 

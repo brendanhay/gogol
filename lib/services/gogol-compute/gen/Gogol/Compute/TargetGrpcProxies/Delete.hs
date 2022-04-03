@@ -34,8 +34,8 @@ module Gogol.Compute.TargetGrpcProxies.Delete
     ComputeTargetGrpcProxiesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeTargetGrpcProxiesDelete (..),
     newComputeTargetGrpcProxiesDelete,
-    ComputeTargetGrpcProxiesDelete,
   )
 where
 

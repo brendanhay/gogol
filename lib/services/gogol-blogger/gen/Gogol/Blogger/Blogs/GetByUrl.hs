@@ -34,8 +34,8 @@ module Gogol.Blogger.Blogs.GetByUrl
     BloggerBlogsGetByUrlResource,
 
     -- ** Constructing a Request
+    BloggerBlogsGetByUrl (..),
     newBloggerBlogsGetByUrl,
-    BloggerBlogsGetByUrl,
   )
 where
 

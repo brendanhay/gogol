@@ -34,8 +34,8 @@ module Gogol.Storage.Buckets.Insert
     StorageBucketsInsertResource,
 
     -- ** Constructing a Request
+    StorageBucketsInsert (..),
     newStorageBucketsInsert,
-    StorageBucketsInsert,
   )
 where
 

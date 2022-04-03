@@ -34,8 +34,8 @@ module Gogol.People.ContactGroups.Get
     PeopleContactGroupsGetResource,
 
     -- ** Constructing a Request
+    PeopleContactGroupsGet (..),
     newPeopleContactGroupsGet,
-    PeopleContactGroupsGet,
   )
 where
 

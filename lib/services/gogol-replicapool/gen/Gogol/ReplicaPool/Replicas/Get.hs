@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Replicas.Get
     ReplicaPoolReplicasGetResource,
 
     -- ** Constructing a Request
+    ReplicaPoolReplicasGet (..),
     newReplicaPoolReplicasGet,
-    ReplicaPoolReplicasGet,
   )
 where
 

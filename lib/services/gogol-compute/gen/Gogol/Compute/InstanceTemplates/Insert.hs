@@ -34,8 +34,8 @@ module Gogol.Compute.InstanceTemplates.Insert
     ComputeInstanceTemplatesInsertResource,
 
     -- ** Constructing a Request
+    ComputeInstanceTemplatesInsert (..),
     newComputeInstanceTemplatesInsert,
-    ComputeInstanceTemplatesInsert,
   )
 where
 

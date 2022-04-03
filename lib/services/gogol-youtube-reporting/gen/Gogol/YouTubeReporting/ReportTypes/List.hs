@@ -34,8 +34,8 @@ module Gogol.YouTubeReporting.ReportTypes.List
     YouTubeReportingReportTypesListResource,
 
     -- ** Constructing a Request
+    YouTubeReportingReportTypesList (..),
     newYouTubeReportingReportTypesList,
-    YouTubeReportingReportTypesList,
   )
 where
 

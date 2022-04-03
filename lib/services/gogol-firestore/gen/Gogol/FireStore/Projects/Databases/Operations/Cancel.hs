@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Operations.Cancel
     FireStoreProjectsDatabasesOperationsCancelResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesOperationsCancel (..),
     newFireStoreProjectsDatabasesOperationsCancel,
-    FireStoreProjectsDatabasesOperationsCancel,
   )
 where
 

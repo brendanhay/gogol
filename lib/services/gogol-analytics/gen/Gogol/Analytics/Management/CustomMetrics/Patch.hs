@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.CustomMetrics.Patch
     AnalyticsManagementCustomMetricsPatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementCustomMetricsPatch (..),
     newAnalyticsManagementCustomMetricsPatch,
-    AnalyticsManagementCustomMetricsPatch,
   )
 where
 

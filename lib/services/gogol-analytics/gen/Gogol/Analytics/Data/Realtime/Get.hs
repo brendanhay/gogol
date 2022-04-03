@@ -34,8 +34,8 @@ module Gogol.Analytics.Data.Realtime.Get
     AnalyticsDataRealtimeGetResource,
 
     -- ** Constructing a Request
+    AnalyticsDataRealtimeGet (..),
     newAnalyticsDataRealtimeGet,
-    AnalyticsDataRealtimeGet,
   )
 where
 

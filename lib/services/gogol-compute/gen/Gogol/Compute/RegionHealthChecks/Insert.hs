@@ -34,8 +34,8 @@ module Gogol.Compute.RegionHealthChecks.Insert
     ComputeRegionHealthChecksInsertResource,
 
     -- ** Constructing a Request
+    ComputeRegionHealthChecksInsert (..),
     newComputeRegionHealthChecksInsert,
-    ComputeRegionHealthChecksInsert,
   )
 where
 

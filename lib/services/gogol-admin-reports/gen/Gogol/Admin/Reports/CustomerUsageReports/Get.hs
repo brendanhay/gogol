@@ -34,8 +34,8 @@ module Gogol.Admin.Reports.CustomerUsageReports.Get
     ReportsCustomerUsageReportsGetResource,
 
     -- ** Constructing a Request
+    ReportsCustomerUsageReportsGet (..),
     newReportsCustomerUsageReportsGet,
-    ReportsCustomerUsageReportsGet,
   )
 where
 

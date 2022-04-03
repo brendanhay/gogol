@@ -48,233 +48,233 @@ module Gogol.CloudSearch
 
     -- ** cloudsearch.debug.datasources.items.checkAccess
     CloudSearchDebugDatasourcesItemsCheckAccessResource,
+    CloudSearchDebugDatasourcesItemsCheckAccess (..),
     newCloudSearchDebugDatasourcesItemsCheckAccess,
-    CloudSearchDebugDatasourcesItemsCheckAccess,
 
     -- ** cloudsearch.debug.datasources.items.searchByViewUrl
     CloudSearchDebugDatasourcesItemsSearchByViewUrlResource,
+    CloudSearchDebugDatasourcesItemsSearchByViewUrl (..),
     newCloudSearchDebugDatasourcesItemsSearchByViewUrl,
-    CloudSearchDebugDatasourcesItemsSearchByViewUrl,
 
     -- ** cloudsearch.debug.datasources.items.unmappedids.list
     CloudSearchDebugDatasourcesItemsUnmappedidsListResource,
+    CloudSearchDebugDatasourcesItemsUnmappedidsList (..),
     newCloudSearchDebugDatasourcesItemsUnmappedidsList,
-    CloudSearchDebugDatasourcesItemsUnmappedidsList,
 
     -- ** cloudsearch.debug.identitysources.items.listForunmappedidentity
     CloudSearchDebugIdentitysourcesItemsListForunmappedidentityResource,
+    CloudSearchDebugIdentitysourcesItemsListForunmappedidentity (..),
     newCloudSearchDebugIdentitysourcesItemsListForunmappedidentity,
-    CloudSearchDebugIdentitysourcesItemsListForunmappedidentity,
 
     -- ** cloudsearch.debug.identitysources.unmappedids.list
     CloudSearchDebugIdentitysourcesUnmappedidsListResource,
+    CloudSearchDebugIdentitysourcesUnmappedidsList (..),
     newCloudSearchDebugIdentitysourcesUnmappedidsList,
-    CloudSearchDebugIdentitysourcesUnmappedidsList,
 
     -- ** cloudsearch.indexing.datasources.deleteSchema
     CloudSearchIndexingDatasourcesDeleteSchemaResource,
+    CloudSearchIndexingDatasourcesDeleteSchema (..),
     newCloudSearchIndexingDatasourcesDeleteSchema,
-    CloudSearchIndexingDatasourcesDeleteSchema,
 
     -- ** cloudsearch.indexing.datasources.getSchema
     CloudSearchIndexingDatasourcesGetSchemaResource,
+    CloudSearchIndexingDatasourcesGetSchema (..),
     newCloudSearchIndexingDatasourcesGetSchema,
-    CloudSearchIndexingDatasourcesGetSchema,
 
     -- ** cloudsearch.indexing.datasources.items.delete
     CloudSearchIndexingDatasourcesItemsDeleteResource,
+    CloudSearchIndexingDatasourcesItemsDelete (..),
     newCloudSearchIndexingDatasourcesItemsDelete,
-    CloudSearchIndexingDatasourcesItemsDelete,
 
     -- ** cloudsearch.indexing.datasources.items.deleteQueueItems
     CloudSearchIndexingDatasourcesItemsDeleteQueueItemsResource,
+    CloudSearchIndexingDatasourcesItemsDeleteQueueItems (..),
     newCloudSearchIndexingDatasourcesItemsDeleteQueueItems,
-    CloudSearchIndexingDatasourcesItemsDeleteQueueItems,
 
     -- ** cloudsearch.indexing.datasources.items.get
     CloudSearchIndexingDatasourcesItemsGetResource,
+    CloudSearchIndexingDatasourcesItemsGet (..),
     newCloudSearchIndexingDatasourcesItemsGet,
-    CloudSearchIndexingDatasourcesItemsGet,
 
     -- ** cloudsearch.indexing.datasources.items.index
     CloudSearchIndexingDatasourcesItemsIndexResource,
+    CloudSearchIndexingDatasourcesItemsIndex (..),
     newCloudSearchIndexingDatasourcesItemsIndex,
-    CloudSearchIndexingDatasourcesItemsIndex,
 
     -- ** cloudsearch.indexing.datasources.items.list
     CloudSearchIndexingDatasourcesItemsListResource,
+    CloudSearchIndexingDatasourcesItemsList (..),
     newCloudSearchIndexingDatasourcesItemsList,
-    CloudSearchIndexingDatasourcesItemsList,
 
     -- ** cloudsearch.indexing.datasources.items.poll
     CloudSearchIndexingDatasourcesItemsPollResource,
+    CloudSearchIndexingDatasourcesItemsPoll (..),
     newCloudSearchIndexingDatasourcesItemsPoll,
-    CloudSearchIndexingDatasourcesItemsPoll,
 
     -- ** cloudsearch.indexing.datasources.items.push
     CloudSearchIndexingDatasourcesItemsPushResource,
+    CloudSearchIndexingDatasourcesItemsPush (..),
     newCloudSearchIndexingDatasourcesItemsPush,
-    CloudSearchIndexingDatasourcesItemsPush,
 
     -- ** cloudsearch.indexing.datasources.items.unreserve
     CloudSearchIndexingDatasourcesItemsUnreserveResource,
+    CloudSearchIndexingDatasourcesItemsUnreserve (..),
     newCloudSearchIndexingDatasourcesItemsUnreserve,
-    CloudSearchIndexingDatasourcesItemsUnreserve,
 
     -- ** cloudsearch.indexing.datasources.items.upload
     CloudSearchIndexingDatasourcesItemsUploadResource,
+    CloudSearchIndexingDatasourcesItemsUpload (..),
     newCloudSearchIndexingDatasourcesItemsUpload,
-    CloudSearchIndexingDatasourcesItemsUpload,
 
     -- ** cloudsearch.indexing.datasources.updateSchema
     CloudSearchIndexingDatasourcesUpdateSchemaResource,
+    CloudSearchIndexingDatasourcesUpdateSchema (..),
     newCloudSearchIndexingDatasourcesUpdateSchema,
-    CloudSearchIndexingDatasourcesUpdateSchema,
 
     -- ** cloudsearch.initializeCustomer
     CloudSearchInitializeCustomerResource,
+    CloudSearchInitializeCustomer (..),
     newCloudSearchInitializeCustomer,
-    CloudSearchInitializeCustomer,
 
     -- ** cloudsearch.media.upload
     CloudSearchMediaUploadResource,
+    CloudSearchMediaUpload (..),
     newCloudSearchMediaUpload,
-    CloudSearchMediaUpload,
 
     -- ** cloudsearch.operations.get
     CloudSearchOperationsGetResource,
+    CloudSearchOperationsGet (..),
     newCloudSearchOperationsGet,
-    CloudSearchOperationsGet,
 
     -- ** cloudsearch.operations.lro.list
     CloudSearchOperationsLroListResource,
+    CloudSearchOperationsLroList (..),
     newCloudSearchOperationsLroList,
-    CloudSearchOperationsLroList,
 
     -- ** cloudsearch.query.search
     CloudSearchQuerySearchResource,
+    CloudSearchQuerySearch (..),
     newCloudSearchQuerySearch,
-    CloudSearchQuerySearch,
 
     -- ** cloudsearch.query.sources.list
     CloudSearchQuerySourcesListResource,
+    CloudSearchQuerySourcesList (..),
     newCloudSearchQuerySourcesList,
-    CloudSearchQuerySourcesList,
 
     -- ** cloudsearch.query.suggest
     CloudSearchQuerySuggestResource,
+    CloudSearchQuerySuggest (..),
     newCloudSearchQuerySuggest,
-    CloudSearchQuerySuggest,
 
     -- ** cloudsearch.settings.datasources.create
     CloudSearchSettingsDatasourcesCreateResource,
+    CloudSearchSettingsDatasourcesCreate (..),
     newCloudSearchSettingsDatasourcesCreate,
-    CloudSearchSettingsDatasourcesCreate,
 
     -- ** cloudsearch.settings.datasources.delete
     CloudSearchSettingsDatasourcesDeleteResource,
+    CloudSearchSettingsDatasourcesDelete (..),
     newCloudSearchSettingsDatasourcesDelete,
-    CloudSearchSettingsDatasourcesDelete,
 
     -- ** cloudsearch.settings.datasources.get
     CloudSearchSettingsDatasourcesGetResource,
+    CloudSearchSettingsDatasourcesGet (..),
     newCloudSearchSettingsDatasourcesGet,
-    CloudSearchSettingsDatasourcesGet,
 
     -- ** cloudsearch.settings.datasources.list
     CloudSearchSettingsDatasourcesListResource,
+    CloudSearchSettingsDatasourcesList (..),
     newCloudSearchSettingsDatasourcesList,
-    CloudSearchSettingsDatasourcesList,
 
     -- ** cloudsearch.settings.datasources.update
     CloudSearchSettingsDatasourcesUpdateResource,
+    CloudSearchSettingsDatasourcesUpdate (..),
     newCloudSearchSettingsDatasourcesUpdate,
-    CloudSearchSettingsDatasourcesUpdate,
 
     -- ** cloudsearch.settings.getCustomer
     CloudSearchSettingsGetCustomerResource,
+    CloudSearchSettingsGetCustomer (..),
     newCloudSearchSettingsGetCustomer,
-    CloudSearchSettingsGetCustomer,
 
     -- ** cloudsearch.settings.searchapplications.create
     CloudSearchSettingsSearchapplicationsCreateResource,
+    CloudSearchSettingsSearchapplicationsCreate (..),
     newCloudSearchSettingsSearchapplicationsCreate,
-    CloudSearchSettingsSearchapplicationsCreate,
 
     -- ** cloudsearch.settings.searchapplications.delete
     CloudSearchSettingsSearchapplicationsDeleteResource,
+    CloudSearchSettingsSearchapplicationsDelete (..),
     newCloudSearchSettingsSearchapplicationsDelete,
-    CloudSearchSettingsSearchapplicationsDelete,
 
     -- ** cloudsearch.settings.searchapplications.get
     CloudSearchSettingsSearchapplicationsGetResource,
+    CloudSearchSettingsSearchapplicationsGet (..),
     newCloudSearchSettingsSearchapplicationsGet,
-    CloudSearchSettingsSearchapplicationsGet,
 
     -- ** cloudsearch.settings.searchapplications.list
     CloudSearchSettingsSearchapplicationsListResource,
+    CloudSearchSettingsSearchapplicationsList (..),
     newCloudSearchSettingsSearchapplicationsList,
-    CloudSearchSettingsSearchapplicationsList,
 
     -- ** cloudsearch.settings.searchapplications.reset
     CloudSearchSettingsSearchapplicationsResetResource,
+    CloudSearchSettingsSearchapplicationsReset (..),
     newCloudSearchSettingsSearchapplicationsReset,
-    CloudSearchSettingsSearchapplicationsReset,
 
     -- ** cloudsearch.settings.searchapplications.update
     CloudSearchSettingsSearchapplicationsUpdateResource,
+    CloudSearchSettingsSearchapplicationsUpdate (..),
     newCloudSearchSettingsSearchapplicationsUpdate,
-    CloudSearchSettingsSearchapplicationsUpdate,
 
     -- ** cloudsearch.settings.updateCustomer
     CloudSearchSettingsUpdateCustomerResource,
+    CloudSearchSettingsUpdateCustomer (..),
     newCloudSearchSettingsUpdateCustomer,
-    CloudSearchSettingsUpdateCustomer,
 
     -- ** cloudsearch.stats.getIndex
     CloudSearchStatsGetIndexResource,
+    CloudSearchStatsGetIndex (..),
     newCloudSearchStatsGetIndex,
-    CloudSearchStatsGetIndex,
 
     -- ** cloudsearch.stats.getQuery
     CloudSearchStatsGetQueryResource,
+    CloudSearchStatsGetQuery (..),
     newCloudSearchStatsGetQuery,
-    CloudSearchStatsGetQuery,
 
     -- ** cloudsearch.stats.getSearchapplication
     CloudSearchStatsGetSearchapplicationResource,
+    CloudSearchStatsGetSearchapplication (..),
     newCloudSearchStatsGetSearchapplication,
-    CloudSearchStatsGetSearchapplication,
 
     -- ** cloudsearch.stats.getSession
     CloudSearchStatsGetSessionResource,
+    CloudSearchStatsGetSession (..),
     newCloudSearchStatsGetSession,
-    CloudSearchStatsGetSession,
 
     -- ** cloudsearch.stats.getUser
     CloudSearchStatsGetUserResource,
+    CloudSearchStatsGetUser (..),
     newCloudSearchStatsGetUser,
-    CloudSearchStatsGetUser,
 
     -- ** cloudsearch.stats.index.datasources.get
     CloudSearchStatsIndexDatasourcesGetResource,
+    CloudSearchStatsIndexDatasourcesGet (..),
     newCloudSearchStatsIndexDatasourcesGet,
-    CloudSearchStatsIndexDatasourcesGet,
 
     -- ** cloudsearch.stats.query.searchapplications.get
     CloudSearchStatsQuerySearchapplicationsGetResource,
+    CloudSearchStatsQuerySearchapplicationsGet (..),
     newCloudSearchStatsQuerySearchapplicationsGet,
-    CloudSearchStatsQuerySearchapplicationsGet,
 
     -- ** cloudsearch.stats.session.searchapplications.get
     CloudSearchStatsSessionSearchapplicationsGetResource,
+    CloudSearchStatsSessionSearchapplicationsGet (..),
     newCloudSearchStatsSessionSearchapplicationsGet,
-    CloudSearchStatsSessionSearchapplicationsGet,
 
     -- ** cloudsearch.stats.user.searchapplications.get
     CloudSearchStatsUserSearchapplicationsGetResource,
+    CloudSearchStatsUserSearchapplicationsGet (..),
     newCloudSearchStatsUserSearchapplicationsGet,
-    CloudSearchStatsUserSearchapplicationsGet,
 
     -- * Types
 

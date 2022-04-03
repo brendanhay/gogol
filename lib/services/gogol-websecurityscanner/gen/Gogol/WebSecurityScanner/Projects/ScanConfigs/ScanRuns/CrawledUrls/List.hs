@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.CrawledUrls.List
     WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsListResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList,
   )
 where
 

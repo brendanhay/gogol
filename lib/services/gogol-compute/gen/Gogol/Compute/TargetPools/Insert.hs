@@ -34,8 +34,8 @@ module Gogol.Compute.TargetPools.Insert
     ComputeTargetPoolsInsertResource,
 
     -- ** Constructing a Request
+    ComputeTargetPoolsInsert (..),
     newComputeTargetPoolsInsert,
-    ComputeTargetPoolsInsert,
   )
 where
 

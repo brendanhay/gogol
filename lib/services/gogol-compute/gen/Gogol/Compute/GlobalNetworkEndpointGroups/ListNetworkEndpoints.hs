@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalNetworkEndpointGroups.ListNetworkEndpoints
     ComputeGlobalNetworkEndpointGroupsListNetworkEndpointsResource,
 
     -- ** Constructing a Request
+    ComputeGlobalNetworkEndpointGroupsListNetworkEndpoints (..),
     newComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
-    ComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
   )
 where
 

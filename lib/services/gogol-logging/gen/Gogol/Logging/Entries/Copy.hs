@@ -34,8 +34,8 @@ module Gogol.Logging.Entries.Copy
     LoggingEntriesCopyResource,
 
     -- ** Constructing a Request
+    LoggingEntriesCopy (..),
     newLoggingEntriesCopy,
-    LoggingEntriesCopy,
   )
 where
 

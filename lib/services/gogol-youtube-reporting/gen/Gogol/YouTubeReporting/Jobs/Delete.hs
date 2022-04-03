@@ -34,8 +34,8 @@ module Gogol.YouTubeReporting.Jobs.Delete
     YouTubeReportingJobsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeReportingJobsDelete (..),
     newYouTubeReportingJobsDelete,
-    YouTubeReportingJobsDelete,
   )
 where
 

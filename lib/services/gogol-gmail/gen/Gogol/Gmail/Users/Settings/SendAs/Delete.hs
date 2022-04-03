@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.Delete
     GmailUsersSettingsSendAsDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsDelete (..),
     newGmailUsersSettingsSendAsDelete,
-    GmailUsersSettingsSendAsDelete,
   )
 where
 

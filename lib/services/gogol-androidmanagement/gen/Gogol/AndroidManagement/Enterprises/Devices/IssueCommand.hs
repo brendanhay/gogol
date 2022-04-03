@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Devices.IssueCommand
     AndroidManagementEnterprisesDevicesIssueCommandResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesDevicesIssueCommand (..),
     newAndroidManagementEnterprisesDevicesIssueCommand,
-    AndroidManagementEnterprisesDevicesIssueCommand,
   )
 where
 

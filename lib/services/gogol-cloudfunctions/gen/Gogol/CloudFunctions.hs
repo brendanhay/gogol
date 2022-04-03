@@ -40,73 +40,73 @@ module Gogol.CloudFunctions
 
     -- ** cloudfunctions.projects.locations.functions.create
     CloudFunctionsProjectsLocationsFunctionsCreateResource,
+    CloudFunctionsProjectsLocationsFunctionsCreate (..),
     newCloudFunctionsProjectsLocationsFunctionsCreate,
-    CloudFunctionsProjectsLocationsFunctionsCreate,
 
     -- ** cloudfunctions.projects.locations.functions.delete
     CloudFunctionsProjectsLocationsFunctionsDeleteResource,
+    CloudFunctionsProjectsLocationsFunctionsDelete (..),
     newCloudFunctionsProjectsLocationsFunctionsDelete,
-    CloudFunctionsProjectsLocationsFunctionsDelete,
 
     -- ** cloudfunctions.projects.locations.functions.generateDownloadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource,
+    CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl (..),
     newCloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl,
-    CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl,
 
     -- ** cloudfunctions.projects.locations.functions.generateUploadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrlResource,
+    CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl (..),
     newCloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl,
-    CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl,
 
     -- ** cloudfunctions.projects.locations.functions.get
     CloudFunctionsProjectsLocationsFunctionsGetResource,
+    CloudFunctionsProjectsLocationsFunctionsGet (..),
     newCloudFunctionsProjectsLocationsFunctionsGet,
-    CloudFunctionsProjectsLocationsFunctionsGet,
 
     -- ** cloudfunctions.projects.locations.functions.getIamPolicy
     CloudFunctionsProjectsLocationsFunctionsGetIamPolicyResource,
+    CloudFunctionsProjectsLocationsFunctionsGetIamPolicy (..),
     newCloudFunctionsProjectsLocationsFunctionsGetIamPolicy,
-    CloudFunctionsProjectsLocationsFunctionsGetIamPolicy,
 
     -- ** cloudfunctions.projects.locations.functions.list
     CloudFunctionsProjectsLocationsFunctionsListResource,
+    CloudFunctionsProjectsLocationsFunctionsList (..),
     newCloudFunctionsProjectsLocationsFunctionsList,
-    CloudFunctionsProjectsLocationsFunctionsList,
 
     -- ** cloudfunctions.projects.locations.functions.patch
     CloudFunctionsProjectsLocationsFunctionsPatchResource,
+    CloudFunctionsProjectsLocationsFunctionsPatch (..),
     newCloudFunctionsProjectsLocationsFunctionsPatch,
-    CloudFunctionsProjectsLocationsFunctionsPatch,
 
     -- ** cloudfunctions.projects.locations.functions.setIamPolicy
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicyResource,
+    CloudFunctionsProjectsLocationsFunctionsSetIamPolicy (..),
     newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy,
-    CloudFunctionsProjectsLocationsFunctionsSetIamPolicy,
 
     -- ** cloudfunctions.projects.locations.functions.testIamPermissions
     CloudFunctionsProjectsLocationsFunctionsTestIamPermissionsResource,
+    CloudFunctionsProjectsLocationsFunctionsTestIamPermissions (..),
     newCloudFunctionsProjectsLocationsFunctionsTestIamPermissions,
-    CloudFunctionsProjectsLocationsFunctionsTestIamPermissions,
 
     -- ** cloudfunctions.projects.locations.list
     CloudFunctionsProjectsLocationsListResource,
+    CloudFunctionsProjectsLocationsList (..),
     newCloudFunctionsProjectsLocationsList,
-    CloudFunctionsProjectsLocationsList,
 
     -- ** cloudfunctions.projects.locations.operations.get
     CloudFunctionsProjectsLocationsOperationsGetResource,
+    CloudFunctionsProjectsLocationsOperationsGet (..),
     newCloudFunctionsProjectsLocationsOperationsGet,
-    CloudFunctionsProjectsLocationsOperationsGet,
 
     -- ** cloudfunctions.projects.locations.operations.list
     CloudFunctionsProjectsLocationsOperationsListResource,
+    CloudFunctionsProjectsLocationsOperationsList (..),
     newCloudFunctionsProjectsLocationsOperationsList,
-    CloudFunctionsProjectsLocationsOperationsList,
 
     -- ** cloudfunctions.projects.locations.runtimes.list
     CloudFunctionsProjectsLocationsRuntimesListResource,
+    CloudFunctionsProjectsLocationsRuntimesList (..),
     newCloudFunctionsProjectsLocationsRuntimesList,
-    CloudFunctionsProjectsLocationsRuntimesList,
 
     -- * Types
 

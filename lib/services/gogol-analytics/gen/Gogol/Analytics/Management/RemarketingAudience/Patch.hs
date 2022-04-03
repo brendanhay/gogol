@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.RemarketingAudience.Patch
     AnalyticsManagementRemarketingAudiencePatchResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementRemarketingAudiencePatch (..),
     newAnalyticsManagementRemarketingAudiencePatch,
-    AnalyticsManagementRemarketingAudiencePatch,
   )
 where
 

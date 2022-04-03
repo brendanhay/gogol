@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
     CloudSearchIndexingDatasourcesDeleteSchemaResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesDeleteSchema (..),
     newCloudSearchIndexingDatasourcesDeleteSchema,
-    CloudSearchIndexingDatasourcesDeleteSchema,
   )
 where
 

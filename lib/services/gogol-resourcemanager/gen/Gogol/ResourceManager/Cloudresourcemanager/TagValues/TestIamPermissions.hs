@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagValues.TestIamPermissions
     CloudresourcemanagerTagValuesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagValuesTestIamPermissions (..),
     newCloudresourcemanagerTagValuesTestIamPermissions,
-    CloudresourcemanagerTagValuesTestIamPermissions,
   )
 where
 

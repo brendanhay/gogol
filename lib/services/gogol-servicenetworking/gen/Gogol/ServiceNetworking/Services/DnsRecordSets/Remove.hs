@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.DnsRecordSets.Remove
     ServiceNetworkingServicesDnsRecordSetsRemoveResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesDnsRecordSetsRemove (..),
     newServiceNetworkingServicesDnsRecordSetsRemove,
-    ServiceNetworkingServicesDnsRecordSetsRemove,
   )
 where
 

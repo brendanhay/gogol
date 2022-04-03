@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.ListServerCas
     SqlInstancesListServerCasResource,
 
     -- ** Constructing a Request
+    SqlInstancesListServerCas (..),
     newSqlInstancesListServerCas,
-    SqlInstancesListServerCas,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Unreserve
     CloudSearchIndexingDatasourcesItemsUnreserveResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsUnreserve (..),
     newCloudSearchIndexingDatasourcesItemsUnreserve,
-    CloudSearchIndexingDatasourcesItemsUnreserve,
   )
 where
 

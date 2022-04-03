@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Products.List
     AndroidEnterpriseProductsListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseProductsList (..),
     newAndroidEnterpriseProductsList,
-    AndroidEnterpriseProductsList,
   )
 where
 

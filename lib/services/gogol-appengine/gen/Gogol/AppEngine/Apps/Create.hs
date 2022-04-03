@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Create
     AppEngineAppsCreateResource,
 
     -- ** Constructing a Request
+    AppEngineAppsCreate (..),
     newAppEngineAppsCreate,
-    AppEngineAppsCreate,
   )
 where
 

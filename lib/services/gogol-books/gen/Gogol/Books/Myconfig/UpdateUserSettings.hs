@@ -34,8 +34,8 @@ module Gogol.Books.Myconfig.UpdateUserSettings
     BooksMyconfigUpdateUserSettingsResource,
 
     -- ** Constructing a Request
+    BooksMyconfigUpdateUserSettings (..),
     newBooksMyconfigUpdateUserSettings,
-    BooksMyconfigUpdateUserSettings,
   )
 where
 

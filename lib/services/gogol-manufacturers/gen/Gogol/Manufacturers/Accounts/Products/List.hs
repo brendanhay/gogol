@@ -34,8 +34,8 @@ module Gogol.Manufacturers.Accounts.Products.List
     ManufacturersAccountsProductsListResource,
 
     -- ** Constructing a Request
+    ManufacturersAccountsProductsList (..),
     newManufacturersAccountsProductsList,
-    ManufacturersAccountsProductsList,
   )
 where
 

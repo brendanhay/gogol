@@ -34,8 +34,8 @@ module Gogol.People.UpdateContactPhoto
     PeoplePeopleUpdateContactPhotoResource,
 
     -- ** Constructing a Request
+    PeoplePeopleUpdateContactPhoto (..),
     newPeoplePeopleUpdateContactPhoto,
-    PeoplePeopleUpdateContactPhoto,
   )
 where
 

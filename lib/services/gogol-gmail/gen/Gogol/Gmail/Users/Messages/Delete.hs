@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Delete
     GmailUsersMessagesDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesDelete (..),
     newGmailUsersMessagesDelete,
-    GmailUsersMessagesDelete,
   )
 where
 

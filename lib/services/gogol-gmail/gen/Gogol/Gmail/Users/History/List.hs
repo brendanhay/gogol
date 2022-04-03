@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.History.List
     GmailUsersHistoryListResource,
 
     -- ** Constructing a Request
+    GmailUsersHistoryList (..),
     newGmailUsersHistoryList,
-    GmailUsersHistoryList,
   )
 where
 

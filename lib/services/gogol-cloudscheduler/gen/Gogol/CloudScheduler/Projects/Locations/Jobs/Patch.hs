@@ -34,8 +34,8 @@ module Gogol.CloudScheduler.Projects.Locations.Jobs.Patch
     CloudSchedulerProjectsLocationsJobsPatchResource,
 
     -- ** Constructing a Request
+    CloudSchedulerProjectsLocationsJobsPatch (..),
     newCloudSchedulerProjectsLocationsJobsPatch,
-    CloudSchedulerProjectsLocationsJobsPatch,
   )
 where
 

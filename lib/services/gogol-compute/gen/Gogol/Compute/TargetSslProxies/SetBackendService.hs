@@ -34,8 +34,8 @@ module Gogol.Compute.TargetSslProxies.SetBackendService
     ComputeTargetSslProxiesSetBackendServiceResource,
 
     -- ** Constructing a Request
+    ComputeTargetSslProxiesSetBackendService (..),
     newComputeTargetSslProxiesSetBackendService,
-    ComputeTargetSslProxiesSetBackendService,
   )
 where
 

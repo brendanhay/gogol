@@ -34,8 +34,8 @@ module Gogol.CloudErrorReporting.Projects.Groups.Update
     CloudErrorReportingProjectsGroupsUpdateResource,
 
     -- ** Constructing a Request
+    CloudErrorReportingProjectsGroupsUpdate (..),
     newCloudErrorReportingProjectsGroupsUpdate,
-    CloudErrorReportingProjectsGroupsUpdate,
   )
 where
 

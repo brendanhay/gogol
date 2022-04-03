@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Get
     CloudTasksProjectsLocationsGetResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsGet (..),
     newCloudTasksProjectsLocationsGet,
-    CloudTasksProjectsLocationsGet,
   )
 where
 

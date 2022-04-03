@@ -43,53 +43,53 @@ module Gogol.ReplicaPoolUpdater
 
     -- ** replicapoolupdater.rollingUpdates.cancel
     ReplicaPoolUpdaterRollingUpdatesCancelResource,
+    ReplicaPoolUpdaterRollingUpdatesCancel (..),
     newReplicaPoolUpdaterRollingUpdatesCancel,
-    ReplicaPoolUpdaterRollingUpdatesCancel,
 
     -- ** replicapoolupdater.rollingUpdates.get
     ReplicaPoolUpdaterRollingUpdatesGetResource,
+    ReplicaPoolUpdaterRollingUpdatesGet (..),
     newReplicaPoolUpdaterRollingUpdatesGet,
-    ReplicaPoolUpdaterRollingUpdatesGet,
 
     -- ** replicapoolupdater.rollingUpdates.insert
     ReplicaPoolUpdaterRollingUpdatesInsertResource,
+    ReplicaPoolUpdaterRollingUpdatesInsert (..),
     newReplicaPoolUpdaterRollingUpdatesInsert,
-    ReplicaPoolUpdaterRollingUpdatesInsert,
 
     -- ** replicapoolupdater.rollingUpdates.list
     ReplicaPoolUpdaterRollingUpdatesListResource,
+    ReplicaPoolUpdaterRollingUpdatesList (..),
     newReplicaPoolUpdaterRollingUpdatesList,
-    ReplicaPoolUpdaterRollingUpdatesList,
 
     -- ** replicapoolupdater.rollingUpdates.listInstanceUpdates
     ReplicaPoolUpdaterRollingUpdatesListInstanceUpdatesResource,
+    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdates (..),
     newReplicaPoolUpdaterRollingUpdatesListInstanceUpdates,
-    ReplicaPoolUpdaterRollingUpdatesListInstanceUpdates,
 
     -- ** replicapoolupdater.rollingUpdates.pause
     ReplicaPoolUpdaterRollingUpdatesPauseResource,
+    ReplicaPoolUpdaterRollingUpdatesPause (..),
     newReplicaPoolUpdaterRollingUpdatesPause,
-    ReplicaPoolUpdaterRollingUpdatesPause,
 
     -- ** replicapoolupdater.rollingUpdates.resume
     ReplicaPoolUpdaterRollingUpdatesResumeResource,
+    ReplicaPoolUpdaterRollingUpdatesResume (..),
     newReplicaPoolUpdaterRollingUpdatesResume,
-    ReplicaPoolUpdaterRollingUpdatesResume,
 
     -- ** replicapoolupdater.rollingUpdates.rollback
     ReplicaPoolUpdaterRollingUpdatesRollbackResource,
+    ReplicaPoolUpdaterRollingUpdatesRollback (..),
     newReplicaPoolUpdaterRollingUpdatesRollback,
-    ReplicaPoolUpdaterRollingUpdatesRollback,
 
     -- ** replicapoolupdater.zoneOperations.get
     ReplicaPoolUpdaterZoneOperationsGetResource,
+    ReplicaPoolUpdaterZoneOperationsGet (..),
     newReplicaPoolUpdaterZoneOperationsGet,
-    ReplicaPoolUpdaterZoneOperationsGet,
 
     -- ** replicapoolupdater.zoneOperations.list
     ReplicaPoolUpdaterZoneOperationsListResource,
+    ReplicaPoolUpdaterZoneOperationsList (..),
     newReplicaPoolUpdaterZoneOperationsList,
-    ReplicaPoolUpdaterZoneOperationsList,
 
     -- * Types
 

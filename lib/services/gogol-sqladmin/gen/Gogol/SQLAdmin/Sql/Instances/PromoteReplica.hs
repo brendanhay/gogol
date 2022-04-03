@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.PromoteReplica
     SqlInstancesPromoteReplicaResource,
 
     -- ** Constructing a Request
+    SqlInstancesPromoteReplica (..),
     newSqlInstancesPromoteReplica,
-    SqlInstancesPromoteReplica,
   )
 where
 

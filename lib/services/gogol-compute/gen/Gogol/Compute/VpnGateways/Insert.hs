@@ -34,8 +34,8 @@ module Gogol.Compute.VpnGateways.Insert
     ComputeVpnGatewaysInsertResource,
 
     -- ** Constructing a Request
+    ComputeVpnGatewaysInsert (..),
     newComputeVpnGatewaysInsert,
-    ComputeVpnGatewaysInsert,
   )
 where
 

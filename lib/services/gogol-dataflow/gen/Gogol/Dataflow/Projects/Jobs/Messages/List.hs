@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.Messages.List
     DataflowProjectsJobsMessagesListResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsMessagesList (..),
     newDataflowProjectsJobsMessagesList,
-    DataflowProjectsJobsMessagesList,
   )
 where
 

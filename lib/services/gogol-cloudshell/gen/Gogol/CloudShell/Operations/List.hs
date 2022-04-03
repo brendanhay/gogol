@@ -34,8 +34,8 @@ module Gogol.CloudShell.Operations.List
     CloudShellOperationsListResource,
 
     -- ** Constructing a Request
+    CloudShellOperationsList (..),
     newCloudShellOperationsList,
-    CloudShellOperationsList,
   )
 where
 

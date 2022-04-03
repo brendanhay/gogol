@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.BatchWrite
     FireStoreProjectsDatabasesDocumentsBatchWriteResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsBatchWrite (..),
     newFireStoreProjectsDatabasesDocumentsBatchWrite,
-    FireStoreProjectsDatabasesDocumentsBatchWrite,
   )
 where
 

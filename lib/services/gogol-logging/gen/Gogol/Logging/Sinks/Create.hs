@@ -34,8 +34,8 @@ module Gogol.Logging.Sinks.Create
     LoggingSinksCreateResource,
 
     -- ** Constructing a Request
+    LoggingSinksCreate (..),
     newLoggingSinksCreate,
-    LoggingSinksCreate,
   )
 where
 

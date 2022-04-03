@@ -34,8 +34,8 @@ module Gogol.Compute.ZoneOperations.Wait
     ComputeZoneOperationsWaitResource,
 
     -- ** Constructing a Request
+    ComputeZoneOperationsWait (..),
     newComputeZoneOperationsWait,
-    ComputeZoneOperationsWait,
   )
 where
 

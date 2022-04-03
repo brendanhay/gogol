@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.Memberships.ModifyMembershipRoles
     CloudIdentityGroupsMembershipsModifyMembershipRolesResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsMembershipsModifyMembershipRoles (..),
     newCloudIdentityGroupsMembershipsModifyMembershipRoles,
-    CloudIdentityGroupsMembershipsModifyMembershipRoles,
   )
 where
 

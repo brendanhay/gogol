@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.Delete
     ComputeBackendBucketsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsDelete (..),
     newComputeBackendBucketsDelete,
-    ComputeBackendBucketsDelete,
   )
 where
 

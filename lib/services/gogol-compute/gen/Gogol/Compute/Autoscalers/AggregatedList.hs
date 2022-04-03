@@ -34,8 +34,8 @@ module Gogol.Compute.Autoscalers.AggregatedList
     ComputeAutoscalersAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeAutoscalersAggregatedList (..),
     newComputeAutoscalersAggregatedList,
-    ComputeAutoscalersAggregatedList,
   )
 where
 

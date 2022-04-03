@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.Revisions.Delete
     RunProjectsLocationsServicesRevisionsDeleteResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesRevisionsDelete (..),
     newRunProjectsLocationsServicesRevisionsDelete,
-    RunProjectsLocationsServicesRevisionsDelete,
   )
 where
 

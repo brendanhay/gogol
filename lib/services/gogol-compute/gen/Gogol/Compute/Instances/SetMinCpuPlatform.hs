@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetMinCpuPlatform
     ComputeInstancesSetMinCpuPlatformResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetMinCpuPlatform (..),
     newComputeInstancesSetMinCpuPlatform,
-    ComputeInstancesSetMinCpuPlatform,
   )
 where
 

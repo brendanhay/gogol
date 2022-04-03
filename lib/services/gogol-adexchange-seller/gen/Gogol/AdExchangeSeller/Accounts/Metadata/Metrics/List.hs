@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Metadata.Metrics.List
     AdExchangeSellerAccountsMetadataMetricsListResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsMetadataMetricsList (..),
     newAdExchangeSellerAccountsMetadataMetricsList,
-    AdExchangeSellerAccountsMetadataMetricsList,
   )
 where
 

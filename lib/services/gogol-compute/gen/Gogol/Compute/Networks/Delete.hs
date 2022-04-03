@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.Delete
     ComputeNetworksDeleteResource,
 
     -- ** Constructing a Request
+    ComputeNetworksDelete (..),
     newComputeNetworksDelete,
-    ComputeNetworksDelete,
   )
 where
 

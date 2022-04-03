@@ -41,258 +41,258 @@ module Gogol.ResourceManager
 
     -- ** cloudresourcemanager.folders.create
     CloudresourcemanagerFoldersCreateResource,
+    CloudresourcemanagerFoldersCreate (..),
     newCloudresourcemanagerFoldersCreate,
-    CloudresourcemanagerFoldersCreate,
 
     -- ** cloudresourcemanager.folders.delete
     CloudresourcemanagerFoldersDeleteResource,
+    CloudresourcemanagerFoldersDelete (..),
     newCloudresourcemanagerFoldersDelete,
-    CloudresourcemanagerFoldersDelete,
 
     -- ** cloudresourcemanager.folders.get
     CloudresourcemanagerFoldersGetResource,
+    CloudresourcemanagerFoldersGet (..),
     newCloudresourcemanagerFoldersGet,
-    CloudresourcemanagerFoldersGet,
 
     -- ** cloudresourcemanager.folders.getIamPolicy
     CloudresourcemanagerFoldersGetIamPolicyResource,
+    CloudresourcemanagerFoldersGetIamPolicy (..),
     newCloudresourcemanagerFoldersGetIamPolicy,
-    CloudresourcemanagerFoldersGetIamPolicy,
 
     -- ** cloudresourcemanager.folders.list
     CloudresourcemanagerFoldersListResource,
+    CloudresourcemanagerFoldersList (..),
     newCloudresourcemanagerFoldersList,
-    CloudresourcemanagerFoldersList,
 
     -- ** cloudresourcemanager.folders.move
     CloudresourcemanagerFoldersMoveResource,
+    CloudresourcemanagerFoldersMove (..),
     newCloudresourcemanagerFoldersMove,
-    CloudresourcemanagerFoldersMove,
 
     -- ** cloudresourcemanager.folders.patch
     CloudresourcemanagerFoldersPatchResource,
+    CloudresourcemanagerFoldersPatch (..),
     newCloudresourcemanagerFoldersPatch,
-    CloudresourcemanagerFoldersPatch,
 
     -- ** cloudresourcemanager.folders.search
     CloudresourcemanagerFoldersSearchResource,
+    CloudresourcemanagerFoldersSearch (..),
     newCloudresourcemanagerFoldersSearch,
-    CloudresourcemanagerFoldersSearch,
 
     -- ** cloudresourcemanager.folders.setIamPolicy
     CloudresourcemanagerFoldersSetIamPolicyResource,
+    CloudresourcemanagerFoldersSetIamPolicy (..),
     newCloudresourcemanagerFoldersSetIamPolicy,
-    CloudresourcemanagerFoldersSetIamPolicy,
 
     -- ** cloudresourcemanager.folders.testIamPermissions
     CloudresourcemanagerFoldersTestIamPermissionsResource,
+    CloudresourcemanagerFoldersTestIamPermissions (..),
     newCloudresourcemanagerFoldersTestIamPermissions,
-    CloudresourcemanagerFoldersTestIamPermissions,
 
     -- ** cloudresourcemanager.folders.undelete
     CloudresourcemanagerFoldersUndeleteResource,
+    CloudresourcemanagerFoldersUndelete (..),
     newCloudresourcemanagerFoldersUndelete,
-    CloudresourcemanagerFoldersUndelete,
 
     -- ** cloudresourcemanager.liens.create
     CloudresourcemanagerLiensCreateResource,
+    CloudresourcemanagerLiensCreate (..),
     newCloudresourcemanagerLiensCreate,
-    CloudresourcemanagerLiensCreate,
 
     -- ** cloudresourcemanager.liens.delete
     CloudresourcemanagerLiensDeleteResource,
+    CloudresourcemanagerLiensDelete (..),
     newCloudresourcemanagerLiensDelete,
-    CloudresourcemanagerLiensDelete,
 
     -- ** cloudresourcemanager.liens.get
     CloudresourcemanagerLiensGetResource,
+    CloudresourcemanagerLiensGet (..),
     newCloudresourcemanagerLiensGet,
-    CloudresourcemanagerLiensGet,
 
     -- ** cloudresourcemanager.liens.list
     CloudresourcemanagerLiensListResource,
+    CloudresourcemanagerLiensList (..),
     newCloudresourcemanagerLiensList,
-    CloudresourcemanagerLiensList,
 
     -- ** cloudresourcemanager.operations.get
     CloudresourcemanagerOperationsGetResource,
+    CloudresourcemanagerOperationsGet (..),
     newCloudresourcemanagerOperationsGet,
-    CloudresourcemanagerOperationsGet,
 
     -- ** cloudresourcemanager.organizations.get
     CloudresourcemanagerOrganizationsGetResource,
+    CloudresourcemanagerOrganizationsGet (..),
     newCloudresourcemanagerOrganizationsGet,
-    CloudresourcemanagerOrganizationsGet,
 
     -- ** cloudresourcemanager.organizations.getIamPolicy
     CloudresourcemanagerOrganizationsGetIamPolicyResource,
+    CloudresourcemanagerOrganizationsGetIamPolicy (..),
     newCloudresourcemanagerOrganizationsGetIamPolicy,
-    CloudresourcemanagerOrganizationsGetIamPolicy,
 
     -- ** cloudresourcemanager.organizations.search
     CloudresourcemanagerOrganizationsSearchResource,
+    CloudresourcemanagerOrganizationsSearch (..),
     newCloudresourcemanagerOrganizationsSearch,
-    CloudresourcemanagerOrganizationsSearch,
 
     -- ** cloudresourcemanager.organizations.setIamPolicy
     CloudresourcemanagerOrganizationsSetIamPolicyResource,
+    CloudresourcemanagerOrganizationsSetIamPolicy (..),
     newCloudresourcemanagerOrganizationsSetIamPolicy,
-    CloudresourcemanagerOrganizationsSetIamPolicy,
 
     -- ** cloudresourcemanager.organizations.testIamPermissions
     CloudresourcemanagerOrganizationsTestIamPermissionsResource,
+    CloudresourcemanagerOrganizationsTestIamPermissions (..),
     newCloudresourcemanagerOrganizationsTestIamPermissions,
-    CloudresourcemanagerOrganizationsTestIamPermissions,
 
     -- ** cloudresourcemanager.projects.create
     CloudresourcemanagerProjectsCreateResource,
+    CloudresourcemanagerProjectsCreate (..),
     newCloudresourcemanagerProjectsCreate,
-    CloudresourcemanagerProjectsCreate,
 
     -- ** cloudresourcemanager.projects.delete
     CloudresourcemanagerProjectsDeleteResource,
+    CloudresourcemanagerProjectsDelete (..),
     newCloudresourcemanagerProjectsDelete,
-    CloudresourcemanagerProjectsDelete,
 
     -- ** cloudresourcemanager.projects.get
     CloudresourcemanagerProjectsGetResource,
+    CloudresourcemanagerProjectsGet (..),
     newCloudresourcemanagerProjectsGet,
-    CloudresourcemanagerProjectsGet,
 
     -- ** cloudresourcemanager.projects.getIamPolicy
     CloudresourcemanagerProjectsGetIamPolicyResource,
+    CloudresourcemanagerProjectsGetIamPolicy (..),
     newCloudresourcemanagerProjectsGetIamPolicy,
-    CloudresourcemanagerProjectsGetIamPolicy,
 
     -- ** cloudresourcemanager.projects.list
     CloudresourcemanagerProjectsListResource,
+    CloudresourcemanagerProjectsList (..),
     newCloudresourcemanagerProjectsList,
-    CloudresourcemanagerProjectsList,
 
     -- ** cloudresourcemanager.projects.move
     CloudresourcemanagerProjectsMoveResource,
+    CloudresourcemanagerProjectsMove (..),
     newCloudresourcemanagerProjectsMove,
-    CloudresourcemanagerProjectsMove,
 
     -- ** cloudresourcemanager.projects.patch
     CloudresourcemanagerProjectsPatchResource,
+    CloudresourcemanagerProjectsPatch (..),
     newCloudresourcemanagerProjectsPatch,
-    CloudresourcemanagerProjectsPatch,
 
     -- ** cloudresourcemanager.projects.search
     CloudresourcemanagerProjectsSearchResource,
+    CloudresourcemanagerProjectsSearch (..),
     newCloudresourcemanagerProjectsSearch,
-    CloudresourcemanagerProjectsSearch,
 
     -- ** cloudresourcemanager.projects.setIamPolicy
     CloudresourcemanagerProjectsSetIamPolicyResource,
+    CloudresourcemanagerProjectsSetIamPolicy (..),
     newCloudresourcemanagerProjectsSetIamPolicy,
-    CloudresourcemanagerProjectsSetIamPolicy,
 
     -- ** cloudresourcemanager.projects.testIamPermissions
     CloudresourcemanagerProjectsTestIamPermissionsResource,
+    CloudresourcemanagerProjectsTestIamPermissions (..),
     newCloudresourcemanagerProjectsTestIamPermissions,
-    CloudresourcemanagerProjectsTestIamPermissions,
 
     -- ** cloudresourcemanager.projects.undelete
     CloudresourcemanagerProjectsUndeleteResource,
+    CloudresourcemanagerProjectsUndelete (..),
     newCloudresourcemanagerProjectsUndelete,
-    CloudresourcemanagerProjectsUndelete,
 
     -- ** cloudresourcemanager.tagBindings.create
     CloudresourcemanagerTagBindingsCreateResource,
+    CloudresourcemanagerTagBindingsCreate (..),
     newCloudresourcemanagerTagBindingsCreate,
-    CloudresourcemanagerTagBindingsCreate,
 
     -- ** cloudresourcemanager.tagBindings.delete
     CloudresourcemanagerTagBindingsDeleteResource,
+    CloudresourcemanagerTagBindingsDelete (..),
     newCloudresourcemanagerTagBindingsDelete,
-    CloudresourcemanagerTagBindingsDelete,
 
     -- ** cloudresourcemanager.tagBindings.list
     CloudresourcemanagerTagBindingsListResource,
+    CloudresourcemanagerTagBindingsList (..),
     newCloudresourcemanagerTagBindingsList,
-    CloudresourcemanagerTagBindingsList,
 
     -- ** cloudresourcemanager.tagKeys.create
     CloudresourcemanagerTagKeysCreateResource,
+    CloudresourcemanagerTagKeysCreate (..),
     newCloudresourcemanagerTagKeysCreate,
-    CloudresourcemanagerTagKeysCreate,
 
     -- ** cloudresourcemanager.tagKeys.delete
     CloudresourcemanagerTagKeysDeleteResource,
+    CloudresourcemanagerTagKeysDelete (..),
     newCloudresourcemanagerTagKeysDelete,
-    CloudresourcemanagerTagKeysDelete,
 
     -- ** cloudresourcemanager.tagKeys.get
     CloudresourcemanagerTagKeysGetResource,
+    CloudresourcemanagerTagKeysGet (..),
     newCloudresourcemanagerTagKeysGet,
-    CloudresourcemanagerTagKeysGet,
 
     -- ** cloudresourcemanager.tagKeys.getIamPolicy
     CloudresourcemanagerTagKeysGetIamPolicyResource,
+    CloudresourcemanagerTagKeysGetIamPolicy (..),
     newCloudresourcemanagerTagKeysGetIamPolicy,
-    CloudresourcemanagerTagKeysGetIamPolicy,
 
     -- ** cloudresourcemanager.tagKeys.list
     CloudresourcemanagerTagKeysListResource,
+    CloudresourcemanagerTagKeysList (..),
     newCloudresourcemanagerTagKeysList,
-    CloudresourcemanagerTagKeysList,
 
     -- ** cloudresourcemanager.tagKeys.patch
     CloudresourcemanagerTagKeysPatchResource,
+    CloudresourcemanagerTagKeysPatch (..),
     newCloudresourcemanagerTagKeysPatch,
-    CloudresourcemanagerTagKeysPatch,
 
     -- ** cloudresourcemanager.tagKeys.setIamPolicy
     CloudresourcemanagerTagKeysSetIamPolicyResource,
+    CloudresourcemanagerTagKeysSetIamPolicy (..),
     newCloudresourcemanagerTagKeysSetIamPolicy,
-    CloudresourcemanagerTagKeysSetIamPolicy,
 
     -- ** cloudresourcemanager.tagKeys.testIamPermissions
     CloudresourcemanagerTagKeysTestIamPermissionsResource,
+    CloudresourcemanagerTagKeysTestIamPermissions (..),
     newCloudresourcemanagerTagKeysTestIamPermissions,
-    CloudresourcemanagerTagKeysTestIamPermissions,
 
     -- ** cloudresourcemanager.tagValues.create
     CloudresourcemanagerTagValuesCreateResource,
+    CloudresourcemanagerTagValuesCreate (..),
     newCloudresourcemanagerTagValuesCreate,
-    CloudresourcemanagerTagValuesCreate,
 
     -- ** cloudresourcemanager.tagValues.delete
     CloudresourcemanagerTagValuesDeleteResource,
+    CloudresourcemanagerTagValuesDelete (..),
     newCloudresourcemanagerTagValuesDelete,
-    CloudresourcemanagerTagValuesDelete,
 
     -- ** cloudresourcemanager.tagValues.get
     CloudresourcemanagerTagValuesGetResource,
+    CloudresourcemanagerTagValuesGet (..),
     newCloudresourcemanagerTagValuesGet,
-    CloudresourcemanagerTagValuesGet,
 
     -- ** cloudresourcemanager.tagValues.getIamPolicy
     CloudresourcemanagerTagValuesGetIamPolicyResource,
+    CloudresourcemanagerTagValuesGetIamPolicy (..),
     newCloudresourcemanagerTagValuesGetIamPolicy,
-    CloudresourcemanagerTagValuesGetIamPolicy,
 
     -- ** cloudresourcemanager.tagValues.list
     CloudresourcemanagerTagValuesListResource,
+    CloudresourcemanagerTagValuesList (..),
     newCloudresourcemanagerTagValuesList,
-    CloudresourcemanagerTagValuesList,
 
     -- ** cloudresourcemanager.tagValues.patch
     CloudresourcemanagerTagValuesPatchResource,
+    CloudresourcemanagerTagValuesPatch (..),
     newCloudresourcemanagerTagValuesPatch,
-    CloudresourcemanagerTagValuesPatch,
 
     -- ** cloudresourcemanager.tagValues.setIamPolicy
     CloudresourcemanagerTagValuesSetIamPolicyResource,
+    CloudresourcemanagerTagValuesSetIamPolicy (..),
     newCloudresourcemanagerTagValuesSetIamPolicy,
-    CloudresourcemanagerTagValuesSetIamPolicy,
 
     -- ** cloudresourcemanager.tagValues.testIamPermissions
     CloudresourcemanagerTagValuesTestIamPermissionsResource,
+    CloudresourcemanagerTagValuesTestIamPermissions (..),
     newCloudresourcemanagerTagValuesTestIamPermissions,
-    CloudresourcemanagerTagValuesTestIamPermissions,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Buyongoogleprograms.Pause
     ContentBuyongoogleprogramsPauseResource,
 
     -- ** Constructing a Request
+    ContentBuyongoogleprogramsPause (..),
     newContentBuyongoogleprogramsPause,
-    ContentBuyongoogleprogramsPause,
   )
 where
 

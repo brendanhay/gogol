@@ -34,8 +34,8 @@ module Gogol.YouTube.Members.List
     YouTubeMembersListResource,
 
     -- ** Constructing a Request
+    YouTubeMembersList (..),
     newYouTubeMembersList,
-    YouTubeMembersList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Docs.Documents.BatchUpdate
     DocsDocumentsBatchUpdateResource,
 
     -- ** Constructing a Request
+    DocsDocumentsBatchUpdate (..),
     newDocsDocumentsBatchUpdate,
-    DocsDocumentsBatchUpdate,
   )
 where
 

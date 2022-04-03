@@ -36,8 +36,8 @@ module Gogol.ProximityBeacon.Beacons.Register
     ProximityBeaconBeaconsRegisterResource,
 
     -- ** Constructing a Request
+    ProximityBeaconBeaconsRegister (..),
     newProximityBeaconBeaconsRegister,
-    ProximityBeaconBeaconsRegister,
   )
 where
 

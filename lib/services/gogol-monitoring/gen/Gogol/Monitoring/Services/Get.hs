@@ -34,8 +34,8 @@ module Gogol.Monitoring.Services.Get
     MonitoringServicesGetResource,
 
     -- ** Constructing a Request
+    MonitoringServicesGet (..),
     newMonitoringServicesGet,
-    MonitoringServicesGet,
   )
 where
 

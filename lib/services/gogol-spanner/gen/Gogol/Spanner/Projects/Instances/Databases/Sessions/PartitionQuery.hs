@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.PartitionQuery
     SpannerProjectsInstancesDatabasesSessionsPartitionQueryResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsPartitionQuery (..),
     newSpannerProjectsInstancesDatabasesSessionsPartitionQuery,
-    SpannerProjectsInstancesDatabasesSessionsPartitionQuery,
   )
 where
 

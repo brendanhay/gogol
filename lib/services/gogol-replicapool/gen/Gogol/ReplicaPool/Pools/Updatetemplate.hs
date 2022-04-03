@@ -34,8 +34,8 @@ module Gogol.ReplicaPool.Pools.Updatetemplate
     ReplicaPoolPoolsUpdatetemplateResource,
 
     -- ** Constructing a Request
+    ReplicaPoolPoolsUpdatetemplate (..),
     newReplicaPoolPoolsUpdatetemplate,
-    ReplicaPoolPoolsUpdatetemplate,
   )
 where
 

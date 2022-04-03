@@ -34,8 +34,8 @@ module Gogol.DNS.ResponsePolicyRules.Delete
     DNSResponsePolicyRulesDeleteResource,
 
     -- ** Constructing a Request
+    DNSResponsePolicyRulesDelete (..),
     newDNSResponsePolicyRulesDelete,
-    DNSResponsePolicyRulesDelete,
   )
 where
 

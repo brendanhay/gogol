@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.ListUsable
     ComputeSubnetworksListUsableResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksListUsable (..),
     newComputeSubnetworksListUsable,
-    ComputeSubnetworksListUsable,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Locations.JobTriggers.Delete
     DLPProjectsLocationsJobTriggersDeleteResource,
 
     -- ** Constructing a Request
+    DLPProjectsLocationsJobTriggersDelete (..),
     newDLPProjectsLocationsJobTriggersDelete,
-    DLPProjectsLocationsJobTriggersDelete,
   )
 where
 

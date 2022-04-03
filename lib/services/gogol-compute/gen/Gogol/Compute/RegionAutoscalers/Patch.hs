@@ -34,8 +34,8 @@ module Gogol.Compute.RegionAutoscalers.Patch
     ComputeRegionAutoscalersPatchResource,
 
     -- ** Constructing a Request
+    ComputeRegionAutoscalersPatch (..),
     newComputeRegionAutoscalersPatch,
-    ComputeRegionAutoscalersPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Books.Cloudloading.AddBook
     BooksCloudloadingAddBookResource,
 
     -- ** Constructing a Request
+    BooksCloudloadingAddBook (..),
     newBooksCloudloadingAddBook,
-    BooksCloudloadingAddBook,
   )
 where
 

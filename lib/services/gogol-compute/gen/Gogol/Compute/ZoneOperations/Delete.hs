@@ -34,8 +34,8 @@ module Gogol.Compute.ZoneOperations.Delete
     ComputeZoneOperationsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeZoneOperationsDelete (..),
     newComputeZoneOperationsDelete,
-    ComputeZoneOperationsDelete,
   )
 where
 

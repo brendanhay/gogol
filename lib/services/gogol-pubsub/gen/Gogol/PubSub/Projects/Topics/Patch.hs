@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Topics.Patch
     PubSubProjectsTopicsPatchResource,
 
     -- ** Constructing a Request
+    PubSubProjectsTopicsPatch (..),
     newPubSubProjectsTopicsPatch,
-    PubSubProjectsTopicsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.BackendServices.AggregatedList
     ComputeBackendServicesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeBackendServicesAggregatedList (..),
     newComputeBackendServicesAggregatedList,
-    ComputeBackendServicesAggregatedList,
   )
 where
 

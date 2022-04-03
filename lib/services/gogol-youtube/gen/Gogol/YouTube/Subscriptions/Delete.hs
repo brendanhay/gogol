@@ -34,8 +34,8 @@ module Gogol.YouTube.Subscriptions.Delete
     YouTubeSubscriptionsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeSubscriptionsDelete (..),
     newYouTubeSubscriptionsDelete,
-    YouTubeSubscriptionsDelete,
   )
 where
 

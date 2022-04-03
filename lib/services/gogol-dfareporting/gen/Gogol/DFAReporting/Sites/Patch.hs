@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Sites.Patch
     DFAReportingSitesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingSitesPatch (..),
     newDFAReportingSitesPatch,
-    DFAReportingSitesPatch,
   )
 where
 

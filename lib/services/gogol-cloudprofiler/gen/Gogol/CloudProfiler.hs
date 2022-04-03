@@ -42,18 +42,18 @@ module Gogol.CloudProfiler
 
     -- ** cloudprofiler.projects.profiles.create
     CloudProfilerProjectsProfilesCreateResource,
+    CloudProfilerProjectsProfilesCreate (..),
     newCloudProfilerProjectsProfilesCreate,
-    CloudProfilerProjectsProfilesCreate,
 
     -- ** cloudprofiler.projects.profiles.createOffline
     CloudProfilerProjectsProfilesCreateOfflineResource,
+    CloudProfilerProjectsProfilesCreateOffline (..),
     newCloudProfilerProjectsProfilesCreateOffline,
-    CloudProfilerProjectsProfilesCreateOffline,
 
     -- ** cloudprofiler.projects.profiles.patch
     CloudProfilerProjectsProfilesPatchResource,
+    CloudProfilerProjectsProfilesPatch (..),
     newCloudProfilerProjectsProfilesPatch,
-    CloudProfilerProjectsProfilesPatch,
 
     -- * Types
 

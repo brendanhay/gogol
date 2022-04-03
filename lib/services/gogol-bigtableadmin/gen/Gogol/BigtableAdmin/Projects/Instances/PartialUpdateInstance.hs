@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.PartialUpdateInstance
     BigtableAdminProjectsInstancesPartialUpdateInstanceResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesPartialUpdateInstance (..),
     newBigtableAdminProjectsInstancesPartialUpdateInstance,
-    BigtableAdminProjectsInstancesPartialUpdateInstance,
   )
 where
 

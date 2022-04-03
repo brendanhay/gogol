@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Expansionfiles.Upload
     AndroidPublisherEditsExpansionfilesUploadResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsExpansionfilesUpload (..),
     newAndroidPublisherEditsExpansionfilesUpload,
-    AndroidPublisherEditsExpansionfilesUpload,
   )
 where
 

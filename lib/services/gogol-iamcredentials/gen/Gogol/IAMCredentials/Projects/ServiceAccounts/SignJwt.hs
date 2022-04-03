@@ -34,8 +34,8 @@ module Gogol.IAMCredentials.Projects.ServiceAccounts.SignJwt
     IAMCredentialsProjectsServiceAccountsSignJwtResource,
 
     -- ** Constructing a Request
+    IAMCredentialsProjectsServiceAccountsSignJwt (..),
     newIAMCredentialsProjectsServiceAccountsSignJwt,
-    IAMCredentialsProjectsServiceAccountsSignJwt,
   )
 where
 

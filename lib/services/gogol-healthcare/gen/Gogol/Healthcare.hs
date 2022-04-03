@@ -40,618 +40,618 @@ module Gogol.Healthcare
 
     -- ** healthcare.projects.locations.datasets.consentStores.attributeDefinitions.create
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreate,
-    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.attributeDefinitions.delete
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsDeleteResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsDelete (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsDelete,
-    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsDelete,
 
     -- ** healthcare.projects.locations.datasets.consentStores.attributeDefinitions.get
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsGetResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsGet,
 
     -- ** healthcare.projects.locations.datasets.consentStores.attributeDefinitions.list
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsListResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList,
-    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList,
 
     -- ** healthcare.projects.locations.datasets.consentStores.attributeDefinitions.patch
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatchResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatch (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatch,
-    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatch,
 
     -- ** healthcare.projects.locations.datasets.consentStores.checkDataAccess
     HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccessResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccess (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccess,
-    HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccess,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consentArtifacts.create
     HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consentArtifacts.delete
     HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsDeleteResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsDelete (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsDelete,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsDelete,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consentArtifacts.get
     HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsGetResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsGet,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consentArtifacts.list
     HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsListResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsList (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsList,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsList,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.activate
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsActivate,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.create
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsCreate,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.delete
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDelete (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDelete,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDelete,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.deleteRevision
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevisionResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.get
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsGetResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsGet,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.list
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsListResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsList (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsList,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsList,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.listRevisions
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisionsResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisions (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisions,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisions,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.patch
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsPatchResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsPatch (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsPatch,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsPatch,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.reject
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsRejectResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsReject,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject,
 
     -- ** healthcare.projects.locations.datasets.consentStores.consents.revoke
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevokeResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevoke (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsRevoke,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevoke,
 
     -- ** healthcare.projects.locations.datasets.consentStores.create
     HealthcareProjectsLocationsDatasetsConsentStoresCreateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresCreate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresCreate,
-    HealthcareProjectsLocationsDatasetsConsentStoresCreate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.delete
     HealthcareProjectsLocationsDatasetsConsentStoresDeleteResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresDelete (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresDelete,
-    HealthcareProjectsLocationsDatasetsConsentStoresDelete,
 
     -- ** healthcare.projects.locations.datasets.consentStores.evaluateUserConsents
     HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsents (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsents,
-    HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsents,
 
     -- ** healthcare.projects.locations.datasets.consentStores.get
     HealthcareProjectsLocationsDatasetsConsentStoresGetResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresGet,
 
     -- ** healthcare.projects.locations.datasets.consentStores.getIamPolicy
     HealthcareProjectsLocationsDatasetsConsentStoresGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsConsentStoresGetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.consentStores.list
     HealthcareProjectsLocationsDatasetsConsentStoresListResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresList (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresList,
-    HealthcareProjectsLocationsDatasetsConsentStoresList,
 
     -- ** healthcare.projects.locations.datasets.consentStores.patch
     HealthcareProjectsLocationsDatasetsConsentStoresPatchResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresPatch,
-    HealthcareProjectsLocationsDatasetsConsentStoresPatch,
 
     -- ** healthcare.projects.locations.datasets.consentStores.queryAccessibleData
     HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDataResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData,
-    HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleData,
 
     -- ** healthcare.projects.locations.datasets.consentStores.setIamPolicy
     HealthcareProjectsLocationsDatasetsConsentStoresSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresSetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresSetIamPolicy,
-    HealthcareProjectsLocationsDatasetsConsentStoresSetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.consentStores.testIamPermissions
     HealthcareProjectsLocationsDatasetsConsentStoresTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsConsentStoresTestIamPermissions,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.archive
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchive,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.create
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreate (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreate,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreate,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.delete
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsDeleteResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsDelete (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsDelete,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsDelete,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.get
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsGetResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsGet,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.list
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsList (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsList,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsList,
 
     -- ** healthcare.projects.locations.datasets.consentStores.userDataMappings.patch
     HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsPatchResource,
+    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsPatch (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsPatch,
-    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsPatch,
 
     -- ** healthcare.projects.locations.datasets.create
     HealthcareProjectsLocationsDatasetsCreateResource,
+    HealthcareProjectsLocationsDatasetsCreate (..),
     newHealthcareProjectsLocationsDatasetsCreate,
-    HealthcareProjectsLocationsDatasetsCreate,
 
     -- ** healthcare.projects.locations.datasets.deidentify
     HealthcareProjectsLocationsDatasetsDeidentifyResource,
+    HealthcareProjectsLocationsDatasetsDeidentify (..),
     newHealthcareProjectsLocationsDatasetsDeidentify,
-    HealthcareProjectsLocationsDatasetsDeidentify,
 
     -- ** healthcare.projects.locations.datasets.delete
     HealthcareProjectsLocationsDatasetsDeleteResource,
+    HealthcareProjectsLocationsDatasetsDelete (..),
     newHealthcareProjectsLocationsDatasetsDelete,
-    HealthcareProjectsLocationsDatasetsDelete,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.create
     HealthcareProjectsLocationsDatasetsDicomStoresCreateResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresCreate (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresCreate,
-    HealthcareProjectsLocationsDatasetsDicomStoresCreate,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.deidentify
     HealthcareProjectsLocationsDatasetsDicomStoresDeidentifyResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDeidentify (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresDeidentify,
-    HealthcareProjectsLocationsDatasetsDicomStoresDeidentify,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.delete
     HealthcareProjectsLocationsDatasetsDicomStoresDeleteResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresDelete,
-    HealthcareProjectsLocationsDatasetsDicomStoresDelete,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.export
     HealthcareProjectsLocationsDatasetsDicomStoresExportResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresExport (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresExport,
-    HealthcareProjectsLocationsDatasetsDicomStoresExport,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.get
     HealthcareProjectsLocationsDatasetsDicomStoresGetResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresGet (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresGet,
-    HealthcareProjectsLocationsDatasetsDicomStoresGet,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.getIamPolicy
     HealthcareProjectsLocationsDatasetsDicomStoresGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsDicomStoresGetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.import
     HealthcareProjectsLocationsDatasetsDicomStoresImportResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresImport (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresImport,
-    HealthcareProjectsLocationsDatasetsDicomStoresImport,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.list
     HealthcareProjectsLocationsDatasetsDicomStoresListResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresList (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresList,
-    HealthcareProjectsLocationsDatasetsDicomStoresList,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.patch
     HealthcareProjectsLocationsDatasetsDicomStoresPatchResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresPatch,
-    HealthcareProjectsLocationsDatasetsDicomStoresPatch,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.searchForInstances
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForInstancesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresSearchForInstances (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSearchForInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForInstances,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.searchForSeries
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeriesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries,
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForSeries,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.searchForStudies
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForStudiesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresSearchForStudies (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSearchForStudies,
-    HealthcareProjectsLocationsDatasetsDicomStoresSearchForStudies,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.setIamPolicy
     HealthcareProjectsLocationsDatasetsDicomStoresSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresSetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSetIamPolicy,
-    HealthcareProjectsLocationsDatasetsDicomStoresSetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.storeInstances
     HealthcareProjectsLocationsDatasetsDicomStoresStoreInstancesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStoreInstances (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStoreInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresStoreInstances,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.delete
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesDeleteResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesDelete,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesDelete,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.retrieveMetadata
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadataResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadata (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadata,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveMetadata,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudyResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.searchForInstances
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForInstancesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForInstances (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForInstances,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.searchForSeries
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForSeriesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForSeries (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForSeries,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSearchForSeries,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.delete
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDeleteResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesDelete,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.delete
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDelete,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDelete,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveFrames
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveFramesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveFrames,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.frames.retrieveRendered
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRenderedResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRendered (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRendered,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRendered,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveInstance
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveInstanceResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveInstance (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveInstance,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveInstance,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveMetadata
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveMetadataResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveMetadata (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveMetadata,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveMetadata,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.instances.retrieveRendered
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveRenderedResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveRendered (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveRendered,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesRetrieveRendered,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveMetadata
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadataResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.retrieveSeries
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveSeriesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveSeries (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveSeries,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveSeries,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstancesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.studies.storeInstances
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.testIamPermissions
     HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.create
     HealthcareProjectsLocationsDatasetsFhirStoresCreateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresCreate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresCreate,
-    HealthcareProjectsLocationsDatasetsFhirStoresCreate,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.deidentify
     HealthcareProjectsLocationsDatasetsFhirStoresDeidentifyResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresDeidentify (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresDeidentify,
-    HealthcareProjectsLocationsDatasetsFhirStoresDeidentify,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.delete
     HealthcareProjectsLocationsDatasetsFhirStoresDeleteResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresDelete (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresDelete,
-    HealthcareProjectsLocationsDatasetsFhirStoresDelete,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.export
     HealthcareProjectsLocationsDatasetsFhirStoresExportResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresExport (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresExport,
-    HealthcareProjectsLocationsDatasetsFhirStoresExport,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Patienteverything
     HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverythingResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Resourcepurge
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurgeResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Resourcevalidate
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilities (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilities,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilities,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.create
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirCreate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirCreate,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirCreate,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.delete
     HealthcareProjectsLocationsDatasetsFhirStoresFhirDeleteResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirDelete (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirDelete,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirDelete,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.executeBundle
     HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundleResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.history
     HealthcareProjectsLocationsDatasetsFhirStoresFhirHistoryResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirHistory (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirHistory,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirHistory,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.patch
     HealthcareProjectsLocationsDatasetsFhirStoresFhirPatchResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatch (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatch,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatch,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.read
     HealthcareProjectsLocationsDatasetsFhirStoresFhirReadResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirRead (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirRead,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirRead,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.search
     HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirSearch (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirSearch,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirSearch,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.searchtype
     HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchtypeResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchtype (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirSearchtype,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchtype,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.update
     HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.vread
     HealthcareProjectsLocationsDatasetsFhirStoresFhirVreadResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirVread (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirVread,
-    HealthcareProjectsLocationsDatasetsFhirStoresFhirVread,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.get
     HealthcareProjectsLocationsDatasetsFhirStoresGetResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresGet (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresGet,
-    HealthcareProjectsLocationsDatasetsFhirStoresGet,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.getIamPolicy
     HealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsFhirStoresGetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.import
     HealthcareProjectsLocationsDatasetsFhirStoresImportResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresImport (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresImport,
-    HealthcareProjectsLocationsDatasetsFhirStoresImport,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.list
     HealthcareProjectsLocationsDatasetsFhirStoresListResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresList (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresList,
-    HealthcareProjectsLocationsDatasetsFhirStoresList,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.patch
     HealthcareProjectsLocationsDatasetsFhirStoresPatchResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresPatch,
-    HealthcareProjectsLocationsDatasetsFhirStoresPatch,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.setIamPolicy
     HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy,
-    HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.testIamPermissions
     HealthcareProjectsLocationsDatasetsFhirStoresTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsFhirStoresTestIamPermissions,
 
     -- ** healthcare.projects.locations.datasets.get
     HealthcareProjectsLocationsDatasetsGetResource,
+    HealthcareProjectsLocationsDatasetsGet (..),
     newHealthcareProjectsLocationsDatasetsGet,
-    HealthcareProjectsLocationsDatasetsGet,
 
     -- ** healthcare.projects.locations.datasets.getIamPolicy
     HealthcareProjectsLocationsDatasetsGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsGetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.create
     HealthcareProjectsLocationsDatasetsHl7V2StoresCreateResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresCreate (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresCreate,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresCreate,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.delete
     HealthcareProjectsLocationsDatasetsHl7V2StoresDeleteResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresDelete (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresDelete,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresDelete,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.export
     HealthcareProjectsLocationsDatasetsHl7V2StoresExportResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresExport (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresExport,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresExport,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.get
     HealthcareProjectsLocationsDatasetsHl7V2StoresGetResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresGet (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresGet,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresGet,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.getIamPolicy
     HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicy,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.import
     HealthcareProjectsLocationsDatasetsHl7V2StoresImportResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresImport (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresImport,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresImport,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.list
     HealthcareProjectsLocationsDatasetsHl7V2StoresListResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresList (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresList,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresList,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.create
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreateResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.delete
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDeleteResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDelete (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDelete,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDelete,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.get
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesGetResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesGet (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesGet,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesGet,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.list
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesListResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.messages.patch
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.patch
     HealthcareProjectsLocationsDatasetsHl7V2StoresPatchResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresPatch (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresPatch,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresPatch,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy
     HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicy,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.testIamPermissions
     HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions,
 
     -- ** healthcare.projects.locations.datasets.list
     HealthcareProjectsLocationsDatasetsListResource,
+    HealthcareProjectsLocationsDatasetsList (..),
     newHealthcareProjectsLocationsDatasetsList,
-    HealthcareProjectsLocationsDatasetsList,
 
     -- ** healthcare.projects.locations.datasets.operations.cancel
     HealthcareProjectsLocationsDatasetsOperationsCancelResource,
+    HealthcareProjectsLocationsDatasetsOperationsCancel (..),
     newHealthcareProjectsLocationsDatasetsOperationsCancel,
-    HealthcareProjectsLocationsDatasetsOperationsCancel,
 
     -- ** healthcare.projects.locations.datasets.operations.get
     HealthcareProjectsLocationsDatasetsOperationsGetResource,
+    HealthcareProjectsLocationsDatasetsOperationsGet (..),
     newHealthcareProjectsLocationsDatasetsOperationsGet,
-    HealthcareProjectsLocationsDatasetsOperationsGet,
 
     -- ** healthcare.projects.locations.datasets.operations.list
     HealthcareProjectsLocationsDatasetsOperationsListResource,
+    HealthcareProjectsLocationsDatasetsOperationsList (..),
     newHealthcareProjectsLocationsDatasetsOperationsList,
-    HealthcareProjectsLocationsDatasetsOperationsList,
 
     -- ** healthcare.projects.locations.datasets.patch
     HealthcareProjectsLocationsDatasetsPatchResource,
+    HealthcareProjectsLocationsDatasetsPatch (..),
     newHealthcareProjectsLocationsDatasetsPatch,
-    HealthcareProjectsLocationsDatasetsPatch,
 
     -- ** healthcare.projects.locations.datasets.setIamPolicy
     HealthcareProjectsLocationsDatasetsSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsSetIamPolicy (..),
     newHealthcareProjectsLocationsDatasetsSetIamPolicy,
-    HealthcareProjectsLocationsDatasetsSetIamPolicy,
 
     -- ** healthcare.projects.locations.datasets.testIamPermissions
     HealthcareProjectsLocationsDatasetsTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsTestIamPermissions,
-    HealthcareProjectsLocationsDatasetsTestIamPermissions,
 
     -- ** healthcare.projects.locations.get
     HealthcareProjectsLocationsGetResource,
+    HealthcareProjectsLocationsGet (..),
     newHealthcareProjectsLocationsGet,
-    HealthcareProjectsLocationsGet,
 
     -- ** healthcare.projects.locations.list
     HealthcareProjectsLocationsListResource,
+    HealthcareProjectsLocationsList (..),
     newHealthcareProjectsLocationsList,
-    HealthcareProjectsLocationsList,
 
     -- ** healthcare.projects.locations.services.nlp.analyzeEntities
     HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesResource,
+    HealthcareProjectsLocationsServicesNlpAnalyzeEntities (..),
     newHealthcareProjectsLocationsServicesNlpAnalyzeEntities,
-    HealthcareProjectsLocationsServicesNlpAnalyzeEntities,
 
     -- * Types
 

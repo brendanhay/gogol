@@ -34,8 +34,8 @@ module Gogol.Blogger.PostUserInfos.Get
     BloggerPostUserInfosGetResource,
 
     -- ** Constructing a Request
+    BloggerPostUserInfosGet (..),
     newBloggerPostUserInfosGet,
-    BloggerPostUserInfosGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.SetAutoscaling
     ContainerProjectsLocationsClustersNodePoolsSetAutoscalingResource,
 
     -- ** Constructing a Request
+    ContainerProjectsLocationsClustersNodePoolsSetAutoscaling (..),
     newContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
-    ContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
   )
 where
 

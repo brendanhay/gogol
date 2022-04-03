@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Locations.Get
     AppEngineAppsLocationsGetResource,
 
     -- ** Constructing a Request
+    AppEngineAppsLocationsGet (..),
     newAppEngineAppsLocationsGet,
-    AppEngineAppsLocationsGet,
   )
 where
 

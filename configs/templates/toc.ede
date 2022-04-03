@@ -20,15 +20,15 @@ module {{ moduleName }}
 
     -- ** {{ action.value.id }}
     , {{ action.value.aliasName }}
+    , {{ action.value.type.name }} (..)
     , {{ action.value.type.ctor.name }}
-    , {{ action.value.type.name }}
   {% endfor %}
   {% for action in api.resources %}
 
     -- ** {{ action.value.id }}
     , {{ action.value.aliasName }}
+    , {{ action.value.type.name }} (..)
     , {{ action.value.type.ctor.name }}
-    , {{ action.value.type.name }}
   {% endfor %}
 
     -- * Types

@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ConnectionTypes.List
     DFAReportingConnectionTypesListResource,
 
     -- ** Constructing a Request
+    DFAReportingConnectionTypesList (..),
     newDFAReportingConnectionTypesList,
-    DFAReportingConnectionTypesList,
   )
 where
 

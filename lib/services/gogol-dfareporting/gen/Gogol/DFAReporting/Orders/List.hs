@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Orders.List
     DFAReportingOrdersListResource,
 
     -- ** Constructing a Request
+    DFAReportingOrdersList (..),
     newDFAReportingOrdersList,
-    DFAReportingOrdersList,
   )
 where
 

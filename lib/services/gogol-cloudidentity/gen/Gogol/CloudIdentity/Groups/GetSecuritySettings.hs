@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.GetSecuritySettings
     CloudIdentityGroupsGetSecuritySettingsResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsGetSecuritySettings (..),
     newCloudIdentityGroupsGetSecuritySettings,
-    CloudIdentityGroupsGetSecuritySettings,
   )
 where
 

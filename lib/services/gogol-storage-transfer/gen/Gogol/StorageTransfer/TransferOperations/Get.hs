@@ -34,8 +34,8 @@ module Gogol.StorageTransfer.TransferOperations.Get
     StorageTransferTransferOperationsGetResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferOperationsGet (..),
     newStorageTransferTransferOperationsGet,
-    StorageTransferTransferOperationsGet,
   )
 where
 

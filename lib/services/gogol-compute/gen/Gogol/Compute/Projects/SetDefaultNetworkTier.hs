@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.SetDefaultNetworkTier
     ComputeProjectsSetDefaultNetworkTierResource,
 
     -- ** Constructing a Request
+    ComputeProjectsSetDefaultNetworkTier (..),
     newComputeProjectsSetDefaultNetworkTier,
-    ComputeProjectsSetDefaultNetworkTier,
   )
 where
 

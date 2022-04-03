@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
     DataprocProjectsRegionsClustersInjectCredentialsResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersInjectCredentials (..),
     newDataprocProjectsRegionsClustersInjectCredentials,
-    DataprocProjectsRegionsClustersInjectCredentials,
   )
 where
 

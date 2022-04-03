@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.Create
     AdExchangeBuyer2BiddersFilterSetsCreateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersFilterSetsCreate (..),
     newAdExchangeBuyer2BiddersFilterSetsCreate,
-    AdExchangeBuyer2BiddersFilterSetsCreate,
   )
 where
 

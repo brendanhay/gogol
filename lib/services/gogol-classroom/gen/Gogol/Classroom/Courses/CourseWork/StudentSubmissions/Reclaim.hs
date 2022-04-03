@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
     ClassroomCoursesCourseWorkStudentSubmissionsReclaimResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkStudentSubmissionsReclaim (..),
     newClassroomCoursesCourseWorkStudentSubmissionsReclaim,
-    ClassroomCoursesCourseWorkStudentSubmissionsReclaim,
   )
 where
 

@@ -40,48 +40,48 @@ module Gogol.Composer
 
     -- ** composer.projects.locations.environments.create
     ComposerProjectsLocationsEnvironmentsCreateResource,
+    ComposerProjectsLocationsEnvironmentsCreate (..),
     newComposerProjectsLocationsEnvironmentsCreate,
-    ComposerProjectsLocationsEnvironmentsCreate,
 
     -- ** composer.projects.locations.environments.delete
     ComposerProjectsLocationsEnvironmentsDeleteResource,
+    ComposerProjectsLocationsEnvironmentsDelete (..),
     newComposerProjectsLocationsEnvironmentsDelete,
-    ComposerProjectsLocationsEnvironmentsDelete,
 
     -- ** composer.projects.locations.environments.get
     ComposerProjectsLocationsEnvironmentsGetResource,
+    ComposerProjectsLocationsEnvironmentsGet (..),
     newComposerProjectsLocationsEnvironmentsGet,
-    ComposerProjectsLocationsEnvironmentsGet,
 
     -- ** composer.projects.locations.environments.list
     ComposerProjectsLocationsEnvironmentsListResource,
+    ComposerProjectsLocationsEnvironmentsList (..),
     newComposerProjectsLocationsEnvironmentsList,
-    ComposerProjectsLocationsEnvironmentsList,
 
     -- ** composer.projects.locations.environments.patch
     ComposerProjectsLocationsEnvironmentsPatchResource,
+    ComposerProjectsLocationsEnvironmentsPatch (..),
     newComposerProjectsLocationsEnvironmentsPatch,
-    ComposerProjectsLocationsEnvironmentsPatch,
 
     -- ** composer.projects.locations.imageVersions.list
     ComposerProjectsLocationsImageVersionsListResource,
+    ComposerProjectsLocationsImageVersionsList (..),
     newComposerProjectsLocationsImageVersionsList,
-    ComposerProjectsLocationsImageVersionsList,
 
     -- ** composer.projects.locations.operations.delete
     ComposerProjectsLocationsOperationsDeleteResource,
+    ComposerProjectsLocationsOperationsDelete (..),
     newComposerProjectsLocationsOperationsDelete,
-    ComposerProjectsLocationsOperationsDelete,
 
     -- ** composer.projects.locations.operations.get
     ComposerProjectsLocationsOperationsGetResource,
+    ComposerProjectsLocationsOperationsGet (..),
     newComposerProjectsLocationsOperationsGet,
-    ComposerProjectsLocationsOperationsGet,
 
     -- ** composer.projects.locations.operations.list
     ComposerProjectsLocationsOperationsListResource,
+    ComposerProjectsLocationsOperationsList (..),
     newComposerProjectsLocationsOperationsList,
-    ComposerProjectsLocationsOperationsList,
 
     -- * Types
 

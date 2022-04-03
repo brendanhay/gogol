@@ -34,8 +34,8 @@ module Gogol.Books.Layers.List
     BooksLayersListResource,
 
     -- ** Constructing a Request
+    BooksLayersList (..),
     newBooksLayersList,
-    BooksLayersList,
   )
 where
 

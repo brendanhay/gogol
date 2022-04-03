@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.ScanRuns.Findings.Get
     WebSecurityScannerProjectsScanConfigsScanRunsFindingsGetResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsFindingsGet,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet,
   )
 where
 

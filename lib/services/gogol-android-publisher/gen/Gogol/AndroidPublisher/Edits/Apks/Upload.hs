@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Apks.Upload
     AndroidPublisherEditsApksUploadResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsApksUpload (..),
     newAndroidPublisherEditsApksUpload,
-    AndroidPublisherEditsApksUpload,
   )
 where
 

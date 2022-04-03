@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Products.Get
     AdExchangeBuyerProductsGetResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerProductsGet (..),
     newAdExchangeBuyerProductsGet,
-    AdExchangeBuyerProductsGet,
   )
 where
 

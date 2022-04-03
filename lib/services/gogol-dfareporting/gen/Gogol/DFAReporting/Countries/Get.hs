@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Countries.Get
     DFAReportingCountriesGetResource,
 
     -- ** Constructing a Request
+    DFAReportingCountriesGet (..),
     newDFAReportingCountriesGet,
-    DFAReportingCountriesGet,
   )
 where
 

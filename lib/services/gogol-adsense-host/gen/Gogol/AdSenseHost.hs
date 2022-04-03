@@ -40,133 +40,133 @@ module Gogol.AdSenseHost
 
     -- ** adsensehost.accounts.adclients.get
     AdSenseHostAccountsAdclientsGetResource,
+    AdSenseHostAccountsAdclientsGet (..),
     newAdSenseHostAccountsAdclientsGet,
-    AdSenseHostAccountsAdclientsGet,
 
     -- ** adsensehost.accounts.adclients.list
     AdSenseHostAccountsAdclientsListResource,
+    AdSenseHostAccountsAdclientsList (..),
     newAdSenseHostAccountsAdclientsList,
-    AdSenseHostAccountsAdclientsList,
 
     -- ** adsensehost.accounts.adunits.delete
     AdSenseHostAccountsAdunitsDeleteResource,
+    AdSenseHostAccountsAdunitsDelete (..),
     newAdSenseHostAccountsAdunitsDelete,
-    AdSenseHostAccountsAdunitsDelete,
 
     -- ** adsensehost.accounts.adunits.get
     AdSenseHostAccountsAdunitsGetResource,
+    AdSenseHostAccountsAdunitsGet (..),
     newAdSenseHostAccountsAdunitsGet,
-    AdSenseHostAccountsAdunitsGet,
 
     -- ** adsensehost.accounts.adunits.getAdCode
     AdSenseHostAccountsAdunitsGetAdCodeResource,
+    AdSenseHostAccountsAdunitsGetAdCode (..),
     newAdSenseHostAccountsAdunitsGetAdCode,
-    AdSenseHostAccountsAdunitsGetAdCode,
 
     -- ** adsensehost.accounts.adunits.insert
     AdSenseHostAccountsAdunitsInsertResource,
+    AdSenseHostAccountsAdunitsInsert (..),
     newAdSenseHostAccountsAdunitsInsert,
-    AdSenseHostAccountsAdunitsInsert,
 
     -- ** adsensehost.accounts.adunits.list
     AdSenseHostAccountsAdunitsListResource,
+    AdSenseHostAccountsAdunitsList (..),
     newAdSenseHostAccountsAdunitsList,
-    AdSenseHostAccountsAdunitsList,
 
     -- ** adsensehost.accounts.adunits.patch
     AdSenseHostAccountsAdunitsPatchResource,
+    AdSenseHostAccountsAdunitsPatch (..),
     newAdSenseHostAccountsAdunitsPatch,
-    AdSenseHostAccountsAdunitsPatch,
 
     -- ** adsensehost.accounts.adunits.update
     AdSenseHostAccountsAdunitsUpdateResource,
+    AdSenseHostAccountsAdunitsUpdate (..),
     newAdSenseHostAccountsAdunitsUpdate,
-    AdSenseHostAccountsAdunitsUpdate,
 
     -- ** adsensehost.accounts.get
     AdSenseHostAccountsGetResource,
+    AdSenseHostAccountsGet (..),
     newAdSenseHostAccountsGet,
-    AdSenseHostAccountsGet,
 
     -- ** adsensehost.accounts.list
     AdSenseHostAccountsListResource,
+    AdSenseHostAccountsList (..),
     newAdSenseHostAccountsList,
-    AdSenseHostAccountsList,
 
     -- ** adsensehost.accounts.reports.generate
     AdSenseHostAccountsReportsGenerateResource,
+    AdSenseHostAccountsReportsGenerate (..),
     newAdSenseHostAccountsReportsGenerate,
-    AdSenseHostAccountsReportsGenerate,
 
     -- ** adsensehost.adclients.get
     AdSenseHostAdclientsGetResource,
+    AdSenseHostAdclientsGet (..),
     newAdSenseHostAdclientsGet,
-    AdSenseHostAdclientsGet,
 
     -- ** adsensehost.adclients.list
     AdSenseHostAdclientsListResource,
+    AdSenseHostAdclientsList (..),
     newAdSenseHostAdclientsList,
-    AdSenseHostAdclientsList,
 
     -- ** adsensehost.associationsessions.start
     AdSenseHostAssociationsessionsStartResource,
+    AdSenseHostAssociationsessionsStart (..),
     newAdSenseHostAssociationsessionsStart,
-    AdSenseHostAssociationsessionsStart,
 
     -- ** adsensehost.associationsessions.verify
     AdSenseHostAssociationsessionsVerifyResource,
+    AdSenseHostAssociationsessionsVerify (..),
     newAdSenseHostAssociationsessionsVerify,
-    AdSenseHostAssociationsessionsVerify,
 
     -- ** adsensehost.customchannels.delete
     AdSenseHostCustomchannelsDeleteResource,
+    AdSenseHostCustomchannelsDelete (..),
     newAdSenseHostCustomchannelsDelete,
-    AdSenseHostCustomchannelsDelete,
 
     -- ** adsensehost.customchannels.get
     AdSenseHostCustomchannelsGetResource,
+    AdSenseHostCustomchannelsGet (..),
     newAdSenseHostCustomchannelsGet,
-    AdSenseHostCustomchannelsGet,
 
     -- ** adsensehost.customchannels.insert
     AdSenseHostCustomchannelsInsertResource,
+    AdSenseHostCustomchannelsInsert (..),
     newAdSenseHostCustomchannelsInsert,
-    AdSenseHostCustomchannelsInsert,
 
     -- ** adsensehost.customchannels.list
     AdSenseHostCustomchannelsListResource,
+    AdSenseHostCustomchannelsList (..),
     newAdSenseHostCustomchannelsList,
-    AdSenseHostCustomchannelsList,
 
     -- ** adsensehost.customchannels.patch
     AdSenseHostCustomchannelsPatchResource,
+    AdSenseHostCustomchannelsPatch (..),
     newAdSenseHostCustomchannelsPatch,
-    AdSenseHostCustomchannelsPatch,
 
     -- ** adsensehost.customchannels.update
     AdSenseHostCustomchannelsUpdateResource,
+    AdSenseHostCustomchannelsUpdate (..),
     newAdSenseHostCustomchannelsUpdate,
-    AdSenseHostCustomchannelsUpdate,
 
     -- ** adsensehost.reports.generate
     AdSenseHostReportsGenerateResource,
+    AdSenseHostReportsGenerate (..),
     newAdSenseHostReportsGenerate,
-    AdSenseHostReportsGenerate,
 
     -- ** adsensehost.urlchannels.delete
     AdSenseHostUrlchannelsDeleteResource,
+    AdSenseHostUrlchannelsDelete (..),
     newAdSenseHostUrlchannelsDelete,
-    AdSenseHostUrlchannelsDelete,
 
     -- ** adsensehost.urlchannels.insert
     AdSenseHostUrlchannelsInsertResource,
+    AdSenseHostUrlchannelsInsert (..),
     newAdSenseHostUrlchannelsInsert,
-    AdSenseHostUrlchannelsInsert,
 
     -- ** adsensehost.urlchannels.list
     AdSenseHostUrlchannelsListResource,
+    AdSenseHostUrlchannelsList (..),
     newAdSenseHostUrlchannelsList,
-    AdSenseHostUrlchannelsList,
 
     -- * Types
 

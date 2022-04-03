@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ChangeLogs.Get
     DFAReportingChangeLogsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingChangeLogsGet (..),
     newDFAReportingChangeLogsGet,
-    DFAReportingChangeLogsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.Load
     DialogFlowProjectsLocationsAgentsFlowsVersionsLoadResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsVersionsLoad (..),
     newDialogFlowProjectsLocationsAgentsFlowsVersionsLoad,
-    DialogFlowProjectsLocationsAgentsFlowsVersionsLoad,
   )
 where
 

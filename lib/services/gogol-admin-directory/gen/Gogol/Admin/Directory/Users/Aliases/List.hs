@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Aliases.List
     DirectoryUsersAliasesListResource,
 
     -- ** Constructing a Request
+    DirectoryUsersAliasesList (..),
     newDirectoryUsersAliasesList,
-    DirectoryUsersAliasesList,
   )
 where
 

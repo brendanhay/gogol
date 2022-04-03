@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.Insert
     ComputeSnapshotsInsertResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsInsert (..),
     newComputeSnapshotsInsert,
-    ComputeSnapshotsInsert,
   )
 where
 

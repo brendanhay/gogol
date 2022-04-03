@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.Configs.Get
     ServiceManagementServicesConfigsGetResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesConfigsGet (..),
     newServiceManagementServicesConfigsGet,
-    ServiceManagementServicesConfigsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.GetXpnHost
     ComputeProjectsGetXpnHostResource,
 
     -- ** Constructing a Request
+    ComputeProjectsGetXpnHost (..),
     newComputeProjectsGetXpnHost,
-    ComputeProjectsGetXpnHost,
   )
 where
 

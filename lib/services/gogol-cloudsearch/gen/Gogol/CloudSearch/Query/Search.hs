@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Query.Search
     CloudSearchQuerySearchResource,
 
     -- ** Constructing a Request
+    CloudSearchQuerySearch (..),
     newCloudSearchQuerySearch,
-    CloudSearchQuerySearch,
   )
 where
 

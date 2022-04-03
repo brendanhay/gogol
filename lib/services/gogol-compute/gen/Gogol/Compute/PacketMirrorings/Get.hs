@@ -34,8 +34,8 @@ module Gogol.Compute.PacketMirrorings.Get
     ComputePacketMirroringsGetResource,
 
     -- ** Constructing a Request
+    ComputePacketMirroringsGet (..),
     newComputePacketMirroringsGet,
-    ComputePacketMirroringsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetMachineResources
     ComputeInstancesSetMachineResourcesResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetMachineResources (..),
     newComputeInstancesSetMachineResources,
-    ComputeInstancesSetMachineResources,
   )
 where
 

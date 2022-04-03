@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Built_in_variables.Revert
     TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevertResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert (..),
     newTagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
-    TagManagerAccountsContainersWorkspacesBuilt_in_variablesRevert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.BackupRuns.List
     SqlBackupRunsListResource,
 
     -- ** Constructing a Request
+    SqlBackupRunsList (..),
     newSqlBackupRunsList,
-    SqlBackupRunsList,
   )
 where
 

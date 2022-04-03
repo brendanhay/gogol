@@ -34,8 +34,8 @@ module Gogol.Drive.Replies.Delete
     DriveRepliesDeleteResource,
 
     -- ** Constructing a Request
+    DriveRepliesDelete (..),
     newDriveRepliesDelete,
-    DriveRepliesDelete,
   )
 where
 

@@ -46,198 +46,198 @@ module Gogol.BigQuery
 
     -- ** bigquery.datasets.delete
     BigQueryDatasetsDeleteResource,
+    BigQueryDatasetsDelete (..),
     newBigQueryDatasetsDelete,
-    BigQueryDatasetsDelete,
 
     -- ** bigquery.datasets.get
     BigQueryDatasetsGetResource,
+    BigQueryDatasetsGet (..),
     newBigQueryDatasetsGet,
-    BigQueryDatasetsGet,
 
     -- ** bigquery.datasets.insert
     BigQueryDatasetsInsertResource,
+    BigQueryDatasetsInsert (..),
     newBigQueryDatasetsInsert,
-    BigQueryDatasetsInsert,
 
     -- ** bigquery.datasets.list
     BigQueryDatasetsListResource,
+    BigQueryDatasetsList (..),
     newBigQueryDatasetsList,
-    BigQueryDatasetsList,
 
     -- ** bigquery.datasets.patch
     BigQueryDatasetsPatchResource,
+    BigQueryDatasetsPatch (..),
     newBigQueryDatasetsPatch,
-    BigQueryDatasetsPatch,
 
     -- ** bigquery.datasets.update
     BigQueryDatasetsUpdateResource,
+    BigQueryDatasetsUpdate (..),
     newBigQueryDatasetsUpdate,
-    BigQueryDatasetsUpdate,
 
     -- ** bigquery.jobs.cancel
     BigQueryJobsCancelResource,
+    BigQueryJobsCancel (..),
     newBigQueryJobsCancel,
-    BigQueryJobsCancel,
 
     -- ** bigquery.jobs.delete
     BigQueryJobsDeleteResource,
+    BigQueryJobsDelete (..),
     newBigQueryJobsDelete,
-    BigQueryJobsDelete,
 
     -- ** bigquery.jobs.get
     BigQueryJobsGetResource,
+    BigQueryJobsGet (..),
     newBigQueryJobsGet,
-    BigQueryJobsGet,
 
     -- ** bigquery.jobs.getQueryResults
     BigQueryJobsGetQueryResultsResource,
+    BigQueryJobsGetQueryResults (..),
     newBigQueryJobsGetQueryResults,
-    BigQueryJobsGetQueryResults,
 
     -- ** bigquery.jobs.insert
     BigQueryJobsInsertResource,
+    BigQueryJobsInsert (..),
     newBigQueryJobsInsert,
-    BigQueryJobsInsert,
 
     -- ** bigquery.jobs.list
     BigQueryJobsListResource,
+    BigQueryJobsList (..),
     newBigQueryJobsList,
-    BigQueryJobsList,
 
     -- ** bigquery.jobs.query
     BigQueryJobsQueryResource,
+    BigQueryJobsQuery (..),
     newBigQueryJobsQuery,
-    BigQueryJobsQuery,
 
     -- ** bigquery.models.delete
     BigQueryModelsDeleteResource,
+    BigQueryModelsDelete (..),
     newBigQueryModelsDelete,
-    BigQueryModelsDelete,
 
     -- ** bigquery.models.get
     BigQueryModelsGetResource,
+    BigQueryModelsGet (..),
     newBigQueryModelsGet,
-    BigQueryModelsGet,
 
     -- ** bigquery.models.list
     BigQueryModelsListResource,
+    BigQueryModelsList (..),
     newBigQueryModelsList,
-    BigQueryModelsList,
 
     -- ** bigquery.models.patch
     BigQueryModelsPatchResource,
+    BigQueryModelsPatch (..),
     newBigQueryModelsPatch,
-    BigQueryModelsPatch,
 
     -- ** bigquery.projects.getServiceAccount
     BigQueryProjectsGetServiceAccountResource,
+    BigQueryProjectsGetServiceAccount (..),
     newBigQueryProjectsGetServiceAccount,
-    BigQueryProjectsGetServiceAccount,
 
     -- ** bigquery.projects.list
     BigQueryProjectsListResource,
+    BigQueryProjectsList (..),
     newBigQueryProjectsList,
-    BigQueryProjectsList,
 
     -- ** bigquery.routines.delete
     BigQueryRoutinesDeleteResource,
+    BigQueryRoutinesDelete (..),
     newBigQueryRoutinesDelete,
-    BigQueryRoutinesDelete,
 
     -- ** bigquery.routines.get
     BigQueryRoutinesGetResource,
+    BigQueryRoutinesGet (..),
     newBigQueryRoutinesGet,
-    BigQueryRoutinesGet,
 
     -- ** bigquery.routines.insert
     BigQueryRoutinesInsertResource,
+    BigQueryRoutinesInsert (..),
     newBigQueryRoutinesInsert,
-    BigQueryRoutinesInsert,
 
     -- ** bigquery.routines.list
     BigQueryRoutinesListResource,
+    BigQueryRoutinesList (..),
     newBigQueryRoutinesList,
-    BigQueryRoutinesList,
 
     -- ** bigquery.routines.update
     BigQueryRoutinesUpdateResource,
+    BigQueryRoutinesUpdate (..),
     newBigQueryRoutinesUpdate,
-    BigQueryRoutinesUpdate,
 
     -- ** bigquery.rowAccessPolicies.getIamPolicy
     BigQueryRowAccessPoliciesGetIamPolicyResource,
+    BigQueryRowAccessPoliciesGetIamPolicy (..),
     newBigQueryRowAccessPoliciesGetIamPolicy,
-    BigQueryRowAccessPoliciesGetIamPolicy,
 
     -- ** bigquery.rowAccessPolicies.list
     BigQueryRowAccessPoliciesListResource,
+    BigQueryRowAccessPoliciesList (..),
     newBigQueryRowAccessPoliciesList,
-    BigQueryRowAccessPoliciesList,
 
     -- ** bigquery.rowAccessPolicies.setIamPolicy
     BigQueryRowAccessPoliciesSetIamPolicyResource,
+    BigQueryRowAccessPoliciesSetIamPolicy (..),
     newBigQueryRowAccessPoliciesSetIamPolicy,
-    BigQueryRowAccessPoliciesSetIamPolicy,
 
     -- ** bigquery.rowAccessPolicies.testIamPermissions
     BigQueryRowAccessPoliciesTestIamPermissionsResource,
+    BigQueryRowAccessPoliciesTestIamPermissions (..),
     newBigQueryRowAccessPoliciesTestIamPermissions,
-    BigQueryRowAccessPoliciesTestIamPermissions,
 
     -- ** bigquery.tabledata.insertAll
     BigQueryTabledataInsertAllResource,
+    BigQueryTabledataInsertAll (..),
     newBigQueryTabledataInsertAll,
-    BigQueryTabledataInsertAll,
 
     -- ** bigquery.tabledata.list
     BigQueryTabledataListResource,
+    BigQueryTabledataList (..),
     newBigQueryTabledataList,
-    BigQueryTabledataList,
 
     -- ** bigquery.tables.delete
     BigQueryTablesDeleteResource,
+    BigQueryTablesDelete (..),
     newBigQueryTablesDelete,
-    BigQueryTablesDelete,
 
     -- ** bigquery.tables.get
     BigQueryTablesGetResource,
+    BigQueryTablesGet (..),
     newBigQueryTablesGet,
-    BigQueryTablesGet,
 
     -- ** bigquery.tables.getIamPolicy
     BigQueryTablesGetIamPolicyResource,
+    BigQueryTablesGetIamPolicy (..),
     newBigQueryTablesGetIamPolicy,
-    BigQueryTablesGetIamPolicy,
 
     -- ** bigquery.tables.insert
     BigQueryTablesInsertResource,
+    BigQueryTablesInsert (..),
     newBigQueryTablesInsert,
-    BigQueryTablesInsert,
 
     -- ** bigquery.tables.list
     BigQueryTablesListResource,
+    BigQueryTablesList (..),
     newBigQueryTablesList,
-    BigQueryTablesList,
 
     -- ** bigquery.tables.patch
     BigQueryTablesPatchResource,
+    BigQueryTablesPatch (..),
     newBigQueryTablesPatch,
-    BigQueryTablesPatch,
 
     -- ** bigquery.tables.setIamPolicy
     BigQueryTablesSetIamPolicyResource,
+    BigQueryTablesSetIamPolicy (..),
     newBigQueryTablesSetIamPolicy,
-    BigQueryTablesSetIamPolicy,
 
     -- ** bigquery.tables.testIamPermissions
     BigQueryTablesTestIamPermissionsResource,
+    BigQueryTablesTestIamPermissions (..),
     newBigQueryTablesTestIamPermissions,
-    BigQueryTablesTestIamPermissions,
 
     -- ** bigquery.tables.update
     BigQueryTablesUpdateResource,
+    BigQueryTablesUpdate (..),
     newBigQueryTablesUpdate,
-    BigQueryTablesUpdate,
 
     -- * Types
 

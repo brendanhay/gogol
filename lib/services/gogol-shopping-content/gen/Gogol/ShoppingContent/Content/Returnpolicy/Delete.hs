@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Returnpolicy.Delete
     ContentReturnpolicyDeleteResource,
 
     -- ** Constructing a Request
+    ContentReturnpolicyDelete (..),
     newContentReturnpolicyDelete,
-    ContentReturnpolicyDelete,
   )
 where
 

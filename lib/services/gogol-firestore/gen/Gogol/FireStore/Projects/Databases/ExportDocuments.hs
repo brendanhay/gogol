@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.ExportDocuments
     FireStoreProjectsDatabasesExportDocumentsResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesExportDocuments (..),
     newFireStoreProjectsDatabasesExportDocuments,
-    FireStoreProjectsDatabasesExportDocuments,
   )
 where
 

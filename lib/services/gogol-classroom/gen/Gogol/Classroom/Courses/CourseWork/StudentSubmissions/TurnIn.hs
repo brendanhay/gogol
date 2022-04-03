@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
     ClassroomCoursesCourseWorkStudentSubmissionsTurnInResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkStudentSubmissionsTurnIn (..),
     newClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
-    ClassroomCoursesCourseWorkStudentSubmissionsTurnIn,
   )
 where
 

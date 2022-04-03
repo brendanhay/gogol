@@ -34,8 +34,8 @@ module Gogol.YouTube.Channels.Update
     YouTubeChannelsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeChannelsUpdate (..),
     newYouTubeChannelsUpdate,
-    YouTubeChannelsUpdate,
   )
 where
 

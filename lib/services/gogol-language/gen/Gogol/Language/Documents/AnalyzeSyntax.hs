@@ -34,8 +34,8 @@ module Gogol.Language.Documents.AnalyzeSyntax
     LanguageDocumentsAnalyzeSyntaxResource,
 
     -- ** Constructing a Request
+    LanguageDocumentsAnalyzeSyntax (..),
     newLanguageDocumentsAnalyzeSyntax,
-    LanguageDocumentsAnalyzeSyntax,
   )
 where
 

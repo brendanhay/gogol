@@ -34,8 +34,8 @@ module Gogol.Compute.NodeTypes.List
     ComputeNodeTypesListResource,
 
     -- ** Constructing a Request
+    ComputeNodeTypesList (..),
     newComputeNodeTypesList,
-    ComputeNodeTypesList,
   )
 where
 

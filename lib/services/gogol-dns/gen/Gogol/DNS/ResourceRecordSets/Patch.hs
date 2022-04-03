@@ -34,8 +34,8 @@ module Gogol.DNS.ResourceRecordSets.Patch
     DNSResourceRecordSetsPatchResource,
 
     -- ** Constructing a Request
+    DNSResourceRecordSetsPatch (..),
     newDNSResourceRecordSetsPatch,
-    DNSResourceRecordSetsPatch,
   )
 where
 

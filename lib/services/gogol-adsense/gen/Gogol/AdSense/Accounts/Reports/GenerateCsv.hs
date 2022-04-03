@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.Reports.GenerateCsv
     AdSenseAccountsReportsGenerateCsvResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsReportsGenerateCsv (..),
     newAdSenseAccountsReportsGenerateCsv,
-    AdSenseAccountsReportsGenerateCsv,
   )
 where
 

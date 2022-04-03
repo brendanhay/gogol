@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.GetIamPolicy
     CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicyResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy (..),
     newCloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
-    CloudKMSProjectsLocationsKeyRingsImportJobsGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.Search
     ServiceConsumerManagementServicesSearchResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesSearch (..),
     newServiceConsumerManagementServicesSearch,
-    ServiceConsumerManagementServicesSearch,
   )
 where
 

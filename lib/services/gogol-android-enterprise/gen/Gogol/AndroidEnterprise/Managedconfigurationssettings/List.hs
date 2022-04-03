@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Managedconfigurationssettings.List
     AndroidEnterpriseManagedconfigurationssettingsListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseManagedconfigurationssettingsList (..),
     newAndroidEnterpriseManagedconfigurationssettingsList,
-    AndroidEnterpriseManagedconfigurationssettingsList,
   )
 where
 

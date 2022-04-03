@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
     TagManagerAccountsContainersWorkspacesTriggersDeleteResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTriggersDelete (..),
     newTagManagerAccountsContainersWorkspacesTriggersDelete,
-    TagManagerAccountsContainersWorkspacesTriggersDelete,
   )
 where
 

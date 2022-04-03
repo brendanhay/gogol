@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Surveys.Stop
     ConsumerSurveysSurveysStopResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysSurveysStop (..),
     newConsumerSurveysSurveysStop,
-    ConsumerSurveysSurveysStop,
   )
 where
 

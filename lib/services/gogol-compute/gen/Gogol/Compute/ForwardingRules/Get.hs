@@ -34,8 +34,8 @@ module Gogol.Compute.ForwardingRules.Get
     ComputeForwardingRulesGetResource,
 
     -- ** Constructing a Request
+    ComputeForwardingRulesGet (..),
     newComputeForwardingRulesGet,
-    ComputeForwardingRulesGet,
   )
 where
 

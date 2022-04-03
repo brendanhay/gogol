@@ -34,8 +34,8 @@ module Gogol.AdExperienceReport.ViolatingSites.List
     AdExperienceReportViolatingSitesListResource,
 
     -- ** Constructing a Request
+    AdExperienceReportViolatingSitesList (..),
     newAdExperienceReportViolatingSitesList,
-    AdExperienceReportViolatingSitesList,
   )
 where
 

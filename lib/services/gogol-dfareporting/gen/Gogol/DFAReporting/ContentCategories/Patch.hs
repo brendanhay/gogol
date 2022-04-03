@@ -34,8 +34,8 @@ module Gogol.DFAReporting.ContentCategories.Patch
     DFAReportingContentCategoriesPatchResource,
 
     -- ** Constructing a Request
+    DFAReportingContentCategoriesPatch (..),
     newDFAReportingContentCategoriesPatch,
-    DFAReportingContentCategoriesPatch,
   )
 where
 

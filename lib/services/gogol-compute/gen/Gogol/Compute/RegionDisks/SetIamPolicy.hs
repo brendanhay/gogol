@@ -34,8 +34,8 @@ module Gogol.Compute.RegionDisks.SetIamPolicy
     ComputeRegionDisksSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeRegionDisksSetIamPolicy (..),
     newComputeRegionDisksSetIamPolicy,
-    ComputeRegionDisksSetIamPolicy,
   )
 where
 

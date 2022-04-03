@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.CreateWebToken
     AndroidEnterpriseEnterprisesCreateWebTokenResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesCreateWebToken (..),
     newAndroidEnterpriseEnterprisesCreateWebToken,
-    AndroidEnterpriseEnterprisesCreateWebToken,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Insert
     LicensingLicenseAssignmentsInsertResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsInsert (..),
     newLicensingLicenseAssignmentsInsert,
-    LicensingLicenseAssignmentsInsert,
   )
 where
 

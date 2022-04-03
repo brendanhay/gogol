@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.M
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSignResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSign,
   )
 where
 

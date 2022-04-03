@@ -34,8 +34,8 @@ module Gogol.Mirror.Subscriptions.Insert
     MirrorSubscriptionsInsertResource,
 
     -- ** Constructing a Request
+    MirrorSubscriptionsInsert (..),
     newMirrorSubscriptionsInsert,
-    MirrorSubscriptionsInsert,
   )
 where
 

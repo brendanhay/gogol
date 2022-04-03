@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Insert
     ComputeInstancesInsertResource,
 
     -- ** Constructing a Request
+    ComputeInstancesInsert (..),
     newComputeInstancesInsert,
-    ComputeInstancesInsert,
   )
 where
 

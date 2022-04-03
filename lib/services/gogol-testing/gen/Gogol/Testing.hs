@@ -41,28 +41,28 @@ module Gogol.Testing
 
     -- ** testing.applicationDetailService.getApkDetails
     TestingApplicationDetailServiceGetApkDetailsResource,
+    TestingApplicationDetailServiceGetApkDetails (..),
     newTestingApplicationDetailServiceGetApkDetails,
-    TestingApplicationDetailServiceGetApkDetails,
 
     -- ** testing.projects.testMatrices.cancel
     TestingProjectsTestMatricesCancelResource,
+    TestingProjectsTestMatricesCancel (..),
     newTestingProjectsTestMatricesCancel,
-    TestingProjectsTestMatricesCancel,
 
     -- ** testing.projects.testMatrices.create
     TestingProjectsTestMatricesCreateResource,
+    TestingProjectsTestMatricesCreate (..),
     newTestingProjectsTestMatricesCreate,
-    TestingProjectsTestMatricesCreate,
 
     -- ** testing.projects.testMatrices.get
     TestingProjectsTestMatricesGetResource,
+    TestingProjectsTestMatricesGet (..),
     newTestingProjectsTestMatricesGet,
-    TestingProjectsTestMatricesGet,
 
     -- ** testing.testEnvironmentCatalog.get
     TestingTestEnvironmentCatalogGetResource,
+    TestingTestEnvironmentCatalogGet (..),
     newTestingTestEnvironmentCatalogGet,
-    TestingTestEnvironmentCatalogGet,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.PlusDomains.People.Get
     PlusDomainsPeopleGetResource,
 
     -- ** Constructing a Request
+    PlusDomainsPeopleGet (..),
     newPlusDomainsPeopleGet,
-    PlusDomainsPeopleGet,
   )
 where
 

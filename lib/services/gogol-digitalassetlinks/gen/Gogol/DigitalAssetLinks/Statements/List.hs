@@ -34,8 +34,8 @@ module Gogol.DigitalAssetLinks.Statements.List
     DigitalAssetLinksStatementsListResource,
 
     -- ** Constructing a Request
+    DigitalAssetLinksStatementsList (..),
     newDigitalAssetLinksStatementsList,
-    DigitalAssetLinksStatementsList,
   )
 where
 

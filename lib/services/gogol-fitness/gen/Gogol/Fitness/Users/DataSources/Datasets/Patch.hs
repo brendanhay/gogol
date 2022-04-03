@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.DataSources.Datasets.Patch
     FitnessUsersDataSourcesDatasetsPatchResource,
 
     -- ** Constructing a Request
+    FitnessUsersDataSourcesDatasetsPatch (..),
     newFitnessUsersDataSourcesDatasetsPatch,
-    FitnessUsersDataSourcesDatasetsPatch,
   )
 where
 

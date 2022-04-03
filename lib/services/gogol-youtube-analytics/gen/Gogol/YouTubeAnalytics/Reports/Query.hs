@@ -34,8 +34,8 @@ module Gogol.YouTubeAnalytics.Reports.Query
     YouTubeAnalyticsReportsQueryResource,
 
     -- ** Constructing a Request
+    YouTubeAnalyticsReportsQuery (..),
     newYouTubeAnalyticsReportsQuery,
-    YouTubeAnalyticsReportsQuery,
   )
 where
 

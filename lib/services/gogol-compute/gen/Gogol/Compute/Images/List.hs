@@ -34,8 +34,8 @@ module Gogol.Compute.Images.List
     ComputeImagesListResource,
 
     -- ** Constructing a Request
+    ComputeImagesList (..),
     newComputeImagesList,
-    ComputeImagesList,
   )
 where
 

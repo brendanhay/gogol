@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Users.Aliases.Watch
     DirectoryUsersAliasesWatchResource,
 
     -- ** Constructing a Request
+    DirectoryUsersAliasesWatch (..),
     newDirectoryUsersAliasesWatch,
-    DirectoryUsersAliasesWatch,
   )
 where
 

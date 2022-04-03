@@ -34,8 +34,8 @@ module Gogol.WebSecurityScanner.Projects.ScanConfigs.Patch
     WebSecurityScannerProjectsScanConfigsPatchResource,
 
     -- ** Constructing a Request
+    WebSecurityScannerProjectsScanConfigsPatch (..),
     newWebSecurityScannerProjectsScanConfigsPatch,
-    WebSecurityScannerProjectsScanConfigsPatch,
   )
 where
 

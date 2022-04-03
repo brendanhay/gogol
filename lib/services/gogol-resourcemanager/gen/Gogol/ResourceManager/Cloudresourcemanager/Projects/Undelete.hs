@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Undelete
     CloudresourcemanagerProjectsUndeleteResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerProjectsUndelete (..),
     newCloudresourcemanagerProjectsUndelete,
-    CloudresourcemanagerProjectsUndelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Bidders.Accounts.FilterSets.ImpressionMetrics.List
     AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsListResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList,
   )
 where
 

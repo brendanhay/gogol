@@ -34,8 +34,8 @@ module Gogol.DFAReporting.Creatives.Insert
     DFAReportingCreativesInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingCreativesInsert (..),
     newDFAReportingCreativesInsert,
-    DFAReportingCreativesInsert,
   )
 where
 

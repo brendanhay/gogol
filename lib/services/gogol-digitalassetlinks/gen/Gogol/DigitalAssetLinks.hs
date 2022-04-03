@@ -37,18 +37,18 @@ module Gogol.DigitalAssetLinks
 
     -- ** digitalassetlinks.assetlinks.bulkCheck
     DigitalAssetLinksAssetlinksBulkCheckResource,
+    DigitalAssetLinksAssetlinksBulkCheck (..),
     newDigitalAssetLinksAssetlinksBulkCheck,
-    DigitalAssetLinksAssetlinksBulkCheck,
 
     -- ** digitalassetlinks.assetlinks.check
     DigitalAssetLinksAssetlinksCheckResource,
+    DigitalAssetLinksAssetlinksCheck (..),
     newDigitalAssetLinksAssetlinksCheck,
-    DigitalAssetLinksAssetlinksCheck,
 
     -- ** digitalassetlinks.statements.list
     DigitalAssetLinksStatementsListResource,
+    DigitalAssetLinksStatementsList (..),
     newDigitalAssetLinksStatementsList,
-    DigitalAssetLinksStatementsList,
 
     -- * Types
 

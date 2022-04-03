@@ -34,8 +34,8 @@ module Gogol.DFAReporting.VideoFormats.List
     DFAReportingVideoFormatsListResource,
 
     -- ** Constructing a Request
+    DFAReportingVideoFormatsList (..),
     newDFAReportingVideoFormatsList,
-    DFAReportingVideoFormatsList,
   )
 where
 

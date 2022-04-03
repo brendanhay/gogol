@@ -34,8 +34,8 @@ module Gogol.Compute.ServiceAttachments.Delete
     ComputeServiceAttachmentsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeServiceAttachmentsDelete (..),
     newComputeServiceAttachmentsDelete,
-    ComputeServiceAttachmentsDelete,
   )
 where
 

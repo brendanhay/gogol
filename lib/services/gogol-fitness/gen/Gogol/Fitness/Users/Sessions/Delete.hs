@@ -34,8 +34,8 @@ module Gogol.Fitness.Users.Sessions.Delete
     FitnessUsersSessionsDeleteResource,
 
     -- ** Constructing a Request
+    FitnessUsersSessionsDelete (..),
     newFitnessUsersSessionsDelete,
-    FitnessUsersSessionsDelete,
   )
 where
 

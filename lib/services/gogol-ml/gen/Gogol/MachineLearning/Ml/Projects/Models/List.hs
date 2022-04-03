@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Models.List
     MlProjectsModelsListResource,
 
     -- ** Constructing a Request
+    MlProjectsModelsList (..),
     newMlProjectsModelsList,
-    MlProjectsModelsList,
   )
 where
 

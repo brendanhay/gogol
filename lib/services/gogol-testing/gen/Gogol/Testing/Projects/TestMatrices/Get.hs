@@ -34,8 +34,8 @@ module Gogol.Testing.Projects.TestMatrices.Get
     TestingProjectsTestMatricesGetResource,
 
     -- ** Constructing a Request
+    TestingProjectsTestMatricesGet (..),
     newTestingProjectsTestMatricesGet,
-    TestingProjectsTestMatricesGet,
   )
 where
 

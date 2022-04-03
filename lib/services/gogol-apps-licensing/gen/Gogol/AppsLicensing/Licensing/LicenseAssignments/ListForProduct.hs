@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProduct
     LicensingLicenseAssignmentsListForProductResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsListForProduct (..),
     newLicensingLicenseAssignmentsListForProduct,
-    LicensingLicenseAssignmentsListForProduct,
   )
 where
 

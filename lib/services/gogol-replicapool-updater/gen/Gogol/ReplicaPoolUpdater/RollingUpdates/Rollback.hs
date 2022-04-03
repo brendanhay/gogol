@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
     ReplicaPoolUpdaterRollingUpdatesRollbackResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterRollingUpdatesRollback (..),
     newReplicaPoolUpdaterRollingUpdatesRollback,
-    ReplicaPoolUpdaterRollingUpdatesRollback,
   )
 where
 

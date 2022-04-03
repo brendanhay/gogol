@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.Teachers.Delete
     ClassroomCoursesTeachersDeleteResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesTeachersDelete (..),
     newClassroomCoursesTeachersDelete,
-    ClassroomCoursesTeachersDelete,
   )
 where
 

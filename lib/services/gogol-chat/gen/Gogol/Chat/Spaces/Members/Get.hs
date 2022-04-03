@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Members.Get
     ChatSpacesMembersGetResource,
 
     -- ** Constructing a Request
+    ChatSpacesMembersGet (..),
     newChatSpacesMembersGet,
-    ChatSpacesMembersGet,
   )
 where
 

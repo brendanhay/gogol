@@ -40,68 +40,68 @@ module Gogol.WebSecurityScanner
 
     -- ** websecurityscanner.projects.scanConfigs.create
     WebSecurityScannerProjectsScanConfigsCreateResource,
+    WebSecurityScannerProjectsScanConfigsCreate (..),
     newWebSecurityScannerProjectsScanConfigsCreate,
-    WebSecurityScannerProjectsScanConfigsCreate,
 
     -- ** websecurityscanner.projects.scanConfigs.delete
     WebSecurityScannerProjectsScanConfigsDeleteResource,
+    WebSecurityScannerProjectsScanConfigsDelete (..),
     newWebSecurityScannerProjectsScanConfigsDelete,
-    WebSecurityScannerProjectsScanConfigsDelete,
 
     -- ** websecurityscanner.projects.scanConfigs.get
     WebSecurityScannerProjectsScanConfigsGetResource,
+    WebSecurityScannerProjectsScanConfigsGet (..),
     newWebSecurityScannerProjectsScanConfigsGet,
-    WebSecurityScannerProjectsScanConfigsGet,
 
     -- ** websecurityscanner.projects.scanConfigs.list
     WebSecurityScannerProjectsScanConfigsListResource,
+    WebSecurityScannerProjectsScanConfigsList (..),
     newWebSecurityScannerProjectsScanConfigsList,
-    WebSecurityScannerProjectsScanConfigsList,
 
     -- ** websecurityscanner.projects.scanConfigs.patch
     WebSecurityScannerProjectsScanConfigsPatchResource,
+    WebSecurityScannerProjectsScanConfigsPatch (..),
     newWebSecurityScannerProjectsScanConfigsPatch,
-    WebSecurityScannerProjectsScanConfigsPatch,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list
     WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsListResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsCrawledUrlsList,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list
     WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsListResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingTypeStatsList,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findings.get
     WebSecurityScannerProjectsScanConfigsScanRunsFindingsGetResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsFindingsGet,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsGet,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.findings.list
     WebSecurityScannerProjectsScanConfigsScanRunsFindingsListResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsFindingsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsFindingsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsFindingsList,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.get
     WebSecurityScannerProjectsScanConfigsScanRunsGetResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsGet (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsGet,
-    WebSecurityScannerProjectsScanConfigsScanRunsGet,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.list
     WebSecurityScannerProjectsScanConfigsScanRunsListResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsList (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsList,
-    WebSecurityScannerProjectsScanConfigsScanRunsList,
 
     -- ** websecurityscanner.projects.scanConfigs.scanRuns.stop
     WebSecurityScannerProjectsScanConfigsScanRunsStopResource,
+    WebSecurityScannerProjectsScanConfigsScanRunsStop (..),
     newWebSecurityScannerProjectsScanConfigsScanRunsStop,
-    WebSecurityScannerProjectsScanConfigsScanRunsStop,
 
     -- ** websecurityscanner.projects.scanConfigs.start
     WebSecurityScannerProjectsScanConfigsStartResource,
+    WebSecurityScannerProjectsScanConfigsStart (..),
     newWebSecurityScannerProjectsScanConfigsStart,
-    WebSecurityScannerProjectsScanConfigsStart,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.BigQuery.Routines.Get
     BigQueryRoutinesGetResource,
 
     -- ** Constructing a Request
+    BigQueryRoutinesGet (..),
     newBigQueryRoutinesGet,
-    BigQueryRoutinesGet,
   )
 where
 

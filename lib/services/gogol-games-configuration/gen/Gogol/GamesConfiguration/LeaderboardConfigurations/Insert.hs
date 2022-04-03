@@ -34,8 +34,8 @@ module Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
     GamesConfigurationLeaderboardConfigurationsInsertResource,
 
     -- ** Constructing a Request
+    GamesConfigurationLeaderboardConfigurationsInsert (..),
     newGamesConfigurationLeaderboardConfigurationsInsert,
-    GamesConfigurationLeaderboardConfigurationsInsert,
   )
 where
 

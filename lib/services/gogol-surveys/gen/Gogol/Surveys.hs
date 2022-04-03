@@ -42,43 +42,43 @@ module Gogol.Surveys
 
     -- ** surveys.results.get
     SurveysResultsGetResource,
+    SurveysResultsGet (..),
     newSurveysResultsGet,
-    SurveysResultsGet,
 
     -- ** surveys.surveys.delete
     SurveysSurveysDeleteResource,
+    SurveysSurveysDelete (..),
     newSurveysSurveysDelete,
-    SurveysSurveysDelete,
 
     -- ** surveys.surveys.get
     SurveysSurveysGetResource,
+    SurveysSurveysGet (..),
     newSurveysSurveysGet,
-    SurveysSurveysGet,
 
     -- ** surveys.surveys.insert
     SurveysSurveysInsertResource,
+    SurveysSurveysInsert (..),
     newSurveysSurveysInsert,
-    SurveysSurveysInsert,
 
     -- ** surveys.surveys.list
     SurveysSurveysListResource,
+    SurveysSurveysList (..),
     newSurveysSurveysList,
-    SurveysSurveysList,
 
     -- ** surveys.surveys.start
     SurveysSurveysStartResource,
+    SurveysSurveysStart (..),
     newSurveysSurveysStart,
-    SurveysSurveysStart,
 
     -- ** surveys.surveys.stop
     SurveysSurveysStopResource,
+    SurveysSurveysStop (..),
     newSurveysSurveysStop,
-    SurveysSurveysStop,
 
     -- ** surveys.surveys.update
     SurveysSurveysUpdateResource,
+    SurveysSurveysUpdate (..),
     newSurveysSurveysUpdate,
-    SurveysSurveysUpdate,
 
     -- * Types
 

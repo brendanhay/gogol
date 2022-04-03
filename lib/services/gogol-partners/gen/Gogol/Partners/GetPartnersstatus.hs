@@ -34,8 +34,8 @@ module Gogol.Partners.GetPartnersstatus
     PartnersGetPartnersstatusResource,
 
     -- ** Constructing a Request
+    PartnersGetPartnersstatus (..),
     newPartnersGetPartnersstatus,
-    PartnersGetPartnersstatus,
   )
 where
 

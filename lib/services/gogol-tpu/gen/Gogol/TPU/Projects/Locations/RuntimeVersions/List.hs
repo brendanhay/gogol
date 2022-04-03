@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.RuntimeVersions.List
     TPUProjectsLocationsRuntimeVersionsListResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsRuntimeVersionsList (..),
     newTPUProjectsLocationsRuntimeVersionsList,
-    TPUProjectsLocationsRuntimeVersionsList,
   )
 where
 

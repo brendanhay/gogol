@@ -34,8 +34,8 @@ module Gogol.ServiceManagement.Services.GenerateConfigReport
     ServiceManagementServicesGenerateConfigReportResource,
 
     -- ** Constructing a Request
+    ServiceManagementServicesGenerateConfigReport (..),
     newServiceManagementServicesGenerateConfigReport,
-    ServiceManagementServicesGenerateConfigReport,
   )
 where
 

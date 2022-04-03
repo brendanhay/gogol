@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounts.Returncarrier.Create
     ContentAccountsReturncarrierCreateResource,
 
     -- ** Constructing a Request
+    ContentAccountsReturncarrierCreate (..),
     newContentAccountsReturncarrierCreate,
-    ContentAccountsReturncarrierCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.TargetSslProxies.Get
     ComputeTargetSslProxiesGetResource,
 
     -- ** Constructing a Request
+    ComputeTargetSslProxiesGet (..),
     newComputeTargetSslProxiesGet,
-    ComputeTargetSslProxiesGet,
   )
 where
 

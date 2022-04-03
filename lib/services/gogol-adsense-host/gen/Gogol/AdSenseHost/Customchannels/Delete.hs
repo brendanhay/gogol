@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Customchannels.Delete
     AdSenseHostCustomchannelsDeleteResource,
 
     -- ** Constructing a Request
+    AdSenseHostCustomchannelsDelete (..),
     newAdSenseHostCustomchannelsDelete,
-    AdSenseHostCustomchannelsDelete,
   )
 where
 

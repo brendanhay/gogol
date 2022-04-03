@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Apks.List
     AndroidPublisherEditsApksListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsApksList (..),
     newAndroidPublisherEditsApksList,
-    AndroidPublisherEditsApksList,
   )
 where
 

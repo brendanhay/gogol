@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Delete
     BigQueryDataTransferProjectsTransferConfigsDeleteResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsTransferConfigsDelete (..),
     newBigQueryDataTransferProjectsTransferConfigsDelete,
-    BigQueryDataTransferProjectsTransferConfigsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Marketplacedeals.Delete
     AdExchangeBuyerMarketplacedealsDeleteResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerMarketplacedealsDelete (..),
     newAdExchangeBuyerMarketplacedealsDelete,
-    AdExchangeBuyerMarketplacedealsDelete,
   )
 where
 

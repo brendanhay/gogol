@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Delete
     AndroidManagementEnterprisesEnrollmentTokensDeleteResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesEnrollmentTokensDelete (..),
     newAndroidManagementEnterprisesEnrollmentTokensDelete,
-    AndroidManagementEnterprisesEnrollmentTokensDelete,
   )
 where
 

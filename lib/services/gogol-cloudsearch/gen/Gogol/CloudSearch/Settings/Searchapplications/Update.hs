@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Settings.Searchapplications.Update
     CloudSearchSettingsSearchapplicationsUpdateResource,
 
     -- ** Constructing a Request
+    CloudSearchSettingsSearchapplicationsUpdate (..),
     newCloudSearchSettingsSearchapplicationsUpdate,
-    CloudSearchSettingsSearchapplicationsUpdate,
   )
 where
 

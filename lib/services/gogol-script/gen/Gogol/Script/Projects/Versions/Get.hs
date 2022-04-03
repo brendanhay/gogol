@@ -34,8 +34,8 @@ module Gogol.Script.Projects.Versions.Get
     ScriptProjectsVersionsGetResource,
 
     -- ** Constructing a Request
+    ScriptProjectsVersionsGet (..),
     newScriptProjectsVersionsGet,
-    ScriptProjectsVersionsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Metadata.Dimensions.List
     AdExchangeSellerAccountsMetadataDimensionsListResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsMetadataDimensionsList (..),
     newAdExchangeSellerAccountsMetadataDimensionsList,
-    AdExchangeSellerAccountsMetadataDimensionsList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Expansionfiles.Get
     AndroidPublisherEditsExpansionfilesGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsExpansionfilesGet (..),
     newAndroidPublisherEditsExpansionfilesGet,
-    AndroidPublisherEditsExpansionfilesGet,
   )
 where
 

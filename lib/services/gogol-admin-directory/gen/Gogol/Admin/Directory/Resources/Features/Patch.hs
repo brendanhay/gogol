@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Resources.Features.Patch
     DirectoryResourcesFeaturesPatchResource,
 
     -- ** Constructing a Request
+    DirectoryResourcesFeaturesPatch (..),
     newDirectoryResourcesFeaturesPatch,
-    DirectoryResourcesFeaturesPatch,
   )
 where
 

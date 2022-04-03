@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.WebApps.Patch
     AndroidManagementEnterprisesWebAppsPatchResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesWebAppsPatch (..),
     newAndroidManagementEnterprisesWebAppsPatch,
-    AndroidManagementEnterprisesWebAppsPatch,
   )
 where
 

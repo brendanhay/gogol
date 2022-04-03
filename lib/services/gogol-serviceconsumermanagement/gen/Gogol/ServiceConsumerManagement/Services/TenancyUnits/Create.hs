@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.TenancyUnits.Create
     ServiceConsumerManagementServicesTenancyUnitsCreateResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesTenancyUnitsCreate (..),
     newServiceConsumerManagementServicesTenancyUnitsCreate,
-    ServiceConsumerManagementServicesTenancyUnitsCreate,
   )
 where
 

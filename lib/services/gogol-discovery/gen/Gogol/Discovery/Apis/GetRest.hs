@@ -34,8 +34,8 @@ module Gogol.Discovery.Apis.GetRest
     DiscoveryApisGetRestResource,
 
     -- ** Constructing a Request
+    DiscoveryApisGetRest (..),
     newDiscoveryApisGetRest,
-    DiscoveryApisGetRest,
   )
 where
 

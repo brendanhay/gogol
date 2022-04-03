@@ -34,8 +34,8 @@ module Gogol.Surveys.Insert
     SurveysSurveysInsertResource,
 
     -- ** Constructing a Request
+    SurveysSurveysInsert (..),
     newSurveysSurveysInsert,
-    SurveysSurveysInsert,
   )
 where
 

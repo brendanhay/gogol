@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.Insert
     ComputeReservationsInsertResource,
 
     -- ** Constructing a Request
+    ComputeReservationsInsert (..),
     newComputeReservationsInsert,
-    ComputeReservationsInsert,
   )
 where
 

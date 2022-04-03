@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.List
     DirectoryMembersListResource,
 
     -- ** Constructing a Request
+    DirectoryMembersList (..),
     newDirectoryMembersList,
-    DirectoryMembersList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Pos.Custombatch
     ContentPosCustombatchResource,
 
     -- ** Constructing a Request
+    ContentPosCustombatch (..),
     newContentPosCustombatch,
-    ContentPosCustombatch,
   )
 where
 

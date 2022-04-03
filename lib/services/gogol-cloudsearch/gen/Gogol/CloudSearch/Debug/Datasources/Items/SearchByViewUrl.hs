@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
     CloudSearchDebugDatasourcesItemsSearchByViewUrlResource,
 
     -- ** Constructing a Request
+    CloudSearchDebugDatasourcesItemsSearchByViewUrl (..),
     newCloudSearchDebugDatasourcesItemsSearchByViewUrl,
-    CloudSearchDebugDatasourcesItemsSearchByViewUrl,
   )
 where
 

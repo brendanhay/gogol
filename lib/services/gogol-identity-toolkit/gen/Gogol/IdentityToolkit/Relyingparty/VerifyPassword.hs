@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.VerifyPassword
     IdentityToolkitRelyingpartyVerifyPasswordResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyVerifyPassword (..),
     newIdentityToolkitRelyingpartyVerifyPassword,
-    IdentityToolkitRelyingpartyVerifyPassword,
   )
 where
 

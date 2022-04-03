@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.Unlock
     GamesAchievementsUnlockResource,
 
     -- ** Constructing a Request
+    GamesAchievementsUnlock (..),
     newGamesAchievementsUnlock,
-    GamesAchievementsUnlock,
   )
 where
 

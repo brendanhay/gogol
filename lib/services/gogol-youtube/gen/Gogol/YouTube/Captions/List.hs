@@ -34,8 +34,8 @@ module Gogol.YouTube.Captions.List
     YouTubeCaptionsListResource,
 
     -- ** Constructing a Request
+    YouTubeCaptionsList (..),
     newYouTubeCaptionsList,
-    YouTubeCaptionsList,
   )
 where
 

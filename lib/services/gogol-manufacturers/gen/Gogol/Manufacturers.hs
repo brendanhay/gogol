@@ -40,23 +40,23 @@ module Gogol.Manufacturers
 
     -- ** manufacturers.accounts.products.delete
     ManufacturersAccountsProductsDeleteResource,
+    ManufacturersAccountsProductsDelete (..),
     newManufacturersAccountsProductsDelete,
-    ManufacturersAccountsProductsDelete,
 
     -- ** manufacturers.accounts.products.get
     ManufacturersAccountsProductsGetResource,
+    ManufacturersAccountsProductsGet (..),
     newManufacturersAccountsProductsGet,
-    ManufacturersAccountsProductsGet,
 
     -- ** manufacturers.accounts.products.list
     ManufacturersAccountsProductsListResource,
+    ManufacturersAccountsProductsList (..),
     newManufacturersAccountsProductsList,
-    ManufacturersAccountsProductsList,
 
     -- ** manufacturers.accounts.products.update
     ManufacturersAccountsProductsUpdateResource,
+    ManufacturersAccountsProductsUpdate (..),
     newManufacturersAccountsProductsUpdate,
-    ManufacturersAccountsProductsUpdate,
 
     -- * Types
 

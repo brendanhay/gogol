@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.Delete
     BigtableAdminProjectsInstancesTablesDeleteResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesDelete (..),
     newBigtableAdminProjectsInstancesTablesDelete,
-    BigtableAdminProjectsInstancesTablesDelete,
   )
 where
 

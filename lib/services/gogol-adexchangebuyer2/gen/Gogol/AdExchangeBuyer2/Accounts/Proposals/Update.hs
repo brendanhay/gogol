@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.Update
     AdExchangeBuyer2AccountsProposalsUpdateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyer2AccountsProposalsUpdate (..),
     newAdExchangeBuyer2AccountsProposalsUpdate,
-    AdExchangeBuyer2AccountsProposalsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.Resume
     ComputeInstancesResumeResource,
 
     -- ** Constructing a Request
+    ComputeInstancesResume (..),
     newComputeInstancesResume,
-    ComputeInstancesResume,
   )
 where
 

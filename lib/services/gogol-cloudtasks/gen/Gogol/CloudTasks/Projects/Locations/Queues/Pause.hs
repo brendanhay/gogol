@@ -34,8 +34,8 @@ module Gogol.CloudTasks.Projects.Locations.Queues.Pause
     CloudTasksProjectsLocationsQueuesPauseResource,
 
     -- ** Constructing a Request
+    CloudTasksProjectsLocationsQueuesPause (..),
     newCloudTasksProjectsLocationsQueuesPause,
-    CloudTasksProjectsLocationsQueuesPause,
   )
 where
 

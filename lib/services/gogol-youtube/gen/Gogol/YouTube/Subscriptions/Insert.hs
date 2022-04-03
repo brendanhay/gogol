@@ -34,8 +34,8 @@ module Gogol.YouTube.Subscriptions.Insert
     YouTubeSubscriptionsInsertResource,
 
     -- ** Constructing a Request
+    YouTubeSubscriptionsInsert (..),
     newYouTubeSubscriptionsInsert,
-    YouTubeSubscriptionsInsert,
   )
 where
 

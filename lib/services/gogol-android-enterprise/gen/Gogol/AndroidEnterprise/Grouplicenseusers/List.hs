@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Grouplicenseusers.List
     AndroidEnterpriseGrouplicenseusersListResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseGrouplicenseusersList (..),
     newAndroidEnterpriseGrouplicenseusersList,
-    AndroidEnterpriseGrouplicenseusersList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceUsage.Services.BatchGet
     ServiceUsageServicesBatchGetResource,
 
     -- ** Constructing a Request
+    ServiceUsageServicesBatchGet (..),
     newServiceUsageServicesBatchGet,
-    ServiceUsageServicesBatchGet,
   )
 where
 

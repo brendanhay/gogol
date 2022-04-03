@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.AddSignedUrlKey
     ComputeBackendBucketsAddSignedUrlKeyResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsAddSignedUrlKey (..),
     newComputeBackendBucketsAddSignedUrlKey,
-    ComputeBackendBucketsAddSignedUrlKey,
   )
 where
 

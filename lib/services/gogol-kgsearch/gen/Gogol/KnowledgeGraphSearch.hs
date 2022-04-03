@@ -37,8 +37,8 @@ module Gogol.KnowledgeGraphSearch
 
     -- ** kgsearch.entities.search
     KgsearchEntitiesSearchResource,
+    KgsearchEntitiesSearch (..),
     newKgsearchEntitiesSearch,
-    KgsearchEntitiesSearch,
 
     -- * Types
 

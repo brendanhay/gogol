@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.RunContinuousTest
     DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTestResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest,
-    DialogFlowProjectsLocationsAgentsEnvironmentsRunContinuousTest,
   )
 where
 

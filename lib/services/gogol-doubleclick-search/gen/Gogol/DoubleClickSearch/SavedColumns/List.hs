@@ -34,8 +34,8 @@ module Gogol.DoubleClickSearch.SavedColumns.List
     DoubleClickSearchSavedColumnsListResource,
 
     -- ** Constructing a Request
+    DoubleClickSearchSavedColumnsList (..),
     newDoubleClickSearchSavedColumnsList,
-    DoubleClickSearchSavedColumnsList,
   )
 where
 

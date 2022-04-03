@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.Create
     GmailUsersSettingsSendAsCreateResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsCreate (..),
     newGmailUsersSettingsSendAsCreate,
-    GmailUsersSettingsSendAsCreate,
   )
 where
 

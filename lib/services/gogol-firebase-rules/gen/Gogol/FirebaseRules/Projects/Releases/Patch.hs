@@ -34,8 +34,8 @@ module Gogol.FirebaseRules.Projects.Releases.Patch
     FirebaseRulesProjectsReleasesPatchResource,
 
     -- ** Constructing a Request
+    FirebaseRulesProjectsReleasesPatch (..),
     newFirebaseRulesProjectsReleasesPatch,
-    FirebaseRulesProjectsReleasesPatch,
   )
 where
 

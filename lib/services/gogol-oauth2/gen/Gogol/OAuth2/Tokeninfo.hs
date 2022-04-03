@@ -32,8 +32,8 @@ module Gogol.OAuth2.Tokeninfo
     OAuth2TokeninfoMethod,
 
     -- ** Constructing a Request
+    OAuth2Tokeninfo (..),
     newOAuth2Tokeninfo,
-    OAuth2Tokeninfo,
   )
 where
 

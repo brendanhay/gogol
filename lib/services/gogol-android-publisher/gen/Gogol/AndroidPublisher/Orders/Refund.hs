@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Orders.Refund
     AndroidPublisherOrdersRefundResource,
 
     -- ** Constructing a Request
+    AndroidPublisherOrdersRefund (..),
     newAndroidPublisherOrdersRefund,
-    AndroidPublisherOrdersRefund,
   )
 where
 

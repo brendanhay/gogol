@@ -35,8 +35,8 @@ module Gogol.StorageTransfer.TransferOperations.Cancel
     StorageTransferTransferOperationsCancelResource,
 
     -- ** Constructing a Request
+    StorageTransferTransferOperationsCancel (..),
     newStorageTransferTransferOperationsCancel,
-    StorageTransferTransferOperationsCancel,
   )
 where
 

@@ -40,323 +40,323 @@ module Gogol.AdExchangeBuyer2
 
     -- ** adexchangebuyer2.accounts.clients.create
     AdExchangeBuyer2AccountsClientsCreateResource,
+    AdExchangeBuyer2AccountsClientsCreate (..),
     newAdExchangeBuyer2AccountsClientsCreate,
-    AdExchangeBuyer2AccountsClientsCreate,
 
     -- ** adexchangebuyer2.accounts.clients.get
     AdExchangeBuyer2AccountsClientsGetResource,
+    AdExchangeBuyer2AccountsClientsGet (..),
     newAdExchangeBuyer2AccountsClientsGet,
-    AdExchangeBuyer2AccountsClientsGet,
 
     -- ** adexchangebuyer2.accounts.clients.invitations.create
     AdExchangeBuyer2AccountsClientsInvitationsCreateResource,
+    AdExchangeBuyer2AccountsClientsInvitationsCreate (..),
     newAdExchangeBuyer2AccountsClientsInvitationsCreate,
-    AdExchangeBuyer2AccountsClientsInvitationsCreate,
 
     -- ** adexchangebuyer2.accounts.clients.invitations.get
     AdExchangeBuyer2AccountsClientsInvitationsGetResource,
+    AdExchangeBuyer2AccountsClientsInvitationsGet (..),
     newAdExchangeBuyer2AccountsClientsInvitationsGet,
-    AdExchangeBuyer2AccountsClientsInvitationsGet,
 
     -- ** adexchangebuyer2.accounts.clients.invitations.list
     AdExchangeBuyer2AccountsClientsInvitationsListResource,
+    AdExchangeBuyer2AccountsClientsInvitationsList (..),
     newAdExchangeBuyer2AccountsClientsInvitationsList,
-    AdExchangeBuyer2AccountsClientsInvitationsList,
 
     -- ** adexchangebuyer2.accounts.clients.list
     AdExchangeBuyer2AccountsClientsListResource,
+    AdExchangeBuyer2AccountsClientsList (..),
     newAdExchangeBuyer2AccountsClientsList,
-    AdExchangeBuyer2AccountsClientsList,
 
     -- ** adexchangebuyer2.accounts.clients.update
     AdExchangeBuyer2AccountsClientsUpdateResource,
+    AdExchangeBuyer2AccountsClientsUpdate (..),
     newAdExchangeBuyer2AccountsClientsUpdate,
-    AdExchangeBuyer2AccountsClientsUpdate,
 
     -- ** adexchangebuyer2.accounts.clients.users.get
     AdExchangeBuyer2AccountsClientsUsersGetResource,
+    AdExchangeBuyer2AccountsClientsUsersGet (..),
     newAdExchangeBuyer2AccountsClientsUsersGet,
-    AdExchangeBuyer2AccountsClientsUsersGet,
 
     -- ** adexchangebuyer2.accounts.clients.users.list
     AdExchangeBuyer2AccountsClientsUsersListResource,
+    AdExchangeBuyer2AccountsClientsUsersList (..),
     newAdExchangeBuyer2AccountsClientsUsersList,
-    AdExchangeBuyer2AccountsClientsUsersList,
 
     -- ** adexchangebuyer2.accounts.clients.users.update
     AdExchangeBuyer2AccountsClientsUsersUpdateResource,
+    AdExchangeBuyer2AccountsClientsUsersUpdate (..),
     newAdExchangeBuyer2AccountsClientsUsersUpdate,
-    AdExchangeBuyer2AccountsClientsUsersUpdate,
 
     -- ** adexchangebuyer2.accounts.creatives.create
     AdExchangeBuyer2AccountsCreativesCreateResource,
+    AdExchangeBuyer2AccountsCreativesCreate (..),
     newAdExchangeBuyer2AccountsCreativesCreate,
-    AdExchangeBuyer2AccountsCreativesCreate,
 
     -- ** adexchangebuyer2.accounts.creatives.dealAssociations.add
     AdExchangeBuyer2AccountsCreativesDealAssociationsAddResource,
+    AdExchangeBuyer2AccountsCreativesDealAssociationsAdd (..),
     newAdExchangeBuyer2AccountsCreativesDealAssociationsAdd,
-    AdExchangeBuyer2AccountsCreativesDealAssociationsAdd,
 
     -- ** adexchangebuyer2.accounts.creatives.dealAssociations.list
     AdExchangeBuyer2AccountsCreativesDealAssociationsListResource,
+    AdExchangeBuyer2AccountsCreativesDealAssociationsList (..),
     newAdExchangeBuyer2AccountsCreativesDealAssociationsList,
-    AdExchangeBuyer2AccountsCreativesDealAssociationsList,
 
     -- ** adexchangebuyer2.accounts.creatives.dealAssociations.remove
     AdExchangeBuyer2AccountsCreativesDealAssociationsRemoveResource,
+    AdExchangeBuyer2AccountsCreativesDealAssociationsRemove (..),
     newAdExchangeBuyer2AccountsCreativesDealAssociationsRemove,
-    AdExchangeBuyer2AccountsCreativesDealAssociationsRemove,
 
     -- ** adexchangebuyer2.accounts.creatives.get
     AdExchangeBuyer2AccountsCreativesGetResource,
+    AdExchangeBuyer2AccountsCreativesGet (..),
     newAdExchangeBuyer2AccountsCreativesGet,
-    AdExchangeBuyer2AccountsCreativesGet,
 
     -- ** adexchangebuyer2.accounts.creatives.list
     AdExchangeBuyer2AccountsCreativesListResource,
+    AdExchangeBuyer2AccountsCreativesList (..),
     newAdExchangeBuyer2AccountsCreativesList,
-    AdExchangeBuyer2AccountsCreativesList,
 
     -- ** adexchangebuyer2.accounts.creatives.stopWatching
     AdExchangeBuyer2AccountsCreativesStopWatchingResource,
+    AdExchangeBuyer2AccountsCreativesStopWatching (..),
     newAdExchangeBuyer2AccountsCreativesStopWatching,
-    AdExchangeBuyer2AccountsCreativesStopWatching,
 
     -- ** adexchangebuyer2.accounts.creatives.update
     AdExchangeBuyer2AccountsCreativesUpdateResource,
+    AdExchangeBuyer2AccountsCreativesUpdate (..),
     newAdExchangeBuyer2AccountsCreativesUpdate,
-    AdExchangeBuyer2AccountsCreativesUpdate,
 
     -- ** adexchangebuyer2.accounts.creatives.watch
     AdExchangeBuyer2AccountsCreativesWatchResource,
+    AdExchangeBuyer2AccountsCreativesWatch (..),
     newAdExchangeBuyer2AccountsCreativesWatch,
-    AdExchangeBuyer2AccountsCreativesWatch,
 
     -- ** adexchangebuyer2.accounts.finalizedProposals.list
     AdExchangeBuyer2AccountsFinalizedProposalsListResource,
+    AdExchangeBuyer2AccountsFinalizedProposalsList (..),
     newAdExchangeBuyer2AccountsFinalizedProposalsList,
-    AdExchangeBuyer2AccountsFinalizedProposalsList,
 
     -- ** adexchangebuyer2.accounts.finalizedProposals.pause
     AdExchangeBuyer2AccountsFinalizedProposalsPauseResource,
+    AdExchangeBuyer2AccountsFinalizedProposalsPause (..),
     newAdExchangeBuyer2AccountsFinalizedProposalsPause,
-    AdExchangeBuyer2AccountsFinalizedProposalsPause,
 
     -- ** adexchangebuyer2.accounts.finalizedProposals.resume
     AdExchangeBuyer2AccountsFinalizedProposalsResumeResource,
+    AdExchangeBuyer2AccountsFinalizedProposalsResume (..),
     newAdExchangeBuyer2AccountsFinalizedProposalsResume,
-    AdExchangeBuyer2AccountsFinalizedProposalsResume,
 
     -- ** adexchangebuyer2.accounts.products.get
     AdExchangeBuyer2AccountsProductsGetResource,
+    AdExchangeBuyer2AccountsProductsGet (..),
     newAdExchangeBuyer2AccountsProductsGet,
-    AdExchangeBuyer2AccountsProductsGet,
 
     -- ** adexchangebuyer2.accounts.products.list
     AdExchangeBuyer2AccountsProductsListResource,
+    AdExchangeBuyer2AccountsProductsList (..),
     newAdExchangeBuyer2AccountsProductsList,
-    AdExchangeBuyer2AccountsProductsList,
 
     -- ** adexchangebuyer2.accounts.proposals.accept
     AdExchangeBuyer2AccountsProposalsAcceptResource,
+    AdExchangeBuyer2AccountsProposalsAccept (..),
     newAdExchangeBuyer2AccountsProposalsAccept,
-    AdExchangeBuyer2AccountsProposalsAccept,
 
     -- ** adexchangebuyer2.accounts.proposals.addNote
     AdExchangeBuyer2AccountsProposalsAddNoteResource,
+    AdExchangeBuyer2AccountsProposalsAddNote (..),
     newAdExchangeBuyer2AccountsProposalsAddNote,
-    AdExchangeBuyer2AccountsProposalsAddNote,
 
     -- ** adexchangebuyer2.accounts.proposals.cancelNegotiation
     AdExchangeBuyer2AccountsProposalsCancelNegotiationResource,
+    AdExchangeBuyer2AccountsProposalsCancelNegotiation (..),
     newAdExchangeBuyer2AccountsProposalsCancelNegotiation,
-    AdExchangeBuyer2AccountsProposalsCancelNegotiation,
 
     -- ** adexchangebuyer2.accounts.proposals.completeSetup
     AdExchangeBuyer2AccountsProposalsCompleteSetupResource,
+    AdExchangeBuyer2AccountsProposalsCompleteSetup (..),
     newAdExchangeBuyer2AccountsProposalsCompleteSetup,
-    AdExchangeBuyer2AccountsProposalsCompleteSetup,
 
     -- ** adexchangebuyer2.accounts.proposals.create
     AdExchangeBuyer2AccountsProposalsCreateResource,
+    AdExchangeBuyer2AccountsProposalsCreate (..),
     newAdExchangeBuyer2AccountsProposalsCreate,
-    AdExchangeBuyer2AccountsProposalsCreate,
 
     -- ** adexchangebuyer2.accounts.proposals.get
     AdExchangeBuyer2AccountsProposalsGetResource,
+    AdExchangeBuyer2AccountsProposalsGet (..),
     newAdExchangeBuyer2AccountsProposalsGet,
-    AdExchangeBuyer2AccountsProposalsGet,
 
     -- ** adexchangebuyer2.accounts.proposals.list
     AdExchangeBuyer2AccountsProposalsListResource,
+    AdExchangeBuyer2AccountsProposalsList (..),
     newAdExchangeBuyer2AccountsProposalsList,
-    AdExchangeBuyer2AccountsProposalsList,
 
     -- ** adexchangebuyer2.accounts.proposals.pause
     AdExchangeBuyer2AccountsProposalsPauseResource,
+    AdExchangeBuyer2AccountsProposalsPause (..),
     newAdExchangeBuyer2AccountsProposalsPause,
-    AdExchangeBuyer2AccountsProposalsPause,
 
     -- ** adexchangebuyer2.accounts.proposals.resume
     AdExchangeBuyer2AccountsProposalsResumeResource,
+    AdExchangeBuyer2AccountsProposalsResume (..),
     newAdExchangeBuyer2AccountsProposalsResume,
-    AdExchangeBuyer2AccountsProposalsResume,
 
     -- ** adexchangebuyer2.accounts.proposals.update
     AdExchangeBuyer2AccountsProposalsUpdateResource,
+    AdExchangeBuyer2AccountsProposalsUpdate (..),
     newAdExchangeBuyer2AccountsProposalsUpdate,
-    AdExchangeBuyer2AccountsProposalsUpdate,
 
     -- ** adexchangebuyer2.accounts.publisherProfiles.get
     AdExchangeBuyer2AccountsPublisherProfilesGetResource,
+    AdExchangeBuyer2AccountsPublisherProfilesGet (..),
     newAdExchangeBuyer2AccountsPublisherProfilesGet,
-    AdExchangeBuyer2AccountsPublisherProfilesGet,
 
     -- ** adexchangebuyer2.accounts.publisherProfiles.list
     AdExchangeBuyer2AccountsPublisherProfilesListResource,
+    AdExchangeBuyer2AccountsPublisherProfilesList (..),
     newAdExchangeBuyer2AccountsPublisherProfilesList,
-    AdExchangeBuyer2AccountsPublisherProfilesList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.bidMetrics.list
     AdExchangeBuyer2BiddersAccountsFilterSetsBidMetricsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsBidMetricsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsBidMetricsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsBidMetricsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.bidResponseErrors.list
     AdExchangeBuyer2BiddersAccountsFilterSetsBidResponseErrorsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponseErrorsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsBidResponseErrorsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponseErrorsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.bidResponsesWithoutBids.list
     AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsBidResponsesWithoutBidsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.create
     AdExchangeBuyer2BiddersAccountsFilterSetsCreateResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsCreate (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsCreate,
-    AdExchangeBuyer2BiddersAccountsFilterSetsCreate,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.delete
     AdExchangeBuyer2BiddersAccountsFilterSetsDeleteResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsDelete (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsDelete,
-    AdExchangeBuyer2BiddersAccountsFilterSetsDelete,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.filteredBidRequests.list
     AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidRequestsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.filteredBids.creatives.list
     AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsCreativesListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsCreativesList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsCreativesList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsCreativesList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.filteredBids.details.list
     AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsDetailsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsDetailsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsDetailsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsDetailsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.filteredBids.list
     AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsFilteredBidsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.get
     AdExchangeBuyer2BiddersAccountsFilterSetsGetResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsGet (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsGet,
-    AdExchangeBuyer2BiddersAccountsFilterSetsGet,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.impressionMetrics.list
     AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsImpressionMetricsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.list
     AdExchangeBuyer2BiddersAccountsFilterSetsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.losingBids.list
     AdExchangeBuyer2BiddersAccountsFilterSetsLosingBidsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsLosingBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsLosingBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsLosingBidsList,
 
     -- ** adexchangebuyer2.bidders.accounts.filterSets.nonBillableWinningBids.list
     AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsListResource,
+    AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList (..),
     newAdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList,
-    AdExchangeBuyer2BiddersAccountsFilterSetsNonBillableWinningBidsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.bidMetrics.list
     AdExchangeBuyer2BiddersFilterSetsBidMetricsListResource,
+    AdExchangeBuyer2BiddersFilterSetsBidMetricsList (..),
     newAdExchangeBuyer2BiddersFilterSetsBidMetricsList,
-    AdExchangeBuyer2BiddersFilterSetsBidMetricsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.bidResponseErrors.list
     AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsListResource,
+    AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList (..),
     newAdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList,
-    AdExchangeBuyer2BiddersFilterSetsBidResponseErrorsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.bidResponsesWithoutBids.list
     AdExchangeBuyer2BiddersFilterSetsBidResponsesWithoutBidsListResource,
+    AdExchangeBuyer2BiddersFilterSetsBidResponsesWithoutBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsBidResponsesWithoutBidsList,
-    AdExchangeBuyer2BiddersFilterSetsBidResponsesWithoutBidsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.create
     AdExchangeBuyer2BiddersFilterSetsCreateResource,
+    AdExchangeBuyer2BiddersFilterSetsCreate (..),
     newAdExchangeBuyer2BiddersFilterSetsCreate,
-    AdExchangeBuyer2BiddersFilterSetsCreate,
 
     -- ** adexchangebuyer2.bidders.filterSets.delete
     AdExchangeBuyer2BiddersFilterSetsDeleteResource,
+    AdExchangeBuyer2BiddersFilterSetsDelete (..),
     newAdExchangeBuyer2BiddersFilterSetsDelete,
-    AdExchangeBuyer2BiddersFilterSetsDelete,
 
     -- ** adexchangebuyer2.bidders.filterSets.filteredBidRequests.list
     AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsListResource,
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList (..),
     newAdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList,
-    AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.filteredBids.creatives.list
     AdExchangeBuyer2BiddersFilterSetsFilteredBidsCreativesListResource,
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidsCreativesList (..),
     newAdExchangeBuyer2BiddersFilterSetsFilteredBidsCreativesList,
-    AdExchangeBuyer2BiddersFilterSetsFilteredBidsCreativesList,
 
     -- ** adexchangebuyer2.bidders.filterSets.filteredBids.details.list
     AdExchangeBuyer2BiddersFilterSetsFilteredBidsDetailsListResource,
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidsDetailsList (..),
     newAdExchangeBuyer2BiddersFilterSetsFilteredBidsDetailsList,
-    AdExchangeBuyer2BiddersFilterSetsFilteredBidsDetailsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.filteredBids.list
     AdExchangeBuyer2BiddersFilterSetsFilteredBidsListResource,
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsFilteredBidsList,
-    AdExchangeBuyer2BiddersFilterSetsFilteredBidsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.get
     AdExchangeBuyer2BiddersFilterSetsGetResource,
+    AdExchangeBuyer2BiddersFilterSetsGet (..),
     newAdExchangeBuyer2BiddersFilterSetsGet,
-    AdExchangeBuyer2BiddersFilterSetsGet,
 
     -- ** adexchangebuyer2.bidders.filterSets.impressionMetrics.list
     AdExchangeBuyer2BiddersFilterSetsImpressionMetricsListResource,
+    AdExchangeBuyer2BiddersFilterSetsImpressionMetricsList (..),
     newAdExchangeBuyer2BiddersFilterSetsImpressionMetricsList,
-    AdExchangeBuyer2BiddersFilterSetsImpressionMetricsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.list
     AdExchangeBuyer2BiddersFilterSetsListResource,
+    AdExchangeBuyer2BiddersFilterSetsList (..),
     newAdExchangeBuyer2BiddersFilterSetsList,
-    AdExchangeBuyer2BiddersFilterSetsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.losingBids.list
     AdExchangeBuyer2BiddersFilterSetsLosingBidsListResource,
+    AdExchangeBuyer2BiddersFilterSetsLosingBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsLosingBidsList,
-    AdExchangeBuyer2BiddersFilterSetsLosingBidsList,
 
     -- ** adexchangebuyer2.bidders.filterSets.nonBillableWinningBids.list
     AdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsListResource,
+    AdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsList,
-    AdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsList,
 
     -- * Types
 

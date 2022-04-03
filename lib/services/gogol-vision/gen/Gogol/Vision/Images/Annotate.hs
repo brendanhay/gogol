@@ -34,8 +34,8 @@ module Gogol.Vision.Images.Annotate
     VisionImagesAnnotateResource,
 
     -- ** Constructing a Request
+    VisionImagesAnnotate (..),
     newVisionImagesAnnotate,
-    VisionImagesAnnotate,
   )
 where
 

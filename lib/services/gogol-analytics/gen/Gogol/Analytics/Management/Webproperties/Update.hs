@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Webproperties.Update
     AnalyticsManagementWebpropertiesUpdateResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementWebpropertiesUpdate (..),
     newAnalyticsManagementWebpropertiesUpdate,
-    AnalyticsManagementWebpropertiesUpdate,
   )
 where
 

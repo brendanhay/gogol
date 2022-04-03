@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.GetByPath
     BloggerPostsGetByPathResource,
 
     -- ** Constructing a Request
+    BloggerPostsGetByPath (..),
     newBloggerPostsGetByPath,
-    BloggerPostsGetByPath,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.List
     CalendarEventsListResource,
 
     -- ** Constructing a Request
+    CalendarEventsList (..),
     newCalendarEventsList,
-    CalendarEventsList,
   )
 where
 

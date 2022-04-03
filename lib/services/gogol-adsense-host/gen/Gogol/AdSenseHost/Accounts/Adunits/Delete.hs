@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Accounts.Adunits.Delete
     AdSenseHostAccountsAdunitsDeleteResource,
 
     -- ** Constructing a Request
+    AdSenseHostAccountsAdunitsDelete (..),
     newAdSenseHostAccountsAdunitsDelete,
-    AdSenseHostAccountsAdunitsDelete,
   )
 where
 

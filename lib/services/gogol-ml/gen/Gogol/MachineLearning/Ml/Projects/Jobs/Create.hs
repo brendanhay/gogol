@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.Create
     MlProjectsJobsCreateResource,
 
     -- ** Constructing a Request
+    MlProjectsJobsCreate (..),
     newMlProjectsJobsCreate,
-    MlProjectsJobsCreate,
   )
 where
 

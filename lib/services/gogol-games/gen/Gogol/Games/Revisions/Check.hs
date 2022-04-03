@@ -34,8 +34,8 @@ module Gogol.Games.Revisions.Check
     GamesRevisionsCheckResource,
 
     -- ** Constructing a Request
+    GamesRevisionsCheck (..),
     newGamesRevisionsCheck,
-    GamesRevisionsCheck,
   )
 where
 

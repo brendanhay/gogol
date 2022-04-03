@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Topics.Get
     PubSubProjectsTopicsGetResource,
 
     -- ** Constructing a Request
+    PubSubProjectsTopicsGet (..),
     newPubSubProjectsTopicsGet,
-    PubSubProjectsTopicsGet,
   )
 where
 

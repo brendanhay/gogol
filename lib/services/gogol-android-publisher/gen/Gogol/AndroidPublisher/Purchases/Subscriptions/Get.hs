@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Get
     AndroidPublisherPurchasesSubscriptionsGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesSubscriptionsGet (..),
     newAndroidPublisherPurchasesSubscriptionsGet,
-    AndroidPublisherPurchasesSubscriptionsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Schemas.Delete
     DirectorySchemasDeleteResource,
 
     -- ** Constructing a Request
+    DirectorySchemasDelete (..),
     newDirectorySchemasDelete,
-    DirectorySchemasDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.RoleAssignments.Insert
     DirectoryRoleAssignmentsInsertResource,
 
     -- ** Constructing a Request
+    DirectoryRoleAssignmentsInsert (..),
     newDirectoryRoleAssignmentsInsert,
-    DirectoryRoleAssignmentsInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkEndpointGroups.AggregatedList
     ComputeNetworkEndpointGroupsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeNetworkEndpointGroupsAggregatedList (..),
     newComputeNetworkEndpointGroupsAggregatedList,
-    ComputeNetworkEndpointGroupsAggregatedList,
   )
 where
 

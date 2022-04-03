@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.UpdateDdl
     SpannerProjectsInstancesDatabasesUpdateDdlResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesUpdateDdl (..),
     newSpannerProjectsInstancesDatabasesUpdateDdl,
-    SpannerProjectsInstancesDatabasesUpdateDdl,
   )
 where
 

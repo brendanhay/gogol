@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Pos.Inventory
     ContentPosInventoryResource,
 
     -- ** Constructing a Request
+    ContentPosInventory (..),
     newContentPosInventory,
-    ContentPosInventory,
   )
 where
 

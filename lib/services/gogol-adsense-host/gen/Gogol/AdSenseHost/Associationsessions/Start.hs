@@ -34,8 +34,8 @@ module Gogol.AdSenseHost.Associationsessions.Start
     AdSenseHostAssociationsessionsStartResource,
 
     -- ** Constructing a Request
+    AdSenseHostAssociationsessionsStart (..),
     newAdSenseHostAssociationsessionsStart,
-    AdSenseHostAssociationsessionsStart,
   )
 where
 

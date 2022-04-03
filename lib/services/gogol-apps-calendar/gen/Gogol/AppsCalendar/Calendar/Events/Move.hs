@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Events.Move
     CalendarEventsMoveResource,
 
     -- ** Constructing a Request
+    CalendarEventsMove (..),
     newCalendarEventsMove,
-    CalendarEventsMove,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Chat.Spaces.Members.List
     ChatSpacesMembersListResource,
 
     -- ** Constructing a Request
+    ChatSpacesMembersList (..),
     newChatSpacesMembersList,
-    ChatSpacesMembersList,
   )
 where
 

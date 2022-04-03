@@ -34,8 +34,8 @@ module Gogol.Compute.ExternalVpnGateways.Get
     ComputeExternalVpnGatewaysGetResource,
 
     -- ** Constructing a Request
+    ComputeExternalVpnGatewaysGet (..),
     newComputeExternalVpnGatewaysGet,
-    ComputeExternalVpnGatewaysGet,
   )
 where
 

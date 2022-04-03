@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Projects.UpdateAccessApprovalSettings
     AccessApprovalProjectsUpdateAccessApprovalSettingsResource,
 
     -- ** Constructing a Request
+    AccessApprovalProjectsUpdateAccessApprovalSettings (..),
     newAccessApprovalProjectsUpdateAccessApprovalSettings,
-    AccessApprovalProjectsUpdateAccessApprovalSettings,
   )
 where
 

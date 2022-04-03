@@ -37,8 +37,8 @@ module Gogol.QPXExpress
 
     -- ** qpxExpress.trips.search
     QPXExpressTripsSearchResource,
+    QPXExpressTripsSearch (..),
     newQPXExpressTripsSearch,
-    QPXExpressTripsSearch,
 
     -- * Types
 

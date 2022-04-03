@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.List
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesListResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList,
-    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList,
   )
 where
 

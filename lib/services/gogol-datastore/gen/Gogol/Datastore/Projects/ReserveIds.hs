@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.ReserveIds
     DatastoreProjectsReserveIdsResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsReserveIds (..),
     newDatastoreProjectsReserveIds,
-    DatastoreProjectsReserveIds,
   )
 where
 

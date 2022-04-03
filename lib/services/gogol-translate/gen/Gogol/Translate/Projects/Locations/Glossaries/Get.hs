@@ -34,8 +34,8 @@ module Gogol.Translate.Projects.Locations.Glossaries.Get
     TranslateProjectsLocationsGlossariesGetResource,
 
     -- ** Constructing a Request
+    TranslateProjectsLocationsGlossariesGet (..),
     newTranslateProjectsLocationsGlossariesGet,
-    TranslateProjectsLocationsGlossariesGet,
   )
 where
 

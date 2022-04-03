@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.SmimeInfo.Insert
     GmailUsersSettingsSendAsSmimeInfoInsertResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsSmimeInfoInsert (..),
     newGmailUsersSettingsSendAsSmimeInfoInsert,
-    GmailUsersSettingsSendAsSmimeInfoInsert,
   )
 where
 

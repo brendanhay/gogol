@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.SignBlob
     IAMProjectsServiceAccountsSignBlobResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsSignBlob (..),
     newIAMProjectsServiceAccountsSignBlob,
-    IAMProjectsServiceAccountsSignBlob,
   )
 where
 

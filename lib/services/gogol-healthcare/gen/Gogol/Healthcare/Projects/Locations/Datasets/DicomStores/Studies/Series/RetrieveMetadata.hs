@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.R
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadataResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata,
-    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesRetrieveMetadata,
   )
 where
 

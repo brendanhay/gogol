@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.StartExternalSync
     SqlProjectsInstancesStartExternalSyncResource,
 
     -- ** Constructing a Request
+    SqlProjectsInstancesStartExternalSync (..),
     newSqlProjectsInstancesStartExternalSync,
-    SqlProjectsInstancesStartExternalSync,
   )
 where
 

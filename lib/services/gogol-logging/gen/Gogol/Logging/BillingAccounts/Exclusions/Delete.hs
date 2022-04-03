@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Exclusions.Delete
     LoggingBillingAccountsExclusionsDeleteResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsExclusionsDelete (..),
     newLoggingBillingAccountsExclusionsDelete,
-    LoggingBillingAccountsExclusionsDelete,
   )
 where
 

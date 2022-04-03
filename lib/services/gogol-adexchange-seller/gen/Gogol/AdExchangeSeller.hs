@@ -41,73 +41,73 @@ module Gogol.AdExchangeSeller
 
     -- ** adexchangeseller.accounts.adclients.list
     AdExchangeSellerAccountsAdclientsListResource,
+    AdExchangeSellerAccountsAdclientsList (..),
     newAdExchangeSellerAccountsAdclientsList,
-    AdExchangeSellerAccountsAdclientsList,
 
     -- ** adexchangeseller.accounts.alerts.list
     AdExchangeSellerAccountsAlertsListResource,
+    AdExchangeSellerAccountsAlertsList (..),
     newAdExchangeSellerAccountsAlertsList,
-    AdExchangeSellerAccountsAlertsList,
 
     -- ** adexchangeseller.accounts.customchannels.get
     AdExchangeSellerAccountsCustomchannelsGetResource,
+    AdExchangeSellerAccountsCustomchannelsGet (..),
     newAdExchangeSellerAccountsCustomchannelsGet,
-    AdExchangeSellerAccountsCustomchannelsGet,
 
     -- ** adexchangeseller.accounts.customchannels.list
     AdExchangeSellerAccountsCustomchannelsListResource,
+    AdExchangeSellerAccountsCustomchannelsList (..),
     newAdExchangeSellerAccountsCustomchannelsList,
-    AdExchangeSellerAccountsCustomchannelsList,
 
     -- ** adexchangeseller.accounts.get
     AdExchangeSellerAccountsGetResource,
+    AdExchangeSellerAccountsGet (..),
     newAdExchangeSellerAccountsGet,
-    AdExchangeSellerAccountsGet,
 
     -- ** adexchangeseller.accounts.list
     AdExchangeSellerAccountsListResource,
+    AdExchangeSellerAccountsList (..),
     newAdExchangeSellerAccountsList,
-    AdExchangeSellerAccountsList,
 
     -- ** adexchangeseller.accounts.metadata.dimensions.list
     AdExchangeSellerAccountsMetadataDimensionsListResource,
+    AdExchangeSellerAccountsMetadataDimensionsList (..),
     newAdExchangeSellerAccountsMetadataDimensionsList,
-    AdExchangeSellerAccountsMetadataDimensionsList,
 
     -- ** adexchangeseller.accounts.metadata.metrics.list
     AdExchangeSellerAccountsMetadataMetricsListResource,
+    AdExchangeSellerAccountsMetadataMetricsList (..),
     newAdExchangeSellerAccountsMetadataMetricsList,
-    AdExchangeSellerAccountsMetadataMetricsList,
 
     -- ** adexchangeseller.accounts.preferreddeals.get
     AdExchangeSellerAccountsPreferreddealsGetResource,
+    AdExchangeSellerAccountsPreferreddealsGet (..),
     newAdExchangeSellerAccountsPreferreddealsGet,
-    AdExchangeSellerAccountsPreferreddealsGet,
 
     -- ** adexchangeseller.accounts.preferreddeals.list
     AdExchangeSellerAccountsPreferreddealsListResource,
+    AdExchangeSellerAccountsPreferreddealsList (..),
     newAdExchangeSellerAccountsPreferreddealsList,
-    AdExchangeSellerAccountsPreferreddealsList,
 
     -- ** adexchangeseller.accounts.reports.generate
     AdExchangeSellerAccountsReportsGenerateResource,
+    AdExchangeSellerAccountsReportsGenerate (..),
     newAdExchangeSellerAccountsReportsGenerate,
-    AdExchangeSellerAccountsReportsGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.generate
     AdExchangeSellerAccountsReportsSavedGenerateResource,
+    AdExchangeSellerAccountsReportsSavedGenerate (..),
     newAdExchangeSellerAccountsReportsSavedGenerate,
-    AdExchangeSellerAccountsReportsSavedGenerate,
 
     -- ** adexchangeseller.accounts.reports.saved.list
     AdExchangeSellerAccountsReportsSavedListResource,
+    AdExchangeSellerAccountsReportsSavedList (..),
     newAdExchangeSellerAccountsReportsSavedList,
-    AdExchangeSellerAccountsReportsSavedList,
 
     -- ** adexchangeseller.accounts.urlchannels.list
     AdExchangeSellerAccountsUrlchannelsListResource,
+    AdExchangeSellerAccountsUrlchannelsList (..),
     newAdExchangeSellerAccountsUrlchannelsList,
-    AdExchangeSellerAccountsUrlchannelsList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Refundorder
     ContentOrdersRefundorderResource,
 
     -- ** Constructing a Request
+    ContentOrdersRefundorder (..),
     newContentOrdersRefundorder,
-    ContentOrdersRefundorder,
   )
 where
 

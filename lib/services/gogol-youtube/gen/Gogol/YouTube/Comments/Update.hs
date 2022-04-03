@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.Update
     YouTubeCommentsUpdateResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsUpdate (..),
     newYouTubeCommentsUpdate,
-    YouTubeCommentsUpdate,
   )
 where
 

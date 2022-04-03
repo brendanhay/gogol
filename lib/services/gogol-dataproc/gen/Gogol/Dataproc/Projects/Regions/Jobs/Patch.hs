@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Jobs.Patch
     DataprocProjectsRegionsJobsPatchResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsJobsPatch (..),
     newDataprocProjectsRegionsJobsPatch,
-    DataprocProjectsRegionsJobsPatch,
   )
 where
 

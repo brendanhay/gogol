@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
     AndroidPublisherEditsApksAddexternallyhostedResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsApksAddexternallyhosted (..),
     newAndroidPublisherEditsApksAddexternallyhosted,
-    AndroidPublisherEditsApksAddexternallyhosted,
   )
 where
 

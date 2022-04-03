@@ -34,8 +34,8 @@ module Gogol.Compute.RegionInstanceGroups.SetNamedPorts
     ComputeRegionInstanceGroupsSetNamedPortsResource,
 
     -- ** Constructing a Request
+    ComputeRegionInstanceGroupsSetNamedPorts (..),
     newComputeRegionInstanceGroupsSetNamedPorts,
-    ComputeRegionInstanceGroupsSetNamedPorts,
   )
 where
 

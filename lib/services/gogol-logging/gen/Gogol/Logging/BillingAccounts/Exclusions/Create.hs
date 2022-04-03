@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.Exclusions.Create
     LoggingBillingAccountsExclusionsCreateResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsExclusionsCreate (..),
     newLoggingBillingAccountsExclusionsCreate,
-    LoggingBillingAccountsExclusionsCreate,
   )
 where
 

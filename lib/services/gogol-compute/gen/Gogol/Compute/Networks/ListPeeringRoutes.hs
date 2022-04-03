@@ -34,8 +34,8 @@ module Gogol.Compute.Networks.ListPeeringRoutes
     ComputeNetworksListPeeringRoutesResource,
 
     -- ** Constructing a Request
+    ComputeNetworksListPeeringRoutes (..),
     newComputeNetworksListPeeringRoutes,
-    ComputeNetworksListPeeringRoutes,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.PlayCustomApp.Accounts.CustomApps.Create
     PlayCustomAppAccountsCustomAppsCreateResource,
 
     -- ** Constructing a Request
+    PlayCustomAppAccountsCustomAppsCreate (..),
     newPlayCustomAppAccountsCustomAppsCreate,
-    PlayCustomAppAccountsCustomAppsCreate,
   )
 where
 

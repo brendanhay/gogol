@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.AddAccessConfig
     ComputeInstancesAddAccessConfigResource,
 
     -- ** Constructing a Request
+    ComputeInstancesAddAccessConfig (..),
     newComputeInstancesAddAccessConfig,
-    ComputeInstancesAddAccessConfig,
   )
 where
 

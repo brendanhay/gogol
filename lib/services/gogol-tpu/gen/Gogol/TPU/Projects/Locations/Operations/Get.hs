@@ -34,8 +34,8 @@ module Gogol.TPU.Projects.Locations.Operations.Get
     TPUProjectsLocationsOperationsGetResource,
 
     -- ** Constructing a Request
+    TPUProjectsLocationsOperationsGet (..),
     newTPUProjectsLocationsOperationsGet,
-    TPUProjectsLocationsOperationsGet,
   )
 where
 

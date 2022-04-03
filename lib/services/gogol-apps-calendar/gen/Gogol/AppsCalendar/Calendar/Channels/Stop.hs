@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Channels.Stop
     CalendarChannelsStopResource,
 
     -- ** Constructing a Request
+    CalendarChannelsStop (..),
     newCalendarChannelsStop,
-    CalendarChannelsStop,
   )
 where
 

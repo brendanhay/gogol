@@ -40,818 +40,818 @@ module Gogol.ShoppingContent
 
     -- ** content.accounts.authinfo
     ContentAccountsAuthinfoResource,
+    ContentAccountsAuthinfo (..),
     newContentAccountsAuthinfo,
-    ContentAccountsAuthinfo,
 
     -- ** content.accounts.claimwebsite
     ContentAccountsClaimwebsiteResource,
+    ContentAccountsClaimwebsite (..),
     newContentAccountsClaimwebsite,
-    ContentAccountsClaimwebsite,
 
     -- ** content.accounts.credentials.create
     ContentAccountsCredentialsCreateResource,
+    ContentAccountsCredentialsCreate (..),
     newContentAccountsCredentialsCreate,
-    ContentAccountsCredentialsCreate,
 
     -- ** content.accounts.custombatch
     ContentAccountsCustombatchResource,
+    ContentAccountsCustombatch (..),
     newContentAccountsCustombatch,
-    ContentAccountsCustombatch,
 
     -- ** content.accounts.delete
     ContentAccountsDeleteResource,
+    ContentAccountsDelete (..),
     newContentAccountsDelete,
-    ContentAccountsDelete,
 
     -- ** content.accounts.get
     ContentAccountsGetResource,
+    ContentAccountsGet (..),
     newContentAccountsGet,
-    ContentAccountsGet,
 
     -- ** content.accounts.insert
     ContentAccountsInsertResource,
+    ContentAccountsInsert (..),
     newContentAccountsInsert,
-    ContentAccountsInsert,
 
     -- ** content.accounts.labels.create
     ContentAccountsLabelsCreateResource,
+    ContentAccountsLabelsCreate (..),
     newContentAccountsLabelsCreate,
-    ContentAccountsLabelsCreate,
 
     -- ** content.accounts.labels.delete
     ContentAccountsLabelsDeleteResource,
+    ContentAccountsLabelsDelete (..),
     newContentAccountsLabelsDelete,
-    ContentAccountsLabelsDelete,
 
     -- ** content.accounts.labels.list
     ContentAccountsLabelsListResource,
+    ContentAccountsLabelsList (..),
     newContentAccountsLabelsList,
-    ContentAccountsLabelsList,
 
     -- ** content.accounts.labels.patch
     ContentAccountsLabelsPatchResource,
+    ContentAccountsLabelsPatch (..),
     newContentAccountsLabelsPatch,
-    ContentAccountsLabelsPatch,
 
     -- ** content.accounts.link
     ContentAccountsLinkResource,
+    ContentAccountsLink (..),
     newContentAccountsLink,
-    ContentAccountsLink,
 
     -- ** content.accounts.list
     ContentAccountsListResource,
+    ContentAccountsList (..),
     newContentAccountsList,
-    ContentAccountsList,
 
     -- ** content.accounts.listlinks
     ContentAccountsListlinksResource,
+    ContentAccountsListlinks (..),
     newContentAccountsListlinks,
-    ContentAccountsListlinks,
 
     -- ** content.accounts.requestphoneverification
     ContentAccountsRequestphoneverificationResource,
+    ContentAccountsRequestphoneverification (..),
     newContentAccountsRequestphoneverification,
-    ContentAccountsRequestphoneverification,
 
     -- ** content.accounts.returncarrier.create
     ContentAccountsReturncarrierCreateResource,
+    ContentAccountsReturncarrierCreate (..),
     newContentAccountsReturncarrierCreate,
-    ContentAccountsReturncarrierCreate,
 
     -- ** content.accounts.returncarrier.delete
     ContentAccountsReturncarrierDeleteResource,
+    ContentAccountsReturncarrierDelete (..),
     newContentAccountsReturncarrierDelete,
-    ContentAccountsReturncarrierDelete,
 
     -- ** content.accounts.returncarrier.list
     ContentAccountsReturncarrierListResource,
+    ContentAccountsReturncarrierList (..),
     newContentAccountsReturncarrierList,
-    ContentAccountsReturncarrierList,
 
     -- ** content.accounts.returncarrier.patch
     ContentAccountsReturncarrierPatchResource,
+    ContentAccountsReturncarrierPatch (..),
     newContentAccountsReturncarrierPatch,
-    ContentAccountsReturncarrierPatch,
 
     -- ** content.accounts.update
     ContentAccountsUpdateResource,
+    ContentAccountsUpdate (..),
     newContentAccountsUpdate,
-    ContentAccountsUpdate,
 
     -- ** content.accounts.updatelabels
     ContentAccountsUpdatelabelsResource,
+    ContentAccountsUpdatelabels (..),
     newContentAccountsUpdatelabels,
-    ContentAccountsUpdatelabels,
 
     -- ** content.accounts.verifyphonenumber
     ContentAccountsVerifyphonenumberResource,
+    ContentAccountsVerifyphonenumber (..),
     newContentAccountsVerifyphonenumber,
-    ContentAccountsVerifyphonenumber,
 
     -- ** content.accountstatuses.custombatch
     ContentAccountstatusesCustombatchResource,
+    ContentAccountstatusesCustombatch (..),
     newContentAccountstatusesCustombatch,
-    ContentAccountstatusesCustombatch,
 
     -- ** content.accountstatuses.get
     ContentAccountstatusesGetResource,
+    ContentAccountstatusesGet (..),
     newContentAccountstatusesGet,
-    ContentAccountstatusesGet,
 
     -- ** content.accountstatuses.list
     ContentAccountstatusesListResource,
+    ContentAccountstatusesList (..),
     newContentAccountstatusesList,
-    ContentAccountstatusesList,
 
     -- ** content.accounttax.custombatch
     ContentAccounttaxCustombatchResource,
+    ContentAccounttaxCustombatch (..),
     newContentAccounttaxCustombatch,
-    ContentAccounttaxCustombatch,
 
     -- ** content.accounttax.get
     ContentAccounttaxGetResource,
+    ContentAccounttaxGet (..),
     newContentAccounttaxGet,
-    ContentAccounttaxGet,
 
     -- ** content.accounttax.list
     ContentAccounttaxListResource,
+    ContentAccounttaxList (..),
     newContentAccounttaxList,
-    ContentAccounttaxList,
 
     -- ** content.accounttax.update
     ContentAccounttaxUpdateResource,
+    ContentAccounttaxUpdate (..),
     newContentAccounttaxUpdate,
-    ContentAccounttaxUpdate,
 
     -- ** content.buyongoogleprograms.activate
     ContentBuyongoogleprogramsActivateResource,
+    ContentBuyongoogleprogramsActivate (..),
     newContentBuyongoogleprogramsActivate,
-    ContentBuyongoogleprogramsActivate,
 
     -- ** content.buyongoogleprograms.get
     ContentBuyongoogleprogramsGetResource,
+    ContentBuyongoogleprogramsGet (..),
     newContentBuyongoogleprogramsGet,
-    ContentBuyongoogleprogramsGet,
 
     -- ** content.buyongoogleprograms.onboard
     ContentBuyongoogleprogramsOnboardResource,
+    ContentBuyongoogleprogramsOnboard (..),
     newContentBuyongoogleprogramsOnboard,
-    ContentBuyongoogleprogramsOnboard,
 
     -- ** content.buyongoogleprograms.patch
     ContentBuyongoogleprogramsPatchResource,
+    ContentBuyongoogleprogramsPatch (..),
     newContentBuyongoogleprogramsPatch,
-    ContentBuyongoogleprogramsPatch,
 
     -- ** content.buyongoogleprograms.pause
     ContentBuyongoogleprogramsPauseResource,
+    ContentBuyongoogleprogramsPause (..),
     newContentBuyongoogleprogramsPause,
-    ContentBuyongoogleprogramsPause,
 
     -- ** content.buyongoogleprograms.requestreview
     ContentBuyongoogleprogramsRequestreviewResource,
+    ContentBuyongoogleprogramsRequestreview (..),
     newContentBuyongoogleprogramsRequestreview,
-    ContentBuyongoogleprogramsRequestreview,
 
     -- ** content.collections.create
     ContentCollectionsCreateResource,
+    ContentCollectionsCreate (..),
     newContentCollectionsCreate,
-    ContentCollectionsCreate,
 
     -- ** content.collections.delete
     ContentCollectionsDeleteResource,
+    ContentCollectionsDelete (..),
     newContentCollectionsDelete,
-    ContentCollectionsDelete,
 
     -- ** content.collections.get
     ContentCollectionsGetResource,
+    ContentCollectionsGet (..),
     newContentCollectionsGet,
-    ContentCollectionsGet,
 
     -- ** content.collections.list
     ContentCollectionsListResource,
+    ContentCollectionsList (..),
     newContentCollectionsList,
-    ContentCollectionsList,
 
     -- ** content.collectionstatuses.get
     ContentCollectionstatusesGetResource,
+    ContentCollectionstatusesGet (..),
     newContentCollectionstatusesGet,
-    ContentCollectionstatusesGet,
 
     -- ** content.collectionstatuses.list
     ContentCollectionstatusesListResource,
+    ContentCollectionstatusesList (..),
     newContentCollectionstatusesList,
-    ContentCollectionstatusesList,
 
     -- ** content.csses.get
     ContentCssesGetResource,
+    ContentCssesGet (..),
     newContentCssesGet,
-    ContentCssesGet,
 
     -- ** content.csses.list
     ContentCssesListResource,
+    ContentCssesList (..),
     newContentCssesList,
-    ContentCssesList,
 
     -- ** content.csses.updatelabels
     ContentCssesUpdatelabelsResource,
+    ContentCssesUpdatelabels (..),
     newContentCssesUpdatelabels,
-    ContentCssesUpdatelabels,
 
     -- ** content.datafeeds.custombatch
     ContentDatafeedsCustombatchResource,
+    ContentDatafeedsCustombatch (..),
     newContentDatafeedsCustombatch,
-    ContentDatafeedsCustombatch,
 
     -- ** content.datafeeds.delete
     ContentDatafeedsDeleteResource,
+    ContentDatafeedsDelete (..),
     newContentDatafeedsDelete,
-    ContentDatafeedsDelete,
 
     -- ** content.datafeeds.fetchnow
     ContentDatafeedsFetchnowResource,
+    ContentDatafeedsFetchnow (..),
     newContentDatafeedsFetchnow,
-    ContentDatafeedsFetchnow,
 
     -- ** content.datafeeds.get
     ContentDatafeedsGetResource,
+    ContentDatafeedsGet (..),
     newContentDatafeedsGet,
-    ContentDatafeedsGet,
 
     -- ** content.datafeeds.insert
     ContentDatafeedsInsertResource,
+    ContentDatafeedsInsert (..),
     newContentDatafeedsInsert,
-    ContentDatafeedsInsert,
 
     -- ** content.datafeeds.list
     ContentDatafeedsListResource,
+    ContentDatafeedsList (..),
     newContentDatafeedsList,
-    ContentDatafeedsList,
 
     -- ** content.datafeeds.update
     ContentDatafeedsUpdateResource,
+    ContentDatafeedsUpdate (..),
     newContentDatafeedsUpdate,
-    ContentDatafeedsUpdate,
 
     -- ** content.datafeedstatuses.custombatch
     ContentDatafeedstatusesCustombatchResource,
+    ContentDatafeedstatusesCustombatch (..),
     newContentDatafeedstatusesCustombatch,
-    ContentDatafeedstatusesCustombatch,
 
     -- ** content.datafeedstatuses.get
     ContentDatafeedstatusesGetResource,
+    ContentDatafeedstatusesGet (..),
     newContentDatafeedstatusesGet,
-    ContentDatafeedstatusesGet,
 
     -- ** content.datafeedstatuses.list
     ContentDatafeedstatusesListResource,
+    ContentDatafeedstatusesList (..),
     newContentDatafeedstatusesList,
-    ContentDatafeedstatusesList,
 
     -- ** content.freelistingsprogram.get
     ContentFreelistingsprogramGetResource,
+    ContentFreelistingsprogramGet (..),
     newContentFreelistingsprogramGet,
-    ContentFreelistingsprogramGet,
 
     -- ** content.freelistingsprogram.requestreview
     ContentFreelistingsprogramRequestreviewResource,
+    ContentFreelistingsprogramRequestreview (..),
     newContentFreelistingsprogramRequestreview,
-    ContentFreelistingsprogramRequestreview,
 
     -- ** content.liasettings.custombatch
     ContentLiasettingsCustombatchResource,
+    ContentLiasettingsCustombatch (..),
     newContentLiasettingsCustombatch,
-    ContentLiasettingsCustombatch,
 
     -- ** content.liasettings.get
     ContentLiasettingsGetResource,
+    ContentLiasettingsGet (..),
     newContentLiasettingsGet,
-    ContentLiasettingsGet,
 
     -- ** content.liasettings.getaccessiblegmbaccounts
     ContentLiasettingsGetaccessiblegmbaccountsResource,
+    ContentLiasettingsGetaccessiblegmbaccounts (..),
     newContentLiasettingsGetaccessiblegmbaccounts,
-    ContentLiasettingsGetaccessiblegmbaccounts,
 
     -- ** content.liasettings.list
     ContentLiasettingsListResource,
+    ContentLiasettingsList (..),
     newContentLiasettingsList,
-    ContentLiasettingsList,
 
     -- ** content.liasettings.listposdataproviders
     ContentLiasettingsListposdataprovidersResource,
+    ContentLiasettingsListposdataproviders (..),
     newContentLiasettingsListposdataproviders,
-    ContentLiasettingsListposdataproviders,
 
     -- ** content.liasettings.requestgmbaccess
     ContentLiasettingsRequestgmbaccessResource,
+    ContentLiasettingsRequestgmbaccess (..),
     newContentLiasettingsRequestgmbaccess,
-    ContentLiasettingsRequestgmbaccess,
 
     -- ** content.liasettings.requestinventoryverification
     ContentLiasettingsRequestinventoryverificationResource,
+    ContentLiasettingsRequestinventoryverification (..),
     newContentLiasettingsRequestinventoryverification,
-    ContentLiasettingsRequestinventoryverification,
 
     -- ** content.liasettings.setinventoryverificationcontact
     ContentLiasettingsSetinventoryverificationcontactResource,
+    ContentLiasettingsSetinventoryverificationcontact (..),
     newContentLiasettingsSetinventoryverificationcontact,
-    ContentLiasettingsSetinventoryverificationcontact,
 
     -- ** content.liasettings.setposdataprovider
     ContentLiasettingsSetposdataproviderResource,
+    ContentLiasettingsSetposdataprovider (..),
     newContentLiasettingsSetposdataprovider,
-    ContentLiasettingsSetposdataprovider,
 
     -- ** content.liasettings.update
     ContentLiasettingsUpdateResource,
+    ContentLiasettingsUpdate (..),
     newContentLiasettingsUpdate,
-    ContentLiasettingsUpdate,
 
     -- ** content.localinventory.custombatch
     ContentLocalinventoryCustombatchResource,
+    ContentLocalinventoryCustombatch (..),
     newContentLocalinventoryCustombatch,
-    ContentLocalinventoryCustombatch,
 
     -- ** content.localinventory.insert
     ContentLocalinventoryInsertResource,
+    ContentLocalinventoryInsert (..),
     newContentLocalinventoryInsert,
-    ContentLocalinventoryInsert,
 
     -- ** content.orderinvoices.createchargeinvoice
     ContentOrderinvoicesCreatechargeinvoiceResource,
+    ContentOrderinvoicesCreatechargeinvoice (..),
     newContentOrderinvoicesCreatechargeinvoice,
-    ContentOrderinvoicesCreatechargeinvoice,
 
     -- ** content.orderinvoices.createrefundinvoice
     ContentOrderinvoicesCreaterefundinvoiceResource,
+    ContentOrderinvoicesCreaterefundinvoice (..),
     newContentOrderinvoicesCreaterefundinvoice,
-    ContentOrderinvoicesCreaterefundinvoice,
 
     -- ** content.orderreports.listdisbursements
     ContentOrderreportsListdisbursementsResource,
+    ContentOrderreportsListdisbursements (..),
     newContentOrderreportsListdisbursements,
-    ContentOrderreportsListdisbursements,
 
     -- ** content.orderreports.listtransactions
     ContentOrderreportsListtransactionsResource,
+    ContentOrderreportsListtransactions (..),
     newContentOrderreportsListtransactions,
-    ContentOrderreportsListtransactions,
 
     -- ** content.orderreturns.acknowledge
     ContentOrderreturnsAcknowledgeResource,
+    ContentOrderreturnsAcknowledge (..),
     newContentOrderreturnsAcknowledge,
-    ContentOrderreturnsAcknowledge,
 
     -- ** content.orderreturns.createorderreturn
     ContentOrderreturnsCreateorderreturnResource,
+    ContentOrderreturnsCreateorderreturn (..),
     newContentOrderreturnsCreateorderreturn,
-    ContentOrderreturnsCreateorderreturn,
 
     -- ** content.orderreturns.get
     ContentOrderreturnsGetResource,
+    ContentOrderreturnsGet (..),
     newContentOrderreturnsGet,
-    ContentOrderreturnsGet,
 
     -- ** content.orderreturns.labels.create
     ContentOrderreturnsLabelsCreateResource,
+    ContentOrderreturnsLabelsCreate (..),
     newContentOrderreturnsLabelsCreate,
-    ContentOrderreturnsLabelsCreate,
 
     -- ** content.orderreturns.list
     ContentOrderreturnsListResource,
+    ContentOrderreturnsList (..),
     newContentOrderreturnsList,
-    ContentOrderreturnsList,
 
     -- ** content.orderreturns.process
     ContentOrderreturnsProcessResource,
+    ContentOrderreturnsProcess (..),
     newContentOrderreturnsProcess,
-    ContentOrderreturnsProcess,
 
     -- ** content.orders.acknowledge
     ContentOrdersAcknowledgeResource,
+    ContentOrdersAcknowledge (..),
     newContentOrdersAcknowledge,
-    ContentOrdersAcknowledge,
 
     -- ** content.orders.advancetestorder
     ContentOrdersAdvancetestorderResource,
+    ContentOrdersAdvancetestorder (..),
     newContentOrdersAdvancetestorder,
-    ContentOrdersAdvancetestorder,
 
     -- ** content.orders.cancel
     ContentOrdersCancelResource,
+    ContentOrdersCancel (..),
     newContentOrdersCancel,
-    ContentOrdersCancel,
 
     -- ** content.orders.cancellineitem
     ContentOrdersCancellineitemResource,
+    ContentOrdersCancellineitem (..),
     newContentOrdersCancellineitem,
-    ContentOrdersCancellineitem,
 
     -- ** content.orders.canceltestorderbycustomer
     ContentOrdersCanceltestorderbycustomerResource,
+    ContentOrdersCanceltestorderbycustomer (..),
     newContentOrdersCanceltestorderbycustomer,
-    ContentOrdersCanceltestorderbycustomer,
 
     -- ** content.orders.captureOrder
     ContentOrdersCaptureOrderResource,
+    ContentOrdersCaptureOrder (..),
     newContentOrdersCaptureOrder,
-    ContentOrdersCaptureOrder,
 
     -- ** content.orders.createtestorder
     ContentOrdersCreatetestorderResource,
+    ContentOrdersCreatetestorder (..),
     newContentOrdersCreatetestorder,
-    ContentOrdersCreatetestorder,
 
     -- ** content.orders.createtestreturn
     ContentOrdersCreatetestreturnResource,
+    ContentOrdersCreatetestreturn (..),
     newContentOrdersCreatetestreturn,
-    ContentOrdersCreatetestreturn,
 
     -- ** content.orders.get
     ContentOrdersGetResource,
+    ContentOrdersGet (..),
     newContentOrdersGet,
-    ContentOrdersGet,
 
     -- ** content.orders.getbymerchantorderid
     ContentOrdersGetbymerchantorderidResource,
+    ContentOrdersGetbymerchantorderid (..),
     newContentOrdersGetbymerchantorderid,
-    ContentOrdersGetbymerchantorderid,
 
     -- ** content.orders.gettestordertemplate
     ContentOrdersGettestordertemplateResource,
+    ContentOrdersGettestordertemplate (..),
     newContentOrdersGettestordertemplate,
-    ContentOrdersGettestordertemplate,
 
     -- ** content.orders.instorerefundlineitem
     ContentOrdersInstorerefundlineitemResource,
+    ContentOrdersInstorerefundlineitem (..),
     newContentOrdersInstorerefundlineitem,
-    ContentOrdersInstorerefundlineitem,
 
     -- ** content.orders.list
     ContentOrdersListResource,
+    ContentOrdersList (..),
     newContentOrdersList,
-    ContentOrdersList,
 
     -- ** content.orders.refunditem
     ContentOrdersRefunditemResource,
+    ContentOrdersRefunditem (..),
     newContentOrdersRefunditem,
-    ContentOrdersRefunditem,
 
     -- ** content.orders.refundorder
     ContentOrdersRefundorderResource,
+    ContentOrdersRefundorder (..),
     newContentOrdersRefundorder,
-    ContentOrdersRefundorder,
 
     -- ** content.orders.rejectreturnlineitem
     ContentOrdersRejectreturnlineitemResource,
+    ContentOrdersRejectreturnlineitem (..),
     newContentOrdersRejectreturnlineitem,
-    ContentOrdersRejectreturnlineitem,
 
     -- ** content.orders.returnrefundlineitem
     ContentOrdersReturnrefundlineitemResource,
+    ContentOrdersReturnrefundlineitem (..),
     newContentOrdersReturnrefundlineitem,
-    ContentOrdersReturnrefundlineitem,
 
     -- ** content.orders.setlineitemmetadata
     ContentOrdersSetlineitemmetadataResource,
+    ContentOrdersSetlineitemmetadata (..),
     newContentOrdersSetlineitemmetadata,
-    ContentOrdersSetlineitemmetadata,
 
     -- ** content.orders.shiplineitems
     ContentOrdersShiplineitemsResource,
+    ContentOrdersShiplineitems (..),
     newContentOrdersShiplineitems,
-    ContentOrdersShiplineitems,
 
     -- ** content.orders.updatelineitemshippingdetails
     ContentOrdersUpdatelineitemshippingdetailsResource,
+    ContentOrdersUpdatelineitemshippingdetails (..),
     newContentOrdersUpdatelineitemshippingdetails,
-    ContentOrdersUpdatelineitemshippingdetails,
 
     -- ** content.orders.updatemerchantorderid
     ContentOrdersUpdatemerchantorderidResource,
+    ContentOrdersUpdatemerchantorderid (..),
     newContentOrdersUpdatemerchantorderid,
-    ContentOrdersUpdatemerchantorderid,
 
     -- ** content.orders.updateshipment
     ContentOrdersUpdateshipmentResource,
+    ContentOrdersUpdateshipment (..),
     newContentOrdersUpdateshipment,
-    ContentOrdersUpdateshipment,
 
     -- ** content.ordertrackingsignals.create
     ContentOrdertrackingsignalsCreateResource,
+    ContentOrdertrackingsignalsCreate (..),
     newContentOrdertrackingsignalsCreate,
-    ContentOrdertrackingsignalsCreate,
 
     -- ** content.pos.custombatch
     ContentPosCustombatchResource,
+    ContentPosCustombatch (..),
     newContentPosCustombatch,
-    ContentPosCustombatch,
 
     -- ** content.pos.delete
     ContentPosDeleteResource,
+    ContentPosDelete (..),
     newContentPosDelete,
-    ContentPosDelete,
 
     -- ** content.pos.get
     ContentPosGetResource,
+    ContentPosGet (..),
     newContentPosGet,
-    ContentPosGet,
 
     -- ** content.pos.insert
     ContentPosInsertResource,
+    ContentPosInsert (..),
     newContentPosInsert,
-    ContentPosInsert,
 
     -- ** content.pos.inventory
     ContentPosInventoryResource,
+    ContentPosInventory (..),
     newContentPosInventory,
-    ContentPosInventory,
 
     -- ** content.pos.list
     ContentPosListResource,
+    ContentPosList (..),
     newContentPosList,
-    ContentPosList,
 
     -- ** content.pos.sale
     ContentPosSaleResource,
+    ContentPosSale (..),
     newContentPosSale,
-    ContentPosSale,
 
     -- ** content.products.custombatch
     ContentProductsCustombatchResource,
+    ContentProductsCustombatch (..),
     newContentProductsCustombatch,
-    ContentProductsCustombatch,
 
     -- ** content.products.delete
     ContentProductsDeleteResource,
+    ContentProductsDelete (..),
     newContentProductsDelete,
-    ContentProductsDelete,
 
     -- ** content.products.get
     ContentProductsGetResource,
+    ContentProductsGet (..),
     newContentProductsGet,
-    ContentProductsGet,
 
     -- ** content.products.insert
     ContentProductsInsertResource,
+    ContentProductsInsert (..),
     newContentProductsInsert,
-    ContentProductsInsert,
 
     -- ** content.products.list
     ContentProductsListResource,
+    ContentProductsList (..),
     newContentProductsList,
-    ContentProductsList,
 
     -- ** content.products.update
     ContentProductsUpdateResource,
+    ContentProductsUpdate (..),
     newContentProductsUpdate,
-    ContentProductsUpdate,
 
     -- ** content.productstatuses.custombatch
     ContentProductstatusesCustombatchResource,
+    ContentProductstatusesCustombatch (..),
     newContentProductstatusesCustombatch,
-    ContentProductstatusesCustombatch,
 
     -- ** content.productstatuses.get
     ContentProductstatusesGetResource,
+    ContentProductstatusesGet (..),
     newContentProductstatusesGet,
-    ContentProductstatusesGet,
 
     -- ** content.productstatuses.list
     ContentProductstatusesListResource,
+    ContentProductstatusesList (..),
     newContentProductstatusesList,
-    ContentProductstatusesList,
 
     -- ** content.productstatuses.repricingreports.list
     ContentProductstatusesRepricingreportsListResource,
+    ContentProductstatusesRepricingreportsList (..),
     newContentProductstatusesRepricingreportsList,
-    ContentProductstatusesRepricingreportsList,
 
     -- ** content.promotions.create
     ContentPromotionsCreateResource,
+    ContentPromotionsCreate (..),
     newContentPromotionsCreate,
-    ContentPromotionsCreate,
 
     -- ** content.promotions.get
     ContentPromotionsGetResource,
+    ContentPromotionsGet (..),
     newContentPromotionsGet,
-    ContentPromotionsGet,
 
     -- ** content.pubsubnotificationsettings.get
     ContentPubsubnotificationsettingsGetResource,
+    ContentPubsubnotificationsettingsGet (..),
     newContentPubsubnotificationsettingsGet,
-    ContentPubsubnotificationsettingsGet,
 
     -- ** content.pubsubnotificationsettings.update
     ContentPubsubnotificationsettingsUpdateResource,
+    ContentPubsubnotificationsettingsUpdate (..),
     newContentPubsubnotificationsettingsUpdate,
-    ContentPubsubnotificationsettingsUpdate,
 
     -- ** content.regionalinventory.custombatch
     ContentRegionalinventoryCustombatchResource,
+    ContentRegionalinventoryCustombatch (..),
     newContentRegionalinventoryCustombatch,
-    ContentRegionalinventoryCustombatch,
 
     -- ** content.regionalinventory.insert
     ContentRegionalinventoryInsertResource,
+    ContentRegionalinventoryInsert (..),
     newContentRegionalinventoryInsert,
-    ContentRegionalinventoryInsert,
 
     -- ** content.regions.create
     ContentRegionsCreateResource,
+    ContentRegionsCreate (..),
     newContentRegionsCreate,
-    ContentRegionsCreate,
 
     -- ** content.regions.delete
     ContentRegionsDeleteResource,
+    ContentRegionsDelete (..),
     newContentRegionsDelete,
-    ContentRegionsDelete,
 
     -- ** content.regions.get
     ContentRegionsGetResource,
+    ContentRegionsGet (..),
     newContentRegionsGet,
-    ContentRegionsGet,
 
     -- ** content.regions.list
     ContentRegionsListResource,
+    ContentRegionsList (..),
     newContentRegionsList,
-    ContentRegionsList,
 
     -- ** content.regions.patch
     ContentRegionsPatchResource,
+    ContentRegionsPatch (..),
     newContentRegionsPatch,
-    ContentRegionsPatch,
 
     -- ** content.reports.search
     ContentReportsSearchResource,
+    ContentReportsSearch (..),
     newContentReportsSearch,
-    ContentReportsSearch,
 
     -- ** content.repricingrules.create
     ContentRepricingrulesCreateResource,
+    ContentRepricingrulesCreate (..),
     newContentRepricingrulesCreate,
-    ContentRepricingrulesCreate,
 
     -- ** content.repricingrules.delete
     ContentRepricingrulesDeleteResource,
+    ContentRepricingrulesDelete (..),
     newContentRepricingrulesDelete,
-    ContentRepricingrulesDelete,
 
     -- ** content.repricingrules.get
     ContentRepricingrulesGetResource,
+    ContentRepricingrulesGet (..),
     newContentRepricingrulesGet,
-    ContentRepricingrulesGet,
 
     -- ** content.repricingrules.list
     ContentRepricingrulesListResource,
+    ContentRepricingrulesList (..),
     newContentRepricingrulesList,
-    ContentRepricingrulesList,
 
     -- ** content.repricingrules.patch
     ContentRepricingrulesPatchResource,
+    ContentRepricingrulesPatch (..),
     newContentRepricingrulesPatch,
-    ContentRepricingrulesPatch,
 
     -- ** content.repricingrules.repricingreports.list
     ContentRepricingrulesRepricingreportsListResource,
+    ContentRepricingrulesRepricingreportsList (..),
     newContentRepricingrulesRepricingreportsList,
-    ContentRepricingrulesRepricingreportsList,
 
     -- ** content.returnaddress.custombatch
     ContentReturnaddressCustombatchResource,
+    ContentReturnaddressCustombatch (..),
     newContentReturnaddressCustombatch,
-    ContentReturnaddressCustombatch,
 
     -- ** content.returnaddress.delete
     ContentReturnaddressDeleteResource,
+    ContentReturnaddressDelete (..),
     newContentReturnaddressDelete,
-    ContentReturnaddressDelete,
 
     -- ** content.returnaddress.get
     ContentReturnaddressGetResource,
+    ContentReturnaddressGet (..),
     newContentReturnaddressGet,
-    ContentReturnaddressGet,
 
     -- ** content.returnaddress.insert
     ContentReturnaddressInsertResource,
+    ContentReturnaddressInsert (..),
     newContentReturnaddressInsert,
-    ContentReturnaddressInsert,
 
     -- ** content.returnaddress.list
     ContentReturnaddressListResource,
+    ContentReturnaddressList (..),
     newContentReturnaddressList,
-    ContentReturnaddressList,
 
     -- ** content.returnpolicy.custombatch
     ContentReturnpolicyCustombatchResource,
+    ContentReturnpolicyCustombatch (..),
     newContentReturnpolicyCustombatch,
-    ContentReturnpolicyCustombatch,
 
     -- ** content.returnpolicy.delete
     ContentReturnpolicyDeleteResource,
+    ContentReturnpolicyDelete (..),
     newContentReturnpolicyDelete,
-    ContentReturnpolicyDelete,
 
     -- ** content.returnpolicy.get
     ContentReturnpolicyGetResource,
+    ContentReturnpolicyGet (..),
     newContentReturnpolicyGet,
-    ContentReturnpolicyGet,
 
     -- ** content.returnpolicy.insert
     ContentReturnpolicyInsertResource,
+    ContentReturnpolicyInsert (..),
     newContentReturnpolicyInsert,
-    ContentReturnpolicyInsert,
 
     -- ** content.returnpolicy.list
     ContentReturnpolicyListResource,
+    ContentReturnpolicyList (..),
     newContentReturnpolicyList,
-    ContentReturnpolicyList,
 
     -- ** content.returnpolicyonline.create
     ContentReturnpolicyonlineCreateResource,
+    ContentReturnpolicyonlineCreate (..),
     newContentReturnpolicyonlineCreate,
-    ContentReturnpolicyonlineCreate,
 
     -- ** content.returnpolicyonline.delete
     ContentReturnpolicyonlineDeleteResource,
+    ContentReturnpolicyonlineDelete (..),
     newContentReturnpolicyonlineDelete,
-    ContentReturnpolicyonlineDelete,
 
     -- ** content.returnpolicyonline.get
     ContentReturnpolicyonlineGetResource,
+    ContentReturnpolicyonlineGet (..),
     newContentReturnpolicyonlineGet,
-    ContentReturnpolicyonlineGet,
 
     -- ** content.returnpolicyonline.list
     ContentReturnpolicyonlineListResource,
+    ContentReturnpolicyonlineList (..),
     newContentReturnpolicyonlineList,
-    ContentReturnpolicyonlineList,
 
     -- ** content.returnpolicyonline.patch
     ContentReturnpolicyonlinePatchResource,
+    ContentReturnpolicyonlinePatch (..),
     newContentReturnpolicyonlinePatch,
-    ContentReturnpolicyonlinePatch,
 
     -- ** content.settlementreports.get
     ContentSettlementreportsGetResource,
+    ContentSettlementreportsGet (..),
     newContentSettlementreportsGet,
-    ContentSettlementreportsGet,
 
     -- ** content.settlementreports.list
     ContentSettlementreportsListResource,
+    ContentSettlementreportsList (..),
     newContentSettlementreportsList,
-    ContentSettlementreportsList,
 
     -- ** content.settlementtransactions.list
     ContentSettlementtransactionsListResource,
+    ContentSettlementtransactionsList (..),
     newContentSettlementtransactionsList,
-    ContentSettlementtransactionsList,
 
     -- ** content.shippingsettings.custombatch
     ContentShippingsettingsCustombatchResource,
+    ContentShippingsettingsCustombatch (..),
     newContentShippingsettingsCustombatch,
-    ContentShippingsettingsCustombatch,
 
     -- ** content.shippingsettings.get
     ContentShippingsettingsGetResource,
+    ContentShippingsettingsGet (..),
     newContentShippingsettingsGet,
-    ContentShippingsettingsGet,
 
     -- ** content.shippingsettings.getsupportedcarriers
     ContentShippingsettingsGetsupportedcarriersResource,
+    ContentShippingsettingsGetsupportedcarriers (..),
     newContentShippingsettingsGetsupportedcarriers,
-    ContentShippingsettingsGetsupportedcarriers,
 
     -- ** content.shippingsettings.getsupportedholidays
     ContentShippingsettingsGetsupportedholidaysResource,
+    ContentShippingsettingsGetsupportedholidays (..),
     newContentShippingsettingsGetsupportedholidays,
-    ContentShippingsettingsGetsupportedholidays,
 
     -- ** content.shippingsettings.getsupportedpickupservices
     ContentShippingsettingsGetsupportedpickupservicesResource,
+    ContentShippingsettingsGetsupportedpickupservices (..),
     newContentShippingsettingsGetsupportedpickupservices,
-    ContentShippingsettingsGetsupportedpickupservices,
 
     -- ** content.shippingsettings.list
     ContentShippingsettingsListResource,
+    ContentShippingsettingsList (..),
     newContentShippingsettingsList,
-    ContentShippingsettingsList,
 
     -- ** content.shippingsettings.update
     ContentShippingsettingsUpdateResource,
+    ContentShippingsettingsUpdate (..),
     newContentShippingsettingsUpdate,
-    ContentShippingsettingsUpdate,
 
     -- ** content.shoppingadsprogram.get
     ContentShoppingadsprogramGetResource,
+    ContentShoppingadsprogramGet (..),
     newContentShoppingadsprogramGet,
-    ContentShoppingadsprogramGet,
 
     -- ** content.shoppingadsprogram.requestreview
     ContentShoppingadsprogramRequestreviewResource,
+    ContentShoppingadsprogramRequestreview (..),
     newContentShoppingadsprogramRequestreview,
-    ContentShoppingadsprogramRequestreview,
 
     -- * Types
 

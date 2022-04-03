@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Export
     DatastoreProjectsExportResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsExport (..),
     newDatastoreProjectsExport,
-    DatastoreProjectsExport,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerAnalysis.Projects.Notes.Delete
     ContainerAnalysisProjectsNotesDeleteResource,
 
     -- ** Constructing a Request
+    ContainerAnalysisProjectsNotesDelete (..),
     newContainerAnalysisProjectsNotesDelete,
-    ContainerAnalysisProjectsNotesDelete,
   )
 where
 

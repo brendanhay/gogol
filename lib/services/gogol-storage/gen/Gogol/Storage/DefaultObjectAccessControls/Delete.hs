@@ -34,8 +34,8 @@ module Gogol.Storage.DefaultObjectAccessControls.Delete
     StorageDefaultObjectAccessControlsDeleteResource,
 
     -- ** Constructing a Request
+    StorageDefaultObjectAccessControlsDelete (..),
     newStorageDefaultObjectAccessControlsDelete,
-    StorageDefaultObjectAccessControlsDelete,
   )
 where
 

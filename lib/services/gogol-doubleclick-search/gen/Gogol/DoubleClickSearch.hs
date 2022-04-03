@@ -40,48 +40,48 @@ module Gogol.DoubleClickSearch
 
     -- ** doubleclicksearch.conversion.get
     DoubleClickSearchConversionGetResource,
+    DoubleClickSearchConversionGet (..),
     newDoubleClickSearchConversionGet,
-    DoubleClickSearchConversionGet,
 
     -- ** doubleclicksearch.conversion.insert
     DoubleClickSearchConversionInsertResource,
+    DoubleClickSearchConversionInsert (..),
     newDoubleClickSearchConversionInsert,
-    DoubleClickSearchConversionInsert,
 
     -- ** doubleclicksearch.conversion.update
     DoubleClickSearchConversionUpdateResource,
+    DoubleClickSearchConversionUpdate (..),
     newDoubleClickSearchConversionUpdate,
-    DoubleClickSearchConversionUpdate,
 
     -- ** doubleclicksearch.conversion.updateAvailability
     DoubleClickSearchConversionUpdateAvailabilityResource,
+    DoubleClickSearchConversionUpdateAvailability (..),
     newDoubleClickSearchConversionUpdateAvailability,
-    DoubleClickSearchConversionUpdateAvailability,
 
     -- ** doubleclicksearch.reports.generate
     DoubleClickSearchReportsGenerateResource,
+    DoubleClickSearchReportsGenerate (..),
     newDoubleClickSearchReportsGenerate,
-    DoubleClickSearchReportsGenerate,
 
     -- ** doubleclicksearch.reports.get
     DoubleClickSearchReportsGetResource,
+    DoubleClickSearchReportsGet (..),
     newDoubleClickSearchReportsGet,
-    DoubleClickSearchReportsGet,
 
     -- ** doubleclicksearch.reports.getFile
     DoubleClickSearchReportsGetFileResource,
+    DoubleClickSearchReportsGetFile (..),
     newDoubleClickSearchReportsGetFile,
-    DoubleClickSearchReportsGetFile,
 
     -- ** doubleclicksearch.reports.request
     DoubleClickSearchReportsRequestResource,
+    DoubleClickSearchReportsRequest (..),
     newDoubleClickSearchReportsRequest,
-    DoubleClickSearchReportsRequest,
 
     -- ** doubleclicksearch.savedColumns.list
     DoubleClickSearchSavedColumnsListResource,
+    DoubleClickSearchSavedColumnsList (..),
     newDoubleClickSearchSavedColumnsList,
-    DoubleClickSearchSavedColumnsList,
 
     -- * Types
 

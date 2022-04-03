@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Grants.Create
     AndroidPublisherGrantsCreateResource,
 
     -- ** Constructing a Request
+    AndroidPublisherGrantsCreate (..),
     newAndroidPublisherGrantsCreate,
-    AndroidPublisherGrantsCreate,
   )
 where
 

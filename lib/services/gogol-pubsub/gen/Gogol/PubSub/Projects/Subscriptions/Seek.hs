@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.Seek
     PubSubProjectsSubscriptionsSeekResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsSeek (..),
     newPubSubProjectsSubscriptionsSeek,
-    PubSubProjectsSubscriptionsSeek,
   )
 where
 

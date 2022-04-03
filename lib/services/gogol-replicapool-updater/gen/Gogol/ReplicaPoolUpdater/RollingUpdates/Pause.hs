@@ -34,8 +34,8 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
     ReplicaPoolUpdaterRollingUpdatesPauseResource,
 
     -- ** Constructing a Request
+    ReplicaPoolUpdaterRollingUpdatesPause (..),
     newReplicaPoolUpdaterRollingUpdatesPause,
-    ReplicaPoolUpdaterRollingUpdatesPause,
   )
 where
 

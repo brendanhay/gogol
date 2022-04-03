@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Push
     CloudSearchIndexingDatasourcesItemsPushResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsPush (..),
     newCloudSearchIndexingDatasourcesItemsPush,
-    CloudSearchIndexingDatasourcesItemsPush,
   )
 where
 

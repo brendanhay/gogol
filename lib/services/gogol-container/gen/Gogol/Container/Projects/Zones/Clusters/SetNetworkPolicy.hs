@@ -34,8 +34,8 @@ module Gogol.Container.Projects.Zones.Clusters.SetNetworkPolicy
     ContainerProjectsZonesClustersSetNetworkPolicyResource,
 
     -- ** Constructing a Request
+    ContainerProjectsZonesClustersSetNetworkPolicy (..),
     newContainerProjectsZonesClustersSetNetworkPolicy,
-    ContainerProjectsZonesClustersSetNetworkPolicy,
   )
 where
 

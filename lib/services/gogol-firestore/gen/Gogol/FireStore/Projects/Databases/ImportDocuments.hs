@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.ImportDocuments
     FireStoreProjectsDatabasesImportDocumentsResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesImportDocuments (..),
     newFireStoreProjectsDatabasesImportDocuments,
-    FireStoreProjectsDatabasesImportDocuments,
   )
 where
 

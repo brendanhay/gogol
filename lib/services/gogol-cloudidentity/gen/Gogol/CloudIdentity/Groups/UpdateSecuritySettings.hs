@@ -34,8 +34,8 @@ module Gogol.CloudIdentity.Groups.UpdateSecuritySettings
     CloudIdentityGroupsUpdateSecuritySettingsResource,
 
     -- ** Constructing a Request
+    CloudIdentityGroupsUpdateSecuritySettings (..),
     newCloudIdentityGroupsUpdateSecuritySettings,
-    CloudIdentityGroupsUpdateSecuritySettings,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Sheets.CopyTo
     SheetsSpreadsheetsSheetsCopyToResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsSheetsCopyTo (..),
     newSheetsSpreadsheetsSheetsCopyTo,
-    SheetsSpreadsheetsSheetsCopyTo,
   )
 where
 

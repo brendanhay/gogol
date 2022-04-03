@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
     DialogFlowProjectsLocationsAgentsFlowsPagesListResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsFlowsPagesList (..),
     newDialogFlowProjectsLocationsAgentsFlowsPagesList,
-    DialogFlowProjectsLocationsAgentsFlowsPagesList,
   )
 where
 

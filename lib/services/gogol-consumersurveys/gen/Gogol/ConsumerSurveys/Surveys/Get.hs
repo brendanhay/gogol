@@ -34,8 +34,8 @@ module Gogol.ConsumerSurveys.Surveys.Get
     ConsumerSurveysSurveysGetResource,
 
     -- ** Constructing a Request
+    ConsumerSurveysSurveysGet (..),
     newConsumerSurveysSurveysGet,
-    ConsumerSurveysSurveysGet,
   )
 where
 

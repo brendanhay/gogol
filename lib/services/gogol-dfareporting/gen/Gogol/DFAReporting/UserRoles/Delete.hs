@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRoles.Delete
     DFAReportingUserRolesDeleteResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolesDelete (..),
     newDFAReportingUserRolesDelete,
-    DFAReportingUserRolesDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.SafeBrowsing.ThreatMatches.Find
     SafeBrowsingThreatMatchesFindResource,
 
     -- ** Constructing a Request
+    SafeBrowsingThreatMatchesFind (..),
     newSafeBrowsingThreatMatchesFind,
-    SafeBrowsingThreatMatchesFind,
   )
 where
 

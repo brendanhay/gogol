@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.NotificationConfigs.Patch
     SecurityCenterOrganizationsNotificationConfigsPatchResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsNotificationConfigsPatch (..),
     newSecurityCenterOrganizationsNotificationConfigsPatch,
-    SecurityCenterOrganizationsNotificationConfigsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Devices.Operations.Delete
     AndroidManagementEnterprisesDevicesOperationsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesDevicesOperationsDelete (..),
     newAndroidManagementEnterprisesDevicesOperationsDelete,
-    AndroidManagementEnterprisesDevicesOperationsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Disable
     IAMProjectsServiceAccountsDisableResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsDisable (..),
     newIAMProjectsServiceAccountsDisable,
-    IAMProjectsServiceAccountsDisable,
   )
 where
 

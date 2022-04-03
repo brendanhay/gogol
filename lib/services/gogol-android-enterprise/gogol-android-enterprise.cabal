@@ -131,5 +131,5 @@ library
     Gogol.AndroidEnterprise.Internal.Sum
 
   build-depends:
-    , base        >=4.12  && <5
-    , gogol-core  ^>=1.0.0
+    , base        >=4.12 && <5
+    , gogol-core  ^>=1

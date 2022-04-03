@@ -34,8 +34,8 @@ module Gogol.AccessContextManager.AccessPolicies.GetIamPolicy
     AccessContextManagerAccessPoliciesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    AccessContextManagerAccessPoliciesGetIamPolicy (..),
     newAccessContextManagerAccessPoliciesGetIamPolicy,
-    AccessContextManagerAccessPoliciesGetIamPolicy,
   )
 where
 

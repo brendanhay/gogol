@@ -34,8 +34,8 @@ module Gogol.Admin.DataTransfer.Transfers.List
     DatatransferTransfersListResource,
 
     -- ** Constructing a Request
+    DatatransferTransfersList (..),
     newDatatransferTransfersList,
-    DatatransferTransfersList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudShell.Users.Environments.Start
     CloudShellUsersEnvironmentsStartResource,
 
     -- ** Constructing a Request
+    CloudShellUsersEnvironmentsStart (..),
     newCloudShellUsersEnvironmentsStart,
-    CloudShellUsersEnvironmentsStart,
   )
 where
 

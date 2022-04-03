@@ -34,8 +34,8 @@ module Gogol.Language.Documents.AnnotateText
     LanguageDocumentsAnnotateTextResource,
 
     -- ** Constructing a Request
+    LanguageDocumentsAnnotateText (..),
     newLanguageDocumentsAnnotateText,
-    LanguageDocumentsAnnotateText,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Accounttax.List
     ContentAccounttaxListResource,
 
     -- ** Constructing a Request
+    ContentAccounttaxList (..),
     newContentAccounttaxList,
-    ContentAccounttaxList,
   )
 where
 

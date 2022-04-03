@@ -34,8 +34,8 @@ module Gogol.People.SearchContacts
     PeoplePeopleSearchContactsResource,
 
     -- ** Constructing a Request
+    PeoplePeopleSearchContacts (..),
     newPeoplePeopleSearchContacts,
-    PeoplePeopleSearchContacts,
   )
 where
 

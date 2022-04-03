@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
     DataflowProjectsLocationsJobsWorkItemsReportStatusResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsJobsWorkItemsReportStatus (..),
     newDataflowProjectsLocationsJobsWorkItemsReportStatus,
-    DataflowProjectsLocationsJobsWorkItemsReportStatus,
   )
 where
 

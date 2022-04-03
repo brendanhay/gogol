@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Export
     DialogFlowProjectsLocationsAgentsTestCasesExportResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesExport (..),
     newDialogFlowProjectsLocationsAgentsTestCasesExport,
-    DialogFlowProjectsLocationsAgentsTestCasesExport,
   )
 where
 

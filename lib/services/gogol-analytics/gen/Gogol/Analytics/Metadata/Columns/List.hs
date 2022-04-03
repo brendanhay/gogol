@@ -34,8 +34,8 @@ module Gogol.Analytics.Metadata.Columns.List
     AnalyticsMetadataColumnsListResource,
 
     -- ** Constructing a Request
+    AnalyticsMetadataColumnsList (..),
     newAnalyticsMetadataColumnsList,
-    AnalyticsMetadataColumnsList,
   )
 where
 

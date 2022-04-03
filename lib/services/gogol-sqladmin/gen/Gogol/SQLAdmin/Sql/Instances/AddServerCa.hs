@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.AddServerCa
     SqlInstancesAddServerCaResource,
 
     -- ** Constructing a Request
+    SqlInstancesAddServerCa (..),
     newSqlInstancesAddServerCa,
-    SqlInstancesAddServerCa,
   )
 where
 

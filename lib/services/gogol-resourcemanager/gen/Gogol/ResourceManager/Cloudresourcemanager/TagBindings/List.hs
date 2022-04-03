@@ -34,8 +34,8 @@ module Gogol.ResourceManager.Cloudresourcemanager.TagBindings.List
     CloudresourcemanagerTagBindingsListResource,
 
     -- ** Constructing a Request
+    CloudresourcemanagerTagBindingsList (..),
     newCloudresourcemanagerTagBindingsList,
-    CloudresourcemanagerTagBindingsList,
   )
 where
 

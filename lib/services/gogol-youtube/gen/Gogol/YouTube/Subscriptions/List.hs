@@ -34,8 +34,8 @@ module Gogol.YouTube.Subscriptions.List
     YouTubeSubscriptionsListResource,
 
     -- ** Constructing a Request
+    YouTubeSubscriptionsList (..),
     newYouTubeSubscriptionsList,
-    YouTubeSubscriptionsList,
   )
 where
 

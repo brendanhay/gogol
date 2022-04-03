@@ -34,8 +34,8 @@ module Gogol.Datastore.Projects.Operations.Delete
     DatastoreProjectsOperationsDeleteResource,
 
     -- ** Constructing a Request
+    DatastoreProjectsOperationsDelete (..),
     newDatastoreProjectsOperationsDelete,
-    DatastoreProjectsOperationsDelete,
   )
 where
 

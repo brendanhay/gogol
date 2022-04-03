@@ -34,8 +34,8 @@ module Gogol.Compute.Instances.SetServiceAccount
     ComputeInstancesSetServiceAccountResource,
 
     -- ** Constructing a Request
+    ComputeInstancesSetServiceAccount (..),
     newComputeInstancesSetServiceAccount,
-    ComputeInstancesSetServiceAccount,
   )
 where
 

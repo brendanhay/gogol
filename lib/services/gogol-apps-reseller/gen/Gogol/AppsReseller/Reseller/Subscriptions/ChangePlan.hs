@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Subscriptions.ChangePlan
     ResellerSubscriptionsChangePlanResource,
 
     -- ** Constructing a Request
+    ResellerSubscriptionsChangePlan (..),
     newResellerSubscriptionsChangePlan,
-    ResellerSubscriptionsChangePlan,
   )
 where
 

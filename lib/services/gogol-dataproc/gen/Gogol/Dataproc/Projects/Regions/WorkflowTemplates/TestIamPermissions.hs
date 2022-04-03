@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.TestIamPermissions
     DataprocProjectsRegionsWorkflowTemplatesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions (..),
     newDataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
-    DataprocProjectsRegionsWorkflowTemplatesTestIamPermissions,
   )
 where
 

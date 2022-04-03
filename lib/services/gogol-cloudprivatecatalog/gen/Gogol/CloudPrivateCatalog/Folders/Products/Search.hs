@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalog.Folders.Products.Search
     CloudPrivateCatalogFoldersProductsSearchResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogFoldersProductsSearch (..),
     newCloudPrivateCatalogFoldersProductsSearch,
-    CloudPrivateCatalogFoldersProductsSearch,
   )
 where
 

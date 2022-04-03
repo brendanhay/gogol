@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Orgunits.Patch
     DirectoryOrgunitsPatchResource,
 
     -- ** Constructing a Request
+    DirectoryOrgunitsPatch (..),
     newDirectoryOrgunitsPatch,
-    DirectoryOrgunitsPatch,
   )
 where
 

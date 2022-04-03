@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Regionalinventory.Insert
     ContentRegionalinventoryInsertResource,
 
     -- ** Constructing a Request
+    ContentRegionalinventoryInsert (..),
     newContentRegionalinventoryInsert,
-    ContentRegionalinventoryInsert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Reports.Search
     ContentReportsSearchResource,
 
     -- ** Constructing a Request
+    ContentReportsSearch (..),
     newContentReportsSearch,
-    ContentReportsSearch,
   )
 where
 

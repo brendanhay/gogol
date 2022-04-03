@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.SetIamPolicy
     StorageObjectsSetIamPolicyResource,
 
     -- ** Constructing a Request
+    StorageObjectsSetIamPolicy (..),
     newStorageObjectsSetIamPolicy,
-    StorageObjectsSetIamPolicy,
   )
 where
 

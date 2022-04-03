@@ -34,8 +34,8 @@ module Gogol.Partners.Users.UpdateProfile
     PartnersUsersUpdateProfileResource,
 
     -- ** Constructing a Request
+    PartnersUsersUpdateProfile (..),
     newPartnersUsersUpdateProfile,
-    PartnersUsersUpdateProfile,
   )
 where
 

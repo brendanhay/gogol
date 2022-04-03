@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Metrics.Update
     LoggingProjectsMetricsUpdateResource,
 
     -- ** Constructing a Request
+    LoggingProjectsMetricsUpdate (..),
     newLoggingProjectsMetricsUpdate,
-    LoggingProjectsMetricsUpdate,
   )
 where
 

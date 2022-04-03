@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.RefetchSheet
     FusionTablesTableRefetchSheetResource,
 
     -- ** Constructing a Request
+    FusionTablesTableRefetchSheet (..),
     newFusionTablesTableRefetchSheet,
-    FusionTablesTableRefetchSheet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Services.Get
     AppEngineAppsServicesGetResource,
 
     -- ** Constructing a Request
+    AppEngineAppsServicesGet (..),
     newAppEngineAppsServicesGet,
-    AppEngineAppsServicesGet,
   )
 where
 

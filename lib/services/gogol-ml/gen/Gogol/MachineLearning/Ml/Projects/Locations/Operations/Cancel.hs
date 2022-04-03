@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Operations.Cancel
     MlProjectsLocationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    MlProjectsLocationsOperationsCancel (..),
     newMlProjectsLocationsOperationsCancel,
-    MlProjectsLocationsOperationsCancel,
   )
 where
 

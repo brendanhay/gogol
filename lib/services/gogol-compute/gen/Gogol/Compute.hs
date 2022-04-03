@@ -45,3228 +45,3228 @@ module Gogol.Compute
 
     -- ** compute.acceleratorTypes.aggregatedList
     ComputeAcceleratorTypesAggregatedListResource,
+    ComputeAcceleratorTypesAggregatedList (..),
     newComputeAcceleratorTypesAggregatedList,
-    ComputeAcceleratorTypesAggregatedList,
 
     -- ** compute.acceleratorTypes.get
     ComputeAcceleratorTypesGetResource,
+    ComputeAcceleratorTypesGet (..),
     newComputeAcceleratorTypesGet,
-    ComputeAcceleratorTypesGet,
 
     -- ** compute.acceleratorTypes.list
     ComputeAcceleratorTypesListResource,
+    ComputeAcceleratorTypesList (..),
     newComputeAcceleratorTypesList,
-    ComputeAcceleratorTypesList,
 
     -- ** compute.addresses.aggregatedList
     ComputeAddressesAggregatedListResource,
+    ComputeAddressesAggregatedList (..),
     newComputeAddressesAggregatedList,
-    ComputeAddressesAggregatedList,
 
     -- ** compute.addresses.delete
     ComputeAddressesDeleteResource,
+    ComputeAddressesDelete (..),
     newComputeAddressesDelete,
-    ComputeAddressesDelete,
 
     -- ** compute.addresses.get
     ComputeAddressesGetResource,
+    ComputeAddressesGet (..),
     newComputeAddressesGet,
-    ComputeAddressesGet,
 
     -- ** compute.addresses.insert
     ComputeAddressesInsertResource,
+    ComputeAddressesInsert (..),
     newComputeAddressesInsert,
-    ComputeAddressesInsert,
 
     -- ** compute.addresses.list
     ComputeAddressesListResource,
+    ComputeAddressesList (..),
     newComputeAddressesList,
-    ComputeAddressesList,
 
     -- ** compute.autoscalers.aggregatedList
     ComputeAutoscalersAggregatedListResource,
+    ComputeAutoscalersAggregatedList (..),
     newComputeAutoscalersAggregatedList,
-    ComputeAutoscalersAggregatedList,
 
     -- ** compute.autoscalers.delete
     ComputeAutoscalersDeleteResource,
+    ComputeAutoscalersDelete (..),
     newComputeAutoscalersDelete,
-    ComputeAutoscalersDelete,
 
     -- ** compute.autoscalers.get
     ComputeAutoscalersGetResource,
+    ComputeAutoscalersGet (..),
     newComputeAutoscalersGet,
-    ComputeAutoscalersGet,
 
     -- ** compute.autoscalers.insert
     ComputeAutoscalersInsertResource,
+    ComputeAutoscalersInsert (..),
     newComputeAutoscalersInsert,
-    ComputeAutoscalersInsert,
 
     -- ** compute.autoscalers.list
     ComputeAutoscalersListResource,
+    ComputeAutoscalersList (..),
     newComputeAutoscalersList,
-    ComputeAutoscalersList,
 
     -- ** compute.autoscalers.patch
     ComputeAutoscalersPatchResource,
+    ComputeAutoscalersPatch (..),
     newComputeAutoscalersPatch,
-    ComputeAutoscalersPatch,
 
     -- ** compute.autoscalers.update
     ComputeAutoscalersUpdateResource,
+    ComputeAutoscalersUpdate (..),
     newComputeAutoscalersUpdate,
-    ComputeAutoscalersUpdate,
 
     -- ** compute.backendBuckets.addSignedUrlKey
     ComputeBackendBucketsAddSignedUrlKeyResource,
+    ComputeBackendBucketsAddSignedUrlKey (..),
     newComputeBackendBucketsAddSignedUrlKey,
-    ComputeBackendBucketsAddSignedUrlKey,
 
     -- ** compute.backendBuckets.delete
     ComputeBackendBucketsDeleteResource,
+    ComputeBackendBucketsDelete (..),
     newComputeBackendBucketsDelete,
-    ComputeBackendBucketsDelete,
 
     -- ** compute.backendBuckets.deleteSignedUrlKey
     ComputeBackendBucketsDeleteSignedUrlKeyResource,
+    ComputeBackendBucketsDeleteSignedUrlKey (..),
     newComputeBackendBucketsDeleteSignedUrlKey,
-    ComputeBackendBucketsDeleteSignedUrlKey,
 
     -- ** compute.backendBuckets.get
     ComputeBackendBucketsGetResource,
+    ComputeBackendBucketsGet (..),
     newComputeBackendBucketsGet,
-    ComputeBackendBucketsGet,
 
     -- ** compute.backendBuckets.insert
     ComputeBackendBucketsInsertResource,
+    ComputeBackendBucketsInsert (..),
     newComputeBackendBucketsInsert,
-    ComputeBackendBucketsInsert,
 
     -- ** compute.backendBuckets.list
     ComputeBackendBucketsListResource,
+    ComputeBackendBucketsList (..),
     newComputeBackendBucketsList,
-    ComputeBackendBucketsList,
 
     -- ** compute.backendBuckets.patch
     ComputeBackendBucketsPatchResource,
+    ComputeBackendBucketsPatch (..),
     newComputeBackendBucketsPatch,
-    ComputeBackendBucketsPatch,
 
     -- ** compute.backendBuckets.setEdgeSecurityPolicy
     ComputeBackendBucketsSetEdgeSecurityPolicyResource,
+    ComputeBackendBucketsSetEdgeSecurityPolicy (..),
     newComputeBackendBucketsSetEdgeSecurityPolicy,
-    ComputeBackendBucketsSetEdgeSecurityPolicy,
 
     -- ** compute.backendBuckets.update
     ComputeBackendBucketsUpdateResource,
+    ComputeBackendBucketsUpdate (..),
     newComputeBackendBucketsUpdate,
-    ComputeBackendBucketsUpdate,
 
     -- ** compute.backendServices.addSignedUrlKey
     ComputeBackendServicesAddSignedUrlKeyResource,
+    ComputeBackendServicesAddSignedUrlKey (..),
     newComputeBackendServicesAddSignedUrlKey,
-    ComputeBackendServicesAddSignedUrlKey,
 
     -- ** compute.backendServices.aggregatedList
     ComputeBackendServicesAggregatedListResource,
+    ComputeBackendServicesAggregatedList (..),
     newComputeBackendServicesAggregatedList,
-    ComputeBackendServicesAggregatedList,
 
     -- ** compute.backendServices.delete
     ComputeBackendServicesDeleteResource,
+    ComputeBackendServicesDelete (..),
     newComputeBackendServicesDelete,
-    ComputeBackendServicesDelete,
 
     -- ** compute.backendServices.deleteSignedUrlKey
     ComputeBackendServicesDeleteSignedUrlKeyResource,
+    ComputeBackendServicesDeleteSignedUrlKey (..),
     newComputeBackendServicesDeleteSignedUrlKey,
-    ComputeBackendServicesDeleteSignedUrlKey,
 
     -- ** compute.backendServices.get
     ComputeBackendServicesGetResource,
+    ComputeBackendServicesGet (..),
     newComputeBackendServicesGet,
-    ComputeBackendServicesGet,
 
     -- ** compute.backendServices.getHealth
     ComputeBackendServicesGetHealthResource,
+    ComputeBackendServicesGetHealth (..),
     newComputeBackendServicesGetHealth,
-    ComputeBackendServicesGetHealth,
 
     -- ** compute.backendServices.insert
     ComputeBackendServicesInsertResource,
+    ComputeBackendServicesInsert (..),
     newComputeBackendServicesInsert,
-    ComputeBackendServicesInsert,
 
     -- ** compute.backendServices.list
     ComputeBackendServicesListResource,
+    ComputeBackendServicesList (..),
     newComputeBackendServicesList,
-    ComputeBackendServicesList,
 
     -- ** compute.backendServices.patch
     ComputeBackendServicesPatchResource,
+    ComputeBackendServicesPatch (..),
     newComputeBackendServicesPatch,
-    ComputeBackendServicesPatch,
 
     -- ** compute.backendServices.setEdgeSecurityPolicy
     ComputeBackendServicesSetEdgeSecurityPolicyResource,
+    ComputeBackendServicesSetEdgeSecurityPolicy (..),
     newComputeBackendServicesSetEdgeSecurityPolicy,
-    ComputeBackendServicesSetEdgeSecurityPolicy,
 
     -- ** compute.backendServices.setSecurityPolicy
     ComputeBackendServicesSetSecurityPolicyResource,
+    ComputeBackendServicesSetSecurityPolicy (..),
     newComputeBackendServicesSetSecurityPolicy,
-    ComputeBackendServicesSetSecurityPolicy,
 
     -- ** compute.backendServices.update
     ComputeBackendServicesUpdateResource,
+    ComputeBackendServicesUpdate (..),
     newComputeBackendServicesUpdate,
-    ComputeBackendServicesUpdate,
 
     -- ** compute.diskTypes.aggregatedList
     ComputeDiskTypesAggregatedListResource,
+    ComputeDiskTypesAggregatedList (..),
     newComputeDiskTypesAggregatedList,
-    ComputeDiskTypesAggregatedList,
 
     -- ** compute.diskTypes.get
     ComputeDiskTypesGetResource,
+    ComputeDiskTypesGet (..),
     newComputeDiskTypesGet,
-    ComputeDiskTypesGet,
 
     -- ** compute.diskTypes.list
     ComputeDiskTypesListResource,
+    ComputeDiskTypesList (..),
     newComputeDiskTypesList,
-    ComputeDiskTypesList,
 
     -- ** compute.disks.addResourcePolicies
     ComputeDisksAddResourcePoliciesResource,
+    ComputeDisksAddResourcePolicies (..),
     newComputeDisksAddResourcePolicies,
-    ComputeDisksAddResourcePolicies,
 
     -- ** compute.disks.aggregatedList
     ComputeDisksAggregatedListResource,
+    ComputeDisksAggregatedList (..),
     newComputeDisksAggregatedList,
-    ComputeDisksAggregatedList,
 
     -- ** compute.disks.createSnapshot
     ComputeDisksCreateSnapshotResource,
+    ComputeDisksCreateSnapshot (..),
     newComputeDisksCreateSnapshot,
-    ComputeDisksCreateSnapshot,
 
     -- ** compute.disks.delete
     ComputeDisksDeleteResource,
+    ComputeDisksDelete (..),
     newComputeDisksDelete,
-    ComputeDisksDelete,
 
     -- ** compute.disks.get
     ComputeDisksGetResource,
+    ComputeDisksGet (..),
     newComputeDisksGet,
-    ComputeDisksGet,
 
     -- ** compute.disks.getIamPolicy
     ComputeDisksGetIamPolicyResource,
+    ComputeDisksGetIamPolicy (..),
     newComputeDisksGetIamPolicy,
-    ComputeDisksGetIamPolicy,
 
     -- ** compute.disks.insert
     ComputeDisksInsertResource,
+    ComputeDisksInsert (..),
     newComputeDisksInsert,
-    ComputeDisksInsert,
 
     -- ** compute.disks.list
     ComputeDisksListResource,
+    ComputeDisksList (..),
     newComputeDisksList,
-    ComputeDisksList,
 
     -- ** compute.disks.removeResourcePolicies
     ComputeDisksRemoveResourcePoliciesResource,
+    ComputeDisksRemoveResourcePolicies (..),
     newComputeDisksRemoveResourcePolicies,
-    ComputeDisksRemoveResourcePolicies,
 
     -- ** compute.disks.resize
     ComputeDisksResizeResource,
+    ComputeDisksResize (..),
     newComputeDisksResize,
-    ComputeDisksResize,
 
     -- ** compute.disks.setIamPolicy
     ComputeDisksSetIamPolicyResource,
+    ComputeDisksSetIamPolicy (..),
     newComputeDisksSetIamPolicy,
-    ComputeDisksSetIamPolicy,
 
     -- ** compute.disks.setLabels
     ComputeDisksSetLabelsResource,
+    ComputeDisksSetLabels (..),
     newComputeDisksSetLabels,
-    ComputeDisksSetLabels,
 
     -- ** compute.disks.testIamPermissions
     ComputeDisksTestIamPermissionsResource,
+    ComputeDisksTestIamPermissions (..),
     newComputeDisksTestIamPermissions,
-    ComputeDisksTestIamPermissions,
 
     -- ** compute.externalVpnGateways.delete
     ComputeExternalVpnGatewaysDeleteResource,
+    ComputeExternalVpnGatewaysDelete (..),
     newComputeExternalVpnGatewaysDelete,
-    ComputeExternalVpnGatewaysDelete,
 
     -- ** compute.externalVpnGateways.get
     ComputeExternalVpnGatewaysGetResource,
+    ComputeExternalVpnGatewaysGet (..),
     newComputeExternalVpnGatewaysGet,
-    ComputeExternalVpnGatewaysGet,
 
     -- ** compute.externalVpnGateways.insert
     ComputeExternalVpnGatewaysInsertResource,
+    ComputeExternalVpnGatewaysInsert (..),
     newComputeExternalVpnGatewaysInsert,
-    ComputeExternalVpnGatewaysInsert,
 
     -- ** compute.externalVpnGateways.list
     ComputeExternalVpnGatewaysListResource,
+    ComputeExternalVpnGatewaysList (..),
     newComputeExternalVpnGatewaysList,
-    ComputeExternalVpnGatewaysList,
 
     -- ** compute.externalVpnGateways.setLabels
     ComputeExternalVpnGatewaysSetLabelsResource,
+    ComputeExternalVpnGatewaysSetLabels (..),
     newComputeExternalVpnGatewaysSetLabels,
-    ComputeExternalVpnGatewaysSetLabels,
 
     -- ** compute.externalVpnGateways.testIamPermissions
     ComputeExternalVpnGatewaysTestIamPermissionsResource,
+    ComputeExternalVpnGatewaysTestIamPermissions (..),
     newComputeExternalVpnGatewaysTestIamPermissions,
-    ComputeExternalVpnGatewaysTestIamPermissions,
 
     -- ** compute.firewallPolicies.addAssociation
     ComputeFirewallPoliciesAddAssociationResource,
+    ComputeFirewallPoliciesAddAssociation (..),
     newComputeFirewallPoliciesAddAssociation,
-    ComputeFirewallPoliciesAddAssociation,
 
     -- ** compute.firewallPolicies.addRule
     ComputeFirewallPoliciesAddRuleResource,
+    ComputeFirewallPoliciesAddRule (..),
     newComputeFirewallPoliciesAddRule,
-    ComputeFirewallPoliciesAddRule,
 
     -- ** compute.firewallPolicies.cloneRules
     ComputeFirewallPoliciesCloneRulesResource,
+    ComputeFirewallPoliciesCloneRules (..),
     newComputeFirewallPoliciesCloneRules,
-    ComputeFirewallPoliciesCloneRules,
 
     -- ** compute.firewallPolicies.delete
     ComputeFirewallPoliciesDeleteResource,
+    ComputeFirewallPoliciesDelete (..),
     newComputeFirewallPoliciesDelete,
-    ComputeFirewallPoliciesDelete,
 
     -- ** compute.firewallPolicies.get
     ComputeFirewallPoliciesGetResource,
+    ComputeFirewallPoliciesGet (..),
     newComputeFirewallPoliciesGet,
-    ComputeFirewallPoliciesGet,
 
     -- ** compute.firewallPolicies.getAssociation
     ComputeFirewallPoliciesGetAssociationResource,
+    ComputeFirewallPoliciesGetAssociation (..),
     newComputeFirewallPoliciesGetAssociation,
-    ComputeFirewallPoliciesGetAssociation,
 
     -- ** compute.firewallPolicies.getIamPolicy
     ComputeFirewallPoliciesGetIamPolicyResource,
+    ComputeFirewallPoliciesGetIamPolicy (..),
     newComputeFirewallPoliciesGetIamPolicy,
-    ComputeFirewallPoliciesGetIamPolicy,
 
     -- ** compute.firewallPolicies.getRule
     ComputeFirewallPoliciesGetRuleResource,
+    ComputeFirewallPoliciesGetRule (..),
     newComputeFirewallPoliciesGetRule,
-    ComputeFirewallPoliciesGetRule,
 
     -- ** compute.firewallPolicies.insert
     ComputeFirewallPoliciesInsertResource,
+    ComputeFirewallPoliciesInsert (..),
     newComputeFirewallPoliciesInsert,
-    ComputeFirewallPoliciesInsert,
 
     -- ** compute.firewallPolicies.list
     ComputeFirewallPoliciesListResource,
+    ComputeFirewallPoliciesList (..),
     newComputeFirewallPoliciesList,
-    ComputeFirewallPoliciesList,
 
     -- ** compute.firewallPolicies.listAssociations
     ComputeFirewallPoliciesListAssociationsResource,
+    ComputeFirewallPoliciesListAssociations (..),
     newComputeFirewallPoliciesListAssociations,
-    ComputeFirewallPoliciesListAssociations,
 
     -- ** compute.firewallPolicies.move
     ComputeFirewallPoliciesMoveResource,
+    ComputeFirewallPoliciesMove (..),
     newComputeFirewallPoliciesMove,
-    ComputeFirewallPoliciesMove,
 
     -- ** compute.firewallPolicies.patch
     ComputeFirewallPoliciesPatchResource,
+    ComputeFirewallPoliciesPatch (..),
     newComputeFirewallPoliciesPatch,
-    ComputeFirewallPoliciesPatch,
 
     -- ** compute.firewallPolicies.patchRule
     ComputeFirewallPoliciesPatchRuleResource,
+    ComputeFirewallPoliciesPatchRule (..),
     newComputeFirewallPoliciesPatchRule,
-    ComputeFirewallPoliciesPatchRule,
 
     -- ** compute.firewallPolicies.removeAssociation
     ComputeFirewallPoliciesRemoveAssociationResource,
+    ComputeFirewallPoliciesRemoveAssociation (..),
     newComputeFirewallPoliciesRemoveAssociation,
-    ComputeFirewallPoliciesRemoveAssociation,
 
     -- ** compute.firewallPolicies.removeRule
     ComputeFirewallPoliciesRemoveRuleResource,
+    ComputeFirewallPoliciesRemoveRule (..),
     newComputeFirewallPoliciesRemoveRule,
-    ComputeFirewallPoliciesRemoveRule,
 
     -- ** compute.firewallPolicies.setIamPolicy
     ComputeFirewallPoliciesSetIamPolicyResource,
+    ComputeFirewallPoliciesSetIamPolicy (..),
     newComputeFirewallPoliciesSetIamPolicy,
-    ComputeFirewallPoliciesSetIamPolicy,
 
     -- ** compute.firewallPolicies.testIamPermissions
     ComputeFirewallPoliciesTestIamPermissionsResource,
+    ComputeFirewallPoliciesTestIamPermissions (..),
     newComputeFirewallPoliciesTestIamPermissions,
-    ComputeFirewallPoliciesTestIamPermissions,
 
     -- ** compute.firewalls.delete
     ComputeFirewallsDeleteResource,
+    ComputeFirewallsDelete (..),
     newComputeFirewallsDelete,
-    ComputeFirewallsDelete,
 
     -- ** compute.firewalls.get
     ComputeFirewallsGetResource,
+    ComputeFirewallsGet (..),
     newComputeFirewallsGet,
-    ComputeFirewallsGet,
 
     -- ** compute.firewalls.insert
     ComputeFirewallsInsertResource,
+    ComputeFirewallsInsert (..),
     newComputeFirewallsInsert,
-    ComputeFirewallsInsert,
 
     -- ** compute.firewalls.list
     ComputeFirewallsListResource,
+    ComputeFirewallsList (..),
     newComputeFirewallsList,
-    ComputeFirewallsList,
 
     -- ** compute.firewalls.patch
     ComputeFirewallsPatchResource,
+    ComputeFirewallsPatch (..),
     newComputeFirewallsPatch,
-    ComputeFirewallsPatch,
 
     -- ** compute.firewalls.update
     ComputeFirewallsUpdateResource,
+    ComputeFirewallsUpdate (..),
     newComputeFirewallsUpdate,
-    ComputeFirewallsUpdate,
 
     -- ** compute.forwardingRules.aggregatedList
     ComputeForwardingRulesAggregatedListResource,
+    ComputeForwardingRulesAggregatedList (..),
     newComputeForwardingRulesAggregatedList,
-    ComputeForwardingRulesAggregatedList,
 
     -- ** compute.forwardingRules.delete
     ComputeForwardingRulesDeleteResource,
+    ComputeForwardingRulesDelete (..),
     newComputeForwardingRulesDelete,
-    ComputeForwardingRulesDelete,
 
     -- ** compute.forwardingRules.get
     ComputeForwardingRulesGetResource,
+    ComputeForwardingRulesGet (..),
     newComputeForwardingRulesGet,
-    ComputeForwardingRulesGet,
 
     -- ** compute.forwardingRules.insert
     ComputeForwardingRulesInsertResource,
+    ComputeForwardingRulesInsert (..),
     newComputeForwardingRulesInsert,
-    ComputeForwardingRulesInsert,
 
     -- ** compute.forwardingRules.list
     ComputeForwardingRulesListResource,
+    ComputeForwardingRulesList (..),
     newComputeForwardingRulesList,
-    ComputeForwardingRulesList,
 
     -- ** compute.forwardingRules.patch
     ComputeForwardingRulesPatchResource,
+    ComputeForwardingRulesPatch (..),
     newComputeForwardingRulesPatch,
-    ComputeForwardingRulesPatch,
 
     -- ** compute.forwardingRules.setLabels
     ComputeForwardingRulesSetLabelsResource,
+    ComputeForwardingRulesSetLabels (..),
     newComputeForwardingRulesSetLabels,
-    ComputeForwardingRulesSetLabels,
 
     -- ** compute.forwardingRules.setTarget
     ComputeForwardingRulesSetTargetResource,
+    ComputeForwardingRulesSetTarget (..),
     newComputeForwardingRulesSetTarget,
-    ComputeForwardingRulesSetTarget,
 
     -- ** compute.globalAddresses.delete
     ComputeGlobalAddressesDeleteResource,
+    ComputeGlobalAddressesDelete (..),
     newComputeGlobalAddressesDelete,
-    ComputeGlobalAddressesDelete,
 
     -- ** compute.globalAddresses.get
     ComputeGlobalAddressesGetResource,
+    ComputeGlobalAddressesGet (..),
     newComputeGlobalAddressesGet,
-    ComputeGlobalAddressesGet,
 
     -- ** compute.globalAddresses.insert
     ComputeGlobalAddressesInsertResource,
+    ComputeGlobalAddressesInsert (..),
     newComputeGlobalAddressesInsert,
-    ComputeGlobalAddressesInsert,
 
     -- ** compute.globalAddresses.list
     ComputeGlobalAddressesListResource,
+    ComputeGlobalAddressesList (..),
     newComputeGlobalAddressesList,
-    ComputeGlobalAddressesList,
 
     -- ** compute.globalForwardingRules.delete
     ComputeGlobalForwardingRulesDeleteResource,
+    ComputeGlobalForwardingRulesDelete (..),
     newComputeGlobalForwardingRulesDelete,
-    ComputeGlobalForwardingRulesDelete,
 
     -- ** compute.globalForwardingRules.get
     ComputeGlobalForwardingRulesGetResource,
+    ComputeGlobalForwardingRulesGet (..),
     newComputeGlobalForwardingRulesGet,
-    ComputeGlobalForwardingRulesGet,
 
     -- ** compute.globalForwardingRules.insert
     ComputeGlobalForwardingRulesInsertResource,
+    ComputeGlobalForwardingRulesInsert (..),
     newComputeGlobalForwardingRulesInsert,
-    ComputeGlobalForwardingRulesInsert,
 
     -- ** compute.globalForwardingRules.list
     ComputeGlobalForwardingRulesListResource,
+    ComputeGlobalForwardingRulesList (..),
     newComputeGlobalForwardingRulesList,
-    ComputeGlobalForwardingRulesList,
 
     -- ** compute.globalForwardingRules.patch
     ComputeGlobalForwardingRulesPatchResource,
+    ComputeGlobalForwardingRulesPatch (..),
     newComputeGlobalForwardingRulesPatch,
-    ComputeGlobalForwardingRulesPatch,
 
     -- ** compute.globalForwardingRules.setLabels
     ComputeGlobalForwardingRulesSetLabelsResource,
+    ComputeGlobalForwardingRulesSetLabels (..),
     newComputeGlobalForwardingRulesSetLabels,
-    ComputeGlobalForwardingRulesSetLabels,
 
     -- ** compute.globalForwardingRules.setTarget
     ComputeGlobalForwardingRulesSetTargetResource,
+    ComputeGlobalForwardingRulesSetTarget (..),
     newComputeGlobalForwardingRulesSetTarget,
-    ComputeGlobalForwardingRulesSetTarget,
 
     -- ** compute.globalNetworkEndpointGroups.attachNetworkEndpoints
     ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpointsResource,
+    ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints (..),
     newComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints,
-    ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints,
 
     -- ** compute.globalNetworkEndpointGroups.delete
     ComputeGlobalNetworkEndpointGroupsDeleteResource,
+    ComputeGlobalNetworkEndpointGroupsDelete (..),
     newComputeGlobalNetworkEndpointGroupsDelete,
-    ComputeGlobalNetworkEndpointGroupsDelete,
 
     -- ** compute.globalNetworkEndpointGroups.detachNetworkEndpoints
     ComputeGlobalNetworkEndpointGroupsDetachNetworkEndpointsResource,
+    ComputeGlobalNetworkEndpointGroupsDetachNetworkEndpoints (..),
     newComputeGlobalNetworkEndpointGroupsDetachNetworkEndpoints,
-    ComputeGlobalNetworkEndpointGroupsDetachNetworkEndpoints,
 
     -- ** compute.globalNetworkEndpointGroups.get
     ComputeGlobalNetworkEndpointGroupsGetResource,
+    ComputeGlobalNetworkEndpointGroupsGet (..),
     newComputeGlobalNetworkEndpointGroupsGet,
-    ComputeGlobalNetworkEndpointGroupsGet,
 
     -- ** compute.globalNetworkEndpointGroups.insert
     ComputeGlobalNetworkEndpointGroupsInsertResource,
+    ComputeGlobalNetworkEndpointGroupsInsert (..),
     newComputeGlobalNetworkEndpointGroupsInsert,
-    ComputeGlobalNetworkEndpointGroupsInsert,
 
     -- ** compute.globalNetworkEndpointGroups.list
     ComputeGlobalNetworkEndpointGroupsListResource,
+    ComputeGlobalNetworkEndpointGroupsList (..),
     newComputeGlobalNetworkEndpointGroupsList,
-    ComputeGlobalNetworkEndpointGroupsList,
 
     -- ** compute.globalNetworkEndpointGroups.listNetworkEndpoints
     ComputeGlobalNetworkEndpointGroupsListNetworkEndpointsResource,
+    ComputeGlobalNetworkEndpointGroupsListNetworkEndpoints (..),
     newComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
-    ComputeGlobalNetworkEndpointGroupsListNetworkEndpoints,
 
     -- ** compute.globalOperations.aggregatedList
     ComputeGlobalOperationsAggregatedListResource,
+    ComputeGlobalOperationsAggregatedList (..),
     newComputeGlobalOperationsAggregatedList,
-    ComputeGlobalOperationsAggregatedList,
 
     -- ** compute.globalOperations.delete
     ComputeGlobalOperationsDeleteResource,
+    ComputeGlobalOperationsDelete (..),
     newComputeGlobalOperationsDelete,
-    ComputeGlobalOperationsDelete,
 
     -- ** compute.globalOperations.get
     ComputeGlobalOperationsGetResource,
+    ComputeGlobalOperationsGet (..),
     newComputeGlobalOperationsGet,
-    ComputeGlobalOperationsGet,
 
     -- ** compute.globalOperations.list
     ComputeGlobalOperationsListResource,
+    ComputeGlobalOperationsList (..),
     newComputeGlobalOperationsList,
-    ComputeGlobalOperationsList,
 
     -- ** compute.globalOperations.wait
     ComputeGlobalOperationsWaitResource,
+    ComputeGlobalOperationsWait (..),
     newComputeGlobalOperationsWait,
-    ComputeGlobalOperationsWait,
 
     -- ** compute.globalOrganizationOperations.delete
     ComputeGlobalOrganizationOperationsDeleteResource,
+    ComputeGlobalOrganizationOperationsDelete (..),
     newComputeGlobalOrganizationOperationsDelete,
-    ComputeGlobalOrganizationOperationsDelete,
 
     -- ** compute.globalOrganizationOperations.get
     ComputeGlobalOrganizationOperationsGetResource,
+    ComputeGlobalOrganizationOperationsGet (..),
     newComputeGlobalOrganizationOperationsGet,
-    ComputeGlobalOrganizationOperationsGet,
 
     -- ** compute.globalOrganizationOperations.list
     ComputeGlobalOrganizationOperationsListResource,
+    ComputeGlobalOrganizationOperationsList (..),
     newComputeGlobalOrganizationOperationsList,
-    ComputeGlobalOrganizationOperationsList,
 
     -- ** compute.globalPublicDelegatedPrefixes.delete
     ComputeGlobalPublicDelegatedPrefixesDeleteResource,
+    ComputeGlobalPublicDelegatedPrefixesDelete (..),
     newComputeGlobalPublicDelegatedPrefixesDelete,
-    ComputeGlobalPublicDelegatedPrefixesDelete,
 
     -- ** compute.globalPublicDelegatedPrefixes.get
     ComputeGlobalPublicDelegatedPrefixesGetResource,
+    ComputeGlobalPublicDelegatedPrefixesGet (..),
     newComputeGlobalPublicDelegatedPrefixesGet,
-    ComputeGlobalPublicDelegatedPrefixesGet,
 
     -- ** compute.globalPublicDelegatedPrefixes.insert
     ComputeGlobalPublicDelegatedPrefixesInsertResource,
+    ComputeGlobalPublicDelegatedPrefixesInsert (..),
     newComputeGlobalPublicDelegatedPrefixesInsert,
-    ComputeGlobalPublicDelegatedPrefixesInsert,
 
     -- ** compute.globalPublicDelegatedPrefixes.list
     ComputeGlobalPublicDelegatedPrefixesListResource,
+    ComputeGlobalPublicDelegatedPrefixesList (..),
     newComputeGlobalPublicDelegatedPrefixesList,
-    ComputeGlobalPublicDelegatedPrefixesList,
 
     -- ** compute.globalPublicDelegatedPrefixes.patch
     ComputeGlobalPublicDelegatedPrefixesPatchResource,
+    ComputeGlobalPublicDelegatedPrefixesPatch (..),
     newComputeGlobalPublicDelegatedPrefixesPatch,
-    ComputeGlobalPublicDelegatedPrefixesPatch,
 
     -- ** compute.healthChecks.aggregatedList
     ComputeHealthChecksAggregatedListResource,
+    ComputeHealthChecksAggregatedList (..),
     newComputeHealthChecksAggregatedList,
-    ComputeHealthChecksAggregatedList,
 
     -- ** compute.healthChecks.delete
     ComputeHealthChecksDeleteResource,
+    ComputeHealthChecksDelete (..),
     newComputeHealthChecksDelete,
-    ComputeHealthChecksDelete,
 
     -- ** compute.healthChecks.get
     ComputeHealthChecksGetResource,
+    ComputeHealthChecksGet (..),
     newComputeHealthChecksGet,
-    ComputeHealthChecksGet,
 
     -- ** compute.healthChecks.insert
     ComputeHealthChecksInsertResource,
+    ComputeHealthChecksInsert (..),
     newComputeHealthChecksInsert,
-    ComputeHealthChecksInsert,
 
     -- ** compute.healthChecks.list
     ComputeHealthChecksListResource,
+    ComputeHealthChecksList (..),
     newComputeHealthChecksList,
-    ComputeHealthChecksList,
 
     -- ** compute.healthChecks.patch
     ComputeHealthChecksPatchResource,
+    ComputeHealthChecksPatch (..),
     newComputeHealthChecksPatch,
-    ComputeHealthChecksPatch,
 
     -- ** compute.healthChecks.update
     ComputeHealthChecksUpdateResource,
+    ComputeHealthChecksUpdate (..),
     newComputeHealthChecksUpdate,
-    ComputeHealthChecksUpdate,
 
     -- ** compute.httpHealthChecks.delete
     ComputeHttpHealthChecksDeleteResource,
+    ComputeHttpHealthChecksDelete (..),
     newComputeHttpHealthChecksDelete,
-    ComputeHttpHealthChecksDelete,
 
     -- ** compute.httpHealthChecks.get
     ComputeHttpHealthChecksGetResource,
+    ComputeHttpHealthChecksGet (..),
     newComputeHttpHealthChecksGet,
-    ComputeHttpHealthChecksGet,
 
     -- ** compute.httpHealthChecks.insert
     ComputeHttpHealthChecksInsertResource,
+    ComputeHttpHealthChecksInsert (..),
     newComputeHttpHealthChecksInsert,
-    ComputeHttpHealthChecksInsert,
 
     -- ** compute.httpHealthChecks.list
     ComputeHttpHealthChecksListResource,
+    ComputeHttpHealthChecksList (..),
     newComputeHttpHealthChecksList,
-    ComputeHttpHealthChecksList,
 
     -- ** compute.httpHealthChecks.patch
     ComputeHttpHealthChecksPatchResource,
+    ComputeHttpHealthChecksPatch (..),
     newComputeHttpHealthChecksPatch,
-    ComputeHttpHealthChecksPatch,
 
     -- ** compute.httpHealthChecks.update
     ComputeHttpHealthChecksUpdateResource,
+    ComputeHttpHealthChecksUpdate (..),
     newComputeHttpHealthChecksUpdate,
-    ComputeHttpHealthChecksUpdate,
 
     -- ** compute.httpsHealthChecks.delete
     ComputeHttpsHealthChecksDeleteResource,
+    ComputeHttpsHealthChecksDelete (..),
     newComputeHttpsHealthChecksDelete,
-    ComputeHttpsHealthChecksDelete,
 
     -- ** compute.httpsHealthChecks.get
     ComputeHttpsHealthChecksGetResource,
+    ComputeHttpsHealthChecksGet (..),
     newComputeHttpsHealthChecksGet,
-    ComputeHttpsHealthChecksGet,
 
     -- ** compute.httpsHealthChecks.insert
     ComputeHttpsHealthChecksInsertResource,
+    ComputeHttpsHealthChecksInsert (..),
     newComputeHttpsHealthChecksInsert,
-    ComputeHttpsHealthChecksInsert,
 
     -- ** compute.httpsHealthChecks.list
     ComputeHttpsHealthChecksListResource,
+    ComputeHttpsHealthChecksList (..),
     newComputeHttpsHealthChecksList,
-    ComputeHttpsHealthChecksList,
 
     -- ** compute.httpsHealthChecks.patch
     ComputeHttpsHealthChecksPatchResource,
+    ComputeHttpsHealthChecksPatch (..),
     newComputeHttpsHealthChecksPatch,
-    ComputeHttpsHealthChecksPatch,
 
     -- ** compute.httpsHealthChecks.update
     ComputeHttpsHealthChecksUpdateResource,
+    ComputeHttpsHealthChecksUpdate (..),
     newComputeHttpsHealthChecksUpdate,
-    ComputeHttpsHealthChecksUpdate,
 
     -- ** compute.imageFamilyViews.get
     ComputeImageFamilyViewsGetResource,
+    ComputeImageFamilyViewsGet (..),
     newComputeImageFamilyViewsGet,
-    ComputeImageFamilyViewsGet,
 
     -- ** compute.images.delete
     ComputeImagesDeleteResource,
+    ComputeImagesDelete (..),
     newComputeImagesDelete,
-    ComputeImagesDelete,
 
     -- ** compute.images.deprecate
     ComputeImagesDeprecateResource,
+    ComputeImagesDeprecate (..),
     newComputeImagesDeprecate,
-    ComputeImagesDeprecate,
 
     -- ** compute.images.get
     ComputeImagesGetResource,
+    ComputeImagesGet (..),
     newComputeImagesGet,
-    ComputeImagesGet,
 
     -- ** compute.images.getFromFamily
     ComputeImagesGetFromFamilyResource,
+    ComputeImagesGetFromFamily (..),
     newComputeImagesGetFromFamily,
-    ComputeImagesGetFromFamily,
 
     -- ** compute.images.getIamPolicy
     ComputeImagesGetIamPolicyResource,
+    ComputeImagesGetIamPolicy (..),
     newComputeImagesGetIamPolicy,
-    ComputeImagesGetIamPolicy,
 
     -- ** compute.images.insert
     ComputeImagesInsertResource,
+    ComputeImagesInsert (..),
     newComputeImagesInsert,
-    ComputeImagesInsert,
 
     -- ** compute.images.list
     ComputeImagesListResource,
+    ComputeImagesList (..),
     newComputeImagesList,
-    ComputeImagesList,
 
     -- ** compute.images.patch
     ComputeImagesPatchResource,
+    ComputeImagesPatch (..),
     newComputeImagesPatch,
-    ComputeImagesPatch,
 
     -- ** compute.images.setIamPolicy
     ComputeImagesSetIamPolicyResource,
+    ComputeImagesSetIamPolicy (..),
     newComputeImagesSetIamPolicy,
-    ComputeImagesSetIamPolicy,
 
     -- ** compute.images.setLabels
     ComputeImagesSetLabelsResource,
+    ComputeImagesSetLabels (..),
     newComputeImagesSetLabels,
-    ComputeImagesSetLabels,
 
     -- ** compute.images.testIamPermissions
     ComputeImagesTestIamPermissionsResource,
+    ComputeImagesTestIamPermissions (..),
     newComputeImagesTestIamPermissions,
-    ComputeImagesTestIamPermissions,
 
     -- ** compute.instanceGroupManagers.abandonInstances
     ComputeInstanceGroupManagersAbandonInstancesResource,
+    ComputeInstanceGroupManagersAbandonInstances (..),
     newComputeInstanceGroupManagersAbandonInstances,
-    ComputeInstanceGroupManagersAbandonInstances,
 
     -- ** compute.instanceGroupManagers.aggregatedList
     ComputeInstanceGroupManagersAggregatedListResource,
+    ComputeInstanceGroupManagersAggregatedList (..),
     newComputeInstanceGroupManagersAggregatedList,
-    ComputeInstanceGroupManagersAggregatedList,
 
     -- ** compute.instanceGroupManagers.applyUpdatesToInstances
     ComputeInstanceGroupManagersApplyUpdatesToInstancesResource,
+    ComputeInstanceGroupManagersApplyUpdatesToInstances (..),
     newComputeInstanceGroupManagersApplyUpdatesToInstances,
-    ComputeInstanceGroupManagersApplyUpdatesToInstances,
 
     -- ** compute.instanceGroupManagers.createInstances
     ComputeInstanceGroupManagersCreateInstancesResource,
+    ComputeInstanceGroupManagersCreateInstances (..),
     newComputeInstanceGroupManagersCreateInstances,
-    ComputeInstanceGroupManagersCreateInstances,
 
     -- ** compute.instanceGroupManagers.delete
     ComputeInstanceGroupManagersDeleteResource,
+    ComputeInstanceGroupManagersDelete (..),
     newComputeInstanceGroupManagersDelete,
-    ComputeInstanceGroupManagersDelete,
 
     -- ** compute.instanceGroupManagers.deleteInstances
     ComputeInstanceGroupManagersDeleteInstancesResource,
+    ComputeInstanceGroupManagersDeleteInstances (..),
     newComputeInstanceGroupManagersDeleteInstances,
-    ComputeInstanceGroupManagersDeleteInstances,
 
     -- ** compute.instanceGroupManagers.deletePerInstanceConfigs
     ComputeInstanceGroupManagersDeletePerInstanceConfigsResource,
+    ComputeInstanceGroupManagersDeletePerInstanceConfigs (..),
     newComputeInstanceGroupManagersDeletePerInstanceConfigs,
-    ComputeInstanceGroupManagersDeletePerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.get
     ComputeInstanceGroupManagersGetResource,
+    ComputeInstanceGroupManagersGet (..),
     newComputeInstanceGroupManagersGet,
-    ComputeInstanceGroupManagersGet,
 
     -- ** compute.instanceGroupManagers.insert
     ComputeInstanceGroupManagersInsertResource,
+    ComputeInstanceGroupManagersInsert (..),
     newComputeInstanceGroupManagersInsert,
-    ComputeInstanceGroupManagersInsert,
 
     -- ** compute.instanceGroupManagers.list
     ComputeInstanceGroupManagersListResource,
+    ComputeInstanceGroupManagersList (..),
     newComputeInstanceGroupManagersList,
-    ComputeInstanceGroupManagersList,
 
     -- ** compute.instanceGroupManagers.listErrors
     ComputeInstanceGroupManagersListErrorsResource,
+    ComputeInstanceGroupManagersListErrors (..),
     newComputeInstanceGroupManagersListErrors,
-    ComputeInstanceGroupManagersListErrors,
 
     -- ** compute.instanceGroupManagers.listManagedInstances
     ComputeInstanceGroupManagersListManagedInstancesResource,
+    ComputeInstanceGroupManagersListManagedInstances (..),
     newComputeInstanceGroupManagersListManagedInstances,
-    ComputeInstanceGroupManagersListManagedInstances,
 
     -- ** compute.instanceGroupManagers.listPerInstanceConfigs
     ComputeInstanceGroupManagersListPerInstanceConfigsResource,
+    ComputeInstanceGroupManagersListPerInstanceConfigs (..),
     newComputeInstanceGroupManagersListPerInstanceConfigs,
-    ComputeInstanceGroupManagersListPerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.patch
     ComputeInstanceGroupManagersPatchResource,
+    ComputeInstanceGroupManagersPatch (..),
     newComputeInstanceGroupManagersPatch,
-    ComputeInstanceGroupManagersPatch,
 
     -- ** compute.instanceGroupManagers.patchPerInstanceConfigs
     ComputeInstanceGroupManagersPatchPerInstanceConfigsResource,
+    ComputeInstanceGroupManagersPatchPerInstanceConfigs (..),
     newComputeInstanceGroupManagersPatchPerInstanceConfigs,
-    ComputeInstanceGroupManagersPatchPerInstanceConfigs,
 
     -- ** compute.instanceGroupManagers.recreateInstances
     ComputeInstanceGroupManagersRecreateInstancesResource,
+    ComputeInstanceGroupManagersRecreateInstances (..),
     newComputeInstanceGroupManagersRecreateInstances,
-    ComputeInstanceGroupManagersRecreateInstances,
 
     -- ** compute.instanceGroupManagers.resize
     ComputeInstanceGroupManagersResizeResource,
+    ComputeInstanceGroupManagersResize (..),
     newComputeInstanceGroupManagersResize,
-    ComputeInstanceGroupManagersResize,
 
     -- ** compute.instanceGroupManagers.setInstanceTemplate
     ComputeInstanceGroupManagersSetInstanceTemplateResource,
+    ComputeInstanceGroupManagersSetInstanceTemplate (..),
     newComputeInstanceGroupManagersSetInstanceTemplate,
-    ComputeInstanceGroupManagersSetInstanceTemplate,
 
     -- ** compute.instanceGroupManagers.setTargetPools
     ComputeInstanceGroupManagersSetTargetPoolsResource,
+    ComputeInstanceGroupManagersSetTargetPools (..),
     newComputeInstanceGroupManagersSetTargetPools,
-    ComputeInstanceGroupManagersSetTargetPools,
 
     -- ** compute.instanceGroupManagers.updatePerInstanceConfigs
     ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource,
+    ComputeInstanceGroupManagersUpdatePerInstanceConfigs (..),
     newComputeInstanceGroupManagersUpdatePerInstanceConfigs,
-    ComputeInstanceGroupManagersUpdatePerInstanceConfigs,
 
     -- ** compute.instanceGroups.addInstances
     ComputeInstanceGroupsAddInstancesResource,
+    ComputeInstanceGroupsAddInstances (..),
     newComputeInstanceGroupsAddInstances,
-    ComputeInstanceGroupsAddInstances,
 
     -- ** compute.instanceGroups.aggregatedList
     ComputeInstanceGroupsAggregatedListResource,
+    ComputeInstanceGroupsAggregatedList (..),
     newComputeInstanceGroupsAggregatedList,
-    ComputeInstanceGroupsAggregatedList,
 
     -- ** compute.instanceGroups.delete
     ComputeInstanceGroupsDeleteResource,
+    ComputeInstanceGroupsDelete (..),
     newComputeInstanceGroupsDelete,
-    ComputeInstanceGroupsDelete,
 
     -- ** compute.instanceGroups.get
     ComputeInstanceGroupsGetResource,
+    ComputeInstanceGroupsGet (..),
     newComputeInstanceGroupsGet,
-    ComputeInstanceGroupsGet,
 
     -- ** compute.instanceGroups.insert
     ComputeInstanceGroupsInsertResource,
+    ComputeInstanceGroupsInsert (..),
     newComputeInstanceGroupsInsert,
-    ComputeInstanceGroupsInsert,
 
     -- ** compute.instanceGroups.list
     ComputeInstanceGroupsListResource,
+    ComputeInstanceGroupsList (..),
     newComputeInstanceGroupsList,
-    ComputeInstanceGroupsList,
 
     -- ** compute.instanceGroups.listInstances
     ComputeInstanceGroupsListInstancesResource,
+    ComputeInstanceGroupsListInstances (..),
     newComputeInstanceGroupsListInstances,
-    ComputeInstanceGroupsListInstances,
 
     -- ** compute.instanceGroups.removeInstances
     ComputeInstanceGroupsRemoveInstancesResource,
+    ComputeInstanceGroupsRemoveInstances (..),
     newComputeInstanceGroupsRemoveInstances,
-    ComputeInstanceGroupsRemoveInstances,
 
     -- ** compute.instanceGroups.setNamedPorts
     ComputeInstanceGroupsSetNamedPortsResource,
+    ComputeInstanceGroupsSetNamedPorts (..),
     newComputeInstanceGroupsSetNamedPorts,
-    ComputeInstanceGroupsSetNamedPorts,
 
     -- ** compute.instanceTemplates.delete
     ComputeInstanceTemplatesDeleteResource,
+    ComputeInstanceTemplatesDelete (..),
     newComputeInstanceTemplatesDelete,
-    ComputeInstanceTemplatesDelete,
 
     -- ** compute.instanceTemplates.get
     ComputeInstanceTemplatesGetResource,
+    ComputeInstanceTemplatesGet (..),
     newComputeInstanceTemplatesGet,
-    ComputeInstanceTemplatesGet,
 
     -- ** compute.instanceTemplates.getIamPolicy
     ComputeInstanceTemplatesGetIamPolicyResource,
+    ComputeInstanceTemplatesGetIamPolicy (..),
     newComputeInstanceTemplatesGetIamPolicy,
-    ComputeInstanceTemplatesGetIamPolicy,
 
     -- ** compute.instanceTemplates.insert
     ComputeInstanceTemplatesInsertResource,
+    ComputeInstanceTemplatesInsert (..),
     newComputeInstanceTemplatesInsert,
-    ComputeInstanceTemplatesInsert,
 
     -- ** compute.instanceTemplates.list
     ComputeInstanceTemplatesListResource,
+    ComputeInstanceTemplatesList (..),
     newComputeInstanceTemplatesList,
-    ComputeInstanceTemplatesList,
 
     -- ** compute.instanceTemplates.setIamPolicy
     ComputeInstanceTemplatesSetIamPolicyResource,
+    ComputeInstanceTemplatesSetIamPolicy (..),
     newComputeInstanceTemplatesSetIamPolicy,
-    ComputeInstanceTemplatesSetIamPolicy,
 
     -- ** compute.instanceTemplates.testIamPermissions
     ComputeInstanceTemplatesTestIamPermissionsResource,
+    ComputeInstanceTemplatesTestIamPermissions (..),
     newComputeInstanceTemplatesTestIamPermissions,
-    ComputeInstanceTemplatesTestIamPermissions,
 
     -- ** compute.instances.addAccessConfig
     ComputeInstancesAddAccessConfigResource,
+    ComputeInstancesAddAccessConfig (..),
     newComputeInstancesAddAccessConfig,
-    ComputeInstancesAddAccessConfig,
 
     -- ** compute.instances.addResourcePolicies
     ComputeInstancesAddResourcePoliciesResource,
+    ComputeInstancesAddResourcePolicies (..),
     newComputeInstancesAddResourcePolicies,
-    ComputeInstancesAddResourcePolicies,
 
     -- ** compute.instances.aggregatedList
     ComputeInstancesAggregatedListResource,
+    ComputeInstancesAggregatedList (..),
     newComputeInstancesAggregatedList,
-    ComputeInstancesAggregatedList,
 
     -- ** compute.instances.attachDisk
     ComputeInstancesAttachDiskResource,
+    ComputeInstancesAttachDisk (..),
     newComputeInstancesAttachDisk,
-    ComputeInstancesAttachDisk,
 
     -- ** compute.instances.bulkInsert
     ComputeInstancesBulkInsertResource,
+    ComputeInstancesBulkInsert (..),
     newComputeInstancesBulkInsert,
-    ComputeInstancesBulkInsert,
 
     -- ** compute.instances.delete
     ComputeInstancesDeleteResource,
+    ComputeInstancesDelete (..),
     newComputeInstancesDelete,
-    ComputeInstancesDelete,
 
     -- ** compute.instances.deleteAccessConfig
     ComputeInstancesDeleteAccessConfigResource,
+    ComputeInstancesDeleteAccessConfig (..),
     newComputeInstancesDeleteAccessConfig,
-    ComputeInstancesDeleteAccessConfig,
 
     -- ** compute.instances.detachDisk
     ComputeInstancesDetachDiskResource,
+    ComputeInstancesDetachDisk (..),
     newComputeInstancesDetachDisk,
-    ComputeInstancesDetachDisk,
 
     -- ** compute.instances.get
     ComputeInstancesGetResource,
+    ComputeInstancesGet (..),
     newComputeInstancesGet,
-    ComputeInstancesGet,
 
     -- ** compute.instances.getEffectiveFirewalls
     ComputeInstancesGetEffectiveFirewallsResource,
+    ComputeInstancesGetEffectiveFirewalls (..),
     newComputeInstancesGetEffectiveFirewalls,
-    ComputeInstancesGetEffectiveFirewalls,
 
     -- ** compute.instances.getGuestAttributes
     ComputeInstancesGetGuestAttributesResource,
+    ComputeInstancesGetGuestAttributes (..),
     newComputeInstancesGetGuestAttributes,
-    ComputeInstancesGetGuestAttributes,
 
     -- ** compute.instances.getIamPolicy
     ComputeInstancesGetIamPolicyResource,
+    ComputeInstancesGetIamPolicy (..),
     newComputeInstancesGetIamPolicy,
-    ComputeInstancesGetIamPolicy,
 
     -- ** compute.instances.getScreenshot
     ComputeInstancesGetScreenshotResource,
+    ComputeInstancesGetScreenshot (..),
     newComputeInstancesGetScreenshot,
-    ComputeInstancesGetScreenshot,
 
     -- ** compute.instances.getSerialPortOutput
     ComputeInstancesGetSerialPortOutputResource,
+    ComputeInstancesGetSerialPortOutput (..),
     newComputeInstancesGetSerialPortOutput,
-    ComputeInstancesGetSerialPortOutput,
 
     -- ** compute.instances.getShieldedInstanceIdentity
     ComputeInstancesGetShieldedInstanceIdentityResource,
+    ComputeInstancesGetShieldedInstanceIdentity (..),
     newComputeInstancesGetShieldedInstanceIdentity,
-    ComputeInstancesGetShieldedInstanceIdentity,
 
     -- ** compute.instances.insert
     ComputeInstancesInsertResource,
+    ComputeInstancesInsert (..),
     newComputeInstancesInsert,
-    ComputeInstancesInsert,
 
     -- ** compute.instances.list
     ComputeInstancesListResource,
+    ComputeInstancesList (..),
     newComputeInstancesList,
-    ComputeInstancesList,
 
     -- ** compute.instances.listReferrers
     ComputeInstancesListReferrersResource,
+    ComputeInstancesListReferrers (..),
     newComputeInstancesListReferrers,
-    ComputeInstancesListReferrers,
 
     -- ** compute.instances.removeResourcePolicies
     ComputeInstancesRemoveResourcePoliciesResource,
+    ComputeInstancesRemoveResourcePolicies (..),
     newComputeInstancesRemoveResourcePolicies,
-    ComputeInstancesRemoveResourcePolicies,
 
     -- ** compute.instances.reset
     ComputeInstancesResetResource,
+    ComputeInstancesReset (..),
     newComputeInstancesReset,
-    ComputeInstancesReset,
 
     -- ** compute.instances.resume
     ComputeInstancesResumeResource,
+    ComputeInstancesResume (..),
     newComputeInstancesResume,
-    ComputeInstancesResume,
 
     -- ** compute.instances.sendDiagnosticInterrupt
     ComputeInstancesSendDiagnosticInterruptResource,
+    ComputeInstancesSendDiagnosticInterrupt (..),
     newComputeInstancesSendDiagnosticInterrupt,
-    ComputeInstancesSendDiagnosticInterrupt,
 
     -- ** compute.instances.setDeletionProtection
     ComputeInstancesSetDeletionProtectionResource,
+    ComputeInstancesSetDeletionProtection (..),
     newComputeInstancesSetDeletionProtection,
-    ComputeInstancesSetDeletionProtection,
 
     -- ** compute.instances.setDiskAutoDelete
     ComputeInstancesSetDiskAutoDeleteResource,
+    ComputeInstancesSetDiskAutoDelete (..),
     newComputeInstancesSetDiskAutoDelete,
-    ComputeInstancesSetDiskAutoDelete,
 
     -- ** compute.instances.setIamPolicy
     ComputeInstancesSetIamPolicyResource,
+    ComputeInstancesSetIamPolicy (..),
     newComputeInstancesSetIamPolicy,
-    ComputeInstancesSetIamPolicy,
 
     -- ** compute.instances.setLabels
     ComputeInstancesSetLabelsResource,
+    ComputeInstancesSetLabels (..),
     newComputeInstancesSetLabels,
-    ComputeInstancesSetLabels,
 
     -- ** compute.instances.setMachineResources
     ComputeInstancesSetMachineResourcesResource,
+    ComputeInstancesSetMachineResources (..),
     newComputeInstancesSetMachineResources,
-    ComputeInstancesSetMachineResources,
 
     -- ** compute.instances.setMachineType
     ComputeInstancesSetMachineTypeResource,
+    ComputeInstancesSetMachineType (..),
     newComputeInstancesSetMachineType,
-    ComputeInstancesSetMachineType,
 
     -- ** compute.instances.setMetadata
     ComputeInstancesSetMetadataResource,
+    ComputeInstancesSetMetadata (..),
     newComputeInstancesSetMetadata,
-    ComputeInstancesSetMetadata,
 
     -- ** compute.instances.setMinCpuPlatform
     ComputeInstancesSetMinCpuPlatformResource,
+    ComputeInstancesSetMinCpuPlatform (..),
     newComputeInstancesSetMinCpuPlatform,
-    ComputeInstancesSetMinCpuPlatform,
 
     -- ** compute.instances.setScheduling
     ComputeInstancesSetSchedulingResource,
+    ComputeInstancesSetScheduling (..),
     newComputeInstancesSetScheduling,
-    ComputeInstancesSetScheduling,
 
     -- ** compute.instances.setServiceAccount
     ComputeInstancesSetServiceAccountResource,
+    ComputeInstancesSetServiceAccount (..),
     newComputeInstancesSetServiceAccount,
-    ComputeInstancesSetServiceAccount,
 
     -- ** compute.instances.setShieldedInstanceIntegrityPolicy
     ComputeInstancesSetShieldedInstanceIntegrityPolicyResource,
+    ComputeInstancesSetShieldedInstanceIntegrityPolicy (..),
     newComputeInstancesSetShieldedInstanceIntegrityPolicy,
-    ComputeInstancesSetShieldedInstanceIntegrityPolicy,
 
     -- ** compute.instances.setTags
     ComputeInstancesSetTagsResource,
+    ComputeInstancesSetTags (..),
     newComputeInstancesSetTags,
-    ComputeInstancesSetTags,
 
     -- ** compute.instances.simulateMaintenanceEvent
     ComputeInstancesSimulateMaintenanceEventResource,
+    ComputeInstancesSimulateMaintenanceEvent (..),
     newComputeInstancesSimulateMaintenanceEvent,
-    ComputeInstancesSimulateMaintenanceEvent,
 
     -- ** compute.instances.start
     ComputeInstancesStartResource,
+    ComputeInstancesStart (..),
     newComputeInstancesStart,
-    ComputeInstancesStart,
 
     -- ** compute.instances.startWithEncryptionKey
     ComputeInstancesStartWithEncryptionKeyResource,
+    ComputeInstancesStartWithEncryptionKey (..),
     newComputeInstancesStartWithEncryptionKey,
-    ComputeInstancesStartWithEncryptionKey,
 
     -- ** compute.instances.stop
     ComputeInstancesStopResource,
+    ComputeInstancesStop (..),
     newComputeInstancesStop,
-    ComputeInstancesStop,
 
     -- ** compute.instances.suspend
     ComputeInstancesSuspendResource,
+    ComputeInstancesSuspend (..),
     newComputeInstancesSuspend,
-    ComputeInstancesSuspend,
 
     -- ** compute.instances.testIamPermissions
     ComputeInstancesTestIamPermissionsResource,
+    ComputeInstancesTestIamPermissions (..),
     newComputeInstancesTestIamPermissions,
-    ComputeInstancesTestIamPermissions,
 
     -- ** compute.instances.update
     ComputeInstancesUpdateResource,
+    ComputeInstancesUpdate (..),
     newComputeInstancesUpdate,
-    ComputeInstancesUpdate,
 
     -- ** compute.instances.updateAccessConfig
     ComputeInstancesUpdateAccessConfigResource,
+    ComputeInstancesUpdateAccessConfig (..),
     newComputeInstancesUpdateAccessConfig,
-    ComputeInstancesUpdateAccessConfig,
 
     -- ** compute.instances.updateDisplayDevice
     ComputeInstancesUpdateDisplayDeviceResource,
+    ComputeInstancesUpdateDisplayDevice (..),
     newComputeInstancesUpdateDisplayDevice,
-    ComputeInstancesUpdateDisplayDevice,
 
     -- ** compute.instances.updateNetworkInterface
     ComputeInstancesUpdateNetworkInterfaceResource,
+    ComputeInstancesUpdateNetworkInterface (..),
     newComputeInstancesUpdateNetworkInterface,
-    ComputeInstancesUpdateNetworkInterface,
 
     -- ** compute.instances.updateShieldedInstanceConfig
     ComputeInstancesUpdateShieldedInstanceConfigResource,
+    ComputeInstancesUpdateShieldedInstanceConfig (..),
     newComputeInstancesUpdateShieldedInstanceConfig,
-    ComputeInstancesUpdateShieldedInstanceConfig,
 
     -- ** compute.interconnectAttachments.aggregatedList
     ComputeInterconnectAttachmentsAggregatedListResource,
+    ComputeInterconnectAttachmentsAggregatedList (..),
     newComputeInterconnectAttachmentsAggregatedList,
-    ComputeInterconnectAttachmentsAggregatedList,
 
     -- ** compute.interconnectAttachments.delete
     ComputeInterconnectAttachmentsDeleteResource,
+    ComputeInterconnectAttachmentsDelete (..),
     newComputeInterconnectAttachmentsDelete,
-    ComputeInterconnectAttachmentsDelete,
 
     -- ** compute.interconnectAttachments.get
     ComputeInterconnectAttachmentsGetResource,
+    ComputeInterconnectAttachmentsGet (..),
     newComputeInterconnectAttachmentsGet,
-    ComputeInterconnectAttachmentsGet,
 
     -- ** compute.interconnectAttachments.insert
     ComputeInterconnectAttachmentsInsertResource,
+    ComputeInterconnectAttachmentsInsert (..),
     newComputeInterconnectAttachmentsInsert,
-    ComputeInterconnectAttachmentsInsert,
 
     -- ** compute.interconnectAttachments.list
     ComputeInterconnectAttachmentsListResource,
+    ComputeInterconnectAttachmentsList (..),
     newComputeInterconnectAttachmentsList,
-    ComputeInterconnectAttachmentsList,
 
     -- ** compute.interconnectAttachments.patch
     ComputeInterconnectAttachmentsPatchResource,
+    ComputeInterconnectAttachmentsPatch (..),
     newComputeInterconnectAttachmentsPatch,
-    ComputeInterconnectAttachmentsPatch,
 
     -- ** compute.interconnectLocations.get
     ComputeInterconnectLocationsGetResource,
+    ComputeInterconnectLocationsGet (..),
     newComputeInterconnectLocationsGet,
-    ComputeInterconnectLocationsGet,
 
     -- ** compute.interconnectLocations.list
     ComputeInterconnectLocationsListResource,
+    ComputeInterconnectLocationsList (..),
     newComputeInterconnectLocationsList,
-    ComputeInterconnectLocationsList,
 
     -- ** compute.interconnects.delete
     ComputeInterconnectsDeleteResource,
+    ComputeInterconnectsDelete (..),
     newComputeInterconnectsDelete,
-    ComputeInterconnectsDelete,
 
     -- ** compute.interconnects.get
     ComputeInterconnectsGetResource,
+    ComputeInterconnectsGet (..),
     newComputeInterconnectsGet,
-    ComputeInterconnectsGet,
 
     -- ** compute.interconnects.getDiagnostics
     ComputeInterconnectsGetDiagnosticsResource,
+    ComputeInterconnectsGetDiagnostics (..),
     newComputeInterconnectsGetDiagnostics,
-    ComputeInterconnectsGetDiagnostics,
 
     -- ** compute.interconnects.insert
     ComputeInterconnectsInsertResource,
+    ComputeInterconnectsInsert (..),
     newComputeInterconnectsInsert,
-    ComputeInterconnectsInsert,
 
     -- ** compute.interconnects.list
     ComputeInterconnectsListResource,
+    ComputeInterconnectsList (..),
     newComputeInterconnectsList,
-    ComputeInterconnectsList,
 
     -- ** compute.interconnects.patch
     ComputeInterconnectsPatchResource,
+    ComputeInterconnectsPatch (..),
     newComputeInterconnectsPatch,
-    ComputeInterconnectsPatch,
 
     -- ** compute.licenseCodes.get
     ComputeLicenseCodesGetResource,
+    ComputeLicenseCodesGet (..),
     newComputeLicenseCodesGet,
-    ComputeLicenseCodesGet,
 
     -- ** compute.licenseCodes.testIamPermissions
     ComputeLicenseCodesTestIamPermissionsResource,
+    ComputeLicenseCodesTestIamPermissions (..),
     newComputeLicenseCodesTestIamPermissions,
-    ComputeLicenseCodesTestIamPermissions,
 
     -- ** compute.licenses.delete
     ComputeLicensesDeleteResource,
+    ComputeLicensesDelete (..),
     newComputeLicensesDelete,
-    ComputeLicensesDelete,
 
     -- ** compute.licenses.get
     ComputeLicensesGetResource,
+    ComputeLicensesGet (..),
     newComputeLicensesGet,
-    ComputeLicensesGet,
 
     -- ** compute.licenses.getIamPolicy
     ComputeLicensesGetIamPolicyResource,
+    ComputeLicensesGetIamPolicy (..),
     newComputeLicensesGetIamPolicy,
-    ComputeLicensesGetIamPolicy,
 
     -- ** compute.licenses.insert
     ComputeLicensesInsertResource,
+    ComputeLicensesInsert (..),
     newComputeLicensesInsert,
-    ComputeLicensesInsert,
 
     -- ** compute.licenses.list
     ComputeLicensesListResource,
+    ComputeLicensesList (..),
     newComputeLicensesList,
-    ComputeLicensesList,
 
     -- ** compute.licenses.setIamPolicy
     ComputeLicensesSetIamPolicyResource,
+    ComputeLicensesSetIamPolicy (..),
     newComputeLicensesSetIamPolicy,
-    ComputeLicensesSetIamPolicy,
 
     -- ** compute.licenses.testIamPermissions
     ComputeLicensesTestIamPermissionsResource,
+    ComputeLicensesTestIamPermissions (..),
     newComputeLicensesTestIamPermissions,
-    ComputeLicensesTestIamPermissions,
 
     -- ** compute.machineImages.delete
     ComputeMachineImagesDeleteResource,
+    ComputeMachineImagesDelete (..),
     newComputeMachineImagesDelete,
-    ComputeMachineImagesDelete,
 
     -- ** compute.machineImages.get
     ComputeMachineImagesGetResource,
+    ComputeMachineImagesGet (..),
     newComputeMachineImagesGet,
-    ComputeMachineImagesGet,
 
     -- ** compute.machineImages.getIamPolicy
     ComputeMachineImagesGetIamPolicyResource,
+    ComputeMachineImagesGetIamPolicy (..),
     newComputeMachineImagesGetIamPolicy,
-    ComputeMachineImagesGetIamPolicy,
 
     -- ** compute.machineImages.insert
     ComputeMachineImagesInsertResource,
+    ComputeMachineImagesInsert (..),
     newComputeMachineImagesInsert,
-    ComputeMachineImagesInsert,
 
     -- ** compute.machineImages.list
     ComputeMachineImagesListResource,
+    ComputeMachineImagesList (..),
     newComputeMachineImagesList,
-    ComputeMachineImagesList,
 
     -- ** compute.machineImages.setIamPolicy
     ComputeMachineImagesSetIamPolicyResource,
+    ComputeMachineImagesSetIamPolicy (..),
     newComputeMachineImagesSetIamPolicy,
-    ComputeMachineImagesSetIamPolicy,
 
     -- ** compute.machineImages.testIamPermissions
     ComputeMachineImagesTestIamPermissionsResource,
+    ComputeMachineImagesTestIamPermissions (..),
     newComputeMachineImagesTestIamPermissions,
-    ComputeMachineImagesTestIamPermissions,
 
     -- ** compute.machineTypes.aggregatedList
     ComputeMachineTypesAggregatedListResource,
+    ComputeMachineTypesAggregatedList (..),
     newComputeMachineTypesAggregatedList,
-    ComputeMachineTypesAggregatedList,
 
     -- ** compute.machineTypes.get
     ComputeMachineTypesGetResource,
+    ComputeMachineTypesGet (..),
     newComputeMachineTypesGet,
-    ComputeMachineTypesGet,
 
     -- ** compute.machineTypes.list
     ComputeMachineTypesListResource,
+    ComputeMachineTypesList (..),
     newComputeMachineTypesList,
-    ComputeMachineTypesList,
 
     -- ** compute.networkEndpointGroups.aggregatedList
     ComputeNetworkEndpointGroupsAggregatedListResource,
+    ComputeNetworkEndpointGroupsAggregatedList (..),
     newComputeNetworkEndpointGroupsAggregatedList,
-    ComputeNetworkEndpointGroupsAggregatedList,
 
     -- ** compute.networkEndpointGroups.attachNetworkEndpoints
     ComputeNetworkEndpointGroupsAttachNetworkEndpointsResource,
+    ComputeNetworkEndpointGroupsAttachNetworkEndpoints (..),
     newComputeNetworkEndpointGroupsAttachNetworkEndpoints,
-    ComputeNetworkEndpointGroupsAttachNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.delete
     ComputeNetworkEndpointGroupsDeleteResource,
+    ComputeNetworkEndpointGroupsDelete (..),
     newComputeNetworkEndpointGroupsDelete,
-    ComputeNetworkEndpointGroupsDelete,
 
     -- ** compute.networkEndpointGroups.detachNetworkEndpoints
     ComputeNetworkEndpointGroupsDetachNetworkEndpointsResource,
+    ComputeNetworkEndpointGroupsDetachNetworkEndpoints (..),
     newComputeNetworkEndpointGroupsDetachNetworkEndpoints,
-    ComputeNetworkEndpointGroupsDetachNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.get
     ComputeNetworkEndpointGroupsGetResource,
+    ComputeNetworkEndpointGroupsGet (..),
     newComputeNetworkEndpointGroupsGet,
-    ComputeNetworkEndpointGroupsGet,
 
     -- ** compute.networkEndpointGroups.insert
     ComputeNetworkEndpointGroupsInsertResource,
+    ComputeNetworkEndpointGroupsInsert (..),
     newComputeNetworkEndpointGroupsInsert,
-    ComputeNetworkEndpointGroupsInsert,
 
     -- ** compute.networkEndpointGroups.list
     ComputeNetworkEndpointGroupsListResource,
+    ComputeNetworkEndpointGroupsList (..),
     newComputeNetworkEndpointGroupsList,
-    ComputeNetworkEndpointGroupsList,
 
     -- ** compute.networkEndpointGroups.listNetworkEndpoints
     ComputeNetworkEndpointGroupsListNetworkEndpointsResource,
+    ComputeNetworkEndpointGroupsListNetworkEndpoints (..),
     newComputeNetworkEndpointGroupsListNetworkEndpoints,
-    ComputeNetworkEndpointGroupsListNetworkEndpoints,
 
     -- ** compute.networkEndpointGroups.testIamPermissions
     ComputeNetworkEndpointGroupsTestIamPermissionsResource,
+    ComputeNetworkEndpointGroupsTestIamPermissions (..),
     newComputeNetworkEndpointGroupsTestIamPermissions,
-    ComputeNetworkEndpointGroupsTestIamPermissions,
 
     -- ** compute.networkFirewallPolicies.addAssociation
     ComputeNetworkFirewallPoliciesAddAssociationResource,
+    ComputeNetworkFirewallPoliciesAddAssociation (..),
     newComputeNetworkFirewallPoliciesAddAssociation,
-    ComputeNetworkFirewallPoliciesAddAssociation,
 
     -- ** compute.networkFirewallPolicies.addRule
     ComputeNetworkFirewallPoliciesAddRuleResource,
+    ComputeNetworkFirewallPoliciesAddRule (..),
     newComputeNetworkFirewallPoliciesAddRule,
-    ComputeNetworkFirewallPoliciesAddRule,
 
     -- ** compute.networkFirewallPolicies.cloneRules
     ComputeNetworkFirewallPoliciesCloneRulesResource,
+    ComputeNetworkFirewallPoliciesCloneRules (..),
     newComputeNetworkFirewallPoliciesCloneRules,
-    ComputeNetworkFirewallPoliciesCloneRules,
 
     -- ** compute.networkFirewallPolicies.delete
     ComputeNetworkFirewallPoliciesDeleteResource,
+    ComputeNetworkFirewallPoliciesDelete (..),
     newComputeNetworkFirewallPoliciesDelete,
-    ComputeNetworkFirewallPoliciesDelete,
 
     -- ** compute.networkFirewallPolicies.get
     ComputeNetworkFirewallPoliciesGetResource,
+    ComputeNetworkFirewallPoliciesGet (..),
     newComputeNetworkFirewallPoliciesGet,
-    ComputeNetworkFirewallPoliciesGet,
 
     -- ** compute.networkFirewallPolicies.getAssociation
     ComputeNetworkFirewallPoliciesGetAssociationResource,
+    ComputeNetworkFirewallPoliciesGetAssociation (..),
     newComputeNetworkFirewallPoliciesGetAssociation,
-    ComputeNetworkFirewallPoliciesGetAssociation,
 
     -- ** compute.networkFirewallPolicies.getIamPolicy
     ComputeNetworkFirewallPoliciesGetIamPolicyResource,
+    ComputeNetworkFirewallPoliciesGetIamPolicy (..),
     newComputeNetworkFirewallPoliciesGetIamPolicy,
-    ComputeNetworkFirewallPoliciesGetIamPolicy,
 
     -- ** compute.networkFirewallPolicies.getRule
     ComputeNetworkFirewallPoliciesGetRuleResource,
+    ComputeNetworkFirewallPoliciesGetRule (..),
     newComputeNetworkFirewallPoliciesGetRule,
-    ComputeNetworkFirewallPoliciesGetRule,
 
     -- ** compute.networkFirewallPolicies.insert
     ComputeNetworkFirewallPoliciesInsertResource,
+    ComputeNetworkFirewallPoliciesInsert (..),
     newComputeNetworkFirewallPoliciesInsert,
-    ComputeNetworkFirewallPoliciesInsert,
 
     -- ** compute.networkFirewallPolicies.list
     ComputeNetworkFirewallPoliciesListResource,
+    ComputeNetworkFirewallPoliciesList (..),
     newComputeNetworkFirewallPoliciesList,
-    ComputeNetworkFirewallPoliciesList,
 
     -- ** compute.networkFirewallPolicies.patch
     ComputeNetworkFirewallPoliciesPatchResource,
+    ComputeNetworkFirewallPoliciesPatch (..),
     newComputeNetworkFirewallPoliciesPatch,
-    ComputeNetworkFirewallPoliciesPatch,
 
     -- ** compute.networkFirewallPolicies.patchRule
     ComputeNetworkFirewallPoliciesPatchRuleResource,
+    ComputeNetworkFirewallPoliciesPatchRule (..),
     newComputeNetworkFirewallPoliciesPatchRule,
-    ComputeNetworkFirewallPoliciesPatchRule,
 
     -- ** compute.networkFirewallPolicies.removeAssociation
     ComputeNetworkFirewallPoliciesRemoveAssociationResource,
+    ComputeNetworkFirewallPoliciesRemoveAssociation (..),
     newComputeNetworkFirewallPoliciesRemoveAssociation,
-    ComputeNetworkFirewallPoliciesRemoveAssociation,
 
     -- ** compute.networkFirewallPolicies.removeRule
     ComputeNetworkFirewallPoliciesRemoveRuleResource,
+    ComputeNetworkFirewallPoliciesRemoveRule (..),
     newComputeNetworkFirewallPoliciesRemoveRule,
-    ComputeNetworkFirewallPoliciesRemoveRule,
 
     -- ** compute.networkFirewallPolicies.setIamPolicy
     ComputeNetworkFirewallPoliciesSetIamPolicyResource,
+    ComputeNetworkFirewallPoliciesSetIamPolicy (..),
     newComputeNetworkFirewallPoliciesSetIamPolicy,
-    ComputeNetworkFirewallPoliciesSetIamPolicy,
 
     -- ** compute.networkFirewallPolicies.testIamPermissions
     ComputeNetworkFirewallPoliciesTestIamPermissionsResource,
+    ComputeNetworkFirewallPoliciesTestIamPermissions (..),
     newComputeNetworkFirewallPoliciesTestIamPermissions,
-    ComputeNetworkFirewallPoliciesTestIamPermissions,
 
     -- ** compute.networks.addPeering
     ComputeNetworksAddPeeringResource,
+    ComputeNetworksAddPeering (..),
     newComputeNetworksAddPeering,
-    ComputeNetworksAddPeering,
 
     -- ** compute.networks.delete
     ComputeNetworksDeleteResource,
+    ComputeNetworksDelete (..),
     newComputeNetworksDelete,
-    ComputeNetworksDelete,
 
     -- ** compute.networks.get
     ComputeNetworksGetResource,
+    ComputeNetworksGet (..),
     newComputeNetworksGet,
-    ComputeNetworksGet,
 
     -- ** compute.networks.getEffectiveFirewalls
     ComputeNetworksGetEffectiveFirewallsResource,
+    ComputeNetworksGetEffectiveFirewalls (..),
     newComputeNetworksGetEffectiveFirewalls,
-    ComputeNetworksGetEffectiveFirewalls,
 
     -- ** compute.networks.insert
     ComputeNetworksInsertResource,
+    ComputeNetworksInsert (..),
     newComputeNetworksInsert,
-    ComputeNetworksInsert,
 
     -- ** compute.networks.list
     ComputeNetworksListResource,
+    ComputeNetworksList (..),
     newComputeNetworksList,
-    ComputeNetworksList,
 
     -- ** compute.networks.listPeeringRoutes
     ComputeNetworksListPeeringRoutesResource,
+    ComputeNetworksListPeeringRoutes (..),
     newComputeNetworksListPeeringRoutes,
-    ComputeNetworksListPeeringRoutes,
 
     -- ** compute.networks.patch
     ComputeNetworksPatchResource,
+    ComputeNetworksPatch (..),
     newComputeNetworksPatch,
-    ComputeNetworksPatch,
 
     -- ** compute.networks.removePeering
     ComputeNetworksRemovePeeringResource,
+    ComputeNetworksRemovePeering (..),
     newComputeNetworksRemovePeering,
-    ComputeNetworksRemovePeering,
 
     -- ** compute.networks.switchToCustomMode
     ComputeNetworksSwitchToCustomModeResource,
+    ComputeNetworksSwitchToCustomMode (..),
     newComputeNetworksSwitchToCustomMode,
-    ComputeNetworksSwitchToCustomMode,
 
     -- ** compute.networks.updatePeering
     ComputeNetworksUpdatePeeringResource,
+    ComputeNetworksUpdatePeering (..),
     newComputeNetworksUpdatePeering,
-    ComputeNetworksUpdatePeering,
 
     -- ** compute.nodeGroups.addNodes
     ComputeNodeGroupsAddNodesResource,
+    ComputeNodeGroupsAddNodes (..),
     newComputeNodeGroupsAddNodes,
-    ComputeNodeGroupsAddNodes,
 
     -- ** compute.nodeGroups.aggregatedList
     ComputeNodeGroupsAggregatedListResource,
+    ComputeNodeGroupsAggregatedList (..),
     newComputeNodeGroupsAggregatedList,
-    ComputeNodeGroupsAggregatedList,
 
     -- ** compute.nodeGroups.delete
     ComputeNodeGroupsDeleteResource,
+    ComputeNodeGroupsDelete (..),
     newComputeNodeGroupsDelete,
-    ComputeNodeGroupsDelete,
 
     -- ** compute.nodeGroups.deleteNodes
     ComputeNodeGroupsDeleteNodesResource,
+    ComputeNodeGroupsDeleteNodes (..),
     newComputeNodeGroupsDeleteNodes,
-    ComputeNodeGroupsDeleteNodes,
 
     -- ** compute.nodeGroups.get
     ComputeNodeGroupsGetResource,
+    ComputeNodeGroupsGet (..),
     newComputeNodeGroupsGet,
-    ComputeNodeGroupsGet,
 
     -- ** compute.nodeGroups.getIamPolicy
     ComputeNodeGroupsGetIamPolicyResource,
+    ComputeNodeGroupsGetIamPolicy (..),
     newComputeNodeGroupsGetIamPolicy,
-    ComputeNodeGroupsGetIamPolicy,
 
     -- ** compute.nodeGroups.insert
     ComputeNodeGroupsInsertResource,
+    ComputeNodeGroupsInsert (..),
     newComputeNodeGroupsInsert,
-    ComputeNodeGroupsInsert,
 
     -- ** compute.nodeGroups.list
     ComputeNodeGroupsListResource,
+    ComputeNodeGroupsList (..),
     newComputeNodeGroupsList,
-    ComputeNodeGroupsList,
 
     -- ** compute.nodeGroups.listNodes
     ComputeNodeGroupsListNodesResource,
+    ComputeNodeGroupsListNodes (..),
     newComputeNodeGroupsListNodes,
-    ComputeNodeGroupsListNodes,
 
     -- ** compute.nodeGroups.patch
     ComputeNodeGroupsPatchResource,
+    ComputeNodeGroupsPatch (..),
     newComputeNodeGroupsPatch,
-    ComputeNodeGroupsPatch,
 
     -- ** compute.nodeGroups.setIamPolicy
     ComputeNodeGroupsSetIamPolicyResource,
+    ComputeNodeGroupsSetIamPolicy (..),
     newComputeNodeGroupsSetIamPolicy,
-    ComputeNodeGroupsSetIamPolicy,
 
     -- ** compute.nodeGroups.setNodeTemplate
     ComputeNodeGroupsSetNodeTemplateResource,
+    ComputeNodeGroupsSetNodeTemplate (..),
     newComputeNodeGroupsSetNodeTemplate,
-    ComputeNodeGroupsSetNodeTemplate,
 
     -- ** compute.nodeGroups.testIamPermissions
     ComputeNodeGroupsTestIamPermissionsResource,
+    ComputeNodeGroupsTestIamPermissions (..),
     newComputeNodeGroupsTestIamPermissions,
-    ComputeNodeGroupsTestIamPermissions,
 
     -- ** compute.nodeTemplates.aggregatedList
     ComputeNodeTemplatesAggregatedListResource,
+    ComputeNodeTemplatesAggregatedList (..),
     newComputeNodeTemplatesAggregatedList,
-    ComputeNodeTemplatesAggregatedList,
 
     -- ** compute.nodeTemplates.delete
     ComputeNodeTemplatesDeleteResource,
+    ComputeNodeTemplatesDelete (..),
     newComputeNodeTemplatesDelete,
-    ComputeNodeTemplatesDelete,
 
     -- ** compute.nodeTemplates.get
     ComputeNodeTemplatesGetResource,
+    ComputeNodeTemplatesGet (..),
     newComputeNodeTemplatesGet,
-    ComputeNodeTemplatesGet,
 
     -- ** compute.nodeTemplates.getIamPolicy
     ComputeNodeTemplatesGetIamPolicyResource,
+    ComputeNodeTemplatesGetIamPolicy (..),
     newComputeNodeTemplatesGetIamPolicy,
-    ComputeNodeTemplatesGetIamPolicy,
 
     -- ** compute.nodeTemplates.insert
     ComputeNodeTemplatesInsertResource,
+    ComputeNodeTemplatesInsert (..),
     newComputeNodeTemplatesInsert,
-    ComputeNodeTemplatesInsert,
 
     -- ** compute.nodeTemplates.list
     ComputeNodeTemplatesListResource,
+    ComputeNodeTemplatesList (..),
     newComputeNodeTemplatesList,
-    ComputeNodeTemplatesList,
 
     -- ** compute.nodeTemplates.setIamPolicy
     ComputeNodeTemplatesSetIamPolicyResource,
+    ComputeNodeTemplatesSetIamPolicy (..),
     newComputeNodeTemplatesSetIamPolicy,
-    ComputeNodeTemplatesSetIamPolicy,
 
     -- ** compute.nodeTemplates.testIamPermissions
     ComputeNodeTemplatesTestIamPermissionsResource,
+    ComputeNodeTemplatesTestIamPermissions (..),
     newComputeNodeTemplatesTestIamPermissions,
-    ComputeNodeTemplatesTestIamPermissions,
 
     -- ** compute.nodeTypes.aggregatedList
     ComputeNodeTypesAggregatedListResource,
+    ComputeNodeTypesAggregatedList (..),
     newComputeNodeTypesAggregatedList,
-    ComputeNodeTypesAggregatedList,
 
     -- ** compute.nodeTypes.get
     ComputeNodeTypesGetResource,
+    ComputeNodeTypesGet (..),
     newComputeNodeTypesGet,
-    ComputeNodeTypesGet,
 
     -- ** compute.nodeTypes.list
     ComputeNodeTypesListResource,
+    ComputeNodeTypesList (..),
     newComputeNodeTypesList,
-    ComputeNodeTypesList,
 
     -- ** compute.packetMirrorings.aggregatedList
     ComputePacketMirroringsAggregatedListResource,
+    ComputePacketMirroringsAggregatedList (..),
     newComputePacketMirroringsAggregatedList,
-    ComputePacketMirroringsAggregatedList,
 
     -- ** compute.packetMirrorings.delete
     ComputePacketMirroringsDeleteResource,
+    ComputePacketMirroringsDelete (..),
     newComputePacketMirroringsDelete,
-    ComputePacketMirroringsDelete,
 
     -- ** compute.packetMirrorings.get
     ComputePacketMirroringsGetResource,
+    ComputePacketMirroringsGet (..),
     newComputePacketMirroringsGet,
-    ComputePacketMirroringsGet,
 
     -- ** compute.packetMirrorings.insert
     ComputePacketMirroringsInsertResource,
+    ComputePacketMirroringsInsert (..),
     newComputePacketMirroringsInsert,
-    ComputePacketMirroringsInsert,
 
     -- ** compute.packetMirrorings.list
     ComputePacketMirroringsListResource,
+    ComputePacketMirroringsList (..),
     newComputePacketMirroringsList,
-    ComputePacketMirroringsList,
 
     -- ** compute.packetMirrorings.patch
     ComputePacketMirroringsPatchResource,
+    ComputePacketMirroringsPatch (..),
     newComputePacketMirroringsPatch,
-    ComputePacketMirroringsPatch,
 
     -- ** compute.packetMirrorings.testIamPermissions
     ComputePacketMirroringsTestIamPermissionsResource,
+    ComputePacketMirroringsTestIamPermissions (..),
     newComputePacketMirroringsTestIamPermissions,
-    ComputePacketMirroringsTestIamPermissions,
 
     -- ** compute.projects.disableXpnHost
     ComputeProjectsDisableXpnHostResource,
+    ComputeProjectsDisableXpnHost (..),
     newComputeProjectsDisableXpnHost,
-    ComputeProjectsDisableXpnHost,
 
     -- ** compute.projects.disableXpnResource
     ComputeProjectsDisableXpnResourceResource,
+    ComputeProjectsDisableXpnResource (..),
     newComputeProjectsDisableXpnResource,
-    ComputeProjectsDisableXpnResource,
 
     -- ** compute.projects.enableXpnHost
     ComputeProjectsEnableXpnHostResource,
+    ComputeProjectsEnableXpnHost (..),
     newComputeProjectsEnableXpnHost,
-    ComputeProjectsEnableXpnHost,
 
     -- ** compute.projects.enableXpnResource
     ComputeProjectsEnableXpnResourceResource,
+    ComputeProjectsEnableXpnResource (..),
     newComputeProjectsEnableXpnResource,
-    ComputeProjectsEnableXpnResource,
 
     -- ** compute.projects.get
     ComputeProjectsGetResource,
+    ComputeProjectsGet (..),
     newComputeProjectsGet,
-    ComputeProjectsGet,
 
     -- ** compute.projects.getXpnHost
     ComputeProjectsGetXpnHostResource,
+    ComputeProjectsGetXpnHost (..),
     newComputeProjectsGetXpnHost,
-    ComputeProjectsGetXpnHost,
 
     -- ** compute.projects.getXpnResources
     ComputeProjectsGetXpnResourcesResource,
+    ComputeProjectsGetXpnResources (..),
     newComputeProjectsGetXpnResources,
-    ComputeProjectsGetXpnResources,
 
     -- ** compute.projects.listXpnHosts
     ComputeProjectsListXpnHostsResource,
+    ComputeProjectsListXpnHosts (..),
     newComputeProjectsListXpnHosts,
-    ComputeProjectsListXpnHosts,
 
     -- ** compute.projects.moveDisk
     ComputeProjectsMoveDiskResource,
+    ComputeProjectsMoveDisk (..),
     newComputeProjectsMoveDisk,
-    ComputeProjectsMoveDisk,
 
     -- ** compute.projects.moveInstance
     ComputeProjectsMoveInstanceResource,
+    ComputeProjectsMoveInstance (..),
     newComputeProjectsMoveInstance,
-    ComputeProjectsMoveInstance,
 
     -- ** compute.projects.setCommonInstanceMetadata
     ComputeProjectsSetCommonInstanceMetadataResource,
+    ComputeProjectsSetCommonInstanceMetadata (..),
     newComputeProjectsSetCommonInstanceMetadata,
-    ComputeProjectsSetCommonInstanceMetadata,
 
     -- ** compute.projects.setDefaultNetworkTier
     ComputeProjectsSetDefaultNetworkTierResource,
+    ComputeProjectsSetDefaultNetworkTier (..),
     newComputeProjectsSetDefaultNetworkTier,
-    ComputeProjectsSetDefaultNetworkTier,
 
     -- ** compute.projects.setUsageExportBucket
     ComputeProjectsSetUsageExportBucketResource,
+    ComputeProjectsSetUsageExportBucket (..),
     newComputeProjectsSetUsageExportBucket,
-    ComputeProjectsSetUsageExportBucket,
 
     -- ** compute.publicAdvertisedPrefixes.delete
     ComputePublicAdvertisedPrefixesDeleteResource,
+    ComputePublicAdvertisedPrefixesDelete (..),
     newComputePublicAdvertisedPrefixesDelete,
-    ComputePublicAdvertisedPrefixesDelete,
 
     -- ** compute.publicAdvertisedPrefixes.get
     ComputePublicAdvertisedPrefixesGetResource,
+    ComputePublicAdvertisedPrefixesGet (..),
     newComputePublicAdvertisedPrefixesGet,
-    ComputePublicAdvertisedPrefixesGet,
 
     -- ** compute.publicAdvertisedPrefixes.insert
     ComputePublicAdvertisedPrefixesInsertResource,
+    ComputePublicAdvertisedPrefixesInsert (..),
     newComputePublicAdvertisedPrefixesInsert,
-    ComputePublicAdvertisedPrefixesInsert,
 
     -- ** compute.publicAdvertisedPrefixes.list
     ComputePublicAdvertisedPrefixesListResource,
+    ComputePublicAdvertisedPrefixesList (..),
     newComputePublicAdvertisedPrefixesList,
-    ComputePublicAdvertisedPrefixesList,
 
     -- ** compute.publicAdvertisedPrefixes.patch
     ComputePublicAdvertisedPrefixesPatchResource,
+    ComputePublicAdvertisedPrefixesPatch (..),
     newComputePublicAdvertisedPrefixesPatch,
-    ComputePublicAdvertisedPrefixesPatch,
 
     -- ** compute.publicDelegatedPrefixes.aggregatedList
     ComputePublicDelegatedPrefixesAggregatedListResource,
+    ComputePublicDelegatedPrefixesAggregatedList (..),
     newComputePublicDelegatedPrefixesAggregatedList,
-    ComputePublicDelegatedPrefixesAggregatedList,
 
     -- ** compute.publicDelegatedPrefixes.delete
     ComputePublicDelegatedPrefixesDeleteResource,
+    ComputePublicDelegatedPrefixesDelete (..),
     newComputePublicDelegatedPrefixesDelete,
-    ComputePublicDelegatedPrefixesDelete,
 
     -- ** compute.publicDelegatedPrefixes.get
     ComputePublicDelegatedPrefixesGetResource,
+    ComputePublicDelegatedPrefixesGet (..),
     newComputePublicDelegatedPrefixesGet,
-    ComputePublicDelegatedPrefixesGet,
 
     -- ** compute.publicDelegatedPrefixes.insert
     ComputePublicDelegatedPrefixesInsertResource,
+    ComputePublicDelegatedPrefixesInsert (..),
     newComputePublicDelegatedPrefixesInsert,
-    ComputePublicDelegatedPrefixesInsert,
 
     -- ** compute.publicDelegatedPrefixes.list
     ComputePublicDelegatedPrefixesListResource,
+    ComputePublicDelegatedPrefixesList (..),
     newComputePublicDelegatedPrefixesList,
-    ComputePublicDelegatedPrefixesList,
 
     -- ** compute.publicDelegatedPrefixes.patch
     ComputePublicDelegatedPrefixesPatchResource,
+    ComputePublicDelegatedPrefixesPatch (..),
     newComputePublicDelegatedPrefixesPatch,
-    ComputePublicDelegatedPrefixesPatch,
 
     -- ** compute.regionAutoscalers.delete
     ComputeRegionAutoscalersDeleteResource,
+    ComputeRegionAutoscalersDelete (..),
     newComputeRegionAutoscalersDelete,
-    ComputeRegionAutoscalersDelete,
 
     -- ** compute.regionAutoscalers.get
     ComputeRegionAutoscalersGetResource,
+    ComputeRegionAutoscalersGet (..),
     newComputeRegionAutoscalersGet,
-    ComputeRegionAutoscalersGet,
 
     -- ** compute.regionAutoscalers.insert
     ComputeRegionAutoscalersInsertResource,
+    ComputeRegionAutoscalersInsert (..),
     newComputeRegionAutoscalersInsert,
-    ComputeRegionAutoscalersInsert,
 
     -- ** compute.regionAutoscalers.list
     ComputeRegionAutoscalersListResource,
+    ComputeRegionAutoscalersList (..),
     newComputeRegionAutoscalersList,
-    ComputeRegionAutoscalersList,
 
     -- ** compute.regionAutoscalers.patch
     ComputeRegionAutoscalersPatchResource,
+    ComputeRegionAutoscalersPatch (..),
     newComputeRegionAutoscalersPatch,
-    ComputeRegionAutoscalersPatch,
 
     -- ** compute.regionAutoscalers.update
     ComputeRegionAutoscalersUpdateResource,
+    ComputeRegionAutoscalersUpdate (..),
     newComputeRegionAutoscalersUpdate,
-    ComputeRegionAutoscalersUpdate,
 
     -- ** compute.regionBackendServices.delete
     ComputeRegionBackendServicesDeleteResource,
+    ComputeRegionBackendServicesDelete (..),
     newComputeRegionBackendServicesDelete,
-    ComputeRegionBackendServicesDelete,
 
     -- ** compute.regionBackendServices.get
     ComputeRegionBackendServicesGetResource,
+    ComputeRegionBackendServicesGet (..),
     newComputeRegionBackendServicesGet,
-    ComputeRegionBackendServicesGet,
 
     -- ** compute.regionBackendServices.getHealth
     ComputeRegionBackendServicesGetHealthResource,
+    ComputeRegionBackendServicesGetHealth (..),
     newComputeRegionBackendServicesGetHealth,
-    ComputeRegionBackendServicesGetHealth,
 
     -- ** compute.regionBackendServices.insert
     ComputeRegionBackendServicesInsertResource,
+    ComputeRegionBackendServicesInsert (..),
     newComputeRegionBackendServicesInsert,
-    ComputeRegionBackendServicesInsert,
 
     -- ** compute.regionBackendServices.list
     ComputeRegionBackendServicesListResource,
+    ComputeRegionBackendServicesList (..),
     newComputeRegionBackendServicesList,
-    ComputeRegionBackendServicesList,
 
     -- ** compute.regionBackendServices.patch
     ComputeRegionBackendServicesPatchResource,
+    ComputeRegionBackendServicesPatch (..),
     newComputeRegionBackendServicesPatch,
-    ComputeRegionBackendServicesPatch,
 
     -- ** compute.regionBackendServices.update
     ComputeRegionBackendServicesUpdateResource,
+    ComputeRegionBackendServicesUpdate (..),
     newComputeRegionBackendServicesUpdate,
-    ComputeRegionBackendServicesUpdate,
 
     -- ** compute.regionCommitments.aggregatedList
     ComputeRegionCommitmentsAggregatedListResource,
+    ComputeRegionCommitmentsAggregatedList (..),
     newComputeRegionCommitmentsAggregatedList,
-    ComputeRegionCommitmentsAggregatedList,
 
     -- ** compute.regionCommitments.get
     ComputeRegionCommitmentsGetResource,
+    ComputeRegionCommitmentsGet (..),
     newComputeRegionCommitmentsGet,
-    ComputeRegionCommitmentsGet,
 
     -- ** compute.regionCommitments.insert
     ComputeRegionCommitmentsInsertResource,
+    ComputeRegionCommitmentsInsert (..),
     newComputeRegionCommitmentsInsert,
-    ComputeRegionCommitmentsInsert,
 
     -- ** compute.regionCommitments.list
     ComputeRegionCommitmentsListResource,
+    ComputeRegionCommitmentsList (..),
     newComputeRegionCommitmentsList,
-    ComputeRegionCommitmentsList,
 
     -- ** compute.regionCommitments.update
     ComputeRegionCommitmentsUpdateResource,
+    ComputeRegionCommitmentsUpdate (..),
     newComputeRegionCommitmentsUpdate,
-    ComputeRegionCommitmentsUpdate,
 
     -- ** compute.regionDiskTypes.get
     ComputeRegionDiskTypesGetResource,
+    ComputeRegionDiskTypesGet (..),
     newComputeRegionDiskTypesGet,
-    ComputeRegionDiskTypesGet,
 
     -- ** compute.regionDiskTypes.list
     ComputeRegionDiskTypesListResource,
+    ComputeRegionDiskTypesList (..),
     newComputeRegionDiskTypesList,
-    ComputeRegionDiskTypesList,
 
     -- ** compute.regionDisks.addResourcePolicies
     ComputeRegionDisksAddResourcePoliciesResource,
+    ComputeRegionDisksAddResourcePolicies (..),
     newComputeRegionDisksAddResourcePolicies,
-    ComputeRegionDisksAddResourcePolicies,
 
     -- ** compute.regionDisks.createSnapshot
     ComputeRegionDisksCreateSnapshotResource,
+    ComputeRegionDisksCreateSnapshot (..),
     newComputeRegionDisksCreateSnapshot,
-    ComputeRegionDisksCreateSnapshot,
 
     -- ** compute.regionDisks.delete
     ComputeRegionDisksDeleteResource,
+    ComputeRegionDisksDelete (..),
     newComputeRegionDisksDelete,
-    ComputeRegionDisksDelete,
 
     -- ** compute.regionDisks.get
     ComputeRegionDisksGetResource,
+    ComputeRegionDisksGet (..),
     newComputeRegionDisksGet,
-    ComputeRegionDisksGet,
 
     -- ** compute.regionDisks.getIamPolicy
     ComputeRegionDisksGetIamPolicyResource,
+    ComputeRegionDisksGetIamPolicy (..),
     newComputeRegionDisksGetIamPolicy,
-    ComputeRegionDisksGetIamPolicy,
 
     -- ** compute.regionDisks.insert
     ComputeRegionDisksInsertResource,
+    ComputeRegionDisksInsert (..),
     newComputeRegionDisksInsert,
-    ComputeRegionDisksInsert,
 
     -- ** compute.regionDisks.list
     ComputeRegionDisksListResource,
+    ComputeRegionDisksList (..),
     newComputeRegionDisksList,
-    ComputeRegionDisksList,
 
     -- ** compute.regionDisks.removeResourcePolicies
     ComputeRegionDisksRemoveResourcePoliciesResource,
+    ComputeRegionDisksRemoveResourcePolicies (..),
     newComputeRegionDisksRemoveResourcePolicies,
-    ComputeRegionDisksRemoveResourcePolicies,
 
     -- ** compute.regionDisks.resize
     ComputeRegionDisksResizeResource,
+    ComputeRegionDisksResize (..),
     newComputeRegionDisksResize,
-    ComputeRegionDisksResize,
 
     -- ** compute.regionDisks.setIamPolicy
     ComputeRegionDisksSetIamPolicyResource,
+    ComputeRegionDisksSetIamPolicy (..),
     newComputeRegionDisksSetIamPolicy,
-    ComputeRegionDisksSetIamPolicy,
 
     -- ** compute.regionDisks.setLabels
     ComputeRegionDisksSetLabelsResource,
+    ComputeRegionDisksSetLabels (..),
     newComputeRegionDisksSetLabels,
-    ComputeRegionDisksSetLabels,
 
     -- ** compute.regionDisks.testIamPermissions
     ComputeRegionDisksTestIamPermissionsResource,
+    ComputeRegionDisksTestIamPermissions (..),
     newComputeRegionDisksTestIamPermissions,
-    ComputeRegionDisksTestIamPermissions,
 
     -- ** compute.regionHealthCheckServices.delete
     ComputeRegionHealthCheckServicesDeleteResource,
+    ComputeRegionHealthCheckServicesDelete (..),
     newComputeRegionHealthCheckServicesDelete,
-    ComputeRegionHealthCheckServicesDelete,
 
     -- ** compute.regionHealthCheckServices.get
     ComputeRegionHealthCheckServicesGetResource,
+    ComputeRegionHealthCheckServicesGet (..),
     newComputeRegionHealthCheckServicesGet,
-    ComputeRegionHealthCheckServicesGet,
 
     -- ** compute.regionHealthCheckServices.insert
     ComputeRegionHealthCheckServicesInsertResource,
+    ComputeRegionHealthCheckServicesInsert (..),
     newComputeRegionHealthCheckServicesInsert,
-    ComputeRegionHealthCheckServicesInsert,
 
     -- ** compute.regionHealthCheckServices.list
     ComputeRegionHealthCheckServicesListResource,
+    ComputeRegionHealthCheckServicesList (..),
     newComputeRegionHealthCheckServicesList,
-    ComputeRegionHealthCheckServicesList,
 
     -- ** compute.regionHealthCheckServices.patch
     ComputeRegionHealthCheckServicesPatchResource,
+    ComputeRegionHealthCheckServicesPatch (..),
     newComputeRegionHealthCheckServicesPatch,
-    ComputeRegionHealthCheckServicesPatch,
 
     -- ** compute.regionHealthChecks.delete
     ComputeRegionHealthChecksDeleteResource,
+    ComputeRegionHealthChecksDelete (..),
     newComputeRegionHealthChecksDelete,
-    ComputeRegionHealthChecksDelete,
 
     -- ** compute.regionHealthChecks.get
     ComputeRegionHealthChecksGetResource,
+    ComputeRegionHealthChecksGet (..),
     newComputeRegionHealthChecksGet,
-    ComputeRegionHealthChecksGet,
 
     -- ** compute.regionHealthChecks.insert
     ComputeRegionHealthChecksInsertResource,
+    ComputeRegionHealthChecksInsert (..),
     newComputeRegionHealthChecksInsert,
-    ComputeRegionHealthChecksInsert,
 
     -- ** compute.regionHealthChecks.list
     ComputeRegionHealthChecksListResource,
+    ComputeRegionHealthChecksList (..),
     newComputeRegionHealthChecksList,
-    ComputeRegionHealthChecksList,
 
     -- ** compute.regionHealthChecks.patch
     ComputeRegionHealthChecksPatchResource,
+    ComputeRegionHealthChecksPatch (..),
     newComputeRegionHealthChecksPatch,
-    ComputeRegionHealthChecksPatch,
 
     -- ** compute.regionHealthChecks.update
     ComputeRegionHealthChecksUpdateResource,
+    ComputeRegionHealthChecksUpdate (..),
     newComputeRegionHealthChecksUpdate,
-    ComputeRegionHealthChecksUpdate,
 
     -- ** compute.regionInstanceGroupManagers.abandonInstances
     ComputeRegionInstanceGroupManagersAbandonInstancesResource,
+    ComputeRegionInstanceGroupManagersAbandonInstances (..),
     newComputeRegionInstanceGroupManagersAbandonInstances,
-    ComputeRegionInstanceGroupManagersAbandonInstances,
 
     -- ** compute.regionInstanceGroupManagers.applyUpdatesToInstances
     ComputeRegionInstanceGroupManagersApplyUpdatesToInstancesResource,
+    ComputeRegionInstanceGroupManagersApplyUpdatesToInstances (..),
     newComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
-    ComputeRegionInstanceGroupManagersApplyUpdatesToInstances,
 
     -- ** compute.regionInstanceGroupManagers.createInstances
     ComputeRegionInstanceGroupManagersCreateInstancesResource,
+    ComputeRegionInstanceGroupManagersCreateInstances (..),
     newComputeRegionInstanceGroupManagersCreateInstances,
-    ComputeRegionInstanceGroupManagersCreateInstances,
 
     -- ** compute.regionInstanceGroupManagers.delete
     ComputeRegionInstanceGroupManagersDeleteResource,
+    ComputeRegionInstanceGroupManagersDelete (..),
     newComputeRegionInstanceGroupManagersDelete,
-    ComputeRegionInstanceGroupManagersDelete,
 
     -- ** compute.regionInstanceGroupManagers.deleteInstances
     ComputeRegionInstanceGroupManagersDeleteInstancesResource,
+    ComputeRegionInstanceGroupManagersDeleteInstances (..),
     newComputeRegionInstanceGroupManagersDeleteInstances,
-    ComputeRegionInstanceGroupManagersDeleteInstances,
 
     -- ** compute.regionInstanceGroupManagers.deletePerInstanceConfigs
     ComputeRegionInstanceGroupManagersDeletePerInstanceConfigsResource,
+    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.get
     ComputeRegionInstanceGroupManagersGetResource,
+    ComputeRegionInstanceGroupManagersGet (..),
     newComputeRegionInstanceGroupManagersGet,
-    ComputeRegionInstanceGroupManagersGet,
 
     -- ** compute.regionInstanceGroupManagers.insert
     ComputeRegionInstanceGroupManagersInsertResource,
+    ComputeRegionInstanceGroupManagersInsert (..),
     newComputeRegionInstanceGroupManagersInsert,
-    ComputeRegionInstanceGroupManagersInsert,
 
     -- ** compute.regionInstanceGroupManagers.list
     ComputeRegionInstanceGroupManagersListResource,
+    ComputeRegionInstanceGroupManagersList (..),
     newComputeRegionInstanceGroupManagersList,
-    ComputeRegionInstanceGroupManagersList,
 
     -- ** compute.regionInstanceGroupManagers.listErrors
     ComputeRegionInstanceGroupManagersListErrorsResource,
+    ComputeRegionInstanceGroupManagersListErrors (..),
     newComputeRegionInstanceGroupManagersListErrors,
-    ComputeRegionInstanceGroupManagersListErrors,
 
     -- ** compute.regionInstanceGroupManagers.listManagedInstances
     ComputeRegionInstanceGroupManagersListManagedInstancesResource,
+    ComputeRegionInstanceGroupManagersListManagedInstances (..),
     newComputeRegionInstanceGroupManagersListManagedInstances,
-    ComputeRegionInstanceGroupManagersListManagedInstances,
 
     -- ** compute.regionInstanceGroupManagers.listPerInstanceConfigs
     ComputeRegionInstanceGroupManagersListPerInstanceConfigsResource,
+    ComputeRegionInstanceGroupManagersListPerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersListPerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersListPerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.patch
     ComputeRegionInstanceGroupManagersPatchResource,
+    ComputeRegionInstanceGroupManagersPatch (..),
     newComputeRegionInstanceGroupManagersPatch,
-    ComputeRegionInstanceGroupManagersPatch,
 
     -- ** compute.regionInstanceGroupManagers.patchPerInstanceConfigs
     ComputeRegionInstanceGroupManagersPatchPerInstanceConfigsResource,
+    ComputeRegionInstanceGroupManagersPatchPerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersPatchPerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersPatchPerInstanceConfigs,
 
     -- ** compute.regionInstanceGroupManagers.recreateInstances
     ComputeRegionInstanceGroupManagersRecreateInstancesResource,
+    ComputeRegionInstanceGroupManagersRecreateInstances (..),
     newComputeRegionInstanceGroupManagersRecreateInstances,
-    ComputeRegionInstanceGroupManagersRecreateInstances,
 
     -- ** compute.regionInstanceGroupManagers.resize
     ComputeRegionInstanceGroupManagersResizeResource,
+    ComputeRegionInstanceGroupManagersResize (..),
     newComputeRegionInstanceGroupManagersResize,
-    ComputeRegionInstanceGroupManagersResize,
 
     -- ** compute.regionInstanceGroupManagers.setInstanceTemplate
     ComputeRegionInstanceGroupManagersSetInstanceTemplateResource,
+    ComputeRegionInstanceGroupManagersSetInstanceTemplate (..),
     newComputeRegionInstanceGroupManagersSetInstanceTemplate,
-    ComputeRegionInstanceGroupManagersSetInstanceTemplate,
 
     -- ** compute.regionInstanceGroupManagers.setTargetPools
     ComputeRegionInstanceGroupManagersSetTargetPoolsResource,
+    ComputeRegionInstanceGroupManagersSetTargetPools (..),
     newComputeRegionInstanceGroupManagersSetTargetPools,
-    ComputeRegionInstanceGroupManagersSetTargetPools,
 
     -- ** compute.regionInstanceGroupManagers.updatePerInstanceConfigs
     ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigsResource,
+    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs (..),
     newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
-    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs,
 
     -- ** compute.regionInstanceGroups.get
     ComputeRegionInstanceGroupsGetResource,
+    ComputeRegionInstanceGroupsGet (..),
     newComputeRegionInstanceGroupsGet,
-    ComputeRegionInstanceGroupsGet,
 
     -- ** compute.regionInstanceGroups.list
     ComputeRegionInstanceGroupsListResource,
+    ComputeRegionInstanceGroupsList (..),
     newComputeRegionInstanceGroupsList,
-    ComputeRegionInstanceGroupsList,
 
     -- ** compute.regionInstanceGroups.listInstances
     ComputeRegionInstanceGroupsListInstancesResource,
+    ComputeRegionInstanceGroupsListInstances (..),
     newComputeRegionInstanceGroupsListInstances,
-    ComputeRegionInstanceGroupsListInstances,
 
     -- ** compute.regionInstanceGroups.setNamedPorts
     ComputeRegionInstanceGroupsSetNamedPortsResource,
+    ComputeRegionInstanceGroupsSetNamedPorts (..),
     newComputeRegionInstanceGroupsSetNamedPorts,
-    ComputeRegionInstanceGroupsSetNamedPorts,
 
     -- ** compute.regionInstances.bulkInsert
     ComputeRegionInstancesBulkInsertResource,
+    ComputeRegionInstancesBulkInsert (..),
     newComputeRegionInstancesBulkInsert,
-    ComputeRegionInstancesBulkInsert,
 
     -- ** compute.regionNetworkEndpointGroups.delete
     ComputeRegionNetworkEndpointGroupsDeleteResource,
+    ComputeRegionNetworkEndpointGroupsDelete (..),
     newComputeRegionNetworkEndpointGroupsDelete,
-    ComputeRegionNetworkEndpointGroupsDelete,
 
     -- ** compute.regionNetworkEndpointGroups.get
     ComputeRegionNetworkEndpointGroupsGetResource,
+    ComputeRegionNetworkEndpointGroupsGet (..),
     newComputeRegionNetworkEndpointGroupsGet,
-    ComputeRegionNetworkEndpointGroupsGet,
 
     -- ** compute.regionNetworkEndpointGroups.insert
     ComputeRegionNetworkEndpointGroupsInsertResource,
+    ComputeRegionNetworkEndpointGroupsInsert (..),
     newComputeRegionNetworkEndpointGroupsInsert,
-    ComputeRegionNetworkEndpointGroupsInsert,
 
     -- ** compute.regionNetworkEndpointGroups.list
     ComputeRegionNetworkEndpointGroupsListResource,
+    ComputeRegionNetworkEndpointGroupsList (..),
     newComputeRegionNetworkEndpointGroupsList,
-    ComputeRegionNetworkEndpointGroupsList,
 
     -- ** compute.regionNetworkFirewallPolicies.addAssociation
     ComputeRegionNetworkFirewallPoliciesAddAssociationResource,
+    ComputeRegionNetworkFirewallPoliciesAddAssociation (..),
     newComputeRegionNetworkFirewallPoliciesAddAssociation,
-    ComputeRegionNetworkFirewallPoliciesAddAssociation,
 
     -- ** compute.regionNetworkFirewallPolicies.addRule
     ComputeRegionNetworkFirewallPoliciesAddRuleResource,
+    ComputeRegionNetworkFirewallPoliciesAddRule (..),
     newComputeRegionNetworkFirewallPoliciesAddRule,
-    ComputeRegionNetworkFirewallPoliciesAddRule,
 
     -- ** compute.regionNetworkFirewallPolicies.cloneRules
     ComputeRegionNetworkFirewallPoliciesCloneRulesResource,
+    ComputeRegionNetworkFirewallPoliciesCloneRules (..),
     newComputeRegionNetworkFirewallPoliciesCloneRules,
-    ComputeRegionNetworkFirewallPoliciesCloneRules,
 
     -- ** compute.regionNetworkFirewallPolicies.delete
     ComputeRegionNetworkFirewallPoliciesDeleteResource,
+    ComputeRegionNetworkFirewallPoliciesDelete (..),
     newComputeRegionNetworkFirewallPoliciesDelete,
-    ComputeRegionNetworkFirewallPoliciesDelete,
 
     -- ** compute.regionNetworkFirewallPolicies.get
     ComputeRegionNetworkFirewallPoliciesGetResource,
+    ComputeRegionNetworkFirewallPoliciesGet (..),
     newComputeRegionNetworkFirewallPoliciesGet,
-    ComputeRegionNetworkFirewallPoliciesGet,
 
     -- ** compute.regionNetworkFirewallPolicies.getAssociation
     ComputeRegionNetworkFirewallPoliciesGetAssociationResource,
+    ComputeRegionNetworkFirewallPoliciesGetAssociation (..),
     newComputeRegionNetworkFirewallPoliciesGetAssociation,
-    ComputeRegionNetworkFirewallPoliciesGetAssociation,
 
     -- ** compute.regionNetworkFirewallPolicies.getEffectiveFirewalls
     ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewallsResource,
+    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls (..),
     newComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
-    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
 
     -- ** compute.regionNetworkFirewallPolicies.getIamPolicy
     ComputeRegionNetworkFirewallPoliciesGetIamPolicyResource,
+    ComputeRegionNetworkFirewallPoliciesGetIamPolicy (..),
     newComputeRegionNetworkFirewallPoliciesGetIamPolicy,
-    ComputeRegionNetworkFirewallPoliciesGetIamPolicy,
 
     -- ** compute.regionNetworkFirewallPolicies.getRule
     ComputeRegionNetworkFirewallPoliciesGetRuleResource,
+    ComputeRegionNetworkFirewallPoliciesGetRule (..),
     newComputeRegionNetworkFirewallPoliciesGetRule,
-    ComputeRegionNetworkFirewallPoliciesGetRule,
 
     -- ** compute.regionNetworkFirewallPolicies.insert
     ComputeRegionNetworkFirewallPoliciesInsertResource,
+    ComputeRegionNetworkFirewallPoliciesInsert (..),
     newComputeRegionNetworkFirewallPoliciesInsert,
-    ComputeRegionNetworkFirewallPoliciesInsert,
 
     -- ** compute.regionNetworkFirewallPolicies.list
     ComputeRegionNetworkFirewallPoliciesListResource,
+    ComputeRegionNetworkFirewallPoliciesList (..),
     newComputeRegionNetworkFirewallPoliciesList,
-    ComputeRegionNetworkFirewallPoliciesList,
 
     -- ** compute.regionNetworkFirewallPolicies.patch
     ComputeRegionNetworkFirewallPoliciesPatchResource,
+    ComputeRegionNetworkFirewallPoliciesPatch (..),
     newComputeRegionNetworkFirewallPoliciesPatch,
-    ComputeRegionNetworkFirewallPoliciesPatch,
 
     -- ** compute.regionNetworkFirewallPolicies.patchRule
     ComputeRegionNetworkFirewallPoliciesPatchRuleResource,
+    ComputeRegionNetworkFirewallPoliciesPatchRule (..),
     newComputeRegionNetworkFirewallPoliciesPatchRule,
-    ComputeRegionNetworkFirewallPoliciesPatchRule,
 
     -- ** compute.regionNetworkFirewallPolicies.removeAssociation
     ComputeRegionNetworkFirewallPoliciesRemoveAssociationResource,
+    ComputeRegionNetworkFirewallPoliciesRemoveAssociation (..),
     newComputeRegionNetworkFirewallPoliciesRemoveAssociation,
-    ComputeRegionNetworkFirewallPoliciesRemoveAssociation,
 
     -- ** compute.regionNetworkFirewallPolicies.removeRule
     ComputeRegionNetworkFirewallPoliciesRemoveRuleResource,
+    ComputeRegionNetworkFirewallPoliciesRemoveRule (..),
     newComputeRegionNetworkFirewallPoliciesRemoveRule,
-    ComputeRegionNetworkFirewallPoliciesRemoveRule,
 
     -- ** compute.regionNetworkFirewallPolicies.setIamPolicy
     ComputeRegionNetworkFirewallPoliciesSetIamPolicyResource,
+    ComputeRegionNetworkFirewallPoliciesSetIamPolicy (..),
     newComputeRegionNetworkFirewallPoliciesSetIamPolicy,
-    ComputeRegionNetworkFirewallPoliciesSetIamPolicy,
 
     -- ** compute.regionNetworkFirewallPolicies.testIamPermissions
     ComputeRegionNetworkFirewallPoliciesTestIamPermissionsResource,
+    ComputeRegionNetworkFirewallPoliciesTestIamPermissions (..),
     newComputeRegionNetworkFirewallPoliciesTestIamPermissions,
-    ComputeRegionNetworkFirewallPoliciesTestIamPermissions,
 
     -- ** compute.regionNotificationEndpoints.delete
     ComputeRegionNotificationEndpointsDeleteResource,
+    ComputeRegionNotificationEndpointsDelete (..),
     newComputeRegionNotificationEndpointsDelete,
-    ComputeRegionNotificationEndpointsDelete,
 
     -- ** compute.regionNotificationEndpoints.get
     ComputeRegionNotificationEndpointsGetResource,
+    ComputeRegionNotificationEndpointsGet (..),
     newComputeRegionNotificationEndpointsGet,
-    ComputeRegionNotificationEndpointsGet,
 
     -- ** compute.regionNotificationEndpoints.insert
     ComputeRegionNotificationEndpointsInsertResource,
+    ComputeRegionNotificationEndpointsInsert (..),
     newComputeRegionNotificationEndpointsInsert,
-    ComputeRegionNotificationEndpointsInsert,
 
     -- ** compute.regionNotificationEndpoints.list
     ComputeRegionNotificationEndpointsListResource,
+    ComputeRegionNotificationEndpointsList (..),
     newComputeRegionNotificationEndpointsList,
-    ComputeRegionNotificationEndpointsList,
 
     -- ** compute.regionOperations.delete
     ComputeRegionOperationsDeleteResource,
+    ComputeRegionOperationsDelete (..),
     newComputeRegionOperationsDelete,
-    ComputeRegionOperationsDelete,
 
     -- ** compute.regionOperations.get
     ComputeRegionOperationsGetResource,
+    ComputeRegionOperationsGet (..),
     newComputeRegionOperationsGet,
-    ComputeRegionOperationsGet,
 
     -- ** compute.regionOperations.list
     ComputeRegionOperationsListResource,
+    ComputeRegionOperationsList (..),
     newComputeRegionOperationsList,
-    ComputeRegionOperationsList,
 
     -- ** compute.regionOperations.wait
     ComputeRegionOperationsWaitResource,
+    ComputeRegionOperationsWait (..),
     newComputeRegionOperationsWait,
-    ComputeRegionOperationsWait,
 
     -- ** compute.regionSslCertificates.delete
     ComputeRegionSslCertificatesDeleteResource,
+    ComputeRegionSslCertificatesDelete (..),
     newComputeRegionSslCertificatesDelete,
-    ComputeRegionSslCertificatesDelete,
 
     -- ** compute.regionSslCertificates.get
     ComputeRegionSslCertificatesGetResource,
+    ComputeRegionSslCertificatesGet (..),
     newComputeRegionSslCertificatesGet,
-    ComputeRegionSslCertificatesGet,
 
     -- ** compute.regionSslCertificates.insert
     ComputeRegionSslCertificatesInsertResource,
+    ComputeRegionSslCertificatesInsert (..),
     newComputeRegionSslCertificatesInsert,
-    ComputeRegionSslCertificatesInsert,
 
     -- ** compute.regionSslCertificates.list
     ComputeRegionSslCertificatesListResource,
+    ComputeRegionSslCertificatesList (..),
     newComputeRegionSslCertificatesList,
-    ComputeRegionSslCertificatesList,
 
     -- ** compute.regionTargetHttpProxies.delete
     ComputeRegionTargetHttpProxiesDeleteResource,
+    ComputeRegionTargetHttpProxiesDelete (..),
     newComputeRegionTargetHttpProxiesDelete,
-    ComputeRegionTargetHttpProxiesDelete,
 
     -- ** compute.regionTargetHttpProxies.get
     ComputeRegionTargetHttpProxiesGetResource,
+    ComputeRegionTargetHttpProxiesGet (..),
     newComputeRegionTargetHttpProxiesGet,
-    ComputeRegionTargetHttpProxiesGet,
 
     -- ** compute.regionTargetHttpProxies.insert
     ComputeRegionTargetHttpProxiesInsertResource,
+    ComputeRegionTargetHttpProxiesInsert (..),
     newComputeRegionTargetHttpProxiesInsert,
-    ComputeRegionTargetHttpProxiesInsert,
 
     -- ** compute.regionTargetHttpProxies.list
     ComputeRegionTargetHttpProxiesListResource,
+    ComputeRegionTargetHttpProxiesList (..),
     newComputeRegionTargetHttpProxiesList,
-    ComputeRegionTargetHttpProxiesList,
 
     -- ** compute.regionTargetHttpProxies.setUrlMap
     ComputeRegionTargetHttpProxiesSetUrlMapResource,
+    ComputeRegionTargetHttpProxiesSetUrlMap (..),
     newComputeRegionTargetHttpProxiesSetUrlMap,
-    ComputeRegionTargetHttpProxiesSetUrlMap,
 
     -- ** compute.regionTargetHttpsProxies.delete
     ComputeRegionTargetHttpsProxiesDeleteResource,
+    ComputeRegionTargetHttpsProxiesDelete (..),
     newComputeRegionTargetHttpsProxiesDelete,
-    ComputeRegionTargetHttpsProxiesDelete,
 
     -- ** compute.regionTargetHttpsProxies.get
     ComputeRegionTargetHttpsProxiesGetResource,
+    ComputeRegionTargetHttpsProxiesGet (..),
     newComputeRegionTargetHttpsProxiesGet,
-    ComputeRegionTargetHttpsProxiesGet,
 
     -- ** compute.regionTargetHttpsProxies.insert
     ComputeRegionTargetHttpsProxiesInsertResource,
+    ComputeRegionTargetHttpsProxiesInsert (..),
     newComputeRegionTargetHttpsProxiesInsert,
-    ComputeRegionTargetHttpsProxiesInsert,
 
     -- ** compute.regionTargetHttpsProxies.list
     ComputeRegionTargetHttpsProxiesListResource,
+    ComputeRegionTargetHttpsProxiesList (..),
     newComputeRegionTargetHttpsProxiesList,
-    ComputeRegionTargetHttpsProxiesList,
 
     -- ** compute.regionTargetHttpsProxies.patch
     ComputeRegionTargetHttpsProxiesPatchResource,
+    ComputeRegionTargetHttpsProxiesPatch (..),
     newComputeRegionTargetHttpsProxiesPatch,
-    ComputeRegionTargetHttpsProxiesPatch,
 
     -- ** compute.regionTargetHttpsProxies.setSslCertificates
     ComputeRegionTargetHttpsProxiesSetSslCertificatesResource,
+    ComputeRegionTargetHttpsProxiesSetSslCertificates (..),
     newComputeRegionTargetHttpsProxiesSetSslCertificates,
-    ComputeRegionTargetHttpsProxiesSetSslCertificates,
 
     -- ** compute.regionTargetHttpsProxies.setUrlMap
     ComputeRegionTargetHttpsProxiesSetUrlMapResource,
+    ComputeRegionTargetHttpsProxiesSetUrlMap (..),
     newComputeRegionTargetHttpsProxiesSetUrlMap,
-    ComputeRegionTargetHttpsProxiesSetUrlMap,
 
     -- ** compute.regionUrlMaps.delete
     ComputeRegionUrlMapsDeleteResource,
+    ComputeRegionUrlMapsDelete (..),
     newComputeRegionUrlMapsDelete,
-    ComputeRegionUrlMapsDelete,
 
     -- ** compute.regionUrlMaps.get
     ComputeRegionUrlMapsGetResource,
+    ComputeRegionUrlMapsGet (..),
     newComputeRegionUrlMapsGet,
-    ComputeRegionUrlMapsGet,
 
     -- ** compute.regionUrlMaps.insert
     ComputeRegionUrlMapsInsertResource,
+    ComputeRegionUrlMapsInsert (..),
     newComputeRegionUrlMapsInsert,
-    ComputeRegionUrlMapsInsert,
 
     -- ** compute.regionUrlMaps.list
     ComputeRegionUrlMapsListResource,
+    ComputeRegionUrlMapsList (..),
     newComputeRegionUrlMapsList,
-    ComputeRegionUrlMapsList,
 
     -- ** compute.regionUrlMaps.patch
     ComputeRegionUrlMapsPatchResource,
+    ComputeRegionUrlMapsPatch (..),
     newComputeRegionUrlMapsPatch,
-    ComputeRegionUrlMapsPatch,
 
     -- ** compute.regionUrlMaps.update
     ComputeRegionUrlMapsUpdateResource,
+    ComputeRegionUrlMapsUpdate (..),
     newComputeRegionUrlMapsUpdate,
-    ComputeRegionUrlMapsUpdate,
 
     -- ** compute.regionUrlMaps.validate
     ComputeRegionUrlMapsValidateResource,
+    ComputeRegionUrlMapsValidate (..),
     newComputeRegionUrlMapsValidate,
-    ComputeRegionUrlMapsValidate,
 
     -- ** compute.regions.get
     ComputeRegionsGetResource,
+    ComputeRegionsGet (..),
     newComputeRegionsGet,
-    ComputeRegionsGet,
 
     -- ** compute.regions.list
     ComputeRegionsListResource,
+    ComputeRegionsList (..),
     newComputeRegionsList,
-    ComputeRegionsList,
 
     -- ** compute.reservations.aggregatedList
     ComputeReservationsAggregatedListResource,
+    ComputeReservationsAggregatedList (..),
     newComputeReservationsAggregatedList,
-    ComputeReservationsAggregatedList,
 
     -- ** compute.reservations.delete
     ComputeReservationsDeleteResource,
+    ComputeReservationsDelete (..),
     newComputeReservationsDelete,
-    ComputeReservationsDelete,
 
     -- ** compute.reservations.get
     ComputeReservationsGetResource,
+    ComputeReservationsGet (..),
     newComputeReservationsGet,
-    ComputeReservationsGet,
 
     -- ** compute.reservations.getIamPolicy
     ComputeReservationsGetIamPolicyResource,
+    ComputeReservationsGetIamPolicy (..),
     newComputeReservationsGetIamPolicy,
-    ComputeReservationsGetIamPolicy,
 
     -- ** compute.reservations.insert
     ComputeReservationsInsertResource,
+    ComputeReservationsInsert (..),
     newComputeReservationsInsert,
-    ComputeReservationsInsert,
 
     -- ** compute.reservations.list
     ComputeReservationsListResource,
+    ComputeReservationsList (..),
     newComputeReservationsList,
-    ComputeReservationsList,
 
     -- ** compute.reservations.resize
     ComputeReservationsResizeResource,
+    ComputeReservationsResize (..),
     newComputeReservationsResize,
-    ComputeReservationsResize,
 
     -- ** compute.reservations.setIamPolicy
     ComputeReservationsSetIamPolicyResource,
+    ComputeReservationsSetIamPolicy (..),
     newComputeReservationsSetIamPolicy,
-    ComputeReservationsSetIamPolicy,
 
     -- ** compute.reservations.testIamPermissions
     ComputeReservationsTestIamPermissionsResource,
+    ComputeReservationsTestIamPermissions (..),
     newComputeReservationsTestIamPermissions,
-    ComputeReservationsTestIamPermissions,
 
     -- ** compute.reservations.update
     ComputeReservationsUpdateResource,
+    ComputeReservationsUpdate (..),
     newComputeReservationsUpdate,
-    ComputeReservationsUpdate,
 
     -- ** compute.resourcePolicies.aggregatedList
     ComputeResourcePoliciesAggregatedListResource,
+    ComputeResourcePoliciesAggregatedList (..),
     newComputeResourcePoliciesAggregatedList,
-    ComputeResourcePoliciesAggregatedList,
 
     -- ** compute.resourcePolicies.delete
     ComputeResourcePoliciesDeleteResource,
+    ComputeResourcePoliciesDelete (..),
     newComputeResourcePoliciesDelete,
-    ComputeResourcePoliciesDelete,
 
     -- ** compute.resourcePolicies.get
     ComputeResourcePoliciesGetResource,
+    ComputeResourcePoliciesGet (..),
     newComputeResourcePoliciesGet,
-    ComputeResourcePoliciesGet,
 
     -- ** compute.resourcePolicies.getIamPolicy
     ComputeResourcePoliciesGetIamPolicyResource,
+    ComputeResourcePoliciesGetIamPolicy (..),
     newComputeResourcePoliciesGetIamPolicy,
-    ComputeResourcePoliciesGetIamPolicy,
 
     -- ** compute.resourcePolicies.insert
     ComputeResourcePoliciesInsertResource,
+    ComputeResourcePoliciesInsert (..),
     newComputeResourcePoliciesInsert,
-    ComputeResourcePoliciesInsert,
 
     -- ** compute.resourcePolicies.list
     ComputeResourcePoliciesListResource,
+    ComputeResourcePoliciesList (..),
     newComputeResourcePoliciesList,
-    ComputeResourcePoliciesList,
 
     -- ** compute.resourcePolicies.setIamPolicy
     ComputeResourcePoliciesSetIamPolicyResource,
+    ComputeResourcePoliciesSetIamPolicy (..),
     newComputeResourcePoliciesSetIamPolicy,
-    ComputeResourcePoliciesSetIamPolicy,
 
     -- ** compute.resourcePolicies.testIamPermissions
     ComputeResourcePoliciesTestIamPermissionsResource,
+    ComputeResourcePoliciesTestIamPermissions (..),
     newComputeResourcePoliciesTestIamPermissions,
-    ComputeResourcePoliciesTestIamPermissions,
 
     -- ** compute.routers.aggregatedList
     ComputeRoutersAggregatedListResource,
+    ComputeRoutersAggregatedList (..),
     newComputeRoutersAggregatedList,
-    ComputeRoutersAggregatedList,
 
     -- ** compute.routers.delete
     ComputeRoutersDeleteResource,
+    ComputeRoutersDelete (..),
     newComputeRoutersDelete,
-    ComputeRoutersDelete,
 
     -- ** compute.routers.get
     ComputeRoutersGetResource,
+    ComputeRoutersGet (..),
     newComputeRoutersGet,
-    ComputeRoutersGet,
 
     -- ** compute.routers.getNatMappingInfo
     ComputeRoutersGetNatMappingInfoResource,
+    ComputeRoutersGetNatMappingInfo (..),
     newComputeRoutersGetNatMappingInfo,
-    ComputeRoutersGetNatMappingInfo,
 
     -- ** compute.routers.getRouterStatus
     ComputeRoutersGetRouterStatusResource,
+    ComputeRoutersGetRouterStatus (..),
     newComputeRoutersGetRouterStatus,
-    ComputeRoutersGetRouterStatus,
 
     -- ** compute.routers.insert
     ComputeRoutersInsertResource,
+    ComputeRoutersInsert (..),
     newComputeRoutersInsert,
-    ComputeRoutersInsert,
 
     -- ** compute.routers.list
     ComputeRoutersListResource,
+    ComputeRoutersList (..),
     newComputeRoutersList,
-    ComputeRoutersList,
 
     -- ** compute.routers.patch
     ComputeRoutersPatchResource,
+    ComputeRoutersPatch (..),
     newComputeRoutersPatch,
-    ComputeRoutersPatch,
 
     -- ** compute.routers.preview
     ComputeRoutersPreviewResource,
+    ComputeRoutersPreview (..),
     newComputeRoutersPreview,
-    ComputeRoutersPreview,
 
     -- ** compute.routers.update
     ComputeRoutersUpdateResource,
+    ComputeRoutersUpdate (..),
     newComputeRoutersUpdate,
-    ComputeRoutersUpdate,
 
     -- ** compute.routes.delete
     ComputeRoutesDeleteResource,
+    ComputeRoutesDelete (..),
     newComputeRoutesDelete,
-    ComputeRoutesDelete,
 
     -- ** compute.routes.get
     ComputeRoutesGetResource,
+    ComputeRoutesGet (..),
     newComputeRoutesGet,
-    ComputeRoutesGet,
 
     -- ** compute.routes.insert
     ComputeRoutesInsertResource,
+    ComputeRoutesInsert (..),
     newComputeRoutesInsert,
-    ComputeRoutesInsert,
 
     -- ** compute.routes.list
     ComputeRoutesListResource,
+    ComputeRoutesList (..),
     newComputeRoutesList,
-    ComputeRoutesList,
 
     -- ** compute.securityPolicies.addRule
     ComputeSecurityPoliciesAddRuleResource,
+    ComputeSecurityPoliciesAddRule (..),
     newComputeSecurityPoliciesAddRule,
-    ComputeSecurityPoliciesAddRule,
 
     -- ** compute.securityPolicies.delete
     ComputeSecurityPoliciesDeleteResource,
+    ComputeSecurityPoliciesDelete (..),
     newComputeSecurityPoliciesDelete,
-    ComputeSecurityPoliciesDelete,
 
     -- ** compute.securityPolicies.get
     ComputeSecurityPoliciesGetResource,
+    ComputeSecurityPoliciesGet (..),
     newComputeSecurityPoliciesGet,
-    ComputeSecurityPoliciesGet,
 
     -- ** compute.securityPolicies.getRule
     ComputeSecurityPoliciesGetRuleResource,
+    ComputeSecurityPoliciesGetRule (..),
     newComputeSecurityPoliciesGetRule,
-    ComputeSecurityPoliciesGetRule,
 
     -- ** compute.securityPolicies.insert
     ComputeSecurityPoliciesInsertResource,
+    ComputeSecurityPoliciesInsert (..),
     newComputeSecurityPoliciesInsert,
-    ComputeSecurityPoliciesInsert,
 
     -- ** compute.securityPolicies.list
     ComputeSecurityPoliciesListResource,
+    ComputeSecurityPoliciesList (..),
     newComputeSecurityPoliciesList,
-    ComputeSecurityPoliciesList,
 
     -- ** compute.securityPolicies.listPreconfiguredExpressionSets
     ComputeSecurityPoliciesListPreconfiguredExpressionSetsResource,
+    ComputeSecurityPoliciesListPreconfiguredExpressionSets (..),
     newComputeSecurityPoliciesListPreconfiguredExpressionSets,
-    ComputeSecurityPoliciesListPreconfiguredExpressionSets,
 
     -- ** compute.securityPolicies.patch
     ComputeSecurityPoliciesPatchResource,
+    ComputeSecurityPoliciesPatch (..),
     newComputeSecurityPoliciesPatch,
-    ComputeSecurityPoliciesPatch,
 
     -- ** compute.securityPolicies.patchRule
     ComputeSecurityPoliciesPatchRuleResource,
+    ComputeSecurityPoliciesPatchRule (..),
     newComputeSecurityPoliciesPatchRule,
-    ComputeSecurityPoliciesPatchRule,
 
     -- ** compute.securityPolicies.removeRule
     ComputeSecurityPoliciesRemoveRuleResource,
+    ComputeSecurityPoliciesRemoveRule (..),
     newComputeSecurityPoliciesRemoveRule,
-    ComputeSecurityPoliciesRemoveRule,
 
     -- ** compute.serviceAttachments.aggregatedList
     ComputeServiceAttachmentsAggregatedListResource,
+    ComputeServiceAttachmentsAggregatedList (..),
     newComputeServiceAttachmentsAggregatedList,
-    ComputeServiceAttachmentsAggregatedList,
 
     -- ** compute.serviceAttachments.delete
     ComputeServiceAttachmentsDeleteResource,
+    ComputeServiceAttachmentsDelete (..),
     newComputeServiceAttachmentsDelete,
-    ComputeServiceAttachmentsDelete,
 
     -- ** compute.serviceAttachments.get
     ComputeServiceAttachmentsGetResource,
+    ComputeServiceAttachmentsGet (..),
     newComputeServiceAttachmentsGet,
-    ComputeServiceAttachmentsGet,
 
     -- ** compute.serviceAttachments.getIamPolicy
     ComputeServiceAttachmentsGetIamPolicyResource,
+    ComputeServiceAttachmentsGetIamPolicy (..),
     newComputeServiceAttachmentsGetIamPolicy,
-    ComputeServiceAttachmentsGetIamPolicy,
 
     -- ** compute.serviceAttachments.insert
     ComputeServiceAttachmentsInsertResource,
+    ComputeServiceAttachmentsInsert (..),
     newComputeServiceAttachmentsInsert,
-    ComputeServiceAttachmentsInsert,
 
     -- ** compute.serviceAttachments.list
     ComputeServiceAttachmentsListResource,
+    ComputeServiceAttachmentsList (..),
     newComputeServiceAttachmentsList,
-    ComputeServiceAttachmentsList,
 
     -- ** compute.serviceAttachments.patch
     ComputeServiceAttachmentsPatchResource,
+    ComputeServiceAttachmentsPatch (..),
     newComputeServiceAttachmentsPatch,
-    ComputeServiceAttachmentsPatch,
 
     -- ** compute.serviceAttachments.setIamPolicy
     ComputeServiceAttachmentsSetIamPolicyResource,
+    ComputeServiceAttachmentsSetIamPolicy (..),
     newComputeServiceAttachmentsSetIamPolicy,
-    ComputeServiceAttachmentsSetIamPolicy,
 
     -- ** compute.serviceAttachments.testIamPermissions
     ComputeServiceAttachmentsTestIamPermissionsResource,
+    ComputeServiceAttachmentsTestIamPermissions (..),
     newComputeServiceAttachmentsTestIamPermissions,
-    ComputeServiceAttachmentsTestIamPermissions,
 
     -- ** compute.snapshots.delete
     ComputeSnapshotsDeleteResource,
+    ComputeSnapshotsDelete (..),
     newComputeSnapshotsDelete,
-    ComputeSnapshotsDelete,
 
     -- ** compute.snapshots.get
     ComputeSnapshotsGetResource,
+    ComputeSnapshotsGet (..),
     newComputeSnapshotsGet,
-    ComputeSnapshotsGet,
 
     -- ** compute.snapshots.getIamPolicy
     ComputeSnapshotsGetIamPolicyResource,
+    ComputeSnapshotsGetIamPolicy (..),
     newComputeSnapshotsGetIamPolicy,
-    ComputeSnapshotsGetIamPolicy,
 
     -- ** compute.snapshots.insert
     ComputeSnapshotsInsertResource,
+    ComputeSnapshotsInsert (..),
     newComputeSnapshotsInsert,
-    ComputeSnapshotsInsert,
 
     -- ** compute.snapshots.list
     ComputeSnapshotsListResource,
+    ComputeSnapshotsList (..),
     newComputeSnapshotsList,
-    ComputeSnapshotsList,
 
     -- ** compute.snapshots.setIamPolicy
     ComputeSnapshotsSetIamPolicyResource,
+    ComputeSnapshotsSetIamPolicy (..),
     newComputeSnapshotsSetIamPolicy,
-    ComputeSnapshotsSetIamPolicy,
 
     -- ** compute.snapshots.setLabels
     ComputeSnapshotsSetLabelsResource,
+    ComputeSnapshotsSetLabels (..),
     newComputeSnapshotsSetLabels,
-    ComputeSnapshotsSetLabels,
 
     -- ** compute.snapshots.testIamPermissions
     ComputeSnapshotsTestIamPermissionsResource,
+    ComputeSnapshotsTestIamPermissions (..),
     newComputeSnapshotsTestIamPermissions,
-    ComputeSnapshotsTestIamPermissions,
 
     -- ** compute.sslCertificates.aggregatedList
     ComputeSslCertificatesAggregatedListResource,
+    ComputeSslCertificatesAggregatedList (..),
     newComputeSslCertificatesAggregatedList,
-    ComputeSslCertificatesAggregatedList,
 
     -- ** compute.sslCertificates.delete
     ComputeSslCertificatesDeleteResource,
+    ComputeSslCertificatesDelete (..),
     newComputeSslCertificatesDelete,
-    ComputeSslCertificatesDelete,
 
     -- ** compute.sslCertificates.get
     ComputeSslCertificatesGetResource,
+    ComputeSslCertificatesGet (..),
     newComputeSslCertificatesGet,
-    ComputeSslCertificatesGet,
 
     -- ** compute.sslCertificates.insert
     ComputeSslCertificatesInsertResource,
+    ComputeSslCertificatesInsert (..),
     newComputeSslCertificatesInsert,
-    ComputeSslCertificatesInsert,
 
     -- ** compute.sslCertificates.list
     ComputeSslCertificatesListResource,
+    ComputeSslCertificatesList (..),
     newComputeSslCertificatesList,
-    ComputeSslCertificatesList,
 
     -- ** compute.sslPolicies.delete
     ComputeSslPoliciesDeleteResource,
+    ComputeSslPoliciesDelete (..),
     newComputeSslPoliciesDelete,
-    ComputeSslPoliciesDelete,
 
     -- ** compute.sslPolicies.get
     ComputeSslPoliciesGetResource,
+    ComputeSslPoliciesGet (..),
     newComputeSslPoliciesGet,
-    ComputeSslPoliciesGet,
 
     -- ** compute.sslPolicies.insert
     ComputeSslPoliciesInsertResource,
+    ComputeSslPoliciesInsert (..),
     newComputeSslPoliciesInsert,
-    ComputeSslPoliciesInsert,
 
     -- ** compute.sslPolicies.list
     ComputeSslPoliciesListResource,
+    ComputeSslPoliciesList (..),
     newComputeSslPoliciesList,
-    ComputeSslPoliciesList,
 
     -- ** compute.sslPolicies.listAvailableFeatures
     ComputeSslPoliciesListAvailableFeaturesResource,
+    ComputeSslPoliciesListAvailableFeatures (..),
     newComputeSslPoliciesListAvailableFeatures,
-    ComputeSslPoliciesListAvailableFeatures,
 
     -- ** compute.sslPolicies.patch
     ComputeSslPoliciesPatchResource,
+    ComputeSslPoliciesPatch (..),
     newComputeSslPoliciesPatch,
-    ComputeSslPoliciesPatch,
 
     -- ** compute.subnetworks.aggregatedList
     ComputeSubnetworksAggregatedListResource,
+    ComputeSubnetworksAggregatedList (..),
     newComputeSubnetworksAggregatedList,
-    ComputeSubnetworksAggregatedList,
 
     -- ** compute.subnetworks.delete
     ComputeSubnetworksDeleteResource,
+    ComputeSubnetworksDelete (..),
     newComputeSubnetworksDelete,
-    ComputeSubnetworksDelete,
 
     -- ** compute.subnetworks.expandIpCidrRange
     ComputeSubnetworksExpandIpCidrRangeResource,
+    ComputeSubnetworksExpandIpCidrRange (..),
     newComputeSubnetworksExpandIpCidrRange,
-    ComputeSubnetworksExpandIpCidrRange,
 
     -- ** compute.subnetworks.get
     ComputeSubnetworksGetResource,
+    ComputeSubnetworksGet (..),
     newComputeSubnetworksGet,
-    ComputeSubnetworksGet,
 
     -- ** compute.subnetworks.getIamPolicy
     ComputeSubnetworksGetIamPolicyResource,
+    ComputeSubnetworksGetIamPolicy (..),
     newComputeSubnetworksGetIamPolicy,
-    ComputeSubnetworksGetIamPolicy,
 
     -- ** compute.subnetworks.insert
     ComputeSubnetworksInsertResource,
+    ComputeSubnetworksInsert (..),
     newComputeSubnetworksInsert,
-    ComputeSubnetworksInsert,
 
     -- ** compute.subnetworks.list
     ComputeSubnetworksListResource,
+    ComputeSubnetworksList (..),
     newComputeSubnetworksList,
-    ComputeSubnetworksList,
 
     -- ** compute.subnetworks.listUsable
     ComputeSubnetworksListUsableResource,
+    ComputeSubnetworksListUsable (..),
     newComputeSubnetworksListUsable,
-    ComputeSubnetworksListUsable,
 
     -- ** compute.subnetworks.patch
     ComputeSubnetworksPatchResource,
+    ComputeSubnetworksPatch (..),
     newComputeSubnetworksPatch,
-    ComputeSubnetworksPatch,
 
     -- ** compute.subnetworks.setIamPolicy
     ComputeSubnetworksSetIamPolicyResource,
+    ComputeSubnetworksSetIamPolicy (..),
     newComputeSubnetworksSetIamPolicy,
-    ComputeSubnetworksSetIamPolicy,
 
     -- ** compute.subnetworks.setPrivateIpGoogleAccess
     ComputeSubnetworksSetPrivateIpGoogleAccessResource,
+    ComputeSubnetworksSetPrivateIpGoogleAccess (..),
     newComputeSubnetworksSetPrivateIpGoogleAccess,
-    ComputeSubnetworksSetPrivateIpGoogleAccess,
 
     -- ** compute.subnetworks.testIamPermissions
     ComputeSubnetworksTestIamPermissionsResource,
+    ComputeSubnetworksTestIamPermissions (..),
     newComputeSubnetworksTestIamPermissions,
-    ComputeSubnetworksTestIamPermissions,
 
     -- ** compute.targetGrpcProxies.delete
     ComputeTargetGrpcProxiesDeleteResource,
+    ComputeTargetGrpcProxiesDelete (..),
     newComputeTargetGrpcProxiesDelete,
-    ComputeTargetGrpcProxiesDelete,
 
     -- ** compute.targetGrpcProxies.get
     ComputeTargetGrpcProxiesGetResource,
+    ComputeTargetGrpcProxiesGet (..),
     newComputeTargetGrpcProxiesGet,
-    ComputeTargetGrpcProxiesGet,
 
     -- ** compute.targetGrpcProxies.insert
     ComputeTargetGrpcProxiesInsertResource,
+    ComputeTargetGrpcProxiesInsert (..),
     newComputeTargetGrpcProxiesInsert,
-    ComputeTargetGrpcProxiesInsert,
 
     -- ** compute.targetGrpcProxies.list
     ComputeTargetGrpcProxiesListResource,
+    ComputeTargetGrpcProxiesList (..),
     newComputeTargetGrpcProxiesList,
-    ComputeTargetGrpcProxiesList,
 
     -- ** compute.targetGrpcProxies.patch
     ComputeTargetGrpcProxiesPatchResource,
+    ComputeTargetGrpcProxiesPatch (..),
     newComputeTargetGrpcProxiesPatch,
-    ComputeTargetGrpcProxiesPatch,
 
     -- ** compute.targetHttpProxies.aggregatedList
     ComputeTargetHttpProxiesAggregatedListResource,
+    ComputeTargetHttpProxiesAggregatedList (..),
     newComputeTargetHttpProxiesAggregatedList,
-    ComputeTargetHttpProxiesAggregatedList,
 
     -- ** compute.targetHttpProxies.delete
     ComputeTargetHttpProxiesDeleteResource,
+    ComputeTargetHttpProxiesDelete (..),
     newComputeTargetHttpProxiesDelete,
-    ComputeTargetHttpProxiesDelete,
 
     -- ** compute.targetHttpProxies.get
     ComputeTargetHttpProxiesGetResource,
+    ComputeTargetHttpProxiesGet (..),
     newComputeTargetHttpProxiesGet,
-    ComputeTargetHttpProxiesGet,
 
     -- ** compute.targetHttpProxies.insert
     ComputeTargetHttpProxiesInsertResource,
+    ComputeTargetHttpProxiesInsert (..),
     newComputeTargetHttpProxiesInsert,
-    ComputeTargetHttpProxiesInsert,
 
     -- ** compute.targetHttpProxies.list
     ComputeTargetHttpProxiesListResource,
+    ComputeTargetHttpProxiesList (..),
     newComputeTargetHttpProxiesList,
-    ComputeTargetHttpProxiesList,
 
     -- ** compute.targetHttpProxies.patch
     ComputeTargetHttpProxiesPatchResource,
+    ComputeTargetHttpProxiesPatch (..),
     newComputeTargetHttpProxiesPatch,
-    ComputeTargetHttpProxiesPatch,
 
     -- ** compute.targetHttpProxies.setUrlMap
     ComputeTargetHttpProxiesSetUrlMapResource,
+    ComputeTargetHttpProxiesSetUrlMap (..),
     newComputeTargetHttpProxiesSetUrlMap,
-    ComputeTargetHttpProxiesSetUrlMap,
 
     -- ** compute.targetHttpsProxies.aggregatedList
     ComputeTargetHttpsProxiesAggregatedListResource,
+    ComputeTargetHttpsProxiesAggregatedList (..),
     newComputeTargetHttpsProxiesAggregatedList,
-    ComputeTargetHttpsProxiesAggregatedList,
 
     -- ** compute.targetHttpsProxies.delete
     ComputeTargetHttpsProxiesDeleteResource,
+    ComputeTargetHttpsProxiesDelete (..),
     newComputeTargetHttpsProxiesDelete,
-    ComputeTargetHttpsProxiesDelete,
 
     -- ** compute.targetHttpsProxies.get
     ComputeTargetHttpsProxiesGetResource,
+    ComputeTargetHttpsProxiesGet (..),
     newComputeTargetHttpsProxiesGet,
-    ComputeTargetHttpsProxiesGet,
 
     -- ** compute.targetHttpsProxies.insert
     ComputeTargetHttpsProxiesInsertResource,
+    ComputeTargetHttpsProxiesInsert (..),
     newComputeTargetHttpsProxiesInsert,
-    ComputeTargetHttpsProxiesInsert,
 
     -- ** compute.targetHttpsProxies.list
     ComputeTargetHttpsProxiesListResource,
+    ComputeTargetHttpsProxiesList (..),
     newComputeTargetHttpsProxiesList,
-    ComputeTargetHttpsProxiesList,
 
     -- ** compute.targetHttpsProxies.patch
     ComputeTargetHttpsProxiesPatchResource,
+    ComputeTargetHttpsProxiesPatch (..),
     newComputeTargetHttpsProxiesPatch,
-    ComputeTargetHttpsProxiesPatch,
 
     -- ** compute.targetHttpsProxies.setQuicOverride
     ComputeTargetHttpsProxiesSetQuicOverrideResource,
+    ComputeTargetHttpsProxiesSetQuicOverride (..),
     newComputeTargetHttpsProxiesSetQuicOverride,
-    ComputeTargetHttpsProxiesSetQuicOverride,
 
     -- ** compute.targetHttpsProxies.setSslCertificates
     ComputeTargetHttpsProxiesSetSslCertificatesResource,
+    ComputeTargetHttpsProxiesSetSslCertificates (..),
     newComputeTargetHttpsProxiesSetSslCertificates,
-    ComputeTargetHttpsProxiesSetSslCertificates,
 
     -- ** compute.targetHttpsProxies.setSslPolicy
     ComputeTargetHttpsProxiesSetSslPolicyResource,
+    ComputeTargetHttpsProxiesSetSslPolicy (..),
     newComputeTargetHttpsProxiesSetSslPolicy,
-    ComputeTargetHttpsProxiesSetSslPolicy,
 
     -- ** compute.targetHttpsProxies.setUrlMap
     ComputeTargetHttpsProxiesSetUrlMapResource,
+    ComputeTargetHttpsProxiesSetUrlMap (..),
     newComputeTargetHttpsProxiesSetUrlMap,
-    ComputeTargetHttpsProxiesSetUrlMap,
 
     -- ** compute.targetInstances.aggregatedList
     ComputeTargetInstancesAggregatedListResource,
+    ComputeTargetInstancesAggregatedList (..),
     newComputeTargetInstancesAggregatedList,
-    ComputeTargetInstancesAggregatedList,
 
     -- ** compute.targetInstances.delete
     ComputeTargetInstancesDeleteResource,
+    ComputeTargetInstancesDelete (..),
     newComputeTargetInstancesDelete,
-    ComputeTargetInstancesDelete,
 
     -- ** compute.targetInstances.get
     ComputeTargetInstancesGetResource,
+    ComputeTargetInstancesGet (..),
     newComputeTargetInstancesGet,
-    ComputeTargetInstancesGet,
 
     -- ** compute.targetInstances.insert
     ComputeTargetInstancesInsertResource,
+    ComputeTargetInstancesInsert (..),
     newComputeTargetInstancesInsert,
-    ComputeTargetInstancesInsert,
 
     -- ** compute.targetInstances.list
     ComputeTargetInstancesListResource,
+    ComputeTargetInstancesList (..),
     newComputeTargetInstancesList,
-    ComputeTargetInstancesList,
 
     -- ** compute.targetPools.addHealthCheck
     ComputeTargetPoolsAddHealthCheckResource,
+    ComputeTargetPoolsAddHealthCheck (..),
     newComputeTargetPoolsAddHealthCheck,
-    ComputeTargetPoolsAddHealthCheck,
 
     -- ** compute.targetPools.addInstance
     ComputeTargetPoolsAddInstanceResource,
+    ComputeTargetPoolsAddInstance (..),
     newComputeTargetPoolsAddInstance,
-    ComputeTargetPoolsAddInstance,
 
     -- ** compute.targetPools.aggregatedList
     ComputeTargetPoolsAggregatedListResource,
+    ComputeTargetPoolsAggregatedList (..),
     newComputeTargetPoolsAggregatedList,
-    ComputeTargetPoolsAggregatedList,
 
     -- ** compute.targetPools.delete
     ComputeTargetPoolsDeleteResource,
+    ComputeTargetPoolsDelete (..),
     newComputeTargetPoolsDelete,
-    ComputeTargetPoolsDelete,
 
     -- ** compute.targetPools.get
     ComputeTargetPoolsGetResource,
+    ComputeTargetPoolsGet (..),
     newComputeTargetPoolsGet,
-    ComputeTargetPoolsGet,
 
     -- ** compute.targetPools.getHealth
     ComputeTargetPoolsGetHealthResource,
+    ComputeTargetPoolsGetHealth (..),
     newComputeTargetPoolsGetHealth,
-    ComputeTargetPoolsGetHealth,
 
     -- ** compute.targetPools.insert
     ComputeTargetPoolsInsertResource,
+    ComputeTargetPoolsInsert (..),
     newComputeTargetPoolsInsert,
-    ComputeTargetPoolsInsert,
 
     -- ** compute.targetPools.list
     ComputeTargetPoolsListResource,
+    ComputeTargetPoolsList (..),
     newComputeTargetPoolsList,
-    ComputeTargetPoolsList,
 
     -- ** compute.targetPools.removeHealthCheck
     ComputeTargetPoolsRemoveHealthCheckResource,
+    ComputeTargetPoolsRemoveHealthCheck (..),
     newComputeTargetPoolsRemoveHealthCheck,
-    ComputeTargetPoolsRemoveHealthCheck,
 
     -- ** compute.targetPools.removeInstance
     ComputeTargetPoolsRemoveInstanceResource,
+    ComputeTargetPoolsRemoveInstance (..),
     newComputeTargetPoolsRemoveInstance,
-    ComputeTargetPoolsRemoveInstance,
 
     -- ** compute.targetPools.setBackup
     ComputeTargetPoolsSetBackupResource,
+    ComputeTargetPoolsSetBackup (..),
     newComputeTargetPoolsSetBackup,
-    ComputeTargetPoolsSetBackup,
 
     -- ** compute.targetSslProxies.delete
     ComputeTargetSslProxiesDeleteResource,
+    ComputeTargetSslProxiesDelete (..),
     newComputeTargetSslProxiesDelete,
-    ComputeTargetSslProxiesDelete,
 
     -- ** compute.targetSslProxies.get
     ComputeTargetSslProxiesGetResource,
+    ComputeTargetSslProxiesGet (..),
     newComputeTargetSslProxiesGet,
-    ComputeTargetSslProxiesGet,
 
     -- ** compute.targetSslProxies.insert
     ComputeTargetSslProxiesInsertResource,
+    ComputeTargetSslProxiesInsert (..),
     newComputeTargetSslProxiesInsert,
-    ComputeTargetSslProxiesInsert,
 
     -- ** compute.targetSslProxies.list
     ComputeTargetSslProxiesListResource,
+    ComputeTargetSslProxiesList (..),
     newComputeTargetSslProxiesList,
-    ComputeTargetSslProxiesList,
 
     -- ** compute.targetSslProxies.setBackendService
     ComputeTargetSslProxiesSetBackendServiceResource,
+    ComputeTargetSslProxiesSetBackendService (..),
     newComputeTargetSslProxiesSetBackendService,
-    ComputeTargetSslProxiesSetBackendService,
 
     -- ** compute.targetSslProxies.setProxyHeader
     ComputeTargetSslProxiesSetProxyHeaderResource,
+    ComputeTargetSslProxiesSetProxyHeader (..),
     newComputeTargetSslProxiesSetProxyHeader,
-    ComputeTargetSslProxiesSetProxyHeader,
 
     -- ** compute.targetSslProxies.setSslCertificates
     ComputeTargetSslProxiesSetSslCertificatesResource,
+    ComputeTargetSslProxiesSetSslCertificates (..),
     newComputeTargetSslProxiesSetSslCertificates,
-    ComputeTargetSslProxiesSetSslCertificates,
 
     -- ** compute.targetSslProxies.setSslPolicy
     ComputeTargetSslProxiesSetSslPolicyResource,
+    ComputeTargetSslProxiesSetSslPolicy (..),
     newComputeTargetSslProxiesSetSslPolicy,
-    ComputeTargetSslProxiesSetSslPolicy,
 
     -- ** compute.targetTcpProxies.delete
     ComputeTargetTcpProxiesDeleteResource,
+    ComputeTargetTcpProxiesDelete (..),
     newComputeTargetTcpProxiesDelete,
-    ComputeTargetTcpProxiesDelete,
 
     -- ** compute.targetTcpProxies.get
     ComputeTargetTcpProxiesGetResource,
+    ComputeTargetTcpProxiesGet (..),
     newComputeTargetTcpProxiesGet,
-    ComputeTargetTcpProxiesGet,
 
     -- ** compute.targetTcpProxies.insert
     ComputeTargetTcpProxiesInsertResource,
+    ComputeTargetTcpProxiesInsert (..),
     newComputeTargetTcpProxiesInsert,
-    ComputeTargetTcpProxiesInsert,
 
     -- ** compute.targetTcpProxies.list
     ComputeTargetTcpProxiesListResource,
+    ComputeTargetTcpProxiesList (..),
     newComputeTargetTcpProxiesList,
-    ComputeTargetTcpProxiesList,
 
     -- ** compute.targetTcpProxies.setBackendService
     ComputeTargetTcpProxiesSetBackendServiceResource,
+    ComputeTargetTcpProxiesSetBackendService (..),
     newComputeTargetTcpProxiesSetBackendService,
-    ComputeTargetTcpProxiesSetBackendService,
 
     -- ** compute.targetTcpProxies.setProxyHeader
     ComputeTargetTcpProxiesSetProxyHeaderResource,
+    ComputeTargetTcpProxiesSetProxyHeader (..),
     newComputeTargetTcpProxiesSetProxyHeader,
-    ComputeTargetTcpProxiesSetProxyHeader,
 
     -- ** compute.targetVpnGateways.aggregatedList
     ComputeTargetVpnGatewaysAggregatedListResource,
+    ComputeTargetVpnGatewaysAggregatedList (..),
     newComputeTargetVpnGatewaysAggregatedList,
-    ComputeTargetVpnGatewaysAggregatedList,
 
     -- ** compute.targetVpnGateways.delete
     ComputeTargetVpnGatewaysDeleteResource,
+    ComputeTargetVpnGatewaysDelete (..),
     newComputeTargetVpnGatewaysDelete,
-    ComputeTargetVpnGatewaysDelete,
 
     -- ** compute.targetVpnGateways.get
     ComputeTargetVpnGatewaysGetResource,
+    ComputeTargetVpnGatewaysGet (..),
     newComputeTargetVpnGatewaysGet,
-    ComputeTargetVpnGatewaysGet,
 
     -- ** compute.targetVpnGateways.insert
     ComputeTargetVpnGatewaysInsertResource,
+    ComputeTargetVpnGatewaysInsert (..),
     newComputeTargetVpnGatewaysInsert,
-    ComputeTargetVpnGatewaysInsert,
 
     -- ** compute.targetVpnGateways.list
     ComputeTargetVpnGatewaysListResource,
+    ComputeTargetVpnGatewaysList (..),
     newComputeTargetVpnGatewaysList,
-    ComputeTargetVpnGatewaysList,
 
     -- ** compute.urlMaps.aggregatedList
     ComputeUrlMapsAggregatedListResource,
+    ComputeUrlMapsAggregatedList (..),
     newComputeUrlMapsAggregatedList,
-    ComputeUrlMapsAggregatedList,
 
     -- ** compute.urlMaps.delete
     ComputeUrlMapsDeleteResource,
+    ComputeUrlMapsDelete (..),
     newComputeUrlMapsDelete,
-    ComputeUrlMapsDelete,
 
     -- ** compute.urlMaps.get
     ComputeUrlMapsGetResource,
+    ComputeUrlMapsGet (..),
     newComputeUrlMapsGet,
-    ComputeUrlMapsGet,
 
     -- ** compute.urlMaps.insert
     ComputeUrlMapsInsertResource,
+    ComputeUrlMapsInsert (..),
     newComputeUrlMapsInsert,
-    ComputeUrlMapsInsert,
 
     -- ** compute.urlMaps.invalidateCache
     ComputeUrlMapsInvalidateCacheResource,
+    ComputeUrlMapsInvalidateCache (..),
     newComputeUrlMapsInvalidateCache,
-    ComputeUrlMapsInvalidateCache,
 
     -- ** compute.urlMaps.list
     ComputeUrlMapsListResource,
+    ComputeUrlMapsList (..),
     newComputeUrlMapsList,
-    ComputeUrlMapsList,
 
     -- ** compute.urlMaps.patch
     ComputeUrlMapsPatchResource,
+    ComputeUrlMapsPatch (..),
     newComputeUrlMapsPatch,
-    ComputeUrlMapsPatch,
 
     -- ** compute.urlMaps.update
     ComputeUrlMapsUpdateResource,
+    ComputeUrlMapsUpdate (..),
     newComputeUrlMapsUpdate,
-    ComputeUrlMapsUpdate,
 
     -- ** compute.urlMaps.validate
     ComputeUrlMapsValidateResource,
+    ComputeUrlMapsValidate (..),
     newComputeUrlMapsValidate,
-    ComputeUrlMapsValidate,
 
     -- ** compute.vpnGateways.aggregatedList
     ComputeVpnGatewaysAggregatedListResource,
+    ComputeVpnGatewaysAggregatedList (..),
     newComputeVpnGatewaysAggregatedList,
-    ComputeVpnGatewaysAggregatedList,
 
     -- ** compute.vpnGateways.delete
     ComputeVpnGatewaysDeleteResource,
+    ComputeVpnGatewaysDelete (..),
     newComputeVpnGatewaysDelete,
-    ComputeVpnGatewaysDelete,
 
     -- ** compute.vpnGateways.get
     ComputeVpnGatewaysGetResource,
+    ComputeVpnGatewaysGet (..),
     newComputeVpnGatewaysGet,
-    ComputeVpnGatewaysGet,
 
     -- ** compute.vpnGateways.getStatus
     ComputeVpnGatewaysGetStatusResource,
+    ComputeVpnGatewaysGetStatus (..),
     newComputeVpnGatewaysGetStatus,
-    ComputeVpnGatewaysGetStatus,
 
     -- ** compute.vpnGateways.insert
     ComputeVpnGatewaysInsertResource,
+    ComputeVpnGatewaysInsert (..),
     newComputeVpnGatewaysInsert,
-    ComputeVpnGatewaysInsert,
 
     -- ** compute.vpnGateways.list
     ComputeVpnGatewaysListResource,
+    ComputeVpnGatewaysList (..),
     newComputeVpnGatewaysList,
-    ComputeVpnGatewaysList,
 
     -- ** compute.vpnGateways.setLabels
     ComputeVpnGatewaysSetLabelsResource,
+    ComputeVpnGatewaysSetLabels (..),
     newComputeVpnGatewaysSetLabels,
-    ComputeVpnGatewaysSetLabels,
 
     -- ** compute.vpnGateways.testIamPermissions
     ComputeVpnGatewaysTestIamPermissionsResource,
+    ComputeVpnGatewaysTestIamPermissions (..),
     newComputeVpnGatewaysTestIamPermissions,
-    ComputeVpnGatewaysTestIamPermissions,
 
     -- ** compute.vpnTunnels.aggregatedList
     ComputeVpnTunnelsAggregatedListResource,
+    ComputeVpnTunnelsAggregatedList (..),
     newComputeVpnTunnelsAggregatedList,
-    ComputeVpnTunnelsAggregatedList,
 
     -- ** compute.vpnTunnels.delete
     ComputeVpnTunnelsDeleteResource,
+    ComputeVpnTunnelsDelete (..),
     newComputeVpnTunnelsDelete,
-    ComputeVpnTunnelsDelete,
 
     -- ** compute.vpnTunnels.get
     ComputeVpnTunnelsGetResource,
+    ComputeVpnTunnelsGet (..),
     newComputeVpnTunnelsGet,
-    ComputeVpnTunnelsGet,
 
     -- ** compute.vpnTunnels.insert
     ComputeVpnTunnelsInsertResource,
+    ComputeVpnTunnelsInsert (..),
     newComputeVpnTunnelsInsert,
-    ComputeVpnTunnelsInsert,
 
     -- ** compute.vpnTunnels.list
     ComputeVpnTunnelsListResource,
+    ComputeVpnTunnelsList (..),
     newComputeVpnTunnelsList,
-    ComputeVpnTunnelsList,
 
     -- ** compute.zoneOperations.delete
     ComputeZoneOperationsDeleteResource,
+    ComputeZoneOperationsDelete (..),
     newComputeZoneOperationsDelete,
-    ComputeZoneOperationsDelete,
 
     -- ** compute.zoneOperations.get
     ComputeZoneOperationsGetResource,
+    ComputeZoneOperationsGet (..),
     newComputeZoneOperationsGet,
-    ComputeZoneOperationsGet,
 
     -- ** compute.zoneOperations.list
     ComputeZoneOperationsListResource,
+    ComputeZoneOperationsList (..),
     newComputeZoneOperationsList,
-    ComputeZoneOperationsList,
 
     -- ** compute.zoneOperations.wait
     ComputeZoneOperationsWaitResource,
+    ComputeZoneOperationsWait (..),
     newComputeZoneOperationsWait,
-    ComputeZoneOperationsWait,
 
     -- ** compute.zones.get
     ComputeZonesGetResource,
+    ComputeZonesGet (..),
     newComputeZonesGet,
-    ComputeZonesGet,
 
     -- ** compute.zones.list
     ComputeZonesListResource,
+    ComputeZonesList (..),
     newComputeZonesList,
-    ComputeZonesList,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.Image.Redact
     DLPProjectsImageRedactResource,
 
     -- ** Constructing a Request
+    DLPProjectsImageRedact (..),
     newDLPProjectsImageRedact,
-    DLPProjectsImageRedact,
   )
 where
 

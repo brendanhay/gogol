@@ -34,8 +34,8 @@ module Gogol.FireStore.Projects.Databases.Documents.BeginTransaction
     FireStoreProjectsDatabasesDocumentsBeginTransactionResource,
 
     -- ** Constructing a Request
+    FireStoreProjectsDatabasesDocumentsBeginTransaction (..),
     newFireStoreProjectsDatabasesDocumentsBeginTransaction,
-    FireStoreProjectsDatabasesDocumentsBeginTransaction,
   )
 where
 

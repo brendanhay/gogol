@@ -34,8 +34,8 @@ module Gogol.Run.Projects.Locations.Services.Create
     RunProjectsLocationsServicesCreateResource,
 
     -- ** Constructing a Request
+    RunProjectsLocationsServicesCreate (..),
     newRunProjectsLocationsServicesCreate,
-    RunProjectsLocationsServicesCreate,
   )
 where
 

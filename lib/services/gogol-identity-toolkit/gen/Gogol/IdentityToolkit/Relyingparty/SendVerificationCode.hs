@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.SendVerificationCode
     IdentityToolkitRelyingpartySendVerificationCodeResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartySendVerificationCode (..),
     newIdentityToolkitRelyingpartySendVerificationCode,
-    IdentityToolkitRelyingpartySendVerificationCode,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Repair
     DataprocProjectsRegionsClustersRepairResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsClustersRepair (..),
     newDataprocProjectsRegionsClustersRepair,
-    DataprocProjectsRegionsClustersRepair,
   )
 where
 

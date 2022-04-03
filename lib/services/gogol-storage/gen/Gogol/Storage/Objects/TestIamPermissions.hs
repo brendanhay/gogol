@@ -34,8 +34,8 @@ module Gogol.Storage.Objects.TestIamPermissions
     StorageObjectsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    StorageObjectsTestIamPermissions (..),
     newStorageObjectsTestIamPermissions,
-    StorageObjectsTestIamPermissions,
   )
 where
 

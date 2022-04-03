@@ -34,8 +34,8 @@ module Gogol.Blogger.Blogs.Get
     BloggerBlogsGetResource,
 
     -- ** Constructing a Request
+    BloggerBlogsGet (..),
     newBloggerBlogsGet,
-    BloggerBlogsGet,
   )
 where
 

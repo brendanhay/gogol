@@ -34,8 +34,8 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.GetIamPolicy
     DataprocProjectsRegionsWorkflowTemplatesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy (..),
     newDataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
-    DataprocProjectsRegionsWorkflowTemplatesGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Books.Volumes.Recommended.Rate
     BooksVolumesRecommendedRateResource,
 
     -- ** Constructing a Request
+    BooksVolumesRecommendedRate (..),
     newBooksVolumesRecommendedRate,
-    BooksVolumesRecommendedRate,
   )
 where
 

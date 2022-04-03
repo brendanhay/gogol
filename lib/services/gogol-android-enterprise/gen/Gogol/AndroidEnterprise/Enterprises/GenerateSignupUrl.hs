@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.GenerateSignupUrl
     AndroidEnterpriseEnterprisesGenerateSignupUrlResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesGenerateSignupUrl (..),
     newAndroidEnterpriseEnterprisesGenerateSignupUrl,
-    AndroidEnterpriseEnterprisesGenerateSignupUrl,
   )
 where
 

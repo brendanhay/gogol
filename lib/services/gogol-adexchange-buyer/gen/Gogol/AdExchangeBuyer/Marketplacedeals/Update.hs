@@ -34,8 +34,8 @@ module Gogol.AdExchangeBuyer.Marketplacedeals.Update
     AdExchangeBuyerMarketplacedealsUpdateResource,
 
     -- ** Constructing a Request
+    AdExchangeBuyerMarketplacedealsUpdate (..),
     newAdExchangeBuyerMarketplacedealsUpdate,
-    AdExchangeBuyerMarketplacedealsUpdate,
   )
 where
 

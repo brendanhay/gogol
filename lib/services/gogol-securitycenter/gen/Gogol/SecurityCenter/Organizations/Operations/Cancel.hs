@@ -34,8 +34,8 @@ module Gogol.SecurityCenter.Organizations.Operations.Cancel
     SecurityCenterOrganizationsOperationsCancelResource,
 
     -- ** Constructing a Request
+    SecurityCenterOrganizationsOperationsCancel (..),
     newSecurityCenterOrganizationsOperationsCancel,
-    SecurityCenterOrganizationsOperationsCancel,
   )
 where
 

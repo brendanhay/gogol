@@ -34,8 +34,8 @@ module Gogol.Compute.RegionAutoscalers.Delete
     ComputeRegionAutoscalersDeleteResource,
 
     -- ** Constructing a Request
+    ComputeRegionAutoscalersDelete (..),
     newComputeRegionAutoscalersDelete,
-    ComputeRegionAutoscalersDelete,
   )
 where
 

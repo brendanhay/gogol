@@ -34,8 +34,8 @@ module Gogol.Compute.TargetInstances.AggregatedList
     ComputeTargetInstancesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeTargetInstancesAggregatedList (..),
     newComputeTargetInstancesAggregatedList,
-    ComputeTargetInstancesAggregatedList,
   )
 where
 

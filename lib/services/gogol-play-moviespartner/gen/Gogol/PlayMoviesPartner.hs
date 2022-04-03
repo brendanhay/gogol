@@ -40,33 +40,33 @@ module Gogol.PlayMoviesPartner
 
     -- ** playmoviespartner.accounts.avails.get
     PlayMoviesPartnerAccountsAvailsGetResource,
+    PlayMoviesPartnerAccountsAvailsGet (..),
     newPlayMoviesPartnerAccountsAvailsGet,
-    PlayMoviesPartnerAccountsAvailsGet,
 
     -- ** playmoviespartner.accounts.avails.list
     PlayMoviesPartnerAccountsAvailsListResource,
+    PlayMoviesPartnerAccountsAvailsList (..),
     newPlayMoviesPartnerAccountsAvailsList,
-    PlayMoviesPartnerAccountsAvailsList,
 
     -- ** playmoviespartner.accounts.orders.get
     PlayMoviesPartnerAccountsOrdersGetResource,
+    PlayMoviesPartnerAccountsOrdersGet (..),
     newPlayMoviesPartnerAccountsOrdersGet,
-    PlayMoviesPartnerAccountsOrdersGet,
 
     -- ** playmoviespartner.accounts.orders.list
     PlayMoviesPartnerAccountsOrdersListResource,
+    PlayMoviesPartnerAccountsOrdersList (..),
     newPlayMoviesPartnerAccountsOrdersList,
-    PlayMoviesPartnerAccountsOrdersList,
 
     -- ** playmoviespartner.accounts.storeInfos.country.get
     PlayMoviesPartnerAccountsStoreInfosCountryGetResource,
+    PlayMoviesPartnerAccountsStoreInfosCountryGet (..),
     newPlayMoviesPartnerAccountsStoreInfosCountryGet,
-    PlayMoviesPartnerAccountsStoreInfosCountryGet,
 
     -- ** playmoviespartner.accounts.storeInfos.list
     PlayMoviesPartnerAccountsStoreInfosListResource,
+    PlayMoviesPartnerAccountsStoreInfosList (..),
     newPlayMoviesPartnerAccountsStoreInfosList,
-    PlayMoviesPartnerAccountsStoreInfosList,
 
     -- * Types
 

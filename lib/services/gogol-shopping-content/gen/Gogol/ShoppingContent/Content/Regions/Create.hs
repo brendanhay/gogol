@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Regions.Create
     ContentRegionsCreateResource,
 
     -- ** Constructing a Request
+    ContentRegionsCreate (..),
     newContentRegionsCreate,
-    ContentRegionsCreate,
   )
 where
 

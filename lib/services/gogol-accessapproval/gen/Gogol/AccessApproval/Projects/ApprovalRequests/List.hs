@@ -34,8 +34,8 @@ module Gogol.AccessApproval.Projects.ApprovalRequests.List
     AccessApprovalProjectsApprovalRequestsListResource,
 
     -- ** Constructing a Request
+    AccessApprovalProjectsApprovalRequestsList (..),
     newAccessApprovalProjectsApprovalRequestsList,
-    AccessApprovalProjectsApprovalRequestsList,
   )
 where
 

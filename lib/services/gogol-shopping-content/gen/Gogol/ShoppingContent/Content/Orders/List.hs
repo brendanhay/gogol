@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.List
     ContentOrdersListResource,
 
     -- ** Constructing a Request
+    ContentOrdersList (..),
     newContentOrdersList,
-    ContentOrdersList,
   )
 where
 

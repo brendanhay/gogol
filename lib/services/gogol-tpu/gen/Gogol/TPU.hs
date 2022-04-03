@@ -40,98 +40,98 @@ module Gogol.TPU
 
     -- ** tpu.projects.locations.acceleratorTypes.get
     TPUProjectsLocationsAcceleratorTypesGetResource,
+    TPUProjectsLocationsAcceleratorTypesGet (..),
     newTPUProjectsLocationsAcceleratorTypesGet,
-    TPUProjectsLocationsAcceleratorTypesGet,
 
     -- ** tpu.projects.locations.acceleratorTypes.list
     TPUProjectsLocationsAcceleratorTypesListResource,
+    TPUProjectsLocationsAcceleratorTypesList (..),
     newTPUProjectsLocationsAcceleratorTypesList,
-    TPUProjectsLocationsAcceleratorTypesList,
 
     -- ** tpu.projects.locations.generateServiceIdentity
     TPUProjectsLocationsGenerateServiceIdentityResource,
+    TPUProjectsLocationsGenerateServiceIdentity (..),
     newTPUProjectsLocationsGenerateServiceIdentity,
-    TPUProjectsLocationsGenerateServiceIdentity,
 
     -- ** tpu.projects.locations.get
     TPUProjectsLocationsGetResource,
+    TPUProjectsLocationsGet (..),
     newTPUProjectsLocationsGet,
-    TPUProjectsLocationsGet,
 
     -- ** tpu.projects.locations.list
     TPUProjectsLocationsListResource,
+    TPUProjectsLocationsList (..),
     newTPUProjectsLocationsList,
-    TPUProjectsLocationsList,
 
     -- ** tpu.projects.locations.nodes.create
     TPUProjectsLocationsNodesCreateResource,
+    TPUProjectsLocationsNodesCreate (..),
     newTPUProjectsLocationsNodesCreate,
-    TPUProjectsLocationsNodesCreate,
 
     -- ** tpu.projects.locations.nodes.delete
     TPUProjectsLocationsNodesDeleteResource,
+    TPUProjectsLocationsNodesDelete (..),
     newTPUProjectsLocationsNodesDelete,
-    TPUProjectsLocationsNodesDelete,
 
     -- ** tpu.projects.locations.nodes.get
     TPUProjectsLocationsNodesGetResource,
+    TPUProjectsLocationsNodesGet (..),
     newTPUProjectsLocationsNodesGet,
-    TPUProjectsLocationsNodesGet,
 
     -- ** tpu.projects.locations.nodes.getGuestAttributes
     TPUProjectsLocationsNodesGetGuestAttributesResource,
+    TPUProjectsLocationsNodesGetGuestAttributes (..),
     newTPUProjectsLocationsNodesGetGuestAttributes,
-    TPUProjectsLocationsNodesGetGuestAttributes,
 
     -- ** tpu.projects.locations.nodes.list
     TPUProjectsLocationsNodesListResource,
+    TPUProjectsLocationsNodesList (..),
     newTPUProjectsLocationsNodesList,
-    TPUProjectsLocationsNodesList,
 
     -- ** tpu.projects.locations.nodes.patch
     TPUProjectsLocationsNodesPatchResource,
+    TPUProjectsLocationsNodesPatch (..),
     newTPUProjectsLocationsNodesPatch,
-    TPUProjectsLocationsNodesPatch,
 
     -- ** tpu.projects.locations.nodes.start
     TPUProjectsLocationsNodesStartResource,
+    TPUProjectsLocationsNodesStart (..),
     newTPUProjectsLocationsNodesStart,
-    TPUProjectsLocationsNodesStart,
 
     -- ** tpu.projects.locations.nodes.stop
     TPUProjectsLocationsNodesStopResource,
+    TPUProjectsLocationsNodesStop (..),
     newTPUProjectsLocationsNodesStop,
-    TPUProjectsLocationsNodesStop,
 
     -- ** tpu.projects.locations.operations.cancel
     TPUProjectsLocationsOperationsCancelResource,
+    TPUProjectsLocationsOperationsCancel (..),
     newTPUProjectsLocationsOperationsCancel,
-    TPUProjectsLocationsOperationsCancel,
 
     -- ** tpu.projects.locations.operations.delete
     TPUProjectsLocationsOperationsDeleteResource,
+    TPUProjectsLocationsOperationsDelete (..),
     newTPUProjectsLocationsOperationsDelete,
-    TPUProjectsLocationsOperationsDelete,
 
     -- ** tpu.projects.locations.operations.get
     TPUProjectsLocationsOperationsGetResource,
+    TPUProjectsLocationsOperationsGet (..),
     newTPUProjectsLocationsOperationsGet,
-    TPUProjectsLocationsOperationsGet,
 
     -- ** tpu.projects.locations.operations.list
     TPUProjectsLocationsOperationsListResource,
+    TPUProjectsLocationsOperationsList (..),
     newTPUProjectsLocationsOperationsList,
-    TPUProjectsLocationsOperationsList,
 
     -- ** tpu.projects.locations.runtimeVersions.get
     TPUProjectsLocationsRuntimeVersionsGetResource,
+    TPUProjectsLocationsRuntimeVersionsGet (..),
     newTPUProjectsLocationsRuntimeVersionsGet,
-    TPUProjectsLocationsRuntimeVersionsGet,
 
     -- ** tpu.projects.locations.runtimeVersions.list
     TPUProjectsLocationsRuntimeVersionsListResource,
+    TPUProjectsLocationsRuntimeVersionsList (..),
     newTPUProjectsLocationsRuntimeVersionsList,
-    TPUProjectsLocationsRuntimeVersionsList,
 
     -- * Types
 

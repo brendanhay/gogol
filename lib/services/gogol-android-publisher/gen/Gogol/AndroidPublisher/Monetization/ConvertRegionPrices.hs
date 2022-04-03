@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Monetization.ConvertRegionPrices
     AndroidPublisherMonetizationConvertRegionPricesResource,
 
     -- ** Constructing a Request
+    AndroidPublisherMonetizationConvertRegionPrices (..),
     newAndroidPublisherMonetizationConvertRegionPrices,
-    AndroidPublisherMonetizationConvertRegionPrices,
   )
 where
 

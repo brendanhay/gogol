@@ -34,8 +34,8 @@ module Gogol.Logging.BillingAccounts.GetCmekSettings
     LoggingBillingAccountsGetCmekSettingsResource,
 
     -- ** Constructing a Request
+    LoggingBillingAccountsGetCmekSettings (..),
     newLoggingBillingAccountsGetCmekSettings,
-    LoggingBillingAccountsGetCmekSettings,
   )
 where
 

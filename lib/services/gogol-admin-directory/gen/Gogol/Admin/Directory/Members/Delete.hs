@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Members.Delete
     DirectoryMembersDeleteResource,
 
     -- ** Constructing a Request
+    DirectoryMembersDelete (..),
     newDirectoryMembersDelete,
-    DirectoryMembersDelete,
   )
 where
 

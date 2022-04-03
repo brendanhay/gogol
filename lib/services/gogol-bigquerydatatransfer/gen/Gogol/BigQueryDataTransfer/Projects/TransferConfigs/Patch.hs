@@ -34,8 +34,8 @@ module Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Patch
     BigQueryDataTransferProjectsTransferConfigsPatchResource,
 
     -- ** Constructing a Request
+    BigQueryDataTransferProjectsTransferConfigsPatch (..),
     newBigQueryDataTransferProjectsTransferConfigsPatch,
-    BigQueryDataTransferProjectsTransferConfigsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.GlobalOrganizationOperations.Get
     ComputeGlobalOrganizationOperationsGetResource,
 
     -- ** Constructing a Request
+    ComputeGlobalOrganizationOperationsGet (..),
     newComputeGlobalOrganizationOperationsGet,
-    ComputeGlobalOrganizationOperationsGet,
   )
 where
 

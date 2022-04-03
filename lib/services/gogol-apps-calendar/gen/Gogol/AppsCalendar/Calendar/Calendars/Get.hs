@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Calendars.Get
     CalendarCalendarsGetResource,
 
     -- ** Constructing a Request
+    CalendarCalendarsGet (..),
     newCalendarCalendarsGet,
-    CalendarCalendarsGet,
   )
 where
 

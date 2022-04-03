@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Patch
     HealthcareProjectsLocationsDatasetsDicomStoresPatchResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsDicomStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresPatch,
-    HealthcareProjectsLocationsDatasetsDicomStoresPatch,
   )
 where
 

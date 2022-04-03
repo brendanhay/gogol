@@ -40,48 +40,48 @@ module Gogol.StreetViewPublish
 
     -- ** streetviewpublish.photo.create
     StreetViewPublishPhotoCreateResource,
+    StreetViewPublishPhotoCreate (..),
     newStreetViewPublishPhotoCreate,
-    StreetViewPublishPhotoCreate,
 
     -- ** streetviewpublish.photo.delete
     StreetViewPublishPhotoDeleteResource,
+    StreetViewPublishPhotoDelete (..),
     newStreetViewPublishPhotoDelete,
-    StreetViewPublishPhotoDelete,
 
     -- ** streetviewpublish.photo.get
     StreetViewPublishPhotoGetResource,
+    StreetViewPublishPhotoGet (..),
     newStreetViewPublishPhotoGet,
-    StreetViewPublishPhotoGet,
 
     -- ** streetviewpublish.photo.startUpload
     StreetViewPublishPhotoStartUploadResource,
+    StreetViewPublishPhotoStartUpload (..),
     newStreetViewPublishPhotoStartUpload,
-    StreetViewPublishPhotoStartUpload,
 
     -- ** streetviewpublish.photo.update
     StreetViewPublishPhotoUpdateResource,
+    StreetViewPublishPhotoUpdate (..),
     newStreetViewPublishPhotoUpdate,
-    StreetViewPublishPhotoUpdate,
 
     -- ** streetviewpublish.photos.batchDelete
     StreetViewPublishPhotosBatchDeleteResource,
+    StreetViewPublishPhotosBatchDelete (..),
     newStreetViewPublishPhotosBatchDelete,
-    StreetViewPublishPhotosBatchDelete,
 
     -- ** streetviewpublish.photos.batchGet
     StreetViewPublishPhotosBatchGetResource,
+    StreetViewPublishPhotosBatchGet (..),
     newStreetViewPublishPhotosBatchGet,
-    StreetViewPublishPhotosBatchGet,
 
     -- ** streetviewpublish.photos.batchUpdate
     StreetViewPublishPhotosBatchUpdateResource,
+    StreetViewPublishPhotosBatchUpdate (..),
     newStreetViewPublishPhotosBatchUpdate,
-    StreetViewPublishPhotosBatchUpdate,
 
     -- ** streetviewpublish.photos.list
     StreetViewPublishPhotosListResource,
+    StreetViewPublishPhotosList (..),
     newStreetViewPublishPhotosList,
-    StreetViewPublishPhotosList,
 
     -- * Types
 

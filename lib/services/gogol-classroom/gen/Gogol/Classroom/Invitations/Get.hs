@@ -34,8 +34,8 @@ module Gogol.Classroom.Invitations.Get
     ClassroomInvitationsGetResource,
 
     -- ** Constructing a Request
+    ClassroomInvitationsGet (..),
     newClassroomInvitationsGet,
-    ClassroomInvitationsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.SetIamPolicy
     ComputeRegionNetworkFirewallPoliciesSetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesSetIamPolicy (..),
     newComputeRegionNetworkFirewallPoliciesSetIamPolicy,
-    ComputeRegionNetworkFirewallPoliciesSetIamPolicy,
   )
 where
 

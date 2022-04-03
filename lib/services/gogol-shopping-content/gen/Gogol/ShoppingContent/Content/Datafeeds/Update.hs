@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Datafeeds.Update
     ContentDatafeedsUpdateResource,
 
     -- ** Constructing a Request
+    ContentDatafeedsUpdate (..),
     newContentDatafeedsUpdate,
-    ContentDatafeedsUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.LibraryAgent.Shelves.List
     LibraryAgentShelvesListResource,
 
     -- ** Constructing a Request
+    LibraryAgentShelvesList (..),
     newLibraryAgentShelvesList,
-    LibraryAgentShelvesList,
   )
 where
 

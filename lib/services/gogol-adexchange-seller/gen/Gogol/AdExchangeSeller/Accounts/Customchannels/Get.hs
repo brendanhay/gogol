@@ -34,8 +34,8 @@ module Gogol.AdExchangeSeller.Accounts.Customchannels.Get
     AdExchangeSellerAccountsCustomchannelsGetResource,
 
     -- ** Constructing a Request
+    AdExchangeSellerAccountsCustomchannelsGet (..),
     newAdExchangeSellerAccountsCustomchannelsGet,
-    AdExchangeSellerAccountsCustomchannelsGet,
   )
 where
 

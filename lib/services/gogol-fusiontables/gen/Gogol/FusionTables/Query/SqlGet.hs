@@ -34,8 +34,8 @@ module Gogol.FusionTables.Query.SqlGet
     FusionTablesQuerySqlGetResource,
 
     -- ** Constructing a Request
+    FusionTablesQuerySqlGet (..),
     newFusionTablesQuerySqlGet,
-    FusionTablesQuerySqlGet,
   )
 where
 

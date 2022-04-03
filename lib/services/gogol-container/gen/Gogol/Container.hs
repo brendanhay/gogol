@@ -40,318 +40,318 @@ module Gogol.Container
 
     -- ** container.projects.aggregated.usableSubnetworks.list
     ContainerProjectsAggregatedUsableSubnetworksListResource,
+    ContainerProjectsAggregatedUsableSubnetworksList (..),
     newContainerProjectsAggregatedUsableSubnetworksList,
-    ContainerProjectsAggregatedUsableSubnetworksList,
 
     -- ** container.projects.locations.clusters.completeIpRotation
     ContainerProjectsLocationsClustersCompleteIpRotationResource,
+    ContainerProjectsLocationsClustersCompleteIpRotation (..),
     newContainerProjectsLocationsClustersCompleteIpRotation,
-    ContainerProjectsLocationsClustersCompleteIpRotation,
 
     -- ** container.projects.locations.clusters.create
     ContainerProjectsLocationsClustersCreateResource,
+    ContainerProjectsLocationsClustersCreate (..),
     newContainerProjectsLocationsClustersCreate,
-    ContainerProjectsLocationsClustersCreate,
 
     -- ** container.projects.locations.clusters.delete
     ContainerProjectsLocationsClustersDeleteResource,
+    ContainerProjectsLocationsClustersDelete (..),
     newContainerProjectsLocationsClustersDelete,
-    ContainerProjectsLocationsClustersDelete,
 
     -- ** container.projects.locations.clusters.get
     ContainerProjectsLocationsClustersGetResource,
+    ContainerProjectsLocationsClustersGet (..),
     newContainerProjectsLocationsClustersGet,
-    ContainerProjectsLocationsClustersGet,
 
     -- ** container.projects.locations.clusters.getJwks
     ContainerProjectsLocationsClustersGetJwksResource,
+    ContainerProjectsLocationsClustersGetJwks (..),
     newContainerProjectsLocationsClustersGetJwks,
-    ContainerProjectsLocationsClustersGetJwks,
 
     -- ** container.projects.locations.clusters.list
     ContainerProjectsLocationsClustersListResource,
+    ContainerProjectsLocationsClustersList (..),
     newContainerProjectsLocationsClustersList,
-    ContainerProjectsLocationsClustersList,
 
     -- ** container.projects.locations.clusters.nodePools.create
     ContainerProjectsLocationsClustersNodePoolsCreateResource,
+    ContainerProjectsLocationsClustersNodePoolsCreate (..),
     newContainerProjectsLocationsClustersNodePoolsCreate,
-    ContainerProjectsLocationsClustersNodePoolsCreate,
 
     -- ** container.projects.locations.clusters.nodePools.delete
     ContainerProjectsLocationsClustersNodePoolsDeleteResource,
+    ContainerProjectsLocationsClustersNodePoolsDelete (..),
     newContainerProjectsLocationsClustersNodePoolsDelete,
-    ContainerProjectsLocationsClustersNodePoolsDelete,
 
     -- ** container.projects.locations.clusters.nodePools.get
     ContainerProjectsLocationsClustersNodePoolsGetResource,
+    ContainerProjectsLocationsClustersNodePoolsGet (..),
     newContainerProjectsLocationsClustersNodePoolsGet,
-    ContainerProjectsLocationsClustersNodePoolsGet,
 
     -- ** container.projects.locations.clusters.nodePools.list
     ContainerProjectsLocationsClustersNodePoolsListResource,
+    ContainerProjectsLocationsClustersNodePoolsList (..),
     newContainerProjectsLocationsClustersNodePoolsList,
-    ContainerProjectsLocationsClustersNodePoolsList,
 
     -- ** container.projects.locations.clusters.nodePools.rollback
     ContainerProjectsLocationsClustersNodePoolsRollbackResource,
+    ContainerProjectsLocationsClustersNodePoolsRollback (..),
     newContainerProjectsLocationsClustersNodePoolsRollback,
-    ContainerProjectsLocationsClustersNodePoolsRollback,
 
     -- ** container.projects.locations.clusters.nodePools.setAutoscaling
     ContainerProjectsLocationsClustersNodePoolsSetAutoscalingResource,
+    ContainerProjectsLocationsClustersNodePoolsSetAutoscaling (..),
     newContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
-    ContainerProjectsLocationsClustersNodePoolsSetAutoscaling,
 
     -- ** container.projects.locations.clusters.nodePools.setManagement
     ContainerProjectsLocationsClustersNodePoolsSetManagementResource,
+    ContainerProjectsLocationsClustersNodePoolsSetManagement (..),
     newContainerProjectsLocationsClustersNodePoolsSetManagement,
-    ContainerProjectsLocationsClustersNodePoolsSetManagement,
 
     -- ** container.projects.locations.clusters.nodePools.setSize
     ContainerProjectsLocationsClustersNodePoolsSetSizeResource,
+    ContainerProjectsLocationsClustersNodePoolsSetSize (..),
     newContainerProjectsLocationsClustersNodePoolsSetSize,
-    ContainerProjectsLocationsClustersNodePoolsSetSize,
 
     -- ** container.projects.locations.clusters.nodePools.update
     ContainerProjectsLocationsClustersNodePoolsUpdateResource,
+    ContainerProjectsLocationsClustersNodePoolsUpdate (..),
     newContainerProjectsLocationsClustersNodePoolsUpdate,
-    ContainerProjectsLocationsClustersNodePoolsUpdate,
 
     -- ** container.projects.locations.clusters.setAddons
     ContainerProjectsLocationsClustersSetAddonsResource,
+    ContainerProjectsLocationsClustersSetAddons (..),
     newContainerProjectsLocationsClustersSetAddons,
-    ContainerProjectsLocationsClustersSetAddons,
 
     -- ** container.projects.locations.clusters.setLegacyAbac
     ContainerProjectsLocationsClustersSetLegacyAbacResource,
+    ContainerProjectsLocationsClustersSetLegacyAbac (..),
     newContainerProjectsLocationsClustersSetLegacyAbac,
-    ContainerProjectsLocationsClustersSetLegacyAbac,
 
     -- ** container.projects.locations.clusters.setLocations
     ContainerProjectsLocationsClustersSetLocationsResource,
+    ContainerProjectsLocationsClustersSetLocations (..),
     newContainerProjectsLocationsClustersSetLocations,
-    ContainerProjectsLocationsClustersSetLocations,
 
     -- ** container.projects.locations.clusters.setLogging
     ContainerProjectsLocationsClustersSetLoggingResource,
+    ContainerProjectsLocationsClustersSetLogging (..),
     newContainerProjectsLocationsClustersSetLogging,
-    ContainerProjectsLocationsClustersSetLogging,
 
     -- ** container.projects.locations.clusters.setMaintenancePolicy
     ContainerProjectsLocationsClustersSetMaintenancePolicyResource,
+    ContainerProjectsLocationsClustersSetMaintenancePolicy (..),
     newContainerProjectsLocationsClustersSetMaintenancePolicy,
-    ContainerProjectsLocationsClustersSetMaintenancePolicy,
 
     -- ** container.projects.locations.clusters.setMasterAuth
     ContainerProjectsLocationsClustersSetMasterAuthResource,
+    ContainerProjectsLocationsClustersSetMasterAuth (..),
     newContainerProjectsLocationsClustersSetMasterAuth,
-    ContainerProjectsLocationsClustersSetMasterAuth,
 
     -- ** container.projects.locations.clusters.setMonitoring
     ContainerProjectsLocationsClustersSetMonitoringResource,
+    ContainerProjectsLocationsClustersSetMonitoring (..),
     newContainerProjectsLocationsClustersSetMonitoring,
-    ContainerProjectsLocationsClustersSetMonitoring,
 
     -- ** container.projects.locations.clusters.setNetworkPolicy
     ContainerProjectsLocationsClustersSetNetworkPolicyResource,
+    ContainerProjectsLocationsClustersSetNetworkPolicy (..),
     newContainerProjectsLocationsClustersSetNetworkPolicy,
-    ContainerProjectsLocationsClustersSetNetworkPolicy,
 
     -- ** container.projects.locations.clusters.setResourceLabels
     ContainerProjectsLocationsClustersSetResourceLabelsResource,
+    ContainerProjectsLocationsClustersSetResourceLabels (..),
     newContainerProjectsLocationsClustersSetResourceLabels,
-    ContainerProjectsLocationsClustersSetResourceLabels,
 
     -- ** container.projects.locations.clusters.startIpRotation
     ContainerProjectsLocationsClustersStartIpRotationResource,
+    ContainerProjectsLocationsClustersStartIpRotation (..),
     newContainerProjectsLocationsClustersStartIpRotation,
-    ContainerProjectsLocationsClustersStartIpRotation,
 
     -- ** container.projects.locations.clusters.update
     ContainerProjectsLocationsClustersUpdateResource,
+    ContainerProjectsLocationsClustersUpdate (..),
     newContainerProjectsLocationsClustersUpdate,
-    ContainerProjectsLocationsClustersUpdate,
 
     -- ** container.projects.locations.clusters.updateMaster
     ContainerProjectsLocationsClustersUpdateMasterResource,
+    ContainerProjectsLocationsClustersUpdateMaster (..),
     newContainerProjectsLocationsClustersUpdateMaster,
-    ContainerProjectsLocationsClustersUpdateMaster,
 
     -- ** container.projects.locations.clusters.wellknown.getOpenidconfiguration
     ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource,
+    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration (..),
     newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
-    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration,
 
     -- ** container.projects.locations.getServerConfig
     ContainerProjectsLocationsGetServerConfigResource,
+    ContainerProjectsLocationsGetServerConfig (..),
     newContainerProjectsLocationsGetServerConfig,
-    ContainerProjectsLocationsGetServerConfig,
 
     -- ** container.projects.locations.operations.cancel
     ContainerProjectsLocationsOperationsCancelResource,
+    ContainerProjectsLocationsOperationsCancel (..),
     newContainerProjectsLocationsOperationsCancel,
-    ContainerProjectsLocationsOperationsCancel,
 
     -- ** container.projects.locations.operations.get
     ContainerProjectsLocationsOperationsGetResource,
+    ContainerProjectsLocationsOperationsGet (..),
     newContainerProjectsLocationsOperationsGet,
-    ContainerProjectsLocationsOperationsGet,
 
     -- ** container.projects.locations.operations.list
     ContainerProjectsLocationsOperationsListResource,
+    ContainerProjectsLocationsOperationsList (..),
     newContainerProjectsLocationsOperationsList,
-    ContainerProjectsLocationsOperationsList,
 
     -- ** container.projects.zones.clusters.addons
     ContainerProjectsZonesClustersAddonsResource,
+    ContainerProjectsZonesClustersAddons (..),
     newContainerProjectsZonesClustersAddons,
-    ContainerProjectsZonesClustersAddons,
 
     -- ** container.projects.zones.clusters.completeIpRotation
     ContainerProjectsZonesClustersCompleteIpRotationResource,
+    ContainerProjectsZonesClustersCompleteIpRotation (..),
     newContainerProjectsZonesClustersCompleteIpRotation,
-    ContainerProjectsZonesClustersCompleteIpRotation,
 
     -- ** container.projects.zones.clusters.create
     ContainerProjectsZonesClustersCreateResource,
+    ContainerProjectsZonesClustersCreate (..),
     newContainerProjectsZonesClustersCreate,
-    ContainerProjectsZonesClustersCreate,
 
     -- ** container.projects.zones.clusters.delete
     ContainerProjectsZonesClustersDeleteResource,
+    ContainerProjectsZonesClustersDelete (..),
     newContainerProjectsZonesClustersDelete,
-    ContainerProjectsZonesClustersDelete,
 
     -- ** container.projects.zones.clusters.get
     ContainerProjectsZonesClustersGetResource,
+    ContainerProjectsZonesClustersGet (..),
     newContainerProjectsZonesClustersGet,
-    ContainerProjectsZonesClustersGet,
 
     -- ** container.projects.zones.clusters.legacyAbac
     ContainerProjectsZonesClustersLegacyAbacResource,
+    ContainerProjectsZonesClustersLegacyAbac (..),
     newContainerProjectsZonesClustersLegacyAbac,
-    ContainerProjectsZonesClustersLegacyAbac,
 
     -- ** container.projects.zones.clusters.list
     ContainerProjectsZonesClustersListResource,
+    ContainerProjectsZonesClustersList (..),
     newContainerProjectsZonesClustersList,
-    ContainerProjectsZonesClustersList,
 
     -- ** container.projects.zones.clusters.locations
     ContainerProjectsZonesClustersLocationsResource,
+    ContainerProjectsZonesClustersLocations (..),
     newContainerProjectsZonesClustersLocations,
-    ContainerProjectsZonesClustersLocations,
 
     -- ** container.projects.zones.clusters.logging
     ContainerProjectsZonesClustersLoggingResource,
+    ContainerProjectsZonesClustersLogging (..),
     newContainerProjectsZonesClustersLogging,
-    ContainerProjectsZonesClustersLogging,
 
     -- ** container.projects.zones.clusters.master
     ContainerProjectsZonesClustersMasterResource,
+    ContainerProjectsZonesClustersMaster (..),
     newContainerProjectsZonesClustersMaster,
-    ContainerProjectsZonesClustersMaster,
 
     -- ** container.projects.zones.clusters.monitoring
     ContainerProjectsZonesClustersMonitoringResource,
+    ContainerProjectsZonesClustersMonitoring (..),
     newContainerProjectsZonesClustersMonitoring,
-    ContainerProjectsZonesClustersMonitoring,
 
     -- ** container.projects.zones.clusters.nodePools.autoscaling
     ContainerProjectsZonesClustersNodePoolsAutoscalingResource,
+    ContainerProjectsZonesClustersNodePoolsAutoscaling (..),
     newContainerProjectsZonesClustersNodePoolsAutoscaling,
-    ContainerProjectsZonesClustersNodePoolsAutoscaling,
 
     -- ** container.projects.zones.clusters.nodePools.create
     ContainerProjectsZonesClustersNodePoolsCreateResource,
+    ContainerProjectsZonesClustersNodePoolsCreate (..),
     newContainerProjectsZonesClustersNodePoolsCreate,
-    ContainerProjectsZonesClustersNodePoolsCreate,
 
     -- ** container.projects.zones.clusters.nodePools.delete
     ContainerProjectsZonesClustersNodePoolsDeleteResource,
+    ContainerProjectsZonesClustersNodePoolsDelete (..),
     newContainerProjectsZonesClustersNodePoolsDelete,
-    ContainerProjectsZonesClustersNodePoolsDelete,
 
     -- ** container.projects.zones.clusters.nodePools.get
     ContainerProjectsZonesClustersNodePoolsGetResource,
+    ContainerProjectsZonesClustersNodePoolsGet (..),
     newContainerProjectsZonesClustersNodePoolsGet,
-    ContainerProjectsZonesClustersNodePoolsGet,
 
     -- ** container.projects.zones.clusters.nodePools.list
     ContainerProjectsZonesClustersNodePoolsListResource,
+    ContainerProjectsZonesClustersNodePoolsList (..),
     newContainerProjectsZonesClustersNodePoolsList,
-    ContainerProjectsZonesClustersNodePoolsList,
 
     -- ** container.projects.zones.clusters.nodePools.rollback
     ContainerProjectsZonesClustersNodePoolsRollbackResource,
+    ContainerProjectsZonesClustersNodePoolsRollback (..),
     newContainerProjectsZonesClustersNodePoolsRollback,
-    ContainerProjectsZonesClustersNodePoolsRollback,
 
     -- ** container.projects.zones.clusters.nodePools.setManagement
     ContainerProjectsZonesClustersNodePoolsSetManagementResource,
+    ContainerProjectsZonesClustersNodePoolsSetManagement (..),
     newContainerProjectsZonesClustersNodePoolsSetManagement,
-    ContainerProjectsZonesClustersNodePoolsSetManagement,
 
     -- ** container.projects.zones.clusters.nodePools.setSize
     ContainerProjectsZonesClustersNodePoolsSetSizeResource,
+    ContainerProjectsZonesClustersNodePoolsSetSize (..),
     newContainerProjectsZonesClustersNodePoolsSetSize,
-    ContainerProjectsZonesClustersNodePoolsSetSize,
 
     -- ** container.projects.zones.clusters.nodePools.update
     ContainerProjectsZonesClustersNodePoolsUpdateResource,
+    ContainerProjectsZonesClustersNodePoolsUpdate (..),
     newContainerProjectsZonesClustersNodePoolsUpdate,
-    ContainerProjectsZonesClustersNodePoolsUpdate,
 
     -- ** container.projects.zones.clusters.resourceLabels
     ContainerProjectsZonesClustersResourceLabelsResource,
+    ContainerProjectsZonesClustersResourceLabels (..),
     newContainerProjectsZonesClustersResourceLabels,
-    ContainerProjectsZonesClustersResourceLabels,
 
     -- ** container.projects.zones.clusters.setMaintenancePolicy
     ContainerProjectsZonesClustersSetMaintenancePolicyResource,
+    ContainerProjectsZonesClustersSetMaintenancePolicy (..),
     newContainerProjectsZonesClustersSetMaintenancePolicy,
-    ContainerProjectsZonesClustersSetMaintenancePolicy,
 
     -- ** container.projects.zones.clusters.setMasterAuth
     ContainerProjectsZonesClustersSetMasterAuthResource,
+    ContainerProjectsZonesClustersSetMasterAuth (..),
     newContainerProjectsZonesClustersSetMasterAuth,
-    ContainerProjectsZonesClustersSetMasterAuth,
 
     -- ** container.projects.zones.clusters.setNetworkPolicy
     ContainerProjectsZonesClustersSetNetworkPolicyResource,
+    ContainerProjectsZonesClustersSetNetworkPolicy (..),
     newContainerProjectsZonesClustersSetNetworkPolicy,
-    ContainerProjectsZonesClustersSetNetworkPolicy,
 
     -- ** container.projects.zones.clusters.startIpRotation
     ContainerProjectsZonesClustersStartIpRotationResource,
+    ContainerProjectsZonesClustersStartIpRotation (..),
     newContainerProjectsZonesClustersStartIpRotation,
-    ContainerProjectsZonesClustersStartIpRotation,
 
     -- ** container.projects.zones.clusters.update
     ContainerProjectsZonesClustersUpdateResource,
+    ContainerProjectsZonesClustersUpdate (..),
     newContainerProjectsZonesClustersUpdate,
-    ContainerProjectsZonesClustersUpdate,
 
     -- ** container.projects.zones.getServerconfig
     ContainerProjectsZonesGetServerconfigResource,
+    ContainerProjectsZonesGetServerconfig (..),
     newContainerProjectsZonesGetServerconfig,
-    ContainerProjectsZonesGetServerconfig,
 
     -- ** container.projects.zones.operations.cancel
     ContainerProjectsZonesOperationsCancelResource,
+    ContainerProjectsZonesOperationsCancel (..),
     newContainerProjectsZonesOperationsCancel,
-    ContainerProjectsZonesOperationsCancel,
 
     -- ** container.projects.zones.operations.get
     ContainerProjectsZonesOperationsGetResource,
+    ContainerProjectsZonesOperationsGet (..),
     newContainerProjectsZonesOperationsGet,
-    ContainerProjectsZonesOperationsGet,
 
     -- ** container.projects.zones.operations.list
     ContainerProjectsZonesOperationsListResource,
+    ContainerProjectsZonesOperationsList (..),
     newContainerProjectsZonesOperationsList,
-    ContainerProjectsZonesOperationsList,
 
     -- * Types
 

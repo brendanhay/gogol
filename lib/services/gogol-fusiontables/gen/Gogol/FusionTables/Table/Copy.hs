@@ -34,8 +34,8 @@ module Gogol.FusionTables.Table.Copy
     FusionTablesTableCopyResource,
 
     -- ** Constructing a Request
+    FusionTablesTableCopy (..),
     newFusionTablesTableCopy,
-    FusionTablesTableCopy,
   )
 where
 

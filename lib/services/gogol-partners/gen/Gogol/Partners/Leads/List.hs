@@ -34,8 +34,8 @@ module Gogol.Partners.Leads.List
     PartnersLeadsListResource,
 
     -- ** Constructing a Request
+    PartnersLeadsList (..),
     newPartnersLeadsList,
-    PartnersLeadsList,
   )
 where
 

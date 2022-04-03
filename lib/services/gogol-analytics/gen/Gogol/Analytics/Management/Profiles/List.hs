@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Profiles.List
     AnalyticsManagementProfilesListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementProfilesList (..),
     newAnalyticsManagementProfilesList,
-    AnalyticsManagementProfilesList,
   )
 where
 

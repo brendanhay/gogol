@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Instorerefundlineitem
     ContentOrdersInstorerefundlineitemResource,
 
     -- ** Constructing a Request
+    ContentOrdersInstorerefundlineitem (..),
     newContentOrdersInstorerefundlineitem,
-    ContentOrdersInstorerefundlineitem,
   )
 where
 

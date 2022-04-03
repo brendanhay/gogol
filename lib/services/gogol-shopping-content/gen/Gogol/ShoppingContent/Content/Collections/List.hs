@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Collections.List
     ContentCollectionsListResource,
 
     -- ** Constructing a Request
+    ContentCollectionsList (..),
     newContentCollectionsList,
-    ContentCollectionsList,
   )
 where
 

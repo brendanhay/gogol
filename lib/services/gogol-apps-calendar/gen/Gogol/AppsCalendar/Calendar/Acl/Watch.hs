@@ -34,8 +34,8 @@ module Gogol.AppsCalendar.Calendar.Acl.Watch
     CalendarAclWatchResource,
 
     -- ** Constructing a Request
+    CalendarAclWatch (..),
     newCalendarAclWatch,
-    CalendarAclWatch,
   )
 where
 

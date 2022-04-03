@@ -43,38 +43,38 @@ module Gogol.OSLogin
 
     -- ** oslogin.users.getLoginProfile
     OSLoginUsersGetLoginProfileResource,
+    OSLoginUsersGetLoginProfile (..),
     newOSLoginUsersGetLoginProfile,
-    OSLoginUsersGetLoginProfile,
 
     -- ** oslogin.users.importSshPublicKey
     OSLoginUsersImportSshPublicKeyResource,
+    OSLoginUsersImportSshPublicKey (..),
     newOSLoginUsersImportSshPublicKey,
-    OSLoginUsersImportSshPublicKey,
 
     -- ** oslogin.users.projects.delete
     OSLoginUsersProjectsDeleteResource,
+    OSLoginUsersProjectsDelete (..),
     newOSLoginUsersProjectsDelete,
-    OSLoginUsersProjectsDelete,
 
     -- ** oslogin.users.sshPublicKeys.create
     OSLoginUsersSshPublicKeysCreateResource,
+    OSLoginUsersSshPublicKeysCreate (..),
     newOSLoginUsersSshPublicKeysCreate,
-    OSLoginUsersSshPublicKeysCreate,
 
     -- ** oslogin.users.sshPublicKeys.delete
     OSLoginUsersSshPublicKeysDeleteResource,
+    OSLoginUsersSshPublicKeysDelete (..),
     newOSLoginUsersSshPublicKeysDelete,
-    OSLoginUsersSshPublicKeysDelete,
 
     -- ** oslogin.users.sshPublicKeys.get
     OSLoginUsersSshPublicKeysGetResource,
+    OSLoginUsersSshPublicKeysGet (..),
     newOSLoginUsersSshPublicKeysGet,
-    OSLoginUsersSshPublicKeysGet,
 
     -- ** oslogin.users.sshPublicKeys.patch
     OSLoginUsersSshPublicKeysPatchResource,
+    OSLoginUsersSshPublicKeysPatch (..),
     newOSLoginUsersSshPublicKeysPatch,
-    OSLoginUsersSshPublicKeysPatch,
 
     -- * Types
 

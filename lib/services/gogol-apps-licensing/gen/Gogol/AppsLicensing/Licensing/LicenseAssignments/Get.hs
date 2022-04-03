@@ -34,8 +34,8 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Get
     LicensingLicenseAssignmentsGetResource,
 
     -- ** Constructing a Request
+    LicensingLicenseAssignmentsGet (..),
     newLicensingLicenseAssignmentsGet,
-    LicensingLicenseAssignmentsGet,
   )
 where
 

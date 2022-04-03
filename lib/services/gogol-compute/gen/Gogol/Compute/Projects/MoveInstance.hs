@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.MoveInstance
     ComputeProjectsMoveInstanceResource,
 
     -- ** Constructing a Request
+    ComputeProjectsMoveInstance (..),
     newComputeProjectsMoveInstance,
-    ComputeProjectsMoveInstance,
   )
 where
 

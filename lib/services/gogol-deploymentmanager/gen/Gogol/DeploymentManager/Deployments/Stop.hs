@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Stop
     DeploymentManagerDeploymentsStopResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsStop (..),
     newDeploymentManagerDeploymentsStop,
-    DeploymentManagerDeploymentsStop,
   )
 where
 

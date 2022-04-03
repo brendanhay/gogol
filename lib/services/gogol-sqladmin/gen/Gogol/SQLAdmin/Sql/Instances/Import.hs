@@ -34,8 +34,8 @@ module Gogol.SQLAdmin.Sql.Instances.Import
     SqlInstancesImportResource,
 
     -- ** Constructing a Request
+    SqlInstancesImport (..),
     newSqlInstancesImport,
-    SqlInstancesImport,
   )
 where
 

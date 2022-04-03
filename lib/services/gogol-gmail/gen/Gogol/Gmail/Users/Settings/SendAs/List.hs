@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.SendAs.List
     GmailUsersSettingsSendAsListResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsSendAsList (..),
     newGmailUsersSettingsSendAsList,
-    GmailUsersSettingsSendAsList,
   )
 where
 

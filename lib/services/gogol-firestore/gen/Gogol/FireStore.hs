@@ -41,173 +41,173 @@ module Gogol.FireStore
 
     -- ** firestore.projects.databases.collectionGroups.fields.get
     FireStoreProjectsDatabasesCollectionGroupsFieldsGetResource,
+    FireStoreProjectsDatabasesCollectionGroupsFieldsGet (..),
     newFireStoreProjectsDatabasesCollectionGroupsFieldsGet,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsGet,
 
     -- ** firestore.projects.databases.collectionGroups.fields.list
     FireStoreProjectsDatabasesCollectionGroupsFieldsListResource,
+    FireStoreProjectsDatabasesCollectionGroupsFieldsList (..),
     newFireStoreProjectsDatabasesCollectionGroupsFieldsList,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsList,
 
     -- ** firestore.projects.databases.collectionGroups.fields.patch
     FireStoreProjectsDatabasesCollectionGroupsFieldsPatchResource,
+    FireStoreProjectsDatabasesCollectionGroupsFieldsPatch (..),
     newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch,
-    FireStoreProjectsDatabasesCollectionGroupsFieldsPatch,
 
     -- ** firestore.projects.databases.collectionGroups.indexes.create
     FireStoreProjectsDatabasesCollectionGroupsIndexesCreateResource,
+    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate,
 
     -- ** firestore.projects.databases.collectionGroups.indexes.delete
     FireStoreProjectsDatabasesCollectionGroupsIndexesDeleteResource,
+    FireStoreProjectsDatabasesCollectionGroupsIndexesDelete (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesDelete,
 
     -- ** firestore.projects.databases.collectionGroups.indexes.get
     FireStoreProjectsDatabasesCollectionGroupsIndexesGetResource,
+    FireStoreProjectsDatabasesCollectionGroupsIndexesGet (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesGet,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesGet,
 
     -- ** firestore.projects.databases.collectionGroups.indexes.list
     FireStoreProjectsDatabasesCollectionGroupsIndexesListResource,
+    FireStoreProjectsDatabasesCollectionGroupsIndexesList (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesList,
-    FireStoreProjectsDatabasesCollectionGroupsIndexesList,
 
     -- ** firestore.projects.databases.documents.batchGet
     FireStoreProjectsDatabasesDocumentsBatchGetResource,
+    FireStoreProjectsDatabasesDocumentsBatchGet (..),
     newFireStoreProjectsDatabasesDocumentsBatchGet,
-    FireStoreProjectsDatabasesDocumentsBatchGet,
 
     -- ** firestore.projects.databases.documents.batchWrite
     FireStoreProjectsDatabasesDocumentsBatchWriteResource,
+    FireStoreProjectsDatabasesDocumentsBatchWrite (..),
     newFireStoreProjectsDatabasesDocumentsBatchWrite,
-    FireStoreProjectsDatabasesDocumentsBatchWrite,
 
     -- ** firestore.projects.databases.documents.beginTransaction
     FireStoreProjectsDatabasesDocumentsBeginTransactionResource,
+    FireStoreProjectsDatabasesDocumentsBeginTransaction (..),
     newFireStoreProjectsDatabasesDocumentsBeginTransaction,
-    FireStoreProjectsDatabasesDocumentsBeginTransaction,
 
     -- ** firestore.projects.databases.documents.commit
     FireStoreProjectsDatabasesDocumentsCommitResource,
+    FireStoreProjectsDatabasesDocumentsCommit (..),
     newFireStoreProjectsDatabasesDocumentsCommit,
-    FireStoreProjectsDatabasesDocumentsCommit,
 
     -- ** firestore.projects.databases.documents.createDocument
     FireStoreProjectsDatabasesDocumentsCreateDocumentResource,
+    FireStoreProjectsDatabasesDocumentsCreateDocument (..),
     newFireStoreProjectsDatabasesDocumentsCreateDocument,
-    FireStoreProjectsDatabasesDocumentsCreateDocument,
 
     -- ** firestore.projects.databases.documents.delete
     FireStoreProjectsDatabasesDocumentsDeleteResource,
+    FireStoreProjectsDatabasesDocumentsDelete (..),
     newFireStoreProjectsDatabasesDocumentsDelete,
-    FireStoreProjectsDatabasesDocumentsDelete,
 
     -- ** firestore.projects.databases.documents.get
     FireStoreProjectsDatabasesDocumentsGetResource,
+    FireStoreProjectsDatabasesDocumentsGet (..),
     newFireStoreProjectsDatabasesDocumentsGet,
-    FireStoreProjectsDatabasesDocumentsGet,
 
     -- ** firestore.projects.databases.documents.list
     FireStoreProjectsDatabasesDocumentsListResource,
+    FireStoreProjectsDatabasesDocumentsList (..),
     newFireStoreProjectsDatabasesDocumentsList,
-    FireStoreProjectsDatabasesDocumentsList,
 
     -- ** firestore.projects.databases.documents.listCollectionIds
     FireStoreProjectsDatabasesDocumentsListCollectionIdsResource,
+    FireStoreProjectsDatabasesDocumentsListCollectionIds (..),
     newFireStoreProjectsDatabasesDocumentsListCollectionIds,
-    FireStoreProjectsDatabasesDocumentsListCollectionIds,
 
     -- ** firestore.projects.databases.documents.listDocuments
     FireStoreProjectsDatabasesDocumentsListDocumentsResource,
+    FireStoreProjectsDatabasesDocumentsListDocuments (..),
     newFireStoreProjectsDatabasesDocumentsListDocuments,
-    FireStoreProjectsDatabasesDocumentsListDocuments,
 
     -- ** firestore.projects.databases.documents.listen
     FireStoreProjectsDatabasesDocumentsListenResource,
+    FireStoreProjectsDatabasesDocumentsListen (..),
     newFireStoreProjectsDatabasesDocumentsListen,
-    FireStoreProjectsDatabasesDocumentsListen,
 
     -- ** firestore.projects.databases.documents.partitionQuery
     FireStoreProjectsDatabasesDocumentsPartitionQueryResource,
+    FireStoreProjectsDatabasesDocumentsPartitionQuery (..),
     newFireStoreProjectsDatabasesDocumentsPartitionQuery,
-    FireStoreProjectsDatabasesDocumentsPartitionQuery,
 
     -- ** firestore.projects.databases.documents.patch
     FireStoreProjectsDatabasesDocumentsPatchResource,
+    FireStoreProjectsDatabasesDocumentsPatch (..),
     newFireStoreProjectsDatabasesDocumentsPatch,
-    FireStoreProjectsDatabasesDocumentsPatch,
 
     -- ** firestore.projects.databases.documents.rollback
     FireStoreProjectsDatabasesDocumentsRollbackResource,
+    FireStoreProjectsDatabasesDocumentsRollback (..),
     newFireStoreProjectsDatabasesDocumentsRollback,
-    FireStoreProjectsDatabasesDocumentsRollback,
 
     -- ** firestore.projects.databases.documents.runQuery
     FireStoreProjectsDatabasesDocumentsRunQueryResource,
+    FireStoreProjectsDatabasesDocumentsRunQuery (..),
     newFireStoreProjectsDatabasesDocumentsRunQuery,
-    FireStoreProjectsDatabasesDocumentsRunQuery,
 
     -- ** firestore.projects.databases.documents.write
     FireStoreProjectsDatabasesDocumentsWriteResource,
+    FireStoreProjectsDatabasesDocumentsWrite (..),
     newFireStoreProjectsDatabasesDocumentsWrite,
-    FireStoreProjectsDatabasesDocumentsWrite,
 
     -- ** firestore.projects.databases.exportDocuments
     FireStoreProjectsDatabasesExportDocumentsResource,
+    FireStoreProjectsDatabasesExportDocuments (..),
     newFireStoreProjectsDatabasesExportDocuments,
-    FireStoreProjectsDatabasesExportDocuments,
 
     -- ** firestore.projects.databases.get
     FireStoreProjectsDatabasesGetResource,
+    FireStoreProjectsDatabasesGet (..),
     newFireStoreProjectsDatabasesGet,
-    FireStoreProjectsDatabasesGet,
 
     -- ** firestore.projects.databases.importDocuments
     FireStoreProjectsDatabasesImportDocumentsResource,
+    FireStoreProjectsDatabasesImportDocuments (..),
     newFireStoreProjectsDatabasesImportDocuments,
-    FireStoreProjectsDatabasesImportDocuments,
 
     -- ** firestore.projects.databases.list
     FireStoreProjectsDatabasesListResource,
+    FireStoreProjectsDatabasesList (..),
     newFireStoreProjectsDatabasesList,
-    FireStoreProjectsDatabasesList,
 
     -- ** firestore.projects.databases.operations.cancel
     FireStoreProjectsDatabasesOperationsCancelResource,
+    FireStoreProjectsDatabasesOperationsCancel (..),
     newFireStoreProjectsDatabasesOperationsCancel,
-    FireStoreProjectsDatabasesOperationsCancel,
 
     -- ** firestore.projects.databases.operations.delete
     FireStoreProjectsDatabasesOperationsDeleteResource,
+    FireStoreProjectsDatabasesOperationsDelete (..),
     newFireStoreProjectsDatabasesOperationsDelete,
-    FireStoreProjectsDatabasesOperationsDelete,
 
     -- ** firestore.projects.databases.operations.get
     FireStoreProjectsDatabasesOperationsGetResource,
+    FireStoreProjectsDatabasesOperationsGet (..),
     newFireStoreProjectsDatabasesOperationsGet,
-    FireStoreProjectsDatabasesOperationsGet,
 
     -- ** firestore.projects.databases.operations.list
     FireStoreProjectsDatabasesOperationsListResource,
+    FireStoreProjectsDatabasesOperationsList (..),
     newFireStoreProjectsDatabasesOperationsList,
-    FireStoreProjectsDatabasesOperationsList,
 
     -- ** firestore.projects.databases.patch
     FireStoreProjectsDatabasesPatchResource,
+    FireStoreProjectsDatabasesPatch (..),
     newFireStoreProjectsDatabasesPatch,
-    FireStoreProjectsDatabasesPatch,
 
     -- ** firestore.projects.locations.get
     FireStoreProjectsLocationsGetResource,
+    FireStoreProjectsLocationsGet (..),
     newFireStoreProjectsLocationsGet,
-    FireStoreProjectsLocationsGet,
 
     -- ** firestore.projects.locations.list
     FireStoreProjectsLocationsListResource,
+    FireStoreProjectsLocationsList (..),
     newFireStoreProjectsLocationsList,
-    FireStoreProjectsLocationsList,
 
     -- * Types
 

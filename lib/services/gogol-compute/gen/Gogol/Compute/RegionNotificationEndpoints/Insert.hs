@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNotificationEndpoints.Insert
     ComputeRegionNotificationEndpointsInsertResource,
 
     -- ** Constructing a Request
+    ComputeRegionNotificationEndpointsInsert (..),
     newComputeRegionNotificationEndpointsInsert,
-    ComputeRegionNotificationEndpointsInsert,
   )
 where
 

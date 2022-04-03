@@ -34,8 +34,8 @@ module Gogol.BinaryAuthorization.Projects.Attestors.Delete
     BinaryAuthorizationProjectsAttestorsDeleteResource,
 
     -- ** Constructing a Request
+    BinaryAuthorizationProjectsAttestorsDelete (..),
     newBinaryAuthorizationProjectsAttestorsDelete,
-    BinaryAuthorizationProjectsAttestorsDelete,
   )
 where
 

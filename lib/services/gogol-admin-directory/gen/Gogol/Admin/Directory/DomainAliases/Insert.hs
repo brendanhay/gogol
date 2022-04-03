@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.DomainAliases.Insert
     DirectoryDomainAliasesInsertResource,
 
     -- ** Constructing a Request
+    DirectoryDomainAliasesInsert (..),
     newDirectoryDomainAliasesInsert,
-    DirectoryDomainAliasesInsert,
   )
 where
 

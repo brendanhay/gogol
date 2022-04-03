@@ -34,8 +34,8 @@ module Gogol.Compute.Snapshots.Delete
     ComputeSnapshotsDeleteResource,
 
     -- ** Constructing a Request
+    ComputeSnapshotsDelete (..),
     newComputeSnapshotsDelete,
-    ComputeSnapshotsDelete,
   )
 where
 

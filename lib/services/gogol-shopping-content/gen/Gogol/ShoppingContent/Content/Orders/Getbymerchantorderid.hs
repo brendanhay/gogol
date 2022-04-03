@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Orders.Getbymerchantorderid
     ContentOrdersGetbymerchantorderidResource,
 
     -- ** Constructing a Request
+    ContentOrdersGetbymerchantorderid (..),
     newContentOrdersGetbymerchantorderid,
-    ContentOrdersGetbymerchantorderid,
   )
 where
 

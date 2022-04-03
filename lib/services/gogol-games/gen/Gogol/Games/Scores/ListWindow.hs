@@ -34,8 +34,8 @@ module Gogol.Games.Scores.ListWindow
     GamesScoresListWindowResource,
 
     -- ** Constructing a Request
+    GamesScoresListWindow (..),
     newGamesScoresListWindow,
-    GamesScoresListWindow,
   )
 where
 

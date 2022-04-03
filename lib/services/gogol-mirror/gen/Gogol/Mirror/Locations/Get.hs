@@ -34,8 +34,8 @@ module Gogol.Mirror.Locations.Get
     MirrorLocationsGetResource,
 
     -- ** Constructing a Request
+    MirrorLocationsGet (..),
     newMirrorLocationsGet,
-    MirrorLocationsGet,
   )
 where
 

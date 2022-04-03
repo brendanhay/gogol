@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.SetAccount
     AndroidEnterpriseEnterprisesSetAccountResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesSetAccount (..),
     newAndroidEnterpriseEnterprisesSetAccount,
-    AndroidEnterpriseEnterprisesSetAccount,
   )
 where
 

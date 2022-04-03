@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
     BigtableAdminProjectsInstancesTablesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesGetIamPolicy (..),
     newBigtableAdminProjectsInstancesTablesGetIamPolicy,
-    BigtableAdminProjectsInstancesTablesGetIamPolicy,
   )
 where
 

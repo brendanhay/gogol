@@ -34,8 +34,8 @@ module Gogol.AdSense.Accounts.ListChildAccounts
     AdSenseAccountsListChildAccountsResource,
 
     -- ** Constructing a Request
+    AdSenseAccountsListChildAccounts (..),
     newAdSenseAccountsListChildAccounts,
-    AdSenseAccountsListChildAccounts,
   )
 where
 

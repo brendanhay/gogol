@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
     DataflowProjectsLocationsJobsWorkItemsLeaseResource,
 
     -- ** Constructing a Request
+    DataflowProjectsLocationsJobsWorkItemsLease (..),
     newDataflowProjectsLocationsJobsWorkItemsLease,
-    DataflowProjectsLocationsJobsWorkItemsLease,
   )
 where
 

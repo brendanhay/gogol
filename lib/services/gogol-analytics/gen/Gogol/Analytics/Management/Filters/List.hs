@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Filters.List
     AnalyticsManagementFiltersListResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementFiltersList (..),
     newAnalyticsManagementFiltersList,
-    AnalyticsManagementFiltersList,
   )
 where
 

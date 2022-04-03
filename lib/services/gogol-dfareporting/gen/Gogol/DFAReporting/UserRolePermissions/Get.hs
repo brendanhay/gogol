@@ -34,8 +34,8 @@ module Gogol.DFAReporting.UserRolePermissions.Get
     DFAReportingUserRolePermissionsGetResource,
 
     -- ** Constructing a Request
+    DFAReportingUserRolePermissionsGet (..),
     newDFAReportingUserRolePermissionsGet,
-    DFAReportingUserRolePermissionsGet,
   )
 where
 

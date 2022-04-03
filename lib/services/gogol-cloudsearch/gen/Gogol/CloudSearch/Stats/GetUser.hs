@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Stats.GetUser
     CloudSearchStatsGetUserResource,
 
     -- ** Constructing a Request
+    CloudSearchStatsGetUser (..),
     newCloudSearchStatsGetUser,
-    CloudSearchStatsGetUser,
   )
 where
 

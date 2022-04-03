@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Commit
     SpannerProjectsInstancesDatabasesSessionsCommitResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesSessionsCommit (..),
     newSpannerProjectsInstancesDatabasesSessionsCommit,
-    SpannerProjectsInstancesDatabasesSessionsCommit,
   )
 where
 

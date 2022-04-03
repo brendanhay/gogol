@@ -40,48 +40,48 @@ module Gogol.CloudShell
 
     -- ** cloudshell.operations.cancel
     CloudShellOperationsCancelResource,
+    CloudShellOperationsCancel (..),
     newCloudShellOperationsCancel,
-    CloudShellOperationsCancel,
 
     -- ** cloudshell.operations.delete
     CloudShellOperationsDeleteResource,
+    CloudShellOperationsDelete (..),
     newCloudShellOperationsDelete,
-    CloudShellOperationsDelete,
 
     -- ** cloudshell.operations.get
     CloudShellOperationsGetResource,
+    CloudShellOperationsGet (..),
     newCloudShellOperationsGet,
-    CloudShellOperationsGet,
 
     -- ** cloudshell.operations.list
     CloudShellOperationsListResource,
+    CloudShellOperationsList (..),
     newCloudShellOperationsList,
-    CloudShellOperationsList,
 
     -- ** cloudshell.users.environments.addPublicKey
     CloudShellUsersEnvironmentsAddPublicKeyResource,
+    CloudShellUsersEnvironmentsAddPublicKey (..),
     newCloudShellUsersEnvironmentsAddPublicKey,
-    CloudShellUsersEnvironmentsAddPublicKey,
 
     -- ** cloudshell.users.environments.authorize
     CloudShellUsersEnvironmentsAuthorizeResource,
+    CloudShellUsersEnvironmentsAuthorize (..),
     newCloudShellUsersEnvironmentsAuthorize,
-    CloudShellUsersEnvironmentsAuthorize,
 
     -- ** cloudshell.users.environments.get
     CloudShellUsersEnvironmentsGetResource,
+    CloudShellUsersEnvironmentsGet (..),
     newCloudShellUsersEnvironmentsGet,
-    CloudShellUsersEnvironmentsGet,
 
     -- ** cloudshell.users.environments.removePublicKey
     CloudShellUsersEnvironmentsRemovePublicKeyResource,
+    CloudShellUsersEnvironmentsRemovePublicKey (..),
     newCloudShellUsersEnvironmentsRemovePublicKey,
-    CloudShellUsersEnvironmentsRemovePublicKey,
 
     -- ** cloudshell.users.environments.start
     CloudShellUsersEnvironmentsStartResource,
+    CloudShellUsersEnvironmentsStart (..),
     newCloudShellUsersEnvironmentsStart,
-    CloudShellUsersEnvironmentsStart,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Drive.Teamdrives.Delete
     DriveTeamdrivesDeleteResource,
 
     -- ** Constructing a Request
+    DriveTeamdrivesDelete (..),
     newDriveTeamdrivesDelete,
-    DriveTeamdrivesDelete,
   )
 where
 

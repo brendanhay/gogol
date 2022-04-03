@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.UnsampledReports.Delete
     AnalyticsManagementUnsampledReportsDeleteResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementUnsampledReportsDelete (..),
     newAnalyticsManagementUnsampledReportsDelete,
-    AnalyticsManagementUnsampledReportsDelete,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.CheckEarlyStop
     MlProjectsLocationsStudiesTrialsCheckEarlyStoppingStateResource,
 
     -- ** Constructing a Request
+    MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState (..),
     newMlProjectsLocationsStudiesTrialsCheckEarlyStoppingState,
-    MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState,
   )
 where
 

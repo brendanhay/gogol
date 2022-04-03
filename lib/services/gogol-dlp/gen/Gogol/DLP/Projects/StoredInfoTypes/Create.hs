@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.StoredInfoTypes.Create
     DLPProjectsStoredInfoTypesCreateResource,
 
     -- ** Constructing a Request
+    DLPProjectsStoredInfoTypesCreate (..),
     newDLPProjectsStoredInfoTypesCreate,
-    DLPProjectsStoredInfoTypesCreate,
   )
 where
 

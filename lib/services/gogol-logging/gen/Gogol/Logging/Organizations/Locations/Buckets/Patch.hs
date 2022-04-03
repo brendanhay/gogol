@@ -34,8 +34,8 @@ module Gogol.Logging.Organizations.Locations.Buckets.Patch
     LoggingOrganizationsLocationsBucketsPatchResource,
 
     -- ** Constructing a Request
+    LoggingOrganizationsLocationsBucketsPatch (..),
     newLoggingOrganizationsLocationsBucketsPatch,
-    LoggingOrganizationsLocationsBucketsPatch,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Poll
     CloudSearchIndexingDatasourcesItemsPollResource,
 
     -- ** Constructing a Request
+    CloudSearchIndexingDatasourcesItemsPoll (..),
     newCloudSearchIndexingDatasourcesItemsPoll,
-    CloudSearchIndexingDatasourcesItemsPoll,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.Operations.Get
     CloudbuildProjectsLocationsOperationsGetResource,
 
     -- ** Constructing a Request
+    CloudbuildProjectsLocationsOperationsGet (..),
     newCloudbuildProjectsLocationsOperationsGet,
-    CloudbuildProjectsLocationsOperationsGet,
   )
 where
 

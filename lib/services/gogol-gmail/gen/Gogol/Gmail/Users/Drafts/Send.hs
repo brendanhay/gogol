@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Drafts.Send
     GmailUsersDraftsSendResource,
 
     -- ** Constructing a Request
+    GmailUsersDraftsSend (..),
     newGmailUsersDraftsSend,
-    GmailUsersDraftsSend,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.OSLogin.Users.ImportSshPublicKey
     OSLoginUsersImportSshPublicKeyResource,
 
     -- ** Constructing a Request
+    OSLoginUsersImportSshPublicKey (..),
     newOSLoginUsersImportSshPublicKey,
-    OSLoginUsersImportSshPublicKey,
   )
 where
 

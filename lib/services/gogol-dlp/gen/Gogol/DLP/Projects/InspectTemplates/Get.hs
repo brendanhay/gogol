@@ -34,8 +34,8 @@ module Gogol.DLP.Projects.InspectTemplates.Get
     DLPProjectsInspectTemplatesGetResource,
 
     -- ** Constructing a Request
+    DLPProjectsInspectTemplatesGet (..),
     newDLPProjectsInspectTemplatesGet,
-    DLPProjectsInspectTemplatesGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Images.Delete
     ComputeImagesDeleteResource,
 
     -- ** Constructing a Request
+    ComputeImagesDelete (..),
     newComputeImagesDelete,
-    ComputeImagesDelete,
   )
 where
 

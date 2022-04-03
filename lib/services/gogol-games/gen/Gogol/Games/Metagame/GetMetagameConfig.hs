@@ -34,8 +34,8 @@ module Gogol.Games.Metagame.GetMetagameConfig
     GamesMetagameGetMetagameConfigResource,
 
     -- ** Constructing a Request
+    GamesMetagameGetMetagameConfig (..),
     newGamesMetagameGetMetagameConfig,
-    GamesMetagameGetMetagameConfig,
   )
 where
 

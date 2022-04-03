@@ -34,8 +34,8 @@ module Gogol.Games.Events.Record
     GamesEventsRecordResource,
 
     -- ** Constructing a Request
+    GamesEventsRecord (..),
     newGamesEventsRecord,
-    GamesEventsRecord,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
     CloudKMSProjectsLocationsKeyRingsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudKMSProjectsLocationsKeyRingsTestIamPermissions (..),
     newCloudKMSProjectsLocationsKeyRingsTestIamPermissions,
-    CloudKMSProjectsLocationsKeyRingsTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.UnsampledReports.Get
     AnalyticsManagementUnsampledReportsGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementUnsampledReportsGet (..),
     newAnalyticsManagementUnsampledReportsGet,
-    AnalyticsManagementUnsampledReportsGet,
   )
 where
 

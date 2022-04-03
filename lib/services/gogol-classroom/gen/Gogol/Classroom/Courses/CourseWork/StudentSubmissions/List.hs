@@ -34,8 +34,8 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.List
     ClassroomCoursesCourseWorkStudentSubmissionsListResource,
 
     -- ** Constructing a Request
+    ClassroomCoursesCourseWorkStudentSubmissionsList (..),
     newClassroomCoursesCourseWorkStudentSubmissionsList,
-    ClassroomCoursesCourseWorkStudentSubmissionsList,
   )
 where
 

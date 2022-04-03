@@ -34,8 +34,8 @@ module Gogol.Compute.BackendBuckets.DeleteSignedUrlKey
     ComputeBackendBucketsDeleteSignedUrlKeyResource,
 
     -- ** Constructing a Request
+    ComputeBackendBucketsDeleteSignedUrlKey (..),
     newComputeBackendBucketsDeleteSignedUrlKey,
-    ComputeBackendBucketsDeleteSignedUrlKey,
   )
 where
 

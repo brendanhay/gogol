@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Inappproducts.Insert
     AndroidPublisherInappproductsInsertResource,
 
     -- ** Constructing a Request
+    AndroidPublisherInappproductsInsert (..),
     newAndroidPublisherInappproductsInsert,
-    AndroidPublisherInappproductsInsert,
   )
 where
 

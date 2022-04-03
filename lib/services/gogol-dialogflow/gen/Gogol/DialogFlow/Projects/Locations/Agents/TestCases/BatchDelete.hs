@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.BatchDelete
     DialogFlowProjectsLocationsAgentsTestCasesBatchDeleteResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsTestCasesBatchDelete (..),
     newDialogFlowProjectsLocationsAgentsTestCasesBatchDelete,
-    DialogFlowProjectsLocationsAgentsTestCasesBatchDelete,
   )
 where
 

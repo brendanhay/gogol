@@ -34,8 +34,8 @@ module Gogol.Books.Mylibrary.Readingpositions.Get
     BooksMylibraryReadingpositionsGetResource,
 
     -- ** Constructing a Request
+    BooksMylibraryReadingpositionsGet (..),
     newBooksMylibraryReadingpositionsGet,
-    BooksMylibraryReadingpositionsGet,
   )
 where
 

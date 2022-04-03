@@ -34,8 +34,8 @@ module Gogol.Drive.Files.Export
     DriveFilesExportResource,
 
     -- ** Constructing a Request
+    DriveFilesExport (..),
     newDriveFilesExport,
-    DriveFilesExport,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
     PubSubProjectsSubscriptionsModifyAckDeadlineResource,
 
     -- ** Constructing a Request
+    PubSubProjectsSubscriptionsModifyAckDeadline (..),
     newPubSubProjectsSubscriptionsModifyAckDeadline,
-    PubSubProjectsSubscriptionsModifyAckDeadline,
   )
 where
 

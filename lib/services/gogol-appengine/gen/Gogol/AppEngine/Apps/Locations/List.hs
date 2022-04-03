@@ -34,8 +34,8 @@ module Gogol.AppEngine.Apps.Locations.List
     AppEngineAppsLocationsListResource,
 
     -- ** Constructing a Request
+    AppEngineAppsLocationsList (..),
     newAppEngineAppsLocationsList,
-    AppEngineAppsLocationsList,
   )
 where
 

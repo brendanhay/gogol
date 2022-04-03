@@ -34,8 +34,8 @@ module Gogol.SearchConsole.Webmasters.Sites.Delete
     WebmastersSitesDeleteResource,
 
     -- ** Constructing a Request
+    WebmastersSitesDelete (..),
     newWebmastersSitesDelete,
-    WebmastersSitesDelete,
   )
 where
 

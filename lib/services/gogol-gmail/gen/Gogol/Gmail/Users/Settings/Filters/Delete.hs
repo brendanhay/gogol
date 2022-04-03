@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Settings.Filters.Delete
     GmailUsersSettingsFiltersDeleteResource,
 
     -- ** Constructing a Request
+    GmailUsersSettingsFiltersDelete (..),
     newGmailUsersSettingsFiltersDelete,
-    GmailUsersSettingsFiltersDelete,
   )
 where
 

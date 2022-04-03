@@ -34,8 +34,8 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Get
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsGetResource,
 
     -- ** Constructing a Request
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsGet (..),
     newHealthcareProjectsLocationsDatasetsConsentStoresConsentsGet,
-    HealthcareProjectsLocationsDatasetsConsentStoresConsentsGet,
   )
 where
 

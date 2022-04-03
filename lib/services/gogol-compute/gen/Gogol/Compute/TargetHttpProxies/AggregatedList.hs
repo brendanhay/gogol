@@ -34,8 +34,8 @@ module Gogol.Compute.TargetHttpProxies.AggregatedList
     ComputeTargetHttpProxiesAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeTargetHttpProxiesAggregatedList (..),
     newComputeTargetHttpProxiesAggregatedList,
-    ComputeTargetHttpProxiesAggregatedList,
   )
 where
 

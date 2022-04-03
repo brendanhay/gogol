@@ -34,8 +34,8 @@ module Gogol.CustomSearch.Search.Cse.List
     SearchCseListResource,
 
     -- ** Constructing a Request
+    SearchCseList (..),
     newSearchCseList,
-    SearchCseList,
   )
 where
 

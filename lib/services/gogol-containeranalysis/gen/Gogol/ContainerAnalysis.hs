@@ -40,108 +40,108 @@ module Gogol.ContainerAnalysis
 
     -- ** containeranalysis.projects.notes.batchCreate
     ContainerAnalysisProjectsNotesBatchCreateResource,
+    ContainerAnalysisProjectsNotesBatchCreate (..),
     newContainerAnalysisProjectsNotesBatchCreate,
-    ContainerAnalysisProjectsNotesBatchCreate,
 
     -- ** containeranalysis.projects.notes.create
     ContainerAnalysisProjectsNotesCreateResource,
+    ContainerAnalysisProjectsNotesCreate (..),
     newContainerAnalysisProjectsNotesCreate,
-    ContainerAnalysisProjectsNotesCreate,
 
     -- ** containeranalysis.projects.notes.delete
     ContainerAnalysisProjectsNotesDeleteResource,
+    ContainerAnalysisProjectsNotesDelete (..),
     newContainerAnalysisProjectsNotesDelete,
-    ContainerAnalysisProjectsNotesDelete,
 
     -- ** containeranalysis.projects.notes.get
     ContainerAnalysisProjectsNotesGetResource,
+    ContainerAnalysisProjectsNotesGet (..),
     newContainerAnalysisProjectsNotesGet,
-    ContainerAnalysisProjectsNotesGet,
 
     -- ** containeranalysis.projects.notes.getIamPolicy
     ContainerAnalysisProjectsNotesGetIamPolicyResource,
+    ContainerAnalysisProjectsNotesGetIamPolicy (..),
     newContainerAnalysisProjectsNotesGetIamPolicy,
-    ContainerAnalysisProjectsNotesGetIamPolicy,
 
     -- ** containeranalysis.projects.notes.list
     ContainerAnalysisProjectsNotesListResource,
+    ContainerAnalysisProjectsNotesList (..),
     newContainerAnalysisProjectsNotesList,
-    ContainerAnalysisProjectsNotesList,
 
     -- ** containeranalysis.projects.notes.occurrences.list
     ContainerAnalysisProjectsNotesOccurrencesListResource,
+    ContainerAnalysisProjectsNotesOccurrencesList (..),
     newContainerAnalysisProjectsNotesOccurrencesList,
-    ContainerAnalysisProjectsNotesOccurrencesList,
 
     -- ** containeranalysis.projects.notes.patch
     ContainerAnalysisProjectsNotesPatchResource,
+    ContainerAnalysisProjectsNotesPatch (..),
     newContainerAnalysisProjectsNotesPatch,
-    ContainerAnalysisProjectsNotesPatch,
 
     -- ** containeranalysis.projects.notes.setIamPolicy
     ContainerAnalysisProjectsNotesSetIamPolicyResource,
+    ContainerAnalysisProjectsNotesSetIamPolicy (..),
     newContainerAnalysisProjectsNotesSetIamPolicy,
-    ContainerAnalysisProjectsNotesSetIamPolicy,
 
     -- ** containeranalysis.projects.notes.testIamPermissions
     ContainerAnalysisProjectsNotesTestIamPermissionsResource,
+    ContainerAnalysisProjectsNotesTestIamPermissions (..),
     newContainerAnalysisProjectsNotesTestIamPermissions,
-    ContainerAnalysisProjectsNotesTestIamPermissions,
 
     -- ** containeranalysis.projects.occurrences.batchCreate
     ContainerAnalysisProjectsOccurrencesBatchCreateResource,
+    ContainerAnalysisProjectsOccurrencesBatchCreate (..),
     newContainerAnalysisProjectsOccurrencesBatchCreate,
-    ContainerAnalysisProjectsOccurrencesBatchCreate,
 
     -- ** containeranalysis.projects.occurrences.create
     ContainerAnalysisProjectsOccurrencesCreateResource,
+    ContainerAnalysisProjectsOccurrencesCreate (..),
     newContainerAnalysisProjectsOccurrencesCreate,
-    ContainerAnalysisProjectsOccurrencesCreate,
 
     -- ** containeranalysis.projects.occurrences.delete
     ContainerAnalysisProjectsOccurrencesDeleteResource,
+    ContainerAnalysisProjectsOccurrencesDelete (..),
     newContainerAnalysisProjectsOccurrencesDelete,
-    ContainerAnalysisProjectsOccurrencesDelete,
 
     -- ** containeranalysis.projects.occurrences.get
     ContainerAnalysisProjectsOccurrencesGetResource,
+    ContainerAnalysisProjectsOccurrencesGet (..),
     newContainerAnalysisProjectsOccurrencesGet,
-    ContainerAnalysisProjectsOccurrencesGet,
 
     -- ** containeranalysis.projects.occurrences.getIamPolicy
     ContainerAnalysisProjectsOccurrencesGetIamPolicyResource,
+    ContainerAnalysisProjectsOccurrencesGetIamPolicy (..),
     newContainerAnalysisProjectsOccurrencesGetIamPolicy,
-    ContainerAnalysisProjectsOccurrencesGetIamPolicy,
 
     -- ** containeranalysis.projects.occurrences.getNotes
     ContainerAnalysisProjectsOccurrencesGetNotesResource,
+    ContainerAnalysisProjectsOccurrencesGetNotes (..),
     newContainerAnalysisProjectsOccurrencesGetNotes,
-    ContainerAnalysisProjectsOccurrencesGetNotes,
 
     -- ** containeranalysis.projects.occurrences.getVulnerabilitySummary
     ContainerAnalysisProjectsOccurrencesGetVulnerabilitySummaryResource,
+    ContainerAnalysisProjectsOccurrencesGetVulnerabilitySummary (..),
     newContainerAnalysisProjectsOccurrencesGetVulnerabilitySummary,
-    ContainerAnalysisProjectsOccurrencesGetVulnerabilitySummary,
 
     -- ** containeranalysis.projects.occurrences.list
     ContainerAnalysisProjectsOccurrencesListResource,
+    ContainerAnalysisProjectsOccurrencesList (..),
     newContainerAnalysisProjectsOccurrencesList,
-    ContainerAnalysisProjectsOccurrencesList,
 
     -- ** containeranalysis.projects.occurrences.patch
     ContainerAnalysisProjectsOccurrencesPatchResource,
+    ContainerAnalysisProjectsOccurrencesPatch (..),
     newContainerAnalysisProjectsOccurrencesPatch,
-    ContainerAnalysisProjectsOccurrencesPatch,
 
     -- ** containeranalysis.projects.occurrences.setIamPolicy
     ContainerAnalysisProjectsOccurrencesSetIamPolicyResource,
+    ContainerAnalysisProjectsOccurrencesSetIamPolicy (..),
     newContainerAnalysisProjectsOccurrencesSetIamPolicy,
-    ContainerAnalysisProjectsOccurrencesSetIamPolicy,
 
     -- ** containeranalysis.projects.occurrences.testIamPermissions
     ContainerAnalysisProjectsOccurrencesTestIamPermissionsResource,
+    ContainerAnalysisProjectsOccurrencesTestIamPermissions (..),
     newContainerAnalysisProjectsOccurrencesTestIamPermissions,
-    ContainerAnalysisProjectsOccurrencesTestIamPermissions,
 
     -- * Types
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Reservations.AggregatedList
     ComputeReservationsAggregatedListResource,
 
     -- ** Constructing a Request
+    ComputeReservationsAggregatedList (..),
     newComputeReservationsAggregatedList,
-    ComputeReservationsAggregatedList,
   )
 where
 

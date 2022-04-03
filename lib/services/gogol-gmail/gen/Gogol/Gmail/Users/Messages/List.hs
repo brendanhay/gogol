@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.List
     GmailUsersMessagesListResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesList (..),
     newGmailUsersMessagesList,
-    GmailUsersMessagesList,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.YouTube.V3.UpdateCommentThreads
     YouTubeYoutubeV3UpdateCommentThreadsResource,
 
     -- ** Constructing a Request
+    YouTubeYoutubeV3UpdateCommentThreads (..),
     newYouTubeYoutubeV3UpdateCommentThreads,
-    YouTubeYoutubeV3UpdateCommentThreads,
   )
 where
 

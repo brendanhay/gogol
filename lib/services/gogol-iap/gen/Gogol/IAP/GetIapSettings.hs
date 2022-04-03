@@ -34,8 +34,8 @@ module Gogol.IAP.GetIapSettings
     IAPGetIapSettingsResource,
 
     -- ** Constructing a Request
+    IAPGetIapSettings (..),
     newIAPGetIapSettings,
-    IAPGetIapSettings,
   )
 where
 

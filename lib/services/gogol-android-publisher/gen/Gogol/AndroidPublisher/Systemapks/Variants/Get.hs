@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Systemapks.Variants.Get
     AndroidPublisherSystemapksVariantsGetResource,
 
     -- ** Constructing a Request
+    AndroidPublisherSystemapksVariantsGet (..),
     newAndroidPublisherSystemapksVariantsGet,
-    AndroidPublisherSystemapksVariantsGet,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Operations.Cancel
     ServiceNetworkingOperationsCancelResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingOperationsCancel (..),
     newServiceNetworkingOperationsCancel,
-    ServiceNetworkingOperationsCancel,
   )
 where
 

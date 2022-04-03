@@ -34,8 +34,8 @@ module Gogol.YouTube.ChannelSections.Delete
     YouTubeChannelSectionsDeleteResource,
 
     -- ** Constructing a Request
+    YouTubeChannelSectionsDelete (..),
     newYouTubeChannelSectionsDelete,
-    YouTubeChannelSectionsDelete,
   )
 where
 

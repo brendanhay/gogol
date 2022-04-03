@@ -34,8 +34,8 @@ module Gogol.Compute.Licenses.TestIamPermissions
     ComputeLicensesTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    ComputeLicensesTestIamPermissions (..),
     newComputeLicensesTestIamPermissions,
-    ComputeLicensesTestIamPermissions,
   )
 where
 

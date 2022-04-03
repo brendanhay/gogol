@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.User_permissions.Create
     TagManagerAccountsUser_permissionsCreateResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsUser_permissionsCreate (..),
     newTagManagerAccountsUser_permissionsCreate,
-    TagManagerAccountsUser_permissionsCreate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Compute.Firewalls.List
     ComputeFirewallsListResource,
 
     -- ** Constructing a Request
+    ComputeFirewallsList (..),
     newComputeFirewallsList,
-    ComputeFirewallsList,
   )
 where
 

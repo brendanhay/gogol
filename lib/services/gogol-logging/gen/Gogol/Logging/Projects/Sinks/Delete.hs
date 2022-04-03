@@ -34,8 +34,8 @@ module Gogol.Logging.Projects.Sinks.Delete
     LoggingProjectsSinksDeleteResource,
 
     -- ** Constructing a Request
+    LoggingProjectsSinksDelete (..),
     newLoggingProjectsSinksDelete,
-    LoggingProjectsSinksDelete,
   )
 where
 

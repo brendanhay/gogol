@@ -40,13 +40,13 @@ module Gogol.Speech
 
     -- ** speech.projects.locations.operations.get
     SpeechProjectsLocationsOperationsGetResource,
+    SpeechProjectsLocationsOperationsGet (..),
     newSpeechProjectsLocationsOperationsGet,
-    SpeechProjectsLocationsOperationsGet,
 
     -- ** speech.projects.locations.operations.list
     SpeechProjectsLocationsOperationsListResource,
+    SpeechProjectsLocationsOperationsList (..),
     newSpeechProjectsLocationsOperationsList,
-    SpeechProjectsLocationsOperationsList,
 
     -- * Types
 

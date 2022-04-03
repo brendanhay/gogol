@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Edits.Listings.Delete
     AndroidPublisherEditsListingsDeleteResource,
 
     -- ** Constructing a Request
+    AndroidPublisherEditsListingsDelete (..),
     newAndroidPublisherEditsListingsDelete,
-    AndroidPublisherEditsListingsDelete,
   )
 where
 

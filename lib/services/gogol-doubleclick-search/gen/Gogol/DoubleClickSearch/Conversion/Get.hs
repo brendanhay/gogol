@@ -34,8 +34,8 @@ module Gogol.DoubleClickSearch.Conversion.Get
     DoubleClickSearchConversionGetResource,
 
     -- ** Constructing a Request
+    DoubleClickSearchConversionGet (..),
     newDoubleClickSearchConversionGet,
-    DoubleClickSearchConversionGet,
   )
 where
 

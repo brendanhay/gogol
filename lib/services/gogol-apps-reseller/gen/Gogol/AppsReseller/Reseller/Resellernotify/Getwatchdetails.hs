@@ -34,8 +34,8 @@ module Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
     ResellerResellernotifyGetwatchdetailsResource,
 
     -- ** Constructing a Request
+    ResellerResellernotifyGetwatchdetails (..),
     newResellerResellernotifyGetwatchdetails,
-    ResellerResellernotifyGetwatchdetails,
   )
 where
 

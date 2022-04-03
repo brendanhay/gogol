@@ -34,8 +34,8 @@ module Gogol.FirebaseHosting.Operations.List
     FirebaseHostingOperationsListResource,
 
     -- ** Constructing a Request
+    FirebaseHostingOperationsList (..),
     newFirebaseHostingOperationsList,
-    FirebaseHostingOperationsList,
   )
 where
 

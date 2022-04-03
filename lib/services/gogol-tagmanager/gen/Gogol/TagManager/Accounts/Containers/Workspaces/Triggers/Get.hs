@@ -34,8 +34,8 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Get
     TagManagerAccountsContainersWorkspacesTriggersGetResource,
 
     -- ** Constructing a Request
+    TagManagerAccountsContainersWorkspacesTriggersGet (..),
     newTagManagerAccountsContainersWorkspacesTriggersGet,
-    TagManagerAccountsContainersWorkspacesTriggersGet,
   )
 where
 

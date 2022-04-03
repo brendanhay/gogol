@@ -34,8 +34,8 @@ module Gogol.DeploymentManager.Deployments.Delete
     DeploymentManagerDeploymentsDeleteResource,
 
     -- ** Constructing a Request
+    DeploymentManagerDeploymentsDelete (..),
     newDeploymentManagerDeploymentsDelete,
-    DeploymentManagerDeploymentsDelete,
   )
 where
 

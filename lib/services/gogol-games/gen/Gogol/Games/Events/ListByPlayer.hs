@@ -34,8 +34,8 @@ module Gogol.Games.Events.ListByPlayer
     GamesEventsListByPlayerResource,
 
     -- ** Constructing a Request
+    GamesEventsListByPlayer (..),
     newGamesEventsListByPlayer,
-    GamesEventsListByPlayer,
   )
 where
 

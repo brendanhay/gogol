@@ -34,8 +34,8 @@ module Gogol.Compute.RegionUrlMaps.Update
     ComputeRegionUrlMapsUpdateResource,
 
     -- ** Constructing a Request
+    ComputeRegionUrlMapsUpdate (..),
     newComputeRegionUrlMapsUpdate,
-    ComputeRegionUrlMapsUpdate,
   )
 where
 

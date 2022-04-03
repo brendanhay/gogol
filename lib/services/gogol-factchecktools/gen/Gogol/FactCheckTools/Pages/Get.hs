@@ -34,8 +34,8 @@ module Gogol.FactCheckTools.Pages.Get
     FactCheckToolsPagesGetResource,
 
     -- ** Constructing a Request
+    FactCheckToolsPagesGet (..),
     newFactCheckToolsPagesGet,
-    FactCheckToolsPagesGet,
   )
 where
 

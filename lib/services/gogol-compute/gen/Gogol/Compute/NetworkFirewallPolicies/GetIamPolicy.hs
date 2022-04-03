@@ -34,8 +34,8 @@ module Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
     ComputeNetworkFirewallPoliciesGetIamPolicyResource,
 
     -- ** Constructing a Request
+    ComputeNetworkFirewallPoliciesGetIamPolicy (..),
     newComputeNetworkFirewallPoliciesGetIamPolicy,
-    ComputeNetworkFirewallPoliciesGetIamPolicy,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Dataflow.Projects.Jobs.Aggregated
     DataflowProjectsJobsAggregatedResource,
 
     -- ** Constructing a Request
+    DataflowProjectsJobsAggregated (..),
     newDataflowProjectsJobsAggregated,
-    DataflowProjectsJobsAggregated,
   )
 where
 

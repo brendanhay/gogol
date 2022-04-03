@@ -34,8 +34,8 @@ module Gogol.YouTube.ChannelBanners.Insert
     YouTubeChannelBannersInsertResource,
 
     -- ** Constructing a Request
+    YouTubeChannelBannersInsert (..),
     newYouTubeChannelBannersInsert,
-    YouTubeChannelBannersInsert,
   )
 where
 

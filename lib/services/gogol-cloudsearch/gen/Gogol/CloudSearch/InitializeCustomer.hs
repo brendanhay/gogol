@@ -34,8 +34,8 @@ module Gogol.CloudSearch.InitializeCustomer
     CloudSearchInitializeCustomerResource,
 
     -- ** Constructing a Request
+    CloudSearchInitializeCustomer (..),
     newCloudSearchInitializeCustomer,
-    CloudSearchInitializeCustomer,
   )
 where
 

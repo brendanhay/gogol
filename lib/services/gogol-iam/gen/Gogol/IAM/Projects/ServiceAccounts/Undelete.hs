@@ -34,8 +34,8 @@ module Gogol.IAM.Projects.ServiceAccounts.Undelete
     IAMProjectsServiceAccountsUndeleteResource,
 
     -- ** Constructing a Request
+    IAMProjectsServiceAccountsUndelete (..),
     newIAMProjectsServiceAccountsUndelete,
-    IAMProjectsServiceAccountsUndelete,
   )
 where
 

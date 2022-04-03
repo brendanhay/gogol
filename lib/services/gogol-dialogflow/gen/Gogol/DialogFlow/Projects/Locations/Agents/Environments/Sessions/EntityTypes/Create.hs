@@ -34,8 +34,8 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Sessions.EntityTy
     DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreateResource,
 
     -- ** Constructing a Request
+    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate (..),
     newDialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate,
-    DialogFlowProjectsLocationsAgentsEnvironmentsSessionsEntityTypesCreate,
   )
 where
 

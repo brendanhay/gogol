@@ -34,8 +34,8 @@ module Gogol.Poly.Users.Likedassets.List
     PolyUsersLikedassetsListResource,
 
     -- ** Constructing a Request
+    PolyUsersLikedassetsList (..),
     newPolyUsersLikedassetsList,
-    PolyUsersLikedassetsList,
   )
 where
 

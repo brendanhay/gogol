@@ -34,8 +34,8 @@ module Gogol.Compute.Subnetworks.ExpandIpCidrRange
     ComputeSubnetworksExpandIpCidrRangeResource,
 
     -- ** Constructing a Request
+    ComputeSubnetworksExpandIpCidrRange (..),
     newComputeSubnetworksExpandIpCidrRange,
-    ComputeSubnetworksExpandIpCidrRange,
   )
 where
 

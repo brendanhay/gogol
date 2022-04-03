@@ -34,8 +34,8 @@ module Gogol.CloudSearch.Operations.Get
     CloudSearchOperationsGetResource,
 
     -- ** Constructing a Request
+    CloudSearchOperationsGet (..),
     newCloudSearchOperationsGet,
-    CloudSearchOperationsGet,
   )
 where
 

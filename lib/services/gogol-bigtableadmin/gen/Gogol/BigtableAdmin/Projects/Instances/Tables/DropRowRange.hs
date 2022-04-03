@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.DropRowRange
     BigtableAdminProjectsInstancesTablesDropRowRangeResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesTablesDropRowRange (..),
     newBigtableAdminProjectsInstancesTablesDropRowRange,
-    BigtableAdminProjectsInstancesTablesDropRowRange,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.IdentityToolkit.Relyingparty.VerifyAssertion
     IdentityToolkitRelyingpartyVerifyAssertionResource,
 
     -- ** Constructing a Request
+    IdentityToolkitRelyingpartyVerifyAssertion (..),
     newIdentityToolkitRelyingpartyVerifyAssertion,
-    IdentityToolkitRelyingpartyVerifyAssertion,
   )
 where
 

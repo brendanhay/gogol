@@ -34,8 +34,8 @@ module Gogol.URLShortener.Url.List
     URLShortenerUrlListResource,
 
     -- ** Constructing a Request
+    URLShortenerUrlList (..),
     newURLShortenerUrlList,
-    URLShortenerUrlList,
   )
 where
 

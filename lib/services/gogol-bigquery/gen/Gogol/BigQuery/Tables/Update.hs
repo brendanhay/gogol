@@ -34,8 +34,8 @@ module Gogol.BigQuery.Tables.Update
     BigQueryTablesUpdateResource,
 
     -- ** Constructing a Request
+    BigQueryTablesUpdate (..),
     newBigQueryTablesUpdate,
-    BigQueryTablesUpdate,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Analytics.Management.Experiments.Get
     AnalyticsManagementExperimentsGetResource,
 
     -- ** Constructing a Request
+    AnalyticsManagementExperimentsGet (..),
     newAnalyticsManagementExperimentsGet,
-    AnalyticsManagementExperimentsGet,
   )
 where
 

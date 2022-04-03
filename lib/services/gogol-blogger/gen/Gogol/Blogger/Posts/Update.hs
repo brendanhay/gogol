@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.Update
     BloggerPostsUpdateResource,
 
     -- ** Constructing a Request
+    BloggerPostsUpdate (..),
     newBloggerPostsUpdate,
-    BloggerPostsUpdate,
   )
 where
 

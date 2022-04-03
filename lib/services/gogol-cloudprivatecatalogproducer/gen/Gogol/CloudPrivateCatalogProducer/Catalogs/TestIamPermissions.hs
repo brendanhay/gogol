@@ -34,8 +34,8 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.TestIamPermissions
     CloudPrivateCatalogProducerCatalogsTestIamPermissionsResource,
 
     -- ** Constructing a Request
+    CloudPrivateCatalogProducerCatalogsTestIamPermissions (..),
     newCloudPrivateCatalogProducerCatalogsTestIamPermissions,
-    CloudPrivateCatalogProducerCatalogsTestIamPermissions,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidManagement.Enterprises.Devices.Patch
     AndroidManagementEnterprisesDevicesPatchResource,
 
     -- ** Constructing a Request
+    AndroidManagementEnterprisesDevicesPatch (..),
     newAndroidManagementEnterprisesDevicesPatch,
-    AndroidManagementEnterprisesDevicesPatch,
   )
 where
 

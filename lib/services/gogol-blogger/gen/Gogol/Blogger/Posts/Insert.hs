@@ -34,8 +34,8 @@ module Gogol.Blogger.Posts.Insert
     BloggerPostsInsertResource,
 
     -- ** Constructing a Request
+    BloggerPostsInsert (..),
     newBloggerPostsInsert,
-    BloggerPostsInsert,
   )
 where
 

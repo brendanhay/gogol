@@ -40,58 +40,58 @@ module Gogol.AlertCenter
 
     -- ** alertcenter.alerts.batchDelete
     AlertCenterAlertsBatchDeleteResource,
+    AlertCenterAlertsBatchDelete (..),
     newAlertCenterAlertsBatchDelete,
-    AlertCenterAlertsBatchDelete,
 
     -- ** alertcenter.alerts.batchUndelete
     AlertCenterAlertsBatchUndeleteResource,
+    AlertCenterAlertsBatchUndelete (..),
     newAlertCenterAlertsBatchUndelete,
-    AlertCenterAlertsBatchUndelete,
 
     -- ** alertcenter.alerts.delete
     AlertCenterAlertsDeleteResource,
+    AlertCenterAlertsDelete (..),
     newAlertCenterAlertsDelete,
-    AlertCenterAlertsDelete,
 
     -- ** alertcenter.alerts.feedback.create
     AlertCenterAlertsFeedbackCreateResource,
+    AlertCenterAlertsFeedbackCreate (..),
     newAlertCenterAlertsFeedbackCreate,
-    AlertCenterAlertsFeedbackCreate,
 
     -- ** alertcenter.alerts.feedback.list
     AlertCenterAlertsFeedbackListResource,
+    AlertCenterAlertsFeedbackList (..),
     newAlertCenterAlertsFeedbackList,
-    AlertCenterAlertsFeedbackList,
 
     -- ** alertcenter.alerts.get
     AlertCenterAlertsGetResource,
+    AlertCenterAlertsGet (..),
     newAlertCenterAlertsGet,
-    AlertCenterAlertsGet,
 
     -- ** alertcenter.alerts.getMetadata
     AlertCenterAlertsGetMetadataResource,
+    AlertCenterAlertsGetMetadata (..),
     newAlertCenterAlertsGetMetadata,
-    AlertCenterAlertsGetMetadata,
 
     -- ** alertcenter.alerts.list
     AlertCenterAlertsListResource,
+    AlertCenterAlertsList (..),
     newAlertCenterAlertsList,
-    AlertCenterAlertsList,
 
     -- ** alertcenter.alerts.undelete
     AlertCenterAlertsUndeleteResource,
+    AlertCenterAlertsUndelete (..),
     newAlertCenterAlertsUndelete,
-    AlertCenterAlertsUndelete,
 
     -- ** alertcenter.getSettings
     AlertCenterGetSettingsResource,
+    AlertCenterGetSettings (..),
     newAlertCenterGetSettings,
-    AlertCenterGetSettings,
 
     -- ** alertcenter.updateSettings
     AlertCenterUpdateSettingsResource,
+    AlertCenterUpdateSettings (..),
     newAlertCenterUpdateSettings,
-    AlertCenterUpdateSettings,
 
     -- * Types
 

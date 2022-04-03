@@ -34,8 +34,8 @@ module Gogol.Admin.Directory.Privileges.List
     DirectoryPrivilegesListResource,
 
     -- ** Constructing a Request
+    DirectoryPrivilegesList (..),
     newDirectoryPrivilegesList,
-    DirectoryPrivilegesList,
   )
 where
 

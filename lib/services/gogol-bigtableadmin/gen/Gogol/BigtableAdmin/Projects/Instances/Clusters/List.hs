@@ -34,8 +34,8 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.List
     BigtableAdminProjectsInstancesClustersListResource,
 
     -- ** Constructing a Request
+    BigtableAdminProjectsInstancesClustersList (..),
     newBigtableAdminProjectsInstancesClustersList,
-    BigtableAdminProjectsInstancesClustersList,
   )
 where
 

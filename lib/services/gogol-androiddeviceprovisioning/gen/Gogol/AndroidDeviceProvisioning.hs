@@ -37,133 +37,133 @@ module Gogol.AndroidDeviceProvisioning
 
     -- ** androiddeviceprovisioning.customers.configurations.create
     AndroidDeviceProvisioningCustomersConfigurationsCreateResource,
+    AndroidDeviceProvisioningCustomersConfigurationsCreate (..),
     newAndroidDeviceProvisioningCustomersConfigurationsCreate,
-    AndroidDeviceProvisioningCustomersConfigurationsCreate,
 
     -- ** androiddeviceprovisioning.customers.configurations.delete
     AndroidDeviceProvisioningCustomersConfigurationsDeleteResource,
+    AndroidDeviceProvisioningCustomersConfigurationsDelete (..),
     newAndroidDeviceProvisioningCustomersConfigurationsDelete,
-    AndroidDeviceProvisioningCustomersConfigurationsDelete,
 
     -- ** androiddeviceprovisioning.customers.configurations.get
     AndroidDeviceProvisioningCustomersConfigurationsGetResource,
+    AndroidDeviceProvisioningCustomersConfigurationsGet (..),
     newAndroidDeviceProvisioningCustomersConfigurationsGet,
-    AndroidDeviceProvisioningCustomersConfigurationsGet,
 
     -- ** androiddeviceprovisioning.customers.configurations.list
     AndroidDeviceProvisioningCustomersConfigurationsListResource,
+    AndroidDeviceProvisioningCustomersConfigurationsList (..),
     newAndroidDeviceProvisioningCustomersConfigurationsList,
-    AndroidDeviceProvisioningCustomersConfigurationsList,
 
     -- ** androiddeviceprovisioning.customers.configurations.patch
     AndroidDeviceProvisioningCustomersConfigurationsPatchResource,
+    AndroidDeviceProvisioningCustomersConfigurationsPatch (..),
     newAndroidDeviceProvisioningCustomersConfigurationsPatch,
-    AndroidDeviceProvisioningCustomersConfigurationsPatch,
 
     -- ** androiddeviceprovisioning.customers.devices.applyConfiguration
     AndroidDeviceProvisioningCustomersDevicesApplyConfigurationResource,
+    AndroidDeviceProvisioningCustomersDevicesApplyConfiguration (..),
     newAndroidDeviceProvisioningCustomersDevicesApplyConfiguration,
-    AndroidDeviceProvisioningCustomersDevicesApplyConfiguration,
 
     -- ** androiddeviceprovisioning.customers.devices.get
     AndroidDeviceProvisioningCustomersDevicesGetResource,
+    AndroidDeviceProvisioningCustomersDevicesGet (..),
     newAndroidDeviceProvisioningCustomersDevicesGet,
-    AndroidDeviceProvisioningCustomersDevicesGet,
 
     -- ** androiddeviceprovisioning.customers.devices.list
     AndroidDeviceProvisioningCustomersDevicesListResource,
+    AndroidDeviceProvisioningCustomersDevicesList (..),
     newAndroidDeviceProvisioningCustomersDevicesList,
-    AndroidDeviceProvisioningCustomersDevicesList,
 
     -- ** androiddeviceprovisioning.customers.devices.removeConfiguration
     AndroidDeviceProvisioningCustomersDevicesRemoveConfigurationResource,
+    AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration (..),
     newAndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
-    AndroidDeviceProvisioningCustomersDevicesRemoveConfiguration,
 
     -- ** androiddeviceprovisioning.customers.devices.unclaim
     AndroidDeviceProvisioningCustomersDevicesUnclaimResource,
+    AndroidDeviceProvisioningCustomersDevicesUnclaim (..),
     newAndroidDeviceProvisioningCustomersDevicesUnclaim,
-    AndroidDeviceProvisioningCustomersDevicesUnclaim,
 
     -- ** androiddeviceprovisioning.customers.dpcs.list
     AndroidDeviceProvisioningCustomersDpcsListResource,
+    AndroidDeviceProvisioningCustomersDpcsList (..),
     newAndroidDeviceProvisioningCustomersDpcsList,
-    AndroidDeviceProvisioningCustomersDpcsList,
 
     -- ** androiddeviceprovisioning.customers.list
     AndroidDeviceProvisioningCustomersListResource,
+    AndroidDeviceProvisioningCustomersList (..),
     newAndroidDeviceProvisioningCustomersList,
-    AndroidDeviceProvisioningCustomersList,
 
     -- ** androiddeviceprovisioning.operations.get
     AndroidDeviceProvisioningOperationsGetResource,
+    AndroidDeviceProvisioningOperationsGet (..),
     newAndroidDeviceProvisioningOperationsGet,
-    AndroidDeviceProvisioningOperationsGet,
 
     -- ** androiddeviceprovisioning.partners.customers.create
     AndroidDeviceProvisioningPartnersCustomersCreateResource,
+    AndroidDeviceProvisioningPartnersCustomersCreate (..),
     newAndroidDeviceProvisioningPartnersCustomersCreate,
-    AndroidDeviceProvisioningPartnersCustomersCreate,
 
     -- ** androiddeviceprovisioning.partners.customers.list
     AndroidDeviceProvisioningPartnersCustomersListResource,
+    AndroidDeviceProvisioningPartnersCustomersList (..),
     newAndroidDeviceProvisioningPartnersCustomersList,
-    AndroidDeviceProvisioningPartnersCustomersList,
 
     -- ** androiddeviceprovisioning.partners.devices.claim
     AndroidDeviceProvisioningPartnersDevicesClaimResource,
+    AndroidDeviceProvisioningPartnersDevicesClaim (..),
     newAndroidDeviceProvisioningPartnersDevicesClaim,
-    AndroidDeviceProvisioningPartnersDevicesClaim,
 
     -- ** androiddeviceprovisioning.partners.devices.claimAsync
     AndroidDeviceProvisioningPartnersDevicesClaimAsyncResource,
+    AndroidDeviceProvisioningPartnersDevicesClaimAsync (..),
     newAndroidDeviceProvisioningPartnersDevicesClaimAsync,
-    AndroidDeviceProvisioningPartnersDevicesClaimAsync,
 
     -- ** androiddeviceprovisioning.partners.devices.findByIdentifier
     AndroidDeviceProvisioningPartnersDevicesFindByIdentifierResource,
+    AndroidDeviceProvisioningPartnersDevicesFindByIdentifier (..),
     newAndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
-    AndroidDeviceProvisioningPartnersDevicesFindByIdentifier,
 
     -- ** androiddeviceprovisioning.partners.devices.findByOwner
     AndroidDeviceProvisioningPartnersDevicesFindByOwnerResource,
+    AndroidDeviceProvisioningPartnersDevicesFindByOwner (..),
     newAndroidDeviceProvisioningPartnersDevicesFindByOwner,
-    AndroidDeviceProvisioningPartnersDevicesFindByOwner,
 
     -- ** androiddeviceprovisioning.partners.devices.get
     AndroidDeviceProvisioningPartnersDevicesGetResource,
+    AndroidDeviceProvisioningPartnersDevicesGet (..),
     newAndroidDeviceProvisioningPartnersDevicesGet,
-    AndroidDeviceProvisioningPartnersDevicesGet,
 
     -- ** androiddeviceprovisioning.partners.devices.metadata
     AndroidDeviceProvisioningPartnersDevicesMetadataResource,
+    AndroidDeviceProvisioningPartnersDevicesMetadata (..),
     newAndroidDeviceProvisioningPartnersDevicesMetadata,
-    AndroidDeviceProvisioningPartnersDevicesMetadata,
 
     -- ** androiddeviceprovisioning.partners.devices.unclaim
     AndroidDeviceProvisioningPartnersDevicesUnclaimResource,
+    AndroidDeviceProvisioningPartnersDevicesUnclaim (..),
     newAndroidDeviceProvisioningPartnersDevicesUnclaim,
-    AndroidDeviceProvisioningPartnersDevicesUnclaim,
 
     -- ** androiddeviceprovisioning.partners.devices.unclaimAsync
     AndroidDeviceProvisioningPartnersDevicesUnclaimAsyncResource,
+    AndroidDeviceProvisioningPartnersDevicesUnclaimAsync (..),
     newAndroidDeviceProvisioningPartnersDevicesUnclaimAsync,
-    AndroidDeviceProvisioningPartnersDevicesUnclaimAsync,
 
     -- ** androiddeviceprovisioning.partners.devices.updateMetadataAsync
     AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsyncResource,
+    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync (..),
     newAndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
-    AndroidDeviceProvisioningPartnersDevicesUpdateMetadataAsync,
 
     -- ** androiddeviceprovisioning.partners.vendors.customers.list
     AndroidDeviceProvisioningPartnersVendorsCustomersListResource,
+    AndroidDeviceProvisioningPartnersVendorsCustomersList (..),
     newAndroidDeviceProvisioningPartnersVendorsCustomersList,
-    AndroidDeviceProvisioningPartnersVendorsCustomersList,
 
     -- ** androiddeviceprovisioning.partners.vendors.list
     AndroidDeviceProvisioningPartnersVendorsListResource,
+    AndroidDeviceProvisioningPartnersVendorsList (..),
     newAndroidDeviceProvisioningPartnersVendorsList,
-    AndroidDeviceProvisioningPartnersVendorsList,
 
     -- * Types
 

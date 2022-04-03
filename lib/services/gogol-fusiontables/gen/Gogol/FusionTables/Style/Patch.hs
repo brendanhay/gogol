@@ -34,8 +34,8 @@ module Gogol.FusionTables.Style.Patch
     FusionTablesStylePatchResource,
 
     -- ** Constructing a Request
+    FusionTablesStylePatch (..),
     newFusionTablesStylePatch,
-    FusionTablesStylePatch,
   )
 where
 

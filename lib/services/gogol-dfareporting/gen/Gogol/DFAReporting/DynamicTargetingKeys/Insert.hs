@@ -34,8 +34,8 @@ module Gogol.DFAReporting.DynamicTargetingKeys.Insert
     DFAReportingDynamicTargetingKeysInsertResource,
 
     -- ** Constructing a Request
+    DFAReportingDynamicTargetingKeysInsert (..),
     newDFAReportingDynamicTargetingKeysInsert,
-    DFAReportingDynamicTargetingKeysInsert,
   )
 where
 

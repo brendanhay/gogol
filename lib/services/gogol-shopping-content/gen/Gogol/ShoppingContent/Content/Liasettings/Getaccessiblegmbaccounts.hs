@@ -34,8 +34,8 @@ module Gogol.ShoppingContent.Content.Liasettings.Getaccessiblegmbaccounts
     ContentLiasettingsGetaccessiblegmbaccountsResource,
 
     -- ** Constructing a Request
+    ContentLiasettingsGetaccessiblegmbaccounts (..),
     newContentLiasettingsGetaccessiblegmbaccounts,
-    ContentLiasettingsGetaccessiblegmbaccounts,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Admin.DataTransfer.Transfers.Insert
     DatatransferTransfersInsertResource,
 
     -- ** Constructing a Request
+    DatatransferTransfersInsert (..),
     newDatatransferTransfersInsert,
-    DatatransferTransfersInsert,
   )
 where
 

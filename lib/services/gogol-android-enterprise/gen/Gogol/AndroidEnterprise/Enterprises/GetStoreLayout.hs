@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Enterprises.GetStoreLayout
     AndroidEnterpriseEnterprisesGetStoreLayoutResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseEnterprisesGetStoreLayout (..),
     newAndroidEnterpriseEnterprisesGetStoreLayout,
-    AndroidEnterpriseEnterprisesGetStoreLayout,
   )
 where
 

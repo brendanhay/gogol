@@ -34,8 +34,8 @@ module Gogol.AppsTasks.Tasks.Move
     TasksTasksMoveResource,
 
     -- ** Constructing a Request
+    TasksTasksMove (..),
     newTasksTasksMove,
-    TasksTasksMove,
   )
 where
 

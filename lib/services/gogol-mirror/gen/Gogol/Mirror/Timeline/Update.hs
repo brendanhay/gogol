@@ -34,8 +34,8 @@ module Gogol.Mirror.Timeline.Update
     MirrorTimelineUpdateResource,
 
     -- ** Constructing a Request
+    MirrorTimelineUpdate (..),
     newMirrorTimelineUpdate,
-    MirrorTimelineUpdate,
   )
 where
 

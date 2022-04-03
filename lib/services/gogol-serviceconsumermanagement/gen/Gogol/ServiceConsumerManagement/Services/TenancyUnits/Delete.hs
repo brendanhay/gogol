@@ -34,8 +34,8 @@ module Gogol.ServiceConsumerManagement.Services.TenancyUnits.Delete
     ServiceConsumerManagementServicesTenancyUnitsDeleteResource,
 
     -- ** Constructing a Request
+    ServiceConsumerManagementServicesTenancyUnitsDelete (..),
     newServiceConsumerManagementServicesTenancyUnitsDelete,
-    ServiceConsumerManagementServicesTenancyUnitsDelete,
   )
 where
 

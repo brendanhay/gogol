@@ -34,8 +34,8 @@ module Gogol.YouTube.Comments.List
     YouTubeCommentsListResource,
 
     -- ** Constructing a Request
+    YouTubeCommentsList (..),
     newYouTubeCommentsList,
-    YouTubeCommentsList,
   )
 where
 

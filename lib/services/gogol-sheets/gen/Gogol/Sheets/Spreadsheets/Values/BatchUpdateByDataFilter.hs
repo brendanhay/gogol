@@ -34,8 +34,8 @@ module Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
     SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource,
 
     -- ** Constructing a Request
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter (..),
     newSheetsSpreadsheetsValuesBatchUpdateByDataFilter,
-    SheetsSpreadsheetsValuesBatchUpdateByDataFilter,
   )
 where
 

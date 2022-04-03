@@ -34,8 +34,8 @@ module Gogol.Games.Achievements.Reveal
     GamesAchievementsRevealResource,
 
     -- ** Constructing a Request
+    GamesAchievementsReveal (..),
     newGamesAchievementsReveal,
-    GamesAchievementsReveal,
   )
 where
 

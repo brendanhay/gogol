@@ -34,8 +34,8 @@ module Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
     AndroidPublisherPurchasesVoidedpurchasesListResource,
 
     -- ** Constructing a Request
+    AndroidPublisherPurchasesVoidedpurchasesList (..),
     newAndroidPublisherPurchasesVoidedpurchasesList,
-    AndroidPublisherPurchasesVoidedpurchasesList,
   )
 where
 

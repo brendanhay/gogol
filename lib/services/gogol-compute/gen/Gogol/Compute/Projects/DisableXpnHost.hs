@@ -34,8 +34,8 @@ module Gogol.Compute.Projects.DisableXpnHost
     ComputeProjectsDisableXpnHostResource,
 
     -- ** Constructing a Request
+    ComputeProjectsDisableXpnHost (..),
     newComputeProjectsDisableXpnHost,
-    ComputeProjectsDisableXpnHost,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.AndroidEnterprise.Installs.Update
     AndroidEnterpriseInstallsUpdateResource,
 
     -- ** Constructing a Request
+    AndroidEnterpriseInstallsUpdate (..),
     newAndroidEnterpriseInstallsUpdate,
-    AndroidEnterpriseInstallsUpdate,
   )
 where
 

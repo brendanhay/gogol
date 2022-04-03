@@ -34,8 +34,8 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.GetEffectiveFirewalls
     ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewallsResource,
 
     -- ** Constructing a Request
+    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls (..),
     newComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
-    ComputeRegionNetworkFirewallPoliciesGetEffectiveFirewalls,
   )
 where
 

@@ -40,68 +40,68 @@ module Gogol.IAP
 
     -- ** iap.getIamPolicy
     IAPGetIamPolicyResource,
+    IAPGetIamPolicy (..),
     newIAPGetIamPolicy,
-    IAPGetIamPolicy,
 
     -- ** iap.getIapSettings
     IAPGetIapSettingsResource,
+    IAPGetIapSettings (..),
     newIAPGetIapSettings,
-    IAPGetIapSettings,
 
     -- ** iap.projects.brands.create
     IAPProjectsBrandsCreateResource,
+    IAPProjectsBrandsCreate (..),
     newIAPProjectsBrandsCreate,
-    IAPProjectsBrandsCreate,
 
     -- ** iap.projects.brands.get
     IAPProjectsBrandsGetResource,
+    IAPProjectsBrandsGet (..),
     newIAPProjectsBrandsGet,
-    IAPProjectsBrandsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.create
     IAPProjectsBrandsIdentityAwareProxyClientsCreateResource,
+    IAPProjectsBrandsIdentityAwareProxyClientsCreate (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsCreate,
-    IAPProjectsBrandsIdentityAwareProxyClientsCreate,
 
     -- ** iap.projects.brands.identityAwareProxyClients.delete
     IAPProjectsBrandsIdentityAwareProxyClientsDeleteResource,
+    IAPProjectsBrandsIdentityAwareProxyClientsDelete (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsDelete,
-    IAPProjectsBrandsIdentityAwareProxyClientsDelete,
 
     -- ** iap.projects.brands.identityAwareProxyClients.get
     IAPProjectsBrandsIdentityAwareProxyClientsGetResource,
+    IAPProjectsBrandsIdentityAwareProxyClientsGet (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsGet,
-    IAPProjectsBrandsIdentityAwareProxyClientsGet,
 
     -- ** iap.projects.brands.identityAwareProxyClients.list
     IAPProjectsBrandsIdentityAwareProxyClientsListResource,
+    IAPProjectsBrandsIdentityAwareProxyClientsList (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsList,
-    IAPProjectsBrandsIdentityAwareProxyClientsList,
 
     -- ** iap.projects.brands.identityAwareProxyClients.resetSecret
     IAPProjectsBrandsIdentityAwareProxyClientsResetSecretResource,
+    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret (..),
     newIAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
-    IAPProjectsBrandsIdentityAwareProxyClientsResetSecret,
 
     -- ** iap.projects.brands.list
     IAPProjectsBrandsListResource,
+    IAPProjectsBrandsList (..),
     newIAPProjectsBrandsList,
-    IAPProjectsBrandsList,
 
     -- ** iap.setIamPolicy
     IAPSetIamPolicyResource,
+    IAPSetIamPolicy (..),
     newIAPSetIamPolicy,
-    IAPSetIamPolicy,
 
     -- ** iap.testIamPermissions
     IAPTestIamPermissionsResource,
+    IAPTestIamPermissions (..),
     newIAPTestIamPermissions,
-    IAPTestIamPermissions,
 
     -- ** iap.updateIapSettings
     IAPUpdateIapSettingsResource,
+    IAPUpdateIapSettings (..),
     newIAPUpdateIapSettings,
-    IAPUpdateIapSettings,
 
     -- * Types
 

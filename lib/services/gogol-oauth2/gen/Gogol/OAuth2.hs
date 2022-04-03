@@ -42,18 +42,18 @@ module Gogol.OAuth2
 
     -- ** oauth2.tokeninfo
     OAuth2TokeninfoMethod,
+    OAuth2Tokeninfo (..),
     newOAuth2Tokeninfo,
-    OAuth2Tokeninfo,
 
     -- ** oauth2.userinfo.get
     OAuth2UserinfoGetResource,
+    OAuth2UserinfoGet (..),
     newOAuth2UserinfoGet,
-    OAuth2UserinfoGet,
 
     -- ** oauth2.userinfo.v2.me.get
     OAuth2UserinfoV2MeGetResource,
+    OAuth2UserinfoV2MeGet (..),
     newOAuth2UserinfoV2MeGet,
-    OAuth2UserinfoV2MeGet,
 
     -- * Types
 

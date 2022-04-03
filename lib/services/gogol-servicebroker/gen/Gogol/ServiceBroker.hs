@@ -40,18 +40,18 @@ module Gogol.ServiceBroker
 
     -- ** servicebroker.getIamPolicy
     ServiceBrokerGetIamPolicyResource,
+    ServiceBrokerGetIamPolicy (..),
     newServiceBrokerGetIamPolicy,
-    ServiceBrokerGetIamPolicy,
 
     -- ** servicebroker.setIamPolicy
     ServiceBrokerSetIamPolicyResource,
+    ServiceBrokerSetIamPolicy (..),
     newServiceBrokerSetIamPolicy,
-    ServiceBrokerSetIamPolicy,
 
     -- ** servicebroker.testIamPermissions
     ServiceBrokerTestIamPermissionsResource,
+    ServiceBrokerTestIamPermissions (..),
     newServiceBrokerTestIamPermissions,
-    ServiceBrokerTestIamPermissions,
 
     -- * Types
 

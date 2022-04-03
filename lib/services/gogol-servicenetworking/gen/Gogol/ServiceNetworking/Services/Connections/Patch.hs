@@ -34,8 +34,8 @@ module Gogol.ServiceNetworking.Services.Connections.Patch
     ServiceNetworkingServicesConnectionsPatchResource,
 
     -- ** Constructing a Request
+    ServiceNetworkingServicesConnectionsPatch (..),
     newServiceNetworkingServicesConnectionsPatch,
-    ServiceNetworkingServicesConnectionsPatch,
   )
 where
 

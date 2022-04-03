@@ -34,8 +34,8 @@ module Gogol.Jobs.Projects.Tenants.Jobs.SearchForAlert
     JobsProjectsTenantsJobsSearchForAlertResource,
 
     -- ** Constructing a Request
+    JobsProjectsTenantsJobsSearchForAlert (..),
     newJobsProjectsTenantsJobsSearchForAlert,
-    JobsProjectsTenantsJobsSearchForAlert,
   )
 where
 

@@ -34,8 +34,8 @@ module Gogol.Spanner.Projects.Instances.Databases.Restore
     SpannerProjectsInstancesDatabasesRestoreResource,
 
     -- ** Constructing a Request
+    SpannerProjectsInstancesDatabasesRestore (..),
     newSpannerProjectsInstancesDatabasesRestore,
-    SpannerProjectsInstancesDatabasesRestore,
   )
 where
 

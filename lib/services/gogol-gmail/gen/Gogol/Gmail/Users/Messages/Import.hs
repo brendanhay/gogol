@@ -34,8 +34,8 @@ module Gogol.Gmail.Users.Messages.Import
     GmailUsersMessagesImportResource,
 
     -- ** Constructing a Request
+    GmailUsersMessagesImport (..),
     newGmailUsersMessagesImport,
-    GmailUsersMessagesImport,
   )
 where
 
