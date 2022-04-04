@@ -58,8 +58,8 @@ type CalendarEventsInstancesResource =
     Core.:> Core.QueryParam "originalStart" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "showDeleted" Core.Bool
-    Core.:> Core.QueryParam "timeMax" Core.DateTime'
-    Core.:> Core.QueryParam "timeMin" Core.DateTime'
+    Core.:> Core.QueryParam "timeMax" Core.DateTime
+    Core.:> Core.QueryParam "timeMin" Core.DateTime
     Core.:> Core.QueryParam "timeZone" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Events
@@ -85,9 +85,9 @@ data CalendarEventsInstances = CalendarEventsInstances
     -- | Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False.
     showDeleted :: (Core.Maybe Core.Bool),
     -- | Upper bound (exclusive) for an event\'s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset.
-    timeMax :: (Core.Maybe Core.DateTime'),
+    timeMax :: (Core.Maybe Core.DateTime),
     -- | Lower bound (inclusive) for an event\'s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.
-    timeMin :: (Core.Maybe Core.DateTime'),
+    timeMin :: (Core.Maybe Core.DateTime),
     -- | Time zone used in the response. Optional. The default is the time zone of the calendar.
     timeZone :: (Core.Maybe Core.Text)
   }

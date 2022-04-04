@@ -389,9 +389,9 @@ data GoogleCloudRedisV1OperationMetadata = GoogleCloudRedisV1OperationMetadata
     -- | Specifies if cancellation was requested for the operation.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | Creation timestamp.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | End timestamp.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Operation status details.
     statusDetail :: (Core.Maybe Core.Text),
     -- | Operation target.
@@ -542,7 +542,7 @@ data Instance = Instance
     -- | Optional. The network connect mode of the Redis instance. If not provided, the connect mode defaults to DIRECT_PEERING.
     connectMode :: (Core.Maybe Instance_ConnectMode),
     -- | Output only. The time the instance was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The current zone where the Redis primary node is located. In basic tier, this will always be the same as [location_id]. In standard tier, this can be the zone of any node in the instance.
     currentLocationId :: (Core.Maybe Core.Text),
     -- | An arbitrary and optional user-provided name for the instance.
@@ -1043,11 +1043,11 @@ instance Core.ToJSON Location_Metadata where
 -- /See:/ 'newMaintenancePolicy' smart constructor.
 data MaintenancePolicy = MaintenancePolicy
   { -- | Output only. The time when the policy was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Description of what this policy is for. Create\/Update methods return INVALID_ARGUMENT if the length is greater than 512.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The time when the policy was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Maintenance window that is applied to resources covered by this policy. Minimum 1. For the current version, the maximum number of weekly_window is expected to be one.
     weeklyMaintenanceWindow :: (Core.Maybe [WeeklyMaintenanceWindow])
   }
@@ -1097,11 +1097,11 @@ data MaintenanceSchedule = MaintenanceSchedule
   { -- | If the scheduled maintenance can be rescheduled, default is true.
     canReschedule :: (Core.Maybe Core.Bool),
     -- | Output only. The end time of any upcoming scheduled maintenance for this instance.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The deadline that the maintenance schedule start time can not go beyond, including reschedule.
-    scheduleDeadlineTime :: (Core.Maybe Core.DateTime'),
+    scheduleDeadlineTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The start time of any upcoming scheduled maintenance for this instance.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1320,11 +1320,11 @@ data PersistenceConfig = PersistenceConfig
   { -- | Optional. Controls whether Persistence features are enabled. If not provided, the existing value will be used.
     persistenceMode :: (Core.Maybe PersistenceConfig_PersistenceMode),
     -- | Output only. The next time that a snapshot attempt is scheduled to occur.
-    rdbNextSnapshotTime :: (Core.Maybe Core.DateTime'),
+    rdbNextSnapshotTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Period between RDB snapshots. Snapshots will be attempted every period starting from the provided snapshot start time. For example, a start time of 01\/01\/2033 06:45 and SIX/HOURS snapshot period will do nothing until 01\/01\/2033, and then trigger snapshots every day at 06:45, 12:45, 18:45, and 00:45 the next day, and so on. If not provided, TWENTY/FOUR_HOURS will be used as default.
     rdbSnapshotPeriod :: (Core.Maybe PersistenceConfig_RdbSnapshotPeriod),
     -- | Optional. Date and time that the first snapshot was\/will be attempted, and to which future snapshots will be aligned. If not provided, the current time will be used.
-    rdbSnapshotStartTime :: (Core.Maybe Core.DateTime')
+    rdbSnapshotStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1373,7 +1373,7 @@ data RescheduleMaintenanceRequest = RescheduleMaintenanceRequest
   { -- | Required. If reschedule type is SPECIFIC/TIME, must set up schedule/time as well.
     rescheduleType :: (Core.Maybe RescheduleMaintenanceRequest_RescheduleType),
     -- | Optional. Timestamp when the maintenance shall be rescheduled to if reschedule/type=SPECIFIC/TIME, in RFC 3339 format, for example @2012-11-15T16:19:00.094Z@.
-    scheduleTime :: (Core.Maybe Core.DateTime')
+    scheduleTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1528,9 +1528,9 @@ data TlsCertificate = TlsCertificate
   { -- | PEM representation.
     cert :: (Core.Maybe Core.Text),
     -- | Output only. The time when the certificate was created in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2020-05-18T00:00:00.094Z@.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time when the certificate expires in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2020-05-18T00:00:00.094Z@.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Serial number, as extracted from the certificate.
     serialNumber :: (Core.Maybe Core.Text),
     -- | Sha1 Fingerprint of the certificate.
@@ -1613,7 +1613,7 @@ data WeeklyMaintenanceWindow = WeeklyMaintenanceWindow
   { -- | Required. The day of week that maintenance updates occur.
     day :: (Core.Maybe WeeklyMaintenanceWindow_Day),
     -- | Output only. Duration of the maintenance window. The current window is fixed at 1 hour.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Required. Start time of the window in UTC time.
     startTime :: (Core.Maybe TimeOfDay')
   }

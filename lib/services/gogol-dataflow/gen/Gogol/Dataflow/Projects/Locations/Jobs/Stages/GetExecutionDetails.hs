@@ -58,10 +58,10 @@ type DataflowProjectsLocationsJobsStagesGetExecutionDetailsResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "endTime" Core.DateTime'
+    Core.:> Core.QueryParam "endTime" Core.DateTime
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam
               "upload_protocol"
@@ -82,7 +82,7 @@ data DataflowProjectsLocationsJobsStagesGetExecutionDetails = DataflowProjectsLo
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Upper time bound of work items to include, by start time.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The job to get execution details for.
     jobId :: Core.Text,
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the job specified by job_id.
@@ -96,7 +96,7 @@ data DataflowProjectsLocationsJobsStagesGetExecutionDetails = DataflowProjectsLo
     -- | The stage for which to fetch information.
     stageId :: Core.Text,
     -- | Lower time bound of work items to include, by start time.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

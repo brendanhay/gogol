@@ -160,7 +160,7 @@ data AmpInspectionResult = AmpInspectionResult
     -- | A list of zero or more AMP issues found for the inspected URL.
     issues :: (Core.Maybe [AmpIssue]),
     -- | Last time this AMP version was crawled by Google. Absent if the URL was never crawled successfully.
-    lastCrawlTime :: (Core.Maybe Core.DateTime'),
+    lastCrawlTime :: (Core.Maybe Core.DateTime),
     -- | Whether or not Google could fetch the AMP.
     pageFetchState :: (Core.Maybe AmpInspectionResult_PageFetchState),
     -- | Whether or not the page is blocked to Google by a robots.txt rule.
@@ -493,7 +493,7 @@ data IndexStatusInspectionResult = IndexStatusInspectionResult
     -- | Whether or not the page blocks indexing through a noindex rule.
     indexingState :: (Core.Maybe IndexStatusInspectionResult_IndexingState),
     -- | Last time this URL was crawled by Google using the <https://support.google.com/webmasters/answer/7440203#primary_crawler primary crawler>. Absent if the URL was never crawled successfully.
-    lastCrawlTime :: (Core.Maybe Core.DateTime'),
+    lastCrawlTime :: (Core.Maybe Core.DateTime),
     -- | Whether or not Google could retrieve the page from your server. Equivalent to <https://support.google.com/webmasters/answer/9012289#index_coverage \"page fetch\"> in the URL inspection report.
     pageFetchState :: (Core.Maybe IndexStatusInspectionResult_PageFetchState),
     -- | URLs that link to the inspected URL, directly and indirectly.
@@ -1318,9 +1318,9 @@ data WmxSitemap = WmxSitemap
     -- | If true, the sitemap is a collection of sitemaps.
     isSitemapsIndex :: (Core.Maybe Core.Bool),
     -- | Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).
-    lastDownloaded :: (Core.Maybe Core.DateTime'),
+    lastDownloaded :: (Core.Maybe Core.DateTime),
     -- | Date & time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).
-    lastSubmitted :: (Core.Maybe Core.DateTime'),
+    lastSubmitted :: (Core.Maybe Core.DateTime),
     -- | The url of the sitemap.
     path :: (Core.Maybe Core.Text),
     -- | The type of the sitemap. For example: @rssFeed@.

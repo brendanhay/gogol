@@ -537,7 +537,7 @@ data NetworkEvent = NetworkEvent
     --
     -- -   For sent messages, this is the time at which the first bit was sent.
     -- -   For received messages, this is the time at which the last bit was received.
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | Type of NetworkEvent. Indicates whether the RPC message was sent or received.
     type' :: (Core.Maybe NetworkEvent_Type)
   }
@@ -588,7 +588,7 @@ data Span = Span
     -- | Description of the operation in the span. It is sanitized and displayed in the Stackdriver Trace tool in the {% dynamic print site/values.console/name %}. The display/name may be a method name or some other per-call site name. For the same executable and the same call point, a best practice is to use a consistent operation name, which makes it easier to correlate cross-trace spans. The maximum length for the display/name is 128 bytes.
     displayName :: (Core.Maybe TruncatableString),
     -- | End time of the span. On the client side, this is the local machine clock time at which the span execution was ended; on the server side, this is the time at which the server application handler stopped running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | A maximum of 128 links are allowed per Span.
     links :: (Core.Maybe Links),
     -- | The resource name of Span in the format @projects\/PROJECT_ID\/traces\/TRACE_ID\/spans\/SPAN_ID@. @TRACE_ID@ is a unique identifier for a trace within a project and is a base16-encoded, case-insensitive string and is required to be 32 char long. @SPAN_ID@ is a unique identifier for a span within a trace. It is a base 16-encoded, case-insensitive string of a 8-bytes array and is required to be 16 char long.
@@ -600,7 +600,7 @@ data Span = Span
     -- | Stack trace captured at the start of the span.
     stackTrace :: (Core.Maybe StackTrace),
     -- | Start time of the span. On the client side, this is the local machine clock time at which the span execution was started; on the server side, this is the time at which the server application handler started running.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | An optional final status for this span.
     status :: (Core.Maybe Status),
     -- | A maximum of 32 annotations and 128 network events are allowed per Span.
@@ -911,7 +911,7 @@ data TimeEvent = TimeEvent
     -- | An event describing an RPC message sent\/received on the network.
     networkEvent :: (Core.Maybe NetworkEvent),
     -- | The timestamp indicating the time the event occurred.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

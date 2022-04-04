@@ -740,13 +740,13 @@ instance Core.ToJSON CorpusQuery where
 -- /See:/ 'newCountArtifactsMetadata' smart constructor.
 data CountArtifactsMetadata = CountArtifactsMetadata
   { -- | End time of count operation. Available when operation is done.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The matter ID of the associated matter.
     matterId :: (Core.Maybe Core.Text),
     -- | The search query from the request.
     query :: (Core.Maybe Query),
     -- | Creation time of count operation.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -906,7 +906,7 @@ data DriveOptions = DriveOptions
     -- | Set to true to include Team Drive.
     includeTeamDrives :: (Core.Maybe Core.Bool),
     -- | Search the current version of the Drive file, but export the contents of the last version saved before 12:00 AM UTC on the specified date. Enter the date in UTC.
-    versionDate :: (Core.Maybe Core.DateTime')
+    versionDate :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -968,7 +968,7 @@ data Export = Export
   { -- | Output only. The sink for export files in Cloud Storage.
     cloudStorageSink :: (Core.Maybe CloudStorageSink),
     -- | Output only. The time when the export was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Additional export options.
     exportOptions :: (Core.Maybe ExportOptions),
     -- | Output only. The generated export ID.
@@ -1340,7 +1340,7 @@ data HeldAccount = HeldAccount
     -- | Output only. The first name of the account holder.
     firstName :: (Core.Maybe Core.Text),
     -- | Output only. When the account was put on hold.
-    holdTime :: (Core.Maybe Core.DateTime'),
+    holdTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The last name of the account holder.
     lastName :: (Core.Maybe Core.Text)
   }
@@ -1429,9 +1429,9 @@ instance Core.ToJSON HeldDriveQuery where
 -- /See:/ 'newHeldGroupsQuery' smart constructor.
 data HeldGroupsQuery = HeldGroupsQuery
   { -- | The end time for the query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The start time for the query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The <https://support.google.com/vault/answer/2474474 search operators> used to refine the messages covered by the hold.
     terms :: (Core.Maybe Core.Text)
   }
@@ -1503,9 +1503,9 @@ instance Core.ToJSON HeldHangoutsChatQuery where
 -- /See:/ 'newHeldMailQuery' smart constructor.
 data HeldMailQuery = HeldMailQuery
   { -- | The end time for the query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The start time for the query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The <https://support.google.com/vault/answer/2474474 search operators> used to refine the messages covered by the hold.
     terms :: (Core.Maybe Core.Text)
   }
@@ -1547,7 +1547,7 @@ instance Core.ToJSON HeldMailQuery where
 -- /See:/ 'newHeldOrgUnit' smart constructor.
 data HeldOrgUnit = HeldOrgUnit
   { -- | When the organizational unit was put on hold. This property is immutable.
-    holdTime :: (Core.Maybe Core.DateTime'),
+    holdTime :: (Core.Maybe Core.DateTime),
     -- | The organizational unit\'s immutable ID as provided by the <https://developers.google.com/admin-sdk/ Admin SDK>.
     orgUnitId :: (Core.Maybe Core.Text)
   }
@@ -1624,7 +1624,7 @@ data Hold = Hold
     -- | Service-specific options. If set, __CorpusQuery__ must match __CorpusType__.
     query :: (Core.Maybe CorpusQuery),
     -- | The last time this hold was modified.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2266,7 +2266,7 @@ data Query = Query
     -- | Set Drive search-specific options.
     driveOptions :: (Core.Maybe DriveOptions),
     -- | The end time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required when __SearchMethod__ is __ROOM__. (read-only)
     hangoutsChatInfo :: (Core.Maybe HangoutsChatInfo),
     -- | Set Chat search-specific options. (read-only)
@@ -2282,7 +2282,7 @@ data Query = Query
     -- | Required when __SearchMethod__ is **SHARED_DRIVE**.
     sharedDriveInfo :: (Core.Maybe SharedDriveInfo),
     -- | The start time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Required when __SearchMethod__ is **TEAM_DRIVE**.
     teamDriveInfo :: (Core.Maybe TeamDriveInfo),
     -- | Service-specific <https://support.google.com/vault/answer/2474474 search operators> to filter search results.
@@ -2514,7 +2514,7 @@ instance Core.ToJSON ReopenMatterResponse where
 -- /See:/ 'newSavedQuery' smart constructor.
 data SavedQuery = SavedQuery
   { -- | Output only. The server-generated timestamp when the saved query was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The name of the saved query.
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. The matter ID of the matter the saved query is saved in. The server does not use this field during create and always uses matter ID in the URL.

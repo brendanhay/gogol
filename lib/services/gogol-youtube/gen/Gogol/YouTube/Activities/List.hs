@@ -57,8 +57,8 @@ type YouTubeActivitiesListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "mine" Core.Bool
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "publishedAfter" Core.DateTime'
-    Core.:> Core.QueryParam "publishedBefore" Core.DateTime'
+    Core.:> Core.QueryParam "publishedAfter" Core.DateTime
+    Core.:> Core.QueryParam "publishedBefore" Core.DateTime
     Core.:> Core.QueryParam "regionCode" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -90,9 +90,9 @@ data YouTubeActivitiesList = YouTubeActivitiesList
     -- | The /part/ parameter specifies a comma-separated list of one or more activity resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set /part=snippet/, the API response will also contain all of those nested properties.
     part :: [Core.Text],
     -- |
-    publishedAfter :: (Core.Maybe Core.DateTime'),
+    publishedAfter :: (Core.Maybe Core.DateTime),
     -- |
-    publishedBefore :: (Core.Maybe Core.DateTime'),
+    publishedBefore :: (Core.Maybe Core.DateTime),
     -- |
     regionCode :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

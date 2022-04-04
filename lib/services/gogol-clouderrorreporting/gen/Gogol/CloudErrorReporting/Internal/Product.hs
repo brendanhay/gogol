@@ -168,7 +168,7 @@ data ErrorEvent = ErrorEvent
   { -- | Data about the context in which the error occurred.
     context :: (Core.Maybe ErrorContext),
     -- | Time when the event occurred as provided in the error report. If the report did not contain a timestamp, the time the error was received by the Error Reporting system is used.
-    eventTime :: (Core.Maybe Core.DateTime'),
+    eventTime :: (Core.Maybe Core.DateTime),
     -- | The stack trace that was reported or logged by the service.
     message :: (Core.Maybe Core.Text),
     -- | The @ServiceContext@ for which this error was reported.
@@ -271,11 +271,11 @@ data ErrorGroupStats = ErrorGroupStats
     -- | Approximate total number of events in the given group that match the filter criteria.
     count :: (Core.Maybe Core.Int64),
     -- | Approximate first occurrence that was ever seen for this group and which matches the given filter criteria, ignoring the time_range that was specified in the request.
-    firstSeenTime :: (Core.Maybe Core.DateTime'),
+    firstSeenTime :: (Core.Maybe Core.DateTime),
     -- | Group data that is independent of the filter criteria.
     group' :: (Core.Maybe ErrorGroup),
     -- | Approximate last occurrence that was ever seen for this group and which matches the given filter criteria, ignoring the time_range that was specified in the request.
-    lastSeenTime :: (Core.Maybe Core.DateTime'),
+    lastSeenTime :: (Core.Maybe Core.DateTime),
     -- | The total number of services with a non-zero error count for the given filter criteria.
     numAffectedServices :: (Core.Maybe Core.Int32),
     -- | An arbitrary event that is chosen as representative for the whole group. The representative event is intended to be used as a quick preview for the whole group. Events in the group are usually sufficiently similar to each other such that showing an arbitrary representative provides insight into the characteristics of the group as a whole.
@@ -406,7 +406,7 @@ data ListEventsResponse = ListEventsResponse
     -- | If non-empty, more results are available. Pass this token, along with the same query parameters as the first request, to view the next page of results.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The timestamp specifies the start time to which the request was restricted.
-    timeRangeBegin :: (Core.Maybe Core.DateTime')
+    timeRangeBegin :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -450,7 +450,7 @@ data ListGroupStatsResponse = ListGroupStatsResponse
     -- | If non-empty, more results are available. Pass this token, along with the same query parameters as the first request, to view the next page of results.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The timestamp specifies the start time to which the request was restricted. The start time is set based on the requested time range. It may be adjusted to a later time if a project has exceeded the storage quota and older data has been deleted.
-    timeRangeBegin :: (Core.Maybe Core.DateTime')
+    timeRangeBegin :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -513,7 +513,7 @@ data ReportedErrorEvent = ReportedErrorEvent
   { -- | Optional. A description of the context in which the error occurred.
     context :: (Core.Maybe ErrorContext),
     -- | Optional. Time when the event occurred. If not provided, the time when the event was received by the Error Reporting system is used. If provided, the time must not exceed the <https://cloud.google.com/logging/quotas#logs_retention_periods logs retention period> in the past, or be more than 24 hours in the future. If an invalid time is provided, then an error is returned.
-    eventTime :: (Core.Maybe Core.DateTime'),
+    eventTime :: (Core.Maybe Core.DateTime),
     -- | Required. The error message. If no @context.reportLocation@ is provided, the message must contain a header (typically consisting of the exception type name and an error message) and an exception stack trace in one of the supported programming languages and formats. Supported languages are Java, Python, JavaScript, Ruby, C#, PHP, and Go. Supported stack trace formats are: * __Java__: Must be the return value of <https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29 Throwable.printStackTrace()>. * __Python__: Must be the return value of <https://docs.python.org/2/library/traceback.html#traceback.format_exc traceback.format_exc()>. * __JavaScript__: Must be the value of <https://github.com/v8/v8/wiki/Stack-Trace-API error.stack> as returned by V8. * __Ruby__: Must contain frames returned by <https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace Exception.backtrace>. * __C#__: Must be the return value of
     -- <https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx Exception.ToString()>. * __PHP__: Must start with @PHP (Notice|Parse error|Fatal error|Warning)@ and contain the result of <http://php.net/manual/en/exception.tostring.php (string)$exception>. * __Go__: Must be the return value of <https://golang.org/pkg/runtime/debug/#Stack runtime.Stack()>.
     message :: (Core.Maybe Core.Text),
@@ -687,9 +687,9 @@ data TimedCount = TimedCount
   { -- | Approximate number of occurrences in the given time period.
     count :: (Core.Maybe Core.Int64),
     -- | End of the time period to which @count@ refers (excluded).
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Start of the time period to which @count@ refers (included).
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

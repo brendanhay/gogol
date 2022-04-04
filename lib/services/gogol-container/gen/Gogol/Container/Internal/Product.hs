@@ -6205,11 +6205,11 @@ instance Core.ToJSON StatusCondition where
 -- /See:/ 'newTimeWindow' smart constructor.
 data TimeWindow = TimeWindow
   { -- | The time that the window ends. The end time should take place after the start time.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | MaintenanceExclusionOptions provides maintenance exclusion related options.
     maintenanceExclusionOptions :: (Core.Maybe MaintenanceExclusionOptions),
     -- | The time that the window first starts.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6511,7 +6511,7 @@ data UpgradeEvent = UpgradeEvent
     -- | The operation associated with this upgrade.
     operation :: (Core.Maybe Core.Text),
     -- | The time when the operation was started.
-    operationStartTime :: (Core.Maybe Core.DateTime'),
+    operationStartTime :: (Core.Maybe Core.DateTime),
     -- | Optional relative path to the resource. For example in node pool upgrades, the relative path of the node pool.
     resource :: (Core.Maybe Core.Text),
     -- | The resource type that is upgrading.

@@ -50,10 +50,10 @@ type PeoplePeopleGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "personFields" Core.GFieldMask
+    Core.:> Core.QueryParam "personFields" Core.FieldMask
     Core.:> Core.QueryParam
               "requestMask.includeField"
-              Core.GFieldMask
+              Core.FieldMask
     Core.:> Core.QueryParams "sources" PeopleGetSources
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -71,9 +71,9 @@ data PeoplePeopleGet = PeoplePeopleGet
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    personFields :: (Core.Maybe Core.GFieldMask),
+    personFields :: (Core.Maybe Core.FieldMask),
     -- | Required. Comma-separated list of person fields to be included in the response. Each path should start with @person.@: for example, @person.names@ or @person.photos@.
-    requestMaskIncludeField :: (Core.Maybe Core.GFieldMask),
+    requestMaskIncludeField :: (Core.Maybe Core.FieldMask),
     -- | Required. The resource name of the person to provide information about. - To get information about the authenticated user, specify @people\/me@. - To get information about a google account, specify @people\/{account_id}@. - To get information about a contact, specify the resource name that identifies the contact as returned by @people.connections.list@.
     resourceName :: Core.Text,
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/PROFILE and READ/SOURCE/TYPE/CONTACT if not set.

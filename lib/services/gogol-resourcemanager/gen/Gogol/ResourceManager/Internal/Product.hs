@@ -560,7 +560,7 @@ instance Core.ToJSON CreateFolderMetadata where
 -- /See:/ 'newCreateProjectMetadata' smart constructor.
 data CreateProjectMetadata = CreateProjectMetadata
   { -- | Creation time of the project creation workflow.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | True if the project can be retrieved using @GetProject@. No other operations on the project are guaranteed to work until the project creation is complete.
     gettable :: (Core.Maybe Core.Bool),
     -- | True if the project creation process is complete.
@@ -852,9 +852,9 @@ instance Core.ToJSON Expr where
 -- /See:/ 'newFolder' smart constructor.
 data Folder = Folder
   { -- | Output only. Timestamp when the folder was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Timestamp when the folder was requested to be deleted.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | The folder\'s display name. A folder\'s display name must be unique amongst its siblings. For example, no two folders with the same parent can share the same display name. The display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. This is captured by the regular expression: @[\\p{L}\\p{N}]([\\p{L}\\p{N}_- ]{0,28}[\\p{L}\\p{N}])?@.
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. A checksum computed by the server based on the current value of the folder resource. This may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
@@ -866,7 +866,7 @@ data Folder = Folder
     -- | Output only. The lifecycle state of the folder. Updates to the state must be performed using DeleteFolder and UndeleteFolder.
     state :: (Core.Maybe Folder_State),
     -- | Output only. Timestamp when the folder was last modified.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1062,7 +1062,7 @@ instance Core.ToJSON GetPolicyOptions where
 -- /See:/ 'newLien' smart constructor.
 data Lien = Lien
   { -- | The creation time of this Lien.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A system-generated unique identifier for this Lien. Example: @liens\/1234abcd@
     name :: (Core.Maybe Core.Text),
     -- | A stable, user-visible\/meaningful string identifying the origin of the Lien, intended to be inspected programmatically. Maximum length of 200 characters. Example: \'compute.googleapis.com\'
@@ -1579,9 +1579,9 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newOrganization' smart constructor.
 data Organization = Organization
   { -- | Output only. Timestamp when the Organization was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Timestamp when the Organization was requested for deletion.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | Immutable. The G Suite \/ Workspace customer id used in the Directory API.
     directoryCustomerId :: (Core.Maybe Core.Text),
     -- | Output only. A human-readable string that refers to the organization in the Google Cloud Console. This string is set by the server and cannot be changed. The string will be set to the primary domain (for example, \"google.com\") of the Google Workspace customer that owns the organization.
@@ -1593,7 +1593,7 @@ data Organization = Organization
     -- | Output only. The organization\'s current lifecycle state.
     state :: (Core.Maybe Organization_State),
     -- | Output only. Timestamp when the Organization was last modified.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1701,9 +1701,9 @@ instance Core.ToJSON Policy where
 -- /See:/ 'newProject' smart constructor.
 data Project = Project
   { -- | Output only. Creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time at which this resource was requested for deletion.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | Optional. A user-assigned display name of the project. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: @My Project@
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. A checksum computed by the server based on the current value of the Project resource. This may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
@@ -1719,7 +1719,7 @@ data Project = Project
     -- | Output only. The project lifecycle state.
     state :: (Core.Maybe Project_State),
     -- | Output only. The most recent time this resource was modified.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1807,7 +1807,7 @@ instance Core.ToJSON Project_Labels where
 -- /See:/ 'newProjectCreationStatus' smart constructor.
 data ProjectCreationStatus = ProjectCreationStatus
   { -- | Creation time of the project creation workflow.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | True if the project can be retrieved using GetProject. No other operations on the project are guaranteed to work until the project creation is complete.
     gettable :: (Core.Maybe Core.Bool),
     -- | True if the project creation process is complete.
@@ -1964,7 +1964,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2109,7 +2109,7 @@ instance Core.ToJSON TagBinding where
 -- /See:/ 'newTagKey' smart constructor.
 data TagKey = TagKey
   { -- | Output only. Creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-assigned description of the TagKey. Must not exceed 256 characters. Read-write.
     description :: (Core.Maybe Core.Text),
     -- | Optional. Entity tag which users can pass to prevent race conditions. This field is always set in server responses. See UpdateTagKeyRequest for details.
@@ -2123,7 +2123,7 @@ data TagKey = TagKey
     -- | Required. Immutable. The user friendly name for a TagKey. The short name should be unique for TagKeys within the same tag namespace. The short name must be 1-63 characters, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between.
     shortName :: (Core.Maybe Core.Text),
     -- | Output only. Update time.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2178,7 +2178,7 @@ instance Core.ToJSON TagKey where
 -- /See:/ 'newTagValue' smart constructor.
 data TagValue = TagValue
   { -- | Output only. Creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-assigned description of the TagValue. Must not exceed 256 characters. Read-write.
     description :: (Core.Maybe Core.Text),
     -- | Optional. Entity tag which users can pass to prevent race conditions. This field is always set in server responses. See UpdateTagValueRequest for details.
@@ -2192,7 +2192,7 @@ data TagValue = TagValue
     -- | Required. Immutable. User-assigned short name for TagValue. The short name should be unique for TagValues within the same parent TagKey. The short name must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between.
     shortName :: (Core.Maybe Core.Text),
     -- | Output only. Update time.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

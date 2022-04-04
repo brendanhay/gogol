@@ -8690,7 +8690,7 @@ data UpdateDocumentStyleRequest = UpdateDocumentStyleRequest
   { -- | The styles to set on the document. Certain document style changes may cause other changes in order to mirror the behavior of the Docs editor. See the documentation of DocumentStyle for more information.
     documentStyle :: (Core.Maybe DocumentStyle),
     -- | The fields that should be updated. At least one field must be specified. The root @document_style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the background, set @fields@ to @\"background\"@.
-    fields :: (Core.Maybe Core.GFieldMask)
+    fields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8727,7 +8727,7 @@ instance Core.ToJSON UpdateDocumentStyleRequest where
 -- /See:/ 'newUpdateParagraphStyleRequest' smart constructor.
 data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @paragraph_style@ is implied and should not be specified. For example, to update the paragraph style\'s alignment property, set @fields@ to @\"alignment\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The styles to set on the paragraphs. Certain paragraph style changes may cause other changes in order to mirror the behavior of the Docs editor. See the documentation of ParagraphStyle for more information.
     paragraphStyle :: (Core.Maybe ParagraphStyle),
     -- | The range overlapping the paragraphs to style.
@@ -8771,7 +8771,7 @@ instance Core.ToJSON UpdateParagraphStyleRequest where
 -- /See:/ 'newUpdateSectionStyleRequest' smart constructor.
 data UpdateSectionStyleRequest = UpdateSectionStyleRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @section_style@ is implied and must not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the left margin, set @fields@ to @\"margin_left\"@.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The range overlapping the sections to style. Because section breaks can only be inserted inside the body, the segment ID field must be empty.
     range :: (Core.Maybe Range),
     -- | The styles to be set on the section. Certain section style changes may cause other changes in order to mirror the behavior of the Docs editor. See the documentation of SectionStyle for more information.
@@ -8815,7 +8815,7 @@ instance Core.ToJSON UpdateSectionStyleRequest where
 -- /See:/ 'newUpdateTableCellStyleRequest' smart constructor.
 data UpdateTableCellStyleRequest = UpdateTableCellStyleRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @tableCellStyle@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the table cell background color, set @fields@ to @\"backgroundColor\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The style to set on the table cells. When updating borders, if a cell shares a border with an adjacent cell, the corresponding border property of the adjacent cell is updated as well. Borders that are merged and invisible are not updated. Since updating a border shared by adjacent cells in the same request can cause conflicting border updates, border updates are applied in the following order: - @border_right@ - @border_left@ - @border_bottom@ - @border_top@
     tableCellStyle :: (Core.Maybe TableCellStyle),
     -- | The table range representing the subset of the table to which the updates are applied.
@@ -8867,7 +8867,7 @@ data UpdateTableColumnPropertiesRequest = UpdateTableColumnPropertiesRequest
   { -- | The list of zero-based column indices whose property should be updated. If no indices are specified, all columns will be updated.
     columnIndices :: (Core.Maybe [Core.Int32]),
     -- | The fields that should be updated. At least one field must be specified. The root @tableColumnProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the column width, set @fields@ to @\"width\"@.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The table column properties to update. If the value of @table_column_properties#width@ is less than 5 points (5\/72 inch), a 400 bad request error is returned.
     tableColumnProperties :: (Core.Maybe TableColumnProperties),
     -- | The location where the table starts in the document.
@@ -8922,7 +8922,7 @@ instance
 -- /See:/ 'newUpdateTableRowStyleRequest' smart constructor.
 data UpdateTableRowStyleRequest = UpdateTableRowStyleRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @tableRowStyle@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the minimum row height, set @fields@ to @\"min_row_height\"@.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The list of zero-based row indices whose style should be updated. If no indices are specified, all rows will be updated.
     rowIndices :: (Core.Maybe [Core.Int32]),
     -- | The styles to be set on the rows.
@@ -8972,7 +8972,7 @@ instance Core.ToJSON UpdateTableRowStyleRequest where
 -- /See:/ 'newUpdateTextStyleRequest' smart constructor.
 data UpdateTextStyleRequest = UpdateTextStyleRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @text_style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example, to update the text style to bold, set @fields@ to @\"bold\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The range of text to style. The range may be extended to include adjacent newlines. If the range fully contains a paragraph belonging to a list, the paragraph\'s bullet is also updated with the matching text style. Ranges cannot be inserted inside a relative UpdateTextStyleRequest.
     range :: (Core.Maybe Range),
     -- | The styles to set on the text. If the value for a particular style matches that of the parent, that style will be set to inherit. Certain text style changes may cause other changes in order to to mirror the behavior of the Docs editor. See the documentation of TextStyle for more information.

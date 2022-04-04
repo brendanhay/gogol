@@ -53,7 +53,7 @@ type ClassroomUserProfilesGuardianInvitationsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -77,7 +77,7 @@ data ClassroomUserProfilesGuardianInvitationsPatch = ClassroomUserProfilesGuardi
     -- | The ID of the student whose guardian invitation is to be modified.
     studentId :: Core.Text,
     -- | Mask that identifies which fields on the course to update. This field is required to do an update. The update fails if invalid fields are specified. The following fields are valid: * @state@ When set in a query parameter, this field should be specified as @updateMask=,,...@
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

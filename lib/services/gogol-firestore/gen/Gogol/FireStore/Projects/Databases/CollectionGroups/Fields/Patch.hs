@@ -50,7 +50,7 @@ type FireStoreProjectsDatabasesCollectionGroupsFieldsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -73,7 +73,7 @@ data FireStoreProjectsDatabasesCollectionGroupsFieldsPatch = FireStoreProjectsDa
     -- | Multipart request metadata.
     payload :: GoogleFirestoreAdminV1Field,
     -- | A mask, relative to the field. If specified, only configuration specified by this field_mask will be updated in the field.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

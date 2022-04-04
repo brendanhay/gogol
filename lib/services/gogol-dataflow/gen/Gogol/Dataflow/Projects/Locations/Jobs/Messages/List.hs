@@ -56,13 +56,13 @@ type DataflowProjectsLocationsJobsMessagesListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "endTime" Core.DateTime'
+    Core.:> Core.QueryParam "endTime" Core.DateTime
     Core.:> Core.QueryParam
               "minimumImportance"
               ProjectsLocationsJobsMessagesListMinimumImportance
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam
               "upload_protocol"
@@ -83,7 +83,7 @@ data DataflowProjectsLocationsJobsMessagesList = DataflowProjectsLocationsJobsMe
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Return only messages with timestamps \< end_time. The default is now (i.e. return up to the latest messages available).
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The job to get messages about.
     jobId :: Core.Text,
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the job specified by job_id.
@@ -97,7 +97,7 @@ data DataflowProjectsLocationsJobsMessagesList = DataflowProjectsLocationsJobsMe
     -- | A project id.
     projectId :: Core.Text,
     -- | If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

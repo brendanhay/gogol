@@ -52,7 +52,7 @@ type MonitoringOrganizationsTimeSeriesListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam
               "aggregation.alignmentPeriod"
-              Core.GDuration
+              Core.Duration
     Core.:> Core.QueryParam
               "aggregation.crossSeriesReducer"
               OrganizationsTimeSeriesListAggregationCrossSeriesReducer
@@ -64,14 +64,14 @@ type MonitoringOrganizationsTimeSeriesListResource =
               OrganizationsTimeSeriesListAggregationPerSeriesAligner
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam "interval.endTime" Core.DateTime'
-    Core.:> Core.QueryParam "interval.startTime" Core.DateTime'
+    Core.:> Core.QueryParam "interval.endTime" Core.DateTime
+    Core.:> Core.QueryParam "interval.startTime" Core.DateTime
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam
               "secondaryAggregation.alignmentPeriod"
-              Core.GDuration
+              Core.Duration
     Core.:> Core.QueryParam
               "secondaryAggregation.crossSeriesReducer"
               OrganizationsTimeSeriesListSecondaryAggregationCrossSeriesReducer
@@ -106,7 +106,7 @@ data MonitoringOrganizationsTimeSeriesList = MonitoringOrganizationsTimeSeriesLi
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | The alignment/period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN/NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN/NONE is specified, then this field is ignored.The maximum value of the alignment/period is 104 weeks (2 years) for charts, and 90,000 seconds (25 hours) for alerting policies.
-    aggregationAlignmentPeriod :: (Core.Maybe Core.GDuration),
+    aggregationAlignmentPeriod :: (Core.Maybe Core.Duration),
     -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
     aggregationCrossSeriesReducer ::
       ( Core.Maybe
@@ -121,9 +121,9 @@ data MonitoringOrganizationsTimeSeriesList = MonitoringOrganizationsTimeSeriesLi
     -- | Required. A monitoring filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example: metric.type = \"compute.googleapis.com\/instance\/cpu\/usage/time\" AND metric.labels.instance/name = \"my-instance-name\"
     filter :: (Core.Maybe Core.Text),
     -- | Required. The end of the time interval.
-    intervalEndTime :: (Core.Maybe Core.DateTime'),
+    intervalEndTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-    intervalStartTime :: (Core.Maybe Core.DateTime'),
+    intervalStartTime :: (Core.Maybe Core.DateTime),
     -- | Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name), organization or folder on which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER] organizations\/[ORGANIZATION/ID] folders\/[FOLDER/ID]
     name :: Core.Text,
     -- | Unsupported: must be left blank. The points in each time series are currently returned in reverse time order (most recent to oldest).
@@ -133,7 +133,7 @@ data MonitoringOrganizationsTimeSeriesList = MonitoringOrganizationsTimeSeriesLi
     -- | If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
     pageToken :: (Core.Maybe Core.Text),
     -- | The alignment/period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN/NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN/NONE is specified, then this field is ignored.The maximum value of the alignment/period is 104 weeks (2 years) for charts, and 90,000 seconds (25 hours) for alerting policies.
-    secondaryAggregationAlignmentPeriod :: (Core.Maybe Core.GDuration),
+    secondaryAggregationAlignmentPeriod :: (Core.Maybe Core.Duration),
     -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
     secondaryAggregationCrossSeriesReducer ::
       ( Core.Maybe

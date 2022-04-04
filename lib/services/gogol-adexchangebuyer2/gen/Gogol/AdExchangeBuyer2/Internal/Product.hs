@@ -1232,7 +1232,7 @@ data Creative = Creative
     -- | The agency ID for this creative.
     agencyId :: (Core.Maybe Core.Int64),
     -- | Output only. The last update timestamp of the creative via API.
-    apiUpdateTime :: (Core.Maybe Core.DateTime'),
+    apiUpdateTime :: (Core.Maybe Core.DateTime),
     -- | All attributes for the ads that may be shown from this creative. Can be used to filter the response of the creatives.list method.
     attributes :: (Core.Maybe [Creative_AttributesItem]),
     -- | The set of destination URLs for the creative.
@@ -1812,9 +1812,9 @@ instance Core.ToJSON DayPartTargeting where
 -- /See:/ 'newDeal' smart constructor.
 data Deal = Deal
   { -- | Proposed flight end time of the deal. This will generally be stored in a granularity of a second. A value is not required for Private Auction deals or Preferred Deals.
-    availableEndTime :: (Core.Maybe Core.DateTime'),
+    availableEndTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Proposed flight start time of the deal. This will generally be stored in the granularity of one second since deal serving starts at seconds boundary. Any time specified with more granularity (e.g., in milliseconds) will be truncated towards the start of time in seconds.
-    availableStartTime :: (Core.Maybe Core.DateTime'),
+    availableStartTime :: (Core.Maybe Core.DateTime),
     -- | Buyer private data (hidden from seller).
     buyerPrivateData :: (Core.Maybe PrivateData),
     -- | The product ID from which this deal was created. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error.
@@ -1822,7 +1822,7 @@ data Deal = Deal
     -- | Optional. Revision number of the product that the deal was created from. If present on create, and the server @product_revision@ has advanced since the passed-in @create_product_revision@, an @ABORTED@ error will be returned. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error.
     createProductRevision :: (Core.Maybe Core.Int64),
     -- | Output only. The time of the deal creation.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Specifies the creative pre-approval policy.
     creativePreApprovalPolicy :: (Core.Maybe Deal_CreativePreApprovalPolicy),
     -- | Output only. Restricitions about the creatives associated with the deal (i.e., size) This is available for Programmatic Guaranteed\/Preferred Deals in Ad Manager.
@@ -1858,7 +1858,7 @@ data Deal = Deal
     -- | The shared targeting visible to buyers and sellers. Each shared targeting entity is AND\'d together.
     targetingCriterion :: (Core.Maybe [TargetingCriteria]),
     -- | Output only. The time when the deal was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The web property code for the seller copied over from the product.
     webPropertyCode :: (Core.Maybe Core.Text)
   }
@@ -4000,7 +4000,7 @@ instance Core.ToJSON NonGuaranteedFixedPriceTerms where
 -- /See:/ 'newNote' smart constructor.
 data Note = Note
   { -- | Output only. The timestamp for when this note was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The role of the person (buyer\/seller) creating the note.
     creatorRole :: (Core.Maybe Note_CreatorRole),
     -- | The actual note to attach. (max-length: 1024 unicode code units) Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error.
@@ -4341,11 +4341,11 @@ instance Core.ToJSON PrivateData where
 -- /See:/ 'newProduct' smart constructor.
 data Product = Product
   { -- | The proposed end time for the deal. The field will be truncated to the order of seconds during serving.
-    availableEndTime :: (Core.Maybe Core.DateTime'),
+    availableEndTime :: (Core.Maybe Core.DateTime),
     -- | Inventory availability dates. The start time will be truncated to seconds during serving. Thus, a field specified as 3:23:34.456 (HH:mm:ss.SSS) will be truncated to 3:23:34 when serving.
-    availableStartTime :: (Core.Maybe Core.DateTime'),
+    availableStartTime :: (Core.Maybe Core.DateTime),
     -- | Creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional contact information for the creator of this product.
     creatorContacts :: (Core.Maybe [ContactInformation]),
     -- | The display name for this product as set by the seller.
@@ -4367,7 +4367,7 @@ data Product = Product
     -- | The negotiable terms of the deal.
     terms :: (Core.Maybe DealTerms),
     -- | Time of last update.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The web-property code for the seller. This needs to be copied as is when adding a new deal to a proposal.
     webPropertyCode :: (Core.Maybe Core.Text)
   }
@@ -4491,7 +4491,7 @@ data Proposal = Proposal
     -- | Output only. The terms and conditions set by the publisher for this proposal.
     termsAndConditions :: (Core.Maybe Core.Text),
     -- | Output only. The time when the proposal was last revised.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4753,7 +4753,7 @@ instance
 -- /See:/ 'newRealtimeTimeRange' smart constructor.
 newtype RealtimeTimeRange = RealtimeTimeRange
   { -- | The start timestamp of the real-time RTB metrics aggregation.
-    startTimestamp :: (Core.Maybe Core.DateTime')
+    startTimestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5316,9 +5316,9 @@ instance Core.ToJSON TechnologyTargeting where
 -- /See:/ 'newTimeInterval' smart constructor.
 data TimeInterval = TimeInterval
   { -- | The timestamp marking the end of the range (exclusive) for which data is included.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The timestamp marking the start of the range (inclusive) for which data is included.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

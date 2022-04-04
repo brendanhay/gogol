@@ -378,13 +378,13 @@ data Job = Job
   { -- | App Engine HTTP target.
     appEngineHttpTarget :: (Core.Maybe AppEngineHttpTarget),
     -- | The deadline for job attempts. If the request handler does not respond by this deadline then the request is cancelled and the attempt is marked as a @DEADLINE_EXCEEDED@ failure. The failed attempt can be viewed in execution logs. Cloud Scheduler will retry the job according to the RetryConfig. The allowed duration for this deadline is: * For HTTP targets, between 15 seconds and 30 minutes. * For App Engine HTTP targets, between 15 seconds and 24 hours 15 seconds.
-    attemptDeadline :: (Core.Maybe Core.GDuration),
+    attemptDeadline :: (Core.Maybe Core.Duration),
     -- | Optionally caller-specified in CreateJob or UpdateJob. A human-readable description for the job. This string must not contain more than 500 characters.
     description :: (Core.Maybe Core.Text),
     -- | HTTP target.
     httpTarget :: (Core.Maybe HttpTarget),
     -- | Output only. The time the last job attempt started.
-    lastAttemptTime :: (Core.Maybe Core.DateTime'),
+    lastAttemptTime :: (Core.Maybe Core.DateTime),
     -- | Optionally caller-specified in CreateJob, after which it becomes output only. The job name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/jobs\/JOB_ID@. * @PROJECT_ID@ can contain letters ([A-Za-z]), numbers ([0-9]), hyphens (-), colons (:), or periods (.). For more information, see <https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects Identifying projects> * @LOCATION_ID@ is the canonical ID for the job\'s location. The list of available locations can be obtained by calling ListLocations. For more information, see https:\/\/cloud.google.com\/about\/locations\/. * @JOB_ID@ can contain only letters ([A-Za-z]), numbers ([0-9]), hyphens (-), or underscores (_). The maximum length is 500 characters.
     name :: (Core.Maybe Core.Text),
     -- | Pub\/Sub target.
@@ -394,7 +394,7 @@ data Job = Job
     -- | Required, except when used with UpdateJob. Describes the schedule on which the job will be executed. The schedule can be either of the following types: * <https://en.wikipedia.org/wiki/Cron#Overview Crontab> * English-like <https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules schedule> As a general rule, execution @n + 1@ of a job will not begin until execution @n@ has finished. Cloud Scheduler will never allow two simultaneously outstanding executions. For example, this implies that if the @n+1@th execution is scheduled to run at 16:00 but the @n@th execution takes until 16:15, the @n+1@th execution will not start until @16:15@. A scheduled start time will be delayed if the previous execution has not ended when its scheduled time occurs. If retry/count > 0 and a job attempt fails, the job will be tried a total of retry/count times, with exponential backoff, until the next scheduled start time.
     schedule :: (Core.Maybe Core.Text),
     -- | Output only. The next time the job is scheduled. Note that this may be a retry of a previously failed attempt or the next execution time according to the schedule.
-    scheduleTime :: (Core.Maybe Core.DateTime'),
+    scheduleTime :: (Core.Maybe Core.DateTime),
     -- | Output only. State of the job.
     state :: (Core.Maybe Job_State),
     -- | Output only. The response from the target for the last attempted execution.
@@ -402,7 +402,7 @@ data Job = Job
     -- | Specifies the time zone to be used in interpreting schedule. The value of this field must be a time zone name from the <http://en.wikipedia.org/wiki/Tz_database tz database>. Note that some time zones include a provision for daylight savings time. The rules for daylight saving time are determined by the chosen tz. For UTC use the string \"utc\". If a time zone is not specified, the default will be in UTC (also known as GMT).
     timeZone :: (Core.Maybe Core.Text),
     -- | Output only. The creation time of the job.
-    userUpdateTime :: (Core.Maybe Core.DateTime')
+    userUpdateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -758,7 +758,7 @@ data PubsubMessage = PubsubMessage
     -- | If non-empty, identifies related messages for which publish order should be respected. If a @Subscription@ has @enable_message_ordering@ set to @true@, messages published with the same non-empty @ordering_key@ value will be delivered to subscribers in the order in which they are received by the Pub\/Sub system. All @PubsubMessage@s published in a given @PublishRequest@ must specify the same @ordering_key@ value.
     orderingKey :: (Core.Maybe Core.Text),
     -- | The time at which the message was published, populated by the server when it receives the @Publish@ call. It must not be populated by the publisher in a @Publish@ call.
-    publishTime :: (Core.Maybe Core.DateTime')
+    publishTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -928,13 +928,13 @@ instance Core.ToJSON ResumeJobRequest where
 -- /See:/ 'newRetryConfig' smart constructor.
 data RetryConfig = RetryConfig
   { -- | The maximum amount of time to wait before retrying a job after it fails. The default value of this field is 1 hour.
-    maxBackoffDuration :: (Core.Maybe Core.GDuration),
+    maxBackoffDuration :: (Core.Maybe Core.Duration),
     -- | The time between retries will double @max_doublings@ times. A job\'s retry interval starts at min/backoff/duration, then doubles @max_doublings@ times, then increases linearly, and finally retries at intervals of max/backoff/duration up to retry/count times. For example, if min/backoff/duration is 10s, max/backoff/duration is 300s, and @max_doublings@ is 3, then the a job will first be retried in 10s. The retry interval will double three times, and then increase linearly by 2^3 * 10s. Finally, the job will retry at intervals of max/backoff/duration until the job has been attempted retry/count times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, .... The default value of this field is 5.
     maxDoublings :: (Core.Maybe Core.Int32),
     -- | The time limit for retrying a failed job, measured from time when an execution was first attempted. If specified with retry/count, the job will be retried until both limits are reached. The default value for max/retry_duration is zero, which means retry duration is unlimited.
-    maxRetryDuration :: (Core.Maybe Core.GDuration),
+    maxRetryDuration :: (Core.Maybe Core.Duration),
     -- | The minimum amount of time to wait before retrying a job after it fails. The default value of this field is 5 seconds.
-    minBackoffDuration :: (Core.Maybe Core.GDuration),
+    minBackoffDuration :: (Core.Maybe Core.Duration),
     -- | The number of attempts that the system will make to run a job using the exponential backoff procedure described by max/doublings. The default value of retry/count is zero. If retry/count is zero, a job attempt will /not/ be retried if it fails. Instead the Cloud Scheduler system will wait for the next scheduled execution time. If retry/count is set to a non-zero number then Cloud Scheduler will retry failed attempts, using exponential backoff, retry_count times, or until the next scheduled execution time, whichever comes first. Values greater than 5 and negative values are not allowed.
     retryCount :: (Core.Maybe Core.Int32)
   }

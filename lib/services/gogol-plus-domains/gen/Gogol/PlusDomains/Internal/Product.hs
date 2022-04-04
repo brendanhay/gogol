@@ -360,13 +360,13 @@ data Activity = Activity
     -- | The service provider that initially published this activity.
     provider :: (Core.Maybe Activity_Provider),
     -- | The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
-    published :: (Core.Maybe Core.DateTime'),
+    published :: (Core.Maybe Core.DateTime),
     -- | Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.
     radius :: (Core.Maybe Core.Text),
     -- | Title of this activity.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | The link to this activity.
     url :: (Core.Maybe Core.Text),
     -- | This activity\'s verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:
@@ -1587,7 +1587,7 @@ data ActivityFeed = ActivityFeed
     -- | The title of this collection of activities, which is a truncated portion of the content.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1925,11 +1925,11 @@ data Comment = Comment
     -- | People who +1\'d this comment.
     plusoners :: (Core.Maybe Comment_Plusoners),
     -- | The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
-    published :: (Core.Maybe Core.DateTime'),
+    published :: (Core.Maybe Core.DateTime),
     -- | Link to this comment resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | This comment\'s verb, indicating what action was performed. Possible values are:
     -- - \"post\" - Publish content to the stream.
     verb :: Core.Text
@@ -2315,7 +2315,7 @@ data CommentFeed = CommentFeed
     -- | The title of this collection of comments.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2383,11 +2383,11 @@ data Media = Media
     -- | The type of resource.
     kind :: Core.Text,
     -- | The time at which this media was originally created in UTC. Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z
-    mediaCreatedTime :: (Core.Maybe Core.DateTime'),
+    mediaCreatedTime :: (Core.Maybe Core.DateTime),
     -- | The URL of this photo or video\'s still image.
     mediaUrl :: (Core.Maybe Core.Text),
     -- | The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.
-    published :: (Core.Maybe Core.DateTime'),
+    published :: (Core.Maybe Core.DateTime),
     -- | The size in bytes of this video.
     sizeBytes :: (Core.Maybe Core.Int64),
     -- | The list of video streams for this video. There might be several different streams available for a single video, either Flash or MPEG, of various sizes
@@ -2395,7 +2395,7 @@ data Media = Media
     -- | A description, or caption, for this media.
     summary :: (Core.Maybe Core.Text),
     -- | The time at which this media was last updated. This includes changes to media metadata. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | The URL for the page that hosts this media.
     url :: (Core.Maybe Core.Text),
     -- | The duration in milliseconds of this video.
@@ -2568,7 +2568,7 @@ instance Core.ToJSON Media_Author_Image where
 -- /See:/ 'newMedia_Exif' smart constructor.
 newtype Media_Exif = Media_Exif
   { -- | The time the media was captured. Formatted as an RFC 3339 timestamp.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

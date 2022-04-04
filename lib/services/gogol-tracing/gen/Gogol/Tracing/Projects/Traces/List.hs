@@ -52,13 +52,13 @@ type TracingProjectsTracesListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "bearer_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "endTime" Core.DateTime'
+    Core.:> Core.QueryParam "endTime" Core.DateTime
     Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "pp" Core.Bool
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -77,7 +77,7 @@ data TracingProjectsTracesList = TracingProjectsTracesList
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | End of the time interval (inclusive) during which the trace data was collected from the application.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | An optional filter for the request. Example: @version_label_key:a some_label:some_label_key@ returns traces from version @a@ and has @some_label@ with @some_label_key@.
     filter :: (Core.Maybe Core.Text),
     -- | Field used to sort the returned traces. Optional. Can be one of the following:
@@ -100,7 +100,7 @@ data TracingProjectsTracesList = TracingProjectsTracesList
     -- | Pretty-print response.
     pp :: Core.Bool,
     -- | Start of the time interval (inclusive) during which the trace data was collected from the application.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

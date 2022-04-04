@@ -55,7 +55,7 @@ type FireStoreProjectsDatabasesDocumentsListResource =
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "readTime" Core.DateTime'
+    Core.:> Core.QueryParam "readTime" Core.DateTime
     Core.:> Core.QueryParam "showMissing" Core.Bool
     Core.:> Core.QueryParam "transaction" Core.Base64
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -86,7 +86,7 @@ data FireStoreProjectsDatabasesDocumentsList = FireStoreProjectsDatabasesDocumen
     -- | Required. The parent resource name. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents@ or @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents@ or @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@
     parent :: Core.Text,
     -- | Reads documents as they were at the given time. This may not be older than 270 seconds.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | If the list should show missing documents. A missing document is a document that does not exist but has sub-documents. These documents will be returned with a key but will not have fields, Document.create/time, or Document.update/time set. Requests with @show_missing@ may not specify @where@ or @order_by@.
     showMissing :: (Core.Maybe Core.Bool),
     -- | Reads documents in a transaction.

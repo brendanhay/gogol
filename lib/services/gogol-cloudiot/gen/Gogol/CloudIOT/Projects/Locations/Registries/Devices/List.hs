@@ -53,7 +53,7 @@ type CloudIOTProjectsLocationsRegistriesDevicesListResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "deviceIds" Core.Text
     Core.:> Core.QueryParams "deviceNumIds" Core.Word64
-    Core.:> Core.QueryParam "fieldMask" Core.GFieldMask
+    Core.:> Core.QueryParam "fieldMask" Core.FieldMask
     Core.:> Core.QueryParam
               "gatewayListOptions.associationsDeviceId"
               Core.Text
@@ -85,7 +85,7 @@ data CloudIOTProjectsLocationsRegistriesDevicesList = CloudIOTProjectsLocationsR
     -- | A list of device numeric IDs. If empty, this field is ignored. Maximum IDs: 10,000.
     deviceNumIds :: (Core.Maybe [Core.Word64]),
     -- | The fields of the @Device@ resource to be returned in the response. The fields @id@ and @num_id@ are always returned, along with any other fields specified in snake_case format, for example: @last_heartbeat_time@.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | If set, returns only the gateways with which the specified device is associated. The device ID can be numeric (@num_id@) or the user-defined string (@id@). For example, if @456@ is specified, returns only the gateways to which the device with @num_id@ 456 is bound.
     gatewayListOptionsAssociationsDeviceId :: (Core.Maybe Core.Text),
     -- | If set, only devices associated with the specified gateway are returned. The gateway ID can be numeric (@num_id@) or the user-defined string (@id@). For example, if @123@ is specified, only devices bound to the gateway with @num_id@ 123 are returned.

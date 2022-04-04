@@ -2462,7 +2462,7 @@ data GoogleCloudDialogflowCxV3Changelog = GoogleCloudDialogflowCxV3Changelog
   { -- | The action of the change.
     action :: (Core.Maybe Core.Text),
     -- | The timestamp of the change.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The affected resource display name of the change.
     displayName :: (Core.Maybe Core.Text),
     -- | The unique identifier of the changelog. Format: @projects\/\/locations\/\/agents\/\/changelogs\/@.
@@ -2578,7 +2578,7 @@ data GoogleCloudDialogflowCxV3CompareVersionsResponse = GoogleCloudDialogflowCxV
   { -- | JSON representation of the base version content.
     baseVersionContentJson :: (Core.Maybe Core.Text),
     -- | The timestamp when the two version compares.
-    compareTime :: (Core.Maybe Core.DateTime'),
+    compareTime :: (Core.Maybe Core.DateTime),
     -- | JSON representation of the target version content.
     targetVersionContentJson :: (Core.Maybe Core.Text)
   }
@@ -2633,7 +2633,7 @@ data GoogleCloudDialogflowCxV3ContinuousTestResult = GoogleCloudDialogflowCxV3Co
     -- | The result of this continuous test run, i.e. whether all the tests in this continuous test run pass or not.
     result :: (Core.Maybe GoogleCloudDialogflowCxV3ContinuousTestResult_Result),
     -- | Time when the continuous testing run starts.
-    runTime :: (Core.Maybe Core.DateTime'),
+    runTime :: (Core.Maybe Core.DateTime),
     -- | A list of individual test case results names in this continuous test run.
     testCaseResults :: (Core.Maybe [Core.Text])
   }
@@ -3243,7 +3243,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3Deployment' smart constructor.
 data GoogleCloudDialogflowCxV3Deployment = GoogleCloudDialogflowCxV3Deployment
   { -- | End time of this deployment.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The name of the flow version for this deployment. Format: projects\/\/locations\/\/agents\/\/flows\/\/versions\/.
     flowVersion :: (Core.Maybe Core.Text),
     -- | The name of the deployment. Format: projects\/\/locations\/\/agents\/\/environments\/\/deployments\/.
@@ -3251,7 +3251,7 @@ data GoogleCloudDialogflowCxV3Deployment = GoogleCloudDialogflowCxV3Deployment
     -- | Result of the deployment.
     result :: (Core.Maybe GoogleCloudDialogflowCxV3DeploymentResult),
     -- | Start time of this deployment.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the deployment.
     state :: (Core.Maybe GoogleCloudDialogflowCxV3Deployment_State)
   }
@@ -3691,7 +3691,7 @@ data GoogleCloudDialogflowCxV3Environment = GoogleCloudDialogflowCxV3Environment
     -- | The test cases config for continuous tests of this environment.
     testCasesConfig :: (Core.Maybe GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig),
     -- | Output only. Update time of this environment.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
     versionConfigs :: (Core.Maybe [GoogleCloudDialogflowCxV3EnvironmentVersionConfig])
   }
@@ -3935,7 +3935,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3Experiment' smart constructor.
 data GoogleCloudDialogflowCxV3Experiment = GoogleCloudDialogflowCxV3Experiment
   { -- | Creation time of this experiment.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The definition of the experiment.
     definition :: (Core.Maybe GoogleCloudDialogflowCxV3ExperimentDefinition),
     -- | The human-readable description of the experiment.
@@ -3943,11 +3943,11 @@ data GoogleCloudDialogflowCxV3Experiment = GoogleCloudDialogflowCxV3Experiment
     -- | Required. The human-readable name of the experiment (unique in an environment). Limit of 64 characters.
     displayName :: (Core.Maybe Core.Text),
     -- | End time of this experiment.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Maximum number of days to run the experiment\/rollout. If auto-rollout is not enabled, default value and maximum will be 30 days. If auto-rollout is enabled, default value and maximum will be 6 days.
-    experimentLength :: (Core.Maybe Core.GDuration),
+    experimentLength :: (Core.Maybe Core.Duration),
     -- | Last update time of this experiment.
-    lastUpdateTime :: (Core.Maybe Core.DateTime'),
+    lastUpdateTime :: (Core.Maybe Core.DateTime),
     -- | The name of the experiment. Format: projects\/\/locations\/\/agents\/\/environments\/\/experiments\/..
     name :: (Core.Maybe Core.Text),
     -- | Inference result of the experiment.
@@ -3959,7 +3959,7 @@ data GoogleCloudDialogflowCxV3Experiment = GoogleCloudDialogflowCxV3Experiment
     -- | State of the auto rollout process.
     rolloutState :: (Core.Maybe GoogleCloudDialogflowCxV3RolloutState),
     -- | Start time of this experiment.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the experiment. Transition triggered by Experiments.StartExperiment: DRAFT->RUNNING. Transition triggered by Experiments.CancelExperiment: DRAFT->DONE or RUNNING->DONE.
     state :: (Core.Maybe GoogleCloudDialogflowCxV3Experiment_State),
     -- | The history of updates to the experiment variants.
@@ -4095,7 +4095,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3ExperimentResult' smart constructor.
 data GoogleCloudDialogflowCxV3ExperimentResult = GoogleCloudDialogflowCxV3ExperimentResult
   { -- | The last time the experiment\'s stats data was updated. Will have default value if stats have never been computed for this experiment.
-    lastUpdateTime :: (Core.Maybe Core.DateTime'),
+    lastUpdateTime :: (Core.Maybe Core.DateTime),
     -- | Version variants and metrics.
     versionMetrics ::
       ( Core.Maybe
@@ -4703,7 +4703,7 @@ data GoogleCloudDialogflowCxV3FlowValidationResult = GoogleCloudDialogflowCxV3Fl
   { -- | The unique identifier of the flow validation result. Format: @projects\/\/locations\/\/agents\/\/flows\/\/validationResult@.
     name :: (Core.Maybe Core.Text),
     -- | Last time the flow was validated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Contains all validation messages.
     validationMessages :: (Core.Maybe [GoogleCloudDialogflowCxV3ValidationMessage])
   }
@@ -8785,7 +8785,7 @@ data GoogleCloudDialogflowCxV3RolloutConfigRolloutStep = GoogleCloudDialogflowCx
   { -- | The name of the rollout step;
     displayName :: (Core.Maybe Core.Text),
     -- | The minimum time that this step should last. Should be longer than 1 hour. If not set, the default minimum duration for each step will be 1 hour.
-    minDuration :: (Core.Maybe Core.GDuration),
+    minDuration :: (Core.Maybe Core.Duration),
     -- | The percentage of traffic allocated to the flow version of this rollout step. (0%, 100%].
     trafficPercent :: (Core.Maybe Core.Int32)
   }
@@ -8834,7 +8834,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3RolloutState' smart constructor.
 data GoogleCloudDialogflowCxV3RolloutState = GoogleCloudDialogflowCxV3RolloutState
   { -- | Start time of the current step.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Display name of the current auto rollout step.
     step :: (Core.Maybe Core.Text),
     -- | Index of the current step in the auto rollout steps list.
@@ -9580,7 +9580,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3TestCase' smart constructor.
 data GoogleCloudDialogflowCxV3TestCase = GoogleCloudDialogflowCxV3TestCase
   { -- | Output only. When the test was created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Required. The human-readable name of the test case, unique within the agent. Limit of 200 characters.
     displayName :: (Core.Maybe Core.Text),
     -- | The latest test result.
@@ -9711,7 +9711,7 @@ data GoogleCloudDialogflowCxV3TestCaseResult = GoogleCloudDialogflowCxV3TestCase
     -- | Whether the test case passed in the agent environment.
     testResult :: (Core.Maybe GoogleCloudDialogflowCxV3TestCaseResult_TestResult),
     -- | The time that the test was run.
-    testTime :: (Core.Maybe Core.DateTime')
+    testTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9821,7 +9821,7 @@ data GoogleCloudDialogflowCxV3TestError = GoogleCloudDialogflowCxV3TestError
     -- | The test case resource name.
     testCase :: (Core.Maybe Core.Text),
     -- | The timestamp when the test was completed.
-    testTime :: (Core.Maybe Core.DateTime')
+    testTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10595,7 +10595,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3VariantsHistory' smart constructor.
 data GoogleCloudDialogflowCxV3VariantsHistory = GoogleCloudDialogflowCxV3VariantsHistory
   { -- | Update time of the variants.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The flow versions as the variants.
     versionVariants :: (Core.Maybe GoogleCloudDialogflowCxV3VersionVariants)
   }
@@ -10641,7 +10641,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3Version' smart constructor.
 data GoogleCloudDialogflowCxV3Version = GoogleCloudDialogflowCxV3Version
   { -- | Output only. Create time of the version.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The description of the version. The maximum length is 500 characters. If exceeded, the request is rejected.
     description :: (Core.Maybe Core.Text),
     -- | Required. The human-readable name of the version. Limit of 64 characters.
@@ -10851,7 +10851,7 @@ data GoogleCloudDialogflowCxV3Webhook = GoogleCloudDialogflowCxV3Webhook
     -- | Configuration for a <https://cloud.google.com/service-directory Service Directory> service.
     serviceDirectory :: (Core.Maybe GoogleCloudDialogflowCxV3WebhookServiceDirectoryConfig),
     -- | Webhook execution timeout. Execution is considered failed if Dialogflow doesn\'t receive a response from webhook at the end of the timeout period. Defaults to 5 seconds, maximum allowed timeout is 30 seconds.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11712,7 +11712,7 @@ data GoogleCloudDialogflowCxV3beta1ContinuousTestResult = GoogleCloudDialogflowC
           GoogleCloudDialogflowCxV3beta1ContinuousTestResult_Result
       ),
     -- | Time when the continuous testing run starts.
-    runTime :: (Core.Maybe Core.DateTime'),
+    runTime :: (Core.Maybe Core.DateTime),
     -- | A list of individual test case results names in this continuous test run.
     testCaseResults :: (Core.Maybe [Core.Text])
   }
@@ -12345,7 +12345,7 @@ data GoogleCloudDialogflowCxV3beta1Environment = GoogleCloudDialogflowCxV3beta1E
           GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig
       ),
     -- | Output only. Update time of this environment.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from @Start Flow@ in the agent. Otherwise, an error will be returned.
     versionConfigs ::
       ( Core.Maybe
@@ -14985,7 +14985,7 @@ instance
 -- /See:/ 'newGoogleCloudDialogflowCxV3beta1TestCase' smart constructor.
 data GoogleCloudDialogflowCxV3beta1TestCase = GoogleCloudDialogflowCxV3beta1TestCase
   { -- | Output only. When the test was created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Required. The human-readable name of the test case, unique within the agent. Limit of 200 characters.
     displayName :: (Core.Maybe Core.Text),
     -- | The latest test result.
@@ -15120,7 +15120,7 @@ data GoogleCloudDialogflowCxV3beta1TestCaseResult = GoogleCloudDialogflowCxV3bet
           GoogleCloudDialogflowCxV3beta1TestCaseResult_TestResult
       ),
     -- | The time that the test was run.
-    testTime :: (Core.Maybe Core.DateTime')
+    testTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -15231,7 +15231,7 @@ data GoogleCloudDialogflowCxV3beta1TestError = GoogleCloudDialogflowCxV3beta1Tes
     -- | The test case resource name.
     testCase :: (Core.Maybe Core.Text),
     -- | The timestamp when the test was completed.
-    testTime :: (Core.Maybe Core.DateTime')
+    testTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -16285,7 +16285,7 @@ data GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata = Goog
   { -- | The resource name of the conversation profile. Format: @projects\/\/locations\/\/conversationProfiles\/@
     conversationProfile :: (Core.Maybe Core.Text),
     -- | Timestamp whe the request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The participant role to remove the suggestion feature config. Only HUMAN/AGENT or END/USER can be used.
     participantRole ::
       ( Core.Maybe
@@ -16485,7 +16485,7 @@ data GoogleCloudDialogflowV2ConversationModel = GoogleCloudDialogflowV2Conversat
   { -- | Metadata for article suggestion models.
     articleSuggestionModelMetadata :: (Core.Maybe GoogleCloudDialogflowV2ArticleSuggestionModelMetadata),
     -- | Output only. Creation time of this model.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. Datasets used to create model.
     datasets :: (Core.Maybe [GoogleCloudDialogflowV2InputDataset]),
     -- | Required. The display name of the model. At most 64 bytes long.
@@ -16594,7 +16594,7 @@ data GoogleCloudDialogflowV2CreateConversationModelEvaluationOperationMetadata =
     -- | The resource name of the conversation model. Format: @projects\/\/locations\/\/conversationModels\/\/evaluations\/@
     conversationModelEvaluation :: (Core.Maybe Core.Text),
     -- | Timestamp when the request to create conversation model was submitted. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | State of CreateConversationModel operation.
     state ::
       ( Core.Maybe
@@ -16653,7 +16653,7 @@ data GoogleCloudDialogflowV2CreateConversationModelOperationMetadata = GoogleClo
   { -- | The resource name of the conversation model. Format: @projects\/\/conversationModels\/@
     conversationModel :: (Core.Maybe Core.Text),
     -- | Timestamp when the request to create conversation model is submitted. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | State of CreateConversationModel operation.
     state ::
       ( Core.Maybe
@@ -16738,7 +16738,7 @@ data GoogleCloudDialogflowV2DeleteConversationModelOperationMetadata = GoogleClo
   { -- | The resource name of the conversation model. Format: @projects\/\/conversationModels\/@
     conversationModel :: (Core.Maybe Core.Text),
     -- | Timestamp when delete conversation model request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -16785,7 +16785,7 @@ data GoogleCloudDialogflowV2DeployConversationModelOperationMetadata = GoogleClo
   { -- | The resource name of the conversation model. Format: @projects\/\/conversationModels\/@
     conversationModel :: (Core.Maybe Core.Text),
     -- | Timestamp when request to deploy conversation model was submitted. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -17305,7 +17305,7 @@ data GoogleCloudDialogflowV2ImportConversationDataOperationMetadata = GoogleClou
   { -- | The resource name of the imported conversation dataset. Format: @projects\/\/locations\/\/conversationDatasets\/@
     conversationDataset :: (Core.Maybe Core.Text),
     -- | Timestamp when import conversation data request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Partial failures are failures that don\'t fail the whole long running operation, e.g. single files that couldn\'t be read.
     partialFailures :: (Core.Maybe [GoogleRpcStatus])
   }
@@ -19377,7 +19377,7 @@ data GoogleCloudDialogflowV2Message = GoogleCloudDialogflowV2Message
   { -- | Required. The message content.
     content :: (Core.Maybe Core.Text),
     -- | Output only. The time when the message was created in Contact Center AI.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The message language. This should be a <https://www.rfc-editor.org/rfc/bcp/bcp47.txt BCP-47> language tag. Example: \"en-US\".
     languageCode :: (Core.Maybe Core.Text),
     -- | Output only. The annotation for the message.
@@ -19389,7 +19389,7 @@ data GoogleCloudDialogflowV2Message = GoogleCloudDialogflowV2Message
     -- | Output only. The role of the participant.
     participantRole :: (Core.Maybe GoogleCloudDialogflowV2Message_ParticipantRole),
     -- | Optional. The time when the message was sent.
-    sendTime :: (Core.Maybe Core.DateTime'),
+    sendTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The sentiment analysis result for the message.
     sentimentAnalysis :: (Core.Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
   }
@@ -19963,7 +19963,7 @@ data GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata = Google
   { -- | The resource name of the conversation profile. Format: @projects\/\/locations\/\/conversationProfiles\/@
     conversationProfile :: (Core.Maybe Core.Text),
     -- | Timestamp whe the request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The participant role to add or update the suggestion feature config. Only HUMAN/AGENT or END/USER can be used.
     participantRole ::
       ( Core.Maybe
@@ -20336,7 +20336,7 @@ data GoogleCloudDialogflowV2UndeployConversationModelOperationMetadata = GoogleC
   { -- | The resource name of the conversation model. Format: @projects\/\/conversationModels\/@
     conversationModel :: (Core.Maybe Core.Text),
     -- | Timestamp when the request to undeploy conversation model was submitted. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -20781,7 +20781,7 @@ data GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata =
   { -- | The resource name of the conversation profile. Format: @projects\/\/locations\/\/conversationProfiles\/@
     conversationProfile :: (Core.Maybe Core.Text),
     -- | Timestamp whe the request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The participant role to remove the suggestion feature config. Only HUMAN/AGENT or END/USER can be used.
     participantRole ::
       ( Core.Maybe
@@ -24291,7 +24291,7 @@ data GoogleCloudDialogflowV2beta1Message = GoogleCloudDialogflowV2beta1Message
   { -- | Required. The message content.
     content :: (Core.Maybe Core.Text),
     -- | Output only. The time when the message was created in Contact Center AI.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The message language. This should be a <https://www.rfc-editor.org/rfc/bcp/bcp47.txt BCP-47> language tag. Example: \"en-US\".
     languageCode :: (Core.Maybe Core.Text),
     -- | Output only. The annotation for the message.
@@ -24303,7 +24303,7 @@ data GoogleCloudDialogflowV2beta1Message = GoogleCloudDialogflowV2beta1Message
     -- | Output only. The role of the participant.
     participantRole :: (Core.Maybe GoogleCloudDialogflowV2beta1Message_ParticipantRole),
     -- | Optional. The time when the message was sent.
-    sendTime :: (Core.Maybe Core.DateTime'),
+    sendTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The sentiment analysis result for the message.
     sentimentAnalysis :: (Core.Maybe GoogleCloudDialogflowV2beta1SentimentAnalysisResult)
   }
@@ -24898,7 +24898,7 @@ data GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata = G
   { -- | The resource name of the conversation profile. Format: @projects\/\/locations\/\/conversationProfiles\/@
     conversationProfile :: (Core.Maybe Core.Text),
     -- | Timestamp whe the request was created. The time is measured on server side.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The participant role to add or update the suggestion feature config. Only HUMAN/AGENT or END/USER can be used.
     participantRole ::
       ( Core.Maybe

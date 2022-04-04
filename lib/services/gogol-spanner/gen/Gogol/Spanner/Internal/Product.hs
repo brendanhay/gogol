@@ -528,7 +528,7 @@ import Gogol.Spanner.Internal.Sum
 -- /See:/ 'newBackup' smart constructor.
 data Backup = Backup
   { -- | Output only. The time the CreateBackup request is received. If the request does not specify @version_time@, the @version_time@ of the backup will be equivalent to the @create_time@.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required for the CreateBackup operation. Name of the database from which this backup was created. This needs to be in the same instance as the backup. Values are of the form @projects\/\/instances\/\/databases\/@.
     database :: (Core.Maybe Core.Text),
     -- | Output only. The database dialect information for the backup.
@@ -536,7 +536,7 @@ data Backup = Backup
     -- | Output only. The encryption information for the backup.
     encryptionInfo :: (Core.Maybe EncryptionInfo),
     -- | Required for the CreateBackup operation. The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 366 days from the time the CreateBackup request is processed. Once the @expire_time@ has passed, the backup is eligible to be automatically deleted by Cloud Spanner to free the resources used by the backup.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only for the CreateBackup operation. Required for the UpdateBackup operation. A globally unique identifier for the backup which cannot be changed. Values are of the form @projects\/\/instances\/\/backups\/a-z*[a-z0-9]@ The final segment of the name must be between 2 and 60 characters in length. The backup is stored in the location(s) specified in the instance configuration of the instance containing the backup, identified by the prefix of the backup name of the form @projects\/\/instances\/@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The names of the restored databases that reference the backup. The database names are of the form @projects\/\/instances\/\/databases\/@. Referencing databases may exist in different instances. The existence of any referencing database prevents the backup from being deleted. When a restored database from the backup enters the @READY@ state, the reference to the backup is removed.
@@ -546,7 +546,7 @@ data Backup = Backup
     -- | Output only. The current state of the backup.
     state :: (Core.Maybe Backup_State),
     -- | The backup will contain an externally consistent copy of the database at the timestamp specified by @version_time@. If @version_time@ is not specified, the system will set @version_time@ to the @create_time@ of the backup.
-    versionTime :: (Core.Maybe Core.DateTime')
+    versionTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -613,11 +613,11 @@ data BackupInfo = BackupInfo
   { -- | Name of the backup.
     backup :: (Core.Maybe Core.Text),
     -- | The time the CreateBackup request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Name of the database the backup was created from.
     sourceDatabase :: (Core.Maybe Core.Text),
     -- | The backup contains an externally consistent copy of @source_database@ at the timestamp specified by @version_time@. If the CreateBackup request did not specify @version_time@, the @version_time@ of the backup is equivalent to the @create_time@.
-    versionTime :: (Core.Maybe Core.DateTime')
+    versionTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -917,7 +917,7 @@ data CommitResponse = CommitResponse
   { -- | The statistics about this Commit. Not returned by default. For more information, see CommitRequest.return/commit/stats.
     commitStats :: (Core.Maybe CommitStats),
     -- | The Cloud Spanner timestamp at which the transaction committed.
-    commitTimestamp :: (Core.Maybe Core.DateTime')
+    commitTimestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1032,7 +1032,7 @@ instance Core.ToJSON ContextValue where
 -- /See:/ 'newCreateBackupMetadata' smart constructor.
 data CreateBackupMetadata = CreateBackupMetadata
   { -- | The time at which cancellation of this operation was received. Operations.CancelOperation starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    cancelTime :: (Core.Maybe Core.DateTime'),
+    cancelTime :: (Core.Maybe Core.DateTime),
     -- | The name of the database the backup is created from.
     database :: (Core.Maybe Core.Text),
     -- | The name of the backup being created.
@@ -1163,13 +1163,13 @@ instance Core.ToJSON CreateDatabaseRequest where
 -- /See:/ 'newCreateInstanceMetadata' smart constructor.
 data CreateInstanceMetadata = CreateInstanceMetadata
   { -- | The time at which this operation was cancelled. If set, this operation is in the process of undoing itself (which is guaranteed to succeed) and cannot be cancelled again.
-    cancelTime :: (Core.Maybe Core.DateTime'),
+    cancelTime :: (Core.Maybe Core.DateTime),
     -- | The time at which this operation failed or was completed successfully.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The instance being created.
     instance' :: (Core.Maybe Instance),
     -- | The time at which the CreateInstance request was received.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1277,13 +1277,13 @@ instance Core.ToJSON CreateSessionRequest where
 -- /See:/ 'newDatabase' smart constructor.
 data Database = Database
   { -- | Output only. If exists, the time at which the database creation started.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The dialect of the Cloud Spanner Database.
     databaseDialect :: (Core.Maybe Database_DatabaseDialect),
     -- | Output only. The read-write region which contains the database\'s leader replicas. This is the same as the value of default_leader database option set using DatabaseAdmin.CreateDatabase or DatabaseAdmin.UpdateDatabaseDdl. If not explicitly set, this is empty.
     defaultLeader :: (Core.Maybe Core.Text),
     -- | Output only. Earliest timestamp at which older versions of the data can be read. This value is continuously updated by Cloud Spanner and becomes stale the moment it is queried. If you are using this value to recover data, make sure to account for the time from the moment when the value is queried to the moment when you initiate the recovery.
-    earliestVersionTime :: (Core.Maybe Core.DateTime'),
+    earliestVersionTime :: (Core.Maybe Core.DateTime),
     -- | Output only. For databases that are using customer managed encryption, this field contains the encryption configuration for the database. For databases that are using Google default or other types of encryption, this field is empty.
     encryptionConfig :: (Core.Maybe EncryptionConfig),
     -- | Output only. For databases that are using customer managed encryption, this field contains the encryption information for the database, such as encryption state and the Cloud KMS key versions that are in use. For databases that are using Google default or other types of encryption, this field is empty. This field is propagated lazily from the backend. There might be a delay from when a key version is being used and when it appears in this field.
@@ -2310,7 +2310,7 @@ data KeyRangeInfo = KeyRangeInfo
     -- | The index of the start key in indexed_keys.
     startKeyIndex :: (Core.Maybe Core.Int32),
     -- | The time offset. This is the time since the start of the time interval.
-    timeOffset :: (Core.Maybe Core.GDuration),
+    timeOffset :: (Core.Maybe Core.Duration),
     -- | The unit of the metric. This is an unstructured field and will be mapped as is to the user.
     unit :: (Core.Maybe LocalizedString),
     -- | The value of the metric.
@@ -3238,11 +3238,11 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newOperationProgress' smart constructor.
 data OperationProgress = OperationProgress
   { -- | If set, the time at which this operation failed or was completed successfully.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Percent completion of the operation. Values are between 0 and 100 inclusive.
     progressPercent :: (Core.Maybe Core.Int32),
     -- | Time the request was received.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3973,13 +3973,13 @@ instance Core.ToJSON QueryPlan where
 -- /See:/ 'newReadOnly' smart constructor.
 data ReadOnly = ReadOnly
   { -- | Executes all reads at a timestamp that is @exact_staleness@ old. The timestamp is chosen soon after the read is started. Guarantees that all writes that have committed more than the specified number of seconds ago are visible. Because Cloud Spanner chooses the exact timestamp, this mode works even if the client\'s local clock is substantially skewed from Cloud Spanner commit timestamps. Useful for reading at nearby replicas without the distributed timestamp negotiation overhead of @max_staleness@.
-    exactStaleness :: (Core.Maybe Core.GDuration),
+    exactStaleness :: (Core.Maybe Core.Duration),
     -- | Read data at a timestamp >= @NOW - max_staleness@ seconds. Guarantees that all writes that have committed more than the specified number of seconds ago are visible. Because Cloud Spanner chooses the exact timestamp, this mode works even if the client\'s local clock is substantially skewed from Cloud Spanner commit timestamps. Useful for reading the freshest data available at a nearby replica, while bounding the possible staleness if the local replica has fallen behind. Note that this option can only be used in single-use transactions.
-    maxStaleness :: (Core.Maybe Core.GDuration),
+    maxStaleness :: (Core.Maybe Core.Duration),
     -- | Executes all reads at a timestamp >= @min_read_timestamp@. This is useful for requesting fresher data than some previous read, or data that is fresh enough to observe the effects of some previously committed transaction whose timestamp is known. Note that this option can only be used in single-use transactions. A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds. Example: @\"2014-10-02T15:01:23.045123456Z\"@.
-    minReadTimestamp :: (Core.Maybe Core.DateTime'),
+    minReadTimestamp :: (Core.Maybe Core.DateTime),
     -- | Executes all reads at the given timestamp. Unlike other modes, reads at a specific timestamp are repeatable; the same read at the same timestamp always returns the same data. If the timestamp is in the future, the read will block until the specified timestamp, modulo the read\'s deadline. Useful for large scale consistent reads such as mapreduces, or for coordinating many reads against a consistent snapshot of the data. A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds. Example: @\"2014-10-02T15:01:23.045123456Z\"@.
-    readTimestamp :: (Core.Maybe Core.DateTime'),
+    readTimestamp :: (Core.Maybe Core.DateTime),
     -- | If true, the Cloud Spanner-selected read timestamp is included in the Transaction message that describes the transaction.
     returnReadTimestamp :: (Core.Maybe Core.Bool),
     -- | Read at a timestamp where all previously committed transactions are visible.
@@ -4260,7 +4260,7 @@ data RestoreDatabaseMetadata = RestoreDatabaseMetadata
   { -- | Information about the backup used to restore the database.
     backupInfo :: (Core.Maybe BackupInfo),
     -- | The time at which cancellation of this operation was received. Operations.CancelOperation starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    cancelTime :: (Core.Maybe Core.DateTime'),
+    cancelTime :: (Core.Maybe Core.DateTime),
     -- | Name of the database being created and restored to.
     name :: (Core.Maybe Core.Text),
     -- | If exists, the name of the long-running operation that will be used to track the post-restore optimization process to optimize the performance of the restored database, and remove the dependency on the restore source. The name is of the form @projects\/\/instances\/\/databases\/\/operations\/@ where the is the name of database being created and restored to. The metadata type of the long-running operation is OptimizeRestoredDatabaseMetadata. This long-running operation will be automatically created by the system after the RestoreDatabase long-running operation completes successfully. This operation will not be created if the restore was not successful.
@@ -4588,13 +4588,13 @@ data Scan = Scan
   { -- | Additional information provided by the implementer.
     details :: (Core.Maybe Scan_Details),
     -- | The upper bound for when the scan is defined.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The unique name of the scan, specific to the Database service implementing this interface.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Cloud Key Visualizer scan data. Note, this field is not available to the ListScans method.
     scanData :: (Core.Maybe ScanData),
     -- | A range of time (inclusive) for when the scan is defined. The lower bound for when the scan is defined.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4669,9 +4669,9 @@ data ScanData = ScanData
   { -- | Cloud Key Visualizer scan data. The range of time this information covers is captured via the above time range fields. Note, this field is not available to the ListScans method.
     data' :: (Core.Maybe VisualizationData),
     -- | The upper bound for when the contained data is defined.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | A range of time (inclusive) for when the contained data is defined. The lower bound for when the contained data is defined.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4711,9 +4711,9 @@ instance Core.ToJSON ScanData where
 -- /See:/ 'newSession' smart constructor.
 data Session = Session
   { -- | Output only. The approximate timestamp when the session is last used. It is typically earlier than the actual last use time.
-    approximateLastUseTime :: (Core.Maybe Core.DateTime'),
+    approximateLastUseTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The timestamp when the session is created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The labels for the session. * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @[a-z]([-a-z0-9]*[a-z0-9])?@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @([a-z]([-a-z0-9]*[a-z0-9])?)?@. * No more than 64 labels can be associated with a given session. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels.
     labels :: (Core.Maybe Session_Labels),
     -- | Output only. The name of the session. This is always system-assigned.
@@ -5141,7 +5141,7 @@ data Transaction = Transaction
   { -- | @id@ may be used to identify the transaction in subsequent Read, ExecuteSql, Commit, or Rollback calls. Single-use read-only transactions do not have IDs, because single-use transactions do not support multiple requests.
     id :: (Core.Maybe Core.Base64),
     -- | For snapshot read-only transactions, the read timestamp chosen for the transaction. Not returned by default: see TransactionOptions.ReadOnly.return/read/timestamp. A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds. Example: @\"2014-10-02T15:01:23.045123456Z\"@.
-    readTimestamp :: (Core.Maybe Core.DateTime')
+    readTimestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5323,7 +5323,7 @@ instance Core.ToJSON Type where
 -- /See:/ 'newUpdateDatabaseDdlMetadata' smart constructor.
 data UpdateDatabaseDdlMetadata = UpdateDatabaseDdlMetadata
   { -- | Reports the commit timestamps of all statements that have succeeded so far, where @commit_timestamps[i]@ is the commit timestamp for the statement @statements[i]@.
-    commitTimestamps :: (Core.Maybe [Core.DateTime']),
+    commitTimestamps :: (Core.Maybe [Core.DateTime]),
     -- | The database being modified.
     database :: (Core.Maybe Core.Text),
     -- | The progress of the UpdateDatabaseDdl operations. Currently, only index creation statements will have a continuously updating progress. For non-index creation statements, @progress[i]@ will have start time and end time populated with commit timestamp of operation, as well as a progress of 100% once the operation has completed. @progress[i]@ is the operation progress for @statements[i]@.
@@ -5417,13 +5417,13 @@ instance Core.ToJSON UpdateDatabaseDdlRequest where
 -- /See:/ 'newUpdateInstanceMetadata' smart constructor.
 data UpdateInstanceMetadata = UpdateInstanceMetadata
   { -- | The time at which this operation was cancelled. If set, this operation is in the process of undoing itself (which is guaranteed to succeed) and cannot be cancelled again.
-    cancelTime :: (Core.Maybe Core.DateTime'),
+    cancelTime :: (Core.Maybe Core.DateTime),
     -- | The time at which this operation failed or was completed successfully.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The desired end state of the update.
     instance' :: (Core.Maybe Instance),
     -- | The time at which UpdateInstance request was received.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5466,7 +5466,7 @@ instance Core.ToJSON UpdateInstanceMetadata where
 -- /See:/ 'newUpdateInstanceRequest' smart constructor.
 data UpdateInstanceRequest = UpdateInstanceRequest
   { -- | Required. A mask specifying which fields in Instance should be updated. The field mask must always be specified; this prevents any future fields in Instance from being erased accidentally by clients that do not know about them.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | Required. The instance to update, which must always include the instance name. Otherwise, only fields mentioned in field_mask need be included.
     instance' :: (Core.Maybe Instance)
   }

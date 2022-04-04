@@ -295,19 +295,19 @@ data Device = Device
     -- | The user-defined device identifier. The device ID must be unique within a device registry.
     id :: (Core.Maybe Core.Text),
     -- | [Output only] The last time a cloud-to-device config version acknowledgment was received from the device. This field is only for configurations sent through MQTT.
-    lastConfigAckTime :: (Core.Maybe Core.DateTime'),
+    lastConfigAckTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The last time a cloud-to-device config version was sent to the device.
-    lastConfigSendTime :: (Core.Maybe Core.DateTime'),
+    lastConfigSendTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The error message of the most recent error, such as a failure to publish to Cloud Pub\/Sub. \'last/error/time\' is the timestamp of this field. If no errors have occurred, this field has an empty message and the status code 0 == OK. Otherwise, this field is expected to have a status code other than OK.
     lastErrorStatus :: (Core.Maybe Status),
     -- | [Output only] The time the most recent error occurred, such as a failure to publish to Cloud Pub\/Sub. This field is the timestamp of \'last/error/status\'.
-    lastErrorTime :: (Core.Maybe Core.DateTime'),
+    lastErrorTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The last time a telemetry event was received. Timestamps are periodically collected and written to storage; they may be stale by a few minutes.
-    lastEventTime :: (Core.Maybe Core.DateTime'),
+    lastEventTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The last time an MQTT @PINGREQ@ was received. This field applies only to devices connecting through MQTT. MQTT clients usually only send @PINGREQ@ messages if the connection is idle, and no other messages have been sent. Timestamps are periodically collected and written to storage; they may be stale by a few minutes.
-    lastHeartbeatTime :: (Core.Maybe Core.DateTime'),
+    lastHeartbeatTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The last time a state event was received. Timestamps are periodically collected and written to storage; they may be stale by a few minutes.
-    lastStateTime :: (Core.Maybe Core.DateTime'),
+    lastStateTime :: (Core.Maybe Core.DateTime),
     -- | __Beta Feature__ The logging verbosity for device activity. If unspecified, DeviceRegistry.log_level will be used.
     logLevel :: (Core.Maybe Device_LogLevel),
     -- | The metadata key-value pairs assigned to the device. This metadata is not interpreted or indexed by Cloud IoT Core. It can be used to add contextual information for the device. Keys must conform to the regular expression a-zA-Z+ and be less than 128 bytes in length. Values are free-form strings. Each value must be less than or equal to 32 KB in size. The total size of all keys and values must be less than 256 KB, and the maximum number of key-value pairs is 500.
@@ -431,9 +431,9 @@ data DeviceConfig = DeviceConfig
   { -- | The device configuration data.
     binaryData :: (Core.Maybe Core.Base64),
     -- | [Output only] The time at which this configuration version was updated in Cloud IoT Core. This timestamp is set by the server.
-    cloudUpdateTime :: (Core.Maybe Core.DateTime'),
+    cloudUpdateTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The time at which Cloud IoT Core received the acknowledgment from the device, indicating that the device has received this configuration version. If this field is not present, the device has not yet acknowledged that it received this version. Note that when the config was sent to the device, many config versions may have been available in Cloud IoT Core while the device was disconnected, and on connection, only the latest version is sent to the device. Some versions may never be sent to the device, and therefore are never acknowledged. This timestamp is set by Cloud IoT Core.
-    deviceAckTime :: (Core.Maybe Core.DateTime'),
+    deviceAckTime :: (Core.Maybe Core.DateTime),
     -- | [Output only] The version of this update. The version number is assigned by the server, and is always greater than 0 after device creation. The version must be 0 on the @CreateDevice@ request if a @config@ is specified; the response of @CreateDevice@ will always have a value of 1.
     version :: (Core.Maybe Core.Int64)
   }
@@ -479,7 +479,7 @@ instance Core.ToJSON DeviceConfig where
 -- /See:/ 'newDeviceCredential' smart constructor.
 data DeviceCredential = DeviceCredential
   { -- | [Optional] The time at which this credential becomes invalid. This credential will be ignored for new client authentication requests after this timestamp; however, it will not be automatically deleted.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | A public key used to verify the signature of JSON Web Tokens (JWTs). When adding a new device credential, either via device creation or via modifications, this public key credential may be required to be signed by one of the registry level certificates. More specifically, if the registry contains at least one certificate, any new device credential must be signed by one of the registry certificates. As a result, when the registry contains certificates, only X.509 certificates are accepted as device credentials. However, if the registry does not contain a certificate, self-signed certificates and public keys will be accepted. New device credentials must be different from every registry-level certificate.
     publicKey :: (Core.Maybe PublicKeyCredential)
   }
@@ -590,7 +590,7 @@ data DeviceState = DeviceState
   { -- | The device state data.
     binaryData :: (Core.Maybe Core.Base64),
     -- | [Output only] The time at which this state version was updated in Cloud IoT Core.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -739,7 +739,7 @@ data GatewayConfig = GatewayConfig
     -- | [Output only] The ID of the gateway the device accessed most recently.
     lastAccessedGatewayId :: (Core.Maybe Core.Text),
     -- | [Output only] The most recent time at which the device accessed the gateway specified in @last_accessed_gateway@.
-    lastAccessedGatewayTime :: (Core.Maybe Core.DateTime')
+    lastAccessedGatewayTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1556,7 +1556,7 @@ instance Core.ToJSON UnbindDeviceFromGatewayResponse where
 -- /See:/ 'newX509CertificateDetails' smart constructor.
 data X509CertificateDetails = X509CertificateDetails
   { -- | The time the certificate becomes invalid.
-    expiryTime :: (Core.Maybe Core.DateTime'),
+    expiryTime :: (Core.Maybe Core.DateTime),
     -- | The entity that signed the certificate.
     issuer :: (Core.Maybe Core.Text),
     -- | The type of public key in the certificate.
@@ -1564,7 +1564,7 @@ data X509CertificateDetails = X509CertificateDetails
     -- | The algorithm used to sign the certificate.
     signatureAlgorithm :: (Core.Maybe Core.Text),
     -- | The time the certificate becomes valid.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The entity the certificate and public key belong to.
     subject :: (Core.Maybe Core.Text)
   }

@@ -2026,7 +2026,7 @@ data GooglePrivacyDlpV2Container = GooglePrivacyDlpV2Container
     -- | Container type, for example BigQuery or Google Cloud Storage.
     type' :: (Core.Maybe Core.Text),
     -- | Findings container modification timestamp, if applicable. For Google Cloud Storage contains last file modification timestamp. For BigQuery table contains last/modified/time property. For Datastore - not populated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Findings container version, if available (\"generation\" for Google Cloud Storage).
     version :: (Core.Maybe Core.Text)
   }
@@ -2126,7 +2126,7 @@ data GooglePrivacyDlpV2ContentLocation = GooglePrivacyDlpV2ContentLocation
   { -- | Name of the container where the finding is located. The top level name is the source file name or table name. Names of some common storage containers are formatted as follows: * BigQuery tables: @{project_id}:{dataset_id}.{table_id}@ * Cloud Storage files: @gs:\/\/{bucket}\/{path}@ * Datastore namespace: {namespace} Nested names could be absent if the embedded object has no string identifier (for an example an image contained within a document).
     containerName :: (Core.Maybe Core.Text),
     -- | Findings container modification timestamp, if applicable. For Google Cloud Storage contains last file modification timestamp. For BigQuery table contains last/modified/time property. For Datastore - not populated.
-    containerTimestamp :: (Core.Maybe Core.DateTime'),
+    containerTimestamp :: (Core.Maybe Core.DateTime),
     -- | Findings container version, if available (\"generation\" for Google Cloud Storage).
     containerVersion :: (Core.Maybe Core.Text),
     -- | Location data for document files.
@@ -3082,7 +3082,7 @@ instance
 -- /See:/ 'newGooglePrivacyDlpV2DeidentifyTemplate' smart constructor.
 data GooglePrivacyDlpV2DeidentifyTemplate = GooglePrivacyDlpV2DeidentifyTemplate
   { -- | Output only. The creation timestamp of an inspectTemplate.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The core content of the template.
     deidentifyConfig :: (Core.Maybe GooglePrivacyDlpV2DeidentifyConfig),
     -- | Short description (max 256 chars).
@@ -3092,7 +3092,7 @@ data GooglePrivacyDlpV2DeidentifyTemplate = GooglePrivacyDlpV2DeidentifyTemplate
     -- | Output only. The template name. The template will have one of the following formats: @projects\/PROJECT_ID\/deidentifyTemplates\/TEMPLATE_ID@ OR @organizations\/ORGANIZATION_ID\/deidentifyTemplates\/TEMPLATE_ID@
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of an inspectTemplate.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3435,9 +3435,9 @@ instance Core.ToJSON GooglePrivacyDlpV2Dictionary where
 -- /See:/ 'newGooglePrivacyDlpV2DlpJob' smart constructor.
 data GooglePrivacyDlpV2DlpJob = GooglePrivacyDlpV2DlpJob
   { -- | Time when the job was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Time when the job finished.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | A stream of errors encountered running the job.
     errors :: (Core.Maybe [GooglePrivacyDlpV2Error]),
     -- | Results from inspecting a data source.
@@ -3449,7 +3449,7 @@ data GooglePrivacyDlpV2DlpJob = GooglePrivacyDlpV2DlpJob
     -- | Results from analyzing risk of a data source.
     riskDetails :: (Core.Maybe GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails),
     -- | Time when the job started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | State of a job.
     state :: (Core.Maybe GooglePrivacyDlpV2DlpJob_State),
     -- | The type of job.
@@ -3584,7 +3584,7 @@ data GooglePrivacyDlpV2Error = GooglePrivacyDlpV2Error
   { -- | Detailed error codes and messages.
     details :: (Core.Maybe GoogleRpcStatus),
     -- | The times the error occurred.
-    timestamps :: (Core.Maybe [Core.DateTime'])
+    timestamps :: (Core.Maybe [Core.DateTime])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3869,13 +3869,13 @@ instance Core.ToJSON GooglePrivacyDlpV2FileSet where
 -- /See:/ 'newGooglePrivacyDlpV2Finding' smart constructor.
 data GooglePrivacyDlpV2Finding = GooglePrivacyDlpV2Finding
   { -- | Timestamp when finding was detected.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The unique finding id.
     findingId :: (Core.Maybe Core.Text),
     -- | The type of content that might have been found. Provided if @excluded_types@ is false.
     infoType :: (Core.Maybe GooglePrivacyDlpV2InfoType),
     -- | Time the job started that produced this finding.
-    jobCreateTime :: (Core.Maybe Core.DateTime'),
+    jobCreateTime :: (Core.Maybe Core.DateTime),
     -- | The job that stored the finding.
     jobName :: (Core.Maybe Core.Text),
     -- | The labels associated with this @Finding@. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @[a-z]([-a-z0-9]*[a-z0-9])?@. Label values must be between 0 and 63 characters long and must conform to the regular expression @([a-z]([-a-z0-9]*[a-z0-9])?)?@. No more than 10 labels can be associated with a given finding. Examples: * @\"environment\" : \"production\"@ * @\"pipeline\" : \"etl\"@
@@ -5220,7 +5220,7 @@ instance Core.ToJSON GooglePrivacyDlpV2InspectResult where
 -- /See:/ 'newGooglePrivacyDlpV2InspectTemplate' smart constructor.
 data GooglePrivacyDlpV2InspectTemplate = GooglePrivacyDlpV2InspectTemplate
   { -- | Output only. The creation timestamp of an inspectTemplate.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Short description (max 256 chars).
     description :: (Core.Maybe Core.Text),
     -- | Display name (max 256 chars).
@@ -5230,7 +5230,7 @@ data GooglePrivacyDlpV2InspectTemplate = GooglePrivacyDlpV2InspectTemplate
     -- | Output only. The template name. The template will have one of the following formats: @projects\/PROJECT_ID\/inspectTemplates\/TEMPLATE_ID@ OR @organizations\/ORGANIZATION_ID\/inspectTemplates\/TEMPLATE_ID@;
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of an inspectTemplate.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5401,7 +5401,7 @@ instance
 -- /See:/ 'newGooglePrivacyDlpV2JobTrigger' smart constructor.
 data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger
   { -- | Output only. The creation timestamp of a triggeredJob.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | User provided description (max 256 chars)
     description :: (Core.Maybe Core.Text),
     -- | Display name (max 100 chars)
@@ -5411,7 +5411,7 @@ data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger
     -- | For inspect jobs, a snapshot of the configuration.
     inspectJob :: (Core.Maybe GooglePrivacyDlpV2InspectJobConfig),
     -- | Output only. The timestamp of the last time this trigger executed.
-    lastRunTime :: (Core.Maybe Core.DateTime'),
+    lastRunTime :: (Core.Maybe Core.DateTime),
     -- | Unique resource name for the triggeredJob, assigned by the service when the triggeredJob is created, for example @projects\/dlp-test-project\/jobTriggers\/53234423@.
     name :: (Core.Maybe Core.Text),
     -- | Required. A status for this trigger.
@@ -5419,7 +5419,7 @@ data GooglePrivacyDlpV2JobTrigger = GooglePrivacyDlpV2JobTrigger
     -- | A list of triggers which will be OR\'ed together. Only one in the list needs to trigger for a job to be started. The list may contain only a single Schedule trigger and must have at least one object.
     triggers :: (Core.Maybe [GooglePrivacyDlpV2Trigger]),
     -- | Output only. The last update timestamp of a triggeredJob.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8362,7 +8362,7 @@ instance Core.ToJSON GooglePrivacyDlpV2SaveFindings where
 -- /See:/ 'newGooglePrivacyDlpV2Schedule' smart constructor.
 newtype GooglePrivacyDlpV2Schedule = GooglePrivacyDlpV2Schedule
   { -- | With this option a job is started a regular periodic basis. For example: every day (86400 seconds). A scheduled start time will be skipped if the previous execution has not ended when its scheduled time occurs. This value must be set to a time duration greater than or equal to 1 day and can be no longer than 60 days.
-    recurrencePeriodDuration :: (Core.Maybe Core.GDuration)
+    recurrencePeriodDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8691,7 +8691,7 @@ data GooglePrivacyDlpV2StoredInfoTypeVersion = GooglePrivacyDlpV2StoredInfoTypeV
   { -- | StoredInfoType configuration.
     config :: (Core.Maybe GooglePrivacyDlpV2StoredInfoTypeConfig),
     -- | Create timestamp of the version. Read-only, determined by the system when the version is created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Errors that occurred when creating this storedInfoType version, or anomalies detected in the storedInfoType data that render it unusable. Only the five most recent errors will be displayed, with the most recent error appearing first. For example, some of the data for stored custom dictionaries is put in the user\'s Google Cloud Storage bucket, and if this data is modified or deleted by the user or another system, the dictionary becomes invalid. If any errors occur, fix the problem indicated by the error message and use the UpdateStoredInfoType API method to create another version of the storedInfoType to continue using it, reusing the same @config@ if it was not the source of the error.
     errors :: (Core.Maybe [GooglePrivacyDlpV2Error]),
     -- | Stored info type version state. Read-only, updated by the system during dictionary creation.
@@ -8749,7 +8749,7 @@ instance
 -- /See:/ 'newGooglePrivacyDlpV2StoredType' smart constructor.
 data GooglePrivacyDlpV2StoredType = GooglePrivacyDlpV2StoredType
   { -- | Timestamp indicating when the version of the @StoredInfoType@ used for inspection was created. Output-only field, populated by the system.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Resource name of the requested @StoredInfoType@, for example @organizations\/433245324\/storedInfoTypes\/432452342@ or @projects\/project-id\/storedInfoTypes\/432452342@.
     name :: (Core.Maybe Core.Text)
   }
@@ -9098,9 +9098,9 @@ data GooglePrivacyDlpV2TimespanConfig = GooglePrivacyDlpV2TimespanConfig
   { -- | When the job is started by a JobTrigger we will automatically figure out a valid start_time to avoid scanning files that have not been modified since the last time the JobTrigger executed. This will be based on the time of the execution of the last run of the JobTrigger.
     enableAutoPopulationOfTimespanConfig :: (Core.Maybe Core.Bool),
     -- | Exclude files, tables, or rows newer than this value. If not set, no upper time limit is applied.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Exclude files, tables, or rows older than this value. If not set, no lower time limit is applied.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Specification of the field containing the timestamp of scanned items. Used for data sources like Datastore and BigQuery. For BigQuery: If this value is not specified and the table was modified between the given start and end times, the entire table will be scanned. If this value is specified, then rows are filtered based on the given start and end times. Rows with a @NULL@ value in the provided BigQuery column are skipped. Valid data types of the provided BigQuery column are: @INTEGER@, @DATE@, @TIMESTAMP@, and @DATETIME@. For Datastore: If this value is specified, then entities are filtered based on the given start and end times. If an entity does not contain the provided timestamp property or contains empty or invalid values, then it is included. Valid data types of the provided timestamp property are: @TIMESTAMP@.
     timestampField :: (Core.Maybe GooglePrivacyDlpV2FieldId)
   }
@@ -9427,7 +9427,7 @@ data GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest = GooglePrivacyDlpV2Updat
   { -- | New DeidentifyTemplate value.
     deidentifyTemplate :: (Core.Maybe GooglePrivacyDlpV2DeidentifyTemplate),
     -- | Mask to control which fields get updated.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9474,7 +9474,7 @@ data GooglePrivacyDlpV2UpdateInspectTemplateRequest = GooglePrivacyDlpV2UpdateIn
   { -- | New InspectTemplate value.
     inspectTemplate :: (Core.Maybe GooglePrivacyDlpV2InspectTemplate),
     -- | Mask to control which fields get updated.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9521,7 +9521,7 @@ data GooglePrivacyDlpV2UpdateJobTriggerRequest = GooglePrivacyDlpV2UpdateJobTrig
   { -- | New JobTrigger value.
     jobTrigger :: (Core.Maybe GooglePrivacyDlpV2JobTrigger),
     -- | Mask to control which fields get updated.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9566,7 +9566,7 @@ data GooglePrivacyDlpV2UpdateStoredInfoTypeRequest = GooglePrivacyDlpV2UpdateSto
   { -- | Updated configuration for the storedInfoType. If not provided, a new version of the storedInfoType will be created with the existing configuration.
     config :: (Core.Maybe GooglePrivacyDlpV2StoredInfoTypeConfig),
     -- | Mask to control which fields get updated.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9624,7 +9624,7 @@ data GooglePrivacyDlpV2Value = GooglePrivacyDlpV2Value
     -- | time of day
     timeValue :: (Core.Maybe GoogleTypeTimeOfDay),
     -- | timestamp
-    timestampValue :: (Core.Maybe Core.DateTime')
+    timestampValue :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

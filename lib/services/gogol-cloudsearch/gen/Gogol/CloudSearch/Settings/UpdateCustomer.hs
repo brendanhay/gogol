@@ -51,7 +51,7 @@ type CloudSearchSettingsUpdateCustomerResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -71,7 +71,7 @@ data CloudSearchSettingsUpdateCustomer = CloudSearchSettingsUpdateCustomer
     -- | Multipart request metadata.
     payload :: CustomerSettings,
     -- | Update mask to control which fields get updated. If you specify a field in the update/mask but don\'t specify its value here, that field will be cleared. If the mask is not present or empty, all fields will be updated. Currently supported field paths: vpc/settings and audit/logging/settings
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

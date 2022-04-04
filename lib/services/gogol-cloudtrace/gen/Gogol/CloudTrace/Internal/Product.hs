@@ -486,7 +486,7 @@ data Span = Span
     -- | Required. A description of the span\'s operation (up to 128 bytes). Cloud Trace displays the description in the Cloud Console. For example, the display name can be a qualified method name or a file name and a line number where the operation is called. A best practice is to use the same display name within an application and at the same call point. This makes it easier to correlate spans in different traces.
     displayName :: (Core.Maybe TruncatableString),
     -- | Required. The end time of the span. On the client side, this is the time kept by the local machine where the span execution ends. On the server side, this is the time when the server application handler stops running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Links associated with the span. You can have up to 128 links per Span.
     links :: (Core.Maybe Links),
     -- | Required. The resource name of the span in the following format: * @projects\/[PROJECT_ID]\/traces\/[TRACE_ID]\/spans\/[SPAN_ID]@ @[TRACE_ID]@ is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array. It should not be zero. @[SPAN_ID]@ is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array. It should not be zero. .
@@ -502,7 +502,7 @@ data Span = Span
     -- | Stack trace captured at the start of the span.
     stackTrace :: (Core.Maybe StackTrace),
     -- | Required. The start time of the span. On the client side, this is the time kept by the local machine where the span execution starts. On the server side, this is the time when the server\'s application handler starts running.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The final status for this span.
     status :: (Core.Maybe Status),
     -- | A set of time events. You can have up to 32 annotations and 128 message events per span.
@@ -792,7 +792,7 @@ data TimeEvent = TimeEvent
     -- | An event describing a message sent\/received between Spans.
     messageEvent :: (Core.Maybe MessageEvent),
     -- | The timestamp indicating the time the event occurred.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

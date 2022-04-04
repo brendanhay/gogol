@@ -55,7 +55,7 @@ type DataflowProjectsJobsGetMetricsResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "location" Core.Text
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -78,7 +78,7 @@ data DataflowProjectsJobsGetMetrics = DataflowProjectsJobsGetMetrics
     -- | A project id.
     projectId :: Core.Text,
     -- | Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

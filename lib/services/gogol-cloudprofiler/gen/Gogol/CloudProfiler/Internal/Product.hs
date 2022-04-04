@@ -165,7 +165,7 @@ data Profile = Profile
   { -- | Deployment this profile corresponds to.
     deployment :: (Core.Maybe Deployment),
     -- | Duration of the profiling session. Input (for the offline mode) or output (for the online mode). The field represents requested profiling duration. It may slightly differ from the effective profiling duration, which is recorded in the profile data, in case the profiling can\'t be stopped immediately (e.g. in case stopping the profiling is handled asynchronously).
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Input only. Labels associated to this specific profile. These labels will get merged with the deployment labels for the final data set. See documentation on deployment labels for validation rules and limits.
     labels :: (Core.Maybe Profile_Labels),
     -- | Output only. Opaque, server-assigned, unique ID for this profile.

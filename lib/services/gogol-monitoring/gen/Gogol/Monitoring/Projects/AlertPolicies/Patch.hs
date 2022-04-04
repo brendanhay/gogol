@@ -50,7 +50,7 @@ type MonitoringProjectsAlertPoliciesPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -73,7 +73,7 @@ data MonitoringProjectsAlertPoliciesPatch = MonitoringProjectsAlertPoliciesPatch
     payload :: AlertPolicy,
     -- | Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert/policy), or to the field\'s default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display/name, documentation, documentation.content, documentation.mime/type, user/labels, user/label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following: The new policy will have the same [ALERT/POLICY/ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents. Conditions in the new policy will keep their former [CONDITION/ID] if the supplied condition includes the name field with that
     -- [CONDITION/ID]. If the supplied condition omits the name field, then a new [CONDITION/ID] is created.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

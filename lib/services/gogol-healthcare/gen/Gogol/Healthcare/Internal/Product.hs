@@ -654,9 +654,9 @@ data ActivateConsentRequest = ActivateConsentRequest
   { -- | Required. The resource name of the Consent artifact that contains documentation of the user\'s consent, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consentArtifacts\/{consent_artifact_id}@. If the draft Consent had a Consent artifact, this Consent artifact overwrites it.
     consentArtifact :: (Core.Maybe Core.Text),
     -- | Timestamp in UTC of when this Consent is considered expired.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | The time to live for this Consent from when it is marked as active.
-    ttl :: (Core.Maybe Core.GDuration)
+    ttl :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1259,7 +1259,7 @@ data Consent = Consent
   { -- | Required. The resource name of the Consent artifact that contains proof of the end user\'s consent, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consentArtifacts\/{consent_artifact_id}@.
     consentArtifact :: (Core.Maybe Core.Text),
     -- | Timestamp in UTC of when this Consent is considered expired.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-supplied key-value pairs used to organize Consent resources. Metadata keys must: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - begin with a letter - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes Metadata values must be: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes No more than 64 metadata entries can be associated with a given consent.
     metadata :: (Core.Maybe Consent_Metadata),
     -- | Resource name of the Consent, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consents\/{consent_id}@. Cannot be changed after creation.
@@ -1267,13 +1267,13 @@ data Consent = Consent
     -- | Optional. Represents a user\'s consent in terms of the resources that can be accessed and under what conditions.
     policies :: (Core.Maybe [GoogleCloudHealthcareV1ConsentPolicy]),
     -- | Output only. The timestamp that the revision was created.
-    revisionCreateTime :: (Core.Maybe Core.DateTime'),
+    revisionCreateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The revision ID of the Consent. The format is an 8-character hexadecimal string. Refer to a specific revision of a Consent by appending @\@{revision_id}@ to the Consent\'s resource name.
     revisionId :: (Core.Maybe Core.Text),
     -- | Required. Indicates the current state of this Consent.
     state :: (Core.Maybe Consent_State),
     -- | Input only. The time to live for this Consent from when it is created.
-    ttl :: (Core.Maybe Core.GDuration),
+    ttl :: (Core.Maybe Core.Duration),
     -- | Required. User\'s UUID provided by the client.
     userId :: (Core.Maybe Core.Text)
   }
@@ -1532,7 +1532,7 @@ instance Core.ToJSON ConsentList where
 -- /See:/ 'newConsentStore' smart constructor.
 data ConsentStore = ConsentStore
   { -- | Optional. Default time to live for Consents created in this store. Must be at least 24 hours. Updating this field will not affect the expiration time of existing consents.
-    defaultConsentTtl :: (Core.Maybe Core.GDuration),
+    defaultConsentTtl :: (Core.Maybe Core.Duration),
     -- | Optional. If @true@, UpdateConsent creates the Consent if it does not already exist. If unspecified, defaults to @false@.
     enableConsentCreateOnUpdate :: (Core.Maybe Core.Bool),
     -- | Optional. User-supplied key-value pairs used to organize consent stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62}. Label values must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}. No more than 64 labels can be associated with a given store. For more information: https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/labeling-resources
@@ -2503,11 +2503,11 @@ instance Core.ToJSON ExportDicomDataResponse where
 -- /See:/ 'newExportMessagesRequest' smart constructor.
 data ExportMessagesRequest = ExportMessagesRequest
   { -- | The end of the range in @send_time@ (MSH.7, https:\/\/www.hl7.org\/documentcenter\/public/temp/2E58C1F9-1C23-BA17-0C6126475344DA9D\/wg\/conf\/HL7MSH.htm) to process. If not specified, the time when the export is scheduled is used. This value has to come after the @start_time@ defined below. Only messages whose @send_time@ lies in the range @start_time@ (inclusive) to @end_time@ (exclusive) are exported.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Export to a Cloud Storage destination.
     gcsDestination :: (Core.Maybe GcsDestination),
     -- | The start of the range in @send_time@ (MSH.7, https:\/\/www.hl7.org\/documentcenter\/public/temp/2E58C1F9-1C23-BA17-0C6126475344DA9D\/wg\/conf\/HL7MSH.htm) to process. If not specified, the UNIX epoch (1970-01-01T00:00:00Z) is used. This value has to come before the @end_time@ defined below. Only messages whose @send_time@ lies in the range @start_time@ (inclusive) to @end_time@ (exclusive) are exported.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4810,7 +4810,7 @@ instance Core.ToJSON Location_Metadata where
 -- /See:/ 'newMessage' smart constructor.
 data Message = Message
   { -- | Output only. The datetime when the message was created. Set by the server.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Raw message bytes.
     data' :: (Core.Maybe Core.Base64),
     -- | User-supplied key-value pairs used to organize HL7v2 stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
@@ -4828,7 +4828,7 @@ data Message = Message
     -- | The hospital that this message came from. MSH-4.
     sendFacility :: (Core.Maybe Core.Text),
     -- | The datetime the sending application sent this message. MSH-7.
-    sendTime :: (Core.Maybe Core.DateTime')
+    sendTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5063,9 +5063,9 @@ data OperationMetadata = OperationMetadata
     -- |
     counter :: (Core.Maybe ProgressCounter),
     -- | The time at which the operation was created by the API.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time at which execution was completed.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | A link to audit and error logs in the log viewer. Error logs are generated only by some operations, listed at <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>.
     logsUrl :: (Core.Maybe Core.Text)
   }
@@ -6023,7 +6023,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6061,7 +6061,7 @@ data Signature = Signature
     -- | Optional. Metadata associated with the user\'s signature. For example, the user\'s name or the user\'s title.
     metadata :: (Core.Maybe Signature_Metadata),
     -- | Optional. Timestamp of the signature.
-    signatureTime :: (Core.Maybe Core.DateTime'),
+    signatureTime :: (Core.Maybe Core.DateTime),
     -- | Required. User\'s UUID provided by the client.
     userId :: (Core.Maybe Core.Text)
   }
@@ -6439,7 +6439,7 @@ instance Core.ToJSON Type where
 -- /See:/ 'newUserDataMapping' smart constructor.
 data UserDataMapping = UserDataMapping
   { -- | Output only. Indicates the time when this mapping was archived.
-    archiveTime :: (Core.Maybe Core.DateTime'),
+    archiveTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Indicates whether this mapping is archived.
     archived :: (Core.Maybe Core.Bool),
     -- | Required. A unique identifier for the mapped resource.

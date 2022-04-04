@@ -444,7 +444,7 @@ data Instance = Instance
     -- | Available versions that the instance can be upgraded to using UpdateInstanceRequest.
     availableVersion :: (Core.Maybe [Version]),
     -- | Output only. The time the instance was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The crypto key configuration. This field is used by the Customer-Managed Encryption Keys (CMEK) feature.
     cryptoKeyConfig :: (Core.Maybe CryptoKeyConfig),
     -- | User-managed service account to set on Dataproc when Cloud Data Fusion creates Dataproc to run data processing pipelines. This allows users to have fine-grained access control on Dataproc\'s accesses to cloud resources.
@@ -488,7 +488,7 @@ data Instance = Instance
     -- | Required. Instance type.
     type' :: (Core.Maybe Instance_Type),
     -- | Output only. The time the instance was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Current version of the Data Fusion. Only specifiable in Update.
     version :: (Core.Maybe Core.Text),
     -- | Name of the zone in which the Data Fusion instance will be created. Only DEVELOPER instances use this field.
@@ -1083,9 +1083,9 @@ data OperationMetadata = OperationMetadata
     -- | API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
     -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     requestedCancellation :: (Core.Maybe Core.Bool),
     -- | Human-readable status of the operation if any.
@@ -1260,7 +1260,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

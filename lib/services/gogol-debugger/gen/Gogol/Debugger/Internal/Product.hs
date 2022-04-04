@@ -192,17 +192,17 @@ data Breakpoint = Breakpoint
   { -- | Action that the agent should perform when the code at the breakpoint location is hit.
     action :: (Core.Maybe Breakpoint_Action),
     -- | The deadline for the breakpoint to stay in CANARY/ACTIVE state. The value is meaningless when the breakpoint is not in CANARY/ACTIVE state.
-    canaryExpireTime :: (Core.Maybe Core.DateTime'),
+    canaryExpireTime :: (Core.Maybe Core.DateTime),
     -- | Condition that triggers the breakpoint. The condition is a compound boolean expression composed using expressions in a programming language at the source location.
     condition :: (Core.Maybe Core.Text),
     -- | Time this breakpoint was created by the server in seconds resolution.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Values of evaluated expressions at breakpoint time. The evaluated expressions appear in exactly the same order they are listed in the @expressions@ field. The @name@ field holds the original expression text, the @value@ or @members@ field holds the result of the evaluated expression. If the expression cannot be evaluated, the @status@ inside the @Variable@ will indicate an error and contain the error text.
     evaluatedExpressions :: (Core.Maybe [Variable]),
     -- | List of read-only expressions to evaluate at the breakpoint location. The expressions are composed using expressions in the programming language at the source location. If the breakpoint action is @LOG@, the evaluated expressions are included in log statements.
     expressions :: (Core.Maybe [Core.Text]),
     -- | Time this breakpoint was finalized as seen by the server in seconds resolution.
-    finalTime :: (Core.Maybe Core.DateTime'),
+    finalTime :: (Core.Maybe Core.DateTime),
     -- | Breakpoint identifier, unique in the scope of the debuggee.
     id :: (Core.Maybe Core.Text),
     -- | When true, indicates that this is a final result and the breakpoint state will not change from here on.

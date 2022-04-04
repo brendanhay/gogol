@@ -965,7 +965,7 @@ data Creative = Creative
     -- | The agency id for this creative.
     agencyId :: (Core.Maybe Core.Int64),
     -- | The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).
-    apiUploadTimestamp :: (Core.Maybe Core.DateTime'),
+    apiUploadTimestamp :: (Core.Maybe Core.DateTime),
     -- | List of buyer selectable attributes for the ads that may be shown from this snippet. Each attribute is represented by an integer as defined in buyer-declarable-creative-attributes.txt.
     attribute :: (Core.Maybe [Core.Int32]),
     -- | A buyer-specific id identifying the creative in this ad.

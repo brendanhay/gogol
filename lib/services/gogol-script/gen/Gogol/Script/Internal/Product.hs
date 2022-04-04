@@ -273,7 +273,7 @@ data Deployment = Deployment
     -- | The deployment\'s entry points.
     entryPoints :: (Core.Maybe [EntryPoint]),
     -- | Last modified date time stamp.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -584,7 +584,7 @@ instance Core.ToJSON ExecutionResponse where
 -- /See:/ 'newFile' smart constructor.
 data File = File
   { -- | Creation date timestamp. This read-only field is only visible to users who have WRITER permission for the script project.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The defined set of functions in the script file, if any.
     functionSet :: (Core.Maybe GoogleAppsScriptTypeFunctionSet),
     -- | The user who modified the file most recently. This read-only field is only visible to users who have WRITER permission for the script project.
@@ -596,7 +596,7 @@ data File = File
     -- | The type of the file.
     type' :: (Core.Maybe File_Type),
     -- | Last modified date timestamp. This read-only field is only visible to users who have WRITER permission for the script project.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -856,7 +856,7 @@ instance Core.ToJSON GoogleAppsScriptTypeFunctionSet where
 -- /See:/ 'newGoogleAppsScriptTypeProcess' smart constructor.
 data GoogleAppsScriptTypeProcess = GoogleAppsScriptTypeProcess
   { -- | Duration the execution spent executing.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Name of the function the started the execution.
     functionName :: (Core.Maybe Core.Text),
     -- | The executions status.
@@ -866,7 +866,7 @@ data GoogleAppsScriptTypeProcess = GoogleAppsScriptTypeProcess
     -- | Name of the script being executed.
     projectName :: (Core.Maybe Core.Text),
     -- | Time the execution started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The executing users access level to the script.
     userAccessLevel :: (Core.Maybe GoogleAppsScriptTypeProcess_UserAccessLevel)
   }
@@ -1285,9 +1285,9 @@ instance Core.ToJSON Metrics where
 -- /See:/ 'newMetricsValue' smart constructor.
 data MetricsValue = MetricsValue
   { -- | Required field indicating the end time of the interval.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required field indicating the start time of the interval.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Indicates the number of executions counted.
     value :: (Core.Maybe Core.Word64)
   }
@@ -1398,7 +1398,7 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newProject' smart constructor.
 data Project = Project
   { -- | When the script was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | User who originally created the script.
     creator :: (Core.Maybe GoogleAppsScriptTypeUser),
     -- | User who last modified the script.
@@ -1410,7 +1410,7 @@ data Project = Project
     -- | The title for the project.
     title :: (Core.Maybe Core.Text),
     -- | When the script was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1782,7 +1782,7 @@ instance Core.ToJSON Value_ProtoValue where
 -- /See:/ 'newVersion' smart constructor.
 data Version = Version
   { -- | When the version was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The description for this version.
     description :: (Core.Maybe Core.Text),
     -- | The script project\'s Drive ID.

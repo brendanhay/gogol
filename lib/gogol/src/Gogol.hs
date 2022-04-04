@@ -73,8 +73,6 @@ module Gogol
     -- * Handling Errors
     AsError (..),
     AsAuthError (..),
-    trying,
-    catching,
 
     -- * Logging
     -- $logging
@@ -96,13 +94,21 @@ module Gogol
 
     -- * Re-exported Types
     module Gogol.Types,
+    Base64 (..),
+    DateTime (..),
+    Date (..),
+    Time (..),
+    Duration (..),
+
+    -- * Re-exported Utilities
+    runResourceT,
   )
 where
 
 import Control.Exception.Lens
 import Control.Monad
 import Control.Monad.IO.Class (MonadIO (..))
-import Control.Monad.Trans.Resource
+import Control.Monad.Trans.Resource (MonadResource, runResourceT)
 import Gogol.Auth
 import Gogol.Env
 import Gogol.Internal.Body

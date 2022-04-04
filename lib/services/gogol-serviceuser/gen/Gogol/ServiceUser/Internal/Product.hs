@@ -2231,11 +2231,11 @@ instance Core.ToJSON MetricDescriptor where
 -- /See:/ 'newMetricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata = MetricDescriptorMetadata
   { -- | The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
-    ingestDelay :: (Core.Maybe Core.GDuration),
+    ingestDelay :: (Core.Maybe Core.Duration),
     -- | The launch stage of the metric definition.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.GDuration)
+    samplePeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2774,7 +2774,7 @@ data OperationMetadata = OperationMetadata
     -- | The full name of the resources that this operation is directly associated with.
     resourceNames :: (Core.Maybe [Core.Text]),
     -- | The start time of the operation.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Detailed status information for each step. The order is undetermined.
     steps :: (Core.Maybe [Step])
   }

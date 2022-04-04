@@ -509,7 +509,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newAggregation' smart constructor.
 data Aggregation = Aggregation
   { -- | The alignment/period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN/NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN/NONE is specified, then this field is ignored.The maximum value of the alignment/period is 104 weeks (2 years) for charts, and 90,000 seconds (25 hours) for alerting policies.
-    alignmentPeriod :: (Core.Maybe Core.GDuration),
+    alignmentPeriod :: (Core.Maybe Core.Duration),
     -- | The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric/kind and the value/type of the original time series. Reduction can yield a time series with a different metric/kind or value/type than the input time series.Time series data must first be aligned (see per/series/aligner) in order to perform cross-time series reduction. If cross/series/reducer is specified, then per/series/aligner must be specified, and must not be ALIGN/NONE. An alignment/period must also be specified; otherwise, an error is returned.
     crossSeriesReducer :: (Core.Maybe Aggregation_CrossSeriesReducer),
     -- | The set of fields to preserve when cross/series/reducer is specified. The group/by/fields determine how the time series are partitioned into subsets prior to applying the aggregation operation. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The cross/series/reducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in group/by/fields are aggregated away. If group/by/fields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If cross/series/reducer is not defined, this field is ignored.
@@ -683,7 +683,7 @@ instance Core.ToJSON AlertPolicy_UserLabels where
 -- /See:/ 'newAlertStrategy' smart constructor.
 data AlertStrategy = AlertStrategy
   { -- | If an alert policy that was active has no data for this long, any open incidents will close
-    autoClose :: (Core.Maybe Core.GDuration),
+    autoClose :: (Core.Maybe Core.Duration),
     -- | Required for alert policies with a LogMatch condition.This limit is not implemented for alert policies that are not log-based.
     notificationRateLimit :: (Core.Maybe NotificationRateLimit)
   }
@@ -982,7 +982,7 @@ instance Core.ToJSON ClusterIstio where
 -- /See:/ 'newCollectdPayload' smart constructor.
 data CollectdPayload = CollectdPayload
   { -- | The end time of the interval.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The measurement metadata. Example: \"process_id\" -> 12345
     metadata :: (Core.Maybe CollectdPayload_Metadata),
     -- | The name of the plugin. Example: \"disk\".
@@ -990,7 +990,7 @@ data CollectdPayload = CollectdPayload
     -- | The instance name of the plugin Example: \"hdcl\".
     pluginInstance :: (Core.Maybe Core.Text),
     -- | The start time of the interval.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The measurement type. Example: \"memory\".
     type' :: (Core.Maybe Core.Text),
     -- | The measurement type instance. Example: \"used\".
@@ -1735,7 +1735,7 @@ data Exemplar = Exemplar
   { -- | Contextual information about the example value. Examples are:Trace: type.googleapis.com\/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com\/google.protobuf.StringValueLabels dropped during aggregation: type.googleapis.com\/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.
     attachments :: (Core.Maybe [Exemplar_AttachmentsItem]),
     -- | The observation (sampling) time of the above value.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Value of the exemplar point. This value determines to which bucket the exemplar belongs.
     value :: (Core.Maybe Core.Double)
   }
@@ -1958,7 +1958,7 @@ instance Core.ToJSON Field where
 -- /See:/ 'newGetNotificationChannelVerificationCodeRequest' smart constructor.
 newtype GetNotificationChannelVerificationCodeRequest = GetNotificationChannelVerificationCodeRequest
   { -- | The desired expiration time. If specified, the API will guarantee that the returned code will not be valid after the specified timestamp; however, the API cannot guarantee that the returned code will be valid for at least as long as the requested time (the API puts an upper bound on the amount of time for which a code may be valid). If omitted, a default expiration will be used, which may be less than the max permissible expiration (so specifying an expiration may extend the code\'s lifetime over omitting an expiration, even though the API does impose an upper limit on the maximum expiration that is permitted).
-    expireTime :: (Core.Maybe Core.DateTime')
+    expireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1998,7 +1998,7 @@ data GetNotificationChannelVerificationCodeResponse = GetNotificationChannelVeri
   { -- | The verification code, which may be used to verify other channels that have an equivalent identity (i.e. other channels of the same type with the same fingerprint such as other email channels with the same email address or other sms channels with the same number).
     code :: (Core.Maybe Core.Text),
     -- | The expiration time associated with the code that was returned. If an expiration was provided in the request, this is the minimum of the requested expiration in the request and the max permitted expiration.
-    expireTime :: (Core.Maybe Core.DateTime')
+    expireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2432,7 +2432,7 @@ instance Core.ToJSON LabelValue where
 -- /See:/ 'newLatencyCriteria' smart constructor.
 newtype LatencyCriteria = LatencyCriteria
   { -- | Good service is defined to be the count of requests made to this service that return in no more than threshold.
-    threshold :: (Core.Maybe Core.GDuration)
+    threshold :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3210,7 +3210,7 @@ data MetricAbsence = MetricAbsence
   { -- | Specifies the alignment of data points in individual time series as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resources). Multiple aggregations are applied in the order specified.This field is similar to the one in the ListTimeSeries request (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list). It is advisable to use the ListTimeSeries method when debugging this field.
     aggregations :: (Core.Maybe [Aggregation]),
     -- | The amount of time that a time series must fail to report new data to be considered failing. The minimum value of this field is 120 seconds. Larger values that are a multiple of a minute--for example, 240 or 300 seconds--are supported. If an invalid value is given, an error will be returned. The Duration.nanos field is ignored.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Required. A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list) (that call is useful to verify the time series that will be retrieved \/ processed). The filter must specify the metric type and the resource type. Optionally, it can specify resource labels and metric labels. This field must not exceed 2048 Unicode characters in length.
     filter :: (Core.Maybe Core.Text),
     -- | The number\/percent of time series for which the comparison must hold in order for the condition to trigger. If unspecified, then the condition will trigger if the comparison is true for any of the time series that have been identified by filter and aggregations.
@@ -3347,11 +3347,11 @@ instance Core.ToJSON MetricDescriptor where
 -- /See:/ 'newMetricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata = MetricDescriptorMetadata
   { -- | The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
-    ingestDelay :: (Core.Maybe Core.GDuration),
+    ingestDelay :: (Core.Maybe Core.Duration),
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.GDuration)
+    samplePeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3434,7 +3434,7 @@ data MetricThreshold = MetricThreshold
     -- | A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that identifies a time series that should be used as the denominator of a ratio that will be compared with the threshold. If a denominator_filter is specified, the time series specified by the filter field will be used as the numerator.The filter must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.
     denominatorFilter :: (Core.Maybe Core.Text),
     -- | The amount of time that a time series must violate the threshold to be considered failing. Currently, only values that are a multiple of a minute--e.g., 0, 60, 120, or 300 seconds--are supported. If an invalid value is given, an error will be returned. When choosing a duration, it is useful to keep in mind the frequency of the underlying time series data (which may also be affected by any alignments specified in the aggregations field); a good duration is long enough so that a single outlier does not generate spurious alerts, but short enough that unhealthy states are detected and alerted on quickly.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.
     evaluationMissingData :: (Core.Maybe MetricThreshold_EvaluationMissingData),
     -- | Required. A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list) (that call is useful to verify the time series that will be retrieved \/ processed). The filter must specify the metric type and the resource type. Optionally, it can specify resource labels and metric labels. This field must not exceed 2048 Unicode characters in length.
@@ -3740,7 +3740,7 @@ instance
 -- /See:/ 'newMonitoringQueryLanguageCondition' smart constructor.
 data MonitoringQueryLanguageCondition = MonitoringQueryLanguageCondition
   { -- | The amount of time that a time series must violate the threshold to be considered failing. Currently, only values that are a multiple of a minute--e.g., 0, 60, 120, or 300 seconds--are supported. If an invalid value is given, an error will be returned. When choosing a duration, it is useful to keep in mind the frequency of the underlying time series data (which may also be affected by any alignments specified in the aggregations field); a good duration is long enough so that a single outlier does not generate spurious alerts, but short enough that unhealthy states are detected and alerted on quickly.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.
     evaluationMissingData :: (Core.Maybe MonitoringQueryLanguageCondition_EvaluationMissingData),
     -- | Monitoring Query Language (https:\/\/cloud.google.com\/monitoring\/mql) query that outputs a boolean stream.
@@ -3793,7 +3793,7 @@ instance Core.ToJSON MonitoringQueryLanguageCondition where
 -- /See:/ 'newMutationRecord' smart constructor.
 data MutationRecord = MutationRecord
   { -- | When the change occurred.
-    mutateTime :: (Core.Maybe Core.DateTime'),
+    mutateTime :: (Core.Maybe Core.DateTime),
     -- | The email address of the user making the change.
     mutatedBy :: (Core.Maybe Core.Text)
   }
@@ -4033,7 +4033,7 @@ instance Core.ToJSON NotificationChannelDescriptor where
 -- /See:/ 'newNotificationRateLimit' smart constructor.
 newtype NotificationRateLimit = NotificationRateLimit
   { -- | Not more than one notification per period.
-    period :: (Core.Maybe Core.GDuration)
+    period :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4060,11 +4060,11 @@ instance Core.ToJSON NotificationRateLimit where
 -- /See:/ 'newOperationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4674,7 +4674,7 @@ data ServiceLevelObjective = ServiceLevelObjective
     -- | Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME]
     name :: (Core.Maybe Core.Text),
     -- | A rolling time period, semantically \"in the past \". Must be an integer multiple of 1 day no larger than 30 days.
-    rollingPeriod :: (Core.Maybe Core.GDuration),
+    rollingPeriod :: (Core.Maybe Core.Duration),
     -- | The definition of good service, used to measure and calculate the quality of the Service\'s performance with respect to a single aspect of service quality.
     serviceLevelIndicator :: (Core.Maybe ServiceLevelIndicator),
     -- | Labels which have been used to annotate the service-level objective. Label keys must start with a letter. Label keys and values may contain lowercase letters, numbers, underscores, and dashes. Label keys and values have a maximum length of 63 characters, and must be less than 128 bytes in size. Up to 64 label entries may be stored. For labels which do not have a semantic value, the empty string may be supplied for the label value.
@@ -4943,9 +4943,9 @@ instance Core.ToJSON Telemetry where
 -- /See:/ 'newTimeInterval' smart constructor.
 data TimeInterval = TimeInterval
   { -- | Required. The end of the time interval.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5332,7 +5332,7 @@ data UptimeCheckConfig = UptimeCheckConfig
     -- | A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
     name :: (Core.Maybe Core.Text),
     -- | How often, in seconds, the Uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Optional, defaults to 60s.
-    period :: (Core.Maybe Core.GDuration),
+    period :: (Core.Maybe Core.Duration),
     -- | The group resource associated with the configuration.
     resourceGroup :: (Core.Maybe ResourceGroup),
     -- | The list of regions from which the check will be run. Some regions contain one location, and others contain more than one. If this field is specified, enough regions must be provided to include a minimum of 3 locations. Not specifying this field will result in Uptime checks running from all available regions.
@@ -5340,7 +5340,7 @@ data UptimeCheckConfig = UptimeCheckConfig
     -- | Contains information needed to make a TCP check.
     tcpCheck :: (Core.Maybe TcpCheck),
     -- | The maximum amount of time to wait for the request to complete (must be between 1 and 60 seconds). Required.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5545,7 +5545,7 @@ data WindowsBasedSli = WindowsBasedSli
     -- | A window is good if the metric\'s value is in a good range, summed across returned streams.
     metricSumInRange :: (Core.Maybe MetricRange),
     -- | Duration over which window quality is evaluated. Must be an integer fraction of a day and at least 60s.
-    windowPeriod :: (Core.Maybe Core.GDuration)
+    windowPeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

@@ -1854,7 +1854,7 @@ data BqmlTrainingRun = BqmlTrainingRun
   { -- | [Output-only, Beta] List of each iteration results.
     iterationResults :: (Core.Maybe [BqmlIterationResult]),
     -- | [Output-only, Beta] Training run start time in milliseconds since the epoch.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | [Output-only, Beta] Different state applicable for a training run. IN PROGRESS: Training run is in progress. FAILED: Training run ended due to a non-retryable failure. SUCCEEDED: Training run successfully completed. CANCELLED: Training run cancelled by the user.
     state :: (Core.Maybe Core.Text),
     -- | [Output-only, Beta] Training options used by this training run. These options are mutable for subsequent training runs. Default values are explicitly stored for options not specified in the input query of the first training run. For subsequent training runs, any option not explicitly specified in the input query will be copied from the previous training run.
@@ -2049,7 +2049,7 @@ data CloneDefinition = CloneDefinition
   { -- | [Required] Reference describing the ID of the table that was cloned.
     baseTableReference :: (Core.Maybe TableReference),
     -- | [Required] The time at which the base table was cloned. This value is reported in the JSON response using RFC3339 format.
-    cloneTime :: (Core.Maybe Core.DateTime')
+    cloneTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2909,7 +2909,7 @@ data DestinationTableProperties = DestinationTableProperties
   { -- | [Optional] The description for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current description is provided, the job will fail.
     description :: (Core.Maybe Core.Text),
     -- | [Internal] This field is for Google internal use only.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | [Optional] The friendly name for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current friendly name is provided, the job will fail.
     friendlyName :: (Core.Maybe Core.Text),
     -- | [Optional] The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.
@@ -7819,13 +7819,13 @@ instance Core.ToJSON Row where
 -- /See:/ 'newRowAccessPolicy' smart constructor.
 data RowAccessPolicy = RowAccessPolicy
   { -- | Output only. The time when this row access policy was created, in milliseconds since the epoch.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A hash of this resource.
     etag :: (Core.Maybe Core.Text),
     -- | Required. A SQL boolean expression that represents the rows defined by this row access policy, similar to the boolean expression in a WHERE clause of a SELECT query on a table. References to other tables, routines, and temporary functions are not supported. Examples: region=\"EU\" date/field = CAST(\'2019-9-27\' as DATE) nullable/field is not NULL numeric_field BETWEEN 1.0 AND 5.0
     filterPredicate :: (Core.Maybe Core.Text),
     -- | Output only. The time when this row access policy was last modified, in milliseconds since the epoch.
-    lastModifiedTime :: (Core.Maybe Core.DateTime'),
+    lastModifiedTime :: (Core.Maybe Core.DateTime),
     -- | Required. Reference describing the ID of this row access policy.
     rowAccessPolicyReference :: (Core.Maybe RowAccessPolicyReference)
   }
@@ -8078,7 +8078,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8113,7 +8113,7 @@ data SnapshotDefinition = SnapshotDefinition
   { -- | [Required] Reference describing the ID of the table that was snapshot.
     baseTableReference :: (Core.Maybe TableReference),
     -- | [Required] The time at which the base table was snapshot. This value is reported in the JSON response using RFC3339 format.
-    snapshotTime :: (Core.Maybe Core.DateTime')
+    snapshotTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9838,7 +9838,7 @@ data TrainingRun = TrainingRun
     -- | Output of each iteration run, results.size() \<= max_iterations.
     results :: (Core.Maybe [IterationResult]),
     -- | The start time of this training run.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Options that were used for this training run, includes user specified and default options that were used.
     trainingOptions :: (Core.Maybe TrainingOptions)
   }

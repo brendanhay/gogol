@@ -5760,7 +5760,7 @@ data DateTime' = DateTime'
     -- | Time zone.
     timeZone :: (Core.Maybe TimeZone),
     -- | UTC offset. Must be whole seconds, between -18 hours and +18 hours. For example, a UTC offset of -4:00 would be represented as { seconds: -14400 }.
-    utcOffset :: (Core.Maybe Core.GDuration),
+    utcOffset :: (Core.Maybe Core.Duration),
     -- | Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a datetime without a year.
     year :: (Core.Maybe Core.Int32)
   }
@@ -6159,7 +6159,7 @@ instance
 -- /See:/ 'newFreeListingsProgramStatusReviewIneligibilityReasonDetails' smart constructor.
 newtype FreeListingsProgramStatusReviewIneligibilityReasonDetails = FreeListingsProgramStatusReviewIneligibilityReasonDetails
   { -- | This timestamp represents end of cooldown period for review ineligbility reason @IN_COOLDOWN_PERIOD@.
-    cooldownTime :: (Core.Maybe Core.DateTime')
+    cooldownTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -15848,7 +15848,7 @@ data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry
     -- | The ID of the product to get or mutate. Only defined if the method is @get@, @delete@, or @update@.
     productId :: (Core.Maybe Core.Text),
     -- | The comma-separated list of product attributes to be updated. Example: @\"title,salePrice\"@. Attributes specified in the update mask without a value specified in the body will be deleted from the product. Only top-level product attributes can be updated. If not defined, product attributes with set values will be updated and other attributes will stay unchanged. Only defined if the method is @update@.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -17425,9 +17425,9 @@ instance Core.ToJSON RepricingRuleEffectiveTime where
 -- /See:/ 'newRepricingRuleEffectiveTimeFixedTimePeriod' smart constructor.
 data RepricingRuleEffectiveTimeFixedTimePeriod = RepricingRuleEffectiveTimeFixedTimePeriod
   { -- | The end time (exclusive) of the period. It can only be hour granularity.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The start time (inclusive) of the period. It can only be hour granularity.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -20599,7 +20599,7 @@ instance
 -- /See:/ 'newShoppingAdsProgramStatusReviewIneligibilityReasonDetails' smart constructor.
 newtype ShoppingAdsProgramStatusReviewIneligibilityReasonDetails = ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
   { -- | This timestamp represents end of cooldown period for review ineligbility reason @IN_COOLDOWN_PERIOD@.
-    cooldownTime :: (Core.Maybe Core.DateTime')
+    cooldownTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -21137,9 +21137,9 @@ instance
 -- /See:/ 'newTimePeriod' smart constructor.
 data TimePeriod = TimePeriod
   { -- | The ending timestamp.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The starting timestamp.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

@@ -54,9 +54,9 @@ type PeoplePeopleUpdateContactResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "personFields" Core.GFieldMask
+    Core.:> Core.QueryParam "personFields" Core.FieldMask
     Core.:> Core.QueryParams "sources" PeopleUpdateContactSources
-    Core.:> Core.QueryParam "updatePersonFields" Core.GFieldMask
+    Core.:> Core.QueryParam "updatePersonFields" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -77,13 +77,13 @@ data PeoplePeopleUpdateContact = PeoplePeopleUpdateContact
     -- | Multipart request metadata.
     payload :: Person,
     -- | Optional. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Defaults to all fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    personFields :: (Core.Maybe Core.GFieldMask),
+    personFields :: (Core.Maybe Core.FieldMask),
     -- | The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of @people\/{person_id}@.
     resourceName :: Core.Text,
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.
     sources :: (Core.Maybe [PeopleUpdateContactSources]),
     -- | Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are: * addresses * biographies * birthdays * calendarUrls * clientData * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * relations * sipAddresses * urls * userDefined
-    updatePersonFields :: (Core.Maybe Core.GFieldMask),
+    updatePersonFields :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

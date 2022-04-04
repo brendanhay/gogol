@@ -52,12 +52,12 @@ type YouTubeReportingJobsReportsListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "createdAfter" Core.DateTime'
+    Core.:> Core.QueryParam "createdAfter" Core.DateTime
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "startTimeAtOrAfter" Core.DateTime'
-    Core.:> Core.QueryParam "startTimeBefore" Core.DateTime'
+    Core.:> Core.QueryParam "startTimeAtOrAfter" Core.DateTime
+    Core.:> Core.QueryParam "startTimeBefore" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -74,7 +74,7 @@ data YouTubeReportingJobsReportsList = YouTubeReportingJobsReportsList
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | If set, only reports created after the specified date\/time are returned.
-    createdAfter :: (Core.Maybe Core.DateTime'),
+    createdAfter :: (Core.Maybe Core.DateTime),
     -- | The ID of the job.
     jobId :: Core.Text,
     -- | The content owner\'s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
@@ -84,9 +84,9 @@ data YouTubeReportingJobsReportsList = YouTubeReportingJobsReportsList
     -- | A token identifying a page of results the server should return. Typically, this is the value of ListReportsResponse.next/page/token returned in response to the previous call to the @ListReports@ method.
     pageToken :: (Core.Maybe Core.Text),
     -- | If set, only reports whose start time is greater than or equal the specified date\/time are returned.
-    startTimeAtOrAfter :: (Core.Maybe Core.DateTime'),
+    startTimeAtOrAfter :: (Core.Maybe Core.DateTime),
     -- | If set, only reports whose start time is smaller than the specified date\/time are returned.
-    startTimeBefore :: (Core.Maybe Core.DateTime'),
+    startTimeBefore :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

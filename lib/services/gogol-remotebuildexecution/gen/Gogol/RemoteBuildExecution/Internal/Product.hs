@@ -414,7 +414,7 @@ data BuildBazelRemoteExecutionV2Action = BuildBazelRemoteExecutionV2Action
     -- | An optional additional salt value used to place this @Action@ into a separate cache namespace from other instances having the same field contents. This salt typically comes from operational configuration specific to sources such as repo and service configuration, and allows disowning an entire set of ActionResults that might have been poisoned by buggy software or tool failures.
     salt :: (Core.Maybe Core.Base64),
     -- | A timeout after which the execution should be killed. If the timeout is absent, then the client is specifying that the execution should continue as long as the server will let it. The server SHOULD impose a timeout if the client does not specify one, however, if the client does specify a timeout that is longer than the server\'s maximum timeout, the server MUST reject the request. The timeout is a part of the Action message, and therefore two @Actions@ with different timeouts are different, even if they are otherwise identical. This is because, if they were not, running an @Action@ with a lower timeout than is required might result in a cache hit from an execution run with a longer timeout, hiding the fact that the timeout is too short. By encoding it directly in the @Action@, a lower timeout will result in a cache miss and the execution timeout will fail immediately, rather than whenever the cache entry gets evicted.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1499,25 +1499,25 @@ data BuildBazelRemoteExecutionV2ExecutedActionMetadata = BuildBazelRemoteExecuti
           [BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem]
       ),
     -- | When the worker completed executing the action command.
-    executionCompletedTimestamp :: (Core.Maybe Core.DateTime'),
+    executionCompletedTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker started executing the action command.
-    executionStartTimestamp :: (Core.Maybe Core.DateTime'),
+    executionStartTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker finished fetching action inputs.
-    inputFetchCompletedTimestamp :: (Core.Maybe Core.DateTime'),
+    inputFetchCompletedTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker started fetching action inputs.
-    inputFetchStartTimestamp :: (Core.Maybe Core.DateTime'),
+    inputFetchStartTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker finished uploading action outputs.
-    outputUploadCompletedTimestamp :: (Core.Maybe Core.DateTime'),
+    outputUploadCompletedTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker started uploading action outputs.
-    outputUploadStartTimestamp :: (Core.Maybe Core.DateTime'),
+    outputUploadStartTimestamp :: (Core.Maybe Core.DateTime),
     -- | When was the action added to the queue.
-    queuedTimestamp :: (Core.Maybe Core.DateTime'),
+    queuedTimestamp :: (Core.Maybe Core.DateTime),
     -- | The name of the worker which ran the execution.
     worker :: (Core.Maybe Core.Text),
     -- | When the worker completed the action, including all stages.
-    workerCompletedTimestamp :: (Core.Maybe Core.DateTime'),
+    workerCompletedTimestamp :: (Core.Maybe Core.DateTime),
     -- | When the worker received the action.
-    workerStartTimestamp :: (Core.Maybe Core.DateTime')
+    workerStartTimestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1964,7 +1964,7 @@ instance
 -- /See:/ 'newBuildBazelRemoteExecutionV2NodeProperties' smart constructor.
 data BuildBazelRemoteExecutionV2NodeProperties = BuildBazelRemoteExecutionV2NodeProperties
   { -- | The file\'s last modification timestamp.
-    mtime :: (Core.Maybe Core.DateTime'),
+    mtime :: (Core.Maybe Core.DateTime),
     -- | A list of string-based NodeProperties.
     properties :: (Core.Maybe [BuildBazelRemoteExecutionV2NodeProperty]),
     -- | The UNIX file mode, e.g., 0755.
@@ -2770,31 +2770,31 @@ instance Core.ToJSON BuildBazelSemverSemVer where
 -- /See:/ 'newGoogleDevtoolsRemotebuildbotCommandDurations' smart constructor.
 data GoogleDevtoolsRemotebuildbotCommandDurations = GoogleDevtoolsRemotebuildbotCommandDurations
   { -- | The time spent to release the CAS blobs used by the task.
-    casRelease :: (Core.Maybe Core.GDuration),
+    casRelease :: (Core.Maybe Core.Duration),
     -- | The time spent waiting for Container Manager to assign an asynchronous container for execution.
-    cmWaitForAssignment :: (Core.Maybe Core.GDuration),
+    cmWaitForAssignment :: (Core.Maybe Core.Duration),
     -- | The time spent preparing the command to be run in a Docker container (includes pulling the Docker image, if necessary).
-    dockerPrep :: (Core.Maybe Core.GDuration),
+    dockerPrep :: (Core.Maybe Core.Duration),
     -- | The timestamp when docker preparation begins.
-    dockerPrepStartTime :: (Core.Maybe Core.DateTime'),
+    dockerPrepStartTime :: (Core.Maybe Core.DateTime),
     -- | The time spent downloading the input files and constructing the working directory.
-    download :: (Core.Maybe Core.GDuration),
+    download :: (Core.Maybe Core.Duration),
     -- | The timestamp when downloading the input files begins.
-    downloadStartTime :: (Core.Maybe Core.DateTime'),
+    downloadStartTime :: (Core.Maybe Core.DateTime),
     -- | The timestamp when execution begins.
-    execStartTime :: (Core.Maybe Core.DateTime'),
+    execStartTime :: (Core.Maybe Core.DateTime),
     -- | The time spent executing the command (i.e., doing useful work).
-    execution :: (Core.Maybe Core.GDuration),
+    execution :: (Core.Maybe Core.Duration),
     -- | The timestamp when preparation is done and bot starts downloading files.
-    isoPrepDone :: (Core.Maybe Core.DateTime'),
+    isoPrepDone :: (Core.Maybe Core.DateTime),
     -- | The time spent completing the command, in total.
-    overall :: (Core.Maybe Core.GDuration),
+    overall :: (Core.Maybe Core.Duration),
     -- | The time spent uploading the stdout logs.
-    stdout :: (Core.Maybe Core.GDuration),
+    stdout :: (Core.Maybe Core.Duration),
     -- | The time spent uploading the output files.
-    upload :: (Core.Maybe Core.GDuration),
+    upload :: (Core.Maybe Core.Duration),
     -- | The timestamp when uploading the output files begins.
-    uploadStartTime :: (Core.Maybe Core.DateTime')
+    uploadStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3924,7 +3924,7 @@ data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest = Googl
     -- | Deprecated, use instance.Name instead. Name of the instance to update. Format: @projects\/[PROJECT_ID]\/instances\/[INSTANCE_ID]@.
     name :: (Core.Maybe Core.Text),
     -- | The update mask applies to instance. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask If an empty update/mask is provided, only the non-default valued field in the worker pool field will be updated. Note that in order to update a field to the default value (zero, false, empty string) an explicit update/mask must be provided.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3974,7 +3974,7 @@ instance
 -- /See:/ 'newGoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest' smart constructor.
 data GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest = GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
   { -- | The update mask applies to worker/pool. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask If an empty update/mask is provided, only the non-default valued field in the worker pool field will be updated. Note that in order to update a field to the default value (zero, false, empty string) an explicit update_mask must be provided.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Specifies the worker pool to update.
     workerPool ::
       ( Core.Maybe
@@ -4374,9 +4374,9 @@ instance
 -- /See:/ 'newGoogleDevtoolsRemoteworkersV1test2CommandOverhead' smart constructor.
 data GoogleDevtoolsRemoteworkersV1test2CommandOverhead = GoogleDevtoolsRemoteworkersV1test2CommandOverhead
   { -- | The elapsed time between calling Accept and Complete. The server will also have its own idea of what this should be, but this excludes the overhead of the RPCs and the bot response time.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | The amount of time /not/ spent executing the command (ie uploading\/downloading files).
-    overhead :: (Core.Maybe Core.GDuration)
+    overhead :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4420,7 +4420,7 @@ instance
 -- /See:/ 'newGoogleDevtoolsRemoteworkersV1test2CommandResult' smart constructor.
 data GoogleDevtoolsRemoteworkersV1test2CommandResult = GoogleDevtoolsRemoteworkersV1test2CommandResult
   { -- | The elapsed time between calling Accept and Complete. The server will also have its own idea of what this should be, but this excludes the overhead of the RPCs and the bot response time.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | The exit code of the process. An exit code of \"0\" should only be trusted if @status@ has a code of OK (otherwise it may simply be unset).
     exitCode :: (Core.Maybe Core.Int32),
     -- | Implementation-dependent metadata about the task. Both servers and bots may define messages which can be encoded here; bots are free to provide metadata in multiple formats, and servers are free to choose one or more of the values to process and ignore others. In particular, it is /not/ considered an error for the bot to provide the server with a field that it doesn\'t know about.
@@ -4431,7 +4431,7 @@ data GoogleDevtoolsRemoteworkersV1test2CommandResult = GoogleDevtoolsRemoteworke
     -- | The output files. The blob referenced by the digest should contain one of the following (implementation-dependent): * A marshalled DirectoryMetadata of the returned filesystem * A LUCI-style .isolated file
     outputs :: (Core.Maybe GoogleDevtoolsRemoteworkersV1test2Digest),
     -- | The amount of time /not/ spent executing the command (ie uploading\/downloading files).
-    overhead :: (Core.Maybe Core.GDuration),
+    overhead :: (Core.Maybe Core.Duration),
     -- | An overall status for the command. For example, if the command timed out, this might have a code of DEADLINE/EXCEEDED; if it was killed by the OS for memory exhaustion, it might have a code of RESOURCE/EXHAUSTED.
     status :: (Core.Maybe GoogleRpcStatus)
   }
@@ -4750,11 +4750,11 @@ instance
 -- /See:/ 'newGoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts' smart constructor.
 data GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts = GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
   { -- | This specifies the maximum time that the task can run, excluding the time required to download inputs or upload outputs. That is, the worker will terminate the task if it runs longer than this.
-    execution :: (Core.Maybe Core.GDuration),
+    execution :: (Core.Maybe Core.Duration),
     -- | This specifies the maximum amount of time the task can be idle - that is, go without generating some output in either stdout or stderr. If the process is silent for more than the specified time, the worker will terminate the task.
-    idle :: (Core.Maybe Core.GDuration),
+    idle :: (Core.Maybe Core.Duration),
     -- | If the execution or IO timeouts are exceeded, the worker will try to gracefully terminate the task and return any existing logs. However, tasks may be hard-frozen in which case this process will fail. This timeout specifies how long to wait for a terminated task to shut down gracefully (e.g. via SIGTERM) before we bring down the hammer (e.g. SIGKILL on *nix, CTRL/BREAK/EVENT on Windows).
-    shutdown :: (Core.Maybe Core.GDuration)
+    shutdown :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

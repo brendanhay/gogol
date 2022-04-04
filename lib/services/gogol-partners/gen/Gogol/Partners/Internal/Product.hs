@@ -496,9 +496,9 @@ data Certification = Certification
     -- | The type of certification, the area of expertise.
     certificationType :: (Core.Maybe Certification_CertificationType),
     -- | Date this certification is due to expire.
-    expiration :: (Core.Maybe Core.DateTime'),
+    expiration :: (Core.Maybe Core.DateTime),
     -- | The date the user last achieved certification.
-    lastAchieved :: (Core.Maybe Core.DateTime'),
+    lastAchieved :: (Core.Maybe Core.DateTime),
     -- | Whether this certification is in the state of warning.
     warning :: (Core.Maybe Core.Bool)
   }
@@ -798,7 +798,7 @@ data CompanyRelation = CompanyRelation
     -- | The ID of the company. There may be no id if this is a pending company.5
     companyId :: (Core.Maybe Core.Text),
     -- | The timestamp of when affiliation was requested. \@OutputOnly
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | The internal company ID. Only available for a whitelisted set of api clients.
     internalCompanyId :: (Core.Maybe Core.Text),
     -- | The flag that indicates if the company is pending verification.
@@ -818,7 +818,7 @@ data CompanyRelation = CompanyRelation
     -- | The primary language code of the company.
     primaryLanguageCode :: (Core.Maybe Core.Text),
     -- | The timestamp when the user was approved. \@OutputOnly
-    resolvedTimestamp :: (Core.Maybe Core.DateTime'),
+    resolvedTimestamp :: (Core.Maybe Core.DateTime),
     -- | The segment the company is classified as.
     segment :: (Core.Maybe [Core.Text]),
     -- | The list of Google Partners specialization statuses for the company.
@@ -1214,13 +1214,13 @@ data ExamStatus = ExamStatus
   { -- | The type of the exam.
     examType :: (Core.Maybe ExamStatus_ExamType),
     -- | Date this exam is due to expire.
-    expiration :: (Core.Maybe Core.DateTime'),
+    expiration :: (Core.Maybe Core.DateTime),
     -- | The date the user last passed this exam.
-    lastPassed :: (Core.Maybe Core.DateTime'),
+    lastPassed :: (Core.Maybe Core.DateTime),
     -- | Whether this exam has been passed and not expired.
     passed :: (Core.Maybe Core.Bool),
     -- | The date the user last taken this exam.
-    taken :: (Core.Maybe Core.DateTime'),
+    taken :: (Core.Maybe Core.DateTime),
     -- | Whether this exam is in the state of warning.
     warning :: (Core.Maybe Core.Bool)
   }
@@ -1349,11 +1349,11 @@ data HistoricalOffer = HistoricalOffer
     -- | Name of the client.
     clientName :: (Core.Maybe Core.Text),
     -- | Time offer was first created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Time this offer expires.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | Time last action was taken.
-    lastModifiedTime :: (Core.Maybe Core.DateTime'),
+    lastModifiedTime :: (Core.Maybe Core.DateTime),
     -- | Offer code.
     offerCode :: (Core.Maybe Core.Text),
     -- | Country Code for the offer country.
@@ -1472,7 +1472,7 @@ data Lead = Lead
     -- | Comments lead source gave.
     comments :: (Core.Maybe Core.Text),
     -- | Timestamp of when this lead was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Email address of lead source.
     email :: (Core.Maybe Core.Text),
     -- | Last name of lead source.
@@ -2254,7 +2254,7 @@ data OfferCustomer = OfferCustomer
     -- | Country code of the customer.
     countryCode :: (Core.Maybe Core.Text),
     -- | Time the customer was created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Days the customer is still eligible.
     eligibilityDaysLeft :: (Core.Maybe Core.Int32),
     -- | External CID for the customer.
@@ -2683,7 +2683,7 @@ data User = User
     -- | The internal user ID. Only available for a whitelisted set of api clients.
     internalId :: (Core.Maybe Core.Text),
     -- | The most recent time the user interacted with the Partners site. \@OutputOnly
-    lastAccessTime :: (Core.Maybe Core.DateTime'),
+    lastAccessTime :: (Core.Maybe Core.DateTime),
     -- | The list of emails the user has access to\/can select as primary. \@OutputOnly
     primaryEmails :: (Core.Maybe [Core.Text]),
     -- | The profile information of a Partners user, contains all the directly editable user information.

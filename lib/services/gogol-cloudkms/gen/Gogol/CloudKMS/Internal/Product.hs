@@ -566,9 +566,9 @@ data Certificate = Certificate
   { -- | Output only. The issuer distinguished name in RFC 2253 format. Only present if parsed is true.
     issuer :: (Core.Maybe Core.Text),
     -- | Output only. The certificate is not valid after this time. Only present if parsed is true.
-    notAfterTime :: (Core.Maybe Core.DateTime'),
+    notAfterTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The certificate is not valid before this time. Only present if parsed is true.
-    notBeforeTime :: (Core.Maybe Core.DateTime'),
+    notBeforeTime :: (Core.Maybe Core.DateTime),
     -- | Output only. True if the certificate was parsed successfully.
     parsed :: (Core.Maybe Core.Bool),
     -- | Required. The raw certificate bytes in DER format.
@@ -689,11 +689,11 @@ instance Core.ToJSON CertificateChains where
 -- /See:/ 'newCryptoKey' smart constructor.
 data CryptoKey = CryptoKey
   { -- | Output only. The time at which this CryptoKey was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Immutable. The resource name of the backend environment where the key material for all CryptoKeyVersions associated with this CryptoKey reside and where all related cryptographic operations are performed. Only applicable if CryptoKeyVersions have a ProtectionLevel of EXTERNAL_VPC, with the resource name in the format @projects\/*\/locations\/*\/ekmConnections\/*@. Note, this list is non-exhaustive and may apply to additional ProtectionLevels in the future.
     cryptoKeyBackend :: (Core.Maybe Core.Text),
     -- | Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 24 hours.
-    destroyScheduledDuration :: (Core.Maybe Core.GDuration),
+    destroyScheduledDuration :: (Core.Maybe Core.Duration),
     -- | Immutable. Whether this key may contain imported versions only.
     importOnly :: (Core.Maybe Core.Bool),
     -- | Labels with user-defined metadata. For more information, see <https://cloud.google.com/kms/docs/labeling-keys Labeling Keys>.
@@ -701,13 +701,13 @@ data CryptoKey = CryptoKey
     -- | Output only. The resource name for this CryptoKey in the format @projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*@.
     name :: (Core.Maybe Core.Text),
     -- | At next/rotation/time, the Key Management Service will automatically: 1. Create a new version of this CryptoKey. 2. Mark the new version as primary. Key rotations performed manually via CreateCryptoKeyVersion and UpdateCryptoKeyPrimaryVersion do not affect next/rotation/time. Keys with purpose ENCRYPT_DECRYPT support automatic rotation. For other keys, this field must be omitted.
-    nextRotationTime :: (Core.Maybe Core.DateTime'),
+    nextRotationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A copy of the \"primary\" CryptoKeyVersion that will be used by Encrypt when this CryptoKey is given in EncryptRequest.name. The CryptoKey\'s primary version can be updated via UpdateCryptoKeyPrimaryVersion. Keys with purpose ENCRYPT_DECRYPT may have a primary. For other keys, this field will be omitted.
     primary :: (Core.Maybe CryptoKeyVersion),
     -- | Immutable. The immutable purpose of this CryptoKey.
     purpose :: (Core.Maybe CryptoKey_Purpose),
     -- | next/rotation/time will be advanced by this period when the service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours. If rotation/period is set, next/rotation/time must also be set. Keys with purpose ENCRYPT/DECRYPT support automatic rotation. For other keys, this field must be omitted.
-    rotationPeriod :: (Core.Maybe Core.GDuration),
+    rotationPeriod :: (Core.Maybe Core.Duration),
     -- | A template describing settings for new CryptoKeyVersion instances. The properties of new CryptoKeyVersion instances created by either CreateCryptoKeyVersion or auto-rotation are controlled by this template.
     versionTemplate :: (Core.Maybe CryptoKeyVersionTemplate)
   }
@@ -808,21 +808,21 @@ data CryptoKeyVersion = CryptoKeyVersion
     -- | Output only. Statement that was generated and signed by the HSM at key creation time. Use this statement to verify attributes of the key as stored on the HSM, independently of Google. Only provided for key versions with protection_level HSM.
     attestation :: (Core.Maybe KeyOperationAttestation),
     -- | Output only. The time at which this CryptoKeyVersion was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time this CryptoKeyVersion\'s key material was destroyed. Only present if state is DESTROYED.
-    destroyEventTime :: (Core.Maybe Core.DateTime'),
+    destroyEventTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time this CryptoKeyVersion\'s key material is scheduled for destruction. Only present if state is DESTROY_SCHEDULED.
-    destroyTime :: (Core.Maybe Core.DateTime'),
+    destroyTime :: (Core.Maybe Core.DateTime),
     -- | ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level and EXTERNAL_VPC protection levels.
     externalProtectionLevelOptions :: (Core.Maybe ExternalProtectionLevelOptions),
     -- | Output only. The time this CryptoKeyVersion\'s key material was generated.
-    generateTime :: (Core.Maybe Core.DateTime'),
+    generateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The root cause of the most recent import failure. Only present if state is IMPORT_FAILED.
     importFailureReason :: (Core.Maybe Core.Text),
     -- | Output only. The name of the ImportJob used in the most recent import of this CryptoKeyVersion. Only present if the underlying key material was imported.
     importJob :: (Core.Maybe Core.Text),
     -- | Output only. The time at which this CryptoKeyVersion\'s key material was most recently imported.
-    importTime :: (Core.Maybe Core.DateTime'),
+    importTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The resource name for this CryptoKeyVersion in the format @projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*\/cryptoKeyVersions\/*@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The ProtectionLevel describing how crypto operations are performed with this CryptoKeyVersion.
@@ -1110,7 +1110,7 @@ instance Core.ToJSON Digest where
 -- /See:/ 'newEkmConnection' smart constructor.
 data EkmConnection = EkmConnection
   { -- | Output only. The time at which the EkmConnection was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | This checksum is computed by the server based on the value of other fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
     etag :: (Core.Maybe Core.Text),
     -- | Output only. The resource name for the EkmConnection in the format @projects\/*\/locations\/*\/ekmConnections\/*@.
@@ -1498,13 +1498,13 @@ data ImportJob = ImportJob
   { -- | Output only. Statement that was generated and signed by the key creator (for example, an HSM) at key creation time. Use this statement to verify attributes of the key as stored on the HSM, independently of Google. Only present if the chosen ImportMethod is one with a protection level of HSM.
     attestation :: (Core.Maybe KeyOperationAttestation),
     -- | Output only. The time at which this ImportJob was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time this ImportJob expired. Only present if state is EXPIRED.
-    expireEventTime :: (Core.Maybe Core.DateTime'),
+    expireEventTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time at which this ImportJob is scheduled for expiration and can no longer be used to import key material.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time this ImportJob\'s key material was generated.
-    generateTime :: (Core.Maybe Core.DateTime'),
+    generateTime :: (Core.Maybe Core.DateTime),
     -- | Required. Immutable. The wrapping method to be used for incoming key material.
     importMethod :: (Core.Maybe ImportJob_ImportMethod),
     -- | Output only. The resource name for this ImportJob in the format @projects\/*\/locations\/*\/keyRings\/*\/importJobs\/*@.
@@ -1619,7 +1619,7 @@ instance Core.ToJSON KeyOperationAttestation where
 -- /See:/ 'newKeyRing' smart constructor.
 data KeyRing = KeyRing
   { -- | Output only. The time at which this KeyRing was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The resource name for the KeyRing in the format @projects\/*\/locations\/*\/keyRings\/*@.
     name :: (Core.Maybe Core.Text)
   }
@@ -2444,7 +2444,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

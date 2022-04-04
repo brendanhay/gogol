@@ -536,7 +536,7 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newPhoto' smart constructor.
 data Photo = Photo
   { -- | Optional. Absolute time when the photo was captured. When the photo has no exif timestamp, this is used to set a timestamp in the photo metadata.
-    captureTime :: (Core.Maybe Core.DateTime'),
+    captureTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Connections to other photos. A connection represents the link from this photo to another photo.
     connections :: (Core.Maybe [Connection]),
     -- | Output only. The download URL for the photo bytes. This field is set only when GetPhotoRequest.view is set to PhotoView.INCLUDE/DOWNLOAD/URL.
@@ -558,7 +558,7 @@ data Photo = Photo
     -- | Input only. Required when creating a photo. Input only. The resource URL where the photo bytes are uploaded to.
     uploadReference :: (Core.Maybe UploadRef),
     -- | Output only. Time when the image was uploaded.
-    uploadTime :: (Core.Maybe Core.DateTime'),
+    uploadTime :: (Core.Maybe Core.DateTime),
     -- | Output only. View count of the photo.
     viewCount :: (Core.Maybe Core.Int64)
   }
@@ -868,7 +868,7 @@ data UpdatePhotoRequest = UpdatePhotoRequest
   { -- | Required. Photo object containing the new metadata.
     photo :: (Core.Maybe Photo),
     -- | Required. Mask that identifies fields on the photo metadata to update. If not present, the old Photo metadata is entirely replaced with the new Photo metadata in this request. The update fails if invalid fields are specified. Multiple fields can be specified in a comma-delimited list. The following fields are valid: * @pose.heading@ * @pose.latLngPair@ * @pose.pitch@ * @pose.roll@ * @pose.level@ * @pose.altitude@ * @connections@ * @places@ > Note: When updateMask contains repeated fields, the entire set of repeated values get replaced with the new contents. For example, if updateMask contains @connections@ and @UpdatePhotoRequest.photo.connections@ is empty, all connections are removed.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

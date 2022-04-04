@@ -59,7 +59,7 @@ type ScriptProcessesListResource =
               Core.Text
     Core.:> Core.QueryParam
               "userProcessFilter.endTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "userProcessFilter.functionName"
               Core.Text
@@ -71,7 +71,7 @@ type ScriptProcessesListResource =
               Core.Text
     Core.:> Core.QueryParam
               "userProcessFilter.startTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParams
               "userProcessFilter.statuses"
               ProcessesListUserProcessFilterStatuses
@@ -107,7 +107,7 @@ data ScriptProcessesList = ScriptProcessesList
     -- | Optional field used to limit returned processes to those originating from projects with a specific deployment ID.
     userProcessFilterDeploymentId :: (Core.Maybe Core.Text),
     -- | Optional field used to limit returned processes to those that completed on or before the given timestamp.
-    userProcessFilterEndTime :: (Core.Maybe Core.DateTime'),
+    userProcessFilterEndTime :: (Core.Maybe Core.DateTime),
     -- | Optional field used to limit returned processes to those originating from a script function with the given function name.
     userProcessFilterFunctionName :: (Core.Maybe Core.Text),
     -- | Optional field used to limit returned processes to those originating from projects with project names containing a specific string.
@@ -115,7 +115,7 @@ data ScriptProcessesList = ScriptProcessesList
     -- | Optional field used to limit returned processes to those originating from projects with a specific script ID.
     userProcessFilterScriptId :: (Core.Maybe Core.Text),
     -- | Optional field used to limit returned processes to those that were started on or after the given timestamp.
-    userProcessFilterStartTime :: (Core.Maybe Core.DateTime'),
+    userProcessFilterStartTime :: (Core.Maybe Core.DateTime),
     -- | Optional field used to limit returned processes to those having one of the specified process statuses.
     userProcessFilterStatuses :: (Core.Maybe [ProcessesListUserProcessFilterStatuses]),
     -- | Optional field used to limit returned processes to those having one of the specified process types.

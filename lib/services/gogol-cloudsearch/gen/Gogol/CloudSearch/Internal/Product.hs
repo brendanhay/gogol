@@ -2667,7 +2667,7 @@ instance Core.ToJSON FilterOptions where
 -- /See:/ 'newFreshnessOptions' smart constructor.
 data FreshnessOptions = FreshnessOptions
   { -- | The duration after which an object should be considered stale. The default value is 180 days (in seconds).
-    freshnessDuration :: (Core.Maybe Core.GDuration),
+    freshnessDuration :: (Core.Maybe Core.Duration),
     -- | This property indicates the freshness level of the object in the index. If set, this property must be a top-level property within the property definitions and it must be a timestamp type or date type. Otherwise, the Indexing API uses updateTime as the freshness indicator. The maximum length is 256 characters. When a property is used to calculate freshness, the value defaults to 2 years from the current time.
     freshnessProperty :: (Core.Maybe Core.Text)
   }
@@ -3624,7 +3624,7 @@ instance Core.ToJSON IntegerValues where
 -- /See:/ 'newInteraction' smart constructor.
 data Interaction = Interaction
   { -- | The time when the user acted on the item. If multiple actions of the same type exist for a single user, only the most recent action is recorded.
-    interactionTime :: (Core.Maybe Core.DateTime'),
+    interactionTime :: (Core.Maybe Core.DateTime),
     -- | The user that acted on the item.
     principal :: (Core.Maybe Principal),
     -- |
@@ -3902,7 +3902,7 @@ data ItemMetadata = ItemMetadata
     -- | A set of named attributes associated with the item. This can be used for influencing the ranking of the item based on the context in the request. The maximum number of elements is 10.
     contextAttributes :: (Core.Maybe [ContextAttribute]),
     -- | The time when the item was created in the source repository.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Hashing value provided by the API caller. This can be used with the items.push method to calculate modified state. The maximum length is 2048 characters.
     hash :: (Core.Maybe Core.Text),
     -- | A list of interactions for the item. Interactions are used to improve Search quality, but are not exposed to end users. The maximum number of elements is 1000.
@@ -3920,7 +3920,7 @@ data ItemMetadata = ItemMetadata
     -- | The title of the item. If given, this will be the displayed title of the Search result. The maximum length is 2048 characters.
     title :: (Core.Maybe Core.Text),
     -- | The time when the item was last modified in the source repository.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4409,7 +4409,7 @@ instance Core.ToJSON Media where
 -- /See:/ 'newMetadata' smart constructor.
 data Metadata = Metadata
   { -- | The creation time for this document or object in the search result.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Options that specify how to display a structured data search result.
     displayOptions :: (Core.Maybe ResultDisplayMetadata),
     -- | Indexed fields in structured data, returned as a generic named property.
@@ -4425,7 +4425,7 @@ data Metadata = Metadata
     -- | The thumbnail URL of the result.
     thumbnailUrl :: (Core.Maybe Core.Text),
     -- | The last modified date for the object in the search result. If not set in the item, the value returned here is empty. When @updateTime@ is used for calculating freshness and is not set, this value defaults to 2 years from the current time.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7785,7 +7785,7 @@ instance Core.ToJSON TimestampPropertyOptions where
 -- /See:/ 'newTimestampValues' smart constructor.
 newtype TimestampValues = TimestampValues
   { -- |
-    values :: (Core.Maybe [Core.DateTime'])
+    values :: (Core.Maybe [Core.DateTime])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8102,7 +8102,7 @@ data Value = Value
     -- |
     stringValue :: (Core.Maybe Core.Text),
     -- |
-    timestampValue :: (Core.Maybe Core.DateTime')
+    timestampValue :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

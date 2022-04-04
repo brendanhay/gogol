@@ -72,16 +72,16 @@ type CalendarEventsWatchResource =
     Core.:> Core.QueryParam "syncToken" Core.Text
     Core.:> Core.QueryParam
               "timeMax"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "timeMin"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "timeZone"
               Core.Text
     Core.:> Core.QueryParam
               "updatedMin"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "alt"
               Core.AltJSON
@@ -129,13 +129,13 @@ data CalendarEventsWatch = CalendarEventsWatch
     -- These are: - iCalUID - orderBy - privateExtendedProperty - q - sharedExtendedProperty - timeMin - timeMax - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken. Learn more about incremental synchronization. Optional. The default is to return all entries.
     syncToken :: (Core.Maybe Core.Text),
     -- | Upper bound (exclusive) for an event\'s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.
-    timeMax :: (Core.Maybe Core.DateTime'),
+    timeMax :: (Core.Maybe Core.DateTime),
     -- | Lower bound (exclusive) for an event\'s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.
-    timeMin :: (Core.Maybe Core.DateTime'),
+    timeMin :: (Core.Maybe Core.DateTime),
     -- | Time zone used in the response. Optional. The default is the time zone of the calendar.
     timeZone :: (Core.Maybe Core.Text),
     -- | Lower bound for an event\'s last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
-    updatedMin :: (Core.Maybe Core.DateTime')
+    updatedMin :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

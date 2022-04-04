@@ -68,7 +68,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newGoogleCloudPrivatecatalogV1beta1Catalog' smart constructor.
 data GoogleCloudPrivatecatalogV1beta1Catalog = GoogleCloudPrivatecatalogV1beta1Catalog
   { -- | Output only. The time when the catalog was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The description of the catalog.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The descriptive name of the catalog as it appears in UIs.
@@ -76,7 +76,7 @@ data GoogleCloudPrivatecatalogV1beta1Catalog = GoogleCloudPrivatecatalogV1beta1C
     -- | Output only. The resource name of the target catalog, in the format of \`catalogs\/{catalog_id}\'.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The time when the catalog was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -133,7 +133,7 @@ data GoogleCloudPrivatecatalogV1beta1Product = GoogleCloudPrivatecatalogV1beta1P
     -- -   @google.cloudprivatecatalog.ListingOnly@
     assetType :: (Core.Maybe Core.Text),
     -- | Output only. The time when the product was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The display metadata to describe the product. The JSON schema of the metadata differs by Product.asset_type. When the type is @google.deploymentmanager.Template@, the schema is as follows:
     --
     -- \`\`\` \"$schema\": http:\/\/json-schema.org\/draft-04\/schema# type: object properties: name: type: string minLength: 1 maxLength: 64 description: type: string minLength: 1 maxLength: 2048 tagline: type: string minLength: 1 maxLength: 100 support/info: type: string minLength: 1 maxLength: 2048 creator: type: string minLength: 1 maxLength: 100 documentation: type: array items: type: object properties: url: type: string pattern: \"^(https?):\/\/[-a-zA-Z0-9+&\@#\/%?=~/|!:,.;]*[-a-zA-Z0-9+&\@#\/%=~_|]\" title: type: string minLength: 1 maxLength: 64 description: type: string minLength: 1 maxLength: 2048 required: - name - description additionalProperties: false
@@ -154,7 +154,7 @@ data GoogleCloudPrivatecatalogV1beta1Product = GoogleCloudPrivatecatalogV1beta1P
     -- A unique identifier for the product under a catalog.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The time when the product was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -396,7 +396,7 @@ data GoogleCloudPrivatecatalogV1beta1Version = GoogleCloudPrivatecatalogV1beta1V
   { -- | Output only. The asset which has been validated and is ready to be provisioned. See google.cloud.privatecatalogproducer.v1beta.Version.asset for details.
     asset :: (Core.Maybe GoogleCloudPrivatecatalogV1beta1Version_Asset),
     -- | Output only. The time when the version was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The user-supplied description of the version. Maximum of 256 characters.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The resource name of the version, in the format \`catalogs\/{catalog/id}\/products\/{product/id}\/versions\/a-z*[a-z0-9]\'.
@@ -404,7 +404,7 @@ data GoogleCloudPrivatecatalogV1beta1Version = GoogleCloudPrivatecatalogV1beta1V
     -- A unique identifier for the version under a product.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The time when the version was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

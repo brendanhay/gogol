@@ -1591,7 +1591,7 @@ data ActivitySnippet = ActivitySnippet
     -- | The group ID associated with the activity. A group ID identifies user events that are associated with the same user and resource. For example, if a user rates a video and marks the same video as a favorite, the entries for those events would have the same group ID in the user\'s activity feed. In your user interface, you can avoid repetition by grouping events with the same groupId value.
     groupId :: (Core.Maybe Core.Text),
     -- | The date and time that the video was uploaded.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | A map of thumbnail images associated with the resource that is primarily associated with the activity. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
     thumbnails :: (Core.Maybe ThumbnailDetails),
     -- | The title of the resource primarily associated with the activity.
@@ -1772,7 +1772,7 @@ data CaptionSnippet = CaptionSnippet
     -- | The language of the caption track. The property value is a BCP-47 language tag.
     language :: (Core.Maybe Core.Text),
     -- | The date and time when the caption track was last updated.
-    lastUpdated :: (Core.Maybe Core.DateTime'),
+    lastUpdated :: (Core.Maybe Core.DateTime),
     -- | The name of the caption track. The name is intended to be visible to the user as an option during playback.
     name :: (Core.Maybe Core.Text),
     -- | The caption track\'s status.
@@ -2266,7 +2266,7 @@ data ChannelContentOwnerDetails = ChannelContentOwnerDetails
   { -- | The ID of the content owner linked to the channel.
     contentOwner :: (Core.Maybe Core.Text),
     -- | The date and time when the channel was linked to the content owner.
-    timeLinked :: (Core.Maybe Core.DateTime')
+    timeLinked :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2968,7 +2968,7 @@ data ChannelSnippet = ChannelSnippet
     -- | Localized title and description, read-only.
     localized :: (Core.Maybe ChannelLocalization),
     -- | The date and time that the channel was created.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | A map of thumbnail images associated with the channel. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail. When displaying thumbnails in your application, make sure that your code uses the image URLs exactly as they are returned in API responses. For example, your application should not use the http domain instead of the https domain in a URL returned in an API response. Beginning in July 2018, channel thumbnail URLs will only be available in the https domain, which is how the URLs appear in API responses. After that time, you might see broken images in your application if it tries to load YouTube images from the http domain. Thumbnail images might be empty for newly created channels and might take up to one day to populate.
     thumbnails :: (Core.Maybe ThumbnailDetails),
     -- | The channel\'s title.
@@ -3352,13 +3352,13 @@ data CommentSnippet = CommentSnippet
     -- | The unique id of the parent comment, only set for replies.
     parentId :: (Core.Maybe Core.Text),
     -- | The date and time when the comment was originally published.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The comment\'s text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc.
     textDisplay :: (Core.Maybe Core.Text),
     -- | The comment\'s original raw text as initially posted or last updated. The original text will only be returned if it is accessible to the viewer, which is only guaranteed if the viewer is the comment\'s author.
     textOriginal :: (Core.Maybe Core.Text),
     -- | The date and time when the comment was last updated.
-    updatedAt :: (Core.Maybe Core.DateTime'),
+    updatedAt :: (Core.Maybe Core.DateTime),
     -- | The ID of the video the comment refers to, if any.
     videoId :: (Core.Maybe Core.Text),
     -- | The rating the viewer has given to this comment. For the time being this will never return RATE/TYPE/DISLIKE and instead return RATE/TYPE/NONE. This may change in the future.
@@ -4909,7 +4909,7 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails
   { -- | This value uniquely identifies the live stream bound to the broadcast.
     boundStreamId :: (Core.Maybe Core.Text),
     -- | The date and time that the live stream referenced by boundStreamId was last updated.
-    boundStreamLastUpdateTimeMs :: (Core.Maybe Core.DateTime'),
+    boundStreamLastUpdateTimeMs :: (Core.Maybe Core.DateTime),
     -- |
     closedCaptionsType :: (Core.Maybe LiveBroadcastContentDetails_ClosedCaptionsType),
     -- | This setting indicates whether auto start is enabled for this broadcast. The default value for this property is false. This setting can only be used by Events.
@@ -5102,9 +5102,9 @@ instance Core.ToJSON LiveBroadcastListResponse where
 -- /See:/ 'newLiveBroadcastSnippet' smart constructor.
 data LiveBroadcastSnippet = LiveBroadcastSnippet
   { -- | The date and time that the broadcast actually ended. This information is only available once the broadcast\'s state is complete.
-    actualEndTime :: (Core.Maybe Core.DateTime'),
+    actualEndTime :: (Core.Maybe Core.DateTime),
     -- | The date and time that the broadcast actually started. This information is only available once the broadcast\'s state is live.
-    actualStartTime :: (Core.Maybe Core.DateTime'),
+    actualStartTime :: (Core.Maybe Core.DateTime),
     -- | The ID that YouTube uses to uniquely identify the channel that is publishing the broadcast.
     channelId :: (Core.Maybe Core.Text),
     -- | The broadcast\'s description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.
@@ -5114,11 +5114,11 @@ data LiveBroadcastSnippet = LiveBroadcastSnippet
     -- | The id of the live chat for this broadcast.
     liveChatId :: (Core.Maybe Core.Text),
     -- | The date and time that the broadcast was added to YouTube\'s live broadcast schedule.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The date and time that the broadcast is scheduled to end.
-    scheduledEndTime :: (Core.Maybe Core.DateTime'),
+    scheduledEndTime :: (Core.Maybe Core.DateTime),
     -- | The date and time that the broadcast is scheduled to start.
-    scheduledStartTime :: (Core.Maybe Core.DateTime'),
+    scheduledStartTime :: (Core.Maybe Core.DateTime),
     -- | A map of thumbnail images associated with the broadcast. For each nested object in this object, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
     thumbnails :: (Core.Maybe ThumbnailDetails),
     -- | The broadcast\'s title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
@@ -5743,7 +5743,7 @@ data LiveChatMessageListResponse = LiveChatMessageListResponse
     -- |
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The date and time when the underlying stream went offline.
-    offlineAt :: (Core.Maybe Core.DateTime'),
+    offlineAt :: (Core.Maybe Core.DateTime),
     -- | General pagination information.
     pageInfo :: (Core.Maybe PageInfo),
     -- | The amount of time the client should wait before polling again.
@@ -5872,7 +5872,7 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet
     -- | Details about the New Member Announcement event, this is only set if the type is \'newSponsorEvent\'. Please note that \"member\" is the new term for \"sponsor\".
     newSponsorDetails' :: (Core.Maybe LiveChatNewSponsorDetails),
     -- | The date and time when the message was orignally published.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | Details about the Super Chat event, this is only set if the type is \'superChatEvent\'.
     superChatDetails :: (Core.Maybe LiveChatSuperChatDetails),
     -- | Details about the Super Sticker event, this is only set if the type is \'superStickerEvent\'.
@@ -6649,7 +6649,7 @@ data LiveStreamSnippet = LiveStreamSnippet
     -- |
     isDefaultStream :: (Core.Maybe Core.Bool),
     -- | The date and time that the stream was created.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The stream\'s title. The value must be between 1 and 128 characters long.
     title :: (Core.Maybe Core.Text)
   }
@@ -7532,7 +7532,7 @@ data PlaylistItemContentDetails = PlaylistItemContentDetails
     -- | The ID that YouTube uses to uniquely identify a video. To retrieve the video resource, set the id query parameter to this value in your API request.
     videoId :: (Core.Maybe Core.Text),
     -- | The date and time that the video was published to YouTube.
-    videoPublishedAt :: (Core.Maybe Core.DateTime')
+    videoPublishedAt :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7664,7 +7664,7 @@ data PlaylistItemSnippet = PlaylistItemSnippet
     -- | The order in which the item appears in the playlist. The value uses a zero-based index, so the first item has a position of 0, the second item has a position of 1, and so forth.
     position :: (Core.Maybe Core.Word32),
     -- | The date and time that the item was added to the playlist.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item.
     resourceId :: (Core.Maybe ResourceId),
     -- | A map of thumbnail images associated with the playlist item. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
@@ -7919,7 +7919,7 @@ data PlaylistSnippet = PlaylistSnippet
     -- | Localized title and description, read-only.
     localized :: (Core.Maybe PlaylistLocalization),
     -- | The date and time that the playlist was created.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | Keyword tags associated with the playlist.
     tags :: (Core.Maybe [Core.Text]),
     -- | Note: if the playlist has a custom thumbnail, this field will not be populated. The video id selected by the user that will be used as the thumbnail of this playlist. This field defaults to the first publicly viewable video in the playlist, if: 1. The user has never selected a video to be the thumbnail of the playlist. 2. The user selects a video to be the thumbnail, and then removes that video from the playlist. 3. The user selects a non-owned video to be the thumbnail, but that video becomes private, or gets deleted.
@@ -8262,7 +8262,7 @@ data SearchResultSnippet = SearchResultSnippet
     -- | It indicates if the resource (video or channel) has upcoming\/active live broadcast content. Or it\'s \"none\" if there is not any upcoming\/active live broadcasts.
     liveBroadcastContent :: (Core.Maybe SearchResultSnippet_LiveBroadcastContent),
     -- | The creation date and time of the resource that the search result identifies.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | A map of thumbnail images associated with the search result. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
     thumbnails :: (Core.Maybe ThumbnailDetails),
     -- | The title of the search result.
@@ -8504,7 +8504,7 @@ data SubscriptionSnippet = SubscriptionSnippet
     -- | The subscription\'s details.
     description :: (Core.Maybe Core.Text),
     -- | The date and time that the subscription was created.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The id object contains information about the channel that the user subscribed to.
     resourceId :: (Core.Maybe ResourceId),
     -- | A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
@@ -8735,7 +8735,7 @@ data SuperChatEventSnippet = SuperChatEventSnippet
     -- | The text contents of the comment left by the user.
     commentText :: (Core.Maybe Core.Text),
     -- | The date and time when the event occurred.
-    createdAt :: (Core.Maybe Core.DateTime'),
+    createdAt :: (Core.Maybe Core.DateTime),
     -- | The currency in which the purchase was made. ISO 4217.
     currency :: (Core.Maybe Core.Text),
     -- | A rendered string that displays the purchase amount and currency (e.g., \"$1.00\"). The string is rendered for the given language.
@@ -10281,15 +10281,15 @@ data VideoLiveStreamingDetails = VideoLiveStreamingDetails
   { -- | The ID of the currently active live chat attached to this video. This field is filled only if the video is a currently live broadcast that has live chat. Once the broadcast transitions to complete this field will be removed and the live chat closed down. For persistent broadcasts that live chat id will no longer be tied to this video but rather to the new video being displayed at the persistent page.
     activeLiveChatId :: (Core.Maybe Core.Text),
     -- | The time that the broadcast actually ended. This value will not be available until the broadcast is over.
-    actualEndTime :: (Core.Maybe Core.DateTime'),
+    actualEndTime :: (Core.Maybe Core.DateTime),
     -- | The time that the broadcast actually started. This value will not be available until the broadcast begins.
-    actualStartTime :: (Core.Maybe Core.DateTime'),
+    actualStartTime :: (Core.Maybe Core.DateTime),
     -- | The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
     concurrentViewers :: (Core.Maybe Core.Word64),
     -- | The time that the broadcast is scheduled to end. If the value is empty or the property is not present, then the broadcast is scheduled to contiue indefinitely.
-    scheduledEndTime :: (Core.Maybe Core.DateTime'),
+    scheduledEndTime :: (Core.Maybe Core.DateTime),
     -- | The time that the broadcast is scheduled to begin.
-    scheduledStartTime :: (Core.Maybe Core.DateTime')
+    scheduledStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10641,7 +10641,7 @@ data VideoRecordingDetails = VideoRecordingDetails
     -- | The text description of the location where the video was recorded.
     locationDescription :: (Core.Maybe Core.Text),
     -- | The date and time when the video was recorded.
-    recordingDate :: (Core.Maybe Core.DateTime')
+    recordingDate :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10698,7 +10698,7 @@ data VideoSnippet = VideoSnippet
     -- | Localized snippet selected with the hl parameter. If no such localization exists, this field is populated with the default snippet. (Read-only)
     localized :: (Core.Maybe VideoLocalization),
     -- | The date and time when the video was uploaded.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | A list of keyword tags associated with the video. Tags may contain spaces.
     tags :: (Core.Maybe [Core.Text]),
     -- | A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
@@ -10844,7 +10844,7 @@ data VideoStatus = VideoStatus
     -- | This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled. \@mutable youtube.videos.insert youtube.videos.update
     publicStatsViewable :: (Core.Maybe Core.Bool),
     -- | The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private..
-    publishAt :: (Core.Maybe Core.DateTime'),
+    publishAt :: (Core.Maybe Core.DateTime),
     -- | This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected.
     rejectionReason :: (Core.Maybe VideoStatus_RejectionReason),
     -- |

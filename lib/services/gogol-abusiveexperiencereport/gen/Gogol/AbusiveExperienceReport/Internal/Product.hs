@@ -46,11 +46,11 @@ data SiteSummaryResponse = SiteSummaryResponse
   { -- | The site\'s Abusive Experience Report status.
     abusiveStatus :: (Core.Maybe SiteSummaryResponse_AbusiveStatus),
     -- | The time at which <https://support.google.com/webtools/answer/7538608 enforcement> against the site began or will begin. Not set when the filter_status is OFF.
-    enforcementTime :: (Core.Maybe Core.DateTime'),
+    enforcementTime :: (Core.Maybe Core.DateTime),
     -- | The site\'s <https://support.google.com/webtools/answer/7538608 enforcement status>.
     filterStatus :: (Core.Maybe SiteSummaryResponse_FilterStatus),
     -- | The time at which the site\'s status last changed.
-    lastChangeTime :: (Core.Maybe Core.DateTime'),
+    lastChangeTime :: (Core.Maybe Core.DateTime),
     -- | A link to the full Abusive Experience Report for the site. Not set in ViolatingSitesResponse. Note that you must complete the <https://support.google.com/webmasters/answer/9008080 Search Console verification process> for the site before you can access the full report.
     reportUrl :: (Core.Maybe Core.Text),
     -- | The name of the reviewed site, e.g. @google.com@.

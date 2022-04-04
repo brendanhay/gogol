@@ -69,7 +69,7 @@ type PartnersUpdateLeadsResource =
     Core.:> Core.QueryParam
               "requestMetadata.userOverrides.userId"
               Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -103,7 +103,7 @@ data PartnersUpdateLeads = PartnersUpdateLeads
     -- | Logged-in user ID to impersonate instead of the user\'s ID.
     requestMetadataUserOverridesUserId :: (Core.Maybe Core.Text),
     -- | Standard field mask for the set of fields to be updated. Required with at least 1 value in FieldMask\'s paths. Only @state@ and @adwords_customer_id@ are currently supported.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

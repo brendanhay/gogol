@@ -314,13 +314,13 @@ instance Core.ToJSON AppEngineRouting where
 -- /See:/ 'newAttempt' smart constructor.
 data Attempt = Attempt
   { -- | Output only. The time that this attempt was dispatched. @dispatch_time@ will be truncated to the nearest microsecond.
-    dispatchTime :: (Core.Maybe Core.DateTime'),
+    dispatchTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The response from the worker for this attempt. If @response_time@ is unset, then the task has not been attempted or is currently running and the @response_status@ field is meaningless.
     responseStatus :: (Core.Maybe Status),
     -- | Output only. The time that this attempt response was received. @response_time@ will be truncated to the nearest microsecond.
-    responseTime :: (Core.Maybe Core.DateTime'),
+    responseTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time that this attempt was scheduled. @schedule_time@ will be truncated to the nearest microsecond.
-    scheduleTime :: (Core.Maybe Core.DateTime')
+    scheduleTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1041,7 +1041,7 @@ data Queue = Queue
     -- | Caller-specified and required in CreateQueue, after which it becomes output only. The queue name. The queue name must have the following format: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@ * @PROJECT_ID@ can contain letters ([A-Za-z]), numbers ([0-9]), hyphens (-), colons (:), or periods (.). For more information, see <https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects Identifying projects> * @LOCATION_ID@ is the canonical ID for the queue\'s location. The list of available locations can be obtained by calling ListLocations. For more information, see https:\/\/cloud.google.com\/about\/locations\/. * @QUEUE_ID@ can contain letters ([A-Za-z]), numbers ([0-9]), or hyphens (-). The maximum length is 100 characters.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last time this queue was purged. All tasks that were created before this time were purged. A queue can be purged using PurgeQueue, the <https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue App Engine Task Queue SDK, or the Cloud Console>. Purge time will be truncated to the nearest microsecond. Purge time will be unset if the queue has never been purged.
-    purgeTime :: (Core.Maybe Core.DateTime'),
+    purgeTime :: (Core.Maybe Core.DateTime),
     -- | Rate limits for task dispatches. rate/limits and retry/config are related because they both control task attempts. However they control task attempts in different ways: * rate/limits controls the total rate of dispatches from a queue (i.e. all traffic dispatched from the queue, regardless of whether the dispatch is from a first attempt or a retry). * retry/config controls what happens to particular a task after its first attempt fails. That is, retry/config controls task retries (the second attempt, third attempt, etc). The queue\'s actual dispatch rate is the result of: * Number of tasks in the queue * User-specified throttling: rate/limits, retry_config, and the queue\'s state. * System throttling due to @429@ (Too Many Requests) or @503@ (Service Unavailable) responses from the worker, high error rates, or to smooth sudden large traffic spikes.
     rateLimits :: (Core.Maybe RateLimits),
     -- | Settings that determine the retry behavior. * For tasks created using Cloud Tasks: the queue-level retry settings apply to all tasks in the queue that were created using Cloud Tasks. Retry settings cannot be set on individual tasks. * For tasks created using the App Engine SDK: the queue-level retry settings apply to all tasks in the queue which do not have retry settings explicitly set on the task and were created by the App Engine SDK. See <https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks App Engine documentation>.
@@ -1172,13 +1172,13 @@ data RetryConfig = RetryConfig
   { -- | Number of attempts per task. Cloud Tasks will attempt the task @max_attempts@ times (that is, if the first attempt fails, then there will be @max_attempts - 1@ retries). Must be >= -1. If unspecified when the queue is created, Cloud Tasks will pick the default. -1 indicates unlimited attempts. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskretrylimit in queue.yaml\/xml>.
     maxAttempts :: (Core.Maybe Core.Int32),
     -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. @max_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters maxbackoffseconds in queue.yaml\/xml>.
-    maxBackoff :: (Core.Maybe Core.GDuration),
+    maxBackoff :: (Core.Maybe Core.Duration),
     -- | The time between retries will double @max_doublings@ times. A task\'s retry interval starts at min/backoff, then doubles @max_doublings@ times, then increases linearly, and finally retries at intervals of max/backoff up to max/attempts times. For example, if min/backoff is 10s, max/backoff is 300s, and @max_doublings@ is 3, then the a task will first be retried in 10s. The retry interval will double three times, and then increase linearly by 2^3 * 10s. Finally, the task will retry at intervals of max/backoff until the task has been attempted max_attempts times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, .... If unspecified when the queue is created, Cloud Tasks will pick the default. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters max_doublings in queue.yaml\/xml>.
     maxDoublings :: (Core.Maybe Core.Int32),
     -- | If positive, @max_retry_duration@ specifies the time limit for retrying a failed task, measured from when the task was first attempted. Once @max_retry_duration@ time has passed /and/ the task has been attempted max_attempts times, no further attempts will be made and the task will be deleted. If zero, then the task age is unlimited. If unspecified when the queue is created, Cloud Tasks will pick the default. @max_retry_duration@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskagelimit in queue.yaml\/xml>.
-    maxRetryDuration :: (Core.Maybe Core.GDuration),
+    maxRetryDuration :: (Core.Maybe Core.Duration),
     -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. @min_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters minbackoffseconds in queue.yaml\/xml>.
-    minBackoff :: (Core.Maybe Core.GDuration)
+    minBackoff :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1381,12 +1381,12 @@ data Task = Task
   { -- | HTTP request that is sent to the App Engine app handler. An App Engine task is a task that has AppEngineHttpRequest set.
     appEngineHttpRequest :: (Core.Maybe AppEngineHttpRequest),
     -- | Output only. The time that the task was created. @create_time@ will be truncated to the nearest second.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The number of attempts dispatched. This count includes attempts which have been dispatched but haven\'t received a response.
     dispatchCount :: (Core.Maybe Core.Int32),
     -- | The deadline for requests sent to the worker. If the worker does not respond by this deadline then the request is cancelled and the attempt is marked as a @DEADLINE_EXCEEDED@ failure. Cloud Tasks will retry the task according to the RetryConfig. Note that when the request is cancelled, Cloud Tasks will stop listening for the response, but whether the worker stops processing depends on the worker. For example, if the worker is stuck, it may not react to cancelled requests. The default and maximum values depend on the type of request: * For HTTP tasks, the default is 10 minutes. The deadline must be in the interval [15 seconds, 30 minutes]. * For App Engine tasks, 0 indicates that the request has the default deadline. The default deadline depends on the <https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling scaling type> of the service: 10 minutes for standard apps with automatic scaling, 24 hours for standard apps with manual and basic scaling, and 60 minutes for flex
     -- apps. If the request deadline is set, it must be in the interval [15 seconds, 24 hours 15 seconds]. Regardless of the task\'s @dispatch_deadline@, the app handler will not run for longer than than the service\'s timeout. We recommend setting the @dispatch_deadline@ to at most a few seconds more than the app handler\'s timeout. For more information see <https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts Timeouts>. @dispatch_deadline@ will be truncated to the nearest millisecond. The deadline is an approximate deadline.
-    dispatchDeadline :: (Core.Maybe Core.GDuration),
+    dispatchDeadline :: (Core.Maybe Core.Duration),
     -- | Output only. The status of the task\'s first attempt. Only dispatch_time will be set. The other Attempt information is not retained by Cloud Tasks.
     firstAttempt :: (Core.Maybe Attempt),
     -- | HTTP request that is sent to the worker. An HTTP task is a task that has HttpRequest set.
@@ -1398,7 +1398,7 @@ data Task = Task
     -- | Output only. The number of attempts which have received a response.
     responseCount :: (Core.Maybe Core.Int32),
     -- | The time when the task is scheduled to be attempted or retried. @schedule_time@ will be truncated to the nearest microsecond.
-    scheduleTime :: (Core.Maybe Core.DateTime'),
+    scheduleTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The view specifies which subset of the Task has been returned.
     view :: (Core.Maybe Task_View)
   }

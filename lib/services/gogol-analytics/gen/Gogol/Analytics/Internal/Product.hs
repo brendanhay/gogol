@@ -482,7 +482,7 @@ data Account = Account
   { -- | Child link for an account entry. Points to the list of web properties for this account.
     childLink :: (Core.Maybe Account_ChildLink),
     -- | Time the account was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Account ID.
     id :: (Core.Maybe Core.Text),
     -- | Resource type for Analytics account.
@@ -496,7 +496,7 @@ data Account = Account
     -- | Indicates whether this account is starred or not.
     starred :: (Core.Maybe Core.Bool),
     -- | Time the account was last modified.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1259,7 +1259,7 @@ data CustomDataSource = CustomDataSource
     -- |
     childLink :: (Core.Maybe CustomDataSource_ChildLink),
     -- | Time this custom data source was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Description of custom data source.
     description :: (Core.Maybe Core.Text),
     -- | Custom data source ID.
@@ -1281,7 +1281,7 @@ data CustomDataSource = CustomDataSource
     -- | Type of the custom data source.
     type' :: (Core.Maybe Core.Text),
     -- | Time this custom data source was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Upload type of the custom data source.
     uploadType :: (Core.Maybe Core.Text),
     -- | Web property ID of the form UA-XXXXX-YY to which this custom data source belongs.
@@ -1514,7 +1514,7 @@ data CustomDimension = CustomDimension
     -- | Boolean indicating whether the custom dimension is active.
     active :: (Core.Maybe Core.Bool),
     -- | Time the custom dimension was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Custom dimension ID.
     id :: (Core.Maybe Core.Text),
     -- | Index of the custom dimension.
@@ -1530,7 +1530,7 @@ data CustomDimension = CustomDimension
     -- | Link for the custom dimension
     selfLink :: (Core.Maybe Core.Text),
     -- | Time the custom dimension was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Property ID.
     webPropertyId :: (Core.Maybe Core.Text)
   }
@@ -1715,7 +1715,7 @@ data CustomMetric = CustomMetric
     -- | Boolean indicating whether the custom metric is active.
     active :: (Core.Maybe Core.Bool),
     -- | Time the custom metric was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Custom metric ID.
     id :: (Core.Maybe Core.Text),
     -- | Index of the custom metric.
@@ -1737,7 +1737,7 @@ data CustomMetric = CustomMetric
     -- | Data type of custom metric.
     type' :: (Core.Maybe Core.Text),
     -- | Time the custom metric was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Property ID.
     webPropertyId :: (Core.Maybe Core.Text)
   }
@@ -2295,13 +2295,13 @@ data Experiment = Experiment
   { -- | Account ID to which this experiment belongs. This field is read-only.
     accountId :: (Core.Maybe Core.Text),
     -- | Time the experiment was created. This field is read-only.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Notes about this experiment.
     description :: (Core.Maybe Core.Text),
     -- | If true, the end user will be able to edit the experiment via the Google Analytics user interface.
     editableInGaUi :: (Core.Maybe Core.Bool),
     -- | The ending time of the experiment (the time the status changed from RUNNING to ENDED). This field is present only if the experiment has ended. This field is read-only.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Boolean specifying whether to distribute traffic evenly across all variations. If the value is False, content experiments follows the default behavior of adjusting traffic dynamically based on variation performance. Optional -- defaults to False. This field may not be changed for an experiment whose status is ENDED.
     equalWeighting :: (Core.Maybe Core.Bool),
     -- | Experiment ID. Required for patch and update. Disallowed for create.
@@ -2334,13 +2334,13 @@ data Experiment = Experiment
     -- | The snippet of code to include on the control page(s). This field is read-only.
     snippet :: (Core.Maybe Core.Text),
     -- | The starting time of the experiment (the time the status changed from READY/TO/RUN to RUNNING). This field is present only if the experiment has started. This field is read-only.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Experiment status. Possible values: \"DRAFT\", \"READY/TO/RUN\", \"RUNNING\", \"ENDED\". Experiments can be created in the \"DRAFT\", \"READY/TO/RUN\" or \"RUNNING\" state. This field is required when creating an experiment.
     status :: (Core.Maybe Core.Text),
     -- | A floating-point number in (0, 1]. Specifies the fraction of the traffic that participates in the experiment. Can be changed for a running experiment. This field may not be changed for an experiments whose status is ENDED.
     trafficCoverage :: (Core.Maybe Core.Double),
     -- | Time the experiment was last modified. This field is read-only.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Array of variations. The first variation in the array is the original. The number of variations may not change once an experiment is in the RUNNING state. At least two variations are required before status can be set to RUNNING.
     variations :: (Core.Maybe [Experiment_VariationsItem]),
     -- | Web property ID to which this experiment belongs. The web property ID is of the form UA-XXXXX-YY. This field is read-only.
@@ -2632,7 +2632,7 @@ data Filter = Filter
     -- | Details for the filter of the type ADVANCED.
     advancedDetails :: (Core.Maybe Filter_AdvancedDetails),
     -- | Time this filter was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Details for the filter of the type EXCLUDE.
     excludeDetails :: (Core.Maybe FilterExpression),
     -- | Filter ID.
@@ -2654,7 +2654,7 @@ data Filter = Filter
     -- | Type of this filter. Possible values are INCLUDE, EXCLUDE, LOWERCASE, UPPERCASE, SEARCH/AND/REPLACE and ADVANCED.
     type' :: (Core.Maybe Core.Text),
     -- | Time this filter was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Details for the filter of the type UPPER.
     uppercaseDetails :: (Core.Maybe Filter_UppercaseDetails)
   }
@@ -3676,7 +3676,7 @@ data Goal = Goal
     -- | Determines whether this goal is active.
     active :: (Core.Maybe Core.Bool),
     -- | Time this goal was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Details for the goal of the type EVENT.
     eventDetails :: (Core.Maybe Goal_EventDetails),
     -- | Goal ID.
@@ -3696,7 +3696,7 @@ data Goal = Goal
     -- | Goal type. Possible values are URL/DESTINATION, VISIT/TIME/ON/SITE, VISIT/NUM/PAGES, AND EVENT.
     type' :: (Core.Maybe Core.Text),
     -- | Time this goal was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Details for the goal of the type URL_DESTINATION.
     urlDestinationDetails :: (Core.Maybe Goal_UrlDestinationDetails),
     -- | Goal value.
@@ -4841,7 +4841,7 @@ data Profile = Profile
     -- | Child link for this view (profile). Points to the list of goals for this view (profile).
     childLink :: (Core.Maybe Profile_ChildLink),
     -- | Time this view (profile) was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | The currency type associated with this view (profile), defaults to USD. The supported values are: USD, JPY, EUR, GBP, AUD, KRW, BRL, CNY, DKK, RUB, SEK, NOK, PLN, TRY, TWD, HKD, THB, IDR, ARS, MXN, VND, PHP, INR, CHF, CAD, CZK, NZD, HUF, BGN, LTL, ZAR, UAH, AED, BOB, CLP, COP, EGP, HRK, ILS, MAD, MYR, PEN, PKR, RON, RSD, SAR, SGD, VEF, LVL
     currency :: (Core.Maybe Core.Text),
     -- | Default page for this view (profile).
@@ -4881,7 +4881,7 @@ data Profile = Profile
     -- | View (Profile) type. Supported types: WEB or APP.
     type' :: (Core.Maybe Core.Text),
     -- | Time this view (profile) was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Web property ID of the form UA-XXXXX-YY to which this view (profile) belongs.
     webPropertyId :: (Core.Maybe Core.Text),
     -- | Website URL for this view (profile).
@@ -5703,7 +5703,7 @@ data RemarketingAudience = RemarketingAudience
     -- | The type of audience, either SIMPLE or STATE_BASED.
     audienceType :: (Core.Maybe Core.Text),
     -- | Time this remarketing audience was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | The description of this remarketing audience.
     description :: (Core.Maybe Core.Text),
     -- | Remarketing Audience ID.
@@ -5721,7 +5721,7 @@ data RemarketingAudience = RemarketingAudience
     -- | A state based audience definition that will cause a user to be added or removed from an audience.
     stateBasedAudienceDefinition :: (Core.Maybe RemarketingAudience_StateBasedAudienceDefinition),
     -- | Time this remarketing audience was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Web property ID of the form UA-XXXXX-YY to which this remarketing audience belongs.
     webPropertyId :: (Core.Maybe Core.Text)
   }
@@ -6010,7 +6010,7 @@ instance Core.ToJSON RemarketingAudiences where
 -- /See:/ 'newSegment' smart constructor.
 data Segment = Segment
   { -- | Time the segment was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Segment definition.
     definition :: (Core.Maybe Core.Text),
     -- | Segment ID.
@@ -6026,7 +6026,7 @@ data Segment = Segment
     -- | Type for a segment. Possible values are \"BUILT_IN\" or \"CUSTOM\".
     type' :: (Core.Maybe Core.Text),
     -- | Time the segment was last modified.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6157,7 +6157,7 @@ data UnsampledReport = UnsampledReport
     -- | Download details for a file stored in Google Cloud Storage.
     cloudStorageDownloadDetails :: (Core.Maybe UnsampledReport_CloudStorageDownloadDetails),
     -- | Time this unsampled report was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | The dimensions for the unsampled report.
     dimensions :: (Core.Maybe Core.Text),
     -- | The type of download you need to use for the report data file. Possible values include @GOOGLE_DRIVE@ and @GOOGLE_CLOUD_STORAGE@. If the value is @GOOGLE_DRIVE@, see the @driveDownloadDetails@ field. If the value is @GOOGLE_CLOUD_STORAGE@, see the @cloudStorageDownloadDetails@ field.
@@ -6187,7 +6187,7 @@ data UnsampledReport = UnsampledReport
     -- | Title of the unsampled report.
     title :: (Core.Maybe Core.Text),
     -- | Time this unsampled report was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Web property ID to which this unsampled report belongs. The web property ID is of the form UA-XXXXX-YY.
     webPropertyId :: (Core.Maybe Core.Text)
   }
@@ -6447,7 +6447,7 @@ data Upload = Upload
     -- | Upload status. Possible values: PENDING, COMPLETED, FAILED, DELETING, DELETED.
     status :: (Core.Maybe Core.Text),
     -- | Time this file is uploaded.
-    uploadTime :: (Core.Maybe Core.DateTime')
+    uploadTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6565,7 +6565,7 @@ instance Core.ToJSON Uploads where
 -- /See:/ 'newUserDeletionRequest' smart constructor.
 data UserDeletionRequest = UserDeletionRequest
   { -- | This marks the point in time for which all user data before should be deleted
-    deletionRequestTime :: (Core.Maybe Core.DateTime'),
+    deletionRequestTime :: (Core.Maybe Core.DateTime),
     -- | Firebase Project Id
     firebaseProjectId :: (Core.Maybe Core.Text),
     -- | User ID.
@@ -6912,7 +6912,7 @@ data Webproperty = Webproperty
     -- | Child link for this web property. Points to the list of views (profiles) for this web property.
     childLink :: (Core.Maybe Webproperty_ChildLink),
     -- | Time this web property was created.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | Set to true to reset the retention period of the user identifier with each new event from that user (thus setting the expiration date to current time plus retention period). Set to false to delete data associated with the user identifier automatically after the rentention period. This property cannot be set on insert.
     dataRetentionResetOnNewActivity :: (Core.Maybe Core.Bool),
     -- | The length of time for which user and event data is retained. This property cannot be set on insert.
@@ -6942,7 +6942,7 @@ data Webproperty = Webproperty
     -- | Indicates whether this web property is starred or not.
     starred :: (Core.Maybe Core.Bool),
     -- | Time this web property was last modified.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Website url for this web property.
     websiteUrl :: (Core.Maybe Core.Text)
   }

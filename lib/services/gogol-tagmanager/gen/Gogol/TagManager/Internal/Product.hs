@@ -1158,7 +1158,7 @@ data Environment = Environment
     -- | The environment authorization code.
     authorizationCode :: (Core.Maybe Core.Text),
     -- | The last update time-stamp for the authorization code.
-    authorizationTimestamp :: (Core.Maybe Core.DateTime'),
+    authorizationTimestamp :: (Core.Maybe Core.DateTime),
     -- | GTM Container ID.
     containerId :: (Core.Maybe Core.Text),
     -- | Represents a link to a container version.

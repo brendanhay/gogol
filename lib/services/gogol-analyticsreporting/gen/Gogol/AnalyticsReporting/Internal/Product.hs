@@ -236,7 +236,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newActivity' smart constructor.
 data Activity = Activity
   { -- | Timestamp of the activity. If activities for a visit cross midnight and occur in two separate dates, then two sessions (one per date) share the session identifier. For example, say session ID 113472 has activity within 2019-08-20, and session ID 243742 has activity within 2019-08-25 and 2019-08-26. Session ID 113472 is one session, and session ID 243742 is two sessions.
-    activityTime :: (Core.Maybe Core.DateTime'),
+    activityTime :: (Core.Maybe Core.DateTime),
     -- | Type of this activity.
     activityType :: (Core.Maybe Activity_ActivityType),
     -- | This will be set if @activity_type@ equals @SCREEN_VIEW@.
@@ -1608,7 +1608,7 @@ instance Core.ToJSON Report where
 -- /See:/ 'newReportData' smart constructor.
 data ReportData = ReportData
   { -- | The last time the data in the report was refreshed. All the hits received before this timestamp are included in the calculation of the report.
-    dataLastRefreshed :: (Core.Maybe Core.DateTime'),
+    dataLastRefreshed :: (Core.Maybe Core.DateTime),
     -- | If empty reason is specified, the report is empty for this reason.
     emptyReason :: (Core.Maybe Core.Text),
     -- | Indicates if response to this request is golden or not. Data is golden when the exact same request will not produce any new results if asked at a later point in time.

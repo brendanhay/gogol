@@ -164,7 +164,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newAccount' smart constructor.
 data Account = Account
   { -- | Output only. Creation time of the account.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Display name of this account.
     displayName :: (Core.Maybe Core.Text),
     -- | Resource name of the account. Format: accounts\/pub-[0-9]+

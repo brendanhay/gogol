@@ -262,7 +262,7 @@ data Attestor = Attestor
     -- | Required. The resource name, in the format: @projects\/*\/attestors\/*@. This field may not be updated.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Time when the attestor was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | This specifies how an attestation will be read, and how it will be used during policy enforcement.
     userOwnedGrafeasNote :: (Core.Maybe UserOwnedGrafeasNote)
   }
@@ -640,7 +640,7 @@ data Policy = Policy
     -- | Output only. The resource name, in the format @projects\/*\/policy@. There is at most one policy per project.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Time when the policy was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

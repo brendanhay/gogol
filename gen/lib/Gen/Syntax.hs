@@ -635,16 +635,16 @@ externalLit = \case
   RqBody -> TyCon () "Core.RequestBody"
   RsBody -> TyCon () "Core.Stream"
   JSONValue -> TyCon () "Core.Value"
-  GFieldMask -> TyCon () "Core.GFieldMask"
+  GFieldMask -> TyCon () "Core.FieldMask"
   GDuration -> TyCon () "Core.Scientific"
 
 internalLit :: Lit -> Type ()
 internalLit = \case
   Text -> TyCon () "Core.Text"
   Bool -> TyCon () "Core.Bool"
-  Time -> TyCon () "Core.Time'"
-  Date -> TyCon () "Core.Date'"
-  DateTime -> TyCon () "Core.DateTime'"
+  Time -> TyCon () "Core.Time"
+  Date -> TyCon () "Core.Date"
+  DateTime -> TyCon () "Core.DateTime"
   Base64 -> TyCon () "Core.Base64"
   Natural {} -> TyCon () "Core.Natural"
   Float {} -> TyCon () "Core.Double"
@@ -657,8 +657,8 @@ internalLit = \case
   RqBody -> TyCon () "Core.RequestBody"
   RsBody -> TyCon () "Core.Stream"
   JSONValue -> TyCon () "Core.Value"
-  GFieldMask -> TyCon () "Core.GFieldMask"
-  GDuration -> TyCon () "Core.GDuration"
+  GFieldMask -> TyCon () "Core.FieldMask"
+  GDuration -> TyCon () "Core.Duration"
 
 textual :: TType -> Bool
 textual = \case

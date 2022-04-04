@@ -58,7 +58,7 @@ type ComputeReservationsUpdateResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "paths" Core.Text
     Core.:> Core.QueryParam "requestId" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -86,7 +86,7 @@ data ComputeReservationsUpdate = ComputeReservationsUpdate
     -- | Name of the reservation to update.
     reservation :: Core.Text,
     -- | Update_mask indicates fields to be updated as part of this request.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

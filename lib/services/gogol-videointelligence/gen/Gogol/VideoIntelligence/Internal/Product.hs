@@ -1061,7 +1061,7 @@ data GoogleCloudVideointelligenceV1_ExplicitContentFrame = GoogleCloudVideointel
           GoogleCloudVideointelligenceV1_ExplicitContentFrame_PornographyLikelihood
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1210,7 +1210,7 @@ data GoogleCloudVideointelligenceV1_FaceFrame = GoogleCloudVideointelligenceV1_F
   { -- | Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
     normalizedBoundingBoxes :: (Core.Maybe [GoogleCloudVideointelligenceV1_NormalizedBoundingBox]),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1357,7 +1357,7 @@ data GoogleCloudVideointelligenceV1_LabelFrame = GoogleCloudVideointelligenceV1_
   { -- | Confidence that the label is accurate. Range: [0, 1].
     confidence :: (Core.Maybe Core.Double),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1704,7 +1704,7 @@ data GoogleCloudVideointelligenceV1_ObjectTrackingFrame = GoogleCloudVideointell
   { -- | The normalized bounding box location of this object track for the frame.
     normalizedBoundingBox :: (Core.Maybe GoogleCloudVideointelligenceV1_NormalizedBoundingBox),
     -- | The timestamp of the frame in microseconds.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1948,7 +1948,7 @@ data GoogleCloudVideointelligenceV1_TextFrame = GoogleCloudVideointelligenceV1_T
   { -- | Bounding polygon of the detected text for this frame.
     rotatedBoundingBox :: (Core.Maybe GoogleCloudVideointelligenceV1_NormalizedBoundingPoly),
     -- | Timestamp of this frame.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2048,7 +2048,7 @@ data GoogleCloudVideointelligenceV1_TimestampedObject = GoogleCloudVideointellig
     -- | Normalized Bounding box in a frame, where the object is located.
     normalizedBoundingBox :: (Core.Maybe GoogleCloudVideointelligenceV1_NormalizedBoundingBox),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this object.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2168,9 +2168,9 @@ data GoogleCloudVideointelligenceV1_VideoAnnotationProgress = GoogleCloudVideoin
     -- | Specifies which segment is being tracked if the request contains more than one segment.
     segment :: (Core.Maybe GoogleCloudVideointelligenceV1_VideoSegment),
     -- | Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Time of the most recent update.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2392,9 +2392,9 @@ instance
 -- /See:/ 'newGoogleCloudVideointelligenceV1_VideoSegment' smart constructor.
 data GoogleCloudVideointelligenceV1_VideoSegment = GoogleCloudVideointelligenceV1_VideoSegment
   { -- | Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).
-    endTimeOffset :: (Core.Maybe Core.GDuration),
+    endTimeOffset :: (Core.Maybe Core.Duration),
     -- | Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).
-    startTimeOffset :: (Core.Maybe Core.GDuration)
+    startTimeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2441,11 +2441,11 @@ data GoogleCloudVideointelligenceV1_WordInfo = GoogleCloudVideointelligenceV1_Wo
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endTime :: (Core.Maybe Core.GDuration),
+    endTime :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from 1 up to diarization/speaker/count, and is only set if speaker diarization is enabled.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startTime :: (Core.Maybe Core.GDuration),
+    startTime :: (Core.Maybe Core.Duration),
     -- | The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }
@@ -2799,7 +2799,7 @@ data GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame = GoogleCloudVideo
           GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame_PornographyLikelihood
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2951,7 +2951,7 @@ data GoogleCloudVideointelligenceV1beta2_FaceFrame = GoogleCloudVideointelligenc
           [GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox]
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3100,7 +3100,7 @@ data GoogleCloudVideointelligenceV1beta2_LabelFrame = GoogleCloudVideointelligen
   { -- | Confidence that the label is accurate. Range: [0, 1].
     confidence :: (Core.Maybe Core.Double),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3454,7 +3454,7 @@ data GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame = GoogleCloudVideoi
           GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox
       ),
     -- | The timestamp of the frame in microseconds.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3701,7 +3701,7 @@ data GoogleCloudVideointelligenceV1beta2_TextFrame = GoogleCloudVideointelligenc
           GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly
       ),
     -- | Timestamp of this frame.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3809,7 +3809,7 @@ data GoogleCloudVideointelligenceV1beta2_TimestampedObject = GoogleCloudVideoint
           GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this object.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3935,9 +3935,9 @@ data GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress = GoogleCloudVi
     -- | Specifies which segment is being tracked if the request contains more than one segment.
     segment :: (Core.Maybe GoogleCloudVideointelligenceV1beta2_VideoSegment),
     -- | Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Time of the most recent update.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4162,9 +4162,9 @@ instance
 -- /See:/ 'newGoogleCloudVideointelligenceV1beta2_VideoSegment' smart constructor.
 data GoogleCloudVideointelligenceV1beta2_VideoSegment = GoogleCloudVideointelligenceV1beta2_VideoSegment
   { -- | Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).
-    endTimeOffset :: (Core.Maybe Core.GDuration),
+    endTimeOffset :: (Core.Maybe Core.Duration),
     -- | Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).
-    startTimeOffset :: (Core.Maybe Core.GDuration)
+    startTimeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4211,11 +4211,11 @@ data GoogleCloudVideointelligenceV1beta2_WordInfo = GoogleCloudVideointelligence
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endTime :: (Core.Maybe Core.GDuration),
+    endTime :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from 1 up to diarization/speaker/count, and is only set if speaker diarization is enabled.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startTime :: (Core.Maybe Core.GDuration),
+    startTime :: (Core.Maybe Core.Duration),
     -- | The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }
@@ -4571,7 +4571,7 @@ data GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame = GoogleCloudVid
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame_PornographyLikelihood
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4723,7 +4723,7 @@ data GoogleCloudVideointelligenceV1p1beta1_FaceFrame = GoogleCloudVideointellige
           [GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox]
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4872,7 +4872,7 @@ data GoogleCloudVideointelligenceV1p1beta1_LabelFrame = GoogleCloudVideointellig
   { -- | Confidence that the label is accurate. Range: [0, 1].
     confidence :: (Core.Maybe Core.Double),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5229,7 +5229,7 @@ data GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame = GoogleCloudVide
           GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox
       ),
     -- | The timestamp of the frame in microseconds.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5476,7 +5476,7 @@ data GoogleCloudVideointelligenceV1p1beta1_TextFrame = GoogleCloudVideointellige
           GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly
       ),
     -- | Timestamp of this frame.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5587,7 +5587,7 @@ data GoogleCloudVideointelligenceV1p1beta1_TimestampedObject = GoogleCloudVideoi
           GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this object.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5714,9 +5714,9 @@ data GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress = GoogleCloud
     -- | Specifies which segment is being tracked if the request contains more than one segment.
     segment :: (Core.Maybe GoogleCloudVideointelligenceV1p1beta1_VideoSegment),
     -- | Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Time of the most recent update.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5956,9 +5956,9 @@ instance
 -- /See:/ 'newGoogleCloudVideointelligenceV1p1beta1_VideoSegment' smart constructor.
 data GoogleCloudVideointelligenceV1p1beta1_VideoSegment = GoogleCloudVideointelligenceV1p1beta1_VideoSegment
   { -- | Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).
-    endTimeOffset :: (Core.Maybe Core.GDuration),
+    endTimeOffset :: (Core.Maybe Core.Duration),
     -- | Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).
-    startTimeOffset :: (Core.Maybe Core.GDuration)
+    startTimeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6005,11 +6005,11 @@ data GoogleCloudVideointelligenceV1p1beta1_WordInfo = GoogleCloudVideointelligen
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endTime :: (Core.Maybe Core.GDuration),
+    endTime :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from 1 up to diarization/speaker/count, and is only set if speaker diarization is enabled.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startTime :: (Core.Maybe Core.GDuration),
+    startTime :: (Core.Maybe Core.Duration),
     -- | The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }
@@ -6365,7 +6365,7 @@ data GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame = GoogleCloudVid
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame_PornographyLikelihood
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6517,7 +6517,7 @@ data GoogleCloudVideointelligenceV1p2beta1_FaceFrame = GoogleCloudVideointellige
           [GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox]
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6666,7 +6666,7 @@ data GoogleCloudVideointelligenceV1p2beta1_LabelFrame = GoogleCloudVideointellig
   { -- | Confidence that the label is accurate. Range: [0, 1].
     confidence :: (Core.Maybe Core.Double),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7023,7 +7023,7 @@ data GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame = GoogleCloudVide
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
       ),
     -- | The timestamp of the frame in microseconds.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7270,7 +7270,7 @@ data GoogleCloudVideointelligenceV1p2beta1_TextFrame = GoogleCloudVideointellige
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
       ),
     -- | Timestamp of this frame.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7381,7 +7381,7 @@ data GoogleCloudVideointelligenceV1p2beta1_TimestampedObject = GoogleCloudVideoi
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this object.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7508,9 +7508,9 @@ data GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress = GoogleCloud
     -- | Specifies which segment is being tracked if the request contains more than one segment.
     segment :: (Core.Maybe GoogleCloudVideointelligenceV1p2beta1_VideoSegment),
     -- | Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Time of the most recent update.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7750,9 +7750,9 @@ instance
 -- /See:/ 'newGoogleCloudVideointelligenceV1p2beta1_VideoSegment' smart constructor.
 data GoogleCloudVideointelligenceV1p2beta1_VideoSegment = GoogleCloudVideointelligenceV1p2beta1_VideoSegment
   { -- | Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).
-    endTimeOffset :: (Core.Maybe Core.GDuration),
+    endTimeOffset :: (Core.Maybe Core.Duration),
     -- | Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).
-    startTimeOffset :: (Core.Maybe Core.GDuration)
+    startTimeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7799,11 +7799,11 @@ data GoogleCloudVideointelligenceV1p2beta1_WordInfo = GoogleCloudVideointelligen
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endTime :: (Core.Maybe Core.GDuration),
+    endTime :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from 1 up to diarization/speaker/count, and is only set if speaker diarization is enabled.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startTime :: (Core.Maybe Core.GDuration),
+    startTime :: (Core.Maybe Core.Duration),
     -- | The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }
@@ -8413,7 +8413,7 @@ data GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame = GoogleCloudVid
           GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame_PornographyLikelihood
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8618,7 +8618,7 @@ data GoogleCloudVideointelligenceV1p3beta1_FaceFrame = GoogleCloudVideointellige
           [GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox]
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8835,7 +8835,7 @@ data GoogleCloudVideointelligenceV1p3beta1_LabelFrame = GoogleCloudVideointellig
   { -- | Confidence that the label is accurate. Range: [0, 1].
     confidence :: (Core.Maybe Core.Double),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9230,7 +9230,7 @@ data GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame = GoogleCloudVide
           GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox
       ),
     -- | The timestamp of the frame in microseconds.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9743,7 +9743,7 @@ data GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults = Goo
           GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation
       ),
     -- | Timestamp of the processed frame in microseconds.
-    frameTimestamp :: (Core.Maybe Core.GDuration),
+    frameTimestamp :: (Core.Maybe Core.Duration),
     -- | Label annotation results.
     labelAnnotations ::
       ( Core.Maybe
@@ -9914,7 +9914,7 @@ data GoogleCloudVideointelligenceV1p3beta1_TextFrame = GoogleCloudVideointellige
           GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly
       ),
     -- | Timestamp of this frame.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10025,7 +10025,7 @@ data GoogleCloudVideointelligenceV1p3beta1_TimestampedObject = GoogleCloudVideoi
           GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox
       ),
     -- | Time-offset, relative to the beginning of the video, corresponding to the video frame for this object.
-    timeOffset :: (Core.Maybe Core.GDuration)
+    timeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10152,9 +10152,9 @@ data GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress = GoogleCloud
     -- | Specifies which segment is being tracked if the request contains more than one segment.
     segment :: (Core.Maybe GoogleCloudVideointelligenceV1p3beta1_VideoSegment),
     -- | Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Time of the most recent update.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10516,9 +10516,9 @@ instance
 -- /See:/ 'newGoogleCloudVideointelligenceV1p3beta1_VideoSegment' smart constructor.
 data GoogleCloudVideointelligenceV1p3beta1_VideoSegment = GoogleCloudVideointelligenceV1p3beta1_VideoSegment
   { -- | Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).
-    endTimeOffset :: (Core.Maybe Core.GDuration),
+    endTimeOffset :: (Core.Maybe Core.Duration),
     -- | Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).
-    startTimeOffset :: (Core.Maybe Core.GDuration)
+    startTimeOffset :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10565,11 +10565,11 @@ data GoogleCloudVideointelligenceV1p3beta1_WordInfo = GoogleCloudVideointelligen
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endTime :: (Core.Maybe Core.GDuration),
+    endTime :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from 1 up to diarization/speaker/count, and is only set if speaker diarization is enabled.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startTime :: (Core.Maybe Core.GDuration),
+    startTime :: (Core.Maybe Core.Duration),
     -- | The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }

@@ -54,7 +54,7 @@ type SqlConnectGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "readTime" Core.DateTime'
+    Core.:> Core.QueryParam "readTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -75,7 +75,7 @@ data SqlConnectGet = SqlConnectGet
     -- | Project ID of the project that contains the instance.
     project :: Core.Text,
     -- | Optional. Optional snapshot read timestamp to trade freshness for performance.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

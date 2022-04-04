@@ -52,8 +52,8 @@ type AdminCustomersChromePrintersPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "clearMask" Core.GFieldMask
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "clearMask" Core.FieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -71,13 +71,13 @@ data AdminCustomersChromePrintersPatch = AdminCustomersChromePrintersPatch
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | The list of fields to be cleared. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
-    clearMask :: (Core.Maybe Core.GFieldMask),
+    clearMask :: (Core.Maybe Core.FieldMask),
     -- | The resource name of the Printer object, in the format customers\/{customer-id}\/printers\/{printer-id} (During printer creation leave empty)
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Printer,
     -- | The list of fields to be updated. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

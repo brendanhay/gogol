@@ -403,7 +403,7 @@ instance Core.ToJSON GroupItemResource where
 -- /See:/ 'newGroupSnippet' smart constructor.
 data GroupSnippet = GroupSnippet
   { -- | The date and time that the group was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
-    publishedAt :: (Core.Maybe Core.DateTime'),
+    publishedAt :: (Core.Maybe Core.DateTime),
     -- | The group name. The value must be a non-empty string.
     title :: (Core.Maybe Core.Text)
   }

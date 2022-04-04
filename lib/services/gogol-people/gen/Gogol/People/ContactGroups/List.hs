@@ -50,7 +50,7 @@ type PeopleContactGroupsListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "groupFields" Core.GFieldMask
+    Core.:> Core.QueryParam "groupFields" Core.FieldMask
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "syncToken" Core.Text
@@ -70,7 +70,7 @@ data PeopleContactGroupsList = PeopleContactGroupsList
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Optional. A field mask to restrict which fields on the group are returned. Defaults to @metadata@, @groupType@, @memberCount@, and @name@ if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name
-    groupFields :: (Core.Maybe Core.GFieldMask),
+    groupFields :: (Core.Maybe Core.FieldMask),
     -- | Optional. The maximum number of resources to return. Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. The next/page/token value returned from a previous call to </people/api/rest/v1/contactgroups/list ListContactGroups>. Requests the next page of resources.

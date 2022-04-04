@@ -392,7 +392,7 @@ import Gogol.SQLAdmin.Internal.Sum
 -- /See:/ 'newAclEntry' smart constructor.
 data AclEntry = AclEntry
   { -- | The time when this access control entry expires in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | This is always @sql#aclEntry@.
     kind :: (Core.Maybe Core.Text),
     -- | Optional. A label to identify this entry.
@@ -647,9 +647,9 @@ data BackupRun = BackupRun
     -- | Encryption status specific to a backup.
     diskEncryptionStatus :: (Core.Maybe DiskEncryptionStatus),
     -- | The time the backup operation completed in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The time the run was enqueued in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    enqueuedTime :: (Core.Maybe Core.DateTime'),
+    enqueuedTime :: (Core.Maybe Core.DateTime),
     -- | Information about why the backup operation failed. This is only present if the run has the FAILED status.
     error :: (Core.Maybe OperationError),
     -- | The identifier for this backup run. Unique only for a specific Cloud SQL instance.
@@ -663,13 +663,13 @@ data BackupRun = BackupRun
     -- | The URI of this resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | The time the backup operation actually started in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The status of this run.
     status :: (Core.Maybe BackupRun_Status),
     -- | The type of this run; can be either \"AUTOMATED\" or \"ON/DEMAND\". This field defaults to \"ON/DEMAND\" and is ignored, when specified for insert requests.
     type' :: (Core.Maybe BackupRun_Type),
     -- | The start time of the backup window during which this the backup was attempted in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    windowStartTime :: (Core.Maybe Core.DateTime')
+    windowStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -850,7 +850,7 @@ data CloneContext = CloneContext
     -- | Reserved for future use.
     pitrTimestampMs :: (Core.Maybe Core.Int64),
     -- | Timestamp, if specified, identifies the time to which the source instance is cloned.
-    pointInTime :: (Core.Maybe Core.DateTime')
+    pointInTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1077,7 +1077,7 @@ data DatabaseInstance = DatabaseInstance
     -- | Connection name of the Cloud SQL instance used in connection strings.
     connectionName :: (Core.Maybe Core.Text),
     -- | Output only. The time when the instance was created in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The current disk usage of the instance in bytes. This property has been deprecated. Use the \"cloudsql.googleapis.com\/database\/disk\/bytes_used\" metric in Cloud Monitoring API instead. Please see <https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ this announcement> for details.
     currentDiskSize :: (Core.Maybe Core.Int64),
     -- | Output only. Stores the current database version running on the instance including minor version such as @MYSQL_8_0_18@.
@@ -2023,9 +2023,9 @@ data GenerateEphemeralCertRequest = GenerateEphemeralCertRequest
     -- | PEM encoded public key to include in the signed certificate.
     publicKey :: (Core.Maybe Core.Text),
     -- | Optional. Optional snapshot read timestamp to trade freshness for performance.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | Optional. If set, it will contain the cert valid duration.
-    validDuration :: (Core.Maybe Core.GDuration)
+    validDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2822,7 +2822,7 @@ data IpMapping = IpMapping
   { -- | The IP address assigned.
     ipAddress :: (Core.Maybe Core.Text),
     -- | The due time for this IP to be retired in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@. This field is only available when the IP is scheduled to be retired.
-    timeToRetire :: (Core.Maybe Core.DateTime'),
+    timeToRetire :: (Core.Maybe Core.DateTime),
     -- | The type of this IP address. A @PRIMARY@ address is a public address that can accept incoming connections. A @PRIVATE@ address is a private address that can accept incoming connections. An @OUTGOING@ address is the source address of connections originating from the instance, if supported.
     type' :: (Core.Maybe IpMapping_Type)
   }
@@ -3160,7 +3160,7 @@ data Operation = Operation
   { -- | The context for backup operation, if applicable.
     backupContext :: (Core.Maybe BackupContext),
     -- | The time this operation finished in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | If errors occurred during processing of this operation, this field will be populated.
     error :: (Core.Maybe OperationErrors),
     -- | The context for export operation, if applicable.
@@ -3168,7 +3168,7 @@ data Operation = Operation
     -- | The context for import operation, if applicable.
     importContext :: (Core.Maybe ImportContext),
     -- | The time this operation was enqueued in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    insertTime :: (Core.Maybe Core.DateTime'),
+    insertTime :: (Core.Maybe Core.DateTime),
     -- | This is always @sql#operation@.
     kind :: (Core.Maybe Core.Text),
     -- | An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
@@ -3178,7 +3178,7 @@ data Operation = Operation
     -- | The URI of this resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | The time this operation actually started in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The status of an operation.
     status :: (Core.Maybe Operation_Status),
     -- | Name of the database instance related to this operation.
@@ -3393,7 +3393,7 @@ data PasswordStatus = PasswordStatus
   { -- | If true, user does not have login privileges.
     locked :: (Core.Maybe Core.Bool),
     -- | The expiration time of the current password.
-    passwordExpirationTime :: (Core.Maybe Core.DateTime')
+    passwordExpirationTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3434,7 +3434,7 @@ data PasswordValidationPolicy = PasswordValidationPolicy
     -- | Minimum number of characters allowed.
     minLength :: (Core.Maybe Core.Int32),
     -- | Minimum interval after which the password can be changed. This flag is only supported for PostgresSQL.
-    passwordChangeInterval :: (Core.Maybe Core.GDuration),
+    passwordChangeInterval :: (Core.Maybe Core.Duration),
     -- | Number of previous passwords that cannot be reused.
     reuseInterval :: (Core.Maybe Core.Int32)
   }
@@ -3530,7 +3530,7 @@ data Reschedule = Reschedule
   { -- | Required. The type of the reschedule.
     rescheduleType :: (Core.Maybe Reschedule_RescheduleType),
     -- | Optional. Timestamp when the maintenance shall be rescheduled to if reschedule/type=SPECIFIC/TIME, in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    scheduleTime :: (Core.Maybe Core.DateTime')
+    scheduleTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4183,9 +4183,9 @@ data SqlScheduledMaintenance = SqlScheduledMaintenance
     -- | If the scheduled maintenance can be rescheduled.
     canReschedule :: (Core.Maybe Core.Bool),
     -- | Maintenance cannot be rescheduled to start beyond this deadline.
-    scheduleDeadlineTime :: (Core.Maybe Core.DateTime'),
+    scheduleDeadlineTime :: (Core.Maybe Core.DateTime),
     -- | The start time of any upcoming scheduled maintenance for this instance.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4346,9 +4346,9 @@ data SslCert = SslCert
     -- | User supplied name. Constrained to [a-zA-Z.-_ ]+.
     commonName :: (Core.Maybe Core.Text),
     -- | The time when the certificate was created in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time when the certificate expires in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | Name of the database instance.
     instance' :: (Core.Maybe Core.Text),
     -- | This is always @sql#sslCert@.
@@ -4850,7 +4850,7 @@ data UserPasswordValidationPolicy = UserPasswordValidationPolicy
     -- | If true, failed login attempts check will be enabled.
     enableFailedAttemptsCheck :: (Core.Maybe Core.Bool),
     -- | Expiration duration after password is updated.
-    passwordExpirationDuration :: (Core.Maybe Core.GDuration),
+    passwordExpirationDuration :: (Core.Maybe Core.Duration),
     -- | Output only. Read-only password status.
     status :: (Core.Maybe PasswordStatus)
   }

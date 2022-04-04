@@ -223,7 +223,7 @@ data DataSource = DataSource
     -- | Disables backfilling and manual run scheduling for the data source.
     manualRunsDisabled :: (Core.Maybe Core.Bool),
     -- | The minimum interval for scheduler to schedule runs.
-    minimumScheduleInterval :: (Core.Maybe Core.GDuration),
+    minimumScheduleInterval :: (Core.Maybe Core.Duration),
     -- | Output only. Data source resource name.
     name :: (Core.Maybe Core.Text),
     -- | Data source parameters.
@@ -826,9 +826,9 @@ data ScheduleOptions = ScheduleOptions
   { -- | If true, automatic scheduling of data transfer runs for this configuration will be disabled. The runs can be started on ad-hoc basis using StartManualTransferRuns API. When automatic scheduling is disabled, the TransferConfig.schedule field will be ignored.
     disableAutoScheduling :: (Core.Maybe Core.Bool),
     -- | Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -869,9 +869,9 @@ instance Core.ToJSON ScheduleOptions where
 -- /See:/ 'newScheduleTransferRunsRequest' smart constructor.
 data ScheduleTransferRunsRequest = ScheduleTransferRunsRequest
   { -- | Required. End time of the range of transfer runs. For example, @\"2017-05-30T00:00:00+00:00\"@.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required. Start time of the range of transfer runs. For example, @\"2017-05-25T00:00:00+00:00\"@.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -934,7 +934,7 @@ instance Core.ToJSON ScheduleTransferRunsResponse where
 -- /See:/ 'newStartManualTransferRunsRequest' smart constructor.
 data StartManualTransferRunsRequest = StartManualTransferRunsRequest
   { -- | Specific run/time for a transfer run to be started. The requested/run_time must not be in the future.
-    requestedRunTime :: (Core.Maybe Core.DateTime'),
+    requestedRunTime :: (Core.Maybe Core.DateTime),
     -- | Time range for the transfer runs that should be started.
     requestedTimeRange :: (Core.Maybe TimeRange)
   }
@@ -1074,9 +1074,9 @@ instance Core.ToJSON Status_DetailsItem where
 -- /See:/ 'newTimeRange' smart constructor.
 data TimeRange = TimeRange
   { -- | End time of the range of transfer runs. For example, @\"2017-05-30T00:00:00+00:00\"@. The end/time must not be in the future. Creates transfer runs where run/time is in the range between start/time (inclusive) and end/time (exclusive).
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Start time of the range of transfer runs. For example, @\"2017-05-25T00:00:00+00:00\"@. The start/time must be strictly less than the end/time. Creates transfer runs where run/time is in the range between start/time (inclusive) and end_time (exclusive).
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1125,7 +1125,7 @@ data TransferConfig = TransferConfig
     -- | The resource name of the transfer config. Transfer config names have the form @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@. Where @config_id@ is usually a uuid, even though it is not guaranteed or required. The name is ignored when creating a transfer config.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Next time when data transfer will run.
-    nextRunTime :: (Core.Maybe Core.DateTime'),
+    nextRunTime :: (Core.Maybe Core.DateTime),
     -- | Pub\/Sub topic where notifications will be sent after transfer runs associated with this transfer config finish. The format for specifying a pubsub topic is: @projects\/{project}\/topics\/{topic}@
     notificationPubsubTopic :: (Core.Maybe Core.Text),
     -- | Output only. Information about the user whose credentials are used to transfer data. Populated only for @transferConfigs.get@ requests. In case the user information is not available, this field will not be populated.
@@ -1139,7 +1139,7 @@ data TransferConfig = TransferConfig
     -- | Output only. State of the most recently updated transfer run.
     state :: (Core.Maybe TransferConfig_State),
     -- | Output only. Data transfer modification time. Ignored by server on input.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Deprecated. Unique ID of the user on whose behalf transfer is done.
     userId :: (Core.Maybe Core.Int64)
   }
@@ -1260,7 +1260,7 @@ data TransferMessage = TransferMessage
   { -- | Message text.
     messageText :: (Core.Maybe Core.Text),
     -- | Time when message was logged.
-    messageTime :: (Core.Maybe Core.DateTime'),
+    messageTime :: (Core.Maybe Core.DateTime),
     -- | Message severity.
     severity :: (Core.Maybe TransferMessage_Severity)
   }
@@ -1308,7 +1308,7 @@ data TransferRun = TransferRun
     -- | Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.
     emailPreferences :: (Core.Maybe EmailPreferences),
     -- | Output only. Time when transfer run ended. Parameter ignored by server for input requests.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Status of the transfer run.
     errorStatus :: (Core.Maybe Status),
     -- | The resource name of the transfer run. Transfer run names have the form @projects\/{project_id}\/locations\/{location}\/transferConfigs\/{config_id}\/runs\/{run_id}@. The name is ignored when creating a transfer run.
@@ -1318,17 +1318,17 @@ data TransferRun = TransferRun
     -- | Output only. Parameters specific to each data source. For more information see the bq tab in the \'Setting up a data transfer\' section for each data source. For example the parameters for Cloud Storage transfers are listed here: https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
     params :: (Core.Maybe TransferRun_Params),
     -- | For batch transfer runs, specifies the date and time of the data should be ingested.
-    runTime :: (Core.Maybe Core.DateTime'),
+    runTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Describes the schedule of this transfer run if it was created as part of a regular schedule. For batch transfer runs that are scheduled manually, this is empty. NOTE: the system might choose to delay the schedule depending on the current load, so @schedule_time@ doesn\'t always match this.
     schedule :: (Core.Maybe Core.Text),
     -- | Minimum time after which a transfer run can be started.
-    scheduleTime :: (Core.Maybe Core.DateTime'),
+    scheduleTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Time when transfer run was started. Parameter ignored by server for input requests.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Data transfer run state. Ignored for input requests.
     state :: (Core.Maybe TransferRun_State),
     -- | Output only. Last time the data transfer run state was updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Deprecated. Unique ID of the user on whose behalf transfer is done.
     userId :: (Core.Maybe Core.Int64)
   }

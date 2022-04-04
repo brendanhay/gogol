@@ -593,7 +593,7 @@ instance Core.ToJSON ApprovalConfig where
 -- /See:/ 'newApprovalResult' smart constructor.
 data ApprovalResult = ApprovalResult
   { -- | Output only. The time when the approval decision was made.
-    approvalTime :: (Core.Maybe Core.DateTime'),
+    approvalTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Email of the user that called the ApproveBuild API to approve or reject a build at the time that the API was called.
     approverAccount :: (Core.Maybe Core.Text),
     -- | Optional. An optional comment for this manual approval result.
@@ -876,11 +876,11 @@ instance
 -- /See:/ 'newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata' smart constructor.
 data BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata = BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | The name of the @BitbucketServerConfig@ that added connected repositories. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{config}@
     config :: (Core.Maybe Core.Text),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -931,7 +931,7 @@ data BitbucketServerConfig = BitbucketServerConfig
     -- | Output only. Connected Bitbucket Server repositories for this config.
     connectedRepositories :: (Core.Maybe [BitbucketServerRepositoryId]),
     -- | Time when the config was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. Immutable. The URI of the Bitbucket Server host. Once this field has been set, it cannot be changed. If you need to change it, please create another BitbucketServerConfig.
     hostUri :: (Core.Maybe Core.Text),
     -- | The resource name for the config.
@@ -1273,11 +1273,11 @@ data Build = Build
     -- | Output only. The ID of the @BuildTrigger@ that triggered this build, if it was triggered automatically.
     buildTriggerId :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the request to create the build was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Contains information about the build when status=FAILURE.
     failureInfo :: (Core.Maybe FailureInfo),
     -- | Output only. Time at which execution of the build was finished. The difference between finish/time and start/time is the duration of the build\'s execution.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Unique identifier of the build.
     id :: (Core.Maybe Core.Text),
     -- | A list of images to be pushed upon the successful completion of all build steps. The images are pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the @Build@ resource\'s results field. If any of the images fail to be pushed, the build status is marked @FAILURE@.
@@ -1293,7 +1293,7 @@ data Build = Build
     -- | Output only. ID of the project.
     projectId :: (Core.Maybe Core.Text),
     -- | TTL in queue for this build. If provided and the build is enqueued longer than this value, the build will expire and the build status will be @EXPIRED@. The TTL starts ticking from create_time.
-    queueTtl :: (Core.Maybe Core.GDuration),
+    queueTtl :: (Core.Maybe Core.Duration),
     -- | Output only. Results of the build.
     results :: (Core.Maybe Results),
     -- | Secrets to decrypt using Cloud Key Management Service. Note: Secret Manager is the recommended technique for managing sensitive data with Cloud Build. Use @available_secrets@ to configure builds to access secrets from Secret Manager. For instructions, see: https:\/\/cloud.google.com\/cloud-build\/docs\/securing-builds\/use-secrets
@@ -1305,7 +1305,7 @@ data Build = Build
     -- | Output only. A permanent fixed identifier for source.
     sourceProvenance :: (Core.Maybe SourceProvenance),
     -- | Output only. Time at which execution of the build was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Status of the build.
     status :: (Core.Maybe Build_Status),
     -- | Output only. Customer-readable message about the current status.
@@ -1317,7 +1317,7 @@ data Build = Build
     -- | Tags for annotation of a @Build@. These are not docker tags.
     tags :: (Core.Maybe [Core.Text]),
     -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is ten minutes.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
     timing :: (Core.Maybe Build_Timing),
     -- | Output only. Non-fatal problems encountered during the execution of the build.
@@ -1691,7 +1691,7 @@ data BuildStep = BuildStep
     -- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
     status :: (Core.Maybe BuildStep_Status),
     -- | Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | Output only. Stores timing information for executing this build step.
     timing :: (Core.Maybe TimeSpan),
     -- | List of volumes to mount into the build step. Each volume is created as an empty volume prior to execution of the build step. Upon completion of the build, volumes and their contents are discarded. Using a named volume in only one step is not valid as it is indicative of a build request with an incorrect configuration.
@@ -1778,7 +1778,7 @@ data BuildTrigger = BuildTrigger
     -- | Contents of the build template.
     build :: (Core.Maybe Build),
     -- | Output only. Time when the trigger was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Human-readable description of this trigger.
     description :: (Core.Maybe Core.Text),
     -- | If true, the trigger will never automatically execute a build.
@@ -2060,9 +2060,9 @@ data CreateBitbucketServerConfigOperationMetadata = CreateBitbucketServerConfigO
   { -- | The resource name of the BitbucketServerConfig to be created. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
     bitbucketServerConfig :: (Core.Maybe Core.Text),
     -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2157,9 +2157,9 @@ instance
 -- /See:/ 'newCreateGitHubEnterpriseConfigOperationMetadata' smart constructor.
 data CreateGitHubEnterpriseConfigOperationMetadata = CreateGitHubEnterpriseConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitHubEnterprise to be created. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
     githubEnterpriseConfig :: (Core.Maybe Core.Text)
   }
@@ -2209,9 +2209,9 @@ instance
 -- /See:/ 'newCreateGitLabConfigOperationMetadata' smart constructor.
 data CreateGitLabConfigOperationMetadata = CreateGitLabConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
     gitlabConfig :: (Core.Maybe Core.Text)
   }
@@ -2259,9 +2259,9 @@ instance
 -- /See:/ 'newCreateWorkerPoolOperationMetadata' smart constructor.
 data CreateWorkerPoolOperationMetadata = CreateWorkerPoolOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the @WorkerPool@ to create. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
     workerPool :: (Core.Maybe Core.Text)
   }
@@ -2311,9 +2311,9 @@ data DeleteBitbucketServerConfigOperationMetadata = DeleteBitbucketServerConfigO
   { -- | The resource name of the BitbucketServerConfig to be deleted. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
     bitbucketServerConfig :: (Core.Maybe Core.Text),
     -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2361,9 +2361,9 @@ instance
 -- /See:/ 'newDeleteGitHubEnterpriseConfigOperationMetadata' smart constructor.
 data DeleteGitHubEnterpriseConfigOperationMetadata = DeleteGitHubEnterpriseConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitHubEnterprise to be deleted. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
     githubEnterpriseConfig :: (Core.Maybe Core.Text)
   }
@@ -2413,9 +2413,9 @@ instance
 -- /See:/ 'newDeleteGitLabConfigOperationMetadata' smart constructor.
 data DeleteGitLabConfigOperationMetadata = DeleteGitLabConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
     gitlabConfig :: (Core.Maybe Core.Text)
   }
@@ -2463,9 +2463,9 @@ instance
 -- /See:/ 'newDeleteWorkerPoolOperationMetadata' smart constructor.
 data DeleteWorkerPoolOperationMetadata = DeleteWorkerPoolOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the @WorkerPool@ being deleted. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
     workerPool :: (Core.Maybe Core.Text)
   }
@@ -2658,7 +2658,7 @@ data GitHubEnterpriseConfig = GitHubEnterpriseConfig
   { -- | Required. The GitHub app id of the Cloud Build app on the GitHub Enterprise server.
     appId :: (Core.Maybe Core.Int64),
     -- | Output only. Time when the installation was associated with the project.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Name to display for this config.
     displayName :: (Core.Maybe Core.Text),
     -- | The URL of the github enterprise host the configuration is for.
@@ -2924,9 +2924,9 @@ data GoogleDevtoolsCloudbuildV2OperationMetadata = GoogleDevtoolsCloudbuildV2Ope
   { -- | Output only. API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
     -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     requestedCancellation :: (Core.Maybe Core.Bool),
     -- | Output only. Human-readable status of the operation, if any.
@@ -3857,9 +3857,9 @@ data OperationMetadata = OperationMetadata
     -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Human-readable status of the operation, if any.
     statusDetail :: (Core.Maybe Core.Text),
     -- | Output only. Server-defined resource path for the target of the operation.
@@ -3981,9 +3981,9 @@ instance Core.ToJSON PrivatePoolV1Config where
 -- /See:/ 'newProcessAppManifestCallbackOperationMetadata' smart constructor.
 data ProcessAppManifestCallbackOperationMetadata = ProcessAppManifestCallbackOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitHubEnterprise to be created. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
     githubEnterpriseConfig :: (Core.Maybe Core.Text)
   }
@@ -4484,9 +4484,9 @@ data RunWorkflowCustomOperationMetadata = RunWorkflowCustomOperationMetadata
   { -- | Output only. API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
     -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. ID of the pipeline run created by RunWorkflow.
     pipelineRunId :: (Core.Maybe Core.Text),
     -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
@@ -5061,9 +5061,9 @@ instance Core.ToJSON StorageSourceManifest where
 -- /See:/ 'newTimeSpan' smart constructor.
 data TimeSpan = TimeSpan
   { -- | End of time span.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Start of time span.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5098,9 +5098,9 @@ data UpdateBitbucketServerConfigOperationMetadata = UpdateBitbucketServerConfigO
   { -- | The resource name of the BitbucketServerConfig to be updated. Format: @projects\/{project}\/locations\/{location}\/bitbucketServerConfigs\/{id}@.
     bitbucketServerConfig :: (Core.Maybe Core.Text),
     -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5148,9 +5148,9 @@ instance
 -- /See:/ 'newUpdateGitHubEnterpriseConfigOperationMetadata' smart constructor.
 data UpdateGitHubEnterpriseConfigOperationMetadata = UpdateGitHubEnterpriseConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitHubEnterprise to be updated. Format: @projects\/{project}\/locations\/{location}\/githubEnterpriseConfigs\/{id}@.
     githubEnterpriseConfig :: (Core.Maybe Core.Text)
   }
@@ -5200,9 +5200,9 @@ instance
 -- /See:/ 'newUpdateGitLabConfigOperationMetadata' smart constructor.
 data UpdateGitLabConfigOperationMetadata = UpdateGitLabConfigOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the GitLabConfig to be created. Format: @projects\/{project}\/locations\/{location}\/gitlabConfigs\/{id}@.
     gitlabConfig :: (Core.Maybe Core.Text)
   }
@@ -5250,9 +5250,9 @@ instance
 -- /See:/ 'newUpdateWorkerPoolOperationMetadata' smart constructor.
 data UpdateWorkerPoolOperationMetadata = UpdateWorkerPoolOperationMetadata
   { -- | Time the operation was completed.
-    completeTime :: (Core.Maybe Core.DateTime'),
+    completeTime :: (Core.Maybe Core.DateTime),
     -- | Time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The resource name of the @WorkerPool@ being updated. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{worker_pool}@.
     workerPool :: (Core.Maybe Core.Text)
   }
@@ -5441,9 +5441,9 @@ data WorkerPool = WorkerPool
   { -- | User specified annotations. See https:\/\/google.aip.dev\/128#annotations for more details such as format and size limitations.
     annotations :: (Core.Maybe WorkerPool_Annotations),
     -- | Output only. Time at which the request to create the @WorkerPool@ was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Time at which the request to delete the @WorkerPool@ was received.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | A user-specified, human-readable name for the @WorkerPool@. If provided, this value must be 1-63 characters.
     displayName :: (Core.Maybe Core.Text),
     -- | Output only. Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
@@ -5457,7 +5457,7 @@ data WorkerPool = WorkerPool
     -- | Output only. A unique identifier for the @WorkerPool@.
     uid :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the request to update the @WorkerPool@ was received.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

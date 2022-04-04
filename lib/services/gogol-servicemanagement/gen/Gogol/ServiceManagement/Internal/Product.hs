@@ -2774,11 +2774,11 @@ instance Core.ToJSON MetricDescriptor where
 -- /See:/ 'newMetricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata = MetricDescriptorMetadata
   { -- | The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
-    ingestDelay :: (Core.Maybe Core.GDuration),
+    ingestDelay :: (Core.Maybe Core.Duration),
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.GDuration)
+    samplePeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3246,7 +3246,7 @@ data OperationMetadata = OperationMetadata
     -- | The full name of the resources that this operation is directly associated with.
     resourceNames :: (Core.Maybe [Core.Text]),
     -- | The start time of the operation.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Detailed status information for each step. The order is undetermined.
     steps :: (Core.Maybe [Step])
   }
@@ -3626,7 +3626,7 @@ instance Core.ToJSON ResourceReference where
 -- /See:/ 'newRollout' smart constructor.
 data Rollout = Rollout
   { -- | Creation time of the rollout. Readonly.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The user who created the Rollout. Readonly.
     createdBy :: (Core.Maybe Core.Text),
     -- | The strategy associated with a rollout to delete a @ManagedService@. Readonly.
@@ -3863,7 +3863,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

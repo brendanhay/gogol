@@ -56,7 +56,7 @@ type PeoplePeopleSearchDirectoryPeopleResource =
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "query" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParams
               "sources"
               PeopleSearchDirectoryPeopleSources
@@ -86,7 +86,7 @@ data PeoplePeopleSearchDirectoryPeople = PeoplePeopleSearchDirectoryPeople
     -- | Required. Prefix query that matches fields in the person. Does NOT use the read_mask for determining what fields to match.
     query :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Required. Directory sources to return.
     sources :: (Core.Maybe [PeopleSearchDirectoryPeopleSources]),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

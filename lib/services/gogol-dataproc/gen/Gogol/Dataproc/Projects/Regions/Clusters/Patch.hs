@@ -57,9 +57,9 @@ type DataprocProjectsRegionsClustersPatchResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam
               "gracefulDecommissionTimeout"
-              Core.GDuration
+              Core.Duration
     Core.:> Core.QueryParam "requestId" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -79,7 +79,7 @@ data DataprocProjectsRegionsClustersPatch = DataprocProjectsRegionsClustersPatch
     -- | Required. The cluster name.
     clusterName :: Core.Text,
     -- | Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning allows removing nodes from the cluster without interrupting jobs in progress. Timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day. (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).Only supported on Dataproc image versions 1.2 and higher.
-    gracefulDecommissionTimeout :: (Core.Maybe Core.GDuration),
+    gracefulDecommissionTimeout :: (Core.Maybe Core.Duration),
     -- | Multipart request metadata.
     payload :: Cluster,
     -- | Required. The ID of the Google Cloud Platform project the cluster belongs to.
@@ -89,7 +89,7 @@ data DataprocProjectsRegionsClustersPatch = DataprocProjectsRegionsClustersPatch
     -- | Optional. A unique ID used to identify the request. If the server receives two UpdateClusterRequest (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https:\/\/en.wikipedia.org\/wiki\/Universally/unique/identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
     requestId :: (Core.Maybe Core.Text),
     -- | Required. Specifies the path, relative to Cluster, of the field to update. For example, to change the number of workers in a cluster to 5, the update/mask parameter would be specified as config.worker/config.num/instances, and the PATCH request body would specify the new value, as follows: { \"config\":{ \"workerConfig\":{ \"numInstances\":\"5\" } } } Similarly, to change the number of preemptible workers in a cluster to 5, the update/mask parameter would be config.secondary/worker/config.num_instances, and the PATCH request body would be set as follows: { \"config\":{ \"secondaryWorkerConfig\":{ \"numInstances\":\"5\" } } } /Note:/ Currently, only the following fields can be updated: /Mask/ /Purpose/ /labels/ Update labels /config.worker/config.num/instances/ Resize primary worker group *config.secondary/worker/config.num/instances* Resize secondary worker group config.autoscaling/config.policy_uri Use, stop using, or change autoscaling policies
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

@@ -947,7 +947,7 @@ data Node = Node
     -- | The CIDR block that the TPU node will use when selecting an IP address. This CIDR block must be a \/29 block; the Compute Engine networks API forbids a smaller block, and using a larger block would be wasteful (a node can only consume one IP address). Errors will occur if the CIDR block has already been used for a currently existing TPU node, the CIDR block conflicts with any subnetworks in the user\'s provided network, or the provided network is peered with another network that is using that CIDR block.
     cidrBlock :: (Core.Maybe Core.Text),
     -- | Output only. The time when the node was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The additional data disks for the Node.
     dataDisks :: (Core.Maybe [AttachedDisk]),
     -- | The user-supplied description of the TPU. Maximum of 512 characters.
@@ -1242,9 +1242,9 @@ data OperationMetadata = OperationMetadata
     -- | Specifies if cancellation was requested for the operation.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Human-readable status of the operation, if any.
     statusDetail :: (Core.Maybe Core.Text),
     -- | Target of the operation - for example projects\/project-1\/connectivityTests\/test-1
@@ -1541,7 +1541,7 @@ instance Core.ToJSON StopNodeRequest where
 -- /See:/ 'newSymptom' smart constructor.
 data Symptom = Symptom
   { -- | Timestamp when the Symptom is created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Detailed information of the current Symptom.
     details :: (Core.Maybe Core.Text),
     -- | Type of the Symptom.

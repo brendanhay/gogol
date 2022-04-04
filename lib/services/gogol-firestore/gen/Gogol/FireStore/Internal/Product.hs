@@ -422,7 +422,7 @@ data BatchGetDocumentsRequest = BatchGetDocumentsRequest
     -- | Starts a new transaction and reads the documents. Defaults to a read-only transaction. The new transaction ID will be returned as the first response in the stream.
     newTransaction' :: (Core.Maybe TransactionOptions),
     -- | Reads documents as they were at the given time. This may not be older than 270 seconds.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | Reads documents in a transaction.
     transaction :: (Core.Maybe Core.Base64)
   }
@@ -474,7 +474,7 @@ data BatchGetDocumentsResponse = BatchGetDocumentsResponse
     -- | A document name that was requested but does not exist. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.
     missing :: (Core.Maybe Core.Text),
     -- | The time at which the document was read. This may be monotically increasing, in this case the previous documents in the result stream are guaranteed not to have changed between their read_time and this one.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | The transaction that was started as part of this request. Will only be set in the first response, and only if BatchGetDocumentsRequest.new_transaction was set in the request.
     transaction :: (Core.Maybe Core.Base64)
   }
@@ -757,7 +757,7 @@ instance Core.ToJSON CommitRequest where
 -- /See:/ 'newCommitResponse' smart constructor.
 data CommitResponse = CommitResponse
   { -- | The time at which the commit occurred. Any read with an equal or greater @read_time@ is guaranteed to see the effects of the commit.
-    commitTime :: (Core.Maybe Core.DateTime'),
+    commitTime :: (Core.Maybe Core.DateTime),
     -- | The result of applying the writes. This i-th write result corresponds to the i-th write in the request.
     writeResults :: (Core.Maybe [WriteResult])
   }
@@ -863,14 +863,14 @@ instance Core.ToJSON Cursor where
 -- /See:/ 'newDocument' smart constructor.
 data Document = Document
   { -- | Output only. The time at which the document was created. This value increases monotonically when a document is deleted then recreated. It can also be compared to values from other documents and the @read_time@ of a query.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The document\'s fields. The map keys represent field names. A simple field name contains only characters @a@ to @z@, @A@ to @Z@, @0@ to @9@, or @_@, and must not start with @0@ to @9@. For example, @foo_bar_17@. Field names matching the regular expression @__.*__@ are reserved. Reserved field names are forbidden except in certain documented contexts. The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be empty. Field paths may be used in other contexts to refer to structured fields defined here. For @map_value@, the field path is represented by the simple or quoted field names of the containing fields, delimited by @.@. For example, the structured field @\"foo\" : { map_value: { \"x&y\" : { string_value: \"hello\" }}}@ would be represented by the field path @foo.x&y@. Within a field path, a quoted field name starts and ends with @\`@ and may contain any character. Some characters, including @\`@, must be escaped using a @\\@. For example, @\`x&y\`@ represents @x&y@ and @\`bak\\\`tik\`@
     -- represents @bak\`tik@.
     fields :: (Core.Maybe Document_Fields),
     -- | The resource name of the document, for example @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The time at which the document was last changed. This value is initially set to the @create_time@ then increases monotonically with each change to the document. It can also be compared to values from other documents and the @read_time@ of a query.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -988,7 +988,7 @@ data DocumentDelete = DocumentDelete
   { -- | The resource name of the Document that was deleted.
     document :: (Core.Maybe Core.Text),
     -- | The read timestamp at which the delete was observed. Greater or equal to the @commit_time@ of the delete.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A set of target IDs for targets that previously matched this entity.
     removedTargetIds :: (Core.Maybe [Core.Int32])
   }
@@ -1063,7 +1063,7 @@ data DocumentRemove = DocumentRemove
   { -- | The resource name of the Document that has gone out of view.
     document :: (Core.Maybe Core.Text),
     -- | The read timestamp at which the remove was observed. Greater or equal to the @commit_time@ of the change\/delete\/remove.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A set of target IDs for targets that previously matched this document.
     removedTargetIds :: (Core.Maybe [Core.Int32])
   }
@@ -1478,7 +1478,7 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1Expor
   { -- | Which collection ids are being exported.
     collectionIds :: (Core.Maybe [Core.Text]),
     -- | The time this operation completed. Will be unset if operation still in progress.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The state of the export operation.
     operationState ::
       ( Core.Maybe
@@ -1491,7 +1491,7 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1Expor
     -- | The progress, in documents, of this operation.
     progressDocuments :: (Core.Maybe GoogleFirestoreAdminV1Progress),
     -- | The time this operation started.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1675,7 +1675,7 @@ instance Core.ToJSON GoogleFirestoreAdminV1Field where
 -- /See:/ 'newGoogleFirestoreAdminV1FieldOperationMetadata' smart constructor.
 data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldOperationMetadata
   { -- | The time this operation completed. Will be unset if operation still in progress.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The field resource that this operation is acting on. For example: @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@
     field :: (Core.Maybe Core.Text),
     -- | A list of IndexConfigDelta, which describe the intent of this operation.
@@ -1685,7 +1685,7 @@ data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldO
     -- | The progress, in documents, of this operation.
     progressDocuments :: (Core.Maybe GoogleFirestoreAdminV1Progress),
     -- | The time this operation started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The state of the operation.
     state :: (Core.Maybe GoogleFirestoreAdminV1FieldOperationMetadata_State)
   }
@@ -1750,7 +1750,7 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1Impor
   { -- | Which collection ids are being imported.
     collectionIds :: (Core.Maybe [Core.Text]),
     -- | The time this operation completed. Will be unset if operation still in progress.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The location of the documents being imported.
     inputUriPrefix :: (Core.Maybe Core.Text),
     -- | The state of the import operation.
@@ -1763,7 +1763,7 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1Impor
     -- | The progress, in documents, of this operation.
     progressDocuments :: (Core.Maybe GoogleFirestoreAdminV1Progress),
     -- | The time this operation started.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2066,7 +2066,7 @@ instance Core.ToJSON GoogleFirestoreAdminV1IndexField where
 -- /See:/ 'newGoogleFirestoreAdminV1IndexOperationMetadata' smart constructor.
 data GoogleFirestoreAdminV1IndexOperationMetadata = GoogleFirestoreAdminV1IndexOperationMetadata
   { -- | The time this operation completed. Will be unset if operation still in progress.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The index resource that this operation is acting on. For example: @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/indexes\/{index_id}@
     index :: (Core.Maybe Core.Text),
     -- | The progress, in bytes, of this operation.
@@ -2074,7 +2074,7 @@ data GoogleFirestoreAdminV1IndexOperationMetadata = GoogleFirestoreAdminV1IndexO
     -- | The progress, in documents, of this operation.
     progressDocuments :: (Core.Maybe GoogleFirestoreAdminV1Progress),
     -- | The time this operation started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The state of the operation.
     state :: (Core.Maybe GoogleFirestoreAdminV1IndexOperationMetadata_State)
   }
@@ -3158,7 +3158,7 @@ data Precondition = Precondition
   { -- | When set to @true@, the target document must exist. When set to @false@, the target document must not exist.
     exists :: (Core.Maybe Core.Bool),
     -- | When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3257,7 +3257,7 @@ instance Core.ToJSON QueryTarget where
 -- /See:/ 'newReadOnly' smart constructor.
 newtype ReadOnly = ReadOnly
   { -- | Reads documents at the given time. This may not be older than 60 seconds.
-    readTime :: (Core.Maybe Core.DateTime')
+    readTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3346,7 +3346,7 @@ data RunQueryRequest = RunQueryRequest
   { -- | Starts a new transaction and reads the documents. Defaults to a read-only transaction. The new transaction ID will be returned as the first response in the stream.
     newTransaction' :: (Core.Maybe TransactionOptions),
     -- | Reads documents as they were at the given time. This may not be older than 270 seconds.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A structured query.
     structuredQuery :: (Core.Maybe StructuredQuery),
     -- | Run the query within an already active transaction. The value here is the opaque transaction ID to execute the query in.
@@ -3397,7 +3397,7 @@ data RunQueryResponse = RunQueryResponse
     -- | If present, Firestore has completely finished the request and no more documents will be returned.
     done :: (Core.Maybe Core.Bool),
     -- | The time at which the document was read. This may be monotonically increasing; in this case, the previous documents in the result stream are guaranteed not to have changed between their @read_time@ and this one. If the query returns no results, a response with @read_time@ and no @document@ will be sent, and this represents the time at which the query was run.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | The number of results that have been skipped due to an offset between the last response and the current response.
     skippedResults :: (Core.Maybe Core.Int32),
     -- | The transaction that was started as part of this request. Can only be set in the first response, and only if RunQueryRequest.new_transaction was set in the request. If set, no other fields will be set in this response.
@@ -3589,7 +3589,7 @@ data Target = Target
     -- | A target specified by a query.
     query :: (Core.Maybe QueryTarget),
     -- | Start listening after a specific @read_time@. The client must know the state of matching documents at this time.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A resume token from a prior TargetChange for an identical target. Using a resume token with a different target is unsupported and may fail.
     resumeToken :: (Core.Maybe Core.Base64),
     -- | The target ID that identifies the target on the stream. Must be a positive number and non-zero.
@@ -3644,7 +3644,7 @@ data TargetChange = TargetChange
   { -- | The error that resulted in this change, if applicable.
     cause :: (Core.Maybe Status),
     -- | The consistent @read_time@ for the given @target_ids@ (omitted when the target/ids are not at a consistent snapshot). The stream is guaranteed to send a @read_time@ with @target_ids@ empty whenever the entire stream reaches a new consistent snapshot. ADD, CURRENT, and RESET messages are guaranteed to (eventually) result in a new consistent snapshot (while NO/CHANGE and REMOVE messages are not). For a given stream, @read_time@ is guaranteed to be monotonically increasing.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A token that can be used to resume the stream for the given @target_ids@, or all targets if @target_ids@ is empty. Not set on every target change.
     resumeToken :: (Core.Maybe Core.Base64),
     -- | The type of change that occurred.
@@ -3787,7 +3787,7 @@ data Value = Value
     -- | A string value. The string, represented as UTF-8, must not exceed 1 MiB - 89 bytes. Only the first 1,500 bytes of the UTF-8 representation are considered by queries.
     stringValue :: (Core.Maybe Core.Text),
     -- | A timestamp value. Precise only to microseconds. When stored, any additional precision is rounded down.
-    timestampValue :: (Core.Maybe Core.DateTime')
+    timestampValue :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3992,7 +3992,7 @@ instance Core.ToJSON WriteRequest_Labels where
 -- /See:/ 'newWriteResponse' smart constructor.
 data WriteResponse = WriteResponse
   { -- | The time at which the commit occurred. Any read with an equal or greater @read_time@ is guaranteed to see the effects of the write.
-    commitTime :: (Core.Maybe Core.DateTime'),
+    commitTime :: (Core.Maybe Core.DateTime),
     -- | The ID of the stream. Only set on the first message, when a new stream was created.
     streamId :: (Core.Maybe Core.Text),
     -- | A token that represents the position of this response in the stream. This can be used by a client to resume the stream at this point. This field is always set.
@@ -4043,7 +4043,7 @@ data WriteResult = WriteResult
   { -- | The results of applying each DocumentTransform.FieldTransform, in the same order.
     transformResults :: (Core.Maybe [Value]),
     -- | The last update time of the document after applying the write. Not set after a @delete@. If the write did not actually change the document, this will be the previous update_time.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

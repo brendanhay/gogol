@@ -68,10 +68,10 @@ type YouTubeSearchListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam
               "publishedAfter"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "publishedBefore"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam "q" Core.Text
     Core.:> Core.QueryParam
               "regionCode"
@@ -168,9 +168,9 @@ data YouTubeSearchList = YouTubeSearchList
     -- | The /part/ parameter specifies a comma-separated list of one or more search resource properties that the API response will include. Set the parameter value to snippet.
     part :: [Core.Text],
     -- | Filter on resources published after this date.
-    publishedAfter :: (Core.Maybe Core.DateTime'),
+    publishedAfter :: (Core.Maybe Core.DateTime),
     -- | Filter on resources published before this date.
-    publishedBefore :: (Core.Maybe Core.DateTime'),
+    publishedBefore :: (Core.Maybe Core.DateTime),
     -- | Textual search terms to match.
     q :: (Core.Maybe Core.Text),
     -- | Display the content as seen by viewers in this country.

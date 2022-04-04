@@ -330,7 +330,7 @@ data BeaconAttachment = BeaconAttachment
   { -- | Resource name of this attachment. Attachment names have the format: \<code>beacons\/\<var>beacon/id\<\/var>\/attachments\/\<var>attachment/id\<\/var>\<\/code>. Leave this empty on creation.
     attachmentName :: (Core.Maybe Core.Text),
     -- | The UTC time when this attachment was created, in milliseconds since the UNIX epoch.
-    creationTimeMs :: (Core.Maybe Core.DateTime'),
+    creationTimeMs :: (Core.Maybe Core.DateTime),
     -- | An opaque data container for client-provided data. Must be <http://tools.ietf.org/html/rfc4648#section-4 base64> encoded in HTTP requests, and will be so encoded (with padding) in responses. Required.
     data' :: (Core.Maybe Core.Base64),
     -- | The distance away from the beacon at which this attachment should be delivered to a mobile app.
@@ -1027,7 +1027,7 @@ data Observation = Observation
     -- | The array of telemetry bytes received from the beacon. The server is responsible for parsing it. This field may frequently be empty, as with a beacon that transmits telemetry only occasionally.
     telemetry :: (Core.Maybe Core.Base64),
     -- | Time when the beacon was observed.
-    timestampMs :: (Core.Maybe Core.DateTime')
+    timestampMs :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

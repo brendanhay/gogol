@@ -50,7 +50,7 @@ type AndroidDeviceProvisioningCustomersConfigurationsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data AndroidDeviceProvisioningCustomersConfigurationsPatch = AndroidDeviceProvis
     -- | Multipart request metadata.
     payload :: Configuration,
     -- | Required. The field mask applied to the target @Configuration@ before updating the fields. To learn more about using field masks, read </protocol-buffers/docs/reference/google.protobuf#fieldmask FieldMask> in the Protocol Buffers documentation.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

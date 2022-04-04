@@ -50,7 +50,7 @@ type CloudIdentityGroupsGetSecuritySettingsResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -69,7 +69,7 @@ data CloudIdentityGroupsGetSecuritySettings = CloudIdentityGroupsGetSecuritySett
     -- | Required. The security settings to retrieve. Format: @groups\/{group_id}\/securitySettings@
     name :: Core.Text,
     -- | Field-level read mask of which fields to return. \"*\" returns all fields. If not specified, all fields will be returned. May only contain the following field: @member_restriction@.
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

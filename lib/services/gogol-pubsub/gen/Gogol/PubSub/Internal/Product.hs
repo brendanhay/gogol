@@ -454,7 +454,7 @@ instance Core.ToJSON Empty where
 -- /See:/ 'newExpirationPolicy' smart constructor.
 newtype ExpirationPolicy = ExpirationPolicy
   { -- | Specifies the \"time-to-live\" duration for an associated resource. The resource expires if it is not active for a period of @ttl@. The definition of \"activity\" depends on the type of the associated resource. The minimum and maximum allowed values for @ttl@ depend on the type of the associated resource, as well. If @ttl@ is not set, the associated resource never expires.
-    ttl :: (Core.Maybe Core.GDuration)
+    ttl :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1007,7 +1007,7 @@ data PubsubMessage = PubsubMessage
     -- | If non-empty, identifies related messages for which publish order should be respected. If a @Subscription@ has @enable_message_ordering@ set to @true@, messages published with the same non-empty @ordering_key@ value will be delivered to subscribers in the order in which they are received by the Pub\/Sub system. All @PubsubMessage@s published in a given @PublishRequest@ must specify the same @ordering_key@ value.
     orderingKey :: (Core.Maybe Core.Text),
     -- | The time at which the message was published, populated by the server when it receives the @Publish@ call. It must not be populated by the publisher in a @Publish@ call.
-    publishTime :: (Core.Maybe Core.DateTime')
+    publishTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1270,9 +1270,9 @@ instance Core.ToJSON ReceivedMessage where
 -- /See:/ 'newRetryPolicy' smart constructor.
 data RetryPolicy = RetryPolicy
   { -- | The maximum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 600 seconds.
-    maximumBackoff :: (Core.Maybe Core.GDuration),
+    maximumBackoff :: (Core.Maybe Core.Duration),
     -- | The minimum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 10 seconds.
-    minimumBackoff :: (Core.Maybe Core.GDuration)
+    minimumBackoff :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1310,7 +1310,7 @@ data Schema = Schema
     -- | Required. Name of the schema. Format is @projects\/{project}\/schemas\/{schema}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The timestamp that the revision was created.
-    revisionCreateTime :: (Core.Maybe Core.DateTime'),
+    revisionCreateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Immutable. The revision ID of the schema.
     revisionId :: (Core.Maybe Core.Text),
     -- | The type of the schema definition.
@@ -1399,7 +1399,7 @@ data SeekRequest = SeekRequest
   { -- | The snapshot to seek to. The snapshot\'s topic must be the same as that of the provided subscription. Format is @projects\/{project}\/snapshots\/{snap}@.
     snapshot :: (Core.Maybe Core.Text),
     -- | The time to seek to. Messages retained in the subscription that were published before this time are marked as acknowledged, and messages retained in the subscription that were published after this time are marked as unacknowledged. Note that this operation affects only those messages retained in the subscription (configured by the combination of @message_retention_duration@ and @retain_acked_messages@). For example, if @time@ corresponds to a point before the message retention window (or to a point before the system\'s notion of the subscription creation time), only retained messages will be marked as unacknowledged, and already-expunged messages will not be restored.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1478,7 +1478,7 @@ instance Core.ToJSON SetIamPolicyRequest where
 -- /See:/ 'newSnapshot' smart constructor.
 data Snapshot = Snapshot
   { -- | The snapshot is guaranteed to exist up until this time. A newly-created snapshot expires no later than 7 days from the time of its creation. Its exact lifetime is determined at creation by the existing backlog in the source subscription. Specifically, the lifetime of the snapshot is @7 days - (age of oldest unacked message in the subscription)@. For example, consider a subscription whose oldest unacked message is 3 days old. If a snapshot is created from this subscription, the snapshot -- which will always capture this 3-day-old backlog as long as the snapshot exists -- will expire in 4 days. The service will refuse to create a snapshot that would expire in less than 1 hour after creation.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | See [Creating and managing labels] (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
     labels :: (Core.Maybe Snapshot_Labels),
     -- | The name of the snapshot.
@@ -1571,7 +1571,7 @@ data Subscription = Subscription
     -- | See Creating and managing labels.
     labels :: (Core.Maybe Subscription_Labels),
     -- | How long to retain unacknowledged messages in the subscription\'s backlog, from the moment a message is published. If @retain_acked_messages@ is true, then this also configures the retention of acknowledged messages, and thus configures how far back in time a @Seek@ can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10 minutes.
-    messageRetentionDuration :: (Core.Maybe Core.GDuration),
+    messageRetentionDuration :: (Core.Maybe Core.Duration),
     -- | Required. The name of the subscription. It must have the format @\"projects\/{project}\/subscriptions\/{subscription}\"@. @{subscription}@ must start with a letter, and contain only letters (@[A-Za-z]@), numbers (@[0-9]@), dashes (@-@), underscores (@_@), periods (@.@), tildes (@~@), plus (@+@) or percent signs (@%@). It must be between 3 and 255 characters in length, and it must not start with @\"goog\"@.
     name :: (Core.Maybe Core.Text),
     -- | If push delivery is used with this subscription, this field is used to configure it. At most one of @pushConfig@ and @bigQueryConfig@ can be set. If both are empty, then the subscriber will pull and ack messages using API methods.
@@ -1585,7 +1585,7 @@ data Subscription = Subscription
     -- | Required. The name of the topic from which this subscription is receiving messages. Format is @projects\/{project}\/topics\/{topic}@. The value of this field will be @_deleted-topic_@ if the topic has been deleted.
     topic :: (Core.Maybe Core.Text),
     -- | Output only. Indicates the minimum duration for which a message is retained after it is published to the subscription\'s topic. If this field is set, messages published to the subscription\'s topic in the last @topic_message_retention_duration@ are always available to subscribers. See the @message_retention_duration@ field in @Topic@. This field is set only in responses from the server; it is ignored if it is set in any requests.
-    topicMessageRetentionDuration :: (Core.Maybe Core.GDuration)
+    topicMessageRetentionDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1768,7 +1768,7 @@ data Topic = Topic
     -- | See [Creating and managing labels] (https:\/\/cloud.google.com\/pubsub\/docs\/labels).
     labels :: (Core.Maybe Topic_Labels),
     -- | Indicates the minimum duration to retain a message after it is published to the topic. If this field is set, messages published to the topic in the last @message_retention_duration@ are always available to subscribers. For instance, it allows any attached subscription to <https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time seek to a timestamp> that is up to @message_retention_duration@ in the past. If this field is not set, message retention is controlled by settings on individual subscriptions. Cannot be more than 31 days or less than 10 minutes.
-    messageRetentionDuration :: (Core.Maybe Core.GDuration),
+    messageRetentionDuration :: (Core.Maybe Core.Duration),
     -- | Policy constraining the set of Google Cloud Platform regions where messages published to the topic may be stored. If not present, then no constraints are in effect.
     messageStoragePolicy :: (Core.Maybe MessageStoragePolicy),
     -- | Required. The name of the topic. It must have the format @\"projects\/{project}\/topics\/{topic}\"@. @{topic}@ must start with a letter, and contain only letters (@[A-Za-z]@), numbers (@[0-9]@), dashes (@-@), underscores (@_@), periods (@.@), tildes (@~@), plus (@+@) or percent signs (@%@). It must be between 3 and 255 characters in length, and it must not start with @\"goog\"@.
@@ -1859,7 +1859,7 @@ data UpdateSnapshotRequest = UpdateSnapshotRequest
   { -- | Required. The updated snapshot object.
     snapshot :: (Core.Maybe Snapshot),
     -- | Required. Indicates which fields in the provided snapshot to update. Must be specified and non-empty.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1895,7 +1895,7 @@ data UpdateSubscriptionRequest = UpdateSubscriptionRequest
   { -- | Required. The updated subscription object.
     subscription :: (Core.Maybe Subscription),
     -- | Required. Indicates which fields in the provided subscription to update. Must be specified and non-empty.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1934,7 +1934,7 @@ data UpdateTopicRequest = UpdateTopicRequest
   { -- | Required. The updated topic object.
     topic :: (Core.Maybe Topic),
     -- | Required. Indicates which fields in the provided topic to update. Must be specified and non-empty. Note that if @update_mask@ contains \"message/storage/policy\" but the @message_storage_policy@ is not set in the @topic@ provided above, then the updated value is determined by the policy configured at the project or organization level.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

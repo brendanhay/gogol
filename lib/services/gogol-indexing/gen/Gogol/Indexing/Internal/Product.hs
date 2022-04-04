@@ -81,7 +81,7 @@ instance Core.ToJSON PublishUrlNotificationResponse where
 -- /See:/ 'newUrlNotification' smart constructor.
 data UrlNotification = UrlNotification
   { -- | Creation timestamp for this notification. Users should /not/ specify it, the field is ignored at the request time.
-    notifyTime :: (Core.Maybe Core.DateTime'),
+    notifyTime :: (Core.Maybe Core.DateTime),
     -- | The URL life cycle event that Google is being notified about.
     type' :: (Core.Maybe UrlNotification_Type),
     -- | The object of this notification. The URL must be owned by the publisher of this notification and, in case of @URL_UPDATED@ notifications, it /must/ be crawlable by Google.

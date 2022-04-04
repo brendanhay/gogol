@@ -770,7 +770,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -873,11 +873,11 @@ data SyncRepoMetadata = SyncRepoMetadata
   { -- | The name of the repo being synchronized. Values are of the form @projects\/\/repos\/@.
     name :: (Core.Maybe Core.Text),
     -- | The time this operation is started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The latest status message on syncing the repository.
     statusMessage :: (Core.Maybe Core.Text),
     -- | The time this operation\'s status message is updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1004,7 +1004,7 @@ data UpdateProjectConfigRequest = UpdateProjectConfigRequest
   { -- | The new configuration for the project.
     projectConfig :: (Core.Maybe ProjectConfig),
     -- | A FieldMask specifying which fields of the project_config to modify. Only the fields in the mask will be modified. If no mask is provided, this request is no-op.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1043,7 +1043,7 @@ data UpdateRepoRequest = UpdateRepoRequest
   { -- | The new configuration for the repository.
     repo :: (Core.Maybe Repo),
     -- | A FieldMask specifying which fields of the repo to modify. Only the fields in the mask will be modified. If no mask is provided, this request is no-op.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

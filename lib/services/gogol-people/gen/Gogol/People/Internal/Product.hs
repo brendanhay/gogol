@@ -463,7 +463,7 @@ data BatchCreateContactsRequest = BatchCreateContactsRequest
   { -- | Required. The contact to create. Allows up to 200 contacts in a single request.
     contacts :: (Core.Maybe [ContactToCreate]),
     -- | Required. A field mask to restrict which fields on each person are returned in the response. Multiple fields can be specified by separating them with commas. If read mask is left empty, the post-mutate-get is skipped and no data will be returned in the response. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. A mask of what source types to return in the post mutate read. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.
     sources :: (Core.Maybe [BatchCreateContactsRequest_SourcesItem])
   }
@@ -600,11 +600,11 @@ data BatchUpdateContactsRequest = BatchUpdateContactsRequest
   { -- | Required. A map of resource names to the person data to be updated. Allows up to 200 contacts in a single request.
     contacts :: (Core.Maybe BatchUpdateContactsRequest_Contacts),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. If read mask is left empty, the post-mutate-get is skipped and no data will be returned in the response. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.
     sources :: (Core.Maybe [BatchUpdateContactsRequest_SourcesItem]),
     -- | Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All specified fields will be replaced, or cleared if left empty for each person. Valid values are: * addresses * biographies * birthdays * calendarUrls * clientData * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * relations * sipAddresses * urls * userDefined
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1078,7 +1078,7 @@ data ContactGroupMetadata = ContactGroupMetadata
   { -- | Output only. True if the contact group resource has been deleted. Populated only for </people/api/rest/v1/contactgroups/list ListContactGroups> requests that include a sync token.
     deleted :: (Core.Maybe Core.Bool),
     -- | Output only. The time the group was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1187,9 +1187,9 @@ instance Core.ToJSON ContactToCreate where
 -- /See:/ 'newCopyOtherContactToMyContactsGroupRequest' smart constructor.
 data CopyOtherContactToMyContactsGroupRequest = CopyOtherContactToMyContactsGroupRequest
   { -- | Required. A field mask to restrict which fields are copied into the new contact. Valid values are: * emailAddresses * names * phoneNumbers
-    copyMask :: (Core.Maybe Core.GFieldMask),
+    copyMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to the copy mask with metadata and membership fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.
     sources :: (Core.Maybe [CopyOtherContactToMyContactsGroupRequest_SourcesItem])
   }
@@ -1283,7 +1283,7 @@ data CreateContactGroupRequest = CreateContactGroupRequest
   { -- | Required. The contact group to create.
     contactGroup :: (Core.Maybe ContactGroup),
     -- | Optional. A field mask to restrict which fields on the group are returned. Defaults to @metadata@, @groupType@, and @name@ if not set or set to empty. Valid fields are: * clientData * groupType * metadata * name
-    readGroupFields :: (Core.Maybe Core.GFieldMask)
+    readGroupFields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3512,7 +3512,7 @@ data Source = Source
     -- | The source type.
     type' :: (Core.Maybe Source_Type),
     -- | Output only. __Only populated in @person.metadata.sources@.__ Last update timestamp of this source.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3662,9 +3662,9 @@ data UpdateContactGroupRequest = UpdateContactGroupRequest
   { -- | Required. The contact group to update.
     contactGroup :: (Core.Maybe ContactGroup),
     -- | Optional. A field mask to restrict which fields on the group are returned. Defaults to @metadata@, @groupType@, and @name@ if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name
-    readGroupFields :: (Core.Maybe Core.GFieldMask),
+    readGroupFields :: (Core.Maybe Core.FieldMask),
     -- | Optional. A field mask to restrict which fields on the group are updated. Multiple fields can be specified by separating them with commas. Defaults to @name@ if not set or set to empty. Updated fields are replaced. Valid values are: * clientData * name
-    updateGroupFields :: (Core.Maybe Core.GFieldMask)
+    updateGroupFields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3705,7 +3705,7 @@ instance Core.ToJSON UpdateContactGroupRequest where
 -- /See:/ 'newUpdateContactPhotoRequest' smart constructor.
 data UpdateContactPhotoRequest = UpdateContactPhotoRequest
   { -- | Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    personFields :: (Core.Maybe Core.GFieldMask),
+    personFields :: (Core.Maybe Core.FieldMask),
     -- | Required. Raw photo bytes
     photoBytes :: (Core.Maybe Core.Base64),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.

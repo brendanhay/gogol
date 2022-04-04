@@ -2218,11 +2218,11 @@ instance Core.ToJSON MetricDescriptor where
 -- /See:/ 'newMetricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata = MetricDescriptorMetadata
   { -- | The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
-    ingestDelay :: (Core.Maybe Core.GDuration),
+    ingestDelay :: (Core.Maybe Core.Duration),
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.GDuration)
+    samplePeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3475,7 +3475,7 @@ data TenancyUnit = TenancyUnit
   { -- | Output only. \@OutputOnly Cloud resource name of the consumer of this service. For example \'projects\/123456\'.
     consumer :: (Core.Maybe Core.Text),
     -- | Output only. \@OutputOnly The time this tenancy unit was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Globally unique identifier of this tenancy unit \"services\/{service}\/{collection id}\/{resource id}\/tenancyUnits\/{unit}\"
     name :: (Core.Maybe Core.Text),
     -- | Output only. Google Cloud API name of the managed service owning this tenancy unit. For example \'serviceconsumermanagement.googleapis.com\'.

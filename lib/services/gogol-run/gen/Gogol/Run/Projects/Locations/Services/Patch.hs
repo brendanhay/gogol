@@ -51,7 +51,7 @@ type RunProjectsLocationsServicesPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "allowMissing" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "validateOnly" Core.Bool
@@ -76,7 +76,7 @@ data RunProjectsLocationsServicesPatch = RunProjectsLocationsServicesPatch
     -- | Multipart request metadata.
     payload :: GoogleCloudRunV2Service,
     -- | The list of fields to be updated.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

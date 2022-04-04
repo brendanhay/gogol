@@ -294,7 +294,7 @@ data Announcement = Announcement
     -- | Identifier of the course. Read-only.
     courseId :: (Core.Maybe Core.Text),
     -- | Timestamp when this announcement was created. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Identifier for the user that created the announcement. Read-only.
     creatorUserId :: (Core.Maybe Core.Text),
     -- | Classroom-assigned identifier of this announcement, unique per course. Read-only.
@@ -304,13 +304,13 @@ data Announcement = Announcement
     -- | Additional materials. Announcements must have no more than 20 material items.
     materials :: (Core.Maybe [Material]),
     -- | Optional timestamp when this announcement is scheduled to be published.
-    scheduledTime :: (Core.Maybe Core.DateTime'),
+    scheduledTime :: (Core.Maybe Core.DateTime),
     -- | Status of this announcement. If unspecified, the default state is @DRAFT@.
     state :: (Core.Maybe Announcement_State),
     -- | Description of this announcement. The text must be a valid UTF-8 string containing no more than 30,000 characters.
     text :: (Core.Maybe Core.Text),
     -- | Timestamp of the most recent change to this announcement. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -527,7 +527,7 @@ data Course = Course
     -- | State of the course. If unspecified, the default state is @PROVISIONED@.
     courseState :: (Core.Maybe Course_CourseState),
     -- | Creation time of the course. Specifying this field in a course update mask results in an error. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Optional description. For example, \"We\'ll be learning about the structure of living creatures from a combination of textbooks, guest lectures, and lab work. Expect to be excited!\" If set, this field must be a valid UTF-8 string and no longer than 30,000 characters.
     description :: (Core.Maybe Core.Text),
     -- | Optional heading for the description. For example, \"Welcome to 10th Grade Biology.\" If set, this field must be a valid UTF-8 string and no longer than 3600 characters.
@@ -553,7 +553,7 @@ data Course = Course
     -- | The email address of a Google group containing all teachers of the course. This group does not accept email and can only be used for permissions. Read-only.
     teacherGroupEmail :: (Core.Maybe Core.Text),
     -- | Time of the most recent update to this course. Specifying this field in a course update mask results in an error. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -799,7 +799,7 @@ data CourseWork = CourseWork
     -- | Identifier of the course. Read-only.
     courseId :: (Core.Maybe Core.Text),
     -- | Timestamp when this course work was created. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Identifier for the user that created the coursework. Read-only.
     creatorUserId :: (Core.Maybe Core.Text),
     -- | Optional description of this course work. If set, the description must be a valid UTF-8 string containing no more than 30,000 characters.
@@ -821,7 +821,7 @@ data CourseWork = CourseWork
     -- | Multiple choice question details. For read operations, this field is populated only when @work_type@ is @MULTIPLE_CHOICE_QUESTION@. For write operations, this field must be specified when creating course work with a @work_type@ of @MULTIPLE_CHOICE_QUESTION@, and it must not be set otherwise.
     multipleChoiceQuestion :: (Core.Maybe MultipleChoiceQuestion),
     -- | Optional timestamp when this course work is scheduled to be published.
-    scheduledTime :: (Core.Maybe Core.DateTime'),
+    scheduledTime :: (Core.Maybe Core.DateTime),
     -- | Status of this course work. If unspecified, the default state is @DRAFT@.
     state :: (Core.Maybe CourseWork_State),
     -- | Setting to determine when students are allowed to modify submissions. If unspecified, the default value is @MODIFIABLE_UNTIL_TURNED_IN@.
@@ -831,7 +831,7 @@ data CourseWork = CourseWork
     -- | Identifier for the topic that this coursework is associated with. Must match an existing topic in the course.
     topicId :: (Core.Maybe Core.Text),
     -- | Timestamp of the most recent change to this course work. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Type of this course work. The type is set when the course work is created and cannot be changed.
     workType :: (Core.Maybe CourseWork_WorkType)
   }
@@ -973,7 +973,7 @@ data CourseWorkMaterial = CourseWorkMaterial
     -- | Identifier of the course. Read-only.
     courseId :: (Core.Maybe Core.Text),
     -- | Timestamp when this course work material was created. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Identifier for the user that created the course work material. Read-only.
     creatorUserId :: (Core.Maybe Core.Text),
     -- | Optional description of this course work material. The text must be a valid UTF-8 string containing no more than 30,000 characters.
@@ -985,7 +985,7 @@ data CourseWorkMaterial = CourseWorkMaterial
     -- | Additional materials. A course work material must have no more than 20 material items.
     materials :: (Core.Maybe [Material]),
     -- | Optional timestamp when this course work material is scheduled to be published.
-    scheduledTime :: (Core.Maybe Core.DateTime'),
+    scheduledTime :: (Core.Maybe Core.DateTime),
     -- | Status of this course work material. If unspecified, the default state is @DRAFT@.
     state :: (Core.Maybe CourseWorkMaterial_State),
     -- | Title of this course work material. The title must be a valid UTF-8 string containing between 1 and 3000 characters.
@@ -993,7 +993,7 @@ data CourseWorkMaterial = CourseWorkMaterial
     -- | Identifier for the topic that this course work material is associated with. Must match an existing topic in the course.
     topicId :: (Core.Maybe Core.Text),
     -- | Timestamp of the most recent change to this course work material. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1395,7 +1395,7 @@ data GradeHistory = GradeHistory
     -- | The type of grade change at this time in the submission grade history.
     gradeChangeType :: (Core.Maybe GradeHistory_GradeChangeType),
     -- | When the grade of the submission was changed.
-    gradeTimestamp :: (Core.Maybe Core.DateTime'),
+    gradeTimestamp :: (Core.Maybe Core.DateTime),
     -- | The denominator of the grade at this time in the submission grade history.
     maxPoints :: (Core.Maybe Core.Double),
     -- | The numerator of the grade at this time in the submission grade history.
@@ -1541,7 +1541,7 @@ instance Core.ToJSON Guardian where
 -- /See:/ 'newGuardianInvitation' smart constructor.
 data GuardianInvitation = GuardianInvitation
   { -- | The time that this invitation was created. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Unique identifier for this invitation. Read-only.
     invitationId :: (Core.Maybe Core.Text),
     -- | Email address that the invitation was sent to. This field is only visible to domain administrators.
@@ -2520,7 +2520,7 @@ data Registration = Registration
   { -- | The Cloud Pub\/Sub topic that notifications are to be sent to.
     cloudPubsubTopic :: (Core.Maybe CloudPubsubTopic),
     -- | The time until which the @Registration@ is effective. This is a read-only field assigned by the server.
-    expiryTime :: (Core.Maybe Core.DateTime'),
+    expiryTime :: (Core.Maybe Core.DateTime),
     -- | Specification for the class of notifications that Classroom should deliver to the destination.
     feed :: (Core.Maybe Feed),
     -- | A server-generated unique identifier for this @Registration@. Read-only.
@@ -2655,7 +2655,7 @@ data StateHistory = StateHistory
     -- | The workflow pipeline stage.
     state :: (Core.Maybe StateHistory_State),
     -- | When the submission entered this state.
-    stateTimestamp :: (Core.Maybe Core.DateTime')
+    stateTimestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2759,7 +2759,7 @@ data StudentSubmission = StudentSubmission
     -- | Type of course work this submission is for. Read-only.
     courseWorkType :: (Core.Maybe StudentSubmission_CourseWorkType),
     -- | Creation time of this submission. This may be unset if the student has not accessed this item. Read-only.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Optional pending grade. If unset, no grade was set. This value must be non-negative. Decimal (that is, non-integer) values are allowed, but are rounded to two decimal places. This is only visible to and modifiable by course teachers.
     draftGrade :: (Core.Maybe Core.Double),
     -- | Classroom-assigned Identifier for the student submission. This is unique among submissions for the relevant course work. Read-only.
@@ -2775,7 +2775,7 @@ data StudentSubmission = StudentSubmission
     -- | The history of the submission (includes state and grade histories). Read-only.
     submissionHistory :: (Core.Maybe [SubmissionHistory]),
     -- | Last update time of this submission. This may be unset if the student has not accessed this item. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Identifier for the student that owns this submission. Read-only.
     userId :: (Core.Maybe Core.Text)
   }
@@ -2999,7 +2999,7 @@ data Topic = Topic
     -- | Unique identifier for the topic. Read-only.
     topicId :: (Core.Maybe Core.Text),
     -- | The time the topic was last updated by the system. Read-only.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

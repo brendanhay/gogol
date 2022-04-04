@@ -53,7 +53,7 @@ type ClassroomCoursesCourseWorkPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -77,7 +77,7 @@ data ClassroomCoursesCourseWorkPatch = ClassroomCoursesCourseWorkPatch
     -- | Multipart request metadata.
     payload :: CourseWork,
     -- | Mask that identifies which fields on the course work to update. This field is required to do an update. The update fails if invalid fields are specified. If a field supports empty values, it can be cleared by specifying it in the update mask and not in the CourseWork object. If a field that does not support empty values is included in the update mask and not set in the CourseWork object, an @INVALID_ARGUMENT@ error is returned. The following fields may be specified by teachers: * @title@ * @description@ * @state@ * @due_date@ * @due_time@ * @max_points@ * @scheduled_time@ * @submission_modification_mode@ * @topic_id@
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

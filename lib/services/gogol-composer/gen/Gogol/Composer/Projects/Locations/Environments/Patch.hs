@@ -50,7 +50,7 @@ type ComposerProjectsLocationsEnvironmentsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -77,7 +77,7 @@ data ComposerProjectsLocationsEnvironmentsPatch = ComposerProjectsLocationsEnvir
     -- @labels@ mask. * @config.nodeCount@ * Horizontally scale the number of nodes in the environment. An integer greater than or equal to 3 must be provided in the @config.nodeCount@ field. Supported for Cloud Composer environments in versions composer-1././-airflow-/././. / @config.webServerNetworkAccessControl@ * Replace the environment\'s current @WebServerNetworkAccessControl@. * @config.softwareConfig.airflowConfigOverrides@ * Replace all Apache Airflow config overrides. If a replacement config overrides map is not included in @environment@, all config overrides are cleared. It is an error to provide both this mask and a mask specifying one or more individual config overrides. * @config.softwareConfig.airflowConfigOverrides.@section-name * Override the Apache Airflow config property /name/ in the section named /section/, preserving other properties. To delete the property override, include it in @updateMask@ and omit its mapping in @environment.config.softwareConfig.airflowConfigOverrides@. It is an error to
     -- provide both a mask of this form and the @config.softwareConfig.airflowConfigOverrides@ mask. * @config.softwareConfig.envVariables@ * Replace all environment variables. If a replacement environment variable map is not included in @environment@, all custom environment variables are cleared. It is an error to provide both this mask and a mask specifying one or more individual environment variables. * @config.softwareConfig.schedulerCount@ * Horizontally scale the number of schedulers in Airflow. A positive integer not greater than the number of nodes must be provided in the @config.softwareConfig.schedulerCount@ field. Supported for Cloud Composer environments in versions composer-1././-airflow-2././. * @config.databaseConfig.machineType@ * Cloud SQL machine type used by Airflow database. It has to be one of: db-n1-standard-2, db-n1-standard-4, db-n1-standard-8 or db-n1-standard-16. Supported for Cloud Composer environments in versions composer-1././-airflow-/././. / @config.webServerConfig.machineType@ *
     -- Machine type on which Airflow web server is running. It has to be one of: composer-n1-webserver-2, composer-n1-webserver-4 or composer-n1-webserver-8. Supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

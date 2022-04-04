@@ -762,13 +762,13 @@ instance Core.ToJSON Filter where
 -- /See:/ 'newGoogleDatastoreAdminV1CommonMetadata' smart constructor.
 data GoogleDatastoreAdminV1CommonMetadata = GoogleDatastoreAdminV1CommonMetadata
   { -- | The time the operation ended, either successfully or otherwise.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The client-assigned labels which were provided when the operation was created. May also include additional labels.
     labels :: (Core.Maybe GoogleDatastoreAdminV1CommonMetadata_Labels),
     -- | The type of the operation. Can be used as a filter in ListOperationsRequest.
     operationType :: (Core.Maybe GoogleDatastoreAdminV1CommonMetadata_OperationType),
     -- | The time that work began on the operation.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the Operation.
     state :: (Core.Maybe GoogleDatastoreAdminV1CommonMetadata_State)
   }
@@ -1712,7 +1712,7 @@ instance
 -- /See:/ 'newGoogleDatastoreAdminV1beta1CommonMetadata' smart constructor.
 data GoogleDatastoreAdminV1beta1CommonMetadata = GoogleDatastoreAdminV1beta1CommonMetadata
   { -- | The time the operation ended, either successfully or otherwise.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The client-assigned labels which were provided when the operation was created. May also include additional labels.
     labels :: (Core.Maybe GoogleDatastoreAdminV1beta1CommonMetadata_Labels),
     -- | The type of the operation. Can be used as a filter in ListOperationsRequest.
@@ -1721,7 +1721,7 @@ data GoogleDatastoreAdminV1beta1CommonMetadata = GoogleDatastoreAdminV1beta1Comm
           GoogleDatastoreAdminV1beta1CommonMetadata_OperationType
       ),
     -- | The time that work began on the operation.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the Operation.
     state :: (Core.Maybe GoogleDatastoreAdminV1beta1CommonMetadata_State)
   }
@@ -3385,7 +3385,7 @@ data Value = Value
     -- | A UTF-8 encoded string value. When @exclude_from_indexes@ is false (it is indexed) , may have at most 1500 bytes. Otherwise, may be set to at most 1,000,000 bytes.
     stringValue :: (Core.Maybe Core.Text),
     -- | A timestamp value. When stored in the Datastore, precise only to microseconds; any additional precision is rounded down.
-    timestampValue :: (Core.Maybe Core.DateTime')
+    timestampValue :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

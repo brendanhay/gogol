@@ -1048,7 +1048,7 @@ data DeprecatedEvent = DeprecatedEvent
     -- | The type of <https://developers.google.com/chat/how-tos/bot-dialogs dialog> event received.
     dialogEventType :: (Core.Maybe DeprecatedEvent_DialogEventType),
     -- | The timestamp indicating when the event occurred.
-    eventTime :: (Core.Maybe Core.DateTime'),
+    eventTime :: (Core.Maybe Core.DateTime),
     -- | True when the event is related to <https://developers.google.com/chat/how-tos/bot-dialogs dialogs>.
     isDialogEvent :: (Core.Maybe Core.Bool),
     -- | The message that triggered the event, if applicable.
@@ -3066,7 +3066,7 @@ instance Core.ToJSON Media where
 -- /See:/ 'newMembership' smart constructor.
 data Membership = Membership
   { -- | Output only. The creation time of the membership a.k.a. the time at which the member joined the space, if applicable.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A user in Google Chat. Represents a <https://developers.google.com/people/api/rest/v1/people person> in the People API or a <https://developers.google.com/admin-sdk/directory/reference/rest/v1/users user> in the Admin SDK Directory API. Format: @users\/{user}@
     member :: (Core.Maybe User),
     -- |
@@ -3125,11 +3125,11 @@ data Message = Message
     -- | Rich, formatted and interactive cards that can be used to display UI elements such as: formatted texts, buttons, clickable images. Cards are normally displayed below the plain-text body of the message.
     cards :: (Core.Maybe [Card]),
     -- | Output only. The time at which the message was created in Google Chat server.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A plain-text description of the message\'s cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
     fallbackText :: (Core.Maybe Core.Text),
     -- | Output only. The time at which the message was last updated in Google Chat server. If the message was never updated, this field will be same as create_time.
-    lastUpdateTime :: (Core.Maybe Core.DateTime'),
+    lastUpdateTime :: (Core.Maybe Core.DateTime),
     -- | A URL in @spaces.messages.text@ that matches a link unfurling pattern. For more information, refer to </chat/how-tos/link-unfurling Unfurl links>.
     matchedUrl :: (Core.Maybe MatchedUrl),
     -- | Resource name in the form @spaces\/*\/messages\/*@. Example: @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@

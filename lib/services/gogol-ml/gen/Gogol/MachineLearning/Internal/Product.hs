@@ -1475,7 +1475,7 @@ instance Core.ToJSON GoogleCloudMlV1__Capability where
 -- /See:/ 'newGoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata' smart constructor.
 data GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata = GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata
   { -- | The time at which the operation was submitted.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The name of the study that the trial belongs to.
     study :: (Core.Maybe Core.Text),
     -- | The trial name.
@@ -1556,11 +1556,11 @@ instance
 -- /See:/ 'newGoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse' smart constructor.
 data GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse = GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
   { -- | The time at which operation processing completed.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | True if the Trial should stop.
     shouldStop :: (Core.Maybe Core.Bool),
     -- | The time at which the operation was started.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2037,7 +2037,7 @@ data GoogleCloudMlV1__HyperparameterOutput = GoogleCloudMlV1__HyperparameterOutp
     -- | Details related to built-in algorithms jobs. Only set for trials of built-in algorithms jobs that have succeeded.
     builtInAlgorithmOutput :: (Core.Maybe GoogleCloudMlV1__BuiltInAlgorithmOutput),
     -- | Output only. End time for the trial.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The final objective metric seen for this trial.
     finalMetric ::
       ( Core.Maybe
@@ -2048,7 +2048,7 @@ data GoogleCloudMlV1__HyperparameterOutput = GoogleCloudMlV1__HyperparameterOutp
     -- | True if the trial is stopped early.
     isTrialStoppedEarly :: (Core.Maybe Core.Bool),
     -- | Output only. Start time for the trial.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The detailed state of the trial.
     state :: (Core.Maybe GoogleCloudMlV1__HyperparameterOutput_State),
     -- | The trial id for these results.
@@ -2325,9 +2325,9 @@ instance
 -- /See:/ 'newGoogleCloudMlV1__Job' smart constructor.
 data GoogleCloudMlV1__Job = GoogleCloudMlV1__Job
   { -- | Output only. When the job was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. When the job processing was completed.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The details of a failure or a cancellation.
     errorMessage :: (Core.Maybe Core.Text),
     -- | @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a job from overwriting each other. It is strongly suggested that systems make use of the @etag@ in the read-modify-write cycle to perform job updates in order to avoid race conditions: An @etag@ is returned in the response to @GetJob@, and systems are expected to put that etag in the request to @UpdateJob@ to ensure that their change will be applied to the same version of the job.
@@ -2343,7 +2343,7 @@ data GoogleCloudMlV1__Job = GoogleCloudMlV1__Job
     -- | The current prediction job result.
     predictionOutput :: (Core.Maybe GoogleCloudMlV1__PredictionOutput),
     -- | Output only. When the job processing was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The detailed state of a job.
     state :: (Core.Maybe GoogleCloudMlV1__Job_State),
     -- | Input parameters to create a training job.
@@ -2829,7 +2829,7 @@ instance Core.ToJSON GoogleCloudMlV1__ManualScaling where
 -- /See:/ 'newGoogleCloudMlV1__Measurement' smart constructor.
 data GoogleCloudMlV1__Measurement = GoogleCloudMlV1__Measurement
   { -- | Output only. Time that the trial has been running at the point of this measurement.
-    elapsedTime :: (Core.Maybe Core.GDuration),
+    elapsedTime :: (Core.Maybe Core.Duration),
     -- | Provides a list of metrics that act as inputs into the objective function.
     metrics :: (Core.Maybe [GoogleCloudMlV1_Measurement_Metric]),
     -- | The number of steps a machine learning model has been trained for. Must be non-negative.
@@ -3010,9 +3010,9 @@ instance Core.ToJSON GoogleCloudMlV1__Model_Labels where
 -- /See:/ 'newGoogleCloudMlV1__OperationMetadata' smart constructor.
 data GoogleCloudMlV1__OperationMetadata = GoogleCloudMlV1__OperationMetadata
   { -- | The time the operation was submitted.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time operation processing completed.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Indicates whether a request to cancel this operation has been made.
     isCancellationRequested :: (Core.Maybe Core.Bool),
     -- | The user labels, inherited from the model or the model version being operated on.
@@ -3024,7 +3024,7 @@ data GoogleCloudMlV1__OperationMetadata = GoogleCloudMlV1__OperationMetadata
     -- | Contains the project number associated with the operation.
     projectNumber :: (Core.Maybe Core.Int64),
     -- | The time operation processing started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Contains the version associated with the operation.
     version :: (Core.Maybe GoogleCloudMlV1__Version)
   }
@@ -3562,10 +3562,10 @@ instance
 -- /See:/ 'newGoogleCloudMlV1__Scheduling' smart constructor.
 data GoogleCloudMlV1__Scheduling = GoogleCloudMlV1__Scheduling
   { -- | Optional. The maximum job running time, expressed in seconds. The field can contain up to nine fractional digits, terminated by @s@. If not specified, this field defaults to @604800s@ (seven days). If the training job is still running after this duration, AI Platform Training cancels it. The duration is measured from when the job enters the @RUNNING@ state; therefore it does not overlap with the duration limited by Scheduling.max/wait/time. For example, if you want to ensure your job runs for no more than 2 hours, set this field to @7200s@ (2 hours * 60 minutes \/ hour * 60 seconds \/ minute). If you submit your training job using the @gcloud@ tool, you can </ai-platform/training/docs/training-jobs#formatting_your_configuration_parameters specify this field in a config.yaml file>. For example: @yaml trainingInput: scheduling: maxRunningTime: 7200s@
-    maxRunningTime :: (Core.Maybe Core.GDuration),
+    maxRunningTime :: (Core.Maybe Core.Duration),
     -- | Optional. The maximum job wait time, expressed in seconds. The field can contain up to nine fractional digits, terminated by @s@. If not specified, there is no limit to the wait time. The minimum for this field is @1800s@ (30 minutes). If the training job has not entered the @RUNNING@ state after this duration, AI Platform Training cancels it. After the job begins running, it can no longer be cancelled due to the maximum wait time. Therefore the duration limited by this field does not overlap with the duration limited by Scheduling.max/running/time. For example, if the job temporarily stops running and retries due to a </ai-platform/training/docs/overview#restarts VM restart>, this cannot lead to a maximum wait time cancellation. However, independently of this constraint, AI Platform Training might stop a job if there are too many retries due to exhausted resources in a region. The following example describes how you might use this field: To cancel your job if it doesn\'t start running within 1 hour, set this
     -- field to @3600s@ (1 hour * 60 minutes \/ hour * 60 seconds \/ minute). If the job is still in the @QUEUED@ or @PREPARING@ state after an hour of waiting, AI Platform Training cancels the job. If you submit your training job using the @gcloud@ tool, you can </ai-platform/training/docs/training-jobs#formatting_your_configuration_parameters specify this field in a config.yaml file>. For example: @yaml trainingInput: scheduling: maxWaitTime: 3600s@
-    maxWaitTime :: (Core.Maybe Core.GDuration),
+    maxWaitTime :: (Core.Maybe Core.Duration),
     -- | Optional. Job scheduling will be based on this priority, which in the range [0, 1000]. The bigger the number, the higher the priority. Default to 0 if not set. If there are multiple jobs requesting same type of accelerators, the high priority job will be scheduled prior to ones with low priority.
     priority :: (Core.Maybe Core.Int32)
   }
@@ -3661,7 +3661,7 @@ instance
 -- /See:/ 'newGoogleCloudMlV1__Study' smart constructor.
 data GoogleCloudMlV1__Study = GoogleCloudMlV1__Study
   { -- | Output only. Time at which the study was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A human readable reason why the Study is inactive. This should be empty if a study is ACTIVE or COMPLETED.
     inactiveReason :: (Core.Maybe Core.Text),
     -- | Output only. The name of a study.
@@ -3767,7 +3767,7 @@ data GoogleCloudMlV1__SuggestTrialsMetadata = GoogleCloudMlV1__SuggestTrialsMeta
   { -- | The identifier of the client that is requesting the suggestion.
     clientId :: (Core.Maybe Core.Text),
     -- | The time operation was submitted.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The name of the study that the trial belongs to.
     study :: (Core.Maybe Core.Text),
     -- | The number of suggestions requested.
@@ -3867,9 +3867,9 @@ instance
 -- /See:/ 'newGoogleCloudMlV1__SuggestTrialsResponse' smart constructor.
 data GoogleCloudMlV1__SuggestTrialsResponse = GoogleCloudMlV1__SuggestTrialsResponse
   { -- | The time at which operation processing completed.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The time at which the operation was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The state of the study.
     studyState :: (Core.Maybe GoogleCloudMlV1__SuggestTrialsResponse_StudyState),
     -- | A list of trials.
@@ -4204,7 +4204,7 @@ data GoogleCloudMlV1__Trial = GoogleCloudMlV1__Trial
   { -- | Output only. The identifier of the client that originally requested this trial.
     clientId :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the trial\'s status changed to COMPLETED.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The final measurement containing the objective value.
     finalMeasurement :: (Core.Maybe GoogleCloudMlV1__Measurement),
     -- | Output only. A human readable string describing why the trial is infeasible. This should only be set if trial_infeasible is true.
@@ -4216,7 +4216,7 @@ data GoogleCloudMlV1__Trial = GoogleCloudMlV1__Trial
     -- | The parameters of the trial.
     parameters :: (Core.Maybe [GoogleCloudMlV1_Trial_Parameter]),
     -- | Output only. Time at which the trial was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The detailed state of a trial.
     state :: (Core.Maybe GoogleCloudMlV1__Trial_State),
     -- | Output only. If true, the parameters in this trial are not attempted again.
@@ -4290,7 +4290,7 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version
     -- | Optional. Specifies a custom container to use for serving predictions. If you specify this field, then @machineType@ is required. If you specify this field, then @deploymentUri@ is optional. If you specify this field, then you must not specify @runtimeVersion@, @packageUris@, @framework@, @pythonVersion@, or @predictionClass@.
     container :: (Core.Maybe GoogleCloudMlV1__ContainerSpec),
     -- | Output only. The time the version was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The Cloud Storage URI of a directory containing trained model artifacts to be used to create the model version. See the </ai-platform/prediction/docs/deploying-models guide to deploying models> for more information. The total number of files under this directory must not exceed 1000. During projects.models.versions.create, AI Platform Prediction copies all files from the specified directory to a location managed by the service. From then on, AI Platform Prediction uses these copies of the model artifacts to serve predictions, not the original files in Cloud Storage, so this location is useful only as a historical record. If you specify container, then this field is optional. Otherwise, it is required. Learn </ai-platform/prediction/docs/custom-container-requirements#artifacts how to use this field with a custom container>.
     deploymentUri :: (Core.Maybe Core.Text),
     -- | Optional. The description specified for the version when it was created.
@@ -4310,9 +4310,9 @@ data GoogleCloudMlV1__Version = GoogleCloudMlV1__Version
     -- | Output only. The <https://cloud.google.com/ai-platform-unified/docs/reference/rest/v1beta1/projects.locations.models AI Platform (Unified) Model> ID for the last <https://cloud.google.com/ai-platform-unified/docs/start/migrating-to-ai-platform-unified model migration>.
     lastMigrationModelId :: (Core.Maybe Core.Text),
     -- | Output only. The last time this version was successfully <https://cloud.google.com/ai-platform-unified/docs/start/migrating-to-ai-platform-unified migrated to AI Platform (Unified)>.
-    lastMigrationTime :: (Core.Maybe Core.DateTime'),
+    lastMigrationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time the version was last used for prediction.
-    lastUseTime :: (Core.Maybe Core.DateTime'),
+    lastUseTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The type of machine on which to serve the model. Currently only applies to online prediction service. To learn about valid values for this field, read </ai-platform/prediction/docs/machine-types-online-prediction Choosing a machine type for online prediction>. If this field is not specified and you are using a </ai-platform/prediction/docs/regional-endpoints regional endpoint>, then the machine type defaults to @n1-standard-2@. If this field is not specified and you are using the global endpoint (@ml.googleapis.com@), then the machine type defaults to @mls1-c1-m2@.
     machineType :: (Core.Maybe Core.Text),
     -- | Manually select the number of nodes to use for serving the model. You should generally use @auto_scaling@ with an appropriate @min_nodes@ instead, but this option is available if you want more predictable billing. Beware that latency and error rates will increase if the traffic exceeds that capability of the system to serve it based on the selected number of nodes.
@@ -4698,7 +4698,7 @@ data GoogleIamV1__SetIamPolicyRequest = GoogleIamV1__SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe GoogleIamV1__Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

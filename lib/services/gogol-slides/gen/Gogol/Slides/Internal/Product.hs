@@ -5772,7 +5772,7 @@ instance Core.ToJSON UnmergeTableCellsRequest where
 -- /See:/ 'newUpdateImagePropertiesRequest' smart constructor.
 data UpdateImagePropertiesRequest = UpdateImagePropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @imageProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the image outline color, set @fields@ to @\"outline.outlineFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The image properties to update.
     imageProperties :: (Core.Maybe ImageProperties),
     -- | The object ID of the image the updates are applied to.
@@ -5855,7 +5855,7 @@ instance Core.ToJSON UpdateLineCategoryRequest where
 -- /See:/ 'newUpdateLinePropertiesRequest' smart constructor.
 data UpdateLinePropertiesRequest = UpdateLinePropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @lineProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the line solid fill color, set @fields@ to @\"lineFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The line properties to update.
     lineProperties :: (Core.Maybe LineProperties),
     -- | The object ID of the line the update is applied to.
@@ -6041,7 +6041,7 @@ instance Core.ToJSON UpdatePageElementsZOrderRequest where
 -- /See:/ 'newUpdatePagePropertiesRequest' smart constructor.
 data UpdatePagePropertiesRequest = UpdatePagePropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @pageProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the page background solid fill color, set @fields@ to @\"pageBackgroundFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the page the update is applied to.
     objectId :: (Core.Maybe Core.Text),
     -- | The page properties to update.
@@ -6087,7 +6087,7 @@ data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest
   { -- | The location of the cell in the table containing the paragraph(s) to style. If @object_id@ refers to a table, @cell_location@ must have a value. Otherwise, it must not.
     cellLocation :: (Core.Maybe TableCellLocation),
     -- | The fields that should be updated. At least one field must be specified. The root @style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example, to update the paragraph alignment, set @fields@ to @\"alignment\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the shape or table with the text to be styled.
     objectId :: (Core.Maybe Core.Text),
     -- | The paragraph\'s style.
@@ -6139,7 +6139,7 @@ instance Core.ToJSON UpdateParagraphStyleRequest where
 -- /See:/ 'newUpdateShapePropertiesRequest' smart constructor.
 data UpdateShapePropertiesRequest = UpdateShapePropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @shapeProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the shape background solid fill color, set @fields@ to @\"shapeBackgroundFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the shape the updates are applied to.
     objectId :: (Core.Maybe Core.Text),
     -- | The shape properties to update.
@@ -6184,7 +6184,7 @@ instance Core.ToJSON UpdateShapePropertiesRequest where
 -- /See:/ 'newUpdateSlidePropertiesRequest' smart constructor.
 data UpdateSlidePropertiesRequest = UpdateSlidePropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root \'slideProperties\' is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update whether a slide is skipped, set @fields@ to @\"isSkipped\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the slide the update is applied to.
     objectId :: (Core.Maybe Core.Text),
     -- | The slide properties to update.
@@ -6270,7 +6270,7 @@ data UpdateTableBorderPropertiesRequest = UpdateTableBorderPropertiesRequest
   { -- | The border position in the table range the updates should apply to. If a border position is not specified, the updates will apply to all borders in the table range.
     borderPosition :: (Core.Maybe UpdateTableBorderPropertiesRequest_BorderPosition),
     -- | The fields that should be updated. At least one field must be specified. The root @tableBorderProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the table border solid fill color, set @fields@ to @\"tableBorderFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the table.
     objectId :: (Core.Maybe Core.Text),
     -- | The table border properties to update.
@@ -6329,7 +6329,7 @@ instance
 -- /See:/ 'newUpdateTableCellPropertiesRequest' smart constructor.
 data UpdateTableCellPropertiesRequest = UpdateTableCellPropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @tableCellProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the table cell background solid fill color, set @fields@ to @\"tableCellBackgroundFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the table.
     objectId :: (Core.Maybe Core.Text),
     -- | The table cell properties to update.
@@ -6384,7 +6384,7 @@ data UpdateTableColumnPropertiesRequest = UpdateTableColumnPropertiesRequest
   { -- | The list of zero-based indices specifying which columns to update. If no indices are provided, all columns in the table will be updated.
     columnIndices :: (Core.Maybe [Core.Int32]),
     -- | The fields that should be updated. At least one field must be specified. The root @tableColumnProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the column width, set @fields@ to @\"column_width\"@. If \'\"column_width\"\' is included in the field mask but the property is left unset, the column width will default to 406,400 EMU (32 points).
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the table.
     objectId :: (Core.Maybe Core.Text),
     -- | The table column properties to update. If the value of @table_column_properties#column_width@ in the request is less than 406,400 EMU (32 points), a 400 bad request error is returned.
@@ -6438,7 +6438,7 @@ instance
 -- /See:/ 'newUpdateTableRowPropertiesRequest' smart constructor.
 data UpdateTableRowPropertiesRequest = UpdateTableRowPropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @tableRowProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the minimum row height, set @fields@ to @\"min_row_height\"@. If \'\"min/row/height\"\' is included in the field mask but the property is left unset, the minimum row height will default to 0.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the table.
     objectId :: (Core.Maybe Core.Text),
     -- | The list of zero-based indices specifying which rows to update. If no indices are provided, all rows in the table will be updated.
@@ -6493,7 +6493,7 @@ data UpdateTextStyleRequest = UpdateTextStyleRequest
   { -- | The location of the cell in the table containing the text to style. If @object_id@ refers to a table, @cell_location@ must have a value. Otherwise, it must not.
     cellLocation :: (Core.Maybe TableCellLocation),
     -- | The fields that should be updated. At least one field must be specified. The root @style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example, to update the text style to bold, set @fields@ to @\"bold\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the shape or table with the text to be styled.
     objectId :: (Core.Maybe Core.Text),
     -- | The style(s) to set on the text. If the value for a particular style matches that of the parent, that style will be set to inherit. Certain text style changes may cause other changes meant to mirror the behavior of the Slides editor. See the documentation of TextStyle for more information.
@@ -6545,7 +6545,7 @@ instance Core.ToJSON UpdateTextStyleRequest where
 -- /See:/ 'newUpdateVideoPropertiesRequest' smart constructor.
 data UpdateVideoPropertiesRequest = UpdateVideoPropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @videoProperties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the video outline color, set @fields@ to @\"outline.outlineFill.solidFill.color\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The object ID of the video the updates are applied to.
     objectId :: (Core.Maybe Core.Text),
     -- | The video properties to update.

@@ -53,7 +53,7 @@ type FireStoreProjectsDatabasesDocumentsDeleteResource =
     Core.:> Core.QueryParam "currentDocument.exists" Core.Bool
     Core.:> Core.QueryParam
               "currentDocument.updateTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data FireStoreProjectsDatabasesDocumentsDelete = FireStoreProjectsDatabasesDocum
     -- | When set to @true@, the target document must exist. When set to @false@, the target document must not exist.
     currentDocumentExists :: (Core.Maybe Core.Bool),
     -- | When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
-    currentDocumentUpdateTime :: (Core.Maybe Core.DateTime'),
+    currentDocumentUpdateTime :: (Core.Maybe Core.DateTime),
     -- | Required. The resource name of the Document to delete. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

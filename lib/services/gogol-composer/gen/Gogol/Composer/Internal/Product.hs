@@ -422,7 +422,7 @@ data Environment = Environment
   { -- | Configuration parameters for this environment.
     config :: (Core.Maybe EnvironmentConfig),
     -- | Output only. The time at which this environment was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-defined labels for this environment. The labels map can contain no more than 64 entries. Entries of the labels map are UTF8 strings that comply with the following restrictions: * Keys must conform to regexp: \\p{Ll}\\p{Lo}{0,62} * Values must conform to regexp: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} * Both keys and values are additionally constrained to be \<= 128 bytes in size.
     labels :: (Core.Maybe Environment_Labels),
     -- | The resource name of the environment, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" EnvironmentId must start with a lowercase letter followed by up to 63 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
@@ -430,7 +430,7 @@ data Environment = Environment
     -- | The current state of the environment.
     state :: (Core.Maybe Environment_State),
     -- | Output only. The time at which this environment was last modified.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The UUID (Universally Unique IDentifier) associated with this environment. This value is generated when the environment is created.
     uuid :: (Core.Maybe Core.Text)
   }
@@ -855,11 +855,11 @@ instance Core.ToJSON ListOperationsResponse where
 -- /See:/ 'newMaintenanceWindow' smart constructor.
 data MaintenanceWindow = MaintenanceWindow
   { -- | Required. Maintenance window end time. It is used only to calculate the duration of the maintenance window. The value for end-time must be in the future, relative to @start_time@.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required. Maintenance window recurrence. Format is a subset of <https://tools.ietf.org/html/rfc5545 RFC-5545> @RRULE@. The only allowed values for @FREQ@ field are @FREQ=DAILY@ and @FREQ=WEEKLY;BYDAY=...@ Example values: @FREQ=WEEKLY;BYDAY=TU,WE@, @FREQ=DAILY@.
     recurrence :: (Core.Maybe Core.Text),
     -- | Required. Start time of the first recurrence of the maintenance window.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1085,9 +1085,9 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newOperationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata
   { -- | Output only. The time the operation was submitted to the server.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time when the operation terminated, regardless of its success. This field is unset if the operation is still ongoing.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The type of operation being performed.
     operationType :: (Core.Maybe OperationMetadata_OperationType),
     -- | Output only. The resource being operated on, as a </apis/design/resource_names#relative_resource_name relative resource name>.

@@ -53,7 +53,7 @@ type CloudErrorReportingProjectsGroupStatsListResource =
     Core.:> Core.QueryParam
               "alignment"
               ProjectsGroupStatsListAlignment
-    Core.:> Core.QueryParam "alignmentTime" Core.DateTime'
+    Core.:> Core.QueryParam "alignmentTime" Core.DateTime
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "groupId" Core.Text
     Core.:> Core.QueryParam "order" ProjectsGroupStatsListOrder
@@ -71,7 +71,7 @@ type CloudErrorReportingProjectsGroupStatsListResource =
               ProjectsGroupStatsListTimeRangePeriod
     Core.:> Core.QueryParam
               "timedCountDuration"
-              Core.GDuration
+              Core.Duration
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam
               "upload_protocol"
@@ -92,7 +92,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     -- | Optional. The alignment of the timed counts to be returned. Default is @ALIGNMENT_EQUAL_AT_END@.
     alignment :: (Core.Maybe ProjectsGroupStatsListAlignment),
     -- | Optional. Time where the timed counts shall be aligned if rounded alignment is chosen. Default is 00:00 UTC.
-    alignmentTime :: (Core.Maybe Core.DateTime'),
+    alignmentTime :: (Core.Maybe Core.DateTime),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Optional. List all ErrorGroupStats with these IDs.
@@ -114,7 +114,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     -- | Restricts the query to the specified time range.
     timeRangePeriod :: (Core.Maybe ProjectsGroupStatsListTimeRangePeriod),
     -- | Optional. The preferred duration for a single returned @TimedCount@. If not set, no timed counts are returned.
-    timedCountDuration :: (Core.Maybe Core.GDuration),
+    timedCountDuration :: (Core.Maybe Core.Duration),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

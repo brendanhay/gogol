@@ -51,8 +51,8 @@ type SpannerProjectsInstancesDatabasesGetScansResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "endTime" Core.DateTime'
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "endTime" Core.DateTime
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam
@@ -72,11 +72,11 @@ data SpannerProjectsInstancesDatabasesGetScans = SpannerProjectsInstancesDatabas
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | The upper bound for the time range to retrieve Scan data for.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required. The unique name of the scan containing the requested information, specific to the Database service implementing this interface.
     name :: Core.Text,
     -- | These fields restrict the Database-specific information returned in the @Scan.data@ field. If a @View@ is provided that does not include the @Scan.data@ field, these are ignored. This range of time must be entirely contained within the defined time range of the targeted scan. The lower bound for the time range to retrieve Scan data for.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

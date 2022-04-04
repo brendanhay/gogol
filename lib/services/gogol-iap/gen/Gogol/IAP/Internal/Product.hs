@@ -932,7 +932,7 @@ instance Core.ToJSON PolicyName where
 -- /See:/ 'newReauthSettings' smart constructor.
 data ReauthSettings = ReauthSettings
   { -- | Reauth session lifetime, how long before a user has to reauthenticate again.
-    maxAge :: (Core.Maybe Core.GDuration),
+    maxAge :: (Core.Maybe Core.Duration),
     -- | Reauth method required by the policy.
     method :: (Core.Maybe ReauthSettings_Method),
     -- | How IAP determines the effective policy in cases of hierarchial policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.

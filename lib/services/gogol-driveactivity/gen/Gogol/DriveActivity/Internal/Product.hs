@@ -260,7 +260,7 @@ data Action = Action
     -- | The action occurred over this time range.
     timeRange :: (Core.Maybe TimeRange),
     -- | The action occurred at this specific time.
-    timestamp :: (Core.Maybe Core.DateTime')
+    timestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -873,7 +873,7 @@ data DriveActivity = DriveActivity
     -- | The activity occurred over this time range.
     timeRange :: (Core.Maybe TimeRange),
     -- | The activity occurred at this specific time.
-    timestamp :: (Core.Maybe Core.DateTime')
+    timestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2063,9 +2063,9 @@ instance Core.ToJSON TeamDriveReference where
 -- /See:/ 'newTimeRange' smart constructor.
 data TimeRange = TimeRange
   { -- | The end of the time range.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The start of the time range.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

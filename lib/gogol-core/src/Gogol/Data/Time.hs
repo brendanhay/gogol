@@ -10,14 +10,14 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 module Gogol.Data.Time
-  ( Time',
-    Date',
-    DateTime' (..),
-    GDuration,
+  ( Time (..),
+    Date (..),
+    DateTime (..),
+    Duration (..),
     _Time,
     _Date,
     _DateTime,
-    _GDuration,
+    _Duration,
   )
 where
 
@@ -45,73 +45,73 @@ import Web.HttpApiData
 -- | This SHOULD be a time in the format of hh:mm:ss.  It is
 -- recommended that you use the "date-time" format instead of "time"
 -- unless you need to transfer only the time part.
-newtype Time' = Time' {fromTime :: TimeOfDay}
+newtype Time = Time {fromTime :: TimeOfDay}
   deriving (Eq, Ord, Show, Read, Generic)
 
-_Time :: Iso' Time' TimeOfDay
-_Time = iso fromTime Time'
+_Time :: Iso' Time TimeOfDay
+_Time = iso fromTime Time
 
-instance ToHttpApiData Time' where
+instance ToHttpApiData Time where
   toQueryParam = Text.pack . show . fromTime
 
-instance FromHttpApiData Time' where
-  parseQueryParam = second Time' . parseText timeParser
+instance FromHttpApiData Time where
+  parseQueryParam = second Time . parseText timeParser
 
 -- | This SHOULD be a date in the format of YYYY-MM-DD.  It is
 -- recommended that you use the "date-time" format instead of "date"
 -- unless you need to transfer only the date part.
-newtype Date' = Date' {unDate :: Day}
+newtype Date = Date {unDate :: Day}
   deriving (Eq, Ord, Show, Read, Generic, ToHttpApiData, FromHttpApiData)
 
-_Date :: Iso' Date' Day
-_Date = iso unDate Date'
+_Date :: Iso' Date Day
+_Date = iso unDate Date
 
 -- | This SHOULD be a date in ISO 8601 format of YYYY-MM-
 -- DDThh:mm:ssZ in UTC time. This is the recommended form of date/timestamp.
-newtype DateTime' = DateTime' {unDateTime :: UTCTime}
+newtype DateTime = DateTime {unDateTime :: UTCTime}
   deriving (Eq, Ord, Show, Read, Generic, ToHttpApiData, FromHttpApiData)
 
-_DateTime :: Iso' DateTime' UTCTime
-_DateTime = iso unDateTime DateTime'
+_DateTime :: Iso' DateTime UTCTime
+_DateTime = iso unDateTime DateTime
 
 -- | A duration in seconds with up to nine fractional digits, terminated by 's'.
 --
 -- /Example/: @"3.5s"@.
-newtype GDuration = GDuration {unGDuration :: Scientific}
+newtype Duration = Duration {unDuration :: Scientific}
   deriving (Eq, Ord, Show, Read, Generic)
 
-_GDuration :: Iso' GDuration Scientific
-_GDuration = iso unGDuration GDuration
+_Duration :: Iso' Duration Scientific
+_Duration = iso unDuration Duration
 
-instance ToHttpApiData GDuration where
+instance ToHttpApiData Duration where
   toQueryParam =
     LText.toStrict
       . (\seconds -> Build.toLazyText seconds <> "s")
       . Sci.formatScientificBuilder Sci.Fixed (Just 9)
-      . unGDuration
+      . unDuration
 
-instance FromHttpApiData GDuration where
-  parseQueryParam = second GDuration . parseText durationParser
+instance FromHttpApiData Duration where
+  parseQueryParam = second Duration . parseText durationParser
 
-instance ToJSON Time' where toJSON = String . toQueryParam
+instance ToJSON Time where toJSON = String . toQueryParam
 
-instance ToJSON Date' where toJSON = String . toQueryParam
+instance ToJSON Date where toJSON = String . toQueryParam
 
-instance ToJSON DateTime' where toJSON = toJSON . unDateTime
+instance ToJSON DateTime where toJSON = toJSON . unDateTime
 
-instance ToJSON GDuration where toJSON = String . toQueryParam
+instance ToJSON Duration where toJSON = String . toQueryParam
 
-instance FromJSON Time' where
-  parseJSON = fmap Time' . withText "time" (run timeParser)
+instance FromJSON Time where
+  parseJSON = fmap Time . withText "Time" (run timeParser)
 
-instance FromJSON Date' where
-  parseJSON = fmap Date' . withText "date" (run dayParser)
+instance FromJSON Date where
+  parseJSON = fmap Date . withText "Date" (run dayParser)
 
-instance FromJSON DateTime' where
-  parseJSON = fmap DateTime' . parseJSON
+instance FromJSON DateTime where
+  parseJSON = fmap DateTime . parseJSON
 
-instance FromJSON GDuration where
-  parseJSON = fmap GDuration . withText "duration" (run durationParser)
+instance FromJSON Duration where
+  parseJSON = fmap Duration . withText "Duration" (run durationParser)
 
 parseText :: Parser a -> Text -> Either Text a
 parseText p = first Text.pack . parseOnly p

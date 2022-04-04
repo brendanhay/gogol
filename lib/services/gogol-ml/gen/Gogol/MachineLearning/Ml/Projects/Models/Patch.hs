@@ -50,7 +50,7 @@ type MlProjectsModelsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data MlProjectsModelsPatch = MlProjectsModelsPatch
     -- | Multipart request metadata.
     payload :: GoogleCloudMlV1__Model,
     -- | Required. Specifies the path, relative to @Model@, of the field to update. For example, to change the description of a model to \"foo\" and set its default version to \"version/1\", the @update_mask@ parameter would be specified as @description@, @default_version.name@, and the @PATCH@ request body would specify the new value, as follows: { \"description\": \"foo\", \"defaultVersion\": { \"name\":\"version/1\" } } Currently the supported update masks are @description@ and @default_version.name@.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

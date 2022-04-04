@@ -98,7 +98,7 @@ data Asset = Asset
   { -- | The author\'s publicly visible name. Use this name when giving credit to the author. For more information, see </poly/discover/licensing Licensing>.
     authorName :: (Core.Maybe Core.Text),
     -- | For published assets, the time when the asset was published. For unpublished assets, the time when the asset was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The human-readable description, set by the asset\'s author.
     description :: (Core.Maybe Core.Text),
     -- | The human-readable name, set by the asset\'s author.
@@ -120,7 +120,7 @@ data Asset = Asset
     -- | The thumbnail image for the asset.
     thumbnail :: (Core.Maybe File),
     -- | The time when the asset was last modified. For published assets, whose contents are immutable, the update time changes only when metadata properties, such as visibility, are updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The visibility of the asset and who can access it.
     visibility :: (Core.Maybe Asset_Visibility)
   }

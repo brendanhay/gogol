@@ -283,9 +283,9 @@ data ApprovalRequest = ApprovalRequest
     -- | The resource name of the request. Format is \"{projects|folders|organizations}\/{id}\/approvalRequests\/{approval_request}\".
     name :: (Core.Maybe Core.Text),
     -- | The time at which approval was requested.
-    requestTime :: (Core.Maybe Core.DateTime'),
+    requestTime :: (Core.Maybe Core.DateTime),
     -- | The requested expiration for the approval. If the request is approved, access will be granted from the time of approval until the expiration time.
-    requestedExpiration :: (Core.Maybe Core.DateTime'),
+    requestedExpiration :: (Core.Maybe Core.DateTime),
     -- | The locations for which approval is being requested.
     requestedLocations :: (Core.Maybe AccessLocations),
     -- | The justification for which approval is being requested.
@@ -355,7 +355,7 @@ instance Core.ToJSON ApprovalRequest where
 -- /See:/ 'newApproveApprovalRequestMessage' smart constructor.
 newtype ApproveApprovalRequestMessage = ApproveApprovalRequestMessage
   { -- | The expiration time of this approval.
-    expireTime :: (Core.Maybe Core.DateTime')
+    expireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -386,11 +386,11 @@ instance Core.ToJSON ApproveApprovalRequestMessage where
 -- /See:/ 'newApproveDecision' smart constructor.
 data ApproveDecision = ApproveDecision
   { -- | The time at which approval was granted.
-    approveTime :: (Core.Maybe Core.DateTime'),
+    approveTime :: (Core.Maybe Core.DateTime),
     -- | True when the request has been auto-approved.
     autoApproved :: (Core.Maybe Core.Bool),
     -- | The time at which the approval expires.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | The signature for the ApprovalRequest and details on how it was signed.
     signatureInfo :: (Core.Maybe SignatureInfo)
   }
@@ -455,7 +455,7 @@ instance Core.ToJSON DismissApprovalRequestMessage where
 -- /See:/ 'newDismissDecision' smart constructor.
 data DismissDecision = DismissDecision
   { -- | The time at which the approval request was dismissed.
-    dismissTime :: (Core.Maybe Core.DateTime'),
+    dismissTime :: (Core.Maybe Core.DateTime),
     -- | This field will be true if the ApprovalRequest was implicitly dismissed due to inaction by the access approval approvers (the request is not acted on by the approvers before the exiration time).
     implicit :: (Core.Maybe Core.Bool)
   }

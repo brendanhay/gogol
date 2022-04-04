@@ -220,7 +220,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newAnalyzeIamPolicyLongrunningMetadata' smart constructor.
 newtype AnalyzeIamPolicyLongrunningMetadata = AnalyzeIamPolicyLongrunningMetadata
   { -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime')
+    createTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -475,7 +475,7 @@ data GoogleCloudAssetV1p7beta1Asset = GoogleCloudAssetV1p7beta1Asset
     -- | Please also refer to the <https://cloud.google.com/vpc-service-controls/docs/overview service perimeter user guide>.
     servicePerimeter :: (Core.Maybe GoogleIdentityAccesscontextmanagerV1ServicePerimeter),
     -- | The last update timestamp of an asset. update_time is updated when create\/update\/delete operation is performed.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -612,7 +612,7 @@ data GoogleCloudAssetV1p7beta1ExportAssetsRequest = GoogleCloudAssetV1p7beta1Exp
     -- | Required. Output configuration indicating where the results will be output to.
     outputConfig :: (Core.Maybe GoogleCloudAssetV1p7beta1OutputConfig),
     -- | Timestamp to take an asset snapshot. This can only be set to a timestamp between the current time and the current time minus 35 days (inclusive). If not specified, the current time will be used. Due to delays in resource data collection and indexing, there is a volatile window during which running the same query may get different results.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A list of relationship types to export, for example: @INSTANCE_TO_INSTANCEGROUP@. This field should only be specified if content/type=RELATIONSHIP. If specified, it will snapshot [asset/types]\' specified relationships, or give errors if any relationship/types\' supported types are not in [asset/types]. If not specified, it will snapshot all [asset/types]\' supported relationships. An unspecified [asset/types] field means all supported asset_types. See <https://cloud.google.com/asset-inventory/docs/overview Introduction to Cloud Asset Inventory> for all supported asset types and relationship types.
     relationshipTypes :: (Core.Maybe [Core.Text])
   }
@@ -1169,7 +1169,7 @@ data GoogleCloudOrgpolicyV1Policy = GoogleCloudOrgpolicyV1Policy
     -- | Restores the default behavior of the constraint; independent of @Constraint@ type.
     restoreDefault :: (Core.Maybe GoogleCloudOrgpolicyV1RestoreDefault),
     -- | The time stamp the @Policy@ was previously updated. This is set by the server, not specified by the caller, and represents the last time a call to @SetOrgPolicy@ was made for that @Policy@. Any value set by the client will be ignored.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Version of the @Policy@. Default version is 0;
     version :: (Core.Maybe Core.Int32)
   }

@@ -50,11 +50,11 @@ data PlatformSummary = PlatformSummary
   { -- | The site\'s Ad Experience Report status on this platform.
     betterAdsStatus :: (Core.Maybe PlatformSummary_BetterAdsStatus),
     -- | The time at which <https://support.google.com/webtools/answer/7308033 enforcement> against the site began or will begin on this platform. Not set when the filter_status is OFF.
-    enforcementTime :: (Core.Maybe Core.DateTime'),
+    enforcementTime :: (Core.Maybe Core.DateTime),
     -- | The site\'s <https://support.google.com/webtools/answer/7308033 enforcement status> on this platform.
     filterStatus :: (Core.Maybe PlatformSummary_FilterStatus),
     -- | The time at which the site\'s status last changed on this platform.
-    lastChangeTime :: (Core.Maybe Core.DateTime'),
+    lastChangeTime :: (Core.Maybe Core.DateTime),
     -- | The site\'s regions on this platform. No longer populated, because there is no longer any semantic difference between sites in different regions.
     region :: (Core.Maybe [PlatformSummary_RegionItem]),
     -- | A link to the full Ad Experience Report for the site on this platform.. Not set in ViolatingSitesResponse. Note that you must complete the <https://support.google.com/webmasters/answer/9008080 Search Console verification process> for the site before you can access the full report.

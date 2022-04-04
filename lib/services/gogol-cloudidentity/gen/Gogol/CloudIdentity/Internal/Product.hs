@@ -539,7 +539,7 @@ data DynamicGroupStatus = DynamicGroupStatus
   { -- | Status of the dynamic group.
     status :: (Core.Maybe DynamicGroupStatus_Status),
     -- | The latest time at which the dynamic group is guaranteed to be in the given status. If status is @UP_TO_DATE@, the latest time at which the dynamic group was confirmed to be up-to-date. If status is @UPDATING_MEMBERSHIPS@, the time at which dynamic group was created.
-    statusTime :: (Core.Maybe Core.DateTime')
+    statusTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -607,7 +607,7 @@ instance Core.ToJSON EntityKey where
 -- /See:/ 'newExpiryDetail' smart constructor.
 newtype ExpiryDetail = ExpiryDetail
   { -- | The time at which the @MembershipRole@ will expire.
-    expireTime :: (Core.Maybe Core.DateTime')
+    expireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1203,7 +1203,7 @@ data GoogleAppsCloudidentityDevicesV1ClientState = GoogleAppsCloudidentityDevice
           GoogleAppsCloudidentityDevicesV1ClientState_ComplianceState
       ),
     -- | Output only. The time the client state data was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | This field may be used to store a unique identifier for the API resource within which these CustomAttributes are a field.
     customId :: (Core.Maybe Core.Text),
     -- | The token that needs to be passed back for concurrency control in updates. Token needs to be passed back in UpdateRequest
@@ -1219,7 +1219,7 @@ data GoogleAppsCloudidentityDevicesV1ClientState = GoogleAppsCloudidentityDevice
           GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
       ),
     -- | Output only. The time the client state data was last updated.
-    lastUpdateTime :: (Core.Maybe Core.DateTime'),
+    lastUpdateTime :: (Core.Maybe Core.DateTime),
     -- | The management state of the resource as specified by the API client.
     managed :: (Core.Maybe GoogleAppsCloudidentityDevicesV1ClientState_Managed),
     -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the ClientState in format: @devices\/{device}\/deviceUsers\/{device_user}\/clientState\/{partner}@, where partner corresponds to the partner storing the data. For partners belonging to the \"BeyondCorp Alliance\", this is the partner ID specified to you by Google. For all other callers, this is a string of the form: @{customer}-suffix@, where @customer@ is your customer ID. The /suffix/ is any string the caller specifies. This string will be displayed verbatim in the administration console. This suffix is used in setting up Custom Access Levels in Context-Aware Access. Your organization\'s customer ID can be obtained from the URL: @GET https:\/\/www.googleapis.com\/admin\/directory\/v1\/customers\/my_customer@ The @id@ field in the response contains the customer ID starting with the letter \'C\'. The customer ID to be used in this API is the string after the letter \'C\' (not including \'C\')
@@ -1502,7 +1502,7 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
           GoogleAppsCloudidentityDevicesV1Device_CompromisedState
       ),
     -- | Output only. When the Company-Owned device was imported. This field is empty for BYOD devices.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Type of device.
     deviceType :: (Core.Maybe GoogleAppsCloudidentityDevicesV1Device_DeviceType),
     -- | Output only. Whether developer options is enabled on device.
@@ -1516,7 +1516,7 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
     -- | Output only. Kernel version of the device.
     kernelVersion :: (Core.Maybe Core.Text),
     -- | Most recent time when device synced with this service.
-    lastSyncTime :: (Core.Maybe Core.DateTime'),
+    lastSyncTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Management state of the device
     managementState :: (Core.Maybe GoogleAppsCloudidentityDevicesV1Device_ManagementState),
     -- | Output only. Device manufacturer. Example: Motorola.
@@ -1538,7 +1538,7 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
     -- | Output only. OS release version. Example: 6.0.
     releaseVersion :: (Core.Maybe Core.Text),
     -- | Output only. OS security patch update time on device.
-    securityPatchTime :: (Core.Maybe Core.DateTime'),
+    securityPatchTime :: (Core.Maybe Core.DateTime),
     -- | Serial Number of device. Example: HT82V1A01076.
     serialNumber :: (Core.Maybe Core.Text),
     -- | WiFi MAC addresses of device.
@@ -1675,13 +1675,13 @@ data GoogleAppsCloudidentityDevicesV1DeviceUser = GoogleAppsCloudidentityDevices
           GoogleAppsCloudidentityDevicesV1DeviceUser_CompromisedState
       ),
     -- | When the user first signed in to the device
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Most recent time when user registered with this service.
-    firstSyncTime :: (Core.Maybe Core.DateTime'),
+    firstSyncTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Default locale used on device, in IETF BCP-47 format.
     languageCode :: (Core.Maybe Core.Text),
     -- | Output only. Last time when user synced with policies.
-    lastSyncTime :: (Core.Maybe Core.DateTime'),
+    lastSyncTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Management state of the user on the device.
     managementState ::
       ( Core.Maybe
@@ -2297,7 +2297,7 @@ instance
 -- /See:/ 'newGroup' smart constructor.
 data Group = Group
   { -- | Output only. The time when the @Group@ was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | An extended description to help users determine the purpose of a @Group@. Must not be longer than 4,096 characters.
     description :: (Core.Maybe Core.Text),
     -- | The display name of the @Group@.
@@ -2313,7 +2313,7 @@ data Group = Group
     -- | Required. Immutable. The resource name of the entity under which this @Group@ resides in the Cloud Identity resource hierarchy. Must be of the form @identitysources\/{identity_source}@ for external- identity-mapped groups or @customers\/{customer}@ for Google Groups. The @customer@ must begin with \"C\" (for example, \'C046psxkn\').
     parent :: (Core.Maybe Core.Text),
     -- | Output only. The time when the @Group@ was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2707,7 +2707,7 @@ instance Core.ToJSON MemberRestriction where
 -- /See:/ 'newMembership' smart constructor.
 data Membership = Membership
   { -- | Output only. The time when the @Membership@ was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The <https://cloud.google.com/apis/design/resource_names resource name> of the @Membership@. Shall be of the form @groups\/{group}\/memberships\/{membership}@.
     name :: (Core.Maybe Core.Text),
     -- | Required. Immutable. The @EntityKey@ of the member.
@@ -2717,7 +2717,7 @@ data Membership = Membership
     -- | Output only. The type of the membership.
     type' :: (Core.Maybe Membership_Type),
     -- | Output only. The time when the @Membership@ was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3423,7 +3423,7 @@ instance Core.ToJSON UpdateMembershipMetadata where
 -- /See:/ 'newUpdateMembershipRolesParams' smart constructor.
 data UpdateMembershipRolesParams = UpdateMembershipRolesParams
   { -- | The fully-qualified names of fields to update. May only contain the field @expiry_detail.expire_time@.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | The @MembershipRole@s to be updated. Only @MEMBER@ @MembershipRole@ can currently be updated.
     membershipRole :: (Core.Maybe MembershipRole)
   }

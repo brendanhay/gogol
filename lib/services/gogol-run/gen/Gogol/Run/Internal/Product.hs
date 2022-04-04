@@ -298,7 +298,7 @@ data GoogleCloudRunV2Condition = GoogleCloudRunV2Condition
     -- | A reason for the internal condition.
     internalReason :: (Core.Maybe GoogleCloudRunV2Condition_InternalReason),
     -- | Last time the condition transitioned from one status to another.
-    lastTransitionTime :: (Core.Maybe Core.DateTime'),
+    lastTransitionTime :: (Core.Maybe Core.DateTime),
     -- | Human readable message indicating details about the current status.
     message :: (Core.Maybe Core.Text),
     -- | A common (service-level) reason for this condition.
@@ -738,9 +738,9 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     -- | Holds the single container that defines the unit of execution for this Revision.
     containers :: (Core.Maybe [GoogleCloudRunV2Container]),
     -- | Output only. The creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
     encryptionKey :: (Core.Maybe Core.Text),
     -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
@@ -748,7 +748,7 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     -- | The execution environment being used to host this Revision.
     executionEnvironment :: (Core.Maybe GoogleCloudRunV2Revision_ExecutionEnvironment),
     -- | Output only. For a deleted resource, the time after which it will be permamently deleted. It is only populated as a response to a Delete request.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A number that monotonically increases every time the user modifies the desired state.
     generation :: (Core.Maybe Core.Int64),
     -- | KRM-style labels for the resource. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels Cloud Run will populate some labels with \'run.googleapis.com\' or \'serving.knative.dev\' namespaces. Those labels are read-only, and user changes will not be preserved.
@@ -770,11 +770,11 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     -- | Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Max allowed time for an instance to respond to a request.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | Output only. Server assigned unique identifier for the Revision. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
     uid :: (Core.Maybe Core.Text),
     -- | Output only. The last-modified time.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | A list of Volumes to make available to containers.
     volumes :: (Core.Maybe [GoogleCloudRunV2Volume]),
     -- | VPC Access configuration for this Revision. For more information, visit https:\/\/cloud.google.com\/run\/docs\/configuring\/connecting-vpc.
@@ -1024,7 +1024,7 @@ data GoogleCloudRunV2RevisionTemplate = GoogleCloudRunV2RevisionTemplate
     -- | Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has. If not provided, the revision will use the project\'s default service account.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Max allowed time for an instance to respond to a request.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | A list of Volumes to make available to containers.
     volumes :: (Core.Maybe [GoogleCloudRunV2Volume]),
     -- | VPC Access configuration to use for this Revision. For more information, visit https:\/\/cloud.google.com\/run\/docs\/configuring\/connecting-vpc.
@@ -1281,17 +1281,17 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     -- | Output only. The Conditions of all other associated sub-resources. They contain additional diagnostics information in case the Service does not reach its Serving state. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
     conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
     -- | Output only. The creation time.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Email address of the authenticated creator.
     creator :: (Core.Maybe Core.Text),
     -- | Output only. The deletion time.
-    deleteTime :: (Core.Maybe Core.DateTime'),
+    deleteTime :: (Core.Maybe Core.DateTime),
     -- | User-provided description of the Service. This field currently has a 512-character limit.
     description :: (Core.Maybe Core.Text),
     -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
     -- | Output only. For a deleted resource, the time after which it will be permamently deleted.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A number that monotonically increases every time the user modifies the desired state.
     generation :: (Core.Maybe Core.Int64),
     -- | Provides the ingress settings for this Service. On output, returns the currently observed ingress settings, or INGRESS/TRAFFIC/UNSPECIFIED if no revision is active.
@@ -1324,7 +1324,7 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     -- | Output only. Server assigned unique identifier for the trigger. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
     uid :: (Core.Maybe Core.Text),
     -- | Output only. The last-modified time.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The main URI in which this Service is serving traffic.
     uri :: (Core.Maybe Core.Text)
   }
@@ -1963,7 +1963,7 @@ data GoogleIamV1SetIamPolicyRequest = GoogleIamV1SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe GoogleIamV1Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

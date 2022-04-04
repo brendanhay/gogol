@@ -50,7 +50,7 @@ type AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data AccessContextManagerOrganizationsGcpUserAccessBindingsPatch = AccessContext
     -- | Multipart request metadata.
     payload :: GcpUserAccessBinding,
     -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and must always be: update/mask { paths: \"access/levels\" }
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

@@ -475,7 +475,7 @@ data Activity_Id = Activity_Id
     -- | The unique identifier for a Google Workspace account.
     customerId :: (Core.Maybe Core.Text),
     -- | Time of occurrence of the activity. This is in UNIX epoch time in seconds.
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | Unique qualifier if multiple events have the same time.
     uniqueQualifier :: (Core.Maybe Core.Int64)
   }
@@ -805,7 +805,7 @@ data UsageReport_ParametersItem = UsageReport_ParametersItem
   { -- | Output only. Boolean value of the parameter.
     boolValue :: (Core.Maybe Core.Bool),
     -- | The RFC 3339 formatted value of the parameter, for example 2010-10-28T10:26:35.000Z.
-    datetimeValue :: (Core.Maybe Core.DateTime'),
+    datetimeValue :: (Core.Maybe Core.DateTime),
     -- | Output only. Integer value of the parameter.
     intValue :: (Core.Maybe Core.Int64),
     -- | Output only. Nested message value of the parameter.

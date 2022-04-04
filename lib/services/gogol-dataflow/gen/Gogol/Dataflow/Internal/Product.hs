@@ -864,7 +864,7 @@ data ApproximateProgress = ApproximateProgress
     -- | Obsolete.
     position :: (Core.Maybe Position),
     -- | Obsolete.
-    remainingTime :: (Core.Maybe Core.GDuration)
+    remainingTime :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1012,7 +1012,7 @@ data AutoscalingEvent = AutoscalingEvent
     -- | The target number of workers the worker pool wants to resize to use.
     targetNumWorkers :: (Core.Maybe Core.Int64),
     -- | The time this event was emitted to indicate a new target or current num_workers value.
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | A short and friendly name for the worker pool this event refers to.
     workerPool :: (Core.Maybe Core.Text)
   }
@@ -1196,7 +1196,7 @@ data CPUTime = CPUTime
   { -- | Average CPU utilization rate (% non-idle cpu \/ second) since previous sample.
     rate :: (Core.Maybe Core.Double),
     -- | Timestamp of the measurement.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Total active CPU time across all cores (ie., non-idle) in milliseconds since start-up.
     totalMs :: (Core.Maybe Core.Word64)
   }
@@ -2082,7 +2082,7 @@ data DisplayData = DisplayData
   { -- | Contains value if the data is of a boolean type.
     boolValue :: (Core.Maybe Core.Bool),
     -- | Contains value if the data is of duration type.
-    durationValue :: (Core.Maybe Core.GDuration),
+    durationValue :: (Core.Maybe Core.Duration),
     -- | Contains value if the data is of float type.
     floatValue :: (Core.Maybe Core.Double),
     -- | Contains value if the data is of int64 type.
@@ -2100,7 +2100,7 @@ data DisplayData = DisplayData
     -- | Contains value if the data is of string type.
     strValue :: (Core.Maybe Core.Text),
     -- | Contains value if the data is of timestamp type.
-    timestampValue :: (Core.Maybe Core.DateTime'),
+    timestampValue :: (Core.Maybe Core.DateTime),
     -- | An optional full URL.
     url :: (Core.Maybe Core.Text)
   }
@@ -2509,7 +2509,7 @@ instance Core.ToJSON Environment_Version where
 -- /See:/ 'newExecutionStageState' smart constructor.
 data ExecutionStageState = ExecutionStageState
   { -- | The time at which the stage transitioned to this state.
-    currentStateTime :: (Core.Maybe Core.DateTime'),
+    currentStateTime :: (Core.Maybe Core.DateTime),
     -- | The name of the execution stage.
     executionStageName :: (Core.Maybe Core.Text),
     -- | Executions stage states allow the same set of values as JobState.
@@ -3128,7 +3128,7 @@ instance Core.ToJSON Histogram where
 -- /See:/ 'newHotKeyDetection' smart constructor.
 data HotKeyDetection = HotKeyDetection
   { -- | The age of the hot key measured from when it was first detected.
-    hotKeyAge :: (Core.Maybe Core.GDuration),
+    hotKeyAge :: (Core.Maybe Core.Duration),
     -- | System-defined name of the step containing this hot key. Unique across the workflow.
     systemName :: (Core.Maybe Core.Text),
     -- | User-provided name of the step that contains this hot key.
@@ -3303,7 +3303,7 @@ instance Core.ToJSON InstructionOutput_Codec where
 -- /See:/ 'newIntegerGauge' smart constructor.
 data IntegerGauge = IntegerGauge
   { -- | The time at which this value was measured. Measured as msecs from epoch.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | The value of the variable represented by this gauge.
     value :: (Core.Maybe SplitInt64)
   }
@@ -3404,13 +3404,13 @@ data Job = Job
   { -- | The client\'s unique identifier of the job, re-used across retried attempts. If this field is set, the service will ensure its uniqueness. The request to create a job will fail if the service has knowledge of a previously submitted job with the same client\'s ID and job name. The caller may use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it.
     clientRequestId :: (Core.Maybe Core.Text),
     -- | The timestamp when the job was initially created. Immutable and set by the Cloud Dataflow service.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | If this is specified, the job\'s initial state is populated from the given snapshot.
     createdFromSnapshotId :: (Core.Maybe Core.Text),
     -- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
     currentState :: (Core.Maybe Job_CurrentState),
     -- | The timestamp associated with the current state.
-    currentStateTime :: (Core.Maybe Core.DateTime'),
+    currentStateTime :: (Core.Maybe Core.DateTime),
     -- | The environment for the job.
     environment :: (Core.Maybe Environment),
     -- | Deprecated.
@@ -3440,7 +3440,7 @@ data Job = Job
     -- | This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
     stageStates :: (Core.Maybe [ExecutionStageState]),
     -- | The timestamp when the job was started (transitioned to JOB/STATE/PENDING). Flexible resource scheduling jobs are started with some delay after job creation, so start/time is unset before start and is updated when the job is started by the Cloud Dataflow service. For other jobs, start/time always equals to create_time and is immutable and set by the Cloud Dataflow service.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Exactly one of step or steps/location should be specified. The top-level steps that constitute the entire job. Only retrieved with JOB/VIEW_ALL.
     steps :: (Core.Maybe [Step]),
     -- | The Cloud Storage location where the steps are stored.
@@ -3745,7 +3745,7 @@ data JobMessage = JobMessage
     -- | The text of the message.
     messageText :: (Core.Maybe Core.Text),
     -- | The timestamp of the message.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3855,7 +3855,7 @@ instance Core.ToJSON JobMetadata where
 -- /See:/ 'newJobMetrics' smart constructor.
 data JobMetrics = JobMetrics
   { -- | Timestamp as of which metric values are current.
-    metricTime :: (Core.Maybe Core.DateTime'),
+    metricTime :: (Core.Maybe Core.DateTime),
     -- | All metrics for this job.
     metrics :: (Core.Maybe [MetricUpdate])
   }
@@ -4393,11 +4393,11 @@ instance Core.ToJSON LaunchTemplateResponse where
 -- /See:/ 'newLeaseWorkItemRequest' smart constructor.
 data LeaseWorkItemRequest = LeaseWorkItemRequest
   { -- | The current timestamp at the worker.
-    currentWorkerTime :: (Core.Maybe Core.DateTime'),
+    currentWorkerTime :: (Core.Maybe Core.DateTime),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the WorkItem\'s job.
     location :: (Core.Maybe Core.Text),
     -- | The initial lease period.
-    requestedLeaseDuration :: (Core.Maybe Core.GDuration),
+    requestedLeaseDuration :: (Core.Maybe Core.Duration),
     -- | Untranslated bag-of-bytes WorkRequest from UnifiedWorker.
     unifiedWorkerRequest :: (Core.Maybe LeaseWorkItemRequest_UnifiedWorkerRequest),
     -- | Filter for WorkItem type.
@@ -4750,7 +4750,7 @@ data MemInfo = MemInfo
     -- | Instantenous memory (RSS) size in bytes.
     currentRssBytes :: (Core.Maybe Core.Word64),
     -- | Timestamp of the measurement.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Total memory (RSS) usage since start up in GB * ms.
     totalGbMs :: (Core.Maybe Core.Word64)
   }
@@ -4933,7 +4933,7 @@ data MetricUpdate = MetricUpdate
     -- | Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric\'s type. All Values in the list must be of the same type.
     set :: (Core.Maybe Core.Value),
     -- | Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5597,7 +5597,7 @@ instance Core.ToJSON PipelineDescription where
 -- /See:/ 'newPoint' smart constructor.
 data Point = Point
   { -- | The timestamp of the point.
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | The value of the point.
     value :: (Core.Maybe Core.Double)
   }
@@ -5831,7 +5831,7 @@ instance Core.ToJSON PubsubLocation where
 -- /See:/ 'newPubsubSnapshotMetadata' smart constructor.
 data PubsubSnapshotMetadata = PubsubSnapshotMetadata
   { -- | The expire time of the Pubsub snapshot.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | The name of the Pubsub snapshot.
     snapshotName :: (Core.Maybe Core.Text),
     -- | The name of the Pubsub topic.
@@ -5932,7 +5932,7 @@ instance Core.ToJSON ReadInstruction where
 -- /See:/ 'newReportWorkItemStatusRequest' smart constructor.
 data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest
   { -- | The current timestamp at the worker.
-    currentWorkerTime :: (Core.Maybe Core.DateTime'),
+    currentWorkerTime :: (Core.Maybe Core.DateTime),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the WorkItem\'s job.
     location :: (Core.Maybe Core.Text),
     -- | Untranslated bag-of-bytes WorkProgressUpdateRequest from UnifiedWorker.
@@ -7027,7 +7027,7 @@ instance Core.ToJSON Sink_Spec where
 -- /See:/ 'newSnapshot' smart constructor.
 data Snapshot = Snapshot
   { -- | The time this snapshot was created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | User specified description of the snapshot. Maybe empty.
     description :: (Core.Maybe Core.Text),
     -- | The disk byte size of the snapshot. Only available for snapshots in READY state.
@@ -7045,7 +7045,7 @@ data Snapshot = Snapshot
     -- | State of the snapshot.
     state :: (Core.Maybe Snapshot_State),
     -- | The time after which this snapshot will be automatically deleted.
-    ttl :: (Core.Maybe Core.GDuration)
+    ttl :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7113,7 +7113,7 @@ data SnapshotJobRequest = SnapshotJobRequest
     -- | If true, perform snapshots for sources which support this.
     snapshotSources :: (Core.Maybe Core.Bool),
     -- | TTL for the snapshot.
-    ttl :: (Core.Maybe Core.GDuration)
+    ttl :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7867,7 +7867,7 @@ instance Core.ToJSON StageSource where
 -- /See:/ 'newStageSummary' smart constructor.
 data StageSummary = StageSummary
   { -- | End time of this stage. If the work item is completed, this is the actual end time of the stage. Otherwise, it is the predicted end time.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Metrics for this stage.
     metrics :: (Core.Maybe [MetricUpdate]),
     -- | Progress for this stage. Only applicable to Batch jobs.
@@ -7875,7 +7875,7 @@ data StageSummary = StageSummary
     -- | ID of this stage
     stageId :: (Core.Maybe Core.Text),
     -- | Start time of this stage.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | State of this stage.
     state :: (Core.Maybe StageSummary_State)
   }
@@ -9065,7 +9065,7 @@ data WorkItem = WorkItem
     -- | Identifies the workflow job this WorkItem belongs to.
     jobId :: (Core.Maybe Core.Text),
     -- | Time when the lease on this Work will expire.
-    leaseExpireTime :: (Core.Maybe Core.DateTime'),
+    leaseExpireTime :: (Core.Maybe Core.DateTime),
     -- | Additional information for MapTask WorkItems.
     mapTask :: (Core.Maybe MapTask),
     -- | Any required packages that need to be fetched in order to execute this WorkItem.
@@ -9073,7 +9073,7 @@ data WorkItem = WorkItem
     -- | Identifies the cloud project this WorkItem belongs to.
     projectId :: (Core.Maybe Core.Text),
     -- | Recommended reporting interval.
-    reportStatusInterval :: (Core.Maybe Core.GDuration),
+    reportStatusInterval :: (Core.Maybe Core.Duration),
     -- | Additional information for SeqMapTask WorkItems.
     seqMapTask :: (Core.Maybe SeqMapTask),
     -- | Additional information for ShellTask WorkItems.
@@ -9169,13 +9169,13 @@ data WorkItemDetails = WorkItemDetails
   { -- | Attempt ID of this work item
     attemptId :: (Core.Maybe Core.Text),
     -- | End time of this work item attempt. If the work item is completed, this is the actual end time of the work item. Otherwise, it is the predicted end time.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Metrics for this work item.
     metrics :: (Core.Maybe [MetricUpdate]),
     -- | Progress of this work item.
     progress :: (Core.Maybe ProgressTimeseries),
     -- | Start time of this work item attempt.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | State of this work item.
     state :: (Core.Maybe WorkItemDetails_State),
     -- | Name of this work item.
@@ -9237,13 +9237,13 @@ data WorkItemServiceState = WorkItemServiceState
     -- | A hot key is a symptom of poor data distribution in which there are enough elements mapped to a single key to impact pipeline performance. When present, this field includes metadata associated with any hot key.
     hotKeyDetection :: (Core.Maybe HotKeyDetection),
     -- | Time at which the current lease will expire.
-    leaseExpireTime :: (Core.Maybe Core.DateTime'),
+    leaseExpireTime :: (Core.Maybe Core.DateTime),
     -- | The short ids that workers should use in subsequent metric updates. Workers should strive to use short ids whenever possible, but it is ok to request the short_id again if a worker lost track of it (e.g. if the worker is recovering from a crash). NOTE: it is possible that the response may have short ids for a subset of the metrics.
     metricShortId :: (Core.Maybe [MetricShortId]),
     -- | The index value to use for the next report sent by the worker. Note: If the report call fails for whatever reason, the worker should reuse this index for subsequent report attempts.
     nextReportIndex :: (Core.Maybe Core.Int64),
     -- | New recommended reporting interval.
-    reportStatusInterval :: (Core.Maybe Core.GDuration),
+    reportStatusInterval :: (Core.Maybe Core.Duration),
     -- | The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task.
     splitRequest :: (Core.Maybe ApproximateSplitRequest),
     -- | DEPRECATED in favor of split_request.
@@ -9364,7 +9364,7 @@ data WorkItemStatus = WorkItemStatus
     -- | The worker\'s progress through this WorkItem.
     reportedProgress :: (Core.Maybe ApproximateReportedProgress),
     -- | Amount of time the worker requests for its lease.
-    requestedLeaseDuration :: (Core.Maybe Core.GDuration),
+    requestedLeaseDuration :: (Core.Maybe Core.Duration),
     -- | DEPRECATED in favor of dynamic/source/split.
     sourceFork :: (Core.Maybe SourceFork),
     -- | If the work item represented a SourceOperationRequest, and the work is completed, contains the result of the operation.
@@ -9494,7 +9494,7 @@ data WorkerHealthReport = WorkerHealthReport
     -- | The pods running on the worker. See: http:\/\/kubernetes.io\/v1.1\/docs\/api-reference\/v1\/definitions.html#/v1/pod This field is used by the worker to send the status of the indvidual containers running on each worker.
     pods :: (Core.Maybe [WorkerHealthReport_PodsItem]),
     -- | The interval at which the worker is sending health reports. The default value of 0 should be interpreted as the field is not being explicitly set by the worker.
-    reportInterval :: (Core.Maybe Core.GDuration),
+    reportInterval :: (Core.Maybe Core.Duration),
     -- | Code to describe a specific reason, if known, that a VM has reported broken state.
     vmBrokenCode :: (Core.Maybe Core.Text),
     -- | Whether the VM is in a permanently broken state. Broken VMs should be abandoned or deleted ASAP to avoid assigning or completing any work.
@@ -9502,7 +9502,7 @@ data WorkerHealthReport = WorkerHealthReport
     -- | Whether the VM is currently healthy.
     vmIsHealthy :: (Core.Maybe Core.Bool),
     -- | The time the VM was booted.
-    vmStartupTime :: (Core.Maybe Core.DateTime')
+    vmStartupTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9583,7 +9583,7 @@ instance Core.ToJSON WorkerHealthReport_PodsItem where
 -- /See:/ 'newWorkerHealthReportResponse' smart constructor.
 newtype WorkerHealthReportResponse = WorkerHealthReportResponse
   { -- | A positive value indicates the worker should change its reporting interval to the specified value. The default value of zero means no change in report rate is requested by the server.
-    reportInterval :: (Core.Maybe Core.GDuration)
+    reportInterval :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9614,7 +9614,7 @@ instance Core.ToJSON WorkerHealthReportResponse where
 -- /See:/ 'newWorkerLifecycleEvent' smart constructor.
 data WorkerLifecycleEvent = WorkerLifecycleEvent
   { -- | The start time of this container. All events will report this so that events can be grouped together across container\/VM restarts.
-    containerStartTime :: (Core.Maybe Core.DateTime'),
+    containerStartTime :: (Core.Maybe Core.DateTime),
     -- | The event being reported.
     event :: (Core.Maybe WorkerLifecycleEvent_Event),
     -- | Other stats that can accompany an event. E.g. { \"downloaded_bytes\" : \"123456\" }
@@ -9691,7 +9691,7 @@ data WorkerMessage = WorkerMessage
   { -- | Labels are used to group WorkerMessages. For example, a worker/message about a particular container might have the labels: { \"JOB/ID\": \"2015-04-22\", \"WORKER/ID\": \"wordcount-vm-2015…\" \"CONTAINER/TYPE\": \"worker\", \"CONTAINER/ID\": \"ac1234def\"} Label tags typically correspond to Label enum values. However, for ease of development other strings can be used as tags. LABEL/UNSPECIFIED should not be used here.
     labels :: (Core.Maybe WorkerMessage_Labels),
     -- | The timestamp of the worker_message.
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | The health of a worker.
     workerHealthReport :: (Core.Maybe WorkerHealthReport),
     -- | Record of worker lifecycle events.

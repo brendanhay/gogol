@@ -542,9 +542,9 @@ data Backup = Backup
   { -- | Output only. The encryption information for the backup.
     encryptionInfo :: (Core.Maybe EncryptionInfo),
     -- | Output only. @end_time@ is the time that the backup was finished. The row data in the backup will be no newer than this timestamp.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required. The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 30 days from the time the request is received. Once the @expire_time@ has passed, Cloud Bigtable will delete the backup and free the resources used by the backup.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | A globally unique identifier for the backup which cannot be changed. Values are of the form @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}\/ backups\/_a-zA-Z0-9*@ The final segment of the name must be between 1 and 50 characters in length. The backup is stored in the cluster identified by the prefix of the backup name of the form @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Size of the backup in bytes.
@@ -552,7 +552,7 @@ data Backup = Backup
     -- | Required. Immutable. Name of the table from which this backup was created. This needs to be in the same instance as the backup. Values are of the form @projects\/{project}\/instances\/{instance}\/tables\/{source_table}@.
     sourceTable :: (Core.Maybe Core.Text),
     -- | Output only. @start_time@ is the time that the backup was started (i.e. approximately the time the CreateBackup request is received). The row data in this backup will be no older than this timestamp.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The current state of the backup.
     state :: (Core.Maybe Backup_State)
   }
@@ -612,11 +612,11 @@ data BackupInfo = BackupInfo
   { -- | Output only. Name of the backup.
     backup :: (Core.Maybe Core.Text),
     -- | Output only. This time that the backup was finished. Row data in the backup will be no newer than this timestamp.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Name of the table the backup was created from.
     sourceTable :: (Core.Maybe Core.Text),
     -- | Output only. The time that the backup was started. Row data in the backup will be no older than this timestamp.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -969,13 +969,13 @@ instance Core.ToJSON ColumnFamily where
 -- /See:/ 'newCreateBackupMetadata' smart constructor.
 data CreateBackupMetadata = CreateBackupMetadata
   { -- | If set, the time at which this operation finished or was cancelled.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The name of the backup being created.
     name :: (Core.Maybe Core.Text),
     -- | The name of the table the backup is created from.
     sourceTable :: (Core.Maybe Core.Text),
     -- | The time at which this operation started.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1018,11 +1018,11 @@ instance Core.ToJSON CreateBackupMetadata where
 -- /See:/ 'newCreateClusterMetadata' smart constructor.
 data CreateClusterMetadata = CreateClusterMetadata
   { -- | The time at which the operation failed or was completed successfully.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The request that prompted the initiation of this CreateCluster operation.
     originalRequest :: (Core.Maybe CreateClusterRequest),
     -- | The time at which the original request was received.
-    requestTime :: (Core.Maybe Core.DateTime'),
+    requestTime :: (Core.Maybe Core.DateTime),
     -- | Keys: the full @name@ of each table that existed in the instance when CreateCluster was first called, i.e. @projects\/\/instances\/\/tables\/@. Any table added to the instance by a later API call will be created in the new cluster by that API call, not this one. Values: information on how much of a table\'s data has been copied to the newly-created cluster so far.
     tables :: (Core.Maybe CreateClusterMetadata_Tables)
   }
@@ -1141,11 +1141,11 @@ instance Core.ToJSON CreateClusterRequest where
 -- /See:/ 'newCreateInstanceMetadata' smart constructor.
 data CreateInstanceMetadata = CreateInstanceMetadata
   { -- | The time at which the operation failed or was completed successfully.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The request that prompted the initiation of this CreateInstance operation.
     originalRequest :: (Core.Maybe CreateInstanceRequest),
     -- | The time at which the original request was received.
-    requestTime :: (Core.Maybe Core.DateTime')
+    requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1492,7 +1492,7 @@ data GcRule = GcRule
   { -- | Delete cells that would be deleted by every nested rule.
     intersection :: (Core.Maybe Intersection),
     -- | Delete cells in a column older than the given age. Values must be at least one millisecond, and will be truncated to microsecond granularity.
-    maxAge :: (Core.Maybe Core.GDuration),
+    maxAge :: (Core.Maybe Core.Duration),
     -- | Delete all cells in a column except the most recent N.
     maxNumVersions :: (Core.Maybe Core.Int32),
     -- | Delete cells that would be deleted by any nested rule.
@@ -1659,7 +1659,7 @@ instance Core.ToJSON GetPolicyOptions where
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
   { -- | Output only. A server-assigned timestamp representing when this Instance was created. For instances created before this field was added (August 2021), this value is @seconds: 0, nanos: 1@.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The descriptive name for this instance as it appears in UIs. Can be changed at any time, but should be kept globally unique to avoid confusion.
     displayName :: (Core.Maybe Core.Text),
     -- | Required. Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. They can be used to filter resources and aggregate metrics. * Label keys must be between 1 and 63 characters long and must conform to the regular expression: @\\p{Ll}\\p{Lo}{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression: @[\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}@. * No more than 64 labels can be associated with a given resource. * Keys and values must both be under 128 bytes.
@@ -2382,11 +2382,11 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newOperationProgress' smart constructor.
 data OperationProgress = OperationProgress
   { -- | If set, the time at which this operation failed or was completed successfully.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Percent completion of the operation. Values are between 0 and 100 inclusive.
     progressPercent :: (Core.Maybe Core.Int32),
     -- | Time the request was received.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2461,11 +2461,11 @@ instance Core.ToJSON OptimizeRestoredTableMetadata where
 -- /See:/ 'newPartialUpdateClusterMetadata' smart constructor.
 data PartialUpdateClusterMetadata = PartialUpdateClusterMetadata
   { -- | The time at which the operation failed or was completed successfully.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The original request for PartialUpdateCluster.
     originalRequest :: (Core.Maybe PartialUpdateClusterRequest),
     -- | The time at which the original request was received.
-    requestTime :: (Core.Maybe Core.DateTime')
+    requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2507,7 +2507,7 @@ data PartialUpdateClusterRequest = PartialUpdateClusterRequest
   { -- | Required. The Cluster which contains the partial updates to be applied, subject to the update_mask.
     cluster :: (Core.Maybe Cluster),
     -- | Required. The subset of Cluster fields which should be replaced.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2546,7 +2546,7 @@ data PartialUpdateInstanceRequest = PartialUpdateInstanceRequest
   { -- | Required. The Instance which will (partially) replace the current value.
     instance' :: (Core.Maybe Instance),
     -- | Required. The subset of Instance fields which should be replaced. Must be explicitly set.
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2764,7 +2764,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3200,11 +3200,11 @@ instance Core.ToJSON UpdateAppProfileMetadata where
 -- /See:/ 'newUpdateClusterMetadata' smart constructor.
 data UpdateClusterMetadata = UpdateClusterMetadata
   { -- | The time at which the operation failed or was completed successfully.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The request that prompted the initiation of this UpdateCluster operation.
     originalRequest :: (Core.Maybe Cluster),
     -- | The time at which the original request was received.
-    requestTime :: (Core.Maybe Core.DateTime')
+    requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3244,11 +3244,11 @@ instance Core.ToJSON UpdateClusterMetadata where
 -- /See:/ 'newUpdateInstanceMetadata' smart constructor.
 data UpdateInstanceMetadata = UpdateInstanceMetadata
   { -- | The time at which the operation failed or was completed successfully.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | The request that prompted the initiation of this UpdateInstance operation.
     originalRequest :: (Core.Maybe PartialUpdateInstanceRequest),
     -- | The time at which the original request was received.
-    requestTime :: (Core.Maybe Core.DateTime')
+    requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

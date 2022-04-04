@@ -119,11 +119,11 @@ instance Core.ToJSON ListOperationsResponse where
 -- /See:/ 'newLongRunningRecognizeMetadata' smart constructor.
 data LongRunningRecognizeMetadata = LongRunningRecognizeMetadata
   { -- | Output only. Time of the most recent processing update.
-    lastUpdateTime :: (Core.Maybe Core.DateTime'),
+    lastUpdateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Approximate percentage of audio processed thus far. Guaranteed to be 100 when the audio is fully processed and the results are available.
     progressPercent :: (Core.Maybe Core.Int32),
     -- | Output only. Time when the request was received.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | The URI of the audio file being transcribed. Empty if the audio was sent as byte content.
     uri :: (Core.Maybe Core.Text)
   }
@@ -466,11 +466,11 @@ data WordInfo = WordInfo
   { -- | Output only. The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. This field is set only for the top alternative of a non-streaming result or, of a streaming result where @is_final=true@. This field is not guaranteed to be accurate and users should not rely on it to be always provided. The default of 0.0 is a sentinel value indicating @confidence@ was not set.
     confidence :: (Core.Maybe Core.Double),
     -- | Output only. Time offset relative to the beginning of the audio, and corresponding to the end of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    endOffset :: (Core.Maybe Core.GDuration),
+    endOffset :: (Core.Maybe Core.Duration),
     -- | Output only. A distinct integer value is assigned for every speaker within the audio. This field specifies which one of those speakers was detected to have spoken this word. Value ranges from @1@ to @diarization_config.max_speaker_count@ . @speaker_tag@ is set if @diarization_config.enable_speaker_diarization@ = @true@ and only in the top alternative.
     speakerTag :: (Core.Maybe Core.Int32),
     -- | Output only. Time offset relative to the beginning of the audio, and corresponding to the start of the spoken word. This field is only set if @enable_word_time_offsets=true@ and only in the top hypothesis. This is an experimental feature and the accuracy of the time offset can vary.
-    startOffset :: (Core.Maybe Core.GDuration),
+    startOffset :: (Core.Maybe Core.Duration),
     -- | Output only. The word corresponding to this set of information.
     word :: (Core.Maybe Core.Text)
   }

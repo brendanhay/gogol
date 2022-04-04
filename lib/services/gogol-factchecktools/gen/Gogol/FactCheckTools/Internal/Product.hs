@@ -80,7 +80,7 @@ import qualified Gogol.Prelude as Core
 -- /See:/ 'newGoogleFactcheckingFactchecktoolsV1alpha1Claim' smart constructor.
 data GoogleFactcheckingFactchecktoolsV1alpha1Claim = GoogleFactcheckingFactchecktoolsV1alpha1Claim
   { -- | The date that the claim was made.
-    claimDate :: (Core.Maybe Core.DateTime'),
+    claimDate :: (Core.Maybe Core.DateTime),
     -- | One or more reviews of this claim (namely, a fact-checking article).
     claimReview :: (Core.Maybe [GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview]),
     -- | A person or organization stating the claim. For instance, \"John Doe\".
@@ -263,7 +263,7 @@ data GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview = GoogleFactcheckingFac
     -- | The publisher of this claim review.
     publisher :: (Core.Maybe GoogleFactcheckingFactchecktoolsV1alpha1Publisher),
     -- | The date the claim was reviewed.
-    reviewDate :: (Core.Maybe Core.DateTime'),
+    reviewDate :: (Core.Maybe Core.DateTime),
     -- | Textual rating. For instance, \"Mostly false\".
     textualRating :: (Core.Maybe Core.Text),
     -- | The title of this claim review, if it can be determined.

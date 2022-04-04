@@ -50,7 +50,7 @@ type CloudIOTProjectsLocationsRegistriesDevicesGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "fieldMask" Core.GFieldMask
+    Core.:> Core.QueryParam "fieldMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,7 +67,7 @@ data CloudIOTProjectsLocationsRegistriesDevicesGet = CloudIOTProjectsLocationsRe
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | The fields of the @Device@ resource to be returned in the response. If the field mask is unset or empty, all fields are returned. Fields have to be provided in snake_case format, for example: @last_heartbeat_time@.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | Required. The name of the device. For example, @projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/device0@ or @projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/{num_id}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

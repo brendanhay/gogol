@@ -52,7 +52,7 @@ type PeopleOtherContactsSearchResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "query" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -73,7 +73,7 @@ data PeopleOtherContactsSearch = PeopleOtherContactsSearch
     -- | Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name \"foo name\" matches queries such as \"f\", \"fo\", \"foo\", \"foo n\", \"nam\", etc., but not \"oo n\".
     query :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * emailAddresses * metadata * names * phoneNumbers
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

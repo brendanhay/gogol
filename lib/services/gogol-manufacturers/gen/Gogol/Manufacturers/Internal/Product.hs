@@ -531,7 +531,7 @@ data Issue = Issue
     -- | The severity of the issue.
     severity :: (Core.Maybe Issue_Severity),
     -- | The timestamp when this issue appeared.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Short title describing the nature of the issue.
     title :: (Core.Maybe Core.Text),
     -- | The server-generated type of the issue, for example, “INCORRECT/TEXT/FORMATTING”, “IMAGE/NOT/SERVEABLE”, etc.

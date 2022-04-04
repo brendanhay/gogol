@@ -281,7 +281,7 @@ data CheckResponse = CheckResponse
     -- | Set to true if the assets specified in the request are linked by the relation specified in the request.
     linked :: (Core.Maybe Core.Bool),
     -- | From serving time, how much longer the response should be considered valid barring further updates. REQUIRED
-    maxAge :: (Core.Maybe Core.GDuration)
+    maxAge :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -328,7 +328,7 @@ data ListResponse = ListResponse
     -- | Error codes that describe the result of the List operation.
     errorCode :: (Core.Maybe [ListResponse_ErrorCodeItem]),
     -- | From serving time, how much longer the response should be considered valid barring further updates. REQUIRED
-    maxAge :: (Core.Maybe Core.GDuration),
+    maxAge :: (Core.Maybe Core.Duration),
     -- | A list of all the matching statements that have been found.
     statements :: (Core.Maybe [Statement])
   }

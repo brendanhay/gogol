@@ -55,7 +55,7 @@ type BigQueryRoutinesListResource =
     Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListRoutinesResponse
 
@@ -74,7 +74,7 @@ data BigQueryRoutinesList = BigQueryRoutinesList
     -- | Required. Project ID of the routines to list
     projectId :: Core.Text,
     -- | If set, then only the Routine fields in the field mask, as well as project/id, dataset/id and routine/id, are returned in the response. If unset, then the following Routine fields are returned: etag, project/id, dataset/id, routine/id, routine/type, creation/time, last/modified/time, and language.
-    readMask :: (Core.Maybe Core.GFieldMask)
+    readMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

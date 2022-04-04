@@ -314,7 +314,7 @@ data Action = Action
     -- | A map of containers to host port mappings for this container. If the container already specifies exposed ports, use the @PUBLISH_EXPOSED_PORTS@ flag instead. The host port number must be less than 65536. If it is zero, an unused random port is assigned. To determine the resulting port number, consult the @ContainerStartedEvent@ in the operation metadata.
     portMappings :: (Core.Maybe Action_PortMappings),
     -- | The maximum amount of time to give the action to complete. If the action fails to complete before the timeout, it will be terminated and the exit status will be non-zero. The pipeline will continue or terminate based on the rules defined by the @ALWAYS_RUN@ and @IGNORE_EXIT_STATUS@ flags.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -580,7 +580,7 @@ instance Core.ToJSON CheckInRequest_Event where
 -- /See:/ 'newCheckInResponse' smart constructor.
 data CheckInResponse = CheckInResponse
   { -- | The deadline by which the worker must request an extension. The backend will allow for network transmission time and other delays, but the worker must attempt to transmit the extension request no later than the deadline.
-    deadline :: (Core.Maybe Core.DateTime'),
+    deadline :: (Core.Maybe Core.DateTime),
     -- | Feature configuration for the operation.
     features :: (Core.Maybe CheckInResponse_Features),
     -- | The metadata that describes the operation assigned to the worker.
@@ -982,7 +982,7 @@ data Event = Event
     -- | Machine-readable details about the event.
     details :: (Core.Maybe Event_Details),
     -- | The time at which the event occurred.
-    timestamp :: (Core.Maybe Core.DateTime')
+    timestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1147,9 +1147,9 @@ instance Core.ToJSON ListOperationsResponse where
 -- /See:/ 'newMetadata' smart constructor.
 data Metadata = Metadata
   { -- | The time at which the operation was created by the API.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time at which execution was completed and resources were cleaned up.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The list of events that have happened so far during the execution of this operation.
     events :: (Core.Maybe [Event]),
     -- | The user-defined labels associated with this operation.
@@ -1157,7 +1157,7 @@ data Metadata = Metadata
     -- | The pipeline this operation represents.
     pipeline :: (Core.Maybe Pipeline),
     -- | The first time at which resources were allocated to execute the pipeline.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1505,7 +1505,7 @@ data Pipeline = Pipeline
     -- | The resources required for execution.
     resources :: (Core.Maybe Resources),
     -- | The maximum amount of time to give the pipeline to complete. This includes the time spent waiting for a worker to be allocated. If the pipeline fails to complete before the timeout, it will be cancelled and the error code will be set to DEADLINE_EXCEEDED. If unspecified, it will default to 7 days.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1922,7 +1922,7 @@ data TimestampedEvent = TimestampedEvent
   { -- | The event data.
     data' :: (Core.Maybe TimestampedEvent_Data),
     -- | The time when the event happened.
-    timestamp :: (Core.Maybe Core.DateTime')
+    timestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

@@ -1005,11 +1005,11 @@ data BuildProvenance = BuildProvenance
     -- | Commands requested by the build.
     commands :: (Core.Maybe [Command]),
     -- | Time at which the build was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | E-mail address of the user who initiated this build. Note that this was the user\'s e-mail address at the time the build was initiated; this address may not represent the same end-user for all time.
     creator :: (Core.Maybe Core.Text),
     -- | Time at which execution of the build was finished.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Required. Unique identifier of the build.
     id :: (Core.Maybe Core.Text),
     -- | URI where any logs for this provenance were written.
@@ -1019,7 +1019,7 @@ data BuildProvenance = BuildProvenance
     -- | Details of the Source input to the build.
     sourceProvenance :: (Core.Maybe Source),
     -- | Time at which execution of the build was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Trigger identifier if the build was triggered automatically; empty if not.
     triggerId :: (Core.Maybe Core.Text)
   }
@@ -1734,7 +1734,7 @@ instance
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult = ContaineranalysisGoogleDevtoolsCloudbuildV1ApprovalResult
   { -- | Output only. The time when the approval decision was made.
-    approvalTime :: (Core.Maybe Core.DateTime'),
+    approvalTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Email of the user that called the ApproveBuild API to approve or reject a build at the time that the API was called.
     approverAccount :: (Core.Maybe Core.Text),
     -- | Optional. An optional comment for this manual approval result.
@@ -1909,14 +1909,14 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
     -- | Output only. The ID of the @BuildTrigger@ that triggered this build, if it was triggered automatically.
     buildTriggerId :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the request to create the build was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Contains information about the build when status=FAILURE.
     failureInfo ::
       ( Core.Maybe
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildFailureInfo
       ),
     -- | Output only. Time at which execution of the build was finished. The difference between finish/time and start/time is the duration of the build\'s execution.
-    finishTime :: (Core.Maybe Core.DateTime'),
+    finishTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Unique identifier of the build.
     id :: (Core.Maybe Core.Text),
     -- | A list of images to be pushed upon the successful completion of all build steps. The images are pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the @Build@ resource\'s results field. If any of the images fail to be pushed, the build status is marked @FAILURE@.
@@ -1935,7 +1935,7 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
     -- | Output only. ID of the project.
     projectId :: (Core.Maybe Core.Text),
     -- | TTL in queue for this build. If provided and the build is enqueued longer than this value, the build will expire and the build status will be @EXPIRED@. The TTL starts ticking from create_time.
-    queueTtl :: (Core.Maybe Core.GDuration),
+    queueTtl :: (Core.Maybe Core.Duration),
     -- | Output only. Results of the build.
     results :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1Results),
     -- | Secrets to decrypt using Cloud Key Management Service. Note: Secret Manager is the recommended technique for managing sensitive data with Cloud Build. Use @available_secrets@ to configure builds to access secrets from Secret Manager. For instructions, see: https:\/\/cloud.google.com\/cloud-build\/docs\/securing-builds\/use-secrets
@@ -1950,7 +1950,7 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
           ContaineranalysisGoogleDevtoolsCloudbuildV1SourceProvenance
       ),
     -- | Output only. Time at which execution of the build was started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Status of the build.
     status ::
       ( Core.Maybe
@@ -1968,7 +1968,7 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
     -- | Tags for annotation of a @Build@. These are not docker tags.
     tags :: (Core.Maybe [Core.Text]),
     -- | Amount of time that this build should be allowed to run, to second granularity. If this amount of time elapses, work on the build will cease and the build status will be @TIMEOUT@. @timeout@ starts ticking from @startTime@. Default time is ten minutes.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included.
     timing ::
       ( Core.Maybe
@@ -2485,7 +2485,7 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep = ContaineranalysisGoo
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep_Status
       ),
     -- | Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.
-    timeout :: (Core.Maybe Core.GDuration),
+    timeout :: (Core.Maybe Core.Duration),
     -- | Output only. Stores timing information for executing this build step.
     timing :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan),
     -- | List of volumes to mount into the build step. Each volume is created as an empty volume prior to execution of the build step. Upon completion of the build, volumes and their contents are discarded. Using a named volume in only one step is not valid as it is indicative of a build request with an incorrect configuration.
@@ -3491,9 +3491,9 @@ instance
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan = ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan
   { -- | End of time span.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Start of time span.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3709,13 +3709,13 @@ data DeploymentOccurrence = DeploymentOccurrence
     -- | Configuration used to create this deployment.
     config :: (Core.Maybe Core.Text),
     -- | Required. Beginning of the lifetime of this deployment.
-    deployTime :: (Core.Maybe Core.DateTime'),
+    deployTime :: (Core.Maybe Core.DateTime),
     -- | Platform hosting this deployment.
     platform :: (Core.Maybe DeploymentOccurrence_Platform),
     -- | Output only. Resource URI for the artifact being deployed taken from the deployable field with the same name.
     resourceUri :: (Core.Maybe [Core.Text]),
     -- | End of the lifetime of this deployment.
-    undeployTime :: (Core.Maybe Core.DateTime'),
+    undeployTime :: (Core.Maybe Core.DateTime),
     -- | Identity of the user that triggered this deployment.
     userEmail :: (Core.Maybe Core.Text)
   }
@@ -3793,7 +3793,7 @@ data Detail = Detail
     -- | The source from which the information in this Detail was obtained.
     source :: (Core.Maybe Core.Text),
     -- | The time this information was last changed at the source. This is an upstream timestamp from the underlying information source - e.g. Ubuntu security tracker.
-    sourceUpdateTime :: (Core.Maybe Core.DateTime'),
+    sourceUpdateTime :: (Core.Maybe Core.DateTime),
     -- | The name of the vendor of the product.
     vendor :: (Core.Maybe Core.Text)
   }
@@ -3904,13 +3904,13 @@ data DiscoveryOccurrence = DiscoveryOccurrence
     -- | When an error is encountered this will contain a LocalizedMessage under details to show to the user. The LocalizedMessage is output only and populated by the API.
     analysisStatusError :: (Core.Maybe Status),
     -- | Output only. The time occurrences related to this discovery occurrence were archived.
-    archiveTime :: (Core.Maybe Core.DateTime'),
+    archiveTime :: (Core.Maybe Core.DateTime),
     -- | Whether the resource is continuously analyzed.
     continuousAnalysis :: (Core.Maybe DiscoveryOccurrence_ContinuousAnalysis),
     -- | The CPE of the resource being scanned.
     cpe :: (Core.Maybe Core.Text),
     -- | The last time this resource was scanned.
-    lastScanTime :: (Core.Maybe Core.DateTime')
+    lastScanTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4437,9 +4437,9 @@ instance Core.ToJSON GitSourceContext where
 -- /See:/ 'newGoogleDevtoolsContaineranalysisV1alpha1OperationMetadata' smart constructor.
 data GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata = GoogleDevtoolsContaineranalysisV1alpha1OperationMetadata
   { -- | Output only. The time this operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time that this operation was marked completed or failed.
-    endTime :: (Core.Maybe Core.DateTime')
+    endTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5078,11 +5078,11 @@ instance Core.ToJSON Material_Digest where
 -- /See:/ 'newMetadata' smart constructor.
 data Metadata = Metadata
   { -- | The timestamp of when the build completed.
-    buildFinishedOn :: (Core.Maybe Core.DateTime'),
+    buildFinishedOn :: (Core.Maybe Core.DateTime),
     -- | Identifies the particular build invocation, which can be useful for finding associated logs or other ad-hoc analysis. The value SHOULD be globally unique, per in-toto Provenance spec.
     buildInvocationId :: (Core.Maybe Core.Text),
     -- | The timestamp of when the build started.
-    buildStartedOn :: (Core.Maybe Core.DateTime'),
+    buildStartedOn :: (Core.Maybe Core.DateTime),
     -- | Indicates that the builder claims certain fields in this message to be complete.
     completeness :: (Core.Maybe Completeness),
     -- | If true, the builder claims that running the recipe on materials will produce bit-for-bit identical output.
@@ -5184,7 +5184,7 @@ data Note = Note
     -- | A note describing a compliance check.
     compliance :: (Core.Maybe ComplianceNote),
     -- | Output only. The time this note was created. This field can be used as a filter in list requests.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A note describing something that can be deployed.
     deployment :: (Core.Maybe DeploymentNote),
     -- | A note describing the initial analysis of a resource.
@@ -5192,7 +5192,7 @@ data Note = Note
     -- | A note describing a dsse attestation note.
     dsseAttestation :: (Core.Maybe DSSEAttestationNote),
     -- | Time of expiration for this note. Empty if note does not expire.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | A note describing a base image.
     image :: (Core.Maybe ImageNote),
     -- | Output only. The type of analysis. This field can be used as a filter in list requests.
@@ -5210,7 +5210,7 @@ data Note = Note
     -- | A one sentence description of this note.
     shortDescription :: (Core.Maybe Core.Text),
     -- | Output only. The time this note was last updated. This field can be used as a filter in list requests.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | A note describing available package upgrades.
     upgrade :: (Core.Maybe UpgradeNote),
     -- | A note describing a package vulnerability.
@@ -5310,7 +5310,7 @@ data Occurrence = Occurrence
     -- | Describes a compliance violation on a linked resource.
     compliance :: (Core.Maybe ComplianceOccurrence),
     -- | Output only. The time this occurrence was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Describes the deployment of an artifact on a runtime.
     deployment :: (Core.Maybe DeploymentOccurrence),
     -- | Describes when a resource was discovered.
@@ -5334,7 +5334,7 @@ data Occurrence = Occurrence
     -- | Required. Immutable. A URI that represents the resource for which the occurrence applies. For example, @https:\/\/gcr.io\/project\/image\@sha256:123abc@ for a Docker image.
     resourceUri :: (Core.Maybe Core.Text),
     -- | Output only. The time this occurrence was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Describes an available package upgrade on the linked resource.
     upgrade :: (Core.Maybe UpgradeOccurrence),
     -- | Describes a security vulnerability.
@@ -5961,11 +5961,11 @@ instance Core.ToJSON SlsaCompleteness where
 -- /See:/ 'newSlsaMetadata' smart constructor.
 data SlsaMetadata = SlsaMetadata
   { -- | The timestamp of when the build completed.
-    buildFinishedOn :: (Core.Maybe Core.DateTime'),
+    buildFinishedOn :: (Core.Maybe Core.DateTime),
     -- | Identifies the particular build invocation, which can be useful for finding associated logs or other ad-hoc analysis. The value SHOULD be globally unique, per in-toto Provenance spec.
     buildInvocationId :: (Core.Maybe Core.Text),
     -- | The timestamp of when the build started.
-    buildStartedOn :: (Core.Maybe Core.DateTime'),
+    buildStartedOn :: (Core.Maybe Core.DateTime),
     -- | Indicates that the builder claims certain fields in this message to be complete.
     completeness :: (Core.Maybe SlsaCompleteness),
     -- | If true, the builder claims that running the recipe on materials will produce bit-for-bit identical output.
@@ -6742,7 +6742,7 @@ data VulnerabilityNote = VulnerabilityNote
     -- | The note provider assigned severity of this vulnerability.
     severity :: (Core.Maybe VulnerabilityNote_Severity),
     -- | The time this information was last changed at the source. This is an upstream timestamp from the underlying information source - e.g. Ubuntu security tracker.
-    sourceUpdateTime :: (Core.Maybe Core.DateTime'),
+    sourceUpdateTime :: (Core.Maybe Core.DateTime),
     -- | Windows details get their own format because the information format and model don\'t match a normal detail. Specifically Windows updates are done as patches, thus Windows vulnerabilities really are a missing package, rather than a package being at an incorrect version.
     windowsDetails :: (Core.Maybe [WindowsDetail])
   }
@@ -6963,7 +6963,7 @@ data WindowsUpdate = WindowsUpdate
     -- | The Microsoft Knowledge Base article IDs that are associated with the update.
     kbArticleIds :: (Core.Maybe [Core.Text]),
     -- | The last published timestamp of the update.
-    lastPublishedTimestamp :: (Core.Maybe Core.DateTime'),
+    lastPublishedTimestamp :: (Core.Maybe Core.DateTime),
     -- | The hyperlink to the support information for the update.
     supportUrl :: (Core.Maybe Core.Text),
     -- | The localized title of the update.

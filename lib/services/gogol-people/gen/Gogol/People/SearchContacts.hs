@@ -52,7 +52,7 @@ type PeoplePeopleSearchContactsResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "query" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParams
               "sources"
               PeopleSearchContactsSources
@@ -76,7 +76,7 @@ data PeoplePeopleSearchContacts = PeoplePeopleSearchContacts
     -- | Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name \"foo name\" matches queries such as \"f\", \"fo\", \"foo\", \"foo n\", \"nam\", etc., but not \"oo n\".
     query :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE_CONTACT if not set.
     sources :: (Core.Maybe [PeopleSearchContactsSources]),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

@@ -443,7 +443,7 @@ data GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse = GoogleSecurity
           [GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse]
       ),
     -- | The minimum duration the client must wait before issuing any update request. If this field is not set clients may update as soon as they want.
-    minimumWaitDuration :: (Core.Maybe Core.GDuration)
+    minimumWaitDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -636,9 +636,9 @@ data GoogleSecuritySafebrowsingV4FindFullHashesResponse = GoogleSecuritySafebrow
   { -- | The full hashes that matched the requested prefixes.
     matches :: (Core.Maybe [GoogleSecuritySafebrowsingV4ThreatMatch]),
     -- | The minimum duration the client must wait before issuing any find hashes request. If this field is not set, clients can issue a request as soon as they want.
-    minimumWaitDuration :: (Core.Maybe Core.GDuration),
+    minimumWaitDuration :: (Core.Maybe Core.Duration),
     -- | For requested entities that did not match the threat list, how long to cache the response.
-    negativeCacheDuration :: (Core.Maybe Core.GDuration)
+    negativeCacheDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1439,7 +1439,7 @@ instance
 -- /See:/ 'newGoogleSecuritySafebrowsingV4ThreatMatch' smart constructor.
 data GoogleSecuritySafebrowsingV4ThreatMatch = GoogleSecuritySafebrowsingV4ThreatMatch
   { -- | The cache lifetime for the returned match. Clients must not cache this response for more than this duration to avoid false positives.
-    cacheDuration :: (Core.Maybe Core.GDuration),
+    cacheDuration :: (Core.Maybe Core.Duration),
     -- | The platform type matching this threat.
     platformType :: (Core.Maybe GoogleSecuritySafebrowsingV4ThreatMatch_PlatformType),
     -- | The threat matching this threat.

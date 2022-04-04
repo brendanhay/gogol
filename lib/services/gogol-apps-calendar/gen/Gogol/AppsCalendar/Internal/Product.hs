@@ -850,7 +850,7 @@ data Colors = Colors
     -- | Type of the resource (\"calendar#colors\").
     kind :: Core.Text,
     -- | Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1424,7 +1424,7 @@ data Event = Event
     -- | The conference-related information, such as details of a Google Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests.
     conferenceData :: (Core.Maybe ConferenceData),
     -- | Creation time of the event (as a RFC3339 timestamp). Read-only.
-    created :: (Core.Maybe Core.DateTime'),
+    created :: (Core.Maybe Core.DateTime),
     -- | The creator of the event. Read-only.
     creator :: (Core.Maybe Event_Creator),
     -- | Description of the event. Can contain HTML. Optional.
@@ -1492,7 +1492,7 @@ data Event = Event
     -- - \"opaque\" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI. - \"transparent\" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
     transparency :: Core.Text,
     -- | Last modification time of the event (as a RFC3339 timestamp). Read-only.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | Visibility of the event. Optional. Possible values are:
     -- - \"default\" - Uses the default visibility for events on the calendar. This is the default value. - \"public\" - The event is public and event details are visible to all readers of the calendar. - \"private\" - The event is private and only event attendees may view event details. - \"confidential\" - The event is private. This value is provided for compatibility reasons.
     visibility :: Core.Text
@@ -2162,9 +2162,9 @@ instance Core.ToJSON EventAttendee where
 -- /See:/ 'newEventDateTime' smart constructor.
 data EventDateTime = EventDateTime
   { -- | The date, in the format \"yyyy-mm-dd\", if this is an all-day event.
-    date :: (Core.Maybe Core.Date'),
+    date :: (Core.Maybe Core.Date),
     -- | The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in timeZone.
-    dateTime :: (Core.Maybe Core.DateTime'),
+    dateTime :: (Core.Maybe Core.DateTime),
     -- | The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. \"Europe\/Zurich\".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start\/end.
     timeZone :: (Core.Maybe Core.Text)
   }
@@ -2262,7 +2262,7 @@ data Events = Events
     -- | The time zone of the calendar. Read-only.
     timeZone :: (Core.Maybe Core.Text),
     -- | Last modification time of the calendar (as a RFC3339 timestamp). Read-only.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2402,9 +2402,9 @@ data FreeBusyRequest = FreeBusyRequest
     -- | List of calendars and\/or groups to query.
     items :: (Core.Maybe [FreeBusyRequestItem]),
     -- | The end of the interval for the query formatted as per RFC3339.
-    timeMax :: (Core.Maybe Core.DateTime'),
+    timeMax :: (Core.Maybe Core.DateTime),
     -- | The start of the interval for the query formatted as per RFC3339.
-    timeMin :: (Core.Maybe Core.DateTime'),
+    timeMin :: (Core.Maybe Core.DateTime),
     -- | Time zone used in the response. Optional. The default is UTC.
     timeZone :: Core.Text
   }
@@ -2488,9 +2488,9 @@ data FreeBusyResponse = FreeBusyResponse
     -- | Type of the resource (\"calendar#freeBusy\").
     kind :: Core.Text,
     -- | The end of the interval.
-    timeMax :: (Core.Maybe Core.DateTime'),
+    timeMax :: (Core.Maybe Core.DateTime),
     -- | The start of the interval.
-    timeMin :: (Core.Maybe Core.DateTime')
+    timeMin :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2696,9 +2696,9 @@ instance Core.ToJSON Settings where
 -- /See:/ 'newTimePeriod' smart constructor.
 data TimePeriod = TimePeriod
   { -- | The (exclusive) end of the time period.
-    end :: (Core.Maybe Core.DateTime'),
+    end :: (Core.Maybe Core.DateTime),
     -- | The (inclusive) start of the time period.
-    start :: (Core.Maybe Core.DateTime')
+    start :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

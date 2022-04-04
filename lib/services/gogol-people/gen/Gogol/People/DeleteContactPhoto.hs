@@ -53,7 +53,7 @@ type PeoplePeopleDeleteContactPhotoResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "personFields" Core.GFieldMask
+    Core.:> Core.QueryParam "personFields" Core.FieldMask
     Core.:> Core.QueryParams
               "sources"
               PeopleDeleteContactPhotoSources
@@ -73,7 +73,7 @@ data PeoplePeopleDeleteContactPhoto = PeoplePeopleDeleteContactPhoto
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    personFields :: (Core.Maybe Core.GFieldMask),
+    personFields :: (Core.Maybe Core.FieldMask),
     -- | Required. The resource name of the contact whose photo will be deleted.
     resourceName :: Core.Text,
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.

@@ -50,7 +50,7 @@ type PeopleContactGroupsGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "groupFields" Core.GFieldMask
+    Core.:> Core.QueryParam "groupFields" Core.FieldMask
     Core.:> Core.QueryParam "maxMembers" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -68,7 +68,7 @@ data PeopleContactGroupsGet = PeopleContactGroupsGet
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Optional. A field mask to restrict which fields on the group are returned. Defaults to @metadata@, @groupType@, @memberCount@, and @name@ if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name
-    groupFields :: (Core.Maybe Core.GFieldMask),
+    groupFields :: (Core.Maybe Core.FieldMask),
     -- | Optional. Specifies the maximum number of members to return. Defaults to 0 if not set, which will return zero members.
     maxMembers :: (Core.Maybe Core.Int32),
     -- | Required. The resource name of the contact group to get.

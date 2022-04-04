@@ -51,7 +51,7 @@ type DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "languageCode" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -79,7 +79,7 @@ data DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsPatch = DialogFl
     -- | Multipart request metadata.
     payload :: GoogleCloudDialogflowCxV3TransitionRouteGroup,
     -- | The mask to control which fields get updated.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

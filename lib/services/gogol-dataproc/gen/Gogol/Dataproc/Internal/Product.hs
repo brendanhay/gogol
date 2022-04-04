@@ -768,7 +768,7 @@ instance Core.ToJSON AutoscalingPolicy_Labels where
 -- /See:/ 'newBasicAutoscalingAlgorithm' smart constructor.
 data BasicAutoscalingAlgorithm = BasicAutoscalingAlgorithm
   { -- | Optional. Duration between scaling events. A scaling period starts after the update operation from the previous event has completed.Bounds: 2m, 1d. Default: 2m.
-    cooldownPeriod :: (Core.Maybe Core.GDuration),
+    cooldownPeriod :: (Core.Maybe Core.Duration),
     -- | Optional. Spark Standalone autoscaling configuration
     sparkStandaloneConfig :: (Core.Maybe SparkStandaloneAutoscalingConfig),
     -- | Optional. YARN autoscaling configuration.
@@ -813,7 +813,7 @@ instance Core.ToJSON BasicAutoscalingAlgorithm where
 -- /See:/ 'newBasicYarnAutoscalingConfig' smart constructor.
 data BasicYarnAutoscalingConfig = BasicYarnAutoscalingConfig
   { -- | Required. Timeout for YARN graceful decommissioning of Node Managers. Specifies the duration to wait for jobs to complete before forcefully removing workers (and potentially interrupting jobs). Only applicable to downscaling operations.Bounds: 0s, 1d.
-    gracefulDecommissionTimeout :: (Core.Maybe Core.GDuration),
+    gracefulDecommissionTimeout :: (Core.Maybe Core.Duration),
     -- | Required. Fraction of average YARN pending memory in the last cooldown period for which to remove workers. A scale-down factor of 1 will result in scaling down so that there is no available memory remaining after the update (more aggressive scaling). A scale-down factor of 0 disables removing workers, which can be beneficial for autoscaling a single job. See How autoscaling works (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/configuring-clusters\/autoscaling#how/autoscaling/works) for more information.Bounds: 0.0, 1.0.
     scaleDownFactor :: (Core.Maybe Core.Double),
     -- | Optional. Minimum scale-down threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2 worker scale-down for the cluster to scale. A threshold of 0 means the autoscaler will scale down on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.
@@ -870,7 +870,7 @@ instance Core.ToJSON BasicYarnAutoscalingConfig where
 -- /See:/ 'newBatch' smart constructor.
 data Batch = Batch
   { -- | Output only. The time when the batch was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The email address of the user who created the batch.
     creator :: (Core.Maybe Core.Text),
     -- | Optional. Environment configuration for the batch execution.
@@ -900,7 +900,7 @@ data Batch = Batch
     -- | Output only. Batch state details, such as a failure description if the state is FAILED.
     stateMessage :: (Core.Maybe Core.Text),
     -- | Output only. The time when the batch entered a current state.
-    stateTime :: (Core.Maybe Core.DateTime'),
+    stateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A batch UUID (Unique Universal Identifier). The service generates this value when it creates the batch.
     uuid :: (Core.Maybe Core.Text)
   }
@@ -1016,11 +1016,11 @@ data BatchOperationMetadata = BatchOperationMetadata
     -- | Batch UUID for the operation.
     batchUuid :: (Core.Maybe Core.Text),
     -- | The time when the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Short description of the operation.
     description :: (Core.Maybe Core.Text),
     -- | The time when the operation finished.
-    doneTime :: (Core.Maybe Core.DateTime'),
+    doneTime :: (Core.Maybe Core.DateTime),
     -- | Labels associated with the operation.
     labels :: (Core.Maybe BatchOperationMetadata_Labels),
     -- | The operation type.
@@ -1638,7 +1638,7 @@ data ClusterOperationStatus = ClusterOperationStatus
     -- | Output only. A message containing the operation state.
     state :: (Core.Maybe ClusterOperationStatus_State),
     -- | Output only. The time this state was entered.
-    stateStartTime :: (Core.Maybe Core.DateTime')
+    stateStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1751,7 +1751,7 @@ data ClusterStatus = ClusterStatus
     -- | Output only. The cluster\'s state.
     state :: (Core.Maybe ClusterStatus_State),
     -- | Output only. Time when this state was entered (see JSON representation of Timestamp (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    stateStartTime :: (Core.Maybe Core.DateTime'),
+    stateStartTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Additional state information that includes status reported by the agent.
     substate :: (Core.Maybe ClusterStatus_Substate)
   }
@@ -3203,7 +3203,7 @@ data JobMetadata = JobMetadata
     -- | Output only. Operation type.
     operationType :: (Core.Maybe Core.Text),
     -- | Output only. Job submission time.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Most recent job status.
     status :: (Core.Maybe JobStatus)
   }
@@ -3402,7 +3402,7 @@ data JobStatus = JobStatus
     -- | Output only. A state message specifying the overall job state.
     state :: (Core.Maybe JobStatus_State),
     -- | Output only. The time when this state was entered.
-    stateStartTime :: (Core.Maybe Core.DateTime'),
+    stateStartTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Additional state information, which includes status reported by the agent.
     substate :: (Core.Maybe JobStatus_Substate)
   }
@@ -3559,13 +3559,13 @@ instance Core.ToJSON KerberosConfig where
 -- /See:/ 'newLifecycleConfig' smart constructor.
 data LifecycleConfig = LifecycleConfig
   { -- | Optional. The time when cluster will be auto-deleted (see JSON representation of Timestamp (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    autoDeleteTime :: (Core.Maybe Core.DateTime'),
+    autoDeleteTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The lifetime duration of cluster. The cluster will be auto-deleted at the end of this period. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    autoDeleteTtl :: (Core.Maybe Core.GDuration),
+    autoDeleteTtl :: (Core.Maybe Core.Duration),
     -- | Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 5 minutes; maximum value is 14 days (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    idleDeleteTtl :: (Core.Maybe Core.GDuration),
+    idleDeleteTtl :: (Core.Maybe Core.Duration),
     -- | Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness (see JSON representation of Timestamp (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    idleStartTime :: (Core.Maybe Core.DateTime')
+    idleStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4154,7 +4154,7 @@ data NodeInitializationAction = NodeInitializationAction
   { -- | Required. Cloud Storage URI of executable file.
     executableFile :: (Core.Maybe Core.Text),
     -- | Optional. Amount of time executable has to complete. Default is 10 minutes (see JSON representation of Duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.
-    executionTimeout :: (Core.Maybe Core.GDuration)
+    executionTimeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5244,11 +5244,11 @@ instance Core.ToJSON SecurityConfig where
 -- /See:/ 'newSessionOperationMetadata' smart constructor.
 data SessionOperationMetadata = SessionOperationMetadata
   { -- | The time when the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Short description of the operation.
     description :: (Core.Maybe Core.Text),
     -- | The time when the operation was finished.
-    doneTime :: (Core.Maybe Core.DateTime'),
+    doneTime :: (Core.Maybe Core.DateTime),
     -- | Labels associated with the operation.
     labels :: (Core.Maybe SessionOperationMetadata_Labels),
     -- | The operation type.
@@ -6019,7 +6019,7 @@ instance Core.ToJSON SparkSqlJob_ScriptVariables where
 -- /See:/ 'newSparkStandaloneAutoscalingConfig' smart constructor.
 data SparkStandaloneAutoscalingConfig = SparkStandaloneAutoscalingConfig
   { -- | Required. Timeout for Spark graceful decommissioning of spark workers. Specifies the duration to wait for spark worker to complete spark decomissioning tasks before forcefully removing workers. Only applicable to downscaling operations.Bounds: 0s, 1d.
-    gracefulDecommissionTimeout :: (Core.Maybe Core.GDuration),
+    gracefulDecommissionTimeout :: (Core.Maybe Core.Duration),
     -- | Required. Fraction of required executors to remove from Spark Serverless clusters. A scale-down factor of 1.0 will result in scaling down so that there are no more executors for the Spark Job.(more aggressive scaling). A scale-down factor closer to 0 will result in a smaller magnitude of scaling donw (less aggressive scaling).Bounds: 0.0, 1.0.
     scaleDownFactor :: (Core.Maybe Core.Double),
     -- | Optional. Minimum scale-down threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2 worker scale-down for the cluster to scale. A threshold of 0 means the autoscaler will scale down on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.
@@ -6119,7 +6119,7 @@ data StateHistory = StateHistory
     -- | Output only. Details about the state at this point in history.
     stateMessage :: (Core.Maybe Core.Text),
     -- | Output only. The time when the batch entered the historical state.
-    stateStartTime :: (Core.Maybe Core.DateTime')
+    stateStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6471,21 +6471,21 @@ data WorkflowMetadata = WorkflowMetadata
     -- | Output only. The create cluster operation metadata.
     createCluster :: (Core.Maybe ClusterOperation),
     -- | Output only. DAG end time, only set for workflows with dag_timeout when DAG ends.
-    dagEndTime :: (Core.Maybe Core.DateTime'),
+    dagEndTime :: (Core.Maybe Core.DateTime),
     -- | Output only. DAG start time, only set for workflows with dag_timeout when DAG begins.
-    dagStartTime :: (Core.Maybe Core.DateTime'),
+    dagStartTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The timeout duration for the DAG of jobs, expressed in seconds (see JSON representation of duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)).
-    dagTimeout :: (Core.Maybe Core.GDuration),
+    dagTimeout :: (Core.Maybe Core.Duration),
     -- | Output only. The delete cluster operation metadata.
     deleteCluster :: (Core.Maybe ClusterOperation),
     -- | Output only. Workflow end time.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The workflow graph.
     graph :: (Core.Maybe WorkflowGraph),
     -- | Map from parameter names to values that were used for those parameters.
     parameters :: (Core.Maybe WorkflowMetadata_Parameters),
     -- | Output only. Workflow start time.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The workflow state.
     state :: (Core.Maybe WorkflowMetadata_State),
     -- | Output only. The resource name of the workflow template as described in https:\/\/cloud.google.com\/apis\/design\/resource/names. For projects.regions.workflowTemplates, the resource name of the template has the following format: projects\/{project/id}\/regions\/{region}\/workflowTemplates\/{template/id} For projects.locations.workflowTemplates, the resource name of the template has the following format: projects\/{project/id}\/locations\/{location}\/workflowTemplates\/{template_id}
@@ -6651,9 +6651,9 @@ instance Core.ToJSON WorkflowNode where
 -- /See:/ 'newWorkflowTemplate' smart constructor.
 data WorkflowTemplate = WorkflowTemplate
   { -- | Output only. The time template was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Timeout duration for the DAG of jobs, expressed in seconds (see JSON representation of duration (https:\/\/developers.google.com\/protocol-buffers\/docs\/proto3#json)). The timeout duration must be from 10 minutes (\"600s\") to 24 hours (\"86400s\"). The timer begins when the first job is submitted. If the workflow is running at the end of the timeout period, any remaining jobs are cancelled, the workflow is ended, and if the workflow was running on a managed cluster, the cluster is deleted.
-    dagTimeout :: (Core.Maybe Core.GDuration),
+    dagTimeout :: (Core.Maybe Core.Duration),
     -- |
     id :: (Core.Maybe Core.Text),
     -- | Required. The Directed Acyclic Graph of Jobs to submit.
@@ -6667,7 +6667,7 @@ data WorkflowTemplate = WorkflowTemplate
     -- | Required. WorkflowTemplate scheduling information.
     placement :: (Core.Maybe WorkflowTemplatePlacement),
     -- | Output only. The time template was last updated.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Used to perform a consistent read-modify-write.This field should be left blank for a CreateWorkflowTemplate request. It is required for an UpdateWorkflowTemplate request, and must match the current server version. A typical update template flow would fetch the current template with a GetWorkflowTemplate request, which will return the current template with the version field filled in with the current server version. The user updates other fields in the template, then returns it as part of the UpdateWorkflowTemplate request.
     version :: (Core.Maybe Core.Int32)
   }

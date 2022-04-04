@@ -3787,7 +3787,7 @@ data User = User
     -- | Immutable. The user\'s email address.
     email :: (Core.Maybe Core.Text),
     -- | The time at which the user\'s access expires, if set.
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Per-app permissions for the user.
     grants :: (Core.Maybe [Grant]),
     -- | Required. Resource name for this user, following the pattern \"developers\/{developer}\/users\/{email}\".

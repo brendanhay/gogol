@@ -53,7 +53,7 @@ type FireStoreProjectsDatabasesDocumentsPatchResource =
     Core.:> Core.QueryParam "currentDocument.exists" Core.Bool
     Core.:> Core.QueryParam
               "currentDocument.updateTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParams "mask.fieldPaths" Core.Text
     Core.:> Core.QueryParams "updateMask.fieldPaths" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -75,7 +75,7 @@ data FireStoreProjectsDatabasesDocumentsPatch = FireStoreProjectsDatabasesDocume
     -- | When set to @true@, the target document must exist. When set to @false@, the target document must not exist.
     currentDocumentExists :: (Core.Maybe Core.Bool),
     -- | When set, the target document must exist and have been last updated at that time. Timestamp must be microsecond aligned.
-    currentDocumentUpdateTime :: (Core.Maybe Core.DateTime'),
+    currentDocumentUpdateTime :: (Core.Maybe Core.DateTime),
     -- | The list of field paths in the mask. See Document.fields for a field path syntax reference.
     maskFieldPaths :: (Core.Maybe [Core.Text]),
     -- | The resource name of the document, for example @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.

@@ -50,7 +50,7 @@ type MlProjectsModelsVersionsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data MlProjectsModelsVersionsPatch = MlProjectsModelsVersionsPatch
     -- | Multipart request metadata.
     payload :: GoogleCloudMlV1__Version,
     -- | Required. Specifies the path, relative to @Version@, of the field to update. Must be present and non-empty. For example, to change the description of a version to \"foo\", the @update_mask@ parameter would be specified as @description@, and the @PATCH@ request body would specify the new value, as follows: @{ \"description\": \"foo\" }@ Currently the only supported update mask fields are @description@, @requestLoggingConfig@, @autoScaling.minNodes@, and @manualScaling.nodes@. However, you can only update @manualScaling.nodes@ if the version uses a </ml-engine/docs/machine-types-online-prediction Compute Engine (N1) machine type>.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

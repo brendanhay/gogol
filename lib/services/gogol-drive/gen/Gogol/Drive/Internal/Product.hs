@@ -582,7 +582,7 @@ data Change = Change
     -- | Deprecated - use driveId instead.
     teamDriveId :: (Core.Maybe Core.Text),
     -- | The time of this change (RFC 3339 date-time).
-    time :: (Core.Maybe Core.DateTime'),
+    time :: (Core.Maybe Core.DateTime),
     -- | Deprecated - use changeType instead.
     type' :: (Core.Maybe Core.Text)
   }
@@ -811,7 +811,7 @@ data Comment = Comment
     -- | The plain text content of the comment. This field is used for setting the content, while htmlContent should be displayed.
     content :: (Core.Maybe Core.Text),
     -- | The time at which the comment was created (RFC 3339 date-time).
-    createdTime :: (Core.Maybe Core.DateTime'),
+    createdTime :: (Core.Maybe Core.DateTime),
     -- | Whether the comment has been deleted. A deleted comment has no content.
     deleted :: (Core.Maybe Core.Bool),
     -- | The content of the comment with HTML formatting.
@@ -821,7 +821,7 @@ data Comment = Comment
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#comment\".
     kind :: Core.Text,
     -- | The last time the comment or any of its replies was modified (RFC 3339 date-time).
-    modifiedTime :: (Core.Maybe Core.DateTime'),
+    modifiedTime :: (Core.Maybe Core.DateTime),
     -- | The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
     quotedFileContent :: (Core.Maybe Comment_QuotedFileContent),
     -- | The full list of replies to the comment in chronological order.
@@ -981,7 +981,7 @@ data ContentRestriction = ContentRestriction
     -- | The user who set the content restriction. Only populated if readOnly is true.
     restrictingUser :: (Core.Maybe User),
     -- | The time at which the content restriction was set (formatted RFC 3339 timestamp). Only populated if readOnly is true.
-    restrictionTime :: (Core.Maybe Core.DateTime'),
+    restrictionTime :: (Core.Maybe Core.DateTime),
     -- | The type of the content restriction. Currently the only possible value is globalContentRestriction.
     type' :: (Core.Maybe Core.Text)
   }
@@ -1037,7 +1037,7 @@ data Drive = Drive
     -- | The color of this shared drive as an RGB hex string. It can only be set on a drive.drives.update request that does not set themeId.
     colorRgb :: (Core.Maybe Core.Text),
     -- | The time at which the shared drive was created (RFC 3339 date-time).
-    createdTime :: (Core.Maybe Core.DateTime'),
+    createdTime :: (Core.Maybe Core.DateTime),
     -- | Whether the shared drive is hidden from default view.
     hidden :: (Core.Maybe Core.Bool),
     -- | The ID of this shared drive which is also the ID of the top level folder of this shared drive.
@@ -1406,7 +1406,7 @@ data File = File
     -- | Whether the options to copy, print, or download this file, should be disabled for readers and commenters.
     copyRequiresWriterPermission :: (Core.Maybe Core.Bool),
     -- | The time at which the file was created (RFC 3339 date-time).
-    createdTime :: (Core.Maybe Core.DateTime'),
+    createdTime :: (Core.Maybe Core.DateTime),
     -- | A short description of the file.
     description :: (Core.Maybe Core.Text),
     -- | ID of the shared drive the file resides in. Only populated for items in shared drives.
@@ -1448,9 +1448,9 @@ data File = File
     -- | Whether the file has been modified by this user.
     modifiedByMe :: (Core.Maybe Core.Bool),
     -- | The last time the file was modified by the user (RFC 3339 date-time).
-    modifiedByMeTime :: (Core.Maybe Core.DateTime'),
+    modifiedByMeTime :: (Core.Maybe Core.DateTime),
     -- | The last time the file was modified by anyone (RFC 3339 date-time). Note that setting modifiedTime will also update modifiedByMeTime for the user.
-    modifiedTime :: (Core.Maybe Core.DateTime'),
+    modifiedTime :: (Core.Maybe Core.DateTime),
     -- | The name of the file. This is not necessarily unique within a folder. Note that for immutable items such as the top level folders of shared drives, My Drive root folder, and Application Data folder the name is constant.
     name :: (Core.Maybe Core.Text),
     -- | The original filename of the uploaded content if available, or else the original value of the name field. This is only available for files with binary content in Google Drive.
@@ -1474,7 +1474,7 @@ data File = File
     -- | Whether the file has been shared. Not populated for items in shared drives.
     shared :: (Core.Maybe Core.Bool),
     -- | The time at which the file was shared with the user, if applicable (RFC 3339 date-time).
-    sharedWithMeTime :: (Core.Maybe Core.DateTime'),
+    sharedWithMeTime :: (Core.Maybe Core.DateTime),
     -- | The user who shared the file with the requesting user, if applicable.
     sharingUser :: (Core.Maybe User),
     -- | Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application\/vnd.google-apps.shortcut.
@@ -1494,7 +1494,7 @@ data File = File
     -- | Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file. The trashed item is excluded from all files.list responses returned for any user who does not own the file. However, all users with access to the file can see the trashed item metadata in an API response. All users with access can copy, download, export, and share the file.
     trashed :: (Core.Maybe Core.Bool),
     -- | The time that the item was trashed (RFC 3339 date-time). Only populated for items in shared drives.
-    trashedTime :: (Core.Maybe Core.DateTime'),
+    trashedTime :: (Core.Maybe Core.DateTime),
     -- | If the file has been explicitly trashed, the user who trashed it. Only populated for items in shared drives.
     trashingUser :: (Core.Maybe User),
     -- | A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user.
@@ -1504,7 +1504,7 @@ data File = File
     -- | Whether the file has been viewed by this user.
     viewedByMe :: (Core.Maybe Core.Bool),
     -- | The last time the file was viewed by the user (RFC 3339 date-time).
-    viewedByMeTime :: (Core.Maybe Core.DateTime'),
+    viewedByMeTime :: (Core.Maybe Core.DateTime),
     -- | Deprecated - use copyRequiresWriterPermission instead.
     viewersCanCopyContent :: (Core.Maybe Core.Bool),
     -- | A link for downloading the content of the file in a browser. This is only available for files with binary content in Google Drive.
@@ -2545,7 +2545,7 @@ data Permission = Permission
     emailAddress :: (Core.Maybe Core.Text),
     -- | The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:
     -- - They can only be set on user and group permissions - The time must be in the future - The time cannot be more than a year in the future
-    expirationTime :: (Core.Maybe Core.DateTime'),
+    expirationTime :: (Core.Maybe Core.DateTime),
     -- | The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId. IDs should be treated as opaque values.
     id :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#permission\".
@@ -2805,7 +2805,7 @@ data Reply = Reply
     -- | The plain text content of the reply. This field is used for setting the content, while htmlContent should be displayed. This is required on creates if no action is specified.
     content :: (Core.Maybe Core.Text),
     -- | The time at which the reply was created (RFC 3339 date-time).
-    createdTime :: (Core.Maybe Core.DateTime'),
+    createdTime :: (Core.Maybe Core.DateTime),
     -- | Whether the reply has been deleted. A deleted reply has no content.
     deleted :: (Core.Maybe Core.Bool),
     -- | The content of the reply with HTML formatting.
@@ -2815,7 +2815,7 @@ data Reply = Reply
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#reply\".
     kind :: Core.Text,
     -- | The last time the reply was modified (RFC 3339 date-time).
-    modifiedTime :: (Core.Maybe Core.DateTime')
+    modifiedTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2931,7 +2931,7 @@ data Revision = Revision
     -- | The MIME type of the revision.
     mimeType :: (Core.Maybe Core.Text),
     -- | The last time the revision was modified (RFC 3339 date-time).
-    modifiedTime :: (Core.Maybe Core.DateTime'),
+    modifiedTime :: (Core.Maybe Core.DateTime),
     -- | The original filename used to create this revision. This is only applicable to files with binary content in Drive.
     originalFilename :: (Core.Maybe Core.Text),
     -- | Whether subsequent revisions will be automatically republished. This is only applicable to Docs Editors files.
@@ -3136,7 +3136,7 @@ data TeamDrive = TeamDrive
     -- | The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId.
     colorRgb :: (Core.Maybe Core.Text),
     -- | The time at which the Team Drive was created (RFC 3339 date-time).
-    createdTime :: (Core.Maybe Core.DateTime'),
+    createdTime :: (Core.Maybe Core.DateTime),
     -- | The ID of this Team Drive which is also the ID of the top level folder of this Team Drive.
     id :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"drive#teamDrive\".

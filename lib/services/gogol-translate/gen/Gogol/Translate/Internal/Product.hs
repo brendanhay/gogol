@@ -1013,7 +1013,7 @@ instance Core.ToJSON GcsSource where
 -- /See:/ 'newGlossary' smart constructor.
 data Glossary = Glossary
   { -- | Output only. When the glossary creation was finished.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The number of entries defined in the glossary.
     entryCount :: (Core.Maybe Core.Int32),
     -- | Required. Provides examples to build the glossary from. Total glossary must not exceed 10M Unicode codepoints.
@@ -1025,7 +1025,7 @@ data Glossary = Glossary
     -- | Required. The resource name of the glossary. Glossary names have the form @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. When CreateGlossary was called.
-    submitTime :: (Core.Maybe Core.DateTime')
+    submitTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2102,7 +2102,7 @@ instance Core.ToJSON Translation where
 -- /See:/ 'newWaitOperationRequest' smart constructor.
 newtype WaitOperationRequest = WaitOperationRequest
   { -- | The maximum duration to wait before timing out. If left blank, the wait will be at most the time permitted by the underlying HTTP\/RPC protocol. If RPC context deadline is also specified, the shorter one will be used.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

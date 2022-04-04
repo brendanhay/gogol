@@ -52,10 +52,10 @@ type CloudbillingServicesSkusListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currencyCode" Core.Text
-    Core.:> Core.QueryParam "endTime" Core.DateTime'
+    Core.:> Core.QueryParam "endTime" Core.DateTime
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "startTime" Core.DateTime'
+    Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -74,7 +74,7 @@ data CloudbillingServicesSkusList = CloudbillingServicesSkusList
     -- | The ISO 4217 currency code for the pricing info in the response proto. Will use the conversion rate as of start_time. Optional. If not specified USD will be used.
     currencyCode :: (Core.Maybe Core.Text),
     -- | Optional exclusive end time of the time range for which the pricing versions will be returned. Timestamps in the future are not allowed. The time range has to be within a single calendar month in America\/Los_Angeles timezone. Time range as a whole is optional. If not specified, the latest pricing will be returned (up to 12 hours old at most).
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Requested page size. Defaults to 5000.
     pageSize :: (Core.Maybe Core.Int32),
     -- | A token identifying a page of results to return. This should be a @next_page_token@ value returned from a previous @ListSkus@ call. If unspecified, the first page of results is returned.
@@ -82,7 +82,7 @@ data CloudbillingServicesSkusList = CloudbillingServicesSkusList
     -- | Required. The name of the service. Example: \"services\/DA34-426B-A397\"
     parent :: Core.Text,
     -- | Optional inclusive start time of the time range for which the pricing versions will be returned. Timestamps in the future are not allowed. The time range has to be within a single calendar month in America\/Los_Angeles timezone. Time range as a whole is optional. If not specified, the latest pricing will be returned (up to 12 hours old at most).
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

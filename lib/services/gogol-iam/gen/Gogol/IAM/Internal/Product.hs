@@ -1303,7 +1303,7 @@ data PatchServiceAccountRequest = PatchServiceAccountRequest
   { -- |
     serviceAccount :: (Core.Maybe ServiceAccount),
     -- |
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1938,9 +1938,9 @@ data ServiceAccountKey = ServiceAccountKey
     -- | The public key data. Only provided in @GetServiceAccountKey@ responses.
     publicKeyData :: (Core.Maybe Core.Base64),
     -- | The key can be used after this timestamp.
-    validAfterTime :: (Core.Maybe Core.DateTime'),
+    validAfterTime :: (Core.Maybe Core.DateTime),
     -- | The key can be used before this timestamp. For system-managed key pairs, this timestamp is the end time for the private key signing operation. The public key could still be used for verification for a few hours after this time.
-    validBeforeTime :: (Core.Maybe Core.DateTime')
+    validBeforeTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2004,7 +2004,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

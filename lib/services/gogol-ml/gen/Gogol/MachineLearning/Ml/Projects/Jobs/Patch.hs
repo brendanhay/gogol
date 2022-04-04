@@ -50,7 +50,7 @@ type MlProjectsJobsPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data MlProjectsJobsPatch = MlProjectsJobsPatch
     -- | Multipart request metadata.
     payload :: GoogleCloudMlV1__Job,
     -- | Required. Specifies the path, relative to @Job@, of the field to update. To adopt etag mechanism, include @etag@ field in the mask, and include the @etag@ value in your job resource. For example, to change the labels of a job, the @update_mask@ parameter would be specified as @labels@, @etag@, and the @PATCH@ request body would specify the new value, as follows: { \"labels\": { \"owner\": \"Google\", \"color\": \"Blue\" } \"etag\": \"33a64df551425fcc55e4d42a148795d9f25f89d4\" } If @etag@ matches the one on the server, the labels of the job will be replaced with the given ones, and the server end @etag@ will be recalculated. Currently the only supported update masks are @labels@ and @etag@.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

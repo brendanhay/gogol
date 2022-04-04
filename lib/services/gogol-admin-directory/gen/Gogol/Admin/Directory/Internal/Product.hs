@@ -669,7 +669,7 @@ data AuxiliaryMessage = AuxiliaryMessage
   { -- | Human readable message in English. Example: \"Given printer is invalid or no longer supported.\"
     auxiliaryMessage :: (Core.Maybe Core.Text),
     -- | Field that this message concerns.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | Message severity
     severity :: (Core.Maybe AuxiliaryMessage_Severity)
   }
@@ -1375,11 +1375,11 @@ data ChromeOsDevice = ChromeOsDevice
     -- | The type of resource. For the Chromeosdevices resource, the value is @admin#directory#chromeosdevice@.
     kind :: Core.Text,
     -- | Date and time the device was last enrolled (Read-only)
-    lastEnrollmentTime :: (Core.Maybe Core.DateTime'),
+    lastEnrollmentTime :: (Core.Maybe Core.DateTime),
     -- | Contains last known network (Read-only)
     lastKnownNetwork :: (Core.Maybe [ChromeOsDevice_LastKnownNetworkItem]),
     -- | Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
-    lastSync :: (Core.Maybe Core.DateTime'),
+    lastSync :: (Core.Maybe Core.DateTime),
     -- | The device\'s wireless MAC address. If the device does not have this information, it is not included in the response.
     macAddress :: (Core.Maybe Core.Text),
     -- | (Read-only) The date the device was manufactured in yyyy-mm-dd format.
@@ -1409,7 +1409,7 @@ data ChromeOsDevice = ChromeOsDevice
     -- | The status of the device.
     status :: (Core.Maybe Core.Text),
     -- | Final date the device will be supported (Read-only)
-    supportEndDate :: (Core.Maybe Core.DateTime'),
+    supportEndDate :: (Core.Maybe Core.DateTime),
     -- | Reports of amounts of available RAM memory (Read-only)
     systemRamFreeReports :: (Core.Maybe [ChromeOsDevice_SystemRamFreeReportsItem]),
     -- | Total RAM on the device [in bytes] (Read-only)
@@ -1582,7 +1582,7 @@ data ChromeOsDevice_ActiveTimeRangesItem = ChromeOsDevice_ActiveTimeRangesItem
   { -- | Duration of usage in milliseconds.
     activeTime :: (Core.Maybe Core.Int32),
     -- | Date of usage
-    date :: (Core.Maybe Core.Date')
+    date :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1682,7 +1682,7 @@ data ChromeOsDevice_CpuInfoItem_LogicalCpusItem = ChromeOsDevice_CpuInfoItem_Log
     -- | Current frequency the CPU is running at.
     currentScalingFrequencyKhz :: (Core.Maybe Core.Int32),
     -- | Idle time since last boot.
-    idleDuration :: (Core.Maybe Core.GDuration),
+    idleDuration :: (Core.Maybe Core.Duration),
     -- | Maximum frequency the CPU is allowed to run at, by policy.
     maxScalingFrequencyKhz :: (Core.Maybe Core.Int32)
   }
@@ -1737,7 +1737,7 @@ data ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem = ChromeOsDevice_Cpu
   { -- | Name of the state.
     displayName :: (Core.Maybe Core.Text),
     -- | Time spent in the state since the last reboot.
-    sessionDuration :: (Core.Maybe Core.GDuration)
+    sessionDuration :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1788,7 +1788,7 @@ data ChromeOsDevice_CpuStatusReportsItem = ChromeOsDevice_CpuStatusReportsItem
     -- |
     cpuUtilizationPercentageInfo :: (Core.Maybe [Core.Int32]),
     -- | Date and time the report was received.
-    reportTime :: (Core.Maybe Core.DateTime')
+    reportTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1884,7 +1884,7 @@ instance
 -- /See:/ 'newChromeOsDevice_DeviceFilesItem' smart constructor.
 data ChromeOsDevice_DeviceFilesItem = ChromeOsDevice_DeviceFilesItem
   { -- | Date and time the file was created
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | File download URL
     downloadUrl :: (Core.Maybe Core.Text),
     -- | File name
@@ -2100,7 +2100,7 @@ instance Core.ToJSON ChromeOsDevice_RecentUsersItem where
 -- /See:/ 'newChromeOsDevice_ScreenshotFilesItem' smart constructor.
 data ChromeOsDevice_ScreenshotFilesItem = ChromeOsDevice_ScreenshotFilesItem
   { -- | Date and time the file was created
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | File download URL
     downloadUrl :: (Core.Maybe Core.Text),
     -- | File name
@@ -2154,7 +2154,7 @@ instance
 -- /See:/ 'newChromeOsDevice_SystemRamFreeReportsItem' smart constructor.
 data ChromeOsDevice_SystemRamFreeReportsItem = ChromeOsDevice_SystemRamFreeReportsItem
   { -- | Date and time the report was received.
-    reportTime :: (Core.Maybe Core.DateTime'),
+    reportTime :: (Core.Maybe Core.DateTime),
     -- |
     systemRamFreeInfo :: (Core.Maybe [Core.Int64])
   }
@@ -2414,7 +2414,7 @@ data Customer = Customer
   { -- | The customer\'s secondary contact email address. This email address cannot be on the same domain as the @customerDomain@
     alternateEmail :: (Core.Maybe Core.Text),
     -- | The customer\'s creation time (Readonly)
-    customerCreationTime :: (Core.Maybe Core.DateTime'),
+    customerCreationTime :: (Core.Maybe Core.DateTime),
     -- | The customer\'s primary domain name string. Do not include the @www@ prefix when creating a new customer.
     customerDomain :: (Core.Maybe Core.Text),
     -- | ETag of the resource.
@@ -2563,13 +2563,13 @@ instance Core.ToJSON CustomerPostalAddress where
 -- /See:/ 'newDirectoryChromeosdevicesCommand' smart constructor.
 data DirectoryChromeosdevicesCommand = DirectoryChromeosdevicesCommand
   { -- | The time at which the command will expire. If the device doesn\'t execute the command within this time the command will become expired.
-    commandExpireTime :: (Core.Maybe Core.DateTime'),
+    commandExpireTime :: (Core.Maybe Core.DateTime),
     -- | Unique ID of a device command.
     commandId :: (Core.Maybe Core.Int64),
     -- | The result of the command execution.
     commandResult :: (Core.Maybe DirectoryChromeosdevicesCommandResult),
     -- | The timestamp when the command was issued by the admin.
-    issueTime :: (Core.Maybe Core.DateTime'),
+    issueTime :: (Core.Maybe Core.DateTime),
     -- | The payload that the command specified, if any.
     payload :: (Core.Maybe Core.Text),
     -- | Indicates the command state.
@@ -2634,7 +2634,7 @@ data DirectoryChromeosdevicesCommandResult = DirectoryChromeosdevicesCommandResu
   { -- | The error message with a short explanation as to why the command failed. Only present if the command failed.
     errorMessage :: (Core.Maybe Core.Text),
     -- | The time at which the command was executed or failed to execute.
-    executeTime :: (Core.Maybe Core.DateTime'),
+    executeTime :: (Core.Maybe Core.DateTime),
     -- | The result of the command.
     result :: (Core.Maybe DirectoryChromeosdevicesCommandResult_Result)
   }
@@ -3591,7 +3591,7 @@ data MobileDevice = MobileDevice
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
     -- | Date and time the device was first synchronized with the policy settings in the G Suite administrator control panel (Read-only)
-    firstSync :: (Core.Maybe Core.DateTime'),
+    firstSync :: (Core.Maybe Core.DateTime),
     -- | Mobile Device Hardware (Read-only)
     hardware :: (Core.Maybe Core.Text),
     -- | The IMEI\/MEID unique identifier for Android hardware. It is not applicable to Google Sync devices. When adding an Android mobile device, this is an optional property. When updating one of these devices, this is a read-only property.
@@ -3603,7 +3603,7 @@ data MobileDevice = MobileDevice
     -- | The type of the API resource. For Mobiledevices resources, the value is @admin#directory#mobiledevice@.
     kind :: Core.Text,
     -- | Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
-    lastSync :: (Core.Maybe Core.DateTime'),
+    lastSync :: (Core.Maybe Core.DateTime),
     -- | Boolean indicating if this account is on owner\/primary profile or not.
     managedAccountIsOnOwnerProfile :: (Core.Maybe Core.Bool),
     -- | Mobile Device manufacturer (Read-only)
@@ -4061,7 +4061,7 @@ data Printer = Printer
   { -- | Output only. Auxiliary messages about issues with the printer configuration if any.
     auxiliaryMessages :: (Core.Maybe [AuxiliaryMessage]),
     -- | Output only. Time when printer was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Editable. Description of printer.
     description :: (Core.Maybe Core.Text),
     -- | Editable. Name of printer.
@@ -4928,13 +4928,13 @@ data User = User
     -- | Indicates if the user is forced to change their password at next login. This setting doesn\'t apply when <https://support.google.com/a/answer/60224 the user signs in via a third-party identity provider>.
     changePasswordAtNextLogin :: (Core.Maybe Core.Bool),
     -- | User\'s G Suite account creation time. (Read-only)
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Custom fields of the user. The key is a @schema_name@ and its values are @\'field_name\': \'field_value\'@.
     customSchemas :: (Core.Maybe User_CustomSchemas),
     -- | Output only. The customer ID to </admin-sdk/directory/v1/guides/manage-users.html#get_all_users retrieve all account users>. You can use the alias @my_customer@ to represent your account\'s @customerId@. As a reseller administrator, you can use the resold customer account\'s @customerId@. To get a @customerId@, use the account\'s primary domain in the @domain@ parameter of a </admin-sdk/directory/v1/reference/users/list users.list> request.
     customerId :: (Core.Maybe Core.Text),
     -- |
-    deletionTime :: (Core.Maybe Core.DateTime'),
+    deletionTime :: (Core.Maybe Core.DateTime),
     -- | A list of the user\'s email addresses. The maximum allowed data size for this field is 10Kb.
     emails :: (Core.Maybe Core.Value),
     -- | Output only. ETag of the resource.
@@ -4970,7 +4970,7 @@ data User = User
     -- | The user\'s languages. The maximum allowed data size for this field is 1Kb.
     languages :: (Core.Maybe Core.Value),
     -- | User\'s last login time. (Read-only)
-    lastLoginTime :: (Core.Maybe Core.DateTime'),
+    lastLoginTime :: (Core.Maybe Core.DateTime),
     -- | The user\'s locations. The maximum allowed data size for this field is 10Kb.
     locations :: (Core.Maybe Core.Value),
     -- | Holds the given and family names of the user, and the read-only @fullName@ value. The maximum number of characters in the @givenName@ and in the @familyName@ values is 60. In addition, name values support unicode\/UTF-8 characters, and can contain spaces, letters (a-z), numbers (0-9), dashes (-), forward slashes (\/), and periods (.). For more information about character usage rules, see the <https://support.google.com/a/answer/9193374 administration help center>. Maximum allowed data size for this field is 1Kb.

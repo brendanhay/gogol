@@ -224,7 +224,7 @@ data AuthorizeEnvironmentRequest = AuthorizeEnvironmentRequest
   { -- | The OAuth access token that should be sent to the environment.
     accessToken :: (Core.Maybe Core.Text),
     -- | The time when the credentials expire. If not set, defaults to one hour from when the server received the request.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | The OAuth ID token that should be sent to the environment.
     idToken :: (Core.Maybe Core.Text)
   }

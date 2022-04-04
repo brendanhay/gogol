@@ -617,7 +617,7 @@ data Function = Function
     -- | Output only. State Messages for this Cloud Function.
     stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2betaStateMessage]),
     -- | Output only. The last update timestamp of a Cloud Function.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -819,9 +819,9 @@ data GoogleCloudFunctionsV2alphaOperationMetadata = GoogleCloudFunctionsV2alphaO
     -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The original request that started the operation.
     requestResource ::
       ( Core.Maybe
@@ -1054,9 +1054,9 @@ data GoogleCloudFunctionsV2betaOperationMetadata = GoogleCloudFunctionsV2betaOpe
     -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The original request that started the operation.
     requestResource ::
       ( Core.Maybe
@@ -1664,7 +1664,7 @@ data OperationMetadataV1 = OperationMetadataV1
     -- | Type of operation.
     type' :: (Core.Maybe OperationMetadataV1_Type),
     -- | The last update timestamp of the operation.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Version id of the function created or updated by an API call. This field is only populated for Create and Update operations.
     versionId :: (Core.Maybe Core.Int64)
   }
@@ -2055,7 +2055,7 @@ data SetIamPolicyRequest = SetIamPolicyRequest
   { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
-    updateMask :: (Core.Maybe Core.GFieldMask)
+    updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

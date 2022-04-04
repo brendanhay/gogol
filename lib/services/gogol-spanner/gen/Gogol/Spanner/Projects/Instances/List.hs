@@ -52,7 +52,7 @@ type SpannerProjectsInstancesListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam "instanceDeadline" Core.DateTime'
+    Core.:> Core.QueryParam "instanceDeadline" Core.DateTime
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -73,7 +73,7 @@ data SpannerProjectsInstancesList = SpannerProjectsInstancesList
     -- | An expression for filtering the results of the request. Filter rules are case insensitive. The fields eligible for filtering are: * @name@ * @display_name@ * @labels.key@ where key is the name of a label Some examples of using filters are: * @name:*@ --> The instance has a name. * @name:Howl@ --> The instance\'s name contains the string \"howl\". * @name:HOWL@ --> Equivalent to above. * @NAME:howl@ --> Equivalent to above. * @labels.env:*@ --> The instance has the label \"env\". * @labels.env:dev@ --> The instance has the label \"env\" and the value of the label contains the string \"dev\". * @name:howl labels.env:dev@ --> The instance\'s name contains \"howl\" and it has the label \"env\" with its value containing \"dev\".
     filter :: (Core.Maybe Core.Text),
     -- | Deadline used while retrieving metadata for instances. Instances whose metadata cannot be retrieved within this deadline will be added to unreachable in ListInstancesResponse.
-    instanceDeadline :: (Core.Maybe Core.DateTime'),
+    instanceDeadline :: (Core.Maybe Core.DateTime),
     -- | Number of instances to be returned in the response. If 0 or less, defaults to the server\'s maximum allowed page size.
     pageSize :: (Core.Maybe Core.Int32),
     -- | If non-empty, @page_token@ should contain a next/page/token from a previous ListInstancesResponse.

@@ -831,9 +831,9 @@ data DeviceClaim = DeviceClaim
     -- | Output only. The type of claim made on the device.
     sectionType :: (Core.Maybe DeviceClaim_SectionType),
     -- | The timestamp when the device will exit ‘vacation mode’. This value is present iff the device is in \'vacation mode\'.
-    vacationModeExpireTime :: (Core.Maybe Core.DateTime'),
+    vacationModeExpireTime :: (Core.Maybe Core.DateTime),
     -- | The timestamp when the device was put into ‘vacation mode’. This value is present iff the device is in \'vacation mode\'.
-    vacationModeStartTime :: (Core.Maybe Core.DateTime')
+    vacationModeStartTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1737,7 +1737,7 @@ data PartnerUnclaim = PartnerUnclaim
     -- | Optional. The duration of the vacation unlock starting from when the request is processed. (1 day is treated as 24 hours)
     vacationModeDays :: (Core.Maybe Core.Int32),
     -- | Optional. The expiration time of the vacation unlock.
-    vacationModeExpireTime :: (Core.Maybe Core.DateTime')
+    vacationModeExpireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1912,7 +1912,7 @@ data UnclaimDeviceRequest = UnclaimDeviceRequest
     -- | The duration of the vacation unlock starting from when the request is processed. (1 day is treated as 24 hours)
     vacationModeDays :: (Core.Maybe Core.Int32),
     -- | The expiration time of the vacation unlock.
-    vacationModeExpireTime :: (Core.Maybe Core.DateTime')
+    vacationModeExpireTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

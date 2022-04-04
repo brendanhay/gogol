@@ -1352,7 +1352,7 @@ data Distribution = Distribution
   { -- | Output only. The estimated fraction (0-1) of the total market with this configuration.
     marketShare :: (Core.Maybe Core.Double),
     -- | Output only. The time this distribution was measured.
-    measurementTime :: (Core.Maybe Core.DateTime')
+    measurementTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2576,7 +2576,7 @@ data RoboStartingIntent = RoboStartingIntent
     -- | An intent that starts an activity with specific details.
     startActivity :: (Core.Maybe StartActivityIntent),
     -- | Timeout in seconds for each intent.
-    timeout :: (Core.Maybe Core.GDuration)
+    timeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2886,7 +2886,7 @@ data TestExecution = TestExecution
     -- | Output only. How to run the test.
     testSpecification :: (Core.Maybe TestSpecification),
     -- | Output only. The time this test execution was initially created.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Output only. Where the results for this execution are written.
     toolResultsStep :: (Core.Maybe ToolResultsStep)
   }
@@ -2975,7 +2975,7 @@ data TestMatrix = TestMatrix
     -- | Required. How to run the test.
     testSpecification :: (Core.Maybe TestSpecification),
     -- | Output only. The time this test matrix was initially created.
-    timestamp :: (Core.Maybe Core.DateTime')
+    timestamp :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3141,7 +3141,7 @@ data TestSpecification = TestSpecification
     -- | Test setup requirements for Android e.g. files to install, bootstrap scripts.
     testSetup :: (Core.Maybe TestSetup),
     -- | Max time a test execution is allowed to run before it is automatically cancelled. The default value is 5 min.
-    testTimeout :: (Core.Maybe Core.GDuration)
+    testTimeout :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3368,7 +3368,7 @@ data TrafficRule = TrafficRule
     -- | Burst size in kbits.
     burst :: (Core.Maybe Core.Double),
     -- | Packet delay, must be >= 0.
-    delay :: (Core.Maybe Core.GDuration),
+    delay :: (Core.Maybe Core.Duration),
     -- | Packet duplication ratio (0.0 - 1.0).
     packetDuplicationRatio :: (Core.Maybe Core.Double),
     -- | Packet loss ratio (0.0 - 1.0).

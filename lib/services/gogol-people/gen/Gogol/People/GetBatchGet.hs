@@ -50,10 +50,10 @@ type PeoplePeopleGetBatchGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "personFields" Core.GFieldMask
+    Core.:> Core.QueryParam "personFields" Core.FieldMask
     Core.:> Core.QueryParam
               "requestMask.includeField"
-              Core.GFieldMask
+              Core.FieldMask
     Core.:> Core.QueryParams "resourceNames" Core.Text
     Core.:> Core.QueryParams "sources" PeopleGetBatchGetSources
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -72,9 +72,9 @@ data PeoplePeopleGetBatchGet = PeoplePeopleGetBatchGet
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    personFields :: (Core.Maybe Core.GFieldMask),
+    personFields :: (Core.Maybe Core.FieldMask),
     -- | Required. Comma-separated list of person fields to be included in the response. Each path should start with @person.@: for example, @person.names@ or @person.photos@.
-    requestMaskIncludeField :: (Core.Maybe Core.GFieldMask),
+    requestMaskIncludeField :: (Core.Maybe Core.FieldMask),
     -- | Required. The resource names of the people to provide information about. It\'s repeatable. The URL query parameter should be resourceNames=\<name1>&resourceNames=\<name2>&... - To get information about the authenticated user, specify @people\/me@. - To get information about a google account, specify @people\/{account_id}@. - To get information about a contact, specify the resource name that identifies the contact as returned by @people.connections.list@. There is a maximum of 200 resource names.
     resourceNames :: (Core.Maybe [Core.Text]),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.

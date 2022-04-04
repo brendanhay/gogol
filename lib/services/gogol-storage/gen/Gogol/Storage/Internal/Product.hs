@@ -280,9 +280,9 @@ data Bucket = Bucket
     -- | The bucket\'s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI/REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, ARCHIVE, and DURABLE/REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.
     storageClass :: (Core.Maybe Core.Text),
     -- | The creation time of the bucket in RFC 3339 format.
-    timeCreated :: (Core.Maybe Core.DateTime'),
+    timeCreated :: (Core.Maybe Core.DateTime),
     -- | The modification time of the bucket in RFC 3339 format.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | The bucket\'s versioning configuration.
     versioning :: (Core.Maybe Bucket_Versioning),
     -- | The bucket\'s website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.
@@ -415,7 +415,7 @@ data Bucket_Autoclass = Bucket_Autoclass
   { -- | Whether or not Autoclass is enabled on this bucket
     enabled :: (Core.Maybe Core.Bool),
     -- | A date and time in RFC 3339 format representing the instant at which \"enabled\" was last toggled.
-    toggleTime :: (Core.Maybe Core.DateTime')
+    toggleTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -638,7 +638,7 @@ data Bucket_IamConfiguration_BucketPolicyOnly = Bucket_IamConfiguration_BucketPo
   { -- | If set, access is controlled only by bucket-level or above IAM policies.
     enabled :: (Core.Maybe Core.Bool),
     -- | The deadline for changing iamConfiguration.bucketPolicyOnly.enabled from true to false in RFC 3339 format. iamConfiguration.bucketPolicyOnly.enabled may be changed from true to false until the locked time, after which the field is immutable.
-    lockedTime :: (Core.Maybe Core.DateTime')
+    lockedTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -683,7 +683,7 @@ data Bucket_IamConfiguration_UniformBucketLevelAccess = Bucket_IamConfiguration_
   { -- | If set, access is controlled only by bucket-level or above IAM policies.
     enabled :: (Core.Maybe Core.Bool),
     -- | The deadline for changing iamConfiguration.uniformBucketLevelAccess.enabled from true to false in RFC 3339 format. iamConfiguration.uniformBucketLevelAccess.enabled may be changed from true to false until the locked time, after which the field is immutable.
-    lockedTime :: (Core.Maybe Core.DateTime')
+    lockedTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -861,9 +861,9 @@ data Bucket_Lifecycle_RuleItem_Condition = Bucket_Lifecycle_RuleItem_Condition
   { -- | Age of an object (in days). This condition is satisfied when an object reaches the specified age.
     age :: (Core.Maybe Core.Int32),
     -- | A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when an object is created before midnight of the specified date in UTC.
-    createdBefore :: (Core.Maybe Core.Date'),
+    createdBefore :: (Core.Maybe Core.Date),
     -- | A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when the custom time on an object is before this date in UTC.
-    customTimeBefore :: (Core.Maybe Core.Date'),
+    customTimeBefore :: (Core.Maybe Core.Date),
     -- | Number of days elapsed since the user-specified timestamp set on an object. The condition is satisfied if the days elapsed is at least this number. If no custom timestamp is specified on an object, the condition does not apply.
     daysSinceCustomTime :: (Core.Maybe Core.Int32),
     -- | Number of days elapsed since the noncurrent timestamp of an object. The condition is satisfied if the days elapsed is at least this number. This condition is relevant only for versioned objects. The value of the field must be a nonnegative integer. If it\'s zero, the object version will become eligible for Lifecycle action as soon as it becomes noncurrent.
@@ -875,7 +875,7 @@ data Bucket_Lifecycle_RuleItem_Condition = Bucket_Lifecycle_RuleItem_Condition
     -- | Objects having any of the storage classes specified by this condition will be matched. Values include MULTI/REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, STANDARD, and DURABLE/REDUCED_AVAILABILITY.
     matchesStorageClass :: (Core.Maybe [Core.Text]),
     -- | A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when the noncurrent time on an object is before this date in UTC. This condition is relevant only for versioned objects.
-    noncurrentTimeBefore :: (Core.Maybe Core.Date'),
+    noncurrentTimeBefore :: (Core.Maybe Core.Date),
     -- | Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object.
     numNewerVersions :: (Core.Maybe Core.Int32)
   }
@@ -1024,7 +1024,7 @@ instance Core.ToJSON Bucket_Owner where
 -- /See:/ 'newBucket_RetentionPolicy' smart constructor.
 data Bucket_RetentionPolicy = Bucket_RetentionPolicy
   { -- | Server-determined value that indicates the time from which policy was enforced and effective. This value is in RFC 3339 format.
-    effectiveTime :: (Core.Maybe Core.DateTime'),
+    effectiveTime :: (Core.Maybe Core.DateTime),
     -- | Once locked, an object retention policy cannot be modified.
     isLocked :: (Core.Maybe Core.Bool),
     -- | The duration in seconds that objects need to be retained. Retention duration must be greater than zero and less than 100 years. Note that enforcement of retention periods less than a day is not guaranteed. Such periods should only be used for testing purposes.
@@ -1697,9 +1697,9 @@ data HmacKeyMetadata = HmacKeyMetadata
     -- | The state of the key. Can be one of ACTIVE, INACTIVE, or DELETED.
     state :: (Core.Maybe Core.Text),
     -- | The creation time of the HMAC key in RFC 3339 format.
-    timeCreated :: (Core.Maybe Core.DateTime'),
+    timeCreated :: (Core.Maybe Core.DateTime),
     -- | The last modification time of the HMAC key metadata in RFC 3339 format.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1969,7 +1969,7 @@ data Object = Object
     -- | CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64 in big-endian byte order. For more information about using the CRC32c checksum, see Hashes and ETags: Best Practices.
     crc32c :: (Core.Maybe Core.Text),
     -- | A timestamp in RFC 3339 format specified by the user for an object.
-    customTime :: (Core.Maybe Core.DateTime'),
+    customTime :: (Core.Maybe Core.DateTime),
     -- | Metadata of customer-supplied encryption key, if the object is encrypted by such a key.
     customerEncryption :: (Core.Maybe Object_CustomerEncryption),
     -- | HTTP 1.1 Entity tag for the object.
@@ -1997,7 +1997,7 @@ data Object = Object
     -- | The owner of the object. This will always be the uploader of the object.
     owner :: (Core.Maybe Object_Owner),
     -- | A server-determined value that specifies the earliest time that the object\'s retention period expires. This value is in RFC 3339 format. Note 1: This field is not provided for objects with an active event-based hold, since retention expiration is unknown until the hold is removed. Note 2: This value can be provided even when temporary hold is set (so that the user can reason about policy without having to first unset the temporary hold).
-    retentionExpirationTime :: (Core.Maybe Core.DateTime'),
+    retentionExpirationTime :: (Core.Maybe Core.DateTime),
     -- | The link to this object.
     selfLink :: (Core.Maybe Core.Text),
     -- | Content-Length of the data in bytes.
@@ -2007,13 +2007,13 @@ data Object = Object
     -- | Whether an object is under temporary hold. While this flag is set to true, the object is protected against deletion and overwrites. A common use case of this flag is regulatory investigations where objects need to be retained while the investigation is ongoing. Note that unlike event-based hold, temporary hold does not impact retention expiration time of an object.
     temporaryHold :: (Core.Maybe Core.Bool),
     -- | The creation time of the object in RFC 3339 format.
-    timeCreated :: (Core.Maybe Core.DateTime'),
+    timeCreated :: (Core.Maybe Core.DateTime),
     -- | The deletion time of the object in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
-    timeDeleted :: (Core.Maybe Core.DateTime'),
+    timeDeleted :: (Core.Maybe Core.DateTime),
     -- | The time at which the object\'s storage class was last changed. When the object is initially created, it will be set to timeCreated.
-    timeStorageClassUpdated :: (Core.Maybe Core.DateTime'),
+    timeStorageClassUpdated :: (Core.Maybe Core.DateTime),
     -- | The modification time of the object metadata in RFC 3339 format.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

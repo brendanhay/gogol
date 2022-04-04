@@ -55,7 +55,7 @@ type PeoplePeopleListDirectoryPeopleResource =
               PeopleListDirectoryPeopleMergeSources
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "requestSyncToken" Core.Bool
     Core.:> Core.QueryParams
               "sources"
@@ -85,7 +85,7 @@ data PeoplePeopleListDirectoryPeople = PeoplePeopleListDirectoryPeople
     -- | Optional. A page token, received from a previous response @next_page_token@. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @people.listDirectoryPeople@ must match the first call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. Whether the response should return @next_sync_token@. It can be used to get incremental changes since the last request by setting it on the request @sync_token@. More details about sync behavior at @people.listDirectoryPeople@.
     requestSyncToken :: (Core.Maybe Core.Bool),
     -- | Required. Directory sources to return.

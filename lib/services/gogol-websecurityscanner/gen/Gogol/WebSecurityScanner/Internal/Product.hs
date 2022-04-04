@@ -994,7 +994,7 @@ instance Core.ToJSON ScanConfigError where
 -- /See:/ 'newScanRun' smart constructor.
 data ScanRun = ScanRun
   { -- | Output only. The time at which the ScanRun reached termination state - that the ScanRun is either finished or stopped by user.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. If result_state is an ERROR, this field provides the primary reason for scan\'s termination and more details, if such are available.
     errorTrace :: (Core.Maybe ScanRunErrorTrace),
     -- | Output only. The execution state of the ScanRun.
@@ -1008,7 +1008,7 @@ data ScanRun = ScanRun
     -- | Output only. The result state of the ScanRun. This field is only available after the execution state reaches \"FINISHED\".
     resultState :: (Core.Maybe ScanRun_ResultState),
     -- | Output only. The time at which the ScanRun started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The number of URLs crawled during this ScanRun. If the scan is in progress, the value represents the number of URLs crawled up to now.
     urlsCrawledCount :: (Core.Maybe Core.Int64),
     -- | Output only. The number of URLs tested during this ScanRun. If the scan is in progress, the value represents the number of URLs tested up to now. The number of URLs tested is usually larger than the number URLS crawled because typically a crawled URL is tested with multiple test payloads.
@@ -1156,7 +1156,7 @@ data Schedule = Schedule
   { -- | Required. The duration of time between executions in days.
     intervalDurationDays :: (Core.Maybe Core.Int32),
     -- | A timestamp indicates when the next run will be scheduled. The value is refreshed by the server after each run. If unspecified, it will default to current server time, which means the scan will be scheduled to start immediately.
-    scheduleTime :: (Core.Maybe Core.DateTime')
+    scheduleTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

@@ -451,13 +451,13 @@ data CopyLogEntriesMetadata = CopyLogEntriesMetadata
   { -- | Identifies whether the user has requested cancellation of the operation.
     cancellationRequested :: (Core.Maybe Core.Bool),
     -- | The end time of an operation.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Estimated progress of the operation (0 - 100%).
     progress :: (Core.Maybe Core.Int32),
     -- | CopyLogEntries RPC request.
     request' :: (Core.Maybe CopyLogEntriesRequest),
     -- | The create time of an operation.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | State of an operation.
     state :: (Core.Maybe CopyLogEntriesMetadata_State),
     -- | The IAM identity of a service account that must be granted access to the destination.If the service account is not granted permission to the destination within an hour, the operation will be cancelled.For example: \"serviceAccount:foo\@bar.com\"
@@ -690,7 +690,7 @@ data HttpRequest = HttpRequest
     -- | Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
     cacheValidatedWithOriginServer :: (Core.Maybe Core.Bool),
     -- | The request processing latency on the server, from the time the request was received until the response was sent.
-    latency :: (Core.Maybe Core.GDuration),
+    latency :: (Core.Maybe Core.Duration),
     -- | Protocol used for the request. Examples: \"HTTP\/1.1\", \"HTTP\/2\", \"websocket\"
     protocol :: (Core.Maybe Core.Text),
     -- | The referer URL of the request, as defined in HTTP\/1.1 Header Field Definitions (http:\/\/www.w3.org\/Protocols\/rfc2616\/rfc2616-sec14.html).
@@ -1426,7 +1426,7 @@ data LogBucket = LogBucket
   { -- | The CMEK settings of the log bucket. If present, new log entries written to this log bucket are encrypted using the CMEK key provided in this configuration. If a log bucket has CMEK settings, the CMEK settings cannot be disabled later by updating the log bucket. Changing the KMS key is allowed.
     cmekSettings :: (Core.Maybe CmekSettings),
     -- | Output only. The creation timestamp of the bucket. This is not set for any of the default buckets.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Describes this bucket.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The bucket lifecycle state.
@@ -1440,7 +1440,7 @@ data LogBucket = LogBucket
     -- | Logs will be retained by default for this amount of time, after which they will automatically be deleted. The minimum retention period is 1 day. If this value is set to zero at bucket creation time, the default time of 30 days will be used.
     retentionDays :: (Core.Maybe Core.Int32),
     -- | Output only. The last update timestamp of the bucket.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1516,7 +1516,7 @@ data LogEntry = LogEntry
     -- | The log entry payload, represented as a protocol buffer. Some Google Cloud Platform services use this field for their log entry payloads.The following protocol buffer types are supported; user-defined types are not supported:\"type.googleapis.com\/google.cloud.audit.AuditLog\" \"type.googleapis.com\/google.appengine.logging.v1.RequestLog\"
     protoPayload :: (Core.Maybe LogEntry_ProtoPayload),
     -- | Output only. The time the log entry was received by Logging.
-    receiveTimestamp :: (Core.Maybe Core.DateTime'),
+    receiveTimestamp :: (Core.Maybe Core.DateTime),
     -- | Required. The monitored resource that produced this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.
     resource :: (Core.Maybe MonitoredResource),
     -- | Optional. The severity of the log entry. The default value is LogSeverity.DEFAULT.
@@ -1530,7 +1530,7 @@ data LogEntry = LogEntry
     -- | The log entry payload, represented as a Unicode string (UTF-8).
     textPayload :: (Core.Maybe Core.Text),
     -- | Optional. The time the event described by the log entry occurred. This time is used to compute the log entry\'s age and to enforce the logs retention period. If this field is omitted in a new log entry, then Logging assigns it the current time. Timestamps have nanosecond accuracy, but trailing zeros in the fractional seconds might be omitted when the timestamp is displayed.Incoming log entries must have timestamps that don\'t exceed the logs retention period (https:\/\/cloud.google.com\/logging\/quotas#logs/retention/periods) in the past, and that don\'t exceed 24 hours in the future. Log entries outside those time boundaries aren\'t ingested by Logging.
-    timestamp :: (Core.Maybe Core.DateTime'),
+    timestamp :: (Core.Maybe Core.DateTime),
     -- | Optional. Resource name of the trace associated with the log entry, if any. If it contains a relative resource name, the name is assumed to be relative to \/\/tracing.googleapis.com. Example: projects\/my-projectid\/traces\/06796866738c859f2f19b7cfb3214824
     trace :: (Core.Maybe Core.Text),
     -- | Optional. The sampling decision of the trace associated with the log entry.True means that the trace resource name in the trace field was sampled for storage in a trace backend. False means that the trace was not sampled for storage when this log entry was written, or the sampling decision was unknown at the time. A non-sampled trace value is still useful as a request correlation identifier. The default is False.
@@ -1800,7 +1800,7 @@ instance Core.ToJSON LogEntrySourceLocation where
 -- /See:/ 'newLogExclusion' smart constructor.
 data LogExclusion = LogExclusion
   { -- | Output only. The creation timestamp of the exclusion.This field may not be present for older exclusions.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. A description of this exclusion.
     description :: (Core.Maybe Core.Text),
     -- | Optional. If set to True, then this exclusion is disabled and it does not exclude any log entries. You can update an exclusion to change the value of this field.
@@ -1810,7 +1810,7 @@ data LogExclusion = LogExclusion
     -- | Required. A client-assigned identifier, such as \"load-balancer-exclusion\". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods. First character has to be alphanumeric.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of the exclusion.This field may not be present for older exclusions.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1865,7 +1865,7 @@ data LogLine = LogLine
     -- | Where in the source code this log message was written.
     sourceLocation :: (Core.Maybe SourceLocation),
     -- | Approximate time when this log entry was made.
-    time :: (Core.Maybe Core.DateTime')
+    time :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1910,7 +1910,7 @@ data LogMetric = LogMetric
   { -- | Optional. The bucket_options are required when the logs-based metric is using a DISTRIBUTION value type and it describes the bucket boundaries used to create a histogram of the extracted values.
     bucketOptions :: (Core.Maybe BucketOptions),
     -- | Output only. The creation timestamp of the metric.This field may not be present for older metrics.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. A description of this metric, which is used in documentation. The maximum length of the description is 8000 characters.
     description :: (Core.Maybe Core.Text),
     -- | Optional. If set to True, then this metric is disabled and it does not generate any points.
@@ -1924,7 +1924,7 @@ data LogMetric = LogMetric
     -- | Required. The client-assigned metric identifier. Examples: \"error/count\", \"nginx\/requests\".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters /-.,+!*\',()%\/. The forward-slash character (\/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.This field is the [METRIC/ID] part of a metric resource name in the format \"projects\/PROJECT/ID\/metrics\/METRIC_ID\". Example: If the resource name of a metric is \"projects\/my-project\/metrics\/nginx%2Frequests\", this field\'s value is \"nginx\/requests\".
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of the metric.This field may not be present for older metrics.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Optional. A value/extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP/EXTRACT(field, regex). The argument are: 1. field: The name of the log entry field from which the value is to be extracted. 2. regex: A regular expression using the Google RE2 syntax (https:\/\/github.com\/google\/re2\/wiki\/Syntax) with a single capture group to extract data from the specified log entry field. The value of the field is converted to a string before applying the regex. It is an error to specify a regex that does not include exactly one capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, \"./quantity=(\\d+)./\")
     valueExtractor :: (Core.Maybe Core.Text),
     -- | Deprecated. The API version that created or updated this metric. The v2 format is used by default and cannot be changed.
@@ -2025,7 +2025,7 @@ data LogSink = LogSink
   { -- | Optional. Options that affect sinks exporting data to BigQuery.
     bigqueryOptions :: (Core.Maybe BigQueryOptions),
     -- | Output only. The creation timestamp of the sink.This field may not be present for older sinks.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. A description of this sink.The maximum length of the description is 8000 characters.
     description :: (Core.Maybe Core.Text),
     -- | Required. The export destination: \"storage.googleapis.com\/[GCS/BUCKET]\" \"bigquery.googleapis.com\/projects\/[PROJECT/ID]\/datasets\/[DATASET]\" \"pubsub.googleapis.com\/projects\/[PROJECT/ID]\/topics\/[TOPIC/ID]\" The sink\'s writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs with Sinks (https:\/\/cloud.google.com\/logging\/docs\/api\/tasks\/exporting-logs).
@@ -2043,7 +2043,7 @@ data LogSink = LogSink
     -- | Deprecated. This field is unused.
     outputVersionFormat :: (Core.Maybe LogSink_OutputVersionFormat),
     -- | Output only. The last update timestamp of the sink.This field may not be present for older sinks.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. An IAM identity—a service account or group—under which Cloud Logging writes the exported log entries to the sink\'s destination. This field is set by sinks.create and sinks.update based on the value of unique/writer/identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource (https:\/\/cloud.google.com\/iam\/docs\/granting-roles-to-service-accounts#granting/access/to/a/service/account/for/a/resource). Consult the destination service\'s documentation to determine the appropriate IAM roles to assign to the identity.Sinks that have a destination that is a log bucket in the same project as the sink do not have a writer_identity and no additional permissions are required.
     writerIdentity :: (Core.Maybe Core.Text)
   }
@@ -2158,7 +2158,7 @@ instance Core.ToJSON LogSplit where
 -- /See:/ 'newLogView' smart constructor.
 data LogView = LogView
   { -- | Output only. The creation timestamp of the view.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Describes this view.
     description :: (Core.Maybe Core.Text),
     -- | Filter that restricts which log entries in a bucket are visible in this view.Filters are restricted to be a logical AND of ==\/!= of any of the following: originating project\/folder\/organization\/billing account. resource type log idFor example:SOURCE(\"projects\/myproject\") AND resource.type = \"gce/instance\" AND LOG/ID(\"stdout\")
@@ -2166,7 +2166,7 @@ data LogView = LogView
     -- | The resource name of the view.For example:projects\/my-project\/locations\/global\/buckets\/my-bucket\/views\/my-view
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last update timestamp of the view.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2302,11 +2302,11 @@ instance Core.ToJSON MetricDescriptor where
 -- /See:/ 'newMetricDescriptorMetadata' smart constructor.
 data MetricDescriptorMetadata = MetricDescriptorMetadata
   { -- | The delay of data points caused by ingestion. Data points older than this age are guaranteed to be ingested and available to be read, excluding data loss due to errors.
-    ingestDelay :: (Core.Maybe Core.GDuration),
+    ingestDelay :: (Core.Maybe Core.Duration),
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.GDuration)
+    samplePeriod :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2697,7 +2697,7 @@ data RequestLog = RequestLog
     -- | An indication of the relative cost of serving this request.
     cost :: (Core.Maybe Core.Double),
     -- | Time when the request finished.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Whether this request is finished or active.
     finished :: (Core.Maybe Core.Bool),
     -- | Whether this is the first RequestLog entry for this request. If an active request has several RequestLog entries written to Stackdriver Logging, then this field will be set for one of them.
@@ -2713,7 +2713,7 @@ data RequestLog = RequestLog
     -- | Origin IP address.
     ip :: (Core.Maybe Core.Text),
     -- | Latency of the request.
-    latency :: (Core.Maybe Core.GDuration),
+    latency :: (Core.Maybe Core.Duration),
     -- | A list of log lines emitted by the application while serving this request.
     line :: (Core.Maybe [LogLine]),
     -- | Number of CPU megacycles used to process request.
@@ -2725,7 +2725,7 @@ data RequestLog = RequestLog
     -- | The logged-in user who made the request.Most likely, this is the part of the user\'s email before the \@ sign. The field value is the same for different requests from the same user, but different users can have similar names. This information is also available to the application via the App Engine Users API.This field will be populated starting with App Engine 1.9.21.
     nickname :: (Core.Maybe Core.Text),
     -- | Time this request spent in the pending request queue.
-    pendingTime :: (Core.Maybe Core.GDuration),
+    pendingTime :: (Core.Maybe Core.Duration),
     -- | Referrer URL of request.
     referrer :: (Core.Maybe Core.Text),
     -- | Globally unique identifier for a request, which is based on the request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.
@@ -2737,7 +2737,7 @@ data RequestLog = RequestLog
     -- | Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
     sourceReference :: (Core.Maybe [SourceReference]),
     -- | Time when the request started.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | HTTP response status code. Example: 200, 404.
     status :: (Core.Maybe Core.Int32),
     -- | Task name of the request, in the case of an offline request.
@@ -3131,7 +3131,7 @@ instance Core.ToJSON SuppressionInfo where
 -- /See:/ 'newTailLogEntriesRequest' smart constructor.
 data TailLogEntriesRequest = TailLogEntriesRequest
   { -- | Optional. The amount of time to buffer log entries at the server before being returned to prevent out of order results due to late arriving log entries. Valid values are between 0-60000 milliseconds. Defaults to 2000 milliseconds.
-    bufferWindow :: (Core.Maybe Core.GDuration),
+    bufferWindow :: (Core.Maybe Core.Duration),
     -- | Optional. A filter that chooses which log entries to return. See Advanced Logs Filters (https:\/\/cloud.google.com\/logging\/docs\/view\/advanced/filters). Only log entries that match the filter are returned. An empty filter matches all log entries in the resources listed in resource/names. Referencing a parent resource that is not in resource_names will cause the filter to return no results. The maximum length of the filter is 20000 characters.
     filter :: (Core.Maybe Core.Text),
     -- | Required. Name of a parent resource from which to retrieve log entries: projects\/[PROJECT/ID] organizations\/[ORGANIZATION/ID] billingAccounts\/[BILLING/ACCOUNT/ID] folders\/[FOLDER/ID]May alternatively be one or more views: projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID] folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/views\/[VIEW/ID]

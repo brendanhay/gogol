@@ -266,7 +266,7 @@ data DataTransfer = DataTransfer
     -- | Overall transfer status (Read-only).
     overallTransferStatusCode :: (Core.Maybe Core.Text),
     -- | The time at which the data transfer was requested (Read-only).
-    requestTime :: (Core.Maybe Core.DateTime')
+    requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

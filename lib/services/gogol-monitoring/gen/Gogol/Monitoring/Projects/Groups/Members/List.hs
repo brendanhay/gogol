@@ -52,8 +52,8 @@ type MonitoringProjectsGroupsMembersListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam "interval.endTime" Core.DateTime'
-    Core.:> Core.QueryParam "interval.startTime" Core.DateTime'
+    Core.:> Core.QueryParam "interval.endTime" Core.DateTime
+    Core.:> Core.QueryParam "interval.startTime" Core.DateTime
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -74,9 +74,9 @@ data MonitoringProjectsGroupsMembersList = MonitoringProjectsGroupsMembersList
     -- | An optional list filter (https:\/\/cloud.google.com\/monitoring\/api\/learn_more#filtering) describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter: @resource.type = \"gce_instance\"@
     filter :: (Core.Maybe Core.Text),
     -- | Required. The end of the time interval.
-    intervalEndTime :: (Core.Maybe Core.DateTime'),
+    intervalEndTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
-    intervalStartTime :: (Core.Maybe Core.DateTime'),
+    intervalStartTime :: (Core.Maybe Core.DateTime),
     -- | Required. The group whose members are listed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/groups\/[GROUP/ID]
     name :: Core.Text,
     -- | A positive number that is the maximum number of results to return.

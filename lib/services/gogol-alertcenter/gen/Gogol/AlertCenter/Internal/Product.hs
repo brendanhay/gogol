@@ -303,7 +303,7 @@ instance Core.ToJSON AccountSuspensionDetails where
 -- /See:/ 'newAccountSuspensionWarning' smart constructor.
 data AccountSuspensionWarning = AccountSuspensionWarning
   { -- | The amount of time remaining to appeal an imminent suspension. After this window has elapsed, the account will be suspended. Only populated if the account suspension is in WARNING state.
-    appealWindow :: (Core.Maybe Core.GDuration),
+    appealWindow :: (Core.Maybe Core.Duration),
     -- | Account suspension warning state.
     state :: (Core.Maybe AccountSuspensionWarning_State),
     -- | Details about why an account is being suspended.
@@ -408,7 +408,7 @@ data ActivityRule = ActivityRule
   { -- | List of action names associated with the rule threshold.
     actionNames :: (Core.Maybe [Core.Text]),
     -- | Rule create timestamp.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Description of the rule.
     description :: (Core.Maybe Core.Text),
     -- | Alert display name.
@@ -426,9 +426,9 @@ data ActivityRule = ActivityRule
     -- | The trigger sources for this rule. * GMAIL/EVENTS * DEVICE/EVENTS * USER_EVENTS
     triggerSource :: (Core.Maybe Core.Text),
     -- | The timestamp of the last update to the rule.
-    updateTime :: (Core.Maybe Core.DateTime'),
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | Rule window size. Possible values are 1 hour or 24 hours.
-    windowSize :: (Core.Maybe Core.GDuration)
+    windowSize :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -499,7 +499,7 @@ data Alert = Alert
   { -- | Output only. The unique identifier for the alert.
     alertId :: (Core.Maybe Core.Text),
     -- | Output only. The time this alert was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The unique identifier of the Google account of the customer.
     customerId :: (Core.Maybe Core.Text),
     -- | Optional. The data associated with this alert, for example google.apps.alertcenter.type.DeviceCompromised.
@@ -507,7 +507,7 @@ data Alert = Alert
     -- | Output only. @True@ if this alert is marked for deletion.
     deleted :: (Core.Maybe Core.Bool),
     -- | Optional. The time the event that caused this alert ceased being active. If provided, the end time must not be earlier than the start time. If not provided, it indicates an ongoing alert.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Optional. @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of an alert from overwriting each other. It is strongly suggested that systems make use of the @etag@ in the read-modify-write cycle to perform alert updates in order to avoid race conditions: An @etag@ is returned in the response which contains alerts, and systems are expected to put that etag in the request to update alert to ensure that their change will be applied to the same version of the alert. If no @etag@ is provided in the call to update alert, then the existing alert is overwritten blindly.
     etag :: (Core.Maybe Core.Text),
     -- | Output only. The metadata associated with this alert.
@@ -517,11 +517,11 @@ data Alert = Alert
     -- | Required. A unique identifier for the system that reported the alert. This is output only after alert is created. Supported sources are any of the following: * Google Operations * Mobile device management * Gmail phishing * Data Loss Prevention * Domain wide takeout * State sponsored attack * Google identity * Apps outage
     source :: (Core.Maybe Core.Text),
     -- | Required. The time the event that caused this alert was started or detected.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Required. The type of the alert. This is output only after alert is created. For a list of available alert types see <https://developers.google.com/admin-sdk/alertcenter/reference/alert-types Google Workspace Alert types>.
     type' :: (Core.Maybe Core.Text),
     -- | Output only. The time this alert was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -619,7 +619,7 @@ data AlertFeedback = AlertFeedback
   { -- | Output only. The alert identifier.
     alertId :: (Core.Maybe Core.Text),
     -- | Output only. The time this feedback was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The unique identifier of the Google account of the customer.
     customerId :: (Core.Maybe Core.Text),
     -- | Output only. The email of the user that provided the feedback.
@@ -688,7 +688,7 @@ data AlertMetadata = AlertMetadata
     -- | The current status of the alert. The supported values are the following: * NOT/STARTED * IN/PROGRESS * CLOSED
     status :: (Core.Maybe Core.Text),
     -- | Output only. The time this metadata was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -813,11 +813,11 @@ data AppsOutage = AppsOutage
     -- | Indicates new alert details under which the outage is communicated. Only populated when Status is MERGED.
     mergeInfo :: (Core.Maybe MergeInfo),
     -- | Timestamp by which the next update is expected to arrive.
-    nextUpdateTime :: (Core.Maybe Core.DateTime'),
+    nextUpdateTime :: (Core.Maybe Core.DateTime),
     -- | List of products impacted by the outage.
     products :: (Core.Maybe [Core.Text]),
     -- | Timestamp when the outage is expected to be resolved, or has confirmed resolution. Provided only when known.
-    resolutionTime :: (Core.Maybe Core.DateTime'),
+    resolutionTime :: (Core.Maybe Core.DateTime),
     -- | Current outage status.
     status :: (Core.Maybe AppsOutage_Status)
   }
@@ -1503,7 +1503,7 @@ data GmailMessageInfo = GmailMessageInfo
   { -- | The @SHA256@ hash of email\'s attachment and all MIME parts.
     attachmentsSha256Hash :: (Core.Maybe [Core.Text]),
     -- | The date of the event related to this email.
-    date :: (Core.Maybe Core.DateTime'),
+    date :: (Core.Maybe Core.DateTime),
     -- | The hash of the message body text.
     md5HashMessageBody :: (Core.Maybe Core.Text),
     -- | The MD5 Hash of email\'s subject (only available for reported emails).
@@ -1706,7 +1706,7 @@ data LoginDetails = LoginDetails
   { -- | Optional. The human-readable IP address (for example, @11.22.33.44@) that is associated with the warning event.
     ipAddress :: (Core.Maybe Core.Text),
     -- | Optional. The successful login time that is associated with the warning event. This isn\'t present for blocked login attempts.
-    loginTime :: (Core.Maybe Core.DateTime')
+    loginTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

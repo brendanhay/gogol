@@ -1599,7 +1599,7 @@ instance Core.ToJSON AddSlicerResponse where
 -- /See:/ 'newAppendCellsRequest' smart constructor.
 data AppendCellsRequest = AppendCellsRequest
   { -- | The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; \'row.values.\' should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The data to append.
     rows :: (Core.Maybe [RowData]),
     -- | The sheet ID to append the data to.
@@ -4644,7 +4644,7 @@ data DataExecutionStatus = DataExecutionStatus
     -- | The error message, which may be empty.
     errorMessage :: (Core.Maybe Core.Text),
     -- | Gets the time the data last successfully refreshed.
-    lastRefreshTime :: (Core.Maybe Core.DateTime'),
+    lastRefreshTime :: (Core.Maybe Core.DateTime),
     -- | The state of the data execution.
     state :: (Core.Maybe DataExecutionStatus_State)
   }
@@ -7782,9 +7782,9 @@ instance Core.ToJSON InterpolationPoint where
 -- /See:/ 'newInterval' smart constructor.
 data Interval = Interval
   { -- | Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9279,7 +9279,7 @@ data RepeatCellRequest = RepeatCellRequest
   { -- | The data to write.
     cell :: (Core.Maybe CellData),
     -- | The fields that should be updated. At least one field must be specified. The root @cell@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The range to repeat the cell in.
     range :: (Core.Maybe GridRange)
   }
@@ -11281,7 +11281,7 @@ data UpdateBandingRequest = UpdateBandingRequest
   { -- | The banded range to update with the new properties.
     bandedRange :: (Core.Maybe BandedRange),
     -- | The fields that should be updated. At least one field must be specified. The root @bandedRange@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask)
+    fields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11379,7 +11379,7 @@ instance Core.ToJSON UpdateBordersRequest where
 -- /See:/ 'newUpdateCellsRequest' smart constructor.
 data UpdateCellsRequest = UpdateCellsRequest
   { -- | The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; \'row.values.\' should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The range to write data to. If the data in rows does not cover the entire requested range, the fields matching those set in fields will be cleared.
     range :: (Core.Maybe GridRange),
     -- | The data to write.
@@ -11575,7 +11575,7 @@ data UpdateDataSourceRequest = UpdateDataSourceRequest
   { -- | The data source to update.
     dataSource :: (Core.Maybe DataSource),
     -- | The fields that should be updated. At least one field must be specified. The root @dataSource@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask)
+    fields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11653,7 +11653,7 @@ data UpdateDeveloperMetadataRequest = UpdateDeveloperMetadataRequest
     -- | The value that all metadata matched by the data filters will be updated to.
     developerMetadata :: (Core.Maybe DeveloperMetadata),
     -- | The fields that should be updated. At least one field must be specified. The root @developerMetadata@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask)
+    fields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11734,7 +11734,7 @@ data UpdateDimensionGroupRequest = UpdateDimensionGroupRequest
   { -- | The group whose state should be updated. The range and depth of the group should specify a valid group on the sheet, and all other fields updated.
     dimensionGroup :: (Core.Maybe DimensionGroup),
     -- | The fields that should be updated. At least one field must be specified. The root @dimensionGroup@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask)
+    fields :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11773,7 +11773,7 @@ data UpdateDimensionPropertiesRequest = UpdateDimensionPropertiesRequest
   { -- | The columns on a data source sheet to update.
     dataSourceSheetRange :: (Core.Maybe DataSourceSheetDimensionRange),
     -- | The fields that should be updated. At least one field must be specified. The root @properties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | Properties to update.
     properties :: (Core.Maybe DimensionProperties),
     -- | The rows or columns to update.
@@ -11826,7 +11826,7 @@ data UpdateEmbeddedObjectBorderRequest = UpdateEmbeddedObjectBorderRequest
   { -- | The border that applies to the embedded object.
     border :: (Core.Maybe EmbeddedObjectBorder),
     -- | The fields that should be updated. At least one field must be specified. The root @border@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The ID of the embedded object to update.
     objectId :: (Core.Maybe Core.Int32)
   }
@@ -11874,7 +11874,7 @@ instance
 -- /See:/ 'newUpdateEmbeddedObjectPositionRequest' smart constructor.
 data UpdateEmbeddedObjectPositionRequest = UpdateEmbeddedObjectPositionRequest
   { -- | The fields of OverlayPosition that should be updated when setting a new position. Used only if newPosition.overlayPosition is set, in which case at least one field must be specified. The root @newPosition.overlayPosition@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | An explicit position to move the embedded object to. If newPosition.sheetId is set, a new sheet with that ID will be created. If newPosition.newSheet is set to true, a new sheet will be created with an ID that will be chosen for you.
     newPosition' :: (Core.Maybe EmbeddedObjectPosition),
     -- | The ID of the object to moved.
@@ -11961,7 +11961,7 @@ instance
 -- /See:/ 'newUpdateFilterViewRequest' smart constructor.
 data UpdateFilterViewRequest = UpdateFilterViewRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @filter@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The new properties of the filter view.
     filter :: (Core.Maybe FilterView)
   }
@@ -11996,7 +11996,7 @@ instance Core.ToJSON UpdateFilterViewRequest where
 -- /See:/ 'newUpdateNamedRangeRequest' smart constructor.
 data UpdateNamedRangeRequest = UpdateNamedRangeRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @namedRange@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The named range to update with the new properties.
     namedRange :: (Core.Maybe NamedRange)
   }
@@ -12032,7 +12032,7 @@ instance Core.ToJSON UpdateNamedRangeRequest where
 -- /See:/ 'newUpdateProtectedRangeRequest' smart constructor.
 data UpdateProtectedRangeRequest = UpdateProtectedRangeRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @protectedRange@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The protected range to update with the new properties.
     protectedRange :: (Core.Maybe ProtectedRange)
   }
@@ -12071,7 +12071,7 @@ instance Core.ToJSON UpdateProtectedRangeRequest where
 -- /See:/ 'newUpdateSheetPropertiesRequest' smart constructor.
 data UpdateSheetPropertiesRequest = UpdateSheetPropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @properties@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The properties to update.
     properties :: (Core.Maybe SheetProperties)
   }
@@ -12110,7 +12110,7 @@ instance Core.ToJSON UpdateSheetPropertiesRequest where
 -- /See:/ 'newUpdateSlicerSpecRequest' smart constructor.
 data UpdateSlicerSpecRequest = UpdateSlicerSpecRequest
   { -- | The fields that should be updated. At least one field must be specified. The root @SlicerSpec@ is implied and should not be specified. A single \"*\"\` can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The id of the slicer to update.
     slicerId :: (Core.Maybe Core.Int32),
     -- | The specification to apply to the slicer.
@@ -12154,7 +12154,7 @@ instance Core.ToJSON UpdateSlicerSpecRequest where
 -- /See:/ 'newUpdateSpreadsheetPropertiesRequest' smart constructor.
 data UpdateSpreadsheetPropertiesRequest = UpdateSpreadsheetPropertiesRequest
   { -- | The fields that should be updated. At least one field must be specified. The root \'properties\' is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field.
-    fields :: (Core.Maybe Core.GFieldMask),
+    fields :: (Core.Maybe Core.FieldMask),
     -- | The properties to update.
     properties :: (Core.Maybe SpreadsheetProperties)
   }

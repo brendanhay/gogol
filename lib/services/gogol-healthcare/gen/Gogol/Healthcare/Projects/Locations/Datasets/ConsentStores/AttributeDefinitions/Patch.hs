@@ -50,7 +50,7 @@ type HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatchRe
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,7 +72,7 @@ data HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsPatch =
     -- | Multipart request metadata.
     payload :: AttributeDefinition,
     -- | Required. The update mask that applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask. Only the @description@, @allowed_values@, @consent_default_values@ and @data_mapping_default_value@ fields can be updated. The updated @allowed_values@ must contain all values from the previous @allowed_values@.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

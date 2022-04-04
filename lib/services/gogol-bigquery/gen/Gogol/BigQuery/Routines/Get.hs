@@ -53,7 +53,7 @@ type BigQueryRoutinesGetResource =
     Core.:> Core.Capture "datasetId" Core.Text
     Core.:> "routines"
     Core.:> Core.Capture "routineId" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Routine
 
@@ -66,7 +66,7 @@ data BigQueryRoutinesGet = BigQueryRoutinesGet
     -- | Required. Project ID of the requested routine
     projectId :: Core.Text,
     -- | If set, only the Routine fields in the field mask are returned in the response. If unset, all Routine fields are returned.
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Required. Routine ID of the requested routine
     routineId :: Core.Text
   }

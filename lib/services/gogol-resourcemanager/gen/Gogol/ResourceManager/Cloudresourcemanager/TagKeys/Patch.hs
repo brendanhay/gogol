@@ -50,7 +50,7 @@ type CloudresourcemanagerTagKeysPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "validateOnly" Core.Bool
@@ -73,7 +73,7 @@ data CloudresourcemanagerTagKeysPatch = CloudresourcemanagerTagKeysPatch
     -- | Multipart request metadata.
     payload :: TagKey,
     -- | Fields to be updated. The mask may only contain @description@ or @etag@. If omitted entirely, both @description@ and @etag@ are assumed to be significant.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

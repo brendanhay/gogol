@@ -50,7 +50,7 @@ type SpannerProjectsInstancesGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "fieldMask" Core.GFieldMask
+    Core.:> Core.QueryParam "fieldMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,7 +67,7 @@ data SpannerProjectsInstancesGet = SpannerProjectsInstancesGet
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | If field_mask is present, specifies the subset of Instance fields that should be returned. If absent, all Instance fields are returned.
-    fieldMask :: (Core.Maybe Core.GFieldMask),
+    fieldMask :: (Core.Maybe Core.FieldMask),
     -- | Required. The name of the requested instance. Values are of the form @projects\/\/instances\/@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

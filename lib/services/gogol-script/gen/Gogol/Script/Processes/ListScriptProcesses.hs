@@ -58,13 +58,13 @@ type ScriptProcessesListScriptProcessesResource =
               Core.Text
     Core.:> Core.QueryParam
               "scriptProcessFilter.endTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParam
               "scriptProcessFilter.functionName"
               Core.Text
     Core.:> Core.QueryParam
               "scriptProcessFilter.startTime"
-              Core.DateTime'
+              Core.DateTime
     Core.:> Core.QueryParams
               "scriptProcessFilter.statuses"
               ProcessesListScriptProcessesScriptProcessFilterStatuses
@@ -100,11 +100,11 @@ data ScriptProcessesListScriptProcesses = ScriptProcessesListScriptProcesses
     -- | Optional field used to limit returned processes to those originating from projects with a specific deployment ID.
     scriptProcessFilterDeploymentId :: (Core.Maybe Core.Text),
     -- | Optional field used to limit returned processes to those that completed on or before the given timestamp.
-    scriptProcessFilterEndTime :: (Core.Maybe Core.DateTime'),
+    scriptProcessFilterEndTime :: (Core.Maybe Core.DateTime),
     -- | Optional field used to limit returned processes to those originating from a script function with the given function name.
     scriptProcessFilterFunctionName :: (Core.Maybe Core.Text),
     -- | Optional field used to limit returned processes to those that were started on or after the given timestamp.
-    scriptProcessFilterStartTime :: (Core.Maybe Core.DateTime'),
+    scriptProcessFilterStartTime :: (Core.Maybe Core.DateTime),
     -- | Optional field used to limit returned processes to those having one of the specified process statuses.
     scriptProcessFilterStatuses ::
       ( Core.Maybe

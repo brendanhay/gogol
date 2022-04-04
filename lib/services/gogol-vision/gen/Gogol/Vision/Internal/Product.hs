@@ -1406,11 +1406,11 @@ instance Core.ToJSON BatchAnnotateFilesResponse where
 -- /See:/ 'newBatchOperationMetadata' smart constructor.
 data BatchOperationMetadata = BatchOperationMetadata
   { -- | The time when the batch request is finished and google.longrunning.Operation.done is set to true.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the batch operation.
     state :: (Core.Maybe BatchOperationMetadata_State),
     -- | The time when the batch request was submitted to the server.
-    submitTime :: (Core.Maybe Core.DateTime')
+    submitTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3186,11 +3186,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p1beta1OperationMetadata' smart constructor.
 data GoogleCloudVisionV1p1beta1OperationMetadata = GoogleCloudVisionV1p1beta1OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p1beta1OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3545,7 +3545,7 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p1beta1ProductSearchResults' smart constructor.
 data GoogleCloudVisionV1p1beta1ProductSearchResults = GoogleCloudVisionV1p1beta1ProductSearchResults
   { -- | Timestamp of the index which provided these results. Products added to the product set and products removed from the product set after this time are not reflected in the current results.
-    indexTime :: (Core.Maybe Core.DateTime'),
+    indexTime :: (Core.Maybe Core.DateTime),
     -- | List of results grouped by products detected in the query image. Each entry corresponds to one bounding polygon in the query image, and contains the matching products specific to that region. There may be duplicate product matches in the union of all the per-product results.
     productGroupedResults ::
       ( Core.Maybe
@@ -6349,11 +6349,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p2beta1OperationMetadata' smart constructor.
 data GoogleCloudVisionV1p2beta1OperationMetadata = GoogleCloudVisionV1p2beta1OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p2beta1OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6765,7 +6765,7 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p2beta1ProductSearchResults' smart constructor.
 data GoogleCloudVisionV1p2beta1ProductSearchResults = GoogleCloudVisionV1p2beta1ProductSearchResults
   { -- | Timestamp of the index which provided these results. Products added to the product set and products removed from the product set after this time are not reflected in the current results.
-    indexTime :: (Core.Maybe Core.DateTime'),
+    indexTime :: (Core.Maybe Core.DateTime),
     -- | List of results grouped by products detected in the query image. Each entry corresponds to one bounding polygon in the query image, and contains the matching products specific to that region. There may be duplicate product matches in the union of all the per-product results.
     productGroupedResults ::
       ( Core.Maybe
@@ -8050,11 +8050,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p3beta1BatchOperationMetadata' smart constructor.
 data GoogleCloudVisionV1p3beta1BatchOperationMetadata = GoogleCloudVisionV1p3beta1BatchOperationMetadata
   { -- | The time when the batch request is finished and google.longrunning.Operation.done is set to true.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p3beta1BatchOperationMetadata_State),
     -- | The time when the batch request was submitted to the server.
-    submitTime :: (Core.Maybe Core.DateTime')
+    submitTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9030,11 +9030,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p3beta1OperationMetadata' smart constructor.
 data GoogleCloudVisionV1p3beta1OperationMetadata = GoogleCloudVisionV1p3beta1OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p3beta1OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9389,7 +9389,7 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p3beta1ProductSearchResults' smart constructor.
 data GoogleCloudVisionV1p3beta1ProductSearchResults = GoogleCloudVisionV1p3beta1ProductSearchResults
   { -- | Timestamp of the index which provided these results. Products added to the product set and products removed from the product set after this time are not reflected in the current results.
-    indexTime :: (Core.Maybe Core.DateTime'),
+    indexTime :: (Core.Maybe Core.DateTime),
     -- | List of results grouped by products detected in the query image. Each entry corresponds to one bounding polygon in the query image, and contains the matching products specific to that region. There may be duplicate product matches in the union of all the per-product results.
     productGroupedResults ::
       ( Core.Maybe
@@ -10720,11 +10720,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p4beta1BatchOperationMetadata' smart constructor.
 data GoogleCloudVisionV1p4beta1BatchOperationMetadata = GoogleCloudVisionV1p4beta1BatchOperationMetadata
   { -- | The time when the batch request is finished and google.longrunning.Operation.done is set to true.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p4beta1BatchOperationMetadata_State),
     -- | The time when the batch request was submitted to the server.
-    submitTime :: (Core.Maybe Core.DateTime')
+    submitTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11802,11 +11802,11 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p4beta1OperationMetadata' smart constructor.
 data GoogleCloudVisionV1p4beta1OperationMetadata = GoogleCloudVisionV1p4beta1OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe GoogleCloudVisionV1p4beta1OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -12161,7 +12161,7 @@ instance
 -- /See:/ 'newGoogleCloudVisionV1p4beta1ProductSearchResults' smart constructor.
 data GoogleCloudVisionV1p4beta1ProductSearchResults = GoogleCloudVisionV1p4beta1ProductSearchResults
   { -- | Timestamp of the index which provided these results. Products added to the product set and products removed from the product set after this time are not reflected in the current results.
-    indexTime :: (Core.Maybe Core.DateTime'),
+    indexTime :: (Core.Maybe Core.DateTime),
     -- | List of results grouped by products detected in the query image. Each entry corresponds to one bounding polygon in the query image, and contains the matching products specific to that region. There may be duplicate product matches in the union of all the per-product results.
     productGroupedResults ::
       ( Core.Maybe
@@ -13726,11 +13726,11 @@ instance Core.ToJSON Operation_Response where
 -- /See:/ 'newOperationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata
   { -- | The time when the batch request was received.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Current state of the batch operation.
     state :: (Core.Maybe OperationMetadata_State),
     -- | The time when the operation result was last updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -14002,7 +14002,7 @@ instance Core.ToJSON Product where
 -- /See:/ 'newProductSearchResults' smart constructor.
 data ProductSearchResults = ProductSearchResults
   { -- | Timestamp of the index which provided these results. Products added to the product set and products removed from the product set after this time are not reflected in the current results.
-    indexTime :: (Core.Maybe Core.DateTime'),
+    indexTime :: (Core.Maybe Core.DateTime),
     -- | List of results grouped by products detected in the query image. Each entry corresponds to one bounding polygon in the query image, and contains the matching products specific to that region. There may be duplicate product matches in the union of all the per-product results.
     productGroupedResults :: (Core.Maybe [GroupedResult]),
     -- | List of results, one for each product match.

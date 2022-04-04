@@ -53,7 +53,7 @@ type PeopleOtherContactsListResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam "readMask" Core.GFieldMask
+    Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "requestSyncToken" Core.Bool
     Core.:> Core.QueryParams "sources" OtherContactsListSources
     Core.:> Core.QueryParam "syncToken" Core.Text
@@ -78,7 +78,7 @@ data PeopleOtherContactsList = PeopleOtherContactsList
     -- | Optional. A page token, received from a previous response @next_page_token@. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @otherContacts.list@ must match the first call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. What values are valid depend on what ReadSourceType is used. If READ/SOURCE/TYPE/CONTACT is used, valid values are: * emailAddresses * metadata * names * phoneNumbers * photos If READ/SOURCE/TYPE/PROFILE is used, valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
-    readMask :: (Core.Maybe Core.GFieldMask),
+    readMask :: (Core.Maybe Core.FieldMask),
     -- | Optional. Whether the response should return @next_sync_token@ on the last page of results. It can be used to get incremental changes since the last request by setting it on the request @sync_token@. More details about sync behavior at @otherContacts.list@.
     requestSyncToken :: (Core.Maybe Core.Bool),
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE_CONTACT if not set.

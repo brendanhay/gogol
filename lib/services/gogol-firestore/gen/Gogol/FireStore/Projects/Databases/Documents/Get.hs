@@ -51,7 +51,7 @@ type FireStoreProjectsDatabasesDocumentsGetResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "mask.fieldPaths" Core.Text
-    Core.:> Core.QueryParam "readTime" Core.DateTime'
+    Core.:> Core.QueryParam "readTime" Core.DateTime
     Core.:> Core.QueryParam "transaction" Core.Base64
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -73,7 +73,7 @@ data FireStoreProjectsDatabasesDocumentsGet = FireStoreProjectsDatabasesDocument
     -- | Required. The resource name of the Document to get. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.
     name :: Core.Text,
     -- | Reads the version of the document at the given time. This may not be older than 270 seconds.
-    readTime :: (Core.Maybe Core.DateTime'),
+    readTime :: (Core.Maybe Core.DateTime),
     -- | Reads the document in a transaction.
     transaction :: (Core.Maybe Core.Base64),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").

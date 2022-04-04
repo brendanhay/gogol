@@ -1674,7 +1674,7 @@ data Ad = Ad
     -- | Whether this ad is a dynamic click tracker. Applicable when type is AD/SERVING/CLICK_TRACKER. This is a required field on insert, and is read-only after insert.
     dynamicClickTracker :: (Core.Maybe Core.Bool),
     -- |
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Event tag overrides for this ad.
     eventTagOverrides :: (Core.Maybe [EventTagOverride]),
     -- | Geographical targeting information for this ad. This field must be left blank if the ad is using a targeting template. Applicable when type is AD/SERVING/STANDARD_AD.
@@ -1704,7 +1704,7 @@ data Ad = Ad
     -- | Whether this ad requires ssl. This is a read-only field that is auto-generated when the ad is inserted or updated.
     sslRequired :: (Core.Maybe Core.Bool),
     -- |
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Subaccount ID of this ad. This is a read-only field that can be left blank.
     subaccountId :: (Core.Maybe Core.Int64),
     -- | Targeting template ID, used to apply preconfigured targeting information to this ad. This cannot be set while any of dayPartTargeting, geoTargeting, keyValueTargetingExpression, languageTargeting, remarketingListExpression, or technologyTargeting are set. Applicable when type is AD/SERVING/STANDARD_AD.
@@ -2564,7 +2564,7 @@ data Campaign = Campaign
     -- | The default landing page ID for this campaign.
     defaultLandingPageId :: (Core.Maybe Core.Int64),
     -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | Overrides that can be used to activate or deactivate advertiser event tags.
     eventTagOverrides :: (Core.Maybe [EventTagOverride]),
     -- | External ID for this campaign.
@@ -2584,7 +2584,7 @@ data Campaign = Campaign
     -- | Whether Nielsen reports are enabled for this campaign.
     nielsenOcrEnabled :: (Core.Maybe Core.Bool),
     -- |
-    startDate :: (Core.Maybe Core.Date'),
+    startDate :: (Core.Maybe Core.Date),
     -- | Subaccount ID of this campaign. This is a read-only field that can be left blank.
     subaccountId :: (Core.Maybe Core.Int64),
     -- | Campaign trafficker contact emails.
@@ -2871,7 +2871,7 @@ data ChangeLog = ChangeLog
     -- | Action which caused the change.
     action :: (Core.Maybe Core.Text),
     -- |
-    changeTime :: (Core.Maybe Core.DateTime'),
+    changeTime :: (Core.Maybe Core.DateTime),
     -- | Field name of the object which changed.
     fieldName :: (Core.Maybe Core.Text),
     -- | ID of this change log.
@@ -5070,7 +5070,7 @@ data CreativeAssignment = CreativeAssignment
     -- | Dimension value for the ID of the creative. This is a read-only, auto-generated field.
     creativeIdDimensionValue :: (Core.Maybe DimensionValue),
     -- |
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Rich media exit overrides for this creative assignment. Applicable when the creative type is any of the following: - DISPLAY - RICH/MEDIA/INPAGE - RICH/MEDIA/INPAGE/FLOATING - RICH/MEDIA/IM/EXPAND - RICH/MEDIA/EXPANDING - RICH/MEDIA/INTERSTITIAL/FLOAT - RICH/MEDIA/MOBILE/IN/APP - RICH/MEDIA/MULTI/FLOATING - RICH/MEDIA/PEEL/DOWN - VPAID/LINEAR - VPAID/NON/LINEAR
     richMediaExitOverrides :: (Core.Maybe [RichMediaExitOverride]),
     -- | Sequence number of the creative assignment, applicable when the rotation type is CREATIVE/ROTATION/TYPE_SEQUENTIAL. Acceptable values are 1 to 65535, inclusive.
@@ -5078,7 +5078,7 @@ data CreativeAssignment = CreativeAssignment
     -- | Whether the creative to be assigned is SSL-compliant. This is a read-only field that is auto-generated when the ad is inserted or updated.
     sslCompliant :: (Core.Maybe Core.Bool),
     -- |
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Weight of the creative assignment, applicable when the rotation type is CREATIVE/ROTATION/TYPE_RANDOM. Value must be greater than or equal to 1.
     weight :: (Core.Maybe Core.Int32)
   }
@@ -6099,13 +6099,13 @@ instance
 -- /See:/ 'newDateRange' smart constructor.
 data DateRange = DateRange
   { -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | The kind of resource this is, in this case dfareporting#dateRange.
     kind :: (Core.Maybe Core.Text),
     -- | The date range relative to the date of when the report is run.
     relativeDateRange :: (Core.Maybe DateRange_RelativeDateRange),
     -- |
-    startDate :: (Core.Maybe Core.Date')
+    startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6593,13 +6593,13 @@ data DimensionValueRequest = DimensionValueRequest
   { -- | The name of the dimension for which values should be requested.
     dimensionName :: (Core.Maybe Core.Text),
     -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | The list of filters by which to filter values. The filters are ANDed.
     filters :: (Core.Maybe [DimensionFilter]),
     -- | The kind of request this is, in this case dfareporting#dimensionValueRequest .
     kind :: (Core.Maybe Core.Text),
     -- |
-    startDate :: (Core.Maybe Core.Date')
+    startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7399,11 +7399,11 @@ instance Core.ToJSON FileList where
 -- /See:/ 'newFlight' smart constructor.
 data Flight = Flight
   { -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | Rate or cost of this flight.
     rateOrCost :: (Core.Maybe Core.Int64),
     -- |
-    startDate :: (Core.Maybe Core.Date'),
+    startDate :: (Core.Maybe Core.Date),
     -- | Units of this flight.
     units :: (Core.Maybe Core.Int64)
   }
@@ -10169,7 +10169,7 @@ data OrderDocument = OrderDocument
     -- | Information about the creation of this order document.
     createdInfo :: (Core.Maybe LastModifiedInfo),
     -- |
-    effectiveDate :: (Core.Maybe Core.Date'),
+    effectiveDate :: (Core.Maybe Core.Date),
     -- | ID of this order document.
     id :: (Core.Maybe Core.Int64),
     -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#orderDocument\".
@@ -10177,7 +10177,7 @@ data OrderDocument = OrderDocument
     -- | List of email addresses that received the last sent document.
     lastSentRecipients :: (Core.Maybe [Core.Text]),
     -- |
-    lastSentTime :: (Core.Maybe Core.DateTime'),
+    lastSentTime :: (Core.Maybe Core.DateTime),
     -- | ID of the order from which this order document is created.
     orderId :: (Core.Maybe Core.Int64),
     -- | Project ID of this order document.
@@ -11596,7 +11596,7 @@ data Pricing = Pricing
   { -- | Cap cost type of this inventory item.
     capCostType :: (Core.Maybe Pricing_CapCostType),
     -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | Flights of this inventory item. A flight (a.k.a. pricing period) represents the inventory item pricing information for a specific period of time.
     flights :: (Core.Maybe [Flight]),
     -- | Group type of this inventory item if it represents a placement group. Is null otherwise. There are two type of placement groups: PLANNING/PLACEMENT/GROUP/TYPE/PACKAGE is a simple group of inventory items that acts as a single pricing point for a group of tags. PLANNING/PLACEMENT/GROUP/TYPE/ROADBLOCK is a group of inventory items that not only acts as a single pricing point, but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned inventory items to be marked as primary.
@@ -11604,7 +11604,7 @@ data Pricing = Pricing
     -- | Pricing type of this inventory item.
     pricingType :: (Core.Maybe Pricing_PricingType),
     -- |
-    startDate :: (Core.Maybe Core.Date')
+    startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11655,7 +11655,7 @@ data PricingSchedule = PricingSchedule
   { -- | Placement cap cost option.
     capCostOption :: (Core.Maybe PricingSchedule_CapCostOption),
     -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | Whether this placement is flighted. If true, pricing periods will be computed automatically.
     flighted :: (Core.Maybe Core.Bool),
     -- | Floodlight activity ID associated with this placement. This field should be set when placement pricing type is set to PRICING/TYPE/CPA.
@@ -11665,9 +11665,9 @@ data PricingSchedule = PricingSchedule
     -- | Placement pricing type. This field is required on insertion.
     pricingType :: (Core.Maybe PricingSchedule_PricingType),
     -- |
-    startDate :: (Core.Maybe Core.Date'),
+    startDate :: (Core.Maybe Core.Date),
     -- |
-    testingStartDate :: (Core.Maybe Core.Date')
+    testingStartDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -11724,13 +11724,13 @@ instance Core.ToJSON PricingSchedule where
 -- /See:/ 'newPricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
   { -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | Comments for this pricing period.
     pricingComment :: (Core.Maybe Core.Text),
     -- | Rate or cost of this pricing period in nanos (i.e., multipled by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
     rateOrCostNanos :: (Core.Maybe Core.Int64),
     -- |
-    startDate :: (Core.Maybe Core.Date'),
+    startDate :: (Core.Maybe Core.Date),
     -- | Units of this pricing period. Acceptable values are 0 to 10000000000, inclusive.
     units :: (Core.Maybe Core.Int64)
   }
@@ -11793,7 +11793,7 @@ data Project = Project
     -- | Name of the project client.
     clientName :: (Core.Maybe Core.Text),
     -- |
-    endDate :: (Core.Maybe Core.Date'),
+    endDate :: (Core.Maybe Core.Date),
     -- | ID of this project. This is a read-only, auto-generated field.
     id :: (Core.Maybe Core.Int64),
     -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#project\".
@@ -11805,7 +11805,7 @@ data Project = Project
     -- | Overview of this project.
     overview :: (Core.Maybe Core.Text),
     -- |
-    startDate :: (Core.Maybe Core.Date'),
+    startDate :: (Core.Maybe Core.Date),
     -- | Subaccount ID of this project.
     subaccountId :: (Core.Maybe Core.Int64),
     -- | Number of clicks that the advertiser is targeting.
@@ -13224,7 +13224,7 @@ data Report_Schedule = Report_Schedule
     -- | Defines every how many days, weeks or months the report should be run. Needs to be set when \"repeats\" is either \"DAILY\", \"WEEKLY\" or \"MONTHLY\".
     every :: (Core.Maybe Core.Int32),
     -- |
-    expirationDate :: (Core.Maybe Core.Date'),
+    expirationDate :: (Core.Maybe Core.Date),
     -- | The interval for which the report is repeated. Note: - \"DAILY\" also requires field \"every\" to be set. - \"WEEKLY\" also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. - \"MONTHLY\" also requires fields \"every\" and \"runsOnDayOfMonth\" to be set.
     repeats :: (Core.Maybe Core.Text),
     -- | List of week days \"WEEKLY\" on which scheduled reports should run.
@@ -13232,7 +13232,7 @@ data Report_Schedule = Report_Schedule
     -- | Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Example: If \'startDate\' is Monday, April 2nd 2012 (2012-04-02), \"DAY/OF/MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK/OF/MONTH\" would run subsequent reports on the first Monday of the month.
     runsOnDayOfMonth :: (Core.Maybe Report_Schedule_RunsOnDayOfMonth),
     -- |
-    startDate :: (Core.Maybe Core.Date')
+    startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

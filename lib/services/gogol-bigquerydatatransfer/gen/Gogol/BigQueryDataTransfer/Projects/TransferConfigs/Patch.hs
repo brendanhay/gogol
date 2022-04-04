@@ -52,7 +52,7 @@ type BigQueryDataTransferProjectsTransferConfigsPatchResource =
     Core.:> Core.QueryParam "authorizationCode" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "serviceAccountName" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.GFieldMask
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "versionInfo" Core.Text
@@ -79,7 +79,7 @@ data BigQueryDataTransferProjectsTransferConfigsPatch = BigQueryDataTransferProj
     -- | Optional service account name. If this field is set and \"service/account/name\" is set in update_mask, transfer config will be created with this service account credential. It requires that requesting user calling this API has permissions to act as this service account. Note that not all data sources support service account credentials when creating transfer config. Please refer to this public guide for the latest list of data sources with service account support: https:\/\/cloud.google.com\/bigquery-transfer\/docs\/use-service-accounts
     serviceAccountName :: (Core.Maybe Core.Text),
     -- | Required. Required list of fields to be updated in this request.
-    updateMask :: (Core.Maybe Core.GFieldMask),
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

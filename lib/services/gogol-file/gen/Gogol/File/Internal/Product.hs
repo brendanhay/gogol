@@ -246,7 +246,7 @@ data Backup = Backup
   { -- | Output only. Capacity of the source file share when the backup was created.
     capacityGb :: (Core.Maybe Core.Int64),
     -- | Output only. The time when the backup was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A description of the backup with 2048 characters or less. Requests with longer descriptions will be rejected.
     description :: (Core.Maybe Core.Text),
     -- | Output only. Amount of bytes that will be downloaded if the backup is restored. This may be different than storage bytes, since sequential backups of the same disk will share storage.
@@ -384,7 +384,7 @@ instance Core.ToJSON CancelOperationRequest where
 -- /See:/ 'newDailyCycle' smart constructor.
 data DailyCycle = DailyCycle
   { -- | Output only. Duration of the time window, set by service producer.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Time within the day to start the operations.
     startTime :: (Core.Maybe TimeOfDay')
   }
@@ -572,7 +572,7 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance = GoogleCloudSaasac
   { -- | consumer/defined/name is the name that is set by the consumer. On the other hand Name field represents system-assigned id of an instance so consumers are not necessarily aware of it. consumer/defined/name is used for notification\/UI purposes for consumer to recognize their instances.
     consumerDefinedName :: (Core.Maybe Core.Text),
     -- | Output only. Timestamp when the resource was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. The instance/type of this instance of format: projects\/{project/id}\/locations\/{location/id}\/instanceTypes\/{instance/type/id}. Instance Type represents a high-level tier or SKU of the service that this instance belong to. When enabled(eg: Maintenance Rollout), Rollout uses \'instance/type\' along with \'software_versions\' to determine whether instance needs an update or not.
     instanceType :: (Core.Maybe Core.Text),
     -- | Optional. Resource labels to represent user provided metadata. Each label is a key-value pair, where both the key and the value are arbitrary strings provided by the user.
@@ -632,7 +632,7 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance = GoogleCloudSaasac
     -- | Output only. ID of the associated GCP tenant project. See go\/get-instance-metadata.
     tenantProjectId :: (Core.Maybe Core.Text),
     -- | Output only. Timestamp when the resource was last modified.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -972,13 +972,13 @@ data GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule = Google
   { -- | This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.
     canReschedule :: (Core.Maybe Core.Bool),
     -- | The scheduled end time for the maintenance.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The rollout management policy this maintenance schedule is associated with. When doing reschedule update request, the reschedule should be against this given policy.
     rolloutManagementPolicy :: (Core.Maybe Core.Text),
     -- | schedule/deadline/time is the time deadline any schedule start time cannot go beyond, including reschedule. It\'s normally the initial schedule start time plus maintenance window length (1 day or 1 week). Maintenance cannot be scheduled to start beyond this deadline.
-    scheduleDeadlineTime :: (Core.Maybe Core.DateTime'),
+    scheduleDeadlineTime :: (Core.Maybe Core.DateTime),
     -- | The scheduled start time for the maintenance.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1418,7 +1418,7 @@ instance
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
   { -- | Output only. The time when the instance was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The description of the instance (2048 characters or less).
     description :: (Core.Maybe Core.Text),
     -- | Server-specified ETag for the instance resource to prevent simultaneous updates from overwriting each other.
@@ -1847,7 +1847,7 @@ instance Core.ToJSON Location_Metadata where
 -- /See:/ 'newMaintenancePolicy' smart constructor.
 data MaintenancePolicy = MaintenancePolicy
   { -- | Output only. The time when the resource was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. Description of what this policy is for. Create\/Update methods return INVALID_ARGUMENT if the length is greater than 512.
     description :: (Core.Maybe Core.Text),
     -- | Optional. Resource labels to represent user provided metadata. Each label is a key-value pair, where both the key and the value are arbitrary strings provided by the user.
@@ -1859,7 +1859,7 @@ data MaintenancePolicy = MaintenancePolicy
     -- | Maintenance policy applicable to instance update.
     updatePolicy :: (Core.Maybe UpdatePolicy),
     -- | Output only. The time when the resource was updated.
-    updateTime :: (Core.Maybe Core.DateTime')
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2202,9 +2202,9 @@ data OperationMetadata = OperationMetadata
     -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | Output only. The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Human-readable status of the operation, if any.
     statusDetail :: (Core.Maybe Core.Text),
     -- | Output only. Server-defined resource path for the target of the operation.
@@ -2300,7 +2300,7 @@ data Schedule = Schedule
   { -- | Allows to define schedule that runs specified day of the week.
     day :: (Core.Maybe Schedule_Day),
     -- | Output only. Duration of the time window, set by service producer.
-    duration :: (Core.Maybe Core.GDuration),
+    duration :: (Core.Maybe Core.Duration),
     -- | Time within the window to start the operations.
     startTime :: (Core.Maybe TimeOfDay')
   }
@@ -2342,7 +2342,7 @@ instance Core.ToJSON Schedule where
 -- /See:/ 'newSnapshot' smart constructor.
 data Snapshot = Snapshot
   { -- | Output only. The time when the snapshot was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | A description of the snapshot with 2048 characters or less. Requests with longer descriptions will be rejected.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The amount of bytes needed to allocate a full copy of the snapshot content

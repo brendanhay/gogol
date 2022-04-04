@@ -306,13 +306,13 @@ data Activity = Activity
     -- | The service provider that initially published this activity.
     provider :: (Core.Maybe Activity_Provider),
     -- | The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
-    published :: (Core.Maybe Core.DateTime'),
+    published :: (Core.Maybe Core.DateTime),
     -- | Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.
     radius :: (Core.Maybe Core.Text),
     -- | Title of this activity.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | The link to this activity.
     url :: (Core.Maybe Core.Text),
     -- | This activity\'s verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:
@@ -1426,7 +1426,7 @@ data ActivityFeed = ActivityFeed
     -- | The title of this collection of activities, which is a truncated portion of the content.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1497,11 +1497,11 @@ data Comment = Comment
     -- | People who +1\'d this comment.
     plusoners :: (Core.Maybe Comment_Plusoners),
     -- | The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
-    published :: (Core.Maybe Core.DateTime'),
+    published :: (Core.Maybe Core.DateTime),
     -- | Link to this comment resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime'),
+    updated :: (Core.Maybe Core.DateTime),
     -- | This comment\'s verb, indicating what action was performed. Possible values are:
     -- - \"post\" - Publish content to the stream.
     verb :: Core.Text
@@ -1887,7 +1887,7 @@ data CommentFeed = CommentFeed
     -- | The title of this collection of comments.
     title :: (Core.Maybe Core.Text),
     -- | The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
-    updated :: (Core.Maybe Core.DateTime')
+    updated :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

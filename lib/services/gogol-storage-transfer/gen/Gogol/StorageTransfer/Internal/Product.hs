@@ -981,13 +981,13 @@ data ObjectConditions = ObjectConditions
     -- namespace. No include-prefix may be a prefix of another include-prefix. The max size of @include_prefixes@ is 1000. For more information, see </storage-transfer/docs/filtering-objects-from-transfers Filtering objects from transfers>.
     includePrefixes :: (Core.Maybe [Core.Text]),
     -- | If specified, only objects with a \"last modification time\" before this timestamp and objects that don\'t have a \"last modification time\" are transferred.
-    lastModifiedBefore :: (Core.Maybe Core.DateTime'),
+    lastModifiedBefore :: (Core.Maybe Core.DateTime),
     -- | If specified, only objects with a \"last modification time\" on or after this timestamp and objects that don\'t have a \"last modification time\" are transferred. The @last_modified_since@ and @last_modified_before@ fields can be used together for chunked data processing. For example, consider a script that processes each day\'s worth of data at a time. For that you\'d set each of the fields as follows: * @last_modified_since@ to the start of the day * @last_modified_before@ to the end of the day
-    lastModifiedSince :: (Core.Maybe Core.DateTime'),
+    lastModifiedSince :: (Core.Maybe Core.DateTime),
     -- | Ensures that objects are not transferred if a specific maximum time has elapsed since the \"last modification time\". When a TransferOperation begins, objects with a \"last modification time\" are transferred only if the elapsed time between the start/time of the @TransferOperation@and the \"last modification time\" of the object is less than the value of max/time/elapsed/since/last/modification\`. Objects that do not have a \"last modification time\" are also transferred.
-    maxTimeElapsedSinceLastModification :: (Core.Maybe Core.GDuration),
+    maxTimeElapsedSinceLastModification :: (Core.Maybe Core.Duration),
     -- | Ensures that objects are not transferred until a specific minimum time has elapsed after the \"last modification time\". When a TransferOperation begins, objects with a \"last modification time\" are transferred only if the elapsed time between the start/time of the @TransferOperation@ and the \"last modification time\" of the object is equal to or greater than the value of min/time/elapsed/since/last/modification\`. Objects that do not have a \"last modification time\" are also transferred.
-    minTimeElapsedSinceLastModification :: (Core.Maybe Core.GDuration)
+    minTimeElapsedSinceLastModification :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1253,7 +1253,7 @@ data Schedule = Schedule
   { -- | The time in UTC that no further transfer operations are scheduled. Combined with schedule/end/date, @end_time_of_day@ specifies the end date and time for starting new transfer operations. This field must be greater than or equal to the timestamp corresponding to the combintation of schedule/start/date and start/time/of/day, and is subject to the following: * If @end_time_of_day@ is not set and @schedule_end_date@ is set, then a default value of @23:59:59@ is used for @end_time_of_day@. * If @end_time_of_day@ is set and @schedule_end_date@ is not set, then INVALID/ARGUMENT is returned.
     endTimeOfDay :: (Core.Maybe TimeOfDay'),
     -- | Interval between the start of each scheduled TransferOperation. If unspecified, the default value is 24 hours. This value may not be less than 1 hour.
-    repeatInterval :: (Core.Maybe Core.GDuration),
+    repeatInterval :: (Core.Maybe Core.Duration),
     -- | The last day a transfer runs. Date boundaries are determined relative to UTC time. A job runs once per 24 hours within the following guidelines: * If @schedule_end_date@ and schedule/start/date are the same and in the future relative to UTC, the transfer is executed only one time. * If @schedule_end_date@ is later than @schedule_start_date@ and @schedule_end_date@ is in the future relative to UTC, the job runs each day at start/time/of_day through @schedule_end_date@.
     scheduleEndDate :: (Core.Maybe Date),
     -- | Required. The start date of a transfer. Date boundaries are determined relative to UTC time. If @schedule_start_date@ and start/time/of_day are in the past relative to the job\'s creation time, the transfer starts the day after you schedule the transfer request. __Note:__ When starting jobs at or near midnight UTC it is possible that a job starts later than expected. For example, if you send an outbound request on June 1 one millisecond prior to midnight UTC and the Storage Transfer Service server receives the request on June 2, then it creates a TransferJob with @schedule_start_date@ set to June 2 and a @start_time_of_day@ set to midnight UTC. The first scheduled TransferOperation takes place on June 3 at midnight UTC.
@@ -1591,13 +1591,13 @@ instance Core.ToJSON TransferCounters where
 -- /See:/ 'newTransferJob' smart constructor.
 data TransferJob = TransferJob
   { -- | Output only. The time that the transfer job was created.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The time that the transfer job was deleted.
-    deletionTime :: (Core.Maybe Core.DateTime'),
+    deletionTime :: (Core.Maybe Core.DateTime),
     -- | A description provided by the user for the job. Its max length is 1024 bytes when Unicode-encoded.
     description :: (Core.Maybe Core.Text),
     -- | Output only. The time that the transfer job was last modified.
-    lastModificationTime :: (Core.Maybe Core.DateTime'),
+    lastModificationTime :: (Core.Maybe Core.DateTime),
     -- | The name of the most recently started TransferOperation of this JobConfig. Present if a TransferOperation has been created for this JobConfig.
     latestOperationName :: (Core.Maybe Core.Text),
     -- | Logging configuration.
@@ -1714,7 +1714,7 @@ data TransferOperation = TransferOperation
   { -- | Information about the progress of the transfer operation.
     counters :: (Core.Maybe TransferCounters),
     -- | End time of this transfer execution.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | Summarizes errors encountered with sample error log entries.
     errorBreakdowns :: (Core.Maybe [ErrorSummary]),
     -- | A globally unique ID assigned by the system.
@@ -1724,7 +1724,7 @@ data TransferOperation = TransferOperation
     -- | The ID of the Google Cloud project that owns the operation.
     projectId :: (Core.Maybe Core.Text),
     -- | Start time of this transfer execution.
-    startTime :: (Core.Maybe Core.DateTime'),
+    startTime :: (Core.Maybe Core.DateTime),
     -- | Status of the transfer operation.
     status :: (Core.Maybe TransferOperation_Status),
     -- | The name of the transfer job that triggers this transfer operation.
@@ -1950,7 +1950,7 @@ data UpdateTransferJobRequest = UpdateTransferJobRequest
     -- | Required. The job to update. @transferJob@ is expected to specify one or more of five fields: description, transfer/spec, notification/config, logging/config, and status. An @UpdateTransferJobRequest@ that specifies other fields are rejected with the error INVALID/ARGUMENT. Updating a job status to DELETED requires @storagetransfer.jobs.delete@ permissions.
     transferJob :: (Core.Maybe TransferJob),
     -- | The field mask of the fields in @transferJob@ that are to be updated in this request. Fields in @transferJob@ that can be updated are: description, transfer/spec, notification/config, logging/config, and status. To update the @transfer_spec@ of the job, a complete transfer specification must be provided. An incomplete specification missing any required fields is rejected with the error INVALID/ARGUMENT.
-    updateTransferJobFieldMask :: (Core.Maybe Core.GFieldMask)
+    updateTransferJobFieldMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 

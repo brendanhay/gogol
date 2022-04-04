@@ -809,9 +809,9 @@ instance Core.ToJSON GdataObjectId where
 -- /See:/ 'newJob' smart constructor.
 data Job = Job
   { -- | The creation date\/time of the job.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The date\/time when this job will expire\/expired. After a job expired, no new reports are generated.
-    expireTime :: (Core.Maybe Core.DateTime'),
+    expireTime :: (Core.Maybe Core.DateTime),
     -- | The server-generated ID of the job (max. 40 characters).
     id :: (Core.Maybe Core.Text),
     -- | The name of the job (max. 100 characters).
@@ -979,19 +979,19 @@ instance Core.ToJSON ListReportsResponse where
 -- /See:/ 'newReport' smart constructor.
 data Report = Report
   { -- | The date\/time when this report was created.
-    createTime :: (Core.Maybe Core.DateTime'),
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The URL from which the report can be downloaded (max. 1000 characters).
     downloadUrl :: (Core.Maybe Core.Text),
     -- | The end of the time period that the report instance covers. The value is exclusive.
-    endTime :: (Core.Maybe Core.DateTime'),
+    endTime :: (Core.Maybe Core.DateTime),
     -- | The server-generated ID of the report.
     id :: (Core.Maybe Core.Text),
     -- | The date\/time when the job this report belongs to will expire\/expired.
-    jobExpireTime :: (Core.Maybe Core.DateTime'),
+    jobExpireTime :: (Core.Maybe Core.DateTime),
     -- | The ID of the job that created this report.
     jobId :: (Core.Maybe Core.Text),
     -- | The start of the time period that the report instance covers. The value is inclusive.
-    startTime :: (Core.Maybe Core.DateTime')
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1043,7 +1043,7 @@ instance Core.ToJSON Report where
 -- /See:/ 'newReportType' smart constructor.
 data ReportType = ReportType
   { -- | The date\/time when this report type was\/will be deprecated.
-    deprecateTime :: (Core.Maybe Core.DateTime'),
+    deprecateTime :: (Core.Maybe Core.DateTime),
     -- | The ID of the report type (max. 100 characters).
     id :: (Core.Maybe Core.Text),
     -- | The name of the report type (max. 100 characters).

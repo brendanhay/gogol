@@ -1206,7 +1206,7 @@ instance Core.ToJSON IosInfo where
 -- /See:/ 'newManagedShortLink' smart constructor.
 data ManagedShortLink = ManagedShortLink
   { -- | Creation timestamp of the short link.
-    creationTime :: (Core.Maybe Core.DateTime'),
+    creationTime :: (Core.Maybe Core.DateTime),
     -- | Attributes that have been flagged about this short url.
     flaggedAttribute :: (Core.Maybe [ManagedShortLink_FlaggedAttributeItem]),
     -- | Full Dyamic Link info

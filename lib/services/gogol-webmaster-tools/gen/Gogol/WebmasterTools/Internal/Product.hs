@@ -432,9 +432,9 @@ data WmxSitemap = WmxSitemap
     -- | If true, the sitemap is a collection of sitemaps.
     isSitemapsIndex :: (Core.Maybe Core.Bool),
     -- | Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).
-    lastDownloaded :: (Core.Maybe Core.DateTime'),
+    lastDownloaded :: (Core.Maybe Core.DateTime),
     -- | Date & time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).
-    lastSubmitted :: (Core.Maybe Core.DateTime'),
+    lastSubmitted :: (Core.Maybe Core.DateTime),
     -- | The url of the sitemap.
     path :: (Core.Maybe Core.Text),
     -- | The type of the sitemap. For example: rssFeed.
