@@ -664,7 +664,7 @@ seconds (Seconds n)
 microseconds :: Seconds -> Int
 microseconds = (1000000 *) . seconds
 
-newtype GFieldMask = GFieldMask Text
+newtype FieldMask = FieldMask { fromFieldMask :: Text }
   deriving
     ( Eq,
       Ord,
