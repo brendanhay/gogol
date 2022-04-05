@@ -99,6 +99,7 @@ module Gogol
     Date (..),
     Time (..),
     Duration (..),
+    AsText (..),
 
     -- * Re-exported Utilities
     runResourceT,

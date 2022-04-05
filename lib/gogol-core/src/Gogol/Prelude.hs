@@ -13,6 +13,7 @@ where
 import Control.Lens as Export (Lens', lens, mapping, (#), (^.), _Just)
 import Data.ByteString as Export (ByteString)
 import Data.Data as Export (Data, Typeable)
+import Data.Functor as Export ((<&>))
 import Data.HashMap.Strict as Export (HashMap)
 import Data.Hashable as Export (Hashable, hashWithSalt)
 import Data.Int as Export (Int32, Int64)

@@ -22,7 +22,7 @@ module Gogol.Internal.Auth where
 
 import Control.Exception (Exception, SomeException, catch, throwIO)
 import Control.Exception.Lens (exception)
-import Control.Lens (Prism', prism, (<&>))
+import Control.Lens (Prism', prism)
 import Control.Monad.IO.Class (MonadIO (..))
 import Crypto.PubKey.RSA.Types (PrivateKey)
 import Data.Aeson

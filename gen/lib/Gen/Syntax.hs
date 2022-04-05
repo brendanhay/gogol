@@ -431,9 +431,17 @@ jsonDecls g (Map.toList -> rs) = [from', to']
     decode (l, s)
       | _additional s = app (var "Core.parseJSONObject") (var "o")
       | Just x <- def s = defJS l x
-      | required s = reqJS l
-      | monoid s = defJS l (var "Core.mempty")
-      | otherwise = optJS l
+      | text && optional = optJSText l
+      | optional = optJS l
+      | text = reqJSText l
+      | otherwise = reqJS l
+     where
+      text = textual (_type s)
+
+      optional =
+          case _type s of
+            TMaybe {} -> True
+            _other -> False
 
     to' = case rs of
       [(k, v)]
@@ -502,8 +510,18 @@ defJS n = infixApp (infixApp (var "o") "Core..:?" (fstr n)) "Core..!="
 reqJS :: Local -> Exp ()
 reqJS = infixApp (var "o") "Core..:" . fstr
 
+reqJSText :: Local -> Exp ()
+reqJSText l =
+  infixApp (infixApp (var "o") "Core..:" (fstr l)) "Core.<&>" $
+    var "Core.fromAsText"
+
 optJS :: Local -> Exp ()
 optJS = infixApp (var "o") "Core..:?" . fstr
+
+optJSText :: Local -> Exp ()
+optJSText l =
+  infixApp (infixApp (var "o") "Core..:?" (fstr l)) "Core.<&>" $
+    app (var "Core.fmap") (var "Core.fromAsText")
 
 funD :: String -> Exp () -> InstDecl ()
 funD f = InsDecl () . patBind (pvar (name f))

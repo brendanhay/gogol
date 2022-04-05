@@ -43,7 +43,7 @@ import Data.HashMap.Strict (HashMap)
 import Data.Text (Text)
 #endif
 
-newtype AsText a = AsText a
+newtype AsText a = AsText {fromAsText :: a}
   deriving (Eq, Ord, Read, Show, Num, Fractional, ToHttpApiData, FromHttpApiData)
 
 instance (FromJSON a, FromHttpApiData a) => FromJSON (AsText a) where
