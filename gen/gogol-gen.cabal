@@ -64,7 +64,8 @@ library
     , transformers            ^>=0.5
     , unliftio                ^>=0.2
     , base16
-    
+    , either
+
   exposed-modules:
     Kuy.Command
     Kuy.Discovery
@@ -76,7 +77,10 @@ library
     Kuy.Driver
     Kuy.Driver.Query
     Kuy.Driver.Rules
-    Kuy.Driver.Store
+    Kuy.Store.Fingerprint
+    Kuy.Store.Cache
+    Kuy.Store.Artefact
+    Kuy.Store.Manifest
     Kuy.GHC.DynFlags
     Kuy.Markdown
     Kuy.Orphans

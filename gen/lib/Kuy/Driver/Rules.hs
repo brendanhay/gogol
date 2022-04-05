@@ -5,7 +5,9 @@ import Data.Atomics qualified as Atomics
 import Data.Text qualified as Text
 import Kuy.Discovery
 import Kuy.Driver.Query
-import Kuy.Driver.Store
+import Kuy.Store.Artefact
+import Kuy.Store.Manifest
+import Kuy.Store.Cache
 import Kuy.Prelude
 import Network.HTTP.Client qualified as Client
 import Rock
@@ -13,13 +15,13 @@ import UnliftIO.IORef qualified as IORef
 
 rules ::
   Client.Manager ->
-  Store ->
+  FilePath ->
   IORef Manifest ->
   GenRules (Writer TaskKind Query) Query
 rules manager store manifestVar (Writer query) =
   case query of
     --
-    CacheBytes reader ->
+    CachedBytes reader ->
       input $
         readCache store reader
     --
@@ -30,9 +32,9 @@ rules manager store manifestVar (Writer query) =
     LocalArtefact name ->
       input $
         runMaybeT $ do
-          hashes <- IORef.readIORef hashesVar
-          artefact <- MaybeT (newArtefact store name)
-          artefact <$ guard (isKnownHash artefact hashes)
+          manifest <- IORef.readIORef manifestVar
+          artefact <- MaybeT (getArtefact store name)
+          artefact <$ guard (isKnownArtefact artefact manifest)
     --
     RemoteArtefact url name ->
       input $
@@ -43,7 +45,8 @@ rules manager store manifestVar (Writer query) =
         (artefact, list) <-
           fetchArtefactJSON @DirectoryList store directoryListURL "directory-list.json"
 
-        liftIO $ Atomics.atomicModifyIORefCAS_ manifestVar (insertHash artefact)
+        liftIO $
+          Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
 
         pure $! newDirectoryIndex list.items
     --
@@ -66,7 +69,8 @@ rules manager store manifestVar (Writer query) =
           (artefact, desc) <-
             fetchArtefactJSON @Description store url path
 
-          liftIO $ Atomics.atomicModifyIORefCAS_ hashesVar (insertHash artefact)
+          liftIO $
+            Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
 
           pure desc
 
@@ -78,7 +82,7 @@ fetchArtefactJSON ::
     Persist a,
     FromJSON a
   ) =>
-  Store ->
+  FilePath ->
   String ->
   FilePath ->
   m (Artefact, a)
@@ -101,11 +105,13 @@ fetchCachedJSON ::
     Persist a,
     FromJSON a
   ) =>
-  Store ->
+  FilePath ->
   Artefact ->
   m a
-fetchCachedJSON store artefact@(newContent @a -> reader) =
-  fetch (ContentBytes reader) >>= \case
+fetchCachedJSON store artefact = do
+  let reader = getCacheReader @a artefact.hash
+
+  fetch (CachedBytes reader) >>= \case
     Right item ->
       pure item
     --
@@ -113,7 +119,7 @@ fetchCachedJSON store artefact@(newContent @a -> reader) =
       json <- fetch (ArtefactBytes artefact)
       item <- either error pure $ Aeson.eitherDecodeStrict' json
 
-      writeContent store writer item
+      writeCache store writer item
 
       pure item
 

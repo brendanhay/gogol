@@ -1,27 +1,22 @@
 module Kuy.Driver
   ( execute,
-    withHashes,
+    withManifest,
   )
 where
 
-import System.FilePath qualified as FilePath
-import Data.Aeson qualified as Aeson
 import Kuy.Driver.Query
 import Kuy.Driver.Rules qualified as Rules
-import Kuy.Driver.Store
+import Kuy.Store.Manifest
 import Kuy.Prelude
 import Network.HTTP.Client qualified as Client
-import Data.ByteString.Lazy qualified as ByteString.Lazy
 import Rock
-import Data.ByteString.Builder qualified as ByteBuilder
 import UnliftIO qualified
-import UnliftIO.Directory qualified as Directory
 import UnliftIO.IORef qualified as IORef
 import UnliftIO.MVar qualified as MVar
 
-execute :: Client.Manager -> Store -> Task Query a -> IO a
+execute :: Client.Manager -> FilePath -> Task Query a -> IO a
 execute manager store task =
-  withHashes (store.path </> ".hashes.json") $ \hashesVar -> do
+  withManifest (store </> ".manifest.json") $ \manifestVar -> do
     startedVar <- IORef.newIORef mempty
     threadsVar <- IORef.newIORef mempty
     consoleVar <- MVar.newMVar (0 :: Int)
@@ -60,44 +55,12 @@ execute manager store task =
           memoiseWithCycleDetection startedVar threadsVar $
             ignoreTaskKind $
               traceFetch_ $
-                Rules.rules manager store hashesVar
+                Rules.rules manager store manifestVar
 
     runTask rules task
 
-withHashes :: FilePath -> (IORef Hashes -> IO a) -> IO a
-withHashes path =
-  UnliftIO.bracket create commit
-  where
-    commit hashes = do
-      Directory.createDirectoryIfMissing True (FilePath.takeDirectory path)
-
-      IORef.readIORef hashes
-        >>= ByteString.Lazy.writeFile path
-          . ByteBuilder.toLazyByteString
-          . encodeHashes
-
-    create = do
-      exists <- Directory.doesPathExist path
-      hashes <-
-        if not exists
-          then mempty
-          else do
-            h <- decodeHashes <$> readFile path
-
-            print h
-
-            pure h
-
-      IORef.newIORef hashes
-
-    -- readJSON =
-    --   Aeson.eitherDecodeFileStrict' path >>= \case
-    --     Right hashes ->
-    --       pure hashes
-    --     --
-    --     Left err ->
-    --       UnliftIO.throwString $
-    --         "(withHashes) failed to parse hashes from "
-    --           ++ path
-    --           ++ " with "
-    --           ++ err
+withManifest :: FilePath -> (IORef Manifest -> IO a) -> IO a
+withManifest path =
+  UnliftIO.bracket
+      (IORef.newIORef =<< readManifest path)
+      (IORef.readIORef >=> writeManifest path)

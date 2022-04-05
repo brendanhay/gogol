@@ -1,47 +1,56 @@
+{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
+module Kuy.Store.Cache
+  ( -- * Cache-addressable binary storage
+    CacheReader,
+    CacheWriter,
+    getCacheReader,
+    writeCache,
+    readCache,
+  )
+where
+
+import Kuy.Store.Fingerprint
+import Data.ByteString qualified as ByteString
+import Data.GADT.Compare.TH qualified as TH
+import Data.Persist qualified as Persist
+import Distribution.Utils.Structured
+import Kuy.Prelude
+import System.FilePath qualified as FilePath
+import Type.Reflection (TypeRep, typeRep)
+import UnliftIO.Directory qualified as Directory
+
 type CacheReader :: Type -> Type
 data CacheReader a = CacheReader
-  { hash :: GHC.Fingerprint,
+  { hash :: Fingerprint,
     repr :: TypeRep a -- Sadge; carried around only for GEq/GCompare.
   }
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Hashable)
 
 type CacheWriter :: Type -> Type
-newtype CacheWriter a = CacheWriter {hash :: GHC.Fingerprint}
+newtype CacheWriter a = CacheWriter {hash :: Fingerprint}
   deriving stock (Show, Eq, Ord)
   deriving newtype (Hashable)
 
-newCache :: forall a. Structured a => GHC.Fingerprint -> CacheReader a
-newCache key =
+getCacheReader :: forall a. Structured a => Fingerprint -> CacheReader a
+getCacheReader hash =
   CacheReader
-    { hash =
-        GHC.fingerprintFingerprints
-          [ key.hash,
-            structureHash (Proxy @a)
-          ],
+    { hash = fingerprints (pure hash <> pure (fingerprintData (Proxy @a))),
       repr = typeRep @a
     }
-
-writeCache :: (MonadIO m, Persist a) => Store -> CacheWriter a -> a -> m ()
-writeCache store writer item = do
-  let path = store.path </> ".cas" </> fingerprintPath writer.hash
-
-  -- FIXME: verify the writer hash against the written content?
-
-  createParent path
-    *> liftIO (ByteString.writeFile path (Persist.encode item))
-    *> setReadOnly path
 
 readCache ::
   forall a m.
   ( MonadIO m,
     Persist a
   ) =>
-  Store ->
+  FilePath ->
   CacheReader a ->
   m (Either (CacheWriter a) a)
 readCache store reader = do
-  let path = store.path </> ".cas" </> fingerprintPath reader.hash
+  let path = store </> "cache" </> renderFingerprint reader.hash
 
   exists <- Directory.doesPathExist path
 
@@ -55,3 +64,20 @@ readCache store reader = do
       -- FIXME: error handling
       either error (pure . Right) (Persist.decode bytes)
 
+writeCache :: (MonadIO m, Persist a) => FilePath -> CacheWriter a -> a -> m ()
+writeCache store writer item = do
+  let path = store </> "cache" </> renderFingerprint writer.hash
+
+  -- FIXME: verify the writer hash against the written content?
+
+  Directory.createDirectoryIfMissing True (FilePath.takeDirectory path)
+    *> liftIO (ByteString.writeFile path (Persist.encode item))
+
+  Directory.getPermissions path
+    >>= Directory.setPermissions path
+      . Directory.setOwnerWritable False
+
+--
+
+TH.deriveGEq ''CacheReader
+TH.deriveGCompare ''CacheReader

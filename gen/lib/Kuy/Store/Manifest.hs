@@ -1,59 +1,67 @@
 module Kuy.Store.Manifest where
 
-import UnliftIO.IORef qualified as IORef
-import Data.Char qualified as Char
+import Kuy.Store.Artefact
 import Data.ByteString.Char8 qualified as ByteString.Char8
-import Data.Aeson qualified as Aeson
-import Data.ByteString qualified as ByteString
 import Data.ByteString.Lazy qualified as ByteString.Lazy
-import Data.ByteString.Lazy.Char8 qualified as ByteString.Lazy.Char8
-import Data.ByteString.Builder qualified as ByteBuilder
-import Data.Function qualified as Function
-import Data.GADT.Compare.TH qualified as TH
-import Data.Map.Strict qualified as Map
-import Data.Persist qualified as Persist
-import Kuy.Prelude
-import Network.HTTP.Client qualified as Client
 import System.FilePath qualified as FilePath
-import Type.Reflection (TypeRep, typeRep)
-import UnliftIO qualified
 import UnliftIO.Directory qualified as Directory
-import UnliftIO.Temporary qualified as Temporary
+import Data.ByteString qualified as ByteString
+import Data.ByteString.Builder qualified as ByteBuilder
+import Data.Map.Strict qualified as Map
+import UnliftIO qualified
+import Kuy.Prelude
 import Kuy.Store.Fingerprint
+import Data.Either.Validation (Validation (..), validationToEither, eitherToValidation)
 
-newtype Manifest = Manifest { fingerprints :: Map FilePath Fingerprint}
+newtype Manifest = Manifest { hashes :: Map FilePath Fingerprint}
   deriving stock (Show)
   deriving newtype (Semigroup, Monoid)
 
-encodeManifest :: Manifest -> ByteBuilder
+encodeManifest :: Manifest -> ByteStringLazy
 encodeManifest m =
-  Map.foldMapWithKey
-    (\k v -> encodeFingerprint v <> " " <> ByteBuilder.stringUtf8 k <> "\n")
-    m.fingerprints
+  flip Map.foldMapWithKey m.hashes $ \k v ->
+    ByteBuilder.toLazyByteString $
+     ByteBuilder.byteString (encodeFingerprint v)
+      <> "  "
+      <> ByteBuilder.stringUtf8 k
+      <> "\n"
 
-decodeManifest :: [ByteString] -> Manifest
+decodeManifest :: [ByteString] -> Either [String] Manifest
 decodeManifest =
-  Manifest
-    . Map.fromList
-    . map (second ByteString.Char8.strip . ByteString.splitAt fingerprintSize)
+  validationToEither
+    . fmap (Manifest . Map.fromList)
+    . traverse (bitraverse parseKey parseVal . ByteString.splitAt fingerprintSize)
     . filter (not . ByteString.null)
+ where
+   parseKey = Success . ByteString.Char8.unpack
+   parseVal = eitherToValidation . first (:[]) . decodeFingerprint
 
---   filter empty lines
+isKnownArtefact :: Artefact -> Manifest -> Bool
+isKnownArtefact x m = maybe False (x.hash ==) (Map.lookup x.path m.hashes)
 
---   ignore invalid parses
---  Hashes
---   . Map.fromList
---   . map (\x ->
---            case splitAt 32 x of
---              (hash, path) -> 
---                ( drop 1 path
---                , let !fp = GHC.Utils.readHexFingerprint hash in fp
---                )
---         )
---   . lines
+insertArtefact :: Artefact -> Manifest -> Manifest
+insertArtefact x m = m { hashes = Map.insert x.path x.hash m.hashes }
 
-member :: FilePath -> Fingerprint -> Manifest -> Bool
-member k v m = maybe False (v ==) (Map.lookup k m.fingerprints)
+readManifest :: MonadIO m => FilePath -> m Manifest
+readManifest path = do
+  exists <- Directory.doesPathExist path
+  bytes <-  liftIO (ByteString.readFile path)
 
-insert :: FilePath -> Fingerprint -> Manifest -> Manifest
-insert k v m = m { fingerprints = Map.insert k v m.fingerprints }
+  let result =
+        if exists
+          then decodeManifest (ByteString.Char8.lines bytes)
+          else pure mempty
+
+  case result of
+    Right ok -> pure ok
+    Left err ->
+      UnliftIO.throwString $
+        "(readManifest) failed parsing md5sums from  "
+          ++ path
+          ++ " with "
+          ++ show err
+
+writeManifest :: MonadIO m => FilePath -> Manifest -> m ()
+writeManifest path manifest =
+  Directory.createDirectoryIfMissing True (FilePath.takeDirectory path)
+   *> liftIO (ByteString.Lazy.writeFile path (encodeManifest manifest))

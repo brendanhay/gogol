@@ -7,14 +7,15 @@ import Data.GADT.Show.TH qualified as TH
 import Data.Hashable qualified as Hashable
 import Data.Some (Some (Some))
 import Kuy.Discovery
-import Kuy.Driver.Store
+import Kuy.Store.Cache
+import Kuy.Store.Artefact
 import Kuy.Prelude
 
 type Query :: Type -> Type
 data Query a where
   -- Cache content is either absent, in which case we return a unique slot
   -- to write to, or we returned the read bytes.
-  CacheBytes ::
+  CachedBytes ::
     Persist a =>
     CacheReader a ->
     Query (Either (CacheWriter a) a)
@@ -55,7 +56,7 @@ TH.deriveGShow ''Query
 
 instance Hashable (Query a) where
   hashWithSalt salt = \case
-    CacheBytes a -> tag salt 1 a
+    CachedBytes a -> tag salt 1 a
     ArtefactBytes a -> tag salt 2 a
     LocalArtefact a -> tag salt 3 a
     RemoteArtefact a b -> tag salt 4 (a, b)

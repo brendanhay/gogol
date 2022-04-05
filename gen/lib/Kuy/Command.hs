@@ -5,9 +5,8 @@ import Data.List qualified as List
 import Data.Set qualified as Set
 import Data.Time qualified as Time
 import Kuy.Discovery
-import Kuy.Driver qualified as Driver 
+import Kuy.Driver qualified as Driver
 import Kuy.Driver.Query
-import Kuy.Driver.Store (Store (..))
 import Kuy.Prelude
 import Network.HTTP.Client qualified as Client
 import Network.HTTP.Client.TLS qualified as TLS
@@ -56,7 +55,7 @@ build (Set.toList -> targets) = do
         Async.pooledMapConcurrentlyN_ threads run xs
 
 clean :: Bool -> IO ()
-clean full =
+clean _full =
   withTimeSummary $
     Directory.removePathForcibly "_kuy"
 
