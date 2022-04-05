@@ -111,7 +111,7 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1Claim
             Core.<$> (o Core..:? "claimDate")
-              Core.<*> (o Core..:? "claimReview" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "claimReview")
               Core.<*> (o Core..:? "claimant")
               Core.<*> (o Core..:? "text")
       )
@@ -412,7 +412,7 @@ instance
       "GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup"
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
-            Core.<$> (o Core..:? "claimAppearances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "claimAppearances")
               Core.<*> (o Core..:? "claimAuthor")
               Core.<*> (o Core..:? "claimDate")
               Core.<*> (o Core..:? "claimFirstAppearance")
@@ -491,9 +491,7 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
             Core.<$> (o Core..:? "claimReviewAuthor")
-              Core.<*> ( o Core..:? "claimReviewMarkups"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "claimReviewMarkups")
               Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "pageUrl")
               Core.<*> (o Core..:? "publishDate")
@@ -548,7 +546,7 @@ instance
       "GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse"
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
-            Core.<$> (o Core..:? "claims" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "claims")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -597,9 +595,7 @@ instance
       "GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse"
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
-            Core.<$> ( o Core..:? "claimReviewMarkupPages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "claimReviewMarkupPages")
               Core.<*> (o Core..:? "nextPageToken")
       )
 

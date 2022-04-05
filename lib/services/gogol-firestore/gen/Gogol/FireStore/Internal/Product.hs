@@ -401,10 +401,7 @@ instance Core.FromJSON ArrayValue where
   parseJSON =
     Core.withObject
       "ArrayValue"
-      ( \o ->
-          ArrayValue
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> ArrayValue Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON ArrayValue where
   toJSON ArrayValue {..} =
@@ -446,7 +443,7 @@ instance Core.FromJSON BatchGetDocumentsRequest where
       "BatchGetDocumentsRequest"
       ( \o ->
           BatchGetDocumentsRequest
-            Core.<$> (o Core..:? "documents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "documents")
             Core.<*> (o Core..:? "mask")
             Core.<*> (o Core..:? "newTransaction")
             Core.<*> (o Core..:? "readTime")
@@ -537,8 +534,7 @@ instance Core.FromJSON BatchWriteRequest where
       "BatchWriteRequest"
       ( \o ->
           BatchWriteRequest
-            Core.<$> (o Core..:? "labels")
-            Core.<*> (o Core..:? "writes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labels") Core.<*> (o Core..:? "writes")
       )
 
 instance Core.ToJSON BatchWriteRequest where
@@ -603,8 +599,8 @@ instance Core.FromJSON BatchWriteResponse where
       "BatchWriteResponse"
       ( \o ->
           BatchWriteResponse
-            Core.<$> (o Core..:? "status" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "writeResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "status")
+            Core.<*> (o Core..:? "writeResults")
       )
 
 instance Core.ToJSON BatchWriteResponse where
@@ -740,7 +736,7 @@ instance Core.FromJSON CommitRequest where
       ( \o ->
           CommitRequest
             Core.<$> (o Core..:? "transaction")
-            Core.<*> (o Core..:? "writes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "writes")
       )
 
 instance Core.ToJSON CommitRequest where
@@ -776,7 +772,7 @@ instance Core.FromJSON CommitResponse where
       ( \o ->
           CommitResponse
             Core.<$> (o Core..:? "commitTime")
-            Core.<*> (o Core..:? "writeResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "writeResults")
       )
 
 instance Core.ToJSON CommitResponse where
@@ -810,8 +806,7 @@ instance Core.FromJSON CompositeFilter where
       "CompositeFilter"
       ( \o ->
           CompositeFilter
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "op")
+            Core.<$> (o Core..:? "filters") Core.<*> (o Core..:? "op")
       )
 
 instance Core.ToJSON CompositeFilter where
@@ -845,8 +840,7 @@ instance Core.FromJSON Cursor where
       "Cursor"
       ( \o ->
           Cursor
-            Core.<$> (o Core..:? "before")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "before") Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON Cursor where
@@ -966,8 +960,8 @@ instance Core.FromJSON DocumentChange where
       ( \o ->
           DocumentChange
             Core.<$> (o Core..:? "document")
-            Core.<*> (o Core..:? "removedTargetIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "targetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "removedTargetIds")
+            Core.<*> (o Core..:? "targetIds")
       )
 
 instance Core.ToJSON DocumentChange where
@@ -1012,7 +1006,7 @@ instance Core.FromJSON DocumentDelete where
           DocumentDelete
             Core.<$> (o Core..:? "document")
             Core.<*> (o Core..:? "readTime")
-            Core.<*> (o Core..:? "removedTargetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "removedTargetIds")
       )
 
 instance Core.ToJSON DocumentDelete where
@@ -1045,8 +1039,7 @@ instance Core.FromJSON DocumentMask where
     Core.withObject
       "DocumentMask"
       ( \o ->
-          DocumentMask
-            Core.<$> (o Core..:? "fieldPaths" Core..!= Core.mempty)
+          DocumentMask Core.<$> (o Core..:? "fieldPaths")
       )
 
 instance Core.ToJSON DocumentMask where
@@ -1087,7 +1080,7 @@ instance Core.FromJSON DocumentRemove where
           DocumentRemove
             Core.<$> (o Core..:? "document")
             Core.<*> (o Core..:? "readTime")
-            Core.<*> (o Core..:? "removedTargetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "removedTargetIds")
       )
 
 instance Core.ToJSON DocumentRemove where
@@ -1125,7 +1118,7 @@ instance Core.FromJSON DocumentTransform where
       ( \o ->
           DocumentTransform
             Core.<$> (o Core..:? "document")
-            Core.<*> (o Core..:? "fieldTransforms" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fieldTransforms")
       )
 
 instance Core.ToJSON DocumentTransform where
@@ -1157,8 +1150,7 @@ instance Core.FromJSON DocumentsTarget where
     Core.withObject
       "DocumentsTarget"
       ( \o ->
-          DocumentsTarget
-            Core.<$> (o Core..:? "documents" Core..!= Core.mempty)
+          DocumentsTarget Core.<$> (o Core..:? "documents")
       )
 
 instance Core.ToJSON DocumentsTarget where
@@ -1518,7 +1510,7 @@ instance
       "GoogleFirestoreAdminV1ExportDocumentsMetadata"
       ( \o ->
           GoogleFirestoreAdminV1ExportDocumentsMetadata
-            Core.<$> (o Core..:? "collectionIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectionIds")
               Core.<*> (o Core..:? "endTime")
               Core.<*> (o Core..:? "operationState")
               Core.<*> (o Core..:? "outputUriPrefix")
@@ -1575,7 +1567,7 @@ instance
       "GoogleFirestoreAdminV1ExportDocumentsRequest"
       ( \o ->
           GoogleFirestoreAdminV1ExportDocumentsRequest
-            Core.<$> (o Core..:? "collectionIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectionIds")
             Core.<*> (o Core..:? "outputUriPrefix")
       )
 
@@ -1716,7 +1708,7 @@ instance
           GoogleFirestoreAdminV1FieldOperationMetadata
             Core.<$> (o Core..:? "endTime")
             Core.<*> (o Core..:? "field")
-            Core.<*> (o Core..:? "indexConfigDeltas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "indexConfigDeltas")
             Core.<*> (o Core..:? "progressBytes")
             Core.<*> (o Core..:? "progressDocuments")
             Core.<*> (o Core..:? "startTime")
@@ -1790,7 +1782,7 @@ instance
       "GoogleFirestoreAdminV1ImportDocumentsMetadata"
       ( \o ->
           GoogleFirestoreAdminV1ImportDocumentsMetadata
-            Core.<$> (o Core..:? "collectionIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectionIds")
               Core.<*> (o Core..:? "endTime")
               Core.<*> (o Core..:? "inputUriPrefix")
               Core.<*> (o Core..:? "operationState")
@@ -1847,7 +1839,7 @@ instance
       "GoogleFirestoreAdminV1ImportDocumentsRequest"
       ( \o ->
           GoogleFirestoreAdminV1ImportDocumentsRequest
-            Core.<$> (o Core..:? "collectionIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectionIds")
             Core.<*> (o Core..:? "inputUriPrefix")
       )
 
@@ -1896,7 +1888,7 @@ instance Core.FromJSON GoogleFirestoreAdminV1Index where
       "GoogleFirestoreAdminV1Index"
       ( \o ->
           GoogleFirestoreAdminV1Index
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "queryScope")
             Core.<*> (o Core..:? "state")
@@ -1949,7 +1941,7 @@ instance
       ( \o ->
           GoogleFirestoreAdminV1IndexConfig
             Core.<$> (o Core..:? "ancestorField")
-            Core.<*> (o Core..:? "indexes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "indexes")
             Core.<*> (o Core..:? "reverting")
             Core.<*> (o Core..:? "usesAncestorConfig")
       )
@@ -2152,7 +2144,7 @@ instance
       "GoogleFirestoreAdminV1ListDatabasesResponse"
       ( \o ->
           GoogleFirestoreAdminV1ListDatabasesResponse
-            Core.<$> (o Core..:? "databases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "databases")
       )
 
 instance
@@ -2195,7 +2187,7 @@ instance
       "GoogleFirestoreAdminV1ListFieldsResponse"
       ( \o ->
           GoogleFirestoreAdminV1ListFieldsResponse
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2240,7 +2232,7 @@ instance
       "GoogleFirestoreAdminV1ListIndexesResponse"
       ( \o ->
           GoogleFirestoreAdminV1ListIndexesResponse
-            Core.<$> (o Core..:? "indexes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "indexes")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2311,8 +2303,12 @@ instance Core.FromJSON GoogleFirestoreAdminV1Progress where
       "GoogleFirestoreAdminV1Progress"
       ( \o ->
           GoogleFirestoreAdminV1Progress
-            Core.<$> (o Core..:? "completedWork")
-            Core.<*> (o Core..:? "estimatedWork")
+            Core.<$> ( o Core..:? "completedWork"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "estimatedWork"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GoogleFirestoreAdminV1Progress where
@@ -2415,7 +2411,7 @@ instance
       ( \o ->
           GoogleLongrunningListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -2653,7 +2649,7 @@ instance Core.FromJSON ListCollectionIdsResponse where
       "ListCollectionIdsResponse"
       ( \o ->
           ListCollectionIdsResponse
-            Core.<$> (o Core..:? "collectionIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectionIds")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2689,7 +2685,7 @@ instance Core.FromJSON ListDocumentsResponse where
       "ListDocumentsResponse"
       ( \o ->
           ListDocumentsResponse
-            Core.<$> (o Core..:? "documents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "documents")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2725,7 +2721,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3095,7 +3091,9 @@ instance Core.FromJSON PartitionQueryRequest where
           PartitionQueryRequest
             Core.<$> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "partitionCount")
+            Core.<*> ( o Core..:? "partitionCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "structuredQuery")
       )
 
@@ -3139,7 +3137,7 @@ instance Core.FromJSON PartitionQueryResponse where
       ( \o ->
           PartitionQueryResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "partitions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "partitions")
       )
 
 instance Core.ToJSON PartitionQueryResponse where
@@ -3205,10 +3203,7 @@ instance Core.FromJSON Projection where
   parseJSON =
     Core.withObject
       "Projection"
-      ( \o ->
-          Projection
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
-      )
+      (\o -> Projection Core.<$> (o Core..:? "fields"))
 
 instance Core.ToJSON Projection where
   toJSON Projection {..} =
@@ -3468,7 +3463,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3554,10 +3549,10 @@ instance Core.FromJSON StructuredQuery where
       ( \o ->
           StructuredQuery
             Core.<$> (o Core..:? "endAt")
-            Core.<*> (o Core..:? "from" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "from")
             Core.<*> (o Core..:? "limit")
             Core.<*> (o Core..:? "offset")
-            Core.<*> (o Core..:? "orderBy" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "orderBy")
             Core.<*> (o Core..:? "select")
             Core.<*> (o Core..:? "startAt")
             Core.<*> (o Core..:? "where")
@@ -3676,7 +3671,7 @@ instance Core.FromJSON TargetChange where
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "resumeToken")
             Core.<*> (o Core..:? "targetChangeType")
-            Core.<*> (o Core..:? "targetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targetIds")
       )
 
 instance Core.ToJSON TargetChange where
@@ -3820,7 +3815,9 @@ instance Core.FromJSON Value where
             Core.<*> (o Core..:? "bytesValue")
             Core.<*> (o Core..:? "doubleValue")
             Core.<*> (o Core..:? "geoPointValue")
-            Core.<*> (o Core..:? "integerValue")
+            Core.<*> ( o Core..:? "integerValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mapValue")
             Core.<*> (o Core..:? "nullValue")
             Core.<*> (o Core..:? "referenceValue")
@@ -3890,7 +3887,7 @@ instance Core.FromJSON Write where
             Core.<*> (o Core..:? "transform")
             Core.<*> (o Core..:? "update")
             Core.<*> (o Core..:? "updateMask")
-            Core.<*> (o Core..:? "updateTransforms" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "updateTransforms")
       )
 
 instance Core.ToJSON Write where
@@ -3943,7 +3940,7 @@ instance Core.FromJSON WriteRequest where
             Core.<$> (o Core..:? "labels")
             Core.<*> (o Core..:? "streamId")
             Core.<*> (o Core..:? "streamToken")
-            Core.<*> (o Core..:? "writes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "writes")
       )
 
 instance Core.ToJSON WriteRequest where
@@ -4022,7 +4019,7 @@ instance Core.FromJSON WriteResponse where
             Core.<$> (o Core..:? "commitTime")
             Core.<*> (o Core..:? "streamId")
             Core.<*> (o Core..:? "streamToken")
-            Core.<*> (o Core..:? "writeResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "writeResults")
       )
 
 instance Core.ToJSON WriteResponse where
@@ -4059,7 +4056,7 @@ instance Core.FromJSON WriteResult where
       "WriteResult"
       ( \o ->
           WriteResult
-            Core.<$> (o Core..:? "transformResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "transformResults")
             Core.<*> (o Core..:? "updateTime")
       )
 

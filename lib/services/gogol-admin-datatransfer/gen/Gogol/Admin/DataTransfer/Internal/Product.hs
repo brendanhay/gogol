@@ -91,12 +91,12 @@ instance Core.FromJSON Application where
       ( \o ->
           Application
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#datatransfer#ApplicationResource"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "transferParams" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferParams")
       )
 
 instance Core.ToJSON Application where
@@ -140,10 +140,10 @@ instance Core.FromJSON ApplicationDataTransfer where
       "ApplicationDataTransfer"
       ( \o ->
           ApplicationDataTransfer
-            Core.<$> (o Core..:? "applicationId")
-            Core.<*> ( o Core..:? "applicationTransferParams"
-                         Core..!= Core.mempty
+            Core.<$> ( o Core..:? "applicationId"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "applicationTransferParams")
             Core.<*> (o Core..:? "applicationTransferStatus")
       )
 
@@ -183,8 +183,7 @@ instance Core.FromJSON ApplicationTransferParam where
       "ApplicationTransferParam"
       ( \o ->
           ApplicationTransferParam
-            Core.<$> (o Core..:? "key")
-            Core.<*> (o Core..:? "value" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ApplicationTransferParam where
@@ -228,7 +227,7 @@ instance Core.FromJSON ApplicationsListResponse where
       "ApplicationsListResponse"
       ( \o ->
           ApplicationsListResponse
-            Core.<$> (o Core..:? "applications" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "applications")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#datatransfer#applicationsList"
@@ -291,9 +290,7 @@ instance Core.FromJSON DataTransfer where
       "DataTransfer"
       ( \o ->
           DataTransfer
-            Core.<$> ( o Core..:? "applicationDataTransfers"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "applicationDataTransfers")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
             Core.<*> ( o Core..:? "kind"
@@ -354,7 +351,7 @@ instance Core.FromJSON DataTransfersListResponse where
       "DataTransfersListResponse"
       ( \o ->
           DataTransfersListResponse
-            Core.<$> (o Core..:? "dataTransfers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataTransfers")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#datatransfer#dataTransfersList"

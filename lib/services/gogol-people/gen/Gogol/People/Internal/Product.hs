@@ -485,9 +485,9 @@ instance Core.FromJSON BatchCreateContactsRequest where
       "BatchCreateContactsRequest"
       ( \o ->
           BatchCreateContactsRequest
-            Core.<$> (o Core..:? "contacts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contacts")
             Core.<*> (o Core..:? "readMask")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON BatchCreateContactsRequest where
@@ -521,7 +521,7 @@ instance Core.FromJSON BatchCreateContactsResponse where
       "BatchCreateContactsResponse"
       ( \o ->
           BatchCreateContactsResponse
-            Core.<$> (o Core..:? "createdPeople" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "createdPeople")
       )
 
 instance Core.ToJSON BatchCreateContactsResponse where
@@ -552,7 +552,7 @@ instance Core.FromJSON BatchDeleteContactsRequest where
       "BatchDeleteContactsRequest"
       ( \o ->
           BatchDeleteContactsRequest
-            Core.<$> (o Core..:? "resourceNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourceNames")
       )
 
 instance Core.ToJSON BatchDeleteContactsRequest where
@@ -583,7 +583,7 @@ instance Core.FromJSON BatchGetContactGroupsResponse where
       "BatchGetContactGroupsResponse"
       ( \o ->
           BatchGetContactGroupsResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON BatchGetContactGroupsResponse where
@@ -627,7 +627,7 @@ instance Core.FromJSON BatchUpdateContactsRequest where
           BatchUpdateContactsRequest
             Core.<$> (o Core..:? "contacts")
             Core.<*> (o Core..:? "readMask")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
             Core.<*> (o Core..:? "updateMask")
       )
 
@@ -1001,14 +1001,12 @@ instance Core.FromJSON ContactGroup where
       "ContactGroup"
       ( \o ->
           ContactGroup
-            Core.<$> (o Core..:? "clientData" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clientData")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "formattedName")
             Core.<*> (o Core..:? "groupType")
             Core.<*> (o Core..:? "memberCount")
-            Core.<*> ( o Core..:? "memberResourceNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "memberResourceNames")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "resourceName")
@@ -1216,7 +1214,7 @@ instance
           CopyOtherContactToMyContactsGroupRequest
             Core.<$> (o Core..:? "copyMask")
             Core.<*> (o Core..:? "readMask")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance
@@ -1736,8 +1734,7 @@ instance Core.FromJSON GetPeopleResponse where
     Core.withObject
       "GetPeopleResponse"
       ( \o ->
-          GetPeopleResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+          GetPeopleResponse Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON GetPeopleResponse where
@@ -1911,7 +1908,7 @@ instance Core.FromJSON ListConnectionsResponse where
       "ListConnectionsResponse"
       ( \o ->
           ListConnectionsResponse
-            Core.<$> (o Core..:? "connections" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "connections")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
             Core.<*> (o Core..:? "totalItems")
@@ -1962,7 +1959,7 @@ instance Core.FromJSON ListContactGroupsResponse where
       "ListContactGroupsResponse"
       ( \o ->
           ListContactGroupsResponse
-            Core.<$> (o Core..:? "contactGroups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contactGroups")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
             Core.<*> (o Core..:? "totalItems")
@@ -2010,7 +2007,7 @@ instance Core.FromJSON ListDirectoryPeopleResponse where
           ListDirectoryPeopleResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
-            Core.<*> (o Core..:? "people" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "people")
       )
 
 instance Core.ToJSON ListDirectoryPeopleResponse where
@@ -2057,7 +2054,7 @@ instance Core.FromJSON ListOtherContactsResponse where
           ListOtherContactsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
-            Core.<*> (o Core..:? "otherContacts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "otherContacts")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -2300,12 +2297,8 @@ instance
       "ModifyContactGroupMembersRequest"
       ( \o ->
           ModifyContactGroupMembersRequest
-            Core.<$> ( o Core..:? "resourceNamesToAdd"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "resourceNamesToRemove"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "resourceNamesToAdd")
+            Core.<*> (o Core..:? "resourceNamesToRemove")
       )
 
 instance Core.ToJSON ModifyContactGroupMembersRequest where
@@ -2350,11 +2343,8 @@ instance
           ModifyContactGroupMembersResponse
             Core.<$> ( o
                          Core..:? "canNotRemoveLastContactGroupResourceNames"
-                         Core..!= Core.mempty
                      )
-            Core.<*> ( o Core..:? "notFoundResourceNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notFoundResourceNames")
       )
 
 instance
@@ -2804,48 +2794,44 @@ instance Core.FromJSON Person where
       "Person"
       ( \o ->
           Person
-            Core.<$> (o Core..:? "addresses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addresses")
             Core.<*> (o Core..:? "ageRange")
-            Core.<*> (o Core..:? "ageRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "biographies" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "birthdays" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "braggingRights" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "calendarUrls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "clientData" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "coverPhotos" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "emailAddresses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ageRanges")
+            Core.<*> (o Core..:? "biographies")
+            Core.<*> (o Core..:? "birthdays")
+            Core.<*> (o Core..:? "braggingRights")
+            Core.<*> (o Core..:? "calendarUrls")
+            Core.<*> (o Core..:? "clientData")
+            Core.<*> (o Core..:? "coverPhotos")
+            Core.<*> (o Core..:? "emailAddresses")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "externalIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileAses" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "genders" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "imClients" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "interests" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locales" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "memberships" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
+            Core.<*> (o Core..:? "externalIds")
+            Core.<*> (o Core..:? "fileAses")
+            Core.<*> (o Core..:? "genders")
+            Core.<*> (o Core..:? "imClients")
+            Core.<*> (o Core..:? "interests")
+            Core.<*> (o Core..:? "locales")
+            Core.<*> (o Core..:? "locations")
+            Core.<*> (o Core..:? "memberships")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "miscKeywords" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "names" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "nicknames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "occupations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "organizations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "phoneNumbers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "photos" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "relations" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "relationshipInterests"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "relationshipStatuses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "residences" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "miscKeywords")
+            Core.<*> (o Core..:? "names")
+            Core.<*> (o Core..:? "nicknames")
+            Core.<*> (o Core..:? "occupations")
+            Core.<*> (o Core..:? "organizations")
+            Core.<*> (o Core..:? "phoneNumbers")
+            Core.<*> (o Core..:? "photos")
+            Core.<*> (o Core..:? "relations")
+            Core.<*> (o Core..:? "relationshipInterests")
+            Core.<*> (o Core..:? "relationshipStatuses")
+            Core.<*> (o Core..:? "residences")
             Core.<*> (o Core..:? "resourceName")
-            Core.<*> (o Core..:? "sipAddresses" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "skills" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "taglines" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "urls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "userDefined" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sipAddresses")
+            Core.<*> (o Core..:? "skills")
+            Core.<*> (o Core..:? "taglines")
+            Core.<*> (o Core..:? "urls")
+            Core.<*> (o Core..:? "userDefined")
       )
 
 instance Core.ToJSON Person where
@@ -2931,14 +2917,10 @@ instance Core.FromJSON PersonMetadata where
       ( \o ->
           PersonMetadata
             Core.<$> (o Core..:? "deleted")
-            Core.<*> ( o Core..:? "linkedPeopleResourceNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "linkedPeopleResourceNames")
             Core.<*> (o Core..:? "objectType")
-            Core.<*> ( o Core..:? "previousResourceNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "previousResourceNames")
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON PersonMetadata where
@@ -3123,7 +3105,7 @@ instance Core.FromJSON ProfileMetadata where
       ( \o ->
           ProfileMetadata
             Core.<$> (o Core..:? "objectType")
-            Core.<*> (o Core..:? "userTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userTypes")
       )
 
 instance Core.ToJSON ProfileMetadata where
@@ -3346,7 +3328,7 @@ instance Core.FromJSON SearchDirectoryPeopleResponse where
       ( \o ->
           SearchDirectoryPeopleResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "people" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "people")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -3379,8 +3361,7 @@ instance Core.FromJSON SearchResponse where
     Core.withObject
       "SearchResponse"
       ( \o ->
-          SearchResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+          SearchResponse Core.<$> (o Core..:? "results")
       )
 
 instance Core.ToJSON SearchResponse where
@@ -3579,7 +3560,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3731,7 +3712,7 @@ instance Core.FromJSON UpdateContactPhotoRequest where
           UpdateContactPhotoRequest
             Core.<$> (o Core..:? "personFields")
             Core.<*> (o Core..:? "photoBytes")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON UpdateContactPhotoRequest where

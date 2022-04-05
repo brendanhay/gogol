@@ -192,8 +192,8 @@ instance Core.FromJSON Action where
       "Action"
       ( \o ->
           Action
-            Core.<$> (o Core..:? "commands" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "envVariables" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "commands")
+            Core.<*> (o Core..:? "envVariables")
             Core.<*> (o Core..:? "timeoutMilliSeconds")
       )
 
@@ -453,7 +453,7 @@ instance Core.FromJSON Metadata where
       ( \o ->
           Metadata
             Core.<$> (o Core..:? "fingerPrint")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
       )
 
 instance Core.ToJSON Metadata where
@@ -528,7 +528,7 @@ instance Core.FromJSON NetworkInterface where
       "NetworkInterface"
       ( \o ->
           NetworkInterface
-            Core.<$> (o Core..:? "accessConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessConfigs")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "networkIp")
       )
@@ -622,7 +622,9 @@ instance Core.FromJSON NewDiskInitializeParams where
       "NewDiskInitializeParams"
       ( \o ->
           NewDiskInitializeParams
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "diskType")
             Core.<*> (o Core..:? "sourceImage")
       )
@@ -708,15 +710,15 @@ instance Core.FromJSON Pool where
             Core.<*> (o Core..:? "baseInstanceName")
             Core.<*> (o Core..:? "currentNumReplicas")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthChecks")
             Core.<*> (o Core..:? "initialNumReplicas")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "numReplicas")
-            Core.<*> (o Core..:? "resourceViews" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceViews")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "targetPool")
-            Core.<*> (o Core..:? "targetPools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targetPools")
             Core.<*> (o Core..:? "template")
             Core.<*> (o Core..:? "type")
       )
@@ -765,7 +767,7 @@ instance Core.FromJSON PoolsDeleteRequest where
       "PoolsDeleteRequest"
       ( \o ->
           PoolsDeleteRequest
-            Core.<$> (o Core..:? "abandonInstances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "abandonInstances")
       )
 
 instance Core.ToJSON PoolsDeleteRequest where
@@ -800,7 +802,7 @@ instance Core.FromJSON PoolsListResponse where
       ( \o ->
           PoolsListResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON PoolsListResponse where
@@ -961,7 +963,7 @@ instance Core.FromJSON ReplicasListResponse where
       ( \o ->
           ReplicasListResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ReplicasListResponse where
@@ -995,8 +997,7 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1031,7 +1032,7 @@ instance Core.FromJSON Tag where
       ( \o ->
           Tag
             Core.<$> (o Core..:? "fingerPrint")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
       )
 
 instance Core.ToJSON Tag where
@@ -1076,7 +1077,7 @@ instance Core.FromJSON Template where
       ( \o ->
           Template
             Core.<$> (o Core..:? "action")
-            Core.<*> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthChecks")
             Core.<*> (o Core..:? "version")
             Core.<*> (o Core..:? "vmParams")
       )
@@ -1148,13 +1149,13 @@ instance Core.FromJSON VmParams where
             Core.<$> (o Core..:? "baseInstanceName")
             Core.<*> (o Core..:? "canIpForward")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disksToAttach" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "disksToCreate" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disksToAttach")
+            Core.<*> (o Core..:? "disksToCreate")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "networkInterfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkInterfaces")
             Core.<*> (o Core..:? "onHostMaintenance")
-            Core.<*> (o Core..:? "serviceAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceAccounts")
             Core.<*> (o Core..:? "tags")
       )
 

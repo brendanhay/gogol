@@ -277,7 +277,7 @@ instance
       "GoogleCloudRunV2CloudSqlInstance"
       ( \o ->
           GoogleCloudRunV2CloudSqlInstance
-            Core.<$> (o Core..:? "connections" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "connections")
       )
 
 instance Core.ToJSON GoogleCloudRunV2CloudSqlInstance where
@@ -412,14 +412,14 @@ instance Core.FromJSON GoogleCloudRunV2Container where
       "GoogleCloudRunV2Container"
       ( \o ->
           GoogleCloudRunV2Container
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "command" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
+            Core.<*> (o Core..:? "command")
+            Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ports")
             Core.<*> (o Core..:? "resources")
-            Core.<*> (o Core..:? "volumeMounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumeMounts")
       )
 
 instance Core.ToJSON GoogleCloudRunV2Container where
@@ -581,7 +581,7 @@ instance
       ( \o ->
           GoogleCloudRunV2ListRevisionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "revisions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "revisions")
       )
 
 instance
@@ -626,7 +626,7 @@ instance
       ( \o ->
           GoogleCloudRunV2ListServicesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance
@@ -822,22 +822,26 @@ instance Core.FromJSON GoogleCloudRunV2Revision where
       ( \o ->
           GoogleCloudRunV2Revision
             Core.<$> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "confidential")
             Core.<*> (o Core..:? "containerConcurrency")
-            Core.<*> (o Core..:? "containers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "containers")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "deleteTime")
             Core.<*> (o Core..:? "encryptionKey")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "executionEnvironment")
             Core.<*> (o Core..:? "expireTime")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "logUri")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "observedGeneration")
+            Core.<*> ( o Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "reconciling")
             Core.<*> (o Core..:? "scaling")
             Core.<*> (o Core..:? "service")
@@ -845,7 +849,7 @@ instance Core.FromJSON GoogleCloudRunV2Revision where
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "uid")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
             Core.<*> (o Core..:? "vpcAccess")
       )
 
@@ -1064,7 +1068,7 @@ instance
             Core.<$> (o Core..:? "annotations")
             Core.<*> (o Core..:? "confidential")
             Core.<*> (o Core..:? "containerConcurrency")
-            Core.<*> (o Core..:? "containers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "containers")
             Core.<*> (o Core..:? "encryptionKey")
             Core.<*> (o Core..:? "executionEnvironment")
             Core.<*> (o Core..:? "labels")
@@ -1072,7 +1076,7 @@ instance
             Core.<*> (o Core..:? "scaling")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "timeout")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
             Core.<*> (o Core..:? "vpcAccess")
       )
 
@@ -1249,7 +1253,7 @@ instance
       ( \o ->
           GoogleCloudRunV2SecretVolumeSource
             Core.<$> (o Core..:? "defaultMode")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "secret")
       )
 
@@ -1375,14 +1379,16 @@ instance Core.FromJSON GoogleCloudRunV2Service where
             Core.<*> (o Core..:? "binaryAuthorization")
             Core.<*> (o Core..:? "client")
             Core.<*> (o Core..:? "clientVersion")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "creator")
             Core.<*> (o Core..:? "deleteTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "expireTime")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ingress")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "lastModifier")
@@ -1390,12 +1396,14 @@ instance Core.FromJSON GoogleCloudRunV2Service where
             Core.<*> (o Core..:? "latestReadyRevision")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "observedGeneration")
+            Core.<*> ( o Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "reconciling")
             Core.<*> (o Core..:? "template")
             Core.<*> (o Core..:? "terminalCondition")
-            Core.<*> (o Core..:? "traffic" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "trafficStatuses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "traffic")
+            Core.<*> (o Core..:? "trafficStatuses")
             Core.<*> (o Core..:? "uid")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "uri")
@@ -1805,7 +1813,7 @@ instance Core.FromJSON GoogleIamV1AuditConfig where
       "GoogleIamV1AuditConfig"
       ( \o ->
           GoogleIamV1AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -1845,7 +1853,7 @@ instance Core.FromJSON GoogleIamV1AuditLogConfig where
       "GoogleIamV1AuditLogConfig"
       ( \o ->
           GoogleIamV1AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -1890,7 +1898,7 @@ instance Core.FromJSON GoogleIamV1Binding where
       ( \o ->
           GoogleIamV1Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1939,8 +1947,8 @@ instance Core.FromJSON GoogleIamV1Policy where
       "GoogleIamV1Policy"
       ( \o ->
           GoogleIamV1Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -2019,7 +2027,7 @@ instance
       "GoogleIamV1TestIamPermissionsRequest"
       ( \o ->
           GoogleIamV1TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -2056,7 +2064,7 @@ instance
       "GoogleIamV1TestIamPermissionsResponse"
       ( \o ->
           GoogleIamV1TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -2099,7 +2107,7 @@ instance
       ( \o ->
           GoogleLongrunningListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -2290,7 +2298,7 @@ instance Core.FromJSON GoogleRpcStatus where
       ( \o ->
           GoogleRpcStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

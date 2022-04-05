@@ -188,7 +188,7 @@ instance Core.FromJSON Accounts where
       ( \o ->
           Accounts
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "adsensehost#accounts")
       )
 
@@ -288,7 +288,7 @@ instance Core.FromJSON AdClients where
       ( \o ->
           AdClients
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "adsensehost#adClients")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -727,7 +727,7 @@ instance Core.FromJSON AdUnits where
       ( \o ->
           AdUnits
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "adsensehost#adUnits")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -794,7 +794,7 @@ instance Core.FromJSON AssociationSession where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adsensehost#associationSession"
                      )
-            Core.<*> (o Core..:? "productCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productCodes")
             Core.<*> (o Core..:? "redirectUrl")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userLocale")
@@ -900,7 +900,7 @@ instance Core.FromJSON CustomChannels where
       ( \o ->
           CustomChannels
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adsensehost#customChannels"
                      )
@@ -958,13 +958,15 @@ instance Core.FromJSON Report where
       "Report"
       ( \o ->
           Report
-            Core.<$> (o Core..:? "averages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "averages")
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "kind" Core..!= "adsensehost#report")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalMatchedRows")
-            Core.<*> (o Core..:? "totals" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
+            Core.<*> ( o Core..:? "totalMatchedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "totals")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Report where
@@ -1100,7 +1102,7 @@ instance Core.FromJSON UrlChannels where
       ( \o ->
           UrlChannels
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adsensehost#urlChannels"
                      )

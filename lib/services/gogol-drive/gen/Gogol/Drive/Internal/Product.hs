@@ -293,17 +293,17 @@ instance Core.FromJSON About where
             Core.<$> (o Core..:? "appInstalled")
             Core.<*> (o Core..:? "canCreateDrives")
             Core.<*> (o Core..:? "canCreateTeamDrives")
-            Core.<*> (o Core..:? "driveThemes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "driveThemes")
             Core.<*> (o Core..:? "exportFormats")
-            Core.<*> ( o Core..:? "folderColorPalette"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "folderColorPalette")
             Core.<*> (o Core..:? "importFormats")
             Core.<*> (o Core..:? "kind" Core..!= "drive#about")
             Core.<*> (o Core..:? "maxImportSizes")
-            Core.<*> (o Core..:? "maxUploadSize")
+            Core.<*> ( o Core..:? "maxUploadSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storageQuota")
-            Core.<*> (o Core..:? "teamDriveThemes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "teamDriveThemes")
             Core.<*> (o Core..:? "user")
       )
 
@@ -496,10 +496,18 @@ instance Core.FromJSON About_StorageQuota where
       "About_StorageQuota"
       ( \o ->
           About_StorageQuota
-            Core.<$> (o Core..:? "limit")
-            Core.<*> (o Core..:? "usage")
-            Core.<*> (o Core..:? "usageInDrive")
-            Core.<*> (o Core..:? "usageInDriveTrash")
+            Core.<$> ( o Core..:? "limit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "usage"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "usageInDrive"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "usageInDriveTrash"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON About_StorageQuota where
@@ -675,7 +683,7 @@ instance Core.FromJSON ChangeList where
       "ChangeList"
       ( \o ->
           ChangeList
-            Core.<$> (o Core..:? "changes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "changes")
             Core.<*> (o Core..:? "kind" Core..!= "drive#changeList")
             Core.<*> (o Core..:? "newStartPageToken")
             Core.<*> (o Core..:? "nextPageToken")
@@ -744,7 +752,9 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -866,7 +876,7 @@ instance Core.FromJSON Comment where
             Core.<*> (o Core..:? "kind" Core..!= "drive#comment")
             Core.<*> (o Core..:? "modifiedTime")
             Core.<*> (o Core..:? "quotedFileContent")
-            Core.<*> (o Core..:? "replies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replies")
             Core.<*> (o Core..:? "resolved")
       )
 
@@ -955,7 +965,7 @@ instance Core.FromJSON CommentList where
       "CommentList"
       ( \o ->
           CommentList
-            Core.<$> (o Core..:? "comments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "comments")
             Core.<*> (o Core..:? "kind" Core..!= "drive#commentList")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1376,7 +1386,7 @@ instance Core.FromJSON DriveList where
       "DriveList"
       ( \o ->
           DriveList
-            Core.<$> (o Core..:? "drives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "drives")
             Core.<*> (o Core..:? "kind" Core..!= "drive#driveList")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1591,9 +1601,7 @@ instance Core.FromJSON File where
             Core.<$> (o Core..:? "appProperties")
             Core.<*> (o Core..:? "capabilities")
             Core.<*> (o Core..:? "contentHints")
-            Core.<*> ( o Core..:? "contentRestrictions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "contentRestrictions")
             Core.<*> (o Core..:? "copyRequiresWriterPermission")
             Core.<*> (o Core..:? "createdTime")
             Core.<*> (o Core..:? "description")
@@ -1621,27 +1629,35 @@ instance Core.FromJSON File where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "originalFilename")
             Core.<*> (o Core..:? "ownedByMe")
-            Core.<*> (o Core..:? "owners" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "parents" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "permissionIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "owners")
+            Core.<*> (o Core..:? "parents")
+            Core.<*> (o Core..:? "permissionIds")
+            Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "properties")
-            Core.<*> (o Core..:? "quotaBytesUsed")
+            Core.<*> ( o Core..:? "quotaBytesUsed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resourceKey")
             Core.<*> (o Core..:? "shared")
             Core.<*> (o Core..:? "sharedWithMeTime")
             Core.<*> (o Core..:? "sharingUser")
             Core.<*> (o Core..:? "shortcutDetails")
-            Core.<*> (o Core..:? "size")
-            Core.<*> (o Core..:? "spaces" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "spaces")
             Core.<*> (o Core..:? "starred")
             Core.<*> (o Core..:? "teamDriveId")
             Core.<*> (o Core..:? "thumbnailLink")
-            Core.<*> (o Core..:? "thumbnailVersion")
+            Core.<*> ( o Core..:? "thumbnailVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "trashed")
             Core.<*> (o Core..:? "trashedTime")
             Core.<*> (o Core..:? "trashingUser")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "videoMediaMetadata")
             Core.<*> (o Core..:? "viewedByMe")
             Core.<*> (o Core..:? "viewedByMeTime")
@@ -2418,7 +2434,9 @@ instance Core.FromJSON File_VideoMediaMetadata where
       "File_VideoMediaMetadata"
       ( \o ->
           File_VideoMediaMetadata
-            Core.<$> (o Core..:? "durationMillis")
+            Core.<$> ( o Core..:? "durationMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "width")
       )
@@ -2466,7 +2484,7 @@ instance Core.FromJSON FileList where
       "FileList"
       ( \o ->
           FileList
-            Core.<$> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "files")
             Core.<*> (o Core..:? "incompleteSearch")
             Core.<*> (o Core..:? "kind" Core..!= "drive#fileList")
             Core.<*> (o Core..:? "nextPageToken")
@@ -2513,7 +2531,7 @@ instance Core.FromJSON GeneratedIds where
       "GeneratedIds"
       ( \o ->
           GeneratedIds
-            Core.<$> (o Core..:? "ids" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ids")
             Core.<*> (o Core..:? "kind" Core..!= "drive#generatedIds")
             Core.<*> (o Core..:? "space")
       )
@@ -2606,12 +2624,10 @@ instance Core.FromJSON Permission where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "drive#permission")
             Core.<*> (o Core..:? "pendingOwner")
-            Core.<*> (o Core..:? "permissionDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissionDetails")
             Core.<*> (o Core..:? "photoLink")
             Core.<*> (o Core..:? "role")
-            Core.<*> ( o Core..:? "teamDrivePermissionDetails"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "teamDrivePermissionDetails")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "view")
       )
@@ -2780,7 +2796,7 @@ instance Core.FromJSON PermissionList where
           PermissionList
             Core.<$> (o Core..:? "kind" Core..!= "drive#permissionList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON PermissionList where
@@ -2899,7 +2915,7 @@ instance Core.FromJSON ReplyList where
           ReplyList
             Core.<$> (o Core..:? "kind" Core..!= "drive#replyList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "replies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replies")
       )
 
 instance Core.ToJSON ReplyList where
@@ -2987,7 +3003,9 @@ instance Core.FromJSON Revision where
             Core.<*> (o Core..:? "published")
             Core.<*> (o Core..:? "publishedLink")
             Core.<*> (o Core..:? "publishedOutsideDomain")
-            Core.<*> (o Core..:? "size")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Revision where
@@ -3075,7 +3093,7 @@ instance Core.FromJSON RevisionList where
           RevisionList
             Core.<$> (o Core..:? "kind" Core..!= "drive#revisionList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "revisions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "revisions")
       )
 
 instance Core.ToJSON RevisionList where
@@ -3480,7 +3498,7 @@ instance Core.FromJSON TeamDriveList where
           TeamDriveList
             Core.<$> (o Core..:? "kind" Core..!= "drive#teamDriveList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "teamDrives" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "teamDrives")
       )
 
 instance Core.ToJSON TeamDriveList where

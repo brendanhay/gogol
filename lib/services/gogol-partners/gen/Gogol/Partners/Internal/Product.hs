@@ -251,7 +251,7 @@ instance Core.FromJSON AdWordsManagerAccountInfo where
       ( \o ->
           AdWordsManagerAccountInfo
             Core.<$> (o Core..:? "customerName")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AdWordsManagerAccountInfo where
@@ -336,7 +336,7 @@ instance Core.FromJSON AnalyticsDataPoint where
       ( \o ->
           AnalyticsDataPoint
             Core.<$> (o Core..:? "eventCount")
-            Core.<*> (o Core..:? "eventLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eventLocations")
       )
 
 instance Core.ToJSON AnalyticsDataPoint where
@@ -451,14 +451,14 @@ instance Core.FromJSON AvailableOffer where
       ( \o ->
           AvailableOffer
             Core.<$> (o Core..:? "available")
-            Core.<*> (o Core..:? "countryOfferInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "countryOfferInfos")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "maxAccountAge")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "offerLevel")
             Core.<*> (o Core..:? "offerType")
-            Core.<*> (o Core..:? "qualifiedCustomer" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "qualifiedCustomer")
             Core.<*> (o Core..:? "qualifiedCustomersComplete")
             Core.<*> (o Core..:? "showSpecialOfferCopy")
             Core.<*> (o Core..:? "terms")
@@ -611,7 +611,7 @@ instance Core.FromJSON CertificationStatus where
       "CertificationStatus"
       ( \o ->
           CertificationStatus
-            Core.<$> (o Core..:? "examStatuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "examStatuses")
             Core.<*> (o Core..:? "isCertified")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "userCount")
@@ -714,35 +714,29 @@ instance Core.FromJSON Company where
       "Company"
       ( \o ->
           Company
-            Core.<$> ( o Core..:? "additionalWebsites"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "autoApprovalEmailDomains"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalWebsites")
+            Core.<*> (o Core..:? "autoApprovalEmailDomains")
             Core.<*> (o Core..:? "badgeAuthorityInAwn")
             Core.<*> (o Core..:? "badgeTier")
-            Core.<*> ( o Core..:? "certificationStatuses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "companyTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "certificationStatuses")
+            Core.<*> (o Core..:? "companyTypes")
             Core.<*> (o Core..:? "convertedMinMonthlyBudget")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "industries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "localizedInfos" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "industries")
+            Core.<*> (o Core..:? "localizedInfos")
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "originalMinMonthlyBudget")
-            Core.<*> (o Core..:? "primaryAdwordsManagerAccountId")
+            Core.<*> ( o Core..:? "primaryAdwordsManagerAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "primaryLanguageCode")
             Core.<*> (o Core..:? "primaryLocation")
             Core.<*> (o Core..:? "profileStatus")
             Core.<*> (o Core..:? "publicProfile")
-            Core.<*> (o Core..:? "ranks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "specializationStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "ranks")
+            Core.<*> (o Core..:? "services")
+            Core.<*> (o Core..:? "specializationStatus")
             Core.<*> (o Core..:? "websiteUrl")
       )
 
@@ -870,17 +864,17 @@ instance Core.FromJSON CompanyRelation where
             Core.<*> (o Core..:? "internalCompanyId")
             Core.<*> (o Core..:? "isPending")
             Core.<*> (o Core..:? "logoUrl")
-            Core.<*> (o Core..:? "managerAccount")
+            Core.<*> ( o Core..:? "managerAccount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "primaryAddress")
             Core.<*> (o Core..:? "primaryCountryCode")
             Core.<*> (o Core..:? "primaryLanguageCode")
             Core.<*> (o Core..:? "resolvedTimestamp")
-            Core.<*> (o Core..:? "segment" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "specializationStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "specializationStatus")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "website")
       )
@@ -1194,8 +1188,7 @@ instance Core.FromJSON EventData where
       "EventData"
       ( \o ->
           EventData
-            Core.<$> (o Core..:? "key")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON EventData where
@@ -1394,7 +1387,9 @@ instance Core.FromJSON HistoricalOffer where
           HistoricalOffer
             Core.<$> (o Core..:? "adwordsUrl")
             Core.<*> (o Core..:? "clientEmail")
-            Core.<*> (o Core..:? "clientId")
+            Core.<*> ( o Core..:? "clientId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "clientName")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "expirationTime")
@@ -1528,13 +1523,15 @@ instance Core.FromJSON Lead where
       "Lead"
       ( \o ->
           Lead
-            Core.<$> (o Core..:? "adwordsCustomerId")
+            Core.<$> ( o Core..:? "adwordsCustomerId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "comments")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "familyName")
             Core.<*> (o Core..:? "givenName")
-            Core.<*> (o Core..:? "gpsMotivations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "gpsMotivations")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "marketingOptIn")
@@ -1601,7 +1598,7 @@ instance Core.FromJSON ListAnalyticsResponse where
       "ListAnalyticsResponse"
       ( \o ->
           ListAnalyticsResponse
-            Core.<$> (o Core..:? "analytics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "analytics")
             Core.<*> (o Core..:? "analyticsSummary")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "responseMetadata")
@@ -1649,7 +1646,7 @@ instance Core.FromJSON ListCompaniesResponse where
       "ListCompaniesResponse"
       ( \o ->
           ListCompaniesResponse
-            Core.<$> (o Core..:? "companies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "companies")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "responseMetadata")
       )
@@ -1697,7 +1694,7 @@ instance Core.FromJSON ListLeadsResponse where
       "ListLeadsResponse"
       ( \o ->
           ListLeadsResponse
-            Core.<$> (o Core..:? "leads" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "leads")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "responseMetadata")
             Core.<*> (o Core..:? "totalSize")
@@ -1755,7 +1752,7 @@ instance Core.FromJSON ListOffersHistoryResponse where
           ListOffersHistoryResponse
             Core.<$> (o Core..:? "canShowEntireCompany")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "offers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "offers")
             Core.<*> (o Core..:? "responseMetadata")
             Core.<*> (o Core..:? "showingEntireCompany")
             Core.<*> (o Core..:? "totalResults")
@@ -1806,7 +1803,7 @@ instance Core.FromJSON ListOffersResponse where
       "ListOffersResponse"
       ( \o ->
           ListOffersResponse
-            Core.<$> (o Core..:? "availableOffers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "availableOffers")
             Core.<*> (o Core..:? "noOfferReason")
             Core.<*> (o Core..:? "responseMetadata")
       )
@@ -1850,7 +1847,7 @@ instance Core.FromJSON ListUserStatesResponse where
       ( \o ->
           ListUserStatesResponse
             Core.<$> (o Core..:? "responseMetadata")
-            Core.<*> (o Core..:? "userStates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userStates")
       )
 
 instance Core.ToJSON ListUserStatesResponse where
@@ -1895,7 +1892,7 @@ instance Core.FromJSON LocalizedCompanyInfo where
       "LocalizedCompanyInfo"
       ( \o ->
           LocalizedCompanyInfo
-            Core.<$> (o Core..:? "countryCodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "countryCodes")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "overview")
@@ -1963,7 +1960,7 @@ instance Core.FromJSON Location where
       ( \o ->
           Location
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "addressLine" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "addressLine")
             Core.<*> (o Core..:? "administrativeArea")
             Core.<*> (o Core..:? "dependentLocality")
             Core.<*> (o Core..:? "languageCode")
@@ -2148,7 +2145,7 @@ instance Core.FromJSON LogUserEventRequest where
           LogUserEventRequest
             Core.<$> (o Core..:? "eventAction")
             Core.<*> (o Core..:? "eventCategory")
-            Core.<*> (o Core..:? "eventDatas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eventDatas")
             Core.<*> (o Core..:? "eventScope")
             Core.<*> (o Core..:? "lead")
             Core.<*> (o Core..:? "requestMetadata")
@@ -2232,7 +2229,9 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> (o Core..:? "units")
+            Core.<*> ( o Core..:? "units"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Money where
@@ -2296,7 +2295,9 @@ instance Core.FromJSON OfferCustomer where
             Core.<*> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "eligibilityDaysLeft")
-            Core.<*> (o Core..:? "externalCid")
+            Core.<*> ( o Core..:? "externalCid"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "getYAmount")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "offerType")
@@ -2535,7 +2536,7 @@ instance Core.FromJSON RequestMetadata where
       "RequestMetadata"
       ( \o ->
           RequestMetadata
-            Core.<$> (o Core..:? "experimentIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "experimentIds")
             Core.<*> (o Core..:? "locale")
             Core.<*> (o Core..:? "partnersSessionId")
             Core.<*> (o Core..:? "trafficSource")
@@ -2719,19 +2720,15 @@ instance Core.FromJSON User where
       ( \o ->
           User
             Core.<$> (o Core..:? "afaInfoShared")
-            Core.<*> ( o Core..:? "availableAdwordsManagerAccounts"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "certificationStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "availableAdwordsManagerAccounts")
+            Core.<*> (o Core..:? "certificationStatus")
             Core.<*> (o Core..:? "company")
             Core.<*> (o Core..:? "companyVerificationEmail")
-            Core.<*> (o Core..:? "examStatus" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "examStatus")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "internalId")
             Core.<*> (o Core..:? "lastAccessTime")
-            Core.<*> (o Core..:? "primaryEmails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "primaryEmails")
             Core.<*> (o Core..:? "profile")
             Core.<*> (o Core..:? "publicProfile")
       )
@@ -2860,16 +2857,18 @@ instance Core.FromJSON UserProfile where
       ( \o ->
           UserProfile
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "adwordsManagerAccount")
-            Core.<*> (o Core..:? "channels" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "adwordsManagerAccount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "channels")
             Core.<*> (o Core..:? "emailAddress")
             Core.<*> (o Core..:? "emailOptIns")
             Core.<*> (o Core..:? "familyName")
             Core.<*> (o Core..:? "givenName")
-            Core.<*> (o Core..:? "industries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jobFunctions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "markets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "industries")
+            Core.<*> (o Core..:? "jobFunctions")
+            Core.<*> (o Core..:? "languages")
+            Core.<*> (o Core..:? "markets")
             Core.<*> (o Core..:? "migrateToAfa")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "primaryCountryCode")

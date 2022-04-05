@@ -161,7 +161,7 @@ instance Core.FromJSON AuditRefs where
             Core.<$> (o Core..:? "acronym")
             Core.<*> (o Core..:? "group")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "relevantAudits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "relevantAudits")
             Core.<*> (o Core..:? "weight")
       )
 
@@ -600,7 +600,7 @@ instance Core.FromJSON LighthouseCategoryV5 where
       "LighthouseCategoryV5"
       ( \o ->
           LighthouseCategoryV5
-            Core.<$> (o Core..:? "auditRefs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditRefs")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "manualDescription")
@@ -697,9 +697,9 @@ instance Core.FromJSON LighthouseResultV5 where
             Core.<*> (o Core..:? "i18n")
             Core.<*> (o Core..:? "lighthouseVersion")
             Core.<*> (o Core..:? "requestedUrl")
-            Core.<*> (o Core..:? "runWarnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "runWarnings")
             Core.<*> (o Core..:? "runtimeError")
-            Core.<*> (o Core..:? "stackPacks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stackPacks")
             Core.<*> (o Core..:? "timing")
             Core.<*> (o Core..:? "userAgent")
       )
@@ -1484,7 +1484,7 @@ instance Core.FromJSON UserPageLoadMetricV5 where
       ( \o ->
           UserPageLoadMetricV5
             Core.<$> (o Core..:? "category")
-            Core.<*> (o Core..:? "distributions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "distributions")
             Core.<*> (o Core..:? "formFactor")
             Core.<*> (o Core..:? "median")
             Core.<*> (o Core..:? "metricId")

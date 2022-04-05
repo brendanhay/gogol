@@ -128,7 +128,7 @@ instance
       "GoogleExampleLibraryagentV1ListBooksResponse"
       ( \o ->
           GoogleExampleLibraryagentV1ListBooksResponse
-            Core.<$> (o Core..:? "books" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "books")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -175,7 +175,7 @@ instance
       ( \o ->
           GoogleExampleLibraryagentV1ListShelvesResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "shelves" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "shelves")
       )
 
 instance

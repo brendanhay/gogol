@@ -91,9 +91,9 @@ instance Core.FromJSON GenerateAccessTokenRequest where
       "GenerateAccessTokenRequest"
       ( \o ->
           GenerateAccessTokenRequest
-            Core.<$> (o Core..:? "delegates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "delegates")
             Core.<*> (o Core..:? "lifetime")
-            Core.<*> (o Core..:? "scope" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scope")
       )
 
 instance Core.ToJSON GenerateAccessTokenRequest where
@@ -173,7 +173,7 @@ instance Core.FromJSON GenerateIdTokenRequest where
       ( \o ->
           GenerateIdTokenRequest
             Core.<$> (o Core..:? "audience")
-            Core.<*> (o Core..:? "delegates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "delegates")
             Core.<*> (o Core..:? "includeEmail")
       )
 
@@ -236,7 +236,7 @@ instance Core.FromJSON SignBlobRequest where
       "SignBlobRequest"
       ( \o ->
           SignBlobRequest
-            Core.<$> (o Core..:? "delegates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "delegates")
             Core.<*> (o Core..:? "payload")
       )
 
@@ -306,7 +306,7 @@ instance Core.FromJSON SignJwtRequest where
       "SignJwtRequest"
       ( \o ->
           SignJwtRequest
-            Core.<$> (o Core..:? "delegates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "delegates")
             Core.<*> (o Core..:? "payload")
       )
 

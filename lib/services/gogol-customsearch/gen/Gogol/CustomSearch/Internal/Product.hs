@@ -133,7 +133,7 @@ instance Core.FromJSON Promotion where
       "Promotion"
       ( \o ->
           Promotion
-            Core.<$> (o Core..:? "bodyLines" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bodyLines")
             Core.<*> (o Core..:? "displayLink")
             Core.<*> (o Core..:? "htmlTitle")
             Core.<*> (o Core..:? "image")
@@ -321,7 +321,7 @@ instance Core.FromJSON Result where
             Core.<*> (o Core..:? "htmlTitle")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "link")
             Core.<*> (o Core..:? "mime")
             Core.<*> (o Core..:? "pagemap")
@@ -532,9 +532,9 @@ instance Core.FromJSON Search where
       ( \o ->
           Search
             Core.<$> (o Core..:? "context")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "promotions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "promotions")
             Core.<*> (o Core..:? "queries")
             Core.<*> (o Core..:? "searchInformation")
             Core.<*> (o Core..:? "spelling")
@@ -613,9 +613,9 @@ instance Core.FromJSON Search_Queries where
       "Search_Queries"
       ( \o ->
           Search_Queries
-            Core.<$> (o Core..:? "nextPage" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "previousPage" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "request" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nextPage")
+            Core.<*> (o Core..:? "previousPage")
+            Core.<*> (o Core..:? "request")
       )
 
 instance Core.ToJSON Search_Queries where
@@ -791,7 +791,9 @@ instance Core.FromJSON Search_Queries_NextPageItem where
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "totalResults")
+            Core.<*> ( o Core..:? "totalResults"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Search_Queries_NextPageItem where
@@ -1007,7 +1009,9 @@ instance
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "totalResults")
+            Core.<*> ( o Core..:? "totalResults"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Search_Queries_PreviousPageItem where
@@ -1220,7 +1224,9 @@ instance Core.FromJSON Search_Queries_RequestItem where
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "totalResults")
+            Core.<*> ( o Core..:? "totalResults"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Search_Queries_RequestItem where

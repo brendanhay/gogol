@@ -128,8 +128,7 @@ instance Core.FromJSON FieldMask where
       "FieldMask"
       ( \o ->
           FieldMask
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<$> (o Core..:? "fields") Core.<*> (o Core..:? "id")
       )
 
 instance Core.ToJSON FieldMask where
@@ -183,7 +182,7 @@ instance Core.FromJSON MobileAppPanel where
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "mobileAppPanelId")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "owners" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "owners")
       )
 
 instance Core.ToJSON MobileAppPanel where
@@ -233,7 +232,7 @@ instance Core.FromJSON MobileAppPanelsListResponse where
           MobileAppPanelsListResponse
             Core.<$> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "requestId")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "tokenPagination")
       )
 
@@ -341,7 +340,7 @@ instance Core.FromJSON ResultsMask where
       "ResultsMask"
       ( \o ->
           ResultsMask
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "projection")
       )
 
@@ -410,8 +409,8 @@ instance Core.FromJSON Survey where
             Core.<*> (o Core..:? "cost")
             Core.<*> (o Core..:? "customerData")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "owners" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "questions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "owners")
+            Core.<*> (o Core..:? "questions")
             Core.<*> (o Core..:? "rejectionReason")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "surveyUrlId")
@@ -478,11 +477,11 @@ instance Core.FromJSON SurveyAudience where
       "SurveyAudience"
       ( \o ->
           SurveyAudience
-            Core.<$> (o Core..:? "ages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ages")
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "countrySubdivision")
             Core.<*> (o Core..:? "gender")
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "languages")
             Core.<*> (o Core..:? "mobileAppPanelId")
             Core.<*> (o Core..:? "populationSource")
       )
@@ -535,10 +534,16 @@ instance Core.FromJSON SurveyCost where
       "SurveyCost"
       ( \o ->
           SurveyCost
-            Core.<$> (o Core..:? "costPerResponseNanos")
+            Core.<$> ( o Core..:? "costPerResponseNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currencyCode")
-            Core.<*> (o Core..:? "maxCostPerResponseNanos")
-            Core.<*> (o Core..:? "nanos")
+            Core.<*> ( o Core..:? "maxCostPerResponseNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "nanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SurveyCost where
@@ -629,22 +634,20 @@ instance Core.FromJSON SurveyQuestion where
       ( \o ->
           SurveyQuestion
             Core.<$> (o Core..:? "answerOrder")
-            Core.<*> (o Core..:? "answers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "answers")
             Core.<*> (o Core..:? "hasOther")
             Core.<*> (o Core..:? "highValueLabel")
-            Core.<*> (o Core..:? "images" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "lastAnswerPositionPinned")
             Core.<*> (o Core..:? "lowValueLabel")
             Core.<*> (o Core..:? "mustPickSuggestion")
             Core.<*> (o Core..:? "numStars")
             Core.<*> (o Core..:? "openTextPlaceholder")
-            Core.<*> ( o Core..:? "openTextSuggestions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "openTextSuggestions")
             Core.<*> (o Core..:? "question")
             Core.<*> (o Core..:? "sentimentText")
             Core.<*> (o Core..:? "singleLineResponse")
-            Core.<*> (o Core..:? "thresholdAnswers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "thresholdAnswers")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "unitOfMeasurementLabel")
             Core.<*> (o Core..:? "videoId")
@@ -857,7 +860,7 @@ instance Core.FromJSON SurveysListResponse where
           SurveysListResponse
             Core.<$> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "requestId")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "tokenPagination")
       )
 
@@ -893,7 +896,9 @@ instance Core.FromJSON SurveysStartRequest where
       "SurveysStartRequest"
       ( \o ->
           SurveysStartRequest
-            Core.<$> (o Core..:? "maxCostPerResponseNanos")
+            Core.<$> ( o Core..:? "maxCostPerResponseNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SurveysStartRequest where

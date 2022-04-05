@@ -482,7 +482,7 @@ instance Core.FromJSON Form where
       ( \o ->
           Form
             Core.<$> (o Core..:? "actionUri")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
       )
 
 instance Core.ToJSON Form where
@@ -655,7 +655,7 @@ instance Core.FromJSON ListCrawledUrlsResponse where
       "ListCrawledUrlsResponse"
       ( \o ->
           ListCrawledUrlsResponse
-            Core.<$> (o Core..:? "crawledUrls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "crawledUrls")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -689,7 +689,7 @@ instance Core.FromJSON ListFindingTypeStatsResponse where
       "ListFindingTypeStatsResponse"
       ( \o ->
           ListFindingTypeStatsResponse
-            Core.<$> (o Core..:? "findingTypeStats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "findingTypeStats")
       )
 
 instance Core.ToJSON ListFindingTypeStatsResponse where
@@ -724,7 +724,7 @@ instance Core.FromJSON ListFindingsResponse where
       "ListFindingsResponse"
       ( \o ->
           ListFindingsResponse
-            Core.<$> (o Core..:? "findings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "findings")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -764,7 +764,7 @@ instance Core.FromJSON ListScanConfigsResponse where
       ( \o ->
           ListScanConfigsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "scanConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scanConfigs")
       )
 
 instance Core.ToJSON ListScanConfigsResponse where
@@ -800,7 +800,7 @@ instance Core.FromJSON ListScanRunsResponse where
       ( \o ->
           ListScanRunsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "scanRuns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scanRuns")
       )
 
 instance Core.ToJSON ListScanRunsResponse where
@@ -841,7 +841,7 @@ instance Core.FromJSON OutdatedLibrary where
       "OutdatedLibrary"
       ( \o ->
           OutdatedLibrary
-            Core.<$> (o Core..:? "learnMoreUrls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "learnMoreUrls")
             Core.<*> (o Core..:? "libraryName")
             Core.<*> (o Core..:? "version")
       )
@@ -916,7 +916,7 @@ instance Core.FromJSON ScanConfig where
       ( \o ->
           ScanConfig
             Core.<$> (o Core..:? "authentication")
-            Core.<*> (o Core..:? "blacklistPatterns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "blacklistPatterns")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "exportToSecurityCommandCenter")
             Core.<*> (o Core..:? "ignoreHttpStatusErrors")
@@ -925,7 +925,7 @@ instance Core.FromJSON ScanConfig where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "riskLevel")
             Core.<*> (o Core..:? "schedule")
-            Core.<*> (o Core..:? "startingUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "startingUrls")
             Core.<*> (o Core..:? "staticIpScan")
             Core.<*> (o Core..:? "userAgent")
       )
@@ -1050,9 +1050,13 @@ instance Core.FromJSON ScanRun where
             Core.<*> (o Core..:? "progressPercent")
             Core.<*> (o Core..:? "resultState")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "urlsCrawledCount")
-            Core.<*> (o Core..:? "urlsTestedCount")
-            Core.<*> (o Core..:? "warningTraces" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "urlsCrawledCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "urlsTestedCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "warningTraces")
       )
 
 instance Core.ToJSON ScanRun where
@@ -1285,8 +1289,8 @@ instance Core.FromJSON VulnerableHeaders where
       "VulnerableHeaders"
       ( \o ->
           VulnerableHeaders
-            Core.<$> (o Core..:? "headers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "missingHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "headers")
+            Core.<*> (o Core..:? "missingHeaders")
       )
 
 instance Core.ToJSON VulnerableHeaders where
@@ -1318,7 +1322,7 @@ instance Core.FromJSON VulnerableParameters where
       "VulnerableParameters"
       ( \o ->
           VulnerableParameters
-            Core.<$> (o Core..:? "parameterNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameterNames")
       )
 
 instance Core.ToJSON VulnerableParameters where
@@ -1362,7 +1366,7 @@ instance Core.FromJSON Xss where
           Xss
             Core.<$> (o Core..:? "attackVector")
             Core.<*> (o Core..:? "errorMessage")
-            Core.<*> (o Core..:? "stackTraces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stackTraces")
             Core.<*> (o Core..:? "storedXssSeedingUrl")
       )
 

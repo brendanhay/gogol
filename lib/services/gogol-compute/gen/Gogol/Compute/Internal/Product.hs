@@ -3954,7 +3954,7 @@ instance Core.FromJSON AcceleratorType where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#acceleratorType"
                      )
@@ -4029,7 +4029,7 @@ instance Core.FromJSON AcceleratorTypeAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -4116,7 +4116,7 @@ instance
       ( \o ->
           AcceleratorTypeAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4216,7 +4216,7 @@ instance Core.FromJSON AcceleratorTypeList where
       ( \o ->
           AcceleratorTypeList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#acceleratorTypeList"
                      )
@@ -4268,7 +4268,7 @@ instance Core.FromJSON AcceleratorTypeList_Warning where
       ( \o ->
           AcceleratorTypeList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4350,7 +4350,7 @@ instance Core.FromJSON AcceleratorTypesScopedList where
       "AcceleratorTypesScopedList"
       ( \o ->
           AcceleratorTypesScopedList
-            Core.<$> (o Core..:? "acceleratorTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "acceleratorTypes")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -4397,7 +4397,7 @@ instance
       ( \o ->
           AcceleratorTypesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4612,7 +4612,7 @@ instance Core.FromJSON Address where
             Core.<*> (o Core..:? "addressType")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ipVersion")
             Core.<*> (o Core..:? "kind" Core..!= "compute#address")
             Core.<*> (o Core..:? "name")
@@ -4624,7 +4624,7 @@ instance Core.FromJSON Address where
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "subnetwork")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON Address where
@@ -4699,7 +4699,7 @@ instance Core.FromJSON AddressAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -4777,7 +4777,7 @@ instance Core.FromJSON AddressAggregatedList_Warning where
       ( \o ->
           AddressAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4873,7 +4873,7 @@ instance Core.FromJSON AddressList where
       ( \o ->
           AddressList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#addressList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -4923,7 +4923,7 @@ instance Core.FromJSON AddressList_Warning where
       ( \o ->
           AddressList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4993,7 +4993,7 @@ instance Core.FromJSON AddressesScopedList where
       "AddressesScopedList"
       ( \o ->
           AddressesScopedList
-            Core.<$> (o Core..:? "addresses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addresses")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -5036,7 +5036,7 @@ instance Core.FromJSON AddressesScopedList_Warning where
       ( \o ->
           AddressesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -5207,7 +5207,9 @@ instance
       "AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk"
       ( \o ->
           AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "interface")
       )
 
@@ -5266,8 +5268,8 @@ instance
       "AllocationSpecificSKUAllocationReservedInstanceProperties"
       ( \o ->
           AllocationSpecificSKUAllocationReservedInstanceProperties
-            Core.<$> (o Core..:? "guestAccelerators" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "localSsds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "guestAccelerators")
+              Core.<*> (o Core..:? "localSsds")
               Core.<*> (o Core..:? "locationHint")
               Core.<*> (o Core..:? "machineType")
               Core.<*> (o Core..:? "minCpuPlatform")
@@ -5328,9 +5330,15 @@ instance
       "AllocationSpecificSKUReservation"
       ( \o ->
           AllocationSpecificSKUReservation
-            Core.<$> (o Core..:? "assuredCount")
-            Core.<*> (o Core..:? "count")
-            Core.<*> (o Core..:? "inUseCount")
+            Core.<$> ( o Core..:? "assuredCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "inUseCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "instanceProperties")
       )
 
@@ -5417,13 +5425,15 @@ instance Core.FromJSON AttachedDisk where
             Core.<*> (o Core..:? "boot")
             Core.<*> (o Core..:? "deviceName")
             Core.<*> (o Core..:? "diskEncryptionKey")
-            Core.<*> (o Core..:? "diskSizeGb")
-            Core.<*> (o Core..:? "guestOsFeatures" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "guestOsFeatures")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "initializeParams")
             Core.<*> (o Core..:? "interface")
             Core.<*> (o Core..:? "kind" Core..!= "compute#attachedDisk")
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "shieldedInstanceInitialState")
             Core.<*> (o Core..:? "source")
@@ -5517,13 +5527,17 @@ instance Core.FromJSON AttachedDiskInitializeParams where
           AttachedDiskInitializeParams
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "diskName")
-            Core.<*> (o Core..:? "diskSizeGb")
+            Core.<*> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "diskType")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "onUpdateAction")
-            Core.<*> (o Core..:? "provisionedIops")
-            Core.<*> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "provisionedIops"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "sourceImage")
             Core.<*> (o Core..:? "sourceImageEncryptionKey")
             Core.<*> (o Core..:? "sourceSnapshot")
@@ -5621,8 +5635,8 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
+            Core.<*> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "service")
       )
 
@@ -5666,7 +5680,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "ignoreChildExemptions")
             Core.<*> (o Core..:? "logType")
       )
@@ -5779,7 +5793,7 @@ instance Core.FromJSON Autoscaler where
             Core.<$> (o Core..:? "autoscalingPolicy")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#autoscaler")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "recommendedSize")
@@ -5787,7 +5801,7 @@ instance Core.FromJSON Autoscaler where
             Core.<*> (o Core..:? "scalingScheduleStatus")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "statusDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statusDetails")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "zone")
       )
@@ -5896,7 +5910,7 @@ instance Core.FromJSON AutoscalerAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -5977,7 +5991,7 @@ instance
       ( \o ->
           AutoscalerAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6073,7 +6087,7 @@ instance Core.FromJSON AutoscalerList where
       ( \o ->
           AutoscalerList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#autoscalerList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -6123,7 +6137,7 @@ instance Core.FromJSON AutoscalerList_Warning where
       ( \o ->
           AutoscalerList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6232,7 +6246,7 @@ instance Core.FromJSON AutoscalersScopedList where
       "AutoscalersScopedList"
       ( \o ->
           AutoscalersScopedList
-            Core.<$> (o Core..:? "autoscalers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "autoscalers")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -6275,7 +6289,7 @@ instance Core.FromJSON AutoscalersScopedList_Warning where
       ( \o ->
           AutoscalersScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6381,9 +6395,7 @@ instance Core.FromJSON AutoscalingPolicy where
           AutoscalingPolicy
             Core.<$> (o Core..:? "coolDownPeriodSec")
             Core.<*> (o Core..:? "cpuUtilization")
-            Core.<*> ( o Core..:? "customMetricUtilizations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "customMetricUtilizations")
             Core.<*> (o Core..:? "loadBalancingUtilization")
             Core.<*> (o Core..:? "maxNumReplicas")
             Core.<*> (o Core..:? "minNumReplicas")
@@ -6853,13 +6865,11 @@ instance Core.FromJSON BackendBucket where
             Core.<$> (o Core..:? "bucketName")
             Core.<*> (o Core..:? "cdnPolicy")
             Core.<*> (o Core..:? "creationTimestamp")
-            Core.<*> ( o Core..:? "customResponseHeaders"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "customResponseHeaders")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "edgeSecurityPolicy")
             Core.<*> (o Core..:? "enableCdn")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#backendBucket")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "selfLink")
@@ -6942,24 +6952,20 @@ instance Core.FromJSON BackendBucketCdnPolicy where
       "BackendBucketCdnPolicy"
       ( \o ->
           BackendBucketCdnPolicy
-            Core.<$> ( o Core..:? "bypassCacheOnRequestHeaders"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bypassCacheOnRequestHeaders")
             Core.<*> (o Core..:? "cacheKeyPolicy")
             Core.<*> (o Core..:? "cacheMode")
             Core.<*> (o Core..:? "clientTtl")
             Core.<*> (o Core..:? "defaultTtl")
             Core.<*> (o Core..:? "maxTtl")
             Core.<*> (o Core..:? "negativeCaching")
-            Core.<*> ( o Core..:? "negativeCachingPolicy"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "negativeCachingPolicy")
             Core.<*> (o Core..:? "requestCoalescing")
             Core.<*> (o Core..:? "serveWhileStale")
-            Core.<*> (o Core..:? "signedUrlCacheMaxAgeSec")
-            Core.<*> ( o Core..:? "signedUrlKeyNames"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "signedUrlCacheMaxAgeSec"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "signedUrlKeyNames")
       )
 
 instance Core.ToJSON BackendBucketCdnPolicy where
@@ -7054,12 +7060,8 @@ instance
       "BackendBucketCdnPolicyCacheKeyPolicy"
       ( \o ->
           BackendBucketCdnPolicyCacheKeyPolicy
-            Core.<$> ( o Core..:? "includeHttpHeaders"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "queryStringWhitelist"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "includeHttpHeaders")
+            Core.<*> (o Core..:? "queryStringWhitelist")
       )
 
 instance
@@ -7160,7 +7162,7 @@ instance Core.FromJSON BackendBucketList where
       ( \o ->
           BackendBucketList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#backendBucketList"
                      )
@@ -7212,7 +7214,7 @@ instance Core.FromJSON BackendBucketList_Warning where
       ( \o ->
           BackendBucketList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -7396,27 +7398,23 @@ instance Core.FromJSON BackendService where
       ( \o ->
           BackendService
             Core.<$> (o Core..:? "affinityCookieTtlSec")
-            Core.<*> (o Core..:? "backends" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "backends")
             Core.<*> (o Core..:? "cdnPolicy")
             Core.<*> (o Core..:? "circuitBreakers")
             Core.<*> (o Core..:? "connectionDraining")
             Core.<*> (o Core..:? "connectionTrackingPolicy")
             Core.<*> (o Core..:? "consistentHash")
             Core.<*> (o Core..:? "creationTimestamp")
-            Core.<*> ( o Core..:? "customRequestHeaders"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "customResponseHeaders"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "customRequestHeaders")
+            Core.<*> (o Core..:? "customResponseHeaders")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "edgeSecurityPolicy")
             Core.<*> (o Core..:? "enableCDN")
             Core.<*> (o Core..:? "failoverPolicy")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthChecks")
             Core.<*> (o Core..:? "iap")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#backendService")
             Core.<*> (o Core..:? "loadBalancingScheme")
             Core.<*> (o Core..:? "localityLbPolicy")
@@ -7540,7 +7538,7 @@ instance Core.FromJSON BackendServiceAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -7627,7 +7625,7 @@ instance
       ( \o ->
           BackendServiceAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -7744,24 +7742,20 @@ instance Core.FromJSON BackendServiceCdnPolicy where
       "BackendServiceCdnPolicy"
       ( \o ->
           BackendServiceCdnPolicy
-            Core.<$> ( o Core..:? "bypassCacheOnRequestHeaders"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bypassCacheOnRequestHeaders")
             Core.<*> (o Core..:? "cacheKeyPolicy")
             Core.<*> (o Core..:? "cacheMode")
             Core.<*> (o Core..:? "clientTtl")
             Core.<*> (o Core..:? "defaultTtl")
             Core.<*> (o Core..:? "maxTtl")
             Core.<*> (o Core..:? "negativeCaching")
-            Core.<*> ( o Core..:? "negativeCachingPolicy"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "negativeCachingPolicy")
             Core.<*> (o Core..:? "requestCoalescing")
             Core.<*> (o Core..:? "serveWhileStale")
-            Core.<*> (o Core..:? "signedUrlCacheMaxAgeSec")
-            Core.<*> ( o Core..:? "signedUrlKeyNames"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "signedUrlCacheMaxAgeSec"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "signedUrlKeyNames")
       )
 
 instance Core.ToJSON BackendServiceCdnPolicy where
@@ -8010,7 +8004,7 @@ instance Core.FromJSON BackendServiceGroupHealth where
       ( \o ->
           BackendServiceGroupHealth
             Core.<$> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "healthStatus" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthStatus")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#backendServiceGroupHealth"
                      )
@@ -8152,7 +8146,7 @@ instance Core.FromJSON BackendServiceList where
       ( \o ->
           BackendServiceList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#backendServiceList"
                      )
@@ -8204,7 +8198,7 @@ instance Core.FromJSON BackendServiceList_Warning where
       ( \o ->
           BackendServiceList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -8349,7 +8343,7 @@ instance Core.FromJSON BackendServicesScopedList where
       "BackendServicesScopedList"
       ( \o ->
           BackendServicesScopedList
-            Core.<$> (o Core..:? "backendServices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "backendServices")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -8396,7 +8390,7 @@ instance
       ( \o ->
           BackendServicesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -8619,17 +8613,19 @@ instance Core.FromJSON BfdStatus where
       ( \o ->
           BfdStatus
             Core.<$> (o Core..:? "bfdSessionInitializationMode")
-            Core.<*> (o Core..:? "configUpdateTimestampMicros")
-            Core.<*> (o Core..:? "controlPacketCounts")
-            Core.<*> ( o Core..:? "controlPacketIntervals"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "configUpdateTimestampMicros"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "controlPacketCounts")
+            Core.<*> (o Core..:? "controlPacketIntervals")
             Core.<*> (o Core..:? "localDiagnostic")
             Core.<*> (o Core..:? "localState")
             Core.<*> (o Core..:? "negotiatedLocalControlTxIntervalMs")
             Core.<*> (o Core..:? "rxPacket")
             Core.<*> (o Core..:? "txPacket")
-            Core.<*> (o Core..:? "uptimeMs")
+            Core.<*> ( o Core..:? "uptimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BfdStatus where
@@ -8739,7 +8735,7 @@ instance Core.FromJSON Binding where
           Binding
             Core.<$> (o Core..:? "bindingId")
             Core.<*> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -8795,10 +8791,14 @@ instance Core.FromJSON BulkInsertInstanceResource where
       "BulkInsertInstanceResource"
       ( \o ->
           BulkInsertInstanceResource
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "instanceProperties")
             Core.<*> (o Core..:? "locationPolicy")
-            Core.<*> (o Core..:? "minCount")
+            Core.<*> ( o Core..:? "minCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "namePattern")
             Core.<*> (o Core..:? "perInstanceProperties")
             Core.<*> (o Core..:? "sourceInstanceTemplate")
@@ -8975,20 +8975,12 @@ instance Core.FromJSON CacheKeyPolicy where
       ( \o ->
           CacheKeyPolicy
             Core.<$> (o Core..:? "includeHost")
-            Core.<*> ( o Core..:? "includeHttpHeaders"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "includeNamedCookies"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "includeHttpHeaders")
+            Core.<*> (o Core..:? "includeNamedCookies")
             Core.<*> (o Core..:? "includeProtocol")
             Core.<*> (o Core..:? "includeQueryString")
-            Core.<*> ( o Core..:? "queryStringBlacklist"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "queryStringWhitelist"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "queryStringBlacklist")
+            Core.<*> (o Core..:? "queryStringWhitelist")
       )
 
 instance Core.ToJSON CacheKeyPolicy where
@@ -9145,14 +9137,14 @@ instance Core.FromJSON Commitment where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "endTimestamp")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#commitment")
             Core.<*> (o Core..:? "licenseResource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "plan")
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "reservations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reservations")
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "startTimestamp")
             Core.<*> (o Core..:? "status")
@@ -9233,7 +9225,7 @@ instance Core.FromJSON CommitmentAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -9314,7 +9306,7 @@ instance
       ( \o ->
           CommitmentAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -9410,7 +9402,7 @@ instance Core.FromJSON CommitmentList where
       ( \o ->
           CommitmentList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#commitmentList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -9460,7 +9452,7 @@ instance Core.FromJSON CommitmentList_Warning where
       ( \o ->
           CommitmentList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -9533,7 +9525,7 @@ instance Core.FromJSON CommitmentsScopedList where
       "CommitmentsScopedList"
       ( \o ->
           CommitmentsScopedList
-            Core.<$> (o Core..:? "commitments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "commitments")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -9576,7 +9568,7 @@ instance Core.FromJSON CommitmentsScopedList_Warning where
       ( \o ->
           CommitmentsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -9672,7 +9664,7 @@ instance Core.FromJSON Condition where
             Core.<*> (o Core..:? "op")
             Core.<*> (o Core..:? "svc")
             Core.<*> (o Core..:? "sys")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON Condition where
@@ -9786,7 +9778,9 @@ instance
           ConsistentHashLoadBalancerSettings
             Core.<$> (o Core..:? "httpCookie")
             Core.<*> (o Core..:? "httpHeaderName")
-            Core.<*> (o Core..:? "minimumRingSize")
+            Core.<*> ( o Core..:? "minimumRingSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -9899,14 +9893,12 @@ instance Core.FromJSON CorsPolicy where
       ( \o ->
           CorsPolicy
             Core.<$> (o Core..:? "allowCredentials")
-            Core.<*> (o Core..:? "allowHeaders" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "allowMethods" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "allowOriginRegexes"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "allowOrigins" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "allowHeaders")
+            Core.<*> (o Core..:? "allowMethods")
+            Core.<*> (o Core..:? "allowOriginRegexes")
+            Core.<*> (o Core..:? "allowOrigins")
             Core.<*> (o Core..:? "disabled")
-            Core.<*> (o Core..:? "exposeHeaders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "exposeHeaders")
             Core.<*> (o Core..:? "maxAge")
       )
 
@@ -10211,26 +10203,32 @@ instance Core.FromJSON Disk where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "diskEncryptionKey")
-            Core.<*> (o Core..:? "guestOsFeatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "guestOsFeatures")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#disk")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "lastAttachTimestamp")
             Core.<*> (o Core..:? "lastDetachTimestamp")
-            Core.<*> (o Core..:? "licenseCodes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenseCodes")
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "locationHint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "options")
-            Core.<*> (o Core..:? "physicalBlockSizeBytes")
-            Core.<*> (o Core..:? "provisionedIops")
+            Core.<*> ( o Core..:? "physicalBlockSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "provisionedIops"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "replicaZones" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replicaZones")
+            Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "sizeGb")
+            Core.<*> ( o Core..:? "sizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sourceDisk")
             Core.<*> (o Core..:? "sourceDiskId")
             Core.<*> (o Core..:? "sourceImage")
@@ -10242,7 +10240,7 @@ instance Core.FromJSON Disk where
             Core.<*> (o Core..:? "sourceStorageObject")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "type")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -10376,7 +10374,7 @@ instance Core.FromJSON DiskAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -10454,7 +10452,7 @@ instance Core.FromJSON DiskAggregatedList_Warning where
       ( \o ->
           DiskAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -10597,7 +10595,7 @@ instance Core.FromJSON DiskList where
       ( \o ->
           DiskList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#diskList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -10647,7 +10645,7 @@ instance Core.FromJSON DiskList_Warning where
       ( \o ->
           DiskList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -10785,10 +10783,12 @@ instance Core.FromJSON DiskType where
       ( \o ->
           DiskType
             Core.<$> (o Core..:? "creationTimestamp")
-            Core.<*> (o Core..:? "defaultDiskSizeGb")
+            Core.<*> ( o Core..:? "defaultDiskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#diskType")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "region")
@@ -10864,7 +10864,7 @@ instance Core.FromJSON DiskTypeAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -10942,7 +10942,7 @@ instance Core.FromJSON DiskTypeAggregatedList_Warning where
       ( \o ->
           DiskTypeAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -11038,7 +11038,7 @@ instance Core.FromJSON DiskTypeList where
       ( \o ->
           DiskTypeList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#diskTypeList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -11088,7 +11088,7 @@ instance Core.FromJSON DiskTypeList_Warning where
       ( \o ->
           DiskTypeList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -11158,7 +11158,7 @@ instance Core.FromJSON DiskTypesScopedList where
       "DiskTypesScopedList"
       ( \o ->
           DiskTypesScopedList
-            Core.<$> (o Core..:? "diskTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "diskTypes")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -11201,7 +11201,7 @@ instance Core.FromJSON DiskTypesScopedList_Warning where
       ( \o ->
           DiskTypesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -11281,7 +11281,7 @@ instance
       "DisksAddResourcePoliciesRequest"
       ( \o ->
           DisksAddResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance Core.ToJSON DisksAddResourcePoliciesRequest where
@@ -11316,7 +11316,7 @@ instance
       "DisksRemoveResourcePoliciesRequest"
       ( \o ->
           DisksRemoveResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance
@@ -11349,7 +11349,10 @@ instance Core.FromJSON DisksResizeRequest where
     Core.withObject
       "DisksResizeRequest"
       ( \o ->
-          DisksResizeRequest Core.<$> (o Core..:? "sizeGb")
+          DisksResizeRequest
+            Core.<$> ( o Core..:? "sizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DisksResizeRequest where
@@ -11383,8 +11386,7 @@ instance Core.FromJSON DisksScopedList where
       "DisksScopedList"
       ( \o ->
           DisksScopedList
-            Core.<$> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warning")
+            Core.<$> (o Core..:? "disks") Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON DisksScopedList where
@@ -11426,7 +11428,7 @@ instance Core.FromJSON DisksScopedList_Warning where
       ( \o ->
           DisksScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -11529,7 +11531,7 @@ instance Core.FromJSON DistributionPolicy where
       ( \o ->
           DistributionPolicy
             Core.<$> (o Core..:? "targetShape")
-            Core.<*> (o Core..:? "zones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "zones")
       )
 
 instance Core.ToJSON DistributionPolicy where
@@ -11597,7 +11599,10 @@ instance Core.FromJSON Duration where
       "Duration"
       ( \o ->
           Duration
-            Core.<$> (o Core..:? "nanos") Core.<*> (o Core..:? "seconds")
+            Core.<$> (o Core..:? "nanos")
+            Core.<*> ( o Core..:? "seconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Duration where
@@ -11701,7 +11706,7 @@ instance Core.FromJSON ExchangedPeeringRoutesList where
       ( \o ->
           ExchangedPeeringRoutesList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#exchangedPeeringRoutesList"
                      )
@@ -11756,7 +11761,7 @@ instance
       ( \o ->
           ExchangedPeeringRoutesList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -11919,8 +11924,8 @@ instance Core.FromJSON ExternalVpnGateway where
           ExternalVpnGateway
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "interfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "interfaces")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#externalVpnGateway"
                      )
@@ -12058,7 +12063,7 @@ instance Core.FromJSON ExternalVpnGatewayList where
           ExternalVpnGatewayList
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#externalVpnGatewayList"
                      )
@@ -12111,7 +12116,7 @@ instance Core.FromJSON ExternalVpnGatewayList_Warning where
       ( \o ->
           ExternalVpnGatewayList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -12280,29 +12285,25 @@ instance Core.FromJSON Firewall where
       "Firewall"
       ( \o ->
           Firewall
-            Core.<$> (o Core..:? "allowed" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowed")
             Core.<*> (o Core..:? "creationTimestamp")
-            Core.<*> (o Core..:? "denied" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "denied")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "destinationRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "destinationRanges")
             Core.<*> (o Core..:? "direction")
             Core.<*> (o Core..:? "disabled")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#firewall")
             Core.<*> (o Core..:? "logConfig")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "sourceRanges" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "sourceServiceAccounts"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "sourceTags" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "targetServiceAccounts"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "targetTags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceRanges")
+            Core.<*> (o Core..:? "sourceServiceAccounts")
+            Core.<*> (o Core..:? "sourceTags")
+            Core.<*> (o Core..:? "targetServiceAccounts")
+            Core.<*> (o Core..:? "targetTags")
       )
 
 instance Core.ToJSON Firewall where
@@ -12358,7 +12359,7 @@ instance Core.FromJSON Firewall_AllowedItem where
       ( \o ->
           Firewall_AllowedItem
             Core.<$> (o Core..:? "IPProtocol")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ports")
       )
 
 instance Core.ToJSON Firewall_AllowedItem where
@@ -12393,7 +12394,7 @@ instance Core.FromJSON Firewall_DeniedItem where
       ( \o ->
           Firewall_DeniedItem
             Core.<$> (o Core..:? "IPProtocol")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ports")
       )
 
 instance Core.ToJSON Firewall_DeniedItem where
@@ -12444,7 +12445,7 @@ instance Core.FromJSON FirewallList where
       ( \o ->
           FirewallList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#firewallList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -12494,7 +12495,7 @@ instance Core.FromJSON FirewallList_Warning where
       ( \o ->
           FirewallList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -12606,7 +12607,7 @@ instance
       "FirewallPoliciesListAssociationsResponse"
       ( \o ->
           FirewallPoliciesListAssociationsResponse
-            Core.<$> (o Core..:? "associations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "associations")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#firewallPoliciesListAssociationsResponse"
                      )
@@ -12689,18 +12690,18 @@ instance Core.FromJSON FirewallPolicy where
       "FirewallPolicy"
       ( \o ->
           FirewallPolicy
-            Core.<$> (o Core..:? "associations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "associations")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#firewallPolicy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "ruleTupleCount")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "selfLinkWithId")
             Core.<*> (o Core..:? "shortName")
@@ -12819,7 +12820,7 @@ instance Core.FromJSON FirewallPolicyList where
       ( \o ->
           FirewallPolicyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#firewallPolicyList"
                      )
@@ -12869,7 +12870,7 @@ instance Core.FromJSON FirewallPolicyList_Warning where
       ( \o ->
           FirewallPolicyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -12990,11 +12991,9 @@ instance Core.FromJSON FirewallPolicyRule where
             Core.<*> (o Core..:? "match")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "ruleTupleCount")
-            Core.<*> (o Core..:? "targetResources" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "targetSecureTags" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "targetServiceAccounts"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetResources")
+            Core.<*> (o Core..:? "targetSecureTags")
+            Core.<*> (o Core..:? "targetServiceAccounts")
       )
 
 instance Core.ToJSON FirewallPolicyRule where
@@ -13050,10 +13049,10 @@ instance Core.FromJSON FirewallPolicyRuleMatcher where
       "FirewallPolicyRuleMatcher"
       ( \o ->
           FirewallPolicyRuleMatcher
-            Core.<$> (o Core..:? "destIpRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "layer4Configs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "srcIpRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "srcSecureTags" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "destIpRanges")
+            Core.<*> (o Core..:? "layer4Configs")
+            Core.<*> (o Core..:? "srcIpRanges")
+            Core.<*> (o Core..:? "srcSecureTags")
       )
 
 instance Core.ToJSON FirewallPolicyRuleMatcher where
@@ -13096,7 +13095,7 @@ instance
       ( \o ->
           FirewallPolicyRuleMatcherLayer4Config
             Core.<$> (o Core..:? "ipProtocol")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ports")
       )
 
 instance
@@ -13309,26 +13308,26 @@ instance Core.FromJSON ForwardingRule where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ipVersion")
             Core.<*> (o Core..:? "isMirroringCollector")
             Core.<*> (o Core..:? "kind" Core..!= "compute#forwardingRule")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "loadBalancingScheme")
-            Core.<*> (o Core..:? "metadataFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metadataFilters")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "networkTier")
             Core.<*> (o Core..:? "portRange")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pscConnectionId")
+            Core.<*> (o Core..:? "ports")
+            Core.<*> ( o Core..:? "pscConnectionId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pscConnectionStatus")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> ( o Core..:? "serviceDirectoryRegistrations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "serviceDirectoryRegistrations")
             Core.<*> (o Core..:? "serviceLabel")
             Core.<*> (o Core..:? "serviceName")
             Core.<*> (o Core..:? "subnetwork")
@@ -13457,7 +13456,7 @@ instance Core.FromJSON ForwardingRuleAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -13544,7 +13543,7 @@ instance
       ( \o ->
           ForwardingRuleAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -13644,7 +13643,7 @@ instance Core.FromJSON ForwardingRuleList where
       ( \o ->
           ForwardingRuleList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#forwardingRuleList"
                      )
@@ -13696,7 +13695,7 @@ instance Core.FromJSON ForwardingRuleList_Warning where
       ( \o ->
           ForwardingRuleList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -13856,7 +13855,7 @@ instance Core.FromJSON ForwardingRulesScopedList where
       "ForwardingRulesScopedList"
       ( \o ->
           ForwardingRulesScopedList
-            Core.<$> (o Core..:? "forwardingRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "forwardingRules")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -13903,7 +13902,7 @@ instance
       ( \o ->
           ForwardingRulesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -14038,7 +14037,7 @@ instance
       "GlobalNetworkEndpointGroupsAttachEndpointsRequest"
       ( \o ->
           GlobalNetworkEndpointGroupsAttachEndpointsRequest
-            Core.<$> (o Core..:? "networkEndpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "networkEndpoints")
       )
 
 instance
@@ -14079,7 +14078,7 @@ instance
       "GlobalNetworkEndpointGroupsDetachEndpointsRequest"
       ( \o ->
           GlobalNetworkEndpointGroupsDetachEndpointsRequest
-            Core.<$> (o Core..:? "networkEndpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "networkEndpoints")
       )
 
 instance
@@ -14126,7 +14125,7 @@ instance
       "GlobalOrganizationSetPolicyRequest"
       ( \o ->
           GlobalOrganizationSetPolicyRequest
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "policy")
       )
@@ -14241,7 +14240,7 @@ instance Core.FromJSON GlobalSetPolicyRequest where
       "GlobalSetPolicyRequest"
       ( \o ->
           GlobalSetPolicyRequest
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "policy")
       )
@@ -14380,8 +14379,7 @@ instance Core.FromJSON GuestAttributesValue where
     Core.withObject
       "GuestAttributesValue"
       ( \o ->
-          GuestAttributesValue
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+          GuestAttributesValue Core.<$> (o Core..:? "items")
       )
 
 instance Core.ToJSON GuestAttributesValue where
@@ -14691,7 +14689,7 @@ instance Core.FromJSON HealthCheck where
             Core.<*> (o Core..:? "http2HealthCheck")
             Core.<*> (o Core..:? "httpHealthCheck")
             Core.<*> (o Core..:? "httpsHealthCheck")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#healthCheck")
             Core.<*> (o Core..:? "logConfig")
             Core.<*> (o Core..:? "name")
@@ -14775,7 +14773,7 @@ instance Core.FromJSON HealthCheckList where
       ( \o ->
           HealthCheckList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#healthCheckList"
                      )
@@ -14827,7 +14825,7 @@ instance Core.FromJSON HealthCheckList_Warning where
       ( \o ->
           HealthCheckList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -14994,19 +14992,15 @@ instance Core.FromJSON HealthCheckService where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthChecks")
             Core.<*> (o Core..:? "healthStatusAggregationPolicy")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#healthCheckService"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "networkEndpointGroups"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "notificationEndpoints"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "networkEndpointGroups")
+            Core.<*> (o Core..:? "notificationEndpoints")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
       )
@@ -15105,7 +15099,7 @@ instance Core.FromJSON HealthCheckServicesList where
       ( \o ->
           HealthCheckServicesList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#healthCheckServicesList"
                      )
@@ -15160,7 +15154,7 @@ instance
       ( \o ->
           HealthCheckServicesList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -15264,7 +15258,7 @@ instance Core.FromJSON HealthChecksAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -15348,7 +15342,7 @@ instance
       ( \o ->
           HealthChecksAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -15431,7 +15425,7 @@ instance Core.FromJSON HealthChecksScopedList where
       "HealthChecksScopedList"
       ( \o ->
           HealthChecksScopedList
-            Core.<$> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "healthChecks")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -15474,7 +15468,7 @@ instance Core.FromJSON HealthChecksScopedList_Warning where
       ( \o ->
           HealthChecksScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -15719,7 +15713,7 @@ instance Core.FromJSON HostRule where
       ( \o ->
           HostRule
             Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "hosts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "hosts")
             Core.<*> (o Core..:? "pathMatcher")
       )
 
@@ -15872,18 +15866,10 @@ instance Core.FromJSON HttpHeaderAction where
       "HttpHeaderAction"
       ( \o ->
           HttpHeaderAction
-            Core.<$> ( o Core..:? "requestHeadersToAdd"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "requestHeadersToRemove"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "responseHeadersToAdd"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "responseHeadersToRemove"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "requestHeadersToAdd")
+            Core.<*> (o Core..:? "requestHeadersToRemove")
+            Core.<*> (o Core..:? "responseHeadersToAdd")
+            Core.<*> (o Core..:? "responseHeadersToRemove")
       )
 
 instance Core.ToJSON HttpHeaderAction where
@@ -16078,7 +16064,7 @@ instance Core.FromJSON HttpHealthCheck where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "healthyThreshold")
             Core.<*> (o Core..:? "host")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#httpHealthCheck"
                      )
@@ -16153,7 +16139,7 @@ instance Core.FromJSON HttpHealthCheckList where
       ( \o ->
           HttpHealthCheckList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#httpHealthCheckList"
                      )
@@ -16205,7 +16191,7 @@ instance Core.FromJSON HttpHealthCheckList_Warning where
       ( \o ->
           HttpHealthCheckList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -16403,7 +16389,7 @@ instance Core.FromJSON HttpRetryPolicy where
           HttpRetryPolicy
             Core.<$> (o Core..:? "numRetries")
             Core.<*> (o Core..:? "perTryTimeout")
-            Core.<*> (o Core..:? "retryConditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "retryConditions")
       )
 
 instance Core.ToJSON HttpRetryPolicy where
@@ -16467,9 +16453,7 @@ instance Core.FromJSON HttpRouteAction where
             Core.<*> (o Core..:? "retryPolicy")
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "urlRewrite")
-            Core.<*> ( o Core..:? "weightedBackendServices"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "weightedBackendServices")
       )
 
 instance Core.ToJSON HttpRouteAction where
@@ -16534,7 +16518,7 @@ instance Core.FromJSON HttpRouteRule where
           HttpRouteRule
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "headerAction")
-            Core.<*> (o Core..:? "matchRules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "matchRules")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "routeAction")
             Core.<*> (o Core..:? "service")
@@ -16598,13 +16582,11 @@ instance Core.FromJSON HttpRouteRuleMatch where
       ( \o ->
           HttpRouteRuleMatch
             Core.<$> (o Core..:? "fullPathMatch")
-            Core.<*> (o Core..:? "headerMatches" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "headerMatches")
             Core.<*> (o Core..:? "ignoreCase")
-            Core.<*> (o Core..:? "metadataFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metadataFilters")
             Core.<*> (o Core..:? "prefixMatch")
-            Core.<*> ( o Core..:? "queryParameterMatches"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "queryParameterMatches")
             Core.<*> (o Core..:? "regexMatch")
       )
 
@@ -16687,7 +16669,7 @@ instance Core.FromJSON HttpsHealthCheck where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "healthyThreshold")
             Core.<*> (o Core..:? "host")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#httpsHealthCheck"
                      )
@@ -16762,7 +16744,7 @@ instance Core.FromJSON HttpsHealthCheckList where
       ( \o ->
           HttpsHealthCheckList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#httpsHealthCheckList"
                      )
@@ -16814,7 +16796,7 @@ instance Core.FromJSON HttpsHealthCheckList_Warning where
       ( \o ->
           HttpsHealthCheckList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -16984,20 +16966,24 @@ instance Core.FromJSON Image where
       "Image"
       ( \o ->
           Image
-            Core.<$> (o Core..:? "archiveSizeBytes")
+            Core.<$> ( o Core..:? "archiveSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "diskSizeGb")
+            Core.<*> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "family")
-            Core.<*> (o Core..:? "guestOsFeatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "guestOsFeatures")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "imageEncryptionKey")
             Core.<*> (o Core..:? "kind" Core..!= "compute#image")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "licenseCodes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenseCodes")
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "rawDisk")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -17016,7 +17002,7 @@ instance Core.FromJSON Image where
                          Core..!= Image_SourceType_Raw
                      )
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "storageLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "storageLocations")
       )
 
 instance Core.ToJSON Image where
@@ -17204,7 +17190,7 @@ instance Core.FromJSON ImageList where
       ( \o ->
           ImageList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#imageList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -17254,7 +17240,7 @@ instance Core.FromJSON ImageList_Warning where
       ( \o ->
           ImageList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -17334,9 +17320,9 @@ instance Core.FromJSON InitialStateConfig where
       "InitialStateConfig"
       ( \o ->
           InitialStateConfig
-            Core.<$> (o Core..:? "dbs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "dbxs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "keks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dbs")
+            Core.<*> (o Core..:? "dbxs")
+            Core.<*> (o Core..:? "keks")
             Core.<*> (o Core..:? "pk")
       )
 
@@ -17504,12 +17490,12 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deletionProtection")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disks")
             Core.<*> (o Core..:? "displayDevice")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "guestAccelerators" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "guestAccelerators")
             Core.<*> (o Core..:? "hostname")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#instance")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
@@ -17520,16 +17506,16 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minCpuPlatform")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "networkInterfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkInterfaces")
             Core.<*> (o Core..:? "networkPerformanceConfig")
             Core.<*> (o Core..:? "params")
             Core.<*> (o Core..:? "privateIpv6GoogleAccess")
             Core.<*> (o Core..:? "reservationAffinity")
-            Core.<*> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "scheduling")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "serviceAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceAccounts")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "shieldedInstanceIntegrityPolicy")
             Core.<*> (o Core..:? "sourceMachineImage")
@@ -17682,7 +17668,7 @@ instance Core.FromJSON InstanceAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -17760,7 +17746,7 @@ instance Core.FromJSON InstanceAggregatedList_Warning where
       ( \o ->
           InstanceAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -17879,10 +17865,10 @@ instance Core.FromJSON InstanceGroup where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#instanceGroup")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "namedPorts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedPorts")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
@@ -17959,7 +17945,7 @@ instance Core.FromJSON InstanceGroupAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -18046,7 +18032,7 @@ instance
       ( \o ->
           InstanceGroupAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -18146,7 +18132,7 @@ instance Core.FromJSON InstanceGroupList where
       ( \o ->
           InstanceGroupList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceGroupList"
                      )
@@ -18198,7 +18184,7 @@ instance Core.FromJSON InstanceGroupList_Warning where
       ( \o ->
           InstanceGroupList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -18338,31 +18324,29 @@ instance Core.FromJSON InstanceGroupManager where
       "InstanceGroupManager"
       ( \o ->
           InstanceGroupManager
-            Core.<$> ( o Core..:? "autoHealingPolicies"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "autoHealingPolicies")
             Core.<*> (o Core..:? "baseInstanceName")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "currentActions")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "distributionPolicy")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instanceGroup")
             Core.<*> (o Core..:? "instanceTemplate")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceGroupManager"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "namedPorts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedPorts")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "statefulPolicy")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "targetPools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targetPools")
             Core.<*> (o Core..:? "targetSize")
             Core.<*> (o Core..:? "updatePolicy")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -18550,7 +18534,7 @@ instance
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -18640,7 +18624,7 @@ instance
       ( \o ->
           InstanceGroupManagerAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -18785,7 +18769,7 @@ instance Core.FromJSON InstanceGroupManagerList where
       ( \o ->
           InstanceGroupManagerList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceGroupManagerList"
                      )
@@ -18840,7 +18824,7 @@ instance
       ( \o ->
           InstanceGroupManagerList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -19208,7 +19192,7 @@ instance
       "InstanceGroupManagersAbandonInstancesRequest"
       ( \o ->
           InstanceGroupManagersAbandonInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -19261,7 +19245,7 @@ instance
       ( \o ->
           InstanceGroupManagersApplyUpdatesRequest
             Core.<$> (o Core..:? "allInstances")
-            Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "minimalAction")
             Core.<*> (o Core..:? "mostDisruptiveAllowedAction")
       )
@@ -19305,7 +19289,7 @@ instance
       "InstanceGroupManagersCreateInstancesRequest"
       ( \o ->
           InstanceGroupManagersCreateInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -19347,7 +19331,7 @@ instance
       "InstanceGroupManagersDeleteInstancesRequest"
       ( \o ->
           InstanceGroupManagersDeleteInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "skipInstancesOnValidationError")
       )
 
@@ -19389,7 +19373,7 @@ instance
       "InstanceGroupManagersDeletePerInstanceConfigsReq"
       ( \o ->
           InstanceGroupManagersDeletePerInstanceConfigsReq
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance
@@ -19429,7 +19413,7 @@ instance
       "InstanceGroupManagersListErrorsResponse"
       ( \o ->
           InstanceGroupManagersListErrorsResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -19473,7 +19457,7 @@ instance
       "InstanceGroupManagersListManagedInstancesResponse"
       ( \o ->
           InstanceGroupManagersListManagedInstancesResponse
-            Core.<$> (o Core..:? "managedInstances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "managedInstances")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -19525,7 +19509,7 @@ instance
       "InstanceGroupManagersListPerInstanceConfigsResp"
       ( \o ->
           InstanceGroupManagersListPerInstanceConfigsResp
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
               Core.<*> (o Core..:? "nextPageToken")
               Core.<*> (o Core..:? "warning")
       )
@@ -19582,8 +19566,7 @@ instance
       "InstanceGroupManagersListPerInstanceConfigsResp_Warning"
       ( \o ->
           InstanceGroupManagersListPerInstanceConfigsResp_Warning
-            Core.<$> (o Core..:? "code")
-              Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "data")
               Core.<*> (o Core..:? "message")
       )
 
@@ -19671,9 +19654,7 @@ instance
       "InstanceGroupManagersPatchPerInstanceConfigsReq"
       ( \o ->
           InstanceGroupManagersPatchPerInstanceConfigsReq
-            Core.<$> ( o Core..:? "perInstanceConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "perInstanceConfigs")
       )
 
 instance
@@ -19712,7 +19693,7 @@ instance
       "InstanceGroupManagersRecreateInstancesRequest"
       ( \o ->
           InstanceGroupManagersRecreateInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -19754,9 +19735,7 @@ instance
       "InstanceGroupManagersScopedList"
       ( \o ->
           InstanceGroupManagersScopedList
-            Core.<$> ( o Core..:? "instanceGroupManagers"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "instanceGroupManagers")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -19803,7 +19782,7 @@ instance
       ( \o ->
           InstanceGroupManagersScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -19934,7 +19913,7 @@ instance
       ( \o ->
           InstanceGroupManagersSetTargetPoolsRequest
             Core.<$> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "targetPools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targetPools")
       )
 
 instance
@@ -19975,9 +19954,7 @@ instance
       "InstanceGroupManagersUpdatePerInstanceConfigsReq"
       ( \o ->
           InstanceGroupManagersUpdatePerInstanceConfigsReq
-            Core.<$> ( o Core..:? "perInstanceConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "perInstanceConfigs")
       )
 
 instance
@@ -20016,7 +19993,7 @@ instance
       "InstanceGroupsAddInstancesRequest"
       ( \o ->
           InstanceGroupsAddInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -20067,7 +20044,7 @@ instance Core.FromJSON InstanceGroupsListInstances where
       ( \o ->
           InstanceGroupsListInstances
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceGroupsListInstances"
                      )
@@ -20122,7 +20099,7 @@ instance
       ( \o ->
           InstanceGroupsListInstances_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -20242,7 +20219,7 @@ instance
       "InstanceGroupsRemoveInstancesRequest"
       ( \o ->
           InstanceGroupsRemoveInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -20280,7 +20257,7 @@ instance Core.FromJSON InstanceGroupsScopedList where
       "InstanceGroupsScopedList"
       ( \o ->
           InstanceGroupsScopedList
-            Core.<$> (o Core..:? "instanceGroups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instanceGroups")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -20326,7 +20303,7 @@ instance
       ( \o ->
           InstanceGroupsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -20412,7 +20389,7 @@ instance
       ( \o ->
           InstanceGroupsSetNamedPortsRequest
             Core.<$> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "namedPorts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedPorts")
       )
 
 instance
@@ -20466,7 +20443,7 @@ instance Core.FromJSON InstanceList where
       ( \o ->
           InstanceList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#instanceList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -20516,7 +20493,7 @@ instance Core.FromJSON InstanceList_Warning where
       ( \o ->
           InstanceList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -20603,7 +20580,7 @@ instance Core.FromJSON InstanceListReferrers where
       ( \o ->
           InstanceListReferrers
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceListReferrers"
                      )
@@ -20655,7 +20632,7 @@ instance Core.FromJSON InstanceListReferrers_Warning where
       ( \o ->
           InstanceListReferrers_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -21040,20 +21017,20 @@ instance Core.FromJSON InstanceProperties where
             Core.<*> (o Core..:? "canIpForward")
             Core.<*> (o Core..:? "confidentialInstanceConfig")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "guestAccelerators" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disks")
+            Core.<*> (o Core..:? "guestAccelerators")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minCpuPlatform")
-            Core.<*> (o Core..:? "networkInterfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkInterfaces")
             Core.<*> (o Core..:? "networkPerformanceConfig")
             Core.<*> (o Core..:? "privateIpv6GoogleAccess")
             Core.<*> (o Core..:? "reservationAffinity")
             Core.<*> (o Core..:? "resourceManagerTags")
-            Core.<*> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "scheduling")
-            Core.<*> (o Core..:? "serviceAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceAccounts")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "tags")
       )
@@ -21238,7 +21215,7 @@ instance Core.FromJSON InstanceTemplate where
           InstanceTemplate
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceTemplate"
                      )
@@ -21306,7 +21283,7 @@ instance Core.FromJSON InstanceTemplateList where
       ( \o ->
           InstanceTemplateList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#instanceTemplateList"
                      )
@@ -21358,7 +21335,7 @@ instance Core.FromJSON InstanceTemplateList_Warning where
       ( \o ->
           InstanceTemplateList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -21444,7 +21421,7 @@ instance Core.FromJSON InstanceWithNamedPorts where
       ( \o ->
           InstanceWithNamedPorts
             Core.<$> (o Core..:? "instance")
-            Core.<*> (o Core..:? "namedPorts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedPorts")
             Core.<*> (o Core..:? "status")
       )
 
@@ -21481,7 +21458,7 @@ instance
       "InstancesAddResourcePoliciesRequest"
       ( \o ->
           InstancesAddResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance
@@ -21527,8 +21504,8 @@ instance
       "InstancesGetEffectiveFirewallsResponse"
       ( \o ->
           InstancesGetEffectiveFirewallsResponse
-            Core.<$> (o Core..:? "firewallPolicys" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "firewalls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "firewallPolicys")
+            Core.<*> (o Core..:? "firewalls")
       )
 
 instance
@@ -21586,7 +21563,7 @@ instance
           InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
               Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "rules")
               Core.<*> (o Core..:? "shortName")
               Core.<*> (o Core..:? "type")
       )
@@ -21630,7 +21607,7 @@ instance
       "InstancesRemoveResourcePoliciesRequest"
       ( \o ->
           InstancesRemoveResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance
@@ -21667,7 +21644,7 @@ instance Core.FromJSON InstancesScopedList where
       "InstancesScopedList"
       ( \o ->
           InstancesScopedList
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -21710,7 +21687,7 @@ instance Core.FromJSON InstancesScopedList_Warning where
       ( \o ->
           InstancesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -21861,9 +21838,7 @@ instance
       "InstancesSetMachineResourcesRequest"
       ( \o ->
           InstancesSetMachineResourcesRequest
-            Core.<$> ( o Core..:? "guestAccelerators"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "guestAccelerators")
       )
 
 instance
@@ -21972,8 +21947,7 @@ instance
       "InstancesSetServiceAccountRequest"
       ( \o ->
           InstancesSetServiceAccountRequest
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
       )
 
 instance
@@ -22011,7 +21985,7 @@ instance
       "InstancesStartWithEncryptionKeyRequest"
       ( \o ->
           InstancesStartWithEncryptionKeyRequest
-            Core.<$> (o Core..:? "disks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "disks")
       )
 
 instance
@@ -22045,8 +22019,12 @@ instance Core.FromJSON Int64RangeMatch where
       "Int64RangeMatch"
       ( \o ->
           Int64RangeMatch
-            Core.<$> (o Core..:? "rangeEnd")
-            Core.<*> (o Core..:? "rangeStart")
+            Core.<$> ( o Core..:? "rangeEnd"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rangeStart"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Int64RangeMatch where
@@ -22150,17 +22128,15 @@ instance Core.FromJSON Interconnect where
       ( \o ->
           Interconnect
             Core.<$> (o Core..:? "adminEnabled")
-            Core.<*> (o Core..:? "circuitInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "circuitInfos")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "customerName")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "expectedOutages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "expectedOutages")
             Core.<*> (o Core..:? "googleIpAddress")
             Core.<*> (o Core..:? "googleReferenceId")
-            Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "interconnectAttachments"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "interconnectAttachments")
             Core.<*> (o Core..:? "interconnectType")
             Core.<*> (o Core..:? "kind" Core..!= "compute#interconnect")
             Core.<*> (o Core..:? "linkType")
@@ -22341,10 +22317,8 @@ instance Core.FromJSON InterconnectAttachment where
           InterconnectAttachment
             Core.<$> (o Core..:? "adminEnabled")
             Core.<*> (o Core..:? "bandwidth")
-            Core.<*> ( o Core..:? "candidateIpv6Subnets"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "candidateSubnets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "candidateIpv6Subnets")
+            Core.<*> (o Core..:? "candidateSubnets")
             Core.<*> (o Core..:? "cloudRouterIpAddress")
             Core.<*> (o Core..:? "cloudRouterIpv6Address")
             Core.<*> (o Core..:? "cloudRouterIpv6InterfaceId")
@@ -22357,11 +22331,9 @@ instance Core.FromJSON InterconnectAttachment where
             Core.<*> (o Core..:? "edgeAvailabilityDomain")
             Core.<*> (o Core..:? "encryption")
             Core.<*> (o Core..:? "googleReferenceId")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "interconnect")
-            Core.<*> ( o Core..:? "ipsecInternalAddresses"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "ipsecInternalAddresses")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#interconnectAttachment"
                      )
@@ -22369,7 +22341,9 @@ instance Core.FromJSON InterconnectAttachment where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "operationalStatus")
             Core.<*> (o Core..:? "pairingKey")
-            Core.<*> (o Core..:? "partnerAsn")
+            Core.<*> ( o Core..:? "partnerAsn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "partnerMetadata")
             Core.<*> (o Core..:? "privateInterconnectInfo")
             Core.<*> (o Core..:? "region")
@@ -22490,7 +22464,7 @@ instance
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -22583,7 +22557,7 @@ instance
       ( \o ->
           InterconnectAttachmentAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -22684,7 +22658,7 @@ instance Core.FromJSON InterconnectAttachmentList where
       ( \o ->
           InterconnectAttachmentList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#interconnectAttachmentList"
                      )
@@ -22739,7 +22713,7 @@ instance
       ( \o ->
           InterconnectAttachmentList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -22916,9 +22890,7 @@ instance
       "InterconnectAttachmentsScopedList"
       ( \o ->
           InterconnectAttachmentsScopedList
-            Core.<$> ( o Core..:? "interconnectAttachments"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "interconnectAttachments")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -22968,7 +22940,7 @@ instance
       ( \o ->
           InterconnectAttachmentsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -23103,8 +23075,8 @@ instance Core.FromJSON InterconnectDiagnostics where
       "InterconnectDiagnostics"
       ( \o ->
           InterconnectDiagnostics
-            Core.<$> (o Core..:? "arpCaches" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "links" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arpCaches")
+            Core.<*> (o Core..:? "links")
             Core.<*> (o Core..:? "macAddress")
       )
 
@@ -23293,7 +23265,7 @@ instance
       "InterconnectDiagnosticsLinkStatus"
       ( \o ->
           InterconnectDiagnosticsLinkStatus
-            Core.<$> (o Core..:? "arpCaches" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arpCaches")
             Core.<*> (o Core..:? "circuitId")
             Core.<*> (o Core..:? "googleDemarc")
             Core.<*> (o Core..:? "lacpStatus")
@@ -23358,7 +23330,7 @@ instance Core.FromJSON InterconnectList where
       ( \o ->
           InterconnectList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#interconnectList"
                      )
@@ -23410,7 +23382,7 @@ instance Core.FromJSON InterconnectList_Warning where
       ( \o ->
           InterconnectList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -23540,13 +23512,13 @@ instance Core.FromJSON InterconnectLocation where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "facilityProvider")
             Core.<*> (o Core..:? "facilityProviderFacilityId")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#interconnectLocation"
                      )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "peeringdbFacilityId")
-            Core.<*> (o Core..:? "regionInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regionInfos")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "supportsPzs")
@@ -23619,7 +23591,7 @@ instance Core.FromJSON InterconnectLocationList where
       ( \o ->
           InterconnectLocationList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#interconnectLocationList"
                      )
@@ -23674,7 +23646,7 @@ instance
       ( \o ->
           InterconnectLocationList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -23760,7 +23732,9 @@ instance Core.FromJSON InterconnectLocationRegionInfo where
       "InterconnectLocationRegionInfo"
       ( \o ->
           InterconnectLocationRegionInfo
-            Core.<$> (o Core..:? "expectedRttMs")
+            Core.<$> ( o Core..:? "expectedRttMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "locationPresence")
             Core.<*> (o Core..:? "region")
       )
@@ -23821,13 +23795,17 @@ instance Core.FromJSON InterconnectOutageNotification where
       "InterconnectOutageNotification"
       ( \o ->
           InterconnectOutageNotification
-            Core.<$> (o Core..:? "affectedCircuits" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "affectedCircuits")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "endTime")
+            Core.<*> ( o Core..:? "endTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "issueType")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "source")
-            Core.<*> (o Core..:? "startTime")
+            Core.<*> ( o Core..:? "startTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "state")
       )
 
@@ -23937,9 +23915,11 @@ instance Core.FromJSON License where
             Core.<$> (o Core..:? "chargesUseFee")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#license")
-            Core.<*> (o Core..:? "licenseCode")
+            Core.<*> ( o Core..:? "licenseCode"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "resourceRequirements")
             Core.<*> (o Core..:? "selfLink")
@@ -24015,9 +23995,9 @@ instance Core.FromJSON LicenseCode where
           LicenseCode
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#licenseCode")
-            Core.<*> (o Core..:? "licenseAlias" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenseAlias")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "state")
@@ -24105,7 +24085,9 @@ instance Core.FromJSON LicenseResourceCommitment where
       "LicenseResourceCommitment"
       ( \o ->
           LicenseResourceCommitment
-            Core.<$> (o Core..:? "amount")
+            Core.<$> ( o Core..:? "amount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "coresPerLicense")
             Core.<*> (o Core..:? "license")
       )
@@ -24195,7 +24177,7 @@ instance Core.FromJSON LicensesListResponse where
       ( \o ->
           LicensesListResponse
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "warning")
@@ -24243,7 +24225,7 @@ instance Core.FromJSON LicensesListResponse_Warning where
       ( \o ->
           LicensesListResponse_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -24544,7 +24526,7 @@ instance Core.FromJSON LogConfigCounterOptions where
       "LogConfigCounterOptions"
       ( \o ->
           LogConfigCounterOptions
-            Core.<$> (o Core..:? "customFields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customFields")
             Core.<*> (o Core..:? "field")
             Core.<*> (o Core..:? "metric")
       )
@@ -24705,22 +24687,22 @@ instance Core.FromJSON MachineImage where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "guestFlush")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instanceProperties")
             Core.<*> (o Core..:? "kind" Core..!= "compute#machineImage")
             Core.<*> (o Core..:? "machineImageEncryptionKey")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
-            Core.<*> (o Core..:? "savedDisks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "savedDisks")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> ( o Core..:? "sourceDiskEncryptionKeys"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "sourceDiskEncryptionKeys")
             Core.<*> (o Core..:? "sourceInstance")
             Core.<*> (o Core..:? "sourceInstanceProperties")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "storageLocations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalStorageBytes")
+            Core.<*> (o Core..:? "storageLocations")
+            Core.<*> ( o Core..:? "totalStorageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MachineImage where
@@ -24793,7 +24775,7 @@ instance Core.FromJSON MachineImageList where
       ( \o ->
           MachineImageList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#machineImageList"
                      )
@@ -24845,7 +24827,7 @@ instance Core.FromJSON MachineImageList_Warning where
       ( \o ->
           MachineImageList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -24967,20 +24949,22 @@ instance Core.FromJSON MachineType where
       "MachineType"
       ( \o ->
           MachineType
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "guestCpus")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "imageSpaceGb")
             Core.<*> (o Core..:? "isSharedCpu")
             Core.<*> (o Core..:? "kind" Core..!= "compute#machineType")
             Core.<*> (o Core..:? "maximumPersistentDisks")
-            Core.<*> (o Core..:? "maximumPersistentDisksSizeGb")
+            Core.<*> ( o Core..:? "maximumPersistentDisksSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "memoryMb")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "scratchDisks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scratchDisks")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "zone")
       )
@@ -25127,7 +25111,7 @@ instance Core.FromJSON MachineTypeAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -25211,7 +25195,7 @@ instance
       ( \o ->
           MachineTypeAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -25310,7 +25294,7 @@ instance Core.FromJSON MachineTypeList where
       ( \o ->
           MachineTypeList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#machineTypeList"
                      )
@@ -25362,7 +25346,7 @@ instance Core.FromJSON MachineTypeList_Warning where
       ( \o ->
           MachineTypeList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -25435,7 +25419,7 @@ instance Core.FromJSON MachineTypesScopedList where
       "MachineTypesScopedList"
       ( \o ->
           MachineTypesScopedList
-            Core.<$> (o Core..:? "machineTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "machineTypes")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -25478,7 +25462,7 @@ instance Core.FromJSON MachineTypesScopedList_Warning where
       ( \o ->
           MachineTypesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -25584,9 +25568,9 @@ instance Core.FromJSON ManagedInstance where
       ( \o ->
           ManagedInstance
             Core.<$> (o Core..:? "currentAction")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instance")
-            Core.<*> (o Core..:? "instanceHealth" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instanceHealth")
             Core.<*> (o Core..:? "instanceStatus")
             Core.<*> (o Core..:? "lastAttempt")
             Core.<*> (o Core..:? "preservedStateFromConfig")
@@ -25703,7 +25687,7 @@ instance
       "ManagedInstanceLastAttempt_Errors"
       ( \o ->
           ManagedInstanceLastAttempt_Errors
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -25830,7 +25814,7 @@ instance Core.FromJSON Metadata where
       ( \o ->
           Metadata
             Core.<$> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#metadata")
       )
 
@@ -25905,7 +25889,7 @@ instance Core.FromJSON MetadataFilter where
       "MetadataFilter"
       ( \o ->
           MetadataFilter
-            Core.<$> (o Core..:? "filterLabels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filterLabels")
             Core.<*> (o Core..:? "filterMatchCriteria")
       )
 
@@ -26065,17 +26049,17 @@ instance Core.FromJSON Network where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "enableUlaInternalIpv6")
             Core.<*> (o Core..:? "gatewayIPv4")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "internalIpv6Range")
             Core.<*> (o Core..:? "kind" Core..!= "compute#network")
             Core.<*> (o Core..:? "mtu")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkFirewallPolicyEnforcementOrder")
-            Core.<*> (o Core..:? "peerings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "peerings")
             Core.<*> (o Core..:? "routingConfig")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "selfLinkWithId")
-            Core.<*> (o Core..:? "subnetworks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subnetworks")
       )
 
 instance Core.ToJSON Network where
@@ -26272,7 +26256,7 @@ instance Core.FromJSON NetworkEndpointGroup where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "defaultPort")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#networkEndpointGroup"
                      )
@@ -26398,7 +26382,7 @@ instance
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -26488,7 +26472,7 @@ instance
       ( \o ->
           NetworkEndpointGroupAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -26720,7 +26704,7 @@ instance Core.FromJSON NetworkEndpointGroupList where
       ( \o ->
           NetworkEndpointGroupList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#networkEndpointGroupList"
                      )
@@ -26775,7 +26759,7 @@ instance
       ( \o ->
           NetworkEndpointGroupList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -26855,7 +26839,7 @@ instance
       "NetworkEndpointGroupsAttachEndpointsRequest"
       ( \o ->
           NetworkEndpointGroupsAttachEndpointsRequest
-            Core.<$> (o Core..:? "networkEndpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "networkEndpoints")
       )
 
 instance
@@ -26894,7 +26878,7 @@ instance
       "NetworkEndpointGroupsDetachEndpointsRequest"
       ( \o ->
           NetworkEndpointGroupsDetachEndpointsRequest
-            Core.<$> (o Core..:? "networkEndpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "networkEndpoints")
       )
 
 instance
@@ -26984,7 +26968,7 @@ instance
       ( \o ->
           NetworkEndpointGroupsListNetworkEndpoints
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#networkEndpointGroupsListNetworkEndpoints"
                      )
@@ -27042,8 +27026,7 @@ instance
       "NetworkEndpointGroupsListNetworkEndpoints_Warning"
       ( \o ->
           NetworkEndpointGroupsListNetworkEndpoints_Warning
-            Core.<$> (o Core..:? "code")
-              Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "data")
               Core.<*> (o Core..:? "message")
       )
 
@@ -27133,9 +27116,7 @@ instance
       "NetworkEndpointGroupsScopedList"
       ( \o ->
           NetworkEndpointGroupsScopedList
-            Core.<$> ( o Core..:? "networkEndpointGroups"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "networkEndpointGroups")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -27182,7 +27163,7 @@ instance
       ( \o ->
           NetworkEndpointGroupsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -27271,7 +27252,7 @@ instance
       "NetworkEndpointWithHealthStatus"
       ( \o ->
           NetworkEndpointWithHealthStatus
-            Core.<$> (o Core..:? "healths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "healths")
             Core.<*> (o Core..:? "networkEndpoint")
       )
 
@@ -27350,11 +27331,11 @@ instance Core.FromJSON NetworkInterface where
       "NetworkInterface"
       ( \o ->
           NetworkInterface
-            Core.<$> (o Core..:? "accessConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "aliasIpRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessConfigs")
+            Core.<*> (o Core..:? "aliasIpRanges")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "internalIpv6PrefixLength")
-            Core.<*> (o Core..:? "ipv6AccessConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ipv6AccessConfigs")
             Core.<*> (o Core..:? "ipv6AccessType")
             Core.<*> (o Core..:? "ipv6Address")
             Core.<*> ( o Core..:? "kind"
@@ -27432,7 +27413,7 @@ instance Core.FromJSON NetworkList where
       ( \o ->
           NetworkList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#networkList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -27482,7 +27463,7 @@ instance Core.FromJSON NetworkList_Warning where
       ( \o ->
           NetworkList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -27762,8 +27743,8 @@ instance
       "NetworksGetEffectiveFirewallsResponse"
       ( \o ->
           NetworksGetEffectiveFirewallsResponse
-            Core.<$> (o Core..:? "firewallPolicys" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "firewalls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "firewallPolicys")
+            Core.<*> (o Core..:? "firewalls")
       )
 
 instance
@@ -27821,7 +27802,7 @@ instance
           NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
               Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "rules")
               Core.<*> (o Core..:? "shortName")
               Core.<*> (o Core..:? "type")
       )
@@ -27969,7 +27950,7 @@ instance Core.FromJSON NodeGroup where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeGroup")
             Core.<*> (o Core..:? "locationHint")
             Core.<*> (o Core..:? "maintenancePolicy")
@@ -28055,7 +28036,7 @@ instance Core.FromJSON NodeGroupAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -28136,7 +28117,7 @@ instance
       ( \o ->
           NodeGroupAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -28275,7 +28256,7 @@ instance Core.FromJSON NodeGroupList where
       ( \o ->
           NodeGroupList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeGroupList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -28325,7 +28306,7 @@ instance Core.FromJSON NodeGroupList_Warning where
       ( \o ->
           NodeGroupList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -28462,10 +28443,10 @@ instance Core.FromJSON NodeGroupNode where
       "NodeGroupNode"
       ( \o ->
           NodeGroupNode
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "cpuOvercommitType")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disks")
+            Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodeType")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -28544,7 +28525,7 @@ instance Core.FromJSON NodeGroupsDeleteNodesRequest where
       "NodeGroupsDeleteNodesRequest"
       ( \o ->
           NodeGroupsDeleteNodesRequest
-            Core.<$> (o Core..:? "nodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodes")
       )
 
 instance Core.ToJSON NodeGroupsDeleteNodesRequest where
@@ -28590,7 +28571,7 @@ instance Core.FromJSON NodeGroupsListNodes where
       ( \o ->
           NodeGroupsListNodes
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#nodeGroupsListNodes"
                      )
@@ -28642,7 +28623,7 @@ instance Core.FromJSON NodeGroupsListNodes_Warning where
       ( \o ->
           NodeGroupsListNodes_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -28721,7 +28702,7 @@ instance Core.FromJSON NodeGroupsScopedList where
       "NodeGroupsScopedList"
       ( \o ->
           NodeGroupsScopedList
-            Core.<$> (o Core..:? "nodeGroups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodeGroups")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -28764,7 +28745,7 @@ instance Core.FromJSON NodeGroupsScopedList_Warning where
       ( \o ->
           NodeGroupsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -28922,12 +28903,12 @@ instance Core.FromJSON NodeTemplate where
       "NodeTemplate"
       ( \o ->
           NodeTemplate
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "cpuOvercommitType")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "disks")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeTemplate")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodeAffinityLabels")
@@ -29047,7 +29028,7 @@ instance Core.FromJSON NodeTemplateAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -29131,7 +29112,7 @@ instance
       ( \o ->
           NodeTemplateAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -29231,7 +29212,7 @@ instance Core.FromJSON NodeTemplateList where
       ( \o ->
           NodeTemplateList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#nodeTemplateList"
                      )
@@ -29283,7 +29264,7 @@ instance Core.FromJSON NodeTemplateList_Warning where
       ( \o ->
           NodeTemplateList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -29405,7 +29386,7 @@ instance Core.FromJSON NodeTemplatesScopedList where
       "NodeTemplatesScopedList"
       ( \o ->
           NodeTemplatesScopedList
-            Core.<$> (o Core..:? "nodeTemplates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodeTemplates")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -29451,7 +29432,7 @@ instance
       ( \o ->
           NodeTemplatesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -29569,7 +29550,7 @@ instance Core.FromJSON NodeType where
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "guestCpus")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeType")
             Core.<*> (o Core..:? "localSsdGb")
             Core.<*> (o Core..:? "memoryMb")
@@ -29645,7 +29626,7 @@ instance Core.FromJSON NodeTypeAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -29723,7 +29704,7 @@ instance Core.FromJSON NodeTypeAggregatedList_Warning where
       ( \o ->
           NodeTypeAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -29819,7 +29800,7 @@ instance Core.FromJSON NodeTypeList where
       ( \o ->
           NodeTypeList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#nodeTypeList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -29869,7 +29850,7 @@ instance Core.FromJSON NodeTypeList_Warning where
       ( \o ->
           NodeTypeList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -29939,7 +29920,7 @@ instance Core.FromJSON NodeTypesScopedList where
       "NodeTypesScopedList"
       ( \o ->
           NodeTypesScopedList
-            Core.<$> (o Core..:? "nodeTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodeTypes")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -29982,7 +29963,7 @@ instance Core.FromJSON NodeTypesScopedList_Warning where
       ( \o ->
           NodeTypesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -30086,7 +30067,7 @@ instance Core.FromJSON NotificationEndpoint where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "grpcSettings")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#notificationEndpoint"
                      )
@@ -30207,7 +30188,7 @@ instance Core.FromJSON NotificationEndpointList where
       ( \o ->
           NotificationEndpointList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#notificationEndpointList"
                      )
@@ -30262,7 +30243,7 @@ instance
       ( \o ->
           NotificationEndpointList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -30418,7 +30399,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "httpErrorMessage")
             Core.<*> (o Core..:? "httpErrorStatusCode")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
             Core.<*> (o Core..:? "kind" Core..!= "compute#operation")
             Core.<*> (o Core..:? "name")
@@ -30430,10 +30411,12 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusMessage")
-            Core.<*> (o Core..:? "targetId")
+            Core.<*> ( o Core..:? "targetId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "targetLink")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -30493,8 +30476,7 @@ instance Core.FromJSON Operation_Error where
     Core.withObject
       "Operation_Error"
       ( \o ->
-          Operation_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          Operation_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON Operation_Error where
@@ -30574,7 +30556,7 @@ instance Core.FromJSON Operation_WarningsItem where
       ( \o ->
           Operation_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -30672,7 +30654,7 @@ instance Core.FromJSON OperationAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -30753,7 +30735,7 @@ instance
       ( \o ->
           OperationAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -30849,7 +30831,7 @@ instance Core.FromJSON OperationList where
       ( \o ->
           OperationList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#operationList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -30899,7 +30881,7 @@ instance Core.FromJSON OperationList_Warning where
       ( \o ->
           OperationList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -30969,7 +30951,7 @@ instance Core.FromJSON OperationsScopedList where
       "OperationsScopedList"
       ( \o ->
           OperationsScopedList
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -31012,7 +30994,7 @@ instance Core.FromJSON OperationsScopedList_Warning where
       ( \o ->
           OperationsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -31201,11 +31183,19 @@ instance Core.FromJSON PacketIntervals where
       "PacketIntervals"
       ( \o ->
           PacketIntervals
-            Core.<$> (o Core..:? "avgMs")
+            Core.<$> ( o Core..:? "avgMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "duration")
-            Core.<*> (o Core..:? "maxMs")
-            Core.<*> (o Core..:? "minMs")
-            Core.<*> (o Core..:? "numIntervals")
+            Core.<*> ( o Core..:? "maxMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numIntervals"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -31287,7 +31277,7 @@ instance Core.FromJSON PacketMirroring where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "enable")
             Core.<*> (o Core..:? "filter")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#packetMirroring"
                      )
@@ -31369,7 +31359,7 @@ instance Core.FromJSON PacketMirroringAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -31456,7 +31446,7 @@ instance
       ( \o ->
           PacketMirroringAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -31545,8 +31535,8 @@ instance Core.FromJSON PacketMirroringFilter where
       "PacketMirroringFilter"
       ( \o ->
           PacketMirroringFilter
-            Core.<$> (o Core..:? "IPProtocols" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "cidrRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "IPProtocols")
+            Core.<*> (o Core..:? "cidrRanges")
             Core.<*> (o Core..:? "direction")
       )
 
@@ -31643,7 +31633,7 @@ instance Core.FromJSON PacketMirroringList where
       ( \o ->
           PacketMirroringList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#packetMirroringList"
                      )
@@ -31695,7 +31685,7 @@ instance Core.FromJSON PacketMirroringList_Warning where
       ( \o ->
           PacketMirroringList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -31783,9 +31773,9 @@ instance
       "PacketMirroringMirroredResourceInfo"
       ( \o ->
           PacketMirroringMirroredResourceInfo
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "subnetworks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
+            Core.<*> (o Core..:? "subnetworks")
+            Core.<*> (o Core..:? "tags")
       )
 
 instance
@@ -31951,7 +31941,7 @@ instance Core.FromJSON PacketMirroringsScopedList where
       "PacketMirroringsScopedList"
       ( \o ->
           PacketMirroringsScopedList
-            Core.<$> (o Core..:? "packetMirrorings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "packetMirrorings")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -31998,7 +31988,7 @@ instance
       ( \o ->
           PacketMirroringsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -32110,8 +32100,8 @@ instance Core.FromJSON PathMatcher where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "headerAction")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pathRules" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "routeRules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pathRules")
+            Core.<*> (o Core..:? "routeRules")
       )
 
 instance Core.ToJSON PathMatcher where
@@ -32163,7 +32153,7 @@ instance Core.FromJSON PathRule where
       "PathRule"
       ( \o ->
           PathRule
-            Core.<$> (o Core..:? "paths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "paths")
             Core.<*> (o Core..:? "routeAction")
             Core.<*> (o Core..:? "service")
             Core.<*> (o Core..:? "urlRedirect")
@@ -32266,10 +32256,10 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "version")
       )
 
@@ -32304,7 +32294,7 @@ instance Core.FromJSON PreconfiguredWafSet where
       "PreconfiguredWafSet"
       ( \o ->
           PreconfiguredWafSet
-            Core.<$> (o Core..:? "expressionSets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "expressionSets")
       )
 
 instance Core.ToJSON PreconfiguredWafSet where
@@ -32517,11 +32507,11 @@ instance Core.FromJSON Project where
             Core.<*> (o Core..:? "defaultNetworkTier")
             Core.<*> (o Core..:? "defaultServiceAccount")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "enabledFeatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "enabledFeatures")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#project")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "quotas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "quotas")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "usageExportLocation")
             Core.<*> (o Core..:? "xpnProjectStatus")
@@ -32654,7 +32644,7 @@ instance Core.FromJSON ProjectsGetXpnResources where
                          Core..!= "compute#projectsGetXpnResources"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ProjectsGetXpnResources where
@@ -32793,15 +32783,13 @@ instance Core.FromJSON PublicAdvertisedPrefix where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "dnsVerificationIp")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ipCidrRange")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#publicAdvertisedPrefix"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "publicDelegatedPrefixs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "publicDelegatedPrefixs")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "sharedSecret")
             Core.<*> (o Core..:? "status")
@@ -32867,7 +32855,7 @@ instance Core.FromJSON PublicAdvertisedPrefixList where
       ( \o ->
           PublicAdvertisedPrefixList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#publicAdvertisedPrefixList"
                      )
@@ -32922,7 +32910,7 @@ instance
       ( \o ->
           PublicAdvertisedPrefixList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -33106,7 +33094,7 @@ instance Core.FromJSON PublicDelegatedPrefix where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ipCidrRange")
             Core.<*> (o Core..:? "isLiveMigration")
             Core.<*> ( o Core..:? "kind"
@@ -33114,9 +33102,7 @@ instance Core.FromJSON PublicDelegatedPrefix where
                      )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parentPrefix")
-            Core.<*> ( o Core..:? "publicDelegatedSubPrefixs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "publicDelegatedSubPrefixs")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
@@ -33194,7 +33180,7 @@ instance
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -33284,7 +33270,7 @@ instance
       ( \o ->
           PublicDelegatedPrefixAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -33384,7 +33370,7 @@ instance Core.FromJSON PublicDelegatedPrefixList where
       ( \o ->
           PublicDelegatedPrefixList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#publicDelegatedPrefixList"
                      )
@@ -33439,7 +33425,7 @@ instance
       ( \o ->
           PublicDelegatedPrefixList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -33599,9 +33585,7 @@ instance
       "PublicDelegatedPrefixesScopedList"
       ( \o ->
           PublicDelegatedPrefixesScopedList
-            Core.<$> ( o Core..:? "publicDelegatedPrefixes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "publicDelegatedPrefixes")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -33651,7 +33635,7 @@ instance
       ( \o ->
           PublicDelegatedPrefixesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -33866,14 +33850,14 @@ instance Core.FromJSON Region where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#region")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "quotas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "quotas")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "supportsPzs")
-            Core.<*> (o Core..:? "zones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "zones")
       )
 
 instance Core.ToJSON Region where
@@ -33934,7 +33918,7 @@ instance Core.FromJSON RegionAutoscalerList where
       ( \o ->
           RegionAutoscalerList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#regionAutoscalerList"
                      )
@@ -33986,7 +33970,7 @@ instance Core.FromJSON RegionAutoscalerList_Warning where
       ( \o ->
           RegionAutoscalerList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -34081,7 +34065,7 @@ instance Core.FromJSON RegionDiskTypeList where
       ( \o ->
           RegionDiskTypeList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#regionDiskTypeList"
                      )
@@ -34133,7 +34117,7 @@ instance Core.FromJSON RegionDiskTypeList_Warning where
       ( \o ->
           RegionDiskTypeList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -34210,7 +34194,7 @@ instance
       "RegionDisksAddResourcePoliciesRequest"
       ( \o ->
           RegionDisksAddResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance
@@ -34248,7 +34232,7 @@ instance
       "RegionDisksRemoveResourcePoliciesRequest"
       ( \o ->
           RegionDisksRemoveResourcePoliciesRequest
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
       )
 
 instance
@@ -34282,7 +34266,9 @@ instance Core.FromJSON RegionDisksResizeRequest where
       "RegionDisksResizeRequest"
       ( \o ->
           RegionDisksResizeRequest
-            Core.<$> (o Core..:? "sizeGb")
+            Core.<$> ( o Core..:? "sizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON RegionDisksResizeRequest where
@@ -34333,7 +34319,7 @@ instance Core.FromJSON RegionInstanceGroupList where
       ( \o ->
           RegionInstanceGroupList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#regionInstanceGroupList"
                      )
@@ -34388,7 +34374,7 @@ instance
       ( \o ->
           RegionInstanceGroupList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -34469,7 +34455,7 @@ instance
       "RegionInstanceGroupManagerDeleteInstanceConfigReq"
       ( \o ->
           RegionInstanceGroupManagerDeleteInstanceConfigReq
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance
@@ -34520,7 +34506,7 @@ instance Core.FromJSON RegionInstanceGroupManagerList where
       ( \o ->
           RegionInstanceGroupManagerList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#regionInstanceGroupManagerList"
                      )
@@ -34575,7 +34561,7 @@ instance
       ( \o ->
           RegionInstanceGroupManagerList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -34662,9 +34648,7 @@ instance
       "RegionInstanceGroupManagerPatchInstanceConfigReq"
       ( \o ->
           RegionInstanceGroupManagerPatchInstanceConfigReq
-            Core.<$> ( o Core..:? "perInstanceConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "perInstanceConfigs")
       )
 
 instance
@@ -34706,9 +34690,7 @@ instance
       "RegionInstanceGroupManagerUpdateInstanceConfigReq"
       ( \o ->
           RegionInstanceGroupManagerUpdateInstanceConfigReq
-            Core.<$> ( o Core..:? "perInstanceConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "perInstanceConfigs")
       )
 
 instance
@@ -34747,7 +34729,7 @@ instance
       "RegionInstanceGroupManagersAbandonInstancesRequest"
       ( \o ->
           RegionInstanceGroupManagersAbandonInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -34803,7 +34785,7 @@ instance
       ( \o ->
           RegionInstanceGroupManagersApplyUpdatesRequest
             Core.<$> (o Core..:? "allInstances")
-              Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "instances")
               Core.<*> (o Core..:? "minimalAction")
               Core.<*> (o Core..:? "mostDisruptiveAllowedAction")
       )
@@ -34848,7 +34830,7 @@ instance
       "RegionInstanceGroupManagersCreateInstancesRequest"
       ( \o ->
           RegionInstanceGroupManagersCreateInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -34890,7 +34872,7 @@ instance
       "RegionInstanceGroupManagersDeleteInstancesRequest"
       ( \o ->
           RegionInstanceGroupManagersDeleteInstancesRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
               Core.<*> (o Core..:? "skipInstancesOnValidationError")
       )
 
@@ -34936,7 +34918,7 @@ instance
       "RegionInstanceGroupManagersListErrorsResponse"
       ( \o ->
           RegionInstanceGroupManagersListErrorsResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -34987,7 +34969,7 @@ instance
       "RegionInstanceGroupManagersListInstanceConfigsResp"
       ( \o ->
           RegionInstanceGroupManagersListInstanceConfigsResp
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
               Core.<*> (o Core..:? "nextPageToken")
               Core.<*> (o Core..:? "warning")
       )
@@ -35044,8 +35026,7 @@ instance
       "RegionInstanceGroupManagersListInstanceConfigsResp_Warning"
       ( \o ->
           RegionInstanceGroupManagersListInstanceConfigsResp_Warning
-            Core.<$> (o Core..:? "code")
-              Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "data")
               Core.<*> (o Core..:? "message")
       )
 
@@ -35135,7 +35116,7 @@ instance
       "RegionInstanceGroupManagersListInstancesResponse"
       ( \o ->
           RegionInstanceGroupManagersListInstancesResponse
-            Core.<$> (o Core..:? "managedInstances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "managedInstances")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -35176,7 +35157,7 @@ instance
       "RegionInstanceGroupManagersRecreateRequest"
       ( \o ->
           RegionInstanceGroupManagersRecreateRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -35218,7 +35199,7 @@ instance
       ( \o ->
           RegionInstanceGroupManagersSetTargetPoolsRequest
             Core.<$> (o Core..:? "fingerprint")
-              Core.<*> (o Core..:? "targetPools" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "targetPools")
       )
 
 instance
@@ -35316,7 +35297,7 @@ instance
       ( \o ->
           RegionInstanceGroupsListInstances
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#regionInstanceGroupsListInstances"
                      )
@@ -35374,7 +35355,7 @@ instance
       ( \o ->
           RegionInstanceGroupsListInstances_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -35508,7 +35489,7 @@ instance
       ( \o ->
           RegionInstanceGroupsSetNamedPortsRequest
             Core.<$> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "namedPorts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedPorts")
       )
 
 instance
@@ -35562,7 +35543,7 @@ instance Core.FromJSON RegionList where
       ( \o ->
           RegionList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#regionList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -35612,7 +35593,7 @@ instance Core.FromJSON RegionList_Warning where
       ( \o ->
           RegionList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -35691,8 +35672,8 @@ instance
       "RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse"
       ( \o ->
           RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
-            Core.<$> (o Core..:? "firewallPolicys" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "firewalls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "firewallPolicys")
+              Core.<*> (o Core..:? "firewalls")
       )
 
 instance
@@ -35748,7 +35729,7 @@ instance
           RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
             Core.<$> (o Core..:? "displayName")
               Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "rules")
               Core.<*> (o Core..:? "type")
       )
 
@@ -35864,7 +35845,7 @@ instance Core.FromJSON RegionSetPolicyRequest where
       "RegionSetPolicyRequest"
       ( \o ->
           RegionSetPolicyRequest
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "policy")
       )
@@ -35904,7 +35885,7 @@ instance
       "RegionTargetHttpsProxiesSetSslCertificatesRequest"
       ( \o ->
           RegionTargetHttpsProxiesSetSslCertificatesRequest
-            Core.<$> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "sslCertificates")
       )
 
 instance
@@ -36042,7 +36023,7 @@ instance Core.FromJSON Reservation where
             Core.<$> (o Core..:? "commitment")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#reservation")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -36108,7 +36089,7 @@ instance Core.FromJSON ReservationAffinity where
           ReservationAffinity
             Core.<$> (o Core..:? "consumeReservationType")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ReservationAffinity where
@@ -36170,7 +36151,7 @@ instance Core.FromJSON ReservationAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -36254,7 +36235,7 @@ instance
       ( \o ->
           ReservationAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -36352,7 +36333,7 @@ instance Core.FromJSON ReservationList where
       ( \o ->
           ReservationList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#reservationList"
                      )
@@ -36404,7 +36385,7 @@ instance Core.FromJSON ReservationList_Warning where
       ( \o ->
           ReservationList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -36475,7 +36456,9 @@ instance Core.FromJSON ReservationsResizeRequest where
       "ReservationsResizeRequest"
       ( \o ->
           ReservationsResizeRequest
-            Core.<$> (o Core..:? "specificSkuCount")
+            Core.<$> ( o Core..:? "specificSkuCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ReservationsResizeRequest where
@@ -36509,7 +36492,7 @@ instance Core.FromJSON ReservationsScopedList where
       "ReservationsScopedList"
       ( \o ->
           ReservationsScopedList
-            Core.<$> (o Core..:? "reservations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "reservations")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -36552,7 +36535,7 @@ instance Core.FromJSON ReservationsScopedList_Warning where
       ( \o ->
           ReservationsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -36639,7 +36622,9 @@ instance Core.FromJSON ResourceCommitment where
       ( \o ->
           ResourceCommitment
             Core.<$> (o Core..:? "acceleratorType")
-            Core.<*> (o Core..:? "amount")
+            Core.<*> ( o Core..:? "amount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -36706,7 +36691,7 @@ instance Core.FromJSON ResourcePoliciesScopedList where
       "ResourcePoliciesScopedList"
       ( \o ->
           ResourcePoliciesScopedList
-            Core.<$> (o Core..:? "resourcePolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourcePolicies")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -36753,7 +36738,7 @@ instance
       ( \o ->
           ResourcePoliciesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -36873,7 +36858,7 @@ instance Core.FromJSON ResourcePolicy where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "groupPlacementPolicy")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instanceSchedulePolicy")
             Core.<*> (o Core..:? "kind" Core..!= "compute#resourcePolicy")
             Core.<*> (o Core..:? "name")
@@ -36959,7 +36944,7 @@ instance Core.FromJSON ResourcePolicyAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -37047,7 +37032,7 @@ instance
       ( \o ->
           ResourcePolicyAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -37387,7 +37372,7 @@ instance Core.FromJSON ResourcePolicyList where
           ResourcePolicyList
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#resourcePolicyList"
                      )
@@ -37440,7 +37425,7 @@ instance Core.FromJSON ResourcePolicyList_Warning where
       ( \o ->
           ResourcePolicyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -37772,7 +37757,7 @@ instance
             Core.<$> (o Core..:? "chainName")
               Core.<*> (o Core..:? "guestFlush")
               Core.<*> (o Core..:? "labels")
-              Core.<*> (o Core..:? "storageLocations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "storageLocations")
       )
 
 instance
@@ -37851,7 +37836,7 @@ instance Core.FromJSON ResourcePolicyWeeklyCycle where
       "ResourcePolicyWeeklyCycle"
       ( \o ->
           ResourcePolicyWeeklyCycle
-            Core.<$> (o Core..:? "dayOfWeeks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dayOfWeeks")
       )
 
 instance Core.ToJSON ResourcePolicyWeeklyCycle where
@@ -37990,11 +37975,11 @@ instance Core.FromJSON Route where
       "Route"
       ( \o ->
           Route
-            Core.<$> (o Core..:? "asPaths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "asPaths")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "destRange")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#route")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "network")
@@ -38008,8 +37993,8 @@ instance Core.FromJSON Route where
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "routeType")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Route where
@@ -38070,7 +38055,7 @@ instance Core.FromJSON Route_WarningsItem where
       ( \o ->
           Route_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -38140,7 +38125,7 @@ instance Core.FromJSON RouteAsPath where
       "RouteAsPath"
       ( \o ->
           RouteAsPath
-            Core.<$> (o Core..:? "asLists" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "asLists")
             Core.<*> (o Core..:? "pathSegmentType")
       )
 
@@ -38193,7 +38178,7 @@ instance Core.FromJSON RouteList where
       ( \o ->
           RouteList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#routeList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -38243,7 +38228,7 @@ instance Core.FromJSON RouteList_Warning where
       ( \o ->
           RouteList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -38351,15 +38336,15 @@ instance Core.FromJSON Router where
       ( \o ->
           Router
             Core.<$> (o Core..:? "bgp")
-            Core.<*> (o Core..:? "bgpPeers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "bgpPeers")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "encryptedInterconnectRouter")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "interfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "interfaces")
             Core.<*> (o Core..:? "kind" Core..!= "compute#router")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "nats" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nats")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
@@ -38471,7 +38456,7 @@ instance Core.FromJSON RouterAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -38549,7 +38534,7 @@ instance Core.FromJSON RouterAggregatedList_Warning where
       ( \o ->
           RouterAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -38641,10 +38626,8 @@ instance Core.FromJSON RouterBgp where
       ( \o ->
           RouterBgp
             Core.<$> (o Core..:? "advertiseMode")
-            Core.<*> (o Core..:? "advertisedGroups" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "advertisedIpRanges"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "advertisedGroups")
+            Core.<*> (o Core..:? "advertisedIpRanges")
             Core.<*> (o Core..:? "asn")
             Core.<*> (o Core..:? "keepaliveInterval")
       )
@@ -38732,10 +38715,8 @@ instance Core.FromJSON RouterBgpPeer where
       ( \o ->
           RouterBgpPeer
             Core.<$> (o Core..:? "advertiseMode")
-            Core.<*> (o Core..:? "advertisedGroups" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "advertisedIpRanges"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "advertisedGroups")
+            Core.<*> (o Core..:? "advertisedIpRanges")
             Core.<*> (o Core..:? "advertisedRoutePriority")
             Core.<*> (o Core..:? "bfd")
             Core.<*> (o Core..:? "enable")
@@ -38941,7 +38922,7 @@ instance Core.FromJSON RouterList where
       ( \o ->
           RouterList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#routerList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -38991,7 +38972,7 @@ instance Core.FromJSON RouterList_Warning where
       ( \o ->
           RouterList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -39110,7 +39091,7 @@ instance Core.FromJSON RouterNat where
       "RouterNat"
       ( \o ->
           RouterNat
-            Core.<$> (o Core..:? "drainNatIps" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "drainNatIps")
             Core.<*> (o Core..:? "enableDynamicPortAllocation")
             Core.<*> (o Core..:? "enableEndpointIndependentMapping")
             Core.<*> (o Core..:? "icmpIdleTimeoutSec")
@@ -39119,10 +39100,10 @@ instance Core.FromJSON RouterNat where
             Core.<*> (o Core..:? "minPortsPerVm")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "natIpAllocateOption")
-            Core.<*> (o Core..:? "natIps" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "natIps")
+            Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "sourceSubnetworkIpRangesToNat")
-            Core.<*> (o Core..:? "subnetworks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subnetworks")
             Core.<*> (o Core..:? "tcpEstablishedIdleTimeoutSec")
             Core.<*> (o Core..:? "tcpTimeWaitTimeoutSec")
             Core.<*> (o Core..:? "tcpTransitoryIdleTimeoutSec")
@@ -39270,12 +39251,8 @@ instance Core.FromJSON RouterNatRuleAction where
       "RouterNatRuleAction"
       ( \o ->
           RouterNatRuleAction
-            Core.<$> ( o Core..:? "sourceNatActiveIps"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "sourceNatDrainIps"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "sourceNatActiveIps")
+            Core.<*> (o Core..:? "sourceNatDrainIps")
       )
 
 instance Core.ToJSON RouterNatRuleAction where
@@ -39319,12 +39296,8 @@ instance Core.FromJSON RouterNatSubnetworkToNat where
       ( \o ->
           RouterNatSubnetworkToNat
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "secondaryIpRangeNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "sourceIpRangesToNat"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "secondaryIpRangeNames")
+            Core.<*> (o Core..:? "sourceIpRangesToNat")
       )
 
 instance Core.ToJSON RouterNatSubnetworkToNat where
@@ -39373,12 +39346,10 @@ instance Core.FromJSON RouterStatus where
       "RouterStatus"
       ( \o ->
           RouterStatus
-            Core.<$> (o Core..:? "bestRoutes" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "bestRoutesForRouter"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "bgpPeerStatus" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "natStatus" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestRoutes")
+            Core.<*> (o Core..:? "bestRoutesForRouter")
+            Core.<*> (o Core..:? "bgpPeerStatus")
+            Core.<*> (o Core..:? "natStatus")
             Core.<*> (o Core..:? "network")
       )
 
@@ -39450,7 +39421,7 @@ instance Core.FromJSON RouterStatusBgpPeerStatus where
       "RouterStatusBgpPeerStatus"
       ( \o ->
           RouterStatusBgpPeerStatus
-            Core.<$> (o Core..:? "advertisedRoutes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "advertisedRoutes")
             Core.<*> (o Core..:? "bfdStatus")
             Core.<*> (o Core..:? "ipAddress")
             Core.<*> (o Core..:? "linkedVpnTunnel")
@@ -39533,25 +39504,15 @@ instance Core.FromJSON RouterStatusNatStatus where
       "RouterStatusNatStatus"
       ( \o ->
           RouterStatusNatStatus
-            Core.<$> ( o Core..:? "autoAllocatedNatIps"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "drainAutoAllocatedNatIps"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "drainUserAllocatedNatIps"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "autoAllocatedNatIps")
+            Core.<*> (o Core..:? "drainAutoAllocatedNatIps")
+            Core.<*> (o Core..:? "drainUserAllocatedNatIps")
             Core.<*> (o Core..:? "minExtraNatIpsNeeded")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "numVmEndpointsWithNatMappings")
-            Core.<*> (o Core..:? "ruleStatus" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "userAllocatedNatIpResources"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "userAllocatedNatIps"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "ruleStatus")
+            Core.<*> (o Core..:? "userAllocatedNatIpResources")
+            Core.<*> (o Core..:? "userAllocatedNatIps")
       )
 
 instance Core.ToJSON RouterStatusNatStatus where
@@ -39615,8 +39576,8 @@ instance
       "RouterStatusNatStatusNatRuleStatus"
       ( \o ->
           RouterStatusNatStatusNatRuleStatus
-            Core.<$> (o Core..:? "activeNatIps" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "drainNatIps" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activeNatIps")
+            Core.<*> (o Core..:? "drainNatIps")
             Core.<*> (o Core..:? "minExtraIpsNeeded")
             Core.<*> (o Core..:? "numVmEndpointsWithNatMappings")
             Core.<*> (o Core..:? "ruleNumber")
@@ -39730,7 +39691,7 @@ instance Core.FromJSON RoutersScopedList where
       "RoutersScopedList"
       ( \o ->
           RoutersScopedList
-            Core.<$> (o Core..:? "routers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "routers")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -39773,7 +39734,7 @@ instance Core.FromJSON RoutersScopedList_Warning where
       ( \o ->
           RoutersScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -39869,12 +39830,12 @@ instance Core.FromJSON Rule where
       ( \o ->
           Rule
             Core.<$> (o Core..:? "action")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "ins" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "logConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "notIns" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ins")
+            Core.<*> (o Core..:? "logConfigs")
+            Core.<*> (o Core..:? "notIns")
+            Core.<*> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON Rule where
@@ -40022,18 +39983,22 @@ instance Core.FromJSON SavedAttachedDisk where
             Core.<*> (o Core..:? "boot")
             Core.<*> (o Core..:? "deviceName")
             Core.<*> (o Core..:? "diskEncryptionKey")
-            Core.<*> (o Core..:? "diskSizeGb")
+            Core.<*> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "diskType")
-            Core.<*> (o Core..:? "guestOsFeatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "guestOsFeatures")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "interface")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#savedAttachedDisk"
                      )
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "source")
-            Core.<*> (o Core..:? "storageBytes")
+            Core.<*> ( o Core..:? "storageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storageBytesStatus")
             Core.<*> (o Core..:? "type")
       )
@@ -40099,7 +40064,9 @@ instance Core.FromJSON SavedDisk where
           SavedDisk
             Core.<$> (o Core..:? "kind" Core..!= "compute#savedDisk")
             Core.<*> (o Core..:? "sourceDisk")
-            Core.<*> (o Core..:? "storageBytes")
+            Core.<*> ( o Core..:? "storageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storageBytesStatus")
       )
 
@@ -40207,7 +40174,7 @@ instance Core.FromJSON Scheduling where
             Core.<*> (o Core..:? "instanceTerminationAction")
             Core.<*> (o Core..:? "locationHint")
             Core.<*> (o Core..:? "minNodeCpus")
-            Core.<*> (o Core..:? "nodeAffinities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nodeAffinities")
             Core.<*> (o Core..:? "onHostMaintenance")
             Core.<*> (o Core..:? "preemptible")
             Core.<*> (o Core..:? "provisioningModel")
@@ -40263,7 +40230,7 @@ instance Core.FromJSON SchedulingNodeAffinity where
           SchedulingNodeAffinity
             Core.<$> (o Core..:? "key")
             Core.<*> (o Core..:? "operator")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON SchedulingNodeAffinity where
@@ -40444,11 +40411,11 @@ instance Core.FromJSON SecurityPolicy where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#securityPolicy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "recaptchaOptionsConfig")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "type")
       )
@@ -40648,7 +40615,7 @@ instance Core.FromJSON SecurityPolicyList where
       ( \o ->
           SecurityPolicyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#securityPolicyList"
                      )
@@ -40698,7 +40665,7 @@ instance Core.FromJSON SecurityPolicyList_Warning where
       ( \o ->
           SecurityPolicyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -40921,9 +40888,7 @@ instance
       "SecurityPolicyRuleHttpHeaderAction"
       ( \o ->
           SecurityPolicyRuleHttpHeaderAction
-            Core.<$> ( o Core..:? "requestHeadersToAdds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "requestHeadersToAdds")
       )
 
 instance
@@ -41050,7 +41015,7 @@ instance
       "SecurityPolicyRuleMatcherConfig"
       ( \o ->
           SecurityPolicyRuleMatcherConfig
-            Core.<$> (o Core..:? "srcIpRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "srcIpRanges")
       )
 
 instance Core.ToJSON SecurityPolicyRuleMatcherConfig where
@@ -41253,7 +41218,7 @@ instance Core.FromJSON SecuritySettings where
       ( \o ->
           SecuritySettings
             Core.<$> (o Core..:? "clientTlsPolicy")
-            Core.<*> (o Core..:? "subjectAltNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subjectAltNames")
       )
 
 instance Core.ToJSON SecuritySettings where
@@ -41306,9 +41271,13 @@ instance Core.FromJSON SerialPortOutput where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#serialPortOutput"
                      )
-            Core.<*> (o Core..:? "next")
+            Core.<*> ( o Core..:? "next"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "start")
+            Core.<*> ( o Core..:? "start"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SerialPortOutput where
@@ -41369,8 +41338,7 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -41456,27 +41424,21 @@ instance Core.FromJSON ServiceAttachment where
       "ServiceAttachment"
       ( \o ->
           ServiceAttachment
-            Core.<$> ( o Core..:? "connectedEndpoints"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "connectedEndpoints")
             Core.<*> (o Core..:? "connectionPreference")
-            Core.<*> ( o Core..:? "consumerAcceptLists"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "consumerRejectLists"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "consumerAcceptLists")
+            Core.<*> (o Core..:? "consumerRejectLists")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "domainNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domainNames")
             Core.<*> (o Core..:? "enableProxyProtocol")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#serviceAttachment"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "natSubnets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "natSubnets")
             Core.<*> (o Core..:? "producerForwardingRule")
             Core.<*> (o Core..:? "pscServiceAttachmentId")
             Core.<*> (o Core..:? "region")
@@ -41568,7 +41530,7 @@ instance
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -41655,7 +41617,7 @@ instance
       ( \o ->
           ServiceAttachmentAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -41749,7 +41711,9 @@ instance
       ( \o ->
           ServiceAttachmentConnectedEndpoint
             Core.<$> (o Core..:? "endpoint")
-            Core.<*> (o Core..:? "pscConnectionId")
+            Core.<*> ( o Core..:? "pscConnectionId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "status")
       )
 
@@ -41850,7 +41814,7 @@ instance Core.FromJSON ServiceAttachmentList where
       ( \o ->
           ServiceAttachmentList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#serviceAttachmentList"
                      )
@@ -41902,7 +41866,7 @@ instance Core.FromJSON ServiceAttachmentList_Warning where
       ( \o ->
           ServiceAttachmentList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -41984,9 +41948,7 @@ instance Core.FromJSON ServiceAttachmentsScopedList where
       "ServiceAttachmentsScopedList"
       ( \o ->
           ServiceAttachmentsScopedList
-            Core.<$> ( o Core..:? "serviceAttachments"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "serviceAttachments")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -42033,7 +41995,7 @@ instance
       ( \o ->
           ServiceAttachmentsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -42485,14 +42447,18 @@ instance Core.FromJSON Snapshot where
             Core.<*> (o Core..:? "chainName")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "diskSizeGb")
-            Core.<*> (o Core..:? "downloadBytes")
-            Core.<*> (o Core..:? "id")
+            Core.<*> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "downloadBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#snapshot")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "licenseCodes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "licenses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "licenseCodes")
+            Core.<*> (o Core..:? "licenses")
             Core.<*> (o Core..:? "locationHint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -42502,9 +42468,11 @@ instance Core.FromJSON Snapshot where
             Core.<*> (o Core..:? "sourceDiskEncryptionKey")
             Core.<*> (o Core..:? "sourceDiskId")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "storageBytes")
+            Core.<*> ( o Core..:? "storageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storageBytesStatus")
-            Core.<*> (o Core..:? "storageLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "storageLocations")
       )
 
 instance Core.ToJSON Snapshot where
@@ -42613,7 +42581,7 @@ instance Core.FromJSON SnapshotList where
       ( \o ->
           SnapshotList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#snapshotList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -42663,7 +42631,7 @@ instance Core.FromJSON SnapshotList_Warning where
       ( \o ->
           SnapshotList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -42770,7 +42738,7 @@ instance Core.FromJSON SourceInstanceParams where
       "SourceInstanceParams"
       ( \o ->
           SourceInstanceParams
-            Core.<$> (o Core..:? "diskConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "diskConfigs")
       )
 
 instance Core.ToJSON SourceInstanceParams where
@@ -42842,15 +42810,15 @@ instance Core.FromJSON SourceInstanceProperties where
             Core.<$> (o Core..:? "canIpForward")
             Core.<*> (o Core..:? "deletionProtection")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "guestAccelerators" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disks")
+            Core.<*> (o Core..:? "guestAccelerators")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minCpuPlatform")
-            Core.<*> (o Core..:? "networkInterfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkInterfaces")
             Core.<*> (o Core..:? "scheduling")
-            Core.<*> (o Core..:? "serviceAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceAccounts")
             Core.<*> (o Core..:? "tags")
       )
 
@@ -42976,7 +42944,7 @@ instance Core.FromJSON SslCertificate where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "expireTime")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#sslCertificate")
             Core.<*> (o Core..:? "managed")
             Core.<*> (o Core..:? "name")
@@ -42984,9 +42952,7 @@ instance Core.FromJSON SslCertificate where
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "selfManaged")
-            Core.<*> ( o Core..:? "subjectAlternativeNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "subjectAlternativeNames")
             Core.<*> (o Core..:? "type")
       )
 
@@ -43060,7 +43026,7 @@ instance Core.FromJSON SslCertificateAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -43147,7 +43113,7 @@ instance
       ( \o ->
           SslCertificateAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -43247,7 +43213,7 @@ instance Core.FromJSON SslCertificateList where
       ( \o ->
           SslCertificateList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#sslCertificateList"
                      )
@@ -43299,7 +43265,7 @@ instance Core.FromJSON SslCertificateList_Warning where
       ( \o ->
           SslCertificateList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -43386,7 +43352,7 @@ instance
       ( \o ->
           SslCertificateManagedSslCertificate
             Core.<$> (o Core..:? "domainStatus")
-            Core.<*> (o Core..:? "domains" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domains")
             Core.<*> (o Core..:? "status")
       )
 
@@ -43514,7 +43480,7 @@ instance Core.FromJSON SslCertificatesScopedList where
       "SslCertificatesScopedList"
       ( \o ->
           SslCertificatesScopedList
-            Core.<$> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "sslCertificates")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -43561,7 +43527,7 @@ instance
       ( \o ->
           SslCertificatesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -43659,7 +43625,7 @@ instance Core.FromJSON SslPoliciesList where
       ( \o ->
           SslPoliciesList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#sslPoliciesList"
                      )
@@ -43711,7 +43677,7 @@ instance Core.FromJSON SslPoliciesList_Warning where
       ( \o ->
           SslPoliciesList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -43785,7 +43751,7 @@ instance
       "SslPoliciesListAvailableFeaturesResponse"
       ( \o ->
           SslPoliciesListAvailableFeaturesResponse
-            Core.<$> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "features")
       )
 
 instance
@@ -43855,17 +43821,17 @@ instance Core.FromJSON SslPolicy where
       ( \o ->
           SslPolicy
             Core.<$> (o Core..:? "creationTimestamp")
-            Core.<*> (o Core..:? "customFeatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customFeatures")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "enabledFeatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "enabledFeatures")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#sslPolicy")
             Core.<*> (o Core..:? "minTlsVersion")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "profile")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON SslPolicy where
@@ -43917,7 +43883,7 @@ instance Core.FromJSON SslPolicy_WarningsItem where
       ( \o ->
           SslPolicy_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -44224,7 +44190,7 @@ instance Core.FromJSON Subnetwork where
             Core.<*> (o Core..:? "externalIpv6Prefix")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "gatewayAddress")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "internalIpv6Prefix")
             Core.<*> (o Core..:? "ipCidrRange")
             Core.<*> (o Core..:? "ipv6AccessType")
@@ -44238,7 +44204,7 @@ instance Core.FromJSON Subnetwork where
             Core.<*> (o Core..:? "purpose")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "role")
-            Core.<*> (o Core..:? "secondaryIpRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secondaryIpRanges")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "stackType")
             Core.<*> (o Core..:? "state")
@@ -44328,7 +44294,7 @@ instance Core.FromJSON SubnetworkAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -44409,7 +44375,7 @@ instance
       ( \o ->
           SubnetworkAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -44505,7 +44471,7 @@ instance Core.FromJSON SubnetworkList where
       ( \o ->
           SubnetworkList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#subnetworkList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -44555,7 +44521,7 @@ instance Core.FromJSON SubnetworkList_Warning where
       ( \o ->
           SubnetworkList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -44649,7 +44615,7 @@ instance Core.FromJSON SubnetworkLogConfig where
             Core.<*> (o Core..:? "filterExpr")
             Core.<*> (o Core..:? "flowSampling")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "metadataFields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metadataFields")
       )
 
 instance Core.ToJSON SubnetworkLogConfig where
@@ -44763,7 +44729,7 @@ instance Core.FromJSON SubnetworksScopedList where
       "SubnetworksScopedList"
       ( \o ->
           SubnetworksScopedList
-            Core.<$> (o Core..:? "subnetworks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "subnetworks")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -44806,7 +44772,7 @@ instance Core.FromJSON SubnetworksScopedList_Warning where
       ( \o ->
           SubnetworksScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -45010,7 +44976,7 @@ instance Core.FromJSON Tags where
       ( \o ->
           Tags
             Core.<$> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
       )
 
 instance Core.ToJSON Tags where
@@ -45075,7 +45041,7 @@ instance Core.FromJSON TargetGrpcProxy where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetGrpcProxy"
                      )
@@ -45143,7 +45109,7 @@ instance Core.FromJSON TargetGrpcProxyList where
       ( \o ->
           TargetGrpcProxyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetGrpcProxyList"
                      )
@@ -45195,7 +45161,7 @@ instance Core.FromJSON TargetGrpcProxyList_Warning where
       ( \o ->
           TargetGrpcProxyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -45277,7 +45243,7 @@ instance Core.FromJSON TargetHttpProxiesScopedList where
       "TargetHttpProxiesScopedList"
       ( \o ->
           TargetHttpProxiesScopedList
-            Core.<$> (o Core..:? "targetHttpProxies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "targetHttpProxies")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -45324,7 +45290,7 @@ instance
       ( \o ->
           TargetHttpProxiesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -45438,7 +45404,7 @@ instance Core.FromJSON TargetHttpProxy where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetHttpProxy"
                      )
@@ -45511,7 +45477,7 @@ instance Core.FromJSON TargetHttpProxyAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
       )
 
 instance Core.ToJSON TargetHttpProxyAggregatedList where
@@ -45602,7 +45568,7 @@ instance Core.FromJSON TargetHttpProxyList where
       ( \o ->
           TargetHttpProxyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetHttpProxyList"
                      )
@@ -45654,7 +45620,7 @@ instance Core.FromJSON TargetHttpProxyList_Warning where
       ( \o ->
           TargetHttpProxyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -45736,9 +45702,7 @@ instance Core.FromJSON TargetHttpsProxiesScopedList where
       "TargetHttpsProxiesScopedList"
       ( \o ->
           TargetHttpsProxiesScopedList
-            Core.<$> ( o Core..:? "targetHttpsProxies"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "targetHttpsProxies")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -45785,7 +45749,7 @@ instance
       ( \o ->
           TargetHttpsProxiesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -45905,7 +45869,7 @@ instance
       "TargetHttpsProxiesSetSslCertificatesRequest"
       ( \o ->
           TargetHttpsProxiesSetSslCertificatesRequest
-            Core.<$> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "sslCertificates")
       )
 
 instance
@@ -45990,7 +45954,7 @@ instance Core.FromJSON TargetHttpsProxy where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetHttpsProxy"
                      )
@@ -46000,7 +45964,7 @@ instance Core.FromJSON TargetHttpsProxy where
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "serverTlsPolicy")
-            Core.<*> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sslCertificates")
             Core.<*> (o Core..:? "sslPolicy")
             Core.<*> (o Core..:? "urlMap")
       )
@@ -46076,7 +46040,7 @@ instance Core.FromJSON TargetHttpsProxyAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -46163,7 +46127,7 @@ instance
       ( \o ->
           TargetHttpsProxyAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -46263,7 +46227,7 @@ instance Core.FromJSON TargetHttpsProxyList where
       ( \o ->
           TargetHttpsProxyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetHttpsProxyList"
                      )
@@ -46315,7 +46279,7 @@ instance Core.FromJSON TargetHttpsProxyList_Warning where
       ( \o ->
           TargetHttpsProxyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -46424,7 +46388,7 @@ instance Core.FromJSON TargetInstance where
           TargetInstance
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instance")
             Core.<*> (o Core..:? "kind" Core..!= "compute#targetInstance")
             Core.<*> (o Core..:? "name")
@@ -46499,7 +46463,7 @@ instance Core.FromJSON TargetInstanceAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -46586,7 +46550,7 @@ instance
       ( \o ->
           TargetInstanceAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -46686,7 +46650,7 @@ instance Core.FromJSON TargetInstanceList where
       ( \o ->
           TargetInstanceList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetInstanceList"
                      )
@@ -46738,7 +46702,7 @@ instance Core.FromJSON TargetInstanceList_Warning where
       ( \o ->
           TargetInstanceList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -46817,7 +46781,7 @@ instance Core.FromJSON TargetInstancesScopedList where
       "TargetInstancesScopedList"
       ( \o ->
           TargetInstancesScopedList
-            Core.<$> (o Core..:? "targetInstances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "targetInstances")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -46864,7 +46828,7 @@ instance
       ( \o ->
           TargetInstancesScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -46984,9 +46948,9 @@ instance Core.FromJSON TargetPool where
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "failoverRatio")
-            Core.<*> (o Core..:? "healthChecks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "healthChecks")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "kind" Core..!= "compute#targetPool")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "region")
@@ -47062,7 +47026,7 @@ instance Core.FromJSON TargetPoolAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -47143,7 +47107,7 @@ instance
       ( \o ->
           TargetPoolAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -47225,7 +47189,7 @@ instance Core.FromJSON TargetPoolInstanceHealth where
       "TargetPoolInstanceHealth"
       ( \o ->
           TargetPoolInstanceHealth
-            Core.<$> (o Core..:? "healthStatus" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "healthStatus")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetPoolInstanceHealth"
                      )
@@ -47279,7 +47243,7 @@ instance Core.FromJSON TargetPoolList where
       ( \o ->
           TargetPoolList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#targetPoolList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -47329,7 +47293,7 @@ instance Core.FromJSON TargetPoolList_Warning where
       ( \o ->
           TargetPoolList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -47403,7 +47367,7 @@ instance
       "TargetPoolsAddHealthCheckRequest"
       ( \o ->
           TargetPoolsAddHealthCheckRequest
-            Core.<$> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "healthChecks")
       )
 
 instance Core.ToJSON TargetPoolsAddHealthCheckRequest where
@@ -47433,7 +47397,7 @@ instance Core.FromJSON TargetPoolsAddInstanceRequest where
       "TargetPoolsAddInstanceRequest"
       ( \o ->
           TargetPoolsAddInstanceRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance Core.ToJSON TargetPoolsAddInstanceRequest where
@@ -47466,7 +47430,7 @@ instance
       "TargetPoolsRemoveHealthCheckRequest"
       ( \o ->
           TargetPoolsRemoveHealthCheckRequest
-            Core.<$> (o Core..:? "healthChecks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "healthChecks")
       )
 
 instance
@@ -47502,7 +47466,7 @@ instance
       "TargetPoolsRemoveInstanceRequest"
       ( \o ->
           TargetPoolsRemoveInstanceRequest
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance Core.ToJSON TargetPoolsRemoveInstanceRequest where
@@ -47534,7 +47498,7 @@ instance Core.FromJSON TargetPoolsScopedList where
       "TargetPoolsScopedList"
       ( \o ->
           TargetPoolsScopedList
-            Core.<$> (o Core..:? "targetPools" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "targetPools")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -47577,7 +47541,7 @@ instance Core.FromJSON TargetPoolsScopedList_Warning where
       ( \o ->
           TargetPoolsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -47755,7 +47719,7 @@ instance
       "TargetSslProxiesSetSslCertificatesRequest"
       ( \o ->
           TargetSslProxiesSetSslCertificatesRequest
-            Core.<$> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "sslCertificates")
       )
 
 instance
@@ -47822,13 +47786,13 @@ instance Core.FromJSON TargetSslProxy where
           TargetSslProxy
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#targetSslProxy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "proxyHeader")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "service")
-            Core.<*> (o Core..:? "sslCertificates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sslCertificates")
             Core.<*> (o Core..:? "sslPolicy")
       )
 
@@ -47889,7 +47853,7 @@ instance Core.FromJSON TargetSslProxyList where
       ( \o ->
           TargetSslProxyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetSslProxyList"
                      )
@@ -47941,7 +47905,7 @@ instance Core.FromJSON TargetSslProxyList_Warning where
       ( \o ->
           TargetSslProxyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -48116,7 +48080,7 @@ instance Core.FromJSON TargetTcpProxy where
           TargetTcpProxy
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#targetTcpProxy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "proxyBind")
@@ -48181,7 +48145,7 @@ instance Core.FromJSON TargetTcpProxyList where
       ( \o ->
           TargetTcpProxyList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetTcpProxyList"
                      )
@@ -48233,7 +48197,7 @@ instance Core.FromJSON TargetTcpProxyList_Warning where
       ( \o ->
           TargetTcpProxyList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -48342,8 +48306,8 @@ instance Core.FromJSON TargetVpnGateway where
           TargetVpnGateway
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "forwardingRules" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "forwardingRules")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetVpnGateway"
                      )
@@ -48352,7 +48316,7 @@ instance Core.FromJSON TargetVpnGateway where
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "tunnels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tunnels")
       )
 
 instance Core.ToJSON TargetVpnGateway where
@@ -48421,7 +48385,7 @@ instance Core.FromJSON TargetVpnGatewayAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -48508,7 +48472,7 @@ instance
       ( \o ->
           TargetVpnGatewayAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -48608,7 +48572,7 @@ instance Core.FromJSON TargetVpnGatewayList where
       ( \o ->
           TargetVpnGatewayList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#targetVpnGatewayList"
                      )
@@ -48660,7 +48624,7 @@ instance Core.FromJSON TargetVpnGatewayList_Warning where
       ( \o ->
           TargetVpnGatewayList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -48742,7 +48706,7 @@ instance Core.FromJSON TargetVpnGatewaysScopedList where
       "TargetVpnGatewaysScopedList"
       ( \o ->
           TargetVpnGatewaysScopedList
-            Core.<$> (o Core..:? "targetVpnGateways" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "targetVpnGateways")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -48789,7 +48753,7 @@ instance
       ( \o ->
           TargetVpnGatewaysScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -48902,7 +48866,7 @@ instance Core.FromJSON TestFailure where
             Core.<*> (o Core..:? "expectedOutputUrl")
             Core.<*> (o Core..:? "expectedRedirectResponseCode")
             Core.<*> (o Core..:? "expectedService")
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "path")
       )
@@ -48946,7 +48910,7 @@ instance Core.FromJSON TestPermissionsRequest where
       "TestPermissionsRequest"
       ( \o ->
           TestPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestPermissionsRequest where
@@ -48976,7 +48940,7 @@ instance Core.FromJSON TestPermissionsResponse where
       "TestPermissionsResponse"
       ( \o ->
           TestPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestPermissionsResponse where
@@ -49007,7 +48971,12 @@ instance Core.FromJSON Uint128 where
       "Uint128"
       ( \o ->
           Uint128
-            Core.<$> (o Core..:? "high") Core.<*> (o Core..:? "low")
+            Core.<$> ( o Core..:? "high"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "low"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Uint128 where
@@ -49092,14 +49061,14 @@ instance Core.FromJSON UrlMap where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "headerAction")
-            Core.<*> (o Core..:? "hostRules" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "hostRules")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#urlMap")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pathMatchers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pathMatchers")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "tests" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tests")
       )
 
 instance Core.ToJSON UrlMap where
@@ -49166,7 +49135,7 @@ instance Core.FromJSON UrlMapList where
       ( \o ->
           UrlMapList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#urlMapList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -49216,7 +49185,7 @@ instance Core.FromJSON UrlMapList_Warning where
       ( \o ->
           UrlMapList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -49334,7 +49303,7 @@ instance Core.FromJSON UrlMapTest where
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "expectedOutputUrl")
             Core.<*> (o Core..:? "expectedRedirectResponseCode")
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "service")
@@ -49423,9 +49392,9 @@ instance Core.FromJSON UrlMapValidationResult where
       "UrlMapValidationResult"
       ( \o ->
           UrlMapValidationResult
-            Core.<$> (o Core..:? "loadErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "loadErrors")
             Core.<*> (o Core..:? "loadSucceeded")
-            Core.<*> (o Core..:? "testFailures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "testFailures")
             Core.<*> (o Core..:? "testPassed")
       )
 
@@ -49487,7 +49456,7 @@ instance Core.FromJSON UrlMapsAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -49565,7 +49534,7 @@ instance Core.FromJSON UrlMapsAggregatedList_Warning where
       ( \o ->
           UrlMapsAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -49644,7 +49613,7 @@ instance Core.FromJSON UrlMapsScopedList where
       "UrlMapsScopedList"
       ( \o ->
           UrlMapsScopedList
-            Core.<$> (o Core..:? "urlMaps" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "urlMaps")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -49687,7 +49656,7 @@ instance Core.FromJSON UrlMapsScopedList_Warning where
       ( \o ->
           UrlMapsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -49766,9 +49735,7 @@ instance Core.FromJSON UrlMapsValidateRequest where
       "UrlMapsValidateRequest"
       ( \o ->
           UrlMapsValidateRequest
-            Core.<$> ( o Core..:? "loadBalancingSchemes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "loadBalancingSchemes")
             Core.<*> (o Core..:? "resource")
       )
 
@@ -49880,7 +49847,7 @@ instance Core.FromJSON UsableSubnetwork where
           UsableSubnetwork
             Core.<$> (o Core..:? "ipCidrRange")
             Core.<*> (o Core..:? "network")
-            Core.<*> (o Core..:? "secondaryIpRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secondaryIpRanges")
             Core.<*> (o Core..:? "subnetwork")
       )
 
@@ -49976,7 +49943,7 @@ instance
       ( \o ->
           UsableSubnetworksAggregatedList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "compute#usableSubnetworksAggregatedList"
                      )
@@ -50031,7 +49998,7 @@ instance
       ( \o ->
           UsableSubnetworksAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -50159,9 +50126,7 @@ instance Core.FromJSON VmEndpointNatMappings where
       ( \o ->
           VmEndpointNatMappings
             Core.<$> (o Core..:? "instanceName")
-            Core.<*> ( o Core..:? "interfaceNatMappings"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "interfaceNatMappings")
       )
 
 instance Core.ToJSON VmEndpointNatMappings where
@@ -50215,10 +50180,8 @@ instance
       "VmEndpointNatMappingsInterfaceNatMappings"
       ( \o ->
           VmEndpointNatMappingsInterfaceNatMappings
-            Core.<$> ( o Core..:? "drainNatIpPortRanges"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "natIpPortRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "drainNatIpPortRanges")
+            Core.<*> (o Core..:? "natIpPortRanges")
             Core.<*> (o Core..:? "numTotalDrainNatPorts")
             Core.<*> (o Core..:? "numTotalNatPorts")
             Core.<*> (o Core..:? "sourceAliasIpRange")
@@ -50289,7 +50252,7 @@ instance Core.FromJSON VmEndpointNatMappingsList where
                          Core..!= "compute#vmEndpointNatMappingsList"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "result" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "result")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "warning")
       )
@@ -50340,7 +50303,7 @@ instance
       ( \o ->
           VmEndpointNatMappingsList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -50458,7 +50421,7 @@ instance Core.FromJSON VpnGateway where
           VpnGateway
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#vpnGateway")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "labels")
@@ -50467,7 +50430,7 @@ instance Core.FromJSON VpnGateway where
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "stackType")
-            Core.<*> (o Core..:? "vpnInterfaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "vpnInterfaces")
       )
 
 instance Core.ToJSON VpnGateway where
@@ -50565,7 +50528,7 @@ instance Core.FromJSON VpnGatewayAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -50646,7 +50609,7 @@ instance
       ( \o ->
           VpnGatewayAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -50742,7 +50705,7 @@ instance Core.FromJSON VpnGatewayList where
       ( \o ->
           VpnGatewayList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#vpnGatewayList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -50792,7 +50755,7 @@ instance Core.FromJSON VpnGatewayList_Warning where
       ( \o ->
           VpnGatewayList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -50862,7 +50825,7 @@ instance Core.FromJSON VpnGatewayStatus where
       "VpnGatewayStatus"
       ( \o ->
           VpnGatewayStatus
-            Core.<$> (o Core..:? "vpnConnections" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vpnConnections")
       )
 
 instance Core.ToJSON VpnGatewayStatus where
@@ -51003,7 +50966,7 @@ instance Core.FromJSON VpnGatewayStatusVpnConnection where
             Core.<$> (o Core..:? "peerExternalGateway")
             Core.<*> (o Core..:? "peerGcpGateway")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "tunnels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tunnels")
       )
 
 instance Core.ToJSON VpnGatewayStatusVpnConnection where
@@ -51113,7 +51076,7 @@ instance Core.FromJSON VpnGatewaysScopedList where
       "VpnGatewaysScopedList"
       ( \o ->
           VpnGatewaysScopedList
-            Core.<$> (o Core..:? "vpnGateways" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vpnGateways")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -51156,7 +51119,7 @@ instance Core.FromJSON VpnGatewaysScopedList_Warning where
       ( \o ->
           VpnGatewaysScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -51303,21 +51266,17 @@ instance Core.FromJSON VpnTunnel where
             Core.<$> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "detailedStatus")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ikeVersion")
             Core.<*> (o Core..:? "kind" Core..!= "compute#vpnTunnel")
-            Core.<*> ( o Core..:? "localTrafficSelector"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "localTrafficSelector")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "peerExternalGateway")
             Core.<*> (o Core..:? "peerExternalGatewayInterface")
             Core.<*> (o Core..:? "peerGcpGateway")
             Core.<*> (o Core..:? "peerIp")
             Core.<*> (o Core..:? "region")
-            Core.<*> ( o Core..:? "remoteTrafficSelector"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "remoteTrafficSelector")
             Core.<*> (o Core..:? "router")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "sharedSecret")
@@ -51412,7 +51371,7 @@ instance Core.FromJSON VpnTunnelAggregatedList where
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "unreachables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachables")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -51493,7 +51452,7 @@ instance
       ( \o ->
           VpnTunnelAggregatedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -51589,7 +51548,7 @@ instance Core.FromJSON VpnTunnelList where
       ( \o ->
           VpnTunnelList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#vpnTunnelList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -51639,7 +51598,7 @@ instance Core.FromJSON VpnTunnelList_Warning where
       ( \o ->
           VpnTunnelList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -51709,7 +51668,7 @@ instance Core.FromJSON VpnTunnelsScopedList where
       "VpnTunnelsScopedList"
       ( \o ->
           VpnTunnelsScopedList
-            Core.<$> (o Core..:? "vpnTunnels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vpnTunnels")
             Core.<*> (o Core..:? "warning")
       )
 
@@ -51752,7 +51711,7 @@ instance Core.FromJSON VpnTunnelsScopedList_Warning where
       ( \o ->
           VpnTunnelsScopedList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -51837,8 +51796,8 @@ instance Core.FromJSON WafExpressionSet where
       "WafExpressionSet"
       ( \o ->
           WafExpressionSet
-            Core.<$> (o Core..:? "aliases" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "expressions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aliases")
+            Core.<*> (o Core..:? "expressions")
             Core.<*> (o Core..:? "id")
       )
 
@@ -51961,7 +51920,7 @@ instance Core.FromJSON XpnHostList where
       ( \o ->
           XpnHostList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#xpnHostList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -52011,7 +51970,7 @@ instance Core.FromJSON XpnHostList_Warning where
       ( \o ->
           XpnHostList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -52146,13 +52105,11 @@ instance Core.FromJSON Zone where
       "Zone"
       ( \o ->
           Zone
-            Core.<$> ( o Core..:? "availableCpuPlatforms"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "availableCpuPlatforms")
             Core.<*> (o Core..:? "creationTimestamp")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "compute#zone")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "region")
@@ -52220,7 +52177,7 @@ instance Core.FromJSON ZoneList where
       ( \o ->
           ZoneList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "compute#zoneList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -52270,7 +52227,7 @@ instance Core.FromJSON ZoneList_Warning where
       ( \o ->
           ZoneList_Warning
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -52412,7 +52369,7 @@ instance Core.FromJSON ZoneSetPolicyRequest where
       "ZoneSetPolicyRequest"
       ( \o ->
           ZoneSetPolicyRequest
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "policy")
       )

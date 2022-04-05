@@ -220,7 +220,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -257,7 +257,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -302,7 +302,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -537,14 +537,14 @@ instance Core.FromJSON Instance where
       "Instance"
       ( \o ->
           Instance
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "apiEndpoint")
-            Core.<*> (o Core..:? "availableVersion" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "availableVersion")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "cryptoKeyConfig")
             Core.<*> (o Core..:? "dataprocServiceAccount")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "disabledReason" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disabledReason")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableRbac")
             Core.<*> (o Core..:? "enableStackdriverLogging")
@@ -687,7 +687,7 @@ instance Core.FromJSON ListAvailableVersionsResponse where
       "ListAvailableVersionsResponse"
       ( \o ->
           ListAvailableVersionsResponse
-            Core.<$> (o Core..:? "availableVersions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "availableVersions")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -730,9 +730,9 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListInstancesResponse where
@@ -768,7 +768,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -808,7 +808,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1216,8 +1216,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1315,7 +1315,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1377,7 +1377,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -1408,7 +1408,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -1450,7 +1450,7 @@ instance Core.FromJSON Version where
       "Version"
       ( \o ->
           Version
-            Core.<$> (o Core..:? "availableFeatures" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "availableFeatures")
             Core.<*> (o Core..:? "defaultVersion")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "versionNumber")

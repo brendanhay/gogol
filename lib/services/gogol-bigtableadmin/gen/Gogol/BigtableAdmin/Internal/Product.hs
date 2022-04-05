@@ -415,7 +415,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -452,7 +452,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -583,7 +583,9 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "sizeBytes")
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sourceTable")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
@@ -685,7 +687,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -925,7 +927,7 @@ instance Core.FromJSON ClusterState where
       "ClusterState"
       ( \o ->
           ClusterState
-            Core.<$> (o Core..:? "encryptionInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "replicationState")
       )
 
@@ -1288,7 +1290,7 @@ instance Core.FromJSON CreateTableRequest where
       "CreateTableRequest"
       ( \o ->
           CreateTableRequest
-            Core.<$> (o Core..:? "initialSplits" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "initialSplits")
             Core.<*> (o Core..:? "table")
             Core.<*> (o Core..:? "tableId")
       )
@@ -1758,10 +1760,7 @@ instance Core.FromJSON Intersection where
   parseJSON =
     Core.withObject
       "Intersection"
-      ( \o ->
-          Intersection
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
-      )
+      (\o -> Intersection Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON Intersection where
   toJSON Intersection {..} =
@@ -1797,8 +1796,8 @@ instance Core.FromJSON ListAppProfilesResponse where
       "ListAppProfilesResponse"
       ( \o ->
           ListAppProfilesResponse
-            Core.<$> (o Core..:? "appProfiles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "failedLocations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "appProfiles")
+            Core.<*> (o Core..:? "failedLocations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1835,7 +1834,7 @@ instance Core.FromJSON ListBackupsResponse where
       "ListBackupsResponse"
       ( \o ->
           ListBackupsResponse
-            Core.<$> (o Core..:? "backups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "backups")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1877,8 +1876,8 @@ instance Core.FromJSON ListClustersResponse where
       "ListClustersResponse"
       ( \o ->
           ListClustersResponse
-            Core.<$> (o Core..:? "clusters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "failedLocations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusters")
+            Core.<*> (o Core..:? "failedLocations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1921,8 +1920,8 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "failedLocations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "failedLocations")
+            Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1960,7 +1959,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2000,7 +1999,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -2036,7 +2035,7 @@ instance Core.FromJSON ListTablesResponse where
       ( \o ->
           ListTablesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tables")
       )
 
 instance Core.ToJSON ListTablesResponse where
@@ -2226,7 +2225,7 @@ instance Core.FromJSON ModifyColumnFamiliesRequest where
       "ModifyColumnFamiliesRequest"
       ( \o ->
           ModifyColumnFamiliesRequest
-            Core.<$> (o Core..:? "modifications" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "modifications")
       )
 
 instance Core.ToJSON ModifyColumnFamiliesRequest where
@@ -2257,7 +2256,7 @@ instance Core.FromJSON MultiClusterRoutingUseAny where
       "MultiClusterRoutingUseAny"
       ( \o ->
           MultiClusterRoutingUseAny
-            Core.<$> (o Core..:? "clusterIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusterIds")
       )
 
 instance Core.ToJSON MultiClusterRoutingUseAny where
@@ -2613,8 +2612,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -2884,7 +2883,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3068,8 +3067,12 @@ instance Core.FromJSON TableProgress where
       "TableProgress"
       ( \o ->
           TableProgress
-            Core.<$> (o Core..:? "estimatedCopiedBytes")
-            Core.<*> (o Core..:? "estimatedSizeBytes")
+            Core.<$> ( o Core..:? "estimatedCopiedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "estimatedSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "state")
       )
 
@@ -3106,7 +3109,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -3137,7 +3140,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -3165,10 +3168,7 @@ instance Core.FromJSON Union where
   parseJSON =
     Core.withObject
       "Union"
-      ( \o ->
-          Union
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
-      )
+      (\o -> Union Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON Union where
   toJSON Union {..} =

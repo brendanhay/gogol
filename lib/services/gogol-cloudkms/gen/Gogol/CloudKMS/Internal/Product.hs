@@ -262,7 +262,9 @@ instance Core.FromJSON AsymmetricDecryptRequest where
       ( \o ->
           AsymmetricDecryptRequest
             Core.<$> (o Core..:? "ciphertext")
-            Core.<*> (o Core..:? "ciphertextCrc32c")
+            Core.<*> ( o Core..:? "ciphertextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AsymmetricDecryptRequest where
@@ -308,7 +310,9 @@ instance Core.FromJSON AsymmetricDecryptResponse where
       ( \o ->
           AsymmetricDecryptResponse
             Core.<$> (o Core..:? "plaintext")
-            Core.<*> (o Core..:? "plaintextCrc32c")
+            Core.<*> ( o Core..:? "plaintextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "verifiedCiphertextCrc32c")
       )
@@ -359,9 +363,13 @@ instance Core.FromJSON AsymmetricSignRequest where
       ( \o ->
           AsymmetricSignRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> (o Core..:? "dataCrc32c")
+            Core.<*> ( o Core..:? "dataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "digest")
-            Core.<*> (o Core..:? "digestCrc32c")
+            Core.<*> ( o Core..:? "digestCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AsymmetricSignRequest where
@@ -418,7 +426,9 @@ instance Core.FromJSON AsymmetricSignResponse where
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "signature")
-            Core.<*> (o Core..:? "signatureCrc32c")
+            Core.<*> ( o Core..:? "signatureCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "verifiedDataCrc32c")
             Core.<*> (o Core..:? "verifiedDigestCrc32c")
       )
@@ -463,7 +473,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -500,7 +510,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -545,7 +555,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -614,9 +624,7 @@ instance Core.FromJSON Certificate where
             Core.<*> (o Core..:? "serialNumber")
             Core.<*> (o Core..:? "sha256Fingerprint")
             Core.<*> (o Core..:? "subject")
-            Core.<*> ( o Core..:? "subjectAlternativeDnsNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "subjectAlternativeDnsNames")
       )
 
 instance Core.ToJSON Certificate where
@@ -666,11 +674,9 @@ instance Core.FromJSON CertificateChains where
       "CertificateChains"
       ( \o ->
           CertificateChains
-            Core.<$> (o Core..:? "caviumCerts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "googleCardCerts" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "googlePartitionCerts"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "caviumCerts")
+            Core.<*> (o Core..:? "googleCardCerts")
+            Core.<*> (o Core..:? "googlePartitionCerts")
       )
 
 instance Core.ToJSON CertificateChains where
@@ -975,9 +981,13 @@ instance Core.FromJSON DecryptRequest where
       ( \o ->
           DecryptRequest
             Core.<$> (o Core..:? "additionalAuthenticatedData")
-            Core.<*> (o Core..:? "additionalAuthenticatedDataCrc32c")
+            Core.<*> ( o Core..:? "additionalAuthenticatedDataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ciphertext")
-            Core.<*> (o Core..:? "ciphertextCrc32c")
+            Core.<*> ( o Core..:? "ciphertextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DecryptRequest where
@@ -1028,7 +1038,9 @@ instance Core.FromJSON DecryptResponse where
       ( \o ->
           DecryptResponse
             Core.<$> (o Core..:? "plaintext")
-            Core.<*> (o Core..:? "plaintextCrc32c")
+            Core.<*> ( o Core..:? "plaintextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "usedPrimary")
       )
@@ -1140,7 +1152,7 @@ instance Core.FromJSON EkmConnection where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "serviceResolvers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceResolvers")
       )
 
 instance Core.ToJSON EkmConnection where
@@ -1188,9 +1200,13 @@ instance Core.FromJSON EncryptRequest where
       ( \o ->
           EncryptRequest
             Core.<$> (o Core..:? "additionalAuthenticatedData")
-            Core.<*> (o Core..:? "additionalAuthenticatedDataCrc32c")
+            Core.<*> ( o Core..:? "additionalAuthenticatedDataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "plaintext")
-            Core.<*> (o Core..:? "plaintextCrc32c")
+            Core.<*> ( o Core..:? "plaintextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON EncryptRequest where
@@ -1247,7 +1263,9 @@ instance Core.FromJSON EncryptResponse where
       ( \o ->
           EncryptResponse
             Core.<$> (o Core..:? "ciphertext")
-            Core.<*> (o Core..:? "ciphertextCrc32c")
+            Core.<*> ( o Core..:? "ciphertextCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> ( o
@@ -1426,7 +1444,9 @@ instance Core.FromJSON GenerateRandomBytesResponse where
       ( \o ->
           GenerateRandomBytesResponse
             Core.<$> (o Core..:? "data")
-            Core.<*> (o Core..:? "dataCrc32c")
+            Core.<*> ( o Core..:? "dataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GenerateRandomBytesResponse where
@@ -1678,7 +1698,7 @@ instance Core.FromJSON ListCryptoKeyVersionsResponse where
       "ListCryptoKeyVersionsResponse"
       ( \o ->
           ListCryptoKeyVersionsResponse
-            Core.<$> (o Core..:? "cryptoKeyVersions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cryptoKeyVersions")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1723,7 +1743,7 @@ instance Core.FromJSON ListCryptoKeysResponse where
       "ListCryptoKeysResponse"
       ( \o ->
           ListCryptoKeysResponse
-            Core.<$> (o Core..:? "cryptoKeys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cryptoKeys")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1767,7 +1787,7 @@ instance Core.FromJSON ListEkmConnectionsResponse where
       "ListEkmConnectionsResponse"
       ( \o ->
           ListEkmConnectionsResponse
-            Core.<$> (o Core..:? "ekmConnections" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ekmConnections")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1811,7 +1831,7 @@ instance Core.FromJSON ListImportJobsResponse where
       "ListImportJobsResponse"
       ( \o ->
           ListImportJobsResponse
-            Core.<$> (o Core..:? "importJobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "importJobs")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1855,7 +1875,7 @@ instance Core.FromJSON ListKeyRingsResponse where
       "ListKeyRingsResponse"
       ( \o ->
           ListKeyRingsResponse
-            Core.<$> (o Core..:? "keyRings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "keyRings")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1893,7 +1913,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2074,7 +2094,9 @@ instance Core.FromJSON MacSignRequest where
       ( \o ->
           MacSignRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> (o Core..:? "dataCrc32c")
+            Core.<*> ( o Core..:? "dataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MacSignRequest where
@@ -2123,7 +2145,9 @@ instance Core.FromJSON MacSignResponse where
       ( \o ->
           MacSignResponse
             Core.<$> (o Core..:? "mac")
-            Core.<*> (o Core..:? "macCrc32c")
+            Core.<*> ( o Core..:? "macCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "verifiedDataCrc32c")
@@ -2176,9 +2200,13 @@ instance Core.FromJSON MacVerifyRequest where
       ( \o ->
           MacVerifyRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> (o Core..:? "dataCrc32c")
+            Core.<*> ( o Core..:? "dataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mac")
-            Core.<*> (o Core..:? "macCrc32c")
+            Core.<*> ( o Core..:? "macCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MacVerifyRequest where
@@ -2291,8 +2319,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -2346,7 +2374,9 @@ instance Core.FromJSON PublicKey where
             Core.<$> (o Core..:? "algorithm")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pem")
-            Core.<*> (o Core..:? "pemCrc32c")
+            Core.<*> ( o Core..:? "pemCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "protectionLevel")
       )
 
@@ -2418,9 +2448,7 @@ instance Core.FromJSON ServiceResolver where
           ServiceResolver
             Core.<$> (o Core..:? "endpointFilter")
             Core.<*> (o Core..:? "hostname")
-            Core.<*> ( o Core..:? "serverCertificates"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "serverCertificates")
             Core.<*> (o Core..:? "serviceDirectoryService")
       )
 
@@ -2494,7 +2522,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2525,7 +2553,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

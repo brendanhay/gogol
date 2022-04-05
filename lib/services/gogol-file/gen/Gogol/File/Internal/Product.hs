@@ -295,10 +295,14 @@ instance Core.FromJSON Backup where
       "Backup"
       ( \o ->
           Backup
-            Core.<$> (o Core..:? "capacityGb")
+            Core.<$> ( o Core..:? "capacityGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "downloadBytes")
+            Core.<*> ( o Core..:? "downloadBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -306,7 +310,9 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "sourceInstance")
             Core.<*> (o Core..:? "sourceInstanceTier")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "storageBytes")
+            Core.<*> ( o Core..:? "storageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Backup where
@@ -547,9 +553,11 @@ instance Core.FromJSON FileShareConfig where
       "FileShareConfig"
       ( \o ->
           FileShareConfig
-            Core.<$> (o Core..:? "capacityGb")
+            Core.<$> ( o Core..:? "capacityGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "nfsExportOptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nfsExportOptions")
             Core.<*> (o Core..:? "sourceBackup")
       )
 
@@ -679,9 +687,7 @@ instance
               Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "notificationParameters")
               Core.<*> (o Core..:? "producerMetadata")
-              Core.<*> ( o Core..:? "provisionedResources"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "provisionedResources")
               Core.<*> (o Core..:? "slmInstanceTemplate")
               Core.<*> (o Core..:? "sloMetadata")
               Core.<*> (o Core..:? "softwareVersions")
@@ -1393,7 +1399,7 @@ instance
       "GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata"
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
-            Core.<$> (o Core..:? "nodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodes")
               Core.<*> (o Core..:? "perSliEligibility")
               Core.<*> (o Core..:? "tier")
       )
@@ -1475,15 +1481,15 @@ instance Core.FromJSON Instance where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "fileShares" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fileShares")
             Core.<*> (o Core..:? "kmsKeyName")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "networks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networks")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "statusMessage")
-            Core.<*> (o Core..:? "suspensionReasons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "suspensionReasons")
             Core.<*> (o Core..:? "tier")
       )
 
@@ -1564,9 +1570,9 @@ instance Core.FromJSON ListBackupsResponse where
       "ListBackupsResponse"
       ( \o ->
           ListBackupsResponse
-            Core.<$> (o Core..:? "backups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "backups")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListBackupsResponse where
@@ -1608,9 +1614,9 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListInstancesResponse where
@@ -1646,7 +1652,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1686,7 +1692,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1722,7 +1728,7 @@ instance Core.FromJSON ListSnapshotsResponse where
       ( \o ->
           ListSnapshotsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "snapshots" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "snapshots")
       )
 
 instance Core.ToJSON ListSnapshotsResponse where
@@ -2008,8 +2014,8 @@ instance Core.FromJSON NetworkConfig where
       ( \o ->
           NetworkConfig
             Core.<$> (o Core..:? "connectMode")
-            Core.<*> (o Core..:? "ipAddresses" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "modes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ipAddresses")
+            Core.<*> (o Core..:? "modes")
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "reservedIpRange")
       )
@@ -2063,9 +2069,13 @@ instance Core.FromJSON NfsExportOptions where
       ( \o ->
           NfsExportOptions
             Core.<$> (o Core..:? "accessMode")
-            Core.<*> (o Core..:? "anonGid")
-            Core.<*> (o Core..:? "anonUid")
-            Core.<*> (o Core..:? "ipRanges" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "anonGid"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "anonUid"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "ipRanges")
             Core.<*> (o Core..:? "squashMode")
       )
 
@@ -2377,7 +2387,9 @@ instance Core.FromJSON Snapshot where
           Snapshot
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "filesystemUsedBytes")
+            Core.<*> ( o Core..:? "filesystemUsedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "state")
@@ -2450,7 +2462,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2570,9 +2582,7 @@ instance Core.FromJSON UpdatePolicy where
       ( \o ->
           UpdatePolicy
             Core.<$> (o Core..:? "channel")
-            Core.<*> ( o Core..:? "denyMaintenancePeriods"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "denyMaintenancePeriods")
             Core.<*> (o Core..:? "window")
       )
 
@@ -2605,10 +2615,7 @@ instance Core.FromJSON WeeklyCycle where
   parseJSON =
     Core.withObject
       "WeeklyCycle"
-      ( \o ->
-          WeeklyCycle
-            Core.<$> (o Core..:? "schedule" Core..!= Core.mempty)
-      )
+      (\o -> WeeklyCycle Core.<$> (o Core..:? "schedule"))
 
 instance Core.ToJSON WeeklyCycle where
   toJSON WeeklyCycle {..} =

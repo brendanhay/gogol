@@ -284,8 +284,8 @@ instance Core.FromJSON DataSource where
             Core.<*> (o Core..:? "manualRunsDisabled")
             Core.<*> (o Core..:? "minimumScheduleInterval")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
+            Core.<*> (o Core..:? "scopes")
             Core.<*> (o Core..:? "supportsCustomSchedule")
             Core.<*> (o Core..:? "supportsMultipleTransfers")
             Core.<*> (o Core..:? "transferType")
@@ -392,11 +392,11 @@ instance Core.FromJSON DataSourceParameter where
       "DataSourceParameter"
       ( \o ->
           DataSourceParameter
-            Core.<$> (o Core..:? "allowedValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedValues")
             Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "immutable")
             Core.<*> (o Core..:? "maxValue")
             Core.<*> (o Core..:? "minValue")
@@ -507,7 +507,7 @@ instance Core.FromJSON EnrollDataSourcesRequest where
       "EnrollDataSourcesRequest"
       ( \o ->
           EnrollDataSourcesRequest
-            Core.<$> (o Core..:? "dataSourceIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataSourceIds")
       )
 
 instance Core.ToJSON EnrollDataSourcesRequest where
@@ -543,7 +543,7 @@ instance Core.FromJSON ListDataSourcesResponse where
       "ListDataSourcesResponse"
       ( \o ->
           ListDataSourcesResponse
-            Core.<$> (o Core..:? "dataSources" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataSources")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -579,7 +579,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -619,7 +619,7 @@ instance Core.FromJSON ListTransferConfigsResponse where
       ( \o ->
           ListTransferConfigsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transferConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferConfigs")
       )
 
 instance Core.ToJSON ListTransferConfigsResponse where
@@ -659,7 +659,7 @@ instance Core.FromJSON ListTransferLogsResponse where
       ( \o ->
           ListTransferLogsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transferMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferMessages")
       )
 
 instance Core.ToJSON ListTransferLogsResponse where
@@ -699,7 +699,7 @@ instance Core.FromJSON ListTransferRunsResponse where
       ( \o ->
           ListTransferRunsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transferRuns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferRuns")
       )
 
 instance Core.ToJSON ListTransferRunsResponse where
@@ -921,7 +921,7 @@ instance Core.FromJSON ScheduleTransferRunsResponse where
       "ScheduleTransferRunsResponse"
       ( \o ->
           ScheduleTransferRunsResponse
-            Core.<$> (o Core..:? "runs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "runs")
       )
 
 instance Core.ToJSON ScheduleTransferRunsResponse where
@@ -994,7 +994,7 @@ instance
       "StartManualTransferRunsResponse"
       ( \o ->
           StartManualTransferRunsResponse
-            Core.<$> (o Core..:? "runs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "runs")
       )
 
 instance Core.ToJSON StartManualTransferRunsResponse where
@@ -1028,7 +1028,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1191,7 +1191,9 @@ instance Core.FromJSON TransferConfig where
             Core.<*> (o Core..:? "scheduleOptions")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "userId")
+            Core.<*> ( o Core..:? "userId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON TransferConfig where
@@ -1376,7 +1378,9 @@ instance Core.FromJSON TransferRun where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "userId")
+            Core.<*> ( o Core..:? "userId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON TransferRun where

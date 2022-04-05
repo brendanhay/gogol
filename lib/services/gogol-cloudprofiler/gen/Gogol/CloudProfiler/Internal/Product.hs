@@ -75,7 +75,7 @@ instance Core.FromJSON CreateProfileRequest where
       ( \o ->
           CreateProfileRequest
             Core.<$> (o Core..:? "deployment")
-            Core.<*> (o Core..:? "profileType" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "profileType")
       )
 
 instance Core.ToJSON CreateProfileRequest where

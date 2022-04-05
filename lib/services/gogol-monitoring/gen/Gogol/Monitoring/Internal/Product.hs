@@ -538,7 +538,7 @@ instance Core.FromJSON Aggregation where
           Aggregation
             Core.<$> (o Core..:? "alignmentPeriod")
             Core.<*> (o Core..:? "crossSeriesReducer")
-            Core.<*> (o Core..:? "groupByFields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "groupByFields")
             Core.<*> (o Core..:? "perSeriesAligner")
       )
 
@@ -614,16 +614,14 @@ instance Core.FromJSON AlertPolicy where
           AlertPolicy
             Core.<$> (o Core..:? "alertStrategy")
             Core.<*> (o Core..:? "combiner")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "creationRecord")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "documentation")
             Core.<*> (o Core..:? "enabled")
             Core.<*> (o Core..:? "mutationRecord")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "notificationChannels"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notificationChannels")
             Core.<*> (o Core..:? "userLabels")
             Core.<*> (o Core..:? "validity")
       )
@@ -835,9 +833,9 @@ instance Core.FromJSON BasicSli where
           BasicSli
             Core.<$> (o Core..:? "availability")
             Core.<*> (o Core..:? "latency")
-            Core.<*> (o Core..:? "location" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "method" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "version" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "method")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON BasicSli where
@@ -1028,7 +1026,7 @@ instance Core.FromJSON CollectdPayload where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "typeInstance")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON CollectdPayload where
@@ -1107,7 +1105,7 @@ instance Core.FromJSON CollectdPayloadError where
           CollectdPayloadError
             Core.<$> (o Core..:? "error")
             Core.<*> (o Core..:? "index")
-            Core.<*> (o Core..:? "valueErrors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueErrors")
       )
 
 instance Core.ToJSON CollectdPayloadError where
@@ -1330,7 +1328,7 @@ instance
       "CreateCollectdTimeSeriesRequest"
       ( \o ->
           CreateCollectdTimeSeriesRequest
-            Core.<$> (o Core..:? "collectdPayloads" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "collectdPayloads")
             Core.<*> (o Core..:? "collectdVersion")
             Core.<*> (o Core..:? "resource")
       )
@@ -1375,7 +1373,7 @@ instance
       "CreateCollectdTimeSeriesResponse"
       ( \o ->
           CreateCollectdTimeSeriesResponse
-            Core.<$> (o Core..:? "payloadErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "payloadErrors")
             Core.<*> (o Core..:? "summary")
       )
 
@@ -1408,7 +1406,7 @@ instance Core.FromJSON CreateTimeSeriesRequest where
       "CreateTimeSeriesRequest"
       ( \o ->
           CreateTimeSeriesRequest
-            Core.<$> (o Core..:? "timeSeries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "timeSeries")
       )
 
 instance Core.ToJSON CreateTimeSeriesRequest where
@@ -1447,7 +1445,7 @@ instance Core.FromJSON CreateTimeSeriesSummary where
       "CreateTimeSeriesSummary"
       ( \o ->
           CreateTimeSeriesSummary
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
             Core.<*> (o Core..:? "successPointCount")
             Core.<*> (o Core..:? "totalPointCount")
       )
@@ -1523,10 +1521,12 @@ instance Core.FromJSON Distribution where
       "Distribution"
       ( \o ->
           Distribution
-            Core.<$> (o Core..:? "bucketCounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bucketCounts")
             Core.<*> (o Core..:? "bucketOptions")
-            Core.<*> (o Core..:? "count")
-            Core.<*> (o Core..:? "exemplars" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "exemplars")
             Core.<*> (o Core..:? "mean")
             Core.<*> (o Core..:? "range")
             Core.<*> (o Core..:? "sumOfSquaredDeviation")
@@ -1757,7 +1757,7 @@ instance Core.FromJSON Exemplar where
       "Exemplar"
       ( \o ->
           Exemplar
-            Core.<$> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attachments")
             Core.<*> (o Core..:? "timestamp")
             Core.<*> (o Core..:? "value")
       )
@@ -1819,10 +1819,7 @@ instance Core.FromJSON Explicit where
   parseJSON =
     Core.withObject
       "Explicit"
-      ( \o ->
-          Explicit
-            Core.<$> (o Core..:? "bounds" Core..!= Core.mempty)
-      )
+      (\o -> Explicit Core.<$> (o Core..:? "bounds"))
 
 instance Core.ToJSON Explicit where
   toJSON Explicit {..} =
@@ -1931,7 +1928,7 @@ instance Core.FromJSON Field where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "number")
             Core.<*> (o Core..:? "oneofIndex")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "packed")
             Core.<*> (o Core..:? "typeUrl")
       )
@@ -2412,7 +2409,9 @@ instance Core.FromJSON LabelValue where
       ( \o ->
           LabelValue
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> (o Core..:? "int64Value")
+            Core.<*> ( o Core..:? "int64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -2530,7 +2529,7 @@ instance Core.FromJSON ListAlertPoliciesResponse where
       "ListAlertPoliciesResponse"
       ( \o ->
           ListAlertPoliciesResponse
-            Core.<$> (o Core..:? "alertPolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alertPolicies")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -2574,7 +2573,7 @@ instance Core.FromJSON ListGroupMembersResponse where
       "ListGroupMembersResponse"
       ( \o ->
           ListGroupMembersResponse
-            Core.<$> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "members")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -2612,7 +2611,7 @@ instance Core.FromJSON ListGroupsResponse where
       "ListGroupsResponse"
       ( \o ->
           ListGroupsResponse
-            Core.<$> (o Core..:? "group" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "group")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2651,7 +2650,7 @@ instance Core.FromJSON ListMetricDescriptorsResponse where
       "ListMetricDescriptorsResponse"
       ( \o ->
           ListMetricDescriptorsResponse
-            Core.<$> (o Core..:? "metricDescriptors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metricDescriptors")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2695,9 +2694,7 @@ instance
       ( \o ->
           ListMonitoredResourceDescriptorsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "resourceDescriptors"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resourceDescriptors")
       )
 
 instance
@@ -2742,9 +2739,7 @@ instance
       "ListNotificationChannelDescriptorsResponse"
       ( \o ->
           ListNotificationChannelDescriptorsResponse
-            Core.<$> ( o Core..:? "channelDescriptors"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "channelDescriptors")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2794,9 +2789,7 @@ instance
       ( \o ->
           ListNotificationChannelsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "notificationChannels"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notificationChannels")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -2841,9 +2834,7 @@ instance
       ( \o ->
           ListServiceLevelObjectivesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "serviceLevelObjectives"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "serviceLevelObjectives")
       )
 
 instance
@@ -2883,7 +2874,7 @@ instance Core.FromJSON ListServicesResponse where
       ( \o ->
           ListServicesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON ListServicesResponse where
@@ -2927,9 +2918,9 @@ instance Core.FromJSON ListTimeSeriesResponse where
       "ListTimeSeriesResponse"
       ( \o ->
           ListTimeSeriesResponse
-            Core.<$> (o Core..:? "executionErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "executionErrors")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "timeSeries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timeSeries")
             Core.<*> (o Core..:? "unit")
       )
 
@@ -2976,9 +2967,7 @@ instance Core.FromJSON ListUptimeCheckConfigsResponse where
           ListUptimeCheckConfigsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
-            Core.<*> ( o Core..:? "uptimeCheckConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "uptimeCheckConfigs")
       )
 
 instance Core.ToJSON ListUptimeCheckConfigsResponse where
@@ -3019,7 +3008,7 @@ instance Core.FromJSON ListUptimeCheckIpsResponse where
       ( \o ->
           ListUptimeCheckIpsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "uptimeCheckIps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "uptimeCheckIps")
       )
 
 instance Core.ToJSON ListUptimeCheckIpsResponse where
@@ -3235,7 +3224,7 @@ instance Core.FromJSON MetricAbsence where
       "MetricAbsence"
       ( \o ->
           MetricAbsence
-            Core.<$> (o Core..:? "aggregations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aggregations")
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "trigger")
@@ -3310,13 +3299,11 @@ instance Core.FromJSON MetricDescriptor where
           MetricDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "metricKind")
-            Core.<*> ( o Core..:? "monitoredResourceTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "monitoredResourceTypes")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "unit")
@@ -3468,11 +3455,9 @@ instance Core.FromJSON MetricThreshold where
       "MetricThreshold"
       ( \o ->
           MetricThreshold
-            Core.<$> (o Core..:? "aggregations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aggregations")
             Core.<*> (o Core..:? "comparison")
-            Core.<*> ( o Core..:? "denominatorAggregations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "denominatorAggregations")
             Core.<*> (o Core..:? "denominatorFilter")
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "evaluationMissingData")
@@ -3605,7 +3590,7 @@ instance Core.FromJSON MonitoredResourceDescriptor where
           MonitoredResourceDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
@@ -3879,7 +3864,7 @@ instance Core.FromJSON NotificationChannel where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enabled")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "mutationRecords" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mutationRecords")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "userLabels")
@@ -4007,10 +3992,10 @@ instance Core.FromJSON NotificationChannelDescriptor where
           NotificationChannelDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "supportedTiers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedTiers")
             Core.<*> (o Core..:? "type")
       )
 
@@ -4263,7 +4248,7 @@ instance Core.FromJSON PointData where
       ( \o ->
           PointData
             Core.<$> (o Core..:? "timeInterval")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON PointData where
@@ -4352,8 +4337,8 @@ instance Core.FromJSON QueryTimeSeriesResponse where
       ( \o ->
           QueryTimeSeriesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "partialErrors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "timeSeriesData" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "partialErrors")
+            Core.<*> (o Core..:? "timeSeriesData")
             Core.<*> (o Core..:? "timeSeriesDescriptor")
       )
 
@@ -4841,7 +4826,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -5018,7 +5003,7 @@ instance Core.FromJSON TimeSeries where
             Core.<$> (o Core..:? "metadata")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "metricKind")
-            Core.<*> (o Core..:? "points" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "points")
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "unit")
             Core.<*> (o Core..:? "valueType")
@@ -5061,8 +5046,8 @@ instance Core.FromJSON TimeSeriesData where
       "TimeSeriesData"
       ( \o ->
           TimeSeriesData
-            Core.<$> (o Core..:? "labelValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pointData" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labelValues")
+            Core.<*> (o Core..:? "pointData")
       )
 
 instance Core.ToJSON TimeSeriesData where
@@ -5100,8 +5085,8 @@ instance Core.FromJSON TimeSeriesDescriptor where
       "TimeSeriesDescriptor"
       ( \o ->
           TimeSeriesDescriptor
-            Core.<$> (o Core..:? "labelDescriptors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pointDescriptors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labelDescriptors")
+            Core.<*> (o Core..:? "pointDescriptors")
       )
 
 instance Core.ToJSON TimeSeriesDescriptor where
@@ -5234,10 +5219,10 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "oneofs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oneofs")
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "sourceContext")
             Core.<*> (o Core..:? "syntax")
       )
@@ -5293,7 +5278,9 @@ instance Core.FromJSON TypedValue where
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "distributionValue")
             Core.<*> (o Core..:? "doubleValue")
-            Core.<*> (o Core..:? "int64Value")
+            Core.<*> ( o Core..:? "int64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -5371,16 +5358,16 @@ instance Core.FromJSON UptimeCheckConfig where
       ( \o ->
           UptimeCheckConfig
             Core.<$> (o Core..:? "checkerType")
-            Core.<*> (o Core..:? "contentMatchers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "contentMatchers")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "httpCheck")
-            Core.<*> (o Core..:? "internalCheckers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "internalCheckers")
             Core.<*> (o Core..:? "isInternal")
             Core.<*> (o Core..:? "monitoredResource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "period")
             Core.<*> (o Core..:? "resourceGroup")
-            Core.<*> (o Core..:? "selectedRegions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "selectedRegions")
             Core.<*> (o Core..:? "tcpCheck")
             Core.<*> (o Core..:? "timeout")
       )

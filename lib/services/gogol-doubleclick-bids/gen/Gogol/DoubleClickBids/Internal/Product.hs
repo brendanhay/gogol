@@ -146,7 +146,7 @@ instance Core.FromJSON ChannelGrouping where
           ChannelGrouping
             Core.<$> (o Core..:? "fallbackName")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
       )
 
 instance Core.ToJSON ChannelGrouping where
@@ -180,7 +180,7 @@ instance Core.FromJSON DisjunctiveMatchStatement where
       "DisjunctiveMatchStatement"
       ( \o ->
           DisjunctiveMatchStatement
-            Core.<$> (o Core..:? "eventFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "eventFilters")
       )
 
 instance Core.ToJSON DisjunctiveMatchStatement where
@@ -286,7 +286,7 @@ instance Core.FromJSON ListQueriesResponse where
           ListQueriesResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "queries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "queries")
       )
 
 instance Core.ToJSON ListQueriesResponse where
@@ -330,7 +330,7 @@ instance Core.FromJSON ListReportsResponse where
           ListReportsResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "reports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reports")
       )
 
 instance Core.ToJSON ListReportsResponse where
@@ -422,10 +422,10 @@ instance Core.FromJSON Parameters where
       "Parameters"
       ( \o ->
           Parameters
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "groupBys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filters")
+            Core.<*> (o Core..:? "groupBys")
             Core.<*> (o Core..:? "includeInviteData")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "type")
       )
@@ -467,7 +467,7 @@ instance Core.FromJSON PathFilter where
       "PathFilter"
       ( \o ->
           PathFilter
-            Core.<$> (o Core..:? "eventFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "eventFilters")
             Core.<*> (o Core..:? "pathMatchPosition")
       )
 
@@ -505,7 +505,7 @@ instance Core.FromJSON PathQueryOptions where
       ( \o ->
           PathQueryOptions
             Core.<$> (o Core..:? "channelGrouping")
-            Core.<*> (o Core..:? "pathFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pathFilters")
       )
 
 instance Core.ToJSON PathQueryOptions where
@@ -549,7 +549,7 @@ instance Core.FromJSON PathQueryOptionsFilter where
           PathQueryOptionsFilter
             Core.<$> (o Core..:? "filter")
             Core.<*> (o Core..:? "match")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON PathQueryOptionsFilter where
@@ -609,9 +609,15 @@ instance Core.FromJSON Query where
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "params")
-            Core.<*> (o Core..:? "queryId")
-            Core.<*> (o Core..:? "reportDataEndTimeMs")
-            Core.<*> (o Core..:? "reportDataStartTimeMs")
+            Core.<*> ( o Core..:? "queryId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "reportDataEndTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "reportDataStartTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "schedule")
             Core.<*> (o Core..:? "timezoneCode")
       )
@@ -691,12 +697,14 @@ instance Core.FromJSON QueryMetadata where
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "googleCloudStoragePathForLatestReport")
             Core.<*> (o Core..:? "googleDrivePathForLatestReport")
-            Core.<*> (o Core..:? "latestReportRunTimeMs")
+            Core.<*> ( o Core..:? "latestReportRunTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "locale")
             Core.<*> (o Core..:? "reportCount")
             Core.<*> (o Core..:? "running")
             Core.<*> (o Core..:? "sendNotification")
-            Core.<*> (o Core..:? "shareEmailAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shareEmailAddress")
             Core.<*> (o Core..:? "title")
       )
 
@@ -758,11 +766,15 @@ instance Core.FromJSON QuerySchedule where
       "QuerySchedule"
       ( \o ->
           QuerySchedule
-            Core.<$> (o Core..:? "endTimeMs")
+            Core.<$> ( o Core..:? "endTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "frequency")
             Core.<*> (o Core..:? "nextRunMinuteOfDay")
             Core.<*> (o Core..:? "nextRunTimezoneCode")
-            Core.<*> (o Core..:? "startTimeMs")
+            Core.<*> ( o Core..:? "startTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON QuerySchedule where
@@ -872,8 +884,12 @@ instance Core.FromJSON ReportKey where
       "ReportKey"
       ( \o ->
           ReportKey
-            Core.<$> (o Core..:? "queryId")
-            Core.<*> (o Core..:? "reportId")
+            Core.<$> ( o Core..:? "queryId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "reportId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ReportKey where
@@ -920,8 +936,12 @@ instance Core.FromJSON ReportMetadata where
       ( \o ->
           ReportMetadata
             Core.<$> (o Core..:? "googleCloudStoragePath")
-            Core.<*> (o Core..:? "reportDataEndTimeMs")
-            Core.<*> (o Core..:? "reportDataStartTimeMs")
+            Core.<*> ( o Core..:? "reportDataEndTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "reportDataStartTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "status")
       )
 
@@ -972,7 +992,9 @@ instance Core.FromJSON ReportStatus where
       ( \o ->
           ReportStatus
             Core.<$> (o Core..:? "failure")
-            Core.<*> (o Core..:? "finishTimeMs")
+            Core.<*> ( o Core..:? "finishTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "state")
       )
@@ -1011,9 +1033,7 @@ instance Core.FromJSON Rule where
       "Rule"
       ( \o ->
           Rule
-            Core.<$> ( o Core..:? "disjunctiveMatchStatements"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "disjunctiveMatchStatements")
             Core.<*> (o Core..:? "name")
       )
 
@@ -1060,8 +1080,12 @@ instance Core.FromJSON RunQueryRequest where
       ( \o ->
           RunQueryRequest
             Core.<$> (o Core..:? "dataRange")
-            Core.<*> (o Core..:? "reportDataEndTimeMs")
-            Core.<*> (o Core..:? "reportDataStartTimeMs")
+            Core.<*> ( o Core..:? "reportDataEndTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "reportDataStartTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "timezoneCode")
       )
 

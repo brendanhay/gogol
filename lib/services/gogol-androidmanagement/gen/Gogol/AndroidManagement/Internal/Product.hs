@@ -415,7 +415,6 @@ instance Core.FromJSON AdvancedSecurityOverrides where
             Core.<*> (o Core..:? "googlePlayProtectVerifyApps")
             Core.<*> ( o
                          Core..:? "personalAppsThatCanReadWorkNotifications"
-                         Core..!= Core.mempty
                      )
             Core.<*> (o Core..:? "untrustedAppsPolicy")
       )
@@ -576,7 +575,7 @@ instance Core.FromJSON AppVersion where
       ( \o ->
           AppVersion
             Core.<$> (o Core..:? "production")
-            Core.<*> (o Core..:? "trackIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trackIds")
             Core.<*> (o Core..:? "versionCode")
             Core.<*> (o Core..:? "versionString")
       )
@@ -679,26 +678,24 @@ instance Core.FromJSON Application where
       ( \o ->
           Application
             Core.<$> (o Core..:? "appPricing")
-            Core.<*> (o Core..:? "appTracks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "appVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "appTracks")
+            Core.<*> (o Core..:? "appVersions")
             Core.<*> (o Core..:? "author")
-            Core.<*> ( o Core..:? "availableCountries"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "availableCountries")
             Core.<*> (o Core..:? "category")
             Core.<*> (o Core..:? "contentRating")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "distributionChannel")
-            Core.<*> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "fullDescription")
             Core.<*> (o Core..:? "iconUrl")
-            Core.<*> (o Core..:? "managedProperties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "managedProperties")
             Core.<*> (o Core..:? "minAndroidSdkVersion")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "playStoreUrl")
             Core.<*> (o Core..:? "recentChanges")
-            Core.<*> (o Core..:? "screenshotUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "screenshotUrls")
             Core.<*> (o Core..:? "smallIconUrl")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "updateTime")
@@ -879,13 +876,11 @@ instance Core.FromJSON ApplicationPolicy where
       "ApplicationPolicy"
       ( \o ->
           ApplicationPolicy
-            Core.<$> ( o Core..:? "accessibleTrackIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accessibleTrackIds")
             Core.<*> (o Core..:? "autoUpdateMode")
             Core.<*> (o Core..:? "connectedWorkAndPersonalApp")
             Core.<*> (o Core..:? "defaultPermissionPolicy")
-            Core.<*> (o Core..:? "delegatedScopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "delegatedScopes")
             Core.<*> (o Core..:? "disabled")
             Core.<*> (o Core..:? "extensionConfig")
             Core.<*> (o Core..:? "installType")
@@ -894,7 +889,7 @@ instance Core.FromJSON ApplicationPolicy where
             Core.<*> (o Core..:? "managedConfigurationTemplate")
             Core.<*> (o Core..:? "minimumVersionCode")
             Core.<*> (o Core..:? "packageName")
-            Core.<*> (o Core..:? "permissionGrants" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissionGrants")
       )
 
 instance Core.ToJSON ApplicationPolicy where
@@ -1016,14 +1011,12 @@ instance Core.FromJSON ApplicationReport where
           ApplicationReport
             Core.<$> (o Core..:? "applicationSource")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
             Core.<*> (o Core..:? "installerPackageName")
-            Core.<*> (o Core..:? "keyedAppStates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "keyedAppStates")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "packageSha256Hash")
-            Core.<*> ( o Core..:? "signingKeyCertFingerprints"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "signingKeyCertFingerprints")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "versionCode")
             Core.<*> (o Core..:? "versionName")
@@ -1150,7 +1143,7 @@ instance Core.FromJSON ChoosePrivateKeyRule where
       "ChoosePrivateKeyRule"
       ( \o ->
           ChoosePrivateKeyRule
-            Core.<$> (o Core..:? "packageNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "packageNames")
             Core.<*> (o Core..:? "privateKeyAlias")
             Core.<*> (o Core..:? "urlPattern")
       )
@@ -1210,9 +1203,7 @@ instance Core.FromJSON Command where
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "errorCode")
             Core.<*> (o Core..:? "newPassword")
-            Core.<*> ( o Core..:? "resetPasswordFlags"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resetPasswordFlags")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "userName")
       )
@@ -1300,9 +1291,7 @@ instance Core.FromJSON ComplianceRule where
             Core.<$> (o Core..:? "apiLevelCondition")
             Core.<*> (o Core..:? "disableApps")
             Core.<*> (o Core..:? "nonComplianceDetailCondition")
-            Core.<*> ( o Core..:? "packageNamesToDisable"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "packageNamesToDisable")
       )
 
 instance Core.ToJSON ComplianceRule where
@@ -1419,9 +1408,7 @@ instance Core.FromJSON ContentProviderEndpoint where
       ( \o ->
           ContentProviderEndpoint
             Core.<$> (o Core..:? "packageName")
-            Core.<*> ( o Core..:? "signingCertsSha256"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "signingCertsSha256")
             Core.<*> (o Core..:? "uri")
       )
 
@@ -1648,46 +1635,36 @@ instance Core.FromJSON Device where
       ( \o ->
           Device
             Core.<$> (o Core..:? "apiLevel")
-            Core.<*> ( o Core..:? "applicationReports"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "appliedPasswordPolicies"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "applicationReports")
+            Core.<*> (o Core..:? "appliedPasswordPolicies")
             Core.<*> (o Core..:? "appliedPolicyName")
-            Core.<*> (o Core..:? "appliedPolicyVersion")
+            Core.<*> ( o Core..:? "appliedPolicyVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "appliedState")
             Core.<*> (o Core..:? "commonCriteriaModeInfo")
             Core.<*> (o Core..:? "deviceSettings")
             Core.<*> (o Core..:? "disabledReason")
-            Core.<*> (o Core..:? "displays" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "displays")
             Core.<*> (o Core..:? "enrollmentTime")
             Core.<*> (o Core..:? "enrollmentTokenData")
             Core.<*> (o Core..:? "enrollmentTokenName")
             Core.<*> (o Core..:? "hardwareInfo")
-            Core.<*> ( o Core..:? "hardwareStatusSamples"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "hardwareStatusSamples")
             Core.<*> (o Core..:? "lastPolicyComplianceReportTime")
             Core.<*> (o Core..:? "lastPolicySyncTime")
             Core.<*> (o Core..:? "lastStatusReportTime")
             Core.<*> (o Core..:? "managementMode")
-            Core.<*> (o Core..:? "memoryEvents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "memoryEvents")
             Core.<*> (o Core..:? "memoryInfo")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkInfo")
-            Core.<*> ( o Core..:? "nonComplianceDetails"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonComplianceDetails")
             Core.<*> (o Core..:? "ownership")
             Core.<*> (o Core..:? "policyCompliant")
             Core.<*> (o Core..:? "policyName")
-            Core.<*> ( o Core..:? "powerManagementEvents"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "previousDeviceNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "powerManagementEvents")
+            Core.<*> (o Core..:? "previousDeviceNames")
             Core.<*> (o Core..:? "securityPosture")
             Core.<*> (o Core..:? "softwareInfo")
             Core.<*> (o Core..:? "state")
@@ -2066,18 +2043,14 @@ instance Core.FromJSON Enterprise where
           Enterprise
             Core.<$> (o Core..:? "appAutoApprovalEnabled")
             Core.<*> (o Core..:? "contactInfo")
-            Core.<*> ( o Core..:? "enabledNotificationTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "enabledNotificationTypes")
             Core.<*> (o Core..:? "enterpriseDisplayName")
             Core.<*> (o Core..:? "logo")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primaryColor")
             Core.<*> (o Core..:? "pubsubTopic")
-            Core.<*> (o Core..:? "signinDetails" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "termsAndConditions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "signinDetails")
+            Core.<*> (o Core..:? "termsAndConditions")
       )
 
 instance Core.ToJSON Enterprise where
@@ -2128,9 +2101,7 @@ instance Core.FromJSON ExtensionConfig where
       ( \o ->
           ExtensionConfig
             Core.<$> (o Core..:? "notificationReceiver")
-            Core.<*> ( o Core..:? "signingKeyFingerprintsSha256"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "signingKeyFingerprintsSha256")
       )
 
 instance Core.ToJSON ExtensionConfig where
@@ -2280,37 +2251,21 @@ instance Core.FromJSON HardwareInfo where
       "HardwareInfo"
       ( \o ->
           HardwareInfo
-            Core.<$> ( o Core..:? "batteryShutdownTemperatures"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "batteryThrottlingTemperatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "batteryShutdownTemperatures")
+            Core.<*> (o Core..:? "batteryThrottlingTemperatures")
             Core.<*> (o Core..:? "brand")
-            Core.<*> ( o Core..:? "cpuShutdownTemperatures"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "cpuThrottlingTemperatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "cpuShutdownTemperatures")
+            Core.<*> (o Core..:? "cpuThrottlingTemperatures")
             Core.<*> (o Core..:? "deviceBasebandVersion")
             Core.<*> (o Core..:? "enterpriseSpecificId")
-            Core.<*> ( o Core..:? "gpuShutdownTemperatures"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "gpuThrottlingTemperatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "gpuShutdownTemperatures")
+            Core.<*> (o Core..:? "gpuThrottlingTemperatures")
             Core.<*> (o Core..:? "hardware")
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "model")
             Core.<*> (o Core..:? "serialNumber")
-            Core.<*> ( o Core..:? "skinShutdownTemperatures"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "skinThrottlingTemperatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "skinShutdownTemperatures")
+            Core.<*> (o Core..:? "skinThrottlingTemperatures")
       )
 
 instance Core.ToJSON HardwareInfo where
@@ -2386,15 +2341,13 @@ instance Core.FromJSON HardwareStatus where
       "HardwareStatus"
       ( \o ->
           HardwareStatus
-            Core.<$> ( o Core..:? "batteryTemperatures"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "cpuTemperatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "cpuUsages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "batteryTemperatures")
+            Core.<*> (o Core..:? "cpuTemperatures")
+            Core.<*> (o Core..:? "cpuUsages")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "fanSpeeds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "gpuTemperatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "skinTemperatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fanSpeeds")
+            Core.<*> (o Core..:? "gpuTemperatures")
+            Core.<*> (o Core..:? "skinTemperatures")
       )
 
 instance Core.ToJSON HardwareStatus where
@@ -2601,7 +2554,7 @@ instance Core.FromJSON ListDevicesResponse where
       "ListDevicesResponse"
       ( \o ->
           ListDevicesResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2640,7 +2593,7 @@ instance Core.FromJSON ListEnterprisesResponse where
       "ListEnterprisesResponse"
       ( \o ->
           ListEnterprisesResponse
-            Core.<$> (o Core..:? "enterprises" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enterprises")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2680,7 +2633,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -2716,7 +2669,7 @@ instance Core.FromJSON ListPoliciesResponse where
       ( \o ->
           ListPoliciesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "policies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "policies")
       )
 
 instance Core.ToJSON ListPoliciesResponse where
@@ -2752,7 +2705,7 @@ instance Core.FromJSON ListWebAppsResponse where
       ( \o ->
           ListWebAppsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "webApps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "webApps")
       )
 
 instance Core.ToJSON ListWebAppsResponse where
@@ -2884,9 +2837,9 @@ instance Core.FromJSON ManagedProperty where
           ManagedProperty
             Core.<$> (o Core..:? "defaultValue")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entries")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "nestedProperties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nestedProperties")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "type")
       )
@@ -2970,7 +2923,9 @@ instance Core.FromJSON MemoryEvent where
       "MemoryEvent"
       ( \o ->
           MemoryEvent
-            Core.<$> (o Core..:? "byteCount")
+            Core.<$> ( o Core..:? "byteCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "eventType")
       )
@@ -3009,8 +2964,12 @@ instance Core.FromJSON MemoryInfo where
       "MemoryInfo"
       ( \o ->
           MemoryInfo
-            Core.<$> (o Core..:? "totalInternalStorage")
-            Core.<*> (o Core..:? "totalRam")
+            Core.<$> ( o Core..:? "totalInternalStorage"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalRam"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MemoryInfo where
@@ -3062,7 +3021,7 @@ instance Core.FromJSON NetworkInfo where
             Core.<$> (o Core..:? "imei")
             Core.<*> (o Core..:? "meid")
             Core.<*> (o Core..:? "networkOperatorName")
-            Core.<*> (o Core..:? "telephonyInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "telephonyInfos")
             Core.<*> (o Core..:? "wifiMacAddress")
       )
 
@@ -3211,9 +3170,7 @@ instance Core.FromJSON OncCertificateProvider where
       "OncCertificateProvider"
       ( \o ->
           OncCertificateProvider
-            Core.<$> ( o Core..:? "certificateReferences"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "certificateReferences")
             Core.<*> (o Core..:? "contentProviderEndpoint")
       )
 
@@ -3357,8 +3314,7 @@ instance Core.FromJSON PackageNameList where
     Core.withObject
       "PackageNameList"
       ( \o ->
-          PackageNameList
-            Core.<$> (o Core..:? "packageNames" Core..!= Core.mempty)
+          PackageNameList Core.<$> (o Core..:? "packageNames")
       )
 
 instance Core.ToJSON PackageNameList where
@@ -3544,8 +3500,8 @@ instance Core.FromJSON PersistentPreferredActivity where
       "PersistentPreferredActivity"
       ( \o ->
           PersistentPreferredActivity
-            Core.<$> (o Core..:? "actions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actions")
+            Core.<*> (o Core..:? "categories")
             Core.<*> (o Core..:? "receiverActivity")
       )
 
@@ -3637,14 +3593,10 @@ instance Core.FromJSON PersonalUsagePolicies where
       "PersonalUsagePolicies"
       ( \o ->
           PersonalUsagePolicies
-            Core.<$> ( o Core..:? "accountTypesWithManagementDisabled"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accountTypesWithManagementDisabled")
             Core.<*> (o Core..:? "cameraDisabled")
             Core.<*> (o Core..:? "maxDaysWithWorkOff")
-            Core.<*> ( o Core..:? "personalApplications"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "personalApplications")
             Core.<*> (o Core..:? "personalPlayStoreMode")
             Core.<*> (o Core..:? "screenCaptureDisabled")
       )
@@ -3948,18 +3900,14 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> ( o Core..:? "accountTypesWithManagementDisabled"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accountTypesWithManagementDisabled")
             Core.<*> (o Core..:? "addUserDisabled")
             Core.<*> (o Core..:? "adjustVolumeDisabled")
             Core.<*> (o Core..:? "advancedSecurityOverrides")
             Core.<*> (o Core..:? "alwaysOnVpnPackage")
-            Core.<*> ( o Core..:? "androidDevicePolicyTracks"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "androidDevicePolicyTracks")
             Core.<*> (o Core..:? "appAutoUpdatePolicy")
-            Core.<*> (o Core..:? "applications" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "applications")
             Core.<*> (o Core..:? "autoDateAndTimeZone")
             Core.<*> (o Core..:? "autoTimeRequired")
             Core.<*> (o Core..:? "blockApplicationsEnabled")
@@ -3969,10 +3917,8 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "cameraAccess")
             Core.<*> (o Core..:? "cameraDisabled")
             Core.<*> (o Core..:? "cellBroadcastsConfigDisabled")
-            Core.<*> ( o Core..:? "choosePrivateKeyRules"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "complianceRules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "choosePrivateKeyRules")
+            Core.<*> (o Core..:? "complianceRules")
             Core.<*> (o Core..:? "createWindowsDisabled")
             Core.<*> (o Core..:? "credentialsConfigDisabled")
             Core.<*> (o Core..:? "crossProfilePolicies")
@@ -3983,19 +3929,19 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "encryptionPolicy")
             Core.<*> (o Core..:? "ensureVerifyAppsEnabled")
             Core.<*> (o Core..:? "factoryResetDisabled")
-            Core.<*> (o Core..:? "frpAdminEmails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "frpAdminEmails")
             Core.<*> (o Core..:? "funDisabled")
             Core.<*> (o Core..:? "installAppsDisabled")
             Core.<*> (o Core..:? "installUnknownSourcesAllowed")
             Core.<*> (o Core..:? "keyguardDisabled")
-            Core.<*> ( o Core..:? "keyguardDisabledFeatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "keyguardDisabledFeatures")
             Core.<*> (o Core..:? "kioskCustomLauncherEnabled")
             Core.<*> (o Core..:? "kioskCustomization")
             Core.<*> (o Core..:? "locationMode")
             Core.<*> (o Core..:? "longSupportMessage")
-            Core.<*> (o Core..:? "maximumTimeToLock")
+            Core.<*> ( o Core..:? "maximumTimeToLock"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "microphoneAccess")
             Core.<*> (o Core..:? "minimumApiLevel")
             Core.<*> (o Core..:? "mobileNetworksConfigDisabled")
@@ -4004,25 +3950,19 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkEscapeHatchEnabled")
             Core.<*> (o Core..:? "networkResetDisabled")
-            Core.<*> ( o Core..:? "oncCertificateProviders"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "oncCertificateProviders")
             Core.<*> (o Core..:? "openNetworkConfiguration")
             Core.<*> (o Core..:? "outgoingBeamDisabled")
             Core.<*> (o Core..:? "outgoingCallsDisabled")
-            Core.<*> (o Core..:? "passwordPolicies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "passwordPolicies")
             Core.<*> (o Core..:? "passwordRequirements")
-            Core.<*> (o Core..:? "permissionGrants" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissionGrants")
             Core.<*> (o Core..:? "permittedAccessibilityServices")
             Core.<*> (o Core..:? "permittedInputMethods")
-            Core.<*> ( o Core..:? "persistentPreferredActivities"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "persistentPreferredActivities")
             Core.<*> (o Core..:? "personalUsagePolicies")
             Core.<*> (o Core..:? "playStoreMode")
-            Core.<*> ( o Core..:? "policyEnforcementRules"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "policyEnforcementRules")
             Core.<*> (o Core..:? "preferentialNetworkService")
             Core.<*> (o Core..:? "privateKeySelectionEnabled")
             Core.<*> (o Core..:? "recommendedGlobalProxy")
@@ -4031,23 +3971,23 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "screenCaptureDisabled")
             Core.<*> (o Core..:? "setUserIconDisabled")
             Core.<*> (o Core..:? "setWallpaperDisabled")
-            Core.<*> (o Core..:? "setupActions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "setupActions")
             Core.<*> (o Core..:? "shareLocationDisabled")
             Core.<*> (o Core..:? "shortSupportMessage")
             Core.<*> (o Core..:? "skipFirstUseHintsEnabled")
             Core.<*> (o Core..:? "smsDisabled")
             Core.<*> (o Core..:? "statusBarDisabled")
             Core.<*> (o Core..:? "statusReportingSettings")
-            Core.<*> ( o Core..:? "stayOnPluggedModes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "stayOnPluggedModes")
             Core.<*> (o Core..:? "systemUpdate")
             Core.<*> (o Core..:? "tetheringConfigDisabled")
             Core.<*> (o Core..:? "uninstallAppsDisabled")
             Core.<*> (o Core..:? "unmuteMicrophoneDisabled")
             Core.<*> (o Core..:? "usbFileTransferDisabled")
             Core.<*> (o Core..:? "usbMassStorageEnabled")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "vpnConfigDisabled")
             Core.<*> (o Core..:? "wifiConfigDisabled")
             Core.<*> (o Core..:? "wifiConfigsLockdownEnabled")
@@ -4320,7 +4260,7 @@ instance Core.FromJSON PostureDetail where
       "PostureDetail"
       ( \o ->
           PostureDetail
-            Core.<$> (o Core..:? "advice" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "advice")
             Core.<*> (o Core..:? "securityRisk")
       )
 
@@ -4409,7 +4349,7 @@ instance Core.FromJSON ProxyInfo where
       "ProxyInfo"
       ( \o ->
           ProxyInfo
-            Core.<$> (o Core..:? "excludedHosts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "excludedHosts")
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "pacUri")
             Core.<*> (o Core..:? "port")
@@ -4450,7 +4390,7 @@ instance Core.FromJSON SecurityPosture where
       ( \o ->
           SecurityPosture
             Core.<$> (o Core..:? "devicePosture")
-            Core.<*> (o Core..:? "postureDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "postureDetails")
       )
 
 instance Core.ToJSON SecurityPosture where
@@ -4711,7 +4651,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4880,7 +4820,7 @@ instance Core.FromJSON SystemUpdate where
       ( \o ->
           SystemUpdate
             Core.<$> (o Core..:? "endMinutes")
-            Core.<*> (o Core..:? "freezePeriods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "freezePeriods")
             Core.<*> (o Core..:? "startMinutes")
             Core.<*> (o Core..:? "type")
       )
@@ -5154,11 +5094,13 @@ instance Core.FromJSON WebApp where
       ( \o ->
           WebApp
             Core.<$> (o Core..:? "displayMode")
-            Core.<*> (o Core..:? "icons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "icons")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "startUrl")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "versionCode")
+            Core.<*> ( o Core..:? "versionCode"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON WebApp where
@@ -5237,10 +5179,10 @@ instance Core.FromJSON WebToken where
       "WebToken"
       ( \o ->
           WebToken
-            Core.<$> (o Core..:? "enabledFeatures" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enabledFeatures")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parentFrameUrl")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "value")
       )
 

@@ -253,7 +253,7 @@ instance Core.FromJSON Column where
             Core.<*> (o Core..:? "kind" Core..!= "fusiontables#column")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
-            Core.<*> (o Core..:? "validValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "validValues")
             Core.<*> (o Core..:? "validateData")
       )
 
@@ -346,7 +346,7 @@ instance Core.FromJSON ColumnList where
       "ColumnList"
       ( \o ->
           ColumnList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "fusiontables#columnList"
                      )
@@ -394,7 +394,7 @@ instance Core.FromJSON Geometry where
       "Geometry"
       ( \o ->
           Geometry
-            Core.<$> (o Core..:? "geometries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "geometries")
             Core.<*> (o Core..:? "geometry")
             Core.<*> (o Core..:? "type" Core..!= "GeometryCollection")
       )
@@ -433,7 +433,9 @@ instance Core.FromJSON Import where
       ( \o ->
           Import
             Core.<$> (o Core..:? "kind" Core..!= "fusiontables#import")
-            Core.<*> (o Core..:? "numRowsReceived")
+            Core.<*> ( o Core..:? "numRowsReceived"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Import where
@@ -468,7 +470,7 @@ instance Core.FromJSON Line where
       "Line"
       ( \o ->
           Line
-            Core.<$> (o Core..:? "coordinates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "coordinates")
             Core.<*> (o Core..:? "type" Core..!= "LineString")
       )
 
@@ -559,7 +561,7 @@ instance Core.FromJSON Point where
       "Point"
       ( \o ->
           Point
-            Core.<$> (o Core..:? "coordinates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "coordinates")
             Core.<*> (o Core..:? "type" Core..!= "Point")
       )
 
@@ -629,7 +631,7 @@ instance Core.FromJSON Polygon where
       "Polygon"
       ( \o ->
           Polygon
-            Core.<$> (o Core..:? "coordinates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "coordinates")
             Core.<*> (o Core..:? "type" Core..!= "Polygon")
       )
 
@@ -742,11 +744,11 @@ instance Core.FromJSON Sqlresponse where
       "Sqlresponse"
       ( \o ->
           Sqlresponse
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "fusiontables#sqlresponse"
                      )
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON Sqlresponse where
@@ -791,7 +793,7 @@ instance Core.FromJSON StyleFunction where
       "StyleFunction"
       ( \o ->
           StyleFunction
-            Core.<$> (o Core..:? "buckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buckets")
             Core.<*> (o Core..:? "columnName")
             Core.<*> (o Core..:? "gradient")
             Core.<*> (o Core..:? "kind")
@@ -837,7 +839,7 @@ instance Core.FromJSON StyleFunction_Gradient where
       "StyleFunction_Gradient"
       ( \o ->
           StyleFunction_Gradient
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
             Core.<*> (o Core..:? "max")
             Core.<*> (o Core..:? "min")
       )
@@ -993,7 +995,7 @@ instance Core.FromJSON StyleSettingList where
       "StyleSettingList"
       ( \o ->
           StyleSettingList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "fusiontables#styleSettingList"
                      )
@@ -1073,9 +1075,9 @@ instance Core.FromJSON Table where
           Table
             Core.<$> (o Core..:? "attribution")
             Core.<*> (o Core..:? "attributionLink")
-            Core.<*> (o Core..:? "baseTableIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "baseTableIds")
             Core.<*> (o Core..:? "columnPropertiesJsonSchema")
-            Core.<*> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "columns")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "isExportable")
             Core.<*> (o Core..:? "kind" Core..!= "fusiontables#table")
@@ -1138,7 +1140,7 @@ instance Core.FromJSON TableList where
       "TableList"
       ( \o ->
           TableList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "fusiontables#tableList")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1191,7 +1193,9 @@ instance Core.FromJSON Task where
             Core.<$> (o Core..:? "kind" Core..!= "fusiontables#task")
             Core.<*> (o Core..:? "progress")
             Core.<*> (o Core..:? "started")
-            Core.<*> (o Core..:? "taskId")
+            Core.<*> ( o Core..:? "taskId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -1240,7 +1244,7 @@ instance Core.FromJSON TaskList where
       "TaskList"
       ( \o ->
           TaskList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "fusiontables#taskList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
@@ -1295,9 +1299,7 @@ instance Core.FromJSON Template where
       "Template"
       ( \o ->
           Template
-            Core.<$> ( o Core..:? "automaticColumnNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "automaticColumnNames")
             Core.<*> (o Core..:? "body")
             Core.<*> (o Core..:? "kind" Core..!= "fusiontables#template")
             Core.<*> (o Core..:? "name")
@@ -1351,7 +1353,7 @@ instance Core.FromJSON TemplateList where
       "TemplateList"
       ( \o ->
           TemplateList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "fusiontables#templateList"
                      )

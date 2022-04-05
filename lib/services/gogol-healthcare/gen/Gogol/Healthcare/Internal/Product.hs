@@ -719,9 +719,7 @@ instance Core.FromJSON AnalyzeEntitiesRequest where
       ( \o ->
           AnalyzeEntitiesRequest
             Core.<$> (o Core..:? "documentContent")
-            Core.<*> ( o Core..:? "licensedVocabularies"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "licensedVocabularies")
       )
 
 instance Core.ToJSON AnalyzeEntitiesRequest where
@@ -764,9 +762,9 @@ instance Core.FromJSON AnalyzeEntitiesResponse where
       "AnalyzeEntitiesResponse"
       ( \o ->
           AnalyzeEntitiesResponse
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "entityMentions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "relationships" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
+            Core.<*> (o Core..:? "entityMentions")
+            Core.<*> (o Core..:? "relationships")
       )
 
 instance Core.ToJSON AnalyzeEntitiesResponse where
@@ -843,7 +841,7 @@ instance Core.FromJSON Attribute where
       ( \o ->
           Attribute
             Core.<$> (o Core..:? "attributeDefinitionId")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON Attribute where
@@ -894,11 +892,9 @@ instance Core.FromJSON AttributeDefinition where
       "AttributeDefinition"
       ( \o ->
           AttributeDefinition
-            Core.<$> (o Core..:? "allowedValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedValues")
             Core.<*> (o Core..:? "category")
-            Core.<*> ( o Core..:? "consentDefaultValues"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "consentDefaultValues")
             Core.<*> (o Core..:? "dataMappingDefaultValue")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "name")
@@ -943,7 +939,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -980,7 +976,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -1025,7 +1021,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1306,7 +1302,7 @@ instance Core.FromJSON Consent where
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "policies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "policies")
             Core.<*> (o Core..:? "revisionCreateTime")
             Core.<*> (o Core..:? "revisionId")
             Core.<*> (o Core..:? "state")
@@ -1404,9 +1400,7 @@ instance Core.FromJSON ConsentArtifact where
       "ConsentArtifact"
       ( \o ->
           ConsentArtifact
-            Core.<$> ( o Core..:? "consentContentScreenshots"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "consentContentScreenshots")
             Core.<*> (o Core..:? "consentContentVersion")
             Core.<*> (o Core..:? "guardianSignature")
             Core.<*> (o Core..:? "metadata")
@@ -1515,10 +1509,7 @@ instance Core.FromJSON ConsentList where
   parseJSON =
     Core.withObject
       "ConsentList"
-      ( \o ->
-          ConsentList
-            Core.<$> (o Core..:? "consents" Core..!= Core.mempty)
-      )
+      (\o -> ConsentList Core.<$> (o Core..:? "consents"))
 
 instance Core.ToJSON ConsentList where
   toJSON ConsentList {..} =
@@ -2131,7 +2122,7 @@ instance Core.FromJSON Entity where
           Entity
             Core.<$> (o Core..:? "entityId")
             Core.<*> (o Core..:? "preferredTerm")
-            Core.<*> (o Core..:? "vocabularyCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "vocabularyCodes")
       )
 
 instance Core.ToJSON Entity where
@@ -2191,7 +2182,7 @@ instance Core.FromJSON EntityMention where
           EntityMention
             Core.<$> (o Core..:? "certaintyAssessment")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "linkedEntities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "linkedEntities")
             Core.<*> (o Core..:? "mentionId")
             Core.<*> (o Core..:? "subject")
             Core.<*> (o Core..:? "temporalAssessment")
@@ -2426,7 +2417,7 @@ instance Core.FromJSON EvaluateUserConsentsResponse where
       ( \o ->
           EvaluateUserConsentsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON EvaluateUserConsentsResponse where
@@ -2744,9 +2735,7 @@ instance Core.FromJSON FhirConfig where
       ( \o ->
           FhirConfig
             Core.<$> (o Core..:? "defaultKeepExtensions")
-            Core.<*> ( o Core..:? "fieldMetadataList"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fieldMetadataList")
       )
 
 instance Core.ToJSON FhirConfig where
@@ -2844,7 +2833,7 @@ instance Core.FromJSON FhirStore where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
-            Core.<*> (o Core..:? "streamConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "streamConfigs")
             Core.<*> (o Core..:? "validationConfig")
             Core.<*> (o Core..:? "version")
       )
@@ -2975,8 +2964,7 @@ instance Core.FromJSON FieldMetadata where
       "FieldMetadata"
       ( \o ->
           FieldMetadata
-            Core.<$> (o Core..:? "action")
-            Core.<*> (o Core..:? "paths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "action") Core.<*> (o Core..:? "paths")
       )
 
 instance Core.ToJSON FieldMetadata where
@@ -3126,9 +3114,7 @@ instance
       ( \o ->
           GoogleCloudHealthcareV1ConsentPolicy
             Core.<$> (o Core..:? "authorizationRule")
-            Core.<*> ( o Core..:? "resourceAttributes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resourceAttributes")
       )
 
 instance
@@ -3531,7 +3517,7 @@ instance Core.FromJSON Hl7SchemaConfig where
       ( \o ->
           Hl7SchemaConfig
             Core.<$> (o Core..:? "messageSchemaConfigs")
-            Core.<*> (o Core..:? "version" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON Hl7SchemaConfig where
@@ -3603,8 +3589,7 @@ instance Core.FromJSON Hl7TypesConfig where
       "Hl7TypesConfig"
       ( \o ->
           Hl7TypesConfig
-            Core.<$> (o Core..:? "type" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "version" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON Hl7TypesConfig where
@@ -3692,9 +3677,7 @@ instance Core.FromJSON Hl7V2Store where
           Hl7V2Store
             Core.<$> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "notificationConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notificationConfigs")
             Core.<*> (o Core..:? "parserConfig")
             Core.<*> (o Core..:? "rejectDuplicateMessage")
       )
@@ -3772,7 +3755,7 @@ instance Core.FromJSON HttpBody where
           HttpBody
             Core.<$> (o Core..:? "contentType")
             Core.<*> (o Core..:? "data")
-            Core.<*> (o Core..:? "extensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extensions")
       )
 
 instance Core.ToJSON HttpBody where
@@ -4082,7 +4065,7 @@ instance Core.FromJSON InfoTypeTransformation where
             Core.<$> (o Core..:? "characterMaskConfig")
             Core.<*> (o Core..:? "cryptoHashConfig")
             Core.<*> (o Core..:? "dateShiftConfig")
-            Core.<*> (o Core..:? "infoTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "infoTypes")
             Core.<*> (o Core..:? "redactConfig")
             Core.<*> (o Core..:? "replaceWithInfoTypeConfig")
       )
@@ -4225,9 +4208,7 @@ instance
       "ListAttributeDefinitionsResponse"
       ( \o ->
           ListAttributeDefinitionsResponse
-            Core.<$> ( o Core..:? "attributeDefinitions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "attributeDefinitions")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4266,7 +4247,7 @@ instance Core.FromJSON ListConsentArtifactsResponse where
       "ListConsentArtifactsResponse"
       ( \o ->
           ListConsentArtifactsResponse
-            Core.<$> (o Core..:? "consentArtifacts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "consentArtifacts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4305,7 +4286,7 @@ instance Core.FromJSON ListConsentRevisionsResponse where
       "ListConsentRevisionsResponse"
       ( \o ->
           ListConsentRevisionsResponse
-            Core.<$> (o Core..:? "consents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "consents")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4343,7 +4324,7 @@ instance Core.FromJSON ListConsentStoresResponse where
       "ListConsentStoresResponse"
       ( \o ->
           ListConsentStoresResponse
-            Core.<$> (o Core..:? "consentStores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "consentStores")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4378,7 +4359,7 @@ instance Core.FromJSON ListConsentsResponse where
       "ListConsentsResponse"
       ( \o ->
           ListConsentsResponse
-            Core.<$> (o Core..:? "consents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "consents")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4414,7 +4395,7 @@ instance Core.FromJSON ListDatasetsResponse where
       "ListDatasetsResponse"
       ( \o ->
           ListDatasetsResponse
-            Core.<$> (o Core..:? "datasets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "datasets")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4453,7 +4434,7 @@ instance Core.FromJSON ListDicomStoresResponse where
       "ListDicomStoresResponse"
       ( \o ->
           ListDicomStoresResponse
-            Core.<$> (o Core..:? "dicomStores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dicomStores")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4492,7 +4473,7 @@ instance Core.FromJSON ListFhirStoresResponse where
       "ListFhirStoresResponse"
       ( \o ->
           ListFhirStoresResponse
-            Core.<$> (o Core..:? "fhirStores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fhirStores")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4531,7 +4512,7 @@ instance Core.FromJSON ListHl7V2StoresResponse where
       "ListHl7V2StoresResponse"
       ( \o ->
           ListHl7V2StoresResponse
-            Core.<$> (o Core..:? "hl7V2Stores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "hl7V2Stores")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4567,7 +4548,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4606,7 +4587,7 @@ instance Core.FromJSON ListMessagesResponse where
       "ListMessagesResponse"
       ( \o ->
           ListMessagesResponse
-            Core.<$> (o Core..:? "hl7V2Messages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "hl7V2Messages")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4646,7 +4627,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -4684,7 +4665,7 @@ instance Core.FromJSON ListUserDataMappingsResponse where
       ( \o ->
           ListUserDataMappingsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "userDataMappings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userDataMappings")
       )
 
 instance Core.ToJSON ListUserDataMappingsResponse where
@@ -4861,7 +4842,7 @@ instance Core.FromJSON Message where
             Core.<*> (o Core..:? "messageType")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parsedData")
-            Core.<*> (o Core..:? "patientIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "patientIds")
             Core.<*> (o Core..:? "schematizedData")
             Core.<*> (o Core..:? "sendFacility")
             Core.<*> (o Core..:? "sendTime")
@@ -5129,10 +5110,7 @@ instance Core.FromJSON ParsedData where
   parseJSON =
     Core.withObject
       "ParsedData"
-      ( \o ->
-          ParsedData
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-      )
+      (\o -> ParsedData Core.<$> (o Core..:? "segments"))
 
 instance Core.ToJSON ParsedData where
   toJSON ParsedData {..} =
@@ -5261,8 +5239,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -5307,9 +5285,15 @@ instance Core.FromJSON ProgressCounter where
       "ProgressCounter"
       ( \o ->
           ProgressCounter
-            Core.<$> (o Core..:? "failure")
-            Core.<*> (o Core..:? "pending")
-            Core.<*> (o Core..:? "success")
+            Core.<$> ( o Core..:? "failure"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "pending"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "success"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ProgressCounter where
@@ -5466,7 +5450,7 @@ instance Core.FromJSON QueryAccessibleDataResponse where
       "QueryAccessibleDataResponse"
       ( \o ->
           QueryAccessibleDataResponse
-            Core.<$> (o Core..:? "gcsUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "gcsUris")
       )
 
 instance Core.ToJSON QueryAccessibleDataResponse where
@@ -5566,10 +5550,7 @@ instance Core.FromJSON Resources where
   parseJSON =
     Core.withObject
       "Resources"
-      ( \o ->
-          Resources
-            Core.<$> (o Core..:? "resources" Core..!= Core.mempty)
-      )
+      (\o -> Resources Core.<$> (o Core..:? "resources"))
 
 instance Core.ToJSON Resources where
   toJSON Resources {..} =
@@ -5710,7 +5691,9 @@ instance Core.FromJSON SchemaConfig where
       "SchemaConfig"
       ( \o ->
           SchemaConfig
-            Core.<$> (o Core..:? "recursiveStructureDepth")
+            Core.<$> ( o Core..:? "recursiveStructureDepth"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "schemaType")
       )
 
@@ -5762,7 +5745,7 @@ instance Core.FromJSON SchemaGroup where
           SchemaGroup
             Core.<$> (o Core..:? "choice")
             Core.<*> (o Core..:? "maxOccurs")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "minOccurs")
             Core.<*> (o Core..:? "name")
       )
@@ -5815,9 +5798,9 @@ instance Core.FromJSON SchemaPackage where
       ( \o ->
           SchemaPackage
             Core.<$> (o Core..:? "ignoreMinOccurs")
-            Core.<*> (o Core..:? "schemas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "schemas")
             Core.<*> (o Core..:? "schematizedParsingType")
-            Core.<*> (o Core..:? "types" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "types")
             Core.<*> (o Core..:? "unexpectedSegmentHandling")
       )
 
@@ -6155,7 +6138,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6225,7 +6208,7 @@ instance Core.FromJSON StreamConfig where
       ( \o ->
           StreamConfig
             Core.<$> (o Core..:? "bigqueryDestination")
-            Core.<*> (o Core..:? "resourceTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceTypes")
       )
 
 instance Core.ToJSON StreamConfig where
@@ -6256,10 +6239,7 @@ instance Core.FromJSON TagFilterList where
   parseJSON =
     Core.withObject
       "TagFilterList"
-      ( \o ->
-          TagFilterList
-            Core.<$> (o Core..:? "tags" Core..!= Core.mempty)
-      )
+      (\o -> TagFilterList Core.<$> (o Core..:? "tags"))
 
 instance Core.ToJSON TagFilterList where
   toJSON TagFilterList {..} =
@@ -6287,7 +6267,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -6318,7 +6298,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -6346,8 +6326,7 @@ instance Core.FromJSON TextConfig where
     Core.withObject
       "TextConfig"
       ( \o ->
-          TextConfig
-            Core.<$> (o Core..:? "transformations" Core..!= Core.mempty)
+          TextConfig Core.<$> (o Core..:? "transformations")
       )
 
 instance Core.ToJSON TextConfig where
@@ -6419,7 +6398,7 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primitive")
       )
@@ -6476,9 +6455,7 @@ instance Core.FromJSON UserDataMapping where
             Core.<*> (o Core..:? "archived")
             Core.<*> (o Core..:? "dataId")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "resourceAttributes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resourceAttributes")
             Core.<*> (o Core..:? "userId")
       )
 
@@ -6535,9 +6512,7 @@ instance Core.FromJSON ValidationConfig where
             Core.<*> (o Core..:? "disableProfileValidation")
             Core.<*> (o Core..:? "disableReferenceTypeValidation")
             Core.<*> (o Core..:? "disableRequiredFieldValidation")
-            Core.<*> ( o Core..:? "enabledImplementationGuides"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "enabledImplementationGuides")
       )
 
 instance Core.ToJSON ValidationConfig where

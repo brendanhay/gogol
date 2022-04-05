@@ -949,7 +949,7 @@ instance Core.FromJSON Batch where
             Core.<*> (o Core..:? "sparkRBatch")
             Core.<*> (o Core..:? "sparkSqlBatch")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateHistory" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stateHistory")
             Core.<*> (o Core..:? "stateMessage")
             Core.<*> (o Core..:? "stateTime")
             Core.<*> (o Core..:? "uuid")
@@ -1058,7 +1058,7 @@ instance Core.FromJSON BatchOperationMetadata where
             Core.<*> (o Core..:? "doneTime")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "operationType")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON BatchOperationMetadata where
@@ -1137,7 +1137,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1222,7 +1222,7 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "statusHistory" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statusHistory")
       )
 
 instance Core.ToJSON Cluster where
@@ -1342,9 +1342,7 @@ instance Core.FromJSON ClusterConfig where
             Core.<*> (o Core..:? "endpointConfig")
             Core.<*> (o Core..:? "gceClusterConfig")
             Core.<*> (o Core..:? "gkeClusterConfig")
-            Core.<*> ( o Core..:? "initializationActions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "initializationActions")
             Core.<*> (o Core..:? "lifecycleConfig")
             Core.<*> (o Core..:? "masterConfig")
             Core.<*> (o Core..:? "metastoreConfig")
@@ -1575,8 +1573,8 @@ instance Core.FromJSON ClusterOperationMetadata where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "statusHistory" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statusHistory")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON ClusterOperationMetadata where
@@ -1843,8 +1841,7 @@ instance Core.FromJSON DataprocMetricConfig where
     Core.withObject
       "DataprocMetricConfig"
       ( \o ->
-          DataprocMetricConfig
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+          DataprocMetricConfig Core.<$> (o Core..:? "metrics")
       )
 
 instance Core.ToJSON DataprocMetricConfig where
@@ -2148,7 +2145,7 @@ instance Core.FromJSON ExecutionConfig where
       ( \o ->
           ExecutionConfig
             Core.<$> (o Core..:? "kmsKey")
-            Core.<*> (o Core..:? "networkTags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkTags")
             Core.<*> (o Core..:? "networkUri")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "subnetworkUri")
@@ -2283,12 +2280,10 @@ instance Core.FromJSON GceClusterConfig where
             Core.<*> (o Core..:? "privateIpv6GoogleAccess")
             Core.<*> (o Core..:? "reservationAffinity")
             Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> ( o Core..:? "serviceAccountScopes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "serviceAccountScopes")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "subnetworkUri")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "zoneUri")
       )
 
@@ -2486,10 +2481,10 @@ instance Core.FromJSON HadoopJob where
       "HadoopJob"
       ( \o ->
           HadoopJob
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "mainClass")
             Core.<*> (o Core..:? "mainJarFileUri")
@@ -2580,7 +2575,7 @@ instance Core.FromJSON HiveJob where
       ( \o ->
           HiveJob
             Core.<$> (o Core..:? "continueOnFailure")
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "queryFileUri")
             Core.<*> (o Core..:? "queryList")
@@ -2871,13 +2866,11 @@ instance Core.FromJSON InstanceGroupConfig where
       "InstanceGroupConfig"
       ( \o ->
           InstanceGroupConfig
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "diskConfig")
             Core.<*> (o Core..:? "imageUri")
-            Core.<*> (o Core..:? "instanceNames" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "instanceReferences"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "instanceNames")
+            Core.<*> (o Core..:? "instanceReferences")
             Core.<*> (o Core..:? "isPreemptible")
             Core.<*> (o Core..:? "machineTypeUri")
             Core.<*> (o Core..:? "managedGroupConfig")
@@ -3136,8 +3129,8 @@ instance Core.FromJSON Job where
             Core.<*> (o Core..:? "sparkRJob")
             Core.<*> (o Core..:? "sparkSqlJob")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "statusHistory" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "yarnApplications" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statusHistory")
+            Core.<*> (o Core..:? "yarnApplications")
       )
 
 instance Core.ToJSON Job where
@@ -3633,7 +3626,7 @@ instance
       ( \o ->
           ListAutoscalingPoliciesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "policies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "policies")
       )
 
 instance Core.ToJSON ListAutoscalingPoliciesResponse where
@@ -3668,7 +3661,7 @@ instance Core.FromJSON ListBatchesResponse where
       "ListBatchesResponse"
       ( \o ->
           ListBatchesResponse
-            Core.<$> (o Core..:? "batches" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "batches")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3704,7 +3697,7 @@ instance Core.FromJSON ListClustersResponse where
       "ListClustersResponse"
       ( \o ->
           ListClustersResponse
-            Core.<$> (o Core..:? "clusters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusters")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3740,7 +3733,7 @@ instance Core.FromJSON ListJobsResponse where
       "ListJobsResponse"
       ( \o ->
           ListJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3780,7 +3773,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -3819,7 +3812,7 @@ instance Core.FromJSON ListWorkflowTemplatesResponse where
       ( \o ->
           ListWorkflowTemplatesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "templates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "templates")
       )
 
 instance Core.ToJSON ListWorkflowTemplatesResponse where
@@ -4062,7 +4055,7 @@ instance Core.FromJSON Metric where
       "Metric"
       ( \o ->
           Metric
-            Core.<$> (o Core..:? "metricOverrides" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metricOverrides")
             Core.<*> (o Core..:? "metricSource")
       )
 
@@ -4357,9 +4350,7 @@ instance Core.FromJSON OrderedJob where
             Core.<*> (o Core..:? "hiveJob")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "pigJob")
-            Core.<*> ( o Core..:? "prerequisiteStepIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "prerequisiteStepIds")
             Core.<*> (o Core..:? "prestoJob")
             Core.<*> (o Core..:? "pysparkJob")
             Core.<*> (o Core..:? "scheduling")
@@ -4534,7 +4525,7 @@ instance Core.FromJSON PigJob where
       ( \o ->
           PigJob
             Core.<$> (o Core..:? "continueOnFailure")
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "queryFileUri")
@@ -4643,7 +4634,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -4699,7 +4690,7 @@ instance Core.FromJSON PrestoJob where
       "PrestoJob"
       ( \o ->
           PrestoJob
-            Core.<$> (o Core..:? "clientTags" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clientTags")
             Core.<*> (o Core..:? "continueOnFailure")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "outputFormat")
@@ -4791,12 +4782,12 @@ instance Core.FromJSON PySparkBatch where
       "PySparkBatch"
       ( \o ->
           PySparkBatch
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "mainPythonFileUri")
-            Core.<*> (o Core..:? "pythonFileUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pythonFileUris")
       )
 
 instance Core.ToJSON PySparkBatch where
@@ -4857,14 +4848,14 @@ instance Core.FromJSON PySparkJob where
       "PySparkJob"
       ( \o ->
           PySparkJob
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "mainPythonFileUri")
             Core.<*> (o Core..:? "properties")
-            Core.<*> (o Core..:? "pythonFileUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pythonFileUris")
       )
 
 instance Core.ToJSON PySparkJob where
@@ -4931,10 +4922,7 @@ instance Core.FromJSON QueryList where
   parseJSON =
     Core.withObject
       "QueryList"
-      ( \o ->
-          QueryList
-            Core.<$> (o Core..:? "queries" Core..!= Core.mempty)
-      )
+      (\o -> QueryList Core.<$> (o Core..:? "queries"))
 
 instance Core.ToJSON QueryList where
   toJSON QueryList {..} =
@@ -4962,8 +4950,7 @@ instance Core.FromJSON RegexValidation where
     Core.withObject
       "RegexValidation"
       ( \o ->
-          RegexValidation
-            Core.<$> (o Core..:? "regexes" Core..!= Core.mempty)
+          RegexValidation Core.<$> (o Core..:? "regexes")
       )
 
 instance Core.ToJSON RegexValidation where
@@ -5040,7 +5027,7 @@ instance Core.FromJSON ReservationAffinity where
           ReservationAffinity
             Core.<$> (o Core..:? "consumeReservationType")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ReservationAffinity where
@@ -5290,7 +5277,7 @@ instance Core.FromJSON SessionOperationMetadata where
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "session")
             Core.<*> (o Core..:? "sessionUuid")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON SessionOperationMetadata where
@@ -5444,9 +5431,7 @@ instance Core.FromJSON SoftwareConfig where
       ( \o ->
           SoftwareConfig
             Core.<$> (o Core..:? "imageVersion")
-            Core.<*> ( o Core..:? "optionalComponents"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "optionalComponents")
             Core.<*> (o Core..:? "properties")
       )
 
@@ -5529,10 +5514,10 @@ instance Core.FromJSON SparkBatch where
       "SparkBatch"
       ( \o ->
           SparkBatch
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "mainClass")
             Core.<*> (o Core..:? "mainJarFileUri")
       )
@@ -5627,10 +5612,10 @@ instance Core.FromJSON SparkJob where
       "SparkJob"
       ( \o ->
           SparkJob
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
+            Core.<*> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "mainClass")
             Core.<*> (o Core..:? "mainJarFileUri")
@@ -5714,9 +5699,9 @@ instance Core.FromJSON SparkRBatch where
       "SparkRBatch"
       ( \o ->
           SparkRBatch
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
             Core.<*> (o Core..:? "mainRFileUri")
       )
 
@@ -5769,9 +5754,9 @@ instance Core.FromJSON SparkRJob where
       "SparkRJob"
       ( \o ->
           SparkRJob
-            Core.<$> (o Core..:? "archiveUris" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "archiveUris")
+            Core.<*> (o Core..:? "args")
+            Core.<*> (o Core..:? "fileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "mainRFileUri")
             Core.<*> (o Core..:? "properties")
@@ -5849,7 +5834,7 @@ instance Core.FromJSON SparkSqlBatch where
       "SparkSqlBatch"
       ( \o ->
           SparkSqlBatch
-            Core.<$> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "queryFileUri")
             Core.<*> (o Core..:? "queryVariables")
       )
@@ -5932,7 +5917,7 @@ instance Core.FromJSON SparkSqlJob where
       "SparkSqlJob"
       ( \o ->
           SparkSqlJob
-            Core.<$> (o Core..:? "jarFileUris" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jarFileUris")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "queryFileUri")
@@ -6180,7 +6165,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6326,7 +6311,7 @@ instance Core.FromJSON TemplateParameter where
       ( \o ->
           TemplateParameter
             Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "validation")
       )
@@ -6363,7 +6348,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -6394,7 +6379,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -6423,8 +6408,7 @@ instance Core.FromJSON ValueValidation where
     Core.withObject
       "ValueValidation"
       ( \o ->
-          ValueValidation
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+          ValueValidation Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON ValueValidation where
@@ -6450,10 +6434,7 @@ instance Core.FromJSON WorkflowGraph where
   parseJSON =
     Core.withObject
       "WorkflowGraph"
-      ( \o ->
-          WorkflowGraph
-            Core.<$> (o Core..:? "nodes" Core..!= Core.mempty)
-      )
+      (\o -> WorkflowGraph Core.<$> (o Core..:? "nodes"))
 
 instance Core.ToJSON WorkflowGraph where
   toJSON WorkflowGraph {..} =
@@ -6626,9 +6607,7 @@ instance Core.FromJSON WorkflowNode where
           WorkflowNode
             Core.<$> (o Core..:? "error")
             Core.<*> (o Core..:? "jobId")
-            Core.<*> ( o Core..:? "prerequisiteStepIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "prerequisiteStepIds")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "stepId")
       )
@@ -6699,10 +6678,10 @@ instance Core.FromJSON WorkflowTemplate where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "dagTimeout")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jobs")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "placement")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "version")

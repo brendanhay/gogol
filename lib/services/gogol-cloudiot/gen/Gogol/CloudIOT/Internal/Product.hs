@@ -266,7 +266,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -353,7 +353,7 @@ instance Core.FromJSON Device where
           Device
             Core.<$> (o Core..:? "blocked")
             Core.<*> (o Core..:? "config")
-            Core.<*> (o Core..:? "credentials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "credentials")
             Core.<*> (o Core..:? "gatewayConfig")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "lastConfigAckTime")
@@ -366,7 +366,9 @@ instance Core.FromJSON Device where
             Core.<*> (o Core..:? "logLevel")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "numId")
+            Core.<*> ( o Core..:? "numId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "state")
       )
 
@@ -459,7 +461,9 @@ instance Core.FromJSON DeviceConfig where
             Core.<$> (o Core..:? "binaryData")
             Core.<*> (o Core..:? "cloudUpdateTime")
             Core.<*> (o Core..:? "deviceAckTime")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DeviceConfig where
@@ -554,10 +558,8 @@ instance Core.FromJSON DeviceRegistry where
       "DeviceRegistry"
       ( \o ->
           DeviceRegistry
-            Core.<$> (o Core..:? "credentials" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "eventNotificationConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "credentials")
+            Core.<*> (o Core..:? "eventNotificationConfigs")
             Core.<*> (o Core..:? "httpConfig")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "logLevel")
@@ -896,7 +898,7 @@ instance
       "ListDeviceConfigVersionsResponse"
       ( \o ->
           ListDeviceConfigVersionsResponse
-            Core.<$> (o Core..:? "deviceConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceConfigs")
       )
 
 instance Core.ToJSON ListDeviceConfigVersionsResponse where
@@ -932,7 +934,7 @@ instance Core.FromJSON ListDeviceRegistriesResponse where
       "ListDeviceRegistriesResponse"
       ( \o ->
           ListDeviceRegistriesResponse
-            Core.<$> (o Core..:? "deviceRegistries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceRegistries")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -967,7 +969,7 @@ instance Core.FromJSON ListDeviceStatesResponse where
       "ListDeviceStatesResponse"
       ( \o ->
           ListDeviceStatesResponse
-            Core.<$> (o Core..:? "deviceStates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceStates")
       )
 
 instance Core.ToJSON ListDeviceStatesResponse where
@@ -1000,7 +1002,7 @@ instance Core.FromJSON ListDevicesResponse where
       "ListDevicesResponse"
       ( \o ->
           ListDevicesResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1043,7 +1045,9 @@ instance
       ( \o ->
           ModifyCloudToDeviceConfigRequest
             Core.<$> (o Core..:? "binaryData")
-            Core.<*> (o Core..:? "versionToUpdate")
+            Core.<*> ( o Core..:? "versionToUpdate"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ModifyCloudToDeviceConfigRequest where
@@ -1115,7 +1119,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1386,7 +1390,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1448,7 +1452,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -1479,7 +1483,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

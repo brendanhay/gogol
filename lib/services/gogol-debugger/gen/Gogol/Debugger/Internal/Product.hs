@@ -263,10 +263,8 @@ instance Core.FromJSON Breakpoint where
             Core.<*> (o Core..:? "canaryExpireTime")
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> ( o Core..:? "evaluatedExpressions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "expressions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "evaluatedExpressions")
+            Core.<*> (o Core..:? "expressions")
             Core.<*> (o Core..:? "finalTime")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isFinalState")
@@ -274,11 +272,11 @@ instance Core.FromJSON Breakpoint where
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "logLevel")
             Core.<*> (o Core..:? "logMessageFormat")
-            Core.<*> (o Core..:? "stackFrames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stackFrames")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userEmail")
-            Core.<*> (o Core..:? "variableTable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "variableTable")
       )
 
 instance Core.ToJSON Breakpoint where
@@ -518,13 +516,13 @@ instance Core.FromJSON Debuggee where
             Core.<$> (o Core..:? "agentVersion")
             Core.<*> (o Core..:? "canaryMode")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "extSourceContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extSourceContexts")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isDisabled")
             Core.<*> (o Core..:? "isInactive")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "project")
-            Core.<*> (o Core..:? "sourceContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceContexts")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "uniquifier")
       )
@@ -684,7 +682,7 @@ instance Core.FromJSON FormatMessage where
       ( \o ->
           FormatMessage
             Core.<$> (o Core..:? "format")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON FormatMessage where
@@ -845,7 +843,7 @@ instance Core.FromJSON ListActiveBreakpointsResponse where
       "ListActiveBreakpointsResponse"
       ( \o ->
           ListActiveBreakpointsResponse
-            Core.<$> (o Core..:? "breakpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "breakpoints")
             Core.<*> (o Core..:? "nextWaitToken")
             Core.<*> (o Core..:? "waitExpired")
       )
@@ -886,7 +884,7 @@ instance Core.FromJSON ListBreakpointsResponse where
       "ListBreakpointsResponse"
       ( \o ->
           ListBreakpointsResponse
-            Core.<$> (o Core..:? "breakpoints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "breakpoints")
             Core.<*> (o Core..:? "nextWaitToken")
       )
 
@@ -919,7 +917,7 @@ instance Core.FromJSON ListDebuggeesResponse where
       "ListDebuggeesResponse"
       ( \o ->
           ListDebuggeesResponse
-            Core.<$> (o Core..:? "debuggees" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "debuggees")
       )
 
 instance Core.ToJSON ListDebuggeesResponse where
@@ -1221,9 +1219,9 @@ instance Core.FromJSON StackFrame where
       "StackFrame"
       ( \o ->
           StackFrame
-            Core.<$> (o Core..:? "arguments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arguments")
             Core.<*> (o Core..:? "function")
-            Core.<*> (o Core..:? "locals" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locals")
             Core.<*> (o Core..:? "location")
       )
 
@@ -1373,7 +1371,7 @@ instance Core.FromJSON Variable where
       "Variable"
       ( \o ->
           Variable
-            Core.<$> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "members")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "type")

@@ -261,8 +261,7 @@ instance Core.FromJSON DbUpdateSpec where
     Core.withObject
       "DbUpdateSpec"
       ( \o ->
-          DbUpdateSpec
-            Core.<$> (o Core..:? "databases" Core..!= Core.mempty)
+          DbUpdateSpec Core.<$> (o Core..:? "databases")
       )
 
 instance Core.ToJSON DbUpdateSpec where
@@ -292,7 +291,7 @@ instance Core.FromJSON DeviceCapabilities where
       "DeviceCapabilities"
       ( \o ->
           DeviceCapabilities
-            Core.<$> (o Core..:? "frequencyRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frequencyRanges")
       )
 
 instance Core.ToJSON DeviceCapabilities where
@@ -364,7 +363,7 @@ instance Core.FromJSON DeviceDescriptor where
             Core.<*> (o Core..:? "fccTvbdDeviceType")
             Core.<*> (o Core..:? "manufacturerId")
             Core.<*> (o Core..:? "modelId")
-            Core.<*> (o Core..:? "rulesetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rulesetIds")
             Core.<*> (o Core..:? "serialNumber")
       )
 
@@ -709,8 +708,7 @@ instance Core.FromJSON GeoLocationPolygon where
     Core.withObject
       "GeoLocationPolygon"
       ( \o ->
-          GeoLocationPolygon
-            Core.<$> (o Core..:? "exterior" Core..!= Core.mempty)
+          GeoLocationPolygon Core.<$> (o Core..:? "exterior")
       )
 
 instance Core.ToJSON GeoLocationPolygon where
@@ -747,9 +745,7 @@ instance Core.FromJSON GeoSpectrumSchedule where
       ( \o ->
           GeoSpectrumSchedule
             Core.<$> (o Core..:? "location")
-            Core.<*> ( o Core..:? "spectrumSchedules"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "spectrumSchedules")
       )
 
 instance Core.ToJSON GeoSpectrumSchedule where
@@ -818,7 +814,7 @@ instance Core.FromJSON PawsGetSpectrumBatchRequest where
             Core.<$> (o Core..:? "antenna")
             Core.<*> (o Core..:? "capabilities")
             Core.<*> (o Core..:? "deviceDesc")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "masterDeviceDesc")
             Core.<*> (o Core..:? "owner")
             Core.<*> (o Core..:? "requestType")
@@ -902,9 +898,7 @@ instance Core.FromJSON PawsGetSpectrumBatchResponse where
           PawsGetSpectrumBatchResponse
             Core.<$> (o Core..:? "databaseChange")
             Core.<*> (o Core..:? "deviceDesc")
-            Core.<*> ( o Core..:? "geoSpectrumSchedules"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "geoSpectrumSchedules")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "spectrum#pawsGetSpectrumBatchResponse"
                      )
@@ -1083,7 +1077,7 @@ instance Core.FromJSON PawsGetSpectrumResponse where
             Core.<*> (o Core..:? "maxTotalBwHz")
             Core.<*> (o Core..:? "needsSpectrumReport")
             Core.<*> (o Core..:? "rulesetInfo")
-            Core.<*> (o Core..:? "spectrumSchedules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spectrumSchedules")
             Core.<*> (o Core..:? "timestamp")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
@@ -1264,7 +1258,7 @@ instance Core.FromJSON PawsNotifySpectrumUseRequest where
           PawsNotifySpectrumUseRequest
             Core.<$> (o Core..:? "deviceDesc")
             Core.<*> (o Core..:? "location")
-            Core.<*> (o Core..:? "spectra" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spectra")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
       )
@@ -1482,7 +1476,7 @@ instance Core.FromJSON PawsVerifyDeviceRequest where
       "PawsVerifyDeviceRequest"
       ( \o ->
           PawsVerifyDeviceRequest
-            Core.<$> (o Core..:? "deviceDescs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceDescs")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
       )
@@ -1537,7 +1531,7 @@ instance Core.FromJSON PawsVerifyDeviceResponse where
       ( \o ->
           PawsVerifyDeviceResponse
             Core.<$> (o Core..:? "databaseChange")
-            Core.<*> (o Core..:? "deviceValidities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "deviceValidities")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "spectrum#pawsVerifyDeviceResponse"
                      )
@@ -1593,7 +1587,7 @@ instance Core.FromJSON RulesetInfo where
             Core.<$> (o Core..:? "authority")
             Core.<*> (o Core..:? "maxLocationChange")
             Core.<*> (o Core..:? "maxPollingSecs")
-            Core.<*> (o Core..:? "rulesetIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rulesetIds")
       )
 
 instance Core.ToJSON RulesetInfo where
@@ -1632,7 +1626,7 @@ instance Core.FromJSON SpectrumMessage where
       ( \o ->
           SpectrumMessage
             Core.<$> (o Core..:? "bandwidth")
-            Core.<*> (o Core..:? "frequencyRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "frequencyRanges")
       )
 
 instance Core.ToJSON SpectrumMessage where
@@ -1669,7 +1663,7 @@ instance Core.FromJSON SpectrumSchedule where
       ( \o ->
           SpectrumSchedule
             Core.<$> (o Core..:? "eventTime")
-            Core.<*> (o Core..:? "spectra" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spectra")
       )
 
 instance Core.ToJSON SpectrumSchedule where

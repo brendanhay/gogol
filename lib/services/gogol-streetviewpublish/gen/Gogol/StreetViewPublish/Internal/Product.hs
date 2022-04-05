@@ -139,7 +139,7 @@ instance Core.FromJSON BatchDeletePhotosRequest where
       "BatchDeletePhotosRequest"
       ( \o ->
           BatchDeletePhotosRequest
-            Core.<$> (o Core..:? "photoIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "photoIds")
       )
 
 instance Core.ToJSON BatchDeletePhotosRequest where
@@ -169,7 +169,7 @@ instance Core.FromJSON BatchDeletePhotosResponse where
       "BatchDeletePhotosResponse"
       ( \o ->
           BatchDeletePhotosResponse
-            Core.<$> (o Core..:? "status" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "status")
       )
 
 instance Core.ToJSON BatchDeletePhotosResponse where
@@ -197,7 +197,7 @@ instance Core.FromJSON BatchGetPhotosResponse where
       "BatchGetPhotosResponse"
       ( \o ->
           BatchGetPhotosResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "results")
       )
 
 instance Core.ToJSON BatchGetPhotosResponse where
@@ -228,9 +228,7 @@ instance Core.FromJSON BatchUpdatePhotosRequest where
       "BatchUpdatePhotosRequest"
       ( \o ->
           BatchUpdatePhotosRequest
-            Core.<$> ( o Core..:? "updatePhotoRequests"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "updatePhotoRequests")
       )
 
 instance Core.ToJSON BatchUpdatePhotosRequest where
@@ -263,7 +261,7 @@ instance Core.FromJSON BatchUpdatePhotosResponse where
       "BatchUpdatePhotosResponse"
       ( \o ->
           BatchUpdatePhotosResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "results")
       )
 
 instance Core.ToJSON BatchUpdatePhotosResponse where
@@ -409,7 +407,7 @@ instance Core.FromJSON ListPhotosResponse where
       ( \o ->
           ListPhotosResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "photos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "photos")
       )
 
 instance Core.ToJSON ListPhotosResponse where
@@ -591,18 +589,20 @@ instance Core.FromJSON Photo where
       ( \o ->
           Photo
             Core.<$> (o Core..:? "captureTime")
-            Core.<*> (o Core..:? "connections" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "connections")
             Core.<*> (o Core..:? "downloadUrl")
             Core.<*> (o Core..:? "mapsPublishStatus")
             Core.<*> (o Core..:? "photoId")
-            Core.<*> (o Core..:? "places" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "places")
             Core.<*> (o Core..:? "pose")
             Core.<*> (o Core..:? "shareLink")
             Core.<*> (o Core..:? "thumbnailUrl")
             Core.<*> (o Core..:? "transferStatus")
             Core.<*> (o Core..:? "uploadReference")
             Core.<*> (o Core..:? "uploadTime")
-            Core.<*> (o Core..:? "viewCount")
+            Core.<*> ( o Core..:? "viewCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Photo where
@@ -820,7 +820,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

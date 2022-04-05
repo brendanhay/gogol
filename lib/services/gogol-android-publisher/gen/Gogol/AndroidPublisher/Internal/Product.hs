@@ -524,8 +524,7 @@ instance Core.FromJSON ApksListResponse where
       "ApksListResponse"
       ( \o ->
           ApksListResponse
-            Core.<$> (o Core..:? "apks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "apks") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ApksListResponse where
@@ -690,8 +689,7 @@ instance Core.FromJSON BundlesListResponse where
       "BundlesListResponse"
       ( \o ->
           BundlesListResponse
-            Core.<$> (o Core..:? "bundles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "bundles") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON BundlesListResponse where
@@ -950,7 +948,7 @@ instance Core.FromJSON CountryTargeting where
       "CountryTargeting"
       ( \o ->
           CountryTargeting
-            Core.<$> (o Core..:? "countries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "countries")
             Core.<*> (o Core..:? "includeRestOfWorld")
       )
 
@@ -1180,8 +1178,8 @@ instance Core.FromJSON DeviceSpec where
       ( \o ->
           DeviceSpec
             Core.<$> (o Core..:? "screenDensity")
-            Core.<*> (o Core..:? "supportedAbis" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "supportedLocales" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedAbis")
+            Core.<*> (o Core..:? "supportedLocales")
       )
 
 instance Core.ToJSON DeviceSpec where
@@ -1218,7 +1216,9 @@ instance Core.FromJSON ExpansionFile where
       "ExpansionFile"
       ( \o ->
           ExpansionFile
-            Core.<$> (o Core..:? "fileSize")
+            Core.<$> ( o Core..:? "fileSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "referencesVersion")
       )
 
@@ -1330,20 +1330,20 @@ instance Core.FromJSON ExternallyHostedApk where
       ( \o ->
           ExternallyHostedApk
             Core.<$> (o Core..:? "applicationLabel")
-            Core.<*> ( o Core..:? "certificateBase64s"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "certificateBase64s")
             Core.<*> (o Core..:? "externallyHostedUrl")
             Core.<*> (o Core..:? "fileSha1Base64")
             Core.<*> (o Core..:? "fileSha256Base64")
-            Core.<*> (o Core..:? "fileSize")
+            Core.<*> ( o Core..:? "fileSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "iconBase64")
             Core.<*> (o Core..:? "maximumSdk")
             Core.<*> (o Core..:? "minimumSdk")
-            Core.<*> (o Core..:? "nativeCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nativeCodes")
             Core.<*> (o Core..:? "packageName")
-            Core.<*> (o Core..:? "usesFeatures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "usesPermissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "usesFeatures")
+            Core.<*> (o Core..:? "usesPermissions")
             Core.<*> (o Core..:? "versionCode")
             Core.<*> (o Core..:? "versionName")
       )
@@ -1396,7 +1396,7 @@ instance Core.FromJSON GeneratedApksListResponse where
       "GeneratedApksListResponse"
       ( \o ->
           GeneratedApksListResponse
-            Core.<$> (o Core..:? "generatedApks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "generatedApks")
       )
 
 instance Core.ToJSON GeneratedApksListResponse where
@@ -1442,15 +1442,9 @@ instance Core.FromJSON GeneratedApksPerSigningKey where
       ( \o ->
           GeneratedApksPerSigningKey
             Core.<$> (o Core..:? "certificateSha256Hash")
-            Core.<*> ( o Core..:? "generatedAssetPackSlices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "generatedSplitApks"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "generatedStandaloneApks"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "generatedAssetPackSlices")
+            Core.<*> (o Core..:? "generatedSplitApks")
+            Core.<*> (o Core..:? "generatedStandaloneApks")
             Core.<*> (o Core..:? "generatedUniversalApk")
       )
 
@@ -1506,7 +1500,9 @@ instance Core.FromJSON GeneratedAssetPackSlice where
             Core.<$> (o Core..:? "downloadId")
             Core.<*> (o Core..:? "moduleName")
             Core.<*> (o Core..:? "sliceId")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GeneratedAssetPackSlice where
@@ -1665,9 +1661,7 @@ instance Core.FromJSON Grant where
       "Grant"
       ( \o ->
           Grant
-            Core.<$> ( o Core..:? "appLevelPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "appLevelPermissions")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "packageName")
       )
@@ -1752,7 +1746,7 @@ instance Core.FromJSON ImagesDeleteAllResponse where
       "ImagesDeleteAllResponse"
       ( \o ->
           ImagesDeleteAllResponse
-            Core.<$> (o Core..:? "deleted" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deleted")
       )
 
 instance Core.ToJSON ImagesDeleteAllResponse where
@@ -1781,8 +1775,7 @@ instance Core.FromJSON ImagesListResponse where
     Core.withObject
       "ImagesListResponse"
       ( \o ->
-          ImagesListResponse
-            Core.<$> (o Core..:? "images" Core..!= Core.mempty)
+          ImagesListResponse Core.<$> (o Core..:? "images")
       )
 
 instance Core.ToJSON ImagesListResponse where
@@ -2006,7 +1999,7 @@ instance Core.FromJSON InAppProductListing where
       "InAppProductListing"
       ( \o ->
           InAppProductListing
-            Core.<$> (o Core..:? "benefits" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "benefits")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "title")
       )
@@ -2053,7 +2046,7 @@ instance Core.FromJSON InappproductsListResponse where
       "InappproductsListResponse"
       ( \o ->
           InappproductsListResponse
-            Core.<$> (o Core..:? "inappproduct" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "inappproduct")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
@@ -2148,7 +2141,9 @@ instance Core.FromJSON IntroductoryPriceInfo where
       "IntroductoryPriceInfo"
       ( \o ->
           IntroductoryPriceInfo
-            Core.<$> (o Core..:? "introductoryPriceAmountMicros")
+            Core.<$> ( o Core..:? "introductoryPriceAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "introductoryPriceCurrencyCode")
             Core.<*> (o Core..:? "introductoryPriceCycles")
             Core.<*> (o Core..:? "introductoryPricePeriod")
@@ -2194,7 +2189,7 @@ instance Core.FromJSON ListUsersResponse where
       ( \o ->
           ListUsersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON ListUsersResponse where
@@ -2285,8 +2280,7 @@ instance Core.FromJSON ListingsListResponse where
       "ListingsListResponse"
       ( \o ->
           ListingsListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "listings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "listings")
       )
 
 instance Core.ToJSON ListingsListResponse where
@@ -2455,7 +2449,9 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> (o Core..:? "units")
+            Core.<*> ( o Core..:? "units"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Money where
@@ -2618,7 +2614,9 @@ instance Core.FromJSON ProductPurchase where
             Core.<*> (o Core..:? "orderId")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "purchaseState")
-            Core.<*> (o Core..:? "purchaseTimeMillis")
+            Core.<*> ( o Core..:? "purchaseTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "purchaseToken")
             Core.<*> (o Core..:? "purchaseType")
             Core.<*> (o Core..:? "quantity")
@@ -2761,7 +2759,7 @@ instance Core.FromJSON Review where
       ( \o ->
           Review
             Core.<$> (o Core..:? "authorName")
-            Core.<*> (o Core..:? "comments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "comments")
             Core.<*> (o Core..:? "reviewId")
       )
 
@@ -2841,7 +2839,7 @@ instance Core.FromJSON ReviewsListResponse where
       ( \o ->
           ReviewsListResponse
             Core.<$> (o Core..:? "pageInfo")
-            Core.<*> (o Core..:? "reviews" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reviews")
             Core.<*> (o Core..:? "tokenPagination")
       )
 
@@ -2980,8 +2978,12 @@ instance Core.FromJSON SubscriptionDeferralInfo where
       "SubscriptionDeferralInfo"
       ( \o ->
           SubscriptionDeferralInfo
-            Core.<$> (o Core..:? "desiredExpiryTimeMillis")
-            Core.<*> (o Core..:? "expectedExpiryTimeMillis")
+            Core.<$> ( o Core..:? "desiredExpiryTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "expectedExpiryTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SubscriptionDeferralInfo where
@@ -3142,13 +3144,17 @@ instance Core.FromJSON SubscriptionPurchase where
           SubscriptionPurchase
             Core.<$> (o Core..:? "acknowledgementState")
             Core.<*> (o Core..:? "autoRenewing")
-            Core.<*> (o Core..:? "autoResumeTimeMillis")
+            Core.<*> ( o Core..:? "autoResumeTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "cancelReason")
             Core.<*> (o Core..:? "cancelSurveyResult")
             Core.<*> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "developerPayload")
             Core.<*> (o Core..:? "emailAddress")
-            Core.<*> (o Core..:? "expiryTimeMillis")
+            Core.<*> ( o Core..:? "expiryTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "externalAccountId")
             Core.<*> (o Core..:? "familyName")
             Core.<*> (o Core..:? "givenName")
@@ -3159,7 +3165,9 @@ instance Core.FromJSON SubscriptionPurchase where
             Core.<*> (o Core..:? "obfuscatedExternalProfileId")
             Core.<*> (o Core..:? "orderId")
             Core.<*> (o Core..:? "paymentState")
-            Core.<*> (o Core..:? "priceAmountMicros")
+            Core.<*> ( o Core..:? "priceAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "priceChange")
             Core.<*> (o Core..:? "priceCurrencyCode")
             Core.<*> (o Core..:? "profileId")
@@ -3167,8 +3175,12 @@ instance Core.FromJSON SubscriptionPurchase where
             Core.<*> (o Core..:? "promotionCode")
             Core.<*> (o Core..:? "promotionType")
             Core.<*> (o Core..:? "purchaseType")
-            Core.<*> (o Core..:? "startTimeMillis")
-            Core.<*> (o Core..:? "userCancellationTimeMillis")
+            Core.<*> ( o Core..:? "startTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "userCancellationTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SubscriptionPurchase where
@@ -3322,7 +3334,9 @@ instance
       "SubscriptionPurchasesDeferResponse"
       ( \o ->
           SubscriptionPurchasesDeferResponse
-            Core.<$> (o Core..:? "newExpiryTimeMillis")
+            Core.<$> ( o Core..:? "newExpiryTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -3449,7 +3463,7 @@ instance Core.FromJSON SystemApksListResponse where
       "SystemApksListResponse"
       ( \o ->
           SystemApksListResponse
-            Core.<$> (o Core..:? "variants" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "variants")
       )
 
 instance Core.ToJSON SystemApksListResponse where
@@ -3477,10 +3491,7 @@ instance Core.FromJSON Testers where
   parseJSON =
     Core.withObject
       "Testers"
-      ( \o ->
-          Testers
-            Core.<$> (o Core..:? "googleGroups" Core..!= Core.mempty)
-      )
+      (\o -> Testers Core.<$> (o Core..:? "googleGroups"))
 
 instance Core.ToJSON Testers where
   toJSON Testers {..} =
@@ -3511,7 +3522,10 @@ instance Core.FromJSON Timestamp where
       "Timestamp"
       ( \o ->
           Timestamp
-            Core.<$> (o Core..:? "nanos") Core.<*> (o Core..:? "seconds")
+            Core.<$> (o Core..:? "nanos")
+            Core.<*> ( o Core..:? "seconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Timestamp where
@@ -3586,7 +3600,7 @@ instance Core.FromJSON Track where
       "Track"
       ( \o ->
           Track
-            Core.<$> (o Core..:? "releases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "releases")
             Core.<*> (o Core..:? "track")
       )
 
@@ -3628,7 +3642,7 @@ instance Core.FromJSON TrackCountryAvailability where
       "TrackCountryAvailability"
       ( \o ->
           TrackCountryAvailability
-            Core.<$> (o Core..:? "countries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "countries")
             Core.<*> (o Core..:? "restOfWorld")
             Core.<*> (o Core..:? "syncWithProduction")
       )
@@ -3688,10 +3702,10 @@ instance Core.FromJSON TrackRelease where
             Core.<$> (o Core..:? "countryTargeting")
             Core.<*> (o Core..:? "inAppUpdatePriority")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "releaseNotes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "releaseNotes")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userFraction")
-            Core.<*> (o Core..:? "versionCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versionCodes")
       )
 
 instance Core.ToJSON TrackRelease where
@@ -3763,8 +3777,7 @@ instance Core.FromJSON TracksListResponse where
       "TracksListResponse"
       ( \o ->
           TracksListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "tracks")
       )
 
 instance Core.ToJSON TracksListResponse where
@@ -3818,12 +3831,10 @@ instance Core.FromJSON User where
       ( \o ->
           User
             Core.<$> (o Core..:? "accessState")
-            Core.<*> ( o Core..:? "developerAccountPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "developerAccountPermissions")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "expirationTime")
-            Core.<*> (o Core..:? "grants" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "grants")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "partial")
       )
@@ -4048,11 +4059,15 @@ instance Core.FromJSON VoidedPurchase where
           VoidedPurchase
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "orderId")
-            Core.<*> (o Core..:? "purchaseTimeMillis")
+            Core.<*> ( o Core..:? "purchaseTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "purchaseToken")
             Core.<*> (o Core..:? "voidedReason")
             Core.<*> (o Core..:? "voidedSource")
-            Core.<*> (o Core..:? "voidedTimeMillis")
+            Core.<*> ( o Core..:? "voidedTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON VoidedPurchase where
@@ -4102,7 +4117,7 @@ instance Core.FromJSON VoidedPurchasesListResponse where
           VoidedPurchasesListResponse
             Core.<$> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
-            Core.<*> (o Core..:? "voidedPurchases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "voidedPurchases")
       )
 
 instance Core.ToJSON VoidedPurchasesListResponse where

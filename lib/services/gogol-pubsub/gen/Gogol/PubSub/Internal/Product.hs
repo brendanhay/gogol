@@ -250,8 +250,7 @@ instance Core.FromJSON AcknowledgeRequest where
     Core.withObject
       "AcknowledgeRequest"
       ( \o ->
-          AcknowledgeRequest
-            Core.<$> (o Core..:? "ackIds" Core..!= Core.mempty)
+          AcknowledgeRequest Core.<$> (o Core..:? "ackIds")
       )
 
 instance Core.ToJSON AcknowledgeRequest where
@@ -290,7 +289,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -548,7 +547,7 @@ instance Core.FromJSON ListSchemasResponse where
       ( \o ->
           ListSchemasResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "schemas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "schemas")
       )
 
 instance Core.ToJSON ListSchemasResponse where
@@ -584,7 +583,7 @@ instance Core.FromJSON ListSnapshotsResponse where
       ( \o ->
           ListSnapshotsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "snapshots" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "snapshots")
       )
 
 instance Core.ToJSON ListSnapshotsResponse where
@@ -623,7 +622,7 @@ instance Core.FromJSON ListSubscriptionsResponse where
       ( \o ->
           ListSubscriptionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "subscriptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subscriptions")
       )
 
 instance Core.ToJSON ListSubscriptionsResponse where
@@ -662,7 +661,7 @@ instance Core.FromJSON ListTopicSnapshotsResponse where
       ( \o ->
           ListTopicSnapshotsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "snapshots" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "snapshots")
       )
 
 instance Core.ToJSON ListTopicSnapshotsResponse where
@@ -701,7 +700,7 @@ instance Core.FromJSON ListTopicSubscriptionsResponse where
       ( \o ->
           ListTopicSubscriptionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "subscriptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subscriptions")
       )
 
 instance Core.ToJSON ListTopicSubscriptionsResponse where
@@ -737,7 +736,7 @@ instance Core.FromJSON ListTopicsResponse where
       ( \o ->
           ListTopicsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "topics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "topics")
       )
 
 instance Core.ToJSON ListTopicsResponse where
@@ -770,9 +769,7 @@ instance Core.FromJSON MessageStoragePolicy where
       "MessageStoragePolicy"
       ( \o ->
           MessageStoragePolicy
-            Core.<$> ( o Core..:? "allowedPersistenceRegions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "allowedPersistenceRegions")
       )
 
 instance Core.ToJSON MessageStoragePolicy where
@@ -811,7 +808,7 @@ instance Core.FromJSON ModifyAckDeadlineRequest where
       ( \o ->
           ModifyAckDeadlineRequest
             Core.<$> (o Core..:? "ackDeadlineSeconds")
-            Core.<*> (o Core..:? "ackIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ackIds")
       )
 
 instance Core.ToJSON ModifyAckDeadlineRequest where
@@ -919,7 +916,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -953,8 +950,7 @@ instance Core.FromJSON PublishRequest where
     Core.withObject
       "PublishRequest"
       ( \o ->
-          PublishRequest
-            Core.<$> (o Core..:? "messages" Core..!= Core.mempty)
+          PublishRequest Core.<$> (o Core..:? "messages")
       )
 
 instance Core.ToJSON PublishRequest where
@@ -983,8 +979,7 @@ instance Core.FromJSON PublishResponse where
     Core.withObject
       "PublishResponse"
       ( \o ->
-          PublishResponse
-            Core.<$> (o Core..:? "messageIds" Core..!= Core.mempty)
+          PublishResponse Core.<$> (o Core..:? "messageIds")
       )
 
 instance Core.ToJSON PublishResponse where
@@ -1135,7 +1130,7 @@ instance Core.FromJSON PullResponse where
       "PullResponse"
       ( \o ->
           PullResponse
-            Core.<$> (o Core..:? "receivedMessages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "receivedMessages")
       )
 
 instance Core.ToJSON PullResponse where
@@ -1718,7 +1713,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -1749,7 +1744,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

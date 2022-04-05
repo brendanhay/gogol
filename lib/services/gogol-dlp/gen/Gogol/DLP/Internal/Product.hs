@@ -1038,7 +1038,7 @@ instance
       "GooglePrivacyDlpV2AuxiliaryTable"
       ( \o ->
           GooglePrivacyDlpV2AuxiliaryTable
-            Core.<$> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "quasiIds")
             Core.<*> (o Core..:? "relativeFrequency")
             Core.<*> (o Core..:? "table")
       )
@@ -1118,7 +1118,9 @@ instance Core.FromJSON GooglePrivacyDlpV2BigQueryKey where
       "GooglePrivacyDlpV2BigQueryKey"
       ( \o ->
           GooglePrivacyDlpV2BigQueryKey
-            Core.<$> (o Core..:? "rowNumber")
+            Core.<$> ( o Core..:? "rowNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "tableReference")
       )
 
@@ -1176,10 +1178,12 @@ instance
       "GooglePrivacyDlpV2BigQueryOptions"
       ( \o ->
           GooglePrivacyDlpV2BigQueryOptions
-            Core.<$> (o Core..:? "excludedFields" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "identifyingFields" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "includedFields" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rowsLimit")
+            Core.<$> (o Core..:? "excludedFields")
+            Core.<*> (o Core..:? "identifyingFields")
+            Core.<*> (o Core..:? "includedFields")
+            Core.<*> ( o Core..:? "rowsLimit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "rowsLimitPercent")
             Core.<*> (o Core..:? "sampleMethod")
             Core.<*> (o Core..:? "tableReference")
@@ -1370,7 +1374,7 @@ instance
       "GooglePrivacyDlpV2BucketingConfig"
       ( \o ->
           GooglePrivacyDlpV2BucketingConfig
-            Core.<$> (o Core..:? "buckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buckets")
       )
 
 instance
@@ -1525,11 +1529,19 @@ instance
       "GooglePrivacyDlpV2CategoricalStatsHistogramBucket"
       ( \o ->
           GooglePrivacyDlpV2CategoricalStatsHistogramBucket
-            Core.<$> (o Core..:? "bucketSize")
-              Core.<*> (o Core..:? "bucketValueCount")
-              Core.<*> (o Core..:? "bucketValues" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "valueFrequencyLowerBound")
-              Core.<*> (o Core..:? "valueFrequencyUpperBound")
+            Core.<$> ( o Core..:? "bucketSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "bucketValueCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> (o Core..:? "bucketValues")
+              Core.<*> ( o Core..:? "valueFrequencyLowerBound"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "valueFrequencyUpperBound"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -1580,9 +1592,7 @@ instance
       "GooglePrivacyDlpV2CategoricalStatsResult"
       ( \o ->
           GooglePrivacyDlpV2CategoricalStatsResult
-            Core.<$> ( o Core..:? "valueFrequencyHistogramBuckets"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "valueFrequencyHistogramBuckets")
       )
 
 instance
@@ -1632,9 +1642,7 @@ instance
       "GooglePrivacyDlpV2CharacterMaskConfig"
       ( \o ->
           GooglePrivacyDlpV2CharacterMaskConfig
-            Core.<$> ( o Core..:? "charactersToIgnore"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "charactersToIgnore")
             Core.<*> (o Core..:? "maskingCharacter")
             Core.<*> (o Core..:? "numberToMask")
             Core.<*> (o Core..:? "reverseOrder")
@@ -1779,10 +1787,12 @@ instance
       "GooglePrivacyDlpV2CloudStorageOptions"
       ( \o ->
           GooglePrivacyDlpV2CloudStorageOptions
-            Core.<$> (o Core..:? "bytesLimitPerFile")
+            Core.<$> ( o Core..:? "bytesLimitPerFile"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "bytesLimitPerFilePercent")
             Core.<*> (o Core..:? "fileSet")
-            Core.<*> (o Core..:? "fileTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fileTypes")
             Core.<*> (o Core..:? "filesLimitPercent")
             Core.<*> (o Core..:? "sampleMethod")
       )
@@ -1875,8 +1885,8 @@ instance
       ( \o ->
           GooglePrivacyDlpV2CloudStorageRegexFileSet
             Core.<$> (o Core..:? "bucketName")
-            Core.<*> (o Core..:? "excludeRegex" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "includeRegex" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "excludeRegex")
+            Core.<*> (o Core..:? "includeRegex")
       )
 
 instance
@@ -2001,7 +2011,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Conditions where
       "GooglePrivacyDlpV2Conditions"
       ( \o ->
           GooglePrivacyDlpV2Conditions
-            Core.<$> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conditions")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Conditions where
@@ -2706,7 +2716,7 @@ instance
       "GooglePrivacyDlpV2CustomInfoType"
       ( \o ->
           GooglePrivacyDlpV2CustomInfoType
-            Core.<$> (o Core..:? "detectionRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "detectionRules")
             Core.<*> (o Core..:? "dictionary")
             Core.<*> (o Core..:? "exclusionType")
             Core.<*> (o Core..:? "infoType")
@@ -3175,8 +3185,8 @@ instance
       "GooglePrivacyDlpV2DeltaPresenceEstimationConfig"
       ( \o ->
           GooglePrivacyDlpV2DeltaPresenceEstimationConfig
-            Core.<$> (o Core..:? "auxiliaryTables" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auxiliaryTables")
+              Core.<*> (o Core..:? "quasiIds")
               Core.<*> (o Core..:? "regionCode")
       )
 
@@ -3236,9 +3246,13 @@ instance
       "GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket"
       ( \o ->
           GooglePrivacyDlpV2DeltaPresenceEstimationHistogramBucket
-            Core.<$> (o Core..:? "bucketSize")
-              Core.<*> (o Core..:? "bucketValueCount")
-              Core.<*> (o Core..:? "bucketValues" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "bucketSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "bucketValueCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> (o Core..:? "bucketValues")
               Core.<*> (o Core..:? "maxProbability")
               Core.<*> (o Core..:? "minProbability")
       )
@@ -3291,7 +3305,7 @@ instance
       ( \o ->
           GooglePrivacyDlpV2DeltaPresenceEstimationQuasiIdValues
             Core.<$> (o Core..:? "estimatedProbability")
-              Core.<*> (o Core..:? "quasiIdsValues" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "quasiIdsValues")
       )
 
 instance
@@ -3337,9 +3351,7 @@ instance
       "GooglePrivacyDlpV2DeltaPresenceEstimationResult"
       ( \o ->
           GooglePrivacyDlpV2DeltaPresenceEstimationResult
-            Core.<$> ( o Core..:? "deltaPresenceEstimationHistogram"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "deltaPresenceEstimationHistogram")
       )
 
 instance
@@ -3482,7 +3494,7 @@ instance Core.FromJSON GooglePrivacyDlpV2DlpJob where
           GooglePrivacyDlpV2DlpJob
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "inspectDetails")
             Core.<*> (o Core..:? "jobTriggerName")
             Core.<*> (o Core..:? "name")
@@ -3533,7 +3545,9 @@ instance
       "GooglePrivacyDlpV2DocumentLocation"
       ( \o ->
           GooglePrivacyDlpV2DocumentLocation
-            Core.<$> (o Core..:? "fileOffset")
+            Core.<$> ( o Core..:? "fileOffset"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -3601,7 +3615,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Error where
       ( \o ->
           GooglePrivacyDlpV2Error
             Core.<$> (o Core..:? "details")
-            Core.<*> (o Core..:? "timestamps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timestamps")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Error where
@@ -3637,7 +3651,7 @@ instance
       "GooglePrivacyDlpV2ExcludeInfoTypes"
       ( \o ->
           GooglePrivacyDlpV2ExcludeInfoTypes
-            Core.<$> (o Core..:? "infoTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "infoTypes")
       )
 
 instance
@@ -3807,7 +3821,7 @@ instance
       ( \o ->
           GooglePrivacyDlpV2FieldTransformation
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "infoTypeTransformations")
             Core.<*> (o Core..:? "primitiveTransformation")
       )
@@ -4023,9 +4037,7 @@ instance
       "GooglePrivacyDlpV2FindingLimits"
       ( \o ->
           GooglePrivacyDlpV2FindingLimits
-            Core.<$> ( o Core..:? "maxFindingsPerInfoType"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "maxFindingsPerInfoType")
             Core.<*> (o Core..:? "maxFindingsPerItem")
             Core.<*> (o Core..:? "maxFindingsPerRequest")
       )
@@ -4250,9 +4262,13 @@ instance
       ( \o ->
           GooglePrivacyDlpV2HybridFindingDetails
             Core.<$> (o Core..:? "containerDetails")
-            Core.<*> (o Core..:? "fileOffset")
+            Core.<*> ( o Core..:? "fileOffset"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "rowOffset")
+            Core.<*> ( o Core..:? "rowOffset"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "tableOptions")
       )
 
@@ -4448,9 +4464,15 @@ instance
       "GooglePrivacyDlpV2HybridInspectStatistics"
       ( \o ->
           GooglePrivacyDlpV2HybridInspectStatistics
-            Core.<$> (o Core..:? "abortedCount")
-            Core.<*> (o Core..:? "pendingCount")
-            Core.<*> (o Core..:? "processedCount")
+            Core.<$> ( o Core..:? "abortedCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "pendingCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "processedCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -4506,9 +4528,7 @@ instance
           GooglePrivacyDlpV2HybridOptions
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "labels")
-            Core.<*> ( o Core..:? "requiredFindingLabelKeys"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "requiredFindingLabelKeys")
             Core.<*> (o Core..:? "tableOptions")
       )
 
@@ -4584,7 +4604,7 @@ instance
       "GooglePrivacyDlpV2ImageLocation"
       ( \o ->
           GooglePrivacyDlpV2ImageLocation
-            Core.<$> (o Core..:? "boundingBoxes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "boundingBoxes")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2ImageLocation where
@@ -4720,7 +4740,7 @@ instance
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "supportedBy" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedBy")
       )
 
 instance
@@ -4808,7 +4828,9 @@ instance
       "GooglePrivacyDlpV2InfoTypeStats"
       ( \o ->
           GooglePrivacyDlpV2InfoTypeStats
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "infoType")
       )
 
@@ -4850,7 +4872,7 @@ instance
       "GooglePrivacyDlpV2InfoTypeTransformation"
       ( \o ->
           GooglePrivacyDlpV2InfoTypeTransformation
-            Core.<$> (o Core..:? "infoTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "infoTypes")
             Core.<*> (o Core..:? "primitiveTransformation")
       )
 
@@ -4891,7 +4913,7 @@ instance
       "GooglePrivacyDlpV2InfoTypeTransformations"
       ( \o ->
           GooglePrivacyDlpV2InfoTypeTransformations
-            Core.<$> (o Core..:? "transformations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "transformations")
       )
 
 instance
@@ -4953,14 +4975,14 @@ instance
       "GooglePrivacyDlpV2InspectConfig"
       ( \o ->
           GooglePrivacyDlpV2InspectConfig
-            Core.<$> (o Core..:? "contentOptions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "customInfoTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contentOptions")
+            Core.<*> (o Core..:? "customInfoTypes")
             Core.<*> (o Core..:? "excludeInfoTypes")
             Core.<*> (o Core..:? "includeQuote")
-            Core.<*> (o Core..:? "infoTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "infoTypes")
             Core.<*> (o Core..:? "limits")
             Core.<*> (o Core..:? "minLikelihood")
-            Core.<*> (o Core..:? "ruleSet" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ruleSet")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2InspectConfig where
@@ -5151,7 +5173,7 @@ instance
       "GooglePrivacyDlpV2InspectJobConfig"
       ( \o ->
           GooglePrivacyDlpV2InspectJobConfig
-            Core.<$> (o Core..:? "actions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actions")
             Core.<*> (o Core..:? "inspectConfig")
             Core.<*> (o Core..:? "inspectTemplateName")
             Core.<*> (o Core..:? "storageConfig")
@@ -5201,7 +5223,7 @@ instance
       "GooglePrivacyDlpV2InspectResult"
       ( \o ->
           GooglePrivacyDlpV2InspectResult
-            Core.<$> (o Core..:? "findings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "findings")
             Core.<*> (o Core..:? "findingsTruncated")
       )
 
@@ -5351,8 +5373,8 @@ instance
       "GooglePrivacyDlpV2InspectionRuleSet"
       ( \o ->
           GooglePrivacyDlpV2InspectionRuleSet
-            Core.<$> (o Core..:? "infoTypes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "infoTypes")
+            Core.<*> (o Core..:? "rules")
       )
 
 instance
@@ -5449,12 +5471,12 @@ instance Core.FromJSON GooglePrivacyDlpV2JobTrigger where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "inspectJob")
             Core.<*> (o Core..:? "lastRunTime")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "triggers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "triggers")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -5505,7 +5527,7 @@ instance
       ( \o ->
           GooglePrivacyDlpV2KAnonymityConfig
             Core.<$> (o Core..:? "entityId")
-            Core.<*> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "quasiIds")
       )
 
 instance
@@ -5549,8 +5571,10 @@ instance
       "GooglePrivacyDlpV2KAnonymityEquivalenceClass"
       ( \o ->
           GooglePrivacyDlpV2KAnonymityEquivalenceClass
-            Core.<$> (o Core..:? "equivalenceClassSize")
-            Core.<*> (o Core..:? "quasiIdsValues" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "equivalenceClassSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "quasiIdsValues")
       )
 
 instance
@@ -5605,11 +5629,19 @@ instance
       "GooglePrivacyDlpV2KAnonymityHistogramBucket"
       ( \o ->
           GooglePrivacyDlpV2KAnonymityHistogramBucket
-            Core.<$> (o Core..:? "bucketSize")
-            Core.<*> (o Core..:? "bucketValueCount")
-            Core.<*> (o Core..:? "bucketValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "equivalenceClassSizeLowerBound")
-            Core.<*> (o Core..:? "equivalenceClassSizeUpperBound")
+            Core.<$> ( o Core..:? "bucketSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bucketValueCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "bucketValues")
+            Core.<*> ( o Core..:? "equivalenceClassSizeLowerBound"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "equivalenceClassSizeUpperBound"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -5660,9 +5692,7 @@ instance
       "GooglePrivacyDlpV2KAnonymityResult"
       ( \o ->
           GooglePrivacyDlpV2KAnonymityResult
-            Core.<$> ( o Core..:? "equivalenceClassHistogramBuckets"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "equivalenceClassHistogramBuckets")
       )
 
 instance
@@ -5709,8 +5739,8 @@ instance
       "GooglePrivacyDlpV2KMapEstimationConfig"
       ( \o ->
           GooglePrivacyDlpV2KMapEstimationConfig
-            Core.<$> (o Core..:? "auxiliaryTables" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auxiliaryTables")
+            Core.<*> (o Core..:? "quasiIds")
             Core.<*> (o Core..:? "regionCode")
       )
 
@@ -5766,11 +5796,19 @@ instance
       "GooglePrivacyDlpV2KMapEstimationHistogramBucket"
       ( \o ->
           GooglePrivacyDlpV2KMapEstimationHistogramBucket
-            Core.<$> (o Core..:? "bucketSize")
-              Core.<*> (o Core..:? "bucketValueCount")
-              Core.<*> (o Core..:? "bucketValues" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "maxAnonymity")
-              Core.<*> (o Core..:? "minAnonymity")
+            Core.<$> ( o Core..:? "bucketSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "bucketValueCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> (o Core..:? "bucketValues")
+              Core.<*> ( o Core..:? "maxAnonymity"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "minAnonymity"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -5822,8 +5860,10 @@ instance
       "GooglePrivacyDlpV2KMapEstimationQuasiIdValues"
       ( \o ->
           GooglePrivacyDlpV2KMapEstimationQuasiIdValues
-            Core.<$> (o Core..:? "estimatedAnonymity")
-              Core.<*> (o Core..:? "quasiIdsValues" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "estimatedAnonymity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> (o Core..:? "quasiIdsValues")
       )
 
 instance
@@ -5866,9 +5906,7 @@ instance
       "GooglePrivacyDlpV2KMapEstimationResult"
       ( \o ->
           GooglePrivacyDlpV2KMapEstimationResult
-            Core.<$> ( o Core..:? "kMapEstimationHistogram"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "kMapEstimationHistogram")
       )
 
 instance
@@ -5907,7 +5945,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Key where
       ( \o ->
           GooglePrivacyDlpV2Key
             Core.<$> (o Core..:? "partitionId")
-            Core.<*> (o Core..:? "path" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "path")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Key where
@@ -6025,7 +6063,7 @@ instance
       "GooglePrivacyDlpV2LDiversityConfig"
       ( \o ->
           GooglePrivacyDlpV2LDiversityConfig
-            Core.<$> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "quasiIds")
             Core.<*> (o Core..:? "sensitiveAttribute")
       )
 
@@ -6077,12 +6115,14 @@ instance
       "GooglePrivacyDlpV2LDiversityEquivalenceClass"
       ( \o ->
           GooglePrivacyDlpV2LDiversityEquivalenceClass
-            Core.<$> (o Core..:? "equivalenceClassSize")
-            Core.<*> (o Core..:? "numDistinctSensitiveValues")
-            Core.<*> (o Core..:? "quasiIdsValues" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "topSensitiveValues"
-                         Core..!= Core.mempty
+            Core.<$> ( o Core..:? "equivalenceClassSize"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> ( o Core..:? "numDistinctSensitiveValues"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "quasiIdsValues")
+            Core.<*> (o Core..:? "topSensitiveValues")
       )
 
 instance
@@ -6142,11 +6182,19 @@ instance
       "GooglePrivacyDlpV2LDiversityHistogramBucket"
       ( \o ->
           GooglePrivacyDlpV2LDiversityHistogramBucket
-            Core.<$> (o Core..:? "bucketSize")
-            Core.<*> (o Core..:? "bucketValueCount")
-            Core.<*> (o Core..:? "bucketValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sensitiveValueFrequencyLowerBound")
-            Core.<*> (o Core..:? "sensitiveValueFrequencyUpperBound")
+            Core.<$> ( o Core..:? "bucketSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bucketValueCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "bucketValues")
+            Core.<*> ( o Core..:? "sensitiveValueFrequencyLowerBound"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sensitiveValueFrequencyUpperBound"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -6197,8 +6245,8 @@ instance
       "GooglePrivacyDlpV2LDiversityResult"
       ( \o ->
           GooglePrivacyDlpV2LDiversityResult
-            Core.<$> ( o Core..:? "sensitiveValueFrequencyHistogramBuckets"
-                         Core..!= Core.mempty
+            Core.<$> ( o
+                         Core..:? "sensitiveValueFrequencyHistogramBuckets"
                      )
       )
 
@@ -6290,7 +6338,9 @@ instance
       "GooglePrivacyDlpV2LargeCustomDictionaryStats"
       ( \o ->
           GooglePrivacyDlpV2LargeCustomDictionaryStats
-            Core.<$> (o Core..:? "approxNumPhrases")
+            Core.<$> ( o Core..:? "approxNumPhrases"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -6410,9 +6460,7 @@ instance
       "GooglePrivacyDlpV2ListDeidentifyTemplatesResponse"
       ( \o ->
           GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
-            Core.<$> ( o Core..:? "deidentifyTemplates"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "deidentifyTemplates")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6459,7 +6507,7 @@ instance
       "GooglePrivacyDlpV2ListDlpJobsResponse"
       ( \o ->
           GooglePrivacyDlpV2ListDlpJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6499,7 +6547,7 @@ instance
       "GooglePrivacyDlpV2ListInfoTypesResponse"
       ( \o ->
           GooglePrivacyDlpV2ListInfoTypesResponse
-            Core.<$> (o Core..:? "infoTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "infoTypes")
       )
 
 instance
@@ -6541,7 +6589,7 @@ instance
       "GooglePrivacyDlpV2ListInspectTemplatesResponse"
       ( \o ->
           GooglePrivacyDlpV2ListInspectTemplatesResponse
-            Core.<$> (o Core..:? "inspectTemplates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "inspectTemplates")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6588,7 +6636,7 @@ instance
       "GooglePrivacyDlpV2ListJobTriggersResponse"
       ( \o ->
           GooglePrivacyDlpV2ListJobTriggersResponse
-            Core.<$> (o Core..:? "jobTriggers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobTriggers")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6634,7 +6682,7 @@ instance
       ( \o ->
           GooglePrivacyDlpV2ListStoredInfoTypesResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "storedInfoTypes" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "storedInfoTypes")
       )
 
 instance
@@ -6686,7 +6734,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Location where
             Core.<$> (o Core..:? "byteRange")
             Core.<*> (o Core..:? "codepointRange")
             Core.<*> (o Core..:? "container")
-            Core.<*> (o Core..:? "contentLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "contentLocations")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Location where
@@ -6835,7 +6883,7 @@ instance
           GooglePrivacyDlpV2NumericalStatsResult
             Core.<$> (o Core..:? "maxValue")
             Core.<*> (o Core..:? "minValue")
-            Core.<*> (o Core..:? "quantileValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "quantileValues")
       )
 
 instance
@@ -6964,7 +7012,7 @@ instance Core.FromJSON GooglePrivacyDlpV2PathElement where
       "GooglePrivacyDlpV2PathElement"
       ( \o ->
           GooglePrivacyDlpV2PathElement
-            Core.<$> (o Core..:? "id")
+            Core.<$> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
       )
@@ -7499,7 +7547,10 @@ instance Core.FromJSON GooglePrivacyDlpV2Range where
       "GooglePrivacyDlpV2Range"
       ( \o ->
           GooglePrivacyDlpV2Range
-            Core.<$> (o Core..:? "end") Core.<*> (o Core..:? "start")
+            Core.<$> (o Core..:? "end" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o Core..:? "start"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Range where
@@ -7579,7 +7630,7 @@ instance Core.FromJSON GooglePrivacyDlpV2RecordKey where
           GooglePrivacyDlpV2RecordKey
             Core.<$> (o Core..:? "bigQueryKey")
             Core.<*> (o Core..:? "datastoreKey")
-            Core.<*> (o Core..:? "idValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "idValues")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2RecordKey where
@@ -7705,12 +7756,8 @@ instance
       "GooglePrivacyDlpV2RecordTransformations"
       ( \o ->
           GooglePrivacyDlpV2RecordTransformations
-            Core.<$> ( o Core..:? "fieldTransformations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "recordSuppressions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fieldTransformations")
+            Core.<*> (o Core..:? "recordSuppressions")
       )
 
 instance
@@ -7786,9 +7833,7 @@ instance
       ( \o ->
           GooglePrivacyDlpV2RedactImageRequest
             Core.<$> (o Core..:? "byteItem")
-            Core.<*> ( o Core..:? "imageRedactionConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "imageRedactionConfigs")
             Core.<*> (o Core..:? "includeFindings")
             Core.<*> (o Core..:? "inspectConfig")
             Core.<*> (o Core..:? "locationId")
@@ -7883,7 +7928,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Regex where
       "GooglePrivacyDlpV2Regex"
       ( \o ->
           GooglePrivacyDlpV2Regex
-            Core.<$> (o Core..:? "groupIndexes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groupIndexes")
             Core.<*> (o Core..:? "pattern")
       )
 
@@ -8230,9 +8275,13 @@ instance Core.FromJSON GooglePrivacyDlpV2Result where
       ( \o ->
           GooglePrivacyDlpV2Result
             Core.<$> (o Core..:? "hybridStats")
-            Core.<*> (o Core..:? "infoTypeStats" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "processedBytes")
-            Core.<*> (o Core..:? "totalEstimatedBytes")
+            Core.<*> (o Core..:? "infoTypeStats")
+            Core.<*> ( o Core..:? "processedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalEstimatedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Result where
@@ -8280,7 +8329,7 @@ instance
       "GooglePrivacyDlpV2RiskAnalysisJobConfig"
       ( \o ->
           GooglePrivacyDlpV2RiskAnalysisJobConfig
-            Core.<$> (o Core..:? "actions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actions")
             Core.<*> (o Core..:? "privacyMetric")
             Core.<*> (o Core..:? "sourceTable")
       )
@@ -8317,8 +8366,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Row where
     Core.withObject
       "GooglePrivacyDlpV2Row"
       ( \o ->
-          GooglePrivacyDlpV2Row
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+          GooglePrivacyDlpV2Row Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Row where
@@ -8422,7 +8470,7 @@ instance
       "GooglePrivacyDlpV2StatisticalTable"
       ( \o ->
           GooglePrivacyDlpV2StatisticalTable
-            Core.<$> (o Core..:? "quasiIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "quasiIds")
             Core.<*> (o Core..:? "relativeFrequency")
             Core.<*> (o Core..:? "table")
       )
@@ -8570,7 +8618,7 @@ instance
           GooglePrivacyDlpV2StoredInfoType
             Core.<$> (o Core..:? "currentVersion")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pendingVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pendingVersions")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2StoredInfoType where
@@ -8724,7 +8772,7 @@ instance
           GooglePrivacyDlpV2StoredInfoTypeVersion
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "stats")
       )
@@ -8813,7 +8861,9 @@ instance
       ( \o ->
           GooglePrivacyDlpV2SummaryResult
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "count")
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "details")
       )
 
@@ -8873,8 +8923,7 @@ instance Core.FromJSON GooglePrivacyDlpV2Table where
       "GooglePrivacyDlpV2Table"
       ( \o ->
           GooglePrivacyDlpV2Table
-            Core.<$> (o Core..:? "headers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "headers") Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Table where
@@ -8910,7 +8959,9 @@ instance
       "GooglePrivacyDlpV2TableLocation"
       ( \o ->
           GooglePrivacyDlpV2TableLocation
-            Core.<$> (o Core..:? "rowIndex")
+            Core.<$> ( o Core..:? "rowIndex"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2TableLocation where
@@ -8943,9 +8994,7 @@ instance Core.FromJSON GooglePrivacyDlpV2TableOptions where
       "GooglePrivacyDlpV2TableOptions"
       ( \o ->
           GooglePrivacyDlpV2TableOptions
-            Core.<$> ( o Core..:? "identifyingFields"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "identifyingFields")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2TableOptions where
@@ -9220,10 +9269,10 @@ instance
       "GooglePrivacyDlpV2TransformationOverview"
       ( \o ->
           GooglePrivacyDlpV2TransformationOverview
-            Core.<$> ( o Core..:? "transformationSummaries"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "transformationSummaries")
+            Core.<*> ( o Core..:? "transformedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "transformedBytes")
       )
 
 instance
@@ -9285,14 +9334,14 @@ instance
       ( \o ->
           GooglePrivacyDlpV2TransformationSummary
             Core.<$> (o Core..:? "field")
-            Core.<*> ( o Core..:? "fieldTransformations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fieldTransformations")
             Core.<*> (o Core..:? "infoType")
             Core.<*> (o Core..:? "recordSuppress")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "results")
             Core.<*> (o Core..:? "transformation")
-            Core.<*> (o Core..:? "transformedBytes")
+            Core.<*> ( o Core..:? "transformedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -9653,7 +9702,9 @@ instance Core.FromJSON GooglePrivacyDlpV2Value where
             Core.<*> (o Core..:? "dateValue")
             Core.<*> (o Core..:? "dayOfWeekValue")
             Core.<*> (o Core..:? "floatValue")
-            Core.<*> (o Core..:? "integerValue")
+            Core.<*> ( o Core..:? "integerValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
             Core.<*> (o Core..:? "timeValue")
             Core.<*> (o Core..:? "timestampValue")
@@ -9701,7 +9752,10 @@ instance
       "GooglePrivacyDlpV2ValueFrequency"
       ( \o ->
           GooglePrivacyDlpV2ValueFrequency
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "value")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2ValueFrequency where
@@ -9734,7 +9788,7 @@ instance Core.FromJSON GooglePrivacyDlpV2WordList where
       "GooglePrivacyDlpV2WordList"
       ( \o ->
           GooglePrivacyDlpV2WordList
-            Core.<$> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "words")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2WordList where
@@ -9792,7 +9846,7 @@ instance Core.FromJSON GoogleRpcStatus where
       ( \o ->
           GoogleRpcStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

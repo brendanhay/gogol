@@ -557,7 +557,7 @@ instance Core.FromJSON Annotation where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "layerId")
             Core.<*> (o Core..:? "layerSummary")
-            Core.<*> (o Core..:? "pageIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageIds")
             Core.<*> (o Core..:? "selectedText")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "updated")
@@ -779,7 +779,7 @@ instance Core.FromJSON Annotations where
       "Annotations"
       ( \o ->
           Annotations
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
@@ -818,8 +818,7 @@ instance Core.FromJSON AnnotationsSummary where
       "AnnotationsSummary"
       ( \o ->
           AnnotationsSummary
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "layers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "layers")
       )
 
 instance Core.ToJSON AnnotationsSummary where
@@ -917,7 +916,7 @@ instance Core.FromJSON Annotationsdata where
       "Annotationsdata"
       ( \o ->
           Annotationsdata
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
@@ -1168,8 +1167,7 @@ instance Core.FromJSON Bookshelves where
       "Bookshelves"
       ( \o ->
           Bookshelves
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Bookshelves where
@@ -1202,8 +1200,7 @@ instance Core.FromJSON Category where
       "Category"
       ( \o ->
           Category
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Category where
@@ -1507,8 +1504,7 @@ instance Core.FromJSON Dictlayerdata_Dict where
       "Dictlayerdata_Dict"
       ( \o ->
           Dictlayerdata_Dict
-            Core.<$> (o Core..:? "source")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "words")
       )
 
 instance Core.ToJSON Dictlayerdata_Dict where
@@ -1587,9 +1583,9 @@ instance Core.FromJSON Dictlayerdata_Dict_WordsItem where
       "Dictlayerdata_Dict_WordsItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem
-            Core.<$> (o Core..:? "derivatives" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "examples" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "senses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "derivatives")
+            Core.<*> (o Core..:? "examples")
+            Core.<*> (o Core..:? "senses")
             Core.<*> (o Core..:? "source")
       )
 
@@ -1833,14 +1829,14 @@ instance
       "Dictlayerdata_Dict_WordsItem_SensesItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem
-            Core.<$> (o Core..:? "conjugations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "definitions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conjugations")
+            Core.<*> (o Core..:? "definitions")
             Core.<*> (o Core..:? "partOfSpeech")
             Core.<*> (o Core..:? "pronunciation")
             Core.<*> (o Core..:? "pronunciationUrl")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "syllabification")
-            Core.<*> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "synonyms")
       )
 
 instance
@@ -1938,7 +1934,7 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
             Core.<$> (o Core..:? "definition")
-              Core.<*> (o Core..:? "examples" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "examples")
       )
 
 instance
@@ -2256,7 +2252,7 @@ instance Core.FromJSON Discoveryclusters where
       "Discoveryclusters"
       ( \o ->
           Discoveryclusters
-            Core.<$> (o Core..:? "clusters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusters")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "totalClusters")
       )
@@ -2316,7 +2312,7 @@ instance Core.FromJSON Discoveryclusters_ClustersItem where
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "totalVolumes")
             Core.<*> (o Core..:? "uid")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
       )
 
 instance Core.ToJSON Discoveryclusters_ClustersItem where
@@ -2510,9 +2506,7 @@ instance Core.FromJSON DownloadAccesses where
       "DownloadAccesses"
       ( \o ->
           DownloadAccesses
-            Core.<$> ( o Core..:? "downloadAccessList"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "downloadAccessList")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -2842,7 +2836,7 @@ instance Core.FromJSON Geolayerdata_Geo where
       "Geolayerdata_Geo"
       ( \o ->
           Geolayerdata_Geo
-            Core.<$> (o Core..:? "boundary" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "boundary")
             Core.<*> (o Core..:? "cachePolicy")
             Core.<*> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "latitude")
@@ -3006,7 +3000,7 @@ instance Core.FromJSON Layersummaries where
       "Layersummaries"
       ( \o ->
           Layersummaries
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "totalItems")
       )
@@ -3080,7 +3074,7 @@ instance Core.FromJSON Layersummary where
       ( \o ->
           Layersummary
             Core.<$> (o Core..:? "annotationCount")
-            Core.<*> (o Core..:? "annotationTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "annotationTypes")
             Core.<*> (o Core..:? "annotationsDataLink")
             Core.<*> (o Core..:? "annotationsLink")
             Core.<*> (o Core..:? "contentVersion")
@@ -3138,8 +3132,7 @@ instance Core.FromJSON Metadata where
       "Metadata"
       ( \o ->
           Metadata
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Metadata where
@@ -3188,8 +3181,12 @@ instance Core.FromJSON Metadata_ItemsItem where
             Core.<$> (o Core..:? "download_url")
             Core.<*> (o Core..:? "encrypted_key")
             Core.<*> (o Core..:? "language")
-            Core.<*> (o Core..:? "size")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Metadata_ItemsItem where
@@ -3273,7 +3270,7 @@ instance Core.FromJSON Notification where
       ( \o ->
           Notification
             Core.<$> (o Core..:? "body")
-            Core.<*> (o Core..:? "crmExperimentIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "crmExperimentIds")
             Core.<*> (o Core..:? "doc_id")
             Core.<*> (o Core..:? "doc_type")
             Core.<*> (o Core..:? "dont_show_notification")
@@ -3286,7 +3283,9 @@ instance Core.FromJSON Notification where
             Core.<*> (o Core..:? "reason")
             Core.<*> (o Core..:? "show_notification_settings_action")
             Core.<*> (o Core..:? "targetUrl")
-            Core.<*> (o Core..:? "timeToExpireMs")
+            Core.<*> ( o Core..:? "timeToExpireMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "title")
       )
 
@@ -3341,8 +3340,7 @@ instance Core.FromJSON Offers where
       "Offers"
       ( \o ->
           Offers
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Offers where
@@ -3388,7 +3386,7 @@ instance Core.FromJSON Offers_ItemsItem where
             Core.<$> (o Core..:? "artUrl")
             Core.<*> (o Core..:? "gservicesKey")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
       )
 
 instance Core.ToJSON Offers_ItemsItem where
@@ -3742,8 +3740,7 @@ instance Core.FromJSON Series where
       "Series"
       ( \o ->
           Series
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "series" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "series")
       )
 
 instance Core.ToJSON Series where
@@ -4038,7 +4035,7 @@ instance Core.FromJSON Seriesmembership where
       ( \o ->
           Seriesmembership
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "member" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "member")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4661,8 +4658,7 @@ instance Core.FromJSON Volume_LayerInfo where
     Core.withObject
       "Volume_LayerInfo"
       ( \o ->
-          Volume_LayerInfo
-            Core.<$> (o Core..:? "layers" Core..!= Core.mempty)
+          Volume_LayerInfo Core.<$> (o Core..:? "layers")
       )
 
 instance Core.ToJSON Volume_LayerInfo where
@@ -4787,7 +4783,7 @@ instance Core.FromJSON Volume_SaleInfo where
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "isEbook")
             Core.<*> (o Core..:? "listPrice")
-            Core.<*> (o Core..:? "offers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "offers")
             Core.<*> (o Core..:? "onSaleDate")
             Core.<*> (o Core..:? "retailPrice")
             Core.<*> (o Core..:? "saleability")
@@ -5353,8 +5349,12 @@ instance Core.FromJSON Volume_UserInfo_RentalPeriod where
       "Volume_UserInfo_RentalPeriod"
       ( \o ->
           Volume_UserInfo_RentalPeriod
-            Core.<$> (o Core..:? "endUtcSec")
-            Core.<*> (o Core..:? "startUtcSec")
+            Core.<$> ( o Core..:? "endUtcSec"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "startUtcSec"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Volume_UserInfo_RentalPeriod where
@@ -5511,18 +5511,16 @@ instance Core.FromJSON Volume_VolumeInfo where
       ( \o ->
           Volume_VolumeInfo
             Core.<$> (o Core..:? "allowAnonLogging")
-            Core.<*> (o Core..:? "authors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "authors")
             Core.<*> (o Core..:? "averageRating")
             Core.<*> (o Core..:? "canonicalVolumeLink")
-            Core.<*> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "categories")
             Core.<*> (o Core..:? "comicsContent")
             Core.<*> (o Core..:? "contentVersion")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "imageLinks")
-            Core.<*> ( o Core..:? "industryIdentifiers"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "industryIdentifiers")
             Core.<*> (o Core..:? "infoLink")
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "mainCategory")
@@ -5851,7 +5849,7 @@ instance Core.FromJSON Volume2 where
       "Volume2"
       ( \o ->
           Volume2
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -5936,7 +5934,7 @@ instance Core.FromJSON Volumeannotation where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "layerId")
-            Core.<*> (o Core..:? "pageIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageIds")
             Core.<*> (o Core..:? "selectedText")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "updated")
@@ -6049,7 +6047,7 @@ instance Core.FromJSON Volumeannotations where
       "Volumeannotations"
       ( \o ->
           Volumeannotations
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
@@ -6092,7 +6090,7 @@ instance Core.FromJSON Volumes where
       "Volumes"
       ( \o ->
           Volumes
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "totalItems")
       )
@@ -6141,7 +6139,7 @@ instance Core.FromJSON Volumeseriesinfo where
             Core.<$> (o Core..:? "bookDisplayNumber")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "shortSeriesBookTitle")
-            Core.<*> (o Core..:? "volumeSeries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumeSeries")
       )
 
 instance Core.ToJSON Volumeseriesinfo where
@@ -6191,7 +6189,7 @@ instance
       "Volumeseriesinfo_VolumeSeriesItem"
       ( \o ->
           Volumeseriesinfo_VolumeSeriesItem
-            Core.<$> (o Core..:? "issue" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "issue")
             Core.<*> (o Core..:? "orderNumber")
             Core.<*> (o Core..:? "seriesBookType")
             Core.<*> (o Core..:? "seriesId")

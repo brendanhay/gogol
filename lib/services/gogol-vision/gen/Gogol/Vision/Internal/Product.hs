@@ -1145,7 +1145,7 @@ instance Core.FromJSON AnnotateFileResponse where
           AnnotateFileResponse
             Core.<$> (o Core..:? "error")
             Core.<*> (o Core..:? "inputConfig")
-            Core.<*> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "responses")
             Core.<*> (o Core..:? "totalPages")
       )
 
@@ -1225,20 +1225,16 @@ instance Core.FromJSON AnnotateImageResponse where
             Core.<$> (o Core..:? "context")
             Core.<*> (o Core..:? "cropHintsAnnotation")
             Core.<*> (o Core..:? "error")
-            Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "faceAnnotations")
             Core.<*> (o Core..:? "fullTextAnnotation")
             Core.<*> (o Core..:? "imagePropertiesAnnotation")
-            Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "landmarkAnnotations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "localizedObjectAnnotations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "logoAnnotations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "landmarkAnnotations")
+            Core.<*> (o Core..:? "localizedObjectAnnotations")
+            Core.<*> (o Core..:? "logoAnnotations")
             Core.<*> (o Core..:? "productSearchResults")
             Core.<*> (o Core..:? "safeSearchAnnotation")
-            Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "textAnnotations")
             Core.<*> (o Core..:? "webDetection")
       )
 
@@ -1326,7 +1322,7 @@ instance
       "AsyncBatchAnnotateFilesResponse"
       ( \o ->
           AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON AsyncBatchAnnotateFilesResponse where
@@ -1391,7 +1387,7 @@ instance Core.FromJSON BatchAnnotateFilesResponse where
       "BatchAnnotateFilesResponse"
       ( \o ->
           BatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON BatchAnnotateFilesResponse where
@@ -1483,7 +1479,7 @@ instance Core.FromJSON Block where
             Core.<$> (o Core..:? "blockType")
             Core.<*> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "paragraphs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paragraphs")
             Core.<*> (o Core..:? "property")
       )
 
@@ -1522,10 +1518,8 @@ instance Core.FromJSON BoundingPoly where
       "BoundingPoly"
       ( \o ->
           BoundingPoly
-            Core.<$> ( o Core..:? "normalizedVertices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "normalizedVertices")
+            Core.<*> (o Core..:? "vertices")
       )
 
 instance Core.ToJSON BoundingPoly where
@@ -1699,7 +1693,7 @@ instance Core.FromJSON CropHintsAnnotation where
       "CropHintsAnnotation"
       ( \o ->
           CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cropHints")
       )
 
 instance Core.ToJSON CropHintsAnnotation where
@@ -1799,7 +1793,7 @@ instance Core.FromJSON DominantColorsAnnotation where
       "DominantColorsAnnotation"
       ( \o ->
           DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
       )
 
 instance Core.ToJSON DominantColorsAnnotation where
@@ -1858,9 +1852,9 @@ instance Core.FromJSON EntityAnnotation where
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "mid")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "topicality")
       )
@@ -1954,7 +1948,7 @@ instance Core.FromJSON FaceAnnotation where
             Core.<*> (o Core..:? "headwearLikelihood")
             Core.<*> (o Core..:? "joyLikelihood")
             Core.<*> (o Core..:? "landmarkingConfidence")
-            Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "landmarks")
             Core.<*> (o Core..:? "panAngle")
             Core.<*> (o Core..:? "rollAngle")
             Core.<*> (o Core..:? "sorrowLikelihood")
@@ -2081,7 +2075,7 @@ instance
           GoogleCloudVisionV1p1beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "responses")
               Core.<*> (o Core..:? "totalPages")
       )
 
@@ -2168,20 +2162,16 @@ instance
             Core.<$> (o Core..:? "context")
               Core.<*> (o Core..:? "cropHintsAnnotation")
               Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faceAnnotations")
               Core.<*> (o Core..:? "fullTextAnnotation")
               Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "landmarkAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "localizedObjectAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "logoAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "labelAnnotations")
+              Core.<*> (o Core..:? "landmarkAnnotations")
+              Core.<*> (o Core..:? "localizedObjectAnnotations")
+              Core.<*> (o Core..:? "logoAnnotations")
               Core.<*> (o Core..:? "productSearchResults")
               Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textAnnotations")
               Core.<*> (o Core..:? "webDetection")
       )
 
@@ -2284,7 +2274,7 @@ instance
       "GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -2339,7 +2329,7 @@ instance
             Core.<$> (o Core..:? "blockType")
             Core.<*> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "paragraphs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paragraphs")
             Core.<*> (o Core..:? "property")
       )
 
@@ -2384,10 +2374,8 @@ instance
       "GoogleCloudVisionV1p1beta1BoundingPoly"
       ( \o ->
           GoogleCloudVisionV1p1beta1BoundingPoly
-            Core.<$> ( o Core..:? "normalizedVertices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "normalizedVertices")
+            Core.<*> (o Core..:? "vertices")
       )
 
 instance
@@ -2528,7 +2516,7 @@ instance
       "GoogleCloudVisionV1p1beta1CropHintsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p1beta1CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cropHints")
       )
 
 instance
@@ -2566,7 +2554,7 @@ instance
       "GoogleCloudVisionV1p1beta1DominantColorsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p1beta1DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
       )
 
 instance
@@ -2632,9 +2620,9 @@ instance
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "mid")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "topicality")
       )
@@ -2752,7 +2740,7 @@ instance
             Core.<*> (o Core..:? "headwearLikelihood")
             Core.<*> (o Core..:? "joyLikelihood")
             Core.<*> (o Core..:? "landmarkingConfidence")
-            Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "landmarks")
             Core.<*> (o Core..:? "panAngle")
             Core.<*> (o Core..:? "rollAngle")
             Core.<*> (o Core..:? "sorrowLikelihood")
@@ -3312,7 +3300,7 @@ instance Core.FromJSON GoogleCloudVisionV1p1beta1Page where
       "GoogleCloudVisionV1p1beta1Page"
       ( \o ->
           GoogleCloudVisionV1p1beta1Page
-            Core.<$> (o Core..:? "blocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blocks")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "property")
@@ -3369,7 +3357,7 @@ instance
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -3478,7 +3466,7 @@ instance
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "productCategory")
-            Core.<*> (o Core..:? "productLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productLabels")
       )
 
 instance
@@ -3576,10 +3564,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> ( o Core..:? "productGroupedResults"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "productGroupedResults")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -3633,8 +3619,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -3791,7 +3777,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "uint64Value")
+            Core.<*> ( o Core..:? "uint64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -3953,8 +3941,7 @@ instance
       "GoogleCloudVisionV1p1beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotation
-            Core.<$> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -4096,9 +4083,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> ( o Core..:? "detectedLanguages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
@@ -4192,20 +4177,12 @@ instance
       "GoogleCloudVisionV1p1beta1WebDetection"
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetection
-            Core.<$> (o Core..:? "bestGuessLabels" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "pagesWithMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "visuallySimilarImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "webEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestGuessLabels")
+            Core.<*> (o Core..:? "fullMatchingImages")
+            Core.<*> (o Core..:? "pagesWithMatchingImages")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "visuallySimilarImages")
+            Core.<*> (o Core..:? "webEntities")
       )
 
 instance
@@ -4409,13 +4386,9 @@ instance
       "GoogleCloudVisionV1p1beta1WebDetectionWebPage"
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetectionWebPage
-            Core.<$> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fullMatchingImages")
               Core.<*> (o Core..:? "pageTitle")
-              Core.<*> ( o Core..:? "partialMatchingImages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "partialMatchingImages")
               Core.<*> (o Core..:? "score")
               Core.<*> (o Core..:? "url")
       )
@@ -4473,7 +4446,7 @@ instance Core.FromJSON GoogleCloudVisionV1p1beta1Word where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "symbols" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symbols")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p1beta1Word where
@@ -4522,10 +4495,10 @@ instance
       "GoogleCloudVisionV1p2beta1AnnotateFileRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateFileRequest
-            Core.<$> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "features")
               Core.<*> (o Core..:? "imageContext")
               Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "pages" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "pages")
       )
 
 instance
@@ -4580,7 +4553,7 @@ instance
           GoogleCloudVisionV1p2beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "responses")
               Core.<*> (o Core..:? "totalPages")
       )
 
@@ -4631,8 +4604,7 @@ instance
       "GoogleCloudVisionV1p2beta1AnnotateImageRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateImageRequest
-            Core.<$> (o Core..:? "features" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "image")
+            Core.<$> (o Core..:? "features") Core.<*> (o Core..:? "image")
               Core.<*> (o Core..:? "imageContext")
       )
 
@@ -4718,20 +4690,16 @@ instance
             Core.<$> (o Core..:? "context")
               Core.<*> (o Core..:? "cropHintsAnnotation")
               Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faceAnnotations")
               Core.<*> (o Core..:? "fullTextAnnotation")
               Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "landmarkAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "localizedObjectAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "logoAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "labelAnnotations")
+              Core.<*> (o Core..:? "landmarkAnnotations")
+              Core.<*> (o Core..:? "localizedObjectAnnotations")
+              Core.<*> (o Core..:? "logoAnnotations")
               Core.<*> (o Core..:? "productSearchResults")
               Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textAnnotations")
               Core.<*> (o Core..:? "webDetection")
       )
 
@@ -4803,7 +4771,7 @@ instance
       "GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
-            Core.<$> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "features")
               Core.<*> (o Core..:? "imageContext")
               Core.<*> (o Core..:? "inputConfig")
               Core.<*> (o Core..:? "outputConfig")
@@ -4894,7 +4862,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
             Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "requests")
       )
 
 instance
@@ -4936,7 +4904,7 @@ instance
       "GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -4984,7 +4952,7 @@ instance
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
             Core.<$> (o Core..:? "outputConfig")
               Core.<*> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "requests")
       )
 
 instance
@@ -5031,7 +4999,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
             Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "requests")
       )
 
 instance
@@ -5073,7 +5041,7 @@ instance
       "GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -5117,7 +5085,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
             Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "requests")
       )
 
 instance
@@ -5159,7 +5127,7 @@ instance
       "GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse"
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -5214,7 +5182,7 @@ instance
             Core.<$> (o Core..:? "blockType")
             Core.<*> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "paragraphs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paragraphs")
             Core.<*> (o Core..:? "property")
       )
 
@@ -5259,10 +5227,8 @@ instance
       "GoogleCloudVisionV1p2beta1BoundingPoly"
       ( \o ->
           GoogleCloudVisionV1p2beta1BoundingPoly
-            Core.<$> ( o Core..:? "normalizedVertices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "normalizedVertices")
+            Core.<*> (o Core..:? "vertices")
       )
 
 instance
@@ -5403,7 +5369,7 @@ instance
       "GoogleCloudVisionV1p2beta1CropHintsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p2beta1CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cropHints")
       )
 
 instance
@@ -5441,7 +5407,7 @@ instance
       "GoogleCloudVisionV1p2beta1CropHintsParams"
       ( \o ->
           GoogleCloudVisionV1p2beta1CropHintsParams
-            Core.<$> (o Core..:? "aspectRatios" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aspectRatios")
       )
 
 instance
@@ -5478,7 +5444,7 @@ instance
       "GoogleCloudVisionV1p2beta1DominantColorsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p2beta1DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
       )
 
 instance
@@ -5544,9 +5510,9 @@ instance
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "mid")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "topicality")
       )
@@ -5664,7 +5630,7 @@ instance
             Core.<*> (o Core..:? "headwearLikelihood")
             Core.<*> (o Core..:? "joyLikelihood")
             Core.<*> (o Core..:? "landmarkingConfidence")
-            Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "landmarks")
             Core.<*> (o Core..:? "panAngle")
             Core.<*> (o Core..:? "rollAngle")
             Core.<*> (o Core..:? "sorrowLikelihood")
@@ -6002,7 +5968,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ImageContext
             Core.<$> (o Core..:? "cropHintsParams")
-            Core.<*> (o Core..:? "languageHints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "languageHints")
             Core.<*> (o Core..:? "latLongRect")
             Core.<*> (o Core..:? "productSearchParams")
             Core.<*> (o Core..:? "textDetectionParams")
@@ -6475,7 +6441,7 @@ instance Core.FromJSON GoogleCloudVisionV1p2beta1Page where
       "GoogleCloudVisionV1p2beta1Page"
       ( \o ->
           GoogleCloudVisionV1p2beta1Page
-            Core.<$> (o Core..:? "blocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blocks")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "property")
@@ -6532,7 +6498,7 @@ instance
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -6641,7 +6607,7 @@ instance
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "productCategory")
-            Core.<*> (o Core..:? "productLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productLabels")
       )
 
 instance
@@ -6740,7 +6706,7 @@ instance
           GoogleCloudVisionV1p2beta1ProductSearchParams
             Core.<$> (o Core..:? "boundingPoly")
               Core.<*> (o Core..:? "filter")
-              Core.<*> (o Core..:? "productCategories" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "productCategories")
               Core.<*> (o Core..:? "productSet")
       )
 
@@ -6796,10 +6762,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> ( o Core..:? "productGroupedResults"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "productGroupedResults")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -6853,8 +6817,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -7011,7 +6975,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "uint64Value")
+            Core.<*> ( o Core..:? "uint64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -7173,8 +7139,7 @@ instance
       "GoogleCloudVisionV1p2beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotation
-            Core.<$> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -7316,9 +7281,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> ( o Core..:? "detectedLanguages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
@@ -7454,20 +7417,12 @@ instance
       "GoogleCloudVisionV1p2beta1WebDetection"
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetection
-            Core.<$> (o Core..:? "bestGuessLabels" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "pagesWithMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "visuallySimilarImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "webEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestGuessLabels")
+            Core.<*> (o Core..:? "fullMatchingImages")
+            Core.<*> (o Core..:? "pagesWithMatchingImages")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "visuallySimilarImages")
+            Core.<*> (o Core..:? "webEntities")
       )
 
 instance
@@ -7713,13 +7668,9 @@ instance
       "GoogleCloudVisionV1p2beta1WebDetectionWebPage"
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetectionWebPage
-            Core.<$> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fullMatchingImages")
               Core.<*> (o Core..:? "pageTitle")
-              Core.<*> ( o Core..:? "partialMatchingImages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "partialMatchingImages")
               Core.<*> (o Core..:? "score")
               Core.<*> (o Core..:? "url")
       )
@@ -7777,7 +7728,7 @@ instance Core.FromJSON GoogleCloudVisionV1p2beta1Word where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "symbols" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symbols")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p2beta1Word where
@@ -7828,7 +7779,7 @@ instance
           GoogleCloudVisionV1p3beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "responses")
               Core.<*> (o Core..:? "totalPages")
       )
 
@@ -7915,20 +7866,16 @@ instance
             Core.<$> (o Core..:? "context")
               Core.<*> (o Core..:? "cropHintsAnnotation")
               Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faceAnnotations")
               Core.<*> (o Core..:? "fullTextAnnotation")
               Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "landmarkAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "localizedObjectAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "logoAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "labelAnnotations")
+              Core.<*> (o Core..:? "landmarkAnnotations")
+              Core.<*> (o Core..:? "localizedObjectAnnotations")
+              Core.<*> (o Core..:? "logoAnnotations")
               Core.<*> (o Core..:? "productSearchResults")
               Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textAnnotations")
               Core.<*> (o Core..:? "webDetection")
       )
 
@@ -8031,7 +7978,7 @@ instance
       "GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -8136,7 +8083,7 @@ instance
             Core.<$> (o Core..:? "blockType")
             Core.<*> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "paragraphs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paragraphs")
             Core.<*> (o Core..:? "property")
       )
 
@@ -8181,10 +8128,8 @@ instance
       "GoogleCloudVisionV1p3beta1BoundingPoly"
       ( \o ->
           GoogleCloudVisionV1p3beta1BoundingPoly
-            Core.<$> ( o Core..:? "normalizedVertices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "normalizedVertices")
+            Core.<*> (o Core..:? "vertices")
       )
 
 instance
@@ -8325,7 +8270,7 @@ instance
       "GoogleCloudVisionV1p3beta1CropHintsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p3beta1CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cropHints")
       )
 
 instance
@@ -8363,7 +8308,7 @@ instance
       "GoogleCloudVisionV1p3beta1DominantColorsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p3beta1DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
       )
 
 instance
@@ -8429,9 +8374,9 @@ instance
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "mid")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "topicality")
       )
@@ -8549,7 +8494,7 @@ instance
             Core.<*> (o Core..:? "headwearLikelihood")
             Core.<*> (o Core..:? "joyLikelihood")
             Core.<*> (o Core..:? "landmarkingConfidence")
-            Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "landmarks")
             Core.<*> (o Core..:? "panAngle")
             Core.<*> (o Core..:? "rollAngle")
             Core.<*> (o Core..:? "sorrowLikelihood")
@@ -8819,8 +8764,8 @@ instance
       "GoogleCloudVisionV1p3beta1ImportProductSetsResponse"
       ( \o ->
           GoogleCloudVisionV1p3beta1ImportProductSetsResponse
-            Core.<$> (o Core..:? "referenceImages" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "statuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "referenceImages")
+              Core.<*> (o Core..:? "statuses")
       )
 
 instance
@@ -9156,7 +9101,7 @@ instance Core.FromJSON GoogleCloudVisionV1p3beta1Page where
       "GoogleCloudVisionV1p3beta1Page"
       ( \o ->
           GoogleCloudVisionV1p3beta1Page
-            Core.<$> (o Core..:? "blocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blocks")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "property")
@@ -9213,7 +9158,7 @@ instance
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -9322,7 +9267,7 @@ instance
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "productCategory")
-            Core.<*> (o Core..:? "productLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productLabels")
       )
 
 instance
@@ -9420,10 +9365,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> ( o Core..:? "productGroupedResults"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "productGroupedResults")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -9477,8 +9420,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -9635,7 +9578,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "uint64Value")
+            Core.<*> ( o Core..:? "uint64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -9685,7 +9630,7 @@ instance
       "GoogleCloudVisionV1p3beta1ReferenceImage"
       ( \o ->
           GoogleCloudVisionV1p3beta1ReferenceImage
-            Core.<$> (o Core..:? "boundingPolys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "boundingPolys")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "uri")
       )
@@ -9847,8 +9792,7 @@ instance
       "GoogleCloudVisionV1p3beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotation
-            Core.<$> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -9990,9 +9934,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> ( o Core..:? "detectedLanguages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
@@ -10086,20 +10028,12 @@ instance
       "GoogleCloudVisionV1p3beta1WebDetection"
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetection
-            Core.<$> (o Core..:? "bestGuessLabels" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "pagesWithMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "visuallySimilarImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "webEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestGuessLabels")
+            Core.<*> (o Core..:? "fullMatchingImages")
+            Core.<*> (o Core..:? "pagesWithMatchingImages")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "visuallySimilarImages")
+            Core.<*> (o Core..:? "webEntities")
       )
 
 instance
@@ -10303,13 +10237,9 @@ instance
       "GoogleCloudVisionV1p3beta1WebDetectionWebPage"
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetectionWebPage
-            Core.<$> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fullMatchingImages")
               Core.<*> (o Core..:? "pageTitle")
-              Core.<*> ( o Core..:? "partialMatchingImages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "partialMatchingImages")
               Core.<*> (o Core..:? "score")
               Core.<*> (o Core..:? "url")
       )
@@ -10367,7 +10297,7 @@ instance Core.FromJSON GoogleCloudVisionV1p3beta1Word where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "symbols" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symbols")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p3beta1Word where
@@ -10418,7 +10348,7 @@ instance
           GoogleCloudVisionV1p4beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "responses")
               Core.<*> (o Core..:? "totalPages")
       )
 
@@ -10505,20 +10435,16 @@ instance
             Core.<$> (o Core..:? "context")
               Core.<*> (o Core..:? "cropHintsAnnotation")
               Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faceAnnotations")
               Core.<*> (o Core..:? "fullTextAnnotation")
               Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "landmarkAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "localizedObjectAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "logoAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "labelAnnotations")
+              Core.<*> (o Core..:? "landmarkAnnotations")
+              Core.<*> (o Core..:? "localizedObjectAnnotations")
+              Core.<*> (o Core..:? "logoAnnotations")
               Core.<*> (o Core..:? "productSearchResults")
               Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textAnnotations")
               Core.<*> (o Core..:? "webDetection")
       )
 
@@ -10621,7 +10547,7 @@ instance
       "GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -10701,7 +10627,7 @@ instance
       "GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse"
       ( \o ->
           GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -10806,7 +10732,7 @@ instance
             Core.<$> (o Core..:? "blockType")
             Core.<*> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "paragraphs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paragraphs")
             Core.<*> (o Core..:? "property")
       )
 
@@ -10851,10 +10777,8 @@ instance
       "GoogleCloudVisionV1p4beta1BoundingPoly"
       ( \o ->
           GoogleCloudVisionV1p4beta1BoundingPoly
-            Core.<$> ( o Core..:? "normalizedVertices"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "normalizedVertices")
+            Core.<*> (o Core..:? "vertices")
       )
 
 instance
@@ -11045,7 +10969,7 @@ instance
       "GoogleCloudVisionV1p4beta1CropHintsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p4beta1CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cropHints")
       )
 
 instance
@@ -11083,7 +11007,7 @@ instance
       "GoogleCloudVisionV1p4beta1DominantColorsAnnotation"
       ( \o ->
           GoogleCloudVisionV1p4beta1DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "colors")
       )
 
 instance
@@ -11149,9 +11073,9 @@ instance
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "mid")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "topicality")
       )
@@ -11272,9 +11196,9 @@ instance
             Core.<*> (o Core..:? "headwearLikelihood")
             Core.<*> (o Core..:? "joyLikelihood")
             Core.<*> (o Core..:? "landmarkingConfidence")
-            Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "landmarks")
             Core.<*> (o Core..:? "panAngle")
-            Core.<*> (o Core..:? "recognitionResult" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recognitionResult")
             Core.<*> (o Core..:? "rollAngle")
             Core.<*> (o Core..:? "sorrowLikelihood")
             Core.<*> (o Core..:? "surpriseLikelihood")
@@ -11591,8 +11515,8 @@ instance
       "GoogleCloudVisionV1p4beta1ImportProductSetsResponse"
       ( \o ->
           GoogleCloudVisionV1p4beta1ImportProductSetsResponse
-            Core.<$> (o Core..:? "referenceImages" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "statuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "referenceImages")
+              Core.<*> (o Core..:? "statuses")
       )
 
 instance
@@ -11928,7 +11852,7 @@ instance Core.FromJSON GoogleCloudVisionV1p4beta1Page where
       "GoogleCloudVisionV1p4beta1Page"
       ( \o ->
           GoogleCloudVisionV1p4beta1Page
-            Core.<$> (o Core..:? "blocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blocks")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "property")
@@ -11985,7 +11909,7 @@ instance
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -12094,7 +12018,7 @@ instance
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "productCategory")
-            Core.<*> (o Core..:? "productLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productLabels")
       )
 
 instance
@@ -12192,10 +12116,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> ( o Core..:? "productGroupedResults"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "productGroupedResults")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -12249,8 +12171,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -12407,7 +12329,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "uint64Value")
+            Core.<*> ( o Core..:? "uint64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -12457,7 +12381,7 @@ instance
       "GoogleCloudVisionV1p4beta1ReferenceImage"
       ( \o ->
           GoogleCloudVisionV1p4beta1ReferenceImage
-            Core.<$> (o Core..:? "boundingPolys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "boundingPolys")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "uri")
       )
@@ -12619,8 +12543,7 @@ instance
       "GoogleCloudVisionV1p4beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotation
-            Core.<$> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -12762,9 +12685,7 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> ( o Core..:? "detectedLanguages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
@@ -12858,20 +12779,12 @@ instance
       "GoogleCloudVisionV1p4beta1WebDetection"
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetection
-            Core.<$> (o Core..:? "bestGuessLabels" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "pagesWithMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "visuallySimilarImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "webEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestGuessLabels")
+            Core.<*> (o Core..:? "fullMatchingImages")
+            Core.<*> (o Core..:? "pagesWithMatchingImages")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "visuallySimilarImages")
+            Core.<*> (o Core..:? "webEntities")
       )
 
 instance
@@ -13075,13 +12988,9 @@ instance
       "GoogleCloudVisionV1p4beta1WebDetectionWebPage"
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetectionWebPage
-            Core.<$> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fullMatchingImages")
               Core.<*> (o Core..:? "pageTitle")
-              Core.<*> ( o Core..:? "partialMatchingImages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "partialMatchingImages")
               Core.<*> (o Core..:? "score")
               Core.<*> (o Core..:? "url")
       )
@@ -13139,7 +13048,7 @@ instance Core.FromJSON GoogleCloudVisionV1p4beta1Word where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "symbols" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symbols")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p4beta1Word where
@@ -13183,8 +13092,8 @@ instance Core.FromJSON GroupedResult where
       ( \o ->
           GroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-            Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON GroupedResult where
@@ -13290,8 +13199,8 @@ instance Core.FromJSON ImportProductSetsResponse where
       "ImportProductSetsResponse"
       ( \o ->
           ImportProductSetsResponse
-            Core.<$> (o Core..:? "referenceImages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "statuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "referenceImages")
+            Core.<*> (o Core..:? "statuses")
       )
 
 instance Core.ToJSON ImportProductSetsResponse where
@@ -13836,7 +13745,7 @@ instance Core.FromJSON Page where
       "Page"
       ( \o ->
           Page
-            Core.<$> (o Core..:? "blocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blocks")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "property")
@@ -13890,7 +13799,7 @@ instance Core.FromJSON Paragraph where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance Core.ToJSON Paragraph where
@@ -13982,7 +13891,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "productCategory")
-            Core.<*> (o Core..:? "productLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productLabels")
       )
 
 instance Core.ToJSON Product where
@@ -14027,10 +13936,8 @@ instance Core.FromJSON ProductSearchResults where
       ( \o ->
           ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-            Core.<*> ( o Core..:? "productGroupedResults"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productGroupedResults")
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON ProductSearchResults where
@@ -14074,7 +13981,9 @@ instance Core.FromJSON Property where
       ( \o ->
           Property
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "uint64Value")
+            Core.<*> ( o Core..:? "uint64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -14118,7 +14027,7 @@ instance Core.FromJSON ReferenceImage where
       "ReferenceImage"
       ( \o ->
           ReferenceImage
-            Core.<$> (o Core..:? "boundingPolys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "boundingPolys")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "uri")
       )
@@ -14253,7 +14162,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -14365,8 +14274,7 @@ instance Core.FromJSON TextAnnotation where
       "TextAnnotation"
       ( \o ->
           TextAnnotation
-            Core.<$> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
       )
 
 instance Core.ToJSON TextAnnotation where
@@ -14402,9 +14310,7 @@ instance Core.FromJSON TextProperty where
       ( \o ->
           TextProperty
             Core.<$> (o Core..:? "detectedBreak")
-            Core.<*> ( o Core..:? "detectedLanguages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance Core.ToJSON TextProperty where
@@ -14487,20 +14393,12 @@ instance Core.FromJSON WebDetection where
       "WebDetection"
       ( \o ->
           WebDetection
-            Core.<$> (o Core..:? "bestGuessLabels" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "pagesWithMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "visuallySimilarImages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "webEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bestGuessLabels")
+            Core.<*> (o Core..:? "fullMatchingImages")
+            Core.<*> (o Core..:? "pagesWithMatchingImages")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "visuallySimilarImages")
+            Core.<*> (o Core..:? "webEntities")
       )
 
 instance Core.ToJSON WebDetection where
@@ -14669,13 +14567,9 @@ instance Core.FromJSON WebPage where
       "WebPage"
       ( \o ->
           WebPage
-            Core.<$> ( o Core..:? "fullMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "fullMatchingImages")
             Core.<*> (o Core..:? "pageTitle")
-            Core.<*> ( o Core..:? "partialMatchingImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "partialMatchingImages")
             Core.<*> (o Core..:? "score")
             Core.<*> (o Core..:? "url")
       )
@@ -14729,7 +14623,7 @@ instance Core.FromJSON Word where
             Core.<$> (o Core..:? "boundingBox")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "property")
-            Core.<*> (o Core..:? "symbols" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symbols")
       )
 
 instance Core.ToJSON Word where

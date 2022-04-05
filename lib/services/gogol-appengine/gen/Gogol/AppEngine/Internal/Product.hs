@@ -518,7 +518,7 @@ instance Core.FromJSON Application where
             Core.<*> (o Core..:? "defaultBucket")
             Core.<*> (o Core..:? "defaultCookieExpiration")
             Core.<*> (o Core..:? "defaultHostname")
-            Core.<*> (o Core..:? "dispatchRules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dispatchRules")
             Core.<*> (o Core..:? "featureSettings")
             Core.<*> (o Core..:? "gcrDomain")
             Core.<*> (o Core..:? "iap")
@@ -602,14 +602,12 @@ instance Core.FromJSON AuthorizedCertificate where
             Core.<$> (o Core..:? "certificateRawData")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "domainMappingsCount")
-            Core.<*> (o Core..:? "domainNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domainNames")
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "managedCertificate")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "visibleDomainMappings"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "visibleDomainMappings")
       )
 
 instance Core.ToJSON AuthorizedCertificate where
@@ -827,7 +825,7 @@ instance Core.FromJSON BatchUpdateIngressRulesRequest where
       "BatchUpdateIngressRulesRequest"
       ( \o ->
           BatchUpdateIngressRulesRequest
-            Core.<$> (o Core..:? "ingressRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ingressRules")
       )
 
 instance Core.ToJSON BatchUpdateIngressRulesRequest where
@@ -861,7 +859,7 @@ instance
       "BatchUpdateIngressRulesResponse"
       ( \o ->
           BatchUpdateIngressRulesResponse
-            Core.<$> (o Core..:? "ingressRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ingressRules")
       )
 
 instance Core.ToJSON BatchUpdateIngressRulesResponse where
@@ -1301,7 +1299,7 @@ instance Core.FromJSON DomainMapping where
           DomainMapping
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "resourceRecords" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceRecords")
             Core.<*> (o Core..:? "sslSettings")
       )
 
@@ -1836,7 +1834,9 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "averageLatency")
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "memoryUsage")
+            Core.<*> ( o Core..:? "memoryUsage"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "qps")
             Core.<*> (o Core..:? "requests")
@@ -1939,7 +1939,7 @@ instance
       "ListAuthorizedCertificatesResponse"
       ( \o ->
           ListAuthorizedCertificatesResponse
-            Core.<$> (o Core..:? "certificates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "certificates")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1981,7 +1981,7 @@ instance Core.FromJSON ListAuthorizedDomainsResponse where
       "ListAuthorizedDomainsResponse"
       ( \o ->
           ListAuthorizedDomainsResponse
-            Core.<$> (o Core..:? "domains" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "domains")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2020,7 +2020,7 @@ instance Core.FromJSON ListDomainMappingsResponse where
       "ListDomainMappingsResponse"
       ( \o ->
           ListDomainMappingsResponse
-            Core.<$> (o Core..:? "domainMappings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "domainMappings")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2059,7 +2059,7 @@ instance Core.FromJSON ListIngressRulesResponse where
       "ListIngressRulesResponse"
       ( \o ->
           ListIngressRulesResponse
-            Core.<$> (o Core..:? "ingressRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ingressRules")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2095,7 +2095,7 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2131,7 +2131,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2171,7 +2171,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -2207,7 +2207,7 @@ instance Core.FromJSON ListServicesResponse where
       ( \o ->
           ListServicesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON ListServicesResponse where
@@ -2243,7 +2243,7 @@ instance Core.FromJSON ListVersionsResponse where
       ( \o ->
           ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
       )
 
 instance Core.ToJSON ListVersionsResponse where
@@ -2577,7 +2577,7 @@ instance Core.FromJSON Network where
       "Network"
       ( \o ->
           Network
-            Core.<$> (o Core..:? "forwardedPorts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "forwardedPorts")
             Core.<*> (o Core..:? "instanceTag")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "sessionAffinity")
@@ -2842,7 +2842,7 @@ instance Core.FromJSON OperationMetadataV1 where
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warning" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON OperationMetadataV1 where
@@ -2913,7 +2913,7 @@ instance Core.FromJSON OperationMetadataV1Alpha where
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warning" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON OperationMetadataV1Alpha where
@@ -2984,7 +2984,7 @@ instance Core.FromJSON OperationMetadataV1Beta where
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warning" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON OperationMetadataV1Beta where
@@ -3215,7 +3215,7 @@ instance Core.FromJSON Resources where
             Core.<*> (o Core..:? "diskGb")
             Core.<*> (o Core..:? "kmsKeyReference")
             Core.<*> (o Core..:? "memoryGb")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
       )
 
 instance Core.ToJSON Resources where
@@ -3560,7 +3560,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3927,18 +3927,20 @@ instance Core.FromJSON Version where
             Core.<*> (o Core..:? "createdBy")
             Core.<*> (o Core..:? "defaultExpiration")
             Core.<*> (o Core..:? "deployment")
-            Core.<*> (o Core..:? "diskUsageBytes")
+            Core.<*> ( o Core..:? "diskUsageBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "endpointsApiService")
             Core.<*> (o Core..:? "entrypoint")
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "envVariables")
-            Core.<*> (o Core..:? "errorHandlers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "handlers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errorHandlers")
+            Core.<*> (o Core..:? "handlers")
             Core.<*> (o Core..:? "healthCheck")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "inboundServices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inboundServices")
             Core.<*> (o Core..:? "instanceClass")
-            Core.<*> (o Core..:? "libraries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "libraries")
             Core.<*> (o Core..:? "livenessCheck")
             Core.<*> (o Core..:? "manualScaling")
             Core.<*> (o Core..:? "name")
@@ -3956,7 +3958,7 @@ instance Core.FromJSON Version where
             Core.<*> (o Core..:? "versionUrl")
             Core.<*> (o Core..:? "vm")
             Core.<*> (o Core..:? "vpcAccessConnector")
-            Core.<*> (o Core..:? "zones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "zones")
       )
 
 instance Core.ToJSON Version where

@@ -329,9 +329,7 @@ instance Core.FromJSON AccountSuspensionWarning where
           AccountSuspensionWarning
             Core.<$> (o Core..:? "appealWindow")
             Core.<*> (o Core..:? "state")
-            Core.<*> ( o Core..:? "suspensionDetails"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suspensionDetails")
       )
 
 instance Core.ToJSON AccountSuspensionWarning where
@@ -457,13 +455,13 @@ instance Core.FromJSON ActivityRule where
       "ActivityRule"
       ( \o ->
           ActivityRule
-            Core.<$> (o Core..:? "actionNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actionNames")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "supersededAlerts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supersededAlerts")
             Core.<*> (o Core..:? "supersedingAlert")
             Core.<*> (o Core..:? "threshold")
             Core.<*> (o Core..:? "triggerSource")
@@ -756,7 +754,7 @@ instance Core.FromJSON AppMakerSqlSetupNotification where
       "AppMakerSqlSetupNotification"
       ( \o ->
           AppMakerSqlSetupNotification
-            Core.<$> (o Core..:? "requestInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requestInfo")
       )
 
 instance Core.ToJSON AppMakerSqlSetupNotification where
@@ -847,7 +845,7 @@ instance Core.FromJSON AppsOutage where
             Core.<*> (o Core..:? "incidentTrackingId")
             Core.<*> (o Core..:? "mergeInfo")
             Core.<*> (o Core..:? "nextUpdateTime")
-            Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "products")
             Core.<*> (o Core..:? "resolutionTime")
             Core.<*> (o Core..:? "status")
       )
@@ -926,7 +924,7 @@ instance Core.FromJSON BadWhitelist where
           BadWhitelist
             Core.<$> (o Core..:? "domainId")
             Core.<*> (o Core..:? "maliciousEntity")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "sourceIp")
       )
 
@@ -964,7 +962,7 @@ instance Core.FromJSON BatchDeleteAlertsRequest where
       "BatchDeleteAlertsRequest"
       ( \o ->
           BatchDeleteAlertsRequest
-            Core.<$> (o Core..:? "alertId" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alertId")
             Core.<*> (o Core..:? "customerId")
       )
 
@@ -1004,7 +1002,7 @@ instance Core.FromJSON BatchDeleteAlertsResponse where
       ( \o ->
           BatchDeleteAlertsResponse
             Core.<$> (o Core..:? "failedAlertStatus")
-            Core.<*> (o Core..:? "successAlertIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "successAlertIds")
       )
 
 instance Core.ToJSON BatchDeleteAlertsResponse where
@@ -1078,7 +1076,7 @@ instance Core.FromJSON BatchUndeleteAlertsRequest where
       "BatchUndeleteAlertsRequest"
       ( \o ->
           BatchUndeleteAlertsRequest
-            Core.<$> (o Core..:? "alertId" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alertId")
             Core.<*> (o Core..:? "customerId")
       )
 
@@ -1118,7 +1116,7 @@ instance Core.FromJSON BatchUndeleteAlertsResponse where
       ( \o ->
           BatchUndeleteAlertsResponse
             Core.<$> (o Core..:? "failedAlertStatus")
-            Core.<*> (o Core..:? "successAlertIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "successAlertIds")
       )
 
 instance Core.ToJSON BatchUndeleteAlertsResponse where
@@ -1227,8 +1225,8 @@ instance Core.FromJSON Csv where
       "Csv"
       ( \o ->
           Csv
-            Core.<$> (o Core..:? "dataRows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataRows")
+            Core.<*> (o Core..:? "headers")
       )
 
 instance Core.ToJSON Csv where
@@ -1258,10 +1256,7 @@ instance Core.FromJSON CsvRow where
   parseJSON =
     Core.withObject
       "CsvRow"
-      ( \o ->
-          CsvRow
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-      )
+      (\o -> CsvRow Core.<$> (o Core..:? "entries"))
 
 instance Core.ToJSON CsvRow where
   toJSON CsvRow {..} =
@@ -1293,8 +1288,7 @@ instance Core.FromJSON DeviceCompromised where
       "DeviceCompromised"
       ( \o ->
           DeviceCompromised
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "events")
       )
 
 instance Core.ToJSON DeviceCompromised where
@@ -1540,9 +1534,7 @@ instance Core.FromJSON GmailMessageInfo where
       "GmailMessageInfo"
       ( \o ->
           GmailMessageInfo
-            Core.<$> ( o Core..:? "attachmentsSha256Hash"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "attachmentsSha256Hash")
             Core.<*> (o Core..:? "date")
             Core.<*> (o Core..:? "md5HashMessageBody")
             Core.<*> (o Core..:? "md5HashSubject")
@@ -1608,9 +1600,7 @@ instance Core.FromJSON GoogleOperations where
       "GoogleOperations"
       ( \o ->
           GoogleOperations
-            Core.<$> ( o Core..:? "affectedUserEmails"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "affectedUserEmails")
             Core.<*> (o Core..:? "attachmentData")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "domain")
@@ -1653,7 +1643,7 @@ instance Core.FromJSON ListAlertFeedbackResponse where
       "ListAlertFeedbackResponse"
       ( \o ->
           ListAlertFeedbackResponse
-            Core.<$> (o Core..:? "feedback" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "feedback")
       )
 
 instance Core.ToJSON ListAlertFeedbackResponse where
@@ -1686,7 +1676,7 @@ instance Core.FromJSON ListAlertsResponse where
       "ListAlertsResponse"
       ( \o ->
           ListAlertsResponse
-            Core.<$> (o Core..:? "alerts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alerts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1773,7 +1763,7 @@ instance Core.FromJSON MailPhishing where
             Core.<$> (o Core..:? "domainId")
             Core.<*> (o Core..:? "isInternal")
             Core.<*> (o Core..:? "maliciousEntity")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "systemActionType")
       )
 
@@ -2018,7 +2008,7 @@ instance Core.FromJSON PhishingSpike where
             Core.<$> (o Core..:? "domainId")
             Core.<*> (o Core..:? "isInternal")
             Core.<*> (o Core..:? "maliciousEntity")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
       )
 
 instance Core.ToJSON PhishingSpike where
@@ -2135,9 +2125,11 @@ instance Core.FromJSON RequestInfo where
       "RequestInfo"
       ( \o ->
           RequestInfo
-            Core.<$> (o Core..:? "appDeveloperEmail" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "appDeveloperEmail")
             Core.<*> (o Core..:? "appKey")
-            Core.<*> (o Core..:? "numberOfRequests")
+            Core.<*> ( o Core..:? "numberOfRequests"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON RequestInfo where
@@ -2274,20 +2266,14 @@ instance Core.FromJSON RuleViolationInfo where
       ( \o ->
           RuleViolationInfo
             Core.<$> (o Core..:? "dataSource")
-            Core.<*> (o Core..:? "matchInfo" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "recipients" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "matchInfo")
+            Core.<*> (o Core..:? "recipients")
             Core.<*> (o Core..:? "resourceInfo")
             Core.<*> (o Core..:? "ruleInfo")
-            Core.<*> ( o Core..:? "suppressedActionTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suppressedActionTypes")
             Core.<*> (o Core..:? "trigger")
-            Core.<*> ( o Core..:? "triggeredActionInfo"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "triggeredActionTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "triggeredActionInfo")
+            Core.<*> (o Core..:? "triggeredActionTypes")
             Core.<*> (o Core..:? "triggeringUserEmail")
       )
 
@@ -2331,8 +2317,7 @@ instance Core.FromJSON Settings where
     Core.withObject
       "Settings"
       ( \o ->
-          Settings
-            Core.<$> (o Core..:? "notifications" Core..!= Core.mempty)
+          Settings Core.<$> (o Core..:? "notifications")
       )
 
 instance Core.ToJSON Settings where
@@ -2395,7 +2380,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2459,8 +2444,7 @@ instance Core.FromJSON SuspiciousActivity where
       "SuspiciousActivity"
       ( \o ->
           SuspiciousActivity
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "events")
       )
 
 instance Core.ToJSON SuspiciousActivity where

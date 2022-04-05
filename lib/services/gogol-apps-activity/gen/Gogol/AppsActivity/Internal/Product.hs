@@ -99,7 +99,7 @@ instance Core.FromJSON Activity where
       ( \o ->
           Activity
             Core.<$> (o Core..:? "combinedEvent")
-            Core.<*> (o Core..:? "singleEvents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "singleEvents")
       )
 
 instance Core.ToJSON Activity where
@@ -158,13 +158,13 @@ instance Core.FromJSON Event where
       "Event"
       ( \o ->
           Event
-            Core.<$> ( o Core..:? "additionalEventTypes"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "additionalEventTypes")
+            Core.<*> ( o Core..:? "eventTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "eventTimeMillis")
             Core.<*> (o Core..:? "fromUserDeletion")
             Core.<*> (o Core..:? "move")
-            Core.<*> (o Core..:? "permissionChanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissionChanges")
             Core.<*> (o Core..:? "primaryEventType")
             Core.<*> (o Core..:? "rename")
             Core.<*> (o Core..:? "target")
@@ -218,7 +218,7 @@ instance Core.FromJSON ListActivitiesResponse where
       "ListActivitiesResponse"
       ( \o ->
           ListActivitiesResponse
-            Core.<$> (o Core..:? "activities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activities")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -253,8 +253,8 @@ instance Core.FromJSON Move where
       "Move"
       ( \o ->
           Move
-            Core.<$> (o Core..:? "addedParents" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removedParents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addedParents")
+            Core.<*> (o Core..:? "removedParents")
       )
 
 instance Core.ToJSON Move where
@@ -391,10 +391,8 @@ instance Core.FromJSON PermissionChange where
       "PermissionChange"
       ( \o ->
           PermissionChange
-            Core.<$> (o Core..:? "addedPermissions" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "removedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "addedPermissions")
+            Core.<*> (o Core..:? "removedPermissions")
       )
 
 instance Core.ToJSON PermissionChange where

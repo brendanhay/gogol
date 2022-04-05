@@ -336,7 +336,9 @@ instance Core.FromJSON AchievementDefinition where
           AchievementDefinition
             Core.<$> (o Core..:? "achievementType")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "experiencePoints")
+            Core.<*> ( o Core..:? "experiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "formattedTotalSteps")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "initialState")
@@ -407,7 +409,7 @@ instance
       "AchievementDefinitionsListResponse"
       ( \o ->
           AchievementDefinitionsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -617,8 +619,7 @@ instance
       "AchievementUpdateMultipleRequest"
       ( \o ->
           AchievementUpdateMultipleRequest
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "updates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "updates")
       )
 
 instance Core.ToJSON AchievementUpdateMultipleRequest where
@@ -660,9 +661,7 @@ instance
       ( \o ->
           AchievementUpdateMultipleResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "updatedAchievements"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "updatedAchievements")
       )
 
 instance
@@ -853,15 +852,17 @@ instance Core.FromJSON Application where
       ( \o ->
           Application
             Core.<$> (o Core..:? "achievement_count")
-            Core.<*> (o Core..:? "assets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "assets")
             Core.<*> (o Core..:? "author")
             Core.<*> (o Core..:? "category")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "enabledFeatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "enabledFeatures")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lastUpdatedTimestamp")
+            Core.<*> ( o Core..:? "lastUpdatedTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "leaderboard_count")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "themeColor")
@@ -1009,7 +1010,9 @@ instance Core.FromJSON Category where
       ( \o ->
           Category
             Core.<$> (o Core..:? "category")
-            Core.<*> (o Core..:? "experiencePoints")
+            Core.<*> ( o Core..:? "experiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
       )
 
@@ -1053,7 +1056,7 @@ instance Core.FromJSON CategoryListResponse where
       "CategoryListResponse"
       ( \o ->
           CategoryListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1215,7 +1218,7 @@ instance Core.FromJSON EventDefinition where
       "EventDefinition"
       ( \o ->
           EventDefinition
-            Core.<$> (o Core..:? "childEvents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "childEvents")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "id")
@@ -1270,7 +1273,7 @@ instance Core.FromJSON EventDefinitionListResponse where
       "EventDefinitionListResponse"
       ( \o ->
           EventDefinitionListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1315,8 +1318,12 @@ instance Core.FromJSON EventPeriodRange where
       ( \o ->
           EventPeriodRange
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "periodEndMillis")
-            Core.<*> (o Core..:? "periodStartMillis")
+            Core.<*> ( o Core..:? "periodEndMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "periodStartMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON EventPeriodRange where
@@ -1362,7 +1369,7 @@ instance Core.FromJSON EventPeriodUpdate where
           EventPeriodUpdate
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "timePeriod")
-            Core.<*> (o Core..:? "updates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "updates")
       )
 
 instance Core.ToJSON EventPeriodUpdate where
@@ -1451,10 +1458,14 @@ instance Core.FromJSON EventRecordRequest where
       "EventRecordRequest"
       ( \o ->
           EventRecordRequest
-            Core.<$> (o Core..:? "currentTimeMillis")
+            Core.<$> ( o Core..:? "currentTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "requestId")
-            Core.<*> (o Core..:? "timePeriods" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "requestId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "timePeriods")
       )
 
 instance Core.ToJSON EventRecordRequest where
@@ -1501,7 +1512,9 @@ instance Core.FromJSON EventUpdateRequest where
           EventUpdateRequest
             Core.<$> (o Core..:? "definitionId")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "updateCount")
+            Core.<*> ( o Core..:? "updateCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON EventUpdateRequest where
@@ -1547,10 +1560,10 @@ instance Core.FromJSON EventUpdateResponse where
       "EventUpdateResponse"
       ( \o ->
           EventUpdateResponse
-            Core.<$> (o Core..:? "batchFailures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "eventFailures" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "batchFailures")
+            Core.<*> (o Core..:? "eventFailures")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "playerEvents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "playerEvents")
       )
 
 instance Core.ToJSON EventUpdateResponse where
@@ -1594,7 +1607,9 @@ instance Core.FromJSON GamesAchievementIncrement where
       ( \o ->
           GamesAchievementIncrement
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "requestId")
+            Core.<*> ( o Core..:? "requestId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "steps")
       )
 
@@ -2047,11 +2062,17 @@ instance Core.FromJSON LeaderboardEntry where
             Core.<*> (o Core..:? "formattedScoreRank")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "player")
-            Core.<*> (o Core..:? "scoreRank")
+            Core.<*> ( o Core..:? "scoreRank"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scoreTag")
-            Core.<*> (o Core..:? "scoreValue")
+            Core.<*> ( o Core..:? "scoreValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "timeSpan")
-            Core.<*> (o Core..:? "writeTimestampMillis")
+            Core.<*> ( o Core..:? "writeTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON LeaderboardEntry where
@@ -2103,7 +2124,7 @@ instance Core.FromJSON LeaderboardListResponse where
       "LeaderboardListResponse"
       ( \o ->
           LeaderboardListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -2156,8 +2177,12 @@ instance Core.FromJSON LeaderboardScoreRank where
             Core.<$> (o Core..:? "formattedNumScores")
             Core.<*> (o Core..:? "formattedRank")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "numScores")
-            Core.<*> (o Core..:? "rank")
+            Core.<*> ( o Core..:? "numScores"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rank"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON LeaderboardScoreRank where
@@ -2212,10 +2237,12 @@ instance Core.FromJSON LeaderboardScores where
       "LeaderboardScores"
       ( \o ->
           LeaderboardScores
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "numScores")
+            Core.<*> ( o Core..:? "numScores"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "playerScore")
             Core.<*> (o Core..:? "prevPageToken")
       )
@@ -2265,7 +2292,7 @@ instance Core.FromJSON MetagameConfig where
           MetagameConfig
             Core.<$> (o Core..:? "currentVersion")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "playerLevels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "playerLevels")
       )
 
 instance Core.ToJSON MetagameConfig where
@@ -2449,11 +2476,15 @@ instance Core.FromJSON PlayerAchievement where
           PlayerAchievement
             Core.<$> (o Core..:? "achievementState")
             Core.<*> (o Core..:? "currentSteps")
-            Core.<*> (o Core..:? "experiencePoints")
+            Core.<*> ( o Core..:? "experiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "formattedCurrentStepsString")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lastUpdatedTimestamp")
+            Core.<*> ( o Core..:? "lastUpdatedTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PlayerAchievement where
@@ -2503,7 +2534,7 @@ instance Core.FromJSON PlayerAchievementListResponse where
       "PlayerAchievementListResponse"
       ( \o ->
           PlayerAchievementListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -2556,7 +2587,9 @@ instance Core.FromJSON PlayerEvent where
             Core.<$> (o Core..:? "definitionId")
             Core.<*> (o Core..:? "formattedNumEvents")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "numEvents")
+            Core.<*> ( o Core..:? "numEvents"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "playerId")
       )
 
@@ -2603,7 +2636,7 @@ instance Core.FromJSON PlayerEventListResponse where
       "PlayerEventListResponse"
       ( \o ->
           PlayerEventListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -2653,10 +2686,14 @@ instance Core.FromJSON PlayerExperienceInfo where
       "PlayerExperienceInfo"
       ( \o ->
           PlayerExperienceInfo
-            Core.<$> (o Core..:? "currentExperiencePoints")
+            Core.<$> ( o Core..:? "currentExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currentLevel")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lastLevelUpTimestampMillis")
+            Core.<*> ( o Core..:? "lastLevelUpTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "nextLevel")
       )
 
@@ -2732,10 +2769,14 @@ instance Core.FromJSON PlayerLeaderboardScore where
             Core.<*> (o Core..:? "publicRank")
             Core.<*> (o Core..:? "scoreString")
             Core.<*> (o Core..:? "scoreTag")
-            Core.<*> (o Core..:? "scoreValue")
+            Core.<*> ( o Core..:? "scoreValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "socialRank")
             Core.<*> (o Core..:? "timeSpan")
-            Core.<*> (o Core..:? "writeTimestamp")
+            Core.<*> ( o Core..:? "writeTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PlayerLeaderboardScore where
@@ -2792,7 +2833,7 @@ instance
       "PlayerLeaderboardScoreListResponse"
       ( \o ->
           PlayerLeaderboardScoreListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "player")
@@ -2846,8 +2887,12 @@ instance Core.FromJSON PlayerLevel where
           PlayerLevel
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "level")
-            Core.<*> (o Core..:? "maxExperiencePoints")
-            Core.<*> (o Core..:? "minExperiencePoints")
+            Core.<*> ( o Core..:? "maxExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PlayerLevel where
@@ -2892,7 +2937,7 @@ instance Core.FromJSON PlayerListResponse where
       "PlayerListResponse"
       ( \o ->
           PlayerListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -2944,7 +2989,9 @@ instance Core.FromJSON PlayerScore where
           PlayerScore
             Core.<$> (o Core..:? "formattedScore")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "score")
+            Core.<*> ( o Core..:? "score"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scoreTag")
             Core.<*> (o Core..:? "timeSpan")
       )
@@ -2985,7 +3032,7 @@ instance Core.FromJSON PlayerScoreListResponse where
       ( \o ->
           PlayerScoreListResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "submittedScores" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "submittedScores")
       )
 
 instance Core.ToJSON PlayerScoreListResponse where
@@ -3036,14 +3083,12 @@ instance Core.FromJSON PlayerScoreResponse where
       "PlayerScoreResponse"
       ( \o ->
           PlayerScoreResponse
-            Core.<$> ( o Core..:? "beatenScoreTimeSpans"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "beatenScoreTimeSpans")
             Core.<*> (o Core..:? "formattedScore")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "leaderboardId")
             Core.<*> (o Core..:? "scoreTag")
-            Core.<*> (o Core..:? "unbeatenScores" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unbeatenScores")
       )
 
 instance Core.ToJSON PlayerScoreResponse where
@@ -3083,8 +3128,7 @@ instance Core.FromJSON PlayerScoreSubmissionList where
       "PlayerScoreSubmissionList"
       ( \o ->
           PlayerScoreSubmissionList
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "scores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "scores")
       )
 
 instance Core.ToJSON PlayerScoreSubmissionList where
@@ -3222,7 +3266,9 @@ instance Core.FromJSON ScoreSubmission where
           ScoreSubmission
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "leaderboardId")
-            Core.<*> (o Core..:? "score")
+            Core.<*> ( o Core..:? "score"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scoreTag")
             Core.<*> (o Core..:? "signature")
       )
@@ -3295,11 +3341,17 @@ instance Core.FromJSON Snapshot where
             Core.<$> (o Core..:? "coverImage")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "driveId")
-            Core.<*> (o Core..:? "durationMillis")
+            Core.<*> ( o Core..:? "durationMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lastModifiedMillis")
-            Core.<*> (o Core..:? "progressValue")
+            Core.<*> ( o Core..:? "lastModifiedMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "progressValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "uniqueName")
@@ -3409,7 +3461,7 @@ instance Core.FromJSON SnapshotListResponse where
       "SnapshotListResponse"
       ( \o ->
           SnapshotListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )

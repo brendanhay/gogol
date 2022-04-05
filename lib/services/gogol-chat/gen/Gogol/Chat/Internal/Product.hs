@@ -683,10 +683,10 @@ instance Core.FromJSON Card where
       "Card"
       ( \o ->
           Card
-            Core.<$> (o Core..:? "cardActions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cardActions")
             Core.<*> (o Core..:? "header")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "sections" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sections")
       )
 
 instance Core.ToJSON Card where
@@ -978,7 +978,10 @@ instance Core.FromJSON DateInput where
     Core.withObject
       "DateInput"
       ( \o ->
-          DateInput Core.<$> (o Core..:? "msSinceEpoch")
+          DateInput
+            Core.<$> ( o Core..:? "msSinceEpoch"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DateInput where
@@ -1021,7 +1024,9 @@ instance Core.FromJSON DateTimeInput where
           DateTimeInput
             Core.<$> (o Core..:? "hasDate")
             Core.<*> (o Core..:? "hasTime")
-            Core.<*> (o Core..:? "msSinceEpoch")
+            Core.<*> ( o Core..:? "msSinceEpoch"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DateTimeInput where
@@ -1302,7 +1307,7 @@ instance Core.FromJSON FormAction where
       ( \o ->
           FormAction
             Core.<$> (o Core..:? "actionMethodName")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON FormAction where
@@ -1349,7 +1354,7 @@ instance Core.FromJSON GoogleAppsCardV1Action where
           GoogleAppsCardV1Action
             Core.<$> (o Core..:? "function")
             Core.<*> (o Core..:? "loadIndicator")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "persistValues")
       )
 
@@ -1526,7 +1531,7 @@ instance Core.FromJSON GoogleAppsCardV1ButtonList where
       "GoogleAppsCardV1ButtonList"
       ( \o ->
           GoogleAppsCardV1ButtonList
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
       )
 
 instance Core.ToJSON GoogleAppsCardV1ButtonList where
@@ -1578,13 +1583,13 @@ instance Core.FromJSON GoogleAppsCardV1Card where
       "GoogleAppsCardV1Card"
       ( \o ->
           GoogleAppsCardV1Card
-            Core.<$> (o Core..:? "cardActions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cardActions")
             Core.<*> (o Core..:? "displayStyle")
             Core.<*> (o Core..:? "fixedFooter")
             Core.<*> (o Core..:? "header")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "peekCardHeader")
-            Core.<*> (o Core..:? "sections" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sections")
       )
 
 instance Core.ToJSON GoogleAppsCardV1Card where
@@ -1780,7 +1785,9 @@ instance Core.FromJSON GoogleAppsCardV1DateTimePicker where
             Core.<*> (o Core..:? "onChangeAction")
             Core.<*> (o Core..:? "timezoneOffsetDate")
             Core.<*> (o Core..:? "type")
-            Core.<*> (o Core..:? "valueMsEpoch")
+            Core.<*> ( o Core..:? "valueMsEpoch"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GoogleAppsCardV1DateTimePicker where
@@ -1934,7 +1941,7 @@ instance Core.FromJSON GoogleAppsCardV1Grid where
           GoogleAppsCardV1Grid
             Core.<$> (o Core..:? "borderStyle")
             Core.<*> (o Core..:? "columnCount")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "onClick")
             Core.<*> (o Core..:? "title")
       )
@@ -2319,7 +2326,7 @@ instance Core.FromJSON GoogleAppsCardV1Section where
             Core.<$> (o Core..:? "collapsible")
             Core.<*> (o Core..:? "header")
             Core.<*> (o Core..:? "uncollapsibleWidgetsCount")
-            Core.<*> (o Core..:? "widgets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "widgets")
       )
 
 instance Core.ToJSON GoogleAppsCardV1Section where
@@ -2369,7 +2376,7 @@ instance Core.FromJSON GoogleAppsCardV1SelectionInput where
       "GoogleAppsCardV1SelectionInput"
       ( \o ->
           GoogleAppsCardV1SelectionInput
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "onChangeAction")
@@ -2482,7 +2489,7 @@ instance Core.FromJSON GoogleAppsCardV1Suggestions where
       "GoogleAppsCardV1Suggestions"
       ( \o ->
           GoogleAppsCardV1Suggestions
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
       )
 
 instance Core.ToJSON GoogleAppsCardV1Suggestions where
@@ -2961,7 +2968,7 @@ instance Core.FromJSON ListMembershipsResponse where
       "ListMembershipsResponse"
       ( \o ->
           ListMembershipsResponse
-            Core.<$> (o Core..:? "memberships" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "memberships")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2997,7 +3004,7 @@ instance Core.FromJSON ListSpacesResponse where
       ( \o ->
           ListSpacesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "spaces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spaces")
       )
 
 instance Core.ToJSON ListSpacesResponse where
@@ -3179,10 +3186,10 @@ instance Core.FromJSON Message where
       ( \o ->
           Message
             Core.<$> (o Core..:? "actionResponse")
-            Core.<*> (o Core..:? "annotations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "annotations")
             Core.<*> (o Core..:? "argumentText")
-            Core.<*> (o Core..:? "attachment" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "cards" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attachment")
+            Core.<*> (o Core..:? "cards")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "fallbackText")
             Core.<*> (o Core..:? "lastUpdateTime")
@@ -3302,7 +3309,7 @@ instance Core.FromJSON Section where
       ( \o ->
           Section
             Core.<$> (o Core..:? "header")
-            Core.<*> (o Core..:? "widgets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "widgets")
       )
 
 instance Core.ToJSON Section where
@@ -3333,7 +3340,10 @@ instance Core.FromJSON SlashCommand where
     Core.withObject
       "SlashCommand"
       ( \o ->
-          SlashCommand Core.<$> (o Core..:? "commandId")
+          SlashCommand
+            Core.<$> ( o Core..:? "commandId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SlashCommand where
@@ -3381,7 +3391,9 @@ instance Core.FromJSON SlashCommandMetadata where
       ( \o ->
           SlashCommandMetadata
             Core.<$> (o Core..:? "bot")
-            Core.<*> (o Core..:? "commandId")
+            Core.<*> ( o Core..:? "commandId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "commandName")
             Core.<*> (o Core..:? "triggersDialog")
             Core.<*> (o Core..:? "type")
@@ -3480,7 +3492,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3539,10 +3551,7 @@ instance Core.FromJSON StringInputs where
   parseJSON =
     Core.withObject
       "StringInputs"
-      ( \o ->
-          StringInputs
-            Core.<$> (o Core..:? "value" Core..!= Core.mempty)
-      )
+      (\o -> StringInputs Core.<$> (o Core..:? "value"))
 
 instance Core.ToJSON StringInputs where
   toJSON StringInputs {..} =
@@ -3822,7 +3831,7 @@ instance Core.FromJSON WidgetMarkup where
       "WidgetMarkup"
       ( \o ->
           WidgetMarkup
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "keyValue")
             Core.<*> (o Core..:? "textParagraph")

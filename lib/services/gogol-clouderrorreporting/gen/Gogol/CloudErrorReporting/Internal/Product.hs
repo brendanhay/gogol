@@ -145,7 +145,7 @@ instance Core.FromJSON ErrorContext where
           ErrorContext
             Core.<$> (o Core..:? "httpRequest")
             Core.<*> (o Core..:? "reportLocation")
-            Core.<*> (o Core..:? "sourceReferences" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceReferences")
             Core.<*> (o Core..:? "user")
       )
 
@@ -245,7 +245,7 @@ instance Core.FromJSON ErrorGroup where
             Core.<$> (o Core..:? "groupId")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "resolutionStatus")
-            Core.<*> (o Core..:? "trackingIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trackingIssues")
       )
 
 instance Core.ToJSON ErrorGroup where
@@ -307,15 +307,19 @@ instance Core.FromJSON ErrorGroupStats where
       "ErrorGroupStats"
       ( \o ->
           ErrorGroupStats
-            Core.<$> (o Core..:? "affectedServices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "affectedUsersCount")
-            Core.<*> (o Core..:? "count")
+            Core.<$> (o Core..:? "affectedServices")
+            Core.<*> ( o Core..:? "affectedUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "firstSeenTime")
             Core.<*> (o Core..:? "group")
             Core.<*> (o Core..:? "lastSeenTime")
             Core.<*> (o Core..:? "numAffectedServices")
             Core.<*> (o Core..:? "representative")
-            Core.<*> (o Core..:? "timedCounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timedCounts")
       )
 
 instance Core.ToJSON ErrorGroupStats where
@@ -426,7 +430,7 @@ instance Core.FromJSON ListEventsResponse where
       "ListEventsResponse"
       ( \o ->
           ListEventsResponse
-            Core.<$> (o Core..:? "errorEvents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errorEvents")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "timeRangeBegin")
       )
@@ -470,7 +474,7 @@ instance Core.FromJSON ListGroupStatsResponse where
       "ListGroupStatsResponse"
       ( \o ->
           ListGroupStatsResponse
-            Core.<$> (o Core..:? "errorGroupStats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errorGroupStats")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "timeRangeBegin")
       )
@@ -709,7 +713,9 @@ instance Core.FromJSON TimedCount where
       "TimedCount"
       ( \o ->
           TimedCount
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "startTime")
       )

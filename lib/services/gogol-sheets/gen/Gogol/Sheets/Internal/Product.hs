@@ -1294,7 +1294,7 @@ instance Core.FromJSON AddDimensionGroupResponse where
       "AddDimensionGroupResponse"
       ( \o ->
           AddDimensionGroupResponse
-            Core.<$> (o Core..:? "dimensionGroups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensionGroups")
       )
 
 instance Core.ToJSON AddDimensionGroupResponse where
@@ -1624,7 +1624,7 @@ instance Core.FromJSON AppendCellsRequest where
       ( \o ->
           AppendCellsRequest
             Core.<$> (o Core..:? "fields")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "sheetId")
       )
 
@@ -2151,7 +2151,7 @@ instance Core.FromJSON BasicChartSeries where
             Core.<*> (o Core..:? "lineStyle")
             Core.<*> (o Core..:? "pointStyle")
             Core.<*> (o Core..:? "series")
-            Core.<*> (o Core..:? "styleOverrides" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "styleOverrides")
             Core.<*> (o Core..:? "targetAxis")
             Core.<*> (o Core..:? "type")
       )
@@ -2228,15 +2228,15 @@ instance Core.FromJSON BasicChartSpec where
       "BasicChartSpec"
       ( \o ->
           BasicChartSpec
-            Core.<$> (o Core..:? "axis" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "axis")
             Core.<*> (o Core..:? "chartType")
             Core.<*> (o Core..:? "compareMode")
-            Core.<*> (o Core..:? "domains" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domains")
             Core.<*> (o Core..:? "headerCount")
             Core.<*> (o Core..:? "interpolateNulls")
             Core.<*> (o Core..:? "legendPosition")
             Core.<*> (o Core..:? "lineSmoothing")
-            Core.<*> (o Core..:? "series" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "series")
             Core.<*> (o Core..:? "stackedType")
             Core.<*> (o Core..:? "threeDimensional")
             Core.<*> (o Core..:? "totalDataLabel")
@@ -2296,9 +2296,9 @@ instance Core.FromJSON BasicFilter where
       ( \o ->
           BasicFilter
             Core.<$> (o Core..:? "criteria")
-            Core.<*> (o Core..:? "filterSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filterSpecs")
             Core.<*> (o Core..:? "range")
-            Core.<*> (o Core..:? "sortSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sortSpecs")
       )
 
 instance Core.ToJSON BasicFilter where
@@ -2421,7 +2421,7 @@ instance
       "BatchClearValuesByDataFilterRequest"
       ( \o ->
           BatchClearValuesByDataFilterRequest
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
       )
 
 instance
@@ -2463,7 +2463,7 @@ instance
       "BatchClearValuesByDataFilterResponse"
       ( \o ->
           BatchClearValuesByDataFilterResponse
-            Core.<$> (o Core..:? "clearedRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clearedRanges")
             Core.<*> (o Core..:? "spreadsheetId")
       )
 
@@ -2499,7 +2499,7 @@ instance Core.FromJSON BatchClearValuesRequest where
       "BatchClearValuesRequest"
       ( \o ->
           BatchClearValuesRequest
-            Core.<$> (o Core..:? "ranges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ranges")
       )
 
 instance Core.ToJSON BatchClearValuesRequest where
@@ -2533,7 +2533,7 @@ instance Core.FromJSON BatchClearValuesResponse where
       "BatchClearValuesResponse"
       ( \o ->
           BatchClearValuesResponse
-            Core.<$> (o Core..:? "clearedRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clearedRanges")
             Core.<*> (o Core..:? "spreadsheetId")
       )
 
@@ -2581,7 +2581,7 @@ instance
       "BatchGetValuesByDataFilterRequest"
       ( \o ->
           BatchGetValuesByDataFilterRequest
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
             Core.<*> (o Core..:? "dateTimeRenderOption")
             Core.<*> (o Core..:? "majorDimension")
             Core.<*> (o Core..:? "valueRenderOption")
@@ -2633,7 +2633,7 @@ instance
       ( \o ->
           BatchGetValuesByDataFilterResponse
             Core.<$> (o Core..:? "spreadsheetId")
-            Core.<*> (o Core..:? "valueRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueRanges")
       )
 
 instance
@@ -2675,7 +2675,7 @@ instance Core.FromJSON BatchGetValuesResponse where
       ( \o ->
           BatchGetValuesResponse
             Core.<$> (o Core..:? "spreadsheetId")
-            Core.<*> (o Core..:? "valueRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueRanges")
       )
 
 instance Core.ToJSON BatchGetValuesResponse where
@@ -2720,9 +2720,9 @@ instance Core.FromJSON BatchUpdateSpreadsheetRequest where
       ( \o ->
           BatchUpdateSpreadsheetRequest
             Core.<$> (o Core..:? "includeSpreadsheetInResponse")
-            Core.<*> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "requests")
             Core.<*> (o Core..:? "responseIncludeGridData")
-            Core.<*> (o Core..:? "responseRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "responseRanges")
       )
 
 instance Core.ToJSON BatchUpdateSpreadsheetRequest where
@@ -2767,7 +2767,7 @@ instance Core.FromJSON BatchUpdateSpreadsheetResponse where
       "BatchUpdateSpreadsheetResponse"
       ( \o ->
           BatchUpdateSpreadsheetResponse
-            Core.<$> (o Core..:? "replies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "replies")
             Core.<*> (o Core..:? "spreadsheetId")
             Core.<*> (o Core..:? "updatedSpreadsheet")
       )
@@ -2827,7 +2827,7 @@ instance
       "BatchUpdateValuesByDataFilterRequest"
       ( \o ->
           BatchUpdateValuesByDataFilterRequest
-            Core.<$> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "data")
             Core.<*> (o Core..:? "includeValuesInResponse")
             Core.<*> (o Core..:? "responseDateTimeRenderOption")
             Core.<*> (o Core..:? "responseValueRenderOption")
@@ -2894,7 +2894,7 @@ instance
       "BatchUpdateValuesByDataFilterResponse"
       ( \o ->
           BatchUpdateValuesByDataFilterResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
             Core.<*> (o Core..:? "spreadsheetId")
             Core.<*> (o Core..:? "totalUpdatedCells")
             Core.<*> (o Core..:? "totalUpdatedColumns")
@@ -2957,7 +2957,7 @@ instance Core.FromJSON BatchUpdateValuesRequest where
       "BatchUpdateValuesRequest"
       ( \o ->
           BatchUpdateValuesRequest
-            Core.<$> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "data")
             Core.<*> (o Core..:? "includeValuesInResponse")
             Core.<*> (o Core..:? "responseDateTimeRenderOption")
             Core.<*> (o Core..:? "responseValueRenderOption")
@@ -3018,7 +3018,7 @@ instance Core.FromJSON BatchUpdateValuesResponse where
       "BatchUpdateValuesResponse"
       ( \o ->
           BatchUpdateValuesResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
             Core.<*> (o Core..:? "spreadsheetId")
             Core.<*> (o Core..:? "totalUpdatedCells")
             Core.<*> (o Core..:? "totalUpdatedColumns")
@@ -3183,8 +3183,7 @@ instance Core.FromJSON BooleanCondition where
       "BooleanCondition"
       ( \o ->
           BooleanCondition
-            Core.<$> (o Core..:? "type")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON BooleanCondition where
@@ -3445,8 +3444,7 @@ instance Core.FromJSON CandlestickChartSpec where
       "CandlestickChartSpec"
       ( \o ->
           CandlestickChartSpec
-            Core.<$> (o Core..:? "data" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "domain")
+            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "domain")
       )
 
 instance Core.ToJSON CandlestickChartSpec where
@@ -3634,7 +3632,7 @@ instance Core.FromJSON CellData where
             Core.<*> (o Core..:? "hyperlink")
             Core.<*> (o Core..:? "note")
             Core.<*> (o Core..:? "pivotTable")
-            Core.<*> (o Core..:? "textFormatRuns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "textFormatRuns")
             Core.<*> (o Core..:? "userEnteredFormat")
             Core.<*> (o Core..:? "userEnteredValue")
       )
@@ -4009,8 +4007,7 @@ instance Core.FromJSON ChartSourceRange where
     Core.withObject
       "ChartSourceRange"
       ( \o ->
-          ChartSourceRange
-            Core.<$> (o Core..:? "sources" Core..!= Core.mempty)
+          ChartSourceRange Core.<$> (o Core..:? "sources")
       )
 
 instance Core.ToJSON ChartSourceRange where
@@ -4119,7 +4116,7 @@ instance Core.FromJSON ChartSpec where
             Core.<*> (o Core..:? "bubbleChart")
             Core.<*> (o Core..:? "candlestickChart")
             Core.<*> (o Core..:? "dataSourceChartProperties")
-            Core.<*> (o Core..:? "filterSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filterSpecs")
             Core.<*> (o Core..:? "fontName")
             Core.<*> (o Core..:? "hiddenDimensionStrategy")
             Core.<*> (o Core..:? "histogramChart")
@@ -4127,7 +4124,7 @@ instance Core.FromJSON ChartSpec where
             Core.<*> (o Core..:? "orgChart")
             Core.<*> (o Core..:? "pieChart")
             Core.<*> (o Core..:? "scorecardChart")
-            Core.<*> (o Core..:? "sortSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sortSpecs")
             Core.<*> (o Core..:? "subtitle")
             Core.<*> (o Core..:? "subtitleTextFormat")
             Core.<*> (o Core..:? "subtitleTextPosition")
@@ -4420,7 +4417,7 @@ instance Core.FromJSON ConditionalFormatRule where
           ConditionalFormatRule
             Core.<$> (o Core..:? "booleanRule")
             Core.<*> (o Core..:? "gradientRule")
-            Core.<*> (o Core..:? "ranges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ranges")
       )
 
 instance Core.ToJSON ConditionalFormatRule where
@@ -4760,7 +4757,7 @@ instance Core.FromJSON DataFilterValueRange where
           DataFilterValueRange
             Core.<$> (o Core..:? "dataFilter")
             Core.<*> (o Core..:? "majorDimension")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON DataFilterValueRange where
@@ -4855,7 +4852,7 @@ instance Core.FromJSON DataSource where
       "DataSource"
       ( \o ->
           DataSource
-            Core.<$> (o Core..:? "calculatedColumns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "calculatedColumns")
             Core.<*> (o Core..:? "dataSourceId")
             Core.<*> (o Core..:? "sheetId")
             Core.<*> (o Core..:? "spec")
@@ -5095,7 +5092,7 @@ instance Core.FromJSON DataSourceObjectReferences where
       "DataSourceObjectReferences"
       ( \o ->
           DataSourceObjectReferences
-            Core.<$> (o Core..:? "references" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "references")
       )
 
 instance Core.ToJSON DataSourceObjectReferences where
@@ -5209,7 +5206,7 @@ instance
       "DataSourceRefreshMonthlySchedule"
       ( \o ->
           DataSourceRefreshMonthlySchedule
-            Core.<$> (o Core..:? "daysOfMonth" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "daysOfMonth")
             Core.<*> (o Core..:? "startTime")
       )
 
@@ -5310,7 +5307,7 @@ instance
       "DataSourceRefreshWeeklySchedule"
       ( \o ->
           DataSourceRefreshWeeklySchedule
-            Core.<$> (o Core..:? "daysOfWeek" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "daysOfWeek")
             Core.<*> (o Core..:? "startTime")
       )
 
@@ -5349,7 +5346,7 @@ instance Core.FromJSON DataSourceSheetDimensionRange where
       "DataSourceSheetDimensionRange"
       ( \o ->
           DataSourceSheetDimensionRange
-            Core.<$> (o Core..:? "columnReferences" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnReferences")
             Core.<*> (o Core..:? "sheetId")
       )
 
@@ -5392,7 +5389,7 @@ instance Core.FromJSON DataSourceSheetProperties where
       "DataSourceSheetProperties"
       ( \o ->
           DataSourceSheetProperties
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "dataExecutionStatus")
             Core.<*> (o Core..:? "dataSourceId")
       )
@@ -5432,7 +5429,7 @@ instance Core.FromJSON DataSourceSpec where
       ( \o ->
           DataSourceSpec
             Core.<$> (o Core..:? "bigQuery")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON DataSourceSpec where
@@ -5486,12 +5483,12 @@ instance Core.FromJSON DataSourceTable where
       ( \o ->
           DataSourceTable
             Core.<$> (o Core..:? "columnSelectionType")
-            Core.<*> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "columns")
             Core.<*> (o Core..:? "dataExecutionStatus")
             Core.<*> (o Core..:? "dataSourceId")
-            Core.<*> (o Core..:? "filterSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filterSpecs")
             Core.<*> (o Core..:? "rowLimit")
-            Core.<*> (o Core..:? "sortSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sortSpecs")
       )
 
 instance Core.ToJSON DataSourceTable where
@@ -5779,9 +5776,7 @@ instance
       "DeleteDeveloperMetadataResponse"
       ( \o ->
           DeleteDeveloperMetadataResponse
-            Core.<$> ( o Core..:? "deletedDeveloperMetadata"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "deletedDeveloperMetadata")
       )
 
 instance Core.ToJSON DeleteDeveloperMetadataResponse where
@@ -5843,7 +5838,7 @@ instance Core.FromJSON DeleteDimensionGroupResponse where
       "DeleteDimensionGroupResponse"
       ( \o ->
           DeleteDimensionGroupResponse
-            Core.<$> (o Core..:? "dimensionGroups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensionGroups")
       )
 
 instance Core.ToJSON DeleteDimensionGroupResponse where
@@ -5908,7 +5903,7 @@ instance Core.FromJSON DeleteDuplicatesRequest where
       "DeleteDuplicatesRequest"
       ( \o ->
           DeleteDuplicatesRequest
-            Core.<$> (o Core..:? "comparisonColumns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "comparisonColumns")
             Core.<*> (o Core..:? "range")
       )
 
@@ -6394,7 +6389,7 @@ instance Core.FromJSON DimensionProperties where
       ( \o ->
           DimensionProperties
             Core.<$> (o Core..:? "dataSourceColumnReference")
-            Core.<*> (o Core..:? "developerMetadata" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "developerMetadata")
             Core.<*> (o Core..:? "hiddenByFilter")
             Core.<*> (o Core..:? "hiddenByUser")
             Core.<*> (o Core..:? "pixelSize")
@@ -6633,8 +6628,8 @@ instance Core.FromJSON Editors where
       ( \o ->
           Editors
             Core.<$> (o Core..:? "domainUsersCanEdit")
-            Core.<*> (o Core..:? "groups" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "groups")
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON Editors where
@@ -6904,7 +6899,7 @@ instance Core.FromJSON FilterCriteria where
       ( \o ->
           FilterCriteria
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "hiddenValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "hiddenValues")
             Core.<*> (o Core..:? "visibleBackgroundColor")
             Core.<*> (o Core..:? "visibleBackgroundColorStyle")
             Core.<*> (o Core..:? "visibleForegroundColor")
@@ -7015,11 +7010,11 @@ instance Core.FromJSON FilterView where
       ( \o ->
           FilterView
             Core.<$> (o Core..:? "criteria")
-            Core.<*> (o Core..:? "filterSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filterSpecs")
             Core.<*> (o Core..:? "filterViewId")
             Core.<*> (o Core..:? "namedRangeId")
             Core.<*> (o Core..:? "range")
-            Core.<*> (o Core..:? "sortSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sortSpecs")
             Core.<*> (o Core..:? "title")
       )
 
@@ -7226,7 +7221,7 @@ instance
       "GetSpreadsheetByDataFilterRequest"
       ( \o ->
           GetSpreadsheetByDataFilterRequest
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
             Core.<*> (o Core..:? "includeGridData")
       )
 
@@ -7366,9 +7361,9 @@ instance Core.FromJSON GridData where
       "GridData"
       ( \o ->
           GridData
-            Core.<$> (o Core..:? "columnMetadata" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rowData" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rowMetadata" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnMetadata")
+            Core.<*> (o Core..:? "rowData")
+            Core.<*> (o Core..:? "rowMetadata")
             Core.<*> (o Core..:? "startColumn")
             Core.<*> (o Core..:? "startRow")
       )
@@ -7545,7 +7540,7 @@ instance Core.FromJSON HistogramChartSpec where
             Core.<$> (o Core..:? "bucketSize")
             Core.<*> (o Core..:? "legendPosition")
             Core.<*> (o Core..:? "outlierPercentile")
-            Core.<*> (o Core..:? "series" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "series")
             Core.<*> (o Core..:? "showItemDividers")
       )
 
@@ -7965,10 +7960,7 @@ instance Core.FromJSON ManualRule where
   parseJSON =
     Core.withObject
       "ManualRule"
-      ( \o ->
-          ManualRule
-            Core.<$> (o Core..:? "groups" Core..!= Core.mempty)
-      )
+      (\o -> ManualRule Core.<$> (o Core..:? "groups"))
 
 instance Core.ToJSON ManualRule where
   toJSON ManualRule {..} =
@@ -7999,7 +7991,7 @@ instance Core.FromJSON ManualRuleGroup where
       ( \o ->
           ManualRuleGroup
             Core.<$> (o Core..:? "groupName")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
       )
 
 instance Core.ToJSON ManualRuleGroup where
@@ -8037,7 +8029,7 @@ instance Core.FromJSON MatchedDeveloperMetadata where
       "MatchedDeveloperMetadata"
       ( \o ->
           MatchedDeveloperMetadata
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
             Core.<*> (o Core..:? "developerMetadata")
       )
 
@@ -8074,7 +8066,7 @@ instance Core.FromJSON MatchedValueRange where
       "MatchedValueRange"
       ( \o ->
           MatchedValueRange
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
             Core.<*> (o Core..:? "valueRange")
       )
 
@@ -8552,7 +8544,7 @@ instance Core.FromJSON PivotFilterCriteria where
           PivotFilterCriteria
             Core.<$> (o Core..:? "condition")
             Core.<*> (o Core..:? "visibleByDefault")
-            Core.<*> (o Core..:? "visibleValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "visibleValues")
       )
 
 instance Core.ToJSON PivotFilterCriteria where
@@ -8671,7 +8663,7 @@ instance Core.FromJSON PivotGroup where
             Core.<*> (o Core..:? "sortOrder")
             Core.<*> (o Core..:? "sourceColumnOffset")
             Core.<*> (o Core..:? "valueBucket")
-            Core.<*> (o Core..:? "valueMetadata" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueMetadata")
       )
 
 instance Core.ToJSON PivotGroup where
@@ -8796,7 +8788,7 @@ instance Core.FromJSON PivotGroupSortValueBucket where
       "PivotGroupSortValueBucket"
       ( \o ->
           PivotGroupSortValueBucket
-            Core.<$> (o Core..:? "buckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buckets")
             Core.<*> (o Core..:? "valuesIndex")
       )
 
@@ -8892,15 +8884,15 @@ instance Core.FromJSON PivotTable where
       "PivotTable"
       ( \o ->
           PivotTable
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "criteria")
             Core.<*> (o Core..:? "dataExecutionStatus")
             Core.<*> (o Core..:? "dataSourceId")
-            Core.<*> (o Core..:? "filterSpecs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filterSpecs")
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "valueLayout")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON PivotTable where
@@ -9097,7 +9089,7 @@ instance Core.FromJSON ProtectedRange where
             Core.<*> (o Core..:? "protectedRangeId")
             Core.<*> (o Core..:? "range")
             Core.<*> (o Core..:? "requestingUserCanEdit")
-            Core.<*> (o Core..:? "unprotectedRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unprotectedRanges")
             Core.<*> (o Core..:? "warningOnly")
       )
 
@@ -9262,7 +9254,7 @@ instance Core.FromJSON RefreshDataSourceResponse where
       "RefreshDataSourceResponse"
       ( \o ->
           RefreshDataSourceResponse
-            Core.<$> (o Core..:? "statuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "statuses")
       )
 
 instance Core.ToJSON RefreshDataSourceResponse where
@@ -9876,10 +9868,7 @@ instance Core.FromJSON RowData where
   parseJSON =
     Core.withObject
       "RowData"
-      ( \o ->
-          RowData
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> RowData Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON RowData where
   toJSON RowData {..} =
@@ -9980,7 +9969,7 @@ instance Core.FromJSON SearchDeveloperMetadataRequest where
       "SearchDeveloperMetadataRequest"
       ( \o ->
           SearchDeveloperMetadataRequest
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
       )
 
 instance Core.ToJSON SearchDeveloperMetadataRequest where
@@ -10014,9 +10003,7 @@ instance
       "SearchDeveloperMetadataResponse"
       ( \o ->
           SearchDeveloperMetadataResponse
-            Core.<$> ( o Core..:? "matchedDeveloperMetadata"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "matchedDeveloperMetadata")
       )
 
 instance Core.ToJSON SearchDeveloperMetadataResponse where
@@ -10149,21 +10136,19 @@ instance Core.FromJSON Sheet where
       "Sheet"
       ( \o ->
           Sheet
-            Core.<$> (o Core..:? "bandedRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bandedRanges")
             Core.<*> (o Core..:? "basicFilter")
-            Core.<*> (o Core..:? "charts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "columnGroups" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "conditionalFormats"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "developerMetadata" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "filterViews" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "merges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "charts")
+            Core.<*> (o Core..:? "columnGroups")
+            Core.<*> (o Core..:? "conditionalFormats")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "developerMetadata")
+            Core.<*> (o Core..:? "filterViews")
+            Core.<*> (o Core..:? "merges")
             Core.<*> (o Core..:? "properties")
-            Core.<*> (o Core..:? "protectedRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rowGroups" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "slicers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "protectedRanges")
+            Core.<*> (o Core..:? "rowGroups")
+            Core.<*> (o Core..:? "slicers")
       )
 
 instance Core.ToJSON Sheet where
@@ -10409,7 +10394,7 @@ instance Core.FromJSON SortRangeRequest where
       ( \o ->
           SortRangeRequest
             Core.<$> (o Core..:? "range")
-            Core.<*> (o Core..:? "sortSpecs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sortSpecs")
       )
 
 instance Core.ToJSON SortRangeRequest where
@@ -10577,14 +10562,12 @@ instance Core.FromJSON Spreadsheet where
       "Spreadsheet"
       ( \o ->
           Spreadsheet
-            Core.<$> ( o Core..:? "dataSourceSchedules"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "dataSources" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "developerMetadata" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "namedRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataSourceSchedules")
+            Core.<*> (o Core..:? "dataSources")
+            Core.<*> (o Core..:? "developerMetadata")
+            Core.<*> (o Core..:? "namedRanges")
             Core.<*> (o Core..:? "properties")
-            Core.<*> (o Core..:? "sheets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sheets")
             Core.<*> (o Core..:? "spreadsheetId")
             Core.<*> (o Core..:? "spreadsheetUrl")
       )
@@ -10699,7 +10682,7 @@ instance Core.FromJSON SpreadsheetTheme where
       ( \o ->
           SpreadsheetTheme
             Core.<$> (o Core..:? "primaryFontFamily")
-            Core.<*> (o Core..:? "themeColors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "themeColors")
       )
 
 instance Core.ToJSON SpreadsheetTheme where
@@ -11408,7 +11391,7 @@ instance Core.FromJSON UpdateCellsRequest where
           UpdateCellsRequest
             Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "range")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "start")
       )
 
@@ -11673,7 +11656,7 @@ instance Core.FromJSON UpdateDeveloperMetadataRequest where
       "UpdateDeveloperMetadataRequest"
       ( \o ->
           UpdateDeveloperMetadataRequest
-            Core.<$> (o Core..:? "dataFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataFilters")
             Core.<*> (o Core..:? "developerMetadata")
             Core.<*> (o Core..:? "fields")
       )
@@ -11713,9 +11696,7 @@ instance
       "UpdateDeveloperMetadataResponse"
       ( \o ->
           UpdateDeveloperMetadataResponse
-            Core.<$> ( o Core..:? "developerMetadata"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "developerMetadata")
       )
 
 instance Core.ToJSON UpdateDeveloperMetadataResponse where
@@ -12346,7 +12327,7 @@ instance Core.FromJSON ValueRange where
           ValueRange
             Core.<$> (o Core..:? "majorDimension")
             Core.<*> (o Core..:? "range")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ValueRange where
@@ -12523,7 +12504,7 @@ instance Core.FromJSON WaterfallChartSeries where
       "WaterfallChartSeries"
       ( \o ->
           WaterfallChartSeries
-            Core.<$> (o Core..:? "customSubtotals" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customSubtotals")
             Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "dataLabel")
             Core.<*> (o Core..:? "hideTrailingSubtotal")
@@ -12596,7 +12577,7 @@ instance Core.FromJSON WaterfallChartSpec where
             Core.<*> (o Core..:? "domain")
             Core.<*> (o Core..:? "firstValueIsTotal")
             Core.<*> (o Core..:? "hideConnectorLines")
-            Core.<*> (o Core..:? "series" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "series")
             Core.<*> (o Core..:? "stackedType")
             Core.<*> (o Core..:? "totalDataLabel")
       )

@@ -303,7 +303,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -340,7 +340,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -385,7 +385,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1100,7 +1100,7 @@ instance Core.FromJSON Lien where
             Core.<*> (o Core..:? "origin")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "restrictions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "restrictions")
       )
 
 instance Core.ToJSON Lien where
@@ -1139,7 +1139,7 @@ instance Core.FromJSON ListFoldersResponse where
       "ListFoldersResponse"
       ( \o ->
           ListFoldersResponse
-            Core.<$> (o Core..:? "folders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "folders")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1175,7 +1175,7 @@ instance Core.FromJSON ListLiensResponse where
       "ListLiensResponse"
       ( \o ->
           ListLiensResponse
-            Core.<$> (o Core..:? "liens" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "liens")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1212,7 +1212,7 @@ instance Core.FromJSON ListProjectsResponse where
       ( \o ->
           ListProjectsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "projects" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projects")
       )
 
 instance Core.ToJSON ListProjectsResponse where
@@ -1251,7 +1251,7 @@ instance Core.FromJSON ListTagBindingsResponse where
       ( \o ->
           ListTagBindingsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tagBindings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tagBindings")
       )
 
 instance Core.ToJSON ListTagBindingsResponse where
@@ -1287,7 +1287,7 @@ instance Core.FromJSON ListTagKeysResponse where
       ( \o ->
           ListTagKeysResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tagKeys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tagKeys")
       )
 
 instance Core.ToJSON ListTagKeysResponse where
@@ -1323,7 +1323,7 @@ instance Core.FromJSON ListTagValuesResponse where
       ( \o ->
           ListTagValuesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tagValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tagValues")
       )
 
 instance Core.ToJSON ListTagValuesResponse where
@@ -1679,8 +1679,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1869,7 +1869,7 @@ instance Core.FromJSON SearchFoldersResponse where
       "SearchFoldersResponse"
       ( \o ->
           SearchFoldersResponse
-            Core.<$> (o Core..:? "folders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "folders")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1909,7 +1909,7 @@ instance Core.FromJSON SearchOrganizationsResponse where
       ( \o ->
           SearchOrganizationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "organizations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "organizations")
       )
 
 instance Core.ToJSON SearchOrganizationsResponse where
@@ -1945,7 +1945,7 @@ instance Core.FromJSON SearchProjectsResponse where
       ( \o ->
           SearchProjectsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "projects" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projects")
       )
 
 instance Core.ToJSON SearchProjectsResponse where
@@ -2019,7 +2019,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2263,7 +2263,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2294,7 +2294,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

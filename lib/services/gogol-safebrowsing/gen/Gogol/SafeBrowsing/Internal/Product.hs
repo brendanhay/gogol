@@ -268,9 +268,7 @@ instance
       ( \o ->
           GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest
             Core.<$> (o Core..:? "client")
-              Core.<*> ( o Core..:? "listUpdateRequests"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "listUpdateRequests")
       )
 
 instance
@@ -409,9 +407,7 @@ instance
               Core.<*> (o Core..:? "maxDatabaseEntries")
               Core.<*> (o Core..:? "maxUpdateEntries")
               Core.<*> (o Core..:? "region")
-              Core.<*> ( o Core..:? "supportedCompressions"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "supportedCompressions")
       )
 
 instance
@@ -465,9 +461,7 @@ instance
       "GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse"
       ( \o ->
           GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse
-            Core.<$> ( o Core..:? "listUpdateResponses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "listUpdateResponses")
               Core.<*> (o Core..:? "minimumWaitDuration")
       )
 
@@ -545,11 +539,11 @@ instance
       "GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse"
       ( \o ->
           GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
-            Core.<$> (o Core..:? "additions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "additions")
               Core.<*> (o Core..:? "checksum")
               Core.<*> (o Core..:? "newClientState")
               Core.<*> (o Core..:? "platformType")
-              Core.<*> (o Core..:? "removals" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "removals")
               Core.<*> (o Core..:? "responseType")
               Core.<*> (o Core..:? "threatEntryType")
               Core.<*> (o Core..:? "threatType")
@@ -611,7 +605,7 @@ instance
           GoogleSecuritySafebrowsingV4FindFullHashesRequest
             Core.<$> (o Core..:? "apiClient")
               Core.<*> (o Core..:? "client")
-              Core.<*> (o Core..:? "clientStates" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "clientStates")
               Core.<*> (o Core..:? "threatInfo")
       )
 
@@ -661,7 +655,7 @@ instance
       "GoogleSecuritySafebrowsingV4FindFullHashesResponse"
       ( \o ->
           GoogleSecuritySafebrowsingV4FindFullHashesResponse
-            Core.<$> (o Core..:? "matches" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "matches")
               Core.<*> (o Core..:? "minimumWaitDuration")
               Core.<*> (o Core..:? "negativeCacheDuration")
       )
@@ -751,7 +745,7 @@ instance
       "GoogleSecuritySafebrowsingV4FindThreatMatchesResponse"
       ( \o ->
           GoogleSecuritySafebrowsingV4FindThreatMatchesResponse
-            Core.<$> (o Core..:? "matches" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "matches")
       )
 
 instance
@@ -790,7 +784,7 @@ instance
       "GoogleSecuritySafebrowsingV4ListThreatListsResponse"
       ( \o ->
           GoogleSecuritySafebrowsingV4ListThreatListsResponse
-            Core.<$> (o Core..:? "threatLists" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "threatLists")
       )
 
 instance
@@ -873,7 +867,7 @@ instance
       "GoogleSecuritySafebrowsingV4RawIndices"
       ( \o ->
           GoogleSecuritySafebrowsingV4RawIndices
-            Core.<$> (o Core..:? "indices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "indices")
       )
 
 instance
@@ -922,7 +916,9 @@ instance
       ( \o ->
           GoogleSecuritySafebrowsingV4RiceDeltaEncoding
             Core.<$> (o Core..:? "encodedData")
-              Core.<*> (o Core..:? "firstValue")
+              Core.<*> ( o Core..:? "firstValue"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "numEntries")
               Core.<*> (o Core..:? "riceParameter")
       )
@@ -1020,7 +1016,7 @@ instance
       "GoogleSecuritySafebrowsingV4ThreatEntryMetadata"
       ( \o ->
           GoogleSecuritySafebrowsingV4ThreatEntryMetadata
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -1186,7 +1182,7 @@ instance
             Core.<$> (o Core..:? "clientInfo")
             Core.<*> (o Core..:? "entry")
             Core.<*> (o Core..:? "platformType")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "threatType")
             Core.<*> (o Core..:? "userInfo")
       )
@@ -1353,10 +1349,10 @@ instance
       "GoogleSecuritySafebrowsingV4ThreatInfo"
       ( \o ->
           GoogleSecuritySafebrowsingV4ThreatInfo
-            Core.<$> (o Core..:? "platformTypes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "threatEntries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "threatEntryTypes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "threatTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "platformTypes")
+            Core.<*> (o Core..:? "threatEntries")
+            Core.<*> (o Core..:? "threatEntryTypes")
+            Core.<*> (o Core..:? "threatTypes")
       )
 
 instance

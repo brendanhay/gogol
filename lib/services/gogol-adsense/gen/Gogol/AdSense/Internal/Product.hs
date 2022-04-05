@@ -200,7 +200,7 @@ instance Core.FromJSON Account where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pendingTasks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pendingTasks")
             Core.<*> (o Core..:? "premium")
             Core.<*> (o Core..:? "timeZone")
       )
@@ -657,7 +657,7 @@ instance Core.FromJSON HttpBody where
           HttpBody
             Core.<$> (o Core..:? "contentType")
             Core.<*> (o Core..:? "data")
-            Core.<*> (o Core..:? "extensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extensions")
       )
 
 instance Core.ToJSON HttpBody where
@@ -722,7 +722,7 @@ instance Core.FromJSON ListAccountsResponse where
       "ListAccountsResponse"
       ( \o ->
           ListAccountsResponse
-            Core.<$> (o Core..:? "accounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accounts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -758,7 +758,7 @@ instance Core.FromJSON ListAdClientsResponse where
       "ListAdClientsResponse"
       ( \o ->
           ListAdClientsResponse
-            Core.<$> (o Core..:? "adClients" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adClients")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -794,7 +794,7 @@ instance Core.FromJSON ListAdUnitsResponse where
       "ListAdUnitsResponse"
       ( \o ->
           ListAdUnitsResponse
-            Core.<$> (o Core..:? "adUnits" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adUnits")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -826,8 +826,7 @@ instance Core.FromJSON ListAlertsResponse where
     Core.withObject
       "ListAlertsResponse"
       ( \o ->
-          ListAlertsResponse
-            Core.<$> (o Core..:? "alerts" Core..!= Core.mempty)
+          ListAlertsResponse Core.<$> (o Core..:? "alerts")
       )
 
 instance Core.ToJSON ListAlertsResponse where
@@ -861,7 +860,7 @@ instance Core.FromJSON ListChildAccountsResponse where
       "ListChildAccountsResponse"
       ( \o ->
           ListChildAccountsResponse
-            Core.<$> (o Core..:? "accounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accounts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -900,7 +899,7 @@ instance Core.FromJSON ListCustomChannelsResponse where
       "ListCustomChannelsResponse"
       ( \o ->
           ListCustomChannelsResponse
-            Core.<$> (o Core..:? "customChannels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customChannels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -939,7 +938,7 @@ instance Core.FromJSON ListLinkedAdUnitsResponse where
       "ListLinkedAdUnitsResponse"
       ( \o ->
           ListLinkedAdUnitsResponse
-            Core.<$> (o Core..:? "adUnits" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adUnits")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -981,7 +980,7 @@ instance
       "ListLinkedCustomChannelsResponse"
       ( \o ->
           ListLinkedCustomChannelsResponse
-            Core.<$> (o Core..:? "customChannels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customChannels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1014,7 +1013,7 @@ instance Core.FromJSON ListPaymentsResponse where
       "ListPaymentsResponse"
       ( \o ->
           ListPaymentsResponse
-            Core.<$> (o Core..:? "payments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "payments")
       )
 
 instance Core.ToJSON ListPaymentsResponse where
@@ -1051,7 +1050,7 @@ instance Core.FromJSON ListSavedReportsResponse where
       ( \o ->
           ListSavedReportsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "savedReports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "savedReports")
       )
 
 instance Core.ToJSON ListSavedReportsResponse where
@@ -1087,7 +1086,7 @@ instance Core.FromJSON ListSitesResponse where
       ( \o ->
           ListSitesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sites" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sites")
       )
 
 instance Core.ToJSON ListSitesResponse where
@@ -1126,7 +1125,7 @@ instance Core.FromJSON ListUrlChannelsResponse where
       ( \o ->
           ListUrlChannelsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "urlChannels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "urlChannels")
       )
 
 instance Core.ToJSON ListUrlChannelsResponse where
@@ -1224,12 +1223,14 @@ instance Core.FromJSON ReportResult where
           ReportResult
             Core.<$> (o Core..:? "averages")
             Core.<*> (o Core..:? "endDate")
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "headers")
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "startDate")
-            Core.<*> (o Core..:? "totalMatchedRows")
+            Core.<*> ( o Core..:? "totalMatchedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "totals")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON ReportResult where
@@ -1266,10 +1267,7 @@ instance Core.FromJSON Row where
   parseJSON =
     Core.withObject
       "Row"
-      ( \o ->
-          Row
-            Core.<$> (o Core..:? "cells" Core..!= Core.mempty)
-      )
+      (\o -> Row Core.<$> (o Core..:? "cells"))
 
 instance Core.ToJSON Row where
   toJSON Row {..} =

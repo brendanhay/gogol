@@ -157,7 +157,7 @@ instance Core.FromJSON Asset where
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "formats" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "formats")
             Core.<*> (o Core..:? "isCurated")
             Core.<*> (o Core..:? "license")
             Core.<*> (o Core..:? "metadata")
@@ -318,7 +318,7 @@ instance Core.FromJSON Format where
           Format
             Core.<$> (o Core..:? "formatComplexity")
             Core.<*> (o Core..:? "formatType")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "root")
       )
 
@@ -358,7 +358,9 @@ instance Core.FromJSON FormatComplexity where
       ( \o ->
           FormatComplexity
             Core.<$> (o Core..:? "lodHint")
-            Core.<*> (o Core..:? "triangleCount")
+            Core.<*> ( o Core..:? "triangleCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON FormatComplexity where
@@ -434,7 +436,7 @@ instance Core.FromJSON ListAssetsResponse where
       "ListAssetsResponse"
       ( \o ->
           ListAssetsResponse
-            Core.<$> (o Core..:? "assets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "assets")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -478,7 +480,7 @@ instance Core.FromJSON ListLikedAssetsResponse where
       "ListLikedAssetsResponse"
       ( \o ->
           ListLikedAssetsResponse
-            Core.<$> (o Core..:? "assets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "assets")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -524,7 +526,7 @@ instance Core.FromJSON ListUserAssetsResponse where
           ListUserAssetsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
-            Core.<*> (o Core..:? "userAssets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userAssets")
       )
 
 instance Core.ToJSON ListUserAssetsResponse where
@@ -710,8 +712,7 @@ instance Core.FromJSON RemixInfo where
     Core.withObject
       "RemixInfo"
       ( \o ->
-          RemixInfo
-            Core.<$> (o Core..:? "sourceAsset" Core..!= Core.mempty)
+          RemixInfo Core.<$> (o Core..:? "sourceAsset")
       )
 
 instance Core.ToJSON RemixInfo where
@@ -755,9 +756,7 @@ instance Core.FromJSON StartAssetImportResponse where
           StartAssetImportResponse
             Core.<$> (o Core..:? "assetId")
             Core.<*> (o Core..:? "assetImportId")
-            Core.<*> ( o Core..:? "assetImportMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "assetImportMessages")
             Core.<*> (o Core..:? "publishUrl")
       )
 

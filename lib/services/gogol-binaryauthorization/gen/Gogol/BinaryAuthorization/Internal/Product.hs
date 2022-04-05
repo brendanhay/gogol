@@ -158,9 +158,7 @@ instance Core.FromJSON AdmissionRule where
           AdmissionRule
             Core.<$> (o Core..:? "enforcementMode")
             Core.<*> (o Core..:? "evaluationMode")
-            Core.<*> ( o Core..:? "requireAttestationsBy"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "requireAttestationsBy")
       )
 
 instance Core.ToJSON AdmissionRule where
@@ -235,9 +233,9 @@ instance Core.FromJSON AttestationOccurrence where
       "AttestationOccurrence"
       ( \o ->
           AttestationOccurrence
-            Core.<$> (o Core..:? "jwts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jwts")
             Core.<*> (o Core..:? "serializedPayload")
-            Core.<*> (o Core..:? "signatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "signatures")
       )
 
 instance Core.ToJSON AttestationOccurrence where
@@ -387,7 +385,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -501,7 +499,7 @@ instance Core.FromJSON IamPolicy where
       "IamPolicy"
       ( \o ->
           IamPolicy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -565,7 +563,7 @@ instance Core.FromJSON ListAttestorsResponse where
       "ListAttestorsResponse"
       ( \o ->
           ListAttestorsResponse
-            Core.<$> (o Core..:? "attestors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attestors")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -668,9 +666,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> ( o Core..:? "admissionWhitelistPatterns"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "admissionWhitelistPatterns")
             Core.<*> (o Core..:? "clusterAdmissionRules")
             Core.<*> (o Core..:? "defaultAdmissionRule")
             Core.<*> (o Core..:? "description")
@@ -931,7 +927,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -962,7 +958,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -1003,7 +999,7 @@ instance Core.FromJSON UserOwnedGrafeasNote where
           UserOwnedGrafeasNote
             Core.<$> (o Core..:? "delegationServiceAccountEmail")
             Core.<*> (o Core..:? "noteReference")
-            Core.<*> (o Core..:? "publicKeys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "publicKeys")
       )
 
 instance Core.ToJSON UserOwnedGrafeasNote where

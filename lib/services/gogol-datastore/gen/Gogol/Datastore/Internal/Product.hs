@@ -350,8 +350,7 @@ instance Core.FromJSON AllocateIdsRequest where
     Core.withObject
       "AllocateIdsRequest"
       ( \o ->
-          AllocateIdsRequest
-            Core.<$> (o Core..:? "keys" Core..!= Core.mempty)
+          AllocateIdsRequest Core.<$> (o Core..:? "keys")
       )
 
 instance Core.ToJSON AllocateIdsRequest where
@@ -378,8 +377,7 @@ instance Core.FromJSON AllocateIdsResponse where
     Core.withObject
       "AllocateIdsResponse"
       ( \o ->
-          AllocateIdsResponse
-            Core.<$> (o Core..:? "keys" Core..!= Core.mempty)
+          AllocateIdsResponse Core.<$> (o Core..:? "keys")
       )
 
 instance Core.ToJSON AllocateIdsResponse where
@@ -405,10 +403,7 @@ instance Core.FromJSON ArrayValue where
   parseJSON =
     Core.withObject
       "ArrayValue"
-      ( \o ->
-          ArrayValue
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> ArrayValue Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON ArrayValue where
   toJSON ArrayValue {..} =
@@ -509,7 +504,7 @@ instance Core.FromJSON CommitRequest where
       ( \o ->
           CommitRequest
             Core.<$> (o Core..:? "mode")
-            Core.<*> (o Core..:? "mutations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mutations")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -547,7 +542,7 @@ instance Core.FromJSON CommitResponse where
       ( \o ->
           CommitResponse
             Core.<$> (o Core..:? "indexUpdates")
-            Core.<*> (o Core..:? "mutationResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mutationResults")
       )
 
 instance Core.ToJSON CommitResponse where
@@ -582,8 +577,7 @@ instance Core.FromJSON CompositeFilter where
       "CompositeFilter"
       ( \o ->
           CompositeFilter
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "op")
+            Core.<$> (o Core..:? "filters") Core.<*> (o Core..:? "op")
       )
 
 instance Core.ToJSON CompositeFilter where
@@ -706,7 +700,9 @@ instance Core.FromJSON EntityResult where
           EntityResult
             Core.<$> (o Core..:? "cursor")
             Core.<*> (o Core..:? "entity")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON EntityResult where
@@ -935,8 +931,8 @@ instance
       "GoogleDatastoreAdminV1EntityFilter"
       ( \o ->
           GoogleDatastoreAdminV1EntityFilter
-            Core.<$> (o Core..:? "kinds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "namespaceIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kinds")
+            Core.<*> (o Core..:? "namespaceIds")
       )
 
 instance
@@ -1332,7 +1328,7 @@ instance Core.FromJSON GoogleDatastoreAdminV1Index where
             Core.<*> (o Core..:? "indexId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "state")
       )
 
@@ -1475,7 +1471,7 @@ instance
       "GoogleDatastoreAdminV1ListIndexesResponse"
       ( \o ->
           GoogleDatastoreAdminV1ListIndexesResponse
-            Core.<$> (o Core..:? "indexes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "indexes")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1647,8 +1643,12 @@ instance Core.FromJSON GoogleDatastoreAdminV1Progress where
       "GoogleDatastoreAdminV1Progress"
       ( \o ->
           GoogleDatastoreAdminV1Progress
-            Core.<$> (o Core..:? "workCompleted")
-            Core.<*> (o Core..:? "workEstimated")
+            Core.<$> ( o Core..:? "workCompleted"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "workEstimated"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GoogleDatastoreAdminV1Progress where
@@ -1836,8 +1836,8 @@ instance
       "GoogleDatastoreAdminV1beta1EntityFilter"
       ( \o ->
           GoogleDatastoreAdminV1beta1EntityFilter
-            Core.<$> (o Core..:? "kinds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "namespaceIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kinds")
+            Core.<*> (o Core..:? "namespaceIds")
       )
 
 instance
@@ -2043,8 +2043,12 @@ instance
       "GoogleDatastoreAdminV1beta1Progress"
       ( \o ->
           GoogleDatastoreAdminV1beta1Progress
-            Core.<$> (o Core..:? "workCompleted")
-            Core.<*> (o Core..:? "workEstimated")
+            Core.<$> ( o Core..:? "workCompleted"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "workEstimated"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -2091,7 +2095,7 @@ instance
       ( \o ->
           GoogleLongrunningListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -2266,9 +2270,7 @@ instance Core.FromJSON GqlQuery where
           GqlQuery
             Core.<$> (o Core..:? "allowLiterals")
             Core.<*> (o Core..:? "namedBindings")
-            Core.<*> ( o Core..:? "positionalBindings"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "positionalBindings")
             Core.<*> (o Core..:? "queryString")
       )
 
@@ -2372,7 +2374,7 @@ instance Core.FromJSON Key where
       ( \o ->
           Key
             Core.<$> (o Core..:? "partitionId")
-            Core.<*> (o Core..:? "path" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "path")
       )
 
 instance Core.ToJSON Key where
@@ -2467,7 +2469,7 @@ instance Core.FromJSON LookupRequest where
       "LookupRequest"
       ( \o ->
           LookupRequest
-            Core.<$> (o Core..:? "keys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "keys")
             Core.<*> (o Core..:? "readOptions")
       )
 
@@ -2509,9 +2511,9 @@ instance Core.FromJSON LookupResponse where
       "LookupResponse"
       ( \o ->
           LookupResponse
-            Core.<$> (o Core..:? "deferred" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "found" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "missing" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deferred")
+            Core.<*> (o Core..:? "found")
+            Core.<*> (o Core..:? "missing")
       )
 
 instance Core.ToJSON LookupResponse where
@@ -2559,7 +2561,9 @@ instance Core.FromJSON Mutation where
       "Mutation"
       ( \o ->
           Mutation
-            Core.<$> (o Core..:? "baseVersion")
+            Core.<$> ( o Core..:? "baseVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "delete")
             Core.<*> (o Core..:? "insert")
             Core.<*> (o Core..:? "update")
@@ -2610,7 +2614,9 @@ instance Core.FromJSON MutationResult where
           MutationResult
             Core.<$> (o Core..:? "conflictDetected")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "version")
+            Core.<*> ( o Core..:? "version"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MutationResult where
@@ -2686,7 +2692,7 @@ instance Core.FromJSON PathElement where
       "PathElement"
       ( \o ->
           PathElement
-            Core.<$> (o Core..:? "id")
+            Core.<$> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
       )
@@ -2882,14 +2888,14 @@ instance Core.FromJSON Query where
       "Query"
       ( \o ->
           Query
-            Core.<$> (o Core..:? "distinctOn" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "distinctOn")
             Core.<*> (o Core..:? "endCursor")
             Core.<*> (o Core..:? "filter")
-            Core.<*> (o Core..:? "kind" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "limit")
             Core.<*> (o Core..:? "offset")
-            Core.<*> (o Core..:? "order" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "projection" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "order")
+            Core.<*> (o Core..:? "projection")
             Core.<*> (o Core..:? "startCursor")
       )
 
@@ -2952,11 +2958,13 @@ instance Core.FromJSON QueryResultBatch where
           QueryResultBatch
             Core.<$> (o Core..:? "endCursor")
             Core.<*> (o Core..:? "entityResultType")
-            Core.<*> (o Core..:? "entityResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entityResults")
             Core.<*> (o Core..:? "moreResults")
             Core.<*> (o Core..:? "skippedCursor")
             Core.<*> (o Core..:? "skippedResults")
-            Core.<*> (o Core..:? "snapshotVersion")
+            Core.<*> ( o Core..:? "snapshotVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON QueryResultBatch where
@@ -3088,7 +3096,7 @@ instance Core.FromJSON ReserveIdsRequest where
       ( \o ->
           ReserveIdsRequest
             Core.<$> (o Core..:? "databaseId")
-            Core.<*> (o Core..:? "keys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "keys")
       )
 
 instance Core.ToJSON ReserveIdsRequest where
@@ -3279,7 +3287,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3422,7 +3430,9 @@ instance Core.FromJSON Value where
             Core.<*> (o Core..:? "entityValue")
             Core.<*> (o Core..:? "excludeFromIndexes")
             Core.<*> (o Core..:? "geoPointValue")
-            Core.<*> (o Core..:? "integerValue")
+            Core.<*> ( o Core..:? "integerValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "keyValue")
             Core.<*> (o Core..:? "meaning")
             Core.<*> (o Core..:? "nullValue")

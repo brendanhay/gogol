@@ -88,12 +88,16 @@ instance Core.FromJSON AnalyticsSnapshot where
       "AnalyticsSnapshot"
       ( \o ->
           AnalyticsSnapshot
-            Core.<$> (o Core..:? "browsers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "countries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "longUrlClicks")
-            Core.<*> (o Core..:? "platforms" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "referrers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "shortUrlClicks")
+            Core.<$> (o Core..:? "browsers")
+            Core.<*> (o Core..:? "countries")
+            Core.<*> ( o Core..:? "longUrlClicks"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "platforms")
+            Core.<*> (o Core..:? "referrers")
+            Core.<*> ( o Core..:? "shortUrlClicks"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AnalyticsSnapshot where
@@ -185,7 +189,10 @@ instance Core.FromJSON StringCount where
       "StringCount"
       ( \o ->
           StringCount
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "id")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "id")
       )
 
 instance Core.ToJSON StringCount where
@@ -289,7 +296,7 @@ instance Core.FromJSON UrlHistory where
       "UrlHistory"
       ( \o ->
           UrlHistory
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "urlshortener#urlHistory"

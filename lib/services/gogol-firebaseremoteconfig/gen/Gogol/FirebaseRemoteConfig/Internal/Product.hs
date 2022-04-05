@@ -82,7 +82,7 @@ instance Core.FromJSON RemoteConfig where
       "RemoteConfig"
       ( \o ->
           RemoteConfig
-            Core.<$> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conditions")
             Core.<*> (o Core..:? "parameters")
       )
 

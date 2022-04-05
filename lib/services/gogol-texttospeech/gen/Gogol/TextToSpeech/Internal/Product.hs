@@ -98,7 +98,7 @@ instance Core.FromJSON AudioConfig where
       ( \o ->
           AudioConfig
             Core.<$> (o Core..:? "audioEncoding")
-            Core.<*> (o Core..:? "effectsProfileId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "effectsProfileId")
             Core.<*> (o Core..:? "pitch")
             Core.<*> (o Core..:? "sampleRateHertz")
             Core.<*> (o Core..:? "speakingRate")
@@ -138,8 +138,7 @@ instance Core.FromJSON ListVoicesResponse where
     Core.withObject
       "ListVoicesResponse"
       ( \o ->
-          ListVoicesResponse
-            Core.<$> (o Core..:? "voices" Core..!= Core.mempty)
+          ListVoicesResponse Core.<$> (o Core..:? "voices")
       )
 
 instance Core.ToJSON ListVoicesResponse where
@@ -288,7 +287,7 @@ instance Core.FromJSON Voice where
       "Voice"
       ( \o ->
           Voice
-            Core.<$> (o Core..:? "languageCodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "languageCodes")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "naturalSampleRateHertz")
             Core.<*> (o Core..:? "ssmlGender")

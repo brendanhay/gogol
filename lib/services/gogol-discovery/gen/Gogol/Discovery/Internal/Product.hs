@@ -176,7 +176,7 @@ instance Core.FromJSON DirectoryList where
       ( \o ->
           DirectoryList
             Core.<$> (o Core..:? "discoveryVersion" Core..!= "v1")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "discovery#directoryList"
                      )
@@ -257,7 +257,7 @@ instance Core.FromJSON DirectoryList_ItemsItem where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "discovery#directoryItem"
                      )
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "preferred")
             Core.<*> (o Core..:? "title")
@@ -404,8 +404,8 @@ instance Core.FromJSON JsonSchema where
             Core.<*> (o Core..:? "annotations")
             Core.<*> (o Core..:? "default")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "enum" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "enumDescriptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "enum")
+            Core.<*> (o Core..:? "enumDescriptions")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "items")
@@ -470,7 +470,7 @@ instance Core.FromJSON JsonSchema_Annotations where
       "JsonSchema_Annotations"
       ( \o ->
           JsonSchema_Annotations
-            Core.<$> (o Core..:? "required" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "required")
       )
 
 instance Core.ToJSON JsonSchema_Annotations where
@@ -534,7 +534,7 @@ instance Core.FromJSON JsonSchema_Variant where
       ( \o ->
           JsonSchema_Variant
             Core.<$> (o Core..:? "discriminant")
-            Core.<*> (o Core..:? "map" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "map")
       )
 
 instance Core.ToJSON JsonSchema_Variant where
@@ -700,13 +700,13 @@ instance Core.FromJSON RestDescription where
             Core.<*> (o Core..:? "documentationLink")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "exponentialBackoffDefault")
-            Core.<*> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "icons")
             Core.<*> (o Core..:? "id")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "discovery#restDescription"
                      )
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "methods")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ownerDomain")
@@ -1126,12 +1126,12 @@ instance Core.FromJSON RestMethod where
             Core.<*> (o Core..:? "httpMethod")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "mediaUpload")
-            Core.<*> (o Core..:? "parameterOrder" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameterOrder")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "response")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scopes")
             Core.<*> (o Core..:? "supportsMediaDownload")
             Core.<*> (o Core..:? "supportsMediaUpload")
             Core.<*> (o Core..:? "supportsSubscription")
@@ -1194,7 +1194,7 @@ instance Core.FromJSON RestMethod_MediaUpload where
       "RestMethod_MediaUpload"
       ( \o ->
           RestMethod_MediaUpload
-            Core.<$> (o Core..:? "accept" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accept")
             Core.<*> (o Core..:? "maxSize")
             Core.<*> (o Core..:? "protocols")
       )

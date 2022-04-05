@@ -102,7 +102,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -184,7 +184,7 @@ instance Core.FromJSON LongRunningRecognizeResponse where
       "LongRunningRecognizeResponse"
       ( \o ->
           LongRunningRecognizeResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "results")
       )
 
 instance Core.ToJSON LongRunningRecognizeResponse where
@@ -335,7 +335,7 @@ instance Core.FromJSON SpeechRecognitionAlternative where
           SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
             Core.<*> (o Core..:? "transcript")
-            Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "words")
       )
 
 instance Core.ToJSON SpeechRecognitionAlternative where
@@ -377,7 +377,7 @@ instance Core.FromJSON SpeechRecognitionResult where
       "SpeechRecognitionResult"
       ( \o ->
           SpeechRecognitionResult
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
             Core.<*> (o Core..:? "channelTag")
             Core.<*> (o Core..:? "languageCode")
       )
@@ -418,7 +418,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

@@ -857,13 +857,9 @@ instance Core.FromJSON ArimaCoefficients where
       "ArimaCoefficients"
       ( \o ->
           ArimaCoefficients
-            Core.<$> ( o Core..:? "autoRegressiveCoefficients"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "autoRegressiveCoefficients")
             Core.<*> (o Core..:? "interceptCoefficient")
-            Core.<*> ( o Core..:? "movingAverageCoefficients"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "movingAverageCoefficients")
       )
 
 instance Core.ToJSON ArimaCoefficients where
@@ -961,16 +957,12 @@ instance Core.FromJSON ArimaForecastingMetrics where
       "ArimaForecastingMetrics"
       ( \o ->
           ArimaForecastingMetrics
-            Core.<$> ( o Core..:? "arimaFittingMetrics"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "arimaSingleModelForecastingMetrics"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "hasDrift" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "nonSeasonalOrder" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "seasonalPeriods" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "timeSeriesId" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arimaFittingMetrics")
+            Core.<*> (o Core..:? "arimaSingleModelForecastingMetrics")
+            Core.<*> (o Core..:? "hasDrift")
+            Core.<*> (o Core..:? "nonSeasonalOrder")
+            Core.<*> (o Core..:? "seasonalPeriods")
+            Core.<*> (o Core..:? "timeSeriesId")
       )
 
 instance Core.ToJSON ArimaForecastingMetrics where
@@ -1046,9 +1038,9 @@ instance Core.FromJSON ArimaModelInfo where
             Core.<*> (o Core..:? "hasSpikesAndDips")
             Core.<*> (o Core..:? "hasStepChanges")
             Core.<*> (o Core..:? "nonSeasonalOrder")
-            Core.<*> (o Core..:? "seasonalPeriods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "seasonalPeriods")
             Core.<*> (o Core..:? "timeSeriesId")
-            Core.<*> (o Core..:? "timeSeriesIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timeSeriesIds")
       )
 
 instance Core.ToJSON ArimaModelInfo where
@@ -1098,9 +1090,9 @@ instance Core.FromJSON ArimaOrder where
       "ArimaOrder"
       ( \o ->
           ArimaOrder
-            Core.<$> (o Core..:? "d")
-            Core.<*> (o Core..:? "p")
-            Core.<*> (o Core..:? "q")
+            Core.<$> (o Core..:? "d" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "p" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "q" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ArimaOrder where
@@ -1136,8 +1128,8 @@ instance Core.FromJSON ArimaResult where
       "ArimaResult"
       ( \o ->
           ArimaResult
-            Core.<$> (o Core..:? "arimaModelInfo" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "seasonalPeriods" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arimaModelInfo")
+            Core.<*> (o Core..:? "seasonalPeriods")
       )
 
 instance Core.ToJSON ArimaResult where
@@ -1209,9 +1201,9 @@ instance
             Core.<*> (o Core..:? "hasSpikesAndDips")
             Core.<*> (o Core..:? "hasStepChanges")
             Core.<*> (o Core..:? "nonSeasonalOrder")
-            Core.<*> (o Core..:? "seasonalPeriods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "seasonalPeriods")
             Core.<*> (o Core..:? "timeSeriesId")
-            Core.<*> (o Core..:? "timeSeriesIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timeSeriesIds")
       )
 
 instance
@@ -1261,7 +1253,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -1298,7 +1290,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -1406,7 +1398,7 @@ instance Core.FromJSON BiEngineStatistics where
             Core.<$> ( o Core..:? "biEngineMode"
                          Core..!= "$(stats.bi_engine_mode)"
                      )
-            Core.<*> (o Core..:? "biEngineReasons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "biEngineReasons")
       )
 
 instance Core.ToJSON BiEngineStatistics where
@@ -1445,7 +1437,9 @@ instance Core.FromJSON BigQueryModelTraining where
       ( \o ->
           BigQueryModelTraining
             Core.<$> (o Core..:? "currentIteration")
-            Core.<*> (o Core..:? "expectedTotalIterations")
+            Core.<*> ( o Core..:? "expectedTotalIterations"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BigQueryModelTraining where
@@ -1553,7 +1547,7 @@ instance Core.FromJSON BigtableColumnFamily where
       "BigtableColumnFamily"
       ( \o ->
           BigtableColumnFamily
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "encoding")
             Core.<*> (o Core..:? "familyId")
             Core.<*> (o Core..:? "onlyReadLatest")
@@ -1600,7 +1594,7 @@ instance Core.FromJSON BigtableOptions where
       "BigtableOptions"
       ( \o ->
           BigtableOptions
-            Core.<$> (o Core..:? "columnFamilies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnFamilies")
             Core.<*> (o Core..:? "ignoreUnspecifiedColumnFamilies")
             Core.<*> (o Core..:? "readRowkeyAsString")
       )
@@ -1650,9 +1644,7 @@ instance Core.FromJSON BinaryClassificationMetrics where
       ( \o ->
           BinaryClassificationMetrics
             Core.<$> (o Core..:? "aggregateClassificationMetrics")
-            Core.<*> ( o Core..:? "binaryConfusionMatrixList"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "binaryConfusionMatrixList")
             Core.<*> (o Core..:? "negativeLabel")
             Core.<*> (o Core..:? "positiveLabel")
       )
@@ -1719,13 +1711,21 @@ instance Core.FromJSON BinaryConfusionMatrix where
           BinaryConfusionMatrix
             Core.<$> (o Core..:? "accuracy")
             Core.<*> (o Core..:? "f1Score")
-            Core.<*> (o Core..:? "falseNegatives")
-            Core.<*> (o Core..:? "falsePositives")
+            Core.<*> ( o Core..:? "falseNegatives"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "falsePositives"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "positiveClassThreshold")
             Core.<*> (o Core..:? "precision")
             Core.<*> (o Core..:? "recall")
-            Core.<*> (o Core..:? "trueNegatives")
-            Core.<*> (o Core..:? "truePositives")
+            Core.<*> ( o Core..:? "trueNegatives"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "truePositives"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BinaryConfusionMatrix where
@@ -1780,7 +1780,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1828,7 +1828,9 @@ instance Core.FromJSON BqmlIterationResult where
       "BqmlIterationResult"
       ( \o ->
           BqmlIterationResult
-            Core.<$> (o Core..:? "durationMs")
+            Core.<$> ( o Core..:? "durationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "learnRate")
@@ -1879,7 +1881,7 @@ instance Core.FromJSON BqmlTrainingRun where
       "BqmlTrainingRun"
       ( \o ->
           BqmlTrainingRun
-            Core.<$> (o Core..:? "iterationResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "iterationResults")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "trainingOptions")
@@ -1954,7 +1956,9 @@ instance
             Core.<*> (o Core..:? "learnRate")
             Core.<*> (o Core..:? "learnRateStrategy")
             Core.<*> (o Core..:? "lineSearchInitLearnRate")
-            Core.<*> (o Core..:? "maxIteration")
+            Core.<*> ( o Core..:? "maxIteration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "minRelProgress")
             Core.<*> (o Core..:? "warmStart")
       )
@@ -1998,7 +2002,7 @@ instance Core.FromJSON CategoricalValue where
       "CategoricalValue"
       ( \o ->
           CategoricalValue
-            Core.<$> (o Core..:? "categoryCounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryCounts")
       )
 
 instance Core.ToJSON CategoricalValue where
@@ -2031,7 +2035,9 @@ instance Core.FromJSON CategoryCount where
       ( \o ->
           CategoryCount
             Core.<$> (o Core..:? "category")
-            Core.<*> (o Core..:? "count")
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CategoryCount where
@@ -2108,9 +2114,13 @@ instance Core.FromJSON Cluster where
       "Cluster"
       ( \o ->
           Cluster
-            Core.<$> (o Core..:? "centroidId")
-            Core.<*> (o Core..:? "count")
-            Core.<*> (o Core..:? "featureValues" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "centroidId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "featureValues")
       )
 
 instance Core.ToJSON Cluster where
@@ -2153,9 +2163,13 @@ instance Core.FromJSON ClusterInfo where
       "ClusterInfo"
       ( \o ->
           ClusterInfo
-            Core.<$> (o Core..:? "centroidId")
+            Core.<$> ( o Core..:? "centroidId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "clusterRadius")
-            Core.<*> (o Core..:? "clusterSize")
+            Core.<*> ( o Core..:? "clusterSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ClusterInfo where
@@ -2187,10 +2201,7 @@ instance Core.FromJSON Clustering where
   parseJSON =
     Core.withObject
       "Clustering"
-      ( \o ->
-          Clustering
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
-      )
+      (\o -> Clustering Core.<$> (o Core..:? "fields"))
 
 instance Core.ToJSON Clustering where
   toJSON Clustering {..} =
@@ -2226,7 +2237,7 @@ instance Core.FromJSON ClusteringMetrics where
       "ClusteringMetrics"
       ( \o ->
           ClusteringMetrics
-            Core.<$> (o Core..:? "clusters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusters")
             Core.<*> (o Core..:? "daviesBouldinIndex")
             Core.<*> (o Core..:? "meanSquaredDistance")
       )
@@ -2267,7 +2278,7 @@ instance Core.FromJSON ConfusionMatrix where
       ( \o ->
           ConfusionMatrix
             Core.<$> (o Core..:? "confidenceThreshold")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON ConfusionMatrix where
@@ -2360,7 +2371,9 @@ instance Core.FromJSON CsvOptions where
             Core.<*> (o Core..:? "fieldDelimiter")
             Core.<*> (o Core..:? "null_marker")
             Core.<*> (o Core..:? "quote" Core..!= "\"")
-            Core.<*> (o Core..:? "skipLeadingRows")
+            Core.<*> ( o Core..:? "skipLeadingRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CsvOptions where
@@ -2501,13 +2514,19 @@ instance Core.FromJSON Dataset where
       "Dataset"
       ( \o ->
           Dataset
-            Core.<$> (o Core..:? "access" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "creationTime")
+            Core.<$> (o Core..:? "access")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "datasetReference")
             Core.<*> (o Core..:? "defaultCollation")
             Core.<*> (o Core..:? "defaultEncryptionConfiguration")
-            Core.<*> (o Core..:? "defaultPartitionExpirationMs")
-            Core.<*> (o Core..:? "defaultTableExpirationMs")
+            Core.<*> ( o Core..:? "defaultPartitionExpirationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "defaultTableExpirationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "friendlyName")
@@ -2515,11 +2534,13 @@ instance Core.FromJSON Dataset where
             Core.<*> (o Core..:? "isCaseInsensitive")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#dataset")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "lastModifiedTime")
+            Core.<*> ( o Core..:? "lastModifiedTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "satisfiesPZS")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Dataset where
@@ -2716,7 +2737,7 @@ instance Core.FromJSON DatasetAccessEntry where
       ( \o ->
           DatasetAccessEntry
             Core.<$> (o Core..:? "dataset")
-            Core.<*> (o Core..:? "targetTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targetTypes")
       )
 
 instance Core.ToJSON DatasetAccessEntry where
@@ -2759,7 +2780,7 @@ instance Core.FromJSON DatasetList where
       "DatasetList"
       ( \o ->
           DatasetList
-            Core.<$> (o Core..:? "datasets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "datasets")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#datasetList")
             Core.<*> (o Core..:? "nextPageToken")
@@ -3048,9 +3069,15 @@ instance Core.FromJSON DmlStatistics where
       "DmlStatistics"
       ( \o ->
           DmlStatistics
-            Core.<$> (o Core..:? "deletedRowCount")
-            Core.<*> (o Core..:? "insertedRowCount")
-            Core.<*> (o Core..:? "updatedRowCount")
+            Core.<$> ( o Core..:? "deletedRowCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "insertedRowCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "updatedRowCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DmlStatistics where
@@ -3085,8 +3112,7 @@ instance Core.FromJSON DoubleCandidates where
     Core.withObject
       "DoubleCandidates"
       ( \o ->
-          DoubleCandidates
-            Core.<$> (o Core..:? "candidates" Core..!= Core.mempty)
+          DoubleCandidates Core.<$> (o Core..:? "candidates")
       )
 
 instance Core.ToJSON DoubleCandidates where
@@ -3217,7 +3243,9 @@ instance Core.FromJSON Entry where
       "Entry"
       ( \o ->
           Entry
-            Core.<$> (o Core..:? "itemCount")
+            Core.<$> ( o Core..:? "itemCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "predictedLabel")
       )
 
@@ -3458,34 +3486,68 @@ instance Core.FromJSON ExplainQueryStage where
       "ExplainQueryStage"
       ( \o ->
           ExplainQueryStage
-            Core.<$> (o Core..:? "completedParallelInputs")
-            Core.<*> (o Core..:? "computeMsAvg")
-            Core.<*> (o Core..:? "computeMsMax")
+            Core.<$> ( o Core..:? "completedParallelInputs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "computeMsAvg"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "computeMsMax"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "computeRatioAvg")
             Core.<*> (o Core..:? "computeRatioMax")
-            Core.<*> (o Core..:? "endMs")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "inputStages" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "endMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "inputStages")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parallelInputs")
-            Core.<*> (o Core..:? "readMsAvg")
-            Core.<*> (o Core..:? "readMsMax")
+            Core.<*> ( o Core..:? "parallelInputs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "readMsAvg"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "readMsMax"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "readRatioAvg")
             Core.<*> (o Core..:? "readRatioMax")
-            Core.<*> (o Core..:? "recordsRead")
-            Core.<*> (o Core..:? "recordsWritten")
-            Core.<*> (o Core..:? "shuffleOutputBytes")
-            Core.<*> (o Core..:? "shuffleOutputBytesSpilled")
-            Core.<*> (o Core..:? "slotMs")
-            Core.<*> (o Core..:? "startMs")
+            Core.<*> ( o Core..:? "recordsRead"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "recordsWritten"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shuffleOutputBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shuffleOutputBytesSpilled"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "slotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "startMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "steps" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "waitMsAvg")
-            Core.<*> (o Core..:? "waitMsMax")
+            Core.<*> (o Core..:? "steps")
+            Core.<*> ( o Core..:? "waitMsAvg"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "waitMsMax"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "waitRatioAvg")
             Core.<*> (o Core..:? "waitRatioMax")
-            Core.<*> (o Core..:? "writeMsAvg")
-            Core.<*> (o Core..:? "writeMsMax")
+            Core.<*> ( o Core..:? "writeMsAvg"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "writeMsMax"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "writeRatioAvg")
             Core.<*> (o Core..:? "writeRatioMax")
       )
@@ -3567,8 +3629,7 @@ instance Core.FromJSON ExplainQueryStep where
       "ExplainQueryStep"
       ( \o ->
           ExplainQueryStep
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "substeps" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "substeps")
       )
 
 instance Core.ToJSON ExplainQueryStep where
@@ -3737,9 +3798,7 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "compression")
             Core.<*> (o Core..:? "connectionId")
             Core.<*> (o Core..:? "csvOptions")
-            Core.<*> ( o Core..:? "decimalTargetTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "decimalTargetTypes")
             Core.<*> (o Core..:? "googleSheetsOptions")
             Core.<*> (o Core..:? "hivePartitioningOptions")
             Core.<*> (o Core..:? "ignoreUnknownValues")
@@ -3747,7 +3806,7 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "parquetOptions")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sourceFormat")
-            Core.<*> (o Core..:? "sourceUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceUris")
       )
 
 instance Core.ToJSON ExternalDataConfiguration where
@@ -3938,19 +3997,25 @@ instance Core.FromJSON GetQueryResultsResponse where
       ( \o ->
           GetQueryResultsResponse
             Core.<$> (o Core..:? "cacheHit")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "jobComplete")
             Core.<*> (o Core..:? "jobReference")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "bigquery#getQueryResultsResponse"
                      )
-            Core.<*> (o Core..:? "numDmlAffectedRows")
+            Core.<*> ( o Core..:? "numDmlAffectedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "schema")
-            Core.<*> (o Core..:? "totalBytesProcessed")
-            Core.<*> (o Core..:? "totalRows")
+            Core.<*> ( o Core..:? "totalBytesProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GetQueryResultsResponse where
@@ -4039,7 +4104,7 @@ instance Core.FromJSON GlobalExplanation where
       ( \o ->
           GlobalExplanation
             Core.<$> (o Core..:? "classLabel")
-            Core.<*> (o Core..:? "explanations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "explanations")
       )
 
 instance Core.ToJSON GlobalExplanation where
@@ -4074,7 +4139,9 @@ instance Core.FromJSON GoogleSheetsOptions where
       ( \o ->
           GoogleSheetsOptions
             Core.<$> (o Core..:? "range")
-            Core.<*> (o Core..:? "skipLeadingRows")
+            Core.<*> ( o Core..:? "skipLeadingRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GoogleSheetsOptions where
@@ -4324,16 +4391,22 @@ instance Core.FromJSON HparamTuningTrial where
       "HparamTuningTrial"
       ( \o ->
           HparamTuningTrial
-            Core.<$> (o Core..:? "endTimeMs")
+            Core.<$> ( o Core..:? "endTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "evaluationMetrics")
             Core.<*> (o Core..:? "hparamTuningEvaluationMetrics")
             Core.<*> (o Core..:? "hparams")
-            Core.<*> (o Core..:? "startTimeMs")
+            Core.<*> ( o Core..:? "startTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "trainingLoss")
-            Core.<*> (o Core..:? "trialId")
+            Core.<*> ( o Core..:? "trialId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON HparamTuningTrial where
@@ -4376,10 +4449,7 @@ instance Core.FromJSON IntArray where
   parseJSON =
     Core.withObject
       "IntArray"
-      ( \o ->
-          IntArray
-            Core.<$> (o Core..:? "elements" Core..!= Core.mempty)
-      )
+      (\o -> IntArray Core.<$> (o Core..:? "elements"))
 
 instance Core.ToJSON IntArray where
   toJSON IntArray {..} =
@@ -4409,7 +4479,7 @@ instance Core.FromJSON IntArrayHparamSearchSpace where
       "IntArrayHparamSearchSpace"
       ( \o ->
           IntArrayHparamSearchSpace
-            Core.<$> (o Core..:? "candidates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "candidates")
       )
 
 instance Core.ToJSON IntArrayHparamSearchSpace where
@@ -4438,8 +4508,7 @@ instance Core.FromJSON IntCandidates where
     Core.withObject
       "IntCandidates"
       ( \o ->
-          IntCandidates
-            Core.<$> (o Core..:? "candidates" Core..!= Core.mempty)
+          IntCandidates Core.<$> (o Core..:? "candidates")
       )
 
 instance Core.ToJSON IntCandidates where
@@ -4507,7 +4576,10 @@ instance Core.FromJSON IntRange where
       "IntRange"
       ( \o ->
           IntRange
-            Core.<$> (o Core..:? "max") Core.<*> (o Core..:? "min")
+            Core.<$> (o Core..:? "max" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o Core..:? "min"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON IntRange where
@@ -4553,7 +4625,9 @@ instance Core.FromJSON IterationResult where
       "IterationResult"
       ( \o ->
           IterationResult
-            Core.<$> (o Core..:? "durationMs")
+            Core.<$> ( o Core..:? "durationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "learnRate")
@@ -4729,7 +4803,9 @@ instance Core.FromJSON JobConfiguration where
             Core.<$> (o Core..:? "copy")
             Core.<*> (o Core..:? "dryRun")
             Core.<*> (o Core..:? "extract")
-            Core.<*> (o Core..:? "jobTimeoutMs")
+            Core.<*> ( o Core..:? "jobTimeoutMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "jobType")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "load")
@@ -4831,7 +4907,7 @@ instance Core.FromJSON JobConfigurationExtract where
             Core.<$> (o Core..:? "compression")
             Core.<*> (o Core..:? "destinationFormat")
             Core.<*> (o Core..:? "destinationUri")
-            Core.<*> (o Core..:? "destinationUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "destinationUris")
             Core.<*> (o Core..:? "fieldDelimiter")
             Core.<*> (o Core..:? "printHeader" Core..!= Core.True)
             Core.<*> (o Core..:? "sourceModel")
@@ -4975,9 +5051,7 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "autodetect")
             Core.<*> (o Core..:? "clustering")
             Core.<*> (o Core..:? "createDisposition")
-            Core.<*> ( o Core..:? "decimalTargetTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "decimalTargetTypes")
             Core.<*> (o Core..:? "destinationEncryptionConfiguration")
             Core.<*> (o Core..:? "destinationTable")
             Core.<*> (o Core..:? "destinationTableProperties")
@@ -4990,18 +5064,16 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "nullMarker")
             Core.<*> (o Core..:? "parquetOptions")
             Core.<*> (o Core..:? "preserveAsciiControlCharacters")
-            Core.<*> (o Core..:? "projectionFields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projectionFields")
             Core.<*> (o Core..:? "quote")
             Core.<*> (o Core..:? "rangePartitioning")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "schemaInline")
             Core.<*> (o Core..:? "schemaInlineFormat")
-            Core.<*> ( o Core..:? "schemaUpdateOptions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "schemaUpdateOptions")
             Core.<*> (o Core..:? "skipLeadingRows")
             Core.<*> (o Core..:? "sourceFormat")
-            Core.<*> (o Core..:? "sourceUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceUris")
             Core.<*> (o Core..:? "timePartitioning")
             Core.<*> (o Core..:? "useAvroLogicalTypes")
             Core.<*> (o Core..:? "writeDisposition")
@@ -5155,9 +5227,7 @@ instance Core.FromJSON JobConfigurationQuery where
           JobConfigurationQuery
             Core.<$> (o Core..:? "allowLargeResults" Core..!= Core.False)
             Core.<*> (o Core..:? "clustering")
-            Core.<*> ( o Core..:? "connectionProperties"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "connectionProperties")
             Core.<*> (o Core..:? "createDisposition")
             Core.<*> (o Core..:? "createSession")
             Core.<*> (o Core..:? "defaultDataset")
@@ -5165,23 +5235,21 @@ instance Core.FromJSON JobConfigurationQuery where
             Core.<*> (o Core..:? "destinationTable")
             Core.<*> (o Core..:? "flattenResults" Core..!= Core.True)
             Core.<*> (o Core..:? "maximumBillingTier" Core..!= 1)
-            Core.<*> (o Core..:? "maximumBytesBilled")
+            Core.<*> ( o Core..:? "maximumBytesBilled"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "parameterMode")
             Core.<*> (o Core..:? "preserveNulls")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "queryParameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "queryParameters")
             Core.<*> (o Core..:? "rangePartitioning")
-            Core.<*> ( o Core..:? "schemaUpdateOptions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "schemaUpdateOptions")
             Core.<*> (o Core..:? "tableDefinitions")
             Core.<*> (o Core..:? "timePartitioning")
             Core.<*> (o Core..:? "useLegacySql" Core..!= Core.True)
             Core.<*> (o Core..:? "useQueryCache" Core..!= Core.True)
-            Core.<*> ( o Core..:? "userDefinedFunctionResources"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "userDefinedFunctionResources")
             Core.<*> (o Core..:? "writeDisposition")
       )
 
@@ -5314,7 +5382,7 @@ instance Core.FromJSON JobConfigurationTableCopy where
             Core.<*> (o Core..:? "destinationTable")
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "sourceTable")
-            Core.<*> (o Core..:? "sourceTables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceTables")
             Core.<*> (o Core..:? "writeDisposition")
       )
 
@@ -5370,7 +5438,7 @@ instance Core.FromJSON JobList where
       ( \o ->
           JobList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jobs")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#jobList")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -5576,22 +5644,34 @@ instance Core.FromJSON JobStatistics where
       ( \o ->
           JobStatistics
             Core.<$> (o Core..:? "completionRatio")
-            Core.<*> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "endTime")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "endTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "extract")
             Core.<*> (o Core..:? "load")
-            Core.<*> (o Core..:? "numChildJobs")
+            Core.<*> ( o Core..:? "numChildJobs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "parentJobId")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "quotaDeferments" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "reservationUsage" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "quotaDeferments")
+            Core.<*> (o Core..:? "reservationUsage")
             Core.<*> (o Core..:? "reservation_id")
             Core.<*> (o Core..:? "rowLevelSecurityStatistics")
             Core.<*> (o Core..:? "scriptStatistics")
             Core.<*> (o Core..:? "sessionInfo")
-            Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "totalBytesProcessed")
-            Core.<*> (o Core..:? "totalSlotMs")
+            Core.<*> ( o Core..:? "startTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalBytesProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalSlotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "transactionInfo")
       )
 
@@ -5659,7 +5739,10 @@ instance
       "JobStatistics_ReservationUsageItem"
       ( \o ->
           JobStatistics_ReservationUsageItem
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "slotMs")
+            Core.<$> (o Core..:? "name")
+            Core.<*> ( o Core..:? "slotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -5788,7 +5871,9 @@ instance Core.FromJSON JobStatistics2 where
             Core.<$> (o Core..:? "biEngineStatistics")
             Core.<*> (o Core..:? "billingTier")
             Core.<*> (o Core..:? "cacheHit")
-            Core.<*> (o Core..:? "ddlAffectedRowAccessPolicyCount")
+            Core.<*> ( o Core..:? "ddlAffectedRowAccessPolicyCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ddlDestinationTable")
             Core.<*> (o Core..:? "ddlOperationPerformed")
             Core.<*> (o Core..:? "ddlTargetDataset")
@@ -5796,29 +5881,39 @@ instance Core.FromJSON JobStatistics2 where
             Core.<*> (o Core..:? "ddlTargetRowAccessPolicy")
             Core.<*> (o Core..:? "ddlTargetTable")
             Core.<*> (o Core..:? "dmlStats")
-            Core.<*> (o Core..:? "estimatedBytesProcessed")
+            Core.<*> ( o Core..:? "estimatedBytesProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mlStatistics")
             Core.<*> (o Core..:? "modelTraining")
             Core.<*> (o Core..:? "modelTrainingCurrentIteration")
-            Core.<*> (o Core..:? "modelTrainingExpectedTotalIteration")
-            Core.<*> (o Core..:? "numDmlAffectedRows")
-            Core.<*> (o Core..:? "queryPlan" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "referencedRoutines"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "modelTrainingExpectedTotalIteration"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "referencedTables" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "reservationUsage" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "numDmlAffectedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "queryPlan")
+            Core.<*> (o Core..:? "referencedRoutines")
+            Core.<*> (o Core..:? "referencedTables")
+            Core.<*> (o Core..:? "reservationUsage")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "statementType")
-            Core.<*> (o Core..:? "timeline" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalBytesBilled")
-            Core.<*> (o Core..:? "totalBytesProcessed")
-            Core.<*> (o Core..:? "totalBytesProcessedAccuracy")
-            Core.<*> (o Core..:? "totalPartitionsProcessed")
-            Core.<*> (o Core..:? "totalSlotMs")
-            Core.<*> ( o Core..:? "undeclaredQueryParameters"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "timeline")
+            Core.<*> ( o Core..:? "totalBytesBilled"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> ( o Core..:? "totalBytesProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "totalBytesProcessedAccuracy")
+            Core.<*> ( o Core..:? "totalPartitionsProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalSlotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "undeclaredQueryParameters")
       )
 
 instance Core.ToJSON JobStatistics2 where
@@ -5910,7 +6005,10 @@ instance
       "JobStatistics2_ReservationUsageItem"
       ( \o ->
           JobStatistics2_ReservationUsageItem
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "slotMs")
+            Core.<$> (o Core..:? "name")
+            Core.<*> ( o Core..:? "slotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -5960,11 +6058,21 @@ instance Core.FromJSON JobStatistics3 where
       "JobStatistics3"
       ( \o ->
           JobStatistics3
-            Core.<$> (o Core..:? "badRecords")
-            Core.<*> (o Core..:? "inputFileBytes")
-            Core.<*> (o Core..:? "inputFiles")
-            Core.<*> (o Core..:? "outputBytes")
-            Core.<*> (o Core..:? "outputRows")
+            Core.<$> ( o Core..:? "badRecords"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "inputFileBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "inputFiles"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "outputBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "outputRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON JobStatistics3 where
@@ -6009,10 +6117,10 @@ instance Core.FromJSON JobStatistics4 where
       "JobStatistics4"
       ( \o ->
           JobStatistics4
-            Core.<$> ( o Core..:? "destinationUriFileCounts"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "destinationUriFileCounts")
+            Core.<*> ( o Core..:? "inputBytes"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "inputBytes")
       )
 
 instance Core.ToJSON JobStatistics4 where
@@ -6055,7 +6163,7 @@ instance Core.FromJSON JobStatus where
       ( \o ->
           JobStatus
             Core.<$> (o Core..:? "errorResult")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "state")
       )
 
@@ -6116,7 +6224,7 @@ instance Core.FromJSON ListModelsResponse where
       "ListModelsResponse"
       ( \o ->
           ListModelsResponse
-            Core.<$> (o Core..:? "models" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "models")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6152,7 +6260,7 @@ instance Core.FromJSON ListRoutinesResponse where
       ( \o ->
           ListRoutinesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "routines" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "routines")
       )
 
 instance Core.ToJSON ListRoutinesResponse where
@@ -6191,9 +6299,7 @@ instance Core.FromJSON ListRowAccessPoliciesResponse where
       ( \o ->
           ListRowAccessPoliciesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "rowAccessPolicies"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "rowAccessPolicies")
       )
 
 instance Core.ToJSON ListRowAccessPoliciesResponse where
@@ -6270,9 +6376,13 @@ instance Core.FromJSON MaterializedViewDefinition where
       ( \o ->
           MaterializedViewDefinition
             Core.<$> (o Core..:? "enableRefresh")
-            Core.<*> (o Core..:? "lastRefreshTime")
+            Core.<*> ( o Core..:? "lastRefreshTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "refreshIntervalMs")
+            Core.<*> ( o Core..:? "refreshIntervalMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MaterializedViewDefinition where
@@ -6310,8 +6420,10 @@ instance Core.FromJSON MlStatistics where
       "MlStatistics"
       ( \o ->
           MlStatistics
-            Core.<$> (o Core..:? "iterationResults" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "maxIterations")
+            Core.<$> (o Core..:? "iterationResults")
+            Core.<*> ( o Core..:? "maxIterations"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MlStatistics where
@@ -6401,25 +6513,35 @@ instance Core.FromJSON Model where
       "Model"
       ( \o ->
           Model
-            Core.<$> (o Core..:? "bestTrialId")
-            Core.<*> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "defaultTrialId")
+            Core.<$> ( o Core..:? "bestTrialId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "defaultTrialId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "encryptionConfiguration")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "expirationTime")
-            Core.<*> (o Core..:? "featureColumns" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "expirationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "featureColumns")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "hparamSearchSpaces")
-            Core.<*> (o Core..:? "hparamTrials" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "labelColumns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "hparamTrials")
+            Core.<*> (o Core..:? "labelColumns")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "lastModifiedTime")
+            Core.<*> ( o Core..:? "lastModifiedTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "modelReference")
             Core.<*> (o Core..:? "modelType")
-            Core.<*> (o Core..:? "optimalTrialIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "trainingRuns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "optimalTrialIds")
+            Core.<*> (o Core..:? "trainingRuns")
       )
 
 instance Core.ToJSON Model where
@@ -6505,7 +6627,7 @@ instance Core.FromJSON ModelDefinition where
       ( \o ->
           ModelDefinition
             Core.<$> (o Core..:? "modelOptions")
-            Core.<*> (o Core..:? "trainingRuns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trainingRuns")
       )
 
 instance Core.ToJSON ModelDefinition where
@@ -6546,7 +6668,7 @@ instance Core.FromJSON ModelDefinition_ModelOptions where
       "ModelDefinition_ModelOptions"
       ( \o ->
           ModelDefinition_ModelOptions
-            Core.<$> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labels")
             Core.<*> (o Core..:? "lossType")
             Core.<*> (o Core..:? "modelType")
       )
@@ -6634,9 +6756,7 @@ instance
       ( \o ->
           MultiClassClassificationMetrics
             Core.<$> (o Core..:? "aggregateClassificationMetrics")
-            Core.<*> ( o Core..:? "confusionMatrixList"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "confusionMatrixList")
       )
 
 instance Core.ToJSON MultiClassClassificationMetrics where
@@ -6724,8 +6844,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -6776,7 +6896,9 @@ instance Core.FromJSON PrincipalComponentInfo where
             Core.<$> (o Core..:? "cumulativeExplainedVarianceRatio")
             Core.<*> (o Core..:? "explainedVariance")
             Core.<*> (o Core..:? "explainedVarianceRatio")
-            Core.<*> (o Core..:? "principalComponentId")
+            Core.<*> ( o Core..:? "principalComponentId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PrincipalComponentInfo where
@@ -6831,7 +6953,7 @@ instance Core.FromJSON ProjectList where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#projectList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "projects" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projects")
             Core.<*> (o Core..:? "totalItems")
       )
 
@@ -6884,7 +7006,9 @@ instance Core.FromJSON ProjectList_ProjectsItem where
             Core.<$> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#project")
-            Core.<*> (o Core..:? "numericId")
+            Core.<*> ( o Core..:? "numericId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "projectReference")
       )
 
@@ -7002,7 +7126,7 @@ instance Core.FromJSON QueryParameterType where
       ( \o ->
           QueryParameterType
             Core.<$> (o Core..:? "arrayType")
-            Core.<*> (o Core..:? "structTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "structTypes")
             Core.<*> (o Core..:? "type")
       )
 
@@ -7093,7 +7217,7 @@ instance Core.FromJSON QueryParameterValue where
       "QueryParameterValue"
       ( \o ->
           QueryParameterValue
-            Core.<$> (o Core..:? "arrayValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arrayValues")
             Core.<*> (o Core..:? "structValues")
             Core.<*> (o Core..:? "value")
       )
@@ -7212,9 +7336,7 @@ instance Core.FromJSON QueryRequest where
       "QueryRequest"
       ( \o ->
           QueryRequest
-            Core.<$> ( o Core..:? "connectionProperties"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "connectionProperties")
             Core.<*> (o Core..:? "createSession")
             Core.<*> (o Core..:? "defaultDataset")
             Core.<*> (o Core..:? "dryRun")
@@ -7222,11 +7344,13 @@ instance Core.FromJSON QueryRequest where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "maxResults")
-            Core.<*> (o Core..:? "maximumBytesBilled")
+            Core.<*> ( o Core..:? "maximumBytesBilled"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "parameterMode")
             Core.<*> (o Core..:? "preserveNulls")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "queryParameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "queryParameters")
             Core.<*> (o Core..:? "requestId")
             Core.<*> (o Core..:? "timeoutMs")
             Core.<*> (o Core..:? "useLegacySql" Core..!= Core.True)
@@ -7349,17 +7473,23 @@ instance Core.FromJSON QueryResponse where
           QueryResponse
             Core.<$> (o Core..:? "cacheHit")
             Core.<*> (o Core..:? "dmlStats")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "jobComplete")
             Core.<*> (o Core..:? "jobReference")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#queryResponse")
-            Core.<*> (o Core..:? "numDmlAffectedRows")
+            Core.<*> ( o Core..:? "numDmlAffectedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sessionInfo")
-            Core.<*> (o Core..:? "totalBytesProcessed")
-            Core.<*> (o Core..:? "totalRows")
+            Core.<*> ( o Core..:? "totalBytesProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON QueryResponse where
@@ -7419,11 +7549,21 @@ instance Core.FromJSON QueryTimelineSample where
       "QueryTimelineSample"
       ( \o ->
           QueryTimelineSample
-            Core.<$> (o Core..:? "activeUnits")
-            Core.<*> (o Core..:? "completedUnits")
-            Core.<*> (o Core..:? "elapsedMs")
-            Core.<*> (o Core..:? "pendingUnits")
-            Core.<*> (o Core..:? "totalSlotMs")
+            Core.<$> ( o Core..:? "activeUnits"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "completedUnits"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "elapsedMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "pendingUnits"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalSlotMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON QueryTimelineSample where
@@ -7506,9 +7646,13 @@ instance Core.FromJSON RangePartitioning_Range where
       "RangePartitioning_Range"
       ( \o ->
           RangePartitioning_Range
-            Core.<$> (o Core..:? "end")
-            Core.<*> (o Core..:? "interval")
-            Core.<*> (o Core..:? "start")
+            Core.<$> (o Core..:? "end" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o Core..:? "interval"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "start"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON RangePartitioning_Range where
@@ -7694,15 +7838,19 @@ instance Core.FromJSON Routine where
       "Routine"
       ( \o ->
           Routine
-            Core.<$> (o Core..:? "arguments" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "creationTime")
+            Core.<$> (o Core..:? "arguments")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "definitionBody")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "determinismLevel")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "importedLibraries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "importedLibraries")
             Core.<*> (o Core..:? "language")
-            Core.<*> (o Core..:? "lastModifiedTime")
+            Core.<*> ( o Core..:? "lastModifiedTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "returnTableType")
             Core.<*> (o Core..:? "returnType")
             Core.<*> (o Core..:? "routineReference")
@@ -7802,7 +7950,7 @@ instance Core.FromJSON Row where
       ( \o ->
           Row
             Core.<$> (o Core..:? "actualLabel")
-            Core.<*> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entries")
       )
 
 instance Core.ToJSON Row where
@@ -8031,7 +8179,7 @@ instance Core.FromJSON ScriptStatistics where
       ( \o ->
           ScriptStatistics
             Core.<$> (o Core..:? "evaluationKind")
-            Core.<*> (o Core..:? "stackFrames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stackFrames")
       )
 
 instance Core.ToJSON ScriptStatistics where
@@ -8244,8 +8392,7 @@ instance Core.FromJSON StandardSqlStructType where
     Core.withObject
       "StandardSqlStructType"
       ( \o ->
-          StandardSqlStructType
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+          StandardSqlStructType Core.<$> (o Core..:? "fields")
       )
 
 instance Core.ToJSON StandardSqlStructType where
@@ -8272,8 +8419,7 @@ instance Core.FromJSON StandardSqlTableType where
     Core.withObject
       "StandardSqlTableType"
       ( \o ->
-          StandardSqlTableType
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+          StandardSqlTableType Core.<$> (o Core..:? "columns")
       )
 
 instance Core.ToJSON StandardSqlTableType where
@@ -8311,9 +8457,15 @@ instance Core.FromJSON Streamingbuffer where
       "Streamingbuffer"
       ( \o ->
           Streamingbuffer
-            Core.<$> (o Core..:? "estimatedBytes")
-            Core.<*> (o Core..:? "estimatedRows")
-            Core.<*> (o Core..:? "oldestEntryTime")
+            Core.<$> ( o Core..:? "estimatedBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "estimatedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "oldestEntryTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Streamingbuffer where
@@ -8349,7 +8501,7 @@ instance Core.FromJSON StringHparamSearchSpace where
       "StringHparamSearchSpace"
       ( \o ->
           StringHparamSearchSpace
-            Core.<$> (o Core..:? "candidates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "candidates")
       )
 
 instance Core.ToJSON StringHparamSearchSpace where
@@ -8473,25 +8625,39 @@ instance Core.FromJSON Table where
           Table
             Core.<$> (o Core..:? "cloneDefinition")
             Core.<*> (o Core..:? "clustering")
-            Core.<*> (o Core..:? "creationTime")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "defaultCollation")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "encryptionConfiguration")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "expirationTime")
+            Core.<*> ( o Core..:? "expirationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "externalDataConfiguration")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#table")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "lastModifiedTime")
+            Core.<*> ( o Core..:? "lastModifiedTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "materializedView")
             Core.<*> (o Core..:? "model")
-            Core.<*> (o Core..:? "numBytes")
-            Core.<*> (o Core..:? "numLongTermBytes")
-            Core.<*> (o Core..:? "numPhysicalBytes")
-            Core.<*> (o Core..:? "numRows")
+            Core.<*> ( o Core..:? "numBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numLongTermBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numPhysicalBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "rangePartitioning")
             Core.<*> (o Core..:? "requirePartitionFilter")
             Core.<*> (o Core..:? "schema")
@@ -8647,7 +8813,7 @@ instance Core.FromJSON TableDataInsertAllRequest where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "bigquery#tableDataInsertAllRequest"
                      )
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "skipInvalidRows")
             Core.<*> (o Core..:? "templateSuffix")
       )
@@ -8733,7 +8899,7 @@ instance Core.FromJSON TableDataInsertAllResponse where
       "TableDataInsertAllResponse"
       ( \o ->
           TableDataInsertAllResponse
-            Core.<$> (o Core..:? "insertErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "insertErrors")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "bigquery#tableDataInsertAllResponse"
                      )
@@ -8776,8 +8942,7 @@ instance
       "TableDataInsertAllResponse_InsertErrorsItem"
       ( \o ->
           TableDataInsertAllResponse_InsertErrorsItem
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "index")
+            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "index")
       )
 
 instance
@@ -8830,8 +8995,10 @@ instance Core.FromJSON TableDataList where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#tableDataList")
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalRows")
+            Core.<*> (o Core..:? "rows")
+            Core.<*> ( o Core..:? "totalRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON TableDataList where
@@ -8903,13 +9070,19 @@ instance Core.FromJSON TableFieldSchema where
             Core.<$> (o Core..:? "categories")
             Core.<*> (o Core..:? "collationSpec")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "maxLength")
+            Core.<*> (o Core..:? "fields")
+            Core.<*> ( o Core..:? "maxLength"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "policyTags")
-            Core.<*> (o Core..:? "precision")
-            Core.<*> (o Core..:? "scale")
+            Core.<*> ( o Core..:? "precision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "scale"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -8954,7 +9127,7 @@ instance Core.FromJSON TableFieldSchema_Categories where
       "TableFieldSchema_Categories"
       ( \o ->
           TableFieldSchema_Categories
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance Core.ToJSON TableFieldSchema_Categories where
@@ -8982,7 +9155,7 @@ instance Core.FromJSON TableFieldSchema_PolicyTags where
       "TableFieldSchema_PolicyTags"
       ( \o ->
           TableFieldSchema_PolicyTags
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance Core.ToJSON TableFieldSchema_PolicyTags where
@@ -9027,7 +9200,7 @@ instance Core.FromJSON TableList where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#tableList")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tables")
             Core.<*> (o Core..:? "totalItems")
       )
 
@@ -9099,8 +9272,12 @@ instance Core.FromJSON TableList_TablesItem where
       ( \o ->
           TableList_TablesItem
             Core.<$> (o Core..:? "clustering")
-            Core.<*> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "expirationTime")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "expirationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#table")
@@ -9256,10 +9433,7 @@ instance Core.FromJSON TableRow where
   parseJSON =
     Core.withObject
       "TableRow"
-      ( \o ->
-          TableRow
-            Core.<$> (o Core..:? "f" Core..!= Core.mempty)
-      )
+      (\o -> TableRow Core.<$> (o Core..:? "f"))
 
 instance Core.ToJSON TableRow where
   toJSON TableRow {..} =
@@ -9283,10 +9457,7 @@ instance Core.FromJSON TableSchema where
   parseJSON =
     Core.withObject
       "TableSchema"
-      ( \o ->
-          TableSchema
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
-      )
+      (\o -> TableSchema Core.<$> (o Core..:? "fields"))
 
 instance Core.ToJSON TableSchema where
   toJSON TableSchema {..} =
@@ -9314,7 +9485,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -9345,7 +9516,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -9386,7 +9557,9 @@ instance Core.FromJSON TimePartitioning where
       "TimePartitioning"
       ( \o ->
           TimePartitioning
-            Core.<$> (o Core..:? "expirationMs")
+            Core.<$> ( o Core..:? "expirationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "field")
             Core.<*> (o Core..:? "requirePartitionFilter")
             Core.<*> (o Core..:? "type")
@@ -9613,8 +9786,12 @@ instance Core.FromJSON TrainingOptions where
           TrainingOptions
             Core.<$> (o Core..:? "adjustStepChanges")
             Core.<*> (o Core..:? "autoArima")
-            Core.<*> (o Core..:? "autoArimaMaxOrder")
-            Core.<*> (o Core..:? "batchSize")
+            Core.<*> ( o Core..:? "autoArimaMaxOrder"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "batchSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "boosterType")
             Core.<*> (o Core..:? "calculatePValues")
             Core.<*> (o Core..:? "cleanSpikesAndDips")
@@ -9632,16 +9809,18 @@ instance Core.FromJSON TrainingOptions where
             Core.<*> (o Core..:? "earlyStop")
             Core.<*> (o Core..:? "enableGlobalExplain")
             Core.<*> (o Core..:? "feedbackType")
-            Core.<*> (o Core..:? "hiddenUnits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "hiddenUnits")
             Core.<*> (o Core..:? "holidayRegion")
-            Core.<*> (o Core..:? "horizon")
-            Core.<*> ( o Core..:? "hparamTuningObjectives"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "horizon"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "hparamTuningObjectives")
             Core.<*> (o Core..:? "includeDrift")
             Core.<*> (o Core..:? "initialLearnRate")
-            Core.<*> (o Core..:? "inputLabelColumns" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "integratedGradientsNumSteps")
+            Core.<*> (o Core..:? "inputLabelColumns")
+            Core.<*> ( o Core..:? "integratedGradientsNumSteps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "itemColumn")
             Core.<*> (o Core..:? "kmeansInitializationColumn")
             Core.<*> (o Core..:? "kmeansInitializationMethod")
@@ -9651,27 +9830,43 @@ instance Core.FromJSON TrainingOptions where
             Core.<*> (o Core..:? "learnRate")
             Core.<*> (o Core..:? "learnRateStrategy")
             Core.<*> (o Core..:? "lossType")
-            Core.<*> (o Core..:? "maxIterations")
-            Core.<*> (o Core..:? "maxParallelTrials")
-            Core.<*> (o Core..:? "maxTreeDepth")
+            Core.<*> ( o Core..:? "maxIterations"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxParallelTrials"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxTreeDepth"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "minRelativeProgress")
             Core.<*> (o Core..:? "minSplitLoss")
-            Core.<*> (o Core..:? "minTreeChildWeight")
+            Core.<*> ( o Core..:? "minTreeChildWeight"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "modelUri")
             Core.<*> (o Core..:? "nonSeasonalOrder")
-            Core.<*> (o Core..:? "numClusters")
-            Core.<*> (o Core..:? "numFactors")
-            Core.<*> (o Core..:? "numParallelTree")
-            Core.<*> (o Core..:? "numTrials")
+            Core.<*> ( o Core..:? "numClusters"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numFactors"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numParallelTree"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numTrials"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "optimizationStrategy")
             Core.<*> (o Core..:? "preserveInputStructs")
-            Core.<*> (o Core..:? "sampledShapleyNumPaths")
+            Core.<*> ( o Core..:? "sampledShapleyNumPaths"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "subsample")
             Core.<*> (o Core..:? "timeSeriesDataColumn")
             Core.<*> (o Core..:? "timeSeriesIdColumn")
-            Core.<*> ( o Core..:? "timeSeriesIdColumns"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timeSeriesIdColumns")
             Core.<*> (o Core..:? "timeSeriesTimestampColumn")
             Core.<*> (o Core..:? "treeMethod")
             Core.<*> (o Core..:? "userColumn")
@@ -9864,13 +10059,11 @@ instance Core.FromJSON TrainingRun where
       "TrainingRun"
       ( \o ->
           TrainingRun
-            Core.<$> ( o Core..:? "classLevelGlobalExplanations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "classLevelGlobalExplanations")
             Core.<*> (o Core..:? "dataSplitResult")
             Core.<*> (o Core..:? "evaluationMetrics")
             Core.<*> (o Core..:? "modelLevelGlobalExplanation")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "results")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "trainingOptions")
       )
@@ -9995,9 +10188,7 @@ instance Core.FromJSON ViewDefinition where
             Core.<$> (o Core..:? "query")
             Core.<*> (o Core..:? "useExplicitColumnNames")
             Core.<*> (o Core..:? "useLegacySql")
-            Core.<*> ( o Core..:? "userDefinedFunctionResources"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "userDefinedFunctionResources")
       )
 
 instance Core.ToJSON ViewDefinition where

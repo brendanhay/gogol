@@ -194,7 +194,7 @@ instance Core.FromJSON AnalyzeEntitiesResponse where
       "AnalyzeEntitiesResponse"
       ( \o ->
           AnalyzeEntitiesResponse
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
             Core.<*> (o Core..:? "language")
       )
 
@@ -272,7 +272,7 @@ instance Core.FromJSON AnalyzeEntitySentimentResponse where
       "AnalyzeEntitySentimentResponse"
       ( \o ->
           AnalyzeEntitySentimentResponse
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
             Core.<*> (o Core..:? "language")
       )
 
@@ -352,7 +352,7 @@ instance Core.FromJSON AnalyzeSentimentResponse where
           AnalyzeSentimentResponse
             Core.<$> (o Core..:? "documentSentiment")
             Core.<*> (o Core..:? "language")
-            Core.<*> (o Core..:? "sentences" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sentences")
       )
 
 instance Core.ToJSON AnalyzeSentimentResponse where
@@ -432,8 +432,8 @@ instance Core.FromJSON AnalyzeSyntaxResponse where
       ( \o ->
           AnalyzeSyntaxResponse
             Core.<$> (o Core..:? "language")
-            Core.<*> (o Core..:? "sentences" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tokens" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sentences")
+            Core.<*> (o Core..:? "tokens")
       )
 
 instance Core.ToJSON AnalyzeSyntaxResponse where
@@ -528,12 +528,12 @@ instance Core.FromJSON AnnotateTextResponse where
       "AnnotateTextResponse"
       ( \o ->
           AnnotateTextResponse
-            Core.<$> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categories")
             Core.<*> (o Core..:? "documentSentiment")
-            Core.<*> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entities")
             Core.<*> (o Core..:? "language")
-            Core.<*> (o Core..:? "sentences" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tokens" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sentences")
+            Core.<*> (o Core..:? "tokens")
       )
 
 instance Core.ToJSON AnnotateTextResponse where
@@ -635,7 +635,7 @@ instance Core.FromJSON ClassifyTextResponse where
       "ClassifyTextResponse"
       ( \o ->
           ClassifyTextResponse
-            Core.<$> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categories")
       )
 
 instance Core.ToJSON ClassifyTextResponse where
@@ -768,7 +768,7 @@ instance Core.FromJSON Entity where
       "Entity"
       ( \o ->
           Entity
-            Core.<$> (o Core..:? "mentions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mentions")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "salience")
@@ -1101,7 +1101,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

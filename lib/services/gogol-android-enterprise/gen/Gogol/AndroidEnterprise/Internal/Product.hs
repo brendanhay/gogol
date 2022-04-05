@@ -465,7 +465,7 @@ instance Core.FromJSON AdministratorWebTokenSpec where
           AdministratorWebTokenSpec
             Core.<$> (o Core..:? "managedConfigurations")
             Core.<*> (o Core..:? "parent")
-            Core.<*> (o Core..:? "permission" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permission")
             Core.<*> (o Core..:? "playSearch")
             Core.<*> (o Core..:? "privateApps")
             Core.<*> (o Core..:? "storeBuilder")
@@ -735,7 +735,7 @@ instance Core.FromJSON AppRestrictionsSchema where
       ( \o ->
           AppRestrictionsSchema
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "restrictions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "restrictions")
       )
 
 instance Core.ToJSON AppRestrictionsSchema where
@@ -830,10 +830,10 @@ instance
           AppRestrictionsSchemaRestriction
             Core.<$> (o Core..:? "defaultValue")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "entry" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "entryValue" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entry")
+            Core.<*> (o Core..:? "entryValue")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "nestedRestriction" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nestedRestriction")
             Core.<*> (o Core..:? "restrictionType")
             Core.<*> (o Core..:? "title")
       )
@@ -894,7 +894,7 @@ instance
           AppRestrictionsSchemaRestrictionRestrictionValue
             Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "valueBool")
               Core.<*> (o Core..:? "valueInteger")
-              Core.<*> (o Core..:? "valueMultiselect" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "valueMultiselect")
               Core.<*> (o Core..:? "valueString")
       )
 
@@ -938,7 +938,7 @@ instance Core.FromJSON AppState where
       "AppState"
       ( \o ->
           AppState
-            Core.<$> (o Core..:? "keyedAppState" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "keyedAppState")
             Core.<*> (o Core..:? "packageName")
       )
 
@@ -1017,7 +1017,7 @@ instance Core.FromJSON AppVersion where
           AppVersion
             Core.<$> (o Core..:? "isProduction")
             Core.<*> (o Core..:? "track")
-            Core.<*> (o Core..:? "trackId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trackId")
             Core.<*> (o Core..:? "versionCode")
             Core.<*> (o Core..:? "versionString")
       )
@@ -1168,9 +1168,7 @@ instance Core.FromJSON AutoInstallPolicy where
       "AutoInstallPolicy"
       ( \o ->
           AutoInstallPolicy
-            Core.<$> ( o Core..:? "autoInstallConstraint"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "autoInstallConstraint")
             Core.<*> (o Core..:? "autoInstallMode")
             Core.<*> (o Core..:? "autoInstallPriority")
             Core.<*> (o Core..:? "minimumVersionCode")
@@ -1214,7 +1212,7 @@ instance Core.FromJSON ConfigurationVariables where
       ( \o ->
           ConfigurationVariables
             Core.<$> (o Core..:? "mcmId")
-            Core.<*> (o Core..:? "variableSet" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "variableSet")
       )
 
 instance Core.ToJSON ConfigurationVariables where
@@ -1301,8 +1299,10 @@ instance Core.FromJSON DeviceReport where
       "DeviceReport"
       ( \o ->
           DeviceReport
-            Core.<$> (o Core..:? "appState" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "lastUpdatedTimestampMillis")
+            Core.<$> (o Core..:? "appState")
+            Core.<*> ( o Core..:? "lastUpdatedTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DeviceReport where
@@ -1407,8 +1407,7 @@ instance Core.FromJSON DevicesListResponse where
     Core.withObject
       "DevicesListResponse"
       ( \o ->
-          DevicesListResponse
-            Core.<$> (o Core..:? "device" Core..!= Core.mempty)
+          DevicesListResponse Core.<$> (o Core..:? "device")
       )
 
 instance Core.ToJSON DevicesListResponse where
@@ -1448,7 +1447,7 @@ instance Core.FromJSON Enterprise where
       "Enterprise"
       ( \o ->
           Enterprise
-            Core.<$> (o Core..:? "administrator" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "administrator")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primaryDomain")
@@ -1514,7 +1513,7 @@ instance Core.FromJSON EnterprisesListResponse where
       "EnterprisesListResponse"
       ( \o ->
           EnterprisesListResponse
-            Core.<$> (o Core..:? "enterprise" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enterprise")
       )
 
 instance Core.ToJSON EnterprisesListResponse where
@@ -1625,7 +1624,7 @@ instance Core.FromJSON EntitlementsListResponse where
       "EntitlementsListResponse"
       ( \o ->
           EntitlementsListResponse
-            Core.<$> (o Core..:? "entitlement" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entitlement")
       )
 
 instance Core.ToJSON EntitlementsListResponse where
@@ -1715,7 +1714,7 @@ instance Core.FromJSON GroupLicenseUsersListResponse where
       "GroupLicenseUsersListResponse"
       ( \o ->
           GroupLicenseUsersListResponse
-            Core.<$> (o Core..:? "user" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "user")
       )
 
 instance Core.ToJSON GroupLicenseUsersListResponse where
@@ -1743,7 +1742,7 @@ instance Core.FromJSON GroupLicensesListResponse where
       "GroupLicensesListResponse"
       ( \o ->
           GroupLicensesListResponse
-            Core.<$> (o Core..:? "groupLicense" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groupLicense")
       )
 
 instance Core.ToJSON GroupLicensesListResponse where
@@ -1870,8 +1869,7 @@ instance Core.FromJSON InstallsListResponse where
     Core.withObject
       "InstallsListResponse"
       ( \o ->
-          InstallsListResponse
-            Core.<$> (o Core..:? "install" Core..!= Core.mempty)
+          InstallsListResponse Core.<$> (o Core..:? "install")
       )
 
 instance Core.ToJSON InstallsListResponse where
@@ -1920,7 +1918,9 @@ instance Core.FromJSON KeyedAppState where
             Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "message")
             Core.<*> (o Core..:? "severity")
-            Core.<*> (o Core..:? "stateTimestampMillis")
+            Core.<*> ( o Core..:? "stateTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON KeyedAppState where
@@ -1996,8 +1996,12 @@ instance Core.FromJSON MaintenanceWindow where
       "MaintenanceWindow"
       ( \o ->
           MaintenanceWindow
-            Core.<$> (o Core..:? "durationMs")
-            Core.<*> (o Core..:? "startTimeAfterMidnightMs")
+            Core.<$> ( o Core..:? "durationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "startTimeAfterMidnightMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MaintenanceWindow where
@@ -2046,7 +2050,7 @@ instance Core.FromJSON ManagedConfiguration where
           ManagedConfiguration
             Core.<$> (o Core..:? "configurationVariables")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "managedProperty" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "managedProperty")
             Core.<*> (o Core..:? "productId")
       )
 
@@ -2087,9 +2091,7 @@ instance
       "ManagedConfigurationsForDeviceListResponse"
       ( \o ->
           ManagedConfigurationsForDeviceListResponse
-            Core.<$> ( o Core..:? "managedConfigurationForDevice"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "managedConfigurationForDevice")
       )
 
 instance
@@ -2129,9 +2131,7 @@ instance
       "ManagedConfigurationsForUserListResponse"
       ( \o ->
           ManagedConfigurationsForUserListResponse
-            Core.<$> ( o Core..:? "managedConfigurationForUser"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "managedConfigurationForUser")
       )
 
 instance
@@ -2175,7 +2175,9 @@ instance Core.FromJSON ManagedConfigurationsSettings where
       "ManagedConfigurationsSettings"
       ( \o ->
           ManagedConfigurationsSettings
-            Core.<$> (o Core..:? "lastUpdatedTimestampMillis")
+            Core.<$> ( o Core..:? "lastUpdatedTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mcmId")
             Core.<*> (o Core..:? "name")
       )
@@ -2217,9 +2219,7 @@ instance
       "ManagedConfigurationsSettingsListResponse"
       ( \o ->
           ManagedConfigurationsSettingsListResponse
-            Core.<$> ( o Core..:? "managedConfigurationsSettings"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "managedConfigurationsSettings")
       )
 
 instance
@@ -2278,10 +2278,10 @@ instance Core.FromJSON ManagedProperty where
             Core.<$> (o Core..:? "key")
             Core.<*> (o Core..:? "valueBool")
             Core.<*> (o Core..:? "valueBundle")
-            Core.<*> (o Core..:? "valueBundleArray" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueBundleArray")
             Core.<*> (o Core..:? "valueInteger")
             Core.<*> (o Core..:? "valueString")
-            Core.<*> (o Core..:? "valueStringArray" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "valueStringArray")
       )
 
 instance Core.ToJSON ManagedProperty where
@@ -2321,7 +2321,7 @@ instance Core.FromJSON ManagedPropertyBundle where
       "ManagedPropertyBundle"
       ( \o ->
           ManagedPropertyBundle
-            Core.<$> (o Core..:? "managedProperty" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "managedProperty")
       )
 
 instance Core.ToJSON ManagedPropertyBundle where
@@ -2411,13 +2411,9 @@ instance Core.FromJSON NewPermissionsEvent where
       "NewPermissionsEvent"
       ( \o ->
           NewPermissionsEvent
-            Core.<$> ( o Core..:? "approvedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "approvedPermissions")
             Core.<*> (o Core..:? "productId")
-            Core.<*> ( o Core..:? "requestedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "requestedPermissions")
       )
 
 instance Core.ToJSON NewPermissionsEvent where
@@ -2495,7 +2491,9 @@ instance Core.FromJSON Notification where
             Core.<*> (o Core..:? "notificationType")
             Core.<*> (o Core..:? "productApprovalEvent")
             Core.<*> (o Core..:? "productAvailabilityChangeEvent")
-            Core.<*> (o Core..:? "timestampMillis")
+            Core.<*> ( o Core..:? "timestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Notification where
@@ -2550,7 +2548,7 @@ instance Core.FromJSON NotificationSet where
       "NotificationSet"
       ( \o ->
           NotificationSet
-            Core.<$> (o Core..:? "notification" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "notification")
             Core.<*> (o Core..:? "notificationSetId")
       )
 
@@ -2691,7 +2689,7 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "deviceReportPolicy")
             Core.<*> (o Core..:? "maintenanceWindow")
             Core.<*> (o Core..:? "productAvailabilityPolicy")
-            Core.<*> (o Core..:? "productPolicy" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productPolicy")
       )
 
 instance Core.ToJSON Policy where
@@ -2802,28 +2800,28 @@ instance Core.FromJSON Product where
       "Product"
       ( \o ->
           Product
-            Core.<$> (o Core..:? "appTracks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "appVersion" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "appTracks")
+            Core.<*> (o Core..:? "appVersion")
             Core.<*> (o Core..:? "authorName")
-            Core.<*> ( o Core..:? "availableCountries"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "availableTracks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "availableCountries")
+            Core.<*> (o Core..:? "availableTracks")
             Core.<*> (o Core..:? "category")
             Core.<*> (o Core..:? "contentRating")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "detailsUrl")
             Core.<*> (o Core..:? "distributionChannel")
-            Core.<*> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "iconUrl")
-            Core.<*> (o Core..:? "lastUpdatedTimestampMillis")
+            Core.<*> ( o Core..:? "lastUpdatedTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "minAndroidSdkVersion")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productPricing")
             Core.<*> (o Core..:? "recentChanges")
             Core.<*> (o Core..:? "requiresContainerApp")
-            Core.<*> (o Core..:? "screenshotUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "screenshotUrls")
             Core.<*> (o Core..:? "signingCertificate")
             Core.<*> (o Core..:? "smallIconUrl")
             Core.<*> (o Core..:? "title")
@@ -3003,7 +3001,7 @@ instance Core.FromJSON ProductPermissions where
       "ProductPermissions"
       ( \o ->
           ProductPermissions
-            Core.<$> (o Core..:? "permission" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permission")
             Core.<*> (o Core..:? "productId")
       )
 
@@ -3058,8 +3056,8 @@ instance Core.FromJSON ProductPolicy where
             Core.<*> (o Core..:? "autoUpdateMode")
             Core.<*> (o Core..:? "managedConfiguration")
             Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "trackIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trackIds")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance Core.ToJSON ProductPolicy where
@@ -3106,11 +3104,9 @@ instance Core.FromJSON ProductSet where
       "ProductSet"
       ( \o ->
           ProductSet
-            Core.<$> (o Core..:? "productId" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "productId")
             Core.<*> (o Core..:? "productSetBehavior")
-            Core.<*> ( o Core..:? "productVisibility"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "productVisibility")
       )
 
 instance Core.ToJSON ProductSet where
@@ -3195,8 +3191,8 @@ instance Core.FromJSON ProductVisibility where
       ( \o ->
           ProductVisibility
             Core.<$> (o Core..:? "productId")
-            Core.<*> (o Core..:? "trackIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trackIds")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance Core.ToJSON ProductVisibility where
@@ -3312,7 +3308,7 @@ instance Core.FromJSON ProductsListResponse where
       ( \o ->
           ProductsListResponse
             Core.<$> (o Core..:? "pageInfo")
-            Core.<*> (o Core..:? "product" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "tokenPagination")
       )
 
@@ -3430,9 +3426,7 @@ instance Core.FromJSON ServiceAccountKeysListResponse where
       "ServiceAccountKeysListResponse"
       ( \o ->
           ServiceAccountKeysListResponse
-            Core.<$> ( o Core..:? "serviceAccountKey"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "serviceAccountKey")
       )
 
 instance Core.ToJSON ServiceAccountKeysListResponse where
@@ -3522,9 +3516,9 @@ instance Core.FromJSON StoreCluster where
       ( \o ->
           StoreCluster
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "name" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "orderInPage")
-            Core.<*> (o Core..:? "productId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productId")
       )
 
 instance Core.ToJSON StoreCluster where
@@ -3598,7 +3592,7 @@ instance
       "StoreLayoutClustersListResponse"
       ( \o ->
           StoreLayoutClustersListResponse
-            Core.<$> (o Core..:? "cluster" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cluster")
       )
 
 instance Core.ToJSON StoreLayoutClustersListResponse where
@@ -3628,7 +3622,7 @@ instance Core.FromJSON StoreLayoutPagesListResponse where
       "StoreLayoutPagesListResponse"
       ( \o ->
           StoreLayoutPagesListResponse
-            Core.<$> (o Core..:? "page" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "page")
       )
 
 instance Core.ToJSON StoreLayoutPagesListResponse where
@@ -3662,8 +3656,8 @@ instance Core.FromJSON StorePage where
       ( \o ->
           StorePage
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "link" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "name" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "link")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON StorePage where
@@ -3829,8 +3823,7 @@ instance Core.FromJSON UsersListResponse where
     Core.withObject
       "UsersListResponse"
       ( \o ->
-          UsersListResponse
-            Core.<$> (o Core..:? "user" Core..!= Core.mempty)
+          UsersListResponse Core.<$> (o Core..:? "user")
       )
 
 instance Core.ToJSON UsersListResponse where
@@ -3916,11 +3909,13 @@ instance Core.FromJSON WebApp where
       ( \o ->
           WebApp
             Core.<$> (o Core..:? "displayMode")
-            Core.<*> (o Core..:? "icons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "icons")
             Core.<*> (o Core..:? "isPublished")
             Core.<*> (o Core..:? "startUrl")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "versionCode")
+            Core.<*> ( o Core..:? "versionCode"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "webAppId")
       )
 
@@ -3984,8 +3979,7 @@ instance Core.FromJSON WebAppsListResponse where
     Core.withObject
       "WebAppsListResponse"
       ( \o ->
-          WebAppsListResponse
-            Core.<$> (o Core..:? "webApp" Core..!= Core.mempty)
+          WebAppsListResponse Core.<$> (o Core..:? "webApp")
       )
 
 instance Core.ToJSON WebAppsListResponse where

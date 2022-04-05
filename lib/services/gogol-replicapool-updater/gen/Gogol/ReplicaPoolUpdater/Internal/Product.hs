@@ -155,8 +155,7 @@ instance Core.FromJSON InstanceUpdate_Error where
     Core.withObject
       "InstanceUpdate_Error"
       ( \o ->
-          InstanceUpdate_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          InstanceUpdate_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON InstanceUpdate_Error where
@@ -242,7 +241,7 @@ instance Core.FromJSON InstanceUpdateList where
       "InstanceUpdateList"
       ( \o ->
           InstanceUpdateList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "replicapoolupdater#instanceUpdateList"
                      )
@@ -353,7 +352,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "httpErrorMessage")
             Core.<*> (o Core..:? "httpErrorStatusCode")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "replicapoolupdater#operation"
@@ -366,10 +365,12 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusMessage")
-            Core.<*> (o Core..:? "targetId")
+            Core.<*> ( o Core..:? "targetId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "targetLink")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -426,8 +427,7 @@ instance Core.FromJSON Operation_Error where
     Core.withObject
       "Operation_Error"
       ( \o ->
-          Operation_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          Operation_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON Operation_Error where
@@ -507,7 +507,7 @@ instance Core.FromJSON Operation_WarningsItem where
       ( \o ->
           Operation_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -594,7 +594,7 @@ instance Core.FromJSON OperationList where
       ( \o ->
           OperationList
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "replicapoolupdater#operationList"
                      )
@@ -749,8 +749,7 @@ instance Core.FromJSON RollingUpdate_Error where
     Core.withObject
       "RollingUpdate_Error"
       ( \o ->
-          RollingUpdate_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          RollingUpdate_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON RollingUpdate_Error where
@@ -892,7 +891,7 @@ instance Core.FromJSON RollingUpdateList where
       "RollingUpdateList"
       ( \o ->
           RollingUpdateList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "replicapoolupdater#rollingUpdateList"
                      )

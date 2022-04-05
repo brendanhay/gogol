@@ -110,8 +110,7 @@ instance Core.FromJSON AchievementResetAllResponse where
       "AchievementResetAllResponse"
       ( \o ->
           AchievementResetAllResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON AchievementResetAllResponse where
@@ -151,7 +150,7 @@ instance
       "AchievementResetMultipleForAllRequest"
       ( \o ->
           AchievementResetMultipleForAllRequest
-            Core.<$> (o Core..:? "achievement_ids" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "achievement_ids")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -245,7 +244,7 @@ instance
       "EventsResetMultipleForAllRequest"
       ( \o ->
           EventsResetMultipleForAllRequest
-            Core.<$> (o Core..:? "event_ids" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "event_ids")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -293,9 +292,13 @@ instance
       "GamesPlayerExperienceInfoResource"
       ( \o ->
           GamesPlayerExperienceInfoResource
-            Core.<$> (o Core..:? "currentExperiencePoints")
+            Core.<$> ( o Core..:? "currentExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currentLevel")
-            Core.<*> (o Core..:? "lastLevelUpTimestampMillis")
+            Core.<*> ( o Core..:? "lastLevelUpTimestampMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "nextLevel")
       )
 
@@ -347,8 +350,12 @@ instance Core.FromJSON GamesPlayerLevelResource where
       ( \o ->
           GamesPlayerLevelResource
             Core.<$> (o Core..:? "level")
-            Core.<*> (o Core..:? "maxExperiencePoints")
-            Core.<*> (o Core..:? "minExperiencePoints")
+            Core.<*> ( o Core..:? "maxExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minExperiencePoints"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GamesPlayerLevelResource where
@@ -392,7 +399,9 @@ instance Core.FromJSON HiddenPlayer where
       "HiddenPlayer"
       ( \o ->
           HiddenPlayer
-            Core.<$> (o Core..:? "hiddenTimeMillis")
+            Core.<$> ( o Core..:? "hiddenTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "player")
       )
@@ -437,7 +446,7 @@ instance Core.FromJSON HiddenPlayerList where
       "HiddenPlayerList"
       ( \o ->
           HiddenPlayerList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -598,8 +607,7 @@ instance Core.FromJSON PlayerScoreResetAllResponse where
       "PlayerScoreResetAllResponse"
       ( \o ->
           PlayerScoreResetAllResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON PlayerScoreResetAllResponse where
@@ -642,9 +650,7 @@ instance Core.FromJSON PlayerScoreResetResponse where
           PlayerScoreResetResponse
             Core.<$> (o Core..:? "definitionId")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "resetScoreTimeSpans"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resetScoreTimeSpans")
       )
 
 instance Core.ToJSON PlayerScoreResetResponse where
@@ -723,7 +729,7 @@ instance
       ( \o ->
           ScoresResetMultipleForAllRequest
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "leaderboard_ids" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "leaderboard_ids")
       )
 
 instance Core.ToJSON ScoresResetMultipleForAllRequest where

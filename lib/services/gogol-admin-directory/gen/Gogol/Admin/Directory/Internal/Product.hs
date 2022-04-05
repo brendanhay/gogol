@@ -534,7 +534,7 @@ instance Core.FromJSON Aliases where
       "Aliases"
       ( \o ->
           Aliases
-            Core.<$> (o Core..:? "aliases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aliases")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#aliases"
@@ -593,10 +593,14 @@ instance Core.FromJSON Asp where
       ( \o ->
           Asp
             Core.<$> (o Core..:? "codeId")
-            Core.<*> (o Core..:? "creationTime")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#asp")
-            Core.<*> (o Core..:? "lastTimeUsed")
+            Core.<*> ( o Core..:? "lastTimeUsed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "userKey")
       )
@@ -646,7 +650,7 @@ instance Core.FromJSON Asps where
       ( \o ->
           Asps
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#aspList"
                      )
@@ -728,7 +732,7 @@ instance Core.FromJSON BatchCreatePrintersRequest where
       "BatchCreatePrintersRequest"
       ( \o ->
           BatchCreatePrintersRequest
-            Core.<$> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requests")
       )
 
 instance Core.ToJSON BatchCreatePrintersRequest where
@@ -761,8 +765,8 @@ instance Core.FromJSON BatchCreatePrintersResponse where
       "BatchCreatePrintersResponse"
       ( \o ->
           BatchCreatePrintersResponse
-            Core.<$> (o Core..:? "failures" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "printers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "failures")
+            Core.<*> (o Core..:? "printers")
       )
 
 instance Core.ToJSON BatchCreatePrintersResponse where
@@ -795,7 +799,7 @@ instance Core.FromJSON BatchDeletePrintersRequest where
       "BatchDeletePrintersRequest"
       ( \o ->
           BatchDeletePrintersRequest
-            Core.<$> (o Core..:? "printerIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "printerIds")
       )
 
 instance Core.ToJSON BatchDeletePrintersRequest where
@@ -831,8 +835,8 @@ instance Core.FromJSON BatchDeletePrintersResponse where
       "BatchDeletePrintersResponse"
       ( \o ->
           BatchDeletePrintersResponse
-            Core.<$> (o Core..:? "failedPrinters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "printerIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "failedPrinters")
+            Core.<*> (o Core..:? "printerIds")
       )
 
 instance Core.ToJSON BatchDeletePrintersResponse where
@@ -894,7 +898,7 @@ instance Core.FromJSON Building where
             Core.<*> (o Core..:? "coordinates")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etags")
-            Core.<*> (o Core..:? "floorNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "floorNames")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#resources#buildings#Building"
                      )
@@ -956,7 +960,7 @@ instance Core.FromJSON BuildingAddress where
       "BuildingAddress"
       ( \o ->
           BuildingAddress
-            Core.<$> (o Core..:? "addressLines" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addressLines")
             Core.<*> (o Core..:? "administrativeArea")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "locality")
@@ -1048,7 +1052,7 @@ instance Core.FromJSON Buildings where
       "Buildings"
       ( \o ->
           Buildings
-            Core.<$> (o Core..:? "buildings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buildings")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#resources#buildings#buildingsList"
@@ -1211,7 +1215,7 @@ instance Core.FromJSON CalendarResources where
       ( \o ->
           CalendarResources
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#resources#calendars#calendarResourcesList"
                      )
@@ -1280,7 +1284,9 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -1473,17 +1479,19 @@ instance Core.FromJSON ChromeOsDevice where
       "ChromeOsDevice"
       ( \o ->
           ChromeOsDevice
-            Core.<$> (o Core..:? "activeTimeRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activeTimeRanges")
             Core.<*> (o Core..:? "annotatedAssetId")
             Core.<*> (o Core..:? "annotatedLocation")
             Core.<*> (o Core..:? "annotatedUser")
-            Core.<*> (o Core..:? "autoUpdateExpiration")
+            Core.<*> ( o Core..:? "autoUpdateExpiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "bootMode")
-            Core.<*> (o Core..:? "cpuInfo" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "cpuStatusReports" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "deviceFiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "cpuInfo")
+            Core.<*> (o Core..:? "cpuStatusReports")
+            Core.<*> (o Core..:? "deviceFiles")
             Core.<*> (o Core..:? "deviceId")
-            Core.<*> (o Core..:? "diskVolumeReports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "diskVolumeReports")
             Core.<*> (o Core..:? "dockMacAddress")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "ethernetMacAddress")
@@ -1493,7 +1501,7 @@ instance Core.FromJSON ChromeOsDevice where
                          Core..!= "admin#directory#chromeosdevice"
                      )
             Core.<*> (o Core..:? "lastEnrollmentTime")
-            Core.<*> (o Core..:? "lastKnownNetwork" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "lastKnownNetwork")
             Core.<*> (o Core..:? "lastSync")
             Core.<*> (o Core..:? "macAddress")
             Core.<*> (o Core..:? "manufactureDate")
@@ -1505,15 +1513,15 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "orgUnitPath")
             Core.<*> (o Core..:? "osVersion")
             Core.<*> (o Core..:? "platformVersion")
-            Core.<*> (o Core..:? "recentUsers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "screenshotFiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recentUsers")
+            Core.<*> (o Core..:? "screenshotFiles")
             Core.<*> (o Core..:? "serialNumber")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "supportEndDate")
-            Core.<*> ( o Core..:? "systemRamFreeReports"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "systemRamFreeReports")
+            Core.<*> ( o Core..:? "systemRamTotal"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "systemRamTotal")
             Core.<*> (o Core..:? "tpmVersionInfo")
             Core.<*> (o Core..:? "willAutoRenew")
       )
@@ -1653,7 +1661,7 @@ instance Core.FromJSON ChromeOsDevice_CpuInfoItem where
       ( \o ->
           ChromeOsDevice_CpuInfoItem
             Core.<$> (o Core..:? "architecture")
-            Core.<*> (o Core..:? "logicalCpus" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "logicalCpus")
             Core.<*> (o Core..:? "maxClockSpeedKhz")
             Core.<*> (o Core..:? "model")
       )
@@ -1708,7 +1716,7 @@ instance
       "ChromeOsDevice_CpuInfoItem_LogicalCpusItem"
       ( \o ->
           ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-            Core.<$> (o Core..:? "cStates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cStates")
             Core.<*> (o Core..:? "currentScalingFrequencyKhz")
             Core.<*> (o Core..:? "idleDuration")
             Core.<*> (o Core..:? "maxScalingFrequencyKhz")
@@ -1811,12 +1819,8 @@ instance
       "ChromeOsDevice_CpuStatusReportsItem"
       ( \o ->
           ChromeOsDevice_CpuStatusReportsItem
-            Core.<$> ( o Core..:? "cpuTemperatureInfo"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "cpuUtilizationPercentageInfo"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "cpuTemperatureInfo")
+            Core.<*> (o Core..:? "cpuUtilizationPercentageInfo")
             Core.<*> (o Core..:? "reportTime")
       )
 
@@ -1951,7 +1955,7 @@ instance
       "ChromeOsDevice_DiskVolumeReportsItem"
       ( \o ->
           ChromeOsDevice_DiskVolumeReportsItem
-            Core.<$> (o Core..:? "volumeInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "volumeInfo")
       )
 
 instance
@@ -1995,8 +1999,12 @@ instance
       "ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem"
       ( \o ->
           ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
-            Core.<$> (o Core..:? "storageFree")
-              Core.<*> (o Core..:? "storageTotal")
+            Core.<$> ( o Core..:? "storageFree"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "storageTotal"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "volumeId")
       )
 
@@ -2179,9 +2187,7 @@ instance
       ( \o ->
           ChromeOsDevice_SystemRamFreeReportsItem
             Core.<$> (o Core..:? "reportTime")
-            Core.<*> ( o Core..:? "systemRamFreeInfo"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "systemRamFreeInfo")
       )
 
 instance
@@ -2323,7 +2329,7 @@ instance Core.FromJSON ChromeOsDevices where
       "ChromeOsDevices"
       ( \o ->
           ChromeOsDevices
-            Core.<$> (o Core..:? "chromeosdevices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "chromeosdevices")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#chromeosdevices"
@@ -2362,7 +2368,7 @@ instance Core.FromJSON ChromeOsMoveDevicesToOu where
       "ChromeOsMoveDevicesToOu"
       ( \o ->
           ChromeOsMoveDevicesToOu
-            Core.<$> (o Core..:? "deviceIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceIds")
       )
 
 instance Core.ToJSON ChromeOsMoveDevicesToOu where
@@ -2603,7 +2609,9 @@ instance
       ( \o ->
           DirectoryChromeosdevicesCommand
             Core.<$> (o Core..:? "commandExpireTime")
-            Core.<*> (o Core..:? "commandId")
+            Core.<*> ( o Core..:? "commandId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "commandResult")
             Core.<*> (o Core..:? "issueTime")
             Core.<*> (o Core..:? "payload")
@@ -2750,7 +2758,9 @@ instance
       "DirectoryChromeosdevicesIssueCommandResponse"
       ( \o ->
           DirectoryChromeosdevicesIssueCommandResponse
-            Core.<$> (o Core..:? "commandId")
+            Core.<$> ( o Core..:? "commandId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -2803,7 +2813,9 @@ instance Core.FromJSON DomainAlias where
       "DomainAlias"
       ( \o ->
           DomainAlias
-            Core.<$> (o Core..:? "creationTime")
+            Core.<$> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "domainAliasName")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
@@ -2856,7 +2868,7 @@ instance Core.FromJSON DomainAliases where
       "DomainAliases"
       ( \o ->
           DomainAliases
-            Core.<$> (o Core..:? "domainAliases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "domainAliases")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#domainAliases"
@@ -2913,8 +2925,10 @@ instance Core.FromJSON Domains where
       "Domains"
       ( \o ->
           Domains
-            Core.<$> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "domainAliases" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "domainAliases")
             Core.<*> (o Core..:? "domainName")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "isPrimary")
@@ -2965,7 +2979,7 @@ instance Core.FromJSON Domains2 where
       "Domains2"
       ( \o ->
           Domains2
-            Core.<$> (o Core..:? "domains" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "domains")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#domains"
@@ -3185,7 +3199,7 @@ instance Core.FromJSON Features where
       ( \o ->
           Features
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "features")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#resources#features#featuresList"
                      )
@@ -3254,17 +3268,17 @@ instance Core.FromJSON Group where
       ( \o ->
           Group
             Core.<$> (o Core..:? "adminCreated")
-            Core.<*> (o Core..:? "aliases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "aliases")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "directMembersCount")
+            Core.<*> ( o Core..:? "directMembersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#group")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "nonEditableAliases"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonEditableAliases")
       )
 
 instance Core.ToJSON Group where
@@ -3318,7 +3332,7 @@ instance Core.FromJSON Groups where
       ( \o ->
           Groups
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "groups" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "groups")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#groups")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -3361,7 +3375,7 @@ instance Core.FromJSON ListPrinterModelsResponse where
       ( \o ->
           ListPrinterModelsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "printerModels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "printerModels")
       )
 
 instance Core.ToJSON ListPrinterModelsResponse where
@@ -3397,7 +3411,7 @@ instance Core.FromJSON ListPrintersResponse where
       ( \o ->
           ListPrintersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "printers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "printers")
       )
 
 instance Core.ToJSON ListPrintersResponse where
@@ -3514,7 +3528,7 @@ instance Core.FromJSON Members where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#members"
                      )
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3699,7 +3713,7 @@ instance Core.FromJSON MobileDevice where
       ( \o ->
           MobileDevice
             Core.<$> (o Core..:? "adbStatus")
-            Core.<*> (o Core..:? "applications" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "applications")
             Core.<*> (o Core..:? "basebandVersion")
             Core.<*> (o Core..:? "bootloaderVersion")
             Core.<*> (o Core..:? "brand")
@@ -3709,7 +3723,7 @@ instance Core.FromJSON MobileDevice where
             Core.<*> (o Core..:? "deviceCompromisedStatus")
             Core.<*> (o Core..:? "deviceId")
             Core.<*> (o Core..:? "devicePasswordStatus")
-            Core.<*> (o Core..:? "email" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "encryptionStatus")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "firstSync")
@@ -3725,14 +3739,16 @@ instance Core.FromJSON MobileDevice where
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "meid")
             Core.<*> (o Core..:? "model")
-            Core.<*> (o Core..:? "name" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkOperator")
             Core.<*> (o Core..:? "os")
-            Core.<*> (o Core..:? "otherAccountsInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "otherAccountsInfo")
             Core.<*> (o Core..:? "privilege")
             Core.<*> (o Core..:? "releaseVersion")
             Core.<*> (o Core..:? "resourceId")
-            Core.<*> (o Core..:? "securityPatchLevel")
+            Core.<*> ( o Core..:? "securityPatchLevel"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "serialNumber")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "supportsWorkProfile")
@@ -3835,7 +3851,7 @@ instance Core.FromJSON MobileDevice_ApplicationsItem where
           MobileDevice_ApplicationsItem
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "packageName")
-            Core.<*> (o Core..:? "permission" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permission")
             Core.<*> (o Core..:? "versionCode")
             Core.<*> (o Core..:? "versionName")
       )
@@ -3913,7 +3929,7 @@ instance Core.FromJSON MobileDevices where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#mobiledevices"
                      )
-            Core.<*> (o Core..:? "mobiledevices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mobiledevices")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4038,9 +4054,7 @@ instance Core.FromJSON OrgUnits where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#orgUnits"
                      )
-            Core.<*> ( o Core..:? "organizationUnits"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "organizationUnits")
       )
 
 instance Core.ToJSON OrgUnits where
@@ -4104,7 +4118,7 @@ instance Core.FromJSON Printer where
       "Printer"
       ( \o ->
           Printer
-            Core.<$> (o Core..:? "auxiliaryMessages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auxiliaryMessages")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
@@ -4219,7 +4233,7 @@ instance Core.FromJSON Privilege where
       "Privilege"
       ( \o ->
           Privilege
-            Core.<$> (o Core..:? "childPrivileges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "childPrivileges")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "isOuScopable")
             Core.<*> ( o Core..:? "kind"
@@ -4274,7 +4288,7 @@ instance Core.FromJSON Privileges where
       ( \o ->
           Privileges
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#privileges"
                      )
@@ -4338,9 +4352,11 @@ instance Core.FromJSON Role where
             Core.<*> (o Core..:? "isSystemRole")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#role")
             Core.<*> (o Core..:? "roleDescription")
-            Core.<*> (o Core..:? "roleId")
+            Core.<*> ( o Core..:? "roleId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "roleName")
-            Core.<*> (o Core..:? "rolePrivileges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rolePrivileges")
       )
 
 instance Core.ToJSON Role where
@@ -4445,8 +4461,12 @@ instance Core.FromJSON RoleAssignment where
                          Core..!= "admin#directory#roleAssignment"
                      )
             Core.<*> (o Core..:? "orgUnitId")
-            Core.<*> (o Core..:? "roleAssignmentId")
-            Core.<*> (o Core..:? "roleId")
+            Core.<*> ( o Core..:? "roleAssignmentId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "roleId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scopeType")
       )
 
@@ -4498,7 +4518,7 @@ instance Core.FromJSON RoleAssignments where
       ( \o ->
           RoleAssignments
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#roleAssignments"
                      )
@@ -4548,7 +4568,7 @@ instance Core.FromJSON Roles where
       ( \o ->
           Roles
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#roles")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -4604,7 +4624,7 @@ instance Core.FromJSON Schema where
           Schema
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#schema")
             Core.<*> (o Core..:? "schemaId")
             Core.<*> (o Core..:? "schemaName")
@@ -4785,7 +4805,7 @@ instance Core.FromJSON Schemas where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#schemas"
                      )
-            Core.<*> (o Core..:? "schemas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "schemas")
       )
 
 instance Core.ToJSON Schemas where
@@ -4848,7 +4868,7 @@ instance Core.FromJSON Token where
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#token")
             Core.<*> (o Core..:? "nativeApp")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scopes")
             Core.<*> (o Core..:? "userKey")
       )
 
@@ -4897,7 +4917,7 @@ instance Core.FromJSON Tokens where
       ( \o ->
           Tokens
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#tokenList"
                      )
@@ -5073,7 +5093,7 @@ instance Core.FromJSON User where
           User
             Core.<$> (o Core..:? "addresses")
             Core.<*> (o Core..:? "agreedToTerms")
-            Core.<*> (o Core..:? "aliases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "aliases")
             Core.<*> (o Core..:? "archived")
             Core.<*> (o Core..:? "changePasswordAtNextLogin")
             Core.<*> (o Core..:? "creationTime")
@@ -5100,9 +5120,7 @@ instance Core.FromJSON User where
             Core.<*> (o Core..:? "lastLoginTime")
             Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "nonEditableAliases"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonEditableAliases")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "orgUnitPath")
             Core.<*> (o Core..:? "organizations")
@@ -6044,13 +6062,13 @@ instance Core.FromJSON UserPosixAccount where
           UserPosixAccount
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "gecos")
-            Core.<*> (o Core..:? "gid")
+            Core.<*> (o Core..:? "gid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "homeDirectory")
             Core.<*> (o Core..:? "operatingSystemType")
             Core.<*> (o Core..:? "primary")
             Core.<*> (o Core..:? "shell")
             Core.<*> (o Core..:? "systemId")
-            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "uid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "username")
       )
 
@@ -6145,7 +6163,9 @@ instance Core.FromJSON UserSshPublicKey where
       "UserSshPublicKey"
       ( \o ->
           UserSshPublicKey
-            Core.<$> (o Core..:? "expirationTimeUsec")
+            Core.<$> ( o Core..:? "expirationTimeUsec"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "key")
       )
@@ -6276,7 +6296,7 @@ instance Core.FromJSON Users where
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#users")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "trigger_event")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON Users where
@@ -6373,7 +6393,7 @@ instance Core.FromJSON VerificationCodes where
       ( \o ->
           VerificationCodes
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#verificationCodesList"
                      )

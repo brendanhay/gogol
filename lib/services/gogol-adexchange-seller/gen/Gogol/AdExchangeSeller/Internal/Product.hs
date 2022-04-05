@@ -184,7 +184,7 @@ instance Core.FromJSON Accounts where
       ( \o ->
           Accounts
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#accounts"
                      )
@@ -290,7 +290,7 @@ instance Core.FromJSON AdClients where
       ( \o ->
           AdClients
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#adClients"
                      )
@@ -382,7 +382,7 @@ instance Core.FromJSON Alerts where
       "Alerts"
       ( \o ->
           Alerts
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#alerts"
                      )
@@ -533,7 +533,7 @@ instance Core.FromJSON CustomChannels where
       ( \o ->
           CustomChannels
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#customChannels"
                      )
@@ -573,7 +573,7 @@ instance Core.FromJSON Metadata where
       "Metadata"
       ( \o ->
           Metadata
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#metadata"
                      )
@@ -634,13 +634,19 @@ instance Core.FromJSON PreferredDeal where
             Core.<$> (o Core..:? "advertiserName")
             Core.<*> (o Core..:? "buyerNetworkName")
             Core.<*> (o Core..:? "currencyCode")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "fixedCpm")
-            Core.<*> (o Core..:? "id")
+            Core.<*> ( o Core..:? "endTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "fixedCpm"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#preferredDeal"
                      )
-            Core.<*> (o Core..:? "startTime")
+            Core.<*> ( o Core..:? "startTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PreferredDeal where
@@ -687,7 +693,7 @@ instance Core.FromJSON PreferredDeals where
       "PreferredDeals"
       ( \o ->
           PreferredDeals
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#preferredDeals"
                      )
@@ -742,15 +748,17 @@ instance Core.FromJSON Report where
       "Report"
       ( \o ->
           Report
-            Core.<$> (o Core..:? "averages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "averages")
+            Core.<*> (o Core..:? "headers")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#report"
                      )
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalMatchedRows")
-            Core.<*> (o Core..:? "totals" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
+            Core.<*> ( o Core..:? "totalMatchedRows"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "totals")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Report where
@@ -851,21 +859,15 @@ instance Core.FromJSON ReportingMetadataEntry where
       "ReportingMetadataEntry"
       ( \o ->
           ReportingMetadataEntry
-            Core.<$> ( o Core..:? "compatibleDimensions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "compatibleMetrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "compatibleDimensions")
+            Core.<*> (o Core..:? "compatibleMetrics")
             Core.<*> (o Core..:? "id")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#reportingMetadataEntry"
                      )
-            Core.<*> ( o Core..:? "requiredDimensions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "requiredMetrics" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "supportedProducts"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "requiredDimensions")
+            Core.<*> (o Core..:? "requiredMetrics")
+            Core.<*> (o Core..:? "supportedProducts")
       )
 
 instance Core.ToJSON ReportingMetadataEntry where
@@ -963,7 +965,7 @@ instance Core.FromJSON SavedReports where
       ( \o ->
           SavedReports
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#savedReports"
                      )
@@ -1058,7 +1060,7 @@ instance Core.FromJSON UrlChannels where
       ( \o ->
           UrlChannels
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "adexchangeseller#urlChannels"
                      )

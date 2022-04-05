@@ -520,7 +520,9 @@ instance Core.FromJSON AcceptProposalRequest where
       "AcceptProposalRequest"
       ( \o ->
           AcceptProposalRequest
-            Core.<$> (o Core..:? "proposalRevision")
+            Core.<$> ( o Core..:? "proposalRevision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AcceptProposalRequest where
@@ -557,9 +559,13 @@ instance Core.FromJSON AdSize where
       "AdSize"
       ( \o ->
           AdSize
-            Core.<$> (o Core..:? "height")
+            Core.<$> ( o Core..:? "height"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sizeType")
-            Core.<*> (o Core..:? "width")
+            Core.<*> ( o Core..:? "width"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AdSize where
@@ -599,9 +605,7 @@ instance Core.FromJSON AdTechnologyProviders where
       "AdTechnologyProviders"
       ( \o ->
           AdTechnologyProviders
-            Core.<$> ( o Core..:? "detectedProviderIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "detectedProviderIds")
             Core.<*> (o Core..:? "hasUnidentifiedProvider")
       )
 
@@ -690,10 +694,7 @@ instance Core.FromJSON AppContext where
   parseJSON =
     Core.withObject
       "AppContext"
-      ( \o ->
-          AppContext
-            Core.<$> (o Core..:? "appTypes" Core..!= Core.mempty)
-      )
+      (\o -> AppContext Core.<$> (o Core..:? "appTypes"))
 
 instance Core.ToJSON AppContext where
   toJSON AppContext {..} =
@@ -721,8 +722,7 @@ instance Core.FromJSON AuctionContext where
     Core.withObject
       "AuctionContext"
       ( \o ->
-          AuctionContext
-            Core.<$> (o Core..:? "auctionTypes" Core..!= Core.mempty)
+          AuctionContext Core.<$> (o Core..:? "auctionTypes")
       )
 
 instance Core.ToJSON AuctionContext where
@@ -991,9 +991,13 @@ instance Core.FromJSON Client where
       "Client"
       ( \o ->
           Client
-            Core.<$> (o Core..:? "clientAccountId")
+            Core.<$> ( o Core..:? "clientAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "clientName")
-            Core.<*> (o Core..:? "entityId")
+            Core.<*> ( o Core..:? "entityId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "entityName")
             Core.<*> (o Core..:? "entityType")
             Core.<*> (o Core..:? "partnerClientId")
@@ -1053,10 +1057,14 @@ instance Core.FromJSON ClientUser where
       "ClientUser"
       ( \o ->
           ClientUser
-            Core.<$> (o Core..:? "clientAccountId")
+            Core.<$> ( o Core..:? "clientAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "userId")
+            Core.<*> ( o Core..:? "userId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ClientUser where
@@ -1101,9 +1109,13 @@ instance Core.FromJSON ClientUserInvitation where
       "ClientUserInvitation"
       ( \o ->
           ClientUserInvitation
-            Core.<$> (o Core..:? "clientAccountId")
+            Core.<$> ( o Core..:? "clientAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "email")
-            Core.<*> (o Core..:? "invitationId")
+            Core.<*> ( o Core..:? "invitationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ClientUserInvitation where
@@ -1202,8 +1214,8 @@ instance Core.FromJSON Correction where
       "Correction"
       ( \o ->
           Correction
-            Core.<$> (o Core..:? "contexts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contexts")
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "type")
       )
 
@@ -1319,40 +1331,28 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "adChoicesDestinationUrl")
             Core.<*> (o Core..:? "adTechnologyProviders")
             Core.<*> (o Core..:? "advertiserName")
-            Core.<*> (o Core..:? "agencyId")
+            Core.<*> ( o Core..:? "agencyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "apiUpdateTime")
-            Core.<*> (o Core..:? "attributes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "clickThroughUrls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "corrections" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attributes")
+            Core.<*> (o Core..:? "clickThroughUrls")
+            Core.<*> (o Core..:? "corrections")
             Core.<*> (o Core..:? "creativeId")
             Core.<*> (o Core..:? "dealsStatus")
-            Core.<*> ( o Core..:? "declaredClickThroughUrls"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "detectedAdvertiserIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "detectedDomains" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "detectedLanguages" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "detectedProductCategories"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "detectedSensitiveCategories"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "declaredClickThroughUrls")
+            Core.<*> (o Core..:? "detectedAdvertiserIds")
+            Core.<*> (o Core..:? "detectedDomains")
+            Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "detectedProductCategories")
+            Core.<*> (o Core..:? "detectedSensitiveCategories")
             Core.<*> (o Core..:? "html")
-            Core.<*> ( o Core..:? "impressionTrackingUrls"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "impressionTrackingUrls")
             Core.<*> (o Core..:? "native")
             Core.<*> (o Core..:? "openAuctionStatus")
-            Core.<*> ( o Core..:? "restrictedCategories"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "servingRestrictions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "vendorIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "restrictedCategories")
+            Core.<*> (o Core..:? "servingRestrictions")
+            Core.<*> (o Core..:? "vendorIds")
             Core.<*> (o Core..:? "version")
             Core.<*> (o Core..:? "video")
       )
@@ -1477,9 +1477,7 @@ instance Core.FromJSON CreativeRestrictions where
       ( \o ->
           CreativeRestrictions
             Core.<$> (o Core..:? "creativeFormat")
-            Core.<*> ( o Core..:? "creativeSpecifications"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "creativeSpecifications")
             Core.<*> (o Core..:? "skippableAdType")
       )
 
@@ -1533,8 +1531,8 @@ instance Core.FromJSON CreativeSize where
       "CreativeSize"
       ( \o ->
           CreativeSize
-            Core.<$> (o Core..:? "allowedFormats" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "companionSizes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedFormats")
+            Core.<*> (o Core..:? "companionSizes")
             Core.<*> (o Core..:? "creativeSizeType")
             Core.<*> (o Core..:? "nativeTemplate")
             Core.<*> (o Core..:? "size")
@@ -1582,9 +1580,7 @@ instance Core.FromJSON CreativeSpecification where
       "CreativeSpecification"
       ( \o ->
           CreativeSpecification
-            Core.<$> ( o Core..:? "creativeCompanionSizes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "creativeCompanionSizes")
             Core.<*> (o Core..:? "creativeSize")
       )
 
@@ -1669,12 +1665,8 @@ instance Core.FromJSON CriteriaTargeting where
       "CriteriaTargeting"
       ( \o ->
           CriteriaTargeting
-            Core.<$> ( o Core..:? "excludedCriteriaIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "targetedCriteriaIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "excludedCriteriaIds")
+            Core.<*> (o Core..:? "targetedCriteriaIds")
       )
 
 instance Core.ToJSON CriteriaTargeting where
@@ -1794,7 +1786,7 @@ instance Core.FromJSON DayPartTargeting where
       "DayPartTargeting"
       ( \o ->
           DayPartTargeting
-            Core.<$> (o Core..:? "dayParts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dayParts")
             Core.<*> (o Core..:? "timeZoneType")
       )
 
@@ -1906,7 +1898,9 @@ instance Core.FromJSON Deal where
             Core.<*> (o Core..:? "availableStartTime")
             Core.<*> (o Core..:? "buyerPrivateData")
             Core.<*> (o Core..:? "createProductId")
-            Core.<*> (o Core..:? "createProductRevision")
+            Core.<*> ( o Core..:? "createProductRevision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "creativePreApprovalPolicy")
             Core.<*> (o Core..:? "creativeRestrictions")
@@ -1921,12 +1915,10 @@ instance Core.FromJSON Deal where
             Core.<*> (o Core..:? "isSetupComplete")
             Core.<*> (o Core..:? "programmaticCreativeSource")
             Core.<*> (o Core..:? "proposalId")
-            Core.<*> (o Core..:? "sellerContacts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sellerContacts")
             Core.<*> (o Core..:? "syndicationProduct")
             Core.<*> (o Core..:? "targeting")
-            Core.<*> ( o Core..:? "targetingCriterion"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetingCriterion")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "webPropertyCode")
       )
@@ -2110,7 +2102,9 @@ instance Core.FromJSON DealTerms where
             Core.<$> (o Core..:? "brandingType")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "estimatedGrossSpend")
-            Core.<*> (o Core..:? "estimatedImpressionsPerDay")
+            Core.<*> ( o Core..:? "estimatedImpressionsPerDay"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "guaranteedFixedPriceTerms")
             Core.<*> (o Core..:? "nonGuaranteedAuctionTerms")
             Core.<*> (o Core..:? "nonGuaranteedFixedPriceTerms")
@@ -2169,7 +2163,7 @@ instance Core.FromJSON DeliveryControl where
           DeliveryControl
             Core.<$> (o Core..:? "creativeBlockingLevel")
             Core.<*> (o Core..:? "deliveryRateType")
-            Core.<*> (o Core..:? "frequencyCaps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "frequencyCaps")
       )
 
 instance Core.ToJSON DeliveryControl where
@@ -2206,7 +2200,7 @@ instance Core.FromJSON Disapproval where
       "Disapproval"
       ( \o ->
           Disapproval
-            Core.<$> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "details")
             Core.<*> (o Core..:? "reason")
       )
 
@@ -2300,22 +2294,20 @@ instance Core.FromJSON FilterSet where
       ( \o ->
           FilterSet
             Core.<$> (o Core..:? "absoluteDateRange")
-            Core.<*> ( o Core..:? "breakdownDimensions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "breakdownDimensions")
             Core.<*> (o Core..:? "creativeId")
-            Core.<*> (o Core..:? "dealId")
+            Core.<*> ( o Core..:? "dealId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "format")
-            Core.<*> (o Core..:? "formats" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "formats")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "platforms" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "publisherIdentifiers"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "platforms")
+            Core.<*> (o Core..:? "publisherIdentifiers")
             Core.<*> (o Core..:? "realtimeTimeRange")
             Core.<*> (o Core..:? "relativeDateRange")
-            Core.<*> (o Core..:? "sellerNetworkIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sellerNetworkIds")
             Core.<*> (o Core..:? "timeSeriesGranularity")
       )
 
@@ -2470,8 +2462,8 @@ instance
       "FirstPartyMobileApplicationTargeting"
       ( \o ->
           FirstPartyMobileApplicationTargeting
-            Core.<$> (o Core..:? "excludedAppIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "targetedAppIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "excludedAppIds")
+            Core.<*> (o Core..:? "targetedAppIds")
       )
 
 instance
@@ -2571,12 +2563,22 @@ instance Core.FromJSON GuaranteedFixedPriceTerms where
       "GuaranteedFixedPriceTerms"
       ( \o ->
           GuaranteedFixedPriceTerms
-            Core.<$> (o Core..:? "fixedPrices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "guaranteedImpressions")
-            Core.<*> (o Core..:? "guaranteedLooks")
-            Core.<*> (o Core..:? "impressionCap")
-            Core.<*> (o Core..:? "minimumDailyLooks")
-            Core.<*> (o Core..:? "percentShareOfVoice")
+            Core.<$> (o Core..:? "fixedPrices")
+            Core.<*> ( o Core..:? "guaranteedImpressions"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "guaranteedLooks"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "impressionCap"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minimumDailyLooks"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "percentShareOfVoice"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "reservationType")
       )
 
@@ -2773,12 +2775,8 @@ instance Core.FromJSON InventorySizeTargeting where
       "InventorySizeTargeting"
       ( \o ->
           InventorySizeTargeting
-            Core.<$> ( o Core..:? "excludedInventorySizes"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "targetedInventorySizes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "excludedInventorySizes")
+            Core.<*> (o Core..:? "targetedInventorySizes")
       )
 
 instance Core.ToJSON InventorySizeTargeting where
@@ -2818,7 +2816,7 @@ instance Core.FromJSON ListBidMetricsResponse where
       "ListBidMetricsResponse"
       ( \o ->
           ListBidMetricsResponse
-            Core.<$> (o Core..:? "bidMetricsRows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bidMetricsRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2857,7 +2855,7 @@ instance Core.FromJSON ListBidResponseErrorsResponse where
       "ListBidResponseErrorsResponse"
       ( \o ->
           ListBidResponseErrorsResponse
-            Core.<$> (o Core..:? "calloutStatusRows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "calloutStatusRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2900,9 +2898,7 @@ instance
       "ListBidResponsesWithoutBidsResponse"
       ( \o ->
           ListBidResponsesWithoutBidsResponse
-            Core.<$> ( o Core..:? "bidResponseWithoutBidsStatusRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bidResponseWithoutBidsStatusRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2947,7 +2943,7 @@ instance
       "ListClientUserInvitationsResponse"
       ( \o ->
           ListClientUserInvitationsResponse
-            Core.<$> (o Core..:? "invitations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "invitations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2986,7 +2982,7 @@ instance Core.FromJSON ListClientUsersResponse where
       ( \o ->
           ListClientUsersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON ListClientUsersResponse where
@@ -3020,7 +3016,7 @@ instance Core.FromJSON ListClientsResponse where
       "ListClientsResponse"
       ( \o ->
           ListClientsResponse
-            Core.<$> (o Core..:? "clients" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clients")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3062,9 +3058,7 @@ instance
       "ListCreativeStatusBreakdownByCreativeResponse"
       ( \o ->
           ListCreativeStatusBreakdownByCreativeResponse
-            Core.<$> ( o Core..:? "filteredBidCreativeRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "filteredBidCreativeRows")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3115,9 +3109,7 @@ instance
       ( \o ->
           ListCreativeStatusBreakdownByDetailResponse
             Core.<$> (o Core..:? "detailType")
-            Core.<*> ( o Core..:? "filteredBidDetailRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "filteredBidDetailRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3159,7 +3151,7 @@ instance Core.FromJSON ListCreativesResponse where
       "ListCreativesResponse"
       ( \o ->
           ListCreativesResponse
-            Core.<$> (o Core..:? "creatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "creatives")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3198,7 +3190,7 @@ instance Core.FromJSON ListDealAssociationsResponse where
       "ListDealAssociationsResponse"
       ( \o ->
           ListDealAssociationsResponse
-            Core.<$> (o Core..:? "associations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "associations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3237,7 +3229,7 @@ instance Core.FromJSON ListFilterSetsResponse where
       "ListFilterSetsResponse"
       ( \o ->
           ListFilterSetsResponse
-            Core.<$> (o Core..:? "filterSets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filterSets")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3279,7 +3271,7 @@ instance
       "ListFilteredBidRequestsResponse"
       ( \o ->
           ListFilteredBidRequestsResponse
-            Core.<$> (o Core..:? "calloutStatusRows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "calloutStatusRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3319,9 +3311,7 @@ instance Core.FromJSON ListFilteredBidsResponse where
       "ListFilteredBidsResponse"
       ( \o ->
           ListFilteredBidsResponse
-            Core.<$> ( o Core..:? "creativeStatusRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "creativeStatusRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3361,9 +3351,7 @@ instance Core.FromJSON ListImpressionMetricsResponse where
       "ListImpressionMetricsResponse"
       ( \o ->
           ListImpressionMetricsResponse
-            Core.<$> ( o Core..:? "impressionMetricsRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "impressionMetricsRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3403,9 +3391,7 @@ instance Core.FromJSON ListLosingBidsResponse where
       "ListLosingBidsResponse"
       ( \o ->
           ListLosingBidsResponse
-            Core.<$> ( o Core..:? "creativeStatusRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "creativeStatusRows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3449,9 +3435,7 @@ instance
       ( \o ->
           ListNonBillableWinningBidsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "nonBillableWinningBidStatusRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonBillableWinningBidStatusRows")
       )
 
 instance
@@ -3491,7 +3475,7 @@ instance Core.FromJSON ListProductsResponse where
       ( \o ->
           ListProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "products")
       )
 
 instance Core.ToJSON ListProductsResponse where
@@ -3527,7 +3511,7 @@ instance Core.FromJSON ListProposalsResponse where
       ( \o ->
           ListProposalsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "proposals" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "proposals")
       )
 
 instance Core.ToJSON ListProposalsResponse where
@@ -3566,9 +3550,7 @@ instance Core.FromJSON ListPublisherProfilesResponse where
       ( \o ->
           ListPublisherProfilesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "publisherProfiles"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "publisherProfiles")
       )
 
 instance Core.ToJSON ListPublisherProfilesResponse where
@@ -3601,7 +3583,7 @@ instance Core.FromJSON LocationContext where
       "LocationContext"
       ( \o ->
           LocationContext
-            Core.<$> (o Core..:? "geoCriteriaIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "geoCriteriaIds")
       )
 
 instance Core.ToJSON LocationContext where
@@ -3690,8 +3672,12 @@ instance Core.FromJSON MetricValue where
       "MetricValue"
       ( \o ->
           MetricValue
-            Core.<$> (o Core..:? "value")
-            Core.<*> (o Core..:? "variance")
+            Core.<$> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "variance"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MetricValue where
@@ -3768,7 +3754,9 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> (o Core..:? "units")
+            Core.<*> ( o Core..:? "units"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Money where
@@ -3948,9 +3936,7 @@ instance Core.FromJSON NonGuaranteedAuctionTerms where
       ( \o ->
           NonGuaranteedAuctionTerms
             Core.<$> (o Core..:? "autoOptimizePrivateAuction")
-            Core.<*> ( o Core..:? "reservePricesPerBuyer"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "reservePricesPerBuyer")
       )
 
 instance Core.ToJSON NonGuaranteedAuctionTerms where
@@ -3985,7 +3971,7 @@ instance Core.FromJSON NonGuaranteedFixedPriceTerms where
       "NonGuaranteedFixedPriceTerms"
       ( \o ->
           NonGuaranteedFixedPriceTerms
-            Core.<$> (o Core..:? "fixedPrices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fixedPrices")
       )
 
 instance Core.ToJSON NonGuaranteedFixedPriceTerms where
@@ -4034,7 +4020,9 @@ instance Core.FromJSON Note where
             Core.<*> (o Core..:? "creatorRole")
             Core.<*> (o Core..:? "note")
             Core.<*> (o Core..:? "noteId")
-            Core.<*> (o Core..:? "proposalRevision")
+            Core.<*> ( o Core..:? "proposalRevision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Note where
@@ -4117,7 +4105,7 @@ instance Core.FromJSON PauseProposalDealsRequest where
       "PauseProposalDealsRequest"
       ( \o ->
           PauseProposalDealsRequest
-            Core.<$> (o Core..:? "externalDealIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "externalDealIds")
             Core.<*> (o Core..:? "reason")
       )
 
@@ -4217,8 +4205,7 @@ instance Core.FromJSON PlatformContext where
     Core.withObject
       "PlatformContext"
       ( \o ->
-          PlatformContext
-            Core.<$> (o Core..:? "platforms" Core..!= Core.mempty)
+          PlatformContext Core.<$> (o Core..:? "platforms")
       )
 
 instance Core.ToJSON PlatformContext where
@@ -4292,7 +4279,7 @@ instance Core.FromJSON PricePerBuyer where
       "PricePerBuyer"
       ( \o ->
           PricePerBuyer
-            Core.<$> (o Core..:? "advertiserIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "advertiserIds")
             Core.<*> (o Core..:? "buyer")
             Core.<*> (o Core..:? "price")
       )
@@ -4404,17 +4391,17 @@ instance Core.FromJSON Product where
             Core.<$> (o Core..:? "availableEndTime")
             Core.<*> (o Core..:? "availableStartTime")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "creatorContacts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "creatorContacts")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "hasCreatorSignedOff")
             Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "productRevision")
+            Core.<*> ( o Core..:? "productRevision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "publisherProfileId")
             Core.<*> (o Core..:? "seller")
             Core.<*> (o Core..:? "syndicationProduct")
-            Core.<*> ( o Core..:? "targetingCriterion"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetingCriterion")
             Core.<*> (o Core..:? "terms")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "webPropertyCode")
@@ -4529,21 +4516,23 @@ instance Core.FromJSON Proposal where
           Proposal
             Core.<$> (o Core..:? "billedBuyer")
             Core.<*> (o Core..:? "buyer")
-            Core.<*> (o Core..:? "buyerContacts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "buyerContacts")
             Core.<*> (o Core..:? "buyerPrivateData")
-            Core.<*> (o Core..:? "deals" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "deals")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "isRenegotiating")
             Core.<*> (o Core..:? "isSetupComplete")
             Core.<*> (o Core..:? "lastUpdaterOrCommentorRole")
-            Core.<*> (o Core..:? "notes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "originatorRole")
             Core.<*> (o Core..:? "privateAuctionId")
             Core.<*> (o Core..:? "proposalId")
-            Core.<*> (o Core..:? "proposalRevision")
+            Core.<*> ( o Core..:? "proposalRevision"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "proposalState")
             Core.<*> (o Core..:? "seller")
-            Core.<*> (o Core..:? "sellerContacts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sellerContacts")
             Core.<*> (o Core..:? "termsAndConditions")
             Core.<*> (o Core..:? "updateTime")
       )
@@ -4654,19 +4643,19 @@ instance Core.FromJSON PublisherProfile where
             Core.<*> (o Core..:? "buyerPitchStatement")
             Core.<*> (o Core..:? "directDealsContact")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "domains" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domains")
             Core.<*> (o Core..:? "googlePlusUrl")
             Core.<*> (o Core..:? "isParent")
             Core.<*> (o Core..:? "logoUrl")
             Core.<*> (o Core..:? "mediaKitUrl")
-            Core.<*> (o Core..:? "mobileApps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mobileApps")
             Core.<*> (o Core..:? "overview")
             Core.<*> (o Core..:? "programmaticDealsContact")
             Core.<*> (o Core..:? "publisherProfileId")
             Core.<*> (o Core..:? "rateCardInfoUrl")
             Core.<*> (o Core..:? "samplePageUrl")
             Core.<*> (o Core..:? "seller")
-            Core.<*> (o Core..:? "topHeadlines" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "topHeadlines")
       )
 
 instance Core.ToJSON PublisherProfile where
@@ -4866,7 +4855,7 @@ instance Core.FromJSON ResumeProposalDealsRequest where
       "ResumeProposalDealsRequest"
       ( \o ->
           ResumeProposalDealsRequest
-            Core.<$> (o Core..:? "externalDealIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "externalDealIds")
       )
 
 instance Core.ToJSON ResumeProposalDealsRequest where
@@ -4957,8 +4946,7 @@ instance Core.FromJSON SecurityContext where
     Core.withObject
       "SecurityContext"
       ( \o ->
-          SecurityContext
-            Core.<$> (o Core..:? "securities" Core..!= Core.mempty)
+          SecurityContext Core.<$> (o Core..:? "securities")
       )
 
 instance Core.ToJSON SecurityContext where
@@ -5094,11 +5082,9 @@ instance Core.FromJSON ServingRestriction where
       "ServingRestriction"
       ( \o ->
           ServingRestriction
-            Core.<$> (o Core..:? "contexts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contexts")
             Core.<*> (o Core..:? "disapproval")
-            Core.<*> ( o Core..:? "disapprovalReasons"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "disapprovalReasons")
             Core.<*> (o Core..:? "status")
       )
 
@@ -5197,8 +5183,8 @@ instance Core.FromJSON TargetingCriteria where
       "TargetingCriteria"
       ( \o ->
           TargetingCriteria
-            Core.<$> (o Core..:? "exclusions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "inclusions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exclusions")
+            Core.<*> (o Core..:? "inclusions")
             Core.<*> (o Core..:? "key")
       )
 
@@ -5246,7 +5232,9 @@ instance Core.FromJSON TargetingValue where
           TargetingValue
             Core.<$> (o Core..:? "creativeSizeValue")
             Core.<*> (o Core..:? "dayPartTargetingValue")
-            Core.<*> (o Core..:? "longValue")
+            Core.<*> ( o Core..:? "longValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -5419,8 +5407,8 @@ instance Core.FromJSON UrlTargeting where
       "UrlTargeting"
       ( \o ->
           UrlTargeting
-            Core.<$> (o Core..:? "excludedUrls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "targetedUrls" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "excludedUrls")
+            Core.<*> (o Core..:? "targetedUrls")
       )
 
 instance Core.ToJSON UrlTargeting where
@@ -5494,12 +5482,8 @@ instance Core.FromJSON VideoTargeting where
       "VideoTargeting"
       ( \o ->
           VideoTargeting
-            Core.<$> ( o Core..:? "excludedPositionTypes"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "targetedPositionTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "excludedPositionTypes")
+            Core.<*> (o Core..:? "targetedPositionTypes")
       )
 
 instance Core.ToJSON VideoTargeting where

@@ -239,7 +239,9 @@ instance Core.FromJSON ClaimDeviceRequest where
       "ClaimDeviceRequest"
       ( \o ->
           ClaimDeviceRequest
-            Core.<$> (o Core..:? "customerId")
+            Core.<$> ( o Core..:? "customerId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "sectionType")
@@ -281,7 +283,9 @@ instance Core.FromJSON ClaimDeviceResponse where
       "ClaimDeviceResponse"
       ( \o ->
           ClaimDeviceResponse
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceName")
       )
 
@@ -314,8 +318,7 @@ instance Core.FromJSON ClaimDevicesRequest where
     Core.withObject
       "ClaimDevicesRequest"
       ( \o ->
-          ClaimDevicesRequest
-            Core.<$> (o Core..:? "claims" Core..!= Core.mempty)
+          ClaimDevicesRequest Core.<$> (o Core..:? "claims")
       )
 
 instance Core.ToJSON ClaimDevicesRequest where
@@ -367,12 +370,14 @@ instance Core.FromJSON Company where
       "Company"
       ( \o ->
           Company
-            Core.<$> (o Core..:? "adminEmails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "companyId")
+            Core.<$> (o Core..:? "adminEmails")
+            Core.<*> ( o Core..:? "companyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "companyName")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "ownerEmails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ownerEmails")
             Core.<*> (o Core..:? "skipWelcomeEmail")
             Core.<*> (o Core..:? "termsStatus")
       )
@@ -445,7 +450,9 @@ instance Core.FromJSON Configuration where
       ( \o ->
           Configuration
             Core.<$> (o Core..:? "companyName")
-            Core.<*> (o Core..:? "configurationId")
+            Core.<*> ( o Core..:? "configurationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "configurationName")
             Core.<*> (o Core..:? "contactEmail")
             Core.<*> (o Core..:? "contactPhone")
@@ -574,7 +581,7 @@ instance
       "CustomerListConfigurationsResponse"
       ( \o ->
           CustomerListConfigurationsResponse
-            Core.<$> (o Core..:? "configurations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "configurations")
       )
 
 instance
@@ -613,7 +620,7 @@ instance Core.FromJSON CustomerListCustomersResponse where
       "CustomerListCustomersResponse"
       ( \o ->
           CustomerListCustomersResponse
-            Core.<$> (o Core..:? "customers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customers")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -652,7 +659,7 @@ instance Core.FromJSON CustomerListDevicesResponse where
       "CustomerListDevicesResponse"
       ( \o ->
           CustomerListDevicesResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -685,7 +692,7 @@ instance Core.FromJSON CustomerListDpcsResponse where
       "CustomerListDpcsResponse"
       ( \o ->
           CustomerListDpcsResponse
-            Core.<$> (o Core..:? "dpcs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dpcs")
       )
 
 instance Core.ToJSON CustomerListDpcsResponse where
@@ -795,9 +802,11 @@ instance Core.FromJSON Device where
       "Device"
       ( \o ->
           Device
-            Core.<$> (o Core..:? "claims" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "claims")
             Core.<*> (o Core..:? "configuration")
-            Core.<*> (o Core..:? "deviceId")
+            Core.<*> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "name")
@@ -857,8 +866,12 @@ instance Core.FromJSON DeviceClaim where
       ( \o ->
           DeviceClaim
             Core.<$> (o Core..:? "additionalService")
-            Core.<*> (o Core..:? "ownerCompanyId")
-            Core.<*> (o Core..:? "resellerId")
+            Core.<*> ( o Core..:? "ownerCompanyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "resellerId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeExpireTime")
             Core.<*> (o Core..:? "vacationModeStartTime")
@@ -1018,7 +1031,9 @@ instance Core.FromJSON DeviceReference where
       "DeviceReference"
       ( \o ->
           DeviceReference
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
       )
 
@@ -1113,7 +1128,7 @@ instance
       "DevicesLongRunningOperationResponse"
       ( \o ->
           DevicesLongRunningOperationResponse
-            Core.<$> (o Core..:? "perDeviceStatus" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "perDeviceStatus")
             Core.<*> (o Core..:? "successCount")
       )
 
@@ -1221,7 +1236,9 @@ instance
       ( \o ->
           FindDevicesByDeviceIdentifierRequest
             Core.<$> (o Core..:? "deviceIdentifier")
-            Core.<*> (o Core..:? "limit")
+            Core.<*> ( o Core..:? "limit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pageToken")
       )
 
@@ -1271,7 +1288,7 @@ instance
       "FindDevicesByDeviceIdentifierResponse"
       ( \o ->
           FindDevicesByDeviceIdentifierResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1321,8 +1338,10 @@ instance Core.FromJSON FindDevicesByOwnerRequest where
       "FindDevicesByOwnerRequest"
       ( \o ->
           FindDevicesByOwnerRequest
-            Core.<$> (o Core..:? "customerId" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "limit")
+            Core.<$> (o Core..:? "customerId")
+            Core.<*> ( o Core..:? "limit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pageToken")
             Core.<*> (o Core..:? "sectionType")
       )
@@ -1367,7 +1386,7 @@ instance Core.FromJSON FindDevicesByOwnerResponse where
       "FindDevicesByOwnerResponse"
       ( \o ->
           FindDevicesByOwnerResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1411,7 +1430,7 @@ instance Core.FromJSON ListCustomersResponse where
       "ListCustomersResponse"
       ( \o ->
           ListCustomersResponse
-            Core.<$> (o Core..:? "customers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customers")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1455,7 +1474,7 @@ instance Core.FromJSON ListVendorCustomersResponse where
       "ListVendorCustomersResponse"
       ( \o ->
           ListVendorCustomersResponse
-            Core.<$> (o Core..:? "customers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customers")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -1501,7 +1520,7 @@ instance Core.FromJSON ListVendorsResponse where
           ListVendorsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
-            Core.<*> (o Core..:? "vendors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "vendors")
       )
 
 instance Core.ToJSON ListVendorsResponse where
@@ -1705,7 +1724,9 @@ instance Core.FromJSON PartnerClaim where
       "PartnerClaim"
       ( \o ->
           PartnerClaim
-            Core.<$> (o Core..:? "customerId")
+            Core.<$> ( o Core..:? "customerId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "sectionType")
@@ -1759,7 +1780,9 @@ instance Core.FromJSON PartnerUnclaim where
       "PartnerUnclaim"
       ( \o ->
           PartnerUnclaim
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeDays")
@@ -1814,7 +1837,9 @@ instance Core.FromJSON PerDeviceStatusInBatch where
       "PerDeviceStatusInBatch"
       ( \o ->
           PerDeviceStatusInBatch
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "errorIdentifier")
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "status")
@@ -1858,7 +1883,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1934,7 +1959,9 @@ instance Core.FromJSON UnclaimDeviceRequest where
       "UnclaimDeviceRequest"
       ( \o ->
           UnclaimDeviceRequest
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeDays")
@@ -1977,7 +2004,7 @@ instance Core.FromJSON UnclaimDevicesRequest where
       "UnclaimDevicesRequest"
       ( \o ->
           UnclaimDevicesRequest
-            Core.<$> (o Core..:? "unclaims" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "unclaims")
       )
 
 instance Core.ToJSON UnclaimDevicesRequest where
@@ -2011,7 +2038,7 @@ instance
       "UpdateDeviceMetadataInBatchRequest"
       ( \o ->
           UpdateDeviceMetadataInBatchRequest
-            Core.<$> (o Core..:? "updates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "updates")
       )
 
 instance
@@ -2084,7 +2111,9 @@ instance Core.FromJSON UpdateMetadataArguments where
       "UpdateMetadataArguments"
       ( \o ->
           UpdateMetadataArguments
-            Core.<$> (o Core..:? "deviceId")
+            Core.<$> ( o Core..:? "deviceId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
       )

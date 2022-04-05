@@ -409,7 +409,7 @@ instance Core.FromJSON Environment where
             Core.<$> (o Core..:? "dockerImage")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "publicKeys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "publicKeys")
             Core.<*> (o Core..:? "sshHost")
             Core.<*> (o Core..:? "sshPort")
             Core.<*> (o Core..:? "sshUsername")
@@ -460,7 +460,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -704,7 +704,7 @@ instance Core.FromJSON StartEnvironmentRequest where
       ( \o ->
           StartEnvironmentRequest
             Core.<$> (o Core..:? "accessToken")
-            Core.<*> (o Core..:? "publicKeys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "publicKeys")
       )
 
 instance Core.ToJSON StartEnvironmentRequest where
@@ -773,7 +773,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

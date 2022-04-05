@@ -243,7 +243,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -280,7 +280,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -325,7 +325,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -520,7 +520,7 @@ instance Core.FromJSON EventTrigger where
       "EventTrigger"
       ( \o ->
           EventTrigger
-            Core.<$> (o Core..:? "eventFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "eventFilters")
             Core.<*> (o Core..:? "eventType")
             Core.<*> (o Core..:? "pubsubTopic")
             Core.<*> (o Core..:? "retryPolicy")
@@ -652,7 +652,7 @@ instance Core.FromJSON Function where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceConfig")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stateMessages")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -868,7 +868,7 @@ instance
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "requestResource")
-            Core.<*> (o Core..:? "stages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stages")
             Core.<*> (o Core..:? "statusDetail")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "verb")
@@ -979,7 +979,7 @@ instance
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "resourceUri")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stateMessages")
       )
 
 instance Core.ToJSON GoogleCloudFunctionsV2alphaStage where
@@ -1103,7 +1103,7 @@ instance
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "requestResource")
-            Core.<*> (o Core..:? "stages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stages")
             Core.<*> (o Core..:? "statusDetail")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "verb")
@@ -1214,7 +1214,7 @@ instance
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "resourceUri")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stateMessages")
       )
 
 instance Core.ToJSON GoogleCloudFunctionsV2betaStage where
@@ -1309,9 +1309,9 @@ instance Core.FromJSON ListFunctionsResponse where
       "ListFunctionsResponse"
       ( \o ->
           ListFunctionsResponse
-            Core.<$> (o Core..:? "functions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "functions")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListFunctionsResponse where
@@ -1347,7 +1347,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1387,7 +1387,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1419,7 +1419,7 @@ instance Core.FromJSON ListRuntimesResponse where
       "ListRuntimesResponse"
       ( \o ->
           ListRuntimesResponse
-            Core.<$> (o Core..:? "runtimes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "runtimes")
       )
 
 instance Core.ToJSON ListRuntimesResponse where
@@ -1698,7 +1698,9 @@ instance Core.FromJSON OperationMetadataV1 where
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "versionId")
+            Core.<*> ( o Core..:? "versionId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON OperationMetadataV1 where
@@ -1782,8 +1784,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1902,7 +1904,7 @@ instance Core.FromJSON Runtime where
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stage")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Runtime where
@@ -2186,7 +2188,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2257,7 +2259,9 @@ instance Core.FromJSON StorageSource where
       ( \o ->
           StorageSource
             Core.<$> (o Core..:? "bucket")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "object")
       )
 
@@ -2293,7 +2297,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2324,7 +2328,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

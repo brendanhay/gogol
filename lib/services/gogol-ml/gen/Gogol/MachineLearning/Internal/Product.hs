@@ -451,7 +451,7 @@ instance Core.FromJSON GoogleApi__HttpBody where
           GoogleApi__HttpBody
             Core.<$> (o Core..:? "contentType")
             Core.<*> (o Core..:? "data")
-            Core.<*> (o Core..:? "extensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extensions")
       )
 
 instance Core.ToJSON GoogleApi__HttpBody where
@@ -608,7 +608,9 @@ instance
       ( \o ->
           GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
             Core.<$> (o Core..:? "objectiveValue")
-              Core.<*> (o Core..:? "trainingStep")
+              Core.<*> ( o Core..:? "trainingStep"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -694,7 +696,7 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance
@@ -731,7 +733,7 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance
@@ -816,8 +818,12 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
-            Core.<$> (o Core..:? "maxValue")
-              Core.<*> (o Core..:? "minValue")
+            Core.<$> ( o Core..:? "maxValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "minValue"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -861,7 +867,7 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance
@@ -899,7 +905,7 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance
@@ -937,7 +943,7 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance
@@ -1071,9 +1077,7 @@ instance
       ( \o ->
           GoogleCloudMlV1_StudyConfig_ParameterSpec
             Core.<$> (o Core..:? "categoricalValueSpec")
-            Core.<*> ( o Core..:? "childParameterSpecs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "childParameterSpecs")
             Core.<*> (o Core..:? "discreteValueSpec")
             Core.<*> (o Core..:? "doubleValueSpec")
             Core.<*> (o Core..:? "integerValueSpec")
@@ -1148,7 +1152,9 @@ instance
       ( \o ->
           GoogleCloudMlV1_Trial_Parameter
             Core.<$> (o Core..:? "floatValue")
-            Core.<*> (o Core..:? "intValue")
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "stringValue")
       )
@@ -1194,7 +1200,10 @@ instance
       "GoogleCloudMlV1__AcceleratorConfig"
       ( \o ->
           GoogleCloudMlV1__AcceleratorConfig
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "type")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "type")
       )
 
 instance
@@ -1278,7 +1287,7 @@ instance Core.FromJSON GoogleCloudMlV1__AutoScaling where
       ( \o ->
           GoogleCloudMlV1__AutoScaling
             Core.<$> (o Core..:? "maxNodes")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "minNodes")
       )
 
@@ -1454,9 +1463,7 @@ instance Core.FromJSON GoogleCloudMlV1__Capability where
       "GoogleCloudMlV1__Capability"
       ( \o ->
           GoogleCloudMlV1__Capability
-            Core.<$> ( o Core..:? "availableAccelerators"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "availableAccelerators")
             Core.<*> (o Core..:? "type")
       )
 
@@ -1757,11 +1764,11 @@ instance Core.FromJSON GoogleCloudMlV1__ContainerSpec where
       "GoogleCloudMlV1__ContainerSpec"
       ( \o ->
           GoogleCloudMlV1__ContainerSpec
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "command" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
+            Core.<*> (o Core..:? "command")
+            Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "image")
-            Core.<*> (o Core..:? "ports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ports")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__ContainerSpec where
@@ -2008,7 +2015,9 @@ instance
           GoogleCloudMlV1__GetConfigResponse
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> (o Core..:? "serviceAccountProject")
+            Core.<*> ( o Core..:? "serviceAccountProject"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -2084,7 +2093,7 @@ instance
       "GoogleCloudMlV1__HyperparameterOutput"
       ( \o ->
           GoogleCloudMlV1__HyperparameterOutput
-            Core.<$> (o Core..:? "allMetrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allMetrics")
             Core.<*> (o Core..:? "builtInAlgorithmOutput")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "finalMetric")
@@ -2251,7 +2260,7 @@ instance
             Core.<*> (o Core..:? "maxFailedTrials")
             Core.<*> (o Core..:? "maxParallelTrials")
             Core.<*> (o Core..:? "maxTrials")
-            Core.<*> (o Core..:? "params" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "params")
             Core.<*> (o Core..:? "resumePreviousJobId")
       )
 
@@ -2384,7 +2393,9 @@ instance Core.FromJSON GoogleCloudMlV1__Job where
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "jobId")
-            Core.<*> (o Core..:? "jobPosition")
+            Core.<*> ( o Core..:? "jobPosition"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "predictionInput")
             Core.<*> (o Core..:? "predictionOutput")
@@ -2475,7 +2486,7 @@ instance
       "GoogleCloudMlV1__ListJobsResponse"
       ( \o ->
           GoogleCloudMlV1__ListJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2519,7 +2530,7 @@ instance
       "GoogleCloudMlV1__ListLocationsResponse"
       ( \o ->
           GoogleCloudMlV1__ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2564,7 +2575,7 @@ instance
       "GoogleCloudMlV1__ListModelsResponse"
       ( \o ->
           GoogleCloudMlV1__ListModelsResponse
-            Core.<$> (o Core..:? "models" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "models")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2633,7 +2644,7 @@ instance
       "GoogleCloudMlV1__ListOptimalTrialsResponse"
       ( \o ->
           GoogleCloudMlV1__ListOptimalTrialsResponse
-            Core.<$> (o Core..:? "trials" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "trials")
       )
 
 instance
@@ -2667,7 +2678,7 @@ instance
       "GoogleCloudMlV1__ListStudiesResponse"
       ( \o ->
           GoogleCloudMlV1__ListStudiesResponse
-            Core.<$> (o Core..:? "studies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "studies")
       )
 
 instance
@@ -2704,7 +2715,7 @@ instance
       "GoogleCloudMlV1__ListTrialsResponse"
       ( \o ->
           GoogleCloudMlV1__ListTrialsResponse
-            Core.<$> (o Core..:? "trials" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "trials")
       )
 
 instance
@@ -2745,7 +2756,7 @@ instance
       ( \o ->
           GoogleCloudMlV1__ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
       )
 
 instance
@@ -2782,7 +2793,7 @@ instance Core.FromJSON GoogleCloudMlV1__Location where
       "GoogleCloudMlV1__Location"
       ( \o ->
           GoogleCloudMlV1__Location
-            Core.<$> (o Core..:? "capabilities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "capabilities")
             Core.<*> (o Core..:? "name")
       )
 
@@ -2854,8 +2865,10 @@ instance Core.FromJSON GoogleCloudMlV1__Measurement where
       ( \o ->
           GoogleCloudMlV1__Measurement
             Core.<$> (o Core..:? "elapsedTime")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "stepCount")
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> ( o Core..:? "stepCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Measurement where
@@ -2955,7 +2968,7 @@ instance Core.FromJSON GoogleCloudMlV1__Model where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "onlinePredictionConsoleLogging")
             Core.<*> (o Core..:? "onlinePredictionLogging")
-            Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regions")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Model where
@@ -3061,7 +3074,9 @@ instance
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "modelName")
             Core.<*> (o Core..:? "operationType")
-            Core.<*> (o Core..:? "projectNumber")
+            Core.<*> ( o Core..:? "projectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "version")
       )
@@ -3164,8 +3179,8 @@ instance Core.FromJSON GoogleCloudMlV1__ParameterSpec where
       "GoogleCloudMlV1__ParameterSpec"
       ( \o ->
           GoogleCloudMlV1__ParameterSpec
-            Core.<$> (o Core..:? "categoricalValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "discreteValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoricalValues")
+            Core.<*> (o Core..:? "discreteValues")
             Core.<*> (o Core..:? "maxValue")
             Core.<*> (o Core..:? "minValue")
             Core.<*> (o Core..:? "parameterName")
@@ -3281,10 +3296,14 @@ instance
       "GoogleCloudMlV1__PredictionInput"
       ( \o ->
           GoogleCloudMlV1__PredictionInput
-            Core.<$> (o Core..:? "batchSize")
+            Core.<$> ( o Core..:? "batchSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "dataFormat")
-            Core.<*> (o Core..:? "inputPaths" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "maxWorkerCount")
+            Core.<*> (o Core..:? "inputPaths")
+            Core.<*> ( o Core..:? "maxWorkerCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "modelName")
             Core.<*> (o Core..:? "outputDataFormat")
             Core.<*> (o Core..:? "outputPath")
@@ -3352,10 +3371,14 @@ instance
       "GoogleCloudMlV1__PredictionOutput"
       ( \o ->
           GoogleCloudMlV1__PredictionOutput
-            Core.<$> (o Core..:? "errorCount")
+            Core.<$> ( o Core..:? "errorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "nodeHours")
             Core.<*> (o Core..:? "outputPath")
-            Core.<*> (o Core..:? "predictionCount")
+            Core.<*> ( o Core..:? "predictionCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -3413,8 +3436,8 @@ instance Core.FromJSON GoogleCloudMlV1__ReplicaConfig where
       ( \o ->
           GoogleCloudMlV1__ReplicaConfig
             Core.<$> (o Core..:? "acceleratorConfig")
-            Core.<*> (o Core..:? "containerArgs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "containerCommand" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "containerArgs")
+            Core.<*> (o Core..:? "containerCommand")
             Core.<*> (o Core..:? "diskConfig")
             Core.<*> (o Core..:? "imageUri")
             Core.<*> (o Core..:? "tpuTfVersion")
@@ -3744,8 +3767,8 @@ instance Core.FromJSON GoogleCloudMlV1__StudyConfig where
           GoogleCloudMlV1__StudyConfig
             Core.<$> (o Core..:? "algorithm")
             Core.<*> (o Core..:? "automatedStoppingConfig")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__StudyConfig where
@@ -3900,7 +3923,7 @@ instance
             Core.<$> (o Core..:? "endTime")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "studyState")
-            Core.<*> (o Core..:? "trials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trials")
       )
 
 instance
@@ -4015,20 +4038,24 @@ instance Core.FromJSON GoogleCloudMlV1__TrainingInput where
       "GoogleCloudMlV1__TrainingInput"
       ( \o ->
           GoogleCloudMlV1__TrainingInput
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
             Core.<*> (o Core..:? "enableWebAccess")
             Core.<*> (o Core..:? "encryptionConfig")
             Core.<*> (o Core..:? "evaluatorConfig")
-            Core.<*> (o Core..:? "evaluatorCount")
+            Core.<*> ( o Core..:? "evaluatorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "evaluatorType")
             Core.<*> (o Core..:? "hyperparameters")
             Core.<*> (o Core..:? "jobDir")
             Core.<*> (o Core..:? "masterConfig")
             Core.<*> (o Core..:? "masterType")
             Core.<*> (o Core..:? "network")
-            Core.<*> (o Core..:? "packageUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "packageUris")
             Core.<*> (o Core..:? "parameterServerConfig")
-            Core.<*> (o Core..:? "parameterServerCount")
+            Core.<*> ( o Core..:? "parameterServerCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "parameterServerType")
             Core.<*> (o Core..:? "pythonModule")
             Core.<*> (o Core..:? "pythonVersion")
@@ -4039,7 +4066,9 @@ instance Core.FromJSON GoogleCloudMlV1__TrainingInput where
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "useChiefInTfConfig")
             Core.<*> (o Core..:? "workerConfig")
-            Core.<*> (o Core..:? "workerCount")
+            Core.<*> ( o Core..:? "workerCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "workerType")
       )
 
@@ -4131,12 +4160,14 @@ instance
       ( \o ->
           GoogleCloudMlV1__TrainingOutput
             Core.<$> (o Core..:? "builtInAlgorithmOutput")
-            Core.<*> (o Core..:? "completedTrialCount")
+            Core.<*> ( o Core..:? "completedTrialCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "consumedMLUnits")
             Core.<*> (o Core..:? "hyperparameterMetricTag")
             Core.<*> (o Core..:? "isBuiltInAlgorithmJob")
             Core.<*> (o Core..:? "isHyperparameterTuningJob")
-            Core.<*> (o Core..:? "trials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trials")
             Core.<*> (o Core..:? "webAccessUris")
       )
 
@@ -4251,9 +4282,9 @@ instance Core.FromJSON GoogleCloudMlV1__Trial where
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "finalMeasurement")
             Core.<*> (o Core..:? "infeasibleReason")
-            Core.<*> (o Core..:? "measurements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "measurements")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "trialInfeasible")
@@ -4396,7 +4427,7 @@ instance Core.FromJSON GoogleCloudMlV1__Version where
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "manualScaling")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "packageUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "packageUris")
             Core.<*> (o Core..:? "predictionClass")
             Core.<*> (o Core..:? "pythonVersion")
             Core.<*> (o Core..:? "requestLoggingConfig")
@@ -4540,7 +4571,7 @@ instance Core.FromJSON GoogleIamV1__AuditConfig where
       "GoogleIamV1__AuditConfig"
       ( \o ->
           GoogleIamV1__AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -4580,7 +4611,7 @@ instance Core.FromJSON GoogleIamV1__AuditLogConfig where
       "GoogleIamV1__AuditLogConfig"
       ( \o ->
           GoogleIamV1__AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -4625,7 +4656,7 @@ instance Core.FromJSON GoogleIamV1__Binding where
       ( \o ->
           GoogleIamV1__Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -4674,8 +4705,8 @@ instance Core.FromJSON GoogleIamV1__Policy where
       "GoogleIamV1__Policy"
       ( \o ->
           GoogleIamV1__Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -4757,7 +4788,7 @@ instance
       "GoogleIamV1__TestIamPermissionsRequest"
       ( \o ->
           GoogleIamV1__TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -4794,7 +4825,7 @@ instance
       "GoogleIamV1__TestIamPermissionsResponse"
       ( \o ->
           GoogleIamV1__TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -4837,7 +4868,7 @@ instance
       ( \o ->
           GoogleLongrunning__ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -5028,7 +5059,7 @@ instance Core.FromJSON GoogleRpc__Status where
       ( \o ->
           GoogleRpc__Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

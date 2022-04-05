@@ -259,7 +259,7 @@ instance Core.FromJSON BagDescriptor where
           BagDescriptor
             Core.<$> (o Core..:? "commercialName")
             Core.<*> (o Core..:? "count")
-            Core.<*> (o Core..:? "description" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "description")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "qpxexpress#bagDescriptor"
                      )
@@ -409,12 +409,12 @@ instance Core.FromJSON Data' where
       "Data'"
       ( \o ->
           Data'
-            Core.<$> (o Core..:? "aircraft" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "airport" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "carrier" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "city" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aircraft")
+            Core.<*> (o Core..:? "airport")
+            Core.<*> (o Core..:? "carrier")
+            Core.<*> (o Core..:? "city")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#data")
-            Core.<*> (o Core..:? "tax" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tax")
       )
 
 instance Core.ToJSON Data' where
@@ -567,7 +567,7 @@ instance Core.FromJSON FreeBaggageAllowance where
       "FreeBaggageAllowance"
       ( \o ->
           FreeBaggageAllowance
-            Core.<$> (o Core..:? "bagDescriptor" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bagDescriptor")
             Core.<*> (o Core..:? "kilos")
             Core.<*> (o Core..:? "kilosPerPiece")
             Core.<*> ( o Core..:? "kind"
@@ -831,7 +831,7 @@ instance Core.FromJSON PricingInfo where
       ( \o ->
           PricingInfo
             Core.<$> (o Core..:? "baseFareTotal")
-            Core.<*> (o Core..:? "fare" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fare")
             Core.<*> (o Core..:? "fareCalculation")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#pricingInfo")
             Core.<*> (o Core..:? "latestTicketingTime")
@@ -841,8 +841,8 @@ instance Core.FromJSON PricingInfo where
             Core.<*> (o Core..:? "saleFareTotal")
             Core.<*> (o Core..:? "saleTaxTotal")
             Core.<*> (o Core..:? "saleTotal")
-            Core.<*> (o Core..:? "segmentPricing" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tax" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "segmentPricing")
+            Core.<*> (o Core..:? "tax")
       )
 
 instance Core.ToJSON PricingInfo where
@@ -927,7 +927,7 @@ instance Core.FromJSON SegmentInfo where
             Core.<*> (o Core..:? "flight")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#segmentInfo")
-            Core.<*> (o Core..:? "leg" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "leg")
             Core.<*> (o Core..:? "marriedSegmentGroup")
             Core.<*> (o Core..:? "subjectToGovernmentApproval")
       )
@@ -987,7 +987,7 @@ instance Core.FromJSON SegmentPricing where
       ( \o ->
           SegmentPricing
             Core.<$> (o Core..:? "fareId")
-            Core.<*> (o Core..:? "freeBaggageOption" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "freeBaggageOption")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "qpxexpress#segmentPricing"
                      )
@@ -1037,7 +1037,7 @@ instance Core.FromJSON SliceInfo where
           SliceInfo
             Core.<$> (o Core..:? "duration")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#sliceInfo")
-            Core.<*> (o Core..:? "segment" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "segment")
       )
 
 instance Core.ToJSON SliceInfo where
@@ -1110,12 +1110,10 @@ instance Core.FromJSON SliceInput where
             Core.<*> (o Core..:? "maxConnectionDuration")
             Core.<*> (o Core..:? "maxStops")
             Core.<*> (o Core..:? "origin")
-            Core.<*> (o Core..:? "permittedCarrier" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permittedCarrier")
             Core.<*> (o Core..:? "permittedDepartureTime")
             Core.<*> (o Core..:? "preferredCabin")
-            Core.<*> ( o Core..:? "prohibitedCarrier"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "prohibitedCarrier")
       )
 
 instance Core.ToJSON SliceInput where
@@ -1322,9 +1320,9 @@ instance Core.FromJSON TripOption where
           TripOption
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#tripOption")
-            Core.<*> (o Core..:? "pricing" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pricing")
             Core.<*> (o Core..:? "saleTotal")
-            Core.<*> (o Core..:? "slice" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "slice")
       )
 
 instance Core.ToJSON TripOption where
@@ -1384,7 +1382,7 @@ instance Core.FromJSON TripOptionsRequest where
             Core.<*> (o Core..:? "passengers")
             Core.<*> (o Core..:? "refundable")
             Core.<*> (o Core..:? "saleCountry")
-            Core.<*> (o Core..:? "slice" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "slice")
             Core.<*> (o Core..:? "solutions")
             Core.<*> (o Core..:? "ticketingCountry")
       )
@@ -1439,7 +1437,7 @@ instance Core.FromJSON TripOptionsResponse where
             Core.<$> (o Core..:? "data")
             Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#tripOptions")
             Core.<*> (o Core..:? "requestId")
-            Core.<*> (o Core..:? "tripOption" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tripOption")
       )
 
 instance Core.ToJSON TripOptionsResponse where

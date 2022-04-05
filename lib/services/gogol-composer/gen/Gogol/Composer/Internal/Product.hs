@@ -711,9 +711,7 @@ instance Core.FromJSON ImageVersion where
             Core.<*> (o Core..:? "imageVersionId")
             Core.<*> (o Core..:? "isDefault")
             Core.<*> (o Core..:? "releaseDate")
-            Core.<*> ( o Core..:? "supportedPythonVersions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "supportedPythonVersions")
             Core.<*> (o Core..:? "upgradeDisabled")
       )
 
@@ -759,7 +757,7 @@ instance Core.FromJSON ListEnvironmentsResponse where
       "ListEnvironmentsResponse"
       ( \o ->
           ListEnvironmentsResponse
-            Core.<$> (o Core..:? "environments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "environments")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -798,7 +796,7 @@ instance Core.FromJSON ListImageVersionsResponse where
       "ListImageVersionsResponse"
       ( \o ->
           ListImageVersionsResponse
-            Core.<$> (o Core..:? "imageVersions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "imageVersions")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -838,7 +836,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -947,10 +945,10 @@ instance Core.FromJSON NodeConfig where
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "network")
-            Core.<*> (o Core..:? "oauthScopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oauthScopes")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "subnetwork")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON NodeConfig where
@@ -1495,7 +1493,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1586,7 +1584,7 @@ instance Core.FromJSON WebServerNetworkAccessControl where
       "WebServerNetworkAccessControl"
       ( \o ->
           WebServerNetworkAccessControl
-            Core.<$> (o Core..:? "allowedIpRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedIpRanges")
       )
 
 instance Core.ToJSON WebServerNetworkAccessControl where

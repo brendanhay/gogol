@@ -593,7 +593,7 @@ instance Core.FromJSON Comment where
       ( \o ->
           Comment
             Core.<$> (o Core..:? "assignment")
-            Core.<*> (o Core..:? "mentionedUsers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mentionedUsers")
             Core.<*> (o Core..:? "post")
             Core.<*> (o Core..:? "suggestion")
       )
@@ -896,10 +896,10 @@ instance Core.FromJSON DriveActivity where
       "DriveActivity"
       ( \o ->
           DriveActivity
-            Core.<$> (o Core..:? "actions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "actors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actions")
+            Core.<*> (o Core..:? "actors")
             Core.<*> (o Core..:? "primaryActionDetail")
-            Core.<*> (o Core..:? "targets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targets")
             Core.<*> (o Core..:? "timeRange")
             Core.<*> (o Core..:? "timestamp")
       )
@@ -1380,8 +1380,8 @@ instance Core.FromJSON Move where
       "Move"
       ( \o ->
           Move
-            Core.<$> (o Core..:? "addedParents" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removedParents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addedParents")
+            Core.<*> (o Core..:? "removedParents")
       )
 
 instance Core.ToJSON Move where
@@ -1565,10 +1565,8 @@ instance Core.FromJSON PermissionChange where
       "PermissionChange"
       ( \o ->
           PermissionChange
-            Core.<$> (o Core..:? "addedPermissions" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "removedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "addedPermissions")
+            Core.<*> (o Core..:? "removedPermissions")
       )
 
 instance Core.ToJSON PermissionChange where
@@ -1695,7 +1693,7 @@ instance Core.FromJSON QueryDriveActivityResponse where
       "QueryDriveActivityResponse"
       ( \o ->
           QueryDriveActivityResponse
-            Core.<$> (o Core..:? "activities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activities")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1824,9 +1822,7 @@ instance Core.FromJSON SettingsChange where
       "SettingsChange"
       ( \o ->
           SettingsChange
-            Core.<$> ( o Core..:? "restrictionChanges"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "restrictionChanges")
       )
 
 instance Core.ToJSON SettingsChange where

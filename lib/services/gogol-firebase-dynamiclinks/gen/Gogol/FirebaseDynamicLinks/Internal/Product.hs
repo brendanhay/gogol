@@ -302,7 +302,7 @@ instance Core.FromJSON CreateManagedShortLinkResponse where
           CreateManagedShortLinkResponse
             Core.<$> (o Core..:? "managedShortLink")
             Core.<*> (o Core..:? "previewLink")
-            Core.<*> (o Core..:? "warning" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON CreateManagedShortLinkResponse where
@@ -397,7 +397,7 @@ instance Core.FromJSON CreateShortDynamicLinkResponse where
           CreateShortDynamicLinkResponse
             Core.<$> (o Core..:? "previewLink")
             Core.<*> (o Core..:? "shortLink")
-            Core.<*> (o Core..:? "warning" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON CreateShortDynamicLinkResponse where
@@ -487,8 +487,12 @@ instance Core.FromJSON DeviceInfo where
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "languageCodeFromWebview")
             Core.<*> (o Core..:? "languageCodeRaw")
-            Core.<*> (o Core..:? "screenResolutionHeight")
-            Core.<*> (o Core..:? "screenResolutionWidth")
+            Core.<*> ( o Core..:? "screenResolutionHeight"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "screenResolutionWidth"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "timezone")
       )
 
@@ -539,7 +543,9 @@ instance Core.FromJSON DynamicLinkEventStat where
       "DynamicLinkEventStat"
       ( \o ->
           DynamicLinkEventStat
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "event")
             Core.<*> (o Core..:? "platform")
       )
@@ -650,7 +656,7 @@ instance Core.FromJSON DynamicLinkStats where
       "DynamicLinkStats"
       ( \o ->
           DynamicLinkStats
-            Core.<$> (o Core..:? "linkEventStats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "linkEventStats")
       )
 
 instance Core.ToJSON DynamicLinkStats where
@@ -752,7 +758,9 @@ instance
       "GetIosPostInstallAttributionRequest"
       ( \o ->
           GetIosPostInstallAttributionRequest
-            Core.<$> (o Core..:? "appInstallationTime")
+            Core.<$> ( o Core..:? "appInstallationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "bundleId")
             Core.<*> (o Core..:? "device")
             Core.<*> (o Core..:? "iosVersion")
@@ -1240,7 +1248,7 @@ instance Core.FromJSON ManagedShortLink where
       ( \o ->
           ManagedShortLink
             Core.<$> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "flaggedAttribute" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "flaggedAttribute")
             Core.<*> (o Core..:? "info")
             Core.<*> (o Core..:? "link")
             Core.<*> (o Core..:? "linkName")

@@ -300,9 +300,9 @@ instance Core.FromJSON ApplicationInfo where
       "ApplicationInfo"
       ( \o ->
           ApplicationInfo
-            Core.<$> (o Core..:? "emails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "emails")
             Core.<*> (o Core..:? "instruction")
-            Core.<*> (o Core..:? "uris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "uris")
       )
 
 instance Core.ToJSON ApplicationInfo where
@@ -334,8 +334,7 @@ instance Core.FromJSON BatchCreateJobsRequest where
     Core.withObject
       "BatchCreateJobsRequest"
       ( \o ->
-          BatchCreateJobsRequest
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+          BatchCreateJobsRequest Core.<$> (o Core..:? "jobs")
       )
 
 instance Core.ToJSON BatchCreateJobsRequest where
@@ -363,7 +362,7 @@ instance Core.FromJSON BatchCreateJobsResponse where
       "BatchCreateJobsResponse"
       ( \o ->
           BatchCreateJobsResponse
-            Core.<$> (o Core..:? "jobResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobResults")
       )
 
 instance Core.ToJSON BatchCreateJobsResponse where
@@ -392,8 +391,7 @@ instance Core.FromJSON BatchDeleteJobsRequest where
     Core.withObject
       "BatchDeleteJobsRequest"
       ( \o ->
-          BatchDeleteJobsRequest
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+          BatchDeleteJobsRequest Core.<$> (o Core..:? "names")
       )
 
 instance Core.ToJSON BatchDeleteJobsRequest where
@@ -421,7 +419,7 @@ instance Core.FromJSON BatchDeleteJobsResponse where
       "BatchDeleteJobsResponse"
       ( \o ->
           BatchDeleteJobsResponse
-            Core.<$> (o Core..:? "jobResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobResults")
       )
 
 instance Core.ToJSON BatchDeleteJobsResponse where
@@ -524,7 +522,7 @@ instance Core.FromJSON BatchUpdateJobsRequest where
       "BatchUpdateJobsRequest"
       ( \o ->
           BatchUpdateJobsRequest
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "updateMask")
       )
 
@@ -557,7 +555,7 @@ instance Core.FromJSON BatchUpdateJobsResponse where
       "BatchUpdateJobsResponse"
       ( \o ->
           BatchUpdateJobsResponse
-            Core.<$> (o Core..:? "jobResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobResults")
       )
 
 instance Core.ToJSON BatchUpdateJobsResponse where
@@ -785,9 +783,7 @@ instance Core.FromJSON Company where
             Core.<*> (o Core..:? "headquartersAddress")
             Core.<*> (o Core..:? "hiringAgency")
             Core.<*> (o Core..:? "imageUri")
-            Core.<*> ( o Core..:? "keywordSearchableJobCustomAttributes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "keywordSearchableJobCustomAttributes")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "size")
             Core.<*> (o Core..:? "suspended")
@@ -945,7 +941,7 @@ instance Core.FromJSON CompensationFilter where
                      )
             Core.<*> (o Core..:? "range")
             Core.<*> (o Core..:? "type")
-            Core.<*> (o Core..:? "units" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "units")
       )
 
 instance Core.ToJSON CompensationFilter where
@@ -993,7 +989,7 @@ instance Core.FromJSON CompensationInfo where
           CompensationInfo
             Core.<$> (o Core..:? "annualizedBaseCompensationRange")
             Core.<*> (o Core..:? "annualizedTotalCompensationRange")
-            Core.<*> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entries")
       )
 
 instance Core.ToJSON CompensationInfo where
@@ -1075,7 +1071,7 @@ instance Core.FromJSON CompleteQueryResponse where
       "CompleteQueryResponse"
       ( \o ->
           CompleteQueryResponse
-            Core.<$> (o Core..:? "completionResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "completionResults")
             Core.<*> (o Core..:? "metadata")
       )
 
@@ -1167,8 +1163,8 @@ instance Core.FromJSON CustomAttribute where
           CustomAttribute
             Core.<$> (o Core..:? "filterable")
             Core.<*> (o Core..:? "keywordSearchable")
-            Core.<*> (o Core..:? "longValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "stringValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "longValues")
+            Core.<*> (o Core..:? "stringValues")
       )
 
 instance Core.ToJSON CustomAttribute where
@@ -1485,19 +1481,19 @@ instance Core.FromJSON Job where
       "Job"
       ( \o ->
           Job
-            Core.<$> (o Core..:? "addresses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addresses")
             Core.<*> (o Core..:? "applicationInfo")
             Core.<*> (o Core..:? "company")
             Core.<*> (o Core..:? "companyDisplayName")
             Core.<*> (o Core..:? "compensationInfo")
             Core.<*> (o Core..:? "customAttributes")
-            Core.<*> (o Core..:? "degreeTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "degreeTypes")
             Core.<*> (o Core..:? "department")
             Core.<*> (o Core..:? "derivedInfo")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "employmentTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "employmentTypes")
             Core.<*> (o Core..:? "incentives")
-            Core.<*> (o Core..:? "jobBenefits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jobBenefits")
             Core.<*> (o Core..:? "jobEndTime")
             Core.<*> (o Core..:? "jobLevel")
             Core.<*> (o Core..:? "jobStartTime")
@@ -1616,8 +1612,8 @@ instance Core.FromJSON JobDerivedInfo where
       "JobDerivedInfo"
       ( \o ->
           JobDerivedInfo
-            Core.<$> (o Core..:? "jobCategories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobCategories")
+            Core.<*> (o Core..:? "locations")
       )
 
 instance Core.ToJSON JobDerivedInfo where
@@ -1651,8 +1647,7 @@ instance Core.FromJSON JobEvent where
       "JobEvent"
       ( \o ->
           JobEvent
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "jobs") Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON JobEvent where
@@ -1727,18 +1722,16 @@ instance Core.FromJSON JobQuery where
       ( \o ->
           JobQuery
             Core.<$> (o Core..:? "commuteFilter")
-            Core.<*> (o Core..:? "companies" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "companyDisplayNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "companies")
+            Core.<*> (o Core..:? "companyDisplayNames")
             Core.<*> (o Core..:? "compensationFilter")
             Core.<*> (o Core..:? "customAttributeFilter")
             Core.<*> (o Core..:? "disableSpellCheck")
-            Core.<*> (o Core..:? "employmentTypes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "excludedJobs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jobCategories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "languageCodes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locationFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "employmentTypes")
+            Core.<*> (o Core..:? "excludedJobs")
+            Core.<*> (o Core..:? "jobCategories")
+            Core.<*> (o Core..:? "languageCodes")
+            Core.<*> (o Core..:? "locationFilters")
             Core.<*> (o Core..:? "publishTimeRange")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "queryLanguageCode")
@@ -1869,7 +1862,7 @@ instance Core.FromJSON ListCompaniesResponse where
       "ListCompaniesResponse"
       ( \o ->
           ListCompaniesResponse
-            Core.<$> (o Core..:? "companies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "companies")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1913,7 +1906,7 @@ instance Core.FromJSON ListJobsResponse where
       "ListJobsResponse"
       ( \o ->
           ListJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1959,7 +1952,7 @@ instance Core.FromJSON ListTenantsResponse where
           ListTenantsResponse
             Core.<$> (o Core..:? "metadata")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tenants" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tenants")
       )
 
 instance Core.ToJSON ListTenantsResponse where
@@ -2230,7 +2223,9 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> (o Core..:? "units")
+            Core.<*> ( o Core..:? "units"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Money where
@@ -2305,28 +2300,16 @@ instance Core.FromJSON NamespacedDebugInput where
       "NamespacedDebugInput"
       ( \o ->
           NamespacedDebugInput
-            Core.<$> ( o Core..:? "absolutelyForcedExpNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "absolutelyForcedExpTags"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "absolutelyForcedExps"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "conditionallyForcedExpNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "conditionallyForcedExpTags"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "conditionallyForcedExps"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "absolutelyForcedExpNames")
+            Core.<*> (o Core..:? "absolutelyForcedExpTags")
+            Core.<*> (o Core..:? "absolutelyForcedExps")
+            Core.<*> (o Core..:? "conditionallyForcedExpNames")
+            Core.<*> (o Core..:? "conditionallyForcedExpTags")
+            Core.<*> (o Core..:? "conditionallyForcedExps")
             Core.<*> (o Core..:? "disableAutomaticEnrollmentSelection")
-            Core.<*> (o Core..:? "disableExpNames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "disableExpTags" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "disableExps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disableExpNames")
+            Core.<*> (o Core..:? "disableExpTags")
+            Core.<*> (o Core..:? "disableExps")
             Core.<*> (o Core..:? "disableManualEnrollmentSelection")
             Core.<*> (o Core..:? "disableOrganicSelection")
             Core.<*> (o Core..:? "forcedFlags")
@@ -2596,13 +2579,13 @@ instance Core.FromJSON PostalAddress where
       "PostalAddress"
       ( \o ->
           PostalAddress
-            Core.<$> (o Core..:? "addressLines" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addressLines")
             Core.<*> (o Core..:? "administrativeArea")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "locality")
             Core.<*> (o Core..:? "organization")
             Core.<*> (o Core..:? "postalCode")
-            Core.<*> (o Core..:? "recipients" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recipients")
             Core.<*> (o Core..:? "regionCode")
             Core.<*> (o Core..:? "revision")
             Core.<*> (o Core..:? "sortingCode")
@@ -2826,7 +2809,7 @@ instance Core.FromJSON SearchJobsRequest where
             Core.<*> (o Core..:? "disableKeywordMatch")
             Core.<*> (o Core..:? "diversificationLevel")
             Core.<*> (o Core..:? "enableBroadening")
-            Core.<*> (o Core..:? "histogramQueries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "histogramQueries")
             Core.<*> (o Core..:? "jobQuery")
             Core.<*> (o Core..:? "jobView")
             Core.<*> (o Core..:? "keywordMatchMode")
@@ -2910,11 +2893,9 @@ instance Core.FromJSON SearchJobsResponse where
       ( \o ->
           SearchJobsResponse
             Core.<$> (o Core..:? "broadenedQueryJobsCount")
-            Core.<*> ( o Core..:? "histogramQueryResults"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "locationFilters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "matchingJobs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "histogramQueryResults")
+            Core.<*> (o Core..:? "locationFilters")
+            Core.<*> (o Core..:? "matchingJobs")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "spellCorrection")
@@ -3008,7 +2989,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

@@ -136,7 +136,7 @@ instance Core.FromJSON Activities where
       ( \o ->
           Activities
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#reports#activities"
                      )
@@ -197,7 +197,7 @@ instance Core.FromJSON Activity where
           Activity
             Core.<$> (o Core..:? "actor")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "ipAddress")
             Core.<*> (o Core..:? "kind" Core..!= "admin#reports#activity")
@@ -296,7 +296,7 @@ instance Core.FromJSON Activity_EventsItem where
       ( \o ->
           Activity_EventsItem
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "type")
       )
 
@@ -360,11 +360,13 @@ instance
       ( \o ->
           Activity_EventsItem_ParametersItem
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> (o Core..:? "intValue")
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "messageValue")
-            Core.<*> (o Core..:? "multiIntValue" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "multiMessageValue" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "multiValue" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "multiIntValue")
+            Core.<*> (o Core..:? "multiMessageValue")
+            Core.<*> (o Core..:? "multiValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "value")
       )
@@ -413,7 +415,7 @@ instance
       "Activity_EventsItem_ParametersItem_MessageValue"
       ( \o ->
           Activity_EventsItem_ParametersItem_MessageValue
-            Core.<$> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameter")
       )
 
 instance
@@ -452,7 +454,7 @@ instance
       "Activity_EventsItem_ParametersItem_MultiMessageValueItem"
       ( \o ->
           Activity_EventsItem_ParametersItem_MultiMessageValueItem
-            Core.<$> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameter")
       )
 
 instance
@@ -501,7 +503,9 @@ instance Core.FromJSON Activity_Id where
             Core.<$> (o Core..:? "applicationName")
             Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "time")
-            Core.<*> (o Core..:? "uniqueQualifier")
+            Core.<*> ( o Core..:? "uniqueQualifier"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Activity_Id where
@@ -568,7 +572,9 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -666,10 +672,12 @@ instance Core.FromJSON NestedParameter where
       ( \o ->
           NestedParameter
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> (o Core..:? "intValue")
-            Core.<*> (o Core..:? "multiBoolValue" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "multiIntValue" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "multiValue" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "multiBoolValue")
+            Core.<*> (o Core..:? "multiIntValue")
+            Core.<*> (o Core..:? "multiValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "value")
       )
@@ -730,7 +738,7 @@ instance Core.FromJSON UsageReport where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#reports#usageReport"
                      )
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON UsageReport where
@@ -838,8 +846,10 @@ instance Core.FromJSON UsageReport_ParametersItem where
           UsageReport_ParametersItem
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "datetimeValue")
-            Core.<*> (o Core..:? "intValue")
-            Core.<*> (o Core..:? "msgValue" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "msgValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stringValue")
       )
@@ -932,8 +942,8 @@ instance Core.FromJSON UsageReports where
                          Core..!= "admin#reports#usageReports"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "usageReports" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "usageReports")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON UsageReports where
@@ -977,7 +987,7 @@ instance Core.FromJSON UsageReports_WarningsItem where
       ( \o ->
           UsageReports_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 

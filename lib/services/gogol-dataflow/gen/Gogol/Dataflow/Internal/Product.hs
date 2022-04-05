@@ -1037,10 +1037,14 @@ instance Core.FromJSON AutoscalingEvent where
       "AutoscalingEvent"
       ( \o ->
           AutoscalingEvent
-            Core.<$> (o Core..:? "currentNumWorkers")
+            Core.<$> ( o Core..:? "currentNumWorkers"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "eventType")
-            Core.<*> (o Core..:? "targetNumWorkers")
+            Core.<*> ( o Core..:? "targetNumWorkers"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "time")
             Core.<*> (o Core..:? "workerPool")
       )
@@ -1220,7 +1224,9 @@ instance Core.FromJSON CPUTime where
           CPUTime
             Core.<$> (o Core..:? "rate")
             Core.<*> (o Core..:? "timestamp")
-            Core.<*> (o Core..:? "totalMs")
+            Core.<*> ( o Core..:? "totalMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CPUTime where
@@ -1363,10 +1369,10 @@ instance Core.FromJSON ComputationTopology where
       ( \o ->
           ComputationTopology
             Core.<$> (o Core..:? "computationId")
-            Core.<*> (o Core..:? "inputs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "keyRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "outputs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "stateFamilies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inputs")
+            Core.<*> (o Core..:? "keyRanges")
+            Core.<*> (o Core..:? "outputs")
+            Core.<*> (o Core..:? "stateFamilies")
             Core.<*> (o Core..:? "systemStageName")
       )
 
@@ -1720,7 +1726,9 @@ instance Core.FromJSON CounterUpdate where
             Core.<*> (o Core..:? "integerMean")
             Core.<*> (o Core..:? "internal")
             Core.<*> (o Core..:? "nameAndKind")
-            Core.<*> (o Core..:? "shortId")
+            Core.<*> ( o Core..:? "shortId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringList")
             Core.<*> (o Core..:? "structuredNameAndMetadata")
       )
@@ -1894,7 +1902,7 @@ instance Core.FromJSON DataDiskAssignment where
       "DataDiskAssignment"
       ( \o ->
           DataDiskAssignment
-            Core.<$> (o Core..:? "dataDisks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataDisks")
             Core.<*> (o Core..:? "vmInstance")
       )
 
@@ -2134,7 +2142,9 @@ instance Core.FromJSON DisplayData where
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "durationValue")
             Core.<*> (o Core..:? "floatValue")
-            Core.<*> (o Core..:? "int64Value")
+            Core.<*> ( o Core..:? "int64Value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "javaClassValue")
             Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "label")
@@ -2334,18 +2344,18 @@ instance Core.FromJSON Environment where
             Core.<$> (o Core..:? "clusterManagerApiService")
             Core.<*> (o Core..:? "dataset")
             Core.<*> (o Core..:? "debugOptions")
-            Core.<*> (o Core..:? "experiments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "experiments")
             Core.<*> (o Core..:? "flexResourceSchedulingGoal")
             Core.<*> (o Core..:? "internalExperiments")
             Core.<*> (o Core..:? "sdkPipelineOptions")
             Core.<*> (o Core..:? "serviceAccountEmail")
             Core.<*> (o Core..:? "serviceKmsKeyName")
-            Core.<*> (o Core..:? "serviceOptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceOptions")
             Core.<*> (o Core..:? "shuffleMode")
             Core.<*> (o Core..:? "tempStoragePrefix")
             Core.<*> (o Core..:? "userAgent")
             Core.<*> (o Core..:? "version")
-            Core.<*> (o Core..:? "workerPools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workerPools")
             Core.<*> (o Core..:? "workerRegion")
             Core.<*> (o Core..:? "workerZone")
       )
@@ -2595,18 +2605,14 @@ instance Core.FromJSON ExecutionStageSummary where
       "ExecutionStageSummary"
       ( \o ->
           ExecutionStageSummary
-            Core.<$> (o Core..:? "componentSource" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "componentTransform"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "componentSource")
+            Core.<*> (o Core..:? "componentTransform")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "inputSource" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inputSource")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "outputSource" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "prerequisiteStage"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "outputSource")
+            Core.<*> (o Core..:? "prerequisiteStage")
       )
 
 instance Core.ToJSON ExecutionStageSummary where
@@ -2700,8 +2706,7 @@ instance Core.FromJSON FlattenInstruction where
     Core.withObject
       "FlattenInstruction"
       ( \o ->
-          FlattenInstruction
-            Core.<$> (o Core..:? "inputs" Core..!= Core.mempty)
+          FlattenInstruction Core.<$> (o Core..:? "inputs")
       )
 
 instance Core.ToJSON FlattenInstruction where
@@ -2798,9 +2803,7 @@ instance Core.FromJSON FlexTemplateRuntimeEnvironment where
       "FlexTemplateRuntimeEnvironment"
       ( \o ->
           FlexTemplateRuntimeEnvironment
-            Core.<$> ( o Core..:? "additionalExperiments"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalExperiments")
             Core.<*> (o Core..:? "additionalUserLabels")
             Core.<*> (o Core..:? "autoscalingAlgorithm")
             Core.<*> (o Core..:? "diskSizeGb")
@@ -2919,8 +2922,7 @@ instance Core.FromJSON FloatingPointList where
     Core.withObject
       "FloatingPointList"
       ( \o ->
-          FloatingPointList
-            Core.<$> (o Core..:? "elements" Core..!= Core.mempty)
+          FloatingPointList Core.<$> (o Core..:? "elements")
       )
 
 instance Core.ToJSON FloatingPointList where
@@ -3109,7 +3111,7 @@ instance Core.FromJSON Histogram where
       "Histogram"
       ( \o ->
           Histogram
-            Core.<$> (o Core..:? "bucketCounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bucketCounts")
             Core.<*> (o Core..:? "firstBucketOffset")
       )
 
@@ -3351,10 +3353,7 @@ instance Core.FromJSON IntegerList where
   parseJSON =
     Core.withObject
       "IntegerList"
-      ( \o ->
-          IntegerList
-            Core.<$> (o Core..:? "elements" Core..!= Core.mempty)
-      )
+      (\o -> IntegerList Core.<$> (o Core..:? "elements"))
 
 instance Core.ToJSON IntegerList where
   toJSON IntegerList {..} =
@@ -3510,11 +3509,11 @@ instance Core.FromJSON Job where
             Core.<*> (o Core..:? "replacedByJobId")
             Core.<*> (o Core..:? "requestedState")
             Core.<*> (o Core..:? "satisfiesPzs")
-            Core.<*> (o Core..:? "stageStates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stageStates")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "steps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "steps")
             Core.<*> (o Core..:? "stepsLocation")
-            Core.<*> (o Core..:? "tempFiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tempFiles")
             Core.<*> (o Core..:? "transformNameMapping")
             Core.<*> (o Core..:? "type")
       )
@@ -3635,7 +3634,7 @@ instance Core.FromJSON JobExecutionDetails where
       ( \o ->
           JobExecutionDetails
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "stages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stages")
       )
 
 instance Core.ToJSON JobExecutionDetails where
@@ -3724,7 +3723,7 @@ instance Core.FromJSON JobExecutionStageInfo where
       "JobExecutionStageInfo"
       ( \o ->
           JobExecutionStageInfo
-            Core.<$> (o Core..:? "stepName" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "stepName")
       )
 
 instance Core.ToJSON JobExecutionStageInfo where
@@ -3825,13 +3824,13 @@ instance Core.FromJSON JobMetadata where
       "JobMetadata"
       ( \o ->
           JobMetadata
-            Core.<$> (o Core..:? "bigTableDetails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bigqueryDetails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "datastoreDetails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "fileDetails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pubsubDetails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bigTableDetails")
+            Core.<*> (o Core..:? "bigqueryDetails")
+            Core.<*> (o Core..:? "datastoreDetails")
+            Core.<*> (o Core..:? "fileDetails")
+            Core.<*> (o Core..:? "pubsubDetails")
             Core.<*> (o Core..:? "sdkVersion")
-            Core.<*> (o Core..:? "spannerDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spannerDetails")
       )
 
 instance Core.ToJSON JobMetadata where
@@ -3873,7 +3872,7 @@ instance Core.FromJSON JobMetrics where
       ( \o ->
           JobMetrics
             Core.<$> (o Core..:? "metricTime")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
       )
 
 instance Core.ToJSON JobMetrics where
@@ -4433,10 +4432,8 @@ instance Core.FromJSON LeaseWorkItemRequest where
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "requestedLeaseDuration")
             Core.<*> (o Core..:? "unifiedWorkerRequest")
-            Core.<*> (o Core..:? "workItemTypes" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "workerCapabilities"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "workItemTypes")
+            Core.<*> (o Core..:? "workerCapabilities")
             Core.<*> (o Core..:? "workerId")
       )
 
@@ -4521,7 +4518,7 @@ instance Core.FromJSON LeaseWorkItemResponse where
       ( \o ->
           LeaseWorkItemResponse
             Core.<$> (o Core..:? "unifiedWorkerResponse")
-            Core.<*> (o Core..:? "workItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workItems")
       )
 
 instance Core.ToJSON LeaseWorkItemResponse where
@@ -4600,8 +4597,8 @@ instance Core.FromJSON ListJobMessagesResponse where
       "ListJobMessagesResponse"
       ( \o ->
           ListJobMessagesResponse
-            Core.<$> (o Core..:? "autoscalingEvents" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jobMessages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "autoscalingEvents")
+            Core.<*> (o Core..:? "jobMessages")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4645,8 +4642,8 @@ instance Core.FromJSON ListJobsResponse where
       "ListJobsResponse"
       ( \o ->
           ListJobsResponse
-            Core.<$> (o Core..:? "failedLocation" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "failedLocation")
+            Core.<*> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4680,7 +4677,7 @@ instance Core.FromJSON ListSnapshotsResponse where
       "ListSnapshotsResponse"
       ( \o ->
           ListSnapshotsResponse
-            Core.<$> (o Core..:? "snapshots" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "snapshots")
       )
 
 instance Core.ToJSON ListSnapshotsResponse where
@@ -4723,7 +4720,7 @@ instance Core.FromJSON MapTask where
       ( \o ->
           MapTask
             Core.<$> (o Core..:? "counterPrefix")
-            Core.<*> (o Core..:? "instructions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instructions")
             Core.<*> (o Core..:? "stageName")
             Core.<*> (o Core..:? "systemName")
       )
@@ -4774,11 +4771,19 @@ instance Core.FromJSON MemInfo where
       "MemInfo"
       ( \o ->
           MemInfo
-            Core.<$> (o Core..:? "currentLimitBytes")
-            Core.<*> (o Core..:? "currentOoms")
-            Core.<*> (o Core..:? "currentRssBytes")
+            Core.<$> ( o Core..:? "currentLimitBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "currentOoms"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "currentRssBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "timestamp")
-            Core.<*> (o Core..:? "totalGbMs")
+            Core.<*> ( o Core..:? "totalGbMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MemInfo where
@@ -4821,7 +4826,9 @@ instance Core.FromJSON MetricShortId where
       ( \o ->
           MetricShortId
             Core.<$> (o Core..:? "metricIndex")
-            Core.<*> (o Core..:? "shortId")
+            Core.<*> ( o Core..:? "shortId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MetricShortId where
@@ -5150,9 +5157,9 @@ instance Core.FromJSON ParDoInstruction where
       ( \o ->
           ParDoInstruction
             Core.<$> (o Core..:? "input")
-            Core.<*> (o Core..:? "multiOutputInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "multiOutputInfos")
             Core.<*> (o Core..:? "numOutputs")
-            Core.<*> (o Core..:? "sideInputs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sideInputs")
             Core.<*> (o Core..:? "userFn")
       )
 
@@ -5249,7 +5256,7 @@ instance Core.FromJSON ParallelInstruction where
             Core.<$> (o Core..:? "flatten")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "originalName")
-            Core.<*> (o Core..:? "outputs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputs")
             Core.<*> (o Core..:? "parDo")
             Core.<*> (o Core..:? "partialGroupByKey")
             Core.<*> (o Core..:? "read")
@@ -5355,7 +5362,7 @@ instance Core.FromJSON ParameterMetadata where
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "paramType")
-            Core.<*> (o Core..:? "regexes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regexes")
       )
 
 instance Core.ToJSON ParameterMetadata where
@@ -5447,7 +5454,7 @@ instance Core.FromJSON PartialGroupByKeyInstruction where
             Core.<*> (o Core..:? "inputElementCodec")
             Core.<*> (o Core..:? "originalCombineValuesInputStoreName")
             Core.<*> (o Core..:? "originalCombineValuesStepName")
-            Core.<*> (o Core..:? "sideInputs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sideInputs")
             Core.<*> (o Core..:? "valueCombiningFn")
       )
 
@@ -5571,13 +5578,9 @@ instance Core.FromJSON PipelineDescription where
       "PipelineDescription"
       ( \o ->
           PipelineDescription
-            Core.<$> (o Core..:? "displayData" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "executionPipelineStage"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "originalPipelineTransform"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "displayData")
+            Core.<*> (o Core..:? "executionPipelineStage")
+            Core.<*> (o Core..:? "originalPipelineTransform")
       )
 
 instance Core.ToJSON PipelineDescription where
@@ -5664,11 +5667,15 @@ instance Core.FromJSON Position where
       "Position"
       ( \o ->
           Position
-            Core.<$> (o Core..:? "byteOffset")
+            Core.<$> ( o Core..:? "byteOffset"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "concatPosition")
             Core.<*> (o Core..:? "end")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "recordIndex")
+            Core.<*> ( o Core..:? "recordIndex"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "shufflePosition")
       )
 
@@ -5712,7 +5719,7 @@ instance Core.FromJSON ProgressTimeseries where
       ( \o ->
           ProgressTimeseries
             Core.<$> (o Core..:? "currentProgress")
-            Core.<*> (o Core..:? "dataPoints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dataPoints")
       )
 
 instance Core.ToJSON ProgressTimeseries where
@@ -5889,8 +5896,7 @@ instance Core.FromJSON QueryInfo where
     Core.withObject
       "QueryInfo"
       ( \o ->
-          QueryInfo
-            Core.<$> (o Core..:? "queryProperty" Core..!= Core.mempty)
+          QueryInfo Core.<$> (o Core..:? "queryProperty")
       )
 
 instance Core.ToJSON QueryInfo where
@@ -5965,7 +5971,7 @@ instance Core.FromJSON ReportWorkItemStatusRequest where
             Core.<$> (o Core..:? "currentWorkerTime")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "unifiedWorkerRequest")
-            Core.<*> (o Core..:? "workItemStatuses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workItemStatuses")
             Core.<*> (o Core..:? "workerId")
       )
 
@@ -6048,9 +6054,7 @@ instance Core.FromJSON ReportWorkItemStatusResponse where
       ( \o ->
           ReportWorkItemStatusResponse
             Core.<$> (o Core..:? "unifiedWorkerResponse")
-            Core.<*> ( o Core..:? "workItemServiceStates"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "workItemServiceStates")
       )
 
 instance Core.ToJSON ReportWorkItemStatusResponse where
@@ -6167,8 +6171,8 @@ instance Core.FromJSON ResourceUtilizationReport where
       ( \o ->
           ResourceUtilizationReport
             Core.<$> (o Core..:? "containers")
-            Core.<*> (o Core..:? "cpuTime" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "memoryInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "cpuTime")
+            Core.<*> (o Core..:? "memoryInfo")
       )
 
 instance Core.ToJSON ResourceUtilizationReport where
@@ -6311,9 +6315,7 @@ instance Core.FromJSON RuntimeEnvironment where
       "RuntimeEnvironment"
       ( \o ->
           RuntimeEnvironment
-            Core.<$> ( o Core..:? "additionalExperiments"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalExperiments")
             Core.<*> (o Core..:? "additionalUserLabels")
             Core.<*> (o Core..:? "bypassTempDirValidation")
             Core.<*> (o Core..:? "enableStreamingEngine")
@@ -6418,7 +6420,7 @@ instance Core.FromJSON RuntimeMetadata where
       "RuntimeMetadata"
       ( \o ->
           RuntimeMetadata
-            Core.<$> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameters")
             Core.<*> (o Core..:? "sdkInfo")
       )
 
@@ -6498,7 +6500,7 @@ instance Core.FromJSON SdkHarnessContainerImage where
       "SdkHarnessContainerImage"
       ( \o ->
           SdkHarnessContainerImage
-            Core.<$> (o Core..:? "capabilities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "capabilities")
             Core.<*> (o Core..:? "containerImage")
             Core.<*> (o Core..:? "environmentId")
             Core.<*> (o Core..:? "useSingleCorePerContainer")
@@ -6663,7 +6665,7 @@ instance Core.FromJSON SendWorkerMessagesRequest where
       ( \o ->
           SendWorkerMessagesRequest
             Core.<$> (o Core..:? "location")
-            Core.<*> (o Core..:? "workerMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workerMessages")
       )
 
 instance Core.ToJSON SendWorkerMessagesRequest where
@@ -6696,9 +6698,7 @@ instance Core.FromJSON SendWorkerMessagesResponse where
       "SendWorkerMessagesResponse"
       ( \o ->
           SendWorkerMessagesResponse
-            Core.<$> ( o Core..:? "workerMessageResponses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "workerMessageResponses")
       )
 
 instance Core.ToJSON SendWorkerMessagesResponse where
@@ -6748,9 +6748,9 @@ instance Core.FromJSON SeqMapTask where
       "SeqMapTask"
       ( \o ->
           SeqMapTask
-            Core.<$> (o Core..:? "inputs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "inputs")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "outputInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputInfos")
             Core.<*> (o Core..:? "stageName")
             Core.<*> (o Core..:? "systemName")
             Core.<*> (o Core..:? "userFn")
@@ -6896,7 +6896,7 @@ instance Core.FromJSON SideInputInfo where
       ( \o ->
           SideInputInfo
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
             Core.<*> (o Core..:? "tag")
       )
 
@@ -7074,10 +7074,12 @@ instance Core.FromJSON Snapshot where
           Snapshot
             Core.<$> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "diskSizeBytes")
+            Core.<*> ( o Core..:? "diskSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "pubsubMetadata" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pubsubMetadata")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "sourceJobId")
             Core.<*> (o Core..:? "state")
@@ -7186,7 +7188,7 @@ instance Core.FromJSON Source where
       "Source"
       ( \o ->
           Source
-            Core.<$> (o Core..:? "baseSpecs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "baseSpecs")
             Core.<*> (o Core..:? "codec")
             Core.<*> (o Core..:? "doesNotNeedSplitting")
             Core.<*> (o Core..:? "metadata")
@@ -7426,7 +7428,9 @@ instance Core.FromJSON SourceMetadata where
       "SourceMetadata"
       ( \o ->
           SourceMetadata
-            Core.<$> (o Core..:? "estimatedSizeBytes")
+            Core.<$> ( o Core..:? "estimatedSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "infinite")
             Core.<*> (o Core..:? "producesSortedKeys")
       )
@@ -7564,8 +7568,12 @@ instance Core.FromJSON SourceSplitOptions where
       "SourceSplitOptions"
       ( \o ->
           SourceSplitOptions
-            Core.<$> (o Core..:? "desiredBundleSizeBytes")
-            Core.<*> (o Core..:? "desiredShardSizeBytes")
+            Core.<$> ( o Core..:? "desiredBundleSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "desiredShardSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SourceSplitOptions where
@@ -7645,9 +7653,9 @@ instance Core.FromJSON SourceSplitResponse where
       "SourceSplitResponse"
       ( \o ->
           SourceSplitResponse
-            Core.<$> (o Core..:? "bundles" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bundles")
             Core.<*> (o Core..:? "outcome")
-            Core.<*> (o Core..:? "shards" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shards")
       )
 
 instance Core.ToJSON SourceSplitResponse where
@@ -7799,7 +7807,7 @@ instance Core.FromJSON StageExecutionDetails where
       ( \o ->
           StageExecutionDetails
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "workers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workers")
       )
 
 instance Core.ToJSON StageExecutionDetails where
@@ -7845,7 +7853,9 @@ instance Core.FromJSON StageSource where
           StageSource
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "originalTransformOrCollection")
-            Core.<*> (o Core..:? "sizeBytes")
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "userName")
       )
 
@@ -7901,7 +7911,7 @@ instance Core.FromJSON StageSummary where
       ( \o ->
           StageSummary
             Core.<$> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "progress")
             Core.<*> (o Core..:? "stageId")
             Core.<*> (o Core..:? "startTime")
@@ -7983,7 +7993,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -8225,7 +8235,7 @@ instance Core.FromJSON StreamingComputationConfig where
       ( \o ->
           StreamingComputationConfig
             Core.<$> (o Core..:? "computationId")
-            Core.<*> (o Core..:? "instructions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instructions")
             Core.<*> (o Core..:? "stageName")
             Core.<*> (o Core..:? "systemName")
             Core.<*> (o Core..:? "transformUserNameToStateFamily")
@@ -8310,7 +8320,7 @@ instance Core.FromJSON StreamingComputationRanges where
       ( \o ->
           StreamingComputationRanges
             Core.<$> (o Core..:? "computationId")
-            Core.<*> (o Core..:? "rangeAssignments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rangeAssignments")
       )
 
 instance Core.ToJSON StreamingComputationRanges where
@@ -8352,8 +8362,8 @@ instance Core.FromJSON StreamingComputationTask where
       "StreamingComputationTask"
       ( \o ->
           StreamingComputationTask
-            Core.<$> (o Core..:? "computationRanges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "dataDisks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "computationRanges")
+            Core.<*> (o Core..:? "dataDisks")
             Core.<*> (o Core..:? "taskType")
       )
 
@@ -8409,15 +8419,21 @@ instance Core.FromJSON StreamingConfigTask where
       "StreamingConfigTask"
       ( \o ->
           StreamingConfigTask
-            Core.<$> (o Core..:? "commitStreamChunkSizeBytes")
-            Core.<*> (o Core..:? "getDataStreamChunkSizeBytes")
-            Core.<*> (o Core..:? "maxWorkItemCommitBytes")
-            Core.<*> ( o Core..:? "streamingComputationConfigs"
-                         Core..!= Core.mempty
+            Core.<$> ( o Core..:? "commitStreamChunkSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> ( o Core..:? "getDataStreamChunkSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxWorkItemCommitBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "streamingComputationConfigs")
             Core.<*> (o Core..:? "userStepToStateFamilyNameMap")
             Core.<*> (o Core..:? "windmillServiceEndpoint")
-            Core.<*> (o Core..:? "windmillServicePort")
+            Core.<*> ( o Core..:? "windmillServicePort"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON StreamingConfigTask where
@@ -8620,10 +8636,7 @@ instance Core.FromJSON StringList where
   parseJSON =
     Core.withObject
       "StringList"
-      ( \o ->
-          StringList
-            Core.<$> (o Core..:? "elements" Core..!= Core.mempty)
-      )
+      (\o -> StringList Core.<$> (o Core..:? "elements"))
 
 instance Core.ToJSON StringList where
   toJSON StringList {..} =
@@ -8663,7 +8676,7 @@ instance Core.FromJSON StructuredMessage where
           StructuredMessage
             Core.<$> (o Core..:? "messageKey")
             Core.<*> (o Core..:? "messageText")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON StructuredMessage where
@@ -8764,7 +8777,7 @@ instance Core.FromJSON TaskRunnerSettings where
             Core.<*> (o Core..:? "logDir")
             Core.<*> (o Core..:? "logToSerialconsole")
             Core.<*> (o Core..:? "logUploadLocation")
-            Core.<*> (o Core..:? "oauthScopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oauthScopes")
             Core.<*> (o Core..:? "parallelWorkerSettings")
             Core.<*> (o Core..:? "streamingWorkerMainClass")
             Core.<*> (o Core..:? "taskGroup")
@@ -8841,7 +8854,7 @@ instance Core.FromJSON TemplateMetadata where
           TemplateMetadata
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON TemplateMetadata where
@@ -8889,10 +8902,8 @@ instance Core.FromJSON TopologyConfig where
       "TopologyConfig"
       ( \o ->
           TopologyConfig
-            Core.<$> (o Core..:? "computations" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "dataDiskAssignments"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "computations")
+            Core.<*> (o Core..:? "dataDiskAssignments")
             Core.<*> (o Core..:? "forwardingKeyBits")
             Core.<*> (o Core..:? "persistentStateVersion")
             Core.<*> (o Core..:? "userStageToComputationNameMap")
@@ -8989,16 +9000,12 @@ instance Core.FromJSON TransformSummary where
       "TransformSummary"
       ( \o ->
           TransformSummary
-            Core.<$> (o Core..:? "displayData" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "displayData")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "inputCollectionName"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "inputCollectionName")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "outputCollectionName"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "outputCollectionName")
       )
 
 instance Core.ToJSON TransformSummary where
@@ -9118,12 +9125,14 @@ instance Core.FromJSON WorkItem where
       ( \o ->
           WorkItem
             Core.<$> (o Core..:? "configuration")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "initialReportIndex")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o Core..:? "initialReportIndex"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "jobId")
             Core.<*> (o Core..:? "leaseExpireTime")
             Core.<*> (o Core..:? "mapTask")
-            Core.<*> (o Core..:? "packages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "packages")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "reportStatusInterval")
             Core.<*> (o Core..:? "seqMapTask")
@@ -9205,7 +9214,7 @@ instance Core.FromJSON WorkItemDetails where
           WorkItemDetails
             Core.<$> (o Core..:? "attemptId")
             Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "progress")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
@@ -9280,8 +9289,10 @@ instance Core.FromJSON WorkItemServiceState where
             Core.<*> (o Core..:? "harnessData")
             Core.<*> (o Core..:? "hotKeyDetection")
             Core.<*> (o Core..:? "leaseExpireTime")
-            Core.<*> (o Core..:? "metricShortId" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "nextReportIndex")
+            Core.<*> (o Core..:? "metricShortId")
+            Core.<*> ( o Core..:? "nextReportIndex"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "reportStatusInterval")
             Core.<*> (o Core..:? "splitRequest")
             Core.<*> (o Core..:? "suggestedStopPoint")
@@ -9407,12 +9418,14 @@ instance Core.FromJSON WorkItemStatus where
       ( \o ->
           WorkItemStatus
             Core.<$> (o Core..:? "completed")
-            Core.<*> (o Core..:? "counterUpdates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "counterUpdates")
             Core.<*> (o Core..:? "dynamicSourceSplit")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "metricUpdates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
+            Core.<*> (o Core..:? "metricUpdates")
             Core.<*> (o Core..:? "progress")
-            Core.<*> (o Core..:? "reportIndex")
+            Core.<*> ( o Core..:? "reportIndex"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "reportedProgress")
             Core.<*> (o Core..:? "requestedLeaseDuration")
             Core.<*> (o Core..:? "sourceFork")
@@ -9472,7 +9485,7 @@ instance Core.FromJSON WorkerDetails where
       "WorkerDetails"
       ( \o ->
           WorkerDetails
-            Core.<$> (o Core..:? "workItems" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "workItems")
             Core.<*> (o Core..:? "workerName")
       )
 
@@ -9527,7 +9540,7 @@ instance Core.FromJSON WorkerHealthReport where
       ( \o ->
           WorkerHealthReport
             Core.<$> (o Core..:? "msg")
-            Core.<*> (o Core..:? "pods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pods")
             Core.<*> (o Core..:? "reportInterval")
             Core.<*> (o Core..:? "vmBrokenCode")
             Core.<*> (o Core..:? "vmIsBroken")
@@ -9982,7 +9995,7 @@ instance Core.FromJSON WorkerPool where
       ( \o ->
           WorkerPool
             Core.<$> (o Core..:? "autoscalingSettings")
-            Core.<*> (o Core..:? "dataDisks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dataDisks")
             Core.<*> (o Core..:? "defaultPackageSet")
             Core.<*> (o Core..:? "diskSizeGb")
             Core.<*> (o Core..:? "diskSourceImage")
@@ -9995,11 +10008,9 @@ instance Core.FromJSON WorkerPool where
             Core.<*> (o Core..:? "numThreadsPerWorker")
             Core.<*> (o Core..:? "numWorkers")
             Core.<*> (o Core..:? "onHostMaintenance")
-            Core.<*> (o Core..:? "packages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "packages")
             Core.<*> (o Core..:? "poolArgs")
-            Core.<*> ( o Core..:? "sdkHarnessContainerImages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "sdkHarnessContainerImages")
             Core.<*> (o Core..:? "subnetwork")
             Core.<*> (o Core..:? "taskrunnerSettings")
             Core.<*> (o Core..:? "teardownPolicy")

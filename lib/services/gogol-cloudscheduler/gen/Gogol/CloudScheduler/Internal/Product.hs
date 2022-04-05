@@ -494,7 +494,7 @@ instance Core.FromJSON ListJobsResponse where
       "ListJobsResponse"
       ( \o ->
           ListJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -530,7 +530,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1026,7 +1026,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

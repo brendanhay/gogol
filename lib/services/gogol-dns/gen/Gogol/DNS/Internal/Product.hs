@@ -284,8 +284,8 @@ instance Core.FromJSON Change where
       "Change"
       ( \o ->
           Change
-            Core.<$> (o Core..:? "additions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "deletions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "additions")
+            Core.<*> (o Core..:? "deletions")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isServing")
             Core.<*> (o Core..:? "kind" Core..!= "dns#change")
@@ -339,7 +339,7 @@ instance Core.FromJSON ChangesListResponse where
       "ChangesListResponse"
       ( \o ->
           ChangesListResponse
-            Core.<$> (o Core..:? "changes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "changes")
             Core.<*> (o Core..:? "header")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#changesListResponse"
@@ -414,7 +414,7 @@ instance Core.FromJSON DnsKey where
             Core.<$> (o Core..:? "algorithm")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "digests" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "digests")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isActive")
             Core.<*> (o Core..:? "keyLength")
@@ -556,7 +556,7 @@ instance Core.FromJSON DnsKeysListResponse where
       "DnsKeysListResponse"
       ( \o ->
           DnsKeysListResponse
-            Core.<$> (o Core..:? "dnsKeys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dnsKeys")
             Core.<*> (o Core..:? "header")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#dnsKeysListResponse"
@@ -652,12 +652,12 @@ instance Core.FromJSON ManagedZone where
             Core.<*> (o Core..:? "dnsName")
             Core.<*> (o Core..:? "dnssecConfig")
             Core.<*> (o Core..:? "forwardingConfig")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "dns#managedZone")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nameServerSet")
-            Core.<*> (o Core..:? "nameServers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nameServers")
             Core.<*> (o Core..:? "peeringConfig")
             Core.<*> (o Core..:? "privateVisibilityConfig")
             Core.<*> (o Core..:? "reverseLookupConfig")
@@ -794,7 +794,7 @@ instance Core.FromJSON ManagedZoneDnsSecConfig where
       "ManagedZoneDnsSecConfig"
       ( \o ->
           ManagedZoneDnsSecConfig
-            Core.<$> (o Core..:? "defaultKeySpecs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "defaultKeySpecs")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#managedZoneDnsSecConfig"
                      )
@@ -842,9 +842,7 @@ instance Core.FromJSON ManagedZoneForwardingConfig where
             Core.<$> ( o Core..:? "kind"
                          Core..!= "dns#managedZoneForwardingConfig"
                      )
-            Core.<*> ( o Core..:? "targetNameServers"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetNameServers")
       )
 
 instance Core.ToJSON ManagedZoneForwardingConfig where
@@ -951,7 +949,7 @@ instance
                          Core..!= "dns#managedZoneOperationsListResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -1090,11 +1088,11 @@ instance
       "ManagedZonePrivateVisibilityConfig"
       ( \o ->
           ManagedZonePrivateVisibilityConfig
-            Core.<$> (o Core..:? "gkeClusters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "gkeClusters")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#managedZonePrivateVisibilityConfig"
                      )
-            Core.<*> (o Core..:? "networks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networks")
       )
 
 instance
@@ -1366,7 +1364,7 @@ instance Core.FromJSON ManagedZonesListResponse where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#managedZonesListResponse"
                      )
-            Core.<*> (o Core..:? "managedZones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "managedZones")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1559,7 +1557,7 @@ instance Core.FromJSON PoliciesListResponse where
                          Core..!= "dns#policiesListResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "policies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "policies")
       )
 
 instance Core.ToJSON PoliciesListResponse where
@@ -1689,10 +1687,10 @@ instance Core.FromJSON Policy where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "enableInboundForwarding")
             Core.<*> (o Core..:? "enableLogging")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "dns#policy")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "networks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networks")
       )
 
 instance Core.ToJSON Policy where
@@ -1743,9 +1741,7 @@ instance
             Core.<$> ( o Core..:? "kind"
                          Core..!= "dns#policyAlternativeNameServerConfig"
                      )
-            Core.<*> ( o Core..:? "targetNameServers"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetNameServers")
       )
 
 instance
@@ -1885,7 +1881,9 @@ instance Core.FromJSON Project where
           Project
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "dns#project")
-            Core.<*> (o Core..:? "number")
+            Core.<*> ( o Core..:? "number"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "quota")
       )
 
@@ -1988,9 +1986,7 @@ instance Core.FromJSON Quota where
             Core.<*> (o Core..:? "targetNameServersPerManagedZone")
             Core.<*> (o Core..:? "targetNameServersPerPolicy")
             Core.<*> (o Core..:? "totalRrdataSizePerChange")
-            Core.<*> ( o Core..:? "whitelistedKeySpecs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "whitelistedKeySpecs")
       )
 
 instance Core.ToJSON Quota where
@@ -2101,7 +2097,7 @@ instance Core.FromJSON RRSetRoutingPolicyGeoPolicy where
       "RRSetRoutingPolicyGeoPolicy"
       ( \o ->
           RRSetRoutingPolicyGeoPolicy
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#rRSetRoutingPolicyGeoPolicy"
                      )
@@ -2155,8 +2151,8 @@ instance
                          Core..!= "dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem"
                      )
             Core.<*> (o Core..:? "location")
-            Core.<*> (o Core..:? "rrdatas" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "signatureRrdatas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rrdatas")
+            Core.<*> (o Core..:? "signatureRrdatas")
       )
 
 instance
@@ -2200,7 +2196,7 @@ instance Core.FromJSON RRSetRoutingPolicyWrrPolicy where
       "RRSetRoutingPolicyWrrPolicy"
       ( \o ->
           RRSetRoutingPolicyWrrPolicy
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "dns#rRSetRoutingPolicyWrrPolicy"
                      )
@@ -2253,8 +2249,8 @@ instance
             Core.<$> ( o Core..:? "kind"
                          Core..!= "dns#rRSetRoutingPolicyWrrPolicyWrrPolicyItem"
                      )
-            Core.<*> (o Core..:? "rrdatas" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "signatureRrdatas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rrdatas")
+            Core.<*> (o Core..:? "signatureRrdatas")
             Core.<*> (o Core..:? "weight")
       )
 
@@ -2317,8 +2313,8 @@ instance Core.FromJSON ResourceRecordSet where
             Core.<$> (o Core..:? "kind" Core..!= "dns#resourceRecordSet")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "routingPolicy")
-            Core.<*> (o Core..:? "rrdatas" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "signatureRrdatas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rrdatas")
+            Core.<*> (o Core..:? "signatureRrdatas")
             Core.<*> (o Core..:? "ttl")
             Core.<*> (o Core..:? "type")
       )
@@ -2374,7 +2370,7 @@ instance Core.FromJSON ResourceRecordSetsListResponse where
                          Core..!= "dns#resourceRecordSetsListResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "rrsets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rrsets")
       )
 
 instance Core.ToJSON ResourceRecordSetsListResponse where
@@ -2447,7 +2443,7 @@ instance Core.FromJSON ResponsePoliciesListResponse where
           ResponsePoliciesListResponse
             Core.<$> (o Core..:? "header")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "responsePolicies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "responsePolicies")
       )
 
 instance Core.ToJSON ResponsePoliciesListResponse where
@@ -2576,10 +2572,10 @@ instance Core.FromJSON ResponsePolicy where
       ( \o ->
           ResponsePolicy
             Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "gkeClusters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "gkeClusters")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "dns#responsePolicy")
-            Core.<*> (o Core..:? "networks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networks")
             Core.<*> (o Core..:? "responsePolicyName")
       )
 
@@ -2751,7 +2747,7 @@ instance Core.FromJSON ResponsePolicyRuleLocalData where
       "ResponsePolicyRuleLocalData"
       ( \o ->
           ResponsePolicyRuleLocalData
-            Core.<$> (o Core..:? "localDatas" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "localDatas")
       )
 
 instance Core.ToJSON ResponsePolicyRuleLocalData where
@@ -2794,9 +2790,7 @@ instance
           ResponsePolicyRulesListResponse
             Core.<$> (o Core..:? "header")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "responsePolicyRules"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "responsePolicyRules")
       )
 
 instance Core.ToJSON ResponsePolicyRulesListResponse where

@@ -166,7 +166,7 @@ instance Core.FromJSON AdministrationRegion where
             Core.<$> (o Core..:? "electionAdministrationBody")
             Core.<*> (o Core..:? "local_jurisdiction")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON AdministrationRegion where
@@ -253,14 +253,14 @@ instance Core.FromJSON AdministrativeBody where
             Core.<*> (o Core..:? "electionInfoUrl")
             Core.<*> (o Core..:? "electionNoticeText")
             Core.<*> (o Core..:? "electionNoticeUrl")
-            Core.<*> (o Core..:? "electionOfficials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "electionOfficials")
             Core.<*> (o Core..:? "electionRegistrationConfirmationUrl")
             Core.<*> (o Core..:? "electionRegistrationUrl")
             Core.<*> (o Core..:? "electionRulesUrl")
             Core.<*> (o Core..:? "hoursOfOperation")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "physicalAddress")
-            Core.<*> (o Core..:? "voter_services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "voter_services")
             Core.<*> (o Core..:? "votingLocationFinderUrl")
       )
 
@@ -341,10 +341,12 @@ instance Core.FromJSON Candidate where
       ( \o ->
           Candidate
             Core.<$> (o Core..:? "candidateUrl")
-            Core.<*> (o Core..:? "channels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "channels")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "orderOnBallot")
+            Core.<*> ( o Core..:? "orderOnBallot"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "party")
             Core.<*> (o Core..:? "phone")
             Core.<*> (o Core..:? "photoUrl")
@@ -495,20 +497,24 @@ instance Core.FromJSON Contest where
       "Contest"
       ( \o ->
           Contest
-            Core.<$> (o Core..:? "ballotPlacement")
+            Core.<$> ( o Core..:? "ballotPlacement"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ballotTitle")
-            Core.<*> (o Core..:? "candidates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "candidates")
             Core.<*> (o Core..:? "district")
             Core.<*> (o Core..:? "electorateSpecifications")
-            Core.<*> (o Core..:? "level" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "numberElected")
-            Core.<*> (o Core..:? "numberVotingFor")
-            Core.<*> (o Core..:? "office")
-            Core.<*> (o Core..:? "primaryParties" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "primaryParty")
-            Core.<*> ( o Core..:? "referendumBallotResponses"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "level")
+            Core.<*> ( o Core..:? "numberElected"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> ( o Core..:? "numberVotingFor"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "office")
+            Core.<*> (o Core..:? "primaryParties")
+            Core.<*> (o Core..:? "primaryParty")
+            Core.<*> (o Core..:? "referendumBallotResponses")
             Core.<*> (o Core..:? "referendumBrief")
             Core.<*> (o Core..:? "referendumConStatement")
             Core.<*> (o Core..:? "referendumEffectOfAbstain")
@@ -518,8 +524,8 @@ instance Core.FromJSON Contest where
             Core.<*> (o Core..:? "referendumText")
             Core.<*> (o Core..:? "referendumTitle")
             Core.<*> (o Core..:? "referendumUrl")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
+            Core.<*> (o Core..:? "sources")
             Core.<*> (o Core..:? "special")
             Core.<*> (o Core..:? "type")
       )
@@ -595,7 +601,7 @@ instance Core.FromJSON DivisionSearchResponse where
             Core.<$> ( o Core..:? "kind"
                          Core..!= "civicinfo#divisionSearchResponse"
                      )
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON DivisionSearchResponse where
@@ -636,7 +642,7 @@ instance Core.FromJSON DivisionSearchResult where
       "DivisionSearchResult"
       ( \o ->
           DivisionSearchResult
-            Core.<$> (o Core..:? "aliases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aliases")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ocdId")
       )
@@ -684,7 +690,7 @@ instance Core.FromJSON Election where
       ( \o ->
           Election
             Core.<$> (o Core..:? "electionDay")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "ocdDivisionId")
       )
@@ -781,7 +787,7 @@ instance Core.FromJSON ElectionsQueryResponse where
       "ElectionsQueryResponse"
       ( \o ->
           ElectionsQueryResponse
-            Core.<$> (o Core..:? "elections" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "elections")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "civicinfo#electionsQueryResponse"
                      )
@@ -870,8 +876,12 @@ instance Core.FromJSON FeatureIdProto where
       "FeatureIdProto"
       ( \o ->
           FeatureIdProto
-            Core.<$> (o Core..:? "cellId")
-            Core.<*> (o Core..:? "fprint")
+            Core.<$> ( o Core..:? "cellId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "fprint"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "temporaryData")
       )
 
@@ -972,9 +982,9 @@ instance Core.FromJSON GeographicDivision where
       "GeographicDivision"
       ( \o ->
           GeographicDivision
-            Core.<$> (o Core..:? "alsoKnownAs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alsoKnownAs")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "officeIndices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "officeIndices")
       )
 
 instance Core.ToJSON GeographicDivision where
@@ -1046,11 +1056,11 @@ instance Core.FromJSON Office where
       ( \o ->
           Office
             Core.<$> (o Core..:? "divisionId")
-            Core.<*> (o Core..:? "levels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "levels")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "officialIndices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "officialIndices")
+            Core.<*> (o Core..:? "roles")
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON Office where
@@ -1113,17 +1123,15 @@ instance Core.FromJSON Official where
       "Official"
       ( \o ->
           Official
-            Core.<$> (o Core..:? "address" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "channels" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "emails" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "geocodingSummaries"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "address")
+            Core.<*> (o Core..:? "channels")
+            Core.<*> (o Core..:? "emails")
+            Core.<*> (o Core..:? "geocodingSummaries")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "party")
-            Core.<*> (o Core..:? "phones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "phones")
             Core.<*> (o Core..:? "photoUrl")
-            Core.<*> (o Core..:? "urls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "urls")
       )
 
 instance Core.ToJSON Official where
@@ -1200,7 +1208,7 @@ instance Core.FromJSON PollingLocation where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "pollingHours")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
             Core.<*> (o Core..:? "startDate")
             Core.<*> (o Core..:? "voterServices")
       )
@@ -1251,8 +1259,8 @@ instance Core.FromJSON RepresentativeInfoData where
       ( \o ->
           RepresentativeInfoData
             Core.<$> (o Core..:? "divisions")
-            Core.<*> (o Core..:? "offices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "officials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "offices")
+            Core.<*> (o Core..:? "officials")
       )
 
 instance Core.ToJSON RepresentativeInfoData where
@@ -1338,8 +1346,8 @@ instance Core.FromJSON RepresentativeInfoResponse where
                          Core..!= "civicinfo#representativeInfoResponse"
                      )
             Core.<*> (o Core..:? "normalizedInput")
-            Core.<*> (o Core..:? "offices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "officials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "offices")
+            Core.<*> (o Core..:? "officials")
       )
 
 instance Core.ToJSON RepresentativeInfoResponse where
@@ -1541,19 +1549,19 @@ instance Core.FromJSON VoterInfoResponse where
       "VoterInfoResponse"
       ( \o ->
           VoterInfoResponse
-            Core.<$> (o Core..:? "contests" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "dropOffLocations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "earlyVoteSites" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contests")
+            Core.<*> (o Core..:? "dropOffLocations")
+            Core.<*> (o Core..:? "earlyVoteSites")
             Core.<*> (o Core..:? "election")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "civicinfo#voterInfoResponse"
                      )
             Core.<*> (o Core..:? "mailOnly")
             Core.<*> (o Core..:? "normalizedInput")
-            Core.<*> (o Core..:? "otherElections" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pollingLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "otherElections")
+            Core.<*> (o Core..:? "pollingLocations")
             Core.<*> (o Core..:? "precinctId")
-            Core.<*> (o Core..:? "state" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "state")
       )
 
 instance Core.ToJSON VoterInfoResponse where

@@ -92,8 +92,8 @@ instance Core.FromJSON Webfont where
             Core.<*> (o Core..:? "files")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lastModified")
-            Core.<*> (o Core..:? "subsets" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "variants" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subsets")
+            Core.<*> (o Core..:? "variants")
             Core.<*> (o Core..:? "version")
       )
 
@@ -161,8 +161,7 @@ instance Core.FromJSON WebfontList where
       "WebfontList"
       ( \o ->
           WebfontList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON WebfontList where

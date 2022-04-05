@@ -126,7 +126,7 @@ instance Core.FromJSON ListResponse where
       "ListResponse"
       ( \o ->
           ListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "appstate#listResponse")
             Core.<*> (o Core..:? "maximumKeyCount")
       )

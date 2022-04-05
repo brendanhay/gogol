@@ -143,10 +143,10 @@ instance Core.FromJSON Account where
       "Account"
       ( \o ->
           Account
-            Core.<$> (o Core..:? "authTokens" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "authTokens")
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "password")
-            Core.<*> (o Core..:? "userData" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userData")
       )
 
 instance Core.ToJSON Account where
@@ -236,7 +236,7 @@ instance Core.FromJSON AttachmentsListResponse where
       "AttachmentsListResponse"
       ( \o ->
           AttachmentsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "mirror#attachmentsList"
                      )
@@ -370,15 +370,15 @@ instance Core.FromJSON Contact where
       "Contact"
       ( \o ->
           Contact
-            Core.<$> (o Core..:? "acceptCommands" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "acceptTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "acceptCommands")
+            Core.<*> (o Core..:? "acceptTypes")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "imageUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "imageUrls")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#contact")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "priority")
-            Core.<*> (o Core..:? "sharingFeatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sharingFeatures")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "speakableName")
             Core.<*> (o Core..:? "type")
@@ -426,7 +426,7 @@ instance Core.FromJSON ContactsListResponse where
       "ContactsListResponse"
       ( \o ->
           ContactsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#contacts")
       )
 
@@ -531,7 +531,7 @@ instance Core.FromJSON LocationsListResponse where
       "LocationsListResponse"
       ( \o ->
           LocationsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#locationsList")
       )
 
@@ -592,7 +592,7 @@ instance Core.FromJSON MenuItem where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "payload")
             Core.<*> (o Core..:? "removeWhenSelected")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON MenuItem where
@@ -696,7 +696,7 @@ instance Core.FromJSON Notification where
             Core.<$> (o Core..:? "collection")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "operation")
-            Core.<*> (o Core..:? "userActions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userActions")
             Core.<*> (o Core..:? "userToken")
             Core.<*> (o Core..:? "verifyToken")
       )
@@ -847,7 +847,7 @@ instance Core.FromJSON Subscription where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#subscription")
             Core.<*> (o Core..:? "notification")
-            Core.<*> (o Core..:? "operation" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operation")
             Core.<*> (o Core..:? "updated")
             Core.<*> (o Core..:? "userToken")
             Core.<*> (o Core..:? "verifyToken")
@@ -895,7 +895,7 @@ instance Core.FromJSON SubscriptionsListResponse where
       "SubscriptionsListResponse"
       ( \o ->
           SubscriptionsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "mirror#subscriptionsList"
                      )
@@ -1046,7 +1046,7 @@ instance Core.FromJSON TimelineItem where
       "TimelineItem"
       ( \o ->
           TimelineItem
-            Core.<$> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attachments")
             Core.<*> (o Core..:? "bundleId")
             Core.<*> (o Core..:? "canonicalUrl")
             Core.<*> (o Core..:? "created")
@@ -1061,10 +1061,10 @@ instance Core.FromJSON TimelineItem where
             Core.<*> (o Core..:? "isPinned")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#timelineItem")
             Core.<*> (o Core..:? "location")
-            Core.<*> (o Core..:? "menuItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "menuItems")
             Core.<*> (o Core..:? "notification")
             Core.<*> (o Core..:? "pinScore")
-            Core.<*> (o Core..:? "recipients" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recipients")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "sourceItemId")
             Core.<*> (o Core..:? "speakableText")
@@ -1136,7 +1136,7 @@ instance Core.FromJSON TimelineListResponse where
       "TimelineListResponse"
       ( \o ->
           TimelineListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "mirror#timeline")
             Core.<*> (o Core..:? "nextPageToken")
       )

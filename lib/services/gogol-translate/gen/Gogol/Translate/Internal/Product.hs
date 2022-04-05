@@ -334,13 +334,11 @@ instance Core.FromJSON BatchTranslateDocumentRequest where
           BatchTranslateDocumentRequest
             Core.<$> (o Core..:? "formatConversions")
             Core.<*> (o Core..:? "glossaries")
-            Core.<*> (o Core..:? "inputConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inputConfigs")
             Core.<*> (o Core..:? "models")
             Core.<*> (o Core..:? "outputConfig")
             Core.<*> (o Core..:? "sourceLanguageCode")
-            Core.<*> ( o Core..:? "targetLanguageCodes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetLanguageCodes")
       )
 
 instance Core.ToJSON BatchTranslateDocumentRequest where
@@ -511,14 +509,12 @@ instance Core.FromJSON BatchTranslateTextRequest where
       ( \o ->
           BatchTranslateTextRequest
             Core.<$> (o Core..:? "glossaries")
-            Core.<*> (o Core..:? "inputConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inputConfigs")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "models")
             Core.<*> (o Core..:? "outputConfig")
             Core.<*> (o Core..:? "sourceLanguageCode")
-            Core.<*> ( o Core..:? "targetLanguageCodes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "targetLanguageCodes")
       )
 
 instance Core.ToJSON BatchTranslateTextRequest where
@@ -758,7 +754,7 @@ instance Core.FromJSON DetectLanguageResponse where
       "DetectLanguageResponse"
       ( \o ->
           DetectLanguageResponse
-            Core.<$> (o Core..:? "languages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "languages")
       )
 
 instance Core.ToJSON DetectLanguageResponse where
@@ -914,7 +910,7 @@ instance Core.FromJSON DocumentTranslation where
       "DocumentTranslation"
       ( \o ->
           DocumentTranslation
-            Core.<$> (o Core..:? "byteStreamOutputs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "byteStreamOutputs")
             Core.<*> (o Core..:? "detectedLanguageCode")
             Core.<*> (o Core..:? "mimeType")
       )
@@ -1199,7 +1195,7 @@ instance Core.FromJSON LanguageCodesSet where
       "LanguageCodesSet"
       ( \o ->
           LanguageCodesSet
-            Core.<$> (o Core..:? "languageCodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "languageCodes")
       )
 
 instance Core.ToJSON LanguageCodesSet where
@@ -1235,7 +1231,7 @@ instance Core.FromJSON ListGlossariesResponse where
       "ListGlossariesResponse"
       ( \o ->
           ListGlossariesResponse
-            Core.<$> (o Core..:? "glossaries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "glossaries")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1271,7 +1267,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1311,7 +1307,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1599,7 +1595,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1708,8 +1704,7 @@ instance Core.FromJSON SupportedLanguages where
     Core.withObject
       "SupportedLanguages"
       ( \o ->
-          SupportedLanguages
-            Core.<$> (o Core..:? "languages" Core..!= Core.mempty)
+          SupportedLanguages Core.<$> (o Core..:? "languages")
       )
 
 instance Core.ToJSON SupportedLanguages where
@@ -1951,7 +1946,7 @@ instance Core.FromJSON TranslateTextRequest where
       "TranslateTextRequest"
       ( \o ->
           TranslateTextRequest
-            Core.<$> (o Core..:? "contents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contents")
             Core.<*> (o Core..:? "glossaryConfig")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "mimeType")
@@ -2031,10 +2026,8 @@ instance Core.FromJSON TranslateTextResponse where
       "TranslateTextResponse"
       ( \o ->
           TranslateTextResponse
-            Core.<$> ( o Core..:? "glossaryTranslations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "translations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "glossaryTranslations")
+            Core.<*> (o Core..:? "translations")
       )
 
 instance Core.ToJSON TranslateTextResponse where

@@ -260,7 +260,7 @@ instance Core.FromJSON Acl where
       ( \o ->
           Acl
             Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#acl")
       )
 
@@ -696,7 +696,7 @@ instance Core.FromJSON Activity_Object where
       ( \o ->
           Activity_Object
             Core.<$> (o Core..:? "actor")
-            Core.<*> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attachments")
             Core.<*> (o Core..:? "content")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "objectType")
@@ -992,7 +992,7 @@ instance
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "objectType")
-            Core.<*> (o Core..:? "thumbnails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "thumbnails")
             Core.<*> (o Core..:? "url")
       )
 
@@ -1454,7 +1454,7 @@ instance Core.FromJSON ActivityFeed where
           ActivityFeed
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#activityFeed")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "nextPageToken")
@@ -1535,7 +1535,7 @@ instance Core.FromJSON Comment where
             Core.<$> (o Core..:? "actor")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "inReplyTo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inReplyTo")
             Core.<*> (o Core..:? "kind" Core..!= "plus#comment")
             Core.<*> (o Core..:? "object")
             Core.<*> (o Core..:? "plusoners")
@@ -1914,7 +1914,7 @@ instance Core.FromJSON CommentFeed where
           CommentFeed
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#commentFeed")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "nextPageToken")
@@ -1978,7 +1978,7 @@ instance Core.FromJSON PeopleFeed where
       ( \o ->
           PeopleFeed
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#peopleFeed")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -2121,7 +2121,7 @@ instance Core.FromJSON Person where
             Core.<*> (o Core..:? "currentLocation")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "domain")
-            Core.<*> (o Core..:? "emails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "emails")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "gender")
             Core.<*> (o Core..:? "id")
@@ -2133,14 +2133,14 @@ instance Core.FromJSON Person where
             Core.<*> (o Core..:? "nickname")
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "occupation")
-            Core.<*> (o Core..:? "organizations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "placesLived" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "organizations")
+            Core.<*> (o Core..:? "placesLived")
             Core.<*> (o Core..:? "plusOneCount")
             Core.<*> (o Core..:? "relationshipStatus")
             Core.<*> (o Core..:? "skills")
             Core.<*> (o Core..:? "tagline")
             Core.<*> (o Core..:? "url")
-            Core.<*> (o Core..:? "urls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "urls")
             Core.<*> (o Core..:? "verified")
       )
 

@@ -266,7 +266,7 @@ instance Core.FromJSON BatchDeleteMessagesRequest where
       "BatchDeleteMessagesRequest"
       ( \o ->
           BatchDeleteMessagesRequest
-            Core.<$> (o Core..:? "ids" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ids")
       )
 
 instance Core.ToJSON BatchDeleteMessagesRequest where
@@ -302,9 +302,9 @@ instance Core.FromJSON BatchModifyMessagesRequest where
       "BatchModifyMessagesRequest"
       ( \o ->
           BatchModifyMessagesRequest
-            Core.<$> (o Core..:? "addLabelIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "ids" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removeLabelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addLabelIds")
+            Core.<*> (o Core..:? "ids")
+            Core.<*> (o Core..:? "removeLabelIds")
       )
 
 instance Core.ToJSON BatchModifyMessagesRequest where
@@ -457,9 +457,9 @@ instance Core.FromJSON FilterAction where
       "FilterAction"
       ( \o ->
           FilterAction
-            Core.<$> (o Core..:? "addLabelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addLabelIds")
             Core.<*> (o Core..:? "forward")
-            Core.<*> (o Core..:? "removeLabelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "removeLabelIds")
       )
 
 instance Core.ToJSON FilterAction where
@@ -625,12 +625,12 @@ instance Core.FromJSON History where
       "History"
       ( \o ->
           History
-            Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "labelsAdded" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "labelsRemoved" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "messagesAdded" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "messagesDeleted" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "labelsAdded")
+            Core.<*> (o Core..:? "labelsRemoved")
+            Core.<*> (o Core..:? "messages")
+            Core.<*> (o Core..:? "messagesAdded")
+            Core.<*> (o Core..:? "messagesDeleted")
       )
 
 instance Core.ToJSON History where
@@ -669,7 +669,7 @@ instance Core.FromJSON HistoryLabelAdded where
       "HistoryLabelAdded"
       ( \o ->
           HistoryLabelAdded
-            Core.<$> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "message")
       )
 
@@ -704,7 +704,7 @@ instance Core.FromJSON HistoryLabelRemoved where
       "HistoryLabelRemoved"
       ( \o ->
           HistoryLabelRemoved
-            Core.<$> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "message")
       )
 
@@ -994,7 +994,7 @@ instance Core.FromJSON ListDelegatesResponse where
       "ListDelegatesResponse"
       ( \o ->
           ListDelegatesResponse
-            Core.<$> (o Core..:? "delegates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "delegates")
       )
 
 instance Core.ToJSON ListDelegatesResponse where
@@ -1032,7 +1032,7 @@ instance Core.FromJSON ListDraftsResponse where
       "ListDraftsResponse"
       ( \o ->
           ListDraftsResponse
-            Core.<$> (o Core..:? "drafts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "drafts")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "resultSizeEstimate")
       )
@@ -1067,8 +1067,7 @@ instance Core.FromJSON ListFiltersResponse where
     Core.withObject
       "ListFiltersResponse"
       ( \o ->
-          ListFiltersResponse
-            Core.<$> (o Core..:? "filter" Core..!= Core.mempty)
+          ListFiltersResponse Core.<$> (o Core..:? "filter")
       )
 
 instance Core.ToJSON ListFiltersResponse where
@@ -1100,9 +1099,7 @@ instance
       "ListForwardingAddressesResponse"
       ( \o ->
           ListForwardingAddressesResponse
-            Core.<$> ( o Core..:? "forwardingAddresses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "forwardingAddresses")
       )
 
 instance Core.ToJSON ListForwardingAddressesResponse where
@@ -1142,8 +1139,10 @@ instance Core.FromJSON ListHistoryResponse where
       "ListHistoryResponse"
       ( \o ->
           ListHistoryResponse
-            Core.<$> (o Core..:? "history" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "historyId")
+            Core.<$> (o Core..:? "history")
+            Core.<*> ( o Core..:? "historyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1176,8 +1175,7 @@ instance Core.FromJSON ListLabelsResponse where
     Core.withObject
       "ListLabelsResponse"
       ( \o ->
-          ListLabelsResponse
-            Core.<$> (o Core..:? "labels" Core..!= Core.mempty)
+          ListLabelsResponse Core.<$> (o Core..:? "labels")
       )
 
 instance Core.ToJSON ListLabelsResponse where
@@ -1213,7 +1211,7 @@ instance Core.FromJSON ListMessagesResponse where
       "ListMessagesResponse"
       ( \o ->
           ListMessagesResponse
-            Core.<$> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "messages")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "resultSizeEstimate")
       )
@@ -1248,8 +1246,7 @@ instance Core.FromJSON ListSendAsResponse where
     Core.withObject
       "ListSendAsResponse"
       ( \o ->
-          ListSendAsResponse
-            Core.<$> (o Core..:? "sendAs" Core..!= Core.mempty)
+          ListSendAsResponse Core.<$> (o Core..:? "sendAs")
       )
 
 instance Core.ToJSON ListSendAsResponse where
@@ -1276,7 +1273,7 @@ instance Core.FromJSON ListSmimeInfoResponse where
       "ListSmimeInfoResponse"
       ( \o ->
           ListSmimeInfoResponse
-            Core.<$> (o Core..:? "smimeInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "smimeInfo")
       )
 
 instance Core.ToJSON ListSmimeInfoResponse where
@@ -1316,7 +1313,7 @@ instance Core.FromJSON ListThreadsResponse where
           ListThreadsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "resultSizeEstimate")
-            Core.<*> (o Core..:? "threads" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "threads")
       )
 
 instance Core.ToJSON ListThreadsResponse where
@@ -1377,10 +1374,14 @@ instance Core.FromJSON Message where
       "Message"
       ( \o ->
           Message
-            Core.<$> (o Core..:? "historyId")
+            Core.<$> ( o Core..:? "historyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "internalDate")
-            Core.<*> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "internalDate"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "payload")
             Core.<*> (o Core..:? "raw")
             Core.<*> (o Core..:? "sizeEstimate")
@@ -1446,10 +1447,10 @@ instance Core.FromJSON MessagePart where
           MessagePart
             Core.<$> (o Core..:? "body")
             Core.<*> (o Core..:? "filename")
-            Core.<*> (o Core..:? "headers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "mimeType")
             Core.<*> (o Core..:? "partId")
-            Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parts")
       )
 
 instance Core.ToJSON MessagePart where
@@ -1568,8 +1569,8 @@ instance Core.FromJSON ModifyMessageRequest where
       "ModifyMessageRequest"
       ( \o ->
           ModifyMessageRequest
-            Core.<$> (o Core..:? "addLabelIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removeLabelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addLabelIds")
+            Core.<*> (o Core..:? "removeLabelIds")
       )
 
 instance Core.ToJSON ModifyMessageRequest where
@@ -1606,8 +1607,8 @@ instance Core.FromJSON ModifyThreadRequest where
       "ModifyThreadRequest"
       ( \o ->
           ModifyThreadRequest
-            Core.<$> (o Core..:? "addLabelIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removeLabelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addLabelIds")
+            Core.<*> (o Core..:? "removeLabelIds")
       )
 
 instance Core.ToJSON ModifyThreadRequest where
@@ -1688,7 +1689,9 @@ instance Core.FromJSON Profile where
       ( \o ->
           Profile
             Core.<$> (o Core..:? "emailAddress")
-            Core.<*> (o Core..:? "historyId")
+            Core.<*> ( o Core..:? "historyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "messagesTotal")
             Core.<*> (o Core..:? "threadsTotal")
       )
@@ -1822,7 +1825,9 @@ instance Core.FromJSON SmimeInfo where
       ( \o ->
           SmimeInfo
             Core.<$> (o Core..:? "encryptedKeyPassword")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isDefault")
             Core.<*> (o Core..:? "issuerCn")
@@ -1932,9 +1937,11 @@ instance Core.FromJSON Thread where
       "Thread"
       ( \o ->
           Thread
-            Core.<$> (o Core..:? "historyId")
+            Core.<$> ( o Core..:? "historyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -1995,13 +2002,17 @@ instance Core.FromJSON VacationSettings where
       ( \o ->
           VacationSettings
             Core.<$> (o Core..:? "enableAutoReply")
-            Core.<*> (o Core..:? "endTime")
+            Core.<*> ( o Core..:? "endTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "responseBodyHtml")
             Core.<*> (o Core..:? "responseBodyPlainText")
             Core.<*> (o Core..:? "responseSubject")
             Core.<*> (o Core..:? "restrictToContacts")
             Core.<*> (o Core..:? "restrictToDomain")
-            Core.<*> (o Core..:? "startTime")
+            Core.<*> ( o Core..:? "startTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON VacationSettings where
@@ -2056,7 +2067,7 @@ instance Core.FromJSON WatchRequest where
       ( \o ->
           WatchRequest
             Core.<$> (o Core..:? "labelFilterAction")
-            Core.<*> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "topicName")
       )
 
@@ -2094,8 +2105,12 @@ instance Core.FromJSON WatchResponse where
       "WatchResponse"
       ( \o ->
           WatchResponse
-            Core.<$> (o Core..:? "expiration")
-            Core.<*> (o Core..:? "historyId")
+            Core.<$> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "historyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON WatchResponse where

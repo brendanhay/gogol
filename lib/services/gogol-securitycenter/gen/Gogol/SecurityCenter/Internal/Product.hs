@@ -283,7 +283,7 @@ instance Core.FromJSON AssetDiscoveryConfig where
       ( \o ->
           AssetDiscoveryConfig
             Core.<$> (o Core..:? "inclusionMode")
-            Core.<*> (o Core..:? "projectIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projectIds")
       )
 
 instance Core.ToJSON AssetDiscoveryConfig where
@@ -319,7 +319,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -356,7 +356,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -401,7 +401,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1371,7 +1371,7 @@ instance
           GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
             Core.<$> (o Core..:? "resourceDisplayName")
               Core.<*> (o Core..:? "resourceName")
-              Core.<*> (o Core..:? "resourceOwners" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "resourceOwners")
               Core.<*> (o Core..:? "resourceParent")
               Core.<*> (o Core..:? "resourceParentDisplayName")
               Core.<*> (o Core..:? "resourceProject")
@@ -1629,7 +1629,7 @@ instance Core.FromJSON GroupAssetsResponse where
       "GroupAssetsResponse"
       ( \o ->
           GroupAssetsResponse
-            Core.<$> (o Core..:? "groupByResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groupByResults")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "totalSize")
@@ -1740,7 +1740,7 @@ instance Core.FromJSON GroupFindingsResponse where
       "GroupFindingsResponse"
       ( \o ->
           GroupFindingsResponse
-            Core.<$> (o Core..:? "groupByResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groupByResults")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "totalSize")
@@ -1779,7 +1779,9 @@ instance Core.FromJSON GroupResult where
       "GroupResult"
       ( \o ->
           GroupResult
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "properties")
       )
 
@@ -1854,7 +1856,7 @@ instance Core.FromJSON ListAssetsResponse where
       "ListAssetsResponse"
       ( \o ->
           ListAssetsResponse
-            Core.<$> (o Core..:? "listAssetsResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "listAssetsResults")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "totalSize")
@@ -1940,9 +1942,7 @@ instance Core.FromJSON ListFindingsResponse where
       "ListFindingsResponse"
       ( \o ->
           ListFindingsResponse
-            Core.<$> ( o Core..:? "listFindingsResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "listFindingsResults")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "totalSize")
@@ -2034,9 +2034,7 @@ instance
       ( \o ->
           ListNotificationConfigsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "notificationConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notificationConfigs")
       )
 
 instance Core.ToJSON ListNotificationConfigsResponse where
@@ -2076,7 +2074,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -2112,7 +2110,7 @@ instance Core.FromJSON ListSourcesResponse where
       ( \o ->
           ListSourcesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON ListSourcesResponse where
@@ -2375,8 +2373,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -2674,7 +2672,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2763,7 +2761,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2794,7 +2792,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

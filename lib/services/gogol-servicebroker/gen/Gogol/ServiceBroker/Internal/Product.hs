@@ -103,7 +103,7 @@ instance Core.FromJSON GoogleIamV1__Binding where
       ( \o ->
           GoogleIamV1__Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -213,7 +213,7 @@ instance Core.FromJSON GoogleIamV1__Policy where
       "GoogleIamV1__Policy"
       ( \o ->
           GoogleIamV1__Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -284,7 +284,7 @@ instance
       "GoogleIamV1__TestIamPermissionsRequest"
       ( \o ->
           GoogleIamV1__TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -321,7 +321,7 @@ instance
       "GoogleIamV1__TestIamPermissionsResponse"
       ( \o ->
           GoogleIamV1__TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance

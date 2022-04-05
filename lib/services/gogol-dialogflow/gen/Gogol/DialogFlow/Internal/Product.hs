@@ -2115,9 +2115,7 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Agent where
             Core.<*> (o Core..:? "securitySettings")
             Core.<*> (o Core..:? "speechToTextSettings")
             Core.<*> (o Core..:? "startFlow")
-            Core.<*> ( o Core..:? "supportedLanguageCodes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "supportedLanguageCodes")
             Core.<*> (o Core..:? "timeZone")
       )
 
@@ -2177,9 +2175,7 @@ instance
       "GoogleCloudDialogflowCxV3AgentValidationResult"
       ( \o ->
           GoogleCloudDialogflowCxV3AgentValidationResult
-            Core.<$> ( o Core..:? "flowValidationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "flowValidationResults")
               Core.<*> (o Core..:? "name")
       )
 
@@ -2265,7 +2261,7 @@ instance
       "GoogleCloudDialogflowCxV3BatchDeleteTestCasesRequest"
       ( \o ->
           GoogleCloudDialogflowCxV3BatchDeleteTestCasesRequest
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance
@@ -2301,7 +2297,7 @@ instance
       "GoogleCloudDialogflowCxV3BatchRunTestCasesMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3BatchRunTestCasesMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -2343,7 +2339,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3BatchRunTestCasesRequest
             Core.<$> (o Core..:? "environment")
-              Core.<*> (o Core..:? "testCases" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCases")
       )
 
 instance
@@ -2383,7 +2379,7 @@ instance
       "GoogleCloudDialogflowCxV3BatchRunTestCasesResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3BatchRunTestCasesResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "results")
       )
 
 instance
@@ -2661,7 +2657,7 @@ instance
           GoogleCloudDialogflowCxV3ContinuousTestResult
             Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "result")
               Core.<*> (o Core..:? "runTime")
-              Core.<*> (o Core..:? "testCaseResults" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCaseResults")
       )
 
 instance
@@ -2882,10 +2878,10 @@ instance
           GoogleCloudDialogflowCxV3ConversationTurnVirtualAgentOutput
             Core.<$> (o Core..:? "currentPage")
               Core.<*> (o Core..:? "diagnosticInfo")
-              Core.<*> (o Core..:? "differences" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "differences")
               Core.<*> (o Core..:? "sessionParameters")
               Core.<*> (o Core..:? "status")
-              Core.<*> (o Core..:? "textResponses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textResponses")
               Core.<*> (o Core..:? "triggeredIntent")
       )
 
@@ -3141,7 +3137,7 @@ instance
       "GoogleCloudDialogflowCxV3DeployFlowMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3DeployFlowMetadata
-            Core.<$> (o Core..:? "testErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "testErrors")
       )
 
 instance
@@ -3332,9 +3328,7 @@ instance
       "GoogleCloudDialogflowCxV3DeploymentResult"
       ( \o ->
           GoogleCloudDialogflowCxV3DeploymentResult
-            Core.<$> ( o Core..:? "deploymentTestResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "deploymentTestResults")
             Core.<*> (o Core..:? "experiment")
       )
 
@@ -3570,8 +3564,8 @@ instance
             Core.<$> (o Core..:? "autoExpansionMode")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableFuzzyExtraction")
-            Core.<*> (o Core..:? "entities" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "excludedPhrases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entities")
+            Core.<*> (o Core..:? "excludedPhrases")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "redact")
@@ -3626,7 +3620,7 @@ instance
       "GoogleCloudDialogflowCxV3EntityTypeEntity"
       ( \o ->
           GoogleCloudDialogflowCxV3EntityTypeEntity
-            Core.<$> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "synonyms")
             Core.<*> (o Core..:? "value")
       )
 
@@ -3724,7 +3718,7 @@ instance
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "testCasesConfig")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "versionConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versionConfigs")
       )
 
 instance
@@ -3777,7 +3771,7 @@ instance
           GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig
             Core.<$> (o Core..:? "enableContinuousRun")
               Core.<*> (o Core..:? "enablePredeploymentRun")
-              Core.<*> (o Core..:? "testCases" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCases")
       )
 
 instance
@@ -4012,7 +4006,7 @@ instance
             Core.<*> (o Core..:? "rolloutState")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "variantsHistory" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "variantsHistory")
       )
 
 instance
@@ -4123,7 +4117,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ExperimentResult
             Core.<$> (o Core..:? "lastUpdateTime")
-            Core.<*> (o Core..:? "versionMetrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versionMetrics")
       )
 
 instance
@@ -4295,7 +4289,7 @@ instance
       "GoogleCloudDialogflowCxV3ExperimentResultVersionMetrics"
       ( \o ->
           GoogleCloudDialogflowCxV3ExperimentResultVersionMetrics
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metrics")
               Core.<*> (o Core..:? "sessionCount")
               Core.<*> (o Core..:? "version")
       )
@@ -4671,13 +4665,11 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Flow where
           GoogleCloudDialogflowCxV3Flow
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "eventHandlers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eventHandlers")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nluSettings")
-            Core.<*> ( o Core..:? "transitionRouteGroups"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "transitionRoutes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transitionRouteGroups")
+            Core.<*> (o Core..:? "transitionRoutes")
       )
 
 instance Core.ToJSON GoogleCloudDialogflowCxV3Flow where
@@ -4730,9 +4722,7 @@ instance
           GoogleCloudDialogflowCxV3FlowValidationResult
             Core.<$> (o Core..:? "name")
               Core.<*> (o Core..:? "updateTime")
-              Core.<*> ( o Core..:? "validationMessages"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "validationMessages")
       )
 
 instance
@@ -4771,7 +4761,7 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Form where
       "GoogleCloudDialogflowCxV3Form"
       ( \o ->
           GoogleCloudDialogflowCxV3Form
-            Core.<$> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON GoogleCloudDialogflowCxV3Form where
@@ -4882,9 +4872,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3FormParameterFillBehavior
             Core.<$> (o Core..:? "initialPromptFulfillment")
-              Core.<*> ( o Core..:? "repromptEventHandlers"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "repromptEventHandlers")
       )
 
 instance
@@ -5056,12 +5044,10 @@ instance
       "GoogleCloudDialogflowCxV3Fulfillment"
       ( \o ->
           GoogleCloudDialogflowCxV3Fulfillment
-            Core.<$> (o Core..:? "conditionalCases" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conditionalCases")
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "returnPartialResponses")
-            Core.<*> ( o Core..:? "setParameterActions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "setParameterActions")
             Core.<*> (o Core..:? "tag")
             Core.<*> (o Core..:? "webhook")
       )
@@ -5112,7 +5098,7 @@ instance
       "GoogleCloudDialogflowCxV3FulfillmentConditionalCases"
       ( \o ->
           GoogleCloudDialogflowCxV3FulfillmentConditionalCases
-            Core.<$> (o Core..:? "cases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cases")
       )
 
 instance
@@ -5156,7 +5142,7 @@ instance
       "GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase"
       ( \o ->
           GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase
-            Core.<$> (o Core..:? "caseContent" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "caseContent")
               Core.<*> (o Core..:? "condition")
       )
 
@@ -5376,7 +5362,7 @@ instance
       "GoogleCloudDialogflowCxV3ImportDocumentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ImportDocumentsResponse
-            Core.<$> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "warnings")
       )
 
 instance
@@ -5503,7 +5489,7 @@ instance
       "GoogleCloudDialogflowCxV3ImportTestCasesMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3ImportTestCasesMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -5585,7 +5571,7 @@ instance
       "GoogleCloudDialogflowCxV3ImportTestCasesResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ImportTestCasesResponse
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance
@@ -5648,7 +5634,7 @@ instance
             Core.<*> (o Core..:? "enableWordInfo")
             Core.<*> (o Core..:? "model")
             Core.<*> (o Core..:? "modelVariant")
-            Core.<*> (o Core..:? "phraseHints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "phraseHints")
             Core.<*> (o Core..:? "sampleRateHertz")
             Core.<*> (o Core..:? "singleUtterance")
       )
@@ -5723,9 +5709,9 @@ instance
             Core.<*> (o Core..:? "isFallback")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "priority")
-            Core.<*> (o Core..:? "trainingPhrases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trainingPhrases")
       )
 
 instance Core.ToJSON GoogleCloudDialogflowCxV3Intent where
@@ -5810,7 +5796,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3IntentCoverage
             Core.<$> (o Core..:? "coverageScore")
-            Core.<*> (o Core..:? "intents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "intents")
       )
 
 instance
@@ -5993,8 +5979,7 @@ instance
       "GoogleCloudDialogflowCxV3IntentTrainingPhrase"
       ( \o ->
           GoogleCloudDialogflowCxV3IntentTrainingPhrase
-            Core.<$> (o Core..:? "id")
-              Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "parts")
               Core.<*> (o Core..:? "repeatCount")
       )
 
@@ -6087,7 +6072,7 @@ instance
       "GoogleCloudDialogflowCxV3ListAgentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListAgentsResponse
-            Core.<$> (o Core..:? "agents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "agents")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6133,7 +6118,7 @@ instance
       "GoogleCloudDialogflowCxV3ListChangelogsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListChangelogsResponse
-            Core.<$> (o Core..:? "changelogs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "changelogs")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6179,9 +6164,7 @@ instance
       "GoogleCloudDialogflowCxV3ListContinuousTestResultsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListContinuousTestResultsResponse
-            Core.<$> ( o Core..:? "continuousTestResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "continuousTestResults")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6228,7 +6211,7 @@ instance
       "GoogleCloudDialogflowCxV3ListDeploymentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListDeploymentsResponse
-            Core.<$> (o Core..:? "deployments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deployments")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6274,7 +6257,7 @@ instance
       "GoogleCloudDialogflowCxV3ListEntityTypesResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListEntityTypesResponse
-            Core.<$> (o Core..:? "entityTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entityTypes")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6320,7 +6303,7 @@ instance
       "GoogleCloudDialogflowCxV3ListEnvironmentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListEnvironmentsResponse
-            Core.<$> (o Core..:? "environments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "environments")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6366,7 +6349,7 @@ instance
       "GoogleCloudDialogflowCxV3ListExperimentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListExperimentsResponse
-            Core.<$> (o Core..:? "experiments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "experiments")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6412,7 +6395,7 @@ instance
       "GoogleCloudDialogflowCxV3ListFlowsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListFlowsResponse
-            Core.<$> (o Core..:? "flows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "flows")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6457,7 +6440,7 @@ instance
       "GoogleCloudDialogflowCxV3ListIntentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3ListIntentsResponse
-            Core.<$> (o Core..:? "intents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "intents")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6504,7 +6487,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListPagesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "pages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pages")
       )
 
 instance
@@ -6549,7 +6532,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListSecuritySettingsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "securitySettings" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "securitySettings")
       )
 
 instance
@@ -6596,9 +6579,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListSessionEntityTypesResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> ( o Core..:? "sessionEntityTypes"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "sessionEntityTypes")
       )
 
 instance
@@ -6645,7 +6626,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListTestCaseResultsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "testCaseResults" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCaseResults")
       )
 
 instance
@@ -6692,7 +6673,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListTestCasesResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "testCases" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCases")
       )
 
 instance
@@ -6738,9 +6719,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListTransitionRouteGroupsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> ( o Core..:? "transitionRouteGroups"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "transitionRouteGroups")
       )
 
 instance
@@ -6787,7 +6766,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "versions")
       )
 
 instance
@@ -6833,7 +6812,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ListWebhooksResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "webhooks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "webhooks")
       )
 
 instance
@@ -6920,7 +6899,7 @@ instance
       "GoogleCloudDialogflowCxV3LookupEnvironmentHistoryResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3LookupEnvironmentHistoryResponse
-            Core.<$> (o Core..:? "environments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "environments")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -7120,7 +7099,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3MatchIntentResponse
             Core.<$> (o Core..:? "currentPage")
-            Core.<*> (o Core..:? "matches" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "matches")
             Core.<*> (o Core..:? "text")
             Core.<*> (o Core..:? "transcript")
             Core.<*> (o Core..:? "triggerEvent")
@@ -7293,13 +7272,11 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Page where
           GoogleCloudDialogflowCxV3Page
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "entryFulfillment")
-            Core.<*> (o Core..:? "eventHandlers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eventHandlers")
             Core.<*> (o Core..:? "form")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "transitionRouteGroups"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "transitionRoutes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transitionRouteGroups")
+            Core.<*> (o Core..:? "transitionRoutes")
       )
 
 instance Core.ToJSON GoogleCloudDialogflowCxV3Page where
@@ -7396,7 +7373,7 @@ instance
       "GoogleCloudDialogflowCxV3PageInfoFormInfo"
       ( \o ->
           GoogleCloudDialogflowCxV3PageInfoFormInfo
-            Core.<$> (o Core..:? "parameterInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameterInfo")
       )
 
 instance
@@ -7597,13 +7574,11 @@ instance
             Core.<$> (o Core..:? "analyzeQueryTextSentiment")
             Core.<*> (o Core..:? "currentPage")
             Core.<*> (o Core..:? "disableWebhook")
-            Core.<*> (o Core..:? "flowVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "flowVersions")
             Core.<*> (o Core..:? "geoLocation")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "payload")
-            Core.<*> ( o Core..:? "sessionEntityTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "sessionEntityTypes")
             Core.<*> (o Core..:? "timeZone")
             Core.<*> (o Core..:? "webhookHeaders")
       )
@@ -7825,14 +7800,14 @@ instance
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "match")
             Core.<*> (o Core..:? "parameters")
-            Core.<*> (o Core..:? "responseMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "responseMessages")
             Core.<*> (o Core..:? "sentimentAnalysisResult")
             Core.<*> (o Core..:? "text")
             Core.<*> (o Core..:? "transcript")
             Core.<*> (o Core..:? "triggerEvent")
             Core.<*> (o Core..:? "triggerIntent")
-            Core.<*> (o Core..:? "webhookPayloads" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "webhookStatuses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "webhookPayloads")
+            Core.<*> (o Core..:? "webhookStatuses")
       )
 
 instance
@@ -8420,7 +8395,7 @@ instance
       "GoogleCloudDialogflowCxV3ResponseMessageMixedAudio"
       ( \o ->
           GoogleCloudDialogflowCxV3ResponseMessageMixedAudio
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "segments")
       )
 
 instance
@@ -8655,7 +8630,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ResponseMessageText
             Core.<$> (o Core..:? "allowPlaybackInterruption")
-            Core.<*> (o Core..:? "text" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -8760,7 +8735,7 @@ instance
           GoogleCloudDialogflowCxV3RolloutConfig
             Core.<$> (o Core..:? "failureCondition")
             Core.<*> (o Core..:? "rolloutCondition")
-            Core.<*> (o Core..:? "rolloutSteps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rolloutSteps")
       )
 
 instance
@@ -8903,7 +8878,7 @@ instance
       "GoogleCloudDialogflowCxV3RunContinuousTestMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3RunContinuousTestMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -9158,7 +9133,7 @@ instance
             Core.<*> (o Core..:? "insightsExportSettings")
             Core.<*> (o Core..:? "inspectTemplate")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "purgeDataTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "purgeDataTypes")
             Core.<*> (o Core..:? "redactionScope")
             Core.<*> (o Core..:? "redactionStrategy")
             Core.<*> (o Core..:? "retentionWindowDays")
@@ -9310,7 +9285,7 @@ instance
       "GoogleCloudDialogflowCxV3SessionEntityType"
       ( \o ->
           GoogleCloudDialogflowCxV3SessionEntityType
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
             Core.<*> (o Core..:? "entityOverrideMode")
             Core.<*> (o Core..:? "name")
       )
@@ -9551,7 +9526,7 @@ instance
       "GoogleCloudDialogflowCxV3SynthesizeSpeechConfig"
       ( \o ->
           GoogleCloudDialogflowCxV3SynthesizeSpeechConfig
-            Core.<$> (o Core..:? "effectsProfileId" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "effectsProfileId")
               Core.<*> (o Core..:? "pitch")
               Core.<*> (o Core..:? "speakingRate")
               Core.<*> (o Core..:? "voice")
@@ -9627,10 +9602,8 @@ instance
             Core.<*> (o Core..:? "lastTestResult")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "testCaseConversationTurns"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "testCaseConversationTurns")
             Core.<*> (o Core..:? "testConfig")
       )
 
@@ -9736,7 +9709,7 @@ instance
       "GoogleCloudDialogflowCxV3TestCaseResult"
       ( \o ->
           GoogleCloudDialogflowCxV3TestCaseResult
-            Core.<$> (o Core..:? "conversationTurns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conversationTurns")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "testResult")
@@ -9793,9 +9766,7 @@ instance
           GoogleCloudDialogflowCxV3TestConfig
             Core.<$> (o Core..:? "flow")
             Core.<*> (o Core..:? "page")
-            Core.<*> ( o Core..:? "trackingParameters"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "trackingParameters")
       )
 
 instance
@@ -10004,7 +9975,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3TransitionCoverage
             Core.<$> (o Core..:? "coverageScore")
-            Core.<*> (o Core..:? "transitions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transitions")
       )
 
 instance
@@ -10238,7 +10209,7 @@ instance
           GoogleCloudDialogflowCxV3TransitionRouteGroup
             Core.<$> (o Core..:? "displayName")
               Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "transitionRoutes" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "transitionRoutes")
       )
 
 instance
@@ -10289,7 +10260,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3TransitionRouteGroupCoverage
             Core.<$> (o Core..:? "coverageScore")
-              Core.<*> (o Core..:? "coverages" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "coverages")
       )
 
 instance
@@ -10342,7 +10313,7 @@ instance
           GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverage
             Core.<$> (o Core..:? "coverageScore")
               Core.<*> (o Core..:? "routeGroup")
-              Core.<*> (o Core..:? "transitions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "transitions")
       )
 
 instance
@@ -10569,9 +10540,9 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3ValidationMessage
             Core.<$> (o Core..:? "detail")
-            Core.<*> (o Core..:? "resourceNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceNames")
             Core.<*> (o Core..:? "resourceType")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "severity")
       )
 
@@ -10722,7 +10693,7 @@ instance
       "GoogleCloudDialogflowCxV3VersionVariants"
       ( \o ->
           GoogleCloudDialogflowCxV3VersionVariants
-            Core.<$> (o Core..:? "variants" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "variants")
       )
 
 instance
@@ -10941,7 +10912,7 @@ instance
       "GoogleCloudDialogflowCxV3WebhookGenericWebService"
       ( \o ->
           GoogleCloudDialogflowCxV3WebhookGenericWebService
-            Core.<$> (o Core..:? "allowedCaCerts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedCaCerts")
               Core.<*> (o Core..:? "password")
               Core.<*> (o Core..:? "requestHeaders")
               Core.<*> (o Core..:? "uri")
@@ -11072,7 +11043,7 @@ instance
             Core.<*> (o Core..:? "fulfillmentInfo")
             Core.<*> (o Core..:? "intentInfo")
             Core.<*> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "payload")
             Core.<*> (o Core..:? "sentimentAnalysisResult")
@@ -11515,7 +11486,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3WebhookResponseFulfillmentResponse
             Core.<$> (o Core..:? "mergeBehavior")
-              Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "messages")
       )
 
 instance
@@ -11648,7 +11619,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1BatchRunTestCasesMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1BatchRunTestCasesMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -11686,7 +11657,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1BatchRunTestCasesResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1BatchRunTestCasesResponse
-            Core.<$> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "results")
       )
 
 instance
@@ -11740,7 +11711,7 @@ instance
           GoogleCloudDialogflowCxV3beta1ContinuousTestResult
             Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "result")
               Core.<*> (o Core..:? "runTime")
-              Core.<*> (o Core..:? "testCaseResults" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCaseResults")
       )
 
 instance
@@ -11965,10 +11936,10 @@ instance
           GoogleCloudDialogflowCxV3beta1ConversationTurnVirtualAgentOutput
             Core.<$> (o Core..:? "currentPage")
               Core.<*> (o Core..:? "diagnosticInfo")
-              Core.<*> (o Core..:? "differences" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "differences")
               Core.<*> (o Core..:? "sessionParameters")
               Core.<*> (o Core..:? "status")
-              Core.<*> (o Core..:? "textResponses" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "textResponses")
               Core.<*> (o Core..:? "triggeredIntent")
       )
 
@@ -12224,7 +12195,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1DeployFlowMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1DeployFlowMetadata
-            Core.<$> (o Core..:? "testErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "testErrors")
       )
 
 instance
@@ -12381,7 +12352,7 @@ instance
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "testCasesConfig")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> (o Core..:? "versionConfigs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versionConfigs")
       )
 
 instance
@@ -12434,7 +12405,7 @@ instance
           GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig
             Core.<$> (o Core..:? "enableContinuousRun")
               Core.<*> (o Core..:? "enablePredeploymentRun")
-              Core.<*> (o Core..:? "testCases" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "testCases")
       )
 
 instance
@@ -12781,7 +12752,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1Form"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1Form
-            Core.<$> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameters")
       )
 
 instance
@@ -12899,9 +12870,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior
             Core.<$> (o Core..:? "initialPromptFulfillment")
-              Core.<*> ( o Core..:? "repromptEventHandlers"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "repromptEventHandlers")
       )
 
 instance
@@ -12966,12 +12935,10 @@ instance
       "GoogleCloudDialogflowCxV3beta1Fulfillment"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1Fulfillment
-            Core.<$> (o Core..:? "conditionalCases" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conditionalCases")
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "returnPartialResponses")
-            Core.<*> ( o Core..:? "setParameterActions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "setParameterActions")
             Core.<*> (o Core..:? "tag")
             Core.<*> (o Core..:? "webhook")
       )
@@ -13024,7 +12991,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases
-            Core.<$> (o Core..:? "cases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cases")
       )
 
 instance
@@ -13068,7 +13035,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCase"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCase
-            Core.<$> (o Core..:? "caseContent" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "caseContent")
               Core.<*> (o Core..:? "condition")
       )
 
@@ -13293,7 +13260,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1ImportDocumentsResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ImportDocumentsResponse
-            Core.<$> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "warnings")
       )
 
 instance
@@ -13367,7 +13334,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -13403,7 +13370,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1ImportTestCasesResponse"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ImportTestCasesResponse
-            Core.<$> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "names")
       )
 
 instance
@@ -13469,7 +13436,7 @@ instance
               Core.<*> (o Core..:? "enableWordInfo")
               Core.<*> (o Core..:? "model")
               Core.<*> (o Core..:? "modelVariant")
-              Core.<*> (o Core..:? "phraseHints" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "phraseHints")
               Core.<*> (o Core..:? "sampleRateHertz")
               Core.<*> (o Core..:? "singleUtterance")
       )
@@ -13545,9 +13512,9 @@ instance
             Core.<*> (o Core..:? "isFallback")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "priority")
-            Core.<*> (o Core..:? "trainingPhrases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trainingPhrases")
       )
 
 instance
@@ -13731,8 +13698,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase
-            Core.<$> (o Core..:? "id")
-              Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "parts")
               Core.<*> (o Core..:? "repeatCount")
       )
 
@@ -13842,13 +13808,11 @@ instance
           GoogleCloudDialogflowCxV3beta1Page
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "entryFulfillment")
-            Core.<*> (o Core..:? "eventHandlers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eventHandlers")
             Core.<*> (o Core..:? "form")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "transitionRouteGroups"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "transitionRoutes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transitionRouteGroups")
+            Core.<*> (o Core..:? "transitionRoutes")
       )
 
 instance
@@ -13948,7 +13912,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1PageInfoFormInfo"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1PageInfoFormInfo
-            Core.<$> (o Core..:? "parameterInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameterInfo")
       )
 
 instance
@@ -14500,7 +14464,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1ResponseMessageMixedAudio"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ResponseMessageMixedAudio
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "segments")
       )
 
 instance
@@ -14735,7 +14699,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3beta1ResponseMessageText
             Core.<$> (o Core..:? "allowPlaybackInterruption")
-              Core.<*> (o Core..:? "text" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -14778,7 +14742,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1RunContinuousTestMetadata"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1RunContinuousTestMetadata
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors")
       )
 
 instance
@@ -15032,10 +14996,8 @@ instance
             Core.<*> (o Core..:? "lastTestResult")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "testCaseConversationTurns"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "testCaseConversationTurns")
             Core.<*> (o Core..:? "testConfig")
       )
 
@@ -15145,7 +15107,7 @@ instance
       "GoogleCloudDialogflowCxV3beta1TestCaseResult"
       ( \o ->
           GoogleCloudDialogflowCxV3beta1TestCaseResult
-            Core.<$> (o Core..:? "conversationTurns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conversationTurns")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "testResult")
@@ -15203,9 +15165,7 @@ instance
           GoogleCloudDialogflowCxV3beta1TestConfig
             Core.<$> (o Core..:? "flow")
             Core.<*> (o Core..:? "page")
-            Core.<*> ( o Core..:? "trackingParameters"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "trackingParameters")
       )
 
 instance
@@ -15537,7 +15497,7 @@ instance
             Core.<*> (o Core..:? "fulfillmentInfo")
             Core.<*> (o Core..:? "intentInfo")
             Core.<*> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "payload")
             Core.<*> (o Core..:? "sentimentAnalysisResult")
@@ -15986,7 +15946,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse
             Core.<$> (o Core..:? "mergeBehavior")
-              Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "messages")
       )
 
 instance
@@ -16097,7 +16057,7 @@ instance
             Core.<$> (o Core..:? "answerRecord")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "snippets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "snippets")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "uri")
       )
@@ -16226,7 +16186,7 @@ instance
       "GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse"
       ( \o ->
           GoogleCloudDialogflowV2BatchUpdateEntityTypesResponse
-            Core.<$> (o Core..:? "entityTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entityTypes")
       )
 
 instance
@@ -16264,7 +16224,7 @@ instance
       "GoogleCloudDialogflowV2BatchUpdateIntentsResponse"
       ( \o ->
           GoogleCloudDialogflowV2BatchUpdateIntentsResponse
-            Core.<$> (o Core..:? "intents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "intents")
       )
 
 instance
@@ -16527,7 +16487,7 @@ instance
           GoogleCloudDialogflowV2ConversationModel
             Core.<$> (o Core..:? "articleSuggestionModelMetadata")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "datasets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "datasets")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "name")
@@ -16869,7 +16829,7 @@ instance
             Core.<$> (o Core..:? "autoExpansionMode")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableFuzzyExtraction")
-            Core.<*> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entities")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
       )
@@ -16921,7 +16881,7 @@ instance
       "GoogleCloudDialogflowV2EntityTypeEntity"
       ( \o ->
           GoogleCloudDialogflowV2EntityTypeEntity
-            Core.<$> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "synonyms")
             Core.<*> (o Core..:? "value")
       )
 
@@ -17278,9 +17238,7 @@ instance
           GoogleCloudDialogflowV2HumanAgentAssistantEvent
             Core.<$> (o Core..:? "conversation")
               Core.<*> (o Core..:? "participant")
-              Core.<*> ( o Core..:? "suggestionResults"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "suggestionResults")
       )
 
 instance
@@ -17332,7 +17290,7 @@ instance
           GoogleCloudDialogflowV2ImportConversationDataOperationMetadata
             Core.<$> (o Core..:? "conversationDataset")
               Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "partialFailures" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "partialFailures")
       )
 
 instance
@@ -17422,7 +17380,7 @@ instance
       "GoogleCloudDialogflowV2ImportDocumentsResponse"
       ( \o ->
           GoogleCloudDialogflowV2ImportDocumentsResponse
-            Core.<$> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "warnings")
       )
 
 instance
@@ -17557,28 +17515,24 @@ instance Core.FromJSON GoogleCloudDialogflowV2Intent where
       ( \o ->
           GoogleCloudDialogflowV2Intent
             Core.<$> (o Core..:? "action")
-            Core.<*> ( o Core..:? "defaultResponsePlatforms"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "defaultResponsePlatforms")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "endInteraction")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "followupIntentInfo"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "inputContextNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
+            Core.<*> (o Core..:? "followupIntentInfo")
+            Core.<*> (o Core..:? "inputContextNames")
             Core.<*> (o Core..:? "isFallback")
             Core.<*> (o Core..:? "liveAgentHandoff")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "mlDisabled")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "parentFollowupIntentName")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "resetContexts")
             Core.<*> (o Core..:? "rootFollowupIntentName")
-            Core.<*> (o Core..:? "trainingPhrases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trainingPhrases")
             Core.<*> (o Core..:? "webhookState")
       )
 
@@ -17850,7 +17804,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageBasicCard"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageBasicCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
               Core.<*> (o Core..:? "formattedText")
               Core.<*> (o Core..:? "image")
               Core.<*> (o Core..:? "subtitle")
@@ -17996,7 +17950,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageBrowseCarouselCard
             Core.<$> (o Core..:? "imageDisplayOptions")
-              Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "items")
       )
 
 instance
@@ -18161,7 +18115,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageCard"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
             Core.<*> (o Core..:? "imageUri")
             Core.<*> (o Core..:? "subtitle")
             Core.<*> (o Core..:? "title")
@@ -18253,7 +18207,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageCarouselSelect"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageCarouselSelect
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
       )
 
 instance
@@ -18496,8 +18450,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageListSelect"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageListSelect
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "subtitle")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "subtitle")
               Core.<*> (o Core..:? "title")
       )
 
@@ -18606,7 +18559,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageMediaContent"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageMediaContent
-            Core.<$> (o Core..:? "mediaObjects" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mediaObjects")
               Core.<*> (o Core..:? "mediaType")
       )
 
@@ -18713,7 +18666,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageQuickReplies"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageQuickReplies
-            Core.<$> (o Core..:? "quickReplies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "quickReplies")
               Core.<*> (o Core..:? "title")
       )
 
@@ -18759,8 +18712,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageSelectItemInfo"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageSelectItemInfo
-            Core.<$> (o Core..:? "key")
-              Core.<*> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "synonyms")
       )
 
 instance
@@ -18853,7 +18805,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageSimpleResponses"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageSimpleResponses
-            Core.<$> (o Core..:? "simpleResponses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "simpleResponses")
       )
 
 instance
@@ -18929,7 +18881,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageSuggestions"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageSuggestions
-            Core.<$> (o Core..:? "suggestions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "suggestions")
       )
 
 instance
@@ -18984,10 +18936,10 @@ instance
       "GoogleCloudDialogflowV2IntentMessageTableCard"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageTableCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "columnProperties" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
+              Core.<*> (o Core..:? "columnProperties")
               Core.<*> (o Core..:? "image")
-              Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "rows")
               Core.<*> (o Core..:? "subtitle")
               Core.<*> (o Core..:? "title")
       )
@@ -19075,7 +19027,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageTableCardRow"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageTableCardRow
-            Core.<$> (o Core..:? "cells" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cells")
               Core.<*> (o Core..:? "dividerAfter")
       )
 
@@ -19116,7 +19068,7 @@ instance
       "GoogleCloudDialogflowV2IntentMessageText"
       ( \o ->
           GoogleCloudDialogflowV2IntentMessageText
-            Core.<$> (o Core..:? "text" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "text")
       )
 
 instance
@@ -19180,7 +19132,7 @@ instance
             Core.<*> (o Core..:? "isList")
             Core.<*> (o Core..:? "mandatory")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "prompts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "prompts")
             Core.<*> (o Core..:? "value")
       )
 
@@ -19239,7 +19191,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2IntentTrainingPhrase
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parts")
             Core.<*> (o Core..:? "timesAddedCount")
             Core.<*> (o Core..:? "type")
       )
@@ -19476,7 +19428,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2MessageAnnotation
             Core.<$> (o Core..:? "containEntities")
-            Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parts")
       )
 
 instance
@@ -19659,14 +19611,12 @@ instance
             Core.<*> (o Core..:? "allRequiredParamsPresent")
             Core.<*> (o Core..:? "cancelsSlotFilling")
             Core.<*> (o Core..:? "diagnosticInfo")
-            Core.<*> ( o Core..:? "fulfillmentMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fulfillmentMessages")
             Core.<*> (o Core..:? "fulfillmentText")
             Core.<*> (o Core..:? "intent")
             Core.<*> (o Core..:? "intentDetectionConfidence")
             Core.<*> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "queryText")
             Core.<*> (o Core..:? "sentimentAnalysisResult")
@@ -19937,7 +19887,7 @@ instance
       "GoogleCloudDialogflowV2SessionEntityType"
       ( \o ->
           GoogleCloudDialogflowV2SessionEntityType
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
             Core.<*> (o Core..:? "entityOverrideMode")
             Core.<*> (o Core..:? "name")
       )
@@ -20147,7 +20097,7 @@ instance
       "GoogleCloudDialogflowV2SuggestArticlesResponse"
       ( \o ->
           GoogleCloudDialogflowV2SuggestArticlesResponse
-            Core.<$> (o Core..:? "articleAnswers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "articleAnswers")
               Core.<*> (o Core..:? "contextSize")
               Core.<*> (o Core..:? "latestMessage")
       )
@@ -20199,7 +20149,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2SuggestFaqAnswersResponse
             Core.<$> (o Core..:? "contextSize")
-              Core.<*> (o Core..:? "faqAnswers" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faqAnswers")
               Core.<*> (o Core..:? "latestMessage")
       )
 
@@ -20251,9 +20201,7 @@ instance
           GoogleCloudDialogflowV2SuggestSmartRepliesResponse
             Core.<$> (o Core..:? "contextSize")
               Core.<*> (o Core..:? "latestMessage")
-              Core.<*> ( o Core..:? "smartReplyAnswers"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "smartReplyAnswers")
       )
 
 instance
@@ -20477,15 +20425,11 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2WebhookResponse
             Core.<$> (o Core..:? "followupEventInput")
-            Core.<*> ( o Core..:? "fulfillmentMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fulfillmentMessages")
             Core.<*> (o Core..:? "fulfillmentText")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
             Core.<*> (o Core..:? "payload")
-            Core.<*> ( o Core..:? "sessionEntityTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "sessionEntityTypes")
             Core.<*> (o Core..:? "source")
       )
 
@@ -20637,7 +20581,7 @@ instance
           GoogleCloudDialogflowV2beta1ArticleAnswer
             Core.<$> (o Core..:? "answerRecord")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "snippets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "snippets")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "uri")
       )
@@ -20720,7 +20664,7 @@ instance
       "GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse"
       ( \o ->
           GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse
-            Core.<$> (o Core..:? "entityTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entityTypes")
       )
 
 instance
@@ -20760,7 +20704,7 @@ instance
       "GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse"
       ( \o ->
           GoogleCloudDialogflowV2beta1BatchUpdateIntentsResponse
-            Core.<$> (o Core..:? "intents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "intents")
       )
 
 instance
@@ -21029,7 +20973,7 @@ instance
             Core.<$> (o Core..:? "autoExpansionMode")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableFuzzyExtraction")
-            Core.<*> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entities")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
       )
@@ -21081,7 +21025,7 @@ instance
       "GoogleCloudDialogflowV2beta1EntityTypeEntity"
       ( \o ->
           GoogleCloudDialogflowV2beta1EntityTypeEntity
-            Core.<$> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "synonyms")
             Core.<*> (o Core..:? "value")
       )
 
@@ -21444,9 +21388,7 @@ instance
           GoogleCloudDialogflowV2beta1HumanAgentAssistantEvent
             Core.<$> (o Core..:? "conversation")
               Core.<*> (o Core..:? "participant")
-              Core.<*> ( o Core..:? "suggestionResults"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "suggestionResults")
       )
 
 instance
@@ -21488,7 +21430,7 @@ instance
       "GoogleCloudDialogflowV2beta1ImportDocumentsResponse"
       ( \o ->
           GoogleCloudDialogflowV2beta1ImportDocumentsResponse
-            Core.<$> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "warnings")
       )
 
 instance
@@ -21592,29 +21534,25 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2beta1Intent
             Core.<$> (o Core..:? "action")
-            Core.<*> ( o Core..:? "defaultResponsePlatforms"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "defaultResponsePlatforms")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "endInteraction")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "followupIntentInfo"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "inputContextNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
+            Core.<*> (o Core..:? "followupIntentInfo")
+            Core.<*> (o Core..:? "inputContextNames")
             Core.<*> (o Core..:? "isFallback")
             Core.<*> (o Core..:? "liveAgentHandoff")
-            Core.<*> (o Core..:? "messages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "mlDisabled")
             Core.<*> (o Core..:? "mlEnabled")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "parentFollowupIntentName")
             Core.<*> (o Core..:? "priority")
             Core.<*> (o Core..:? "resetContexts")
             Core.<*> (o Core..:? "rootFollowupIntentName")
-            Core.<*> (o Core..:? "trainingPhrases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trainingPhrases")
             Core.<*> (o Core..:? "webhookState")
       )
 
@@ -21955,7 +21893,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageBasicCard"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageBasicCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
               Core.<*> (o Core..:? "formattedText")
               Core.<*> (o Core..:? "image")
               Core.<*> (o Core..:? "subtitle")
@@ -22101,7 +22039,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard
             Core.<$> (o Core..:? "imageDisplayOptions")
-              Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "items")
       )
 
 instance
@@ -22266,7 +22204,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageCard"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
               Core.<*> (o Core..:? "imageUri")
               Core.<*> (o Core..:? "subtitle")
               Core.<*> (o Core..:? "title")
@@ -22359,7 +22297,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
       )
 
 instance
@@ -22609,8 +22547,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageListSelect"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageListSelect
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "subtitle")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "subtitle")
               Core.<*> (o Core..:? "title")
       )
 
@@ -22722,7 +22659,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageMediaContent"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageMediaContent
-            Core.<$> (o Core..:? "mediaObjects" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mediaObjects")
               Core.<*> (o Core..:? "mediaType")
       )
 
@@ -22829,7 +22766,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageQuickReplies"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageQuickReplies
-            Core.<$> (o Core..:? "quickReplies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "quickReplies")
               Core.<*> (o Core..:? "title")
       )
 
@@ -22889,7 +22826,7 @@ instance
           GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent
             Core.<$> (o Core..:? "description")
               Core.<*> (o Core..:? "media")
-              Core.<*> (o Core..:? "suggestions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "suggestions")
               Core.<*> (o Core..:? "title")
       )
 
@@ -22996,7 +22933,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard
-            Core.<$> (o Core..:? "cardContents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cardContents")
               Core.<*> (o Core..:? "cardWidth")
       )
 
@@ -23380,7 +23317,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageRbmText"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageRbmText
-            Core.<$> (o Core..:? "rbmSuggestion" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "rbmSuggestion")
               Core.<*> (o Core..:? "text")
       )
 
@@ -23426,8 +23363,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageSelectItemInfo
-            Core.<$> (o Core..:? "key")
-              Core.<*> (o Core..:? "synonyms" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "synonyms")
       )
 
 instance
@@ -23523,7 +23459,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses
-            Core.<$> (o Core..:? "simpleResponses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "simpleResponses")
       )
 
 instance
@@ -23601,7 +23537,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageSuggestions"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageSuggestions
-            Core.<$> (o Core..:? "suggestions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "suggestions")
       )
 
 instance
@@ -23665,10 +23601,10 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageTableCard"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageTableCard
-            Core.<$> (o Core..:? "buttons" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "columnProperties" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buttons")
+              Core.<*> (o Core..:? "columnProperties")
               Core.<*> (o Core..:? "image")
-              Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "rows")
               Core.<*> (o Core..:? "subtitle")
               Core.<*> (o Core..:? "title")
       )
@@ -23759,7 +23695,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageTableCardRow"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageTableCardRow
-            Core.<$> (o Core..:? "cells" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cells")
               Core.<*> (o Core..:? "dividerAfter")
       )
 
@@ -23925,7 +23861,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentMessageText"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentMessageText
-            Core.<$> (o Core..:? "text" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "text")
       )
 
 instance
@@ -23990,7 +23926,7 @@ instance
             Core.<*> (o Core..:? "isList")
             Core.<*> (o Core..:? "mandatory")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "prompts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "prompts")
             Core.<*> (o Core..:? "value")
       )
 
@@ -24049,8 +23985,7 @@ instance
       "GoogleCloudDialogflowV2beta1IntentTrainingPhrase"
       ( \o ->
           GoogleCloudDialogflowV2beta1IntentTrainingPhrase
-            Core.<$> (o Core..:? "name")
-              Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "parts")
               Core.<*> (o Core..:? "timesAddedCount")
               Core.<*> (o Core..:? "type")
       )
@@ -24150,7 +24085,7 @@ instance
       "GoogleCloudDialogflowV2beta1KnowledgeAnswers"
       ( \o ->
           GoogleCloudDialogflowV2beta1KnowledgeAnswers
-            Core.<$> (o Core..:? "answers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "answers")
       )
 
 instance
@@ -24396,7 +24331,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2beta1MessageAnnotation
             Core.<$> (o Core..:? "containEntities")
-              Core.<*> (o Core..:? "parts" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "parts")
       )
 
 instance
@@ -24583,15 +24518,13 @@ instance
             Core.<*> (o Core..:? "allRequiredParamsPresent")
             Core.<*> (o Core..:? "cancelsSlotFilling")
             Core.<*> (o Core..:? "diagnosticInfo")
-            Core.<*> ( o Core..:? "fulfillmentMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fulfillmentMessages")
             Core.<*> (o Core..:? "fulfillmentText")
             Core.<*> (o Core..:? "intent")
             Core.<*> (o Core..:? "intentDetectionConfidence")
             Core.<*> (o Core..:? "knowledgeAnswers")
             Core.<*> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "queryText")
             Core.<*> (o Core..:? "sentimentAnalysisResult")
@@ -24871,7 +24804,7 @@ instance
       "GoogleCloudDialogflowV2beta1SessionEntityType"
       ( \o ->
           GoogleCloudDialogflowV2beta1SessionEntityType
-            Core.<$> (o Core..:? "entities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entities")
               Core.<*> (o Core..:? "entityOverrideMode")
               Core.<*> (o Core..:? "name")
       )
@@ -25038,7 +24971,7 @@ instance
       "GoogleCloudDialogflowV2beta1SuggestArticlesResponse"
       ( \o ->
           GoogleCloudDialogflowV2beta1SuggestArticlesResponse
-            Core.<$> (o Core..:? "articleAnswers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "articleAnswers")
               Core.<*> (o Core..:? "contextSize")
               Core.<*> (o Core..:? "latestMessage")
       )
@@ -25090,7 +25023,7 @@ instance
       ( \o ->
           GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse
             Core.<$> (o Core..:? "contextSize")
-              Core.<*> (o Core..:? "faqAnswers" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "faqAnswers")
               Core.<*> (o Core..:? "latestMessage")
       )
 
@@ -25142,9 +25075,7 @@ instance
           GoogleCloudDialogflowV2beta1SuggestSmartRepliesResponse
             Core.<$> (o Core..:? "contextSize")
               Core.<*> (o Core..:? "latestMessage")
-              Core.<*> ( o Core..:? "smartReplyAnswers"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "smartReplyAnswers")
       )
 
 instance
@@ -25265,9 +25196,7 @@ instance
       "GoogleCloudDialogflowV2beta1WebhookRequest"
       ( \o ->
           GoogleCloudDialogflowV2beta1WebhookRequest
-            Core.<$> ( o Core..:? "alternativeQueryResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "alternativeQueryResults")
             Core.<*> (o Core..:? "originalDetectIntentRequest")
             Core.<*> (o Core..:? "queryResult")
             Core.<*> (o Core..:? "responseId")
@@ -25343,16 +25272,12 @@ instance
           GoogleCloudDialogflowV2beta1WebhookResponse
             Core.<$> (o Core..:? "endInteraction")
             Core.<*> (o Core..:? "followupEventInput")
-            Core.<*> ( o Core..:? "fulfillmentMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "fulfillmentMessages")
             Core.<*> (o Core..:? "fulfillmentText")
             Core.<*> (o Core..:? "liveAgentHandoff")
-            Core.<*> (o Core..:? "outputContexts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputContexts")
             Core.<*> (o Core..:? "payload")
-            Core.<*> ( o Core..:? "sessionEntityTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "sessionEntityTypes")
             Core.<*> (o Core..:? "source")
       )
 
@@ -25617,7 +25542,7 @@ instance
       "GoogleCloudDialogflowV3alpha1ImportDocumentsResponse"
       ( \o ->
           GoogleCloudDialogflowV3alpha1ImportDocumentsResponse
-            Core.<$> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "warnings")
       )
 
 instance
@@ -25750,7 +25675,7 @@ instance
       "GoogleCloudLocationListLocationsResponse"
       ( \o ->
           GoogleCloudLocationListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -25922,7 +25847,7 @@ instance
       ( \o ->
           GoogleLongrunningListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -26113,7 +26038,7 @@ instance Core.FromJSON GoogleRpcStatus where
       ( \o ->
           GoogleRpcStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

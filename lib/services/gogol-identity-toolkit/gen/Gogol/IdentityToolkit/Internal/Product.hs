@@ -254,7 +254,7 @@ instance Core.FromJSON CreateAuthUriResponse where
       "CreateAuthUriResponse"
       ( \o ->
           CreateAuthUriResponse
-            Core.<$> (o Core..:? "allProviders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allProviders")
             Core.<*> (o Core..:? "authUri")
             Core.<*> (o Core..:? "captchaRequired")
             Core.<*> (o Core..:? "forExistingProvider")
@@ -264,7 +264,7 @@ instance Core.FromJSON CreateAuthUriResponse where
             Core.<*> (o Core..:? "providerId")
             Core.<*> (o Core..:? "registered")
             Core.<*> (o Core..:? "sessionId")
-            Core.<*> (o Core..:? "signinMethods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "signinMethods")
       )
 
 instance Core.ToJSON CreateAuthUriResponse where
@@ -348,7 +348,7 @@ instance Core.FromJSON DownloadAccountResponse where
                          Core..!= "identitytoolkit#DownloadAccountResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON DownloadAccountResponse where
@@ -403,7 +403,9 @@ instance Core.FromJSON EmailLinkSigninResponse where
       ( \o ->
           EmailLinkSigninResponse
             Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "idToken")
             Core.<*> (o Core..:? "isNewUser")
             Core.<*> ( o Core..:? "kind"
@@ -516,7 +518,7 @@ instance Core.FromJSON GetAccountInfoResponse where
             Core.<$> ( o Core..:? "kind"
                          Core..!= "identitytoolkit#GetAccountInfoResponse"
                      )
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
       )
 
 instance Core.ToJSON GetAccountInfoResponse where
@@ -711,7 +713,9 @@ instance
               Core.<*> (o Core..:? "providerId")
               Core.<*> (o Core..:? "sessionId")
               Core.<*> (o Core..:? "tenantId")
-              Core.<*> (o Core..:? "tenantProjectNumber")
+              Core.<*> ( o Core..:? "tenantProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -814,7 +818,9 @@ instance
       "IdentitytoolkitRelyingpartyDeleteAccountRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyDeleteAccountRequest
-            Core.<$> (o Core..:? "delegatedProjectNumber")
+            Core.<$> ( o Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "idToken")
               Core.<*> (o Core..:? "localId")
       )
@@ -870,7 +876,9 @@ instance
       "IdentitytoolkitRelyingpartyDownloadAccountRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyDownloadAccountRequest
-            Core.<$> (o Core..:? "delegatedProjectNumber")
+            Core.<$> ( o Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "maxResults")
               Core.<*> (o Core..:? "nextPageToken")
               Core.<*> (o Core..:? "targetProjectId")
@@ -982,11 +990,13 @@ instance
       "IdentitytoolkitRelyingpartyGetAccountInfoRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyGetAccountInfoRequest
-            Core.<$> (o Core..:? "delegatedProjectNumber")
-              Core.<*> (o Core..:? "email" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> (o Core..:? "email")
               Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "localId" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "phoneNumber" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "localId")
+              Core.<*> (o Core..:? "phoneNumber")
       )
 
 instance
@@ -1068,11 +1078,11 @@ instance
           IdentitytoolkitRelyingpartyGetProjectConfigResponse
             Core.<$> (o Core..:? "allowPasswordUser")
               Core.<*> (o Core..:? "apiKey")
-              Core.<*> (o Core..:? "authorizedDomains" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "authorizedDomains")
               Core.<*> (o Core..:? "changeEmailTemplate")
               Core.<*> (o Core..:? "dynamicLinksDomain")
               Core.<*> (o Core..:? "enableAnonymousUser")
-              Core.<*> (o Core..:? "idpConfig" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "idpConfig")
               Core.<*> (o Core..:? "legacyResetPasswordTemplate")
               Core.<*> (o Core..:? "projectId")
               Core.<*> (o Core..:? "resetPasswordTemplate")
@@ -1394,27 +1404,35 @@ instance
           IdentitytoolkitRelyingpartySetAccountInfoRequest
             Core.<$> (o Core..:? "captchaChallenge")
               Core.<*> (o Core..:? "captchaResponse")
-              Core.<*> (o Core..:? "createdAt")
+              Core.<*> ( o Core..:? "createdAt"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "customAttributes")
-              Core.<*> (o Core..:? "delegatedProjectNumber")
-              Core.<*> (o Core..:? "deleteAttribute" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "deleteProvider" Core..!= Core.mempty)
+              Core.<*> ( o Core..:? "delegatedProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> (o Core..:? "deleteAttribute")
+              Core.<*> (o Core..:? "deleteProvider")
               Core.<*> (o Core..:? "disableUser")
               Core.<*> (o Core..:? "displayName")
               Core.<*> (o Core..:? "email")
               Core.<*> (o Core..:? "emailVerified")
               Core.<*> (o Core..:? "idToken")
               Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "lastLoginAt")
+              Core.<*> ( o Core..:? "lastLoginAt"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "localId")
               Core.<*> (o Core..:? "oobCode")
               Core.<*> (o Core..:? "password")
               Core.<*> (o Core..:? "phoneNumber")
               Core.<*> (o Core..:? "photoUrl")
-              Core.<*> (o Core..:? "provider" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "provider")
               Core.<*> (o Core..:? "returnSecureToken")
               Core.<*> (o Core..:? "upgradeToFederatedLogin")
-              Core.<*> (o Core..:? "validSince")
+              Core.<*> ( o Core..:? "validSince"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -1517,11 +1535,13 @@ instance
           IdentitytoolkitRelyingpartySetProjectConfigRequest
             Core.<$> (o Core..:? "allowPasswordUser")
               Core.<*> (o Core..:? "apiKey")
-              Core.<*> (o Core..:? "authorizedDomains" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "authorizedDomains")
               Core.<*> (o Core..:? "changeEmailTemplate")
-              Core.<*> (o Core..:? "delegatedProjectNumber")
+              Core.<*> ( o Core..:? "delegatedProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "enableAnonymousUser")
-              Core.<*> (o Core..:? "idpConfig" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "idpConfig")
               Core.<*> (o Core..:? "legacyResetPasswordTemplate")
               Core.<*> (o Core..:? "resetPasswordTemplate")
               Core.<*> (o Core..:? "useEmailSending")
@@ -1758,7 +1778,9 @@ instance
               Core.<*> (o Core..:? "phoneNumber")
               Core.<*> (o Core..:? "photoUrl")
               Core.<*> (o Core..:? "tenantId")
-              Core.<*> (o Core..:? "tenantProjectNumber")
+              Core.<*> ( o Core..:? "tenantProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -1856,7 +1878,9 @@ instance
             Core.<$> (o Core..:? "allowOverwrite")
               Core.<*> (o Core..:? "blockSize")
               Core.<*> (o Core..:? "cpuMemCost")
-              Core.<*> (o Core..:? "delegatedProjectNumber")
+              Core.<*> ( o Core..:? "delegatedProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "dkLen")
               Core.<*> (o Core..:? "hashAlgorithm")
               Core.<*> (o Core..:? "memoryCost")
@@ -1866,7 +1890,7 @@ instance
               Core.<*> (o Core..:? "sanityCheck")
               Core.<*> (o Core..:? "signerKey")
               Core.<*> (o Core..:? "targetProjectId")
-              Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "users")
       )
 
 instance
@@ -1958,7 +1982,9 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyAssertionRequest
             Core.<$> (o Core..:? "autoCreate")
-              Core.<*> (o Core..:? "delegatedProjectNumber")
+              Core.<*> ( o Core..:? "delegatedProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "idToken")
               Core.<*> (o Core..:? "instanceId")
               Core.<*> (o Core..:? "pendingIdToken")
@@ -1969,7 +1995,9 @@ instance
               Core.<*> (o Core..:? "returnSecureToken")
               Core.<*> (o Core..:? "sessionId")
               Core.<*> (o Core..:? "tenantId")
-              Core.<*> (o Core..:? "tenantProjectNumber")
+              Core.<*> ( o Core..:? "tenantProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -2036,7 +2064,9 @@ instance
       "IdentitytoolkitRelyingpartyVerifyCustomTokenRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-            Core.<$> (o Core..:? "delegatedProjectNumber")
+            Core.<$> ( o Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "instanceId")
               Core.<*> (o Core..:? "returnSecureToken")
               Core.<*> (o Core..:? "token")
@@ -2118,7 +2148,9 @@ instance
           IdentitytoolkitRelyingpartyVerifyPasswordRequest
             Core.<$> (o Core..:? "captchaChallenge")
               Core.<*> (o Core..:? "captchaResponse")
-              Core.<*> (o Core..:? "delegatedProjectNumber")
+              Core.<*> ( o Core..:? "delegatedProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "email")
               Core.<*> (o Core..:? "idToken")
               Core.<*> (o Core..:? "instanceId")
@@ -2126,7 +2158,9 @@ instance
               Core.<*> (o Core..:? "pendingIdToken")
               Core.<*> (o Core..:? "returnSecureToken")
               Core.<*> (o Core..:? "tenantId")
-              Core.<*> (o Core..:? "tenantProjectNumber")
+              Core.<*> ( o Core..:? "tenantProjectNumber"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -2279,16 +2313,22 @@ instance
       "IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse"
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
-            Core.<$> (o Core..:? "expiresIn")
+            Core.<$> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "idToken")
               Core.<*> (o Core..:? "isNewUser")
               Core.<*> (o Core..:? "localId")
               Core.<*> (o Core..:? "phoneNumber")
               Core.<*> (o Core..:? "refreshToken")
               Core.<*> (o Core..:? "temporaryProof")
-              Core.<*> (o Core..:? "temporaryProofExpiresIn")
+              Core.<*> ( o Core..:? "temporaryProofExpiresIn"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "verificationProof")
-              Core.<*> (o Core..:? "verificationProofExpiresIn")
+              Core.<*> ( o Core..:? "verificationProofExpiresIn"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -2361,9 +2401,7 @@ instance Core.FromJSON IdpConfig where
             Core.<*> (o Core..:? "experimentPercent")
             Core.<*> (o Core..:? "provider")
             Core.<*> (o Core..:? "secret")
-            Core.<*> ( o Core..:? "whitelistedAudiences"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "whitelistedAudiences")
       )
 
 instance Core.ToJSON IdpConfig where
@@ -2601,7 +2639,9 @@ instance Core.FromJSON SetAccountInfoResponse where
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "emailVerified")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "idToken")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "identitytoolkit#SetAccountInfoResponse"
@@ -2610,7 +2650,7 @@ instance Core.FromJSON SetAccountInfoResponse where
             Core.<*> (o Core..:? "newEmail")
             Core.<*> (o Core..:? "passwordHash")
             Core.<*> (o Core..:? "photoUrl")
-            Core.<*> (o Core..:? "providerUserInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "providerUserInfo")
             Core.<*> (o Core..:? "refreshToken")
       )
 
@@ -2733,7 +2773,9 @@ instance Core.FromJSON SignupNewUserResponse where
           SignupNewUserResponse
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "idToken")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "identitytoolkit#SignupNewUserResponse"
@@ -2783,7 +2825,7 @@ instance Core.FromJSON UploadAccountResponse where
       "UploadAccountResponse"
       ( \o ->
           UploadAccountResponse
-            Core.<$> (o Core..:? "error" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "error")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "identitytoolkit#UploadAccountResponse"
                      )
@@ -2912,24 +2954,30 @@ instance Core.FromJSON UserInfo where
       "UserInfo"
       ( \o ->
           UserInfo
-            Core.<$> (o Core..:? "createdAt")
+            Core.<$> ( o Core..:? "createdAt"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "customAttributes")
             Core.<*> (o Core..:? "customAuth")
             Core.<*> (o Core..:? "disabled")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "emailVerified")
-            Core.<*> (o Core..:? "lastLoginAt")
+            Core.<*> ( o Core..:? "lastLoginAt"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "localId")
             Core.<*> (o Core..:? "passwordHash")
             Core.<*> (o Core..:? "passwordUpdatedAt")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "photoUrl")
-            Core.<*> (o Core..:? "providerUserInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "providerUserInfo")
             Core.<*> (o Core..:? "rawPassword")
             Core.<*> (o Core..:? "salt")
             Core.<*> (o Core..:? "screenName")
-            Core.<*> (o Core..:? "validSince")
+            Core.<*> ( o Core..:? "validSince"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "version")
       )
 
@@ -3180,7 +3228,9 @@ instance Core.FromJSON VerifyAssertionResponse where
             Core.<*> (o Core..:? "emailRecycled")
             Core.<*> (o Core..:? "emailVerified")
             Core.<*> (o Core..:? "errorMessage")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "federatedId")
             Core.<*> (o Core..:? "firstName")
             Core.<*> (o Core..:? "fullName")
@@ -3210,7 +3260,7 @@ instance Core.FromJSON VerifyAssertionResponse where
             Core.<*> (o Core..:? "refreshToken")
             Core.<*> (o Core..:? "screenName")
             Core.<*> (o Core..:? "timeZone")
-            Core.<*> (o Core..:? "verifiedProvider" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "verifiedProvider")
       )
 
 instance Core.ToJSON VerifyAssertionResponse where
@@ -3302,7 +3352,9 @@ instance Core.FromJSON VerifyCustomTokenResponse where
       "VerifyCustomTokenResponse"
       ( \o ->
           VerifyCustomTokenResponse
-            Core.<$> (o Core..:? "expiresIn")
+            Core.<$> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "idToken")
             Core.<*> (o Core..:? "isNewUser")
             Core.<*> ( o Core..:? "kind"
@@ -3382,7 +3434,9 @@ instance Core.FromJSON VerifyPasswordResponse where
           VerifyPasswordResponse
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "idToken")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "identitytoolkit#VerifyPasswordResponse"

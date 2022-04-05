@@ -209,9 +209,9 @@ instance Core.FromJSON ExpressionReport where
       "ExpressionReport"
       ( \o ->
           ExpressionReport
-            Core.<$> (o Core..:? "children" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "children")
             Core.<*> (o Core..:? "sourcePosition")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ExpressionReport where
@@ -286,8 +286,7 @@ instance Core.FromJSON FunctionCall where
       "FunctionCall"
       ( \o ->
           FunctionCall
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "function")
+            Core.<$> (o Core..:? "args") Core.<*> (o Core..:? "function")
       )
 
 instance Core.ToJSON FunctionCall where
@@ -328,7 +327,7 @@ instance Core.FromJSON FunctionMock where
       "FunctionMock"
       ( \o ->
           FunctionMock
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
             Core.<*> (o Core..:? "function")
             Core.<*> (o Core..:? "result")
       )
@@ -471,7 +470,7 @@ instance Core.FromJSON ListReleasesResponse where
       ( \o ->
           ListReleasesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "releases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "releases")
       )
 
 instance Core.ToJSON ListReleasesResponse where
@@ -507,7 +506,7 @@ instance Core.FromJSON ListRulesetsResponse where
       ( \o ->
           ListRulesetsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "rulesets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rulesets")
       )
 
 instance Core.ToJSON ListRulesetsResponse where
@@ -537,10 +536,7 @@ instance Core.FromJSON Metadata where
   parseJSON =
     Core.withObject
       "Metadata"
-      ( \o ->
-          Metadata
-            Core.<$> (o Core..:? "services" Core..!= Core.mempty)
-      )
+      (\o -> Metadata Core.<$> (o Core..:? "services"))
 
 instance Core.ToJSON Metadata where
   toJSON Metadata {..} =
@@ -700,10 +696,7 @@ instance Core.FromJSON Source where
   parseJSON =
     Core.withObject
       "Source"
-      ( \o ->
-          Source
-            Core.<$> (o Core..:? "files" Core..!= Core.mempty)
-      )
+      (\o -> Source Core.<$> (o Core..:? "files"))
 
 instance Core.ToJSON Source where
   toJSON Source {..} =
@@ -804,7 +797,7 @@ instance Core.FromJSON TestCase where
           TestCase
             Core.<$> (o Core..:? "expectation")
             Core.<*> (o Core..:? "expressionReportLevel")
-            Core.<*> (o Core..:? "functionMocks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "functionMocks")
             Core.<*> (o Core..:? "pathEncoding")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "resource")
@@ -862,14 +855,12 @@ instance Core.FromJSON TestResult where
       "TestResult"
       ( \o ->
           TestResult
-            Core.<$> (o Core..:? "debugMessages" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "debugMessages")
             Core.<*> (o Core..:? "errorPosition")
-            Core.<*> (o Core..:? "expressionReports" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "functionCalls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "expressionReports")
+            Core.<*> (o Core..:? "functionCalls")
             Core.<*> (o Core..:? "state")
-            Core.<*> ( o Core..:? "visitedExpressions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "visitedExpressions")
       )
 
 instance Core.ToJSON TestResult where
@@ -946,8 +937,8 @@ instance Core.FromJSON TestRulesetResponse where
       "TestRulesetResponse"
       ( \o ->
           TestRulesetResponse
-            Core.<$> (o Core..:? "issues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "testResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "issues")
+            Core.<*> (o Core..:? "testResults")
       )
 
 instance Core.ToJSON TestRulesetResponse where
@@ -977,10 +968,7 @@ instance Core.FromJSON TestSuite where
   parseJSON =
     Core.withObject
       "TestSuite"
-      ( \o ->
-          TestSuite
-            Core.<$> (o Core..:? "testCases" Core..!= Core.mempty)
-      )
+      (\o -> TestSuite Core.<$> (o Core..:? "testCases"))
 
 instance Core.ToJSON TestSuite where
   toJSON TestSuite {..} =

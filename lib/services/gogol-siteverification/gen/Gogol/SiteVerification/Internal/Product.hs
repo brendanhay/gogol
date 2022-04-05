@@ -213,7 +213,7 @@ instance
       "SiteVerificationWebResourceListResponse"
       ( \o ->
           SiteVerificationWebResourceListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
       )
 
 instance
@@ -256,7 +256,7 @@ instance
       ( \o ->
           SiteVerificationWebResourceResource
             Core.<$> (o Core..:? "id")
-            Core.<*> (o Core..:? "owners" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "owners")
             Core.<*> (o Core..:? "site")
       )
 

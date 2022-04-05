@@ -280,7 +280,7 @@ instance
       "GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse"
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
-            Core.<$> (o Core..:? "catalogs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "catalogs")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -327,7 +327,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "products")
       )
 
 instance
@@ -373,7 +373,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "versions")
       )
 
 instance

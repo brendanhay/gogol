@@ -236,7 +236,7 @@ instance
       "AchievementConfigurationListResponse"
       ( \o ->
           AchievementConfigurationListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -461,8 +461,12 @@ instance Core.FromJSON LeaderboardConfiguration where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "published")
-            Core.<*> (o Core..:? "scoreMax")
-            Core.<*> (o Core..:? "scoreMin")
+            Core.<*> ( o Core..:? "scoreMax"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "scoreMin"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scoreOrder")
             Core.<*> (o Core..:? "token")
       )
@@ -570,7 +574,7 @@ instance
       "LeaderboardConfigurationListResponse"
       ( \o ->
           LeaderboardConfigurationListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -656,7 +660,7 @@ instance Core.FromJSON LocalizedStringBundle where
       ( \o ->
           LocalizedStringBundle
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "translations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "translations")
       )
 
 instance Core.ToJSON LocalizedStringBundle where

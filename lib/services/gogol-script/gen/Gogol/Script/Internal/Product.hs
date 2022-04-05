@@ -213,7 +213,7 @@ instance Core.FromJSON Content where
       "Content"
       ( \o ->
           Content
-            Core.<$> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "files")
             Core.<*> (o Core..:? "scriptId")
       )
 
@@ -296,7 +296,7 @@ instance Core.FromJSON Deployment where
           Deployment
             Core.<$> (o Core..:? "deploymentConfig")
             Core.<*> (o Core..:? "deploymentId")
-            Core.<*> (o Core..:? "entryPoints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entryPoints")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -487,9 +487,7 @@ instance Core.FromJSON ExecutionError where
           ExecutionError
             Core.<$> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "errorType")
-            Core.<*> ( o Core..:? "scriptStackTraceElements"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "scriptStackTraceElements")
       )
 
 instance Core.ToJSON ExecutionError where
@@ -537,7 +535,7 @@ instance Core.FromJSON ExecutionRequest where
           ExecutionRequest
             Core.<$> (o Core..:? "devMode")
             Core.<*> (o Core..:? "function")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "sessionState")
       )
 
@@ -807,7 +805,7 @@ instance Core.FromJSON GoogleAppsScriptTypeFunction where
       ( \o ->
           GoogleAppsScriptTypeFunction
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameters")
       )
 
 instance Core.ToJSON GoogleAppsScriptTypeFunction where
@@ -843,7 +841,7 @@ instance
       "GoogleAppsScriptTypeFunctionSet"
       ( \o ->
           GoogleAppsScriptTypeFunctionSet
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON GoogleAppsScriptTypeFunctionSet where
@@ -1079,7 +1077,7 @@ instance Core.FromJSON ListDeploymentsResponse where
       "ListDeploymentsResponse"
       ( \o ->
           ListDeploymentsResponse
-            Core.<$> (o Core..:? "deployments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deployments")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1119,7 +1117,7 @@ instance Core.FromJSON ListScriptProcessesResponse where
       ( \o ->
           ListScriptProcessesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "processes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "processes")
       )
 
 instance Core.ToJSON ListScriptProcessesResponse where
@@ -1158,7 +1156,7 @@ instance Core.FromJSON ListUserProcessesResponse where
       ( \o ->
           ListUserProcessesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "processes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "processes")
       )
 
 instance Core.ToJSON ListUserProcessesResponse where
@@ -1188,10 +1186,7 @@ instance Core.FromJSON ListValue where
   parseJSON =
     Core.withObject
       "ListValue"
-      ( \o ->
-          ListValue
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> ListValue Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON ListValue where
   toJSON ListValue {..} =
@@ -1222,7 +1217,7 @@ instance Core.FromJSON ListVersionsResponse where
       ( \o ->
           ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
       )
 
 instance Core.ToJSON ListVersionsResponse where
@@ -1263,9 +1258,9 @@ instance Core.FromJSON Metrics where
       "Metrics"
       ( \o ->
           Metrics
-            Core.<$> (o Core..:? "activeUsers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "failedExecutions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalExecutions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activeUsers")
+            Core.<*> (o Core..:? "failedExecutions")
+            Core.<*> (o Core..:? "totalExecutions")
       )
 
 instance Core.ToJSON Metrics where
@@ -1311,7 +1306,9 @@ instance Core.FromJSON MetricsValue where
           MetricsValue
             Core.<$> (o Core..:? "endTime")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "value")
+            Core.<*> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MetricsValue where
@@ -1549,7 +1546,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1724,7 +1721,9 @@ instance Core.FromJSON Value where
           Value
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "bytesValue")
-            Core.<*> (o Core..:? "dateValue")
+            Core.<*> ( o Core..:? "dateValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "listValue")
             Core.<*> (o Core..:? "nullValue")
             Core.<*> (o Core..:? "numberValue")

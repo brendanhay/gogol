@@ -483,7 +483,7 @@ instance Core.FromJSON DynamicGroupMetadata where
       "DynamicGroupMetadata"
       ( \o ->
           DynamicGroupMetadata
-            Core.<$> (o Core..:? "queries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "queries")
             Core.<*> (o Core..:? "status")
       )
 
@@ -677,8 +677,8 @@ instance Core.FromJSON GetMembershipGraphResponse where
       "GetMembershipGraphResponse"
       ( \o ->
           GetMembershipGraphResponse
-            Core.<$> (o Core..:? "adjacencyList" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "groups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adjacencyList")
+            Core.<*> (o Core..:? "groups")
       )
 
 instance Core.ToJSON GetMembershipGraphResponse where
@@ -1259,7 +1259,7 @@ instance
       "GoogleAppsCloudidentityDevicesV1ClientState"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ClientState
-            Core.<$> (o Core..:? "assetTags" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "assetTags")
             Core.<*> (o Core..:? "complianceState")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "customId")
@@ -1612,12 +1612,12 @@ instance
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkOperator")
             Core.<*> (o Core..:? "osVersion")
-            Core.<*> (o Core..:? "otherAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "otherAccounts")
             Core.<*> (o Core..:? "ownerType")
             Core.<*> (o Core..:? "releaseVersion")
             Core.<*> (o Core..:? "securityPatchTime")
             Core.<*> (o Core..:? "serialNumber")
-            Core.<*> (o Core..:? "wifiMacAddresses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "wifiMacAddresses")
       )
 
 instance
@@ -1789,7 +1789,7 @@ instance
       "GoogleAppsCloudidentityDevicesV1ListClientStatesResponse"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
-            Core.<$> (o Core..:? "clientStates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clientStates")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1835,7 +1835,7 @@ instance
       "GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
-            Core.<$> (o Core..:? "deviceUsers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deviceUsers")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1881,7 +1881,7 @@ instance
       "GoogleAppsCloudidentityDevicesV1ListDevicesResponse"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListDevicesResponse
-            Core.<$> (o Core..:? "devices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "devices")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1960,8 +1960,7 @@ instance
       "GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-            Core.<$> (o Core..:? "customer")
-              Core.<*> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "customer") Core.<*> (o Core..:? "names")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2437,7 +2436,7 @@ instance Core.FromJSON GroupRelation where
             Core.<*> (o Core..:? "groupKey")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "relationType")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
       )
 
 instance Core.ToJSON GroupRelation where
@@ -2506,7 +2505,7 @@ instance Core.FromJSON ListGroupsResponse where
       "ListGroupsResponse"
       ( \o ->
           ListGroupsResponse
-            Core.<$> (o Core..:? "groups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groups")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2545,7 +2544,7 @@ instance Core.FromJSON ListMembershipsResponse where
       "ListMembershipsResponse"
       ( \o ->
           ListMembershipsResponse
-            Core.<$> (o Core..:? "memberships" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "memberships")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2647,11 +2646,9 @@ instance Core.FromJSON MemberRelation where
       ( \o ->
           MemberRelation
             Core.<$> (o Core..:? "member")
-            Core.<*> ( o Core..:? "preferredMemberKey"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "preferredMemberKey")
             Core.<*> (o Core..:? "relationType")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
       )
 
 instance Core.ToJSON MemberRelation where
@@ -2743,7 +2740,7 @@ instance Core.FromJSON Membership where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "preferredMemberKey")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "updateTime")
       )
@@ -2785,8 +2782,7 @@ instance Core.FromJSON MembershipAdjacencyList where
       "MembershipAdjacencyList"
       ( \o ->
           MembershipAdjacencyList
-            Core.<$> (o Core..:? "edges" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "group")
+            Core.<$> (o Core..:? "edges") Core.<*> (o Core..:? "group")
       )
 
 instance Core.ToJSON MembershipAdjacencyList where
@@ -2907,11 +2903,9 @@ instance Core.FromJSON ModifyMembershipRolesRequest where
       "ModifyMembershipRolesRequest"
       ( \o ->
           ModifyMembershipRolesRequest
-            Core.<$> (o Core..:? "addRoles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removeRoles" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "updateRolesParams"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "addRoles")
+            Core.<*> (o Core..:? "removeRoles")
+            Core.<*> (o Core..:? "updateRolesParams")
       )
 
 instance Core.ToJSON ModifyMembershipRolesRequest where
@@ -3149,7 +3143,7 @@ instance Core.FromJSON SearchGroupsResponse where
       "SearchGroupsResponse"
       ( \o ->
           SearchGroupsResponse
-            Core.<$> (o Core..:? "groups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groups")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3188,7 +3182,7 @@ instance Core.FromJSON SearchTransitiveGroupsResponse where
       "SearchTransitiveGroupsResponse"
       ( \o ->
           SearchTransitiveGroupsResponse
-            Core.<$> (o Core..:? "memberships" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "memberships")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3230,7 +3224,7 @@ instance
       "SearchTransitiveMembershipsResponse"
       ( \o ->
           SearchTransitiveMembershipsResponse
-            Core.<$> (o Core..:? "memberships" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "memberships")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3309,7 +3303,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

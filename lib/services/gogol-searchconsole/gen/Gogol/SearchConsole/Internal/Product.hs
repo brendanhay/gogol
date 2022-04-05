@@ -194,7 +194,7 @@ instance Core.FromJSON AmpInspectionResult where
             Core.<$> (o Core..:? "ampIndexStatusVerdict")
             Core.<*> (o Core..:? "ampUrl")
             Core.<*> (o Core..:? "indexingState")
-            Core.<*> (o Core..:? "issues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "issues")
             Core.<*> (o Core..:? "lastCrawlTime")
             Core.<*> (o Core..:? "pageFetchState")
             Core.<*> (o Core..:? "robotsTxtState")
@@ -289,7 +289,7 @@ instance Core.FromJSON ApiDataRow where
             Core.<$> (o Core..:? "clicks")
             Core.<*> (o Core..:? "ctr")
             Core.<*> (o Core..:? "impressions")
-            Core.<*> (o Core..:? "keys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "keys")
             Core.<*> (o Core..:? "position")
       )
 
@@ -372,7 +372,7 @@ instance Core.FromJSON ApiDimensionFilterGroup where
       "ApiDimensionFilterGroup"
       ( \o ->
           ApiDimensionFilterGroup
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filters")
             Core.<*> (o Core..:? "groupType")
       )
 
@@ -433,7 +433,7 @@ instance Core.FromJSON DetectedItems where
       "DetectedItems"
       ( \o ->
           DetectedItems
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "richResultType")
       )
 
@@ -539,9 +539,9 @@ instance Core.FromJSON IndexStatusInspectionResult where
             Core.<*> (o Core..:? "indexingState")
             Core.<*> (o Core..:? "lastCrawlTime")
             Core.<*> (o Core..:? "pageFetchState")
-            Core.<*> (o Core..:? "referringUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "referringUrls")
             Core.<*> (o Core..:? "robotsTxtState")
-            Core.<*> (o Core..:? "sitemap" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sitemap")
             Core.<*> (o Core..:? "userCanonical")
             Core.<*> (o Core..:? "verdict")
       )
@@ -663,8 +663,7 @@ instance Core.FromJSON Item where
       "Item"
       ( \o ->
           Item
-            Core.<$> (o Core..:? "issues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "issues") Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON Item where
@@ -732,7 +731,7 @@ instance
       "MobileUsabilityInspectionResult"
       ( \o ->
           MobileUsabilityInspectionResult
-            Core.<$> (o Core..:? "issues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "issues")
             Core.<*> (o Core..:? "verdict")
       )
 
@@ -847,7 +846,7 @@ instance Core.FromJSON RichResultsInspectionResult where
       "RichResultsInspectionResult"
       ( \o ->
           RichResultsInspectionResult
-            Core.<$> (o Core..:? "detectedItems" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "detectedItems")
             Core.<*> (o Core..:? "verdict")
       )
 
@@ -972,10 +971,8 @@ instance Core.FromJSON RunMobileFriendlyTestResponse where
       ( \o ->
           RunMobileFriendlyTestResponse
             Core.<$> (o Core..:? "mobileFriendliness")
-            Core.<*> ( o Core..:? "mobileFriendlyIssues"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "resourceIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mobileFriendlyIssues")
+            Core.<*> (o Core..:? "resourceIssues")
             Core.<*> (o Core..:? "screenshot")
             Core.<*> (o Core..:? "testStatus")
       )
@@ -1045,10 +1042,8 @@ instance Core.FromJSON SearchAnalyticsQueryRequest where
           SearchAnalyticsQueryRequest
             Core.<$> (o Core..:? "aggregationType")
             Core.<*> (o Core..:? "dataState")
-            Core.<*> ( o Core..:? "dimensionFilterGroups"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "dimensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dimensionFilterGroups")
+            Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "endDate")
             Core.<*> (o Core..:? "rowLimit")
             Core.<*> (o Core..:? "searchType")
@@ -1103,7 +1098,7 @@ instance Core.FromJSON SearchAnalyticsQueryResponse where
       ( \o ->
           SearchAnalyticsQueryResponse
             Core.<$> (o Core..:? "responseAggregationType")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON SearchAnalyticsQueryResponse where
@@ -1135,8 +1130,7 @@ instance Core.FromJSON SitemapsListResponse where
     Core.withObject
       "SitemapsListResponse"
       ( \o ->
-          SitemapsListResponse
-            Core.<$> (o Core..:? "sitemap" Core..!= Core.mempty)
+          SitemapsListResponse Core.<$> (o Core..:? "sitemap")
       )
 
 instance Core.ToJSON SitemapsListResponse where
@@ -1165,8 +1159,7 @@ instance Core.FromJSON SitesListResponse where
     Core.withObject
       "SitesListResponse"
       ( \o ->
-          SitesListResponse
-            Core.<$> (o Core..:? "siteEntry" Core..!= Core.mempty)
+          SitesListResponse Core.<$> (o Core..:? "siteEntry")
       )
 
 instance Core.ToJSON SitesListResponse where
@@ -1352,15 +1345,19 @@ instance Core.FromJSON WmxSitemap where
       "WmxSitemap"
       ( \o ->
           WmxSitemap
-            Core.<$> (o Core..:? "contents" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "errors")
+            Core.<$> (o Core..:? "contents")
+            Core.<*> ( o Core..:? "errors"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "isPending")
             Core.<*> (o Core..:? "isSitemapsIndex")
             Core.<*> (o Core..:? "lastDownloaded")
             Core.<*> (o Core..:? "lastSubmitted")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "type")
-            Core.<*> (o Core..:? "warnings")
+            Core.<*> ( o Core..:? "warnings"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON WmxSitemap where
@@ -1410,8 +1407,12 @@ instance Core.FromJSON WmxSitemapContent where
       "WmxSitemapContent"
       ( \o ->
           WmxSitemapContent
-            Core.<$> (o Core..:? "indexed")
-            Core.<*> (o Core..:? "submitted")
+            Core.<$> ( o Core..:? "indexed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "submitted"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 

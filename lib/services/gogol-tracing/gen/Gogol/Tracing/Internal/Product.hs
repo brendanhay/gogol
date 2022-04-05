@@ -185,7 +185,9 @@ instance Core.FromJSON AttributeValue where
       ( \o ->
           AttributeValue
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> (o Core..:? "intValue")
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -309,8 +311,7 @@ instance Core.FromJSON BatchWriteSpansRequest where
     Core.withObject
       "BatchWriteSpansRequest"
       ( \o ->
-          BatchWriteSpansRequest
-            Core.<$> (o Core..:? "spans" Core..!= Core.mempty)
+          BatchWriteSpansRequest Core.<$> (o Core..:? "spans")
       )
 
 instance Core.ToJSON BatchWriteSpansRequest where
@@ -405,7 +406,7 @@ instance Core.FromJSON Links where
       ( \o ->
           Links
             Core.<$> (o Core..:? "droppedLinksCount")
-            Core.<*> (o Core..:? "link" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "link")
       )
 
 instance Core.ToJSON Links where
@@ -442,7 +443,7 @@ instance Core.FromJSON ListSpansResponse where
       ( \o ->
           ListSpansResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "spans" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "spans")
       )
 
 instance Core.ToJSON ListSpansResponse where
@@ -478,7 +479,7 @@ instance Core.FromJSON ListTracesResponse where
       ( \o ->
           ListTracesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "traces" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "traces")
       )
 
 instance Core.ToJSON ListTracesResponse where
@@ -560,8 +561,12 @@ instance Core.FromJSON NetworkEvent where
       "NetworkEvent"
       ( \o ->
           NetworkEvent
-            Core.<$> (o Core..:? "messageId")
-            Core.<*> (o Core..:? "messageSize")
+            Core.<$> ( o Core..:? "messageId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "messageSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "time")
             Core.<*> (o Core..:? "type")
       )
@@ -704,10 +709,14 @@ instance Core.FromJSON StackFrame where
       "StackFrame"
       ( \o ->
           StackFrame
-            Core.<$> (o Core..:? "columnNumber")
+            Core.<$> ( o Core..:? "columnNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "fileName")
             Core.<*> (o Core..:? "functionName")
-            Core.<*> (o Core..:? "lineNumber")
+            Core.<*> ( o Core..:? "lineNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "loadModule")
             Core.<*> (o Core..:? "originalFunctionName")
             Core.<*> (o Core..:? "sourceVersion")
@@ -754,7 +763,7 @@ instance Core.FromJSON StackFrames where
       ( \o ->
           StackFrames
             Core.<$> (o Core..:? "droppedFramesCount")
-            Core.<*> (o Core..:? "frame" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "frame")
       )
 
 instance Core.ToJSON StackFrames where
@@ -795,7 +804,9 @@ instance Core.FromJSON StackTrace where
       ( \o ->
           StackTrace
             Core.<$> (o Core..:? "stackFrames")
-            Core.<*> (o Core..:? "stackTraceHashId")
+            Core.<*> ( o Core..:? "stackTraceHashId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON StackTrace where
@@ -861,7 +872,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -977,7 +988,7 @@ instance Core.FromJSON TimeEvents where
           TimeEvents
             Core.<$> (o Core..:? "droppedAnnotationsCount")
             Core.<*> (o Core..:? "droppedNetworkEventsCount")
-            Core.<*> (o Core..:? "timeEvent" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "timeEvent")
       )
 
 instance Core.ToJSON TimeEvents where

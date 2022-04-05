@@ -574,7 +574,9 @@ instance Core.FromJSON CopyLogEntriesResponse where
       "CopyLogEntriesResponse"
       ( \o ->
           CopyLogEntriesResponse
-            Core.<$> (o Core..:? "logEntriesCopiedCount")
+            Core.<$> ( o Core..:? "logEntriesCopiedCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CopyLogEntriesResponse where
@@ -622,10 +624,7 @@ instance Core.FromJSON Explicit where
   parseJSON =
     Core.withObject
       "Explicit"
-      ( \o ->
-          Explicit
-            Core.<$> (o Core..:? "bounds" Core..!= Core.mempty)
-      )
+      (\o -> Explicit Core.<$> (o Core..:? "bounds"))
 
 instance Core.ToJSON Explicit where
   toJSON Explicit {..} =
@@ -742,7 +741,9 @@ instance Core.FromJSON HttpRequest where
       "HttpRequest"
       ( \o ->
           HttpRequest
-            Core.<$> (o Core..:? "cacheFillBytes")
+            Core.<$> ( o Core..:? "cacheFillBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "cacheHit")
             Core.<*> (o Core..:? "cacheLookup")
             Core.<*> (o Core..:? "cacheValidatedWithOriginServer")
@@ -751,9 +752,13 @@ instance Core.FromJSON HttpRequest where
             Core.<*> (o Core..:? "referer")
             Core.<*> (o Core..:? "remoteIp")
             Core.<*> (o Core..:? "requestMethod")
-            Core.<*> (o Core..:? "requestSize")
+            Core.<*> ( o Core..:? "requestSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "requestUrl")
-            Core.<*> (o Core..:? "responseSize")
+            Core.<*> ( o Core..:? "responseSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "serverIp")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userAgent")
@@ -897,7 +902,7 @@ instance Core.FromJSON ListBucketsResponse where
       "ListBucketsResponse"
       ( \o ->
           ListBucketsResponse
-            Core.<$> (o Core..:? "buckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buckets")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -936,7 +941,7 @@ instance Core.FromJSON ListExclusionsResponse where
       "ListExclusionsResponse"
       ( \o ->
           ListExclusionsResponse
-            Core.<$> (o Core..:? "exclusions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exclusions")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -972,7 +977,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1027,8 +1032,8 @@ instance Core.FromJSON ListLogEntriesRequest where
             Core.<*> (o Core..:? "orderBy")
             Core.<*> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "projectIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resourceNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "projectIds")
+            Core.<*> (o Core..:? "resourceNames")
       )
 
 instance Core.ToJSON ListLogEntriesRequest where
@@ -1067,7 +1072,7 @@ instance Core.FromJSON ListLogEntriesResponse where
       "ListLogEntriesResponse"
       ( \o ->
           ListLogEntriesResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1103,7 +1108,7 @@ instance Core.FromJSON ListLogMetricsResponse where
       "ListLogMetricsResponse"
       ( \o ->
           ListLogMetricsResponse
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metrics")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1139,7 +1144,7 @@ instance Core.FromJSON ListLogsResponse where
       "ListLogsResponse"
       ( \o ->
           ListLogsResponse
-            Core.<$> (o Core..:? "logNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "logNames")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1182,9 +1187,7 @@ instance
       ( \o ->
           ListMonitoredResourceDescriptorsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "resourceDescriptors"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "resourceDescriptors")
       )
 
 instance
@@ -1227,7 +1230,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1263,7 +1266,7 @@ instance Core.FromJSON ListSinksResponse where
       ( \o ->
           ListSinksResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sinks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sinks")
       )
 
 instance Core.ToJSON ListSinksResponse where
@@ -1299,7 +1302,7 @@ instance Core.FromJSON ListViewsResponse where
       ( \o ->
           ListViewsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "views" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "views")
       )
 
 instance Core.ToJSON ListViewsResponse where
@@ -1472,7 +1475,7 @@ instance Core.FromJSON LogBucket where
             Core.<*> (o Core..:? "lifecycleState")
             Core.<*> (o Core..:? "locked")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "restrictedFields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "restrictedFields")
             Core.<*> (o Core..:? "retentionDays")
             Core.<*> (o Core..:? "updateTime")
       )
@@ -1782,7 +1785,9 @@ instance Core.FromJSON LogEntrySourceLocation where
           LogEntrySourceLocation
             Core.<$> (o Core..:? "file")
             Core.<*> (o Core..:? "function")
-            Core.<*> (o Core..:? "line")
+            Core.<*> ( o Core..:? "line"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON LogEntrySourceLocation where
@@ -2079,7 +2084,7 @@ instance Core.FromJSON LogSink where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "destination")
             Core.<*> (o Core..:? "disabled")
-            Core.<*> (o Core..:? "exclusions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "exclusions")
             Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "includeChildren")
             Core.<*> (o Core..:? "name")
@@ -2265,13 +2270,11 @@ instance Core.FromJSON MetricDescriptor where
           MetricDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "metricKind")
-            Core.<*> ( o Core..:? "monitoredResourceTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "monitoredResourceTypes")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "unit")
@@ -2446,7 +2449,7 @@ instance Core.FromJSON MonitoredResourceDescriptor where
           MonitoredResourceDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
@@ -2817,8 +2820,10 @@ instance Core.FromJSON RequestLog where
             Core.<*> (o Core..:? "instanceIndex")
             Core.<*> (o Core..:? "ip")
             Core.<*> (o Core..:? "latency")
-            Core.<*> (o Core..:? "line" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "megaCycles")
+            Core.<*> (o Core..:? "line")
+            Core.<*> ( o Core..:? "megaCycles"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "moduleId")
             Core.<*> (o Core..:? "nickname")
@@ -2826,8 +2831,10 @@ instance Core.FromJSON RequestLog where
             Core.<*> (o Core..:? "referrer")
             Core.<*> (o Core..:? "requestId")
             Core.<*> (o Core..:? "resource")
-            Core.<*> (o Core..:? "responseSize")
-            Core.<*> (o Core..:? "sourceReference" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "responseSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "sourceReference")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "taskName")
@@ -2973,7 +2980,9 @@ instance Core.FromJSON SourceLocation where
           SourceLocation
             Core.<$> (o Core..:? "file")
             Core.<*> (o Core..:? "functionName")
-            Core.<*> (o Core..:? "line")
+            Core.<*> ( o Core..:? "line"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SourceLocation where
@@ -3048,7 +3057,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3157,7 +3166,7 @@ instance Core.FromJSON TailLogEntriesRequest where
           TailLogEntriesRequest
             Core.<$> (o Core..:? "bufferWindow")
             Core.<*> (o Core..:? "filter")
-            Core.<*> (o Core..:? "resourceNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceNames")
       )
 
 instance Core.ToJSON TailLogEntriesRequest where
@@ -3196,8 +3205,8 @@ instance Core.FromJSON TailLogEntriesResponse where
       "TailLogEntriesResponse"
       ( \o ->
           TailLogEntriesResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "suppressionInfo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "suppressionInfo")
       )
 
 instance Core.ToJSON TailLogEntriesResponse where
@@ -3270,7 +3279,7 @@ instance Core.FromJSON WriteLogEntriesRequest where
       ( \o ->
           WriteLogEntriesRequest
             Core.<$> (o Core..:? "dryRun")
-            Core.<*> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entries")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "logName")
             Core.<*> (o Core..:? "partialSuccess")

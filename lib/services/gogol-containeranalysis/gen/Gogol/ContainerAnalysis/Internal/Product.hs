@@ -636,7 +636,7 @@ instance Core.FromJSON Artifact where
           Artifact
             Core.<$> (o Core..:? "checksum")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "names" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "names")
       )
 
 instance Core.ToJSON Artifact where
@@ -703,9 +703,9 @@ instance Core.FromJSON AttestationOccurrence where
       "AttestationOccurrence"
       ( \o ->
           AttestationOccurrence
-            Core.<$> (o Core..:? "jwts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jwts")
             Core.<*> (o Core..:? "serializedPayload")
-            Core.<*> (o Core..:? "signatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "signatures")
       )
 
 instance Core.ToJSON AttestationOccurrence where
@@ -797,7 +797,7 @@ instance Core.FromJSON BatchCreateNotesResponse where
       "BatchCreateNotesResponse"
       ( \o ->
           BatchCreateNotesResponse
-            Core.<$> (o Core..:? "notes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "notes")
       )
 
 instance Core.ToJSON BatchCreateNotesResponse where
@@ -826,7 +826,7 @@ instance Core.FromJSON BatchCreateOccurrencesRequest where
       "BatchCreateOccurrencesRequest"
       ( \o ->
           BatchCreateOccurrencesRequest
-            Core.<$> (o Core..:? "occurrences" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "occurrences")
       )
 
 instance Core.ToJSON BatchCreateOccurrencesRequest where
@@ -857,7 +857,7 @@ instance Core.FromJSON BatchCreateOccurrencesResponse where
       "BatchCreateOccurrencesResponse"
       ( \o ->
           BatchCreateOccurrencesResponse
-            Core.<$> (o Core..:? "occurrences" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "occurrences")
       )
 
 instance Core.ToJSON BatchCreateOccurrencesResponse where
@@ -898,7 +898,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1053,8 +1053,8 @@ instance Core.FromJSON BuildProvenance where
           BuildProvenance
             Core.<$> (o Core..:? "buildOptions")
             Core.<*> (o Core..:? "builderVersion")
-            Core.<*> (o Core..:? "builtArtifacts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "commands" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "builtArtifacts")
+            Core.<*> (o Core..:? "commands")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "creator")
             Core.<*> (o Core..:? "endTime")
@@ -1479,12 +1479,12 @@ instance Core.FromJSON Command where
       "Command"
       ( \o ->
           Command
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
             Core.<*> (o Core..:? "dir")
-            Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "waitFor" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "waitFor")
       )
 
 instance Core.ToJSON Command where
@@ -1590,7 +1590,7 @@ instance Core.FromJSON ComplianceNote where
             Core.<*> (o Core..:? "remediation")
             Core.<*> (o Core..:? "scanInstructions")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "version" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON ComplianceNote where
@@ -1635,9 +1635,7 @@ instance Core.FromJSON ComplianceOccurrence where
       ( \o ->
           ComplianceOccurrence
             Core.<$> (o Core..:? "nonComplianceReason")
-            Core.<*> ( o Core..:? "nonCompliantFiles"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonCompliantFiles")
       )
 
 instance Core.ToJSON ComplianceOccurrence where
@@ -1825,7 +1823,7 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
-            Core.<$> (o Core..:? "images" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "images")
               Core.<*> (o Core..:? "objects")
       )
 
@@ -1874,8 +1872,7 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects
-            Core.<$> (o Core..:? "location")
-              Core.<*> (o Core..:? "paths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "location") Core.<*> (o Core..:? "paths")
               Core.<*> (o Core..:? "timing")
       )
 
@@ -2035,7 +2032,7 @@ instance
               Core.<*> (o Core..:? "failureInfo")
               Core.<*> (o Core..:? "finishTime")
               Core.<*> (o Core..:? "id")
-              Core.<*> (o Core..:? "images" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "images")
               Core.<*> (o Core..:? "logUrl")
               Core.<*> (o Core..:? "logsBucket")
               Core.<*> (o Core..:? "name")
@@ -2043,19 +2040,19 @@ instance
               Core.<*> (o Core..:? "projectId")
               Core.<*> (o Core..:? "queueTtl")
               Core.<*> (o Core..:? "results")
-              Core.<*> (o Core..:? "secrets" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "secrets")
               Core.<*> (o Core..:? "serviceAccount")
               Core.<*> (o Core..:? "source")
               Core.<*> (o Core..:? "sourceProvenance")
               Core.<*> (o Core..:? "startTime")
               Core.<*> (o Core..:? "status")
               Core.<*> (o Core..:? "statusDetail")
-              Core.<*> (o Core..:? "steps" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "steps")
               Core.<*> (o Core..:? "substitutions")
-              Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tags")
               Core.<*> (o Core..:? "timeout")
               Core.<*> (o Core..:? "timing")
-              Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "warnings")
       )
 
 instance
@@ -2372,20 +2369,20 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "dynamicSubstitutions")
-              Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "env")
               Core.<*> (o Core..:? "logStreamingOption")
               Core.<*> (o Core..:? "logging")
               Core.<*> (o Core..:? "machineType")
               Core.<*> (o Core..:? "pool")
               Core.<*> (o Core..:? "requestedVerifyOption")
-              Core.<*> (o Core..:? "secretEnv" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "sourceProvenanceHash"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "secretEnv")
+              Core.<*> (o Core..:? "sourceProvenanceHash")
               Core.<*> (o Core..:? "substitutionOption")
-              Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "volumes")
               Core.<*> (o Core..:? "workerPool")
       )
 
@@ -2525,20 +2522,19 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildStep
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "dir")
+            Core.<$> (o Core..:? "args") Core.<*> (o Core..:? "dir")
               Core.<*> (o Core..:? "entrypoint")
-              Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "env")
               Core.<*> (o Core..:? "id")
               Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "pullTiming")
               Core.<*> (o Core..:? "script")
-              Core.<*> (o Core..:? "secretEnv" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "secretEnv")
               Core.<*> (o Core..:? "status")
               Core.<*> (o Core..:? "timeout")
               Core.<*> (o Core..:? "timing")
-              Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "waitFor" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "volumes")
+              Core.<*> (o Core..:? "waitFor")
       )
 
 instance
@@ -2690,7 +2686,7 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes
-            Core.<$> (o Core..:? "fileHash" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fileHash")
       )
 
 instance
@@ -3001,10 +2997,12 @@ instance
           ContaineranalysisGoogleDevtoolsCloudbuildV1Results
             Core.<$> (o Core..:? "artifactManifest")
               Core.<*> (o Core..:? "artifactTiming")
-              Core.<*> (o Core..:? "buildStepImages" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "buildStepOutputs" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "images" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "numArtifacts")
+              Core.<*> (o Core..:? "buildStepImages")
+              Core.<*> (o Core..:? "buildStepOutputs")
+              Core.<*> (o Core..:? "images")
+              Core.<*> ( o Core..:? "numArtifacts"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -3196,8 +3194,8 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1Secrets"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1Secrets
-            Core.<$> (o Core..:? "inline" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "secretManager" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "inline")
+              Core.<*> (o Core..:? "secretManager")
       )
 
 instance
@@ -3415,7 +3413,9 @@ instance
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource
             Core.<$> (o Core..:? "bucket")
-              Core.<*> (o Core..:? "generation")
+              Core.<*> ( o Core..:? "generation"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "object")
       )
 
@@ -3467,7 +3467,9 @@ instance
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest
             Core.<$> (o Core..:? "bucket")
-              Core.<*> (o Core..:? "generation")
+              Core.<*> ( o Core..:? "generation"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "object")
       )
 
@@ -3689,8 +3691,7 @@ instance Core.FromJSON DeploymentNote where
     Core.withObject
       "DeploymentNote"
       ( \o ->
-          DeploymentNote
-            Core.<$> (o Core..:? "resourceUri" Core..!= Core.mempty)
+          DeploymentNote Core.<$> (o Core..:? "resourceUri")
       )
 
 instance Core.ToJSON DeploymentNote where
@@ -3745,7 +3746,7 @@ instance Core.FromJSON DeploymentOccurrence where
             Core.<*> (o Core..:? "config")
             Core.<*> (o Core..:? "deployTime")
             Core.<*> (o Core..:? "platform")
-            Core.<*> (o Core..:? "resourceUri" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceUri")
             Core.<*> (o Core..:? "undeployTime")
             Core.<*> (o Core..:? "userEmail")
       )
@@ -4064,7 +4065,7 @@ instance Core.FromJSON Envelope where
           Envelope
             Core.<$> (o Core..:? "payload")
             Core.<*> (o Core..:? "payloadType")
-            Core.<*> (o Core..:? "signatures" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "signatures")
       )
 
 instance Core.ToJSON Envelope where
@@ -4179,10 +4180,7 @@ instance Core.FromJSON FileHashes where
   parseJSON =
     Core.withObject
       "FileHashes"
-      ( \o ->
-          FileHashes
-            Core.<$> (o Core..:? "fileHash" Core..!= Core.mempty)
-      )
+      (\o -> FileHashes Core.<$> (o Core..:? "fileHash"))
 
 instance Core.ToJSON FileHashes where
   toJSON FileHashes {..} =
@@ -4221,7 +4219,7 @@ instance Core.FromJSON Fingerprint where
       ( \o ->
           Fingerprint
             Core.<$> (o Core..:? "v1Name")
-            Core.<*> (o Core..:? "v2Blob" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "v2Blob")
             Core.<*> (o Core..:? "v2Name")
       )
 
@@ -4267,10 +4265,14 @@ instance Core.FromJSON FixableTotalByDigest where
       "FixableTotalByDigest"
       ( \o ->
           FixableTotalByDigest
-            Core.<$> (o Core..:? "fixableCount")
+            Core.<$> ( o Core..:? "fixableCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resourceUri")
             Core.<*> (o Core..:? "severity")
-            Core.<*> (o Core..:? "totalCount")
+            Core.<*> ( o Core..:? "totalCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON FixableTotalByDigest where
@@ -4649,7 +4651,7 @@ instance Core.FromJSON ImageOccurrence where
             Core.<$> (o Core..:? "baseResourceUrl")
             Core.<*> (o Core..:? "distance")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "layerInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "layerInfo")
       )
 
 instance Core.ToJSON ImageOccurrence where
@@ -4696,7 +4698,7 @@ instance Core.FromJSON InTotoProvenance where
       ( \o ->
           InTotoProvenance
             Core.<$> (o Core..:? "builderConfig")
-            Core.<*> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "materials")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "recipe")
       )
@@ -4751,7 +4753,7 @@ instance Core.FromJSON InTotoStatement where
             Core.<*> (o Core..:? "predicateType")
             Core.<*> (o Core..:? "provenance")
             Core.<*> (o Core..:? "slsaProvenance")
-            Core.<*> (o Core..:? "subject" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subject")
       )
 
 instance Core.ToJSON InTotoStatement where
@@ -4887,7 +4889,7 @@ instance Core.FromJSON ListNoteOccurrencesResponse where
       ( \o ->
           ListNoteOccurrencesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "occurrences" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "occurrences")
       )
 
 instance Core.ToJSON ListNoteOccurrencesResponse where
@@ -4923,7 +4925,7 @@ instance Core.FromJSON ListNotesResponse where
       ( \o ->
           ListNotesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "notes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "notes")
       )
 
 instance Core.ToJSON ListNotesResponse where
@@ -4962,7 +4964,7 @@ instance Core.FromJSON ListOccurrencesResponse where
       ( \o ->
           ListOccurrencesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "occurrences" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "occurrences")
       )
 
 instance Core.ToJSON ListOccurrencesResponse where
@@ -5263,8 +5265,8 @@ instance Core.FromJSON Note where
             Core.<*> (o Core..:? "longDescription")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "package")
-            Core.<*> (o Core..:? "relatedNoteNames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "relatedUrl" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "relatedNoteNames")
+            Core.<*> (o Core..:? "relatedUrl")
             Core.<*> (o Core..:? "shortDescription")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "upgrade")
@@ -5515,7 +5517,7 @@ instance Core.FromJSON PackageNote where
       "PackageNote"
       ( \o ->
           PackageNote
-            Core.<$> (o Core..:? "distribution" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "distribution")
             Core.<*> (o Core..:? "name")
       )
 
@@ -5551,8 +5553,7 @@ instance Core.FromJSON PackageOccurrence where
       "PackageOccurrence"
       ( \o ->
           PackageOccurrence
-            Core.<$> (o Core..:? "location" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "location") Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON PackageOccurrence where
@@ -5592,7 +5593,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -5678,10 +5679,12 @@ instance Core.FromJSON Recipe where
       "Recipe"
       ( \o ->
           Recipe
-            Core.<$> (o Core..:? "arguments" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "definedInMaterial")
+            Core.<$> (o Core..:? "arguments")
+            Core.<*> ( o Core..:? "definedInMaterial"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "entryPoint")
-            Core.<*> (o Core..:? "environment" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "type")
       )
 
@@ -6044,7 +6047,7 @@ instance Core.FromJSON SlsaProvenance where
       ( \o ->
           SlsaProvenance
             Core.<$> (o Core..:? "builder")
-            Core.<*> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "materials")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "recipe")
       )
@@ -6096,7 +6099,9 @@ instance Core.FromJSON SlsaRecipe where
       ( \o ->
           SlsaRecipe
             Core.<$> (o Core..:? "arguments")
-            Core.<*> (o Core..:? "definedInMaterial")
+            Core.<*> ( o Core..:? "definedInMaterial"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "entryPoint")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "type")
@@ -6207,9 +6212,7 @@ instance Core.FromJSON Source where
       "Source"
       ( \o ->
           Source
-            Core.<$> ( o Core..:? "additionalContexts"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalContexts")
             Core.<*> (o Core..:? "artifactStorageSourceUri")
             Core.<*> (o Core..:? "context")
             Core.<*> (o Core..:? "fileHashes")
@@ -6360,7 +6363,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6482,7 +6485,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -6513,7 +6516,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -6557,7 +6560,7 @@ instance Core.FromJSON UpgradeDistribution where
           UpgradeDistribution
             Core.<$> (o Core..:? "classification")
             Core.<*> (o Core..:? "cpeUri")
-            Core.<*> (o Core..:? "cve" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "cve")
             Core.<*> (o Core..:? "severity")
       )
 
@@ -6604,7 +6607,7 @@ instance Core.FromJSON UpgradeNote where
       "UpgradeNote"
       ( \o ->
           UpgradeNote
-            Core.<$> (o Core..:? "distributions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "distributions")
             Core.<*> (o Core..:? "package")
             Core.<*> (o Core..:? "version")
             Core.<*> (o Core..:? "windowsUpdate")
@@ -6769,10 +6772,10 @@ instance Core.FromJSON VulnerabilityNote where
           VulnerabilityNote
             Core.<$> (o Core..:? "cvssScore")
             Core.<*> (o Core..:? "cvssV3")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "sourceUpdateTime")
-            Core.<*> (o Core..:? "windowsDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "windowsDetails")
       )
 
 instance Core.ToJSON VulnerabilityNote where
@@ -6844,8 +6847,8 @@ instance Core.FromJSON VulnerabilityOccurrence where
             Core.<*> (o Core..:? "effectiveSeverity")
             Core.<*> (o Core..:? "fixAvailable")
             Core.<*> (o Core..:? "longDescription")
-            Core.<*> (o Core..:? "packageIssue" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "relatedUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "packageIssue")
+            Core.<*> (o Core..:? "relatedUrls")
             Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "shortDescription")
             Core.<*> (o Core..:? "type")
@@ -6894,7 +6897,7 @@ instance
       "VulnerabilityOccurrencesSummary"
       ( \o ->
           VulnerabilityOccurrencesSummary
-            Core.<$> (o Core..:? "counts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "counts")
       )
 
 instance Core.ToJSON VulnerabilityOccurrencesSummary where
@@ -6935,7 +6938,7 @@ instance Core.FromJSON WindowsDetail where
           WindowsDetail
             Core.<$> (o Core..:? "cpeUri")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "fixingKbs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fixingKbs")
             Core.<*> (o Core..:? "name")
       )
 
@@ -6991,10 +6994,10 @@ instance Core.FromJSON WindowsUpdate where
       "WindowsUpdate"
       ( \o ->
           WindowsUpdate
-            Core.<$> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categories")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "identity")
-            Core.<*> (o Core..:? "kbArticleIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "kbArticleIds")
             Core.<*> (o Core..:? "lastPublishedTimestamp")
             Core.<*> (o Core..:? "supportUrl")
             Core.<*> (o Core..:? "title")

@@ -185,7 +185,7 @@ instance Core.FromJSON BulkCheckRequest where
             Core.<*> (o Core..:? "defaultSource")
             Core.<*> (o Core..:? "defaultTarget")
             Core.<*> (o Core..:? "skipCacheLookup")
-            Core.<*> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statements")
       )
 
 instance Core.ToJSON BulkCheckRequest where
@@ -226,7 +226,7 @@ instance Core.FromJSON BulkCheckResponse where
       ( \o ->
           BulkCheckResponse
             Core.<$> (o Core..:? "bulkErrorCode")
-            Core.<*> (o Core..:? "checkResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "checkResults")
       )
 
 instance Core.ToJSON BulkCheckResponse where
@@ -303,7 +303,7 @@ instance Core.FromJSON CheckResponse where
       ( \o ->
           CheckResponse
             Core.<$> (o Core..:? "debugString")
-            Core.<*> (o Core..:? "errorCode" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errorCode")
             Core.<*> (o Core..:? "linked")
             Core.<*> (o Core..:? "maxAge")
       )
@@ -352,9 +352,9 @@ instance Core.FromJSON ListResponse where
       ( \o ->
           ListResponse
             Core.<$> (o Core..:? "debugString")
-            Core.<*> (o Core..:? "errorCode" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errorCode")
             Core.<*> (o Core..:? "maxAge")
-            Core.<*> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statements")
       )
 
 instance Core.ToJSON ListResponse where

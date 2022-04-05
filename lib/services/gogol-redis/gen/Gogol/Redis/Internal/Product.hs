@@ -656,7 +656,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "maintenanceSchedule")
             Core.<*> (o Core..:? "memorySizeGb")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "nodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nodes")
             Core.<*> (o Core..:? "persistenceConfig")
             Core.<*> (o Core..:? "persistenceIamIdentity")
             Core.<*> (o Core..:? "port")
@@ -668,7 +668,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "replicaCount")
             Core.<*> (o Core..:? "reservedIpRange")
             Core.<*> (o Core..:? "secondaryIpRange")
-            Core.<*> (o Core..:? "serverCaCerts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serverCaCerts")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "statusMessage")
             Core.<*> (o Core..:? "tier")
@@ -840,9 +840,9 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListInstancesResponse where
@@ -878,7 +878,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -918,7 +918,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1073,9 +1073,7 @@ instance Core.FromJSON MaintenancePolicy where
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "weeklyMaintenanceWindow"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "weeklyMaintenanceWindow")
       )
 
 instance Core.ToJSON MaintenancePolicy where
@@ -1431,7 +1429,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

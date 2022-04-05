@@ -124,7 +124,7 @@ instance Core.FromJSON ViolatingSitesResponse where
       "ViolatingSitesResponse"
       ( \o ->
           ViolatingSitesResponse
-            Core.<$> (o Core..:? "violatingSites" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "violatingSites")
       )
 
 instance Core.ToJSON ViolatingSitesResponse where

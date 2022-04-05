@@ -273,7 +273,10 @@ instance Core.FromJSON Accelerator where
       "Accelerator"
       ( \o ->
           Accelerator
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "type")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Accelerator where
@@ -344,15 +347,15 @@ instance Core.FromJSON Action where
       "Action"
       ( \o ->
           Action
-            Core.<$> (o Core..:? "commands" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "commands")
             Core.<*> (o Core..:? "credentials")
             Core.<*> (o Core..:? "encryptedEnvironment")
             Core.<*> (o Core..:? "entrypoint")
             Core.<*> (o Core..:? "environment")
-            Core.<*> (o Core..:? "flags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "flags")
             Core.<*> (o Core..:? "imageUri")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "mounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mounts")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pidNamespace")
             Core.<*> (o Core..:? "portMappings")
@@ -525,7 +528,7 @@ instance Core.FromJSON CheckInRequest where
           CheckInRequest
             Core.<$> (o Core..:? "deadlineExpired")
             Core.<*> (o Core..:? "event")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
             Core.<*> (o Core..:? "result")
             Core.<*> (o Core..:? "sosReport")
             Core.<*> (o Core..:? "workerStatus")
@@ -855,8 +858,7 @@ instance Core.FromJSON DelayedEvent where
       "DelayedEvent"
       ( \o ->
           DelayedEvent
-            Core.<$> (o Core..:? "cause")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cause") Core.<*> (o Core..:? "metrics")
       )
 
 instance Core.ToJSON DelayedEvent where
@@ -940,8 +942,12 @@ instance Core.FromJSON DiskStatus where
       "DiskStatus"
       ( \o ->
           DiskStatus
-            Core.<$> (o Core..:? "freeSpaceBytes")
-            Core.<*> (o Core..:? "totalSpaceBytes")
+            Core.<$> ( o Core..:? "freeSpaceBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalSpaceBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON DiskStatus where
@@ -1130,7 +1136,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1182,7 +1188,7 @@ instance Core.FromJSON Metadata where
           Metadata
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "events" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "events")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "pipeline")
             Core.<*> (o Core..:? "startTime")
@@ -1527,7 +1533,7 @@ instance Core.FromJSON Pipeline where
       "Pipeline"
       ( \o ->
           Pipeline
-            Core.<$> (o Core..:? "actions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actions")
             Core.<*> (o Core..:? "encryptedEnvironment")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "resources")
@@ -1668,9 +1674,9 @@ instance Core.FromJSON Resources where
       ( \o ->
           Resources
             Core.<$> (o Core..:? "projectId")
-            Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regions")
             Core.<*> (o Core..:? "virtualMachine")
-            Core.<*> (o Core..:? "zones" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "zones")
       )
 
 instance Core.ToJSON Resources where
@@ -1835,8 +1841,7 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1874,7 +1879,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2082,12 +2087,12 @@ instance Core.FromJSON VirtualMachine where
       "VirtualMachine"
       ( \o ->
           VirtualMachine
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "bootDiskSizeGb")
             Core.<*> (o Core..:? "bootImage")
             Core.<*> (o Core..:? "cpuPlatform")
-            Core.<*> (o Core..:? "disks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "dockerCacheImages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disks")
+            Core.<*> (o Core..:? "dockerCacheImages")
             Core.<*> (o Core..:? "enableStackdriverMonitoring")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "machineType")
@@ -2096,7 +2101,7 @@ instance Core.FromJSON VirtualMachine where
             Core.<*> (o Core..:? "preemptible")
             Core.<*> (o Core..:? "reservation")
             Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
       )
 
 instance Core.ToJSON VirtualMachine where
@@ -2319,9 +2324,15 @@ instance Core.FromJSON WorkerStatus where
           WorkerStatus
             Core.<$> (o Core..:? "attachedDisks")
             Core.<*> (o Core..:? "bootDisk")
-            Core.<*> (o Core..:? "freeRamBytes")
-            Core.<*> (o Core..:? "totalRamBytes")
-            Core.<*> (o Core..:? "uptimeSeconds")
+            Core.<*> ( o Core..:? "freeRamBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalRamBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "uptimeSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON WorkerStatus where

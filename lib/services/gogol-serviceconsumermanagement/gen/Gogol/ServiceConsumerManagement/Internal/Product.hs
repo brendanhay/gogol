@@ -508,10 +508,10 @@ instance Core.FromJSON Api where
       "Api"
       ( \o ->
           Api
-            Core.<$> (o Core..:? "methods" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "mixins" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "methods")
+            Core.<*> (o Core..:? "mixins")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "sourceContext")
             Core.<*> (o Core..:? "syntax")
             Core.<*> (o Core..:? "version")
@@ -662,7 +662,7 @@ instance Core.FromJSON AuthProvider where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "issuer")
             Core.<*> (o Core..:? "jwksUri")
-            Core.<*> (o Core..:? "jwtLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "jwtLocations")
       )
 
 instance Core.ToJSON AuthProvider where
@@ -738,8 +738,8 @@ instance Core.FromJSON Authentication where
       "Authentication"
       ( \o ->
           Authentication
-            Core.<$> (o Core..:? "providers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "providers")
+            Core.<*> (o Core..:? "rules")
       )
 
 instance Core.ToJSON Authentication where
@@ -785,7 +785,7 @@ instance Core.FromJSON AuthenticationRule where
           AuthenticationRule
             Core.<$> (o Core..:? "allowWithoutCredential")
             Core.<*> (o Core..:? "oauth")
-            Core.<*> (o Core..:? "requirements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "requirements")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -819,10 +819,7 @@ instance Core.FromJSON Backend where
   parseJSON =
     Core.withObject
       "Backend"
-      ( \o ->
-          Backend
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
-      )
+      (\o -> Backend Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON Backend where
   toJSON Backend {..} =
@@ -919,10 +916,7 @@ instance Core.FromJSON Billing where
     Core.withObject
       "Billing"
       ( \o ->
-          Billing
-            Core.<$> ( o Core..:? "consumerDestinations"
-                         Core..!= Core.mempty
-                     )
+          Billing Core.<$> (o Core..:? "consumerDestinations")
       )
 
 instance Core.ToJSON Billing where
@@ -986,7 +980,7 @@ instance Core.FromJSON BillingDestination where
       "BillingDestination"
       ( \o ->
           BillingDestination
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metrics")
             Core.<*> (o Core..:? "monitoredResource")
       )
 
@@ -1038,10 +1032,7 @@ instance Core.FromJSON Context where
   parseJSON =
     Core.withObject
       "Context"
-      ( \o ->
-          Context
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
-      )
+      (\o -> Context Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON Context where
   toJSON Context {..} =
@@ -1083,14 +1074,10 @@ instance Core.FromJSON ContextRule where
       "ContextRule"
       ( \o ->
           ContextRule
-            Core.<$> ( o Core..:? "allowedRequestExtensions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "allowedResponseExtensions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "provided" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "requested" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedRequestExtensions")
+            Core.<*> (o Core..:? "allowedResponseExtensions")
+            Core.<*> (o Core..:? "provided")
+            Core.<*> (o Core..:? "requested")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -1188,8 +1175,7 @@ instance Core.FromJSON CustomError where
       "CustomError"
       ( \o ->
           CustomError
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "types" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "rules") Core.<*> (o Core..:? "types")
       )
 
 instance Core.ToJSON CustomError where
@@ -1341,8 +1327,8 @@ instance Core.FromJSON Documentation where
           Documentation
             Core.<$> (o Core..:? "documentationRootUrl")
             Core.<*> (o Core..:? "overview")
-            Core.<*> (o Core..:? "pages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pages")
+            Core.<*> (o Core..:? "rules")
             Core.<*> (o Core..:? "serviceRootUrl")
             Core.<*> (o Core..:? "summary")
       )
@@ -1503,9 +1489,9 @@ instance Core.FromJSON Enum' where
       "Enum'"
       ( \o ->
           Enum'
-            Core.<$> (o Core..:? "enumvalue" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enumvalue")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "sourceContext")
             Core.<*> (o Core..:? "syntax")
       )
@@ -1549,7 +1535,7 @@ instance Core.FromJSON EnumValue where
           EnumValue
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "number")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
       )
 
 instance Core.ToJSON EnumValue where
@@ -1619,7 +1605,7 @@ instance Core.FromJSON Field where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "number")
             Core.<*> (o Core..:? "oneofIndex")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "packed")
             Core.<*> (o Core..:? "typeUrl")
       )
@@ -1665,7 +1651,7 @@ instance Core.FromJSON Http where
       ( \o ->
           Http
             Core.<$> (o Core..:? "fullyDecodeReservedExpansion")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
       )
 
 instance Core.ToJSON Http where
@@ -1728,9 +1714,7 @@ instance Core.FromJSON HttpRule where
       "HttpRule"
       ( \o ->
           HttpRule
-            Core.<$> ( o Core..:? "additionalBindings"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalBindings")
             Core.<*> (o Core..:? "body")
             Core.<*> (o Core..:? "custom")
             Core.<*> (o Core..:? "delete")
@@ -1875,7 +1859,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1914,7 +1898,7 @@ instance Core.FromJSON ListTenancyUnitsResponse where
       ( \o ->
           ListTenancyUnitsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tenancyUnits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tenancyUnits")
       )
 
 instance Core.ToJSON ListTenancyUnitsResponse where
@@ -1960,7 +1944,7 @@ instance Core.FromJSON LogDescriptor where
           LogDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
       )
 
@@ -2001,12 +1985,8 @@ instance Core.FromJSON Logging where
       "Logging"
       ( \o ->
           Logging
-            Core.<$> ( o Core..:? "consumerDestinations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "producerDestinations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "consumerDestinations")
+            Core.<*> (o Core..:? "producerDestinations")
       )
 
 instance Core.ToJSON Logging where
@@ -2043,7 +2023,7 @@ instance Core.FromJSON LoggingDestination where
       "LoggingDestination"
       ( \o ->
           LoggingDestination
-            Core.<$> (o Core..:? "logs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "logs")
             Core.<*> (o Core..:? "monitoredResource")
       )
 
@@ -2099,7 +2079,7 @@ instance Core.FromJSON Method where
       ( \o ->
           Method
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "requestStreaming")
             Core.<*> (o Core..:? "requestTypeUrl")
             Core.<*> (o Core..:? "responseStreaming")
@@ -2181,13 +2161,11 @@ instance Core.FromJSON MetricDescriptor where
           MetricDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "metricKind")
-            Core.<*> ( o Core..:? "monitoredResourceTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "monitoredResourceTypes")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "unit")
@@ -2398,7 +2376,7 @@ instance Core.FromJSON MonitoredResourceDescriptor where
           MonitoredResourceDescriptor
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
@@ -2444,12 +2422,8 @@ instance Core.FromJSON Monitoring where
       "Monitoring"
       ( \o ->
           Monitoring
-            Core.<$> ( o Core..:? "consumerDestinations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "producerDestinations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "consumerDestinations")
+            Core.<*> (o Core..:? "producerDestinations")
       )
 
 instance Core.ToJSON Monitoring where
@@ -2489,7 +2463,7 @@ instance Core.FromJSON MonitoringDestination where
       "MonitoringDestination"
       ( \o ->
           MonitoringDestination
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metrics")
             Core.<*> (o Core..:? "monitoredResource")
       )
 
@@ -2733,7 +2707,7 @@ instance Core.FromJSON Page where
           Page
             Core.<$> (o Core..:? "content")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "subpages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subpages")
       )
 
 instance Core.ToJSON Page where
@@ -2768,8 +2742,7 @@ instance Core.FromJSON PolicyBinding where
       "PolicyBinding"
       ( \o ->
           PolicyBinding
-            Core.<$> (o Core..:? "members" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "role")
+            Core.<$> (o Core..:? "members") Core.<*> (o Core..:? "role")
       )
 
 instance Core.ToJSON PolicyBinding where
@@ -2804,8 +2777,8 @@ instance Core.FromJSON Quota where
       "Quota"
       ( \o ->
           Quota
-            Core.<$> (o Core..:? "limits" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "metricRules" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "limits")
+            Core.<*> (o Core..:? "metricRules")
       )
 
 instance Core.ToJSON Quota where
@@ -2867,12 +2840,18 @@ instance Core.FromJSON QuotaLimit where
       "QuotaLimit"
       ( \o ->
           QuotaLimit
-            Core.<$> (o Core..:? "defaultLimit")
+            Core.<$> ( o Core..:? "defaultLimit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "duration")
-            Core.<*> (o Core..:? "freeTier")
-            Core.<*> (o Core..:? "maxLimit")
+            Core.<*> ( o Core..:? "freeTier"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxLimit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "unit")
@@ -2981,7 +2960,7 @@ instance Core.FromJSON SearchTenancyUnitsResponse where
       ( \o ->
           SearchTenancyUnitsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tenancyUnits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tenancyUnits")
       )
 
 instance Core.ToJSON SearchTenancyUnitsResponse where
@@ -3094,7 +3073,7 @@ instance Core.FromJSON Service where
       "Service"
       ( \o ->
           Service
-            Core.<$> (o Core..:? "apis" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "apis")
             Core.<*> (o Core..:? "authentication")
             Core.<*> (o Core..:? "backend")
             Core.<*> (o Core..:? "billing")
@@ -3103,25 +3082,23 @@ instance Core.FromJSON Service where
             Core.<*> (o Core..:? "control")
             Core.<*> (o Core..:? "customError")
             Core.<*> (o Core..:? "documentation")
-            Core.<*> (o Core..:? "endpoints" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "enums" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "endpoints")
+            Core.<*> (o Core..:? "enums")
             Core.<*> (o Core..:? "http")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "logging")
-            Core.<*> (o Core..:? "logs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "monitoredResources"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "logs")
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "monitoredResources")
             Core.<*> (o Core..:? "monitoring")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "producerProjectId")
             Core.<*> (o Core..:? "quota")
             Core.<*> (o Core..:? "sourceInfo")
             Core.<*> (o Core..:? "systemParameters")
-            Core.<*> (o Core..:? "systemTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "systemTypes")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "types" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "types")
             Core.<*> (o Core..:? "usage")
       )
 
@@ -3189,9 +3166,7 @@ instance Core.FromJSON ServiceAccountConfig where
       ( \o ->
           ServiceAccountConfig
             Core.<$> (o Core..:? "accountId")
-            Core.<*> ( o Core..:? "tenantProjectRoles"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "tenantProjectRoles")
       )
 
 instance Core.ToJSON ServiceAccountConfig where
@@ -3252,8 +3227,7 @@ instance Core.FromJSON SourceInfo where
     Core.withObject
       "SourceInfo"
       ( \o ->
-          SourceInfo
-            Core.<$> (o Core..:? "sourceFiles" Core..!= Core.mempty)
+          SourceInfo Core.<$> (o Core..:? "sourceFiles")
       )
 
 instance Core.ToJSON SourceInfo where
@@ -3318,7 +3292,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -3427,7 +3401,7 @@ instance Core.FromJSON SystemParameterRule where
       "SystemParameterRule"
       ( \o ->
           SystemParameterRule
-            Core.<$> (o Core..:? "parameters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameters")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -3459,8 +3433,7 @@ instance Core.FromJSON SystemParameters where
     Core.withObject
       "SystemParameters"
       ( \o ->
-          SystemParameters
-            Core.<$> (o Core..:? "rules" Core..!= Core.mempty)
+          SystemParameters Core.<$> (o Core..:? "rules")
       )
 
 instance Core.ToJSON SystemParameters where
@@ -3507,7 +3480,7 @@ instance Core.FromJSON TenancyUnit where
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "service")
-            Core.<*> (o Core..:? "tenantResources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tenantResources")
       )
 
 instance Core.ToJSON TenancyUnit where
@@ -3565,7 +3538,7 @@ instance Core.FromJSON TenantProjectConfig where
             Core.<*> (o Core..:? "folder")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "serviceAccountConfig")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
             Core.<*> (o Core..:? "tenantProjectPolicy")
       )
 
@@ -3634,7 +3607,7 @@ instance Core.FromJSON TenantProjectPolicy where
       "TenantProjectPolicy"
       ( \o ->
           TenantProjectPolicy
-            Core.<$> (o Core..:? "policyBindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "policyBindings")
       )
 
 instance Core.ToJSON TenantProjectPolicy where
@@ -3726,10 +3699,10 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "oneofs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "options" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oneofs")
+            Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "sourceContext")
             Core.<*> (o Core..:? "syntax")
       )
@@ -3806,8 +3779,8 @@ instance Core.FromJSON Usage where
       ( \o ->
           Usage
             Core.<$> (o Core..:? "producerNotificationChannel")
-            Core.<*> (o Core..:? "requirements" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "requirements")
+            Core.<*> (o Core..:? "rules")
       )
 
 instance Core.ToJSON Usage where
@@ -3888,7 +3861,7 @@ instance Core.FromJSON V1AddVisibilityLabelsResponse where
       "V1AddVisibilityLabelsResponse"
       ( \o ->
           V1AddVisibilityLabelsResponse
-            Core.<$> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labels")
       )
 
 instance Core.ToJSON V1AddVisibilityLabelsResponse where
@@ -3920,7 +3893,7 @@ instance
       "V1Beta1BatchCreateProducerOverridesResponse"
       ( \o ->
           V1Beta1BatchCreateProducerOverridesResponse
-            Core.<$> (o Core..:? "overrides" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "overrides")
       )
 
 instance
@@ -4035,7 +4008,7 @@ instance
       "V1Beta1ImportProducerOverridesResponse"
       ( \o ->
           V1Beta1ImportProducerOverridesResponse
-            Core.<$> (o Core..:? "overrides" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "overrides")
       )
 
 instance
@@ -4072,7 +4045,7 @@ instance
       "V1Beta1ImportProducerQuotaPoliciesResponse"
       ( \o ->
           V1Beta1ImportProducerQuotaPoliciesResponse
-            Core.<$> (o Core..:? "policies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "policies")
       )
 
 instance
@@ -4128,7 +4101,9 @@ instance Core.FromJSON V1Beta1ProducerQuotaPolicy where
             Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "policyValue")
+            Core.<*> ( o Core..:? "policyValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "unit")
       )
 
@@ -4226,7 +4201,9 @@ instance Core.FromJSON V1Beta1QuotaOverride where
             Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "overrideValue")
+            Core.<*> ( o Core..:? "overrideValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "unit")
       )
 
@@ -4565,7 +4542,7 @@ instance
       "V1RemoveVisibilityLabelsResponse"
       ( \o ->
           V1RemoveVisibilityLabelsResponse
-            Core.<$> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labels")
       )
 
 instance Core.ToJSON V1RemoveVisibilityLabelsResponse where

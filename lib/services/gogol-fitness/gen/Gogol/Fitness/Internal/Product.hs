@@ -157,10 +157,14 @@ instance Core.FromJSON AggregateBucket where
       ( \o ->
           AggregateBucket
             Core.<$> (o Core..:? "activity")
-            Core.<*> (o Core..:? "dataset" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "endTimeMillis")
+            Core.<*> (o Core..:? "dataset")
+            Core.<*> ( o Core..:? "endTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "session")
-            Core.<*> (o Core..:? "startTimeMillis")
+            Core.<*> ( o Core..:? "startTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -259,16 +263,18 @@ instance Core.FromJSON AggregateRequest where
       "AggregateRequest"
       ( \o ->
           AggregateRequest
-            Core.<$> (o Core..:? "aggregateBy" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aggregateBy")
             Core.<*> (o Core..:? "bucketByActivitySegment")
             Core.<*> (o Core..:? "bucketByActivityType")
             Core.<*> (o Core..:? "bucketBySession")
             Core.<*> (o Core..:? "bucketByTime")
-            Core.<*> (o Core..:? "endTimeMillis")
-            Core.<*> ( o Core..:? "filteredDataQualityStandard"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "endTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "startTimeMillis")
+            Core.<*> (o Core..:? "filteredDataQualityStandard")
+            Core.<*> ( o Core..:? "startTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AggregateRequest where
@@ -309,8 +315,7 @@ instance Core.FromJSON AggregateResponse where
     Core.withObject
       "AggregateResponse"
       ( \o ->
-          AggregateResponse
-            Core.<$> (o Core..:? "bucket" Core..!= Core.mempty)
+          AggregateResponse Core.<$> (o Core..:? "bucket")
       )
 
 instance Core.ToJSON AggregateResponse where
@@ -392,7 +397,9 @@ instance Core.FromJSON BucketByActivity where
       ( \o ->
           BucketByActivity
             Core.<$> (o Core..:? "activityDataSourceId")
-            Core.<*> (o Core..:? "minDurationMillis")
+            Core.<*> ( o Core..:? "minDurationMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BucketByActivity where
@@ -425,7 +432,9 @@ instance Core.FromJSON BucketBySession where
       "BucketBySession"
       ( \o ->
           BucketBySession
-            Core.<$> (o Core..:? "minDurationMillis")
+            Core.<$> ( o Core..:? "minDurationMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BucketBySession where
@@ -459,7 +468,9 @@ instance Core.FromJSON BucketByTime where
       "BucketByTime"
       ( \o ->
           BucketByTime
-            Core.<$> (o Core..:? "durationMillis")
+            Core.<$> ( o Core..:? "durationMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "period")
       )
 
@@ -560,14 +571,24 @@ instance Core.FromJSON DataPoint where
       "DataPoint"
       ( \o ->
           DataPoint
-            Core.<$> (o Core..:? "computationTimeMillis")
+            Core.<$> ( o Core..:? "computationTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "dataTypeName")
-            Core.<*> (o Core..:? "endTimeNanos")
-            Core.<*> (o Core..:? "modifiedTimeMillis")
+            Core.<*> ( o Core..:? "endTimeNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "modifiedTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "originDataSourceId")
-            Core.<*> (o Core..:? "rawTimestampNanos")
-            Core.<*> (o Core..:? "startTimeNanos")
-            Core.<*> (o Core..:? "value" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "rawTimestampNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "startTimeNanos"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON DataPoint where
@@ -637,9 +658,7 @@ instance Core.FromJSON DataSource where
       ( \o ->
           DataSource
             Core.<$> (o Core..:? "application")
-            Core.<*> ( o Core..:? "dataQualityStandard"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "dataQualityStandard")
             Core.<*> (o Core..:? "dataStreamId")
             Core.<*> (o Core..:? "dataStreamName")
             Core.<*> (o Core..:? "dataType")
@@ -685,8 +704,7 @@ instance Core.FromJSON DataType where
       "DataType"
       ( \o ->
           DataType
-            Core.<$> (o Core..:? "field" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "field") Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON DataType where
@@ -778,10 +796,14 @@ instance Core.FromJSON Dataset where
       ( \o ->
           Dataset
             Core.<$> (o Core..:? "dataSourceId")
-            Core.<*> (o Core..:? "maxEndTimeNs")
-            Core.<*> (o Core..:? "minStartTimeNs")
+            Core.<*> ( o Core..:? "maxEndTimeNs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minStartTimeNs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "point" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "point")
       )
 
 instance Core.ToJSON Dataset where
@@ -884,8 +906,8 @@ instance Core.FromJSON ListDataPointChangesResponse where
       ( \o ->
           ListDataPointChangesResponse
             Core.<$> (o Core..:? "dataSourceId")
-            Core.<*> (o Core..:? "deletedDataPoint" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "insertedDataPoint" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "deletedDataPoint")
+            Core.<*> (o Core..:? "insertedDataPoint")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -921,7 +943,7 @@ instance Core.FromJSON ListDataSourcesResponse where
       "ListDataSourcesResponse"
       ( \o ->
           ListDataSourcesResponse
-            Core.<$> (o Core..:? "dataSource" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataSource")
       )
 
 instance Core.ToJSON ListDataSourcesResponse where
@@ -962,10 +984,10 @@ instance Core.FromJSON ListSessionsResponse where
       "ListSessionsResponse"
       ( \o ->
           ListSessionsResponse
-            Core.<$> (o Core..:? "deletedSession" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deletedSession")
             Core.<*> (o Core..:? "hasMoreData")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "session" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "session")
       )
 
 instance Core.ToJSON ListSessionsResponse where
@@ -1051,15 +1073,23 @@ instance Core.FromJSON Session where
       "Session"
       ( \o ->
           Session
-            Core.<$> (o Core..:? "activeTimeMillis")
+            Core.<$> ( o Core..:? "activeTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "activityType")
             Core.<*> (o Core..:? "application")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "endTimeMillis")
+            Core.<*> ( o Core..:? "endTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "modifiedTimeMillis")
+            Core.<*> ( o Core..:? "modifiedTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "startTimeMillis")
+            Core.<*> ( o Core..:? "startTimeMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Session where
@@ -1116,7 +1146,7 @@ instance Core.FromJSON Value where
           Value
             Core.<$> (o Core..:? "fpVal")
             Core.<*> (o Core..:? "intVal")
-            Core.<*> (o Core..:? "mapVal" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "mapVal")
             Core.<*> (o Core..:? "stringVal")
       )
 

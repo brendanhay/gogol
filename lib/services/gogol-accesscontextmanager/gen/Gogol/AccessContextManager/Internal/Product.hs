@@ -351,7 +351,7 @@ instance Core.FromJSON AccessPolicy where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
-            Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scopes")
             Core.<*> (o Core..:? "title")
       )
 
@@ -390,7 +390,7 @@ instance Core.FromJSON ApiOperation where
       "ApiOperation"
       ( \o ->
           ApiOperation
-            Core.<$> (o Core..:? "methodSelectors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "methodSelectors")
             Core.<*> (o Core..:? "serviceName")
       )
 
@@ -428,7 +428,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -465,7 +465,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -503,7 +503,7 @@ instance Core.FromJSON BasicLevel where
       ( \o ->
           BasicLevel
             Core.<$> (o Core..:? "combiningFunction")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
       )
 
 instance Core.ToJSON BasicLevel where
@@ -547,7 +547,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -634,9 +634,7 @@ instance
       "CommitServicePerimetersResponse"
       ( \o ->
           CommitServicePerimetersResponse
-            Core.<$> ( o Core..:? "servicePerimeters"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "servicePerimeters")
       )
 
 instance Core.ToJSON CommitServicePerimetersResponse where
@@ -687,13 +685,11 @@ instance Core.FromJSON Condition where
       ( \o ->
           Condition
             Core.<$> (o Core..:? "devicePolicy")
-            Core.<*> (o Core..:? "ipSubnetworks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ipSubnetworks")
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "negate")
-            Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "requiredAccessLevels"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "regions")
+            Core.<*> (o Core..:? "requiredAccessLevels")
       )
 
 instance Core.ToJSON Condition where
@@ -773,13 +769,9 @@ instance Core.FromJSON DevicePolicy where
       "DevicePolicy"
       ( \o ->
           DevicePolicy
-            Core.<$> ( o Core..:? "allowedDeviceManagementLevels"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "allowedEncryptionStatuses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "osConstraints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedDeviceManagementLevels")
+            Core.<*> (o Core..:? "allowedEncryptionStatuses")
+            Core.<*> (o Core..:? "osConstraints")
             Core.<*> (o Core..:? "requireAdminApproval")
             Core.<*> (o Core..:? "requireCorpOwned")
             Core.<*> (o Core..:? "requireScreenlock")
@@ -826,7 +818,7 @@ instance Core.FromJSON EgressFrom where
       "EgressFrom"
       ( \o ->
           EgressFrom
-            Core.<$> (o Core..:? "identities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "identities")
             Core.<*> (o Core..:? "identityType")
       )
 
@@ -897,8 +889,8 @@ instance Core.FromJSON EgressTo where
       "EgressTo"
       ( \o ->
           EgressTo
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON EgressTo where
@@ -1007,7 +999,7 @@ instance Core.FromJSON GcpUserAccessBinding where
       "GcpUserAccessBinding"
       ( \o ->
           GcpUserAccessBinding
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessLevels")
             Core.<*> (o Core..:? "groupKey")
             Core.<*> (o Core..:? "name")
       )
@@ -1140,9 +1132,9 @@ instance Core.FromJSON IngressFrom where
       "IngressFrom"
       ( \o ->
           IngressFrom
-            Core.<$> (o Core..:? "identities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "identities")
             Core.<*> (o Core..:? "identityType")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON IngressFrom where
@@ -1249,8 +1241,8 @@ instance Core.FromJSON IngressTo where
       "IngressTo"
       ( \o ->
           IngressTo
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON IngressTo where
@@ -1288,7 +1280,7 @@ instance Core.FromJSON ListAccessLevelsResponse where
       "ListAccessLevelsResponse"
       ( \o ->
           ListAccessLevelsResponse
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessLevels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1327,7 +1319,7 @@ instance Core.FromJSON ListAccessPoliciesResponse where
       "ListAccessPoliciesResponse"
       ( \o ->
           ListAccessPoliciesResponse
-            Core.<$> (o Core..:? "accessPolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessPolicies")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1369,9 +1361,7 @@ instance
       "ListGcpUserAccessBindingsResponse"
       ( \o ->
           ListGcpUserAccessBindingsResponse
-            Core.<$> ( o Core..:? "gcpUserAccessBindings"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "gcpUserAccessBindings")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1415,7 +1405,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1454,9 +1444,7 @@ instance Core.FromJSON ListServicePerimetersResponse where
       ( \o ->
           ListServicePerimetersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "servicePerimeters"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "servicePerimeters")
       )
 
 instance Core.ToJSON ListServicePerimetersResponse where
@@ -1695,8 +1683,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1735,7 +1723,7 @@ instance Core.FromJSON ReplaceAccessLevelsRequest where
       "ReplaceAccessLevelsRequest"
       ( \o ->
           ReplaceAccessLevelsRequest
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessLevels")
             Core.<*> (o Core..:? "etag")
       )
 
@@ -1769,7 +1757,7 @@ instance Core.FromJSON ReplaceAccessLevelsResponse where
       "ReplaceAccessLevelsResponse"
       ( \o ->
           ReplaceAccessLevelsResponse
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessLevels")
       )
 
 instance Core.ToJSON ReplaceAccessLevelsResponse where
@@ -1809,9 +1797,7 @@ instance
       ( \o ->
           ReplaceServicePerimetersRequest
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "servicePerimeters"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "servicePerimeters")
       )
 
 instance Core.ToJSON ReplaceServicePerimetersRequest where
@@ -1848,9 +1834,7 @@ instance
       "ReplaceServicePerimetersResponse"
       ( \o ->
           ReplaceServicePerimetersResponse
-            Core.<$> ( o Core..:? "servicePerimeters"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "servicePerimeters")
       )
 
 instance Core.ToJSON ReplaceServicePerimetersResponse where
@@ -1965,13 +1949,11 @@ instance Core.FromJSON ServicePerimeterConfig where
       "ServicePerimeterConfig"
       ( \o ->
           ServicePerimeterConfig
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "egressPolicies" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "ingressPolicies" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "restrictedServices"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accessLevels")
+            Core.<*> (o Core..:? "egressPolicies")
+            Core.<*> (o Core..:? "ingressPolicies")
+            Core.<*> (o Core..:? "resources")
+            Core.<*> (o Core..:? "restrictedServices")
             Core.<*> (o Core..:? "vpcAccessibleServices")
       )
 
@@ -2052,7 +2034,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2114,7 +2096,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2145,7 +2127,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -2181,7 +2163,7 @@ instance Core.FromJSON VpcAccessibleServices where
       "VpcAccessibleServices"
       ( \o ->
           VpcAccessibleServices
-            Core.<$> (o Core..:? "allowedServices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedServices")
             Core.<*> (o Core..:? "enableRestriction")
       )
 

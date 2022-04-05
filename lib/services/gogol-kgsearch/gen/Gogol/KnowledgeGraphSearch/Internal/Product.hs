@@ -66,7 +66,7 @@ instance Core.FromJSON SearchResponse where
           SearchResponse
             Core.<$> (o Core..:? "@context")
             Core.<*> (o Core..:? "@type")
-            Core.<*> (o Core..:? "itemListElement" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "itemListElement")
       )
 
 instance Core.ToJSON SearchResponse where

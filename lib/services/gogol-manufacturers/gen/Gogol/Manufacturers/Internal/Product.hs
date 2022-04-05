@@ -210,9 +210,7 @@ instance Core.FromJSON Attributes where
       "Attributes"
       ( \o ->
           Attributes
-            Core.<$> ( o Core..:? "additionalImageLink"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalImageLink")
             Core.<*> (o Core..:? "ageGroup")
             Core.<*> (o Core..:? "brand")
             Core.<*> (o Core..:? "capacity")
@@ -220,43 +218,35 @@ instance Core.FromJSON Attributes where
             Core.<*> (o Core..:? "count")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "disclosureDate")
-            Core.<*> ( o Core..:? "excludedDestination"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "featureDescription"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "excludedDestination")
+            Core.<*> (o Core..:? "featureDescription")
             Core.<*> (o Core..:? "flavor")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "gender")
-            Core.<*> (o Core..:? "gtin" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "imageLink")
-            Core.<*> ( o Core..:? "includedDestination"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "includedDestination")
             Core.<*> (o Core..:? "itemGroupId")
             Core.<*> (o Core..:? "material")
             Core.<*> (o Core..:? "mpn")
             Core.<*> (o Core..:? "pattern")
-            Core.<*> (o Core..:? "productDetail" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "productHighlight" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productDetail")
+            Core.<*> (o Core..:? "productHighlight")
             Core.<*> (o Core..:? "productLine")
             Core.<*> (o Core..:? "productName")
             Core.<*> (o Core..:? "productPageUrl")
-            Core.<*> (o Core..:? "productType" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productType")
             Core.<*> (o Core..:? "releaseDate")
-            Core.<*> ( o Core..:? "richProductContent"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "richProductContent")
             Core.<*> (o Core..:? "scent")
             Core.<*> (o Core..:? "size")
             Core.<*> (o Core..:? "sizeSystem")
-            Core.<*> (o Core..:? "sizeType" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sizeType")
             Core.<*> (o Core..:? "suggestedRetailPrice")
             Core.<*> (o Core..:? "targetClientId")
             Core.<*> (o Core..:? "theme")
             Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "videoLink" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "videoLink")
       )
 
 instance Core.ToJSON Attributes where
@@ -332,7 +322,10 @@ instance Core.FromJSON Capacity where
       "Capacity"
       ( \o ->
           Capacity
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Capacity where
@@ -366,7 +359,10 @@ instance Core.FromJSON Count where
       "Count"
       ( \o ->
           Count
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Count where
@@ -608,7 +604,7 @@ instance Core.FromJSON ListProductsResponse where
       ( \o ->
           ListProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "products")
       )
 
 instance Core.ToJSON ListProductsResponse where
@@ -701,10 +697,8 @@ instance Core.FromJSON Product where
           Product
             Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> ( o Core..:? "destinationStatuses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "issues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "destinationStatuses")
+            Core.<*> (o Core..:? "issues")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "productId")

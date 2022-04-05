@@ -482,7 +482,7 @@ instance Core.FromJSON Client where
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "parentFolderId")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "priority")
@@ -533,7 +533,7 @@ instance Core.FromJSON Condition where
       "Condition"
       ( \o ->
           Condition
-            Core.<$> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "parameter")
             Core.<*> (o Core..:? "type")
       )
 
@@ -598,14 +598,14 @@ instance Core.FromJSON Container where
           Container
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "containerId")
-            Core.<*> (o Core..:? "domainName" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "domainName")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "publicId")
             Core.<*> (o Core..:? "tagManagerUrl")
-            Core.<*> (o Core..:? "usageContext" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "usageContext")
       )
 
 instance Core.ToJSON Container where
@@ -736,23 +736,23 @@ instance Core.FromJSON ContainerVersion where
       ( \o ->
           ContainerVersion
             Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "builtInVariable" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "client" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "builtInVariable")
+            Core.<*> (o Core..:? "client")
             Core.<*> (o Core..:? "container")
             Core.<*> (o Core..:? "containerId")
             Core.<*> (o Core..:? "containerVersionId")
-            Core.<*> (o Core..:? "customTemplate" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customTemplate")
             Core.<*> (o Core..:? "deleted")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "folder" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "folder")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "path")
-            Core.<*> (o Core..:? "tag" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tag")
             Core.<*> (o Core..:? "tagManagerUrl")
-            Core.<*> (o Core..:? "trigger" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "variable" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "zone" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trigger")
+            Core.<*> (o Core..:? "variable")
+            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON ContainerVersion where
@@ -902,7 +902,7 @@ instance Core.FromJSON CreateBuiltInVariableResponse where
       "CreateBuiltInVariableResponse"
       ( \o ->
           CreateBuiltInVariableResponse
-            Core.<$> (o Core..:? "builtInVariable" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "builtInVariable")
       )
 
 instance Core.ToJSON CreateBuiltInVariableResponse where
@@ -1363,9 +1363,9 @@ instance Core.FromJSON FolderEntities where
       ( \o ->
           FolderEntities
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tag" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "trigger" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "variable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tag")
+            Core.<*> (o Core..:? "trigger")
+            Core.<*> (o Core..:? "variable")
       )
 
 instance Core.ToJSON FolderEntities where
@@ -1464,8 +1464,8 @@ instance Core.FromJSON GetWorkspaceStatusResponse where
       "GetWorkspaceStatusResponse"
       ( \o ->
           GetWorkspaceStatusResponse
-            Core.<$> (o Core..:? "mergeConflict" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "workspaceChange" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mergeConflict")
+            Core.<*> (o Core..:? "workspaceChange")
       )
 
 instance Core.ToJSON GetWorkspaceStatusResponse where
@@ -1501,7 +1501,7 @@ instance Core.FromJSON ListAccountsResponse where
       "ListAccountsResponse"
       ( \o ->
           ListAccountsResponse
-            Core.<$> (o Core..:? "account" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "account")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1536,7 +1536,7 @@ instance Core.FromJSON ListClientsResponse where
       "ListClientsResponse"
       ( \o ->
           ListClientsResponse
-            Core.<$> (o Core..:? "client" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "client")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1575,9 +1575,7 @@ instance Core.FromJSON ListContainerVersionsResponse where
       "ListContainerVersionsResponse"
       ( \o ->
           ListContainerVersionsResponse
-            Core.<$> ( o Core..:? "containerVersionHeader"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "containerVersionHeader")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1617,7 +1615,7 @@ instance Core.FromJSON ListContainersResponse where
       "ListContainersResponse"
       ( \o ->
           ListContainersResponse
-            Core.<$> (o Core..:? "container" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "container")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1659,7 +1657,7 @@ instance
       "ListEnabledBuiltInVariablesResponse"
       ( \o ->
           ListEnabledBuiltInVariablesResponse
-            Core.<$> (o Core..:? "builtInVariable" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "builtInVariable")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1702,7 +1700,7 @@ instance Core.FromJSON ListEnvironmentsResponse where
       "ListEnvironmentsResponse"
       ( \o ->
           ListEnvironmentsResponse
-            Core.<$> (o Core..:? "environment" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "environment")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1738,7 +1736,7 @@ instance Core.FromJSON ListFoldersResponse where
       "ListFoldersResponse"
       ( \o ->
           ListFoldersResponse
-            Core.<$> (o Core..:? "folder" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "folder")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1775,7 +1773,7 @@ instance Core.FromJSON ListTagsResponse where
       ( \o ->
           ListTagsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "tag" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tag")
       )
 
 instance Core.ToJSON ListTagsResponse where
@@ -1810,7 +1808,7 @@ instance Core.FromJSON ListTemplatesResponse where
       ( \o ->
           ListTemplatesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "template" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "template")
       )
 
 instance Core.ToJSON ListTemplatesResponse where
@@ -1846,7 +1844,7 @@ instance Core.FromJSON ListTriggersResponse where
       ( \o ->
           ListTriggersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "trigger" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "trigger")
       )
 
 instance Core.ToJSON ListTriggersResponse where
@@ -1885,7 +1883,7 @@ instance Core.FromJSON ListUserPermissionsResponse where
       ( \o ->
           ListUserPermissionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "userPermission" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "userPermission")
       )
 
 instance Core.ToJSON ListUserPermissionsResponse where
@@ -1921,7 +1919,7 @@ instance Core.FromJSON ListVariablesResponse where
       ( \o ->
           ListVariablesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "variable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "variable")
       )
 
 instance Core.ToJSON ListVariablesResponse where
@@ -1960,7 +1958,7 @@ instance Core.FromJSON ListWorkspacesResponse where
       ( \o ->
           ListWorkspacesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "workspace" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workspace")
       )
 
 instance Core.ToJSON ListWorkspacesResponse where
@@ -1995,7 +1993,7 @@ instance Core.FromJSON ListZonesResponse where
       ( \o ->
           ListZonesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "zone" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON ListZonesResponse where
@@ -2084,8 +2082,8 @@ instance Core.FromJSON Parameter where
       ( \o ->
           Parameter
             Core.<$> (o Core..:? "key")
-            Core.<*> (o Core..:? "list" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "map" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "list")
+            Core.<*> (o Core..:? "map")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "value")
       )
@@ -2518,7 +2516,7 @@ instance Core.FromJSON SyncWorkspaceResponse where
       "SyncWorkspaceResponse"
       ( \o ->
           SyncWorkspaceResponse
-            Core.<$> (o Core..:? "mergeConflict" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mergeConflict")
             Core.<*> (o Core..:? "syncStatus")
       )
 
@@ -2633,30 +2631,34 @@ instance Core.FromJSON Tag where
       ( \o ->
           Tag
             Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "blockingRuleId" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "blockingTriggerId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "blockingRuleId")
+            Core.<*> (o Core..:? "blockingTriggerId")
             Core.<*> (o Core..:? "consentSettings")
             Core.<*> (o Core..:? "containerId")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "firingRuleId" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "firingTriggerId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "firingRuleId")
+            Core.<*> (o Core..:? "firingTriggerId")
             Core.<*> (o Core..:? "liveOnly")
             Core.<*> (o Core..:? "monitoringMetadata")
             Core.<*> (o Core..:? "monitoringMetadataTagNameKey")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "parentFolderId")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "paused")
             Core.<*> (o Core..:? "priority")
-            Core.<*> (o Core..:? "scheduleEndMs")
-            Core.<*> (o Core..:? "scheduleStartMs")
-            Core.<*> (o Core..:? "setupTag" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "scheduleEndMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "scheduleStartMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "setupTag")
             Core.<*> (o Core..:? "tagFiringOption")
             Core.<*> (o Core..:? "tagId")
             Core.<*> (o Core..:? "tagManagerUrl")
-            Core.<*> (o Core..:? "teardownTag" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "teardownTag")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "workspaceId")
       )
@@ -2889,13 +2891,13 @@ instance Core.FromJSON Trigger where
       ( \o ->
           Trigger
             Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "autoEventFilter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "autoEventFilter")
             Core.<*> (o Core..:? "checkValidation")
             Core.<*> (o Core..:? "containerId")
             Core.<*> (o Core..:? "continuousTimeMinMilliseconds")
-            Core.<*> (o Core..:? "customEventFilter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customEventFilter")
             Core.<*> (o Core..:? "eventName")
-            Core.<*> (o Core..:? "filter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "horizontalScrollPercentageList")
             Core.<*> (o Core..:? "interval")
@@ -2904,7 +2906,7 @@ instance Core.FromJSON Trigger where
             Core.<*> (o Core..:? "maxTimerLengthSeconds")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "parentFolderId")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "selector")
@@ -3008,7 +3010,7 @@ instance Core.FromJSON UserPermission where
           UserPermission
             Core.<$> (o Core..:? "accountAccess")
             Core.<*> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "containerAccess" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "containerAccess")
             Core.<*> (o Core..:? "emailAddress")
             Core.<*> (o Core..:? "path")
       )
@@ -3098,19 +3100,21 @@ instance Core.FromJSON Variable where
           Variable
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "containerId")
-            Core.<*> ( o Core..:? "disablingTriggerId"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "enablingTriggerId" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disablingTriggerId")
+            Core.<*> (o Core..:? "enablingTriggerId")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "formatValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "parentFolderId")
             Core.<*> (o Core..:? "path")
-            Core.<*> (o Core..:? "scheduleEndMs")
-            Core.<*> (o Core..:? "scheduleStartMs")
+            Core.<*> ( o Core..:? "scheduleEndMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "scheduleStartMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "tagManagerUrl")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "variableId")
@@ -3333,12 +3337,12 @@ instance Core.FromJSON Zone where
           Zone
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "boundary")
-            Core.<*> (o Core..:? "childContainer" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "childContainer")
             Core.<*> (o Core..:? "containerId")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "tagManagerUrl")
             Core.<*> (o Core..:? "typeRestriction")
@@ -3392,10 +3396,8 @@ instance Core.FromJSON ZoneBoundary where
       "ZoneBoundary"
       ( \o ->
           ZoneBoundary
-            Core.<$> (o Core..:? "condition" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "customEvaluationTriggerId"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "condition")
+            Core.<*> (o Core..:? "customEvaluationTriggerId")
       )
 
 instance Core.ToJSON ZoneBoundary where
@@ -3468,9 +3470,7 @@ instance Core.FromJSON ZoneTypeRestriction where
       ( \o ->
           ZoneTypeRestriction
             Core.<$> (o Core..:? "enable")
-            Core.<*> ( o Core..:? "whitelistedTypeId"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "whitelistedTypeId")
       )
 
 instance Core.ToJSON ZoneTypeRestriction where

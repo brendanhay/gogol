@@ -373,7 +373,7 @@ instance Core.FromJSON GetGuestAttributesRequest where
       ( \o ->
           GetGuestAttributesRequest
             Core.<$> (o Core..:? "queryPath")
-            Core.<*> (o Core..:? "workerIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workerIds")
       )
 
 instance Core.ToJSON GetGuestAttributesRequest where
@@ -406,7 +406,7 @@ instance Core.FromJSON GetGuestAttributesResponse where
       "GetGuestAttributesResponse"
       ( \o ->
           GetGuestAttributesResponse
-            Core.<$> (o Core..:? "guestAttributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "guestAttributes")
       )
 
 instance Core.ToJSON GetGuestAttributesResponse where
@@ -517,8 +517,7 @@ instance Core.FromJSON GuestAttributesValue where
     Core.withObject
       "GuestAttributesValue"
       ( \o ->
-          GuestAttributesValue
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+          GuestAttributesValue Core.<$> (o Core..:? "items")
       )
 
 instance Core.ToJSON GuestAttributesValue where
@@ -555,9 +554,9 @@ instance Core.FromJSON ListAcceleratorTypesResponse where
       "ListAcceleratorTypesResponse"
       ( \o ->
           ListAcceleratorTypesResponse
-            Core.<$> (o Core..:? "acceleratorTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "acceleratorTypes")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListAcceleratorTypesResponse where
@@ -594,7 +593,7 @@ instance Core.FromJSON ListLocationsResponse where
       "ListLocationsResponse"
       ( \o ->
           ListLocationsResponse
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -637,8 +636,8 @@ instance Core.FromJSON ListNodesResponse where
       ( \o ->
           ListNodesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "nodes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nodes")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListNodesResponse where
@@ -678,7 +677,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -720,8 +719,8 @@ instance Core.FromJSON ListRuntimeVersionsResponse where
       ( \o ->
           ListRuntimeVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "runtimeVersions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "runtimeVersions")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListRuntimeVersionsResponse where
@@ -1020,22 +1019,22 @@ instance Core.FromJSON Node where
             Core.<*> (o Core..:? "apiVersion")
             Core.<*> (o Core..:? "cidrBlock")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "dataDisks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dataDisks")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "health")
             Core.<*> (o Core..:? "healthDescription")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
-            Core.<*> (o Core..:? "networkEndpoints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "networkEndpoints")
             Core.<*> (o Core..:? "runtimeVersion")
             Core.<*> (o Core..:? "schedulingConfig")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "symptoms" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symptoms")
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Node where
@@ -1389,8 +1388,7 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "scope" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scope")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1475,7 +1473,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

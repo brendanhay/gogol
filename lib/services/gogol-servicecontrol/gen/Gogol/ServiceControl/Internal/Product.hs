@@ -314,7 +314,7 @@ instance Core.FromJSON AttributeContext where
           AttributeContext
             Core.<$> (o Core..:? "api")
             Core.<*> (o Core..:? "destination")
-            Core.<*> (o Core..:? "extensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extensions")
             Core.<*> (o Core..:? "origin")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "resource")
@@ -432,10 +432,12 @@ instance Core.FromJSON AuditLog where
       ( \o ->
           AuditLog
             Core.<$> (o Core..:? "authenticationInfo")
-            Core.<*> (o Core..:? "authorizationInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "authorizationInfo")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "methodName")
-            Core.<*> (o Core..:? "numResponseItems")
+            Core.<*> ( o Core..:? "numResponseItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "requestMetadata")
             Core.<*> (o Core..:? "resourceLocation")
@@ -649,8 +651,8 @@ instance Core.FromJSON Auth where
       "Auth"
       ( \o ->
           Auth
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "audiences" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessLevels")
+            Core.<*> (o Core..:? "audiences")
             Core.<*> (o Core..:? "claims")
             Core.<*> (o Core..:? "presenter")
             Core.<*> (o Core..:? "principal")
@@ -736,9 +738,7 @@ instance Core.FromJSON AuthenticationInfo where
             Core.<$> (o Core..:? "authoritySelector")
             Core.<*> (o Core..:? "principalEmail")
             Core.<*> (o Core..:? "principalSubject")
-            Core.<*> ( o Core..:? "serviceAccountDelegationInfo"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "serviceAccountDelegationInfo")
             Core.<*> (o Core..:? "serviceAccountKeyName")
             Core.<*> (o Core..:? "thirdPartyPrincipal")
       )
@@ -881,7 +881,7 @@ instance Core.FromJSON CheckRequest where
           CheckRequest
             Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "flags")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
             Core.<*> (o Core..:? "serviceConfigId")
       )
 
@@ -1075,7 +1075,9 @@ instance Core.FromJSON Peer where
           Peer
             Core.<$> (o Core..:? "ip")
             Core.<*> (o Core..:? "labels")
-            Core.<*> (o Core..:? "port")
+            Core.<*> ( o Core..:? "port"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "principal")
             Core.<*> (o Core..:? "regionCode")
       )
@@ -1142,7 +1144,7 @@ instance Core.FromJSON ReportRequest where
       "ReportRequest"
       ( \o ->
           ReportRequest
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
             Core.<*> (o Core..:? "serviceConfigId")
       )
 
@@ -1242,7 +1244,9 @@ instance Core.FromJSON Request' where
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "reason")
             Core.<*> (o Core..:? "scheme")
-            Core.<*> (o Core..:? "size")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "time")
       )
 
@@ -1575,10 +1579,8 @@ instance Core.FromJSON ResourceLocation where
       "ResourceLocation"
       ( \o ->
           ResourceLocation
-            Core.<$> (o Core..:? "currentLocations" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "originalLocations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "currentLocations")
+            Core.<*> (o Core..:? "originalLocations")
       )
 
 instance Core.ToJSON ResourceLocation where
@@ -1628,9 +1630,13 @@ instance Core.FromJSON Response where
       ( \o ->
           Response
             Core.<$> (o Core..:? "backendLatency")
-            Core.<*> (o Core..:? "code")
+            Core.<*> ( o Core..:? "code"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "headers")
-            Core.<*> (o Core..:? "size")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "time")
       )
 
@@ -1773,7 +1779,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1947,7 +1953,9 @@ instance Core.FromJSON V2HttpRequest where
       "V2HttpRequest"
       ( \o ->
           V2HttpRequest
-            Core.<$> (o Core..:? "cacheFillBytes")
+            Core.<$> ( o Core..:? "cacheFillBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "cacheHit")
             Core.<*> (o Core..:? "cacheLookup")
             Core.<*> (o Core..:? "cacheValidatedWithOriginServer")
@@ -1956,9 +1964,13 @@ instance Core.FromJSON V2HttpRequest where
             Core.<*> (o Core..:? "referer")
             Core.<*> (o Core..:? "remoteIp")
             Core.<*> (o Core..:? "requestMethod")
-            Core.<*> (o Core..:? "requestSize")
+            Core.<*> ( o Core..:? "requestSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "requestUrl")
-            Core.<*> (o Core..:? "responseSize")
+            Core.<*> ( o Core..:? "responseSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "serverIp")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userAgent")
@@ -2288,7 +2300,9 @@ instance Core.FromJSON V2LogEntrySourceLocation where
           V2LogEntrySourceLocation
             Core.<$> (o Core..:? "file")
             Core.<*> (o Core..:? "function")
-            Core.<*> (o Core..:? "line")
+            Core.<*> ( o Core..:? "line"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON V2LogEntrySourceLocation where

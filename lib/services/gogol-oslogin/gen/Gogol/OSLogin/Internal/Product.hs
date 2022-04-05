@@ -142,7 +142,7 @@ instance Core.FromJSON LoginProfile where
       ( \o ->
           LoginProfile
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "posixAccounts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "posixAccounts")
             Core.<*> (o Core..:? "sshPublicKeys")
       )
 
@@ -241,14 +241,14 @@ instance Core.FromJSON PosixAccount where
           PosixAccount
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "gecos")
-            Core.<*> (o Core..:? "gid")
+            Core.<*> (o Core..:? "gid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "homeDirectory")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "operatingSystemType")
             Core.<*> (o Core..:? "primary")
             Core.<*> (o Core..:? "shell")
             Core.<*> (o Core..:? "systemId")
-            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "uid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "username")
       )
 
@@ -303,7 +303,9 @@ instance Core.FromJSON SshPublicKey where
       "SshPublicKey"
       ( \o ->
           SshPublicKey
-            Core.<$> (o Core..:? "expirationTimeUsec")
+            Core.<$> ( o Core..:? "expirationTimeUsec"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "name")

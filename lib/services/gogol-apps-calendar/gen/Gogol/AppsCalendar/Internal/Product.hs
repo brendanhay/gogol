@@ -266,7 +266,7 @@ instance Core.FromJSON Acl where
       ( \o ->
           Acl
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "calendar#acl")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
@@ -477,7 +477,7 @@ instance Core.FromJSON CalendarList where
       ( \o ->
           CalendarList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "calendar#calendarList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
@@ -576,7 +576,7 @@ instance Core.FromJSON CalendarListEntry where
             Core.<*> (o Core..:? "backgroundColor")
             Core.<*> (o Core..:? "colorId")
             Core.<*> (o Core..:? "conferenceProperties")
-            Core.<*> (o Core..:? "defaultReminders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "defaultReminders")
             Core.<*> (o Core..:? "deleted" Core..!= Core.False)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
@@ -648,7 +648,7 @@ instance
       "CalendarListEntry_NotificationSettings"
       ( \o ->
           CalendarListEntry_NotificationSettings
-            Core.<$> (o Core..:? "notifications" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "notifications")
       )
 
 instance
@@ -749,7 +749,9 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -986,7 +988,7 @@ instance Core.FromJSON ConferenceData where
             Core.<$> (o Core..:? "conferenceId")
             Core.<*> (o Core..:? "conferenceSolution")
             Core.<*> (o Core..:? "createRequest")
-            Core.<*> (o Core..:? "entryPoints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entryPoints")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "signature")
@@ -1131,9 +1133,7 @@ instance Core.FromJSON ConferenceProperties where
       "ConferenceProperties"
       ( \o ->
           ConferenceProperties
-            Core.<$> ( o Core..:? "allowedConferenceSolutionTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "allowedConferenceSolutionTypes")
       )
 
 instance Core.ToJSON ConferenceProperties where
@@ -1343,9 +1343,7 @@ instance Core.FromJSON EntryPoint where
       ( \o ->
           EntryPoint
             Core.<$> (o Core..:? "accessCode")
-            Core.<*> ( o Core..:? "entryPointFeatures"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "entryPointFeatures")
             Core.<*> (o Core..:? "entryPointType")
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "meetingCode")
@@ -1552,8 +1550,8 @@ instance Core.FromJSON Event where
       ( \o ->
           Event
             Core.<$> (o Core..:? "anyoneCanAddSelf" Core..!= Core.False)
-            Core.<*> (o Core..:? "attachments" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "attendees" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attachments")
+            Core.<*> (o Core..:? "attendees")
             Core.<*> (o Core..:? "attendeesOmitted" Core..!= Core.False)
             Core.<*> (o Core..:? "colorId")
             Core.<*> (o Core..:? "conferenceData")
@@ -1583,7 +1581,7 @@ instance Core.FromJSON Event where
             Core.<*> (o Core..:? "organizer")
             Core.<*> (o Core..:? "originalStartTime")
             Core.<*> (o Core..:? "privateCopy" Core..!= Core.False)
-            Core.<*> (o Core..:? "recurrence" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recurrence")
             Core.<*> (o Core..:? "recurringEventId")
             Core.<*> (o Core..:? "reminders")
             Core.<*> (o Core..:? "sequence")
@@ -1978,7 +1976,7 @@ instance Core.FromJSON Event_Reminders where
       "Event_Reminders"
       ( \o ->
           Event_Reminders
-            Core.<$> (o Core..:? "overrides" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "overrides")
             Core.<*> (o Core..:? "useDefault")
       )
 
@@ -2291,10 +2289,10 @@ instance Core.FromJSON Events where
       ( \o ->
           Events
             Core.<$> (o Core..:? "accessRole")
-            Core.<*> (o Core..:? "defaultReminders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "defaultReminders")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "calendar#events")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")
@@ -2344,8 +2342,7 @@ instance Core.FromJSON FreeBusyCalendar where
       "FreeBusyCalendar"
       ( \o ->
           FreeBusyCalendar
-            Core.<$> (o Core..:? "busy" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "busy") Core.<*> (o Core..:? "errors")
       )
 
 instance Core.ToJSON FreeBusyCalendar where
@@ -2379,8 +2376,8 @@ instance Core.FromJSON FreeBusyGroup where
       "FreeBusyGroup"
       ( \o ->
           FreeBusyGroup
-            Core.<$> (o Core..:? "calendars" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "calendars")
+            Core.<*> (o Core..:? "errors")
       )
 
 instance Core.ToJSON FreeBusyGroup where
@@ -2431,7 +2428,7 @@ instance Core.FromJSON FreeBusyRequest where
           FreeBusyRequest
             Core.<$> (o Core..:? "calendarExpansionMax")
             Core.<*> (o Core..:? "groupExpansionMax")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "timeMax")
             Core.<*> (o Core..:? "timeMin")
             Core.<*> (o Core..:? "timeZone" Core..!= "UTC")
@@ -2674,7 +2671,7 @@ instance Core.FromJSON Settings where
       ( \o ->
           Settings
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "calendar#settings")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "nextSyncToken")

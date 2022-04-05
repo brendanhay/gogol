@@ -770,12 +770,8 @@ instance Core.FromJSON AutoText where
       "AutoText"
       ( \o ->
           AutoText
-            Core.<$> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
             Core.<*> (o Core..:? "type")
@@ -916,7 +912,7 @@ instance Core.FromJSON BatchUpdateDocumentRequest where
       "BatchUpdateDocumentRequest"
       ( \o ->
           BatchUpdateDocumentRequest
-            Core.<$> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requests")
             Core.<*> (o Core..:? "writeControl")
       )
 
@@ -959,7 +955,7 @@ instance Core.FromJSON BatchUpdateDocumentResponse where
       ( \o ->
           BatchUpdateDocumentResponse
             Core.<$> (o Core..:? "documentId")
-            Core.<*> (o Core..:? "replies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replies")
             Core.<*> (o Core..:? "writeControl")
       )
 
@@ -991,10 +987,7 @@ instance Core.FromJSON Body where
   parseJSON =
     Core.withObject
       "Body"
-      ( \o ->
-          Body
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
-      )
+      (\o -> Body Core.<$> (o Core..:? "content"))
 
 instance Core.ToJSON Body where
   toJSON Body {..} =
@@ -1153,12 +1146,8 @@ instance Core.FromJSON ColumnBreak where
       "ColumnBreak"
       ( \o ->
           ColumnBreak
-            Core.<$> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -2964,12 +2953,8 @@ instance Core.FromJSON Equation where
       "Equation"
       ( \o ->
           Equation
-            Core.<$> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
       )
 
 instance Core.ToJSON Equation where
@@ -3005,7 +2990,7 @@ instance Core.FromJSON Footer where
       "Footer"
       ( \o ->
           Footer
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "content")
             Core.<*> (o Core..:? "footerId")
       )
 
@@ -3040,7 +3025,7 @@ instance Core.FromJSON Footnote where
       "Footnote"
       ( \o ->
           Footnote
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "content")
             Core.<*> (o Core..:? "footnoteId")
       )
 
@@ -3093,12 +3078,8 @@ instance Core.FromJSON FootnoteReference where
           FootnoteReference
             Core.<$> (o Core..:? "footnoteId")
             Core.<*> (o Core..:? "footnoteNumber")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -3178,7 +3159,7 @@ instance Core.FromJSON Header where
       "Header"
       ( \o ->
           Header
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "content")
             Core.<*> (o Core..:? "headerId")
       )
 
@@ -3223,12 +3204,8 @@ instance Core.FromJSON HorizontalRule where
       "HorizontalRule"
       ( \o ->
           HorizontalRule
-            Core.<$> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -3454,9 +3431,7 @@ instance Core.FromJSON InlineObject where
           InlineObject
             Core.<$> (o Core..:? "inlineObjectProperties")
             Core.<*> (o Core..:? "objectId")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
             Core.<*> (o Core..:? "suggestedInlineObjectPropertiesChanges")
             Core.<*> (o Core..:? "suggestedInsertionId")
       )
@@ -3550,12 +3525,8 @@ instance Core.FromJSON InlineObjectElement where
       ( \o ->
           InlineObjectElement
             Core.<$> (o Core..:? "inlineObjectId")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -4206,9 +4177,7 @@ instance Core.FromJSON List where
       ( \o ->
           List
             Core.<$> (o Core..:? "listProperties")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
             Core.<*> (o Core..:? "suggestedInsertionId")
             Core.<*> (o Core..:? "suggestedListPropertiesChanges")
       )
@@ -4282,8 +4251,7 @@ instance Core.FromJSON ListProperties where
     Core.withObject
       "ListProperties"
       ( \o ->
-          ListProperties
-            Core.<$> (o Core..:? "nestingLevels" Core..!= Core.mempty)
+          ListProperties Core.<$> (o Core..:? "nestingLevels")
       )
 
 instance Core.ToJSON ListProperties where
@@ -4314,9 +4282,7 @@ instance Core.FromJSON ListPropertiesSuggestionState where
       "ListPropertiesSuggestionState"
       ( \o ->
           ListPropertiesSuggestionState
-            Core.<$> ( o Core..:? "nestingLevelsSuggestionStates"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "nestingLevelsSuggestionStates")
       )
 
 instance Core.ToJSON ListPropertiesSuggestionState where
@@ -4424,7 +4390,7 @@ instance Core.FromJSON NamedRange where
           NamedRange
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "namedRangeId")
-            Core.<*> (o Core..:? "ranges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ranges")
       )
 
 instance Core.ToJSON NamedRange where
@@ -4460,7 +4426,7 @@ instance Core.FromJSON NamedRanges where
       ( \o ->
           NamedRanges
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "namedRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "namedRanges")
       )
 
 instance Core.ToJSON NamedRanges where
@@ -4580,10 +4546,7 @@ instance Core.FromJSON NamedStyles where
   parseJSON =
     Core.withObject
       "NamedStyles"
-      ( \o ->
-          NamedStyles
-            Core.<$> (o Core..:? "styles" Core..!= Core.mempty)
-      )
+      (\o -> NamedStyles Core.<$> (o Core..:? "styles"))
 
 instance Core.ToJSON NamedStyles where
   toJSON NamedStyles {..} =
@@ -4611,9 +4574,7 @@ instance Core.FromJSON NamedStylesSuggestionState where
       "NamedStylesSuggestionState"
       ( \o ->
           NamedStylesSuggestionState
-            Core.<$> ( o Core..:? "stylesSuggestionStates"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "stylesSuggestionStates")
       )
 
 instance Core.ToJSON NamedStylesSuggestionState where
@@ -4792,8 +4753,7 @@ instance Core.FromJSON ObjectReferences where
     Core.withObject
       "ObjectReferences"
       ( \o ->
-          ObjectReferences
-            Core.<$> (o Core..:? "objectIds" Core..!= Core.mempty)
+          ObjectReferences Core.<$> (o Core..:? "objectIds")
       )
 
 instance Core.ToJSON ObjectReferences where
@@ -4860,12 +4820,8 @@ instance Core.FromJSON PageBreak where
       "PageBreak"
       ( \o ->
           PageBreak
-            Core.<$> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -4962,11 +4918,9 @@ instance Core.FromJSON Paragraph where
       ( \o ->
           Paragraph
             Core.<$> (o Core..:? "bullet")
-            Core.<*> (o Core..:? "elements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "elements")
             Core.<*> (o Core..:? "paragraphStyle")
-            Core.<*> ( o Core..:? "positionedObjectIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "positionedObjectIds")
             Core.<*> (o Core..:? "suggestedBulletChanges")
             Core.<*> (o Core..:? "suggestedParagraphStyleChanges")
             Core.<*> (o Core..:? "suggestedPositionedObjectIds")
@@ -5338,7 +5292,7 @@ instance Core.FromJSON ParagraphStyle where
             Core.<*> (o Core..:? "spaceAbove")
             Core.<*> (o Core..:? "spaceBelow")
             Core.<*> (o Core..:? "spacingMode")
-            Core.<*> (o Core..:? "tabStops" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tabStops")
       )
 
 instance Core.ToJSON ParagraphStyle where
@@ -5560,12 +5514,8 @@ instance Core.FromJSON Person where
           Person
             Core.<$> (o Core..:? "personId")
             Core.<*> (o Core..:? "personProperties")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -5695,9 +5645,7 @@ instance Core.FromJSON PositionedObject where
           PositionedObject
             Core.<$> (o Core..:? "objectId")
             Core.<*> (o Core..:? "positionedObjectProperties")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
             Core.<*> (o Core..:? "suggestedInsertionId")
             Core.<*> ( o
                          Core..:? "suggestedPositionedObjectPropertiesChanges"
@@ -6507,12 +6455,8 @@ instance Core.FromJSON RichLink where
           RichLink
             Core.<$> (o Core..:? "richLinkId")
             Core.<*> (o Core..:? "richLinkProperties")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -6644,12 +6588,8 @@ instance Core.FromJSON SectionBreak where
       ( \o ->
           SectionBreak
             Core.<$> (o Core..:? "sectionStyle")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
       )
 
 instance Core.ToJSON SectionBreak where
@@ -6774,7 +6714,7 @@ instance Core.FromJSON SectionStyle where
       "SectionStyle"
       ( \o ->
           SectionStyle
-            Core.<$> (o Core..:? "columnProperties" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnProperties")
             Core.<*> (o Core..:? "columnSeparatorStyle")
             Core.<*> (o Core..:? "contentDirection")
             Core.<*> (o Core..:? "defaultFooterId")
@@ -7629,13 +7569,9 @@ instance Core.FromJSON Table where
           Table
             Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "tableRows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
+            Core.<*> (o Core..:? "tableRows")
             Core.<*> (o Core..:? "tableStyle")
       )
 
@@ -7695,15 +7631,11 @@ instance Core.FromJSON TableCell where
       "TableCell"
       ( \o ->
           TableCell
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "content")
             Core.<*> (o Core..:? "endIndex")
             Core.<*> (o Core..:? "startIndex")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTableCellStyleChanges")
             Core.<*> (o Core..:? "tableCellStyle")
       )
@@ -8107,13 +8039,9 @@ instance Core.FromJSON TableOfContents where
       "TableOfContents"
       ( \o ->
           TableOfContents
-            Core.<$> (o Core..:? "content" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
       )
 
 instance Core.ToJSON TableOfContents where
@@ -8216,14 +8144,10 @@ instance Core.FromJSON TableRow where
           TableRow
             Core.<$> (o Core..:? "endIndex")
             Core.<*> (o Core..:? "startIndex")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTableRowStyleChanges")
-            Core.<*> (o Core..:? "tableCells" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tableCells")
             Core.<*> (o Core..:? "tableRowStyle")
       )
 
@@ -8362,9 +8286,7 @@ instance Core.FromJSON TableStyle where
       "TableStyle"
       ( \o ->
           TableStyle
-            Core.<$> ( o Core..:? "tableColumnProperties"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "tableColumnProperties")
       )
 
 instance Core.ToJSON TableStyle where
@@ -8412,12 +8334,8 @@ instance Core.FromJSON TextRun where
       ( \o ->
           TextRun
             Core.<$> (o Core..:? "content")
-            Core.<*> ( o Core..:? "suggestedDeletionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "suggestedInsertionIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "suggestedDeletionIds")
+            Core.<*> (o Core..:? "suggestedInsertionIds")
             Core.<*> (o Core..:? "suggestedTextStyleChanges")
             Core.<*> (o Core..:? "textStyle")
       )
@@ -8895,7 +8813,7 @@ instance
       "UpdateTableColumnPropertiesRequest"
       ( \o ->
           UpdateTableColumnPropertiesRequest
-            Core.<$> (o Core..:? "columnIndices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnIndices")
             Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "tableColumnProperties")
             Core.<*> (o Core..:? "tableStartLocation")
@@ -8950,7 +8868,7 @@ instance Core.FromJSON UpdateTableRowStyleRequest where
       ( \o ->
           UpdateTableRowStyleRequest
             Core.<$> (o Core..:? "fields")
-            Core.<*> (o Core..:? "rowIndices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rowIndices")
             Core.<*> (o Core..:? "tableRowStyle")
             Core.<*> (o Core..:? "tableStartLocation")
       )

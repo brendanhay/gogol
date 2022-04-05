@@ -191,7 +191,7 @@ instance Core.FromJSON Avail where
             Core.<*> (o Core..:? "episodeTitleInternalAlias")
             Core.<*> (o Core..:? "formatProfile")
             Core.<*> (o Core..:? "licenseType")
-            Core.<*> (o Core..:? "pphNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pphNames")
             Core.<*> (o Core..:? "priceType")
             Core.<*> (o Core..:? "priceValue")
             Core.<*> (o Core..:? "productId")
@@ -288,7 +288,7 @@ instance Core.FromJSON ListAvailsResponse where
       "ListAvailsResponse"
       ( \o ->
           ListAvailsResponse
-            Core.<$> (o Core..:? "avails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "avails")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalSize")
       )
@@ -333,7 +333,7 @@ instance Core.FromJSON ListOrdersResponse where
       ( \o ->
           ListOrdersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "orders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "orders")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -377,7 +377,7 @@ instance Core.FromJSON ListStoreInfosResponse where
       ( \o ->
           ListStoreInfosResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "storeInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "storeInfos")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -487,7 +487,7 @@ instance Core.FromJSON Order where
             Core.<$> (o Core..:? "approvedTime")
             Core.<*> (o Core..:? "channelId")
             Core.<*> (o Core..:? "channelName")
-            Core.<*> (o Core..:? "countries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "countries")
             Core.<*> (o Core..:? "customId")
             Core.<*> (o Core..:? "earliestAvailStartTime")
             Core.<*> (o Core..:? "episodeName")
@@ -640,7 +640,7 @@ instance Core.FromJSON StoreInfo where
       "StoreInfo"
       ( \o ->
           StoreInfo
-            Core.<$> (o Core..:? "audioTracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "audioTracks")
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "editLevelEidr")
             Core.<*> (o Core..:? "episodeNumber")
@@ -653,14 +653,14 @@ instance Core.FromJSON StoreInfo where
             Core.<*> (o Core..:? "liveTime")
             Core.<*> (o Core..:? "mid")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pphNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pphNames")
             Core.<*> (o Core..:? "seasonId")
             Core.<*> (o Core..:? "seasonName")
             Core.<*> (o Core..:? "seasonNumber")
             Core.<*> (o Core..:? "showId")
             Core.<*> (o Core..:? "showName")
             Core.<*> (o Core..:? "studioName")
-            Core.<*> (o Core..:? "subtitles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subtitles")
             Core.<*> (o Core..:? "titleLevelEidr")
             Core.<*> (o Core..:? "trailerId")
             Core.<*> (o Core..:? "type")

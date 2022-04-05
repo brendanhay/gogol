@@ -333,13 +333,13 @@ instance Core.FromJSON Bucket where
       "Bucket"
       ( \o ->
           Bucket
-            Core.<$> (o Core..:? "acl" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "acl")
             Core.<*> (o Core..:? "autoclass")
             Core.<*> (o Core..:? "billing")
-            Core.<*> (o Core..:? "cors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "cors")
             Core.<*> (o Core..:? "customPlacementConfig")
             Core.<*> (o Core..:? "defaultEventBasedHold")
-            Core.<*> (o Core..:? "defaultObjectAcl" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "defaultObjectAcl")
             Core.<*> (o Core..:? "encryption")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "iamConfiguration")
@@ -350,10 +350,14 @@ instance Core.FromJSON Bucket where
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "locationType")
             Core.<*> (o Core..:? "logging")
-            Core.<*> (o Core..:? "metageneration")
+            Core.<*> ( o Core..:? "metageneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "owner")
-            Core.<*> (o Core..:? "projectNumber")
+            Core.<*> ( o Core..:? "projectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "retentionPolicy")
             Core.<*> (o Core..:? "rpo")
             Core.<*> (o Core..:? "satisfiesPZS")
@@ -505,9 +509,9 @@ instance Core.FromJSON Bucket_CorsItem where
       ( \o ->
           Bucket_CorsItem
             Core.<$> (o Core..:? "maxAgeSeconds")
-            Core.<*> (o Core..:? "method" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "origin" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "responseHeader" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "method")
+            Core.<*> (o Core..:? "origin")
+            Core.<*> (o Core..:? "responseHeader")
       )
 
 instance Core.ToJSON Bucket_CorsItem where
@@ -542,7 +546,7 @@ instance Core.FromJSON Bucket_CustomPlacementConfig where
       "Bucket_CustomPlacementConfig"
       ( \o ->
           Bucket_CustomPlacementConfig
-            Core.<$> (o Core..:? "dataLocations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dataLocations")
       )
 
 instance Core.ToJSON Bucket_CustomPlacementConfig where
@@ -768,8 +772,7 @@ instance Core.FromJSON Bucket_Lifecycle where
     Core.withObject
       "Bucket_Lifecycle"
       ( \o ->
-          Bucket_Lifecycle
-            Core.<$> (o Core..:? "rule" Core..!= Core.mempty)
+          Bucket_Lifecycle Core.<$> (o Core..:? "rule")
       )
 
 instance Core.ToJSON Bucket_Lifecycle where
@@ -914,9 +917,7 @@ instance
             Core.<*> (o Core..:? "daysSinceNoncurrentTime")
             Core.<*> (o Core..:? "isLive")
             Core.<*> (o Core..:? "matchesPattern")
-            Core.<*> ( o Core..:? "matchesStorageClass"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "matchesStorageClass")
             Core.<*> (o Core..:? "noncurrentTimeBefore")
             Core.<*> (o Core..:? "numNewerVersions")
       )
@@ -1050,7 +1051,9 @@ instance Core.FromJSON Bucket_RetentionPolicy where
           Bucket_RetentionPolicy
             Core.<$> (o Core..:? "effectiveTime")
             Core.<*> (o Core..:? "isLocked")
-            Core.<*> (o Core..:? "retentionPeriod")
+            Core.<*> ( o Core..:? "retentionPeriod"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Bucket_RetentionPolicy where
@@ -1283,7 +1286,7 @@ instance Core.FromJSON BucketAccessControls where
       "BucketAccessControls"
       ( \o ->
           BucketAccessControls
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "storage#bucketAccessControls"
                      )
@@ -1327,7 +1330,7 @@ instance Core.FromJSON Buckets where
       "Buckets"
       ( \o ->
           Buckets
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "storage#buckets")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1393,7 +1396,9 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "expiration")
+            Core.<*> ( o Core..:? "expiration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -1480,7 +1485,7 @@ instance Core.FromJSON ComposeRequest where
           ComposeRequest
             Core.<$> (o Core..:? "destination")
             Core.<*> (o Core..:? "kind" Core..!= "storage#composeRequest")
-            Core.<*> (o Core..:? "sourceObjects" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceObjects")
       )
 
 instance Core.ToJSON ComposeRequest where
@@ -1524,7 +1529,9 @@ instance
       "ComposeRequest_SourceObjectsItem"
       ( \o ->
           ComposeRequest_SourceObjectsItem
-            Core.<$> (o Core..:? "generation")
+            Core.<$> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "objectPreconditions")
       )
@@ -1567,7 +1574,9 @@ instance
       "ComposeRequest_SourceObjectsItem_ObjectPreconditions"
       ( \o ->
           ComposeRequest_SourceObjectsItem_ObjectPreconditions
-            Core.<$> (o Core..:? "ifGenerationMatch")
+            Core.<$> ( o Core..:? "ifGenerationMatch"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -1787,7 +1796,7 @@ instance Core.FromJSON HmacKeysMetadata where
       "HmacKeysMetadata"
       ( \o ->
           HmacKeysMetadata
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "storage#hmacKeysMetadata"
                      )
@@ -1853,7 +1862,7 @@ instance Core.FromJSON Notification where
           Notification
             Core.<$> (o Core..:? "custom_attributes")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "event_types" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "event_types")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "storage#notification")
             Core.<*> (o Core..:? "object_name_prefix")
@@ -1933,7 +1942,7 @@ instance Core.FromJSON Notifications where
       "Notifications"
       ( \o ->
           Notifications
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "storage#notifications")
       )
 
@@ -2062,7 +2071,7 @@ instance Core.FromJSON Object where
       "Object"
       ( \o ->
           Object
-            Core.<$> (o Core..:? "acl" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "acl")
             Core.<*> (o Core..:? "bucket")
             Core.<*> (o Core..:? "cacheControl")
             Core.<*> (o Core..:? "componentCount")
@@ -2075,19 +2084,25 @@ instance Core.FromJSON Object where
             Core.<*> (o Core..:? "customerEncryption")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventBasedHold")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "storage#object")
             Core.<*> (o Core..:? "kmsKeyName")
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "mediaLink")
             Core.<*> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "metageneration")
+            Core.<*> ( o Core..:? "metageneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "owner")
             Core.<*> (o Core..:? "retentionExpirationTime")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "size")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storageClass")
             Core.<*> (o Core..:? "temporaryHold")
             Core.<*> (o Core..:? "timeCreated")
@@ -2308,7 +2323,9 @@ instance Core.FromJSON ObjectAccessControl where
             Core.<*> (o Core..:? "entity")
             Core.<*> (o Core..:? "entityId")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "storage#objectAccessControl"
@@ -2408,7 +2425,7 @@ instance Core.FromJSON ObjectAccessControls where
       "ObjectAccessControls"
       ( \o ->
           ObjectAccessControls
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "storage#objectAccessControls"
                      )
@@ -2455,10 +2472,10 @@ instance Core.FromJSON Objects where
       "Objects"
       ( \o ->
           Objects
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "storage#objects")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "prefixes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "prefixes")
       )
 
 instance Core.ToJSON Objects where
@@ -2507,7 +2524,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "storage#policy")
             Core.<*> (o Core..:? "resourceId")
@@ -2573,7 +2590,7 @@ instance Core.FromJSON Policy_BindingsItem where
       ( \o ->
           Policy_BindingsItem
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -2629,10 +2646,14 @@ instance Core.FromJSON RewriteResponse where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "storage#rewriteResponse"
                      )
-            Core.<*> (o Core..:? "objectSize")
+            Core.<*> ( o Core..:? "objectSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "rewriteToken")
-            Core.<*> (o Core..:? "totalBytesRewritten")
+            Core.<*> ( o Core..:? "totalBytesRewritten"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON RewriteResponse where
@@ -2731,7 +2752,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
             Core.<$> ( o Core..:? "kind"
                          Core..!= "storage#testIamPermissionsResponse"
                      )
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

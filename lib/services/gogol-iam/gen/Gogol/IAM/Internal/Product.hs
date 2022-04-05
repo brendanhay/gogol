@@ -331,7 +331,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -397,7 +397,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -496,7 +496,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -880,7 +880,7 @@ instance Core.FromJSON LintPolicyResponse where
       "LintPolicyResponse"
       ( \o ->
           LintPolicyResponse
-            Core.<$> (o Core..:? "lintResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "lintResults")
       )
 
 instance Core.ToJSON LintPolicyResponse where
@@ -974,7 +974,7 @@ instance Core.FromJSON ListRolesResponse where
       ( \o ->
           ListRolesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
       )
 
 instance Core.ToJSON ListRolesResponse where
@@ -1007,7 +1007,7 @@ instance Core.FromJSON ListServiceAccountKeysResponse where
       "ListServiceAccountKeysResponse"
       ( \o ->
           ListServiceAccountKeysResponse
-            Core.<$> (o Core..:? "keys" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "keys")
       )
 
 instance Core.ToJSON ListServiceAccountKeysResponse where
@@ -1041,7 +1041,7 @@ instance Core.FromJSON ListServiceAccountsResponse where
       "ListServiceAccountsResponse"
       ( \o ->
           ListServiceAccountsResponse
-            Core.<$> (o Core..:? "accounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accounts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1084,9 +1084,7 @@ instance
       ( \o ->
           ListWorkloadIdentityPoolProvidersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "workloadIdentityPoolProviders"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "workloadIdentityPoolProviders")
       )
 
 instance
@@ -1132,9 +1130,7 @@ instance
       ( \o ->
           ListWorkloadIdentityPoolsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "workloadIdentityPools"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "workloadIdentityPools")
       )
 
 instance
@@ -1172,7 +1168,7 @@ instance Core.FromJSON Oidc where
       "Oidc"
       ( \o ->
           Oidc
-            Core.<$> (o Core..:? "allowedAudiences" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedAudiences")
             Core.<*> (o Core..:? "issuerUri")
       )
 
@@ -1433,10 +1429,8 @@ instance Core.FromJSON PermissionDelta where
       "PermissionDelta"
       ( \o ->
           PermissionDelta
-            Core.<$> (o Core..:? "addedPermissions" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "removedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "addedPermissions")
+            Core.<*> (o Core..:? "removedPermissions")
       )
 
 instance Core.ToJSON PermissionDelta where
@@ -1485,8 +1479,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1521,8 +1515,7 @@ instance Core.FromJSON PolicyDelta where
     Core.withObject
       "PolicyDelta"
       ( \o ->
-          PolicyDelta
-            Core.<$> (o Core..:? "bindingDeltas" Core..!= Core.mempty)
+          PolicyDelta Core.<$> (o Core..:? "bindingDeltas")
       )
 
 instance Core.ToJSON PolicyDelta where
@@ -1586,7 +1579,7 @@ instance Core.FromJSON QueryAuditableServicesResponse where
       "QueryAuditableServicesResponse"
       ( \o ->
           QueryAuditableServicesResponse
-            Core.<$> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "services")
       )
 
 instance Core.ToJSON QueryAuditableServicesResponse where
@@ -1673,7 +1666,7 @@ instance Core.FromJSON QueryGrantableRolesResponse where
       ( \o ->
           QueryGrantableRolesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "roles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roles")
       )
 
 instance Core.ToJSON QueryGrantableRolesResponse where
@@ -1763,7 +1756,7 @@ instance
       ( \o ->
           QueryTestablePermissionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON QueryTestablePermissionsResponse where
@@ -1819,9 +1812,7 @@ instance Core.FromJSON Role where
             Core.<$> (o Core..:? "deleted")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "includedPermissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "includedPermissions")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stage")
             Core.<*> (o Core..:? "title")
@@ -2189,7 +2180,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2251,7 +2242,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -2282,7 +2273,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

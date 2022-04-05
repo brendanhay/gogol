@@ -754,7 +754,7 @@ instance Core.FromJSON BatchUpdatePresentationRequest where
       "BatchUpdatePresentationRequest"
       ( \o ->
           BatchUpdatePresentationRequest
-            Core.<$> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requests")
             Core.<*> (o Core..:? "writeControl")
       )
 
@@ -800,7 +800,7 @@ instance
       ( \o ->
           BatchUpdatePresentationResponse
             Core.<$> (o Core..:? "presentationId")
-            Core.<*> (o Core..:? "replies" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replies")
             Core.<*> (o Core..:? "writeControl")
       )
 
@@ -881,10 +881,7 @@ instance Core.FromJSON ColorScheme where
   parseJSON =
     Core.withObject
       "ColorScheme"
-      ( \o ->
-          ColorScheme
-            Core.<$> (o Core..:? "colors" Core..!= Core.mempty)
-      )
+      (\o -> ColorScheme Core.<$> (o Core..:? "colors"))
 
 instance Core.ToJSON ColorScheme where
   toJSON ColorScheme {..} =
@@ -1331,9 +1328,7 @@ instance Core.FromJSON CreateSlideRequest where
           CreateSlideRequest
             Core.<$> (o Core..:? "insertionIndex")
             Core.<*> (o Core..:? "objectId")
-            Core.<*> ( o Core..:? "placeholderIdMappings"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "placeholderIdMappings")
             Core.<*> (o Core..:? "slideLayoutReference")
       )
 
@@ -1941,10 +1936,7 @@ instance Core.FromJSON Group where
   parseJSON =
     Core.withObject
       "Group"
-      ( \o ->
-          Group
-            Core.<$> (o Core..:? "children" Core..!= Core.mempty)
-      )
+      (\o -> Group Core.<$> (o Core..:? "children"))
 
 instance Core.ToJSON Group where
   toJSON Group {..} =
@@ -1979,7 +1971,7 @@ instance Core.FromJSON GroupObjectsRequest where
       "GroupObjectsRequest"
       ( \o ->
           GroupObjectsRequest
-            Core.<$> (o Core..:? "childrenObjectIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "childrenObjectIds")
             Core.<*> (o Core..:? "groupObjectId")
       )
 
@@ -3027,7 +3019,7 @@ instance Core.FromJSON Page where
             Core.<*> (o Core..:? "masterProperties")
             Core.<*> (o Core..:? "notesProperties")
             Core.<*> (o Core..:? "objectId")
-            Core.<*> (o Core..:? "pageElements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageElements")
             Core.<*> (o Core..:? "pageProperties")
             Core.<*> (o Core..:? "pageType")
             Core.<*> (o Core..:? "revisionId")
@@ -3473,14 +3465,14 @@ instance Core.FromJSON Presentation where
       "Presentation"
       ( \o ->
           Presentation
-            Core.<$> (o Core..:? "layouts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "layouts")
             Core.<*> (o Core..:? "locale")
-            Core.<*> (o Core..:? "masters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "masters")
             Core.<*> (o Core..:? "notesMaster")
             Core.<*> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "presentationId")
             Core.<*> (o Core..:? "revisionId")
-            Core.<*> (o Core..:? "slides" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "slides")
             Core.<*> (o Core..:? "title")
       )
 
@@ -3567,7 +3559,7 @@ instance Core.FromJSON Recolor where
       ( \o ->
           Recolor
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "recolorStops" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "recolorStops")
       )
 
 instance Core.ToJSON Recolor where
@@ -3651,7 +3643,7 @@ instance
             Core.<$> (o Core..:? "containsText")
             Core.<*> (o Core..:? "imageReplaceMethod")
             Core.<*> (o Core..:? "imageUrl")
-            Core.<*> (o Core..:? "pageObjectIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageObjectIds")
             Core.<*> (o Core..:? "replaceMethod")
       )
 
@@ -3748,7 +3740,7 @@ instance
             Core.<$> (o Core..:? "chartId")
             Core.<*> (o Core..:? "containsText")
             Core.<*> (o Core..:? "linkingMode")
-            Core.<*> (o Core..:? "pageObjectIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageObjectIds")
             Core.<*> (o Core..:? "spreadsheetId")
       )
 
@@ -3836,7 +3828,7 @@ instance Core.FromJSON ReplaceAllTextRequest where
       ( \o ->
           ReplaceAllTextRequest
             Core.<$> (o Core..:? "containsText")
-            Core.<*> (o Core..:? "pageObjectIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pageObjectIds")
             Core.<*> (o Core..:? "replaceText")
       )
 
@@ -4889,15 +4881,11 @@ instance Core.FromJSON Table where
       ( \o ->
           Table
             Core.<$> (o Core..:? "columns")
-            Core.<*> ( o Core..:? "horizontalBorderRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "horizontalBorderRows")
             Core.<*> (o Core..:? "rows")
-            Core.<*> (o Core..:? "tableColumns" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "tableRows" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "verticalBorderRows"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "tableColumns")
+            Core.<*> (o Core..:? "tableRows")
+            Core.<*> (o Core..:? "verticalBorderRows")
       )
 
 instance Core.ToJSON Table where
@@ -5048,7 +5036,7 @@ instance Core.FromJSON TableBorderRow where
       "TableBorderRow"
       ( \o ->
           TableBorderRow
-            Core.<$> (o Core..:? "tableBorderCells" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tableBorderCells")
       )
 
 instance Core.ToJSON TableBorderRow where
@@ -5335,7 +5323,7 @@ instance Core.FromJSON TableRow where
       ( \o ->
           TableRow
             Core.<$> (o Core..:? "rowHeight")
-            Core.<*> (o Core..:? "tableCells" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tableCells")
             Core.<*> (o Core..:? "tableRowProperties")
       )
 
@@ -5403,7 +5391,7 @@ instance Core.FromJSON TextContent where
       ( \o ->
           TextContent
             Core.<$> (o Core..:? "lists")
-            Core.<*> (o Core..:? "textElements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "textElements")
       )
 
 instance Core.ToJSON TextContent where
@@ -5721,7 +5709,7 @@ instance Core.FromJSON UngroupObjectsRequest where
       "UngroupObjectsRequest"
       ( \o ->
           UngroupObjectsRequest
-            Core.<$> (o Core..:? "objectIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "objectIds")
       )
 
 instance Core.ToJSON UngroupObjectsRequest where
@@ -6021,9 +6009,7 @@ instance
       ( \o ->
           UpdatePageElementsZOrderRequest
             Core.<$> (o Core..:? "operation")
-            Core.<*> ( o Core..:? "pageElementObjectIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "pageElementObjectIds")
       )
 
 instance Core.ToJSON UpdatePageElementsZOrderRequest where
@@ -6251,7 +6237,7 @@ instance Core.FromJSON UpdateSlidesPositionRequest where
       ( \o ->
           UpdateSlidesPositionRequest
             Core.<$> (o Core..:? "insertionIndex")
-            Core.<*> (o Core..:? "slideObjectIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "slideObjectIds")
       )
 
 instance Core.ToJSON UpdateSlidesPositionRequest where
@@ -6412,7 +6398,7 @@ instance
       "UpdateTableColumnPropertiesRequest"
       ( \o ->
           UpdateTableColumnPropertiesRequest
-            Core.<$> (o Core..:? "columnIndices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnIndices")
             Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "objectId")
             Core.<*> (o Core..:? "tableColumnProperties")
@@ -6470,7 +6456,7 @@ instance
           UpdateTableRowPropertiesRequest
             Core.<$> (o Core..:? "fields")
             Core.<*> (o Core..:? "objectId")
-            Core.<*> (o Core..:? "rowIndices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rowIndices")
             Core.<*> (o Core..:? "tableRowProperties")
       )
 

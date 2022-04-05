@@ -346,7 +346,7 @@ instance Core.FromJSON Announcement where
             Core.<*> (o Core..:? "creatorUserId")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "individualStudentsOptions")
-            Core.<*> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "materials")
             Core.<*> (o Core..:? "scheduledTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "text")
@@ -424,7 +424,7 @@ instance Core.FromJSON AssignmentSubmission where
       "AssignmentSubmission"
       ( \o ->
           AssignmentSubmission
-            Core.<$> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attachments")
       )
 
 instance Core.ToJSON AssignmentSubmission where
@@ -592,9 +592,7 @@ instance Core.FromJSON Course where
             Core.<$> (o Core..:? "alternateLink")
             Core.<*> (o Core..:? "calendarId")
             Core.<*> (o Core..:? "courseGroupEmail")
-            Core.<*> ( o Core..:? "courseMaterialSets"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "courseMaterialSets")
             Core.<*> (o Core..:? "courseState")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "description")
@@ -741,7 +739,7 @@ instance Core.FromJSON CourseMaterialSet where
       "CourseMaterialSet"
       ( \o ->
           CourseMaterialSet
-            Core.<$> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "materials")
             Core.<*> (o Core..:? "title")
       )
 
@@ -886,7 +884,7 @@ instance Core.FromJSON CourseWork where
             Core.<*> (o Core..:? "gradeCategory")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "individualStudentsOptions")
-            Core.<*> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "materials")
             Core.<*> (o Core..:? "maxPoints")
             Core.<*> (o Core..:? "multipleChoiceQuestion")
             Core.<*> (o Core..:? "scheduledTime")
@@ -1032,7 +1030,7 @@ instance Core.FromJSON CourseWorkMaterial where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "individualStudentsOptions")
-            Core.<*> (o Core..:? "materials" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "materials")
             Core.<*> (o Core..:? "scheduledTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "title")
@@ -1471,7 +1469,7 @@ instance Core.FromJSON GradebookSettings where
           GradebookSettings
             Core.<$> (o Core..:? "calculationType")
             Core.<*> (o Core..:? "displaySetting")
-            Core.<*> (o Core..:? "gradeCategories" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "gradeCategories")
       )
 
 instance Core.ToJSON GradebookSettings where
@@ -1612,7 +1610,7 @@ instance Core.FromJSON IndividualStudentsOptions where
       "IndividualStudentsOptions"
       ( \o ->
           IndividualStudentsOptions
-            Core.<$> (o Core..:? "studentIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "studentIds")
       )
 
 instance Core.ToJSON IndividualStudentsOptions where
@@ -1737,7 +1735,7 @@ instance Core.FromJSON ListAnnouncementsResponse where
       "ListAnnouncementsResponse"
       ( \o ->
           ListAnnouncementsResponse
-            Core.<$> (o Core..:? "announcements" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "announcements")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1776,7 +1774,7 @@ instance Core.FromJSON ListCourseAliasesResponse where
       "ListCourseAliasesResponse"
       ( \o ->
           ListCourseAliasesResponse
-            Core.<$> (o Core..:? "aliases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "aliases")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1815,9 +1813,7 @@ instance Core.FromJSON ListCourseWorkMaterialResponse where
       "ListCourseWorkMaterialResponse"
       ( \o ->
           ListCourseWorkMaterialResponse
-            Core.<$> ( o Core..:? "courseWorkMaterial"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "courseWorkMaterial")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1857,7 +1853,7 @@ instance Core.FromJSON ListCourseWorkResponse where
       "ListCourseWorkResponse"
       ( \o ->
           ListCourseWorkResponse
-            Core.<$> (o Core..:? "courseWork" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "courseWork")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1893,7 +1889,7 @@ instance Core.FromJSON ListCoursesResponse where
       "ListCoursesResponse"
       ( \o ->
           ListCoursesResponse
-            Core.<$> (o Core..:? "courses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "courses")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1935,9 +1931,7 @@ instance
       "ListGuardianInvitationsResponse"
       ( \o ->
           ListGuardianInvitationsResponse
-            Core.<$> ( o Core..:? "guardianInvitations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "guardianInvitations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1974,7 +1968,7 @@ instance Core.FromJSON ListGuardiansResponse where
       "ListGuardiansResponse"
       ( \o ->
           ListGuardiansResponse
-            Core.<$> (o Core..:? "guardians" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "guardians")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2013,7 +2007,7 @@ instance Core.FromJSON ListInvitationsResponse where
       "ListInvitationsResponse"
       ( \o ->
           ListInvitationsResponse
-            Core.<$> (o Core..:? "invitations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "invitations")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2053,9 +2047,7 @@ instance Core.FromJSON ListStudentSubmissionsResponse where
       ( \o ->
           ListStudentSubmissionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "studentSubmissions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "studentSubmissions")
       )
 
 instance Core.ToJSON ListStudentSubmissionsResponse where
@@ -2092,7 +2084,7 @@ instance Core.FromJSON ListStudentsResponse where
       ( \o ->
           ListStudentsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "students" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "students")
       )
 
 instance Core.ToJSON ListStudentsResponse where
@@ -2128,7 +2120,7 @@ instance Core.FromJSON ListTeachersResponse where
       ( \o ->
           ListTeachersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "teachers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "teachers")
       )
 
 instance Core.ToJSON ListTeachersResponse where
@@ -2164,7 +2156,7 @@ instance Core.FromJSON ListTopicResponse where
       ( \o ->
           ListTopicResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "topic" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "topic")
       )
 
 instance Core.ToJSON ListTopicResponse where
@@ -2292,7 +2284,7 @@ instance Core.FromJSON ModifyAttachmentsRequest where
       "ModifyAttachmentsRequest"
       ( \o ->
           ModifyAttachmentsRequest
-            Core.<$> (o Core..:? "addAttachments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addAttachments")
       )
 
 instance Core.ToJSON ModifyAttachmentsRequest where
@@ -2374,8 +2366,8 @@ instance
       "ModifyIndividualStudentsOptions"
       ( \o ->
           ModifyIndividualStudentsOptions
-            Core.<$> (o Core..:? "addStudentIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "removeStudentIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "addStudentIds")
+            Core.<*> (o Core..:? "removeStudentIds")
       )
 
 instance Core.ToJSON ModifyIndividualStudentsOptions where
@@ -2408,7 +2400,7 @@ instance Core.FromJSON MultipleChoiceQuestion where
       "MultipleChoiceQuestion"
       ( \o ->
           MultipleChoiceQuestion
-            Core.<$> (o Core..:? "choices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "choices")
       )
 
 instance Core.ToJSON MultipleChoiceQuestion where
@@ -2825,7 +2817,7 @@ instance Core.FromJSON StudentSubmission where
             Core.<*> (o Core..:? "multipleChoiceSubmission")
             Core.<*> (o Core..:? "shortAnswerSubmission")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "submissionHistory" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "submissionHistory")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "userId")
       )
@@ -3098,7 +3090,7 @@ instance Core.FromJSON UserProfile where
             Core.<$> (o Core..:? "emailAddress")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "photoUrl")
             Core.<*> (o Core..:? "verifiedTeacher")
       )

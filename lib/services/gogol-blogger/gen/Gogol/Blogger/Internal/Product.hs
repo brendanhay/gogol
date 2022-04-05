@@ -372,7 +372,7 @@ instance Core.FromJSON Blog_Posts where
       "Blog_Posts"
       ( \o ->
           Blog_Posts
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalItems")
       )
@@ -415,8 +415,8 @@ instance Core.FromJSON BlogList where
       "BlogList"
       ( \o ->
           BlogList
-            Core.<$> (o Core..:? "blogUserInfos" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blogUserInfos")
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -800,7 +800,7 @@ instance Core.FromJSON CommentList where
       ( \o ->
           CommentList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "prevPageToken")
@@ -1039,7 +1039,7 @@ instance Core.FromJSON PageList where
       ( \o ->
           PageList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1080,7 +1080,7 @@ instance Core.FromJSON Pageviews where
       ( \o ->
           Pageviews
             Core.<$> (o Core..:? "blogId")
-            Core.<*> (o Core..:? "counts" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "counts")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -1116,7 +1116,9 @@ instance Core.FromJSON Pageviews_CountsItem where
       "Pageviews_CountsItem"
       ( \o ->
           Pageviews_CountsItem
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "timeRange")
       )
 
@@ -1211,9 +1213,9 @@ instance Core.FromJSON Post' where
             Core.<*> (o Core..:? "customMetaData")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "images" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "published")
             Core.<*> (o Core..:? "readerComments")
@@ -1455,9 +1457,11 @@ instance Core.FromJSON Post_Replies where
       "Post_Replies"
       ( \o ->
           Post_Replies
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> (o Core..:? "totalItems")
+            Core.<*> ( o Core..:? "totalItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Post_Replies where
@@ -1506,7 +1510,7 @@ instance Core.FromJSON PostList where
       ( \o ->
           PostList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "prevPageToken")
@@ -1648,7 +1652,7 @@ instance Core.FromJSON PostUserInfosList where
       "PostUserInfosList"
       ( \o ->
           PostUserInfosList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )

@@ -420,7 +420,10 @@ instance Core.FromJSON BandwidthLimit where
     Core.withObject
       "BandwidthLimit"
       ( \o ->
-          BandwidthLimit Core.<$> (o Core..:? "limitMbps")
+          BandwidthLimit
+            Core.<$> ( o Core..:? "limitMbps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON BandwidthLimit where
@@ -532,7 +535,7 @@ instance Core.FromJSON ErrorLogEntry where
       "ErrorLogEntry"
       ( \o ->
           ErrorLogEntry
-            Core.<$> (o Core..:? "errorDetails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errorDetails")
             Core.<*> (o Core..:? "url")
       )
 
@@ -575,8 +578,10 @@ instance Core.FromJSON ErrorSummary where
       ( \o ->
           ErrorSummary
             Core.<$> (o Core..:? "errorCode")
-            Core.<*> (o Core..:? "errorCount")
-            Core.<*> (o Core..:? "errorLogEntries" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "errorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "errorLogEntries")
       )
 
 instance Core.ToJSON ErrorSummary where
@@ -716,7 +721,7 @@ instance Core.FromJSON ListAgentPoolsResponse where
       "ListAgentPoolsResponse"
       ( \o ->
           ListAgentPoolsResponse
-            Core.<$> (o Core..:? "agentPools" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "agentPools")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -756,7 +761,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -795,7 +800,7 @@ instance Core.FromJSON ListTransferJobsResponse where
       ( \o ->
           ListTransferJobsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transferJobs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferJobs")
       )
 
 instance Core.ToJSON ListTransferJobsResponse where
@@ -837,8 +842,8 @@ instance Core.FromJSON LoggingConfig where
       ( \o ->
           LoggingConfig
             Core.<$> (o Core..:? "enableOnpremGcsTransferLogs")
-            Core.<*> (o Core..:? "logActionStates" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "logActions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "logActionStates")
+            Core.<*> (o Core..:? "logActions")
       )
 
 instance Core.ToJSON LoggingConfig where
@@ -955,7 +960,7 @@ instance Core.FromJSON NotificationConfig where
       "NotificationConfig"
       ( \o ->
           NotificationConfig
-            Core.<$> (o Core..:? "eventTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "eventTypes")
             Core.<*> (o Core..:? "payloadFormat")
             Core.<*> (o Core..:? "pubsubTopic")
       )
@@ -1010,8 +1015,8 @@ instance Core.FromJSON ObjectConditions where
       "ObjectConditions"
       ( \o ->
           ObjectConditions
-            Core.<$> (o Core..:? "excludePrefixes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "includePrefixes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "excludePrefixes")
+            Core.<*> (o Core..:? "includePrefixes")
             Core.<*> (o Core..:? "lastModifiedBefore")
             Core.<*> (o Core..:? "lastModifiedSince")
             Core.<*> (o Core..:? "maxTimeElapsedSinceLastModification")
@@ -1327,7 +1332,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1500,29 +1505,69 @@ instance Core.FromJSON TransferCounters where
       "TransferCounters"
       ( \o ->
           TransferCounters
-            Core.<$> (o Core..:? "bytesCopiedToSink")
-            Core.<*> (o Core..:? "bytesDeletedFromSink")
-            Core.<*> (o Core..:? "bytesDeletedFromSource")
-            Core.<*> (o Core..:? "bytesFailedToDeleteFromSink")
-            Core.<*> (o Core..:? "bytesFoundFromSource")
-            Core.<*> (o Core..:? "bytesFoundOnlyFromSink")
-            Core.<*> (o Core..:? "bytesFromSourceFailed")
-            Core.<*> (o Core..:? "bytesFromSourceSkippedBySync")
-            Core.<*> (o Core..:? "directoriesFailedToListFromSource")
-            Core.<*> (o Core..:? "directoriesFoundFromSource")
-            Core.<*> ( o
-                         Core..:? "directoriesSuccessfullyListedFromSource"
+            Core.<$> ( o Core..:? "bytesCopiedToSink"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "intermediateObjectsCleanedUp")
-            Core.<*> (o Core..:? "intermediateObjectsFailedCleanedUp")
-            Core.<*> (o Core..:? "objectsCopiedToSink")
-            Core.<*> (o Core..:? "objectsDeletedFromSink")
-            Core.<*> (o Core..:? "objectsDeletedFromSource")
-            Core.<*> (o Core..:? "objectsFailedToDeleteFromSink")
-            Core.<*> (o Core..:? "objectsFoundFromSource")
-            Core.<*> (o Core..:? "objectsFoundOnlyFromSink")
-            Core.<*> (o Core..:? "objectsFromSourceFailed")
-            Core.<*> (o Core..:? "objectsFromSourceSkippedBySync")
+            Core.<*> ( o Core..:? "bytesDeletedFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesDeletedFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesFailedToDeleteFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesFoundFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesFoundOnlyFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesFromSourceFailed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "bytesFromSourceSkippedBySync"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "directoriesFailedToListFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "directoriesFoundFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "directoriesSuccessfullyListedFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "intermediateObjectsCleanedUp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "intermediateObjectsFailedCleanedUp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsCopiedToSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsDeletedFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsDeletedFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsFailedToDeleteFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsFoundFromSource"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsFoundOnlyFromSink"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsFromSourceFailed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "objectsFromSourceSkippedBySync"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON TransferCounters where
@@ -1759,7 +1804,7 @@ instance Core.FromJSON TransferOperation where
           TransferOperation
             Core.<$> (o Core..:? "counters")
             Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "errorBreakdowns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errorBreakdowns")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
             Core.<*> (o Core..:? "projectId")

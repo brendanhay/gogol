@@ -312,7 +312,7 @@ instance Core.FromJSON Acl where
           Acl
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "domainRestricted")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#acl")
       )
 
@@ -753,7 +753,7 @@ instance Core.FromJSON Activity_Object where
       ( \o ->
           Activity_Object
             Core.<$> (o Core..:? "actor")
-            Core.<*> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attachments")
             Core.<*> (o Core..:? "content")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "objectType")
@@ -1057,8 +1057,8 @@ instance
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "objectType")
-            Core.<*> (o Core..:? "previewThumbnails" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "thumbnails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "previewThumbnails")
+            Core.<*> (o Core..:? "thumbnails")
             Core.<*> (o Core..:? "url")
       )
 
@@ -1615,7 +1615,7 @@ instance Core.FromJSON ActivityFeed where
           ActivityFeed
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#activityFeed")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "nextPageToken")
@@ -1729,7 +1729,7 @@ instance Core.FromJSON AudiencesFeed where
       ( \o ->
           AudiencesFeed
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#audiencesFeed")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
@@ -1883,7 +1883,7 @@ instance Core.FromJSON CircleFeed where
       ( \o ->
           CircleFeed
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#circleFeed")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "nextPageToken")
@@ -1963,7 +1963,7 @@ instance Core.FromJSON Comment where
             Core.<$> (o Core..:? "actor")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "inReplyTo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "inReplyTo")
             Core.<*> (o Core..:? "kind" Core..!= "plus#comment")
             Core.<*> (o Core..:? "object")
             Core.<*> (o Core..:? "plusoners")
@@ -2342,7 +2342,7 @@ instance Core.FromJSON CommentFeed where
           CommentFeed
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#commentFeed")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "nextPageToken")
@@ -2449,12 +2449,16 @@ instance Core.FromJSON Media where
             Core.<*> (o Core..:? "mediaCreatedTime")
             Core.<*> (o Core..:? "mediaUrl")
             Core.<*> (o Core..:? "published")
-            Core.<*> (o Core..:? "sizeBytes")
-            Core.<*> (o Core..:? "streams" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "streams")
             Core.<*> (o Core..:? "summary")
             Core.<*> (o Core..:? "updated")
             Core.<*> (o Core..:? "url")
-            Core.<*> (o Core..:? "videoDuration")
+            Core.<*> ( o Core..:? "videoDuration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "videoStatus")
             Core.<*> (o Core..:? "width")
       )
@@ -2629,7 +2633,7 @@ instance Core.FromJSON PeopleFeed where
       ( \o ->
           PeopleFeed
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "plus#peopleFeed")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
@@ -2765,7 +2769,7 @@ instance Core.FromJSON Person where
             Core.<*> (o Core..:? "currentLocation")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "domain")
-            Core.<*> (o Core..:? "emails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "emails")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "gender")
             Core.<*> (o Core..:? "id")
@@ -2776,14 +2780,14 @@ instance Core.FromJSON Person where
             Core.<*> (o Core..:? "nickname")
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "occupation")
-            Core.<*> (o Core..:? "organizations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "placesLived" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "organizations")
+            Core.<*> (o Core..:? "placesLived")
             Core.<*> (o Core..:? "plusOneCount")
             Core.<*> (o Core..:? "relationshipStatus")
             Core.<*> (o Core..:? "skills")
             Core.<*> (o Core..:? "tagline")
             Core.<*> (o Core..:? "url")
-            Core.<*> (o Core..:? "urls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "urls")
             Core.<*> (o Core..:? "verified")
       )
 

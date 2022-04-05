@@ -156,7 +156,9 @@ instance Core.FromJSON GdataBlobstore2Info where
       "GdataBlobstore2Info"
       ( \o ->
           GdataBlobstore2Info
-            Core.<$> (o Core..:? "blobGeneration")
+            Core.<$> ( o Core..:? "blobGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "blobId")
             Core.<*> (o Core..:? "downloadReadHandle")
             Core.<*> (o Core..:? "readToken")
@@ -236,7 +238,9 @@ instance Core.FromJSON GdataCompositeMedia where
             Core.<*> (o Core..:? "cosmoBinaryReference")
             Core.<*> (o Core..:? "crc32cHash")
             Core.<*> (o Core..:? "inline")
-            Core.<*> (o Core..:? "length")
+            Core.<*> ( o Core..:? "length"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "objectId")
             Core.<*> (o Core..:? "path")
@@ -354,9 +358,13 @@ instance Core.FromJSON GdataDiffChecksumsResponse where
       ( \o ->
           GdataDiffChecksumsResponse
             Core.<$> (o Core..:? "checksumsLocation")
-            Core.<*> (o Core..:? "chunkSizeBytes")
+            Core.<*> ( o Core..:? "chunkSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "objectLocation")
-            Core.<*> (o Core..:? "objectSizeBytes")
+            Core.<*> ( o Core..:? "objectSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "objectVersion")
       )
 
@@ -515,7 +523,9 @@ instance Core.FromJSON GdataDiffVersionResponse where
       "GdataDiffVersionResponse"
       ( \o ->
           GdataDiffVersionResponse
-            Core.<$> (o Core..:? "objectSizeBytes")
+            Core.<$> ( o Core..:? "objectSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "objectVersion")
       )
 
@@ -683,7 +693,7 @@ instance Core.FromJSON GdataMedia where
             Core.<*> (o Core..:? "bigstoreObjectRef")
             Core.<*> (o Core..:? "blobRef")
             Core.<*> (o Core..:? "blobstore2Info")
-            Core.<*> (o Core..:? "compositeMedia" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "compositeMedia")
             Core.<*> (o Core..:? "contentType")
             Core.<*> (o Core..:? "contentTypeInfo")
             Core.<*> (o Core..:? "cosmoBinaryReference")
@@ -699,7 +709,9 @@ instance Core.FromJSON GdataMedia where
             Core.<*> (o Core..:? "hashVerified")
             Core.<*> (o Core..:? "inline")
             Core.<*> (o Core..:? "isPotentialRetry")
-            Core.<*> (o Core..:? "length")
+            Core.<*> ( o Core..:? "length"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "mediaId")
             Core.<*> (o Core..:? "objectId")
@@ -707,7 +719,9 @@ instance Core.FromJSON GdataMedia where
             Core.<*> (o Core..:? "referenceType")
             Core.<*> (o Core..:? "sha1Hash")
             Core.<*> (o Core..:? "sha256Hash")
-            Core.<*> (o Core..:? "timestamp")
+            Core.<*> ( o Core..:? "timestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "token")
       )
 
@@ -789,7 +803,9 @@ instance Core.FromJSON GdataObjectId where
       ( \o ->
           GdataObjectId
             Core.<$> (o Core..:? "bucketName")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "objectName")
       )
 
@@ -886,7 +902,7 @@ instance Core.FromJSON ListJobsResponse where
       "ListJobsResponse"
       ( \o ->
           ListJobsResponse
-            Core.<$> (o Core..:? "jobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "jobs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -926,7 +942,7 @@ instance Core.FromJSON ListReportTypesResponse where
       ( \o ->
           ListReportTypesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "reportTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reportTypes")
       )
 
 instance Core.ToJSON ListReportTypesResponse where
@@ -962,7 +978,7 @@ instance Core.FromJSON ListReportsResponse where
       ( \o ->
           ListReportsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "reports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reports")
       )
 
 instance Core.ToJSON ListReportsResponse where

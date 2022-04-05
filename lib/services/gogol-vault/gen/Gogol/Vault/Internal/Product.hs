@@ -313,7 +313,10 @@ instance Core.FromJSON AccountCount where
       "AccountCount"
       ( \o ->
           AccountCount
-            Core.<$> (o Core..:? "account") Core.<*> (o Core..:? "count")
+            Core.<$> (o Core..:? "account")
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AccountCount where
@@ -379,10 +382,7 @@ instance Core.FromJSON AccountInfo where
   parseJSON =
     Core.withObject
       "AccountInfo"
-      ( \o ->
-          AccountInfo
-            Core.<$> (o Core..:? "emails" Core..!= Core.mempty)
-      )
+      (\o -> AccountInfo Core.<$> (o Core..:? "emails"))
 
 instance Core.ToJSON AccountInfo where
   toJSON AccountInfo {..} =
@@ -448,8 +448,8 @@ instance Core.FromJSON AddHeldAccountsRequest where
       "AddHeldAccountsRequest"
       ( \o ->
           AddHeldAccountsRequest
-            Core.<$> (o Core..:? "accountIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "emails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accountIds")
+            Core.<*> (o Core..:? "emails")
       )
 
 instance Core.ToJSON AddHeldAccountsRequest where
@@ -481,7 +481,7 @@ instance Core.FromJSON AddHeldAccountsResponse where
       "AddHeldAccountsResponse"
       ( \o ->
           AddHeldAccountsResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON AddHeldAccountsResponse where
@@ -638,7 +638,9 @@ instance Core.FromJSON CloudStorageFile where
             Core.<$> (o Core..:? "bucketName")
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "objectName")
-            Core.<*> (o Core..:? "size")
+            Core.<*> ( o Core..:? "size"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CloudStorageFile where
@@ -671,8 +673,7 @@ instance Core.FromJSON CloudStorageSink where
     Core.withObject
       "CloudStorageSink"
       ( \o ->
-          CloudStorageSink
-            Core.<$> (o Core..:? "files" Core..!= Core.mempty)
+          CloudStorageSink Core.<$> (o Core..:? "files")
       )
 
 instance Core.ToJSON CloudStorageSink where
@@ -850,7 +851,9 @@ instance Core.FromJSON CountArtifactsResponse where
           CountArtifactsResponse
             Core.<$> (o Core..:? "groupsCountResult")
             Core.<*> (o Core..:? "mailCountResult")
-            Core.<*> (o Core..:? "totalCount")
+            Core.<*> ( o Core..:? "totalCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CountArtifactsResponse where
@@ -1130,9 +1133,15 @@ instance Core.FromJSON ExportStats where
       "ExportStats"
       ( \o ->
           ExportStats
-            Core.<$> (o Core..:? "exportedArtifactCount")
-            Core.<*> (o Core..:? "sizeInBytes")
-            Core.<*> (o Core..:? "totalArtifactCount")
+            Core.<$> ( o Core..:? "exportedArtifactCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sizeInBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalArtifactCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ExportStats where
@@ -1183,15 +1192,15 @@ instance Core.FromJSON GroupsCountResult where
       "GroupsCountResult"
       ( \o ->
           GroupsCountResult
-            Core.<$> ( o Core..:? "accountCountErrors"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "accountCountErrors")
+            Core.<*> (o Core..:? "accountCounts")
+            Core.<*> ( o Core..:? "matchingAccountsCount"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "accountCounts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "matchingAccountsCount")
-            Core.<*> ( o Core..:? "nonQueryableAccounts"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "nonQueryableAccounts")
+            Core.<*> ( o Core..:? "queriedAccountsCount"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "queriedAccountsCount")
       )
 
 instance Core.ToJSON GroupsCountResult where
@@ -1290,8 +1299,7 @@ instance Core.FromJSON HangoutsChatInfo where
     Core.withObject
       "HangoutsChatInfo"
       ( \o ->
-          HangoutsChatInfo
-            Core.<$> (o Core..:? "roomId" Core..!= Core.mempty)
+          HangoutsChatInfo Core.<$> (o Core..:? "roomId")
       )
 
 instance Core.ToJSON HangoutsChatInfo where
@@ -1596,8 +1604,7 @@ instance Core.FromJSON HeldVoiceQuery where
     Core.withObject
       "HeldVoiceQuery"
       ( \o ->
-          HeldVoiceQuery
-            Core.<$> (o Core..:? "coveredData" Core..!= Core.mempty)
+          HeldVoiceQuery Core.<$> (o Core..:? "coveredData")
       )
 
 instance Core.ToJSON HeldVoiceQuery where
@@ -1648,7 +1655,7 @@ instance Core.FromJSON Hold where
       "Hold"
       ( \o ->
           Hold
-            Core.<$> (o Core..:? "accounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accounts")
             Core.<*> (o Core..:? "corpus")
             Core.<*> (o Core..:? "holdId")
             Core.<*> (o Core..:? "name")
@@ -1694,7 +1701,7 @@ instance Core.FromJSON ListExportsResponse where
       "ListExportsResponse"
       ( \o ->
           ListExportsResponse
-            Core.<$> (o Core..:? "exports" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exports")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1727,7 +1734,7 @@ instance Core.FromJSON ListHeldAccountsResponse where
       "ListHeldAccountsResponse"
       ( \o ->
           ListHeldAccountsResponse
-            Core.<$> (o Core..:? "accounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accounts")
       )
 
 instance Core.ToJSON ListHeldAccountsResponse where
@@ -1760,7 +1767,7 @@ instance Core.FromJSON ListHoldsResponse where
       "ListHoldsResponse"
       ( \o ->
           ListHoldsResponse
-            Core.<$> (o Core..:? "holds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "holds")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1796,7 +1803,7 @@ instance Core.FromJSON ListMattersResponse where
       "ListMattersResponse"
       ( \o ->
           ListMattersResponse
-            Core.<$> (o Core..:? "matters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "matters")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1836,7 +1843,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -1875,7 +1882,7 @@ instance Core.FromJSON ListSavedQueriesResponse where
       ( \o ->
           ListSavedQueriesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "savedQueries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "savedQueries")
       )
 
 instance Core.ToJSON ListSavedQueriesResponse where
@@ -1922,15 +1929,15 @@ instance Core.FromJSON MailCountResult where
       "MailCountResult"
       ( \o ->
           MailCountResult
-            Core.<$> ( o Core..:? "accountCountErrors"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "accountCountErrors")
+            Core.<*> (o Core..:? "accountCounts")
+            Core.<*> ( o Core..:? "matchingAccountsCount"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "accountCounts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "matchingAccountsCount")
-            Core.<*> ( o Core..:? "nonQueryableAccounts"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "nonQueryableAccounts")
+            Core.<*> ( o Core..:? "queriedAccountsCount"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "queriedAccountsCount")
       )
 
 instance Core.ToJSON MailCountResult where
@@ -2060,7 +2067,7 @@ instance Core.FromJSON Matter where
           Matter
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "matterId")
-            Core.<*> (o Core..:? "matterPermissions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "matterPermissions")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "state")
       )
@@ -2390,7 +2397,7 @@ instance Core.FromJSON RemoveHeldAccountsRequest where
       "RemoveHeldAccountsRequest"
       ( \o ->
           RemoveHeldAccountsRequest
-            Core.<$> (o Core..:? "accountIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accountIds")
       )
 
 instance Core.ToJSON RemoveHeldAccountsRequest where
@@ -2421,7 +2428,7 @@ instance Core.FromJSON RemoveHeldAccountsResponse where
       "RemoveHeldAccountsResponse"
       ( \o ->
           RemoveHeldAccountsResponse
-            Core.<$> (o Core..:? "statuses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "statuses")
       )
 
 instance Core.ToJSON RemoveHeldAccountsResponse where
@@ -2583,7 +2590,7 @@ instance Core.FromJSON SharedDriveInfo where
       "SharedDriveInfo"
       ( \o ->
           SharedDriveInfo
-            Core.<$> (o Core..:? "sharedDriveIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "sharedDriveIds")
       )
 
 instance Core.ToJSON SharedDriveInfo where
@@ -2619,7 +2626,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -2679,8 +2686,7 @@ instance Core.FromJSON TeamDriveInfo where
     Core.withObject
       "TeamDriveInfo"
       ( \o ->
-          TeamDriveInfo
-            Core.<$> (o Core..:? "teamDriveIds" Core..!= Core.mempty)
+          TeamDriveInfo Core.<$> (o Core..:? "teamDriveIds")
       )
 
 instance Core.ToJSON TeamDriveInfo where
@@ -2794,8 +2800,7 @@ instance Core.FromJSON VoiceOptions where
     Core.withObject
       "VoiceOptions"
       ( \o ->
-          VoiceOptions
-            Core.<$> (o Core..:? "coveredData" Core..!= Core.mempty)
+          VoiceOptions Core.<$> (o Core..:? "coveredData")
       )
 
 instance Core.ToJSON VoiceOptions where

@@ -565,15 +565,11 @@ instance
           BuildBazelRemoteExecutionV2ActionResult
             Core.<$> (o Core..:? "executionMetadata")
             Core.<*> (o Core..:? "exitCode")
-            Core.<*> (o Core..:? "outputDirectories" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "outputDirectorySymlinks"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "outputFileSymlinks"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "outputFiles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "outputSymlinks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "outputDirectories")
+            Core.<*> (o Core..:? "outputDirectorySymlinks")
+            Core.<*> (o Core..:? "outputFileSymlinks")
+            Core.<*> (o Core..:? "outputFiles")
+            Core.<*> (o Core..:? "outputSymlinks")
             Core.<*> (o Core..:? "stderrDigest")
             Core.<*> (o Core..:? "stderrRaw")
             Core.<*> (o Core..:? "stdoutDigest")
@@ -629,7 +625,7 @@ instance
       "BuildBazelRemoteExecutionV2BatchReadBlobsRequest"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchReadBlobsRequest
-            Core.<$> (o Core..:? "digests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "digests")
       )
 
 instance
@@ -670,7 +666,7 @@ instance
       "BuildBazelRemoteExecutionV2BatchReadBlobsResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchReadBlobsResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -761,7 +757,7 @@ instance
       "BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
-            Core.<$> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requests")
       )
 
 instance
@@ -847,7 +843,7 @@ instance
       "BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
-            Core.<$> (o Core..:? "responses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "responses")
       )
 
 instance
@@ -961,11 +957,11 @@ instance
           BuildBazelRemoteExecutionV2CacheCapabilities
             Core.<$> (o Core..:? "actionCacheUpdateCapabilities")
             Core.<*> (o Core..:? "cachePriorityCapabilities")
-            Core.<*> (o Core..:? "digestFunction" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "maxBatchTotalSizeBytes")
-            Core.<*> ( o Core..:? "supportedCompressor"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "digestFunction")
+            Core.<*> ( o Core..:? "maxBatchTotalSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "supportedCompressor")
             Core.<*> (o Core..:? "symlinkAbsolutePathStrategy")
       )
 
@@ -1044,16 +1040,12 @@ instance
       "BuildBazelRemoteExecutionV2Command"
       ( \o ->
           BuildBazelRemoteExecutionV2Command
-            Core.<$> (o Core..:? "arguments" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "environmentVariables"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "outputDirectories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "outputFiles" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "outputNodeProperties"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "outputPaths" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arguments")
+            Core.<*> (o Core..:? "environmentVariables")
+            Core.<*> (o Core..:? "outputDirectories")
+            Core.<*> (o Core..:? "outputFiles")
+            Core.<*> (o Core..:? "outputNodeProperties")
+            Core.<*> (o Core..:? "outputPaths")
             Core.<*> (o Core..:? "platform")
             Core.<*> (o Core..:? "workingDirectory")
       )
@@ -1156,7 +1148,9 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2Digest
             Core.<$> (o Core..:? "hash")
-            Core.<*> (o Core..:? "sizeBytes")
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -1208,10 +1202,10 @@ instance
       "BuildBazelRemoteExecutionV2Directory"
       ( \o ->
           BuildBazelRemoteExecutionV2Directory
-            Core.<$> (o Core..:? "directories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "directories")
+            Core.<*> (o Core..:? "files")
             Core.<*> (o Core..:? "nodeProperties")
-            Core.<*> (o Core..:? "symlinks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "symlinks")
       )
 
 instance
@@ -1548,7 +1542,7 @@ instance
       "BuildBazelRemoteExecutionV2ExecutedActionMetadata"
       ( \o ->
           BuildBazelRemoteExecutionV2ExecutedActionMetadata
-            Core.<$> (o Core..:? "auxiliaryMetadata" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auxiliaryMetadata")
               Core.<*> (o Core..:? "executionCompletedTimestamp")
               Core.<*> (o Core..:? "executionStartTimestamp")
               Core.<*> (o Core..:? "inputFetchCompletedTimestamp")
@@ -1671,9 +1665,7 @@ instance
             Core.<$> (o Core..:? "digestFunction")
               Core.<*> (o Core..:? "execEnabled")
               Core.<*> (o Core..:? "executionPriorityCapabilities")
-              Core.<*> ( o Core..:? "supportedNodeProperties"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "supportedNodeProperties")
       )
 
 instance
@@ -1811,7 +1803,7 @@ instance
       "BuildBazelRemoteExecutionV2FindMissingBlobsRequest"
       ( \o ->
           BuildBazelRemoteExecutionV2FindMissingBlobsRequest
-            Core.<$> (o Core..:? "blobDigests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "blobDigests")
       )
 
 instance
@@ -1851,9 +1843,7 @@ instance
       "BuildBazelRemoteExecutionV2FindMissingBlobsResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2FindMissingBlobsResponse
-            Core.<$> ( o Core..:? "missingBlobDigests"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "missingBlobDigests")
       )
 
 instance
@@ -1898,7 +1888,7 @@ instance
       "BuildBazelRemoteExecutionV2GetTreeResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2GetTreeResponse
-            Core.<$> (o Core..:? "directories" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "directories")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1992,7 +1982,7 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2NodeProperties
             Core.<$> (o Core..:? "mtime")
-            Core.<*> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "unixMode")
       )
 
@@ -2232,7 +2222,7 @@ instance
       "BuildBazelRemoteExecutionV2Platform"
       ( \o ->
           BuildBazelRemoteExecutionV2Platform
-            Core.<$> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "properties")
       )
 
 instance
@@ -2318,7 +2308,7 @@ instance
       "BuildBazelRemoteExecutionV2PriorityCapabilities"
       ( \o ->
           BuildBazelRemoteExecutionV2PriorityCapabilities
-            Core.<$> (o Core..:? "priorities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "priorities")
       )
 
 instance
@@ -2673,8 +2663,7 @@ instance
       "BuildBazelRemoteExecutionV2Tree"
       ( \o ->
           BuildBazelRemoteExecutionV2Tree
-            Core.<$> (o Core..:? "children" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "root")
+            Core.<$> (o Core..:? "children") Core.<*> (o Core..:? "root")
       )
 
 instance Core.ToJSON BuildBazelRemoteExecutionV2Tree where
@@ -2924,8 +2913,12 @@ instance
             Core.<*> (o Core..:? "dockerCacheHit")
             Core.<*> (o Core..:? "dockerImageName")
             Core.<*> (o Core..:? "inputCacheMiss")
-            Core.<*> (o Core..:? "numErrors")
-            Core.<*> (o Core..:? "numWarnings")
+            Core.<*> ( o Core..:? "numErrors"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "numWarnings"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "outputLocation")
             Core.<*> (o Core..:? "usedAsyncContainer")
       )
@@ -3091,12 +3084,24 @@ instance
       "GoogleDevtoolsRemotebuildbotResourceUsageIOStats"
       ( \o ->
           GoogleDevtoolsRemotebuildbotResourceUsageIOStats
-            Core.<$> (o Core..:? "readBytesCount")
-              Core.<*> (o Core..:? "readCount")
-              Core.<*> (o Core..:? "readTimeMs")
-              Core.<*> (o Core..:? "writeBytesCount")
-              Core.<*> (o Core..:? "writeCount")
-              Core.<*> (o Core..:? "writeTimeMs")
+            Core.<$> ( o Core..:? "readBytesCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "readCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "readTimeMs"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "writeBytesCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "writeCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
+              Core.<*> ( o Core..:? "writeTimeMs"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -3150,7 +3155,12 @@ instance
       "GoogleDevtoolsRemotebuildbotResourceUsageStat"
       ( \o ->
           GoogleDevtoolsRemotebuildbotResourceUsageStat
-            Core.<$> (o Core..:? "total") Core.<*> (o Core..:? "used")
+            Core.<$> ( o Core..:? "total"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "used"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -3195,7 +3205,9 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
-            Core.<$> (o Core..:? "acceleratorCount")
+            Core.<$> ( o Core..:? "acceleratorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
               Core.<*> (o Core..:? "acceleratorType")
       )
 
@@ -3243,8 +3255,12 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
-            Core.<$> (o Core..:? "maxSize")
-              Core.<*> (o Core..:? "minSize")
+            Core.<$> ( o Core..:? "maxSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+              Core.<*> ( o Core..:? "minSize"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -3587,7 +3603,7 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
-            Core.<$> (o Core..:? "allowedValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedValues")
               Core.<*> (o Core..:? "policy")
       )
 
@@ -3812,7 +3828,7 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
       )
 
 instance
@@ -3899,7 +3915,7 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
-            Core.<$> (o Core..:? "workerPools" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "workerPools")
       )
 
 instance
@@ -4081,11 +4097,15 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
             Core.<$> (o Core..:? "accelerator")
-              Core.<*> (o Core..:? "diskSizeGb")
+              Core.<*> ( o Core..:? "diskSizeGb"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "diskType")
               Core.<*> (o Core..:? "labels")
               Core.<*> (o Core..:? "machineType")
-              Core.<*> (o Core..:? "maxConcurrentActions")
+              Core.<*> ( o Core..:? "maxConcurrentActions"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "minCpuPlatform")
               Core.<*> (o Core..:? "networkAccess")
               Core.<*> (o Core..:? "reserved")
@@ -4212,7 +4232,9 @@ instance
               Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "state")
               Core.<*> (o Core..:? "workerConfig")
-              Core.<*> (o Core..:? "workerCount")
+              Core.<*> ( o Core..:? "workerCount"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
       )
 
 instance
@@ -4461,7 +4483,7 @@ instance
           GoogleDevtoolsRemoteworkersV1test2CommandResult
             Core.<$> (o Core..:? "duration")
               Core.<*> (o Core..:? "exitCode")
-              Core.<*> (o Core..:? "metadata" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "metadata")
               Core.<*> (o Core..:? "outputs")
               Core.<*> (o Core..:? "overhead")
               Core.<*> (o Core..:? "status")
@@ -4615,12 +4637,10 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
-            Core.<$> (o Core..:? "arguments" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "environmentVariables"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "files" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "inlineBlobs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "arguments")
+              Core.<*> (o Core..:? "environmentVariables")
+              Core.<*> (o Core..:? "files")
+              Core.<*> (o Core..:? "inlineBlobs")
               Core.<*> (o Core..:? "workingDirectory")
       )
 
@@ -4722,8 +4742,8 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
-            Core.<$> (o Core..:? "directories" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "directories")
+              Core.<*> (o Core..:? "files")
               Core.<*> (o Core..:? "stderrDestination")
               Core.<*> (o Core..:? "stdoutDestination")
       )
@@ -4825,7 +4845,9 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2Digest
             Core.<$> (o Core..:? "hash")
-            Core.<*> (o Core..:? "sizeBytes")
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -4870,8 +4892,8 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2Directory"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2Directory
-            Core.<$> (o Core..:? "directories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "directories")
+            Core.<*> (o Core..:? "files")
       )
 
 instance
@@ -5144,7 +5166,7 @@ instance Core.FromJSON GoogleRpcStatus where
       ( \o ->
           GoogleRpcStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

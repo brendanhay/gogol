@@ -170,12 +170,10 @@ instance Core.FromJSON AccessApprovalSettings where
             Core.<$> (o Core..:? "activeKeyVersion")
             Core.<*> (o Core..:? "ancestorHasActiveKeyVersion")
             Core.<*> (o Core..:? "enrolledAncestor")
-            Core.<*> (o Core..:? "enrolledServices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "enrolledServices")
             Core.<*> (o Core..:? "invalidKeyVersion")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "notificationEmails"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "notificationEmails")
       )
 
 instance Core.ToJSON AccessApprovalSettings where
@@ -568,7 +566,7 @@ instance Core.FromJSON ListApprovalRequestsResponse where
       "ListApprovalRequestsResponse"
       ( \o ->
           ListApprovalRequestsResponse
-            Core.<$> (o Core..:? "approvalRequests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "approvalRequests")
             Core.<*> (o Core..:? "nextPageToken")
       )
 

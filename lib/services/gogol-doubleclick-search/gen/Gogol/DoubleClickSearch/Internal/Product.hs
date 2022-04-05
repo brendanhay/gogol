@@ -141,10 +141,18 @@ instance Core.FromJSON Availability where
       "Availability"
       ( \o ->
           Availability
-            Core.<$> (o Core..:? "advertiserId")
-            Core.<*> (o Core..:? "agencyId")
-            Core.<*> (o Core..:? "availabilityTimestamp")
-            Core.<*> (o Core..:? "segmentationId")
+            Core.<$> ( o Core..:? "advertiserId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "agencyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "availabilityTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "segmentationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "segmentationName")
             Core.<*> (o Core..:? "segmentationType")
       )
@@ -287,34 +295,62 @@ instance Core.FromJSON Conversion where
       "Conversion"
       ( \o ->
           Conversion
-            Core.<$> (o Core..:? "adGroupId")
-            Core.<*> (o Core..:? "adId")
-            Core.<*> (o Core..:? "advertiserId")
-            Core.<*> (o Core..:? "agencyId")
+            Core.<$> ( o Core..:? "adGroupId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "adId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "advertiserId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "agencyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "attributionModel")
-            Core.<*> (o Core..:? "campaignId")
+            Core.<*> ( o Core..:? "campaignId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "channel")
             Core.<*> (o Core..:? "clickId")
             Core.<*> (o Core..:? "conversionId")
-            Core.<*> (o Core..:? "conversionModifiedTimestamp")
+            Core.<*> ( o Core..:? "conversionModifiedTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "conversionTimestamp")
-            Core.<*> (o Core..:? "countMillis")
-            Core.<*> (o Core..:? "criterionId")
+            Core.<*> ( o Core..:? "countMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "criterionId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currencyCode")
-            Core.<*> (o Core..:? "customDimension" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "customMetric" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customDimension")
+            Core.<*> (o Core..:? "customMetric")
             Core.<*> (o Core..:? "deviceType")
-            Core.<*> (o Core..:? "dsConversionId")
-            Core.<*> (o Core..:? "engineAccountId")
+            Core.<*> ( o Core..:? "dsConversionId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "engineAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "floodlightOrderId")
-            Core.<*> (o Core..:? "inventoryAccountId")
+            Core.<*> ( o Core..:? "inventoryAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "productCountry")
-            Core.<*> (o Core..:? "productGroupId")
+            Core.<*> ( o Core..:? "productGroupId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productLanguage")
-            Core.<*> (o Core..:? "quantityMillis")
+            Core.<*> ( o Core..:? "quantityMillis"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "revenueMicros")
-            Core.<*> (o Core..:? "segmentationId")
+            Core.<*> ( o Core..:? "segmentationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "segmentationName")
             Core.<*> (o Core..:? "segmentationType")
             Core.<*> (o Core..:? "state")
@@ -404,7 +440,7 @@ instance Core.FromJSON ConversionList where
       "ConversionList"
       ( \o ->
           ConversionList
-            Core.<$> (o Core..:? "conversion" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "conversion")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -532,13 +568,13 @@ instance Core.FromJSON Report where
       "Report"
       ( \o ->
           Report
-            Core.<$> (o Core..:? "files" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "files")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isReportReady")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "rowCount")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "statisticsCurrencyCode")
             Core.<*> (o Core..:? "statisticsTimeZone")
       )
@@ -583,7 +619,10 @@ instance Core.FromJSON Report_FilesItem where
       "Report_FilesItem"
       ( \o ->
           Report_FilesItem
-            Core.<$> (o Core..:? "byteCount") Core.<*> (o Core..:? "url")
+            Core.<$> ( o Core..:? "byteCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON Report_FilesItem where
@@ -740,13 +779,13 @@ instance Core.FromJSON ReportRequest where
       "ReportRequest"
       ( \o ->
           ReportRequest
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "downloadFormat")
-            Core.<*> (o Core..:? "filters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "filters")
             Core.<*> (o Core..:? "includeDeletedEntities")
             Core.<*> (o Core..:? "includeRemovedEntities")
             Core.<*> (o Core..:? "maxRowsPerFile")
-            Core.<*> (o Core..:? "orderBy" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "orderBy")
             Core.<*> (o Core..:? "reportScope")
             Core.<*> (o Core..:? "reportType")
             Core.<*> (o Core..:? "rowCount")
@@ -811,7 +850,7 @@ instance Core.FromJSON ReportRequest_FiltersItem where
           ReportRequest_FiltersItem
             Core.<$> (o Core..:? "column")
             Core.<*> (o Core..:? "operator")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ReportRequest_FiltersItem where
@@ -900,13 +939,27 @@ instance Core.FromJSON ReportRequest_ReportScope where
       "ReportRequest_ReportScope"
       ( \o ->
           ReportRequest_ReportScope
-            Core.<$> (o Core..:? "adGroupId")
-            Core.<*> (o Core..:? "adId")
-            Core.<*> (o Core..:? "advertiserId")
-            Core.<*> (o Core..:? "agencyId")
-            Core.<*> (o Core..:? "campaignId")
-            Core.<*> (o Core..:? "engineAccountId")
-            Core.<*> (o Core..:? "keywordId")
+            Core.<$> ( o Core..:? "adGroupId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "adId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "advertiserId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "agencyId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "campaignId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "engineAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "keywordId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ReportRequest_ReportScope where
@@ -1071,8 +1124,7 @@ instance Core.FromJSON SavedColumnList where
       "SavedColumnList"
       ( \o ->
           SavedColumnList
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON SavedColumnList where
@@ -1105,7 +1157,7 @@ instance Core.FromJSON UpdateAvailabilityRequest where
       "UpdateAvailabilityRequest"
       ( \o ->
           UpdateAvailabilityRequest
-            Core.<$> (o Core..:? "availabilities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "availabilities")
       )
 
 instance Core.ToJSON UpdateAvailabilityRequest where
@@ -1136,7 +1188,7 @@ instance Core.FromJSON UpdateAvailabilityResponse where
       "UpdateAvailabilityResponse"
       ( \o ->
           UpdateAvailabilityResponse
-            Core.<$> (o Core..:? "availabilities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "availabilities")
       )
 
 instance Core.ToJSON UpdateAvailabilityResponse where

@@ -311,7 +311,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -528,7 +528,7 @@ instance Core.FromJSON GcipSettings where
       ( \o ->
           GcipSettings
             Core.<$> (o Core..:? "loginPageUri")
-            Core.<*> (o Core..:? "tenantIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tenantIds")
       )
 
 instance Core.ToJSON GcipSettings where
@@ -709,8 +709,7 @@ instance Core.FromJSON ListBrandsResponse where
     Core.withObject
       "ListBrandsResponse"
       ( \o ->
-          ListBrandsResponse
-            Core.<$> (o Core..:? "brands" Core..!= Core.mempty)
+          ListBrandsResponse Core.<$> (o Core..:? "brands")
       )
 
 instance Core.ToJSON ListBrandsResponse where
@@ -747,9 +746,7 @@ instance
       "ListIdentityAwareProxyClientsResponse"
       ( \o ->
           ListIdentityAwareProxyClientsResponse
-            Core.<$> ( o Core..:? "identityAwareProxyClients"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "identityAwareProxyClients")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -823,7 +820,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1123,7 +1120,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -1154,7 +1151,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

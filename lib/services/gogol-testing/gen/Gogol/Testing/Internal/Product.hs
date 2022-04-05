@@ -417,9 +417,9 @@ instance Core.FromJSON AndroidDeviceCatalog where
       "AndroidDeviceCatalog"
       ( \o ->
           AndroidDeviceCatalog
-            Core.<$> (o Core..:? "models" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "models")
             Core.<*> (o Core..:? "runtimeConfiguration")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
       )
 
 instance Core.ToJSON AndroidDeviceCatalog where
@@ -453,7 +453,7 @@ instance Core.FromJSON AndroidDeviceList where
       "AndroidDeviceList"
       ( \o ->
           AndroidDeviceList
-            Core.<$> (o Core..:? "androidDevices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "androidDevices")
       )
 
 instance Core.ToJSON AndroidDeviceList where
@@ -518,7 +518,7 @@ instance Core.FromJSON AndroidInstrumentationTest where
             Core.<*> (o Core..:? "testApk")
             Core.<*> (o Core..:? "testPackageId")
             Core.<*> (o Core..:? "testRunnerClass")
-            Core.<*> (o Core..:? "testTargets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "testTargets")
       )
 
 instance Core.ToJSON AndroidInstrumentationTest where
@@ -570,10 +570,10 @@ instance Core.FromJSON AndroidMatrix where
       "AndroidMatrix"
       ( \o ->
           AndroidMatrix
-            Core.<$> (o Core..:? "androidModelIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "androidVersionIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locales" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "orientations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "androidModelIds")
+            Core.<*> (o Core..:? "androidVersionIds")
+            Core.<*> (o Core..:? "locales")
+            Core.<*> (o Core..:? "orientations")
       )
 
 instance Core.ToJSON AndroidMatrix where
@@ -665,11 +665,9 @@ instance Core.FromJSON AndroidModel where
             Core.<*> (o Core..:? "screenDensity")
             Core.<*> (o Core..:? "screenX")
             Core.<*> (o Core..:? "screenY")
-            Core.<*> (o Core..:? "supportedAbis" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "supportedVersionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedAbis")
+            Core.<*> (o Core..:? "supportedVersionIds")
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "thumbnailUrl")
       )
 
@@ -753,10 +751,10 @@ instance Core.FromJSON AndroidRoboTest where
             Core.<*> (o Core..:? "appPackageId")
             Core.<*> (o Core..:? "maxDepth")
             Core.<*> (o Core..:? "maxSteps")
-            Core.<*> (o Core..:? "roboDirectives" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "roboDirectives")
             Core.<*> (o Core..:? "roboMode")
             Core.<*> (o Core..:? "roboScript")
-            Core.<*> (o Core..:? "startingIntents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "startingIntents")
       )
 
 instance Core.ToJSON AndroidRoboTest where
@@ -804,8 +802,8 @@ instance Core.FromJSON AndroidRuntimeConfiguration where
       "AndroidRuntimeConfiguration"
       ( \o ->
           AndroidRuntimeConfiguration
-            Core.<$> (o Core..:? "locales" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "orientations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locales")
+            Core.<*> (o Core..:? "orientations")
       )
 
 instance Core.ToJSON AndroidRuntimeConfiguration where
@@ -855,8 +853,8 @@ instance Core.FromJSON AndroidTestLoop where
             Core.<$> (o Core..:? "appApk")
             Core.<*> (o Core..:? "appBundle")
             Core.<*> (o Core..:? "appPackageId")
-            Core.<*> (o Core..:? "scenarioLabels" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "scenarios" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scenarioLabels")
+            Core.<*> (o Core..:? "scenarios")
       )
 
 instance Core.ToJSON AndroidTestLoop where
@@ -917,7 +915,7 @@ instance Core.FromJSON AndroidVersion where
             Core.<*> (o Core..:? "distribution")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "releaseDate")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "versionString")
       )
 
@@ -1041,12 +1039,12 @@ instance Core.FromJSON ApkManifest where
       ( \o ->
           ApkManifest
             Core.<$> (o Core..:? "applicationLabel")
-            Core.<*> (o Core..:? "intentFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "intentFilters")
             Core.<*> (o Core..:? "maxSdkVersion")
             Core.<*> (o Core..:? "minSdkVersion")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "targetSdkVersion")
-            Core.<*> (o Core..:? "usesPermission" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "usesPermission")
       )
 
 instance Core.ToJSON ApkManifest where
@@ -1148,7 +1146,7 @@ instance Core.FromJSON ClientInfo where
       "ClientInfo"
       ( \o ->
           ClientInfo
-            Core.<$> (o Core..:? "clientInfoDetails" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clientInfoDetails")
             Core.<*> (o Core..:? "name")
       )
 
@@ -1335,7 +1333,7 @@ instance Core.FromJSON DeviceIpBlockCatalog where
       "DeviceIpBlockCatalog"
       ( \o ->
           DeviceIpBlockCatalog
-            Core.<$> (o Core..:? "ipBlocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ipBlocks")
       )
 
 instance Core.ToJSON DeviceIpBlockCatalog where
@@ -1635,8 +1633,8 @@ instance Core.FromJSON IntentFilter where
       "IntentFilter"
       ( \o ->
           IntentFilter
-            Core.<$> (o Core..:? "actionNames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "categoryNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "actionNames")
+            Core.<*> (o Core..:? "categoryNames")
             Core.<*> (o Core..:? "mimeType")
       )
 
@@ -1731,10 +1729,10 @@ instance Core.FromJSON IosDeviceCatalog where
       "IosDeviceCatalog"
       ( \o ->
           IosDeviceCatalog
-            Core.<$> (o Core..:? "models" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "models")
             Core.<*> (o Core..:? "runtimeConfiguration")
-            Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "xcodeVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "versions")
+            Core.<*> (o Core..:? "xcodeVersions")
       )
 
 instance Core.ToJSON IosDeviceCatalog where
@@ -1812,8 +1810,7 @@ instance Core.FromJSON IosDeviceList where
     Core.withObject
       "IosDeviceList"
       ( \o ->
-          IosDeviceList
-            Core.<$> (o Core..:? "iosDevices" Core..!= Core.mempty)
+          IosDeviceList Core.<$> (o Core..:? "iosDevices")
       )
 
 instance Core.ToJSON IosDeviceList where
@@ -1870,19 +1867,15 @@ instance Core.FromJSON IosModel where
       "IosModel"
       ( \o ->
           IosModel
-            Core.<$> ( o Core..:? "deviceCapabilities"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "deviceCapabilities")
             Core.<*> (o Core..:? "formFactor")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "screenDensity")
             Core.<*> (o Core..:? "screenX")
             Core.<*> (o Core..:? "screenY")
-            Core.<*> ( o Core..:? "supportedVersionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedVersionIds")
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON IosModel where
@@ -1926,8 +1919,8 @@ instance Core.FromJSON IosRuntimeConfiguration where
       "IosRuntimeConfiguration"
       ( \o ->
           IosRuntimeConfiguration
-            Core.<$> (o Core..:? "locales" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "orientations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locales")
+            Core.<*> (o Core..:? "orientations")
       )
 
 instance Core.ToJSON IosRuntimeConfiguration where
@@ -1970,7 +1963,7 @@ instance Core.FromJSON IosTestLoop where
           IosTestLoop
             Core.<$> (o Core..:? "appBundleId")
             Core.<*> (o Core..:? "appIpa")
-            Core.<*> (o Core..:? "scenarios" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scenarios")
       )
 
 instance Core.ToJSON IosTestLoop where
@@ -2015,10 +2008,10 @@ instance Core.FromJSON IosTestSetup where
       "IosTestSetup"
       ( \o ->
           IosTestSetup
-            Core.<$> (o Core..:? "additionalIpas" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "additionalIpas")
             Core.<*> (o Core..:? "networkProfile")
-            Core.<*> (o Core..:? "pullDirectories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "pushFiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pullDirectories")
+            Core.<*> (o Core..:? "pushFiles")
       )
 
 instance Core.ToJSON IosTestSetup where
@@ -2070,10 +2063,8 @@ instance Core.FromJSON IosVersion where
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "majorVersion")
             Core.<*> (o Core..:? "minorVersion")
-            Core.<*> ( o Core..:? "supportedXcodeVersionIds"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "supportedXcodeVersionIds")
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON IosVersion where
@@ -2199,7 +2190,7 @@ instance Core.FromJSON Locale where
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Locale where
@@ -2233,9 +2224,7 @@ instance Core.FromJSON ManualSharding where
       "ManualSharding"
       ( \o ->
           ManualSharding
-            Core.<$> ( o Core..:? "testTargetsForShard"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "testTargetsForShard")
       )
 
 instance Core.ToJSON ManualSharding where
@@ -2310,7 +2299,7 @@ instance Core.FromJSON NetworkConfigurationCatalog where
       "NetworkConfigurationCatalog"
       ( \o ->
           NetworkConfigurationCatalog
-            Core.<$> (o Core..:? "configurations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "configurations")
       )
 
 instance Core.ToJSON NetworkConfigurationCatalog where
@@ -2382,7 +2371,7 @@ instance Core.FromJSON Orientation where
           Orientation
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Orientation where
@@ -2724,7 +2713,7 @@ instance Core.FromJSON StartActivityIntent where
       ( \o ->
           StartActivityIntent
             Core.<$> (o Core..:? "action")
-            Core.<*> (o Core..:? "categories" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "categories")
             Core.<*> (o Core..:? "uri")
       )
 
@@ -2793,7 +2782,7 @@ instance Core.FromJSON TestDetails where
       ( \o ->
           TestDetails
             Core.<$> (o Core..:? "errorMessage")
-            Core.<*> (o Core..:? "progressMessages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "progressMessages")
       )
 
 instance Core.ToJSON TestDetails where
@@ -3014,7 +3003,7 @@ instance Core.FromJSON TestMatrix where
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "resultStorage")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "testExecutions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "testExecutions")
             Core.<*> (o Core..:? "testMatrixId")
             Core.<*> (o Core..:? "testSpecification")
             Core.<*> (o Core..:? "timestamp")
@@ -3089,13 +3078,11 @@ instance Core.FromJSON TestSetup where
       ( \o ->
           TestSetup
             Core.<$> (o Core..:? "account")
-            Core.<*> (o Core..:? "additionalApks" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "directoriesToPull" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "additionalApks")
+            Core.<*> (o Core..:? "directoriesToPull")
             Core.<*> (o Core..:? "dontAutograntPermissions")
-            Core.<*> ( o Core..:? "environmentVariables"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "filesToPush" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "environmentVariables")
+            Core.<*> (o Core..:? "filesToPush")
             Core.<*> (o Core..:? "networkProfile")
             Core.<*> (o Core..:? "systrace")
       )
@@ -3220,7 +3207,7 @@ instance Core.FromJSON TestTargetsForShard where
       "TestTargetsForShard"
       ( \o ->
           TestTargetsForShard
-            Core.<$> (o Core..:? "testTargets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "testTargets")
       )
 
 instance Core.ToJSON TestTargetsForShard where
@@ -3466,8 +3453,7 @@ instance Core.FromJSON XcodeVersion where
       "XcodeVersion"
       ( \o ->
           XcodeVersion
-            Core.<$> (o Core..:? "tags" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "tags") Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON XcodeVersion where

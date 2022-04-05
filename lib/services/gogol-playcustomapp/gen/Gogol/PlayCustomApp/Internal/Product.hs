@@ -72,7 +72,7 @@ instance Core.FromJSON CustomApp where
       ( \o ->
           CustomApp
             Core.<$> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "organizations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "organizations")
             Core.<*> (o Core..:? "packageName")
             Core.<*> (o Core..:? "title")
       )

@@ -207,7 +207,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -244,7 +244,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -289,7 +289,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -386,9 +386,9 @@ instance Core.FromJSON Deployment where
           Deployment
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "manifest")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "operation")
@@ -481,7 +481,7 @@ instance Core.FromJSON DeploymentUpdate where
       ( \o ->
           DeploymentUpdate
             Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "labels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "manifest")
       )
 
@@ -589,7 +589,7 @@ instance Core.FromJSON DeploymentsListResponse where
       "DeploymentsListResponse"
       ( \o ->
           DeploymentsListResponse
-            Core.<$> (o Core..:? "deployments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "deployments")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -709,7 +709,7 @@ instance Core.FromJSON GlobalSetPolicyRequest where
       "GlobalSetPolicyRequest"
       ( \o ->
           GlobalSetPolicyRequest
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "policy")
       )
@@ -808,12 +808,16 @@ instance Core.FromJSON Manifest where
           Manifest
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "expandedConfig")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "imports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "imports")
             Core.<*> (o Core..:? "insertTime")
             Core.<*> (o Core..:? "layout")
-            Core.<*> (o Core..:? "manifestSizeBytes")
-            Core.<*> (o Core..:? "manifestSizeLimitBytes")
+            Core.<*> ( o Core..:? "manifestSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "manifestSizeLimitBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "selfLink")
       )
@@ -860,7 +864,7 @@ instance Core.FromJSON ManifestsListResponse where
       "ManifestsListResponse"
       ( \o ->
           ManifestsListResponse
-            Core.<$> (o Core..:? "manifests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "manifests")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -972,7 +976,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "httpErrorMessage")
             Core.<*> (o Core..:? "httpErrorStatusCode")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
             Core.<*> (o Core..:? "kind" Core..!= "compute#operation")
             Core.<*> (o Core..:? "name")
@@ -984,10 +988,12 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusMessage")
-            Core.<*> (o Core..:? "targetId")
+            Core.<*> ( o Core..:? "targetId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "targetLink")
             Core.<*> (o Core..:? "user")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -1047,8 +1053,7 @@ instance Core.FromJSON Operation_Error where
     Core.withObject
       "Operation_Error"
       ( \o ->
-          Operation_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          Operation_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON Operation_Error where
@@ -1128,7 +1133,7 @@ instance Core.FromJSON Operation_WarningsItem where
       ( \o ->
           Operation_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1206,7 +1211,7 @@ instance Core.FromJSON OperationsListResponse where
       ( \o ->
           OperationsListResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON OperationsListResponse where
@@ -1253,8 +1258,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1327,7 +1332,7 @@ instance Core.FromJSON Resource where
           Resource
             Core.<$> (o Core..:? "accessControl")
             Core.<*> (o Core..:? "finalProperties")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
             Core.<*> (o Core..:? "manifest")
             Core.<*> (o Core..:? "name")
@@ -1336,7 +1341,7 @@ instance Core.FromJSON Resource where
             Core.<*> (o Core..:? "update")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "url")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Resource where
@@ -1387,7 +1392,7 @@ instance Core.FromJSON Resource_WarningsItem where
       ( \o ->
           Resource_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1515,7 +1520,7 @@ instance Core.FromJSON ResourceUpdate where
             Core.<*> (o Core..:? "manifest")
             Core.<*> (o Core..:? "properties")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON ResourceUpdate where
@@ -1552,8 +1557,7 @@ instance Core.FromJSON ResourceUpdate_Error where
     Core.withObject
       "ResourceUpdate_Error"
       ( \o ->
-          ResourceUpdate_Error
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
+          ResourceUpdate_Error Core.<$> (o Core..:? "errors")
       )
 
 instance Core.ToJSON ResourceUpdate_Error where
@@ -1636,7 +1640,7 @@ instance Core.FromJSON ResourceUpdate_WarningsItem where
       ( \o ->
           ResourceUpdate_WarningsItem
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "data" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "data")
             Core.<*> (o Core..:? "message")
       )
 
@@ -1717,7 +1721,7 @@ instance Core.FromJSON ResourcesListResponse where
       ( \o ->
           ResourcesListResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ResourcesListResponse where
@@ -1752,7 +1756,7 @@ instance Core.FromJSON TargetConfiguration where
       ( \o ->
           TargetConfiguration
             Core.<$> (o Core..:? "config")
-            Core.<*> (o Core..:? "imports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "imports")
       )
 
 instance Core.ToJSON TargetConfiguration where
@@ -1783,7 +1787,7 @@ instance Core.FromJSON TestPermissionsRequest where
       "TestPermissionsRequest"
       ( \o ->
           TestPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestPermissionsRequest where
@@ -1813,7 +1817,7 @@ instance Core.FromJSON TestPermissionsResponse where
       "TestPermissionsResponse"
       ( \o ->
           TestPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestPermissionsResponse where
@@ -1858,7 +1862,7 @@ instance Core.FromJSON Type where
       "Type"
       ( \o ->
           Type
-            Core.<$> (o Core..:? "id")
+            Core.<$> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "operation")
@@ -1901,7 +1905,7 @@ instance Core.FromJSON TypesListResponse where
       ( \o ->
           TypesListResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "types" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "types")
       )
 
 instance Core.ToJSON TypesListResponse where

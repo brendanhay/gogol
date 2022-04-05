@@ -304,7 +304,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -341,7 +341,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -386,7 +386,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -505,11 +505,11 @@ instance Core.FromJSON GoogleCloudAssetV1p7beta1Asset where
           GoogleCloudAssetV1p7beta1Asset
             Core.<$> (o Core..:? "accessLevel")
             Core.<*> (o Core..:? "accessPolicy")
-            Core.<*> (o Core..:? "ancestors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ancestors")
             Core.<*> (o Core..:? "assetType")
             Core.<*> (o Core..:? "iamPolicy")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "orgPolicy" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "orgPolicy")
             Core.<*> (o Core..:? "relatedAssets")
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "servicePerimeter")
@@ -639,13 +639,11 @@ instance
       "GoogleCloudAssetV1p7beta1ExportAssetsRequest"
       ( \o ->
           GoogleCloudAssetV1p7beta1ExportAssetsRequest
-            Core.<$> (o Core..:? "assetTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "assetTypes")
             Core.<*> (o Core..:? "contentType")
             Core.<*> (o Core..:? "outputConfig")
             Core.<*> (o Core..:? "readTime")
-            Core.<*> ( o Core..:? "relationshipTypes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "relationshipTypes")
       )
 
 instance
@@ -824,7 +822,7 @@ instance
       "GoogleCloudAssetV1p7beta1RelatedAsset"
       ( \o ->
           GoogleCloudAssetV1p7beta1RelatedAsset
-            Core.<$> (o Core..:? "ancestors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ancestors")
             Core.<*> (o Core..:? "asset")
             Core.<*> (o Core..:? "assetType")
       )
@@ -871,7 +869,7 @@ instance
       "GoogleCloudAssetV1p7beta1RelatedAssets"
       ( \o ->
           GoogleCloudAssetV1p7beta1RelatedAssets
-            Core.<$> (o Core..:? "assets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "assets")
             Core.<*> (o Core..:? "relationshipAttributes")
       )
 
@@ -1135,8 +1133,8 @@ instance
       ( \o ->
           GoogleCloudOrgpolicyV1ListPolicy
             Core.<$> (o Core..:? "allValues")
-            Core.<*> (o Core..:? "allowedValues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "deniedValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "allowedValues")
+            Core.<*> (o Core..:? "deniedValues")
             Core.<*> (o Core..:? "inheritFromParent")
             Core.<*> (o Core..:? "suggestedValue")
       )
@@ -1346,7 +1344,7 @@ instance
           GoogleIdentityAccesscontextmanagerV1AccessPolicy
             Core.<$> (o Core..:? "etag") Core.<*> (o Core..:? "name")
               Core.<*> (o Core..:? "parent")
-              Core.<*> (o Core..:? "scopes" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "scopes")
               Core.<*> (o Core..:? "title")
       )
 
@@ -1395,7 +1393,7 @@ instance
       "GoogleIdentityAccesscontextmanagerV1ApiOperation"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1ApiOperation
-            Core.<$> (o Core..:? "methodSelectors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "methodSelectors")
               Core.<*> (o Core..:? "serviceName")
       )
 
@@ -1446,7 +1444,7 @@ instance
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1BasicLevel
             Core.<$> (o Core..:? "combiningFunction")
-              Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "conditions")
       )
 
 instance
@@ -1505,13 +1503,11 @@ instance
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1Condition
             Core.<$> (o Core..:? "devicePolicy")
-              Core.<*> (o Core..:? "ipSubnetworks" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "ipSubnetworks")
+              Core.<*> (o Core..:? "members")
               Core.<*> (o Core..:? "negate")
-              Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "requiredAccessLevels"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "regions")
+              Core.<*> (o Core..:? "requiredAccessLevels")
       )
 
 instance
@@ -1615,13 +1611,9 @@ instance
       "GoogleIdentityAccesscontextmanagerV1DevicePolicy"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1DevicePolicy
-            Core.<$> ( o Core..:? "allowedDeviceManagementLevels"
-                         Core..!= Core.mempty
-                     )
-              Core.<*> ( o Core..:? "allowedEncryptionStatuses"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "osConstraints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedDeviceManagementLevels")
+              Core.<*> (o Core..:? "allowedEncryptionStatuses")
+              Core.<*> (o Core..:? "osConstraints")
               Core.<*> (o Core..:? "requireAdminApproval")
               Core.<*> (o Core..:? "requireCorpOwned")
               Core.<*> (o Core..:? "requireScreenlock")
@@ -1681,7 +1673,7 @@ instance
       "GoogleIdentityAccesscontextmanagerV1EgressFrom"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1EgressFrom
-            Core.<$> (o Core..:? "identities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "identities")
               Core.<*> (o Core..:? "identityType")
       )
 
@@ -1773,8 +1765,8 @@ instance
       "GoogleIdentityAccesscontextmanagerV1EgressTo"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1EgressTo
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
+            Core.<*> (o Core..:? "resources")
       )
 
 instance
@@ -1825,9 +1817,9 @@ instance
       "GoogleIdentityAccesscontextmanagerV1IngressFrom"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1IngressFrom
-            Core.<$> (o Core..:? "identities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "identities")
               Core.<*> (o Core..:? "identityType")
-              Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "sources")
       )
 
 instance
@@ -1965,8 +1957,8 @@ instance
       "GoogleIdentityAccesscontextmanagerV1IngressTo"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1IngressTo
-            Core.<$> (o Core..:? "operations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "operations")
+              Core.<*> (o Core..:? "resources")
       )
 
 instance
@@ -2208,13 +2200,11 @@ instance
       "GoogleIdentityAccesscontextmanagerV1ServicePerimeterConfig"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1ServicePerimeterConfig
-            Core.<$> (o Core..:? "accessLevels" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "egressPolicies" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "ingressPolicies" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "restrictedServices"
-                           Core..!= Core.mempty
-                       )
+            Core.<$> (o Core..:? "accessLevels")
+              Core.<*> (o Core..:? "egressPolicies")
+              Core.<*> (o Core..:? "ingressPolicies")
+              Core.<*> (o Core..:? "resources")
+              Core.<*> (o Core..:? "restrictedServices")
               Core.<*> (o Core..:? "vpcAccessibleServices")
       )
 
@@ -2266,7 +2256,7 @@ instance
       "GoogleIdentityAccesscontextmanagerV1VpcAccessibleServices"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1VpcAccessibleServices
-            Core.<$> (o Core..:? "allowedServices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedServices")
               Core.<*> (o Core..:? "enableRestriction")
       )
 
@@ -2430,8 +2420,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -2473,7 +2463,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

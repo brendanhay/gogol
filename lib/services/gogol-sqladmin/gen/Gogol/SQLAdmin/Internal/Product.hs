@@ -581,7 +581,10 @@ instance Core.FromJSON BackupContext where
       "BackupContext"
       ( \o ->
           BackupContext
-            Core.<$> (o Core..:? "backupId") Core.<*> (o Core..:? "kind")
+            Core.<$> ( o Core..:? "backupId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON BackupContext where
@@ -709,7 +712,7 @@ instance Core.FromJSON BackupRun where
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "enqueuedTime")
             Core.<*> (o Core..:? "error")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instance")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "location")
@@ -775,7 +778,7 @@ instance Core.FromJSON BackupRunsListResponse where
       "BackupRunsListResponse"
       ( \o ->
           BackupRunsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -820,7 +823,9 @@ instance Core.FromJSON BinLogCoordinates where
       ( \o ->
           BinLogCoordinates
             Core.<$> (o Core..:? "binLogFileName")
-            Core.<*> (o Core..:? "binLogPosition")
+            Core.<*> ( o Core..:? "binLogPosition"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
       )
 
@@ -877,7 +882,9 @@ instance Core.FromJSON CloneContext where
             Core.<*> (o Core..:? "binLogCoordinates")
             Core.<*> (o Core..:? "destinationInstanceName")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "pitrTimestampMs")
+            Core.<*> ( o Core..:? "pitrTimestampMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "pointInTime")
       )
 
@@ -938,7 +945,7 @@ instance Core.FromJSON ConnectSettings where
           ConnectSettings
             Core.<$> (o Core..:? "backendType")
             Core.<*> (o Core..:? "databaseVersion")
-            Core.<*> (o Core..:? "ipAddresses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ipAddresses")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "serverCaCert")
@@ -1194,13 +1201,13 @@ instance Core.FromJSON DatabaseInstance where
       "DatabaseInstance"
       ( \o ->
           DatabaseInstance
-            Core.<$> ( o Core..:? "availableMaintenanceVersions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "availableMaintenanceVersions")
             Core.<*> (o Core..:? "backendType")
             Core.<*> (o Core..:? "connectionName")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "currentDiskSize")
+            Core.<*> ( o Core..:? "currentDiskSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "databaseInstalledVersion")
             Core.<*> (o Core..:? "databaseVersion")
             Core.<*> (o Core..:? "diskEncryptionConfiguration")
@@ -1209,19 +1216,21 @@ instance Core.FromJSON DatabaseInstance where
             Core.<*> (o Core..:? "failoverReplica")
             Core.<*> (o Core..:? "gceZone")
             Core.<*> (o Core..:? "instanceType")
-            Core.<*> (o Core..:? "ipAddresses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ipAddresses")
             Core.<*> (o Core..:? "ipv6Address")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "maintenanceVersion")
             Core.<*> (o Core..:? "masterInstanceName")
-            Core.<*> (o Core..:? "maxDiskSize")
+            Core.<*> ( o Core..:? "maxDiskSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "onPremisesConfiguration")
             Core.<*> (o Core..:? "outOfDiskReport")
             Core.<*> (o Core..:? "project")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "replicaConfiguration")
-            Core.<*> (o Core..:? "replicaNames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replicaNames")
             Core.<*> (o Core..:? "rootPassword")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "scheduledMaintenance")
@@ -1231,7 +1240,7 @@ instance Core.FromJSON DatabaseInstance where
             Core.<*> (o Core..:? "serviceAccountEmailAddress")
             Core.<*> (o Core..:? "settings")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "suspensionReason" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "suspensionReason")
       )
 
 instance Core.ToJSON DatabaseInstance where
@@ -1356,8 +1365,7 @@ instance Core.FromJSON DatabasesListResponse where
       "DatabasesListResponse"
       ( \o ->
           DatabasesListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON DatabasesListResponse where
@@ -1692,7 +1700,7 @@ instance Core.FromJSON ExportContext where
       ( \o ->
           ExportContext
             Core.<$> (o Core..:? "csvExportOptions")
-            Core.<*> (o Core..:? "databases" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "databases")
             Core.<*> (o Core..:? "fileType")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "offload")
@@ -1804,7 +1812,7 @@ instance Core.FromJSON ExportContext_SqlExportOptions where
           ExportContext_SqlExportOptions
             Core.<$> (o Core..:? "mysqlExportOptions")
             Core.<*> (o Core..:? "schemaOnly")
-            Core.<*> (o Core..:? "tables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tables")
       )
 
 instance Core.ToJSON ExportContext_SqlExportOptions where
@@ -1880,7 +1888,9 @@ instance Core.FromJSON FailoverContext where
       ( \o ->
           FailoverContext
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "settingsVersion")
+            Core.<*> ( o Core..:? "settingsVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON FailoverContext where
@@ -1943,15 +1953,17 @@ instance Core.FromJSON Flag where
       "Flag"
       ( \o ->
           Flag
-            Core.<$> (o Core..:? "allowedIntValues" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "allowedStringValues"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "appliesTo" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowedIntValues")
+            Core.<*> (o Core..:? "allowedStringValues")
+            Core.<*> (o Core..:? "appliesTo")
             Core.<*> (o Core..:? "inBeta")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "maxValue")
-            Core.<*> (o Core..:? "minValue")
+            Core.<*> ( o Core..:? "maxValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "requiresRestart")
             Core.<*> (o Core..:? "type")
@@ -2001,8 +2013,7 @@ instance Core.FromJSON FlagsListResponse where
       "FlagsListResponse"
       ( \o ->
           FlagsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON FlagsListResponse where
@@ -2281,7 +2292,7 @@ instance Core.FromJSON ImportContext_CsvImportOptions where
       "ImportContext_CsvImportOptions"
       ( \o ->
           ImportContext_CsvImportOptions
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "escapeCharacter")
             Core.<*> (o Core..:? "fieldsTerminatedBy")
             Core.<*> (o Core..:? "linesTerminatedBy")
@@ -2597,10 +2608,10 @@ instance Core.FromJSON InstancesListResponse where
       "InstancesListResponse"
       ( \o ->
           InstancesListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON InstancesListResponse where
@@ -2644,7 +2655,7 @@ instance Core.FromJSON InstancesListServerCasResponse where
       ( \o ->
           InstancesListServerCasResponse
             Core.<$> (o Core..:? "activeVersion")
-            Core.<*> (o Core..:? "certs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "certs")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -2793,9 +2804,7 @@ instance Core.FromJSON IpConfiguration where
       ( \o ->
           IpConfiguration
             Core.<$> (o Core..:? "allocatedIpRange")
-            Core.<*> ( o Core..:? "authorizedNetworks"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "authorizedNetworks")
             Core.<*> (o Core..:? "ipv4Enabled")
             Core.<*> (o Core..:? "privateNetwork")
             Core.<*> (o Core..:? "requireSsl")
@@ -3017,7 +3026,9 @@ instance Core.FromJSON MySqlReplicaConfiguration where
             Core.<*> (o Core..:? "connectRetryInterval")
             Core.<*> (o Core..:? "dumpFilePath")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "masterHeartbeatPeriod")
+            Core.<*> ( o Core..:? "masterHeartbeatPeriod"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "password")
             Core.<*> (o Core..:? "sslCipher")
             Core.<*> (o Core..:? "username")
@@ -3066,7 +3077,7 @@ instance Core.FromJSON MySqlSyncConfig where
       "MySqlSyncConfig"
       ( \o ->
           MySqlSyncConfig
-            Core.<$> (o Core..:? "initialSyncFlags" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "initialSyncFlags")
       )
 
 instance Core.ToJSON MySqlSyncConfig where
@@ -3329,8 +3340,7 @@ instance Core.FromJSON OperationErrors where
       "OperationErrors"
       ( \o ->
           OperationErrors
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON OperationErrors where
@@ -3371,7 +3381,7 @@ instance Core.FromJSON OperationsListResponse where
       "OperationsListResponse"
       ( \o ->
           OperationsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -3591,7 +3601,9 @@ instance Core.FromJSON RestoreBackupContext where
       "RestoreBackupContext"
       ( \o ->
           RestoreBackupContext
-            Core.<$> (o Core..:? "backupRunId")
+            Core.<$> ( o Core..:? "backupRunId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "instanceId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "project")
@@ -3745,20 +3757,18 @@ instance Core.FromJSON Settings where
           Settings
             Core.<$> (o Core..:? "activationPolicy")
             Core.<*> (o Core..:? "activeDirectoryConfig")
-            Core.<*> ( o Core..:? "authorizedGaeApplications"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "authorizedGaeApplications")
             Core.<*> (o Core..:? "availabilityType")
             Core.<*> (o Core..:? "backupConfiguration")
             Core.<*> (o Core..:? "collation")
             Core.<*> (o Core..:? "crashSafeReplicationEnabled")
-            Core.<*> (o Core..:? "dataDiskSizeGb")
-            Core.<*> (o Core..:? "dataDiskType")
-            Core.<*> (o Core..:? "databaseFlags" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "databaseReplicationEnabled")
-            Core.<*> ( o Core..:? "denyMaintenancePeriods"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "dataDiskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "dataDiskType")
+            Core.<*> (o Core..:? "databaseFlags")
+            Core.<*> (o Core..:? "databaseReplicationEnabled")
+            Core.<*> (o Core..:? "denyMaintenancePeriods")
             Core.<*> (o Core..:? "insightsConfig")
             Core.<*> (o Core..:? "ipConfiguration")
             Core.<*> (o Core..:? "kind")
@@ -3767,10 +3777,14 @@ instance Core.FromJSON Settings where
             Core.<*> (o Core..:? "passwordValidationPolicy")
             Core.<*> (o Core..:? "pricingPlan")
             Core.<*> (o Core..:? "replicationType")
-            Core.<*> (o Core..:? "settingsVersion")
+            Core.<*> ( o Core..:? "settingsVersion"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sqlServerAuditConfig")
             Core.<*> (o Core..:? "storageAutoResize")
-            Core.<*> (o Core..:? "storageAutoResizeLimit")
+            Core.<*> ( o Core..:? "storageAutoResizeLimit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "tier")
             Core.<*> (o Core..:? "userLabels")
       )
@@ -4114,9 +4128,8 @@ instance
       "SqlInstancesVerifyExternalSyncSettingsResponse"
       ( \o ->
           SqlInstancesVerifyExternalSyncSettingsResponse
-            Core.<$> (o Core..:? "errors" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "kind")
-              Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "kind")
+              Core.<*> (o Core..:? "warnings")
       )
 
 instance
@@ -4323,7 +4336,7 @@ instance Core.FromJSON SqlServerUserDetails where
       ( \o ->
           SqlServerUserDetails
             Core.<$> (o Core..:? "disabled")
-            Core.<*> (o Core..:? "serverRoles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serverRoles")
       )
 
 instance Core.ToJSON SqlServerUserDetails where
@@ -4588,8 +4601,7 @@ instance Core.FromJSON SslCertsListResponse where
       "SslCertsListResponse"
       ( \o ->
           SslCertsListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON SslCertsListResponse where
@@ -4670,10 +4682,12 @@ instance Core.FromJSON Tier where
       "Tier"
       ( \o ->
           Tier
-            Core.<$> (o Core..:? "DiskQuota")
-            Core.<*> (o Core..:? "RAM")
+            Core.<$> ( o Core..:? "DiskQuota"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "RAM" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "region" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "tier")
       )
 
@@ -4713,8 +4727,7 @@ instance Core.FromJSON TiersListResponse where
       "TiersListResponse"
       ( \o ->
           TiersListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON TiersListResponse where
@@ -4922,7 +4935,7 @@ instance Core.FromJSON UsersListResponse where
       "UsersListResponse"
       ( \o ->
           UsersListResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )

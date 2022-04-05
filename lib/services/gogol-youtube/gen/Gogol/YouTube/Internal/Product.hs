@@ -818,9 +818,9 @@ instance Core.FromJSON AbuseReport where
       "AbuseReport"
       ( \o ->
           AbuseReport
-            Core.<$> (o Core..:? "abuseTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "abuseTypes")
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "relatedEntities" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "relatedEntities")
             Core.<*> (o Core..:? "subject")
       )
 
@@ -883,7 +883,7 @@ instance Core.FromJSON AccessPolicy where
       ( \o ->
           AccessPolicy
             Core.<$> (o Core..:? "allowed")
-            Core.<*> (o Core..:? "exception" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "exception")
       )
 
 instance Core.ToJSON AccessPolicy where
@@ -1304,8 +1304,8 @@ instance
             Core.<*> (o Core..:? "customCtaButtonText")
             Core.<*> (o Core..:? "descriptionText")
             Core.<*> (o Core..:? "destinationUrl")
-            Core.<*> (o Core..:? "forecastingUrl" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "impressionUrl" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "forecastingUrl")
+            Core.<*> (o Core..:? "impressionUrl")
             Core.<*> (o Core..:? "videoId")
       )
 
@@ -1551,7 +1551,7 @@ instance Core.FromJSON ActivityListResponse where
           ActivityListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#activityListResponse"
                      )
@@ -1732,7 +1732,7 @@ instance Core.FromJSON CaptionListResponse where
           CaptionListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#captionListResponse"
                      )
@@ -2151,7 +2151,7 @@ instance Core.FromJSON ChannelBrandingSettings where
       ( \o ->
           ChannelBrandingSettings
             Core.<$> (o Core..:? "channel")
-            Core.<*> (o Core..:? "hints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "hints")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "watch")
       )
@@ -2353,8 +2353,7 @@ instance Core.FromJSON ChannelConversionPings where
     Core.withObject
       "ChannelConversionPings"
       ( \o ->
-          ChannelConversionPings
-            Core.<$> (o Core..:? "pings" Core..!= Core.mempty)
+          ChannelConversionPings Core.<$> (o Core..:? "pings")
       )
 
 instance Core.ToJSON ChannelConversionPings where
@@ -2410,7 +2409,7 @@ instance Core.FromJSON ChannelListResponse where
           ChannelListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#channelListResponse"
                      )
@@ -2641,8 +2640,8 @@ instance Core.FromJSON ChannelSectionContentDetails where
       "ChannelSectionContentDetails"
       ( \o ->
           ChannelSectionContentDetails
-            Core.<$> (o Core..:? "channels" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "playlists" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "channels")
+            Core.<*> (o Core..:? "playlists")
       )
 
 instance Core.ToJSON ChannelSectionContentDetails where
@@ -2690,7 +2689,7 @@ instance Core.FromJSON ChannelSectionListResponse where
           ChannelSectionListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#channelSectionListResponse"
                      )
@@ -2831,9 +2830,9 @@ instance Core.FromJSON ChannelSectionTargeting where
       "ChannelSectionTargeting"
       ( \o ->
           ChannelSectionTargeting
-            Core.<$> (o Core..:? "countries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "countries")
+            Core.<*> (o Core..:? "languages")
+            Core.<*> (o Core..:? "regions")
       )
 
 instance Core.ToJSON ChannelSectionTargeting where
@@ -2913,9 +2912,7 @@ instance Core.FromJSON ChannelSettings where
             Core.<*> (o Core..:? "defaultTab")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "featuredChannelsTitle")
-            Core.<*> ( o Core..:? "featuredChannelsUrls"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "featuredChannelsUrls")
             Core.<*> (o Core..:? "keywords")
             Core.<*> (o Core..:? "moderateComments")
             Core.<*> (o Core..:? "profileColor")
@@ -3057,11 +3054,19 @@ instance Core.FromJSON ChannelStatistics where
       "ChannelStatistics"
       ( \o ->
           ChannelStatistics
-            Core.<$> (o Core..:? "commentCount")
+            Core.<$> ( o Core..:? "commentCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "hiddenSubscriberCount")
-            Core.<*> (o Core..:? "subscriberCount")
-            Core.<*> (o Core..:? "videoCount")
-            Core.<*> (o Core..:? "viewCount")
+            Core.<*> ( o Core..:? "subscriberCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "videoCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "viewCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ChannelStatistics where
@@ -3196,8 +3201,8 @@ instance Core.FromJSON ChannelTopicDetails where
       "ChannelTopicDetails"
       ( \o ->
           ChannelTopicDetails
-            Core.<$> (o Core..:? "topicCategories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "topicIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "topicCategories")
+            Core.<*> (o Core..:? "topicIds")
       )
 
 instance Core.ToJSON ChannelTopicDetails where
@@ -3304,7 +3309,7 @@ instance Core.FromJSON CommentListResponse where
           CommentListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#commentListResponse"
                      )
@@ -3566,7 +3571,7 @@ instance Core.FromJSON CommentThreadListResponse where
           CommentThreadListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#commentThreadListResponse"
                      )
@@ -3611,7 +3616,7 @@ instance Core.FromJSON CommentThreadReplies where
       "CommentThreadReplies"
       ( \o ->
           CommentThreadReplies
-            Core.<$> (o Core..:? "comments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "comments")
       )
 
 instance Core.ToJSON CommentThreadReplies where
@@ -3933,9 +3938,7 @@ instance Core.FromJSON ContentRating where
             Core.<*> (o Core..:? "cscfRating")
             Core.<*> (o Core..:? "czfilmRating")
             Core.<*> (o Core..:? "djctqRating")
-            Core.<*> ( o Core..:? "djctqRatingReasons"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "djctqRatingReasons")
             Core.<*> (o Core..:? "ecbmctRating")
             Core.<*> (o Core..:? "eefilmRating")
             Core.<*> (o Core..:? "egfilmRating")
@@ -3944,7 +3947,7 @@ instance Core.FromJSON ContentRating where
             Core.<*> (o Core..:? "fcoRating")
             Core.<*> (o Core..:? "fmocRating")
             Core.<*> (o Core..:? "fpbRating")
-            Core.<*> (o Core..:? "fpbRatingReasons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fpbRatingReasons")
             Core.<*> (o Core..:? "fskRating")
             Core.<*> (o Core..:? "grfilmRating")
             Core.<*> (o Core..:? "icaaRating")
@@ -4239,7 +4242,7 @@ instance Core.FromJSON I18nLanguageListResponse where
           I18nLanguageListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#i18nLanguageListResponse"
                      )
@@ -4378,7 +4381,7 @@ instance Core.FromJSON I18nRegionListResponse where
           I18nRegionListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#i18nRegionListResponse"
                      )
@@ -4769,8 +4772,12 @@ instance Core.FromJSON InvideoTiming where
       "InvideoTiming"
       ( \o ->
           InvideoTiming
-            Core.<$> (o Core..:? "durationMs")
-            Core.<*> (o Core..:? "offsetMs")
+            Core.<$> ( o Core..:? "durationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "offsetMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -5070,7 +5077,7 @@ instance Core.FromJSON LiveBroadcastListResponse where
           LiveBroadcastListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#liveBroadcastListResponse"
                      )
@@ -5205,7 +5212,9 @@ instance Core.FromJSON LiveBroadcastStatistics where
       "LiveBroadcastStatistics"
       ( \o ->
           LiveBroadcastStatistics
-            Core.<$> (o Core..:? "totalChatCount")
+            Core.<$> ( o Core..:? "totalChatCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON LiveBroadcastStatistics where
@@ -5359,7 +5368,9 @@ instance Core.FromJSON LiveChatBanSnippet where
       "LiveChatBanSnippet"
       ( \o ->
           LiveChatBanSnippet
-            Core.<$> (o Core..:? "banDurationSeconds")
+            Core.<$> ( o Core..:? "banDurationSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "bannedUserDetails")
             Core.<*> (o Core..:? "liveChatId")
             Core.<*> (o Core..:? "type")
@@ -5410,7 +5421,9 @@ instance Core.FromJSON LiveChatFanFundingEventDetails where
       ( \o ->
           LiveChatFanFundingEventDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> (o Core..:? "amountMicros")
+            Core.<*> ( o Core..:? "amountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "userComment")
       )
@@ -5780,7 +5793,7 @@ instance Core.FromJSON LiveChatMessageListResponse where
           LiveChatMessageListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#liveChatMessageListResponse"
                      )
@@ -6071,7 +6084,7 @@ instance Core.FromJSON LiveChatModeratorListResponse where
           LiveChatModeratorListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#liveChatModeratorListResponse"
                      )
@@ -6211,7 +6224,9 @@ instance Core.FromJSON LiveChatSuperChatDetails where
       ( \o ->
           LiveChatSuperChatDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> (o Core..:? "amountMicros")
+            Core.<*> ( o Core..:? "amountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "tier")
             Core.<*> (o Core..:? "userComment")
@@ -6266,7 +6281,9 @@ instance Core.FromJSON LiveChatSuperStickerDetails where
       ( \o ->
           LiveChatSuperStickerDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> (o Core..:? "amountMicros")
+            Core.<*> ( o Core..:? "amountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "superStickerMetadata")
             Core.<*> (o Core..:? "tier")
@@ -6348,7 +6365,9 @@ instance
       "LiveChatUserBannedMessageDetails"
       ( \o ->
           LiveChatUserBannedMessageDetails
-            Core.<$> (o Core..:? "banDurationSeconds")
+            Core.<$> ( o Core..:? "banDurationSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "banType")
             Core.<*> (o Core..:? "bannedUserDetails")
       )
@@ -6545,10 +6564,10 @@ instance Core.FromJSON LiveStreamHealthStatus where
       "LiveStreamHealthStatus"
       ( \o ->
           LiveStreamHealthStatus
-            Core.<$> ( o Core..:? "configurationIssues"
-                         Core..!= Core.mempty
+            Core.<$> (o Core..:? "configurationIssues")
+            Core.<*> ( o Core..:? "lastUpdateTimeSeconds"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "lastUpdateTimeSeconds")
             Core.<*> (o Core..:? "status")
       )
 
@@ -6612,7 +6631,7 @@ instance Core.FromJSON LiveStreamListResponse where
           LiveStreamListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#liveStreamListResponse"
                      )
@@ -6758,7 +6777,7 @@ instance Core.FromJSON LocalizedProperty where
           LocalizedProperty
             Core.<$> (o Core..:? "default")
             Core.<*> (o Core..:? "defaultLanguage")
-            Core.<*> (o Core..:? "localized" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "localized")
       )
 
 instance Core.ToJSON LocalizedProperty where
@@ -6891,7 +6910,7 @@ instance Core.FromJSON MemberListResponse where
           MemberListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#memberListResponse"
                      )
@@ -6995,13 +7014,11 @@ instance Core.FromJSON MembershipsDetails where
       "MembershipsDetails"
       ( \o ->
           MembershipsDetails
-            Core.<$> (o Core..:? "accessibleLevels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accessibleLevels")
             Core.<*> (o Core..:? "highestAccessibleLevel")
             Core.<*> (o Core..:? "highestAccessibleLevelDisplayName")
             Core.<*> (o Core..:? "membershipsDuration")
-            Core.<*> ( o Core..:? "membershipsDurationAtLevels"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "membershipsDurationAtLevels")
       )
 
 instance Core.ToJSON MembershipsDetails where
@@ -7191,7 +7208,7 @@ instance Core.FromJSON MembershipsLevelListResponse where
           MembershipsLevelListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#membershipsLevelListResponse"
                      )
@@ -7622,7 +7639,7 @@ instance Core.FromJSON PlaylistItemListResponse where
           PlaylistItemListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#playlistItemListResponse"
                      )
@@ -7813,7 +7830,7 @@ instance Core.FromJSON PlaylistListResponse where
           PlaylistListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#playlistListResponse"
                      )
@@ -7960,7 +7977,7 @@ instance Core.FromJSON PlaylistSnippet where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "localized")
             Core.<*> (o Core..:? "publishedAt")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "thumbnailVideoId")
             Core.<*> (o Core..:? "thumbnails")
             Core.<*> (o Core..:? "title")
@@ -8171,7 +8188,7 @@ instance Core.FromJSON SearchListResponse where
           SearchListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#searchListResponse"
                      )
@@ -8466,7 +8483,7 @@ instance Core.FromJSON SubscriptionListResponse where
           SubscriptionListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#subscriptionListResponse"
                      )
@@ -8700,7 +8717,7 @@ instance Core.FromJSON SuperChatEventListResponse where
           SuperChatEventListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#superChatEventListResponse"
                      )
@@ -8774,7 +8791,9 @@ instance Core.FromJSON SuperChatEventSnippet where
       "SuperChatEventSnippet"
       ( \o ->
           SuperChatEventSnippet
-            Core.<$> (o Core..:? "amountMicros")
+            Core.<$> ( o Core..:? "amountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "channelId")
             Core.<*> (o Core..:? "commentText")
             Core.<*> (o Core..:? "createdAt")
@@ -8882,7 +8901,9 @@ instance Core.FromJSON TestItem where
       ( \o ->
           TestItem
             Core.<$> (o Core..:? "featuredPart")
-            Core.<*> (o Core..:? "gaia")
+            Core.<*> ( o Core..:? "gaia"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "snippet")
       )
@@ -9171,7 +9192,7 @@ instance Core.FromJSON ThumbnailSetResponse where
           ThumbnailSetResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#thumbnailSetResponse"
                      )
@@ -9507,7 +9528,7 @@ instance
           VideoAbuseReportReasonListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#videoAbuseReportReasonListResponse"
                      )
@@ -9556,7 +9577,7 @@ instance Core.FromJSON VideoAbuseReportReasonSnippet where
       ( \o ->
           VideoAbuseReportReasonSnippet
             Core.<$> (o Core..:? "label")
-            Core.<*> (o Core..:? "secondaryReasons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secondaryReasons")
       )
 
 instance Core.ToJSON VideoAbuseReportReasonSnippet where
@@ -9747,7 +9768,7 @@ instance Core.FromJSON VideoCategoryListResponse where
           VideoCategoryListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#videoCategoryListResponse"
                      )
@@ -9931,8 +9952,8 @@ instance
       "VideoContentDetailsRegionRestriction"
       ( \o ->
           VideoContentDetailsRegionRestriction
-            Core.<$> (o Core..:? "allowed" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "blocked" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "allowed")
+            Core.<*> (o Core..:? "blocked")
       )
 
 instance
@@ -9994,15 +10015,21 @@ instance Core.FromJSON VideoFileDetails where
       "VideoFileDetails"
       ( \o ->
           VideoFileDetails
-            Core.<$> (o Core..:? "audioStreams" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bitrateBps")
+            Core.<$> (o Core..:? "audioStreams")
+            Core.<*> ( o Core..:? "bitrateBps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "container")
             Core.<*> (o Core..:? "creationTime")
-            Core.<*> (o Core..:? "durationMs")
+            Core.<*> ( o Core..:? "durationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "fileName")
-            Core.<*> (o Core..:? "fileSize")
+            Core.<*> ( o Core..:? "fileSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "fileType")
-            Core.<*> (o Core..:? "videoStreams" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "videoStreams")
       )
 
 instance Core.ToJSON VideoFileDetails where
@@ -10056,7 +10083,9 @@ instance Core.FromJSON VideoFileDetailsAudioStream where
       "VideoFileDetailsAudioStream"
       ( \o ->
           VideoFileDetailsAudioStream
-            Core.<$> (o Core..:? "bitrateBps")
+            Core.<$> ( o Core..:? "bitrateBps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "channelCount")
             Core.<*> (o Core..:? "codec")
             Core.<*> (o Core..:? "vendor")
@@ -10119,7 +10148,9 @@ instance Core.FromJSON VideoFileDetailsVideoStream where
       ( \o ->
           VideoFileDetailsVideoStream
             Core.<$> (o Core..:? "aspectRatio")
-            Core.<*> (o Core..:? "bitrateBps")
+            Core.<*> ( o Core..:? "bitrateBps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "codec")
             Core.<*> (o Core..:? "frameRateFps")
             Core.<*> (o Core..:? "heightPixels")
@@ -10180,7 +10211,7 @@ instance Core.FromJSON VideoGetRatingResponse where
           VideoGetRatingResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#videoGetRatingResponse"
                      )
@@ -10247,7 +10278,7 @@ instance Core.FromJSON VideoListResponse where
           VideoListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "youtube#videoListResponse"
                      )
@@ -10315,7 +10346,9 @@ instance Core.FromJSON VideoLiveStreamingDetails where
             Core.<$> (o Core..:? "activeLiveChatId")
             Core.<*> (o Core..:? "actualEndTime")
             Core.<*> (o Core..:? "actualStartTime")
-            Core.<*> (o Core..:? "concurrentViewers")
+            Core.<*> ( o Core..:? "concurrentViewers"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "scheduledEndTime")
             Core.<*> (o Core..:? "scheduledStartTime")
       )
@@ -10430,9 +10463,13 @@ instance Core.FromJSON VideoPlayer where
       "VideoPlayer"
       ( \o ->
           VideoPlayer
-            Core.<$> (o Core..:? "embedHeight")
+            Core.<$> ( o Core..:? "embedHeight"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "embedHtml")
-            Core.<*> (o Core..:? "embedWidth")
+            Core.<*> ( o Core..:? "embedWidth"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON VideoPlayer where
@@ -10556,9 +10593,15 @@ instance
       "VideoProcessingDetailsProcessingProgress"
       ( \o ->
           VideoProcessingDetailsProcessingProgress
-            Core.<$> (o Core..:? "partsProcessed")
-            Core.<*> (o Core..:? "partsTotal")
-            Core.<*> (o Core..:? "timeLeftMs")
+            Core.<$> ( o Core..:? "partsProcessed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "partsTotal"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "timeLeftMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -10742,7 +10785,7 @@ instance Core.FromJSON VideoSnippet where
             Core.<*> (o Core..:? "liveBroadcastContent")
             Core.<*> (o Core..:? "localized")
             Core.<*> (o Core..:? "publishedAt")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "thumbnails")
             Core.<*> (o Core..:? "title")
       )
@@ -10803,11 +10846,21 @@ instance Core.FromJSON VideoStatistics where
       "VideoStatistics"
       ( \o ->
           VideoStatistics
-            Core.<$> (o Core..:? "commentCount")
-            Core.<*> (o Core..:? "dislikeCount")
-            Core.<*> (o Core..:? "favoriteCount")
-            Core.<*> (o Core..:? "likeCount")
-            Core.<*> (o Core..:? "viewCount")
+            Core.<$> ( o Core..:? "commentCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "dislikeCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "favoriteCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "likeCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "viewCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON VideoStatistics where
@@ -10943,13 +10996,11 @@ instance Core.FromJSON VideoSuggestions where
       "VideoSuggestions"
       ( \o ->
           VideoSuggestions
-            Core.<$> (o Core..:? "editorSuggestions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "processingErrors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "processingHints" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "processingWarnings"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "tagSuggestions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "editorSuggestions")
+            Core.<*> (o Core..:? "processingErrors")
+            Core.<*> (o Core..:? "processingHints")
+            Core.<*> (o Core..:? "processingWarnings")
+            Core.<*> (o Core..:? "tagSuggestions")
       )
 
 instance Core.ToJSON VideoSuggestions where
@@ -10993,7 +11044,7 @@ instance Core.FromJSON VideoSuggestionsTagSuggestion where
       "VideoSuggestionsTagSuggestion"
       ( \o ->
           VideoSuggestionsTagSuggestion
-            Core.<$> (o Core..:? "categoryRestricts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryRestricts")
             Core.<*> (o Core..:? "tag")
       )
 
@@ -11036,9 +11087,9 @@ instance Core.FromJSON VideoTopicDetails where
       "VideoTopicDetails"
       ( \o ->
           VideoTopicDetails
-            Core.<$> (o Core..:? "relevantTopicIds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "topicCategories" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "topicIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "relevantTopicIds")
+            Core.<*> (o Core..:? "topicCategories")
+            Core.<*> (o Core..:? "topicIds")
       )
 
 instance Core.ToJSON VideoTopicDetails where

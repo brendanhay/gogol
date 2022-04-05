@@ -579,10 +579,10 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "referencingDatabases"
-                         Core..!= Core.mempty
+            Core.<*> (o Core..:? "referencingDatabases")
+            Core.<*> ( o Core..:? "sizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "sizeBytes")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "versionTime")
       )
@@ -716,7 +716,7 @@ instance Core.FromJSON BatchCreateSessionsResponse where
       "BatchCreateSessionsResponse"
       ( \o ->
           BatchCreateSessionsResponse
-            Core.<$> (o Core..:? "session" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "session")
       )
 
 instance Core.ToJSON BatchCreateSessionsResponse where
@@ -796,7 +796,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -889,7 +889,7 @@ instance Core.FromJSON CommitRequest where
       "CommitRequest"
       ( \o ->
           CommitRequest
-            Core.<$> (o Core..:? "mutations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "mutations")
             Core.<*> (o Core..:? "requestOptions")
             Core.<*> (o Core..:? "returnCommitStats")
             Core.<*> (o Core..:? "singleUseTransaction")
@@ -966,7 +966,10 @@ instance Core.FromJSON CommitStats where
     Core.withObject
       "CommitStats"
       ( \o ->
-          CommitStats Core.<$> (o Core..:? "mutationCount")
+          CommitStats
+            Core.<$> ( o Core..:? "mutationCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CommitStats where
@@ -1141,7 +1144,7 @@ instance Core.FromJSON CreateDatabaseRequest where
             Core.<$> (o Core..:? "createStatement")
             Core.<*> (o Core..:? "databaseDialect")
             Core.<*> (o Core..:? "encryptionConfig")
-            Core.<*> (o Core..:? "extraStatements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extraStatements")
       )
 
 instance Core.ToJSON CreateDatabaseRequest where
@@ -1327,7 +1330,7 @@ instance Core.FromJSON Database where
             Core.<*> (o Core..:? "defaultLeader")
             Core.<*> (o Core..:? "earliestVersionTime")
             Core.<*> (o Core..:? "encryptionConfig")
-            Core.<*> (o Core..:? "encryptionInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "restoreInfo")
             Core.<*> (o Core..:? "state")
@@ -1603,8 +1606,10 @@ instance Core.FromJSON ExecuteBatchDmlRequest where
       ( \o ->
           ExecuteBatchDmlRequest
             Core.<$> (o Core..:? "requestOptions")
-            Core.<*> (o Core..:? "seqno")
-            Core.<*> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "seqno"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "statements")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -1643,7 +1648,7 @@ instance Core.FromJSON ExecuteBatchDmlResponse where
       "ExecuteBatchDmlResponse"
       ( \o ->
           ExecuteBatchDmlResponse
-            Core.<$> (o Core..:? "resultSets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resultSets")
             Core.<*> (o Core..:? "status")
       )
 
@@ -1713,7 +1718,9 @@ instance Core.FromJSON ExecuteSqlRequest where
             Core.<*> (o Core..:? "queryOptions")
             Core.<*> (o Core..:? "requestOptions")
             Core.<*> (o Core..:? "resumeToken")
-            Core.<*> (o Core..:? "seqno")
+            Core.<*> ( o Core..:? "seqno"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sql")
             Core.<*> (o Core..:? "transaction")
       )
@@ -1899,7 +1906,7 @@ instance Core.FromJSON GetDatabaseDdlResponse where
       "GetDatabaseDdlResponse"
       ( \o ->
           GetDatabaseDdlResponse
-            Core.<$> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "statements")
       )
 
 instance Core.ToJSON GetDatabaseDdlResponse where
@@ -2142,7 +2149,7 @@ instance Core.FromJSON Instance where
           Instance
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "endpointUris" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "endpointUris")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodeCount")
@@ -2226,9 +2233,9 @@ instance Core.FromJSON InstanceConfig where
       ( \o ->
           InstanceConfig
             Core.<$> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "leaderOptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "leaderOptions")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "replicas" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "replicas")
       )
 
 instance Core.ToJSON InstanceConfig where
@@ -2276,10 +2283,10 @@ instance Core.FromJSON KeyRange where
       "KeyRange"
       ( \o ->
           KeyRange
-            Core.<$> (o Core..:? "endClosed" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "endOpen" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "startClosed" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "startOpen" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "endClosed")
+            Core.<*> (o Core..:? "endOpen")
+            Core.<*> (o Core..:? "startClosed")
+            Core.<*> (o Core..:? "startOpen")
       )
 
 instance Core.ToJSON KeyRange where
@@ -2340,10 +2347,12 @@ instance Core.FromJSON KeyRangeInfo where
       "KeyRangeInfo"
       ( \o ->
           KeyRangeInfo
-            Core.<$> (o Core..:? "contextValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contextValues")
             Core.<*> (o Core..:? "endKeyIndex")
             Core.<*> (o Core..:? "info")
-            Core.<*> (o Core..:? "keysCount")
+            Core.<*> ( o Core..:? "keysCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "startKeyIndex")
             Core.<*> (o Core..:? "timeOffset")
@@ -2391,7 +2400,7 @@ instance Core.FromJSON KeyRangeInfos where
       "KeyRangeInfos"
       ( \o ->
           KeyRangeInfos
-            Core.<$> (o Core..:? "infos" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "infos")
             Core.<*> (o Core..:? "totalSize")
       )
 
@@ -2430,8 +2439,8 @@ instance Core.FromJSON KeySet where
       ( \o ->
           KeySet
             Core.<$> (o Core..:? "all")
-            Core.<*> (o Core..:? "keys" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "ranges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "keys")
+            Core.<*> (o Core..:? "ranges")
       )
 
 instance Core.ToJSON KeySet where
@@ -2471,7 +2480,7 @@ instance Core.FromJSON ListBackupOperationsResponse where
       ( \o ->
           ListBackupOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListBackupOperationsResponse where
@@ -2506,7 +2515,7 @@ instance Core.FromJSON ListBackupsResponse where
       "ListBackupsResponse"
       ( \o ->
           ListBackupsResponse
-            Core.<$> (o Core..:? "backups" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "backups")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2546,7 +2555,7 @@ instance Core.FromJSON ListDatabaseOperationsResponse where
       ( \o ->
           ListDatabaseOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListDatabaseOperationsResponse where
@@ -2581,7 +2590,7 @@ instance Core.FromJSON ListDatabasesResponse where
       "ListDatabasesResponse"
       ( \o ->
           ListDatabasesResponse
-            Core.<$> (o Core..:? "databases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "databases")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2620,7 +2629,7 @@ instance Core.FromJSON ListInstanceConfigsResponse where
       "ListInstanceConfigsResponse"
       ( \o ->
           ListInstanceConfigsResponse
-            Core.<$> (o Core..:? "instanceConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instanceConfigs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2663,9 +2672,9 @@ instance Core.FromJSON ListInstancesResponse where
       "ListInstancesResponse"
       ( \o ->
           ListInstancesResponse
-            Core.<$> (o Core..:? "instances" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "instances")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "unreachable" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListInstancesResponse where
@@ -2705,7 +2714,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -2741,7 +2750,7 @@ instance Core.FromJSON ListScansResponse where
       ( \o ->
           ListScansResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "scans" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "scans")
       )
 
 instance Core.ToJSON ListScansResponse where
@@ -2777,7 +2786,7 @@ instance Core.FromJSON ListSessionsResponse where
       ( \o ->
           ListSessionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sessions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sessions")
       )
 
 instance Core.ToJSON ListSessionsResponse where
@@ -3031,10 +3040,7 @@ instance Core.FromJSON MetricMatrix where
   parseJSON =
     Core.withObject
       "MetricMatrix"
-      ( \o ->
-          MetricMatrix
-            Core.<$> (o Core..:? "rows" Core..!= Core.mempty)
-      )
+      (\o -> MetricMatrix Core.<$> (o Core..:? "rows"))
 
 instance Core.ToJSON MetricMatrix where
   toJSON MetricMatrix {..} =
@@ -3059,10 +3065,7 @@ instance Core.FromJSON MetricMatrixRow where
   parseJSON =
     Core.withObject
       "MetricMatrixRow"
-      ( \o ->
-          MetricMatrixRow
-            Core.<$> (o Core..:? "cols" Core..!= Core.mempty)
-      )
+      (\o -> MetricMatrixRow Core.<$> (o Core..:? "cols"))
 
 instance Core.ToJSON MetricMatrixRow where
   toJSON MetricMatrixRow {..} =
@@ -3359,7 +3362,7 @@ instance Core.FromJSON PartialResultSet where
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "resumeToken")
             Core.<*> (o Core..:? "stats")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON PartialResultSet where
@@ -3429,8 +3432,12 @@ instance Core.FromJSON PartitionOptions where
       "PartitionOptions"
       ( \o ->
           PartitionOptions
-            Core.<$> (o Core..:? "maxPartitions")
-            Core.<*> (o Core..:? "partitionSizeBytes")
+            Core.<$> ( o Core..:? "maxPartitions"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "partitionSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PartitionOptions where
@@ -3600,7 +3607,7 @@ instance Core.FromJSON PartitionReadRequest where
       "PartitionReadRequest"
       ( \o ->
           PartitionReadRequest
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "keySet")
             Core.<*> (o Core..:? "partitionOptions")
@@ -3645,7 +3652,7 @@ instance Core.FromJSON PartitionResponse where
       "PartitionResponse"
       ( \o ->
           PartitionResponse
-            Core.<$> (o Core..:? "partitions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "partitions")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -3719,7 +3726,7 @@ instance Core.FromJSON PlanNode where
       "PlanNode"
       ( \o ->
           PlanNode
-            Core.<$> (o Core..:? "childLinks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "childLinks")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "executionStats")
             Core.<*> (o Core..:? "index")
@@ -3828,7 +3835,7 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -3956,10 +3963,7 @@ instance Core.FromJSON QueryPlan where
   parseJSON =
     Core.withObject
       "QueryPlan"
-      ( \o ->
-          QueryPlan
-            Core.<$> (o Core..:? "planNodes" Core..!= Core.mempty)
-      )
+      (\o -> QueryPlan Core.<$> (o Core..:? "planNodes"))
 
 instance Core.ToJSON QueryPlan where
   toJSON QueryPlan {..} =
@@ -4076,10 +4080,12 @@ instance Core.FromJSON ReadRequest where
       "ReadRequest"
       ( \o ->
           ReadRequest
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "keySet")
-            Core.<*> (o Core..:? "limit")
+            Core.<*> ( o Core..:? "limit"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "partitionToken")
             Core.<*> (o Core..:? "requestOptions")
             Core.<*> (o Core..:? "resumeToken")
@@ -4420,7 +4426,7 @@ instance Core.FromJSON ResultSet where
       ( \o ->
           ResultSet
             Core.<$> (o Core..:? "metadata")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "stats")
       )
 
@@ -4504,8 +4510,12 @@ instance Core.FromJSON ResultSetStats where
           ResultSetStats
             Core.<$> (o Core..:? "queryPlan")
             Core.<*> (o Core..:? "queryStats")
-            Core.<*> (o Core..:? "rowCountExact")
-            Core.<*> (o Core..:? "rowCountLowerBound")
+            Core.<*> ( o Core..:? "rowCountExact"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rowCountLowerBound"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ResultSetStats where
@@ -5003,7 +5013,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -5062,10 +5072,7 @@ instance Core.FromJSON StructType where
   parseJSON =
     Core.withObject
       "StructType"
-      ( \o ->
-          StructType
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
-      )
+      (\o -> StructType Core.<$> (o Core..:? "fields"))
 
 instance Core.ToJSON StructType where
   toJSON StructType {..} =
@@ -5093,7 +5100,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -5124,7 +5131,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
@@ -5353,10 +5360,10 @@ instance Core.FromJSON UpdateDatabaseDdlMetadata where
       "UpdateDatabaseDdlMetadata"
       ( \o ->
           UpdateDatabaseDdlMetadata
-            Core.<$> (o Core..:? "commitTimestamps" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "commitTimestamps")
             Core.<*> (o Core..:? "database")
-            Core.<*> (o Core..:? "progress" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "progress")
+            Core.<*> (o Core..:? "statements")
             Core.<*> (o Core..:? "throttled")
       )
 
@@ -5400,7 +5407,7 @@ instance Core.FromJSON UpdateDatabaseDdlRequest where
       ( \o ->
           UpdateDatabaseDdlRequest
             Core.<$> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "statements" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statements")
       )
 
 instance Core.ToJSON UpdateDatabaseDdlRequest where
@@ -5548,16 +5555,14 @@ instance Core.FromJSON VisualizationData where
           VisualizationData
             Core.<$> (o Core..:? "dataSourceEndToken")
             Core.<*> (o Core..:? "dataSourceSeparatorToken")
-            Core.<*> ( o Core..:? "diagnosticMessages"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "endKeyStrings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "diagnosticMessages")
+            Core.<*> (o Core..:? "endKeyStrings")
             Core.<*> (o Core..:? "hasPii")
-            Core.<*> (o Core..:? "indexedKeys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "indexedKeys")
             Core.<*> (o Core..:? "keySeparator")
             Core.<*> (o Core..:? "keyUnit")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "prefixNodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "prefixNodes")
       )
 
 instance Core.ToJSON VisualizationData where
@@ -5605,9 +5610,9 @@ instance Core.FromJSON Write where
       "Write"
       ( \o ->
           Write
-            Core.<$> (o Core..:? "columns" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columns")
             Core.<*> (o Core..:? "table")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON Write where

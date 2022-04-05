@@ -576,7 +576,9 @@ instance Core.FromJSON AcceleratorConfig where
       "AcceleratorConfig"
       ( \o ->
           AcceleratorConfig
-            Core.<$> (o Core..:? "acceleratorCount")
+            Core.<$> ( o Core..:? "acceleratorCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "acceleratorType")
             Core.<*> (o Core..:? "gpuPartitionSize")
       )
@@ -695,7 +697,9 @@ instance Core.FromJSON AdvancedMachineFeatures where
       "AdvancedMachineFeatures"
       ( \o ->
           AdvancedMachineFeatures
-            Core.<$> (o Core..:? "threadsPerCore")
+            Core.<$> ( o Core..:? "threadsPerCore"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AdvancedMachineFeatures where
@@ -872,7 +876,7 @@ instance
             Core.<*> (o Core..:? "imageType")
             Core.<*> (o Core..:? "management")
             Core.<*> (o Core..:? "minCpuPlatform")
-            Core.<*> (o Core..:? "oauthScopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oauthScopes")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "upgradeSettings")
@@ -1319,7 +1323,7 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "autoscaling")
             Core.<*> (o Core..:? "binaryAuthorization")
             Core.<*> (o Core..:? "clusterIpv4Cidr")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "confidentialNodes")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "currentMasterVersion")
@@ -1336,12 +1340,12 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "identityServiceConfig")
             Core.<*> (o Core..:? "initialClusterVersion")
             Core.<*> (o Core..:? "initialNodeCount")
-            Core.<*> (o Core..:? "instanceGroupUrls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instanceGroupUrls")
             Core.<*> (o Core..:? "ipAllocationPolicy")
             Core.<*> (o Core..:? "labelFingerprint")
             Core.<*> (o Core..:? "legacyAbac")
             Core.<*> (o Core..:? "location")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "loggingService")
             Core.<*> (o Core..:? "maintenancePolicy")
@@ -1358,7 +1362,7 @@ instance Core.FromJSON Cluster where
             Core.<*> (o Core..:? "nodeIpv4CidrSize")
             Core.<*> (o Core..:? "nodePoolAutoConfig")
             Core.<*> (o Core..:? "nodePoolDefaults")
-            Core.<*> (o Core..:? "nodePools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "nodePools")
             Core.<*> (o Core..:? "notificationConfig")
             Core.<*> (o Core..:? "privateClusterConfig")
             Core.<*> (o Core..:? "releaseChannel")
@@ -1539,13 +1543,11 @@ instance Core.FromJSON ClusterAutoscaling where
       "ClusterAutoscaling"
       ( \o ->
           ClusterAutoscaling
-            Core.<$> ( o Core..:? "autoprovisioningLocations"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "autoprovisioningLocations")
             Core.<*> (o Core..:? "autoprovisioningNodePoolDefaults")
             Core.<*> (o Core..:? "autoscalingProfile")
             Core.<*> (o Core..:? "enableNodeAutoprovisioning")
-            Core.<*> (o Core..:? "resourceLimits" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resourceLimits")
       )
 
 instance Core.ToJSON ClusterAutoscaling where
@@ -1699,7 +1701,7 @@ instance Core.FromJSON ClusterUpdate where
             Core.<*> (o Core..:? "desiredImageType")
             Core.<*> (o Core..:? "desiredIntraNodeVisibilityConfig")
             Core.<*> (o Core..:? "desiredL4ilbSubsettingConfig")
-            Core.<*> (o Core..:? "desiredLocations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "desiredLocations")
             Core.<*> (o Core..:? "desiredLoggingConfig")
             Core.<*> (o Core..:? "desiredLoggingService")
             Core.<*> (o Core..:? "desiredMasterAuthorizedNetworksConfig")
@@ -2250,10 +2252,7 @@ instance Core.FromJSON Filter where
   parseJSON =
     Core.withObject
       "Filter"
-      ( \o ->
-          Filter
-            Core.<$> (o Core..:? "eventType" Core..!= Core.mempty)
-      )
+      (\o -> Filter Core.<$> (o Core..:? "eventType"))
 
 instance Core.ToJSON Filter where
   toJSON Filter {..} =
@@ -2378,7 +2377,7 @@ instance Core.FromJSON GetJSONWebKeysResponse where
       ( \o ->
           GetJSONWebKeysResponse
             Core.<$> (o Core..:? "cacheHeader")
-            Core.<*> (o Core..:? "keys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "keys")
       )
 
 instance Core.ToJSON GetJSONWebKeysResponse where
@@ -2435,19 +2434,13 @@ instance Core.FromJSON GetOpenIDConfigResponse where
       ( \o ->
           GetOpenIDConfigResponse
             Core.<$> (o Core..:? "cacheHeader")
-            Core.<*> (o Core..:? "claims_supported" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "grant_types" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "id_token_signing_alg_values_supported"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "claims_supported")
+            Core.<*> (o Core..:? "grant_types")
+            Core.<*> (o Core..:? "id_token_signing_alg_values_supported")
             Core.<*> (o Core..:? "issuer")
             Core.<*> (o Core..:? "jwks_uri")
-            Core.<*> ( o Core..:? "response_types_supported"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "subject_types_supported"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "response_types_supported")
+            Core.<*> (o Core..:? "subject_types_supported")
       )
 
 instance Core.ToJSON GetOpenIDConfigResponse where
@@ -2528,7 +2521,7 @@ instance Core.FromJSON HttpCacheControlResponseHeader where
       "HttpCacheControlResponseHeader"
       ( \o ->
           HttpCacheControlResponseHeader
-            Core.<$> (o Core..:? "age")
+            Core.<$> (o Core..:? "age" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "directive")
             Core.<*> (o Core..:? "expires")
       )
@@ -2977,8 +2970,8 @@ instance Core.FromJSON ListClustersResponse where
       "ListClustersResponse"
       ( \o ->
           ListClustersResponse
-            Core.<$> (o Core..:? "clusters" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "missingZones" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusters")
+            Core.<*> (o Core..:? "missingZones")
       )
 
 instance Core.ToJSON ListClustersResponse where
@@ -3010,7 +3003,7 @@ instance Core.FromJSON ListNodePoolsResponse where
       "ListNodePoolsResponse"
       ( \o ->
           ListNodePoolsResponse
-            Core.<$> (o Core..:? "nodePools" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "nodePools")
       )
 
 instance Core.ToJSON ListNodePoolsResponse where
@@ -3046,8 +3039,8 @@ instance Core.FromJSON ListOperationsResponse where
       "ListOperationsResponse"
       ( \o ->
           ListOperationsResponse
-            Core.<$> (o Core..:? "missingZones" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "missingZones")
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -3086,7 +3079,7 @@ instance Core.FromJSON ListUsableSubnetworksResponse where
       ( \o ->
           ListUsableSubnetworksResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "subnetworks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subnetworks")
       )
 
 instance Core.ToJSON ListUsableSubnetworksResponse where
@@ -3119,7 +3112,7 @@ instance Core.FromJSON LoggingComponentConfig where
       "LoggingComponentConfig"
       ( \o ->
           LoggingComponentConfig
-            Core.<$> (o Core..:? "enableComponents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enableComponents")
       )
 
 instance Core.ToJSON LoggingComponentConfig where
@@ -3400,7 +3393,7 @@ instance Core.FromJSON MasterAuthorizedNetworksConfig where
       "MasterAuthorizedNetworksConfig"
       ( \o ->
           MasterAuthorizedNetworksConfig
-            Core.<$> (o Core..:? "cidrBlocks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cidrBlocks")
             Core.<*> (o Core..:? "enabled")
       )
 
@@ -3433,7 +3426,9 @@ instance Core.FromJSON MaxPodsConstraint where
       "MaxPodsConstraint"
       ( \o ->
           MaxPodsConstraint
-            Core.<$> (o Core..:? "maxPodsPerNode")
+            Core.<$> ( o Core..:? "maxPodsPerNode"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON MaxPodsConstraint where
@@ -3510,7 +3505,9 @@ instance Core.FromJSON Metric where
       ( \o ->
           Metric
             Core.<$> (o Core..:? "doubleValue")
-            Core.<*> (o Core..:? "intValue")
+            Core.<*> ( o Core..:? "intValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stringValue")
       )
@@ -3548,7 +3545,7 @@ instance Core.FromJSON MonitoringComponentConfig where
       "MonitoringComponentConfig"
       ( \o ->
           MonitoringComponentConfig
-            Core.<$> (o Core..:? "enableComponents" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "enableComponents")
       )
 
 instance Core.ToJSON MonitoringComponentConfig where
@@ -3755,10 +3752,7 @@ instance Core.FromJSON NetworkTags where
   parseJSON =
     Core.withObject
       "NetworkTags"
-      ( \o ->
-          NetworkTags
-            Core.<$> (o Core..:? "tags" Core..!= Core.mempty)
-      )
+      (\o -> NetworkTags Core.<$> (o Core..:? "tags"))
 
 instance Core.ToJSON NetworkTags where
   toJSON NetworkTags {..} =
@@ -3864,7 +3858,7 @@ instance Core.FromJSON NodeConfig where
       "NodeConfig"
       ( \o ->
           NodeConfig
-            Core.<$> (o Core..:? "accelerators" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accelerators")
             Core.<*> (o Core..:? "advancedMachineFeatures")
             Core.<*> (o Core..:? "bootDiskKmsKey")
             Core.<*> (o Core..:? "diskSizeGb")
@@ -3880,15 +3874,15 @@ instance Core.FromJSON NodeConfig where
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minCpuPlatform")
             Core.<*> (o Core..:? "nodeGroup")
-            Core.<*> (o Core..:? "oauthScopes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "oauthScopes")
             Core.<*> (o Core..:? "preemptible")
             Core.<*> (o Core..:? "reservationAffinity")
             Core.<*> (o Core..:? "sandboxConfig")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "shieldedInstanceConfig")
             Core.<*> (o Core..:? "spot")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "taints" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "taints")
             Core.<*> (o Core..:? "workloadMetadataConfig")
       )
 
@@ -4221,11 +4215,11 @@ instance Core.FromJSON NodePool where
       ( \o ->
           NodePool
             Core.<$> (o Core..:? "autoscaling")
-            Core.<*> (o Core..:? "conditions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "config")
             Core.<*> (o Core..:? "initialNodeCount")
-            Core.<*> (o Core..:? "instanceGroupUrls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "instanceGroupUrls")
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "management")
             Core.<*> (o Core..:? "maxPodsConstraint")
             Core.<*> (o Core..:? "name")
@@ -4508,15 +4502,13 @@ instance Core.FromJSON Operation where
       "Operation"
       ( \o ->
           Operation
-            Core.<$> (o Core..:? "clusterConditions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusterConditions")
             Core.<*> (o Core..:? "detail")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "nodepoolConditions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nodepoolConditions")
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "progress")
             Core.<*> (o Core..:? "selfLink")
@@ -4583,9 +4575,9 @@ instance Core.FromJSON OperationProgress where
       "OperationProgress"
       ( \o ->
           OperationProgress
-            Core.<$> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metrics")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "stages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "stages")
             Core.<*> (o Core..:? "status")
       )
 
@@ -4842,7 +4834,7 @@ instance Core.FromJSON ReleaseChannelConfig where
           ReleaseChannelConfig
             Core.<$> (o Core..:? "channel")
             Core.<*> (o Core..:? "defaultVersion")
-            Core.<*> (o Core..:? "validVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "validVersions")
       )
 
 instance Core.ToJSON ReleaseChannelConfig where
@@ -4886,7 +4878,7 @@ instance Core.FromJSON ReservationAffinity where
           ReservationAffinity
             Core.<$> (o Core..:? "consumeReservationType")
             Core.<*> (o Core..:? "key")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ReservationAffinity where
@@ -4929,8 +4921,12 @@ instance Core.FromJSON ResourceLimit where
       "ResourceLimit"
       ( \o ->
           ResourceLimit
-            Core.<$> (o Core..:? "maximum")
-            Core.<*> (o Core..:? "minimum")
+            Core.<$> ( o Core..:? "maximum"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minimum"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resourceType")
       )
 
@@ -5122,15 +5118,13 @@ instance Core.FromJSON SecurityBulletinEvent where
       "SecurityBulletinEvent"
       ( \o ->
           SecurityBulletinEvent
-            Core.<$> ( o Core..:? "affectedSupportedMinors"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "affectedSupportedMinors")
             Core.<*> (o Core..:? "briefDescription")
             Core.<*> (o Core..:? "bulletinId")
             Core.<*> (o Core..:? "bulletinUri")
-            Core.<*> (o Core..:? "cveIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "cveIds")
             Core.<*> (o Core..:? "manualStepsRequired")
-            Core.<*> (o Core..:? "patchedVersions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "patchedVersions")
             Core.<*> (o Core..:? "resourceTypeAffected")
             Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "suggestedUpgradeTarget")
@@ -5196,16 +5190,12 @@ instance Core.FromJSON ServerConfig where
       "ServerConfig"
       ( \o ->
           ServerConfig
-            Core.<$> (o Core..:? "channels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "channels")
             Core.<*> (o Core..:? "defaultClusterVersion")
             Core.<*> (o Core..:? "defaultImageType")
-            Core.<*> (o Core..:? "validImageTypes" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "validMasterVersions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "validNodeVersions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "validImageTypes")
+            Core.<*> (o Core..:? "validMasterVersions")
+            Core.<*> (o Core..:? "validNodeVersions")
       )
 
 instance Core.ToJSON ServerConfig where
@@ -5492,7 +5482,7 @@ instance Core.FromJSON SetLocationsRequest where
       ( \o ->
           SetLocationsRequest
             Core.<$> (o Core..:? "clusterId")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "zone")
@@ -6115,7 +6105,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6421,7 +6411,7 @@ instance Core.FromJSON UpdateNodePoolRequest where
             Core.<*> (o Core..:? "imageType")
             Core.<*> (o Core..:? "kubeletConfig")
             Core.<*> (o Core..:? "linuxNodeConfig")
-            Core.<*> (o Core..:? "locations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodePoolId")
             Core.<*> (o Core..:? "nodeVersion")
@@ -6636,7 +6626,7 @@ instance Core.FromJSON UsableSubnetwork where
           UsableSubnetwork
             Core.<$> (o Core..:? "ipCidrRange")
             Core.<*> (o Core..:? "network")
-            Core.<*> (o Core..:? "secondaryIpRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secondaryIpRanges")
             Core.<*> (o Core..:? "statusMessage")
             Core.<*> (o Core..:? "subnetwork")
       )

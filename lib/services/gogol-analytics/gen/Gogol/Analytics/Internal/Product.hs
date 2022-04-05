@@ -607,7 +607,7 @@ instance Core.FromJSON Account_Permissions where
       "Account_Permissions"
       ( \o ->
           Account_Permissions
-            Core.<$> (o Core..:? "effective" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "effective")
       )
 
 instance Core.ToJSON Account_Permissions where
@@ -710,7 +710,7 @@ instance Core.FromJSON AccountSummaries where
       "AccountSummaries"
       ( \o ->
           AccountSummaries
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#accountSummaries"
@@ -778,7 +778,7 @@ instance Core.FromJSON AccountSummary where
                      )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "starred")
-            Core.<*> (o Core..:? "webProperties" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "webProperties")
       )
 
 instance Core.ToJSON AccountSummary where
@@ -1010,7 +1010,7 @@ instance Core.FromJSON Accounts where
       "Accounts"
       ( \o ->
           Accounts
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#accounts")
             Core.<*> (o Core..:? "nextLink")
@@ -1108,9 +1108,7 @@ instance
       "AnalyticsDataimportDeleteUploadDataRequest"
       ( \o ->
           AnalyticsDataimportDeleteUploadDataRequest
-            Core.<$> ( o Core..:? "customDataImportUids"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "customDataImportUids")
       )
 
 instance
@@ -1231,9 +1229,9 @@ instance Core.FromJSON Columns where
       "Columns"
       ( \o ->
           Columns
-            Core.<$> (o Core..:? "attributeNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributeNames")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#columns")
             Core.<*> (o Core..:? "totalResults")
       )
@@ -1329,8 +1327,8 @@ instance Core.FromJSON CustomDataSource where
                      )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parentLink")
-            Core.<*> (o Core..:? "profilesLinked" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "schema" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "profilesLinked")
+            Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "updated")
@@ -1478,7 +1476,7 @@ instance Core.FromJSON CustomDataSources where
       "CustomDataSources"
       ( \o ->
           CustomDataSources
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#customDataSources"
@@ -1679,7 +1677,7 @@ instance Core.FromJSON CustomDimensions where
       "CustomDimensions"
       ( \o ->
           CustomDimensions
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#customDimensions"
@@ -1890,7 +1888,7 @@ instance Core.FromJSON CustomMetrics where
       "CustomMetrics"
       ( \o ->
           CustomMetrics
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#customMetrics"
@@ -1958,14 +1956,14 @@ instance Core.FromJSON EntityAdWordsLink where
       "EntityAdWordsLink"
       ( \o ->
           EntityAdWordsLink
-            Core.<$> (o Core..:? "adWordsAccounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adWordsAccounts")
             Core.<*> (o Core..:? "entity")
             Core.<*> (o Core..:? "id")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#entityAdWordsLink"
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "profileIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "profileIds")
             Core.<*> (o Core..:? "selfLink")
       )
 
@@ -2056,7 +2054,7 @@ instance Core.FromJSON EntityAdWordsLinks where
       "EntityAdWordsLinks"
       ( \o ->
           EntityAdWordsLinks
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#entityAdWordsLinks"
@@ -2209,8 +2207,8 @@ instance Core.FromJSON EntityUserLink_Permissions where
       "EntityUserLink_Permissions"
       ( \o ->
           EntityUserLink_Permissions
-            Core.<$> (o Core..:? "effective" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "local" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "effective")
+            Core.<*> (o Core..:? "local")
       )
 
 instance Core.ToJSON EntityUserLink_Permissions where
@@ -2263,7 +2261,7 @@ instance Core.FromJSON EntityUserLinks where
       "EntityUserLinks"
       ( \o ->
           EntityUserLinks
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#entityUserLinks"
@@ -2417,7 +2415,7 @@ instance Core.FromJSON Experiment where
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "trafficCoverage")
             Core.<*> (o Core..:? "updated")
-            Core.<*> (o Core..:? "variations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "variations")
             Core.<*> (o Core..:? "webPropertyId")
             Core.<*> (o Core..:? "winnerConfidenceLevel")
             Core.<*> (o Core..:? "winnerFound")
@@ -2598,7 +2596,7 @@ instance Core.FromJSON Experiments where
       "Experiments"
       ( \o ->
           Experiments
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#experiments")
             Core.<*> (o Core..:? "nextLink")
@@ -3170,7 +3168,7 @@ instance Core.FromJSON Filters where
       "Filters"
       ( \o ->
           Filters
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#filters")
             Core.<*> (o Core..:? "nextLink")
@@ -3266,9 +3264,11 @@ instance Core.FromJSON GaData where
       "GaData"
       ( \o ->
           GaData
-            Core.<$> (o Core..:? "columnHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "containsSampledData")
-            Core.<*> (o Core..:? "dataLastRefreshed")
+            Core.<*> ( o Core..:? "dataLastRefreshed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "dataTable")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "itemsPerPage")
@@ -3277,9 +3277,13 @@ instance Core.FromJSON GaData where
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "profileInfo")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sampleSize")
-            Core.<*> (o Core..:? "sampleSpace")
+            Core.<*> (o Core..:? "rows")
+            Core.<*> ( o Core..:? "sampleSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sampleSpace"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalResults")
             Core.<*> (o Core..:? "totalsForAllResults")
@@ -3379,8 +3383,7 @@ instance Core.FromJSON GaData_DataTable where
       "GaData_DataTable"
       ( \o ->
           GaData_DataTable
-            Core.<$> (o Core..:? "cols" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cols") Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON GaData_DataTable where
@@ -3453,8 +3456,7 @@ instance Core.FromJSON GaData_DataTable_RowsItem where
     Core.withObject
       "GaData_DataTable_RowsItem"
       ( \o ->
-          GaData_DataTable_RowsItem
-            Core.<$> (o Core..:? "c" Core..!= Core.mempty)
+          GaData_DataTable_RowsItem Core.<$> (o Core..:? "c")
       )
 
 instance Core.ToJSON GaData_DataTable_RowsItem where
@@ -3611,10 +3613,10 @@ instance Core.FromJSON GaData_Query where
             Core.<*> (o Core..:? "filters")
             Core.<*> (o Core..:? "ids")
             Core.<*> (o Core..:? "max-results")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "samplingLevel")
             Core.<*> (o Core..:? "segment")
-            Core.<*> (o Core..:? "sort" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sort")
             Core.<*> (o Core..:? "start-date")
             Core.<*> (o Core..:? "start-index")
       )
@@ -3816,7 +3818,7 @@ instance Core.FromJSON Goal_EventDetails where
       "Goal_EventDetails"
       ( \o ->
           Goal_EventDetails
-            Core.<$> (o Core..:? "eventConditions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "eventConditions")
             Core.<*> (o Core..:? "useEventValue")
       )
 
@@ -3868,7 +3870,9 @@ instance
       ( \o ->
           Goal_EventDetails_EventConditionsItem
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> (o Core..:? "comparisonValue")
+            Core.<*> ( o Core..:? "comparisonValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "expression")
             Core.<*> (o Core..:? "matchType")
             Core.<*> (o Core..:? "type")
@@ -3964,7 +3968,7 @@ instance Core.FromJSON Goal_UrlDestinationDetails where
             Core.<$> (o Core..:? "caseSensitive")
             Core.<*> (o Core..:? "firstStepRequired")
             Core.<*> (o Core..:? "matchType")
-            Core.<*> (o Core..:? "steps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "steps")
             Core.<*> (o Core..:? "url")
       )
 
@@ -4057,7 +4061,9 @@ instance Core.FromJSON Goal_VisitNumPagesDetails where
       ( \o ->
           Goal_VisitNumPagesDetails
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> (o Core..:? "comparisonValue")
+            Core.<*> ( o Core..:? "comparisonValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Goal_VisitNumPagesDetails where
@@ -4097,7 +4103,9 @@ instance Core.FromJSON Goal_VisitTimeOnSiteDetails where
       ( \o ->
           Goal_VisitTimeOnSiteDetails
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> (o Core..:? "comparisonValue")
+            Core.<*> ( o Core..:? "comparisonValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Goal_VisitTimeOnSiteDetails where
@@ -4154,7 +4162,7 @@ instance Core.FromJSON Goals where
       "Goals"
       ( \o ->
           Goals
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#goals")
             Core.<*> (o Core..:? "nextLink")
@@ -4482,7 +4490,7 @@ instance Core.FromJSON McfData where
       "McfData"
       ( \o ->
           McfData
-            Core.<$> (o Core..:? "columnHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "containsSampledData")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "itemsPerPage")
@@ -4491,9 +4499,13 @@ instance Core.FromJSON McfData where
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "profileInfo")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sampleSize")
-            Core.<*> (o Core..:? "sampleSpace")
+            Core.<*> (o Core..:? "rows")
+            Core.<*> ( o Core..:? "sampleSize"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sampleSpace"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalResults")
             Core.<*> (o Core..:? "totalsForAllResults")
@@ -4686,10 +4698,10 @@ instance Core.FromJSON McfData_Query where
             Core.<*> (o Core..:? "filters")
             Core.<*> (o Core..:? "ids")
             Core.<*> (o Core..:? "max-results")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "samplingLevel")
             Core.<*> (o Core..:? "segment")
-            Core.<*> (o Core..:? "sort" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sort")
             Core.<*> (o Core..:? "start-date")
             Core.<*> (o Core..:? "start-index")
       )
@@ -4738,9 +4750,7 @@ instance Core.FromJSON McfData_RowsItemItem where
       "McfData_RowsItemItem"
       ( \o ->
           McfData_RowsItemItem
-            Core.<$> ( o Core..:? "conversionPathValue"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "conversionPathValue")
             Core.<*> (o Core..:? "primitiveValue")
       )
 
@@ -5090,7 +5100,7 @@ instance Core.FromJSON Profile_Permissions where
       "Profile_Permissions"
       ( \o ->
           Profile_Permissions
-            Core.<$> (o Core..:? "effective" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "effective")
       )
 
 instance Core.ToJSON Profile_Permissions where
@@ -5205,7 +5215,7 @@ instance Core.FromJSON ProfileFilterLinks where
       "ProfileFilterLinks"
       ( \o ->
           ProfileFilterLinks
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#profileFilterLinks"
@@ -5397,7 +5407,7 @@ instance Core.FromJSON Profiles where
       "Profiles"
       ( \o ->
           Profiles
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#profiles")
             Core.<*> (o Core..:? "nextLink")
@@ -5469,12 +5479,12 @@ instance Core.FromJSON RealtimeData where
       "RealtimeData"
       ( \o ->
           RealtimeData
-            Core.<$> (o Core..:? "columnHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#realtimeData")
             Core.<*> (o Core..:? "profileInfo")
             Core.<*> (o Core..:? "query")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalResults")
             Core.<*> (o Core..:? "totalsForAllResults")
@@ -5642,8 +5652,8 @@ instance Core.FromJSON RealtimeData_Query where
             Core.<*> (o Core..:? "filters")
             Core.<*> (o Core..:? "ids")
             Core.<*> (o Core..:? "max-results")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "sort" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "sort")
       )
 
 instance Core.ToJSON RealtimeData_Query where
@@ -5764,8 +5774,8 @@ instance Core.FromJSON RemarketingAudience where
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#remarketingAudience"
                      )
-            Core.<*> (o Core..:? "linkedAdAccounts" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "linkedViews" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "linkedAdAccounts")
+            Core.<*> (o Core..:? "linkedViews")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stateBasedAudienceDefinition")
             Core.<*> (o Core..:? "updated")
@@ -5978,7 +5988,7 @@ instance Core.FromJSON RemarketingAudiences where
       "RemarketingAudiences"
       ( \o ->
           RemarketingAudiences
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#remarketingAudiences"
@@ -6123,7 +6133,7 @@ instance Core.FromJSON Segments where
       "Segments"
       ( \o ->
           Segments
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#segments")
             Core.<*> (o Core..:? "nextLink")
@@ -6403,7 +6413,7 @@ instance Core.FromJSON UnsampledReports where
       "UnsampledReports"
       ( \o ->
           UnsampledReports
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#unsampledReports"
@@ -6471,9 +6481,11 @@ instance Core.FromJSON Upload where
       "Upload"
       ( \o ->
           Upload
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "customDataSourceId")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#upload")
             Core.<*> (o Core..:? "status")
@@ -6537,7 +6549,7 @@ instance Core.FromJSON Uploads where
       "Uploads"
       ( \o ->
           Uploads
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> (o Core..:? "kind" Core..!= "analytics#uploads")
             Core.<*> (o Core..:? "nextLink")
@@ -6811,7 +6823,7 @@ instance Core.FromJSON WebPropertySummary where
                      )
             Core.<*> (o Core..:? "level")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "profiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "profiles")
             Core.<*> (o Core..:? "starred")
             Core.<*> (o Core..:? "websiteUrl")
       )
@@ -6876,7 +6888,7 @@ instance Core.FromJSON Webproperties where
       "Webproperties"
       ( \o ->
           Webproperties
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "analytics#webproperties"
@@ -6985,7 +6997,9 @@ instance Core.FromJSON Webproperty where
             Core.<*> (o Core..:? "created")
             Core.<*> (o Core..:? "dataRetentionResetOnNewActivity")
             Core.<*> (o Core..:? "dataRetentionTtl")
-            Core.<*> (o Core..:? "defaultProfileId")
+            Core.<*> ( o Core..:? "defaultProfileId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "industryVertical")
             Core.<*> (o Core..:? "internalWebPropertyId")
@@ -7124,7 +7138,7 @@ instance Core.FromJSON Webproperty_Permissions where
       "Webproperty_Permissions"
       ( \o ->
           Webproperty_Permissions
-            Core.<$> (o Core..:? "effective" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "effective")
       )
 
 instance Core.ToJSON Webproperty_Permissions where

@@ -830,7 +830,7 @@ instance Core.FromJSON AppId where
           AppId
             Core.<$> (o Core..:? "appType")
             Core.<*> (o Core..:? "gsuiteAppType")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AppId where
@@ -1034,7 +1034,7 @@ instance Core.FromJSON CompositeFilter where
       ( \o ->
           CompositeFilter
             Core.<$> (o Core..:? "logicOperator")
-            Core.<*> (o Core..:? "subFilters" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subFilters")
       )
 
 instance Core.ToJSON CompositeFilter where
@@ -1069,8 +1069,7 @@ instance Core.FromJSON ContextAttribute where
       "ContextAttribute"
       ( \o ->
           ContextAttribute
-            Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON ContextAttribute where
@@ -1130,13 +1129,17 @@ instance Core.FromJSON CustomEmoji where
       ( \o ->
           CustomEmoji
             Core.<$> (o Core..:? "blobId")
-            Core.<*> (o Core..:? "createTimeMicros")
+            Core.<*> ( o Core..:? "createTimeMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "creatorUserId")
             Core.<*> (o Core..:? "ownerCustomerId")
             Core.<*> (o Core..:? "readToken")
             Core.<*> (o Core..:? "shortcode")
             Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "updateTimeMicros")
+            Core.<*> ( o Core..:? "updateTimeMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "uuid")
       )
 
@@ -1211,9 +1214,7 @@ instance Core.FromJSON CustomerIndexStats where
       ( \o ->
           CustomerIndexStats
             Core.<$> (o Core..:? "date")
-            Core.<*> ( o Core..:? "itemCountByStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "itemCountByStatus")
       )
 
 instance Core.ToJSON CustomerIndexStats where
@@ -1249,9 +1250,7 @@ instance Core.FromJSON CustomerQueryStats where
       ( \o ->
           CustomerQueryStats
             Core.<$> (o Core..:? "date")
-            Core.<*> ( o Core..:? "queryCountByStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "queryCountByStatus")
       )
 
 instance Core.ToJSON CustomerQueryStats where
@@ -1287,7 +1286,10 @@ instance Core.FromJSON CustomerSearchApplicationStats where
       "CustomerSearchApplicationStats"
       ( \o ->
           CustomerSearchApplicationStats
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "date")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "date")
       )
 
 instance Core.ToJSON CustomerSearchApplicationStats where
@@ -1322,7 +1324,9 @@ instance Core.FromJSON CustomerSessionStats where
       ( \o ->
           CustomerSessionStats
             Core.<$> (o Core..:? "date")
-            Core.<*> (o Core..:? "searchSessionsCount")
+            Core.<*> ( o Core..:? "searchSessionsCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CustomerSessionStats where
@@ -1407,9 +1411,15 @@ instance Core.FromJSON CustomerUserStats where
       ( \o ->
           CustomerUserStats
             Core.<$> (o Core..:? "date")
-            Core.<*> (o Core..:? "oneDayActiveUsersCount")
-            Core.<*> (o Core..:? "sevenDaysActiveUsersCount")
-            Core.<*> (o Core..:? "thirtyDaysActiveUsersCount")
+            Core.<*> ( o Core..:? "oneDayActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sevenDaysActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "thirtyDaysActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON CustomerUserStats where
@@ -1478,12 +1488,10 @@ instance Core.FromJSON DataSource where
             Core.<$> (o Core..:? "disableModifications")
             Core.<*> (o Core..:? "disableServing")
             Core.<*> (o Core..:? "displayName")
-            Core.<*> ( o Core..:? "indexingServiceAccounts"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "itemsVisibility" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "indexingServiceAccounts")
+            Core.<*> (o Core..:? "itemsVisibility")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "operationIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operationIds")
             Core.<*> (o Core..:? "returnThumbnailUrls")
             Core.<*> (o Core..:? "shortName")
       )
@@ -1531,9 +1539,7 @@ instance Core.FromJSON DataSourceIndexStats where
       ( \o ->
           DataSourceIndexStats
             Core.<$> (o Core..:? "date")
-            Core.<*> ( o Core..:? "itemCountByStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "itemCountByStatus")
       )
 
 instance Core.ToJSON DataSourceIndexStats where
@@ -1569,7 +1575,7 @@ instance Core.FromJSON DataSourceRestriction where
       "DataSourceRestriction"
       ( \o ->
           DataSourceRestriction
-            Core.<$> (o Core..:? "filterOptions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filterOptions")
             Core.<*> (o Core..:? "source")
       )
 
@@ -1717,10 +1723,7 @@ instance Core.FromJSON DateValues where
   parseJSON =
     Core.withObject
       "DateValues"
-      ( \o ->
-          DateValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> DateValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON DateValues where
   toJSON DateValues {..} =
@@ -1936,10 +1939,7 @@ instance Core.FromJSON DoubleValues where
   parseJSON =
     Core.withObject
       "DoubleValues"
-      ( \o ->
-          DoubleValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> DoubleValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON DoubleValues where
   toJSON DoubleValues {..} =
@@ -2268,7 +2268,7 @@ instance Core.FromJSON EnumPropertyOptions where
           EnumPropertyOptions
             Core.<$> (o Core..:? "operatorOptions")
             Core.<*> (o Core..:? "orderedRanking")
-            Core.<*> (o Core..:? "possibleValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "possibleValues")
       )
 
 instance Core.ToJSON EnumPropertyOptions where
@@ -2336,10 +2336,7 @@ instance Core.FromJSON EnumValues where
   parseJSON =
     Core.withObject
       "EnumValues"
-      ( \o ->
-          EnumValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> EnumValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON EnumValues where
   toJSON EnumValues {..} =
@@ -2365,8 +2362,7 @@ instance Core.FromJSON ErrorInfo where
     Core.withObject
       "ErrorInfo"
       ( \o ->
-          ErrorInfo
-            Core.<$> (o Core..:? "errorMessages" Core..!= Core.mempty)
+          ErrorInfo Core.<$> (o Core..:? "errorMessages")
       )
 
 instance Core.ToJSON ErrorInfo where
@@ -2538,7 +2534,7 @@ instance Core.FromJSON FacetResult where
       "FacetResult"
       ( \o ->
           FacetResult
-            Core.<$> (o Core..:? "buckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "buckets")
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "operatorName")
             Core.<*> (o Core..:? "sourceName")
@@ -2773,8 +2769,10 @@ instance Core.FromJSON GetCustomerIndexStatsResponse where
       "GetCustomerIndexStatsResponse"
       ( \o ->
           GetCustomerIndexStatsResponse
-            Core.<$> (o Core..:? "averageIndexedItemCount")
-            Core.<*> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "averageIndexedItemCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "stats")
       )
 
 instance Core.ToJSON GetCustomerIndexStatsResponse where
@@ -2813,8 +2811,10 @@ instance Core.FromJSON GetCustomerQueryStatsResponse where
       "GetCustomerQueryStatsResponse"
       ( \o ->
           GetCustomerQueryStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalQueryCount")
+            Core.<$> (o Core..:? "stats")
+            Core.<*> ( o Core..:? "totalQueryCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON GetCustomerQueryStatsResponse where
@@ -2856,8 +2856,10 @@ instance
       "GetCustomerSearchApplicationStatsResponse"
       ( \o ->
           GetCustomerSearchApplicationStatsResponse
-            Core.<$> (o Core..:? "averageSearchApplicationCount")
-            Core.<*> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "averageSearchApplicationCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "stats")
       )
 
 instance
@@ -2897,7 +2899,7 @@ instance
       "GetCustomerSessionStatsResponse"
       ( \o ->
           GetCustomerSessionStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "stats")
       )
 
 instance Core.ToJSON GetCustomerSessionStatsResponse where
@@ -2925,7 +2927,7 @@ instance Core.FromJSON GetCustomerUserStatsResponse where
       "GetCustomerUserStatsResponse"
       ( \o ->
           GetCustomerUserStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "stats")
       )
 
 instance Core.ToJSON GetCustomerUserStatsResponse where
@@ -2961,8 +2963,10 @@ instance
       "GetDataSourceIndexStatsResponse"
       ( \o ->
           GetDataSourceIndexStatsResponse
-            Core.<$> (o Core..:? "averageIndexedItemCount")
-            Core.<*> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "averageIndexedItemCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "stats")
       )
 
 instance Core.ToJSON GetDataSourceIndexStatsResponse where
@@ -3005,8 +3009,10 @@ instance
       "GetSearchApplicationQueryStatsResponse"
       ( \o ->
           GetSearchApplicationQueryStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "totalQueryCount")
+            Core.<$> (o Core..:? "stats")
+            Core.<*> ( o Core..:? "totalQueryCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -3045,7 +3051,7 @@ instance
       "GetSearchApplicationSessionStatsResponse"
       ( \o ->
           GetSearchApplicationSessionStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "stats")
       )
 
 instance
@@ -3079,7 +3085,7 @@ instance
       "GetSearchApplicationUserStatsResponse"
       ( \o ->
           GetSearchApplicationUserStatsResponse
-            Core.<$> (o Core..:? "stats" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "stats")
       )
 
 instance
@@ -3131,7 +3137,9 @@ instance Core.FromJSON GoogleDocsMetadata where
             Core.<$> (o Core..:? "aclInfo")
             Core.<*> (o Core..:? "documentType")
             Core.<*> (o Core..:? "fileExtension")
-            Core.<*> (o Core..:? "lastContentModifiedTimestamp")
+            Core.<*> ( o Core..:? "lastContentModifiedTimestamp"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resultInfo")
             Core.<*> (o Core..:? "typeInfo")
       )
@@ -3333,10 +3341,7 @@ instance Core.FromJSON HtmlValues where
   parseJSON =
     Core.withObject
       "HtmlValues"
-      ( \o ->
-          HtmlValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> HtmlValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON HtmlValues where
   toJSON HtmlValues {..} =
@@ -3372,7 +3377,9 @@ instance Core.FromJSON Id where
       "Id"
       ( \o ->
           Id
-            Core.<$> (o Core..:? "creatorUserId")
+            Core.<$> ( o Core..:? "creatorUserId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "localId")
             Core.<*> (o Core..:? "nameSpace")
       )
@@ -3572,8 +3579,12 @@ instance Core.FromJSON IntegerPropertyOptions where
       "IntegerPropertyOptions"
       ( \o ->
           IntegerPropertyOptions
-            Core.<$> (o Core..:? "maximumValue")
-            Core.<*> (o Core..:? "minimumValue")
+            Core.<$> ( o Core..:? "maximumValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minimumValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "operatorOptions")
             Core.<*> (o Core..:? "orderedRanking")
       )
@@ -3609,10 +3620,7 @@ instance Core.FromJSON IntegerValues where
   parseJSON =
     Core.withObject
       "IntegerValues"
-      ( \o ->
-          IntegerValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> IntegerValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON IntegerValues where
   toJSON IntegerValues {..} =
@@ -3779,10 +3787,10 @@ instance Core.FromJSON ItemAcl where
       ( \o ->
           ItemAcl
             Core.<$> (o Core..:? "aclInheritanceType")
-            Core.<*> (o Core..:? "deniedReaders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "deniedReaders")
             Core.<*> (o Core..:? "inheritAclFrom")
-            Core.<*> (o Core..:? "owners" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "readers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "owners")
+            Core.<*> (o Core..:? "readers")
       )
 
 instance Core.ToJSON ItemAcl where
@@ -3875,8 +3883,12 @@ instance Core.FromJSON ItemCountByStatus where
       "ItemCountByStatus"
       ( \o ->
           ItemCountByStatus
-            Core.<$> (o Core..:? "count")
-            Core.<*> (o Core..:? "indexedItemsCount")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "indexedItemsCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "statusCode")
       )
 
@@ -3952,11 +3964,11 @@ instance Core.FromJSON ItemMetadata where
           ItemMetadata
             Core.<$> (o Core..:? "containerName")
             Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> (o Core..:? "contextAttributes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "contextAttributes")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "hash")
-            Core.<*> (o Core..:? "interactions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "keywords" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "interactions")
+            Core.<*> (o Core..:? "keywords")
             Core.<*> (o Core..:? "mimeType")
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "searchQualityMetadata")
@@ -4018,8 +4030,8 @@ instance Core.FromJSON ItemStatus where
       ( \o ->
           ItemStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "processingErrors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "repositoryErrors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "processingErrors")
+            Core.<*> (o Core..:? "repositoryErrors")
       )
 
 instance Core.ToJSON ItemStatus where
@@ -4092,7 +4104,7 @@ instance Core.FromJSON ListDataSourceResponse where
       ( \o ->
           ListDataSourceResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON ListDataSourceResponse where
@@ -4132,7 +4144,7 @@ instance
       "ListItemNamesForUnmappedIdentityResponse"
       ( \o ->
           ListItemNamesForUnmappedIdentityResponse
-            Core.<$> (o Core..:? "itemNames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "itemNames")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4170,7 +4182,7 @@ instance Core.FromJSON ListItemsResponse where
       "ListItemsResponse"
       ( \o ->
           ListItemsResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -4210,7 +4222,7 @@ instance Core.FromJSON ListOperationsResponse where
       ( \o ->
           ListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance Core.ToJSON ListOperationsResponse where
@@ -4249,7 +4261,7 @@ instance Core.FromJSON ListQuerySourcesResponse where
       ( \o ->
           ListQuerySourcesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "sources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON ListQuerySourcesResponse where
@@ -4287,9 +4299,7 @@ instance Core.FromJSON ListSearchApplicationsResponse where
       ( \o ->
           ListSearchApplicationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "searchApplications"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "searchApplications")
       )
 
 instance Core.ToJSON ListSearchApplicationsResponse where
@@ -4328,9 +4338,7 @@ instance Core.FromJSON ListUnmappedIdentitiesResponse where
       ( \o ->
           ListUnmappedIdentitiesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "unmappedIdentities"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "unmappedIdentities")
       )
 
 instance Core.ToJSON ListUnmappedIdentitiesResponse where
@@ -4453,7 +4461,7 @@ instance Core.FromJSON Metadata where
           Metadata
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "displayOptions")
-            Core.<*> (o Core..:? "fields" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "mimeType")
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "owner")
@@ -4496,10 +4504,7 @@ instance Core.FromJSON Metaline where
   parseJSON =
     Core.withObject
       "Metaline"
-      ( \o ->
-          Metaline
-            Core.<$> (o Core..:? "properties" Core..!= Core.mempty)
-      )
+      (\o -> Metaline Core.<$> (o Core..:? "properties"))
 
 instance Core.ToJSON Metaline where
   toJSON Metaline {..} =
@@ -4646,9 +4651,7 @@ instance Core.FromJSON ObjectDefinition where
           ObjectDefinition
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "options")
-            Core.<*> ( o Core..:? "propertyDefinitions"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "propertyDefinitions")
       )
 
 instance Core.ToJSON ObjectDefinition where
@@ -4688,7 +4691,7 @@ instance Core.FromJSON ObjectDisplayOptions where
       "ObjectDisplayOptions"
       ( \o ->
           ObjectDisplayOptions
-            Core.<$> (o Core..:? "metalines" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metalines")
             Core.<*> (o Core..:? "objectDisplayLabel")
       )
 
@@ -4760,9 +4763,7 @@ instance Core.FromJSON ObjectPropertyOptions where
       "ObjectPropertyOptions"
       ( \o ->
           ObjectPropertyOptions
-            Core.<$> ( o Core..:? "subobjectProperties"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "subobjectProperties")
       )
 
 instance Core.ToJSON ObjectPropertyOptions where
@@ -4792,10 +4793,7 @@ instance Core.FromJSON ObjectValues where
   parseJSON =
     Core.withObject
       "ObjectValues"
-      ( \o ->
-          ObjectValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> ObjectValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON ObjectValues where
   toJSON ObjectValues {..} =
@@ -4974,11 +4972,11 @@ instance Core.FromJSON Person where
       "Person"
       ( \o ->
           Person
-            Core.<$> (o Core..:? "emailAddresses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "emailAddresses")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "obfuscatedId")
-            Core.<*> (o Core..:? "personNames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "photos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "personNames")
+            Core.<*> (o Core..:? "photos")
       )
 
 instance Core.ToJSON Person where
@@ -5056,7 +5054,7 @@ instance Core.FromJSON PollItemsRequest where
             Core.<*> (o Core..:? "debugOptions")
             Core.<*> (o Core..:? "limit")
             Core.<*> (o Core..:? "queue")
-            Core.<*> (o Core..:? "statusCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "statusCodes")
       )
 
 instance Core.ToJSON PollItemsRequest where
@@ -5089,8 +5087,7 @@ instance Core.FromJSON PollItemsResponse where
     Core.withObject
       "PollItemsResponse"
       ( \o ->
-          PollItemsResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+          PollItemsResponse Core.<$> (o Core..:? "items")
       )
 
 instance Core.ToJSON PollItemsResponse where
@@ -5174,7 +5171,7 @@ instance Core.FromJSON ProcessingError where
           ProcessingError
             Core.<$> (o Core..:? "code")
             Core.<*> (o Core..:? "errorMessage")
-            Core.<*> (o Core..:? "fieldViolations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fieldViolations")
       )
 
 instance Core.ToJSON ProcessingError where
@@ -5472,7 +5469,9 @@ instance Core.FromJSON QueryCountByStatus where
       "QueryCountByStatus"
       ( \o ->
           QueryCountByStatus
-            Core.<$> (o Core..:? "count")
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "statusCode")
       )
 
@@ -5704,7 +5703,7 @@ instance Core.FromJSON QueryOperator where
       ( \o ->
           QueryOperator
             Core.<$> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "enumValues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "enumValues")
             Core.<*> (o Core..:? "greaterThanOperatorName")
             Core.<*> (o Core..:? "isFacetable")
             Core.<*> (o Core..:? "isRepeatable")
@@ -5771,7 +5770,7 @@ instance Core.FromJSON QuerySource where
       ( \o ->
           QuerySource
             Core.<$> (o Core..:? "displayName")
-            Core.<*> (o Core..:? "operators" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operators")
             Core.<*> (o Core..:? "shortName")
             Core.<*> (o Core..:? "source")
       )
@@ -6041,9 +6040,7 @@ instance Core.FromJSON ResultCounts where
       "ResultCounts"
       ( \o ->
           ResultCounts
-            Core.<$> ( o Core..:? "sourceResultCounts"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "sourceResultCounts")
       )
 
 instance Core.ToJSON ResultCounts where
@@ -6150,8 +6147,7 @@ instance Core.FromJSON ResultDisplayLine where
     Core.withObject
       "ResultDisplayLine"
       ( \o ->
-          ResultDisplayLine
-            Core.<$> (o Core..:? "fields" Core..!= Core.mempty)
+          ResultDisplayLine Core.<$> (o Core..:? "fields")
       )
 
 instance Core.ToJSON ResultDisplayLine where
@@ -6184,7 +6180,7 @@ instance Core.FromJSON ResultDisplayMetadata where
       "ResultDisplayMetadata"
       ( \o ->
           ResultDisplayMetadata
-            Core.<$> (o Core..:? "metalines" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metalines")
             Core.<*> (o Core..:? "objectTypeLabel")
       )
 
@@ -6250,8 +6246,8 @@ instance Core.FromJSON Schema where
       "Schema"
       ( \o ->
           Schema
-            Core.<$> (o Core..:? "objectDefinitions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "operationIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "objectDefinitions")
+            Core.<*> (o Core..:? "operationIds")
       )
 
 instance Core.ToJSON Schema where
@@ -6358,21 +6354,17 @@ instance Core.FromJSON SearchApplication where
       "SearchApplication"
       ( \o ->
           SearchApplication
-            Core.<$> ( o Core..:? "dataSourceRestrictions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "defaultFacetOptions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "dataSourceRestrictions")
+            Core.<*> (o Core..:? "defaultFacetOptions")
             Core.<*> (o Core..:? "defaultSortOptions")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "enableAuditLog")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "operationIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operationIds")
             Core.<*> (o Core..:? "queryInterpretationConfig")
             Core.<*> (o Core..:? "returnResultThumbnailUrls")
             Core.<*> (o Core..:? "scoringConfig")
-            Core.<*> (o Core..:? "sourceConfig" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sourceConfig")
       )
 
 instance Core.ToJSON SearchApplication where
@@ -6425,9 +6417,7 @@ instance Core.FromJSON SearchApplicationQueryStats where
       ( \o ->
           SearchApplicationQueryStats
             Core.<$> (o Core..:? "date")
-            Core.<*> ( o Core..:? "queryCountByStatus"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "queryCountByStatus")
       )
 
 instance Core.ToJSON SearchApplicationQueryStats where
@@ -6466,7 +6456,9 @@ instance Core.FromJSON SearchApplicationSessionStats where
       ( \o ->
           SearchApplicationSessionStats
             Core.<$> (o Core..:? "date")
-            Core.<*> (o Core..:? "searchSessionsCount")
+            Core.<*> ( o Core..:? "searchSessionsCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SearchApplicationSessionStats where
@@ -6511,9 +6503,15 @@ instance Core.FromJSON SearchApplicationUserStats where
       ( \o ->
           SearchApplicationUserStats
             Core.<$> (o Core..:? "date")
-            Core.<*> (o Core..:? "oneDayActiveUsersCount")
-            Core.<*> (o Core..:? "sevenDaysActiveUsersCount")
-            Core.<*> (o Core..:? "thirtyDaysActiveUsersCount")
+            Core.<*> ( o Core..:? "oneDayActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "sevenDaysActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "thirtyDaysActiveUsersCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON SearchApplicationUserStats where
@@ -6600,7 +6598,7 @@ instance Core.FromJSON SearchItemsByViewUrlResponse where
       "SearchItemsByViewUrlResponse"
       ( \o ->
           SearchItemsByViewUrlResponse
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -6690,11 +6688,9 @@ instance Core.FromJSON SearchRequest where
       "SearchRequest"
       ( \o ->
           SearchRequest
-            Core.<$> (o Core..:? "contextAttributes" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "dataSourceRestrictions"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "facetOptions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "contextAttributes")
+            Core.<*> (o Core..:? "dataSourceRestrictions")
+            Core.<*> (o Core..:? "facetOptions")
             Core.<*> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "queryInterpretationOptions")
@@ -6777,17 +6773,19 @@ instance Core.FromJSON SearchResponse where
           SearchResponse
             Core.<$> (o Core..:? "debugInfo")
             Core.<*> (o Core..:? "errorInfo")
-            Core.<*> (o Core..:? "facetResults" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "facetResults")
             Core.<*> (o Core..:? "hasMoreResults")
             Core.<*> (o Core..:? "queryInterpretation")
-            Core.<*> (o Core..:? "resultCountEstimate")
-            Core.<*> (o Core..:? "resultCountExact")
-            Core.<*> (o Core..:? "resultCounts")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "spellResults" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "structuredResults"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "resultCountEstimate"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> ( o Core..:? "resultCountExact"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "resultCounts")
+            Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "spellResults")
+            Core.<*> (o Core..:? "structuredResults")
       )
 
 instance Core.ToJSON SearchResponse where
@@ -6850,7 +6848,7 @@ instance Core.FromJSON SearchResult where
       "SearchResult"
       ( \o ->
           SearchResult
-            Core.<$> (o Core..:? "clusteredResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "clusteredResults")
             Core.<*> (o Core..:? "debugInfo")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "snippet")
@@ -6927,7 +6925,7 @@ instance Core.FromJSON Snippet where
       "Snippet"
       ( \o ->
           Snippet
-            Core.<$> (o Core..:? "matchRanges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "matchRanges")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -7127,8 +7125,12 @@ instance Core.FromJSON SourceResultCount where
       ( \o ->
           SourceResultCount
             Core.<$> (o Core..:? "hasMoreResults")
-            Core.<*> (o Core..:? "resultCountEstimate")
-            Core.<*> (o Core..:? "resultCountExact")
+            Core.<*> ( o Core..:? "resultCountEstimate"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "resultCountExact"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "source")
       )
 
@@ -7367,7 +7369,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -7428,7 +7430,7 @@ instance Core.FromJSON StructuredDataObject where
       "StructuredDataObject"
       ( \o ->
           StructuredDataObject
-            Core.<$> (o Core..:? "properties" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "properties")
       )
 
 instance Core.ToJSON StructuredDataObject where
@@ -7494,9 +7496,7 @@ instance Core.FromJSON SuggestRequest where
       "SuggestRequest"
       ( \o ->
           SuggestRequest
-            Core.<$> ( o Core..:? "dataSourceRestrictions"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "dataSourceRestrictions")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "requestOptions")
       )
@@ -7532,7 +7532,7 @@ instance Core.FromJSON SuggestResponse where
       "SuggestResponse"
       ( \o ->
           SuggestResponse
-            Core.<$> (o Core..:? "suggestResults" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "suggestResults")
       )
 
 instance Core.ToJSON SuggestResponse where
@@ -7691,10 +7691,7 @@ instance Core.FromJSON TextValues where
   parseJSON =
     Core.withObject
       "TextValues"
-      ( \o ->
-          TextValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
-      )
+      (\o -> TextValues Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON TextValues where
   toJSON TextValues {..} =
@@ -7799,8 +7796,7 @@ instance Core.FromJSON TimestampValues where
     Core.withObject
       "TimestampValues"
       ( \o ->
-          TimestampValues
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+          TimestampValues Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON TimestampValues where
@@ -8128,7 +8124,9 @@ instance Core.FromJSON Value where
             Core.<$> (o Core..:? "booleanValue")
             Core.<*> (o Core..:? "dateValue")
             Core.<*> (o Core..:? "doubleValue")
-            Core.<*> (o Core..:? "integerValue")
+            Core.<*> ( o Core..:? "integerValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "stringValue")
             Core.<*> (o Core..:? "timestampValue")
       )

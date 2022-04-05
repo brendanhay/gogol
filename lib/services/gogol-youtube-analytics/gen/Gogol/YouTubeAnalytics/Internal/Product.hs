@@ -145,7 +145,7 @@ instance Core.FromJSON ErrorProto where
       "ErrorProto"
       ( \o ->
           ErrorProto
-            Core.<$> (o Core..:? "argument" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "argument")
             Core.<*> (o Core..:? "code")
             Core.<*> (o Core..:? "debugInfo")
             Core.<*> (o Core..:? "domain")
@@ -195,7 +195,7 @@ instance Core.FromJSON Errors where
       ( \o ->
           Errors
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "error" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "requestId")
       )
 
@@ -291,7 +291,9 @@ instance Core.FromJSON GroupContentDetails where
       "GroupContentDetails"
       ( \o ->
           GroupContentDetails
-            Core.<$> (o Core..:? "itemCount")
+            Core.<$> ( o Core..:? "itemCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "itemType")
       )
 
@@ -468,7 +470,7 @@ instance Core.FromJSON ListGroupItemsResponse where
           ListGroupItemsResponse
             Core.<$> (o Core..:? "errors")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -520,7 +522,7 @@ instance Core.FromJSON ListGroupsResponse where
           ListGroupsResponse
             Core.<$> (o Core..:? "errors")
             Core.<*> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -569,10 +571,10 @@ instance Core.FromJSON QueryResponse where
       "QueryResponse"
       ( \o ->
           QueryResponse
-            Core.<$> (o Core..:? "columnHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON QueryResponse where

@@ -402,9 +402,7 @@ instance
       "ResellernotifyGetwatchdetailsResponse"
       ( \o ->
           ResellernotifyGetwatchdetailsResponse
-            Core.<$> ( o Core..:? "serviceAccountEmailAddresses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "serviceAccountEmailAddresses")
             Core.<*> (o Core..:? "topicName")
       )
 
@@ -577,7 +575,9 @@ instance Core.FromJSON Subscription where
       ( \o ->
           Subscription
             Core.<$> (o Core..:? "billingMethod")
-            Core.<*> (o Core..:? "creationTime")
+            Core.<*> ( o Core..:? "creationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "customerDomain")
             Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "dealCode")
@@ -591,7 +591,7 @@ instance Core.FromJSON Subscription where
             Core.<*> (o Core..:? "skuName")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "subscriptionId")
-            Core.<*> (o Core..:? "suspensionReasons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "suspensionReasons")
             Core.<*> (o Core..:? "transferInfo")
             Core.<*> (o Core..:? "trialSettings")
       )
@@ -698,8 +698,12 @@ instance
       "Subscription_Plan_CommitmentInterval"
       ( \o ->
           Subscription_Plan_CommitmentInterval
-            Core.<$> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "startTime")
+            Core.<$> ( o Core..:? "endTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "startTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
@@ -747,7 +751,9 @@ instance Core.FromJSON Subscription_TransferInfo where
           Subscription_TransferInfo
             Core.<$> (o Core..:? "currentLegacySkuId")
             Core.<*> (o Core..:? "minimumTransferableSeats")
-            Core.<*> (o Core..:? "transferabilityExpirationTime")
+            Core.<*> ( o Core..:? "transferabilityExpirationTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Subscription_TransferInfo where
@@ -791,7 +797,9 @@ instance Core.FromJSON Subscription_TrialSettings where
       ( \o ->
           Subscription_TrialSettings
             Core.<$> (o Core..:? "isInTrial")
-            Core.<*> (o Core..:? "trialEndTime")
+            Core.<*> ( o Core..:? "trialEndTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Subscription_TrialSettings where
@@ -835,7 +843,7 @@ instance Core.FromJSON Subscriptions where
           Subscriptions
             Core.<$> (o Core..:? "kind" Core..!= "reseller#subscriptions")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "subscriptions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subscriptions")
       )
 
 instance Core.ToJSON Subscriptions where

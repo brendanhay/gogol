@@ -194,7 +194,7 @@ instance Core.FromJSON AuditConfig where
       "AuditConfig"
       ( \o ->
           AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -231,7 +231,7 @@ instance Core.FromJSON AuditLogConfig where
       "AuditLogConfig"
       ( \o ->
           AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -326,7 +326,7 @@ instance Core.FromJSON Binding where
       ( \o ->
           Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -462,8 +462,7 @@ instance Core.FromJSON GeoTaxonomy where
       "GeoTaxonomy"
       ( \o ->
           GeoTaxonomy
-            Core.<$> (o Core..:? "regions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "regions") Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON GeoTaxonomy where
@@ -501,7 +500,7 @@ instance Core.FromJSON ListBillingAccountsResponse where
       "ListBillingAccountsResponse"
       ( \o ->
           ListBillingAccountsResponse
-            Core.<$> (o Core..:? "billingAccounts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "billingAccounts")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -542,9 +541,7 @@ instance Core.FromJSON ListProjectBillingInfoResponse where
       ( \o ->
           ListProjectBillingInfoResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "projectBillingInfo"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "projectBillingInfo")
       )
 
 instance Core.ToJSON ListProjectBillingInfoResponse where
@@ -581,7 +578,7 @@ instance Core.FromJSON ListServicesResponse where
       ( \o ->
           ListServicesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON ListServicesResponse where
@@ -617,7 +614,7 @@ instance Core.FromJSON ListSkusResponse where
       ( \o ->
           ListSkusResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "skus" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "skus")
       )
 
 instance Core.ToJSON ListSkusResponse where
@@ -660,7 +657,9 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> (o Core..:? "units")
+            Core.<*> ( o Core..:? "units"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Money where
@@ -708,8 +707,8 @@ instance Core.FromJSON Policy where
       "Policy"
       ( \o ->
           Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -770,7 +769,7 @@ instance Core.FromJSON PricingExpression where
             Core.<*> (o Core..:? "baseUnitConversionFactor")
             Core.<*> (o Core..:? "baseUnitDescription")
             Core.<*> (o Core..:? "displayQuantity")
-            Core.<*> (o Core..:? "tieredRates" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tieredRates")
             Core.<*> (o Core..:? "usageUnit")
             Core.<*> (o Core..:? "usageUnitDescription")
       )
@@ -1033,9 +1032,9 @@ instance Core.FromJSON Sku where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "geoTaxonomy")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "pricingInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pricingInfo")
             Core.<*> (o Core..:? "serviceProviderName")
-            Core.<*> (o Core..:? "serviceRegions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "serviceRegions")
             Core.<*> (o Core..:? "skuId")
       )
 
@@ -1076,7 +1075,7 @@ instance Core.FromJSON TestIamPermissionsRequest where
       "TestIamPermissionsRequest"
       ( \o ->
           TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
@@ -1107,7 +1106,7 @@ instance Core.FromJSON TestIamPermissionsResponse where
       "TestIamPermissionsResponse"
       ( \o ->
           TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where

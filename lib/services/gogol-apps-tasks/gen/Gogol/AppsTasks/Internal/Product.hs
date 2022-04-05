@@ -122,7 +122,7 @@ instance Core.FromJSON Task where
             Core.<*> (o Core..:? "hidden")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "links" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "links")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "position")
@@ -287,7 +287,7 @@ instance Core.FromJSON TaskLists where
       ( \o ->
           TaskLists
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -335,7 +335,7 @@ instance Core.FromJSON Tasks where
       ( \o ->
           Tasks
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )

@@ -301,7 +301,7 @@ instance Core.FromJSON Activity where
             Core.<*> (o Core..:? "appview")
             Core.<*> (o Core..:? "campaign")
             Core.<*> (o Core..:? "channelGrouping")
-            Core.<*> (o Core..:? "customDimension" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customDimension")
             Core.<*> (o Core..:? "ecommerce")
             Core.<*> (o Core..:? "event")
             Core.<*> (o Core..:? "goals")
@@ -399,7 +399,7 @@ instance Core.FromJSON CohortGroup where
       "CohortGroup"
       ( \o ->
           CohortGroup
-            Core.<$> (o Core..:? "cohorts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "cohorts")
             Core.<*> (o Core..:? "lifetimeValue")
       )
 
@@ -435,7 +435,7 @@ instance Core.FromJSON ColumnHeader where
       "ColumnHeader"
       ( \o ->
           ColumnHeader
-            Core.<$> (o Core..:? "dimensions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "metricHeader")
       )
 
@@ -541,8 +541,8 @@ instance Core.FromJSON DateRangeValues where
       "DateRangeValues"
       ( \o ->
           DateRangeValues
-            Core.<$> (o Core..:? "pivotValueRegions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "pivotValueRegions")
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON DateRangeValues where
@@ -578,7 +578,7 @@ instance Core.FromJSON Dimension where
       "Dimension"
       ( \o ->
           Dimension
-            Core.<$> (o Core..:? "histogramBuckets" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "histogramBuckets")
             Core.<*> (o Core..:? "name")
       )
 
@@ -629,7 +629,7 @@ instance Core.FromJSON DimensionFilter where
           DimensionFilter
             Core.<$> (o Core..:? "caseSensitive")
             Core.<*> (o Core..:? "dimensionName")
-            Core.<*> (o Core..:? "expressions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "expressions")
             Core.<*> (o Core..:? "not")
             Core.<*> (o Core..:? "operator")
       )
@@ -669,7 +669,7 @@ instance Core.FromJSON DimensionFilterClause where
       "DimensionFilterClause"
       ( \o ->
           DimensionFilterClause
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filters")
             Core.<*> (o Core..:? "operator")
       )
 
@@ -760,7 +760,7 @@ instance Core.FromJSON EcommerceData where
           EcommerceData
             Core.<$> (o Core..:? "actionType")
             Core.<*> (o Core..:? "ecommerceType")
-            Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "products")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -812,9 +812,13 @@ instance Core.FromJSON EventData where
           EventData
             Core.<$> (o Core..:? "eventAction")
             Core.<*> (o Core..:? "eventCategory")
-            Core.<*> (o Core..:? "eventCount")
+            Core.<*> ( o Core..:? "eventCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "eventLabel")
-            Core.<*> (o Core..:? "eventValue")
+            Core.<*> ( o Core..:? "eventValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON EventData where
@@ -857,7 +861,7 @@ instance Core.FromJSON GetReportsRequest where
       "GetReportsRequest"
       ( \o ->
           GetReportsRequest
-            Core.<$> (o Core..:? "reportRequests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "reportRequests")
             Core.<*> (o Core..:? "useResourceQuotas")
       )
 
@@ -901,7 +905,7 @@ instance Core.FromJSON GetReportsResponse where
       ( \o ->
           GetReportsResponse
             Core.<$> (o Core..:? "queryCost")
-            Core.<*> (o Core..:? "reports" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reports")
             Core.<*> (o Core..:? "resourceQuotasRemaining")
       )
 
@@ -961,7 +965,9 @@ instance Core.FromJSON GoalData where
       ( \o ->
           GoalData
             Core.<$> (o Core..:? "goalCompletionLocation")
-            Core.<*> (o Core..:? "goalCompletions")
+            Core.<*> ( o Core..:? "goalCompletions"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "goalIndex")
             Core.<*> (o Core..:? "goalName")
             Core.<*> (o Core..:? "goalPreviousStep1")
@@ -1008,10 +1014,7 @@ instance Core.FromJSON GoalSetData where
   parseJSON =
     Core.withObject
       "GoalSetData"
-      ( \o ->
-          GoalSetData
-            Core.<$> (o Core..:? "goals" Core..!= Core.mempty)
-      )
+      (\o -> GoalSetData Core.<$> (o Core..:? "goals"))
 
 instance Core.ToJSON GoalSetData where
   toJSON GoalSetData {..} =
@@ -1135,7 +1138,7 @@ instance Core.FromJSON MetricFilterClause where
       "MetricFilterClause"
       ( \o ->
           MetricFilterClause
-            Core.<$> (o Core..:? "filters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "filters")
             Core.<*> (o Core..:? "operator")
       )
 
@@ -1171,10 +1174,8 @@ instance Core.FromJSON MetricHeader where
       "MetricHeader"
       ( \o ->
           MetricHeader
-            Core.<$> ( o Core..:? "metricHeaderEntries"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "pivotHeaders" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "metricHeaderEntries")
+            Core.<*> (o Core..:? "pivotHeaders")
       )
 
 instance Core.ToJSON MetricHeader where
@@ -1243,9 +1244,7 @@ instance Core.FromJSON OrFiltersForSegment where
       "OrFiltersForSegment"
       ( \o ->
           OrFiltersForSegment
-            Core.<$> ( o Core..:? "segmentFilterClauses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "segmentFilterClauses")
       )
 
 instance Core.ToJSON OrFiltersForSegment where
@@ -1372,12 +1371,10 @@ instance Core.FromJSON Pivot where
       "Pivot"
       ( \o ->
           Pivot
-            Core.<$> ( o Core..:? "dimensionFilterClauses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "dimensions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensionFilterClauses")
+            Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "maxGroupCount")
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "startGroup")
       )
 
@@ -1420,9 +1417,7 @@ instance Core.FromJSON PivotHeader where
       "PivotHeader"
       ( \o ->
           PivotHeader
-            Core.<$> ( o Core..:? "pivotHeaderEntries"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "pivotHeaderEntries")
             Core.<*> (o Core..:? "totalPivotGroupsCount")
       )
 
@@ -1466,8 +1461,8 @@ instance Core.FromJSON PivotHeaderEntry where
       "PivotHeaderEntry"
       ( \o ->
           PivotHeaderEntry
-            Core.<$> (o Core..:? "dimensionNames" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "dimensionValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensionNames")
+            Core.<*> (o Core..:? "dimensionValues")
             Core.<*> (o Core..:? "metric")
       )
 
@@ -1500,8 +1495,7 @@ instance Core.FromJSON PivotValueRegion where
     Core.withObject
       "PivotValueRegion"
       ( \o ->
-          PivotValueRegion
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+          PivotValueRegion Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON PivotValueRegion where
@@ -1543,7 +1537,9 @@ instance Core.FromJSON ProductData where
           ProductData
             Core.<$> (o Core..:? "itemRevenue")
             Core.<*> (o Core..:? "productName")
-            Core.<*> (o Core..:? "productQuantity")
+            Core.<*> ( o Core..:? "productQuantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "productSku")
       )
 
@@ -1656,15 +1652,13 @@ instance Core.FromJSON ReportData where
             Core.<$> (o Core..:? "dataLastRefreshed")
             Core.<*> (o Core..:? "emptyReason")
             Core.<*> (o Core..:? "isDataGolden")
-            Core.<*> (o Core..:? "maximums" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "minimums" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "maximums")
+            Core.<*> (o Core..:? "minimums")
             Core.<*> (o Core..:? "rowCount")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "samplesReadCounts" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "samplingSpaceSizes"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "totals" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
+            Core.<*> (o Core..:? "samplesReadCounts")
+            Core.<*> (o Core..:? "samplingSpaceSizes")
+            Core.<*> (o Core..:? "totals")
       )
 
 instance Core.ToJSON ReportData where
@@ -1759,25 +1753,21 @@ instance Core.FromJSON ReportRequest where
       ( \o ->
           ReportRequest
             Core.<$> (o Core..:? "cohortGroup")
-            Core.<*> (o Core..:? "dateRanges" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "dimensionFilterClauses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "dimensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "dateRanges")
+            Core.<*> (o Core..:? "dimensionFilterClauses")
+            Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "filtersExpression")
             Core.<*> (o Core..:? "hideTotals")
             Core.<*> (o Core..:? "hideValueRanges")
             Core.<*> (o Core..:? "includeEmptyRows")
-            Core.<*> ( o Core..:? "metricFilterClauses"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "orderBys" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "metricFilterClauses")
+            Core.<*> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "orderBys")
             Core.<*> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "pageToken")
-            Core.<*> (o Core..:? "pivots" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pivots")
             Core.<*> (o Core..:? "samplingLevel")
-            Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "segments")
             Core.<*> (o Core..:? "viewId")
       )
 
@@ -1831,8 +1821,8 @@ instance Core.FromJSON ReportRow where
       "ReportRow"
       ( \o ->
           ReportRow
-            Core.<$> (o Core..:? "dimensions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "metrics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "dimensions")
+            Core.<*> (o Core..:? "metrics")
       )
 
 instance Core.ToJSON ReportRow where
@@ -1973,7 +1963,7 @@ instance Core.FromJSON SearchUserActivityRequest where
       "SearchUserActivityRequest"
       ( \o ->
           SearchUserActivityRequest
-            Core.<$> (o Core..:? "activityTypes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activityTypes")
             Core.<*> (o Core..:? "dateRange")
             Core.<*> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "pageToken")
@@ -2028,7 +2018,7 @@ instance Core.FromJSON SearchUserActivityResponse where
           SearchUserActivityResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "sampleRate")
-            Core.<*> (o Core..:? "sessions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sessions")
             Core.<*> (o Core..:? "totalRows")
       )
 
@@ -2098,7 +2088,7 @@ instance Core.FromJSON SegmentDefinition where
       "SegmentDefinition"
       ( \o ->
           SegmentDefinition
-            Core.<$> (o Core..:? "segmentFilters" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "segmentFilters")
       )
 
 instance Core.ToJSON SegmentDefinition where
@@ -2148,7 +2138,7 @@ instance Core.FromJSON SegmentDimensionFilter where
           SegmentDimensionFilter
             Core.<$> (o Core..:? "caseSensitive")
             Core.<*> (o Core..:? "dimensionName")
-            Core.<*> (o Core..:? "expressions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "expressions")
             Core.<*> (o Core..:? "maxComparisonValue")
             Core.<*> (o Core..:? "minComparisonValue")
             Core.<*> (o Core..:? "operator")
@@ -2341,9 +2331,7 @@ instance Core.FromJSON SegmentSequenceStep where
       ( \o ->
           SegmentSequenceStep
             Core.<$> (o Core..:? "matchType")
-            Core.<*> ( o Core..:? "orFiltersForSegment"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "orFiltersForSegment")
       )
 
 instance Core.ToJSON SegmentSequenceStep where
@@ -2383,9 +2371,7 @@ instance Core.FromJSON SequenceSegment where
       ( \o ->
           SequenceSegment
             Core.<$> (o Core..:? "firstStepShouldMatchFirstHit")
-            Core.<*> ( o Core..:? "segmentSequenceSteps"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "segmentSequenceSteps")
       )
 
 instance Core.ToJSON SequenceSegment where
@@ -2419,9 +2405,7 @@ instance Core.FromJSON SimpleSegment where
       "SimpleSegment"
       ( \o ->
           SimpleSegment
-            Core.<$> ( o Core..:? "orFiltersForSegment"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "orFiltersForSegment")
       )
 
 instance Core.ToJSON SimpleSegment where
@@ -2556,7 +2540,7 @@ instance Core.FromJSON UserActivitySession where
       "UserActivitySession"
       ( \o ->
           UserActivitySession
-            Core.<$> (o Core..:? "activities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "activities")
             Core.<*> (o Core..:? "dataSource")
             Core.<*> (o Core..:? "deviceCategory")
             Core.<*> (o Core..:? "platform")

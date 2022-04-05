@@ -88,7 +88,7 @@ instance Core.FromJSON PlatformSummary where
             Core.<*> (o Core..:? "enforcementTime")
             Core.<*> (o Core..:? "filterStatus")
             Core.<*> (o Core..:? "lastChangeTime")
-            Core.<*> (o Core..:? "region" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "reportUrl")
             Core.<*> (o Core..:? "underReview")
       )
@@ -173,7 +173,7 @@ instance Core.FromJSON ViolatingSitesResponse where
       "ViolatingSitesResponse"
       ( \o ->
           ViolatingSitesResponse
-            Core.<$> (o Core..:? "violatingSites" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "violatingSites")
       )
 
 instance Core.ToJSON ViolatingSitesResponse where

@@ -282,7 +282,7 @@ instance Core.FromJSON EncounteredLoginScreen where
       ( \o ->
           EncounteredLoginScreen
             Core.<$> (o Core..:? "distinctScreens")
-            Core.<*> (o Core..:? "screenIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "screenIds")
       )
 
 instance Core.ToJSON EncounteredLoginScreen where
@@ -325,7 +325,7 @@ instance
       ( \o ->
           EncounteredNonAndroidUiWidgetScreen
             Core.<$> (o Core..:? "distinctScreens")
-            Core.<*> (o Core..:? "screenIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "screenIds")
       )
 
 instance
@@ -565,10 +565,8 @@ instance Core.FromJSON NonSdkApi where
       ( \o ->
           NonSdkApi
             Core.<$> (o Core..:? "apiSignature")
-            Core.<*> ( o Core..:? "exampleStackTraces"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "insights" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "exampleStackTraces")
+            Core.<*> (o Core..:? "insights")
             Core.<*> (o Core..:? "invocationCount")
             Core.<*> (o Core..:? "list")
       )
@@ -618,9 +616,7 @@ instance Core.FromJSON NonSdkApiInsight where
       "NonSdkApiInsight"
       ( \o ->
           NonSdkApiInsight
-            Core.<$> ( o Core..:? "exampleTraceMessages"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "exampleTraceMessages")
             Core.<*> (o Core..:? "matcherId")
             Core.<*> (o Core..:? "pendingGoogleUpdateInsight")
             Core.<*> (o Core..:? "upgradeInsight")
@@ -665,7 +661,7 @@ instance Core.FromJSON NonSdkApiUsageViolation where
       "NonSdkApiUsageViolation"
       ( \o ->
           NonSdkApiUsageViolation
-            Core.<$> (o Core..:? "apiSignatures" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "apiSignatures")
             Core.<*> (o Core..:? "uniqueApis")
       )
 
@@ -710,7 +706,7 @@ instance Core.FromJSON NonSdkApiUsageViolationReport where
       "NonSdkApiUsageViolationReport"
       ( \o ->
           NonSdkApiUsageViolationReport
-            Core.<$> (o Core..:? "exampleApis" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exampleApis")
             Core.<*> (o Core..:? "minSdkVersion")
             Core.<*> (o Core..:? "targetSdkVersion")
             Core.<*> (o Core..:? "uniqueApis")
@@ -751,7 +747,7 @@ instance Core.FromJSON OverlappingUIElements where
       "OverlappingUIElements"
       ( \o ->
           OverlappingUIElements
-            Core.<$> (o Core..:? "resourceName" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "resourceName")
             Core.<*> (o Core..:? "screenId")
       )
 

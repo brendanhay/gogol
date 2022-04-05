@@ -1672,23 +1672,23 @@ instance Core.FromJSON Account where
       ( \o ->
           Account
             Core.<$> (o Core..:? "accountManagement")
-            Core.<*> (o Core..:? "adsLinks" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "adsLinks")
             Core.<*> (o Core..:? "adultContent")
             Core.<*> (o Core..:? "automaticImprovements")
-            Core.<*> (o Core..:? "automaticLabelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "automaticLabelIds")
             Core.<*> (o Core..:? "businessInformation")
-            Core.<*> (o Core..:? "cssId")
+            Core.<*> ( o Core..:? "cssId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "googleMyBusinessLink")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "sellerId")
-            Core.<*> (o Core..:? "users" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "users")
             Core.<*> (o Core..:? "websiteUrl")
-            Core.<*> ( o Core..:? "youtubeChannelLinks"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "youtubeChannelLinks")
       )
 
 instance Core.ToJSON Account where
@@ -1794,7 +1794,10 @@ instance Core.FromJSON AccountAdsLink where
       "AccountAdsLink"
       ( \o ->
           AccountAdsLink
-            Core.<$> (o Core..:? "adsId") Core.<*> (o Core..:? "status")
+            Core.<$> ( o Core..:? "adsId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "status")
       )
 
 instance Core.ToJSON AccountAdsLink where
@@ -1937,7 +1940,9 @@ instance Core.FromJSON AccountCredentials where
       ( \o ->
           AccountCredentials
             Core.<$> (o Core..:? "accessToken")
-            Core.<*> (o Core..:? "expiresIn")
+            Core.<*> ( o Core..:? "expiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "purpose")
       )
 
@@ -2060,8 +2065,12 @@ instance Core.FromJSON AccountIdentifier where
       "AccountIdentifier"
       ( \o ->
           AccountIdentifier
-            Core.<$> (o Core..:? "aggregatorId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<$> ( o Core..:? "aggregatorId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AccountIdentifier where
@@ -2305,9 +2314,13 @@ instance Core.FromJSON AccountLabel where
       "AccountLabel"
       ( \o ->
           AccountLabel
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "labelId")
+            Core.<*> ( o Core..:? "labelId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "labelType")
             Core.<*> (o Core..:? "name")
       )
@@ -2358,7 +2371,9 @@ instance Core.FromJSON AccountReturnCarrier where
       "AccountReturnCarrier"
       ( \o ->
           AccountReturnCarrier
-            Core.<$> (o Core..:? "carrierAccountId")
+            Core.<$> ( o Core..:? "carrierAccountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "carrierAccountName")
             Core.<*> (o Core..:? "carrierAccountNumber")
             Core.<*> (o Core..:? "carrierCode")
@@ -2450,12 +2465,10 @@ instance Core.FromJSON AccountStatus where
       ( \o ->
           AccountStatus
             Core.<$> (o Core..:? "accountId")
-            Core.<*> ( o Core..:? "accountLevelIssues"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "accountLevelIssues")
             Core.<*> (o Core..:? "accountManagement")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "products")
             Core.<*> (o Core..:? "websiteClaimed")
       )
 
@@ -2585,7 +2598,9 @@ instance Core.FromJSON AccountStatusItemLevelIssue where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "detail")
             Core.<*> (o Core..:? "documentation")
-            Core.<*> (o Core..:? "numItems")
+            Core.<*> ( o Core..:? "numItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "resolution")
             Core.<*> (o Core..:? "servability")
       )
@@ -2643,7 +2658,7 @@ instance Core.FromJSON AccountStatusProducts where
             Core.<$> (o Core..:? "channel")
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "destination")
-            Core.<*> (o Core..:? "itemLevelIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "itemLevelIssues")
             Core.<*> (o Core..:? "statistics")
       )
 
@@ -2690,10 +2705,18 @@ instance Core.FromJSON AccountStatusStatistics where
       "AccountStatusStatistics"
       ( \o ->
           AccountStatusStatistics
-            Core.<$> (o Core..:? "active")
-            Core.<*> (o Core..:? "disapproved")
-            Core.<*> (o Core..:? "expiring")
-            Core.<*> (o Core..:? "pending")
+            Core.<$> ( o Core..:? "active"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "disapproved"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "expiring"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "pending"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON AccountStatusStatistics where
@@ -2740,9 +2763,11 @@ instance Core.FromJSON AccountTax where
       "AccountTax"
       ( \o ->
           AccountTax
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "rules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rules")
       )
 
 instance Core.ToJSON AccountTax where
@@ -2792,7 +2817,9 @@ instance Core.FromJSON AccountTaxTaxRule where
       ( \o ->
           AccountTaxTaxRule
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "locationId")
+            Core.<*> ( o Core..:? "locationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ratePercent")
             Core.<*> (o Core..:? "shippingTaxed")
             Core.<*> (o Core..:? "useGlobalRate")
@@ -2925,9 +2952,7 @@ instance Core.FromJSON AccountsAuthInfoResponse where
       "AccountsAuthInfoResponse"
       ( \o ->
           AccountsAuthInfoResponse
-            Core.<$> ( o Core..:? "accountIdentifiers"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accountIdentifiers")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -2989,7 +3014,7 @@ instance Core.FromJSON AccountsCustomBatchRequest where
       "AccountsCustomBatchRequest"
       ( \o ->
           AccountsCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON AccountsCustomBatchRequest where
@@ -3053,12 +3078,16 @@ instance
       ( \o ->
           AccountsCustomBatchRequestEntry
             Core.<$> (o Core..:? "account")
-            Core.<*> (o Core..:? "accountId")
+            Core.<*> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "batchId")
             Core.<*> (o Core..:? "force")
-            Core.<*> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "linkRequest")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "overwrite")
             Core.<*> (o Core..:? "view")
@@ -3120,7 +3149,7 @@ instance
             Core.<$> (o Core..:? "action")
             Core.<*> (o Core..:? "linkType")
             Core.<*> (o Core..:? "linkedAccountId")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance
@@ -3159,8 +3188,7 @@ instance Core.FromJSON AccountsCustomBatchResponse where
       "AccountsCustomBatchResponse"
       ( \o ->
           AccountsCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON AccountsCustomBatchResponse where
@@ -3266,7 +3294,7 @@ instance Core.FromJSON AccountsLinkRequest where
             Core.<*> (o Core..:? "linkType")
             Core.<*> (o Core..:? "linkedAccountId")
             Core.<*> (o Core..:? "paymentServiceProviderLinkInfo")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON AccountsLinkRequest where
@@ -3339,7 +3367,7 @@ instance Core.FromJSON AccountsListLinksResponse where
       ( \o ->
           AccountsListLinksResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "links" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "links")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3383,7 +3411,7 @@ instance Core.FromJSON AccountsListResponse where
           AccountsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON AccountsListResponse where
@@ -3416,7 +3444,7 @@ instance Core.FromJSON AccountsUpdateLabelsRequest where
       "AccountsUpdateLabelsRequest"
       ( \o ->
           AccountsUpdateLabelsRequest
-            Core.<$> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "labelIds")
       )
 
 instance Core.ToJSON AccountsUpdateLabelsRequest where
@@ -3477,7 +3505,7 @@ instance
       "AccountstatusesCustomBatchRequest"
       ( \o ->
           AccountstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -3528,10 +3556,14 @@ instance
       "AccountstatusesCustomBatchRequestEntry"
       ( \o ->
           AccountstatusesCustomBatchRequestEntry
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "destinations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> (o Core..:? "destinations")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
       )
 
@@ -3580,8 +3612,7 @@ instance
       "AccountstatusesCustomBatchResponse"
       ( \o ->
           AccountstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -3676,7 +3707,7 @@ instance Core.FromJSON AccountstatusesListResponse where
           AccountstatusesListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON AccountstatusesListResponse where
@@ -3709,7 +3740,7 @@ instance Core.FromJSON AccounttaxCustomBatchRequest where
       "AccounttaxCustomBatchRequest"
       ( \o ->
           AccounttaxCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON AccounttaxCustomBatchRequest where
@@ -3757,10 +3788,14 @@ instance
       "AccounttaxCustomBatchRequestEntry"
       ( \o ->
           AccounttaxCustomBatchRequestEntry
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "accountTax")
             Core.<*> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
       )
 
@@ -3803,8 +3838,7 @@ instance Core.FromJSON AccounttaxCustomBatchResponse where
       "AccounttaxCustomBatchResponse"
       ( \o ->
           AccounttaxCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON AccounttaxCustomBatchResponse where
@@ -3901,7 +3935,7 @@ instance Core.FromJSON AccounttaxListResponse where
           AccounttaxListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON AccounttaxListResponse where
@@ -4047,7 +4081,7 @@ instance Core.FromJSON BusinessDayConfig where
       "BusinessDayConfig"
       ( \o ->
           BusinessDayConfig
-            Core.<$> (o Core..:? "businessDays" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "businessDays")
       )
 
 instance Core.ToJSON BusinessDayConfig where
@@ -4104,7 +4138,7 @@ instance Core.FromJSON BuyOnGoogleProgramStatus where
       "BuyOnGoogleProgramStatus"
       ( \o ->
           BuyOnGoogleProgramStatus
-            Core.<$> (o Core..:? "businessModel" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "businessModel")
             Core.<*> (o Core..:? "customerServicePendingEmail")
             Core.<*> (o Core..:? "customerServicePendingPhoneNumber")
             Core.<*> (o Core..:? "customerServicePendingPhoneRegionCode")
@@ -4283,9 +4317,9 @@ instance Core.FromJSON CarriersCarrier where
       ( \o ->
           CarriersCarrier
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "eddServices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "eddServices")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON CarriersCarrier where
@@ -4363,10 +4397,10 @@ instance Core.FromJSON Collection where
             Core.<*> (o Core..:? "customLabel2")
             Core.<*> (o Core..:? "customLabel3")
             Core.<*> (o Core..:? "customLabel4")
-            Core.<*> (o Core..:? "featuredProduct" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "headline" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "featuredProduct")
+            Core.<*> (o Core..:? "headline")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "imageLink" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "imageLink")
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "link")
             Core.<*> (o Core..:? "mobileLink")
@@ -4472,13 +4506,9 @@ instance Core.FromJSON CollectionStatus where
       "CollectionStatus"
       ( \o ->
           CollectionStatus
-            Core.<$> ( o Core..:? "collectionLevelIssuses"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "collectionLevelIssuses")
             Core.<*> (o Core..:? "creationDate")
-            Core.<*> ( o Core..:? "destinationStatuses"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "destinationStatuses")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "lastUpdateDate")
       )
@@ -4649,12 +4679,16 @@ instance Core.FromJSON Css where
       "Css"
       ( \o ->
           Css
-            Core.<$> (o Core..:? "cssDomainId")
-            Core.<*> (o Core..:? "cssGroupId")
+            Core.<$> ( o Core..:? "cssDomainId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "cssGroupId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "fullName")
             Core.<*> (o Core..:? "homepageUri")
-            Core.<*> (o Core..:? "labelIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "labelIds")
       )
 
 instance Core.ToJSON Css where
@@ -4700,7 +4734,7 @@ instance Core.FromJSON CustomAttribute where
       "CustomAttribute"
       ( \o ->
           CustomAttribute
-            Core.<$> (o Core..:? "groupValues" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "groupValues")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "value")
       )
@@ -4845,10 +4879,10 @@ instance Core.FromJSON Datafeed where
             Core.<*> (o Core..:? "fetchSchedule")
             Core.<*> (o Core..:? "fileName")
             Core.<*> (o Core..:? "format")
-            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "targets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "targets")
       )
 
 instance Core.ToJSON Datafeed where
@@ -5037,15 +5071,21 @@ instance Core.FromJSON DatafeedStatus where
       ( \o ->
           DatafeedStatus
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "datafeedId")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "itemsTotal")
-            Core.<*> (o Core..:? "itemsValid")
+            Core.<*> ( o Core..:? "datafeedId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "errors")
+            Core.<*> ( o Core..:? "itemsTotal"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "itemsValid"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "lastUploadDate")
             Core.<*> (o Core..:? "processingStatus")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON DatafeedStatus where
@@ -5102,8 +5142,10 @@ instance Core.FromJSON DatafeedStatusError where
       ( \o ->
           DatafeedStatusError
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "count")
-            Core.<*> (o Core..:? "examples" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "examples")
             Core.<*> (o Core..:? "message")
       )
 
@@ -5148,7 +5190,9 @@ instance Core.FromJSON DatafeedStatusExample where
       ( \o ->
           DatafeedStatusExample
             Core.<$> (o Core..:? "itemId")
-            Core.<*> (o Core..:? "lineNumber")
+            Core.<*> ( o Core..:? "lineNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "value")
       )
 
@@ -5195,12 +5239,8 @@ instance Core.FromJSON DatafeedTarget where
       ( \o ->
           DatafeedTarget
             Core.<$> (o Core..:? "country")
-            Core.<*> ( o Core..:? "excludedDestinations"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "includedDestinations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "excludedDestinations")
+            Core.<*> (o Core..:? "includedDestinations")
             Core.<*> (o Core..:? "language")
       )
 
@@ -5237,7 +5277,7 @@ instance Core.FromJSON DatafeedsCustomBatchRequest where
       "DatafeedsCustomBatchRequest"
       ( \o ->
           DatafeedsCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON DatafeedsCustomBatchRequest where
@@ -5287,8 +5327,12 @@ instance
           DatafeedsCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "datafeed")
-            Core.<*> (o Core..:? "datafeedId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "datafeedId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
       )
 
@@ -5328,8 +5372,7 @@ instance Core.FromJSON DatafeedsCustomBatchResponse where
       "DatafeedsCustomBatchResponse"
       ( \o ->
           DatafeedsCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON DatafeedsCustomBatchResponse where
@@ -5448,7 +5491,7 @@ instance Core.FromJSON DatafeedsListResponse where
           DatafeedsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON DatafeedsListResponse where
@@ -5484,7 +5527,7 @@ instance
       "DatafeedstatusesCustomBatchRequest"
       ( \o ->
           DatafeedstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -5540,9 +5583,13 @@ instance
           DatafeedstatusesCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "country")
-            Core.<*> (o Core..:? "datafeedId")
+            Core.<*> ( o Core..:? "datafeedId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "language")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
       )
 
@@ -5592,8 +5639,7 @@ instance
       "DatafeedstatusesCustomBatchResponse"
       ( \o ->
           DatafeedstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -5688,7 +5734,7 @@ instance Core.FromJSON DatafeedstatusesListResponse where
           DatafeedstatusesListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON DatafeedstatusesListResponse where
@@ -5866,16 +5912,14 @@ instance Core.FromJSON DeliveryTime where
           DeliveryTime
             Core.<$> (o Core..:? "cutoffTime")
             Core.<*> (o Core..:? "handlingBusinessDayConfig")
-            Core.<*> (o Core..:? "holidayCutoffs" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "holidayCutoffs")
             Core.<*> (o Core..:? "maxHandlingTimeInDays")
             Core.<*> (o Core..:? "maxTransitTimeInDays")
             Core.<*> (o Core..:? "minHandlingTimeInDays")
             Core.<*> (o Core..:? "minTransitTimeInDays")
             Core.<*> (o Core..:? "transitBusinessDayConfig")
             Core.<*> (o Core..:? "transitTimeTable")
-            Core.<*> ( o Core..:? "warehouseBasedDeliveryTimes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "warehouseBasedDeliveryTimes")
       )
 
 instance Core.ToJSON DeliveryTime where
@@ -6002,7 +6046,7 @@ instance Core.FromJSON Errors where
       ( \o ->
           Errors
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "errors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "message")
       )
 
@@ -6043,7 +6087,7 @@ instance Core.FromJSON FreeListingsProgramStatus where
       ( \o ->
           FreeListingsProgramStatus
             Core.<$> (o Core..:? "globalState")
-            Core.<*> (o Core..:? "regionStatuses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regionStatuses")
       )
 
 instance Core.ToJSON FreeListingsProgramStatus where
@@ -6119,13 +6163,13 @@ instance
           FreeListingsProgramStatusRegionStatus
             Core.<$> (o Core..:? "disapprovalDate")
             Core.<*> (o Core..:? "eligibilityStatus")
-            Core.<*> (o Core..:? "onboardingIssues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "regionCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "onboardingIssues")
+            Core.<*> (o Core..:? "regionCodes")
             Core.<*> (o Core..:? "reviewEligibilityStatus")
             Core.<*> (o Core..:? "reviewIneligibilityReason")
             Core.<*> (o Core..:? "reviewIneligibilityReasonDescription")
             Core.<*> (o Core..:? "reviewIneligibilityReasonDetails")
-            Core.<*> (o Core..:? "reviewIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reviewIssues")
       )
 
 instance
@@ -6216,8 +6260,10 @@ instance Core.FromJSON GmbAccounts where
       "GmbAccounts"
       ( \o ->
           GmbAccounts
-            Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "gmbAccounts" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "gmbAccounts")
       )
 
 instance Core.ToJSON GmbAccounts where
@@ -6262,7 +6308,9 @@ instance Core.FromJSON GmbAccountsGmbAccount where
       ( \o ->
           GmbAccountsGmbAccount
             Core.<$> (o Core..:? "email")
-            Core.<*> (o Core..:? "listingCount")
+            Core.<*> ( o Core..:? "listingCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
       )
@@ -6314,13 +6362,11 @@ instance Core.FromJSON Headers where
       "Headers"
       ( \o ->
           Headers
-            Core.<$> (o Core..:? "locations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "numberOfItems" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "postalCodeGroupNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "prices" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "weights" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "locations")
+            Core.<*> (o Core..:? "numberOfItems")
+            Core.<*> (o Core..:? "postalCodeGroupNames")
+            Core.<*> (o Core..:? "prices")
+            Core.<*> (o Core..:? "weights")
       )
 
 instance Core.ToJSON Headers where
@@ -6431,7 +6477,9 @@ instance Core.FromJSON HolidaysHoliday where
             Core.<$> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "date")
             Core.<*> (o Core..:? "deliveryGuaranteeDate")
-            Core.<*> (o Core..:? "deliveryGuaranteeHour")
+            Core.<*> ( o Core..:? "deliveryGuaranteeHour"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "type")
       )
@@ -6477,7 +6525,9 @@ instance Core.FromJSON InapplicabilityDetails where
       "InapplicabilityDetails"
       ( \o ->
           InapplicabilityDetails
-            Core.<$> (o Core..:? "inapplicableCount")
+            Core.<$> ( o Core..:? "inapplicableCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "inapplicableReason")
       )
 
@@ -6513,7 +6563,10 @@ instance Core.FromJSON Installment where
       "Installment"
       ( \o ->
           Installment
-            Core.<$> (o Core..:? "amount") Core.<*> (o Core..:? "months")
+            Core.<$> (o Core..:? "amount")
+            Core.<*> ( o Core..:? "months"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Installment where
@@ -6551,9 +6604,7 @@ instance Core.FromJSON InvoiceSummary where
       "InvoiceSummary"
       ( \o ->
           InvoiceSummary
-            Core.<$> ( o Core..:? "additionalChargeSummaries"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalChargeSummaries")
             Core.<*> (o Core..:? "productTotal")
       )
 
@@ -6629,10 +6680,7 @@ instance Core.FromJSON LabelIds where
   parseJSON =
     Core.withObject
       "LabelIds"
-      ( \o ->
-          LabelIds
-            Core.<$> (o Core..:? "labelIds" Core..!= Core.mempty)
-      )
+      (\o -> LabelIds Core.<$> (o Core..:? "labelIds"))
 
 instance Core.ToJSON LabelIds where
   toJSON LabelIds {..} =
@@ -6856,7 +6904,9 @@ instance Core.FromJSON LiaPosDataProvider where
       "LiaPosDataProvider"
       ( \o ->
           LiaPosDataProvider
-            Core.<$> (o Core..:? "posDataProviderId")
+            Core.<$> ( o Core..:? "posDataProviderId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "posExternalAccountId")
       )
 
@@ -6900,8 +6950,10 @@ instance Core.FromJSON LiaSettings where
       "LiaSettings"
       ( \o ->
           LiaSettings
-            Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "countrySettings" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "countrySettings")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -6936,7 +6988,7 @@ instance Core.FromJSON LiasettingsCustomBatchRequest where
       "LiasettingsCustomBatchRequest"
       ( \o ->
           LiasettingsCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON LiasettingsCustomBatchRequest where
@@ -7001,16 +7053,22 @@ instance
       "LiasettingsCustomBatchRequestEntry"
       ( \o ->
           LiasettingsCustomBatchRequestEntry
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "batchId")
             Core.<*> (o Core..:? "contactEmail")
             Core.<*> (o Core..:? "contactName")
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "gmbEmail")
             Core.<*> (o Core..:? "liaSettings")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
-            Core.<*> (o Core..:? "posDataProviderId")
+            Core.<*> ( o Core..:? "posDataProviderId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "posExternalAccountId")
       )
 
@@ -7061,8 +7119,7 @@ instance Core.FromJSON LiasettingsCustomBatchResponse where
       "LiasettingsCustomBatchResponse"
       ( \o ->
           LiasettingsCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON LiasettingsCustomBatchResponse where
@@ -7119,7 +7176,7 @@ instance
             Core.<*> (o Core..:? "gmbAccounts")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "liaSettings")
-            Core.<*> (o Core..:? "posDataProviders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "posDataProviders")
       )
 
 instance
@@ -7170,8 +7227,10 @@ instance
       "LiasettingsGetAccessibleGmbAccountsResponse"
       ( \o ->
           LiasettingsGetAccessibleGmbAccountsResponse
-            Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "gmbAccounts" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "gmbAccounts")
             Core.<*> (o Core..:? "kind")
       )
 
@@ -7219,7 +7278,7 @@ instance
       ( \o ->
           LiasettingsListPosDataProvidersResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "posDataProviders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "posDataProviders")
       )
 
 instance
@@ -7265,7 +7324,7 @@ instance Core.FromJSON LiasettingsListResponse where
           LiasettingsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON LiasettingsListResponse where
@@ -7473,7 +7532,7 @@ instance Core.FromJSON LinkedAccount where
       ( \o ->
           LinkedAccount
             Core.<$> (o Core..:? "linkedAccountId")
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "services")
       )
 
 instance Core.ToJSON LinkedAccount where
@@ -7512,7 +7571,7 @@ instance Core.FromJSON ListAccountLabelsResponse where
       "ListAccountLabelsResponse"
       ( \o ->
           ListAccountLabelsResponse
-            Core.<$> (o Core..:? "accountLabels" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "accountLabels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -7549,9 +7608,7 @@ instance
       "ListAccountReturnCarrierResponse"
       ( \o ->
           ListAccountReturnCarrierResponse
-            Core.<$> ( o Core..:? "accountReturnCarriers"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "accountReturnCarriers")
       )
 
 instance Core.ToJSON ListAccountReturnCarrierResponse where
@@ -7590,7 +7647,7 @@ instance Core.FromJSON ListCollectionStatusesResponse where
       ( \o ->
           ListCollectionStatusesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ListCollectionStatusesResponse where
@@ -7629,7 +7686,7 @@ instance Core.FromJSON ListCollectionsResponse where
       ( \o ->
           ListCollectionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ListCollectionsResponse where
@@ -7664,7 +7721,7 @@ instance Core.FromJSON ListCssesResponse where
       "ListCssesResponse"
       ( \o ->
           ListCssesResponse
-            Core.<$> (o Core..:? "csses" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "csses")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -7701,7 +7758,7 @@ instance Core.FromJSON ListRegionsResponse where
       ( \o ->
           ListRegionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "regions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regions")
       )
 
 instance Core.ToJSON ListRegionsResponse where
@@ -7743,9 +7800,7 @@ instance
       ( \o ->
           ListRepricingProductReportsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "repricingProductReports"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "repricingProductReports")
       )
 
 instance
@@ -7791,9 +7846,7 @@ instance
       ( \o ->
           ListRepricingRuleReportsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "repricingRuleReports"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "repricingRuleReports")
       )
 
 instance Core.ToJSON ListRepricingRuleReportsResponse where
@@ -7833,7 +7886,7 @@ instance Core.FromJSON ListRepricingRulesResponse where
       ( \o ->
           ListRepricingRulesResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "repricingRules" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "repricingRules")
       )
 
 instance Core.ToJSON ListRepricingRulesResponse where
@@ -7866,7 +7919,7 @@ instance Core.FromJSON ListReturnPolicyOnlineResponse where
       "ListReturnPolicyOnlineResponse"
       ( \o ->
           ListReturnPolicyOnlineResponse
-            Core.<$> (o Core..:? "returnPolicies" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "returnPolicies")
       )
 
 instance Core.ToJSON ListReturnPolicyOnlineResponse where
@@ -7980,7 +8033,7 @@ instance
       "LocalinventoryCustomBatchRequest"
       ( \o ->
           LocalinventoryCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON LocalinventoryCustomBatchRequest where
@@ -8030,7 +8083,9 @@ instance
           LocalinventoryCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "localInventory")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
       )
@@ -8079,8 +8134,7 @@ instance
       "LocalinventoryCustomBatchResponse"
       ( \o ->
           LocalinventoryCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -8163,8 +8217,7 @@ instance Core.FromJSON LocationIdSet where
     Core.withObject
       "LocationIdSet"
       ( \o ->
-          LocationIdSet
-            Core.<$> (o Core..:? "locationIds" Core..!= Core.mempty)
+          LocationIdSet Core.<$> (o Core..:? "locationIds")
       )
 
 instance Core.ToJSON LocationIdSet where
@@ -8203,7 +8256,9 @@ instance Core.FromJSON LoyaltyPoints where
       ( \o ->
           LoyaltyPoints
             Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "pointsValue")
+            Core.<*> ( o Core..:? "pointsValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ratio")
       )
 
@@ -8263,9 +8318,9 @@ instance Core.FromJSON MerchantOrderReturn where
             Core.<*> (o Core..:? "merchantOrderId")
             Core.<*> (o Core..:? "orderId")
             Core.<*> (o Core..:? "orderReturnId")
-            Core.<*> (o Core..:? "returnItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returnItems")
             Core.<*> (o Core..:? "returnPricingInfo")
-            Core.<*> (o Core..:? "returnShipments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returnShipments")
       )
 
 instance Core.ToJSON MerchantOrderReturn where
@@ -8343,7 +8398,7 @@ instance Core.FromJSON MerchantOrderReturnItem where
             Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "refundableAmount")
             Core.<*> (o Core..:? "returnItemId")
-            Core.<*> (o Core..:? "returnShipmentIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returnShipmentIds")
             Core.<*> (o Core..:? "shipmentGroupId")
             Core.<*> (o Core..:? "shipmentUnitId")
             Core.<*> (o Core..:? "state")
@@ -8492,22 +8547,44 @@ instance Core.FromJSON Metrics where
           Metrics
             Core.<$> (o Core..:? "aos")
             Core.<*> (o Core..:? "aovMicros")
-            Core.<*> (o Core..:? "clicks")
+            Core.<*> ( o Core..:? "clicks"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "ctr")
             Core.<*> (o Core..:? "daysToShip")
-            Core.<*> (o Core..:? "impressions")
+            Core.<*> ( o Core..:? "impressions"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "itemDaysToShip")
             Core.<*> (o Core..:? "itemFillRate")
-            Core.<*> (o Core..:? "orderedItemSalesMicros")
-            Core.<*> (o Core..:? "orderedItems")
-            Core.<*> (o Core..:? "orders")
-            Core.<*> (o Core..:? "rejectedItems")
+            Core.<*> ( o Core..:? "orderedItemSalesMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "orderedItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "orders"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rejectedItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "returnRate")
-            Core.<*> (o Core..:? "returnedItems")
-            Core.<*> (o Core..:? "returnsMicros")
-            Core.<*> (o Core..:? "shippedItemSalesMicros")
-            Core.<*> (o Core..:? "shippedItems")
-            Core.<*> (o Core..:? "shippedOrders")
+            Core.<*> ( o Core..:? "returnedItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "returnsMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shippedItemSalesMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shippedItems"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "shippedOrders"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "unshippedItems")
             Core.<*> (o Core..:? "unshippedOrders")
       )
@@ -8571,9 +8648,7 @@ instance Core.FromJSON MinimumOrderValueTable where
       "MinimumOrderValueTable"
       ( \o ->
           MinimumOrderValueTable
-            Core.<$> ( o Core..:? "storeCodeSetWithMovs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "storeCodeSetWithMovs")
       )
 
 instance Core.ToJSON MinimumOrderValueTable where
@@ -8614,7 +8689,7 @@ instance
       "MinimumOrderValueTableStoreCodeSetWithMov"
       ( \o ->
           MinimumOrderValueTableStoreCodeSetWithMov
-            Core.<$> (o Core..:? "storeCodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "storeCodes")
             Core.<*> (o Core..:? "value")
       )
 
@@ -8789,23 +8864,25 @@ instance Core.FromJSON Order where
       ( \o ->
           Order
             Core.<$> (o Core..:? "acknowledged")
-            Core.<*> (o Core..:? "annotations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "annotations")
             Core.<*> (o Core..:? "billingAddress")
             Core.<*> (o Core..:? "customer")
             Core.<*> (o Core..:? "deliveryDetails")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lineItems" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> (o Core..:? "lineItems")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "merchantOrderId")
             Core.<*> (o Core..:? "netPriceAmount")
             Core.<*> (o Core..:? "netTaxAmount")
             Core.<*> (o Core..:? "paymentStatus")
             Core.<*> (o Core..:? "pickupDetails")
             Core.<*> (o Core..:? "placedDate")
-            Core.<*> (o Core..:? "promotions" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "refunds" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "shipments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "promotions")
+            Core.<*> (o Core..:? "refunds")
+            Core.<*> (o Core..:? "shipments")
             Core.<*> (o Core..:? "shippingCost")
             Core.<*> (o Core..:? "shippingCostTax")
             Core.<*> (o Core..:? "status")
@@ -8886,13 +8963,13 @@ instance Core.FromJSON OrderAddress where
       ( \o ->
           OrderAddress
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "fullAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fullAddress")
             Core.<*> (o Core..:? "isPostOfficeBox")
             Core.<*> (o Core..:? "locality")
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "recipientName")
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "streetAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "streetAddress")
       )
 
 instance Core.ToJSON OrderAddress where
@@ -9206,9 +9283,9 @@ instance Core.FromJSON OrderLineItem where
       "OrderLineItem"
       ( \o ->
           OrderLineItem
-            Core.<$> (o Core..:? "adjustments" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "annotations" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "cancellations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "adjustments")
+            Core.<*> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "cancellations")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "price")
             Core.<*> (o Core..:? "product")
@@ -9221,7 +9298,7 @@ instance Core.FromJSON OrderLineItem where
             Core.<*> (o Core..:? "quantityShipped")
             Core.<*> (o Core..:? "quantityUndeliverable")
             Core.<*> (o Core..:? "returnInfo")
-            Core.<*> (o Core..:? "returns" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returns")
             Core.<*> (o Core..:? "shippingDetails")
             Core.<*> (o Core..:? "tax")
       )
@@ -9367,7 +9444,7 @@ instance Core.FromJSON OrderLineItemProduct where
             Core.<$> (o Core..:? "brand")
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> (o Core..:? "fees" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fees")
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "imageLink")
@@ -9378,9 +9455,7 @@ instance Core.FromJSON OrderLineItemProduct where
             Core.<*> (o Core..:? "shownImage")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "variantAttributes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "variantAttributes")
       )
 
 instance Core.ToJSON OrderLineItemProduct where
@@ -9740,7 +9815,7 @@ instance Core.FromJSON OrderPickupDetails where
       ( \o ->
           OrderPickupDetails
             Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "collectors" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "collectors")
             Core.<*> (o Core..:? "locationId")
             Core.<*> (o Core..:? "pickupType")
       )
@@ -9846,8 +9921,8 @@ instance Core.FromJSON OrderPromotion where
       "OrderPromotion"
       ( \o ->
           OrderPromotion
-            Core.<$> (o Core..:? "applicableItems" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "appliedItems" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "applicableItems")
+            Core.<*> (o Core..:? "appliedItems")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "funder")
             Core.<*> (o Core..:? "merchantPromotionId")
@@ -10022,7 +10097,9 @@ instance Core.FromJSON OrderReportDisbursement where
             Core.<*> (o Core..:? "disbursementCreationDate")
             Core.<*> (o Core..:? "disbursementDate")
             Core.<*> (o Core..:? "disbursementId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON OrderReportDisbursement where
@@ -10091,7 +10168,9 @@ instance Core.FromJSON OrderReportTransaction where
             Core.<*> (o Core..:? "disbursementCreationDate")
             Core.<*> (o Core..:? "disbursementDate")
             Core.<*> (o Core..:? "disbursementId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "merchantOrderId")
             Core.<*> (o Core..:? "orderId")
             Core.<*> (o Core..:? "productAmount")
@@ -10224,7 +10303,7 @@ instance Core.FromJSON OrderShipment where
             Core.<*> (o Core..:? "creationDate")
             Core.<*> (o Core..:? "deliveryDate")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "lineItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "lineItems")
             Core.<*> (o Core..:? "scheduledDeliveryDetails")
             Core.<*> (o Core..:? "shipmentGroupId")
             Core.<*> (o Core..:? "status")
@@ -10389,15 +10468,17 @@ instance Core.FromJSON OrderTrackingSignal where
             Core.<$> (o Core..:? "customerShippingFee")
             Core.<*> (o Core..:? "deliveryPostalCode")
             Core.<*> (o Core..:? "deliveryRegionCode")
-            Core.<*> (o Core..:? "lineItems" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> (o Core..:? "lineItems")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "orderCreatedTime")
             Core.<*> (o Core..:? "orderId")
-            Core.<*> (o Core..:? "orderTrackingSignalId")
-            Core.<*> ( o Core..:? "shipmentLineItemMapping"
-                         Core..!= Core.mempty
+            Core.<*> ( o Core..:? "orderTrackingSignalId"
+                         Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "shippingInfo" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shipmentLineItemMapping")
+            Core.<*> (o Core..:? "shippingInfo")
       )
 
 instance Core.ToJSON OrderTrackingSignal where
@@ -10484,7 +10565,9 @@ instance
             Core.<*> (o Core..:? "productDescription")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productTitle")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "sku")
             Core.<*> (o Core..:? "upc")
       )
@@ -10544,7 +10627,9 @@ instance
       ( \o ->
           OrderTrackingSignalShipmentLineItemMapping
             Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "shipmentId")
       )
 
@@ -10694,7 +10779,7 @@ instance
           OrderinvoicesCreateChargeInvoiceRequest
             Core.<$> (o Core..:? "invoiceId")
             Core.<*> (o Core..:? "invoiceSummary")
-            Core.<*> (o Core..:? "lineItemInvoices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "lineItemInvoices")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "shipmentGroupId")
       )
@@ -10808,7 +10893,7 @@ instance
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "refundOnlyOption")
             Core.<*> (o Core..:? "returnOption")
-            Core.<*> (o Core..:? "shipmentInvoices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shipmentInvoices")
       )
 
 instance
@@ -10995,7 +11080,7 @@ instance
       "OrderreportsListDisbursementsResponse"
       ( \o ->
           OrderreportsListDisbursementsResponse
-            Core.<$> (o Core..:? "disbursements" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "disbursements")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -11046,7 +11131,7 @@ instance
           OrderreportsListTransactionsResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transactions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transactions")
       )
 
 instance
@@ -11168,7 +11253,7 @@ instance
       "OrderreturnsCreateOrderReturnRequest"
       ( \o ->
           OrderreturnsCreateOrderReturnRequest
-            Core.<$> (o Core..:? "lineItems" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "lineItems")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "orderId")
             Core.<*> (o Core..:? "returnMethodType")
@@ -11312,7 +11397,7 @@ instance Core.FromJSON OrderreturnsListResponse where
           OrderreturnsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON OrderreturnsListResponse where
@@ -11397,7 +11482,7 @@ instance Core.FromJSON OrderreturnsProcessRequest where
             Core.<$> (o Core..:? "fullChargeReturnShippingCost")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "refundShippingFee")
-            Core.<*> (o Core..:? "returnItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returnItems")
       )
 
 instance Core.ToJSON OrderreturnsProcessRequest where
@@ -12025,7 +12110,7 @@ instance Core.FromJSON OrdersCreateTestReturnRequest where
       "OrdersCreateTestReturnRequest"
       ( \o ->
           OrdersCreateTestReturnRequest
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
       )
 
 instance Core.ToJSON OrdersCreateTestReturnRequest where
@@ -12546,7 +12631,7 @@ instance Core.FromJSON OrdersListResponse where
           OrdersListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON OrdersListResponse where
@@ -12593,7 +12678,7 @@ instance Core.FromJSON OrdersRefundItemRequest where
       "OrdersRefundItemRequest"
       ( \o ->
           OrdersRefundItemRequest
-            Core.<$> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "reason")
             Core.<*> (o Core..:? "reasonText")
@@ -13002,7 +13087,7 @@ instance
       "OrdersSetLineItemMetadataRequest"
       ( \o ->
           OrdersSetLineItemMetadataRequest
-            Core.<$> (o Core..:? "annotations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "annotations")
             Core.<*> (o Core..:? "lineItemId")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "productId")
@@ -13098,10 +13183,10 @@ instance Core.FromJSON OrdersShipLineItemsRequest where
       "OrdersShipLineItemsRequest"
       ( \o ->
           OrdersShipLineItemsRequest
-            Core.<$> (o Core..:? "lineItems" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "lineItems")
             Core.<*> (o Core..:? "operationId")
             Core.<*> (o Core..:? "shipmentGroupId")
-            Core.<*> (o Core..:? "shipmentInfos" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shipmentInfos")
       )
 
 instance Core.ToJSON OrdersShipLineItemsRequest where
@@ -13629,7 +13714,7 @@ instance Core.FromJSON PosCustomBatchRequest where
       "PosCustomBatchRequest"
       ( \o ->
           PosCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON PosCustomBatchRequest where
@@ -13684,12 +13769,16 @@ instance Core.FromJSON PosCustomBatchRequestEntry where
           PosCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "inventory")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "sale")
             Core.<*> (o Core..:? "store")
             Core.<*> (o Core..:? "storeCode")
-            Core.<*> (o Core..:? "targetMerchantId")
+            Core.<*> ( o Core..:? "targetMerchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PosCustomBatchRequestEntry where
@@ -13731,8 +13820,7 @@ instance Core.FromJSON PosCustomBatchResponse where
       "PosCustomBatchResponse"
       ( \o ->
           PosCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON PosCustomBatchResponse where
@@ -13825,7 +13913,7 @@ instance Core.FromJSON PosDataProviders where
       ( \o ->
           PosDataProviders
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "posDataProviders" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "posDataProviders")
       )
 
 instance Core.ToJSON PosDataProviders where
@@ -13871,7 +13959,9 @@ instance
           PosDataProvidersPosDataProvider
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "fullName")
-            Core.<*> (o Core..:? "providerId")
+            Core.<*> ( o Core..:? "providerId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON PosDataProvidersPosDataProvider where
@@ -13937,7 +14027,9 @@ instance Core.FromJSON PosInventory where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -14008,7 +14100,9 @@ instance Core.FromJSON PosInventoryRequest where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -14082,7 +14176,9 @@ instance Core.FromJSON PosInventoryResponse where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -14129,7 +14225,7 @@ instance Core.FromJSON PosListResponse where
       ( \o ->
           PosListResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON PosListResponse where
@@ -14196,7 +14292,9 @@ instance Core.FromJSON PosSale where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -14272,7 +14370,9 @@ instance Core.FromJSON PosSaleRequest where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -14351,7 +14451,9 @@ instance Core.FromJSON PosSaleResponse where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "quantity")
+            Core.<*> ( o Core..:? "quantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -14421,7 +14523,7 @@ instance Core.FromJSON PosStore where
       "PosStore"
       ( \o ->
           PosStore
-            Core.<$> (o Core..:? "gcidCategory" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "gcidCategory")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "placeId")
@@ -14476,7 +14578,7 @@ instance Core.FromJSON PostalCodeGroup where
           PostalCodeGroup
             Core.<$> (o Core..:? "country")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "postalCodeRanges" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "postalCodeRanges")
       )
 
 instance Core.ToJSON PostalCodeGroup where
@@ -14886,12 +14988,10 @@ instance Core.FromJSON Product where
       "Product"
       ( \o ->
           Product
-            Core.<$> ( o Core..:? "additionalImageLinks"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "additionalImageLinks")
             Core.<*> (o Core..:? "additionalSizeType")
             Core.<*> (o Core..:? "adsGrouping")
-            Core.<*> (o Core..:? "adsLabels" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "adsLabels")
             Core.<*> (o Core..:? "adsRedirect")
             Core.<*> (o Core..:? "adult")
             Core.<*> (o Core..:? "ageGroup")
@@ -14904,7 +15004,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "contentLanguage")
             Core.<*> (o Core..:? "costOfGoodsSold")
-            Core.<*> (o Core..:? "customAttributes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customAttributes")
             Core.<*> (o Core..:? "customLabel0")
             Core.<*> (o Core..:? "customLabel1")
             Core.<*> (o Core..:? "customLabel2")
@@ -14913,15 +15013,11 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayAdsId")
             Core.<*> (o Core..:? "displayAdsLink")
-            Core.<*> ( o Core..:? "displayAdsSimilarIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "displayAdsSimilarIds")
             Core.<*> (o Core..:? "displayAdsTitle")
             Core.<*> (o Core..:? "displayAdsValue")
             Core.<*> (o Core..:? "energyEfficiencyClass")
-            Core.<*> ( o Core..:? "excludedDestinations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "excludedDestinations")
             Core.<*> (o Core..:? "expirationDate")
             Core.<*> (o Core..:? "gender")
             Core.<*> (o Core..:? "googleProductCategory")
@@ -14929,9 +15025,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "identifierExists")
             Core.<*> (o Core..:? "imageLink")
-            Core.<*> ( o Core..:? "includedDestinations"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "includedDestinations")
             Core.<*> (o Core..:? "installment")
             Core.<*> (o Core..:? "isBundle")
             Core.<*> (o Core..:? "itemGroupId")
@@ -14941,46 +15035,52 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "loyaltyPoints")
             Core.<*> (o Core..:? "material")
             Core.<*> (o Core..:? "maxEnergyEfficiencyClass")
-            Core.<*> (o Core..:? "maxHandlingTime")
+            Core.<*> ( o Core..:? "maxHandlingTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "minEnergyEfficiencyClass")
-            Core.<*> (o Core..:? "minHandlingTime")
+            Core.<*> ( o Core..:? "minHandlingTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "mobileLink")
             Core.<*> (o Core..:? "mobileLinkTemplate")
             Core.<*> (o Core..:? "mpn")
-            Core.<*> (o Core..:? "multipack")
+            Core.<*> ( o Core..:? "multipack"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "offerId")
             Core.<*> (o Core..:? "pattern")
             Core.<*> (o Core..:? "pickupMethod")
             Core.<*> (o Core..:? "pickupSla")
             Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "productDetails" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productDetails")
             Core.<*> (o Core..:? "productHeight")
-            Core.<*> (o Core..:? "productHighlights" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productHighlights")
             Core.<*> (o Core..:? "productLength")
-            Core.<*> (o Core..:? "productTypes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "productTypes")
             Core.<*> (o Core..:? "productWeight")
             Core.<*> (o Core..:? "productWidth")
-            Core.<*> (o Core..:? "promotionIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "promotionIds")
             Core.<*> (o Core..:? "salePrice")
             Core.<*> (o Core..:? "salePriceEffectiveDate")
-            Core.<*> (o Core..:? "sellOnGoogleQuantity")
-            Core.<*> (o Core..:? "shipping" Core..!= Core.mempty)
+            Core.<*> ( o Core..:? "sellOnGoogleQuantity"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "shipping")
             Core.<*> (o Core..:? "shippingHeight")
             Core.<*> (o Core..:? "shippingLabel")
             Core.<*> (o Core..:? "shippingLength")
             Core.<*> (o Core..:? "shippingWeight")
             Core.<*> (o Core..:? "shippingWidth")
-            Core.<*> ( o Core..:? "shoppingAdsExcludedCountries"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "shoppingAdsExcludedCountries")
             Core.<*> (o Core..:? "sizeSystem")
             Core.<*> (o Core..:? "sizeType")
-            Core.<*> (o Core..:? "sizes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "sizes")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "subscriptionCost")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "taxCategory")
-            Core.<*> (o Core..:? "taxes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "taxes")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "transitTimeLabel")
             Core.<*> (o Core..:? "unitPricingBaseMeasure")
@@ -15282,11 +15382,21 @@ instance Core.FromJSON ProductShipping where
           ProductShipping
             Core.<$> (o Core..:? "country")
             Core.<*> (o Core..:? "locationGroupName")
-            Core.<*> (o Core..:? "locationId")
-            Core.<*> (o Core..:? "maxHandlingTime")
-            Core.<*> (o Core..:? "maxTransitTime")
-            Core.<*> (o Core..:? "minHandlingTime")
-            Core.<*> (o Core..:? "minTransitTime")
+            Core.<*> ( o Core..:? "locationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxHandlingTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "maxTransitTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minHandlingTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "minTransitTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "price")
             Core.<*> (o Core..:? "region")
@@ -15433,11 +15543,9 @@ instance Core.FromJSON ProductStatus where
       ( \o ->
           ProductStatus
             Core.<$> (o Core..:? "creationDate")
-            Core.<*> ( o Core..:? "destinationStatuses"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "destinationStatuses")
             Core.<*> (o Core..:? "googleExpirationDate")
-            Core.<*> (o Core..:? "itemLevelIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "itemLevelIssues")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lastUpdateDate")
             Core.<*> (o Core..:? "link")
@@ -15497,12 +15605,10 @@ instance Core.FromJSON ProductStatusDestinationStatus where
       "ProductStatusDestinationStatus"
       ( \o ->
           ProductStatusDestinationStatus
-            Core.<$> (o Core..:? "approvedCountries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "approvedCountries")
             Core.<*> (o Core..:? "destination")
-            Core.<*> ( o Core..:? "disapprovedCountries"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "pendingCountries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "disapprovedCountries")
+            Core.<*> (o Core..:? "pendingCountries")
             Core.<*> (o Core..:? "status")
       )
 
@@ -15567,9 +15673,7 @@ instance Core.FromJSON ProductStatusItemLevelIssue where
       "ProductStatusItemLevelIssue"
       ( \o ->
           ProductStatusItemLevelIssue
-            Core.<$> ( o Core..:? "applicableCountries"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "applicableCountries")
             Core.<*> (o Core..:? "attributeName")
             Core.<*> (o Core..:? "code")
             Core.<*> (o Core..:? "description")
@@ -15627,7 +15731,9 @@ instance Core.FromJSON ProductSubscriptionCost where
           ProductSubscriptionCost
             Core.<$> (o Core..:? "amount")
             Core.<*> (o Core..:? "period")
-            Core.<*> (o Core..:? "periodLength")
+            Core.<*> ( o Core..:? "periodLength"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ProductSubscriptionCost where
@@ -15679,7 +15785,9 @@ instance Core.FromJSON ProductTax where
       ( \o ->
           ProductTax
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "locationId")
+            Core.<*> ( o Core..:? "locationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "rate")
             Core.<*> (o Core..:? "region")
@@ -15722,7 +15830,10 @@ instance Core.FromJSON ProductUnitPricingBaseMeasure where
       "ProductUnitPricingBaseMeasure"
       ( \o ->
           ProductUnitPricingBaseMeasure
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> ( o Core..:? "value"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ProductUnitPricingBaseMeasure where
@@ -15821,7 +15932,7 @@ instance Core.FromJSON ProductsCustomBatchRequest where
       "ProductsCustomBatchRequest"
       ( \o ->
           ProductsCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON ProductsCustomBatchRequest where
@@ -15876,8 +15987,12 @@ instance
       ( \o ->
           ProductsCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "feedId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "feedId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "productId")
@@ -15922,8 +16037,7 @@ instance Core.FromJSON ProductsCustomBatchResponse where
       "ProductsCustomBatchResponse"
       ( \o ->
           ProductsCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ProductsCustomBatchResponse where
@@ -16017,7 +16131,7 @@ instance Core.FromJSON ProductsListResponse where
           ProductsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ProductsListResponse where
@@ -16053,7 +16167,7 @@ instance
       "ProductstatusesCustomBatchRequest"
       ( \o ->
           ProductstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -16108,9 +16222,11 @@ instance
       ( \o ->
           ProductstatusesCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "destinations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "destinations")
             Core.<*> (o Core..:? "includeAttributes")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
       )
@@ -16161,8 +16277,7 @@ instance
       "ProductstatusesCustomBatchResponse"
       ( \o ->
           ProductstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -16262,7 +16377,7 @@ instance Core.FromJSON ProductstatusesListResponse where
           ProductstatusesListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ProductstatusesListResponse where
@@ -16403,8 +16518,8 @@ instance Core.FromJSON Promotion where
       "Promotion"
       ( \o ->
           Promotion
-            Core.<$> (o Core..:? "brand" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "brandExclusion" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "brand")
+            Core.<*> (o Core..:? "brandExclusion")
             Core.<*> (o Core..:? "contentLanguage")
             Core.<*> (o Core..:? "couponValueType")
             Core.<*> (o Core..:? "freeGiftDescription")
@@ -16413,12 +16528,10 @@ instance Core.FromJSON Promotion where
             Core.<*> (o Core..:? "genericRedemptionCode")
             Core.<*> (o Core..:? "getThisQuantityDiscounted")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "itemGroupId" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "itemGroupIdExclusion"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "itemId" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "itemIdExclusion" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "itemGroupId")
+            Core.<*> (o Core..:? "itemGroupIdExclusion")
+            Core.<*> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "itemIdExclusion")
             Core.<*> (o Core..:? "limitQuantity")
             Core.<*> (o Core..:? "limitValue")
             Core.<*> (o Core..:? "longTitle")
@@ -16430,22 +16543,16 @@ instance Core.FromJSON Promotion where
             Core.<*> (o Core..:? "orderLimit")
             Core.<*> (o Core..:? "percentOff")
             Core.<*> (o Core..:? "productApplicability")
-            Core.<*> (o Core..:? "productType" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "productTypeExclusion"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "promotionDestinationIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "productType")
+            Core.<*> (o Core..:? "productTypeExclusion")
+            Core.<*> (o Core..:? "promotionDestinationIds")
             Core.<*> (o Core..:? "promotionDisplayDates")
             Core.<*> (o Core..:? "promotionDisplayTimePeriod")
             Core.<*> (o Core..:? "promotionEffectiveDates")
             Core.<*> (o Core..:? "promotionEffectiveTimePeriod")
             Core.<*> (o Core..:? "promotionId")
-            Core.<*> (o Core..:? "redemptionChannel" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "shippingServiceNames"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "redemptionChannel")
+            Core.<*> (o Core..:? "shippingServiceNames")
             Core.<*> (o Core..:? "targetCountry")
       )
 
@@ -16538,7 +16645,7 @@ instance Core.FromJSON PubsubNotificationSettings where
           PubsubNotificationSettings
             Core.<$> (o Core..:? "cloudTopicName")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "registeredEvents" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "registeredEvents")
       )
 
 instance Core.ToJSON PubsubNotificationSettings where
@@ -16589,14 +16696,12 @@ instance Core.FromJSON RateGroup where
       "RateGroup"
       ( \o ->
           RateGroup
-            Core.<$> ( o Core..:? "applicableShippingLabels"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "carrierRates" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "applicableShippingLabels")
+            Core.<*> (o Core..:? "carrierRates")
             Core.<*> (o Core..:? "mainTable")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "singleValue")
-            Core.<*> (o Core..:? "subtables" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "subtables")
       )
 
 instance Core.ToJSON RateGroup where
@@ -16692,7 +16797,9 @@ instance Core.FromJSON Region where
           Region
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "geotargetArea")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "postalCodeArea")
             Core.<*> (o Core..:? "regionId")
             Core.<*> (o Core..:? "regionalInventoryEligible")
@@ -16737,9 +16844,7 @@ instance Core.FromJSON RegionGeoTargetArea where
       "RegionGeoTargetArea"
       ( \o ->
           RegionGeoTargetArea
-            Core.<$> ( o Core..:? "geotargetCriteriaIds"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "geotargetCriteriaIds")
       )
 
 instance Core.ToJSON RegionGeoTargetArea where
@@ -16774,7 +16879,7 @@ instance Core.FromJSON RegionPostalCodeArea where
       "RegionPostalCodeArea"
       ( \o ->
           RegionPostalCodeArea
-            Core.<$> (o Core..:? "postalCodes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "postalCodes")
             Core.<*> (o Core..:? "regionCode")
       )
 
@@ -16870,7 +16975,7 @@ instance Core.FromJSON RegionalInventory where
       ( \o ->
           RegionalInventory
             Core.<$> (o Core..:? "availability")
-            Core.<*> (o Core..:? "customAttributes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "customAttributes")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
             Core.<*> (o Core..:? "regionId")
@@ -16917,7 +17022,7 @@ instance
       "RegionalinventoryCustomBatchRequest"
       ( \o ->
           RegionalinventoryCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -16969,7 +17074,9 @@ instance
       ( \o ->
           RegionalinventoryCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "regionalInventory")
@@ -17020,8 +17127,7 @@ instance
       "RegionalinventoryCustomBatchResponse"
       ( \o ->
           RegionalinventoryCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -17177,16 +17283,16 @@ instance Core.FromJSON RepricingProductReport where
       "RepricingProductReport"
       ( \o ->
           RepricingProductReport
-            Core.<$> (o Core..:? "applicationCount")
+            Core.<$> ( o Core..:? "applicationCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "buyboxWinningProductStats")
             Core.<*> (o Core..:? "date")
             Core.<*> (o Core..:? "highWatermark")
-            Core.<*> ( o Core..:? "inapplicabilityDetails"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "inapplicabilityDetails")
             Core.<*> (o Core..:? "lowWatermark")
             Core.<*> (o Core..:? "orderItemCount")
-            Core.<*> (o Core..:? "ruleIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ruleIds")
             Core.<*> (o Core..:? "totalGmv")
             Core.<*> (o Core..:? "type")
       )
@@ -17314,7 +17420,9 @@ instance Core.FromJSON RepricingRule where
             Core.<*> (o Core..:? "effectiveTimePeriod")
             Core.<*> (o Core..:? "eligibleOfferMatcher")
             Core.<*> (o Core..:? "languageCode")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "paused")
             Core.<*> (o Core..:? "restriction")
             Core.<*> (o Core..:? "ruleId")
@@ -17408,7 +17516,7 @@ instance Core.FromJSON RepricingRuleEffectiveTime where
       "RepricingRuleEffectiveTime"
       ( \o ->
           RepricingRuleEffectiveTime
-            Core.<$> (o Core..:? "fixedTimePeriods" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fixedTimePeriods")
       )
 
 instance Core.ToJSON RepricingRuleEffectiveTime where
@@ -17551,7 +17659,7 @@ instance
       "RepricingRuleEligibleOfferMatcherStringMatcher"
       ( \o ->
           RepricingRuleEligibleOfferMatcherStringMatcher
-            Core.<$> (o Core..:? "strAttributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "strAttributes")
       )
 
 instance
@@ -17614,13 +17722,9 @@ instance Core.FromJSON RepricingRuleReport where
           RepricingRuleReport
             Core.<$> (o Core..:? "buyboxWinningRuleStats")
             Core.<*> (o Core..:? "date")
-            Core.<*> (o Core..:? "impactedProducts" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "inapplicabilityDetails"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> ( o Core..:? "inapplicableProducts"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "impactedProducts")
+            Core.<*> (o Core..:? "inapplicabilityDetails")
+            Core.<*> (o Core..:? "inapplicableProducts")
             Core.<*> (o Core..:? "orderItemCount")
             Core.<*> (o Core..:? "ruleId")
             Core.<*> (o Core..:? "totalGmv")
@@ -18100,7 +18204,7 @@ instance Core.FromJSON ReturnAddressAddress where
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "recipientName")
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "streetAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "streetAddress")
       )
 
 instance Core.ToJSON ReturnAddressAddress where
@@ -18167,15 +18271,11 @@ instance Core.FromJSON ReturnPolicy where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "nonFreeReturnReasons"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "nonFreeReturnReasons")
             Core.<*> (o Core..:? "policy")
             Core.<*> (o Core..:? "returnPolicyId")
             Core.<*> (o Core..:? "returnShippingFee")
-            Core.<*> ( o Core..:? "seasonalOverrides"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "seasonalOverrides")
       )
 
 instance Core.ToJSON ReturnPolicy where
@@ -18247,18 +18347,16 @@ instance Core.FromJSON ReturnPolicyOnline where
       "ReturnPolicyOnline"
       ( \o ->
           ReturnPolicyOnline
-            Core.<$> (o Core..:? "countries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "itemConditions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "countries")
+            Core.<*> (o Core..:? "itemConditions")
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "policy")
             Core.<*> (o Core..:? "restockingFee")
-            Core.<*> (o Core..:? "returnMethods" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "returnMethods")
             Core.<*> (o Core..:? "returnPolicyId")
             Core.<*> (o Core..:? "returnPolicyUri")
-            Core.<*> ( o Core..:? "returnReasonCategoryInfo"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "returnReasonCategoryInfo")
       )
 
 instance Core.ToJSON ReturnPolicyOnline where
@@ -18302,7 +18400,10 @@ instance Core.FromJSON ReturnPolicyOnlinePolicy where
       "ReturnPolicyOnlinePolicy"
       ( \o ->
           ReturnPolicyOnlinePolicy
-            Core.<$> (o Core..:? "days") Core.<*> (o Core..:? "type")
+            Core.<$> ( o Core..:? "days"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON ReturnPolicyOnlinePolicy where
@@ -18488,7 +18589,9 @@ instance Core.FromJSON ReturnPolicyPolicy where
       ( \o ->
           ReturnPolicyPolicy
             Core.<$> (o Core..:? "lastReturnDate")
-            Core.<*> (o Core..:? "numberOfDays")
+            Core.<*> ( o Core..:? "numberOfDays"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "type")
       )
 
@@ -18653,9 +18756,7 @@ instance Core.FromJSON ReturnShipment where
             Core.<*> (o Core..:? "deliveryDate")
             Core.<*> (o Core..:? "returnMethodType")
             Core.<*> (o Core..:? "shipmentId")
-            Core.<*> ( o Core..:? "shipmentTrackingInfos"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "shipmentTrackingInfos")
             Core.<*> (o Core..:? "shippingDate")
             Core.<*> (o Core..:? "state")
       )
@@ -18743,7 +18844,7 @@ instance
       "ReturnaddressCustomBatchRequest"
       ( \o ->
           ReturnaddressCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON ReturnaddressCustomBatchRequest where
@@ -18791,7 +18892,9 @@ instance
       ( \o ->
           ReturnaddressCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "returnAddress")
             Core.<*> (o Core..:? "returnAddressId")
@@ -18839,8 +18942,7 @@ instance
       "ReturnaddressCustomBatchResponse"
       ( \o ->
           ReturnaddressCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ReturnaddressCustomBatchResponse where
@@ -18936,7 +19038,7 @@ instance Core.FromJSON ReturnaddressListResponse where
           ReturnaddressListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ReturnaddressListResponse where
@@ -18969,7 +19071,7 @@ instance Core.FromJSON ReturnpolicyCustomBatchRequest where
       "ReturnpolicyCustomBatchRequest"
       ( \o ->
           ReturnpolicyCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON ReturnpolicyCustomBatchRequest where
@@ -19017,7 +19119,9 @@ instance
       ( \o ->
           ReturnpolicyCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "returnPolicy")
             Core.<*> (o Core..:? "returnPolicyId")
@@ -19064,8 +19168,7 @@ instance
       "ReturnpolicyCustomBatchResponse"
       ( \o ->
           ReturnpolicyCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ReturnpolicyCustomBatchResponse where
@@ -19154,7 +19257,7 @@ instance Core.FromJSON ReturnpolicyListResponse where
       ( \o ->
           ReturnpolicyListResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ReturnpolicyListResponse where
@@ -19183,10 +19286,7 @@ instance Core.FromJSON Row where
   parseJSON =
     Core.withObject
       "Row"
-      ( \o ->
-          Row
-            Core.<$> (o Core..:? "cells" Core..!= Core.mempty)
-      )
+      (\o -> Row Core.<$> (o Core..:? "cells"))
 
 instance Core.ToJSON Row where
   toJSON Row {..} =
@@ -19261,7 +19361,7 @@ instance Core.FromJSON SearchResponse where
       ( \o ->
           SearchResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "results" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON SearchResponse where
@@ -19473,7 +19573,7 @@ instance Core.FromJSON Service where
             Core.<*> (o Core..:? "minimumOrderValueTable")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pickupService")
-            Core.<*> (o Core..:? "rateGroups" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rateGroups")
             Core.<*> (o Core..:? "shipmentType")
       )
 
@@ -19548,7 +19648,7 @@ instance Core.FromJSON SettlementReport where
             Core.<*> (o Core..:? "startDate")
             Core.<*> (o Core..:? "transferAmount")
             Core.<*> (o Core..:? "transferDate")
-            Core.<*> (o Core..:? "transferIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "transferIds")
       )
 
 instance Core.ToJSON SettlementReport where
@@ -19753,7 +19853,7 @@ instance
             Core.<*> (o Core..:? "merchantOrderId")
             Core.<*> (o Core..:? "orderItemId")
             Core.<*> (o Core..:? "settlementEntryId")
-            Core.<*> (o Core..:? "shipmentIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shipmentIds")
             Core.<*> (o Core..:? "transactionId")
       )
 
@@ -19841,7 +19941,7 @@ instance Core.FromJSON SettlementreportsListResponse where
           SettlementreportsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON SettlementreportsListResponse where
@@ -19887,7 +19987,7 @@ instance
           SettlementtransactionsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance
@@ -19932,7 +20032,7 @@ instance Core.FromJSON ShipmentInvoice where
       ( \o ->
           ShipmentInvoice
             Core.<$> (o Core..:? "invoiceSummary")
-            Core.<*> (o Core..:? "lineItemInvoices" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "lineItemInvoices")
             Core.<*> (o Core..:? "shipmentGroupId")
       )
 
@@ -19981,7 +20081,7 @@ instance Core.FromJSON ShipmentInvoiceLineItemInvoice where
           ShipmentInvoiceLineItemInvoice
             Core.<$> (o Core..:? "lineItemId")
             Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "shipmentUnitIds" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "shipmentUnitIds")
             Core.<*> (o Core..:? "unitInvoice")
       )
 
@@ -20063,10 +20163,12 @@ instance Core.FromJSON ShippingSettings where
       "ShippingSettings"
       ( \o ->
           ShippingSettings
-            Core.<$> (o Core..:? "accountId")
-            Core.<*> (o Core..:? "postalCodeGroups" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "services" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "warehouses" Core..!= Core.mempty)
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "postalCodeGroups")
+            Core.<*> (o Core..:? "services")
+            Core.<*> (o Core..:? "warehouses")
       )
 
 instance Core.ToJSON ShippingSettings where
@@ -20105,7 +20207,7 @@ instance
       "ShippingsettingsCustomBatchRequest"
       ( \o ->
           ShippingsettingsCustomBatchRequest
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "entries")
       )
 
 instance
@@ -20156,9 +20258,13 @@ instance
       "ShippingsettingsCustomBatchRequestEntry"
       ( \o ->
           ShippingsettingsCustomBatchRequestEntry
-            Core.<$> (o Core..:? "accountId")
+            Core.<$> ( o Core..:? "accountId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "batchId")
-            Core.<*> (o Core..:? "merchantId")
+            Core.<*> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "shippingSettings")
       )
@@ -20209,8 +20315,7 @@ instance
       "ShippingsettingsCustomBatchResponse"
       ( \o ->
           ShippingsettingsCustomBatchResponse
-            Core.<$> (o Core..:? "entries" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -20309,8 +20414,7 @@ instance
       "ShippingsettingsGetSupportedCarriersResponse"
       ( \o ->
           ShippingsettingsGetSupportedCarriersResponse
-            Core.<$> (o Core..:? "carriers" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "carriers") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -20354,8 +20458,7 @@ instance
       "ShippingsettingsGetSupportedHolidaysResponse"
       ( \o ->
           ShippingsettingsGetSupportedHolidaysResponse
-            Core.<$> (o Core..:? "holidays" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "holidays") Core.<*> (o Core..:? "kind")
       )
 
 instance
@@ -20400,7 +20503,7 @@ instance
       ( \o ->
           ShippingsettingsGetSupportedPickupServicesResponse
             Core.<$> (o Core..:? "kind")
-              Core.<*> (o Core..:? "pickupServices" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "pickupServices")
       )
 
 instance
@@ -20446,7 +20549,7 @@ instance Core.FromJSON ShippingsettingsListResponse where
           ShippingsettingsListResponse
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "resources")
       )
 
 instance Core.ToJSON ShippingsettingsListResponse where
@@ -20486,7 +20589,7 @@ instance Core.FromJSON ShoppingAdsProgramStatus where
       ( \o ->
           ShoppingAdsProgramStatus
             Core.<$> (o Core..:? "globalState")
-            Core.<*> (o Core..:? "regionStatuses" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "regionStatuses")
       )
 
 instance Core.ToJSON ShoppingAdsProgramStatus where
@@ -20559,13 +20662,13 @@ instance
           ShoppingAdsProgramStatusRegionStatus
             Core.<$> (o Core..:? "disapprovalDate")
             Core.<*> (o Core..:? "eligibilityStatus")
-            Core.<*> (o Core..:? "onboardingIssues" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "regionCodes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "onboardingIssues")
+            Core.<*> (o Core..:? "regionCodes")
             Core.<*> (o Core..:? "reviewEligibilityStatus")
             Core.<*> (o Core..:? "reviewIneligibilityReason")
             Core.<*> (o Core..:? "reviewIneligibilityReasonDescription")
             Core.<*> (o Core..:? "reviewIneligibilityReasonDetails")
-            Core.<*> (o Core..:? "reviewIssues" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "reviewIssues")
       )
 
 instance
@@ -20668,7 +20771,7 @@ instance Core.FromJSON Table where
             Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "rowHeaders")
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON Table where
@@ -20743,14 +20846,14 @@ instance Core.FromJSON TestOrder where
             Core.<$> (o Core..:? "deliveryDetails")
             Core.<*> (o Core..:? "enableOrderinvoices")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lineItems" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "lineItems")
             Core.<*> (o Core..:? "notificationMode")
             Core.<*> (o Core..:? "pickupDetails")
             Core.<*> (o Core..:? "predefinedBillingAddress")
             Core.<*> (o Core..:? "predefinedDeliveryAddress")
             Core.<*> (o Core..:? "predefinedEmail")
             Core.<*> (o Core..:? "predefinedPickupDetails")
-            Core.<*> (o Core..:? "promotions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "promotions")
             Core.<*> (o Core..:? "shippingCost")
             Core.<*> (o Core..:? "shippingOption")
       )
@@ -20825,13 +20928,13 @@ instance Core.FromJSON TestOrderAddress where
       ( \o ->
           TestOrderAddress
             Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "fullAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fullAddress")
             Core.<*> (o Core..:? "isPostOfficeBox")
             Core.<*> (o Core..:? "locality")
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "recipientName")
             Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "streetAddress" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "streetAddress")
       )
 
 instance Core.ToJSON TestOrderAddress where
@@ -21003,7 +21106,7 @@ instance Core.FromJSON TestOrderLineItemProduct where
             Core.<$> (o Core..:? "brand")
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> (o Core..:? "fees" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "fees")
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "imageLink")
             Core.<*> (o Core..:? "itemGroupId")
@@ -21012,9 +21115,7 @@ instance Core.FromJSON TestOrderLineItemProduct where
             Core.<*> (o Core..:? "price")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "variantAttributes"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "variantAttributes")
       )
 
 instance Core.ToJSON TestOrderLineItemProduct where
@@ -21072,7 +21173,7 @@ instance Core.FromJSON TestOrderPickupDetails where
             Core.<$> (o Core..:? "locationCode")
             Core.<*> (o Core..:? "pickupLocationAddress")
             Core.<*> (o Core..:? "pickupLocationType")
-            Core.<*> (o Core..:? "pickupPersons" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "pickupPersons")
       )
 
 instance Core.ToJSON TestOrderPickupDetails where
@@ -21229,13 +21330,9 @@ instance Core.FromJSON TransitTable where
       "TransitTable"
       ( \o ->
           TransitTable
-            Core.<$> ( o Core..:? "postalCodeGroupNames"
-                         Core..!= Core.mempty
-                     )
-            Core.<*> (o Core..:? "rows" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "transitTimeLabels"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "postalCodeGroupNames")
+            Core.<*> (o Core..:? "rows")
+            Core.<*> (o Core..:? "transitTimeLabels")
       )
 
 instance Core.ToJSON TransitTable where
@@ -21270,7 +21367,7 @@ instance Core.FromJSON TransitTableTransitTimeRow where
       "TransitTableTransitTimeRow"
       ( \o ->
           TransitTableTransitTimeRow
-            Core.<$> (o Core..:? "values" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON TransitTableTransitTimeRow where
@@ -21352,9 +21449,9 @@ instance Core.FromJSON UnitInvoice where
       "UnitInvoice"
       ( \o ->
           UnitInvoice
-            Core.<$> (o Core..:? "additionalCharges" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "additionalCharges")
             Core.<*> (o Core..:? "unitPrice")
-            Core.<*> (o Core..:? "unitPriceTaxes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "unitPriceTaxes")
       )
 
 instance Core.ToJSON UnitInvoice where
@@ -21621,7 +21718,9 @@ instance Core.FromJSON Warehouse where
           Warehouse
             Core.<$> (o Core..:? "businessDayConfig")
             Core.<*> (o Core..:? "cutoffTime")
-            Core.<*> (o Core..:? "handlingDays")
+            Core.<*> ( o Core..:? "handlingDays"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "shippingAddress")
       )

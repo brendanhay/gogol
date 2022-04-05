@@ -788,9 +788,7 @@ instance
       "GoogleCloudVideointelligenceV1_AnnotateVideoProgress"
       ( \o ->
           GoogleCloudVideointelligenceV1_AnnotateVideoProgress
-            Core.<$> ( o Core..:? "annotationProgress"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationProgress")
       )
 
 instance
@@ -835,9 +833,7 @@ instance
       "GoogleCloudVideointelligenceV1_AnnotateVideoResponse"
       ( \o ->
           GoogleCloudVideointelligenceV1_AnnotateVideoResponse
-            Core.<$> ( o Core..:? "annotationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationResults")
       )
 
 instance
@@ -1034,7 +1030,7 @@ instance
       "GoogleCloudVideointelligenceV1_ExplicitContentAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
               Core.<*> (o Core..:? "version")
       )
 
@@ -1133,8 +1129,8 @@ instance
       "GoogleCloudVideointelligenceV1_FaceAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_FaceAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "thumbnail")
       )
 
@@ -1185,7 +1181,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -1232,9 +1228,7 @@ instance
       "GoogleCloudVideointelligenceV1_FaceFrame"
       ( \o ->
           GoogleCloudVideointelligenceV1_FaceFrame
-            Core.<$> ( o Core..:? "normalizedBoundingBoxes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "normalizedBoundingBoxes")
             Core.<*> (o Core..:? "timeOffset")
       )
 
@@ -1326,10 +1320,10 @@ instance
       "GoogleCloudVideointelligenceV1_LabelAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_LabelAnnotation
-            Core.<$> (o Core..:? "categoryEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryEntities")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "version")
       )
 
@@ -1474,8 +1468,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
+              Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -1573,7 +1567,7 @@ instance
       "GoogleCloudVideointelligenceV1_NormalizedBoundingPoly"
       ( \o ->
           GoogleCloudVideointelligenceV1_NormalizedBoundingPoly
-            Core.<$> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vertices")
       )
 
 instance
@@ -1673,9 +1667,11 @@ instance
           GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "trackId")
+              Core.<*> ( o Core..:? "trackId"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "version")
       )
 
@@ -1773,7 +1769,7 @@ instance
       "GoogleCloudVideointelligenceV1_PersonDetectionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_PersonDetectionAnnotation
-            Core.<$> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -1824,7 +1820,7 @@ instance
           GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -1873,7 +1869,7 @@ instance
       "GoogleCloudVideointelligenceV1_SpeechTranscription"
       ( \o ->
           GoogleCloudVideointelligenceV1_SpeechTranscription
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
               Core.<*> (o Core..:? "languageCode")
       )
 
@@ -1922,8 +1918,7 @@ instance
       "GoogleCloudVideointelligenceV1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_TextAnnotation
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
               Core.<*> (o Core..:? "version")
       )
 
@@ -2020,7 +2015,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_TextSegment
             Core.<$> (o Core..:? "confidence")
-            Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "frames")
             Core.<*> (o Core..:? "segment")
       )
 
@@ -2072,8 +2067,8 @@ instance
       "GoogleCloudVideointelligenceV1_TimestampedObject"
       ( \o ->
           GoogleCloudVideointelligenceV1_TimestampedObject
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
+              Core.<*> (o Core..:? "landmarks")
               Core.<*> (o Core..:? "normalizedBoundingBox")
               Core.<*> (o Core..:? "timeOffset")
       )
@@ -2129,12 +2124,10 @@ instance
       "GoogleCloudVideointelligenceV1_Track"
       ( \o ->
           GoogleCloudVideointelligenceV1_Track
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "segment")
-            Core.<*> ( o Core..:? "timestampedObjects"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timestampedObjects")
       )
 
 instance
@@ -2312,39 +2305,21 @@ instance
           GoogleCloudVideointelligenceV1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "faceDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "frameLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "faceAnnotations")
+              Core.<*> (o Core..:? "faceDetectionAnnotations")
+              Core.<*> (o Core..:? "frameLabelAnnotations")
               Core.<*> (o Core..:? "inputUri")
-              Core.<*> ( o Core..:? "logoRecognitionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "personDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "logoRecognitionAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "personDetectionAnnotations")
               Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "segmentLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "segmentPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "shotLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "shotPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "speechTranscriptions"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segmentLabelAnnotations")
+              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
+              Core.<*> (o Core..:? "shotLabelAnnotations")
+              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "speechTranscriptions")
+              Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -2523,9 +2498,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
-            Core.<$> ( o Core..:? "annotationProgress"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationProgress")
       )
 
 instance
@@ -2570,9 +2543,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
-            Core.<$> ( o Core..:? "annotationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationResults")
       )
 
 instance
@@ -2772,7 +2743,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
               Core.<*> (o Core..:? "version")
       )
 
@@ -2871,8 +2842,8 @@ instance
       "GoogleCloudVideointelligenceV1beta2_FaceAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "thumbnail")
       )
 
@@ -2923,7 +2894,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -2973,9 +2944,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_FaceFrame"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceFrame
-            Core.<$> ( o Core..:? "normalizedBoundingBoxes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "normalizedBoundingBoxes")
               Core.<*> (o Core..:? "timeOffset")
       )
 
@@ -3069,10 +3038,10 @@ instance
       "GoogleCloudVideointelligenceV1beta2_LabelAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LabelAnnotation
-            Core.<$> (o Core..:? "categoryEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryEntities")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "version")
       )
 
@@ -3218,8 +3187,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
+              Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -3317,7 +3286,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly
-            Core.<$> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vertices")
       )
 
 instance
@@ -3420,9 +3389,11 @@ instance
           GoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "trackId")
+              Core.<*> ( o Core..:? "trackId"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "version")
       )
 
@@ -3523,7 +3494,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation
-            Core.<$> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -3574,7 +3545,7 @@ instance
           GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -3623,7 +3594,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_SpeechTranscription"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_SpeechTranscription
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
               Core.<*> (o Core..:? "languageCode")
       )
 
@@ -3672,8 +3643,7 @@ instance
       "GoogleCloudVideointelligenceV1beta2_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TextAnnotation
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
               Core.<*> (o Core..:? "version")
       )
 
@@ -3774,7 +3744,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
       )
 
@@ -3833,8 +3803,8 @@ instance
       "GoogleCloudVideointelligenceV1beta2_TimestampedObject"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TimestampedObject
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
+              Core.<*> (o Core..:? "landmarks")
               Core.<*> (o Core..:? "normalizedBoundingBox")
               Core.<*> (o Core..:? "timeOffset")
       )
@@ -3896,12 +3866,10 @@ instance
       "GoogleCloudVideointelligenceV1beta2_Track"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_Track
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "segment")
-            Core.<*> ( o Core..:? "timestampedObjects"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timestampedObjects")
       )
 
 instance
@@ -4082,39 +4050,21 @@ instance
           GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "faceDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "frameLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "faceAnnotations")
+              Core.<*> (o Core..:? "faceDetectionAnnotations")
+              Core.<*> (o Core..:? "frameLabelAnnotations")
               Core.<*> (o Core..:? "inputUri")
-              Core.<*> ( o Core..:? "logoRecognitionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "personDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "logoRecognitionAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "personDetectionAnnotations")
               Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "segmentLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "segmentPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "shotLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "shotPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "speechTranscriptions"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segmentLabelAnnotations")
+              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
+              Core.<*> (o Core..:? "shotLabelAnnotations")
+              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "speechTranscriptions")
+              Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -4294,9 +4244,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
-            Core.<$> ( o Core..:? "annotationProgress"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationProgress")
       )
 
 instance
@@ -4341,9 +4289,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
-            Core.<$> ( o Core..:? "annotationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationResults")
       )
 
 instance
@@ -4544,7 +4490,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
               Core.<*> (o Core..:? "version")
       )
 
@@ -4643,8 +4589,8 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "thumbnail")
       )
 
@@ -4695,7 +4641,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -4745,9 +4691,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_FaceFrame"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceFrame
-            Core.<$> ( o Core..:? "normalizedBoundingBoxes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "normalizedBoundingBoxes")
               Core.<*> (o Core..:? "timeOffset")
       )
 
@@ -4841,10 +4785,10 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
-            Core.<$> (o Core..:? "categoryEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryEntities")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "version")
       )
 
@@ -4990,8 +4934,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
+              Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -5092,7 +5036,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly
-            Core.<$> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vertices")
       )
 
 instance
@@ -5195,9 +5139,11 @@ instance
           GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "trackId")
+              Core.<*> ( o Core..:? "trackId"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "version")
       )
 
@@ -5298,7 +5244,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation
-            Core.<$> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -5349,7 +5295,7 @@ instance
           GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -5398,7 +5344,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
               Core.<*> (o Core..:? "languageCode")
       )
 
@@ -5447,8 +5393,7 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
               Core.<*> (o Core..:? "version")
       )
 
@@ -5549,7 +5494,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
       )
 
@@ -5611,8 +5556,8 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_TimestampedObject"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TimestampedObject
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
+              Core.<*> (o Core..:? "landmarks")
               Core.<*> (o Core..:? "normalizedBoundingBox")
               Core.<*> (o Core..:? "timeOffset")
       )
@@ -5674,12 +5619,10 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_Track"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_Track
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "segment")
-            Core.<*> ( o Core..:? "timestampedObjects"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timestampedObjects")
       )
 
 instance
@@ -5876,39 +5819,21 @@ instance
           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "faceDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "frameLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "faceAnnotations")
+              Core.<*> (o Core..:? "faceDetectionAnnotations")
+              Core.<*> (o Core..:? "frameLabelAnnotations")
               Core.<*> (o Core..:? "inputUri")
-              Core.<*> ( o Core..:? "logoRecognitionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "personDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "logoRecognitionAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "personDetectionAnnotations")
               Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "segmentLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "segmentPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "shotLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "shotPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "speechTranscriptions"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segmentLabelAnnotations")
+              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
+              Core.<*> (o Core..:? "shotLabelAnnotations")
+              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "speechTranscriptions")
+              Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -6088,9 +6013,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
-            Core.<$> ( o Core..:? "annotationProgress"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationProgress")
       )
 
 instance
@@ -6135,9 +6058,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
-            Core.<$> ( o Core..:? "annotationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationResults")
       )
 
 instance
@@ -6338,7 +6259,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
               Core.<*> (o Core..:? "version")
       )
 
@@ -6437,8 +6358,8 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "thumbnail")
       )
 
@@ -6489,7 +6410,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -6539,9 +6460,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_FaceFrame"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceFrame
-            Core.<$> ( o Core..:? "normalizedBoundingBoxes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "normalizedBoundingBoxes")
               Core.<*> (o Core..:? "timeOffset")
       )
 
@@ -6635,10 +6554,10 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
-            Core.<$> (o Core..:? "categoryEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryEntities")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "version")
       )
 
@@ -6784,8 +6703,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
+              Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -6886,7 +6805,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
-            Core.<$> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vertices")
       )
 
 instance
@@ -6989,9 +6908,11 @@ instance
           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "trackId")
+              Core.<*> ( o Core..:? "trackId"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "version")
       )
 
@@ -7092,7 +7013,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation
-            Core.<$> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -7143,7 +7064,7 @@ instance
           GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -7192,7 +7113,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
               Core.<*> (o Core..:? "languageCode")
       )
 
@@ -7241,8 +7162,7 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
               Core.<*> (o Core..:? "version")
       )
 
@@ -7343,7 +7263,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
       )
 
@@ -7405,8 +7325,8 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_TimestampedObject"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TimestampedObject
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
+              Core.<*> (o Core..:? "landmarks")
               Core.<*> (o Core..:? "normalizedBoundingBox")
               Core.<*> (o Core..:? "timeOffset")
       )
@@ -7468,12 +7388,10 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_Track"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_Track
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "segment")
-            Core.<*> ( o Core..:? "timestampedObjects"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timestampedObjects")
       )
 
 instance
@@ -7670,39 +7588,21 @@ instance
           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
               Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "faceDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "frameLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "faceAnnotations")
+              Core.<*> (o Core..:? "faceDetectionAnnotations")
+              Core.<*> (o Core..:? "frameLabelAnnotations")
               Core.<*> (o Core..:? "inputUri")
-              Core.<*> ( o Core..:? "logoRecognitionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "personDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "logoRecognitionAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "personDetectionAnnotations")
               Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "segmentLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "segmentPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "shotLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "shotPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "speechTranscriptions"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segmentLabelAnnotations")
+              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
+              Core.<*> (o Core..:? "shotLabelAnnotations")
+              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "speechTranscriptions")
+              Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -7882,9 +7782,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress
-            Core.<$> ( o Core..:? "annotationProgress"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationProgress")
       )
 
 instance
@@ -7944,7 +7842,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest
-            Core.<$> (o Core..:? "features" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "features")
               Core.<*> (o Core..:? "inputContent")
               Core.<*> (o Core..:? "inputUri")
               Core.<*> (o Core..:? "locationId")
@@ -7998,9 +7896,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse
-            Core.<$> ( o Core..:? "annotationResults"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "annotationResults")
       )
 
 instance
@@ -8096,7 +7992,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation
-            Core.<$> (o Core..:? "celebrityTracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "celebrityTracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -8146,7 +8042,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack
-            Core.<$> (o Core..:? "celebrities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "celebrities")
               Core.<*> (o Core..:? "faceTrack")
       )
 
@@ -8348,7 +8244,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
               Core.<*> (o Core..:? "version")
       )
 
@@ -8485,8 +8381,8 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation
-            Core.<$> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "thumbnail")
       )
 
@@ -8537,7 +8433,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -8640,9 +8536,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_FaceFrame"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceFrame
-            Core.<$> ( o Core..:? "normalizedBoundingBoxes"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "normalizedBoundingBoxes")
               Core.<*> (o Core..:? "timeOffset")
       )
 
@@ -8736,10 +8630,10 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation
-            Core.<$> (o Core..:? "categoryEntities" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "categoryEntities")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "version")
       )
 
@@ -8953,8 +8847,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "tracks" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
+              Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -9055,7 +8949,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly
-            Core.<$> (o Core..:? "vertices" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "vertices")
       )
 
 instance
@@ -9158,9 +9052,11 @@ instance
           GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "trackId")
+              Core.<*> ( o Core..:? "trackId"
+                           Core.<&> Core.fmap Core.fromAsText
+                       )
               Core.<*> (o Core..:? "version")
       )
 
@@ -9299,7 +9195,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation
-            Core.<$> (o Core..:? "tracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "tracks")
               Core.<*> (o Core..:? "version")
       )
 
@@ -9478,7 +9374,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_SpeechContext"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechContext
-            Core.<$> (o Core..:? "phrases" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "phrases")
       )
 
 instance
@@ -9526,7 +9422,7 @@ instance
           GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
               Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -9575,7 +9471,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription
-            Core.<$> (o Core..:? "alternatives" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alternatives")
               Core.<*> (o Core..:? "languageCode")
       )
 
@@ -9642,7 +9538,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig
-            Core.<$> (o Core..:? "audioTracks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "audioTracks")
               Core.<*> (o Core..:? "diarizationSpeakerCount")
               Core.<*> (o Core..:? "enableAutomaticPunctuation")
               Core.<*> (o Core..:? "enableSpeakerDiarization")
@@ -9650,7 +9546,7 @@ instance
               Core.<*> (o Core..:? "filterProfanity")
               Core.<*> (o Core..:? "languageCode")
               Core.<*> (o Core..:? "maxAlternatives")
-              Core.<*> (o Core..:? "speechContexts" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "speechContexts")
       )
 
 instance
@@ -9782,9 +9678,9 @@ instance
           GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults
             Core.<$> (o Core..:? "explicitAnnotation")
               Core.<*> (o Core..:? "frameTimestamp")
-              Core.<*> (o Core..:? "labelAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "labelAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
       )
 
 instance
@@ -9839,8 +9735,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
               Core.<*> (o Core..:? "version")
       )
 
@@ -9887,7 +9782,7 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig
-            Core.<$> (o Core..:? "languageHints" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "languageHints")
               Core.<*> (o Core..:? "model")
       )
 
@@ -9987,7 +9882,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "frames")
               Core.<*> (o Core..:? "segment")
       )
 
@@ -10049,8 +9944,8 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_TimestampedObject"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TimestampedObject
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
-              Core.<*> (o Core..:? "landmarks" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
+              Core.<*> (o Core..:? "landmarks")
               Core.<*> (o Core..:? "normalizedBoundingBox")
               Core.<*> (o Core..:? "timeOffset")
       )
@@ -10112,12 +10007,10 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_Track"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_Track
-            Core.<$> (o Core..:? "attributes" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "confidence")
             Core.<*> (o Core..:? "segment")
-            Core.<*> ( o Core..:? "timestampedObjects"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "timestampedObjects")
       )
 
 instance
@@ -10321,39 +10214,21 @@ instance
             Core.<$> (o Core..:? "celebrityRecognitionAnnotations")
               Core.<*> (o Core..:? "error")
               Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "faceDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "frameLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "faceAnnotations")
+              Core.<*> (o Core..:? "faceDetectionAnnotations")
+              Core.<*> (o Core..:? "frameLabelAnnotations")
               Core.<*> (o Core..:? "inputUri")
-              Core.<*> ( o Core..:? "logoRecognitionAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "objectAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "personDetectionAnnotations"
-                           Core..!= Core.mempty
-                       )
+              Core.<*> (o Core..:? "logoRecognitionAnnotations")
+              Core.<*> (o Core..:? "objectAnnotations")
+              Core.<*> (o Core..:? "personDetectionAnnotations")
               Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "segmentLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "segmentPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "shotAnnotations" Core..!= Core.mempty)
-              Core.<*> ( o Core..:? "shotLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "shotPresenceLabelAnnotations"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> ( o Core..:? "speechTranscriptions"
-                           Core..!= Core.mempty
-                       )
-              Core.<*> (o Core..:? "textAnnotations" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segmentLabelAnnotations")
+              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "shotAnnotations")
+              Core.<*> (o Core..:? "shotLabelAnnotations")
+              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+              Core.<*> (o Core..:? "speechTranscriptions")
+              Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -10477,7 +10352,7 @@ instance
               Core.<*> (o Core..:? "labelDetectionConfig")
               Core.<*> (o Core..:? "objectTrackingConfig")
               Core.<*> (o Core..:? "personDetectionConfig")
-              Core.<*> (o Core..:? "segments" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "segments")
               Core.<*> (o Core..:? "shotChangeDetectionConfig")
               Core.<*> (o Core..:? "speechTranscriptionConfig")
               Core.<*> (o Core..:? "textDetectionConfig")
@@ -10775,7 +10650,7 @@ instance Core.FromJSON GoogleRpc_Status where
       ( \o ->
           GoogleRpc_Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

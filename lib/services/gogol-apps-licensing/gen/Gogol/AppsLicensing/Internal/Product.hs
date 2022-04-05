@@ -196,7 +196,7 @@ instance Core.FromJSON LicenseAssignmentList where
       ( \o ->
           LicenseAssignmentList
             Core.<$> (o Core..:? "etag")
-            Core.<*> (o Core..:? "items" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "items")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "licensing#licenseAssignmentList"
                      )

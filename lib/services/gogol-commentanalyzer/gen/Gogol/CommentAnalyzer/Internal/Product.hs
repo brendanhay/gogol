@@ -141,7 +141,7 @@ instance Core.FromJSON AnalyzeCommentRequest where
             Core.<*> (o Core..:? "communityId")
             Core.<*> (o Core..:? "context")
             Core.<*> (o Core..:? "doNotStore")
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "languages")
             Core.<*> (o Core..:? "requestedAttributes")
             Core.<*> (o Core..:? "sessionId")
             Core.<*> (o Core..:? "spanAnnotations")
@@ -235,8 +235,8 @@ instance Core.FromJSON AnalyzeCommentResponse where
           AnalyzeCommentResponse
             Core.<$> (o Core..:? "attributeScores")
             Core.<*> (o Core..:? "clientToken")
-            Core.<*> (o Core..:? "detectedLanguages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "languages")
       )
 
 instance Core.ToJSON AnalyzeCommentResponse where
@@ -383,7 +383,7 @@ instance Core.FromJSON AttributeScores where
       "AttributeScores"
       ( \o ->
           AttributeScores
-            Core.<$> (o Core..:? "spanScores" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "spanScores")
             Core.<*> (o Core..:? "summaryScore")
       )
 
@@ -420,7 +420,7 @@ instance Core.FromJSON Context where
       ( \o ->
           Context
             Core.<$> (o Core..:? "articleAndParentComment")
-            Core.<*> (o Core..:? "entries" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "entries")
       )
 
 instance Core.ToJSON Context where
@@ -561,7 +561,7 @@ instance Core.FromJSON SuggestCommentScoreRequest where
             Core.<*> (o Core..:? "comment")
             Core.<*> (o Core..:? "communityId")
             Core.<*> (o Core..:? "context")
-            Core.<*> (o Core..:? "languages" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "languages")
             Core.<*> (o Core..:? "sessionId")
       )
 
@@ -652,10 +652,8 @@ instance Core.FromJSON SuggestCommentScoreResponse where
       ( \o ->
           SuggestCommentScoreResponse
             Core.<$> (o Core..:? "clientToken")
-            Core.<*> (o Core..:? "detectedLanguages" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "requestedLanguages"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "requestedLanguages")
       )
 
 instance Core.ToJSON SuggestCommentScoreResponse where

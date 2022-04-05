@@ -702,7 +702,7 @@ instance Core.FromJSON ArtifactObjects where
       ( \o ->
           ArtifactObjects
             Core.<$> (o Core..:? "location")
-            Core.<*> (o Core..:? "paths" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "paths")
             Core.<*> (o Core..:? "timing")
       )
 
@@ -739,7 +739,7 @@ instance Core.FromJSON ArtifactResult where
       "ArtifactResult"
       ( \o ->
           ArtifactResult
-            Core.<$> (o Core..:? "fileHash" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "fileHash")
             Core.<*> (o Core..:? "location")
       )
 
@@ -774,7 +774,7 @@ instance Core.FromJSON Artifacts where
       "Artifacts"
       ( \o ->
           Artifacts
-            Core.<$> (o Core..:? "images" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "images")
             Core.<*> (o Core..:? "objects")
       )
 
@@ -813,7 +813,7 @@ instance
       "BatchCreateBitbucketServerConnectedRepositoriesRequest"
       ( \o ->
           BatchCreateBitbucketServerConnectedRepositoriesRequest
-            Core.<$> (o Core..:? "requests" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "requests")
       )
 
 instance
@@ -853,9 +853,7 @@ instance
       "BatchCreateBitbucketServerConnectedRepositoriesResponse"
       ( \o ->
           BatchCreateBitbucketServerConnectedRepositoriesResponse
-            Core.<$> ( o Core..:? "bitbucketServerConnectedRepositories"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bitbucketServerConnectedRepositories")
       )
 
 instance
@@ -973,9 +971,7 @@ instance Core.FromJSON BitbucketServerConfig where
       ( \o ->
           BitbucketServerConfig
             Core.<$> (o Core..:? "apiKey")
-            Core.<*> ( o Core..:? "connectedRepositories"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "connectedRepositories")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "hostUri")
             Core.<*> (o Core..:? "name")
@@ -1375,7 +1371,7 @@ instance Core.FromJSON Build where
             Core.<*> (o Core..:? "failureInfo")
             Core.<*> (o Core..:? "finishTime")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "images" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "logUrl")
             Core.<*> (o Core..:? "logsBucket")
             Core.<*> (o Core..:? "name")
@@ -1383,19 +1379,19 @@ instance Core.FromJSON Build where
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "queueTtl")
             Core.<*> (o Core..:? "results")
-            Core.<*> (o Core..:? "secrets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secrets")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "sourceProvenance")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusDetail")
-            Core.<*> (o Core..:? "steps" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "steps")
             Core.<*> (o Core..:? "substitutions")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "timing")
-            Core.<*> (o Core..:? "warnings" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON Build where
@@ -1623,20 +1619,20 @@ instance Core.FromJSON BuildOptions where
       "BuildOptions"
       ( \o ->
           BuildOptions
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "dynamicSubstitutions")
-            Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "logStreamingOption")
             Core.<*> (o Core..:? "logging")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "pool")
             Core.<*> (o Core..:? "requestedVerifyOption")
-            Core.<*> (o Core..:? "secretEnv" Core..!= Core.mempty)
-            Core.<*> ( o Core..:? "sourceProvenanceHash"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "secretEnv")
+            Core.<*> (o Core..:? "sourceProvenanceHash")
             Core.<*> (o Core..:? "substitutionOption")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
             Core.<*> (o Core..:? "workerPool")
       )
 
@@ -1728,20 +1724,20 @@ instance Core.FromJSON BuildStep where
       "BuildStep"
       ( \o ->
           BuildStep
-            Core.<$> (o Core..:? "args" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "args")
             Core.<*> (o Core..:? "dir")
             Core.<*> (o Core..:? "entrypoint")
-            Core.<*> (o Core..:? "env" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pullTiming")
             Core.<*> (o Core..:? "script")
-            Core.<*> (o Core..:? "secretEnv" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secretEnv")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "timing")
-            Core.<*> (o Core..:? "volumes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "waitFor" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "volumes")
+            Core.<*> (o Core..:? "waitFor")
       )
 
 instance Core.ToJSON BuildStep where
@@ -1870,15 +1866,15 @@ instance Core.FromJSON BuildTrigger where
             Core.<*> (o Core..:? "gitFileSource")
             Core.<*> (o Core..:? "github")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "ignoredFiles" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "includedFiles" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "ignoredFiles")
+            Core.<*> (o Core..:? "includedFiles")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pubsubConfig")
             Core.<*> (o Core..:? "resourceName")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "sourceToBuild")
             Core.<*> (o Core..:? "substitutions")
-            Core.<*> (o Core..:? "tags" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "triggerTemplate")
             Core.<*> (o Core..:? "webhookConfig")
       )
@@ -2578,10 +2574,7 @@ instance Core.FromJSON FileHashes where
   parseJSON =
     Core.withObject
       "FileHashes"
-      ( \o ->
-          FileHashes
-            Core.<$> (o Core..:? "fileHash" Core..!= Core.mempty)
-      )
+      (\o -> FileHashes Core.<$> (o Core..:? "fileHash"))
 
 instance Core.ToJSON FileHashes where
   toJSON FileHashes {..} =
@@ -2698,7 +2691,9 @@ instance Core.FromJSON GitHubEnterpriseConfig where
       "GitHubEnterpriseConfig"
       ( \o ->
           GitHubEnterpriseConfig
-            Core.<$> (o Core..:? "appId")
+            Core.<$> ( o Core..:? "appId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "hostUrl")
@@ -2839,7 +2834,9 @@ instance Core.FromJSON GitHubEventsConfig where
       ( \o ->
           GitHubEventsConfig
             Core.<$> (o Core..:? "enterpriseConfigResourceName")
-            Core.<*> (o Core..:? "installationId")
+            Core.<*> ( o Core..:? "installationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "owner")
             Core.<*> (o Core..:? "pullRequest")
@@ -3080,7 +3077,7 @@ instance Core.FromJSON HttpBody where
           HttpBody
             Core.<$> (o Core..:? "contentType")
             Core.<*> (o Core..:? "data")
-            Core.<*> (o Core..:? "extensions" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "extensions")
       )
 
 instance Core.ToJSON HttpBody where
@@ -3217,9 +3214,7 @@ instance
       "ListBitbucketServerConfigsResponse"
       ( \o ->
           ListBitbucketServerConfigsResponse
-            Core.<$> ( o Core..:? "bitbucketServerConfigs"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bitbucketServerConfigs")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3265,9 +3260,7 @@ instance
       "ListBitbucketServerRepositoriesResponse"
       ( \o ->
           ListBitbucketServerRepositoriesResponse
-            Core.<$> ( o Core..:? "bitbucketServerRepositories"
-                         Core..!= Core.mempty
-                     )
+            Core.<$> (o Core..:? "bitbucketServerRepositories")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3311,7 +3304,7 @@ instance Core.FromJSON ListBuildTriggersResponse where
       ( \o ->
           ListBuildTriggersResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "triggers" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "triggers")
       )
 
 instance Core.ToJSON ListBuildTriggersResponse where
@@ -3346,7 +3339,7 @@ instance Core.FromJSON ListBuildsResponse where
       "ListBuildsResponse"
       ( \o ->
           ListBuildsResponse
-            Core.<$> (o Core..:? "builds" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "builds")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -3383,7 +3376,7 @@ instance
       "ListGithubEnterpriseConfigsResponse"
       ( \o ->
           ListGithubEnterpriseConfigsResponse
-            Core.<$> (o Core..:? "configs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "configs")
       )
 
 instance
@@ -3423,7 +3416,7 @@ instance Core.FromJSON ListWorkerPoolsResponse where
       ( \o ->
           ListWorkerPoolsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "workerPools" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "workerPools")
       )
 
 instance Core.ToJSON ListWorkerPoolsResponse where
@@ -3726,7 +3719,7 @@ instance Core.FromJSON NotifierSpec where
       ( \o ->
           NotifierSpec
             Core.<$> (o Core..:? "notification")
-            Core.<*> (o Core..:? "secrets" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "secrets")
       )
 
 instance Core.ToJSON NotifierSpec where
@@ -4367,10 +4360,12 @@ instance Core.FromJSON Results where
           Results
             Core.<$> (o Core..:? "artifactManifest")
             Core.<*> (o Core..:? "artifactTiming")
-            Core.<*> (o Core..:? "buildStepImages" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "buildStepOutputs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "images" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "numArtifacts")
+            Core.<*> (o Core..:? "buildStepImages")
+            Core.<*> (o Core..:? "buildStepOutputs")
+            Core.<*> (o Core..:? "images")
+            Core.<*> ( o Core..:? "numArtifacts"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON Results where
@@ -4589,9 +4584,7 @@ instance Core.FromJSON SMTPDelivery where
             Core.<$> (o Core..:? "fromAddress")
             Core.<*> (o Core..:? "password")
             Core.<*> (o Core..:? "port")
-            Core.<*> ( o Core..:? "recipientAddresses"
-                         Core..!= Core.mempty
-                     )
+            Core.<*> (o Core..:? "recipientAddresses")
             Core.<*> (o Core..:? "senderAddress")
             Core.<*> (o Core..:? "server")
       )
@@ -4730,8 +4723,8 @@ instance Core.FromJSON Secrets where
       "Secrets"
       ( \o ->
           Secrets
-            Core.<$> (o Core..:? "inline" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "secretManager" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "inline")
+            Core.<*> (o Core..:? "secretManager")
       )
 
 instance Core.ToJSON Secrets where
@@ -4925,7 +4918,7 @@ instance Core.FromJSON Status where
       ( \o ->
           Status
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 
@@ -4996,7 +4989,9 @@ instance Core.FromJSON StorageSource where
       ( \o ->
           StorageSource
             Core.<$> (o Core..:? "bucket")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "object")
       )
 
@@ -5041,7 +5036,9 @@ instance Core.FromJSON StorageSourceManifest where
       ( \o ->
           StorageSourceManifest
             Core.<$> (o Core..:? "bucket")
-            Core.<*> (o Core..:? "generation")
+            Core.<*> ( o Core..:? "generation"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "object")
       )
 
@@ -5420,7 +5417,9 @@ instance Core.FromJSON WorkerConfig where
       "WorkerConfig"
       ( \o ->
           WorkerConfig
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> ( o Core..:? "diskSizeGb"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "machineType")
       )
 

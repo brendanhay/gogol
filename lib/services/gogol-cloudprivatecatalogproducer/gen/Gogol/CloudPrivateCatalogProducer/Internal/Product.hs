@@ -404,7 +404,7 @@ instance
       "GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse"
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-            Core.<$> (o Core..:? "associations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "associations")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -449,7 +449,7 @@ instance
       "GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse"
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-            Core.<$> (o Core..:? "catalogs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "catalogs")
               Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -495,7 +495,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "products" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "products")
       )
 
 instance
@@ -540,7 +540,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "versions" Core..!= Core.mempty)
+              Core.<*> (o Core..:? "versions")
       )
 
 instance
@@ -976,7 +976,7 @@ instance Core.FromJSON GoogleIamV1AuditConfig where
       "GoogleIamV1AuditConfig"
       ( \o ->
           GoogleIamV1AuditConfig
-            Core.<$> (o Core..:? "auditLogConfigs" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditLogConfigs")
             Core.<*> (o Core..:? "service")
       )
 
@@ -1032,7 +1032,7 @@ instance Core.FromJSON GoogleIamV1AuditLogConfig where
       "GoogleIamV1AuditLogConfig"
       ( \o ->
           GoogleIamV1AuditLogConfig
-            Core.<$> (o Core..:? "exemptedMembers" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "exemptedMembers")
             Core.<*> (o Core..:? "logType")
       )
 
@@ -1094,7 +1094,7 @@ instance Core.FromJSON GoogleIamV1Binding where
       ( \o ->
           GoogleIamV1Binding
             Core.<$> (o Core..:? "condition")
-            Core.<*> (o Core..:? "members" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "role")
       )
 
@@ -1207,8 +1207,8 @@ instance Core.FromJSON GoogleIamV1Policy where
       "GoogleIamV1Policy"
       ( \o ->
           GoogleIamV1Policy
-            Core.<$> (o Core..:? "auditConfigs" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "bindings" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "auditConfigs")
+            Core.<*> (o Core..:? "bindings")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "version")
       )
@@ -1287,7 +1287,7 @@ instance
       "GoogleIamV1TestIamPermissionsRequest"
       ( \o ->
           GoogleIamV1TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -1324,7 +1324,7 @@ instance
       "GoogleIamV1TestIamPermissionsResponse"
       ( \o ->
           GoogleIamV1TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "permissions")
       )
 
 instance
@@ -1396,7 +1396,7 @@ instance
       ( \o ->
           GoogleLongrunningListOperationsResponse
             Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "operations" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "operations")
       )
 
 instance
@@ -1595,7 +1595,7 @@ instance Core.FromJSON GoogleRpcStatus where
       ( \o ->
           GoogleRpcStatus
             Core.<$> (o Core..:? "code")
-            Core.<*> (o Core..:? "details" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "details")
             Core.<*> (o Core..:? "message")
       )
 

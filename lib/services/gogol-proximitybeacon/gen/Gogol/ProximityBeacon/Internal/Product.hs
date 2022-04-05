@@ -418,7 +418,7 @@ instance Core.FromJSON BeaconInfo where
       ( \o ->
           BeaconInfo
             Core.<$> (o Core..:? "advertisedId")
-            Core.<*> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "attachments")
             Core.<*> (o Core..:? "beaconName")
       )
 
@@ -538,7 +538,7 @@ instance Core.FromJSON Diagnostics where
       "Diagnostics"
       ( \o ->
           Diagnostics
-            Core.<$> (o Core..:? "alerts" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "alerts")
             Core.<*> (o Core..:? "beaconName")
             Core.<*> (o Core..:? "estimatedLowBatteryDate")
       )
@@ -623,7 +623,9 @@ instance Core.FromJSON EphemeralIdRegistration where
           EphemeralIdRegistration
             Core.<$> (o Core..:? "beaconEcdhPublicKey")
             Core.<*> (o Core..:? "beaconIdentityKey")
-            Core.<*> (o Core..:? "initialClockValue")
+            Core.<*> ( o Core..:? "initialClockValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "initialEid")
             Core.<*> (o Core..:? "rotationPeriodExponent")
             Core.<*> (o Core..:? "serviceEcdhPublicKey")
@@ -723,8 +725,8 @@ instance
       "GetInfoForObservedBeaconsRequest"
       ( \o ->
           GetInfoForObservedBeaconsRequest
-            Core.<$> (o Core..:? "namespacedTypes" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "observations" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "namespacedTypes")
+            Core.<*> (o Core..:? "observations")
       )
 
 instance Core.ToJSON GetInfoForObservedBeaconsRequest where
@@ -761,7 +763,7 @@ instance
       "GetInfoForObservedBeaconsResponse"
       ( \o ->
           GetInfoForObservedBeaconsResponse
-            Core.<$> (o Core..:? "beacons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "beacons")
       )
 
 instance
@@ -855,7 +857,7 @@ instance Core.FromJSON ListBeaconAttachmentsResponse where
       "ListBeaconAttachmentsResponse"
       ( \o ->
           ListBeaconAttachmentsResponse
-            Core.<$> (o Core..:? "attachments" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "attachments")
       )
 
 instance Core.ToJSON ListBeaconAttachmentsResponse where
@@ -894,9 +896,11 @@ instance Core.FromJSON ListBeaconsResponse where
       "ListBeaconsResponse"
       ( \o ->
           ListBeaconsResponse
-            Core.<$> (o Core..:? "beacons" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "beacons")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "totalCount")
+            Core.<*> ( o Core..:? "totalCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance Core.ToJSON ListBeaconsResponse where
@@ -936,7 +940,7 @@ instance Core.FromJSON ListDiagnosticsResponse where
       "ListDiagnosticsResponse"
       ( \o ->
           ListDiagnosticsResponse
-            Core.<$> (o Core..:? "diagnostics" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "diagnostics")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -969,7 +973,7 @@ instance Core.FromJSON ListNamespacesResponse where
       "ListNamespacesResponse"
       ( \o ->
           ListNamespacesResponse
-            Core.<$> (o Core..:? "namespaces" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "namespaces")
       )
 
 instance Core.ToJSON ListNamespacesResponse where

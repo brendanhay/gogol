@@ -159,7 +159,7 @@ instance Core.FromJSON BatchGetAmpUrlsRequest where
       ( \o ->
           BatchGetAmpUrlsRequest
             Core.<$> (o Core..:? "lookupStrategy")
-            Core.<*> (o Core..:? "urls" Core..!= Core.mempty)
+            Core.<*> (o Core..:? "urls")
       )
 
 instance Core.ToJSON BatchGetAmpUrlsRequest where
@@ -194,8 +194,8 @@ instance Core.FromJSON BatchGetAmpUrlsResponse where
       "BatchGetAmpUrlsResponse"
       ( \o ->
           BatchGetAmpUrlsResponse
-            Core.<$> (o Core..:? "ampUrls" Core..!= Core.mempty)
-            Core.<*> (o Core..:? "urlErrors" Core..!= Core.mempty)
+            Core.<$> (o Core..:? "ampUrls")
+            Core.<*> (o Core..:? "urlErrors")
       )
 
 instance Core.ToJSON BatchGetAmpUrlsResponse where
