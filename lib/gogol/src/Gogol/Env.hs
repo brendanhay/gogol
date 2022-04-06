@@ -65,7 +65,7 @@ class HasEnv scopes a | a -> scopes where
   envLogger = environment . lens _envLogger (\s a -> s {_envLogger = a})
   envManager = environment . lens _envManager (\s a -> s {_envManager = a})
   envStore = environment . lens _envStore (\s a -> s {_envStore = a})
-  envScopes = environment . lens (\_ -> Proxy :: Proxy s) (flip allow)
+  envScopes = environment . lens (\_ -> Proxy :: Proxy scopes) (flip allow)
 
 instance HasEnv scopes (Env scopes) where
   environment = id
@@ -127,7 +127,13 @@ timeout s = local (configure (serviceTimeout ?~ s))
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
-newEnv :: forall s. m (MonadIO m, MonadCatch m, KnownScopes scopes) => m (Env scopes)
+newEnv ::
+  forall scopes m.
+  ( MonadIO m,
+    MonadCatch m,
+    KnownScopes scopes
+  ) =>
+  m (Env scopes)
 newEnv = do
   m <- liftIO (newManager tlsManagerSettings)
   c <- getApplicationDefault m
@@ -137,8 +143,11 @@ newEnv = do
 --
 -- /See:/ 'newEnv'.
 newEnvWith ::
-  forall s m.
-  (MonadIO m, MonadCatch m, KnownScopes scopes) =>
+  forall scopes m.
+  ( MonadIO m,
+    MonadCatch m,
+    KnownScopes scopes
+  ) =>
   Credentials scopes ->
   Logger ->
   Manager ->
