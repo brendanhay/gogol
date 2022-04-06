@@ -30,18 +30,18 @@ import Gogol.Types
 import Network.HTTP.Conduit (Manager, newManager, tlsManagerSettings)
 
 -- | The environment containing the parameters required to make Google requests.
-data Env (s :: [Symbol]) = Env
+data Env (scopes :: [Symbol]) = Env
   { _envOverride :: !(Dual (Endo ServiceConfig)),
     _envLogger :: !Logger,
     _envManager :: !Manager,
-    _envStore :: !(Store s)
+    _envStore :: !(Store scopes)
   }
 
 -- Note: The strictness annotations aobe are applied to ensure
 -- total field initialisation.
 
-class HasEnv s a | a -> s where
-  environment :: Lens' a (Env s)
+class HasEnv scopes a | a -> scopes where
+  environment :: Lens' a (Env scopes)
   {-# MINIMAL environment #-}
 
   -- | The currently applied overrides to all 'Service' configuration.
@@ -54,12 +54,12 @@ class HasEnv s a | a -> s where
   envManager :: Lens' a Manager
 
   -- | The credential store used to sign requests for authentication with Google.
-  envStore :: Lens' a (Store s)
+  envStore :: Lens' a (Store scopes)
 
   -- | The authorised OAuth2 scopes.
   --
   -- /See:/ 'allow', '!', and the related scopes available for each service.
-  envScopes :: Lens' a (Proxy s)
+  envScopes :: Lens' a (Proxy scopes)
 
   envOverride = environment . lens _envOverride (\s a -> s {_envOverride = a})
   envLogger = environment . lens _envLogger (\s a -> s {_envLogger = a})
@@ -67,7 +67,7 @@ class HasEnv s a | a -> s where
   envStore = environment . lens _envStore (\s a -> s {_envStore = a})
   envScopes = environment . lens (\_ -> Proxy :: Proxy s) (flip allow)
 
-instance HasEnv s (Env s) where
+instance HasEnv scopes (Env scopes) where
   environment = id
 
 -- | Provide a function which will be added to the stack
@@ -76,7 +76,7 @@ instance HasEnv s (Env s) where
 -- modified 'Env'.
 --
 -- /See:/ 'override'.
-configure :: HasEnv s a => (ServiceConfig -> ServiceConfig) -> a -> a
+configure :: HasEnv scopes a => (ServiceConfig -> ServiceConfig) -> a -> a
 configure f = envOverride <>~ Dual (Endo f)
 
 -- | Override a specific 'ServiceConfig'. All requests belonging to the
@@ -94,7 +94,7 @@ configure f = envOverride <>~ Dual (Endo f)
 -- >    ...
 --
 -- /See:/ 'configure'.
-override :: HasEnv s a => ServiceConfig -> a -> a
+override :: HasEnv scopes a => ServiceConfig -> a -> a
 override s = configure f
   where
     f x
@@ -112,7 +112,7 @@ override s = configure f
 -- * The 'envManager' timeout, if set.
 --
 -- * The 'ClientRequest' timeout. (Default 30s)
-timeout :: (MonadReader r m, HasEnv s r) => Seconds -> m a -> m a
+timeout :: (MonadReader r m, HasEnv scopes r) => Seconds -> m a -> m a
 timeout s = local (configure (serviceTimeout ?~ s))
 
 -- | Creates a new environment with a newly initialized 'Manager', without logging.
@@ -127,7 +127,7 @@ timeout s = local (configure (serviceTimeout ?~ s))
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
-newEnv :: (MonadIO m, MonadCatch m, KnownScopes s) => m (Env s)
+newEnv :: forall s. m (MonadIO m, MonadCatch m, KnownScopes scopes) => m (Env scopes)
 newEnv = do
   m <- liftIO (newManager tlsManagerSettings)
   c <- getApplicationDefault m
@@ -137,9 +137,11 @@ newEnv = do
 --
 -- /See:/ 'newEnv'.
 newEnvWith ::
-  (MonadIO m, MonadCatch m, KnownScopes s) =>
-  Credentials s ->
+  forall s m.
+  (MonadIO m, MonadCatch m, KnownScopes scopes) =>
+  Credentials scopes ->
   Logger ->
   Manager ->
-  m (Env s)
-newEnvWith c l m = Env mempty l m <$> initStore c l m
+  m (Env scopes)
+newEnvWith c l m =
+  Env mempty l m <$> initStore c l m
