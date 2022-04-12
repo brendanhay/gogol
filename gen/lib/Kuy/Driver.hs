@@ -3,8 +3,8 @@ module Kuy.Driver where
 import Data.Time qualified as Time
 import Kuy.Driver.Query (Query (..))
 import Kuy.Driver.Rules qualified as Rules
-import Kuy.Driver.Store.Manifest
 import Kuy.Prelude
+import Kuy.Store.Manifest
 import Network.HTTP.Client qualified as Client
 import Network.HTTP.Client.TLS qualified as TLS
 import Rock (GenRules, Rules, Task, TaskKind, Writer (..))
@@ -13,12 +13,18 @@ import UnliftIO qualified
 import UnliftIO.IORef qualified as IORef
 import UnliftIO.MVar qualified as MVar
 
+buildDir :: FilePath
+buildDir = "_build"
+
+tempDir :: FilePath
+tempDir = buildDir </> "tmp"
+
 execute :: Task Query a -> IO a
 execute task = do
   manager <- Client.newManager TLS.tlsManagerSettings
 
   withTimeSummary $
-    runTask manager "_build" task
+    runTask manager buildDir task
 
 runTask :: Client.Manager -> FilePath -> Task Query a -> IO a
 runTask manager store task =

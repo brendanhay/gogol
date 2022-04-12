@@ -10,6 +10,7 @@
 bin
 dist
 vendor
+dist-newstyle
 .stack-work
 .direnv
 

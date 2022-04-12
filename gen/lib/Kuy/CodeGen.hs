@@ -14,33 +14,43 @@ import Kuy.Monad
 import Kuy.Prelude
 import Kuy.TH
 import Kuy.Unit
+import Kuy.Driver.Query (Query (..))
+import Data.Char qualified as Char
+import Rock (MonadFetch, fetch)
+
+-- FIXME: Query for Markdown -> Haddock
 
 genPackage ::
+  Cabal.PackageDescription ->
   Description ->
   Either [String] (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
-genPackage description@Description {title, description = markdown} = do
+genPackage package description@Description {title, description = markdown} = do
   haddock <- bimap (: []) (fromString . Text.unpack) (Markdown.writeHaddock markdown)
   modules <- genModules description
 
-  let name = Cabal.mkPackageName (Text.unpack description.name.text)
-      library = Cabal.mkLibrary (Map.keys modules)
+  let name = Cabal.mkPackageName (Text.unpack ("gogol-" <> description.name.text))
 
   pure
-    ( (Cabal.mkPackageDescription name [1, 0, 0, 0] library)
-        { Cabal.copyright = "Copyright (c) 2013-2022 Brendan Hay",
-          Cabal.author = "Brendan Hay",
-          Cabal.maintainer = "Brendan Hay <brendan.g.hay+gogol@gmail.com",
-          Cabal.category = "Google",
-          Cabal.homepage = "https://github.com/brendanhay/gogol",
-          Cabal.synopsis = fromString (Text.unpack title),
-          Cabal.description = haddock
+    ( package
+        { Cabal.package = package.package { Cabal.pkgName = name },
+          -- Cabal.copyright = "Copyright (c) 2013-2022 Brendan Hay",
+          -- Cabal.author = "Brendan Hay",
+          -- Cabal.maintainer = "Brendan Hay <brendan.g.hay+gogol@gmail.com",
+          -- Cabal.category = "Google",
+          -- Cabal.homepage = "https://github.com/brendanhay/gogol",
+          Cabal.description = haddock,
+          Cabal.library = Just (Cabal.mkLibrary (Map.keys modules))
         },
       modules
     )
 
 genModules :: Description -> Either [String] (Map Cabal.ModuleName GHC.HsModule)
-genModules Description {name, methods, resources, schemas} =
-  runM name.text $ do
+genModules Description {name, canonicalName, methods, resources, schemas} = do
+  let namespace =
+        fromMaybe name.text $
+          Text.filter Char.isAlphaNum <$> canonicalName
+
+  runM namespace $ do
     resourceModules <- genResource Resource {methods, resources}
     schemaModules <- Map.fromList <$> for (Map.toList schemas) (uncurry genSchema)
 
@@ -158,8 +168,6 @@ genSchemaRef = \case
       --
       Float ->
         pure Nothing
-
---
 
 genString :: Schema -> M (Maybe Unit)
 genString schema

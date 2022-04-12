@@ -30,6 +30,7 @@ module Kuy.Prelude
   )
 where
 
+import Data.Binary as Export (Binary)
 import Control.Applicative as Export (Alternative ((<|>)))
 import Control.Exception as Export (Exception, IOException, SomeException)
 import Control.Monad as Export

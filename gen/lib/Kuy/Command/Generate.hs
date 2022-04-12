@@ -12,9 +12,9 @@ import Kuy.GHC qualified as GHC
 import Kuy.Prelude
 import Rock (Task, fetch)
 import System.FilePath qualified as FilePath
-import UnliftIO qualified
 import UnliftIO.Async qualified as Async
 import UnliftIO.Directory qualified as Directory
+import UnliftIO.Temporary qualified as Temporary
 
 type Target = (ServiceName, Maybe ServiceVersion)
 
@@ -28,11 +28,11 @@ generateAll outputDir threads targets' =
   case Set.toList targets' of
     -- If no targets were specified, determine all service's preferred version
     -- and generate them concurrently.
-    [] ->
-      fetch DiscoveryIndex
-        >>= Async.pooledMapConcurrentlyN_ threads (generateOne outputDir)
-          . map (\s -> (s.name, Just s.version))
-          . preferredVersions
+    [] -> do
+      services <- preferredVersions <$> fetch DiscoveryIndex
+
+      Async.pooledMapConcurrentlyN_ threads (generateOne outputDir) $
+        map (\s -> (s.name, Just s.version)) services
     --
     -- If a single target was specified, generate with no conccurrency.
     [target] ->
@@ -43,32 +43,52 @@ generateAll outputDir threads targets' =
       Async.pooledMapConcurrentlyN_ threads (generateOne outputDir) targets
 
 generateOne :: FilePath -> Target -> Task Query ()
-generateOne outputDir target@(serviceName, serviceVersion) = do
-  fetch (DiscoveryDescription serviceName serviceVersion) >>= \case
-    Nothing ->
-      liftIO $ putStrLn ("Skipping invalid " ++ show target)
-    --
-    Just description -> do
-      -- FIXME: write to temporary directory then move atomically to location,
-      -- only if files have different fingerprints to preserve mtime, etc.
+generateOne outputDir target = do
+  package <- fetch PackageDescription
+  description <- fetch (uncurry DiscoveryDescription target)
+
+  liftIO $
+    case CodeGen.genPackage package <$> description of
+      Nothing ->
+        putStrLn $
+          "Skipping invalid " ++ show target
       --
-      -- What about readonly?
-      (package, modules) <-
-        either (UnliftIO.throwString . unlines) pure $
-          CodeGen.genPackage description
+      Just (Left errs) ->
+        putStrLn $
+          "Error " ++ unlines (show target : errs)
+      --
+      Just (Right result) ->
+        uncurry (writePackage outputDir) result
 
-      let packageName = Cabal.unPackageName (Cabal.packageName package)
-          packageDir = outputDir </> packageName
-          packageFile = packageDir </> packageName <.> "cabal"
+writePackage ::
+  FilePath ->
+  Cabal.PackageDescription ->
+  Map Cabal.ModuleName GHC.HsModule ->
+  IO ()
+writePackage outputDir package modules = do
+  let packageName = Cabal.unPackageName (Cabal.packageName package)
+      packageDir = outputDir </> packageName
 
-      createParent packageFile
-        *> liftIO (Cabal.writePackageDescription packageFile package)
+  Directory.createDirectoryIfMissing True Driver.tempDir
 
-      for_ (Map.toList modules) $ \(moduleName, module') -> do
-        let moduleFile = packageDir </> Cabal.toFilePath moduleName <.> "hs"
+  -- We can't reliably use withSystemTempDirectory here as I use tmpfs
+  -- and end up with 'Invalid cross-device link' errors trying to use
+  -- renameDirectory across devices.
+  Temporary.withTempDirectory Driver.tempDir packageName $ \tempDir -> do
+    -- Write the package's cabal file.
+    Cabal.writePackageDescription (tempDir </> packageName <.> "cabal") package
 
-        createParent moduleFile
-          *> liftIO (GHC.writeModuleFile moduleFile module')
+    for_ (Map.toList modules) $ \(moduleName, module') -> do
+      -- Write an individual haskell module.
+      let moduleFile = tempDir </> Cabal.toFilePath moduleName <.> "hs"
+
+      createParent moduleFile
+        *> GHC.writeModuleFile moduleFile module'
+
+    -- FIXME: Make everything readonly before copying
+    Directory.removePathForcibly packageDir
+      *> createParent packageDir
+      *> Directory.renameDirectory tempDir packageDir
 
 createParent :: MonadIO m => FilePath -> m ()
 createParent =

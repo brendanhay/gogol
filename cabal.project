@@ -1,3 +1,6 @@
+-- Pin the hackage index.
+index-state: 2022-04-12T09:42:42Z
+
 -- Writing environment files prevents reproducible builds.
 write-ghc-environment-files: never
 

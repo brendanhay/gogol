@@ -26,6 +26,87 @@ import Text.Pandoc qualified as Pandoc
 import UnliftIO (MonadUnliftIO)
 import UnliftIO qualified
 import Prelude
+import Distribution.Simple qualified as Cabal
+import Distribution.PackageDescription qualified as Cabal
+import Distribution.CabalSpecVersion qualified as Cabal
+import Distribution.ModuleName qualified as Cabal
+import Distribution.Utils.Path qualified as Cabal
+import Distribution.Compat.NonEmptySet qualified as Cabal
+import Distribution.SPDX qualified as Cabal.SPDX
+import Distribution.Utils.ShortText qualified as Cabal
+import Data.Word (Word16)
+import Data.Persist qualified as Persist
+import Data.Binary qualified as Binary
+import Data.Binary (Binary)
+
+-- Cabal has Binary instances, consider switching modulo performance concerns.
+
+-- deriving anyclass instance Persist Cabal.PackageDescription
+-- deriving anyclass instance Persist Cabal.PackageFlag
+-- deriving anyclass instance Persist Cabal.PackageIdentifier
+-- deriving anyclass instance Persist Cabal.PackageName
+-- deriving anyclass instance (Persist a, Persist b) => Persist (Cabal.SymbolicPath a b)
+-- deriving anyclass instance Persist Cabal.PackageDir
+-- deriving anyclass instance Persist Cabal.SourceDir
+-- deriving anyclass instance Persist Cabal.FlagName
+-- deriving anyclass instance Persist Cabal.Language
+-- deriving anyclass instance Persist Cabal.Extension
+-- deriving anyclass instance Persist Cabal.Version
+-- deriving anyclass instance Persist Cabal.VersionRange
+-- deriving anyclass instance Persist Cabal.ModuleName
+-- deriving anyclass instance Persist Cabal.UnqualComponentName
+-- deriving anyclass instance Persist Cabal.ModuleReexport
+-- deriving anyclass instance Persist Cabal.ShortText
+-- deriving anyclass instance Persist Cabal.CabalSpecVersion
+-- deriving anyclass instance Persist Cabal.SourceRepo
+-- deriving anyclass instance Persist Cabal.RepoKind
+-- deriving anyclass instance Persist Cabal.RepoType
+-- deriving anyclass instance Persist Cabal.KnownRepoType
+-- deriving anyclass instance Persist Cabal.BuildType
+-- deriving anyclass instance Persist Cabal.SetupBuildInfo
+-- deriving anyclass instance Persist Cabal.BuildInfo
+-- deriving anyclass instance Persist Cabal.ForeignLib
+-- deriving anyclass instance Persist Cabal.ForeignLibType
+-- deriving anyclass instance Persist Cabal.ForeignLibOption
+-- deriving anyclass instance Persist Cabal.Library
+-- deriving anyclass instance Persist Cabal.LibraryName
+-- deriving anyclass instance Persist Cabal.LibraryVisibility
+-- deriving anyclass instance Persist Cabal.LibVersionInfo
+-- deriving anyclass instance Persist Cabal.ExeDependency
+-- deriving anyclass instance Persist Cabal.LegacyExeDependency
+-- deriving anyclass instance Persist Cabal.PkgconfigName
+-- deriving anyclass instance Persist Cabal.PkgconfigDependency
+-- deriving anyclass instance Persist Cabal.PkgconfigVersion
+-- deriving anyclass instance Persist Cabal.PkgconfigVersionRange
+-- deriving anyclass instance Persist a => Persist (Cabal.PerCompilerFlavor a)
+-- deriving anyclass instance Persist Cabal.Dependency
+-- deriving anyclass instance Persist Cabal.TestSuite
+-- deriving anyclass instance Persist Cabal.TestSuiteInterface
+-- deriving anyclass instance Persist Cabal.Executable
+-- deriving anyclass instance Persist Cabal.ExecutableScope
+-- deriving anyclass instance Persist Cabal.License
+-- deriving anyclass instance Persist Cabal.LicenseFile
+-- deriving anyclass instance Persist Cabal.CompilerFlavor
+-- deriving anyclass instance Persist Cabal.SPDX.License
+-- deriving anyclass instance Persist Cabal.SPDX.LicenseRef
+-- deriving anyclass instance Persist Cabal.SPDX.LicenseExpression
+-- deriving anyclass instance Persist Cabal.SPDX.LicenseExceptionId
+-- deriving anyclass instance Persist Cabal.SPDX.SimpleLicenseExpression
+
+instance (Ord a, Persist a) => Persist (Cabal.NonEmptySet a) where
+  put = put . Cabal.toNonEmpty
+  get = Cabal.fromNonEmpty <$> get
+
+
+instance Persist Cabal.SPDX.LicenseId where
+    -- Word16 is encoded in big endianess
+    -- https://github.com/kolmodin/binary/blob/master/src/Data/Binary/Class.hs#L220-LL227
+    put = Persist.putBE @Word16 . fromIntegral . fromEnum
+    get = do
+       i <- Persist.getBE @Word16
+       if i > fromIntegral (fromEnum (maxBound :: Cabal.SPDX.LicenseId))
+        then fail "Too large LicenseId tag"
+        else pure (toEnum (fromIntegral i))
 
 -- Rock has MonadBaseControl instances, but no UnliftIO.
 

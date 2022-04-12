@@ -8,6 +8,7 @@ import GHC.IO.Encoding qualified as Encoding
 import Kuy.Command.Generate qualified as Command (generate)
 import Kuy.Discovery
 import Kuy.Prelude
+import Kuy.Driver qualified as Driver
 import Options.Applicative (Parser, ParserInfo, ReadM)
 import Options.Applicative qualified as Options
 
@@ -37,7 +38,7 @@ generate =
               Options.help "Directory where generated output will be written"
                 <> Options.long "output"
                 <> Options.metavar "PATH"
-                <> Options.value "tmp"
+                <> Options.value (Driver.tempDir </> "services")
                 <> Options.showDefaultWith id
 
           targets <-

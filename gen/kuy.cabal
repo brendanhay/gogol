@@ -43,23 +43,24 @@ library
   build-depends:
     , aeson                   ^>=2
     , atomic-primops          ^>=0.8
-    , base16                  ^>=3.2
+    , base16                  ^>=0.3
     , burrito                 ^>=2
     , bytestring              ^>=0.11
-    , Cabal                   ^>=3.2
+    , Cabal                   ^>=3.6
     , containers              ^>=0.6
     , dependent-sum-template  ^>=0.1
     , dlist                   ^>=1
     , either                  ^>=5
     , filepath                ^>=1.4
-    , ghc                     ^>=9.2.1
+    , ghc                     ^>=9.2
     , hashable                ^>=1.4
+    , binary
     , http-client             ^>=0.7
     , http-client-tls         ^>=0.3
     , mtl                     ^>=2.2
     , optparse-applicative    ^>=0.17
     , pandoc                  ^>=2.17
-    , persist                 ^>=0.1.1
+    , persist                 ^>=0.1
     , psqueues                ^>=0.2
     , rock                    ^>=0.3
     , some                    ^>=1
@@ -70,12 +71,10 @@ library
     , unliftio                ^>=0.2
 
   exposed-modules:
-    Kuy.CodeGen.Cabal
-    Kuy.CodeGen.GHC
-    Kuy.CodeGen.Monad
-    Kuy.CodeGen.Name
-    Kuy.CodeGen.TH
-    Kuy.CodeGen.Unit
+    Kuy.Bridge
+    Kuy.Builtin
+    Kuy.Cabal
+    Kuy.CodeGen
     Kuy.Command.Generate
     Kuy.Discovery
     Kuy.Discovery.Description
@@ -86,8 +85,10 @@ library
     Kuy.Driver
     Kuy.Driver.Query
     Kuy.Driver.Rules
+    Kuy.GHC
     Kuy.Main
     Kuy.Markdown
+    Kuy.Monad
     Kuy.Orphans
     Kuy.Prelude
     Kuy.Store.Artefact
@@ -95,6 +96,8 @@ library
     Kuy.Store.Fingerprint
     Kuy.Store.Manifest
     Kuy.Template
+    Kuy.TH
+    Kuy.Unit
 
 -- executable kuy
 --   import:         base
