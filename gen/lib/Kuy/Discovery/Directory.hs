@@ -57,16 +57,14 @@ data DirectoryItem = DirectoryItem
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Structured, Persist, FromJSON)
 
-data PriorityVersion = PriorityVersion
+data Preferred = Preferred
   { preferred :: Down Bool,
     version :: ServiceVersion
   }
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Structured, Persist)
 
-type ServiceVersions = OrdPSQ ServiceVersion PriorityVersion DirectoryItem
-
-type DirectoryIndex = Map ServiceName ServiceVersions
+type DirectoryIndex = Map ServiceName (OrdPSQ ServiceVersion Preferred DirectoryItem)
 
 newDirectoryIndex :: [DirectoryItem] -> DirectoryIndex
 newDirectoryIndex =
@@ -78,16 +76,16 @@ newDirectoryIndex =
         Just pq -> OrdPSQ.insert item.version priority item pq
       where
         priority =
-          PriorityVersion
+          Preferred
             { preferred = Down item.preferred,
               version = item.version
             }
 
-preferredVersions :: DirectoryIndex -> [ServiceId]
+preferredVersions :: DirectoryIndex -> [DirectoryItem]
 preferredVersions index =
   flip mapMaybe (Map.elems index) $ \versions -> do
     (_v, _p, item) <- OrdPSQ.findMin versions
-    pure item.id
+    pure item
 
 findPreferredVersion ::
   ServiceName ->

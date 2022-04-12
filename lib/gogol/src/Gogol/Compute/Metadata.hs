@@ -255,7 +255,8 @@ getMetadata path statuses m =
 metadataRequest :: Client.Request
 metadataRequest =
   Client.defaultRequest
-    { Client.host = "metadata.google.internal",
+    { -- FIXME: consider switching to 169.254.169.254 by default.
+      Client.host = "metadata.google.internal",
       Client.port = 80,
       Client.secure = False,
       Client.method = "GET",

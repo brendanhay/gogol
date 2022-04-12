@@ -12,7 +12,7 @@ data Schema = Schema
   { -- | Unique identifier for this schema.
     id :: Maybe SchemaId,
     -- | An interpretation of both the type and format fields describing this schema.
-    format :: Maybe Format,
+    format :: Format,
     -- | A description of this object.
     description :: Maybe Markdown,
     -- | The default value of this property (if one exists).
@@ -46,6 +46,46 @@ data Schema = Schema
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Structured, Persist)
 
+instance FromJSON Schema where
+  parseJSON =
+    Aeson.withObject "Schema" $ \o -> do
+      id <-
+        o .:? "id"
+      format <-
+        parseJSON (Aeson.Object o)
+      description <-
+        o .:? "description"
+      default' <-
+        o .:? "default"
+      required <-
+        o .:? "required" .!= False
+      pattern' <-
+        o .:? "pattern"
+      minimum <-
+        o .:? "minimum"
+      maximum <-
+        o .:? "maximum"
+      enum <-
+        o .:? "enum"
+      enumDescriptions <-
+        o .:? "enumDescriptions"
+      repeated <-
+        o .:? "repeated" .!= False
+      location <-
+        o .:? "location"
+      properties <-
+        o .:? "properties" .!= mempty
+      additionalProperties <-
+        o .:? "additionalProperties"
+      items <-
+        o .:? "items"
+      annotations <-
+        o .:? "annotations" >>= \case
+          Nothing -> pure mempty
+          Just o' -> o' .: "required"
+
+      pure Schema {..}
+
 -- | Either a schema reference or an inline definition.
 data SchemaRef
   = Follow SchemaId
@@ -58,45 +98,7 @@ data SchemaRef
 instance FromJSON SchemaRef where
   parseJSON =
     Aeson.withObject "SchemaRef" $ \o ->
-      fmap Follow (o .: "$ref") <|> fmap Inline (parseSchema o)
-    where
-      parseSchema o = do
-        id <-
-          o .:? "id"
-        format <-
-          parseJSON (Aeson.Object o)
-        description <-
-          o .:? "description"
-        default' <-
-          o .:? "default"
-        required <-
-          o .:? "required" .!= False
-        pattern' <-
-          o .:? "pattern"
-        minimum <-
-          o .:? "minimum"
-        maximum <-
-          o .:? "maximum"
-        enum <-
-          o .:? "enum"
-        enumDescriptions <-
-          o .:? "enumDescriptions"
-        repeated <-
-          o .:? "repeated" .!= False
-        location <-
-          o .:? "location"
-        properties <-
-          o .:? "properties" .!= mempty
-        additionalProperties <-
-          o .:? "additionalProperties"
-        items <-
-          o .:? "items"
-        annotations <-
-          o .:? "annotations" >>= \case
-            Nothing -> pure mempty
-            Just o' -> o' .: "required"
-
-        pure Schema {..}
+      fmap Follow (o .: "$ref") <|> fmap Inline (parseJSON (Aeson.Object o))
 
 -- | Whether a parameter goes in the query or the path for REST requests.
 data Location
@@ -154,7 +156,7 @@ data Format
     GoogleDuration
   | -- | A string where field names are separated by a comma. Field names are
     -- represented in lower-camel naming conventions.
-    GoogleFieldmask
+    GoogleFieldMask
   | -- | A 64-bit signed integer. It has a minimum value of -9,223,372,036,854,775,808
     -- and a maximum value of 9,223,372,036,854,775,807 (inclusive).
     Int64
@@ -199,7 +201,7 @@ instance FromJSON Format where
         ("string", Just "google-duration") ->
           pure GoogleDuration
         ("string", Just "google-fieldmask") ->
-          pure GoogleFieldmask
+          pure GoogleFieldMask
         ("string", Just "int64") ->
           pure Int64
         ("string", Just "uint64") ->

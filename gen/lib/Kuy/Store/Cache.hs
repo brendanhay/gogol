@@ -3,53 +3,51 @@
 
 module Kuy.Store.Cache
   ( -- * Cache-addressable binary storage
-    CacheReader,
+    CacheKey,
     CacheWriter,
-    getCacheReader,
+    newCacheKey,
+    tryReadCache,
     writeCache,
-    readCache,
   )
 where
 
-import Kuy.Store.Fingerprint
 import Data.ByteString qualified as ByteString
 import Data.GADT.Compare.TH qualified as TH
 import Data.Persist qualified as Persist
 import Distribution.Utils.Structured
 import Kuy.Prelude
+import Kuy.Store.Fingerprint
 import System.FilePath qualified as FilePath
 import Type.Reflection (TypeRep, typeRep)
 import UnliftIO.Directory qualified as Directory
 
-type CacheReader :: Type -> Type
-data CacheReader a = CacheReader
+data CacheKey a = CacheKey
   { hash :: Fingerprint,
-    repr :: TypeRep a -- Sadge; carried around only for GEq/GCompare.
+    rep :: TypeRep a -- Sadge; carried around only for GEq/GCompare.
   }
   deriving stock (Show, Eq, Ord, Generic)
   deriving anyclass (Hashable)
 
-type CacheWriter :: Type -> Type
 newtype CacheWriter a = CacheWriter {hash :: Fingerprint}
   deriving stock (Show, Eq, Ord)
   deriving newtype (Hashable)
 
-getCacheReader :: forall a. Structured a => Fingerprint -> CacheReader a
-getCacheReader hash =
-  CacheReader
+newCacheKey :: forall a. Structured a => Fingerprint -> CacheKey a
+newCacheKey hash =
+  CacheKey
     { hash = fingerprints (pure hash <> pure (fingerprintData (Proxy @a))),
-      repr = typeRep @a
+      rep = typeRep @a
     }
 
-readCache ::
+tryReadCache ::
   forall a m.
   ( MonadIO m,
     Persist a
   ) =>
   FilePath ->
-  CacheReader a ->
+  CacheKey a ->
   m (Either (CacheWriter a) a)
-readCache store reader = do
+tryReadCache store reader = do
   let path = store </> "cache" </> renderFingerprint reader.hash
 
   exists <- Directory.doesPathExist path
@@ -79,5 +77,5 @@ writeCache store writer item = do
 
 --
 
-TH.deriveGEq ''CacheReader
-TH.deriveGCompare ''CacheReader
+TH.deriveGEq ''CacheKey
+TH.deriveGCompare ''CacheKey

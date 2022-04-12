@@ -7,17 +7,17 @@ import Data.GADT.Show.TH qualified as TH
 import Data.Hashable qualified as Hashable
 import Data.Some (Some (Some))
 import Kuy.Discovery
-import Kuy.Store.Cache
-import Kuy.Store.Artefact
 import Kuy.Prelude
+import Kuy.Store.Artefact
+import Kuy.Store.Cache
 
-type Query :: Type -> Type
+-- type Query :: Type -> Type
 data Query a where
   -- Cache content is either absent, in which case we return a unique slot
-  -- to write to, or we returned the read bytes.
+  -- to write to, or we returned the sucessfully read bytes.
   CachedBytes ::
     Persist a =>
-    CacheReader a ->
+    CacheKey a ->
     Query (Either (CacheWriter a) a)
   -- If you have an ArtefactKey it's proof the file must exist.
   ArtefactBytes ::
@@ -36,15 +36,19 @@ data Query a where
   DiscoveryIndex ::
     Query DirectoryIndex
   --
-  DiscoveryItem ::
-    ServiceName ->
-    Maybe ServiceVersion ->
-    Query (Maybe DirectoryItem)
-  --
   DiscoveryDescription ::
     ServiceName ->
     Maybe ServiceVersion ->
     Query (Maybe Description)
+
+-- --
+-- CabalPackage ::
+--   ServiceId ->
+--   Query PackageDescription
+-- --
+-- HaskellModule ::
+--   ModuleName ->
+--   Query HsModule'
 
 deriving instance Show (Query a)
 
@@ -61,8 +65,7 @@ instance Hashable (Query a) where
     LocalArtefact a -> tag salt 3 a
     RemoteArtefact a b -> tag salt 4 (a, b)
     DiscoveryIndex -> tag salt 5 ()
-    DiscoveryItem a b -> tag salt 6 (a, b)
-    DiscoveryDescription a b -> tag salt 7 (a, b)
+    DiscoveryDescription a b -> tag salt 6 (a, b)
   {-# INLINE hashWithSalt #-}
 
 instance Hashable (Some Query) where

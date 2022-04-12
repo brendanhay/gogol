@@ -52,7 +52,7 @@ data Description = Description
     -- | Common parameters that apply across all apis.
     parameters :: Map Text SchemaRef,
     -- | The schemas for this API.
-    schemas :: Map SchemaId SchemaRef,
+    schemas :: Map SchemaId Schema,
     -- | API-level methods for this API.
     methods :: Map Text Method,
     -- | The resources in this API.

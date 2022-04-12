@@ -33,18 +33,20 @@ where
 import Control.Applicative as Export (Alternative ((<|>)))
 import Control.Exception as Export (Exception, IOException, SomeException)
 import Control.Monad as Export
-import Control.Monad.Except as Export (Except, ExceptT (ExceptT), MonadError)
-import Control.Monad.IO.Class as Export (MonadIO (liftIO))
+import Control.Monad.Except as Export
 import Control.Monad.Reader as Export
-  ( MonadReader,
-    Reader,
-    ReaderT (ReaderT),
-  )
-import Control.Monad.State.Strict as Export (MonadState, State, StateT (StateT))
-import Control.Monad.Trans as Export (MonadTrans (lift))
-import Control.Monad.Trans.Maybe as Export (MaybeT (MaybeT), runMaybeT)
+import Control.Monad.State.Strict as Export
+import Control.Monad.Trans.Maybe as Export
 import Data.Aeson as Export
-  (FromJSON (..), FromJSONKey, ToJSON (..), ToJSONKey, parseJSON, (.!=), (.:), (.:?))
+  ( FromJSON (..),
+    FromJSONKey,
+    ToJSON (..),
+    ToJSONKey,
+    parseJSON,
+    (.!=),
+    (.:),
+    (.:?),
+  )
 import Data.Bifoldable as Export (Bifoldable (bifoldMap), bifor_, bitraverse_)
 import Data.Bifunctor as Export (Bifunctor (bimap, first, second))
 import Data.Bitraversable as Export (Bitraversable (bitraverse), bifor)
@@ -52,7 +54,7 @@ import Data.ByteString qualified
 import Data.ByteString.Builder qualified
 import Data.ByteString.Lazy qualified
 import Data.Coerce as Export (Coercible, coerce)
-import Distribution.Compat.DList as Export (DList)
+import Data.DList as Export (DList)
 import Data.Either as Export
 import Data.Foldable as Export (foldl', for_, traverse_)
 import Data.Function as Export ((&))
@@ -64,7 +66,6 @@ import Data.Hashable as Export (Hashable (hashWithSalt))
 import Data.IORef as Export (IORef)
 import Data.Int as Export (Int16, Int32, Int64, Int8)
 import Data.IntSet as Export (IntSet)
-import Data.Kind as Export (Type)
 import Data.List.NonEmpty as Export (NonEmpty (..))
 import Data.Map.Strict as Export (Map)
 import Data.Maybe as Export

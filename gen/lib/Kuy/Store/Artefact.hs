@@ -1,19 +1,20 @@
 module Kuy.Store.Artefact
   ( Artefact (hash, path),
-    getArtefact,
     readArtefact,
+    lookupArtefact,
     downloadArtefact,
-  ) where
+  )
+where
 
-import System.FilePath qualified as FilePath
 import Data.ByteString qualified as ByteString
 import Data.Function qualified as Function
 import Kuy.Prelude
+import Kuy.Store.Fingerprint
 import Network.HTTP.Client qualified as Client
+import System.FilePath qualified as FilePath
 import UnliftIO qualified
 import UnliftIO.Directory qualified as Directory
 import UnliftIO.Temporary qualified as Temporary
-import Kuy.Store.Fingerprint
 
 -- | An artefact key is proof the file (path) exists at that point in time,
 -- with the supplied fingerprint.
@@ -27,8 +28,11 @@ data Artefact = Artefact
 instance Hashable Artefact where
   hashWithSalt salt k = salt `hashWithSalt` k.hash
 
-getArtefact :: MonadIO m => FilePath -> FilePath -> m (Maybe Artefact)
-getArtefact store name =
+readArtefact :: MonadIO m => Artefact -> m ByteString
+readArtefact key = liftIO (ByteString.readFile key.path)
+
+lookupArtefact :: MonadIO m => FilePath -> FilePath -> m (Maybe Artefact)
+lookupArtefact store name =
   liftIO $ do
     let path = store </> "artefact" </> name
 
@@ -39,9 +43,6 @@ getArtefact store name =
       else do
         hash <- fingerprintFile path
         pure $ Just Artefact {hash, path, name}
-
-readArtefact :: MonadIO m => Artefact -> m ByteString
-readArtefact key = liftIO (ByteString.readFile key.path)
 
 downloadArtefact ::
   MonadIO m =>

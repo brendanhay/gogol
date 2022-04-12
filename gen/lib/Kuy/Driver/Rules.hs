@@ -5,12 +5,13 @@ import Data.Atomics qualified as Atomics
 import Data.Text qualified as Text
 import Kuy.Discovery
 import Kuy.Driver.Query
-import Kuy.Store.Artefact
-import Kuy.Store.Manifest
-import Kuy.Store.Cache
 import Kuy.Prelude
+import Kuy.Store.Artefact
+import Kuy.Store.Cache
+import Kuy.Store.Manifest
 import Network.HTTP.Client qualified as Client
 import Rock
+import UnliftIO qualified
 import UnliftIO.IORef qualified as IORef
 
 rules ::
@@ -18,47 +19,44 @@ rules ::
   FilePath ->
   IORef Manifest ->
   GenRules (Writer TaskKind Query) Query
-rules manager store manifestVar (Writer query) =
+rules manager storePath manifestVar (Writer query) =
   case query of
     --
-    CachedBytes reader ->
+    CachedBytes cacheKey ->
       input $
-        readCache store reader
+        tryReadCache storePath cacheKey
     --
-    ArtefactBytes key ->
+    ArtefactBytes artefact ->
       input $
-        readArtefact key
+        readArtefact artefact
     --
-    LocalArtefact name ->
+    LocalArtefact fileName ->
       input $
         runMaybeT $ do
           manifest <- IORef.readIORef manifestVar
-          artefact <- MaybeT (getArtefact store name)
+          artefact <- MaybeT (lookupArtefact storePath fileName)
           artefact <$ guard (isKnownArtefact artefact manifest)
     --
-    RemoteArtefact url name ->
+    RemoteArtefact url fileName ->
       input $
-        downloadArtefact manager store url name
+        downloadArtefact manager storePath url fileName
     --
     DiscoveryIndex ->
       nonInput $ do
         (artefact, list) <-
-          fetchArtefactJSON @DirectoryList store directoryListURL "directory-list.json"
+          fetchArtefactJSON @DirectoryList storePath directoryListURL "directory-list.json"
 
         liftIO $
           Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
 
         pure $! newDirectoryIndex list.items
     --
-    DiscoveryItem name mversion ->
-      nonInput $
-        findPreferredVersion name mversion <$> fetch DiscoveryIndex
     --
-    DiscoveryDescription name mversion ->
+    DiscoveryDescription serviceName serviceVersion ->
       nonInput $ do
-        mitem <- fetch (DiscoveryItem name mversion)
+        index <- fetch DiscoveryIndex
 
-        for mitem $ \item -> do
+        for (findPreferredVersion serviceName serviceVersion index) $ \item -> do
           let url = item.discoveryRestUrl
               path =
                 "services"
@@ -66,13 +64,16 @@ rules manager store manifestVar (Writer query) =
                   </> Text.unpack item.version.text
                   <.> "json"
 
-          (artefact, desc) <-
-            fetchArtefactJSON @Description store url path
+          (artefact, description) <-
+            fetchArtefactJSON @Description storePath url path
 
           liftIO $
             Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
 
-          pure desc
+          pure description
+
+--
+-- CabalPackage sid -> do
 
 fetchArtefactJSON ::
   forall a m.
@@ -109,15 +110,16 @@ fetchCachedJSON ::
   Artefact ->
   m a
 fetchCachedJSON store artefact = do
-  let reader = getCacheReader @a artefact.hash
+  let key = newCacheKey @a artefact.hash
 
-  fetch (CachedBytes reader) >>= \case
+  fetch (CachedBytes key) >>= \case
     Right item ->
       pure item
     --
     Left writer -> do
       json <- fetch (ArtefactBytes artefact)
-      item <- either error pure $ Aeson.eitherDecodeStrict' json
+      -- FIXME:
+      item <- either UnliftIO.throwString pure $ Aeson.eitherDecodeStrict' json
 
       writeCache store writer item
 
