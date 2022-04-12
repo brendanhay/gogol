@@ -3,77 +3,74 @@ module Kuy.Command.Generate where
 import Control.Concurrent qualified as Concurrent
 import Data.Map.Strict qualified as Map
 import Data.Set qualified as Set
-import Data.Text qualified as Text
-import Distribution.ModuleName qualified as ModuleName
-import Distribution.Utils.Generic qualified as Utils
+import Kuy.Cabal qualified as Cabal
 import Kuy.CodeGen qualified as CodeGen
-import Kuy.CodeGen.Cabal qualified as Cabal
-import Kuy.CodeGen.GHC qualified as GHC
 import Kuy.Discovery
 import Kuy.Driver qualified as Driver
 import Kuy.Driver.Query
-import Kuy.Driver.Query (Query (..))
-import Kuy.Markdown qualified as Markdown
+import Kuy.GHC qualified as GHC
 import Kuy.Prelude
-import Rock (MonadFetch, Task, fetch)
+import Rock (Task, fetch)
 import System.FilePath qualified as FilePath
 import UnliftIO qualified
 import UnliftIO.Async qualified as Async
 import UnliftIO.Directory qualified as Directory
 
-generate :: FilePath -> Set (ServiceName, Maybe ServiceVersion) -> IO ()
+type Target = (ServiceName, Maybe ServiceVersion)
+
+generate :: FilePath -> Set Target -> IO ()
 generate outputDir targets = do
   threads <- Concurrent.getNumCapabilities
+  Driver.execute (generateAll outputDir threads targets)
 
-  Driver.execute $
-    case Set.toList targets of
-      -- Build all service's preverred versions found in the index.
-      [] -> do
-        versions <- preferredVersions <$> fetch DiscoveryIndex
+generateAll :: FilePath -> Int -> Set Target -> Task Query ()
+generateAll outputDir threads targets' =
+  case Set.toList targets' of
+    -- If no targets were specified, determine all service's preferred version
+    -- and generate them concurrently.
+    [] ->
+      fetch DiscoveryIndex
+        >>= Async.pooledMapConcurrentlyN_ threads (generateOne outputDir)
+          . map (\s -> (s.name, Just s.version))
+          . preferredVersions
+    --
+    -- If a single target was specified, generate with no conccurrency.
+    [target] ->
+      generateOne outputDir target
+    --
+    -- If a set of targets was specified, generate them all concurrently.
+    targets ->
+      Async.pooledMapConcurrentlyN_ threads (generateOne outputDir) targets
 
-        Async.pooledMapConcurrentlyN_ threads run $
-          map (\sid -> (sid.name, Just sid.version)) versions
+generateOne :: FilePath -> Target -> Task Query ()
+generateOne outputDir target@(serviceName, serviceVersion) = do
+  fetch (DiscoveryDescription serviceName serviceVersion) >>= \case
+    Nothing ->
+      liftIO $ putStrLn ("Skipping invalid " ++ show target)
+    --
+    Just description -> do
+      -- FIXME: write to temporary directory then move atomically to location,
+      -- only if files have different fingerprints to preserve mtime, etc.
+      --
+      -- What about readonly?
+      (package, modules) <-
+        either (UnliftIO.throwString . unlines) pure $
+          CodeGen.genPackage description
 
-      -- Avoid pooling overhead if we have exactly one target.
-      [x] ->
-        run x
-      -- Build all supplied targets concurrently.
-      xs ->
-        Async.pooledMapConcurrentlyN_ threads run xs
-  where
-    run (name, version) =
-      fetch (DiscoveryDescription name version) >>= \case
-        Nothing ->
-          liftIO $ putStrLn ("Skipping " ++ show (name, version))
-        --
-        Just description -> do
-          -- FIXME: write to temporary directory then move atomically to location,
-          -- only if files have different fingerprints to preserve mtime, etc.
-          --
-          -- What about readonly?
+      let packageName = Cabal.unPackageName (Cabal.packageName package)
+          packageDir = outputDir </> packageName
+          packageFile = packageDir </> packageName <.> "cabal"
 
-          (package, modules) <-
-            either UnliftIO.throwString pure (CodeGen.genPackage description)
+      createParent packageFile
+        *> liftIO (Cabal.writePackageDescription packageFile package)
 
-          let packageName = Cabal.unPackageName (Cabal.packageName package)
-              packageDir = outputDir </> packageName
-              packageFile = packageDir </> packageName <.> "cabal"
+      for_ (Map.toList modules) $ \(moduleName, module') -> do
+        let moduleFile = packageDir </> Cabal.toFilePath moduleName <.> "hs"
 
-          createParent packageFile
-            *> liftIO (Cabal.writePackageDescription packageFile package)
-
-          for_ (Map.toList modules) $ \(moduleName, module') -> do
-            let moduleFile = packageDir </> Cabal.toFilePath moduleName <.> "hs"
-
-            createParent moduleFile
-              *> liftIO (GHC.writeModuleFile moduleFile module')
-
-          pure ()
-
--- Utilities
+        createParent moduleFile
+          *> liftIO (GHC.writeModuleFile moduleFile module')
 
 createParent :: MonadIO m => FilePath -> m ()
-createParent = Directory.createDirectoryIfMissing True . FilePath.takeDirectory
-
-writeUTF8File :: MonadIO m => FilePath -> String -> m ()
-writeUTF8File path = liftIO . Utils.writeUTF8File path
+createParent =
+  Directory.createDirectoryIfMissing True
+    . FilePath.takeDirectory

@@ -1,7 +1,7 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Kuy.Store.Cache
+module Kuy.Driver.Store.Cache
   ( -- * Cache-addressable binary storage
     CacheKey,
     CacheWriter,
@@ -15,8 +15,8 @@ import Data.ByteString qualified as ByteString
 import Data.GADT.Compare.TH qualified as TH
 import Data.Persist qualified as Persist
 import Distribution.Utils.Structured
+import Kuy.Driver.Store.Fingerprint
 import Kuy.Prelude
-import Kuy.Store.Fingerprint
 import System.FilePath qualified as FilePath
 import Type.Reflection (TypeRep, typeRep)
 import UnliftIO.Directory qualified as Directory

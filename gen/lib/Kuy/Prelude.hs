@@ -56,6 +56,11 @@ import Data.ByteString.Lazy qualified
 import Data.Coerce as Export (Coercible, coerce)
 import Data.DList as Export (DList)
 import Data.Either as Export
+import Data.Either.Validation as Export
+  ( Validation (..),
+    eitherToValidation,
+    validationToEither,
+  )
 import Data.Foldable as Export (foldl', for_, traverse_)
 import Data.Function as Export ((&))
 import Data.Functor as Export (($>), (<&>))

@@ -1,14 +1,9 @@
-module Kuy.CodeGen.GHC
+module Kuy.GHC
   ( -- * Names
     ModuleName,
     ModuleName.mkModuleName,
     ModuleName.moduleNameSlashes,
     ModuleName.moduleNameString,
-    -- ModuleName.moduleNameFS,
-
-    -- * FastString
-
-    -- FastString.fastStringToShortByteString,
 
     -- * Modules
     HsModule,
@@ -17,11 +12,9 @@ module Kuy.CodeGen.GHC
 
     -- * Utilities
     writeModuleFile,
-    unsafeConvertDecls,
+    convertDecls,
   )
 where
-
--- import GHC.Data.FastString qualified as FastString
 
 import GHC.Hs
 import GHC.ThToHs qualified as ThToHs
@@ -66,11 +59,10 @@ writeModuleFile path mod =
   IO.withFile path IO.WriteMode $ \handle ->
     PP.printSDoc PP.defaultSDocContext (PP.PageMode True) handle (PP.ppr mod)
 
-unsafeConvertDecls :: [TH.Dec] -> [HsDecl GhcPs]
-unsafeConvertDecls decs =
-  case ThToHs.convertToHsDecls Generated SrcLoc.generatedSrcSpan decs of
-    Left err -> error (PP.showSDocUnsafe err)
-    Right ok -> map SrcLoc.unLoc ok
+convertDecls :: [TH.Dec] -> Either String [HsDecl GhcPs]
+convertDecls =
+  bimap PP.showSDocUnsafe (map SrcLoc.unLoc)
+    . ThToHs.convertToHsDecls Generated SrcLoc.generatedSrcSpan
 
 mkLocated :: a -> GenLocated (SrcSpanAnn' (EpAnn ann)) a
 mkLocated = L (SrcSpanAnn EpAnnNotUsed SrcLoc.generatedSrcSpan)

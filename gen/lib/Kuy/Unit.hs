@@ -1,9 +1,9 @@
-module Kuy.CodeGen.Unit where
+module Kuy.Unit where
 
 import Data.DList qualified as DList
 import Data.Map.Strict qualified as Map
-import Kuy.CodeGen.TH (Dec)
 import Kuy.Prelude
+import Kuy.TH (Dec)
 
 newtype Unit = Unit (Map Text (DList Dec))
 

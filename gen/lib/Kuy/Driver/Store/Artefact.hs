@@ -1,4 +1,4 @@
-module Kuy.Store.Artefact
+module Kuy.Driver.Store.Artefact
   ( Artefact (hash, path),
     readArtefact,
     lookupArtefact,
@@ -8,8 +8,8 @@ where
 
 import Data.ByteString qualified as ByteString
 import Data.Function qualified as Function
+import Kuy.Driver.Store.Fingerprint
 import Kuy.Prelude
-import Kuy.Store.Fingerprint
 import Network.HTTP.Client qualified as Client
 import System.FilePath qualified as FilePath
 import UnliftIO qualified

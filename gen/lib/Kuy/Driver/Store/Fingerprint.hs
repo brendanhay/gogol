@@ -1,4 +1,4 @@
-module Kuy.Store.Fingerprint
+module Kuy.Driver.Store.Fingerprint
   ( Fingerprint,
     renderFingerprint,
     encodeFingerprint,

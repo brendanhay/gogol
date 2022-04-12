@@ -43,20 +43,20 @@ library
   build-depends:
     , aeson                   ^>=2
     , atomic-primops          ^>=0.8
-    , base16
+    , base16                  ^>=3.2
     , burrito                 ^>=2
     , bytestring              ^>=0.11
-    , Cabal
+    , Cabal                   ^>=3.2
     , containers              ^>=0.6
     , dependent-sum-template  ^>=0.1
-    , dlist
-    , either
-    , filepath
+    , dlist                   ^>=1
+    , either                  ^>=5
+    , filepath                ^>=1.4
     , ghc                     ^>=9.2.1
     , hashable                ^>=1.4
     , http-client             ^>=0.7
     , http-client-tls         ^>=0.3
-    , mtl
+    , mtl                     ^>=2.2
     , optparse-applicative    ^>=0.17
     , pandoc                  ^>=2.17
     , persist                 ^>=0.1.1

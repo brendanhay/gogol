@@ -1,15 +1,14 @@
-module Kuy.Store.Manifest where
+module Kuy.Driver.Store.Manifest where
 
 import Data.ByteString qualified as ByteString
 import Data.ByteString.Builder qualified as ByteBuilder
 import Data.ByteString.Char8 qualified as ByteString.Char8
 import Data.ByteString.Lazy qualified as ByteString.Lazy
-import Data.Either.Validation (Validation (..), eitherToValidation, validationToEither)
 import Data.Map.Strict qualified as Map
 import Data.Tuple qualified as Tuple
+import Kuy.Driver.Store.Artefact
+import Kuy.Driver.Store.Fingerprint
 import Kuy.Prelude
-import Kuy.Store.Artefact
-import Kuy.Store.Fingerprint
 import System.FilePath qualified as FilePath
 import UnliftIO qualified
 import UnliftIO.Directory qualified as Directory
@@ -25,17 +24,30 @@ encodeManifest m =
       ByteBuilder.byteString (encodeFingerprint v)
         <> "  "
         <> ByteBuilder.stringUtf8 k
-        <> "\n"
 
-decodeManifest :: [ByteString] -> Either [String] Manifest
+-- <> "\n"
+
+decodeManifest :: [ByteString] -> Validation [String] Manifest
 decodeManifest =
-  validationToEither
-    . fmap (Manifest . Map.fromList)
-    . traverse (bitraverse parseKey parseVal . Tuple.swap . ByteString.splitAt fingerprintSize . ByteString.Char8.strip)
+  fmap (Manifest . Map.fromList)
+    . traverse parsePair
     . filter (not . ByteString.null)
   where
-    parseKey = Success . ByteString.Char8.unpack . ByteString.Char8.strip
-    parseVal = eitherToValidation . first (: []) . decodeFingerprint
+    parsePair =
+      bitraverse parseKey parseVal
+        . Tuple.swap
+        . ByteString.splitAt fingerprintSize
+        . ByteString.Char8.strip
+
+    parseKey =
+      Success
+        . ByteString.Char8.unpack
+        . ByteString.Char8.strip
+
+    parseVal =
+      eitherToValidation
+        . first (: [])
+        . decodeFingerprint
 
 isKnownArtefact :: Artefact -> Manifest -> Bool
 isKnownArtefact x m = maybe False (x.hash ==) (Map.lookup x.path m.hashes)
@@ -53,8 +65,8 @@ readManifest path = do
       bytes <- liftIO (ByteString.readFile path)
 
       case decodeManifest (ByteString.Char8.lines bytes) of
-        Right ok -> pure ok
-        Left err ->
+        Success ok -> pure ok
+        Failure err ->
           UnliftIO.throwString $
             "(readManifest) failed parsing fingerprints from  "
               ++ path

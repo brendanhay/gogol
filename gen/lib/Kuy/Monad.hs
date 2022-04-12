@@ -1,4 +1,4 @@
-module Kuy.CodeGen.Monad
+module Kuy.Monad
   ( M,
     runM,
 
@@ -16,8 +16,8 @@ where
 import Control.Monad.Reader qualified as Reader
 import Data.Char qualified as Char
 import Data.Text qualified as Text
-import Kuy.CodeGen.TH qualified as TH
 import Kuy.Prelude
+import Kuy.TH qualified as TH
 
 data R = R
   { namespace :: Text,

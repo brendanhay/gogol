@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Kuy.CodeGen.TH
+module Kuy.TH
   ( -- -- * Names
     --  TH.PkgName,
     --  TH.mkPkgName,
@@ -29,4 +29,4 @@ import Language.Haskell.TH.Syntax as TH hiding (Inline)
 --   fromString = TH.mkName
 
 getQualifiedImports :: ModName -> [Dec] -> (Set Name, Set ModName)
-getQualifiedImports self decs = (mempty, mempty)
+getQualifiedImports _self _decs = (mempty, mempty)

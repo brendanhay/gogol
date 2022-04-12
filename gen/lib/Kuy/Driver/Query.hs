@@ -7,9 +7,9 @@ import Data.GADT.Show.TH qualified as TH
 import Data.Hashable qualified as Hashable
 import Data.Some (Some (Some))
 import Kuy.Discovery
+import Kuy.Driver.Store.Artefact
+import Kuy.Driver.Store.Cache
 import Kuy.Prelude
-import Kuy.Store.Artefact
-import Kuy.Store.Cache
 
 -- type Query :: Type -> Type
 data Query a where
@@ -40,15 +40,6 @@ data Query a where
     ServiceName ->
     Maybe ServiceVersion ->
     Query (Maybe Description)
-
--- --
--- CabalPackage ::
---   ServiceId ->
---   Query PackageDescription
--- --
--- HaskellModule ::
---   ModuleName ->
---   Query HsModule'
 
 deriving instance Show (Query a)
 

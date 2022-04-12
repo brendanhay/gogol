@@ -5,10 +5,10 @@ import Data.Atomics qualified as Atomics
 import Data.Text qualified as Text
 import Kuy.Discovery
 import Kuy.Driver.Query
+import Kuy.Driver.Store.Artefact
+import Kuy.Driver.Store.Cache
+import Kuy.Driver.Store.Manifest
 import Kuy.Prelude
-import Kuy.Store.Artefact
-import Kuy.Store.Cache
-import Kuy.Store.Manifest
 import Network.HTTP.Client qualified as Client
 import Rock
 import UnliftIO qualified
@@ -51,7 +51,6 @@ rules manager storePath manifestVar (Writer query) =
 
         pure $! newDirectoryIndex list.items
     --
-    --
     DiscoveryDescription serviceName serviceVersion ->
       nonInput $ do
         index <- fetch DiscoveryIndex
@@ -71,9 +70,6 @@ rules manager storePath manifestVar (Writer query) =
             Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
 
           pure description
-
---
--- CabalPackage sid -> do
 
 fetchArtefactJSON ::
   forall a m.

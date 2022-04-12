@@ -1,26 +1,28 @@
+{-# LANGUAGE ApplicativeDo #-}
+
 module Kuy.CodeGen where
 
 import Data.Map.Strict qualified as Map
 import Data.Text qualified as Text
-import Kuy.CodeGen.Bridge qualified as Bridge
-import Kuy.CodeGen.Cabal qualified as Cabal
-import Kuy.CodeGen.GHC qualified as GHC
-import Kuy.CodeGen.Monad
-import Kuy.CodeGen.Name qualified as Name
-import Kuy.CodeGen.TH
-import Kuy.CodeGen.Unit
+import Kuy.Bridge qualified as Bridge
+import Kuy.Builtin qualified as Builtin
+import Kuy.Cabal qualified as Cabal
 import Kuy.Discovery
+import Kuy.GHC qualified as GHC
 import Kuy.Markdown qualified as Markdown
+import Kuy.Monad
 import Kuy.Prelude
+import Kuy.TH
+import Kuy.Unit
 
 genPackage ::
   Description ->
-  Either String (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
-genPackage desc = do
-  description <- fromString . Text.unpack <$> Markdown.writeHaddock desc.description
+  Either [String] (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
+genPackage description@Description {title, description = markdown} = do
+  haddock <- bimap (: []) (fromString . Text.unpack) (Markdown.writeHaddock markdown)
+  modules <- genModules description
 
-  let name = Cabal.mkPackageName (Text.unpack desc.name.text)
-      modules = genModules desc
+  let name = Cabal.mkPackageName (Text.unpack description.name.text)
       library = Cabal.mkLibrary (Map.keys modules)
 
   pure
@@ -30,26 +32,34 @@ genPackage desc = do
           Cabal.maintainer = "Brendan Hay <brendan.g.hay+gogol@gmail.com",
           Cabal.category = "Google",
           Cabal.homepage = "https://github.com/brendanhay/gogol",
-          Cabal.synopsis = fromString (Text.unpack desc.title),
-          Cabal.description = description
+          Cabal.synopsis = fromString (Text.unpack title),
+          Cabal.description = haddock
         },
       modules
     )
 
-genModules :: Description -> Map Cabal.ModuleName GHC.HsModule
+genModules :: Description -> Either [String] (Map Cabal.ModuleName GHC.HsModule)
 genModules Description {name, methods, resources, schemas} =
   runM name.text $ do
-    resourceModules <-
-      genResource Resource {methods, resources}
+    resourceModules <- genResource Resource {methods, resources}
+    schemaModules <- Map.fromList <$> for (Map.toList schemas) (uncurry genSchema)
 
-    schemaModules <-
-      Map.fromList <$> for (Map.toList schemas) (uncurry genSchema)
+    let modules =
+          resourceModules <> schemaModules
+
+        bridge name unit =
+          first (: [])
+            . eitherToValidation
+            . Bridge.ghcModule name
+            . unitDeclarations
+            $ unit
 
     pure
-      . Map.fromList
-      . map (\(name, unit) -> Bridge.ghcModule name (unitDeclarations unit))
+      . validationToEither
+      . fmap Map.fromList
+      . traverse (uncurry bridge)
       . Map.toList
-      $ mappend resourceModules schemaModules
+      $ modules
 
 genResource :: Resource -> M (Map ModName Unit)
 genResource resource = do
@@ -69,7 +79,7 @@ genMethod method = do
   pure
     . Map.singleton moduleName
     . mkUnit method.id.text
-    $ TySynD typeName [] (ConT Name.unit)
+    $ TySynD typeName [] (ConT Builtin.unit)
 
 genSchema :: SchemaId -> Schema -> M (ModName, Unit)
 genSchema schemaId schema = do
@@ -79,7 +89,7 @@ genSchema schemaId schema = do
     withProperty schemaId.text $
       genSchemaProperties schema.properties
 
-  let synonym = mkUnit schemaId.text (TySynD typeName [] (ConT Name.unit))
+  let synonym = mkUnit schemaId.text (TySynD typeName [] (ConT Builtin.unit))
 
   pure
     ( moduleName,

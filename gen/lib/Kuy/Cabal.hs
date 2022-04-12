@@ -1,4 +1,4 @@
-module Kuy.CodeGen.Cabal
+module Kuy.Cabal
   ( PackageName,
     PackageDescription (..),
     Library (..),
