@@ -1,10 +1,13 @@
-module Kuy.Driver.Rules where
+module Kuy.Driver.Rules
+  ( rules,
+  )
+where
 
-import Kuy.Cabal qualified as Cabal
 import Data.Aeson qualified as Aeson
-import Data.ByteString qualified as ByteString
 import Data.Atomics qualified as Atomics
+import Data.ByteString qualified as ByteString
 import Data.Text qualified as Text
+import Kuy.Cabal qualified as Cabal
 import Kuy.Discovery
 import Kuy.Driver.Query
 import Kuy.Prelude
@@ -12,18 +15,18 @@ import Kuy.Store.Artefact
 import Kuy.Store.Cache
 import Kuy.Store.Fingerprint
 import Kuy.Store.Manifest
+import Kuy.Unit
 import Network.HTTP.Client qualified as Client
 import Rock
 import UnliftIO qualified
 import UnliftIO.IORef qualified as IORef
-import UnliftIO.Directory qualified as Directory
 
 rules ::
   Client.Manager ->
   FilePath ->
   IORef Manifest ->
-  GenRules (Writer TaskKind Query) Query
-rules manager store manifestVar (Writer query) =
+  GenRules (Writer [Error] (Writer TaskKind Query)) Query
+rules manager store manifestVar (Writer (Writer query)) =
   case query of
     FileBytes path ->
       input $
@@ -34,11 +37,11 @@ rules manager store manifestVar (Writer query) =
         fingerprintFile path
     --
     CachedBytes key ->
-      nonInput $
+      noError $
         tryReadCache store key
     --
     ArtefactBytes artefact ->
-      nonInput $
+      noError $
         readArtefact artefact
     --
     StoredArtefact name ->
@@ -53,7 +56,7 @@ rules manager store manifestVar (Writer query) =
         downloadArtefact manager store url name
     --
     DiscoveryIndex ->
-      nonInput $ do
+      noError $ do
         (artefact, list) <-
           fetchArtefactJSON @DirectoryList store directoryListURL "directory-list.json"
 
@@ -62,11 +65,11 @@ rules manager store manifestVar (Writer query) =
 
         pure $! newDirectoryIndex list.items
     --
-    DiscoveryDescription serviceName serviceVersion ->
-      nonInput $ do
+    DiscoveryDescription name mversion ->
+      noError $ do
         index <- fetch DiscoveryIndex
 
-        for (findPreferredVersion serviceName serviceVersion index) $ \item -> do
+        for (findPreferredVersion name mversion index) $ \item -> do
           let url = item.discoveryRestUrl
               path =
                 "services"
@@ -82,28 +85,31 @@ rules manager store manifestVar (Writer query) =
 
           pure description
     --
--- FIXME: Binary instances already exists for Cabal types, consider
--- switching from Persist to Binary and caching the description,
--- or does that defeat the purpose if it's cheap to read the Cabal file
--- given how slow Binary is vs Persist?
-    PackageDescription ->
-       nonInput $ do
-        let path = "kuy.cabal"
+    PackageDefaults ->
+      noError $
+        fetchCachedFile store "kuy.cabal" $ \bytes ->
+          either (error . show) pure (Cabal.parsePackageDescription bytes)
+    --
+    CompiledUnit self unit ->
+      nonInput $
+        case compileUnit self unit of
+          Left err -> pure (mempty, [err])
+          Right ok -> pure (ok, [])
 
-        key <- newCacheKey @Cabal.PackageDescription <$> fetch (FileHash path)
+-- Utiltiies
 
-        fetch (CachedBytes key) >>= \case
-          Right item ->
-            pure item
-         --
-          Left writer -> do
-            bytes <- fetch (FileBytes path)
+type Error = String
 
-            case Cabal.parsePackageDescription bytes of
-                Left errors ->
-                    error (show errors)
-                Right package ->
-                  package <$ writeCache store writer package
+input :: Functor m => m a -> m ((a, TaskKind), [Error])
+input = fmap ((,mempty) . (,Input))
+
+nonInput :: Functor m => m (a, [Error]) -> m ((a, TaskKind), [Error])
+nonInput = fmap (first (,NonInput))
+
+noError :: Functor m => m a -> m ((a, TaskKind), [Error])
+noError = fmap ((,mempty) . (,NonInput))
+
+-- Idioms
 
 fetchArtefactJSON ::
   forall a m.
@@ -152,8 +158,25 @@ fetchCachedJSON store artefact = do
       item <- either UnliftIO.throwString pure $ Aeson.eitherDecodeStrict' bytes
       item <$ writeCache store writer item
 
-input :: Functor f => f a -> f (a, TaskKind)
-input = fmap (,Input)
+fetchCachedFile ::
+  forall a m.
+  ( MonadIO m,
+    MonadFetch Query m,
+    Structured a,
+    Persist a
+  ) =>
+  FilePath ->
+  FilePath ->
+  (ByteString -> m a) ->
+  m a
+fetchCachedFile store path decode = do
+  key <- newCacheKey @a <$> fetch (FileHash path)
 
-nonInput :: Functor f => f a -> f (a, TaskKind)
-nonInput = fmap (,NonInput)
+  fetch (CachedBytes key) >>= \case
+    Right item ->
+      pure item
+    --
+    Left writer -> do
+      bytes <- fetch (FileBytes path)
+      item <- decode bytes
+      item <$ writeCache store writer item

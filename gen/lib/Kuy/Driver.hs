@@ -1,5 +1,8 @@
 module Kuy.Driver where
 
+import Data.Dependent.HashMap (DHashMap)
+import Data.Dependent.HashMap qualified as DHashMap
+import Data.Dependent.Sum (DSum ((:=>)))
 import Data.Time qualified as Time
 import Kuy.Driver.Query (Query (..))
 import Kuy.Driver.Rules qualified as Rules
@@ -23,57 +26,66 @@ execute :: Task Query a -> IO a
 execute task = do
   manager <- Client.newManager TLS.tlsManagerSettings
 
-  withTimeSummary $
-    runTask manager buildDir task
+  withTimeSummary $ do
+    (result, errors) <- runTask manager buildDir task
 
-runTask :: Client.Manager -> FilePath -> Task Query a -> IO a
+    for_ errors putStrLn
+
+    pure result
+
+runTask :: Client.Manager -> FilePath -> Task Query a -> IO (a, [String])
 runTask manager store task =
-  withManifest (store </> "manifest.json") $ \manifestVar -> do
+  withManifest store $ \manifestVar -> do
     startedVar <- IORef.newIORef mempty
     threadsVar <- IORef.newIORef mempty
-    consoleVar <- MVar.newMVar (0 :: Int)
+    errorsVar <- IORef.newIORef (mempty :: DHashMap Query (Const [String]))
+    consoleVar <- MVar.newMVar ()
 
-    let ignoreTaskKind_ ::
-          GenRules (Writer TaskKind f) f ->
-          Rules f
-        ignoreTaskKind_ rules key =
-          fst <$> rules (Writer key)
+    let writeErrors :: Writer TaskKind Query a -> [String] -> Task Query ()
+        writeErrors (Writer q) errs =
+          unless (null errs) $
+            IORef.atomicModifyIORef' errorsVar $
+              (,()) . DHashMap.insert q (Const errs)
 
-        traceFetch_ ::
+        ignoreTaskKind :: Query a -> TaskKind -> Task Query ()
+        ignoreTaskKind _ _ = pure ()
+
+        traceFetch ::
           GenRules (Writer TaskKind Query) Query ->
           GenRules (Writer TaskKind Query) Query
-        traceFetch_ =
+        traceFetch =
           Rock.traceFetch
-            ( \(Writer key) -> liftIO $
-                MVar.modifyMVar_ consoleVar $ \n -> do
-                  putStrLn $ "Fetch " <> show key
-                  pure $ n + 1
+            ( \(Writer key) ->
+                liftIO $ MVar.withMVar consoleVar $ \() -> putStrLn ("Fetch " <> show key)
             )
-            ( \(Writer _key) _ -> liftIO $
-                MVar.modifyMVar_ consoleVar $ \n -> do
-                  -- putStrLn $ "Complete " <> show key
-                  pure $ n - 1
+            ( \(Writer _key) _ ->
+                pure ()
             )
 
-        -- (\(Writer key) -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-        --   putStrLn $ fold (replicate n "| ") <> "fetching " <> show key
-        --   pure $ n + 1)
-        -- (\_ _ -> liftIO $ MVar.modifyMVar_ consoleVar $ \n -> do
-        --   putStrLn$ fold (replicate (n - 1) "| ") <> "*"
-        --   pure $ n - 1)
-
-        rules_ :: Rules Query
-        rules_ =
+        rules :: Rules Query
+        rules =
           Rock.memoiseWithCycleDetection startedVar threadsVar $
-            ignoreTaskKind_ (traceFetch_ (Rules.rules manager store manifestVar))
+            Rock.writer ignoreTaskKind $
+              traceFetch $
+                Rock.writer writeErrors $
+                  Rules.rules manager store manifestVar
 
-    Rock.runTask rules_ task
+    Rock.runTask rules $ do
+      result <- task
+      errors <- IORef.readIORef errorsVar
+
+      let errorMessages =
+            foldMap (\(_ :=> Const errs) -> errs) (DHashMap.toList errors)
+
+      pure (result, errorMessages)
 
 withManifest :: FilePath -> (IORef Manifest -> IO a) -> IO a
-withManifest path =
+withManifest store =
   UnliftIO.bracket
     (IORef.newIORef =<< readManifest path)
     (IORef.readIORef >=> writeManifest path)
+  where
+    path = store </> "manifest.md5sum"
 
 withTimeSummary :: IO a -> IO a
 withTimeSummary action = do

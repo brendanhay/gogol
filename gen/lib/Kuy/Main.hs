@@ -7,8 +7,8 @@ import Data.Set qualified as Set
 import GHC.IO.Encoding qualified as Encoding
 import Kuy.Command.Generate qualified as Command (generate)
 import Kuy.Discovery
-import Kuy.Prelude
 import Kuy.Driver qualified as Driver
+import Kuy.Prelude
 import Options.Applicative (Parser, ParserInfo, ReadM)
 import Options.Applicative qualified as Options
 

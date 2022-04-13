@@ -8,17 +8,14 @@ module Kuy.Cabal
     unPackageName,
     toFilePath,
     mkPackageName,
-    -- mkPackageDescription,
     mkLibrary,
 
-    -- * IO
-    PrettyPrint.writePackageDescription,
+    -- * Parsing and pretty printing
     parsePackageDescription,
+    PrettyPrint.writePackageDescription,
   )
 where
 
-import Distribution.Parsec.Error (PError)
-import Distribution.CabalSpecVersion (CabalSpecVersion (..))
 import Distribution.ModuleName (ModuleName, toFilePath)
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Parsec qualified as Parsec
@@ -70,14 +67,9 @@ dependency :: PackageName -> [Int] -> Dependency
 dependency name version =
   mkDependency name (majorBoundVersion (mkVersion version)) mainLibSet
 
--- Conversions
-
 parsePackageDescription :: ByteString -> Either (NonEmpty String) PackageDescription
 parsePackageDescription =
   bimap (fmap show . snd) packageDescription
     . snd
     . Parsec.runParseResult
     . Parsec.parseGenericPackageDescription
-
--- convertModuleName :: GHC.ModuleName -> ModuleName
--- convertModuleName = fromString . GHC.moduleNameString

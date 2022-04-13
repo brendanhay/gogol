@@ -10,12 +10,13 @@ module Kuy.TH
     --  TH.mkName
 
     module TH,
-    -- GHC.ThToHs.convertToHsDecls,
-
-    getQualifiedImports,
+    mkCabalModuleName,
+    mkHsModuleName,
   )
 where
 
+import Distribution.ModuleName qualified as Cabal
+import GHC.Unit.Module.Name qualified as GHC
 import Kuy.Prelude
 import Language.Haskell.TH.Syntax as TH hiding (Inline)
 
@@ -28,5 +29,8 @@ import Language.Haskell.TH.Syntax as TH hiding (Inline)
 -- instance IsString TH.Name where
 --   fromString = TH.mkName
 
-getQualifiedImports :: ModName -> [Dec] -> (Set Name, Set ModName)
-getQualifiedImports _self _decs = (mempty, mempty)
+mkCabalModuleName :: ModName -> Cabal.ModuleName
+mkCabalModuleName = fromString . modString
+
+mkHsModuleName :: ModName -> GHC.ModuleName
+mkHsModuleName = GHC.mkModuleName . modString

@@ -48,13 +48,14 @@ library
     , bytestring              ^>=0.11
     , Cabal                   ^>=3.6
     , containers              ^>=0.6
+    , dependent-hashmap       ^>=0.1
+    , dependent-sum           ^>=0.7
     , dependent-sum-template  ^>=0.1
     , dlist                   ^>=1
     , either                  ^>=5
     , filepath                ^>=1.4
     , ghc                     ^>=9.2
     , hashable                ^>=1.4
-    , binary
     , http-client             ^>=0.7
     , http-client-tls         ^>=0.3
     , mtl                     ^>=2.2
@@ -71,7 +72,6 @@ library
     , unliftio                ^>=0.2
 
   exposed-modules:
-    Kuy.Bridge
     Kuy.Builtin
     Kuy.Cabal
     Kuy.CodeGen

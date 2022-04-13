@@ -2,16 +2,19 @@
 
 module Kuy.Driver.Query where
 
-import Kuy.Cabal qualified as Cabal
 import Data.GADT.Compare.TH qualified as TH
 import Data.GADT.Show.TH qualified as TH
 import Data.Hashable qualified as Hashable
 import Data.Some (Some (Some))
+import Kuy.Cabal qualified as Cabal
 import Kuy.Discovery
+import Kuy.GHC qualified as GHC
 import Kuy.Prelude
 import Kuy.Store.Artefact
-import Kuy.Store.Fingerprint 
 import Kuy.Store.Cache
+import Kuy.Store.Fingerprint
+import Kuy.TH qualified as TH
+import Kuy.Unit (Unit)
 
 -- type Query :: Type -> Type
 data Query a where
@@ -51,21 +54,13 @@ data Query a where
     Maybe ServiceVersion ->
     Query (Maybe Description)
   --
-  PackageDescription ::
+  PackageDefaults ::
     Query Cabal.PackageDescription
-
-  -- --
-  -- Namespace ::
-  --   ServiceId ->
-  --   Query Text
-  -- --
-  -- Package ::
-  --   ServiceId ->
-  --   Query PackageDescription
-  -- --
-  -- Module ::
-  --   Cabal.ModuleName ->
-  --   Query GHC.HsModule
+  --
+  CompiledUnit ::
+    TH.ModName ->
+    Unit ->
+    Query ([GHC.HsDecl'], Set TH.ModName, Set TH.Name)
 
 deriving instance Show (Query a)
 
@@ -85,7 +80,8 @@ instance Hashable (Query a) where
     RemoteArtefact a b -> tag salt 5 (a, b)
     DiscoveryIndex -> tag salt 6 ()
     DiscoveryDescription a b -> tag salt 7 (a, b)
-    PackageDescription -> tag salt 8 ()
+    PackageDefaults -> tag salt 8 ()
+    CompiledUnit a b -> tag salt 9 (a, b)
   {-# INLINE hashWithSalt #-}
 
 instance Hashable (Some Query) where

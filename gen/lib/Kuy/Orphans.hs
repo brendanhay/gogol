@@ -2,111 +2,43 @@
 
 module Kuy.Orphans where
 
-import Burrito.Internal.Type.Case as Template
-import Burrito.Internal.Type.Character as Template
-import Burrito.Internal.Type.Digit as Template
-import Burrito.Internal.Type.Expression as Template
-import Burrito.Internal.Type.Field as Template
-import Burrito.Internal.Type.Literal as Template
-import Burrito.Internal.Type.Match as Template
-import Burrito.Internal.Type.MaxLength as Template
-import Burrito.Internal.Type.Modifier as Template
-import Burrito.Internal.Type.Name as Template
-import Burrito.Internal.Type.Operator as Template
-import Burrito.Internal.Type.Token as Template
-import Burrito.Internal.Type.Variable as Template
+import Burrito.Internal.Type.Case qualified as Template
+import Burrito.Internal.Type.Character qualified as Template
+import Burrito.Internal.Type.Digit qualified as Template
+import Burrito.Internal.Type.Expression qualified as Template
+import Burrito.Internal.Type.Field qualified as Template
+import Burrito.Internal.Type.Literal qualified as Template
+import Burrito.Internal.Type.Match qualified as Template
+import Burrito.Internal.Type.MaxLength qualified as Template
+import Burrito.Internal.Type.Modifier qualified as Template
+import Burrito.Internal.Type.Name qualified as Template
+import Burrito.Internal.Type.Operator qualified as Template
+import Burrito.Internal.Type.Token qualified as Template
+import Burrito.Internal.Type.Variable qualified as Template
+import Data.Hashable (Hashable (..))
 import Data.Ord (Down (Down))
 import Data.OrdPSQ (OrdPSQ)
 import Data.OrdPSQ qualified as OrdPSQ
 import Data.Persist (Persist (..))
+import Data.Persist qualified as Persist
+import Data.Word (Word16)
+import Distribution.CabalSpecVersion qualified as Cabal
+import Distribution.Compat.NonEmptySet qualified as Cabal
+import Distribution.ModuleName qualified as Cabal
+import Distribution.PackageDescription qualified as Cabal
+import Distribution.SPDX qualified as Cabal.SPDX
+import Distribution.Simple qualified as Cabal
+import Distribution.Utils.Path qualified as Cabal
+import Distribution.Utils.ShortText qualified as Cabal
 import Distribution.Utils.Structured (Structured)
+import Foreign.ForeignPtr qualified as ForeignPtr
 import GHC.Generics (Generic)
+import Language.Haskell.TH.Syntax qualified as TH
 import Rock qualified
-import Text.Pandoc qualified as Pandoc
+import System.IO.Unsafe qualified as IO.Unsafe
 import UnliftIO (MonadUnliftIO)
 import UnliftIO qualified
 import Prelude
-import Distribution.Simple qualified as Cabal
-import Distribution.PackageDescription qualified as Cabal
-import Distribution.CabalSpecVersion qualified as Cabal
-import Distribution.ModuleName qualified as Cabal
-import Distribution.Utils.Path qualified as Cabal
-import Distribution.Compat.NonEmptySet qualified as Cabal
-import Distribution.SPDX qualified as Cabal.SPDX
-import Distribution.Utils.ShortText qualified as Cabal
-import Data.Word (Word16)
-import Data.Persist qualified as Persist
-import Data.Binary qualified as Binary
-import Data.Binary (Binary)
-
--- Cabal has Binary instances, consider switching modulo performance concerns.
-
--- deriving anyclass instance Persist Cabal.PackageDescription
--- deriving anyclass instance Persist Cabal.PackageFlag
--- deriving anyclass instance Persist Cabal.PackageIdentifier
--- deriving anyclass instance Persist Cabal.PackageName
--- deriving anyclass instance (Persist a, Persist b) => Persist (Cabal.SymbolicPath a b)
--- deriving anyclass instance Persist Cabal.PackageDir
--- deriving anyclass instance Persist Cabal.SourceDir
--- deriving anyclass instance Persist Cabal.FlagName
--- deriving anyclass instance Persist Cabal.Language
--- deriving anyclass instance Persist Cabal.Extension
--- deriving anyclass instance Persist Cabal.Version
--- deriving anyclass instance Persist Cabal.VersionRange
--- deriving anyclass instance Persist Cabal.ModuleName
--- deriving anyclass instance Persist Cabal.UnqualComponentName
--- deriving anyclass instance Persist Cabal.ModuleReexport
--- deriving anyclass instance Persist Cabal.ShortText
--- deriving anyclass instance Persist Cabal.CabalSpecVersion
--- deriving anyclass instance Persist Cabal.SourceRepo
--- deriving anyclass instance Persist Cabal.RepoKind
--- deriving anyclass instance Persist Cabal.RepoType
--- deriving anyclass instance Persist Cabal.KnownRepoType
--- deriving anyclass instance Persist Cabal.BuildType
--- deriving anyclass instance Persist Cabal.SetupBuildInfo
--- deriving anyclass instance Persist Cabal.BuildInfo
--- deriving anyclass instance Persist Cabal.ForeignLib
--- deriving anyclass instance Persist Cabal.ForeignLibType
--- deriving anyclass instance Persist Cabal.ForeignLibOption
--- deriving anyclass instance Persist Cabal.Library
--- deriving anyclass instance Persist Cabal.LibraryName
--- deriving anyclass instance Persist Cabal.LibraryVisibility
--- deriving anyclass instance Persist Cabal.LibVersionInfo
--- deriving anyclass instance Persist Cabal.ExeDependency
--- deriving anyclass instance Persist Cabal.LegacyExeDependency
--- deriving anyclass instance Persist Cabal.PkgconfigName
--- deriving anyclass instance Persist Cabal.PkgconfigDependency
--- deriving anyclass instance Persist Cabal.PkgconfigVersion
--- deriving anyclass instance Persist Cabal.PkgconfigVersionRange
--- deriving anyclass instance Persist a => Persist (Cabal.PerCompilerFlavor a)
--- deriving anyclass instance Persist Cabal.Dependency
--- deriving anyclass instance Persist Cabal.TestSuite
--- deriving anyclass instance Persist Cabal.TestSuiteInterface
--- deriving anyclass instance Persist Cabal.Executable
--- deriving anyclass instance Persist Cabal.ExecutableScope
--- deriving anyclass instance Persist Cabal.License
--- deriving anyclass instance Persist Cabal.LicenseFile
--- deriving anyclass instance Persist Cabal.CompilerFlavor
--- deriving anyclass instance Persist Cabal.SPDX.License
--- deriving anyclass instance Persist Cabal.SPDX.LicenseRef
--- deriving anyclass instance Persist Cabal.SPDX.LicenseExpression
--- deriving anyclass instance Persist Cabal.SPDX.LicenseExceptionId
--- deriving anyclass instance Persist Cabal.SPDX.SimpleLicenseExpression
-
-instance (Ord a, Persist a) => Persist (Cabal.NonEmptySet a) where
-  put = put . Cabal.toNonEmpty
-  get = Cabal.fromNonEmpty <$> get
-
-
-instance Persist Cabal.SPDX.LicenseId where
-    -- Word16 is encoded in big endianess
-    -- https://github.com/kolmodin/binary/blob/master/src/Data/Binary/Class.hs#L220-LL227
-    put = Persist.putBE @Word16 . fromIntegral . fromEnum
-    get = do
-       i <- Persist.getBE @Word16
-       if i > fromIntegral (fromEnum (maxBound :: Cabal.SPDX.LicenseId))
-        then fail "Too large LicenseId tag"
-        else pure (toEnum (fromIntegral i))
 
 -- Rock has MonadBaseControl instances, but no UnliftIO.
 
@@ -136,103 +68,266 @@ instance (Ord k, Ord p, Ord v) => Ord (OrdPSQ k p v) where
       (Nothing, Just {}) ->
         LT
 
+-- This is suboptimal, but alas.
 instance (Ord k, Ord p, Ord v, Persist k, Persist p, Persist v) => Persist (OrdPSQ k p v) where
   put = put . OrdPSQ.toList
   get = OrdPSQ.fromList <$> get
 
--- Contain recursive definitions, so template-haskell ordering is problematic.
+-- So we can use template-haskell syntax as Query keys.
 
-deriving anyclass instance Structured Pandoc.ListNumberStyle
+deriving anyclass instance Hashable TH.TypeFamilyHead
 
-deriving anyclass instance Structured Pandoc.ListNumberDelim
+deriving anyclass instance Hashable TH.Type
 
-deriving anyclass instance Structured Pandoc.Inline
+deriving anyclass instance Hashable flag => Hashable (TH.TyVarBndr flag)
 
-deriving anyclass instance Structured Pandoc.Format
+deriving anyclass instance Hashable TH.TySynEqn
 
-deriving anyclass instance Structured Pandoc.Block
+deriving anyclass instance Hashable TH.TyLit
 
-deriving anyclass instance Structured Pandoc.Caption
+deriving anyclass instance Hashable TH.Stmt
 
-deriving anyclass instance Structured Pandoc.Alignment
+deriving anyclass instance Hashable TH.Specificity
 
-deriving anyclass instance Structured Pandoc.ColWidth
+deriving anyclass instance Hashable TH.SourceUnpackedness
 
-deriving anyclass instance Structured Pandoc.TableHead
+deriving anyclass instance Hashable TH.SourceStrictness
 
-deriving anyclass instance Structured Pandoc.Row
+deriving anyclass instance Hashable TH.Safety
 
-deriving anyclass instance Structured Pandoc.RowSpan
+deriving anyclass instance Hashable TH.RuleMatch
 
-deriving anyclass instance Structured Pandoc.ColSpan
+deriving anyclass instance Hashable TH.RuleBndr
 
-deriving anyclass instance Structured Pandoc.TableBody
+deriving anyclass instance Hashable TH.Role
 
-deriving anyclass instance Structured Pandoc.RowHeadColumns
+deriving anyclass instance Hashable TH.Range
 
-deriving anyclass instance Structured Pandoc.TableFoot
+deriving anyclass instance Hashable TH.Pragma
 
-deriving anyclass instance Structured Pandoc.CitationMode
+deriving anyclass instance Hashable TH.PkgName
 
-deriving anyclass instance Structured Pandoc.MathType
+deriving anyclass instance Hashable TH.Phases
 
-deriving anyclass instance Structured Pandoc.Citation
+deriving anyclass instance Hashable TH.PatSynDir
 
-deriving anyclass instance Structured Pandoc.Cell
+deriving anyclass instance Hashable TH.PatSynArgs
 
-deriving anyclass instance Structured Pandoc.QuoteType
+deriving anyclass instance Hashable TH.Pat
 
-deriving anyclass instance Structured Pandoc.MetaValue
+deriving anyclass instance Hashable TH.Overlap
 
-deriving anyclass instance Structured Pandoc.Meta
+deriving anyclass instance Hashable TH.OccName
 
-deriving anyclass instance Structured Pandoc.Pandoc
+deriving anyclass instance Hashable TH.NameSpace
 
-deriving anyclass instance Persist Pandoc.ListNumberStyle
+deriving anyclass instance Hashable TH.NameFlavour
 
-deriving anyclass instance Persist Pandoc.ListNumberDelim
+deriving anyclass instance Hashable TH.Name
 
-deriving anyclass instance Persist Pandoc.Inline
+deriving anyclass instance Hashable TH.ModuleInfo
 
-deriving anyclass instance Persist Pandoc.Format
+deriving anyclass instance Hashable TH.Module
 
-deriving anyclass instance Persist Pandoc.Block
+deriving anyclass instance Hashable TH.ModName
 
-deriving anyclass instance Persist Pandoc.Caption
+deriving anyclass instance Hashable TH.Match
 
-deriving anyclass instance Persist Pandoc.Alignment
+deriving anyclass instance Hashable TH.Loc
 
-deriving anyclass instance Persist Pandoc.ColWidth
+deriving anyclass instance Hashable TH.Lit
 
-deriving anyclass instance Persist Pandoc.TableHead
+deriving anyclass instance Hashable TH.Inline
 
-deriving anyclass instance Persist Pandoc.Row
+deriving anyclass instance Hashable TH.InjectivityAnn
 
-deriving anyclass instance Persist Pandoc.RowSpan
+deriving anyclass instance Hashable TH.Info
 
-deriving anyclass instance Persist Pandoc.ColSpan
+deriving anyclass instance Hashable TH.Guard
 
-deriving anyclass instance Persist Pandoc.TableBody
+deriving anyclass instance Hashable TH.FunDep
 
-deriving anyclass instance Persist Pandoc.RowHeadColumns
+deriving anyclass instance Hashable TH.Foreign
 
-deriving anyclass instance Persist Pandoc.TableFoot
+deriving anyclass instance Hashable TH.FixityDirection
 
-deriving anyclass instance Persist Pandoc.CitationMode
+deriving anyclass instance Hashable TH.Fixity
 
-deriving anyclass instance Persist Pandoc.MathType
+deriving anyclass instance Hashable TH.FamilyResultSig
 
-deriving anyclass instance Persist Pandoc.Citation
+deriving anyclass instance Hashable TH.Exp
 
-deriving anyclass instance Persist Pandoc.Cell
+deriving anyclass instance Hashable TH.DocLoc
 
-deriving anyclass instance Persist Pandoc.QuoteType
+deriving anyclass instance Hashable TH.DerivStrategy
 
-deriving anyclass instance Persist Pandoc.MetaValue
+deriving anyclass instance Hashable TH.DerivClause
 
-deriving anyclass instance Persist Pandoc.Meta
+deriving anyclass instance Hashable TH.DecidedStrictness
 
-deriving anyclass instance Persist Pandoc.Pandoc
+deriving anyclass instance Hashable TH.Dec
+
+deriving anyclass instance Hashable TH.Con
+
+deriving anyclass instance Hashable TH.Clause
+
+deriving anyclass instance Hashable TH.Callconv
+
+deriving anyclass instance Hashable TH.Body
+
+deriving anyclass instance Hashable TH.Bang
+
+deriving anyclass instance Hashable TH.AnnTarget
+
+deriving anyclass instance Hashable TH.AnnLookup
+
+instance Hashable TH.Bytes where
+  hashWithSalt salt TH.Bytes {bytesPtr, bytesOffset, bytesSize} =
+    IO.Unsafe.unsafeDupablePerformIO $
+      ForeignPtr.withForeignPtr bytesPtr $ \ptr ->
+        pure (salt `hashWithSalt` (ptr, bytesOffset, bytesSize))
+
+-- Cabal has Binary instances, so these would be moot, but I can't bring myself
+-- to use binary when the performance is so subpar compared to store/persist,
+-- both observationaly in this project and via:
+--
+-- https://rawgit.com/haskell-perf/serialization/master/report.html
+
+deriving anyclass instance Persist Cabal.PackageDescription
+
+deriving anyclass instance Persist Cabal.PackageFlag
+
+deriving anyclass instance Persist Cabal.PackageIdentifier
+
+deriving anyclass instance Persist Cabal.PackageName
+
+deriving anyclass instance (Persist a, Persist b) => Persist (Cabal.SymbolicPath a b)
+
+deriving anyclass instance Persist Cabal.PackageDir
+
+deriving anyclass instance Persist Cabal.SourceDir
+
+deriving anyclass instance Persist Cabal.FlagName
+
+deriving anyclass instance Persist Cabal.Language
+
+deriving anyclass instance Persist Cabal.Extension
+
+deriving anyclass instance Persist Cabal.KnownExtension
+
+deriving anyclass instance Persist Cabal.Version
+
+deriving anyclass instance Persist Cabal.VersionRange
+
+deriving anyclass instance Persist Cabal.ModuleName
+
+deriving anyclass instance Persist Cabal.UnqualComponentName
+
+deriving anyclass instance Persist Cabal.ModuleReexport
+
+deriving anyclass instance Persist Cabal.ShortText
+
+deriving anyclass instance Persist Cabal.CabalSpecVersion
+
+deriving anyclass instance Persist Cabal.SourceRepo
+
+deriving anyclass instance Persist Cabal.RepoKind
+
+deriving anyclass instance Persist Cabal.RepoType
+
+deriving anyclass instance Persist Cabal.KnownRepoType
+
+deriving anyclass instance Persist Cabal.BuildType
+
+deriving anyclass instance Persist Cabal.SetupBuildInfo
+
+deriving anyclass instance Persist Cabal.BuildInfo
+
+deriving anyclass instance Persist Cabal.ForeignLib
+
+deriving anyclass instance Persist Cabal.ForeignLibType
+
+deriving anyclass instance Persist Cabal.ForeignLibOption
+
+deriving anyclass instance Persist Cabal.Library
+
+deriving anyclass instance Persist Cabal.LibraryName
+
+deriving anyclass instance Persist Cabal.LibraryVisibility
+
+deriving anyclass instance Persist Cabal.LibVersionInfo
+
+deriving anyclass instance Persist Cabal.ExeDependency
+
+deriving anyclass instance Persist Cabal.LegacyExeDependency
+
+deriving anyclass instance Persist Cabal.PkgconfigName
+
+deriving anyclass instance Persist Cabal.PkgconfigDependency
+
+deriving anyclass instance Persist Cabal.PkgconfigVersion
+
+deriving anyclass instance Persist Cabal.PkgconfigVersionRange
+
+deriving anyclass instance Persist a => Persist (Cabal.PerCompilerFlavor a)
+
+deriving anyclass instance Persist Cabal.Dependency
+
+deriving anyclass instance Persist Cabal.Mixin
+
+deriving anyclass instance Persist Cabal.IncludeRenaming
+
+deriving anyclass instance Persist Cabal.ModuleRenaming
+
+deriving anyclass instance Persist Cabal.TestType
+
+deriving anyclass instance Persist Cabal.TestSuite
+
+deriving anyclass instance Persist Cabal.TestSuiteInterface
+
+deriving anyclass instance Persist Cabal.Executable
+
+deriving anyclass instance Persist Cabal.ExecutableScope
+
+deriving anyclass instance Persist Cabal.Benchmark
+
+deriving anyclass instance Persist Cabal.BenchmarkType
+
+deriving anyclass instance Persist Cabal.BenchmarkInterface
+
+deriving anyclass instance Persist Cabal.License
+
+deriving anyclass instance Persist Cabal.LicenseFile
+
+deriving anyclass instance Persist Cabal.CompilerFlavor
+
+deriving anyclass instance Persist Cabal.SPDX.License
+
+deriving anyclass instance Persist Cabal.SPDX.LicenseRef
+
+deriving anyclass instance Persist Cabal.SPDX.LicenseExpression
+
+deriving anyclass instance Persist Cabal.SPDX.LicenseExceptionId
+
+deriving anyclass instance Persist Cabal.SPDX.SimpleLicenseExpression
+
+deriving stock instance Generic Cabal.LicenseFile
+
+deriving stock instance Generic Cabal.SourceDir
+
+deriving stock instance Generic Cabal.PackageDir
+
+instance (Ord a, Persist a) => Persist (Cabal.NonEmptySet a) where
+  put = put . Cabal.toNonEmpty
+  get = Cabal.fromNonEmpty <$> get
+
+instance Persist Cabal.SPDX.LicenseId where
+  put = Persist.putBE @Word16 . fromIntegral . fromEnum
+  get = do
+    i <- Persist.getBE @Word16
+    if i > fromIntegral (fromEnum (maxBound :: Cabal.SPDX.LicenseId))
+      then fail "Too large LicenseId tag"
+      else pure (toEnum (fromIntegral i))
 
 -- No Generic instances.
 

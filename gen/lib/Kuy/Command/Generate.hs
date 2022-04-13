@@ -44,51 +44,46 @@ generateAll outputDir threads targets' =
 
 generateOne :: FilePath -> Target -> Task Query ()
 generateOne outputDir target = do
-  package <- fetch PackageDescription
-  description <- fetch (uncurry DiscoveryDescription target)
-
-  liftIO $
-    case CodeGen.genPackage package <$> description of
-      Nothing ->
-        putStrLn $
-          "Skipping invalid " ++ show target
-      --
-      Just (Left errs) ->
-        putStrLn $
-          "Error " ++ unlines (show target : errs)
-      --
-      Just (Right result) ->
-        uncurry (writePackage outputDir) result
+  fetch (uncurry DiscoveryDescription target) >>= \case
+    Nothing ->
+      liftIO . putStrLn $
+        "Skipping invalid " ++ show target
+    --
+    Just description -> do
+      (package, modules) <- CodeGen.genPackage description
+      writePackage outputDir package modules
 
 writePackage ::
+  MonadIO m =>
   FilePath ->
   Cabal.PackageDescription ->
   Map Cabal.ModuleName GHC.HsModule ->
-  IO ()
-writePackage outputDir package modules = do
-  let packageName = Cabal.unPackageName (Cabal.packageName package)
-      packageDir = outputDir </> packageName
+  m ()
+writePackage outputDir package modules =
+  liftIO $ do
+    let packageName = Cabal.unPackageName (Cabal.packageName package)
+        packageDir = outputDir </> packageName
 
-  Directory.createDirectoryIfMissing True Driver.tempDir
+    Directory.createDirectoryIfMissing True Driver.tempDir
 
-  -- We can't reliably use withSystemTempDirectory here as I use tmpfs
-  -- and end up with 'Invalid cross-device link' errors trying to use
-  -- renameDirectory across devices.
-  Temporary.withTempDirectory Driver.tempDir packageName $ \tempDir -> do
-    -- Write the package's cabal file.
-    Cabal.writePackageDescription (tempDir </> packageName <.> "cabal") package
+    -- We can't reliably use withSystemTempDirectory here as I use tmpfs
+    -- and end up with 'Invalid cross-device link' errors trying to use
+    -- renameDirectory across devices.
+    Temporary.withTempDirectory Driver.tempDir packageName $ \tempDir -> do
+      -- Write the package's cabal file.
+      Cabal.writePackageDescription (tempDir </> packageName <.> "cabal") package
 
-    for_ (Map.toList modules) $ \(moduleName, module') -> do
-      -- Write an individual haskell module.
-      let moduleFile = tempDir </> Cabal.toFilePath moduleName <.> "hs"
+      for_ (Map.toList modules) $ \(moduleName, module') -> do
+        -- Write an individual haskell module.
+        let moduleFile = tempDir </> Cabal.toFilePath moduleName <.> "hs"
 
-      createParent moduleFile
-        *> GHC.writeModuleFile moduleFile module'
+        createParent moduleFile
+          *> GHC.writeModuleFile moduleFile module'
 
-    -- FIXME: Make everything readonly before copying
-    Directory.removePathForcibly packageDir
-      *> createParent packageDir
-      *> Directory.renameDirectory tempDir packageDir
+      -- FIXME: Make everything readonly before copying
+      Directory.removePathForcibly packageDir
+        *> createParent packageDir
+        *> Directory.renameDirectory tempDir packageDir
 
 createParent :: MonadIO m => FilePath -> m ()
 createParent =

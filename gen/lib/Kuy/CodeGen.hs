@@ -2,73 +2,68 @@
 
 module Kuy.CodeGen where
 
+import Data.Char qualified as Char
 import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
 import Data.Text qualified as Text
-import Kuy.Bridge qualified as Bridge
 import Kuy.Builtin qualified as Builtin
 import Kuy.Cabal qualified as Cabal
 import Kuy.Discovery
+import Kuy.Driver.Query (Query (..))
 import Kuy.GHC qualified as GHC
 import Kuy.Markdown qualified as Markdown
 import Kuy.Monad
 import Kuy.Prelude
-import Kuy.TH
+import Kuy.TH as TH
 import Kuy.Unit
-import Kuy.Driver.Query (Query (..))
-import Data.Char qualified as Char
-import Rock (MonadFetch, fetch)
-
--- FIXME: Query for Markdown -> Haddock
+import Rock (Task, fetch)
 
 genPackage ::
-  Cabal.PackageDescription ->
   Description ->
-  Either [String] (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
-genPackage package description@Description {title, description = markdown} = do
-  haddock <- bimap (: []) (fromString . Text.unpack) (Markdown.writeHaddock markdown)
-  modules <- genModules description
-
+  Task Query (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
+genPackage description@Description {title, description = markdown} = do
   let name = Cabal.mkPackageName (Text.unpack ("gogol-" <> description.name.text))
 
+  defaults <- fetch PackageDefaults
+  modules <- genModules description
+
   pure
-    ( package
-        { Cabal.package = package.package { Cabal.pkgName = name },
-          -- Cabal.copyright = "Copyright (c) 2013-2022 Brendan Hay",
-          -- Cabal.author = "Brendan Hay",
-          -- Cabal.maintainer = "Brendan Hay <brendan.g.hay+gogol@gmail.com",
-          -- Cabal.category = "Google",
-          -- Cabal.homepage = "https://github.com/brendanhay/gogol",
-          Cabal.description = haddock,
-          Cabal.library = Just (Cabal.mkLibrary (Map.keys modules))
+    ( defaults
+        { Cabal.package =
+            defaults.package {Cabal.pkgName = name},
+          Cabal.synopsis =
+            fromString (Text.unpack title),
+          Cabal.description =
+            fromString (Text.unpack (Markdown.renderHaddock markdown)),
+          Cabal.library =
+            Just (Cabal.mkLibrary (Map.keys modules))
         },
       modules
     )
 
-genModules :: Description -> Either [String] (Map Cabal.ModuleName GHC.HsModule)
+genModules :: Description -> Task Query (Map Cabal.ModuleName GHC.HsModule)
 genModules Description {name, canonicalName, methods, resources, schemas} = do
   let namespace =
         fromMaybe name.text $
           Text.filter Char.isAlphaNum <$> canonicalName
 
   runM namespace $ do
-    resourceModules <- genResource Resource {methods, resources}
-    schemaModules <- Map.fromList <$> for (Map.toList schemas) (uncurry genSchema)
+    let compileUnit self unit = do
+          (decls, imports, _exports) <- fetch (CompiledUnit self unit)
 
-    let modules =
-          resourceModules <> schemaModules
+          pure $
+            GHC.mkModule
+              (TH.mkHsModuleName self)
+              (map (GHC.mkImport . TH.mkHsModuleName) (Set.toList imports))
+              decls
 
-        bridge name unit =
-          first (: [])
-            . eitherToValidation
-            . Bridge.ghcModule name
-            . unitDeclarations
-            $ unit
+    modules <-
+      mappend
+        <$> genResource Resource {methods, resources}
+        <*> fmap Map.fromList (for (Map.toList schemas) (uncurry genSchema))
 
-    pure
-      . validationToEither
-      . fmap Map.fromList
-      . traverse (uncurry bridge)
-      . Map.toList
+    fmap (Map.mapKeysMonotonic TH.mkCabalModuleName)
+      . Map.traverseWithKey compileUnit
       $ modules
 
 genResource :: Resource -> M (Map ModName Unit)
@@ -78,18 +73,19 @@ genResource resource = do
       withResource key (genResource resource)
 
   methodModules <-
-    for (Map.elems resource.methods) genMethod
+    Map.fromListWith mappend
+      <$> for (Map.elems resource.methods) genMethod
 
-  pure (Map.unionsWith mappend (resourceModules ++ methodModules))
+  pure (Map.unionsWith mappend (methodModules : resourceModules))
 
-genMethod :: Method -> M (Map ModName Unit)
+genMethod :: Method -> M (ModName, Unit)
 genMethod method = do
   (moduleName, typeName) <- mkMethodName method.id.text
 
   pure
-    . Map.singleton moduleName
-    . mkUnit method.id.text
-    $ TySynD typeName [] (ConT Builtin.unit)
+    ( moduleName,
+      mkUnit method.id.text (TySynD typeName [] (ConT Builtin.unit))
+    )
 
 genSchema :: SchemaId -> Schema -> M (ModName, Unit)
 genSchema schemaId schema = do
@@ -108,73 +104,73 @@ genSchema schemaId schema = do
 
 genSchemaProperties :: Map Text SchemaRef -> M [Unit]
 genSchemaProperties props =
-  fmap catMaybes . for (Map.toList props) $ \(key, ref) ->
+  for (Map.toList props) $ \(key, ref) ->
     withProperty key $
       genSchemaRef ref
 
-genSchemaRef :: SchemaRef -> M (Maybe Unit)
+genSchemaRef :: SchemaRef -> M Unit
 genSchemaRef = \case
-  Follow {} -> pure Nothing
+  Follow {} -> pure mempty
   Inline schema@Schema {..} ->
     case format of
       Any ->
-        pure Nothing
+        pure mempty
       --
       Array ->
-        pure Nothing
+        pure mempty
       --
       Object ->
-        pure Nothing
+        pure mempty
       --
       Boolean ->
-        pure Nothing
+        pure mempty
       --
       --
       String ->
         genString schema
       --
       Byte ->
-        pure Nothing
+        pure mempty
       --
       Date ->
-        pure Nothing
+        pure mempty
       --
       DateTime ->
-        pure Nothing
+        pure mempty
       --
       GoogleDateTime ->
-        pure Nothing
+        pure mempty
       --
       GoogleDuration ->
-        pure Nothing
+        pure mempty
       --
       GoogleFieldMask ->
-        pure Nothing
+        pure mempty
       --
       Int64 ->
-        pure Nothing
+        pure mempty
       --
       UInt64 ->
-        pure Nothing
+        pure mempty
       --
       Int32 ->
-        pure Nothing
+        pure mempty
       --
       UInt32 ->
-        pure Nothing
+        pure mempty
       --
       Double ->
-        pure Nothing
+        pure mempty
       --
       Float ->
-        pure Nothing
+        pure mempty
 
-genString :: Schema -> M (Maybe Unit)
+genString :: Schema -> M Unit
 genString schema
   | Just values <- schema.enum = do
       -- name <- mkPropertyName
 
-      pure . Just . mkUnit "unknown" $
+      pure . mkUnit "unknown" $
         PragmaD $
           CompleteP
             (mkName "Enumeration" : map (mkName . Text.unpack) values)
@@ -183,4 +179,4 @@ genString schema
   -- flip concatMap values $ \value ->
   --
   | otherwise =
-      pure Nothing
+      pure mempty
