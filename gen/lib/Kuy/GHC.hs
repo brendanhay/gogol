@@ -19,15 +19,16 @@ module Kuy.GHC
   )
 where
 
+import Data.Text.IO qualified as Text.IO
 import GHC.Hs
 import GHC.Types.SrcLoc (GenLocated (L))
 import GHC.Types.SrcLoc qualified as SrcLoc
 import GHC.Unit.Module.Name (ModuleName)
 import GHC.Unit.Module.Name qualified as ModuleName
-import GHC.Utils.Outputable qualified as PP
-import GHC.Utils.Ppr qualified as PP
+import GHC.Utils.Outputable qualified as Pretty
+import GHC.Utils.Ppr qualified as Pretty
 import Kuy.Prelude
-import System.IO qualified as IO
+import Ormolu qualified
 
 type ImportDecl' = ImportDecl GhcPs
 
@@ -57,9 +58,28 @@ mkImport name =
     }
 
 writeModuleFile :: FilePath -> HsModule -> IO ()
-writeModuleFile path mod =
-  IO.withFile path IO.WriteMode $ \handle ->
-    PP.printSDoc PP.defaultSDocContext (PP.PageMode True) handle (PP.ppr mod)
+writeModuleFile path =
+  Ormolu.ormolu Ormolu.defaultConfig path . prettyPrint
+    >=> Text.IO.writeFile path
+
+prettyPrint :: Pretty.Outputable a => a -> String
+prettyPrint =
+  Pretty.renderStyle style
+    . flip Pretty.runSDoc context
+    . Pretty.ppr
+  where
+    context =
+      Pretty.defaultSDocContext
+        { Pretty.sdocLineLength = columns
+        }
+
+    style =
+      Pretty.style
+        { Pretty.mode = Pretty.PageMode True,
+          Pretty.lineLength = columns
+        }
+
+    columns = 100
 
 -- Utilities
 

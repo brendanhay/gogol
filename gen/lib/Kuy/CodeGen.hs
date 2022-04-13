@@ -22,7 +22,7 @@ genPackage ::
   Description ->
   Task Query (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
 genPackage description@Description {title, description = markdown} = do
-  let name = Cabal.mkPackageName (Text.unpack ("gogol-" <> description.name.text))
+  let name = Cabal.mkPackageName $ Text.unpack ("gogol-" <> description.name.text)
 
   defaults <- fetch PackageDefaults
   modules <- genModules description

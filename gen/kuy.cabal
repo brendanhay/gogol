@@ -60,22 +60,25 @@ library
     , http-client-tls         ^>=0.3
     , mtl                     ^>=2.2
     , optparse-applicative    ^>=0.17
+    , ormolu                  ^>=0.4
     , pandoc                  ^>=2.17
     , persist                 ^>=0.1
     , psqueues                ^>=0.2
     , rock                    ^>=0.3
-    , some                    ^>=1
     , template-haskell        ^>=2.18
     , text                    ^>=1.2
     , time                    ^>=1.11
     , transformers            ^>=0.5
     , unliftio                ^>=0.2
 
+  -- Not using ghc-lib-parser despite the ormolu dependency,
+  -- since it currently doesn't expose GHC.ThToHs.
   exposed-modules:
     Kuy.Builtin
     Kuy.Cabal
     Kuy.CodeGen
-    Kuy.Command.Generate
+    Kuy.Command.Build
+    Kuy.Command.Clean
     Kuy.Discovery
     Kuy.Discovery.Description
     Kuy.Discovery.Directory
@@ -99,9 +102,9 @@ library
     Kuy.TH
     Kuy.Unit
 
--- executable kuy
---   import:         base
---   hs-source-dirs: app
---   main-is:        Main.hs
---   ghc-options:    -rtsopts -threaded "-with-rtsopts=-N -qg -A128M -I0"
---   build-depends:  kuy
+executable kuy
+  import:         base
+  hs-source-dirs: app
+  main-is:        Main.hs
+  ghc-options:    -rtsopts -threaded "-with-rtsopts=-N -qg -A128M -I0"
+  build-depends:  kuy

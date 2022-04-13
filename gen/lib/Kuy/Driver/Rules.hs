@@ -19,15 +19,38 @@ import Kuy.Unit
 import Network.HTTP.Client qualified as Client
 import Rock
 import UnliftIO qualified
+import UnliftIO.Directory qualified as Directory
 import UnliftIO.IORef qualified as IORef
 
 rules ::
   Client.Manager ->
   FilePath ->
-  IORef Manifest ->
   GenRules (Writer [Error] (Writer TaskKind Query)) Query
-rules manager store manifestVar (Writer (Writer query)) =
+rules manager buildDir (Writer (Writer query)) =
   case query of
+    BuildInfo ->
+      noError $
+        pure
+          Info
+            { manifest = buildDir </> "manifest",
+              artefact = buildDir </> "artefact",
+              cache = buildDir </> "cache",
+              temporary = buildDir </> "tmp",
+              output = buildDir </> "out"
+            }
+    --
+    ArtefactManifest ->
+      nonInput $ do
+        info <- fetch BuildInfo
+        seen <- Directory.doesPathExist info.manifest
+
+        (manifest, errors) <-
+          if seen
+            then parseManifest <$> fetch (FileBytes info.manifest)
+            else pure mempty
+
+        (,errors) <$> IORef.newIORef manifest
+    --
     FileBytes path ->
       input $
         liftIO (ByteString.readFile path)
@@ -37,8 +60,9 @@ rules manager store manifestVar (Writer (Writer query)) =
         fingerprintFile path
     --
     CachedBytes key ->
-      noError $
-        tryReadCache store key
+      noError $ do
+        info <- fetch BuildInfo
+        tryReadCache info.cache key
     --
     ArtefactBytes artefact ->
       noError $
@@ -47,47 +71,55 @@ rules manager store manifestVar (Writer (Writer query)) =
     StoredArtefact name ->
       input $
         runMaybeT $ do
-          manifest <- IORef.readIORef manifestVar
-          artefact <- MaybeT (lookupArtefact store name)
-          artefact <$ guard (isKnownArtefact artefact manifest)
+          info <- fetch BuildInfo
+          manifestVar <- fetch ArtefactManifest
+
+          artefact <- MaybeT (lookupArtefact (info.artefact </> name))
+          validate <- isKnownArtefact artefact <$> IORef.readIORef manifestVar
+          artefact <$ guard validate
     --
     RemoteArtefact url name ->
-      input $
-        downloadArtefact manager store url name
+      input $ do
+        info <- fetch BuildInfo
+        downloadArtefact manager url (info.artefact </> name)
     --
     DiscoveryIndex ->
       noError $ do
         (artefact, list) <-
-          fetchArtefactJSON @DirectoryList store directoryListURL "directory-list.json"
+          fetchArtefactJSON @DirectoryList directoryListURL "directory-list.json"
 
-        liftIO $
-          Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
+        manifestVar <- fetch ArtefactManifest
 
-        pure $! newDirectoryIndex list.items
+        liftIO $ Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
+
+        pure (newDirectoryIndex list.items)
     --
     DiscoveryDescription name mversion ->
-      noError $ do
+      nonInput $ do
         index <- fetch DiscoveryIndex
 
-        for (findPreferredVersion name mversion index) $ \item -> do
-          let url = item.discoveryRestUrl
-              path =
-                "services"
-                  </> Text.unpack item.name.text
-                  </> Text.unpack item.version.text
-                  <.> "json"
+        case findPreferredVersion name mversion index of
+          Nothing -> pure (Nothing, ["Missing service description"])
+          Just item -> do
+            let url = item.discoveryRestUrl
+                path =
+                  "services"
+                    </> Text.unpack item.name.text
+                    </> Text.unpack item.version.text
+                    <.> "json"
 
-          (artefact, description) <-
-            fetchArtefactJSON @Description store url path
+            (artefact, description) <-
+              fetchArtefactJSON @Description url path
 
-          liftIO $
-            Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
+            manifestVar <- fetch ArtefactManifest
 
-          pure description
+            liftIO $ Atomics.atomicModifyIORefCAS_ manifestVar (insertArtefact artefact)
+
+            pure (Just description, [])
     --
     PackageDefaults ->
       noError $
-        fetchCachedFile store "kuy.cabal" $ \bytes ->
+        fetchCachedFile "kuy.cabal" $ \bytes ->
           either (error . show) pure (Cabal.parsePackageDescription bytes)
     --
     CompiledUnit self unit ->
@@ -119,19 +151,18 @@ fetchArtefactJSON ::
     Persist a,
     FromJSON a
   ) =>
-  FilePath ->
   String ->
   FilePath ->
   m (Artefact, a)
-fetchArtefactJSON store url path =
+fetchArtefactJSON url path =
   fetch (StoredArtefact path) >>= \case
     Nothing -> do
       artefact <- fetch (RemoteArtefact url path)
-      item <- fetchCachedJSON store artefact
+      item <- fetchCachedJSON artefact
       pure (artefact, item)
     --
     Just artefact -> do
-      item <- fetchCachedJSON store artefact
+      item <- fetchCachedJSON artefact
       pure (artefact, item)
 
 fetchCachedJSON ::
@@ -142,10 +173,9 @@ fetchCachedJSON ::
     Persist a,
     FromJSON a
   ) =>
-  FilePath ->
   Artefact ->
   m a
-fetchCachedJSON store artefact = do
+fetchCachedJSON artefact = do
   let key = newCacheKey @a artefact.hash
 
   fetch (CachedBytes key) >>= \case
@@ -153,10 +183,11 @@ fetchCachedJSON store artefact = do
       pure item
     --
     Left writer -> do
+      info <- fetch BuildInfo
       bytes <- fetch (ArtefactBytes artefact)
       -- FIXME: proper error handling
       item <- either UnliftIO.throwString pure $ Aeson.eitherDecodeStrict' bytes
-      item <$ writeCache store writer item
+      item <$ writeCache info.cache writer item
 
 fetchCachedFile ::
   forall a m.
@@ -166,10 +197,9 @@ fetchCachedFile ::
     Persist a
   ) =>
   FilePath ->
-  FilePath ->
   (ByteString -> m a) ->
   m a
-fetchCachedFile store path decode = do
+fetchCachedFile path decode = do
   key <- newCacheKey @a <$> fetch (FileHash path)
 
   fetch (CachedBytes key) >>= \case
@@ -177,6 +207,7 @@ fetchCachedFile store path decode = do
       pure item
     --
     Left writer -> do
+      info <- fetch BuildInfo
       bytes <- fetch (FileBytes path)
       item <- decode bytes
-      item <$ writeCache store writer item
+      item <$ writeCache info.cache writer item

@@ -47,12 +47,12 @@ tryReadCache ::
   FilePath ->
   CacheKey a ->
   m (Either (CacheWriter a) a)
-tryReadCache store reader = do
-  let path = store </> "cache" </> renderFingerprint reader.hash
+tryReadCache dir reader = do
+  let path = dir </> renderFingerprint reader.hash
 
-  exists <- Directory.doesPathExist path
+  seen <- Directory.doesPathExist path
 
-  if not exists
+  if not seen
     then pure $ Left CacheWriter {hash = reader.hash}
     else do
       -- FIXME: verify the reader's hash prior to reading?
@@ -63,8 +63,8 @@ tryReadCache store reader = do
       either error (pure . Right) (Persist.decode bytes)
 
 writeCache :: (MonadIO m, Persist a) => FilePath -> CacheWriter a -> a -> m ()
-writeCache store writer item = do
-  let path = store </> "cache" </> renderFingerprint writer.hash
+writeCache dir writer item = do
+  let path = dir </> renderFingerprint writer.hash
 
   -- FIXME: verify the writer hash against the written content?
 

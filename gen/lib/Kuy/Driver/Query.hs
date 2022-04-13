@@ -13,11 +13,26 @@ import Kuy.Prelude
 import Kuy.Store.Artefact
 import Kuy.Store.Cache
 import Kuy.Store.Fingerprint
+import Kuy.Store.Manifest
 import Kuy.TH qualified as TH
 import Kuy.Unit (Unit)
 
--- type Query :: Type -> Type
+data Info = Info
+  { manifest :: FilePath,
+    artefact :: FilePath,
+    cache :: FilePath,
+    temporary :: FilePath,
+    output :: FilePath
+  }
+
 data Query a where
+  -- Allows clean and other commands to extract the dir from the driver,
+  -- rather than all commands needing to pass it in explicitly.
+  BuildInfo ::
+    Query Info
+  --
+  ArtefactManifest ::
+    Query (IORef Manifest)
   --
   FileBytes ::
     FilePath ->
@@ -72,16 +87,18 @@ TH.deriveGShow ''Query
 
 instance Hashable (Query a) where
   hashWithSalt salt = \case
-    FileBytes a -> tag salt 0 a
-    FileHash a -> tag salt 1 a
-    CachedBytes a -> tag salt 2 a
-    ArtefactBytes a -> tag salt 3 a
-    StoredArtefact a -> tag salt 4 a
-    RemoteArtefact a b -> tag salt 5 (a, b)
-    DiscoveryIndex -> tag salt 6 ()
-    DiscoveryDescription a b -> tag salt 7 (a, b)
-    PackageDefaults -> tag salt 8 ()
-    CompiledUnit a b -> tag salt 9 (a, b)
+    BuildInfo -> tag salt 0 ()
+    ArtefactManifest -> tag salt 1 ()
+    FileBytes a -> tag salt 2 a
+    FileHash a -> tag salt 3 a
+    CachedBytes a -> tag salt 4 a
+    ArtefactBytes a -> tag salt 5 a
+    StoredArtefact a -> tag salt 6 a
+    RemoteArtefact a b -> tag salt 7 (a, b)
+    DiscoveryIndex -> tag salt 8 ()
+    DiscoveryDescription a b -> tag salt 9 (a, b)
+    PackageDefaults -> tag salt 10 ()
+    CompiledUnit a b -> tag salt 12 (a, b)
   {-# INLINE hashWithSalt #-}
 
 instance Hashable (Some Query) where
@@ -94,3 +111,21 @@ tag salt tag payload =
     `Hashable.hashWithSalt` tag
     `Hashable.hashWithSalt` payload
 {-# INLINE tag #-}
+
+isTimedQuery :: Query a -> Bool
+isTimedQuery = const False
+
+renderQuery :: Bool -> Query a -> Maybe String
+renderQuery verbose = const Nothing
+
+-- render True = \case
+--   CompiledUnit self unit ->
+--     Just (show (self, unit))
+--   --
+--   other ->
+--     render False
+
+-- render False = \case
+--   BuildInfo ->
+--     Just "BuildInfo"
+--   --

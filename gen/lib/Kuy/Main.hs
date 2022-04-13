@@ -5,9 +5,9 @@ module Kuy.Main where
 import Data.List qualified as List
 import Data.Set qualified as Set
 import GHC.IO.Encoding qualified as Encoding
-import Kuy.Command.Generate qualified as Command (generate)
+import Kuy.Command.Build qualified as Command (build)
+import Kuy.Command.Clean qualified as Command (clean)
 import Kuy.Discovery
-import Kuy.Driver qualified as Driver
 import Kuy.Prelude
 import Options.Applicative (Parser, ParserInfo, ReadM)
 import Options.Applicative qualified as Options
@@ -26,27 +26,33 @@ program =
 commands :: Parser (IO ())
 commands =
   Options.hsubparser $
-    Options.command "generate" generate
+    Options.command "build" build
+      <> Options.command "clean" clean
 
-generate :: ParserInfo (IO ())
-generate =
-  Options.progDesc "Generate the specified API packages"
+build :: ParserInfo (IO ())
+build =
+  Options.progDesc "Build the specified API packages"
     & Options.info
       ( do
-          output <-
-            Options.strOption $
-              Options.help "Directory where generated output will be written"
-                <> Options.long "output"
-                <> Options.metavar "PATH"
-                <> Options.value (Driver.tempDir </> "services")
-                <> Options.showDefaultWith id
-
           targets <-
             Options.many . Options.argument targetReader $
               Options.help "API service name and optional version"
                 <> Options.metavar "SERVICE[:VERSION]"
 
-          pure (Command.generate output (Set.fromList targets))
+          pure (Command.build (Set.fromList targets))
+      )
+
+clean :: ParserInfo (IO ())
+clean =
+  Options.progDesc "Clean the specified API packages"
+    & Options.info
+      ( do
+          full <-
+            Options.switch $
+              Options.help "Completely remove all cached artefacts"
+                <> Options.long "full"
+
+          pure (Command.clean full)
       )
 
 targetReader :: ReadM (ServiceName, Maybe ServiceVersion)

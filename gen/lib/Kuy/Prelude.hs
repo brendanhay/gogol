@@ -23,7 +23,7 @@ module Kuy.Prelude
     -- * Errors
     hush,
     note,
-    hoistMaybe,
+    liftMaybe,
 
     -- * Re-exports
     module Export,
@@ -119,5 +119,5 @@ note :: a -> Maybe b -> Either a b
 note a = maybe (Left a) Right
 
 -- | Convert a 'Maybe' computation to 'MaybeT'.
-hoistMaybe :: (Applicative m) => Maybe b -> MaybeT m b
-hoistMaybe = MaybeT . pure
+liftMaybe :: Applicative m => Maybe b -> MaybeT m b
+liftMaybe = MaybeT . pure

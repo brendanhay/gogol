@@ -20,8 +20,7 @@ import UnliftIO.Temporary qualified as Temporary
 -- with the supplied fingerprint.
 data Artefact = Artefact
   { hash :: Fingerprint,
-    path :: FilePath,
-    name :: FilePath
+    path :: FilePath
   }
   deriving stock (Show, Ord, Eq, Generic)
 
@@ -31,30 +30,25 @@ instance Hashable Artefact where
 readArtefact :: MonadIO m => Artefact -> m ByteString
 readArtefact key = liftIO (ByteString.readFile key.path)
 
-lookupArtefact :: MonadIO m => FilePath -> FilePath -> m (Maybe Artefact)
-lookupArtefact store name =
+lookupArtefact :: MonadIO m => FilePath -> m (Maybe Artefact)
+lookupArtefact path =
   liftIO $ do
-    let path = store </> "artefact" </> name
+    seen <- Directory.doesPathExist path
 
-    exists <- Directory.doesPathExist path
-
-    if not exists
+    if not seen
       then pure Nothing
       else do
         hash <- fingerprintFile path
-        pure $ Just Artefact {hash, path, name}
+        pure $ Just Artefact {hash, path}
 
 downloadArtefact ::
   MonadIO m =>
   Client.Manager ->
-  FilePath ->
   String ->
   FilePath ->
   m Artefact
-downloadArtefact manager store url name =
+downloadArtefact manager url path =
   liftIO $ do
-    let path = store </> "artefact" </> name
-
     request <-
       Client.parseUrlThrow url <&> \initial ->
         initial
@@ -78,4 +72,4 @@ downloadArtefact manager store url name =
 
       hash <- fingerprintFile path
 
-      pure Artefact {hash, path, name}
+      pure Artefact {hash, path}
