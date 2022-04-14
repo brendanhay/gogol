@@ -1,4 +1,4 @@
-module Kuy.Markdown
+module Kuy.Text.Markdown
   ( Markdown,
     renderHaddock,
   )

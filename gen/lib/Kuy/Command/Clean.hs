@@ -1,8 +1,8 @@
 module Kuy.Command.Clean where
 
 import Kuy.Discovery
-import Kuy.Driver qualified as Driver
 import Kuy.Driver.Query
+import Kuy.Driver.Task qualified as Task
 import Kuy.Prelude
 import Rock (fetch)
 import UnliftIO.Directory qualified as Directory
@@ -11,7 +11,7 @@ type Target = (ServiceName, Maybe ServiceVersion)
 
 clean :: Bool -> IO ()
 clean full = do
-  Driver.execute $ do
+  Task.execute_ $ do
     info <- fetch BuildInfo
 
     traverse_ removePath $
@@ -30,5 +30,5 @@ removePath path =
     seen <- Directory.doesPathExist path
 
     if seen
-      then putStrLn ("Cleaning path " ++ path) *> Directory.removePathForcibly path
-      else putStrLn ("Skipping non-existent path " ++ path)
+      then putStrLn ("Cleaning " ++ path) *> Directory.removePathForcibly path
+      else putStrLn ("Skipping " ++ path)

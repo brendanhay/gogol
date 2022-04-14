@@ -31,11 +31,10 @@ common base
     PatternSynonyms
     RecordWildCards
     StrictData
+    TypeFamilies
     ViewPatterns
     NoFieldSelectors
     OverloadedRecordDot
-
-  build-depends:      base >=4.16
 
 library
   import:          base
@@ -43,6 +42,7 @@ library
   build-depends:
     , aeson                   ^>=2
     , atomic-primops          ^>=0.8
+    , base                    >=4.16
     , base16                  ^>=0.3
     , burrito                 ^>=2
     , bytestring              ^>=0.11
@@ -74,9 +74,11 @@ library
   -- Not using ghc-lib-parser despite the ormolu dependency,
   -- since it currently doesn't expose GHC.ThToHs.
   exposed-modules:
-    Kuy.Builtin
     Kuy.Cabal
     Kuy.CodeGen
+    Kuy.CodeGen.Builtin
+    Kuy.CodeGen.Monad
+    Kuy.CodeGen.Unit
     Kuy.Command.Build
     Kuy.Command.Clean
     Kuy.Discovery
@@ -85,22 +87,22 @@ library
     Kuy.Discovery.Label
     Kuy.Discovery.Name
     Kuy.Discovery.Schema
-    Kuy.Driver
+    Kuy.Driver.Error
     Kuy.Driver.Query
     Kuy.Driver.Rules
+    Kuy.Driver.Task
+    Kuy.Driver.Trace
     Kuy.GHC
     Kuy.Main
-    Kuy.Markdown
-    Kuy.Monad
     Kuy.Orphans
     Kuy.Prelude
     Kuy.Store.Artefact
     Kuy.Store.Cache
     Kuy.Store.Fingerprint
     Kuy.Store.Manifest
-    Kuy.Template
+    Kuy.Text.Markdown
+    Kuy.Text.Template
     Kuy.TH
-    Kuy.Unit
 
 executable kuy
   import:         base

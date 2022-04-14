@@ -1,4 +1,4 @@
-module Kuy.Builtin where
+module Kuy.CodeGen.Builtin where
 
 import Kuy.TH qualified as TH
 

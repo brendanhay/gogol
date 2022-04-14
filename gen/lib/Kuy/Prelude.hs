@@ -31,6 +31,7 @@ module Kuy.Prelude
 where
 
 import Control.Applicative as Export (Alternative ((<|>)))
+import Control.Concurrent.MVar as Export (MVar)
 import Control.Exception as Export (Exception, IOException, SomeException)
 import Control.Monad as Export
 import Control.Monad.Except as Export

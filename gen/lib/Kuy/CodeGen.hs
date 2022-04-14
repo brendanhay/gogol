@@ -6,16 +6,16 @@ import Data.Char qualified as Char
 import Data.Map.Strict qualified as Map
 import Data.Set qualified as Set
 import Data.Text qualified as Text
-import Kuy.Builtin qualified as Builtin
 import Kuy.Cabal qualified as Cabal
+import Kuy.CodeGen.Builtin qualified as Builtin
+import Kuy.CodeGen.Monad
+import Kuy.CodeGen.Unit
 import Kuy.Discovery
 import Kuy.Driver.Query (Query (..))
 import Kuy.GHC qualified as GHC
-import Kuy.Markdown qualified as Markdown
-import Kuy.Monad
 import Kuy.Prelude
 import Kuy.TH as TH
-import Kuy.Unit
+import Kuy.Text.Markdown qualified as Markdown
 import Rock (Task, fetch)
 
 genPackage ::

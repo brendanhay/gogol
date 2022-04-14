@@ -4,9 +4,9 @@ import Data.Aeson qualified as Aeson
 import Kuy.Discovery.Label
 import Kuy.Discovery.Name
 import Kuy.Discovery.Schema
-import Kuy.Markdown (Markdown)
 import Kuy.Prelude
-import Kuy.Template (Template)
+import Kuy.Text.Markdown (Markdown)
+import Kuy.Text.Template (Template)
 
 -- | The discovery document which describes a REST API.
 --

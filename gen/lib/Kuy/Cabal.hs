@@ -13,6 +13,7 @@ module Kuy.Cabal
     -- * Parsing and pretty printing
     parsePackageDescription,
     PrettyPrint.writePackageDescription,
+    emptyPackageDescription,
   )
 where
 

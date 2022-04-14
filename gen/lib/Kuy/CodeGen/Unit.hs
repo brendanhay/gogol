@@ -1,4 +1,4 @@
-module Kuy.Unit
+module Kuy.CodeGen.Unit
   ( Unit,
     mkUnit,
     compileUnit,

@@ -5,8 +5,8 @@ import Data.Set qualified as Set
 import Kuy.Cabal qualified as Cabal
 import Kuy.CodeGen qualified as CodeGen
 import Kuy.Discovery
-import Kuy.Driver qualified as Driver
 import Kuy.Driver.Query
+import Kuy.Driver.Task qualified as Task
 import Kuy.GHC qualified as GHC
 import Kuy.Prelude
 import Rock (Task, fetch)
@@ -26,7 +26,7 @@ ignored =
 
 build :: Set Target -> IO ()
 build targets =
-  Driver.execute $ do
+  Task.execute $ do
     selected <-
       if not (Set.null targets)
         then pure targets
@@ -41,7 +41,7 @@ build targets =
 
           pure (services `Set.difference` ignored)
 
-    Driver.concurrently $
+    Task.concurrently $
       map buildPackage (Set.toList selected)
 
 buildPackage :: Target -> Task Query ()
@@ -70,7 +70,6 @@ writePackage package modules = do
   -- We can't reliably use withSystemTempDirectory here as I use tmpfs
   -- and end up with 'Invalid cross-device link' errors trying to use
   -- renameDirectory across devices.
-
   Temporary.withTempDirectory info.temporary packageName $ \workDir -> do
     -- Write the package's cabal file.
     liftIO (Cabal.writePackageDescription (workDir </> packageName <.> "cabal") package)

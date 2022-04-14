@@ -1,19 +1,21 @@
-module Kuy.Driver
-  ( execute,
+module Kuy.Driver.Task
+  ( concurrently,
+    execute,
     execute_,
-    concurrently,
   )
 where
 
 import Control.Concurrent qualified as Concurrent
 import Data.Atomics qualified as Atomics
 import Data.ByteString.Builder qualified as ByteBuilder
-import Data.Dependent.HashMap (DHashMap)
 import Data.Dependent.HashMap qualified as DHashMap
 import Data.Dependent.Sum (DSum ((:=>)))
 import Data.Time.Clock.POSIX qualified as Time
+import System.Exit qualified as Exit
+import Kuy.Driver.Error (Error, Errors)
 import Kuy.Driver.Query
 import Kuy.Driver.Rules qualified as Rules
+import Kuy.Driver.Trace
 import Kuy.Prelude
 import Kuy.Store.Manifest
 import Network.HTTP.Client qualified as Client
@@ -26,14 +28,16 @@ import UnliftIO qualified
 import UnliftIO.Async qualified as Async
 import UnliftIO.Directory qualified as Directory
 import UnliftIO.IORef qualified as IORef
-import UnliftIO.MVar (MVar)
 import UnliftIO.MVar qualified as MVar
 
-type Error = String
-
-type Errors = DHashMap Query (Const [Error])
-
-type Traces = DHashMap Query (Const NominalDiffTime)
+-- | Concurrently run a list of tasks up to the number of capabilities.
+concurrently :: [Task Query a] -> Task Query ()
+concurrently = \case
+  [] -> pure ()
+  [x] -> void x
+  xs -> do
+    limit <- liftIO Concurrent.getNumCapabilities
+    Async.pooledMapConcurrentlyN_ limit id xs
 
 -- | Execute a driver task and save the generated artefact manifest.
 execute :: Task Query a -> IO a
@@ -49,37 +53,59 @@ execute_ :: Task Query a -> IO a
 execute_ task = do
   manager <- Client.newManager TLS.tlsManagerSettings
 
-  (start, (result, errors), finish) <-
-    (,,)
-      <$> Time.getPOSIXTime
-      <*> runTask manager "_build" task
-      <*> Time.getPOSIXTime
+  withSummary $
+    runTask manager "_build" task
 
-  for_ errors putStrLn
+withSummary :: IO (a, Errors) -> IO a
+withSummary action = do
+  start <- Time.getPOSIXTime
+  (result, errors) <- action
+  finish <- Time.getPOSIXTime
 
-  putStrLn . mconcat $
-    [ "Completed in ",
-      show (finish - start),
-      "."
-    ]
+  let duration = show (finish - start) <> "s"
+
+  count <- reportErrors errors
+
+  putStrLn . unwords $
+    case count of
+      0 ->
+        [ "Completed in",
+          duration
+        ]
+      _ ->
+        [ "Completed with",
+          show count,
+          case count of
+            1 -> "error"
+            _ -> "errors",
+          "in",
+          duration
+        ]
+
+  unless (count == 0) $
+    Exit.exitFailure
 
   pure result
 
--- | Concurrently run a list of tasks up to the number of capabilities.
-concurrently :: [Task Query a] -> Task Query ()
-concurrently = \case
-  [] -> pure ()
-  [x] -> void x
-  xs -> do
-    threads <- liftIO (Concurrent.getNumCapabilities)
-    Async.pooledMapConcurrentlyN_ threads id xs
+reportErrors :: Errors -> IO Int
+reportErrors =
+  foldM go 0 . DHashMap.toList
+  where
+    -- FIXME: use renderQuery from Trace.hs
+    go n ((query :: Query a) :=> Const errors) = do
+      let title = "Error in " ++ show query ++ ":"
+          body = map (\e -> " - " ++ show e) errors
 
-runTask :: Client.Manager -> FilePath -> Task Query a -> IO (a, [Error])
+      putStr (unlines (title : body))
+
+      pure (n + length errors)
+
+runTask :: Client.Manager -> FilePath -> Task Query a -> IO (a, Errors)
 runTask manager buildDir task = do
   startedVar <- IORef.newIORef mempty
   threadsVar <- IORef.newIORef mempty
   errorsVar <- IORef.newIORef (mempty :: Errors)
-  timingsVar <- MVar.newMVar (mempty :: Traces)
+  tracesVar <- MVar.newMVar (mempty :: Traces)
 
   let verbose = False
 
@@ -87,7 +113,7 @@ runTask manager buildDir task = do
       writeErrors (Writer query) errors =
         unless (null errors) $
           liftIO . Atomics.atomicModifyIORefCAS errorsVar $
-            (,()) . DHashMap.insert query (Const errors)
+            (,()) . DHashMap.insertWith mappend query (Const errors)
 
       ignoreTaskKind :: Query a -> TaskKind -> Task Query ()
       ignoreTaskKind _query _kind =
@@ -98,8 +124,8 @@ runTask manager buildDir task = do
         GenRules (Writer TaskKind Query) Query
       traceFetch =
         Rock.traceFetch
-          (traceStart verbose timingsVar)
-          (traceFinish verbose timingsVar)
+          (traceStart verbose tracesVar)
+          (traceFinish verbose tracesVar)
 
       rules :: Rules Query
       rules =
@@ -113,45 +139,19 @@ runTask manager buildDir task = do
     result <- task
     errors <- IORef.readIORef errorsVar
 
-    let errorMessages =
-          foldMap (\(_ :=> Const errs) -> errs) (DHashMap.toList errors)
+    -- let errorMessages =
+    --       foldMap (\(_ :=> Const errs) -> errs) (DHashMap.toList errors)
 
-    pure (result, errorMessages)
+    pure (result, errors)
 
 saveManifest :: Task Query ()
 saveManifest = do
   path <- (.manifest) <$> fetch BuildInfo
 
-  manifestVar <- fetch ArtefactManifest
+  manifestVar <- fetch StoreManifest
   manifest <- IORef.readIORef manifestVar
 
   Directory.createDirectoryIfMissing True (FilePath.takeDirectory path)
 
   liftIO . IO.withBinaryFile path IO.WriteMode $ \handle ->
     ByteBuilder.hPutBuilder handle (renderManifest manifest)
-
-traceStart :: MonadIO m => Bool -> MVar Traces -> Writer TaskKind Query a -> m ()
-traceStart verbose timingsVar (Writer query) =
-  liftIO . MVar.modifyMVar_ timingsVar $ \m -> do
-    for_ (renderQuery verbose query) $ \message ->
-      putStrLn message
-
-    start <- Time.getPOSIXTime
-
-    pure (DHashMap.insert query (Const start) m)
-
-traceFinish :: MonadIO m => Bool -> MVar Traces -> Writer TaskKind Query a -> a -> m ()
-traceFinish verbose timingsVar (Writer query) _value =
-  liftIO . MVar.withMVar timingsVar $ \m ->
-    void . runMaybeT $ do
-      guard (isTimedQuery query)
-
-      Const start <- liftMaybe (DHashMap.lookup query m)
-      message <- liftMaybe (renderQuery verbose query)
-      finish <- lift Time.getPOSIXTime
-
-      lift . putStrLn $
-        message
-          ++ " completed in "
-          ++ show (finish - start)
-          ++ "s"

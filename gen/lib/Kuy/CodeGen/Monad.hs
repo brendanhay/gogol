@@ -1,4 +1,4 @@
-module Kuy.Monad
+module Kuy.CodeGen.Monad
   ( M,
     runM,
 

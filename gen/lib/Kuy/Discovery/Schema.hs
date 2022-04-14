@@ -4,8 +4,8 @@ module Kuy.Discovery.Schema where
 
 import Data.Aeson qualified as Aeson
 import Kuy.Discovery.Name
-import Kuy.Markdown (Markdown)
 import Kuy.Prelude
+import Kuy.Text.Markdown (Markdown)
 
 -- | Description of a single parameter.
 data Schema = Schema

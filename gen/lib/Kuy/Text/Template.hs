@@ -1,4 +1,4 @@
-module Kuy.Template
+module Kuy.Text.Template
   ( Template (..),
     Token (..),
   )
