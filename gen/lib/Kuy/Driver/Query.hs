@@ -96,15 +96,12 @@ instance Hashable (Query a) where
     DiscoveryDescription a b -> tag salt 9 (a, b)
     PackageDefaults -> tag salt 10 ()
     CompiledUnit a b -> tag salt 12 (a, b)
-  {-# INLINE hashWithSalt #-}
 
 instance Hashable (Some Query) where
   hashWithSalt salt (Some query) = salt `Hashable.hashWithSalt` query
-  {-# INLINE hashWithSalt #-}
 
 tag :: Hashable a => Int -> Int -> a -> Int
 tag salt tag payload =
   salt
     `Hashable.hashWithSalt` tag
     `Hashable.hashWithSalt` payload
-{-# INLINE tag #-}

@@ -52,7 +52,7 @@ rules manager buildDir (Writer (Writer query)) =
 
         manifestVar <- IORef.newIORef manifest
 
-        pure (manifestVar, map (Error.Parse info.manifest) errors)
+        pure (manifestVar, map (Error.Warn . Error.Parse info.manifest) errors)
     --
     FileBytes path ->
       input $

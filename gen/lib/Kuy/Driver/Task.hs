@@ -9,10 +9,9 @@ import Control.Concurrent qualified as Concurrent
 import Data.Atomics qualified as Atomics
 import Data.ByteString.Builder qualified as ByteBuilder
 import Data.Dependent.HashMap qualified as DHashMap
-import Data.Dependent.Sum (DSum ((:=>)))
 import Data.Time.Clock.POSIX qualified as Time
 import System.Exit qualified as Exit
-import Kuy.Driver.Error (Error, Errors)
+import Kuy.Driver.Error
 import Kuy.Driver.Query
 import Kuy.Driver.Rules qualified as Rules
 import Kuy.Driver.Trace
@@ -86,19 +85,6 @@ withSummary action = do
     Exit.exitFailure
 
   pure result
-
-reportErrors :: Errors -> IO Int
-reportErrors =
-  foldM go 0 . DHashMap.toList
-  where
-    -- FIXME: use renderQuery from Trace.hs
-    go n ((query :: Query a) :=> Const errors) = do
-      let title = "Error in " ++ show query ++ ":"
-          body = map (\e -> " - " ++ show e) errors
-
-      putStr (unlines (title : body))
-
-      pure (n + length errors)
 
 runTask :: Client.Manager -> FilePath -> Task Query a -> IO (a, Errors)
 runTask manager buildDir task = do
