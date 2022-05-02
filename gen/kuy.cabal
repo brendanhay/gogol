@@ -19,6 +19,8 @@ common base
     -fwarn-unused-packages
 
   default-extensions:
+    FunctionalDependencies
+    MagicHash
     NoImplicitPrelude
     DataKinds
     DeriveAnyClass
@@ -41,12 +43,15 @@ library
   hs-source-dirs:  lib
   build-depends:
     , aeson                   ^>=2
+    , ansi-terminal
     , atomic-primops          ^>=0.8
     , base                    >=4.16
     , base16                  ^>=0.3
+    , binary
     , burrito                 ^>=2
     , bytestring              ^>=0.11
     , Cabal                   ^>=3.6
+    , constraints-extras
     , containers              ^>=0.6
     , dependent-hashmap       ^>=0.1
     , dependent-sum           ^>=0.7
@@ -54,6 +59,7 @@ library
     , dlist                   ^>=1
     , either                  ^>=5
     , filepath                ^>=1.4
+    , generics-sop
     , ghc                     ^>=9.2
     , hashable                ^>=1.4
     , http-client             ^>=0.7
@@ -65,44 +71,51 @@ library
     , persist                 ^>=0.1
     , psqueues                ^>=0.2
     , rock                    ^>=0.3
+    , shake                   ^>=0.19
+    , some
     , template-haskell        ^>=2.18
     , text                    ^>=1.2
     , time                    ^>=1.11
     , transformers            ^>=0.5
     , unliftio                ^>=0.2
+    , unordered-containers
+    , http-api-data
+    , filepattern
+    , sop-core
 
   -- Not using ghc-lib-parser despite the ormolu dependency,
   -- since it currently doesn't expose GHC.ThToHs.
-  exposed-modules:
-    Kuy.Cabal
-    Kuy.CodeGen
-    Kuy.CodeGen.Builtin
-    Kuy.CodeGen.Monad
-    Kuy.CodeGen.Unit
-    Kuy.Command.Build
-    Kuy.Command.Clean
-    Kuy.Discovery
-    Kuy.Discovery.Description
-    Kuy.Discovery.Directory
-    Kuy.Discovery.Label
-    Kuy.Discovery.Name
-    Kuy.Discovery.Schema
-    Kuy.Driver.Error
-    Kuy.Driver.Query
-    Kuy.Driver.Rules
-    Kuy.Driver.Task
-    Kuy.Driver.Trace
-    Kuy.GHC
-    Kuy.Main
-    Kuy.Orphans
-    Kuy.Prelude
-    Kuy.Store.Artefact
-    Kuy.Store.Cache
-    Kuy.Store.Fingerprint
-    Kuy.Store.Manifest
-    Kuy.Text.Markdown
-    Kuy.Text.Template
-    Kuy.TH
+  exposed-modules: Kuy.Main
+
+-- Kuy.Cabal
+-- Kuy.CodeGen
+-- Kuy.CodeGen.Builtin
+-- Kuy.CodeGen.Monad
+-- Kuy.CodeGen.Unit
+-- -- Kuy.Command.Build
+-- -- Kuy.Command.Clean
+-- Kuy.Discovery
+-- Kuy.Discovery.Description
+-- Kuy.Discovery.Directory
+-- Kuy.Discovery.Label
+-- Kuy.Discovery.Name
+-- Kuy.Discovery.Schema
+-- -- Kuy.Driver.Error
+-- -- Kuy.Driver.Query
+-- -- Kuy.Driver.Rules
+-- -- Kuy.Driver.Task
+-- -- Kuy.Driver.Trace
+-- Kuy.GHC
+-- Kuy.Rules.Discovery
+-- Kuy.Orphans
+-- Kuy.Prelude
+-- -- Kuy.Store.Artefact
+-- -- Kuy.Store.Cache
+-- -- Kuy.Store.Fingerprint
+-- -- Kuy.Store.Manifest
+-- Kuy.Text.Markdown
+-- Kuy.Text.Template
+-- Kuy.TH
 
 executable kuy
   import:         base

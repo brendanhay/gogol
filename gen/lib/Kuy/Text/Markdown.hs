@@ -14,7 +14,7 @@ import Text.Pandoc qualified as Pandoc
 -- | Parsed markdown rendered in Haddock format.
 newtype Markdown = Markdown Text
   deriving stock (Show, Eq, Ord)
-  deriving newtype (Structured, Persist)
+  deriving newtype (NFData, Hashable, Binary)
 
 instance FromJSON Markdown where
   parseJSON =

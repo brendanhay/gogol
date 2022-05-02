@@ -6,23 +6,31 @@ module Kuy.Cabal
     ModuleName,
     packageName,
     unPackageName,
-    toFilePath,
     mkPackageName,
+    packageFiles,
+    toFilePath,
     mkLibrary,
 
     -- * Parsing and pretty printing
-    parsePackageDescription,
+
+    -- parsePackageDescription,
+    verbose,
+    packageDescription,
+    Parsec.readGenericPackageDescription,
     PrettyPrint.writePackageDescription,
-    emptyPackageDescription,
+    PrettyPrint.showPackageDescription,
+    -- emptyPackageDescription,
   )
 where
 
+import Data.DList qualified as DList
 import Distribution.ModuleName (ModuleName, toFilePath)
 import Distribution.PackageDescription
 import Distribution.PackageDescription.Parsec qualified as Parsec
 import Distribution.PackageDescription.PrettyPrint qualified as PrettyPrint
 import Distribution.Simple
-import Distribution.Utils.Path (unsafeMakeSymbolicPath)
+import Distribution.Utils.Path (unsafeMakeSymbolicPath, getSymbolicPath)
+import Distribution.Verbosity
 import Kuy.Prelude
 
 -- mkPackageDescription :: PackageName -> [Int] -> Library -> PackageDescription
@@ -68,9 +76,23 @@ dependency :: PackageName -> [Int] -> Dependency
 dependency name version =
   mkDependency name (majorBoundVersion (mkVersion version)) mainLibSet
 
-parsePackageDescription :: ByteString -> Either (NonEmpty String) PackageDescription
-parsePackageDescription =
-  bimap (fmap show . snd) packageDescription
-    . snd
-    . Parsec.runParseResult
-    . Parsec.parseGenericPackageDescription
+-- Note: we're not recursing into 'BuildInfo' and looking for includes, etc.
+packageFiles :: PackageDescription -> [FilePath]
+packageFiles PackageDescription{..} =
+  DList.toList $
+      DList.fromList (map getSymbolicPath licenseFiles)
+        <> DList.fromList dataFiles
+        <> DList.fromList extraSrcFiles
+        <> DList.fromList extraTmpFiles
+        <> DList.fromList extraDocFiles
+
+-- Just ModuleName is insufficient, we need the directory the file is in too,
+-- but this could be one of multiple directories for each library.
+
+-- packageModules :: PackageDescription -> DList ModuleName
+-- packageModules desc@PackageDescription{..} =
+--   foldMap (DList.fromList . explicitLibModules) (allLibraries desc)
+--     <> foldMap (DList.fromList . exeModules) executables
+--     <> foldMap (DList.fromList . foreignLibModules) foreignLibs
+--     <> foldMap (DList.fromList . testModules) testSuites
+--     <> foldMap (DList.fromList . benchmarkModules) benchmarkModules

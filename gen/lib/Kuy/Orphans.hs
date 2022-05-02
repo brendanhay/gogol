@@ -2,6 +2,7 @@
 
 module Kuy.Orphans where
 
+import Language.Haskell.TH.Syntax qualified as TH
 import Burrito.Internal.Type.Case qualified as Template
 import Burrito.Internal.Type.Character qualified as Template
 import Burrito.Internal.Type.Digit qualified as Template
@@ -15,13 +16,12 @@ import Burrito.Internal.Type.Name qualified as Template
 import Burrito.Internal.Type.Operator qualified as Template
 import Burrito.Internal.Type.Token qualified as Template
 import Burrito.Internal.Type.Variable qualified as Template
+import Data.Binary (Binary (..))
+import Data.HashPSQ (HashPSQ)
+import Data.HashPSQ qualified as HashPSQ
 import Data.Hashable (Hashable (..))
-import Data.Ord (Down (Down))
-import Data.OrdPSQ (OrdPSQ)
-import Data.OrdPSQ qualified as OrdPSQ
-import Data.Persist (Persist (..))
-import Data.Persist qualified as Persist
-import Data.Word (Word16)
+import Data.Ord (Down)
+import Development.Shake.Classes (NFData)
 import Distribution.CabalSpecVersion qualified as Cabal
 import Distribution.Compat.NonEmptySet qualified as Cabal
 import Distribution.ModuleName qualified as Cabal
@@ -30,48 +30,172 @@ import Distribution.SPDX qualified as Cabal.SPDX
 import Distribution.Simple qualified as Cabal
 import Distribution.Utils.Path qualified as Cabal
 import Distribution.Utils.ShortText qualified as Cabal
-import Distribution.Utils.Structured (Structured)
-import Foreign.ForeignPtr qualified as ForeignPtr
 import GHC.Generics (Generic)
-import Language.Haskell.TH.Syntax qualified as TH
-import Rock qualified
-import System.IO.Unsafe qualified as IO.Unsafe
-import UnliftIO (MonadUnliftIO)
-import UnliftIO qualified
 import Prelude
+import Foreign.ForeignPtr qualified as ForeignPtr
+import System.IO.Unsafe qualified as IO.Unsafe
 
--- Rock has MonadBaseControl instances, but no UnliftIO.
+deriving anyclass instance Hashable Cabal.PackageDescription
 
-instance MonadUnliftIO (Rock.Task f) where
-  withRunInIO inner =
-    Rock.Task $
-      UnliftIO.withRunInIO $ \run ->
-        inner $ run . Rock.unTask
+deriving anyclass instance Hashable Cabal.PackageFlag
+
+deriving anyclass instance Hashable Cabal.PackageIdentifier
+
+deriving anyclass instance Hashable Cabal.PackageName
+
+deriving anyclass instance (Hashable a, Hashable b) => Hashable (Cabal.SymbolicPath a b)
+
+deriving anyclass instance Hashable Cabal.PackageDir
+
+deriving anyclass instance Hashable Cabal.SourceDir
+
+deriving anyclass instance Hashable Cabal.FlagName
+
+deriving anyclass instance Hashable Cabal.Language
+
+deriving anyclass instance Hashable Cabal.Extension
+
+deriving anyclass instance Hashable Cabal.KnownExtension
+
+deriving anyclass instance Hashable Cabal.Version
+
+deriving anyclass instance Hashable Cabal.VersionRange
+
+deriving anyclass instance Hashable Cabal.ModuleName
+
+deriving anyclass instance Hashable Cabal.UnqualComponentName
+
+deriving anyclass instance Hashable Cabal.ModuleReexport
+
+deriving anyclass instance Hashable Cabal.ShortText
+
+deriving anyclass instance Hashable Cabal.CabalSpecVersion
+
+deriving anyclass instance Hashable Cabal.SourceRepo
+
+deriving anyclass instance Hashable Cabal.RepoKind
+
+deriving anyclass instance Hashable Cabal.RepoType
+
+deriving anyclass instance Hashable Cabal.KnownRepoType
+
+deriving anyclass instance Hashable Cabal.BuildType
+
+deriving anyclass instance Hashable Cabal.SetupBuildInfo
+
+deriving anyclass instance Hashable Cabal.BuildInfo
+
+deriving anyclass instance Hashable Cabal.ForeignLib
+
+deriving anyclass instance Hashable Cabal.ForeignLibType
+
+deriving anyclass instance Hashable Cabal.ForeignLibOption
+
+deriving anyclass instance Hashable Cabal.Library
+
+deriving anyclass instance Hashable Cabal.LibraryName
+
+deriving anyclass instance Hashable Cabal.LibraryVisibility
+
+deriving anyclass instance Hashable Cabal.LibVersionInfo
+
+deriving anyclass instance Hashable Cabal.ExeDependency
+
+deriving anyclass instance Hashable Cabal.LegacyExeDependency
+
+deriving anyclass instance Hashable Cabal.PkgconfigName
+
+deriving anyclass instance Hashable Cabal.PkgconfigDependency
+
+deriving anyclass instance Hashable Cabal.PkgconfigVersion
+
+deriving anyclass instance Hashable Cabal.PkgconfigVersionRange
+
+deriving anyclass instance Hashable a => Hashable (Cabal.PerCompilerFlavor a)
+
+deriving anyclass instance Hashable Cabal.Dependency
+
+deriving anyclass instance Hashable Cabal.Mixin
+
+deriving anyclass instance Hashable Cabal.IncludeRenaming
+
+deriving anyclass instance Hashable Cabal.ModuleRenaming
+
+deriving anyclass instance Hashable Cabal.TestType
+
+deriving anyclass instance Hashable Cabal.TestSuite
+
+deriving anyclass instance Hashable Cabal.TestSuiteInterface
+
+deriving anyclass instance Hashable Cabal.Executable
+
+deriving anyclass instance Hashable Cabal.ExecutableScope
+
+deriving anyclass instance Hashable Cabal.Benchmark
+
+deriving anyclass instance Hashable Cabal.BenchmarkType
+
+deriving anyclass instance Hashable Cabal.BenchmarkInterface
+
+deriving anyclass instance Hashable Cabal.License
+
+deriving anyclass instance Hashable Cabal.LicenseFile
+
+deriving anyclass instance Hashable Cabal.CompilerFlavor
+
+deriving anyclass instance Hashable Cabal.SPDX.License
+
+deriving anyclass instance Hashable Cabal.SPDX.LicenseRef
+
+deriving anyclass instance Hashable Cabal.SPDX.LicenseExpression
+
+deriving anyclass instance Hashable Cabal.SPDX.LicenseExceptionId
+
+deriving anyclass instance Hashable Cabal.SPDX.SimpleLicenseExpression
+
+deriving stock instance Eq Cabal.LicenseFile
+
+deriving stock instance Generic Cabal.LicenseFile
+
+deriving stock instance Eq Cabal.SourceDir
+
+deriving stock instance Generic Cabal.SourceDir
+
+deriving stock instance Eq Cabal.PackageDir
+
+deriving stock instance Generic Cabal.PackageDir
+
+instance Hashable a => Hashable (Cabal.NonEmptySet a) where
+  hashWithSalt salt = hashWithSalt salt . Cabal.toNonEmpty
+
+instance Hashable Cabal.SPDX.LicenseId where
+  hashWithSalt salt = hashWithSalt salt . fromEnum
 
 -- No Ord/Hashable instances for psqeues types.
 
-instance Structured a => Structured (Down a)
+instance Binary a => Binary (Down a)
 
-instance Persist a => Persist (Down a) where
-  put (Down x) = put x
-  get = Down <$> get
+instance Hashable a => Hashable (Down a)
 
-instance (Ord k, Ord p, Ord v) => Ord (OrdPSQ k p v) where
-  compare x y =
-    case (OrdPSQ.minView x, OrdPSQ.minView y) of
-      (Nothing, Nothing) ->
-        EQ
-      (Just (xk, xp, xv, x'), (Just (yk, yp, yv, y'))) ->
-        compare xk yk <> compare xp yp <> compare xv yv <> compare x' y'
-      (Just {}, Nothing) ->
-        GT
-      (Nothing, Just {}) ->
-        LT
+-- instance (Ord k, Ord p, Ord v) => Ord (HashPSQ k p v) where
+--   compare x y =
+--     case (HashPSQ.minView x, HashPSQ.minView y) of
+--       (Nothing, Nothing) ->
+--         EQ
+--       (Just (xk, xp, xv, x'), (Just (yk, yp, yv, y'))) ->
+--         compare xk yk <> compare xp yp <> compare xv yv <> compare x' y'
+--       (Just {}, Nothing) ->
+--         GT
+--       (Nothing, Just {}) ->
+--         LT
 
 -- This is suboptimal, but alas.
-instance (Ord k, Ord p, Ord v, Persist k, Persist p, Persist v) => Persist (OrdPSQ k p v) where
-  put = put . OrdPSQ.toList
-  get = OrdPSQ.fromList <$> get
+instance (Ord k, Hashable k, Ord p, Hashable p, Hashable v) => Hashable (HashPSQ k p v) where
+  hashWithSalt salt = hashWithSalt salt . HashPSQ.toList
+
+instance (Ord k, Hashable k, Ord p, Hashable p, Ord v, Binary k, Binary p, Binary v) => Binary (HashPSQ k p v) where
+  put = put . HashPSQ.toList
+  get = HashPSQ.fromList <$> get
 
 -- So we can use template-haskell syntax as Query keys.
 
@@ -187,149 +311,7 @@ instance Hashable TH.Bytes where
       ForeignPtr.withForeignPtr bytesPtr $ \ptr ->
         pure (salt `hashWithSalt` (ptr, bytesOffset, bytesSize))
 
--- Cabal has Binary instances, so these would be moot, but I can't bring myself
--- to use binary when the performance is so subpar compared to store/persist,
--- both observationaly in this project and via:
---
--- https://rawgit.com/haskell-perf/serialization/master/report.html
-
-deriving anyclass instance Persist Cabal.PackageDescription
-
-deriving anyclass instance Persist Cabal.PackageFlag
-
-deriving anyclass instance Persist Cabal.PackageIdentifier
-
-deriving anyclass instance Persist Cabal.PackageName
-
-deriving anyclass instance (Persist a, Persist b) => Persist (Cabal.SymbolicPath a b)
-
-deriving anyclass instance Persist Cabal.PackageDir
-
-deriving anyclass instance Persist Cabal.SourceDir
-
-deriving anyclass instance Persist Cabal.FlagName
-
-deriving anyclass instance Persist Cabal.Language
-
-deriving anyclass instance Persist Cabal.Extension
-
-deriving anyclass instance Persist Cabal.KnownExtension
-
-deriving anyclass instance Persist Cabal.Version
-
-deriving anyclass instance Persist Cabal.VersionRange
-
-deriving anyclass instance Persist Cabal.ModuleName
-
-deriving anyclass instance Persist Cabal.UnqualComponentName
-
-deriving anyclass instance Persist Cabal.ModuleReexport
-
-deriving anyclass instance Persist Cabal.ShortText
-
-deriving anyclass instance Persist Cabal.CabalSpecVersion
-
-deriving anyclass instance Persist Cabal.SourceRepo
-
-deriving anyclass instance Persist Cabal.RepoKind
-
-deriving anyclass instance Persist Cabal.RepoType
-
-deriving anyclass instance Persist Cabal.KnownRepoType
-
-deriving anyclass instance Persist Cabal.BuildType
-
-deriving anyclass instance Persist Cabal.SetupBuildInfo
-
-deriving anyclass instance Persist Cabal.BuildInfo
-
-deriving anyclass instance Persist Cabal.ForeignLib
-
-deriving anyclass instance Persist Cabal.ForeignLibType
-
-deriving anyclass instance Persist Cabal.ForeignLibOption
-
-deriving anyclass instance Persist Cabal.Library
-
-deriving anyclass instance Persist Cabal.LibraryName
-
-deriving anyclass instance Persist Cabal.LibraryVisibility
-
-deriving anyclass instance Persist Cabal.LibVersionInfo
-
-deriving anyclass instance Persist Cabal.ExeDependency
-
-deriving anyclass instance Persist Cabal.LegacyExeDependency
-
-deriving anyclass instance Persist Cabal.PkgconfigName
-
-deriving anyclass instance Persist Cabal.PkgconfigDependency
-
-deriving anyclass instance Persist Cabal.PkgconfigVersion
-
-deriving anyclass instance Persist Cabal.PkgconfigVersionRange
-
-deriving anyclass instance Persist a => Persist (Cabal.PerCompilerFlavor a)
-
-deriving anyclass instance Persist Cabal.Dependency
-
-deriving anyclass instance Persist Cabal.Mixin
-
-deriving anyclass instance Persist Cabal.IncludeRenaming
-
-deriving anyclass instance Persist Cabal.ModuleRenaming
-
-deriving anyclass instance Persist Cabal.TestType
-
-deriving anyclass instance Persist Cabal.TestSuite
-
-deriving anyclass instance Persist Cabal.TestSuiteInterface
-
-deriving anyclass instance Persist Cabal.Executable
-
-deriving anyclass instance Persist Cabal.ExecutableScope
-
-deriving anyclass instance Persist Cabal.Benchmark
-
-deriving anyclass instance Persist Cabal.BenchmarkType
-
-deriving anyclass instance Persist Cabal.BenchmarkInterface
-
-deriving anyclass instance Persist Cabal.License
-
-deriving anyclass instance Persist Cabal.LicenseFile
-
-deriving anyclass instance Persist Cabal.CompilerFlavor
-
-deriving anyclass instance Persist Cabal.SPDX.License
-
-deriving anyclass instance Persist Cabal.SPDX.LicenseRef
-
-deriving anyclass instance Persist Cabal.SPDX.LicenseExpression
-
-deriving anyclass instance Persist Cabal.SPDX.LicenseExceptionId
-
-deriving anyclass instance Persist Cabal.SPDX.SimpleLicenseExpression
-
-deriving stock instance Generic Cabal.LicenseFile
-
-deriving stock instance Generic Cabal.SourceDir
-
-deriving stock instance Generic Cabal.PackageDir
-
-instance (Ord a, Persist a) => Persist (Cabal.NonEmptySet a) where
-  put = put . Cabal.toNonEmpty
-  get = Cabal.fromNonEmpty <$> get
-
-instance Persist Cabal.SPDX.LicenseId where
-  put = Persist.putBE @Word16 . fromIntegral . fromEnum
-  get = do
-    i <- Persist.getBE @Word16
-    if i > fromIntegral (fromEnum (maxBound :: Cabal.SPDX.LicenseId))
-      then fail "Too large LicenseId tag"
-      else pure (toEnum (fromIntegral i))
-
--- No Generic instances.
+-- No useful instances for URI template types
 
 deriving stock instance Generic Template.Case
 
@@ -357,54 +339,80 @@ deriving stock instance Generic Template.Variable
 
 deriving stock instance Generic (Template.Character a)
 
-deriving anyclass instance Structured Template.Case
+deriving anyclass instance NFData Template.Case
 
-deriving anyclass instance Structured Template.Digit
+deriving anyclass instance NFData Template.Digit
 
-deriving anyclass instance Structured Template.Expression
+deriving anyclass instance NFData Template.Expression
 
-deriving anyclass instance Structured Template.Field
+deriving anyclass instance NFData Template.Field
 
-deriving anyclass instance Structured Template.Literal
+deriving anyclass instance NFData Template.Literal
 
-deriving anyclass instance Structured Template.Match
+deriving anyclass instance NFData Template.Match
 
-deriving anyclass instance Structured Template.MaxLength
+deriving anyclass instance NFData Template.MaxLength
 
-deriving anyclass instance Structured Template.Modifier
+deriving anyclass instance NFData Template.Modifier
 
-deriving anyclass instance Structured Template.Name
+deriving anyclass instance NFData Template.Name
 
-deriving anyclass instance Structured Template.Operator
+deriving anyclass instance NFData Template.Operator
 
-deriving anyclass instance Structured Template.Token
+deriving anyclass instance NFData Template.Token
 
-deriving anyclass instance Structured Template.Variable
+deriving anyclass instance NFData Template.Variable
 
-deriving anyclass instance Structured a => Structured (Template.Character a)
+deriving anyclass instance NFData a => NFData (Template.Character a)
 
-deriving anyclass instance Persist Template.Case
+deriving anyclass instance Hashable Template.Case
 
-deriving anyclass instance Persist Template.Digit
+deriving anyclass instance Hashable Template.Digit
 
-deriving anyclass instance Persist Template.Expression
+deriving anyclass instance Hashable Template.Expression
 
-deriving anyclass instance Persist Template.Field
+deriving anyclass instance Hashable Template.Field
 
-deriving anyclass instance Persist Template.Literal
+deriving anyclass instance Hashable Template.Literal
 
-deriving anyclass instance Persist Template.Match
+deriving anyclass instance Hashable Template.Match
 
-deriving anyclass instance Persist Template.MaxLength
+deriving anyclass instance Hashable Template.MaxLength
 
-deriving anyclass instance Persist Template.Modifier
+deriving anyclass instance Hashable Template.Modifier
 
-deriving anyclass instance Persist Template.Name
+deriving anyclass instance Hashable Template.Name
 
-deriving anyclass instance Persist Template.Operator
+deriving anyclass instance Hashable Template.Operator
 
-deriving anyclass instance Persist Template.Token
+deriving anyclass instance Hashable Template.Token
 
-deriving anyclass instance Persist Template.Variable
+deriving anyclass instance Hashable Template.Variable
 
-deriving anyclass instance Persist a => Persist (Template.Character a)
+deriving anyclass instance Hashable a => Hashable (Template.Character a)
+
+deriving anyclass instance Binary Template.Case
+
+deriving anyclass instance Binary Template.Digit
+
+deriving anyclass instance Binary Template.Expression
+
+deriving anyclass instance Binary Template.Field
+
+deriving anyclass instance Binary Template.Literal
+
+deriving anyclass instance Binary Template.Match
+
+deriving anyclass instance Binary Template.MaxLength
+
+deriving anyclass instance Binary Template.Modifier
+
+deriving anyclass instance Binary Template.Name
+
+deriving anyclass instance Binary Template.Operator
+
+deriving anyclass instance Binary Template.Token
+
+deriving anyclass instance Binary Template.Variable
+
+deriving anyclass instance Binary a => Binary (Template.Character a)

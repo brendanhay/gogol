@@ -1,7 +1,6 @@
-{-# LANGUAGE ApplicativeDo #-}
-
 module Kuy.CodeGen where
 
+import Development.Shake ()
 import Data.Char qualified as Char
 import Data.Map.Strict qualified as Map
 import Data.Set qualified as Set
@@ -11,45 +10,21 @@ import Kuy.CodeGen.Builtin qualified as Builtin
 import Kuy.CodeGen.Monad
 import Kuy.CodeGen.Unit
 import Kuy.Discovery
-import Kuy.Driver.Query (Query (..))
 import Kuy.GHC qualified as GHC
 import Kuy.Prelude
 import Kuy.TH as TH
-import Kuy.Text.Markdown qualified as Markdown
-import Rock (Task, fetch)
 
-genPackage ::
-  Description ->
-  Task Query (Cabal.PackageDescription, Map Cabal.ModuleName GHC.HsModule)
-genPackage description@Description {title, description = markdown} = do
-  let name = Cabal.mkPackageName $ Text.unpack ("gogol-" <> description.name.text)
-
-  defaults <- fetch PackageDefaults
-  modules <- genModules description
-
-  pure
-    ( defaults
-        { Cabal.package =
-            defaults.package {Cabal.pkgName = name},
-          Cabal.synopsis =
-            fromString (Text.unpack title),
-          Cabal.description =
-            fromString (Text.unpack (Markdown.renderHaddock markdown)),
-          Cabal.library =
-            Just (Cabal.mkLibrary (Map.keys modules))
-        },
-      modules
-    )
-
-genModules :: Description -> Task Query (Map Cabal.ModuleName GHC.HsModule)
+genModules :: Description -> Either [String] (Map Cabal.ModuleName GHC.HsModule)
 genModules Description {name, canonicalName, methods, resources, schemas} = do
   let namespace =
         fromMaybe name.text $
           Text.filter Char.isAlphaNum <$> canonicalName
 
-  runM namespace $ do
-    let compileUnit self unit = do
-          (decls, imports, _exports) <- fetch (CompiledUnit self unit)
+  validationToEither . runM namespace $ do
+    let compile :: ModName -> Unit -> Validation [String] GHC.HsModule
+        compile self unit =
+         eitherToValidation $ do
+          (decls, imports, _exports) <- first (:[]) (compileUnit self unit)
 
           pure $
             GHC.mkModule
@@ -62,8 +37,9 @@ genModules Description {name, canonicalName, methods, resources, schemas} = do
         <$> genResource Resource {methods, resources}
         <*> fmap Map.fromList (for (Map.toList schemas) (uncurry genSchema))
 
-    fmap (Map.mapKeysMonotonic TH.mkCabalModuleName)
-      . Map.traverseWithKey compileUnit
+    pure
+      . fmap (Map.mapKeysMonotonic TH.mkCabalModuleName)
+      . Map.traverseWithKey compile
       $ modules
 
 genResource :: Resource -> M (Map ModName Unit)

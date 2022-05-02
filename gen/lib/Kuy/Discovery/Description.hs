@@ -59,7 +59,7 @@ data Description = Description
     resources :: Map Text Resource
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Description where
   parseJSON =
@@ -113,18 +113,18 @@ data Auth = Auth
   { oauth2 :: OAuth
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)
 
 newtype OAuthScope = OAuthScope {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (NFData, Hashable, Binary, FromJSON, FromJSONKey)
 
 -- | Available OAuth 2.0 scopes.
 data OAuth = OAuth
   { scopes :: Map OAuthScope Markdown
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON OAuth where
   parseJSON =
@@ -141,7 +141,7 @@ data Resource = Resource
     resources :: Map Text Resource
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Resource where
   parseJSON =
@@ -188,7 +188,7 @@ data Method = Method
     mediaUpload :: Maybe MediaUpload
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Method where
   parseJSON =
@@ -238,7 +238,7 @@ data MediaUpload = MediaUpload
     protocols :: Protocols
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)
 
 -- | Supported upload protocols.
 data Protocols = Protocols
@@ -248,7 +248,7 @@ data Protocols = Protocols
     resumable :: Maybe Protocol
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)
 
 data Protocol = Protocol
   { -- | The URI path to be used for upload. Should be used in conjunction with
@@ -258,4 +258,4 @@ data Protocol = Protocol
     multipart :: Bool
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)

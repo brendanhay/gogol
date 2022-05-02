@@ -11,7 +11,7 @@ data Label
   | LimitedAvailability
   | Deprecated
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Label where
   parseJSON =

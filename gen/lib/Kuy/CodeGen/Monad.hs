@@ -16,10 +16,8 @@ where
 import Control.Monad.Reader qualified as Reader
 import Data.Char qualified as Char
 import Data.Text qualified as Text
-import Kuy.Driver.Query (Query)
 import Kuy.Prelude
 import Kuy.TH qualified as TH
-import Rock (MonadFetch, Task)
 
 data R = R
   { namespace :: Text,
@@ -27,12 +25,12 @@ data R = R
     property :: [Text]
   }
 
-newtype M a = M (ReaderT R (Task Query) a)
-  deriving newtype (Functor, Monad, Applicative, MonadFetch Query)
+newtype M a = M (Reader R a)
+  deriving newtype (Functor, Monad, Applicative)
 
-runM :: Text -> M a -> Task Query a
+runM :: Text -> M a -> a
 runM namespace (M m) =
-  runReaderT m $
+  runReader m $
     R
       { namespace = "Gogol." <> upperHead namespace,
         resource = [],

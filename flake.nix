@@ -21,6 +21,7 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = [
             ghc
+            pkgs.git
             pkgs.haskellPackages.cabal-fmt
             pkgs.nixpkgs-fmt
             pkgs.parallel

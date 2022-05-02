@@ -1,3 +1,5 @@
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Kuy.TH
@@ -34,3 +36,14 @@ mkCabalModuleName = fromString . modString
 
 mkHsModuleName :: ModName -> GHC.ModuleName
 mkHsModuleName = GHC.mkModuleName . modString
+
+-- deriveShakeValue :: Name -> Q [Dec]
+-- deriveShakeValue name = do
+--     let con = pure (ConT name)
+--     [d|deriving stock    instance Show     $(con)
+--        deriving stock    instance Eq       $(con)
+--        deriving stock    instance Generic  $(con)
+--        deriving anyclass instance NFData   $(con)
+--        deriving anyclass instance Hashable $(con)
+--        deriving anyclass instance Binary   $(con)
+--       |]

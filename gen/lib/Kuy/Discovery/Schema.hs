@@ -44,7 +44,7 @@ data Schema = Schema
     annotations :: Set Text
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Schema where
   parseJSON =
@@ -91,7 +91,7 @@ data SchemaRef
   = Follow SchemaId
   | Inline Schema
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 -- Note no 'FromJSON Schema' instance to ensure you don't accidentally
 -- try and deserialise bare Schema within a larger structure.
@@ -105,7 +105,7 @@ data Location
   = Query
   | Path
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Location where
   parseJSON =
@@ -174,7 +174,7 @@ data Format
   | -- | A single-precision 32-bit IEEE 754 floating point.
     Float
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON Format where
   parseJSON =

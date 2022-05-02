@@ -9,7 +9,7 @@ data ServiceId = ServiceId
     version :: ServiceVersion
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Hashable, Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance FromJSON ServiceId where
   parseJSON =
@@ -26,26 +26,26 @@ instance FromJSON ServiceId where
 
 newtype ServiceName = ServiceName {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString, Hashable, Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, NFData, Hashable, Binary, FromJSON, FromJSONKey, ToHttpApiData, FromHttpApiData)
 
 newtype ServiceVersion = ServiceVersion {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString, Hashable, Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, NFData, Hashable, Binary, FromJSON, FromJSONKey, ToHttpApiData, FromHttpApiData)
 
 newtype MethodId = MethodId {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString, Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, NFData, Hashable, Binary, FromJSON, FromJSONKey)
 
 -- | An absolute ID referring to a schema from the top-level schemas property of
 -- the service description.
 newtype SchemaId = SchemaId {text :: Text}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (IsString, Structured, Persist, FromJSON, FromJSONKey)
+  deriving newtype (IsString, NFData, Hashable, Binary, FromJSON, FromJSONKey)
 
 -- | A constant type-level symbol parsed from a matching JSON string literal.
 data Literal (s :: Symbol) = Literal
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
 instance KnownSymbol s => FromJSON (Literal s) where
   parseJSON =

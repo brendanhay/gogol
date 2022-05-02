@@ -14,7 +14,7 @@ import Kuy.Prelude
 -- | URI path of a REST method in RFC 6570 format without level 2 features ({+var}).
 newtype Template = Template {tokens :: [Token]}
   deriving stock (Show, Eq, Ord)
-  deriving newtype (Structured, Persist)
+  deriving newtype (NFData, Hashable, Binary)
 
 instance FromJSON Template where
   parseJSON =

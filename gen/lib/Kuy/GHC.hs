@@ -19,7 +19,6 @@ module Kuy.GHC
   )
 where
 
-import Data.Text.IO qualified as Text.IO
 import GHC.Hs
 import GHC.Types.SrcLoc (GenLocated (L))
 import GHC.Types.SrcLoc qualified as SrcLoc
@@ -57,10 +56,10 @@ mkImport name =
     { ideclQualified = QualifiedPre
     }
 
-writeModuleFile :: FilePath -> HsModule -> IO ()
+writeModuleFile :: MonadIO m => FilePath -> HsModule -> m Text
 writeModuleFile path =
-  Ormolu.ormolu Ormolu.defaultConfig path . prettyPrint
-    >=> Text.IO.writeFile path
+  Ormolu.ormolu Ormolu.defaultConfig path
+    . prettyPrint
 
 prettyPrint :: Pretty.Outputable a => a -> String
 prettyPrint =

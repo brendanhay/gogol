@@ -1,8 +1,8 @@
 module Kuy.Discovery.Directory where
 
+import Data.HashPSQ (HashPSQ)
+import Data.HashPSQ qualified as HashPSQ
 import Data.Map.Strict qualified as Map
-import Data.OrdPSQ (OrdPSQ)
-import Data.OrdPSQ qualified as OrdPSQ
 import Kuy.Discovery.Label
 import Kuy.Discovery.Name
 import Kuy.Prelude
@@ -26,10 +26,7 @@ data DirectoryList = DirectoryList
     items :: [DirectoryItem]
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
-
-directoryListURL :: String
-directoryListURL = "https://discovery.googleapis.com/discovery/v1/apis"
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)
 
 -- | An overview of the specific API version\'s discovery metadata.
 data DirectoryItem = DirectoryItem
@@ -55,16 +52,16 @@ data DirectoryItem = DirectoryItem
     preferred :: Bool
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist, FromJSON)
+  deriving anyclass (NFData, Hashable, Binary, FromJSON)
 
 data Preferred = Preferred
   { preferred :: Down Bool,
     version :: ServiceVersion
   }
   deriving stock (Show, Eq, Ord, Generic)
-  deriving anyclass (Structured, Persist)
+  deriving anyclass (NFData, Hashable, Binary)
 
-type DirectoryIndex = Map ServiceName (OrdPSQ ServiceVersion Preferred DirectoryItem)
+type DirectoryIndex = Map ServiceName (HashPSQ ServiceVersion Preferred DirectoryItem)
 
 newDirectoryIndex :: [DirectoryItem] -> DirectoryIndex
 newDirectoryIndex =
@@ -72,8 +69,8 @@ newDirectoryIndex =
   where
     update item =
       Just . \case
-        Nothing -> OrdPSQ.singleton item.version priority item
-        Just pq -> OrdPSQ.insert item.version priority item pq
+        Nothing -> HashPSQ.singleton item.version priority item
+        Just pq -> HashPSQ.insert item.version priority item pq
       where
         priority =
           Preferred
@@ -84,7 +81,7 @@ newDirectoryIndex =
 preferredVersions :: DirectoryIndex -> [DirectoryItem]
 preferredVersions index =
   flip mapMaybe (Map.elems index) $ \versions -> do
-    (_v, _p, item) <- OrdPSQ.findMin versions
+    (_v, _p, item) <- HashPSQ.findMin versions
     pure item
 
 findPreferredVersion ::
@@ -96,5 +93,5 @@ findPreferredVersion name mversion index = do
   versions <- Map.lookup name index
 
   case mversion of
-    Nothing -> (\(_v, _p, item) -> item) <$> OrdPSQ.findMin versions
-    Just pv -> (\(_p, item) -> item) <$> OrdPSQ.lookup pv versions
+    Nothing -> (\(_v, _p, item) -> item) <$> HashPSQ.findMin versions
+    Just pv -> (\(_p, item) -> item) <$> HashPSQ.lookup pv versions
