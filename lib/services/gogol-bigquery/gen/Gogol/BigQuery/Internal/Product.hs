@@ -3501,7 +3501,7 @@ instance Core.FromJSON ExplainQueryStage where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> (o Core..:? "inputStages")
+            Core.<*> (o Core..:? "inputStages" Core.<&> Core.fmap (Core.fmap Core.fromAsText))
             Core.<*> (o Core..:? "name")
             Core.<*> ( o Core..:? "parallelInputs"
                          Core.<&> Core.fmap Core.fromAsText
