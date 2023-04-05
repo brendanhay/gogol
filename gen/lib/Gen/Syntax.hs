@@ -431,6 +431,7 @@ jsonDecls g (Map.toList -> rs) = [from', to']
     decode (l, s)
       | _additional s = app (var "Core.parseJSONObject") (var "o")
       | Just x <- def s = defJS l x
+      | text && optionalList = optJSTextList l
       | text && optional = optJSText l
       | optional = optJS l
       | text = reqJSText l
@@ -441,6 +442,11 @@ jsonDecls g (Map.toList -> rs) = [from', to']
       optional =
           case _type s of
             TMaybe {} -> True
+            _other -> False
+
+      optionalList =
+          case _type s of
+            TMaybe (TList {}) -> True
             _other -> False
 
     to' = case rs of
@@ -472,6 +478,7 @@ jsonDecls g (Map.toList -> rs) = [from', to']
     emptyObj = var "Core.emptyObject"
 
     encode (l, s)
+      | text && optionalList = infixApp (infixApp (paren (app n o)) "Core.." (app (var "Core.fmap") (var "Core.AsText"))) "Core.<$>" a
       | text && optional = infixApp (infixApp (paren (app n o)) "Core.." (var "Core.AsText")) "Core.<$>" a
       | optional = infixApp (paren (app n o)) "Core.<$>" a
       | text = var "Core.Just" `app` infixApp n ".=" (var "Core.AsText" `app` a)
@@ -487,6 +494,11 @@ jsonDecls g (Map.toList -> rs) = [from', to']
           case _type s of
             TMaybe {} -> True
             _other -> False
+
+        optionalList =
+            case _type s of
+              TMaybe (TList {}) -> True
+              _other -> False
 
 wildcardD ::
   String ->
@@ -522,6 +534,11 @@ optJSText :: Local -> Exp ()
 optJSText l =
   infixApp (infixApp (var "o") "Core..:?" (fstr l)) "Core.<&>" $
     app (var "Core.fmap") (var "Core.fromAsText")
+
+optJSTextList :: Local -> Exp ()
+optJSTextList l =
+  infixApp (infixApp (var "o") "Core..:?" (fstr l)) "Core.<&>" $
+    (app (var "Core.fmap")) (app (var "Core.fmap") (var "Core.fromAsText"))
 
 funD :: String -> Exp () -> InstDecl ()
 funD f = InsDecl () . patBind (pvar (name f))
@@ -681,7 +698,7 @@ internalLit = \case
 textual :: TType -> Bool
 textual = \case
   TType {} -> False
-  TList {} -> False
+  TList x -> textual x
   TMap {} -> False
   TMaybe x -> textual x
   TLit (Natural p) -> p
