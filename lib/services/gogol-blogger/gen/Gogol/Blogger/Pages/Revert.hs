@@ -28,7 +28,7 @@
 --
 -- Reverts a published or scheduled page to draft state.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.revert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.revert@.
 module Gogol.Blogger.Pages.Revert
   ( -- * Resource
     BloggerPagesRevertResource,

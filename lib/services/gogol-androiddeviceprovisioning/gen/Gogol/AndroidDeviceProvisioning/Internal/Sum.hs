@@ -65,6 +65,14 @@ module Gogol.AndroidDeviceProvisioning.Internal.Sum
         ..
       ),
 
+    -- * DeviceIdentifier_DeviceType
+    DeviceIdentifier_DeviceType
+      ( DeviceIdentifier_DeviceType_DEVICETYPEUNSPECIFIED,
+        DeviceIdentifier_DeviceType_DEVICETYPEANDROID,
+        DeviceIdentifier_DeviceType_DEVICETYPECHROMEOS,
+        ..
+      ),
+
     -- * DevicesLongRunningOperationMetadata_ProcessingStatus
     DevicesLongRunningOperationMetadata_ProcessingStatus
       ( DevicesLongRunningOperationMetadata_ProcessingStatus_BATCHPROCESSSTATUSUNSPECIFIED,
@@ -108,6 +116,8 @@ module Gogol.AndroidDeviceProvisioning.Internal.Sum
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDDEVICEIDENTIFIER,
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDSECTIONTYPE,
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS,
+        PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN,
+        PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN,
         ..
       ),
 
@@ -276,6 +286,38 @@ pattern DeviceClaim_SectionType_SECTIONTYPEZEROTOUCH = DeviceClaim_SectionType "
   DeviceClaim_SectionType_SECTIONTYPESIMLOCK,
   DeviceClaim_SectionType_SECTIONTYPEZEROTOUCH,
   DeviceClaim_SectionType
+  #-}
+
+-- | The type of the device
+newtype DeviceIdentifier_DeviceType = DeviceIdentifier_DeviceType {fromDeviceIdentifier_DeviceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Device type is not specified.
+pattern DeviceIdentifier_DeviceType_DEVICETYPEUNSPECIFIED :: DeviceIdentifier_DeviceType
+pattern DeviceIdentifier_DeviceType_DEVICETYPEUNSPECIFIED = DeviceIdentifier_DeviceType "DEVICE_TYPE_UNSPECIFIED"
+
+-- | Android device
+pattern DeviceIdentifier_DeviceType_DEVICETYPEANDROID :: DeviceIdentifier_DeviceType
+pattern DeviceIdentifier_DeviceType_DEVICETYPEANDROID = DeviceIdentifier_DeviceType "DEVICE_TYPE_ANDROID"
+
+-- | Chrome OS device
+pattern DeviceIdentifier_DeviceType_DEVICETYPECHROMEOS :: DeviceIdentifier_DeviceType
+pattern DeviceIdentifier_DeviceType_DEVICETYPECHROMEOS = DeviceIdentifier_DeviceType "DEVICE_TYPE_CHROME_OS"
+
+{-# COMPLETE
+  DeviceIdentifier_DeviceType_DEVICETYPEUNSPECIFIED,
+  DeviceIdentifier_DeviceType_DEVICETYPEANDROID,
+  DeviceIdentifier_DeviceType_DEVICETYPECHROMEOS,
+  DeviceIdentifier_DeviceType
   #-}
 
 -- | The processing status of the operation.
@@ -456,6 +498,14 @@ pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDSECTIONTYPE = Per
 pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS :: PerDeviceStatusInBatch_Status
 pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS = PerDeviceStatusInBatch_Status "SINGLE_DEVICE_STATUS_SECTION_NOT_YOURS"
 
+-- | Invalid pre-provisioning token.
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN :: PerDeviceStatusInBatch_Status
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN = PerDeviceStatusInBatch_Status "SINGLE_DEVICE_STATUS_INVALID_TOKEN"
+
+-- | Revoked pre-provisioning token.
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN :: PerDeviceStatusInBatch_Status
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN = PerDeviceStatusInBatch_Status "SINGLE_DEVICE_STATUS_REVOKED_TOKEN"
+
 {-# COMPLETE
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSUNSPECIFIED,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSUNKNOWNERROR,
@@ -465,6 +515,8 @@ pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS = PerDev
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDDEVICEIDENTIFIER,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDSECTIONTYPE,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS,
+  PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN,
+  PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN,
   PerDeviceStatusInBatch_Status
   #-}
 

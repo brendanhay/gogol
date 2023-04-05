@@ -37,6 +37,13 @@ module Gogol.TPU.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AcceleratorConfig
+    AcceleratorConfig (..),
+    newAcceleratorConfig,
+
+    -- ** AcceleratorConfig_Type
+    AcceleratorConfig_Type (..),
+
     -- ** AcceleratorType
     AcceleratorType (..),
     newAcceleratorType,
@@ -177,6 +184,10 @@ module Gogol.TPU.Types
     ServiceIdentity (..),
     newServiceIdentity,
 
+    -- ** ShieldedInstanceConfig
+    ShieldedInstanceConfig (..),
+    newShieldedInstanceConfig,
+
     -- ** StartNodeRequest
     StartNodeRequest (..),
     newStartNodeRequest,
@@ -206,11 +217,11 @@ import qualified Gogol.Prelude as Core
 import Gogol.TPU.Internal.Product
 import Gogol.TPU.Internal.Sum
 
--- | Default request referring to version @v2alpha1@ of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v2@ of the Cloud TPU API. This contains the host and root path used as a starting point for constructing service requests.
 tPUService :: Core.ServiceConfig
 tPUService =
   Core.defaultService
-    (Core.ServiceId "tpu:v2alpha1")
+    (Core.ServiceId "tpu:v2")
     "tpu.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.

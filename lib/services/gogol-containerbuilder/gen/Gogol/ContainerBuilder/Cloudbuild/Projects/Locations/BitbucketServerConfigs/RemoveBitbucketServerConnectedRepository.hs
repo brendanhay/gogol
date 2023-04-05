@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Remove a Bitbucket Server repository from an given BitbucketServerConfig’s connected repositories. This API is experimental.
+-- Remove a Bitbucket Server repository from a given BitbucketServerConfig\'s connected repositories. This API is experimental.
 --
 -- /See:/ <https://cloud.google.com/cloud-build/docs/ Cloud Build API Reference> for @cloudbuild.projects.locations.bitbucketServerConfigs.removeBitbucketServerConnectedRepository@.
 module Gogol.ContainerBuilder.Cloudbuild.Projects.Locations.BitbucketServerConfigs.RemoveBitbucketServerConnectedRepository
@@ -61,7 +61,7 @@ type CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConne
               RemoveBitbucketServerConnectedRepositoryRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Remove a Bitbucket Server repository from an given BitbucketServerConfig’s connected repositories. This API is experimental.
+-- | Remove a Bitbucket Server repository from a given BitbucketServerConfig\'s connected repositories. This API is experimental.
 --
 -- /See:/ 'newCloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository' smart constructor.
 data CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository = CloudbuildProjectsLocationsBitbucketServerConfigsRemoveBitbucketServerConnectedRepository

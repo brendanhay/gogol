@@ -88,6 +88,31 @@ module Gogol.IAP
     IAPProjectsBrandsList (..),
     newIAPProjectsBrandsList,
 
+    -- ** iap.projects.iap_tunnel.locations.destGroups.create
+    IAPProjectsIap_tunnelLocationsDestGroupsCreateResource,
+    IAPProjectsIap_tunnelLocationsDestGroupsCreate (..),
+    newIAPProjectsIap_tunnelLocationsDestGroupsCreate,
+
+    -- ** iap.projects.iap_tunnel.locations.destGroups.delete
+    IAPProjectsIap_tunnelLocationsDestGroupsDeleteResource,
+    IAPProjectsIap_tunnelLocationsDestGroupsDelete (..),
+    newIAPProjectsIap_tunnelLocationsDestGroupsDelete,
+
+    -- ** iap.projects.iap_tunnel.locations.destGroups.get
+    IAPProjectsIap_tunnelLocationsDestGroupsGetResource,
+    IAPProjectsIap_tunnelLocationsDestGroupsGet (..),
+    newIAPProjectsIap_tunnelLocationsDestGroupsGet,
+
+    -- ** iap.projects.iap_tunnel.locations.destGroups.list
+    IAPProjectsIap_tunnelLocationsDestGroupsListResource,
+    IAPProjectsIap_tunnelLocationsDestGroupsList (..),
+    newIAPProjectsIap_tunnelLocationsDestGroupsList,
+
+    -- ** iap.projects.iap_tunnel.locations.destGroups.patch
+    IAPProjectsIap_tunnelLocationsDestGroupsPatchResource,
+    IAPProjectsIap_tunnelLocationsDestGroupsPatch (..),
+    newIAPProjectsIap_tunnelLocationsDestGroupsPatch,
+
     -- ** iap.setIamPolicy
     IAPSetIamPolicyResource,
     IAPSetIamPolicy (..),
@@ -116,9 +141,20 @@ module Gogol.IAP
     AccessSettings (..),
     newAccessSettings,
 
+    -- ** AllowedDomainsSettings
+    AllowedDomainsSettings (..),
+    newAllowedDomainsSettings,
+
     -- ** ApplicationSettings
     ApplicationSettings (..),
     newApplicationSettings,
+
+    -- ** AttributePropagationSettings
+    AttributePropagationSettings (..),
+    newAttributePropagationSettings,
+
+    -- ** AttributePropagationSettings_OutputCredentialsItem
+    AttributePropagationSettings_OutputCredentialsItem (..),
 
     -- ** Binding
     Binding (..),
@@ -172,6 +208,10 @@ module Gogol.IAP
     ListIdentityAwareProxyClientsResponse (..),
     newListIdentityAwareProxyClientsResponse,
 
+    -- ** ListTunnelDestGroupsResponse
+    ListTunnelDestGroupsResponse (..),
+    newListTunnelDestGroupsResponse,
+
     -- ** OAuthSettings
     OAuthSettings (..),
     newOAuthSettings,
@@ -221,6 +261,10 @@ module Gogol.IAP
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** TunnelDestGroup
+    TunnelDestGroup (..),
+    newTunnelDestGroup,
   )
 where
 
@@ -234,6 +278,11 @@ import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.Get
 import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
 import Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.ResetSecret
 import Gogol.IAP.Projects.Brands.List
+import Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Create
+import Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Delete
+import Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Get
+import Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.List
+import Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Patch
 import Gogol.IAP.SetIamPolicy
 import Gogol.IAP.TestIamPermissions
 import Gogol.IAP.Types

@@ -78,7 +78,7 @@ data AndroidPublisherEditsTracksUpdate = AndroidPublisherEditsTracksUpdate
     packageName :: Core.Text,
     -- | Multipart request metadata.
     payload :: Track,
-    -- | Identifier of the track.
+    -- | Identifier of the track. <https://developers.google.com/android-publisher/tracks#ff-track-name More on track name>
     track :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -95,7 +95,7 @@ newAndroidPublisherEditsTracksUpdate ::
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Track ->
-  -- |  Identifier of the track. See 'track'.
+  -- |  Identifier of the track. <https://developers.google.com/android-publisher/tracks#ff-track-name More on track name> See 'track'.
   Core.Text ->
   AndroidPublisherEditsTracksUpdate
 newAndroidPublisherEditsTracksUpdate editId packageName payload track =

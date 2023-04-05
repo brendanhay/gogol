@@ -103,6 +103,9 @@ module Gogol.CivicInfo
     Election (..),
     newElection,
 
+    -- ** Election_ShapeLookupBehavior
+    Election_ShapeLookupBehavior (..),
+
     -- ** ElectionOfficial
     ElectionOfficial (..),
     newElectionOfficial,
@@ -154,6 +157,10 @@ module Gogol.CivicInfo
     -- ** PollingLocation
     PollingLocation (..),
     newPollingLocation,
+
+    -- ** Precinct
+    Precinct (..),
+    newPrecinct,
 
     -- ** RepresentativeInfoData
     RepresentativeInfoData (..),

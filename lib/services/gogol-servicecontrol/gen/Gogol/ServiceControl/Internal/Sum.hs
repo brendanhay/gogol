@@ -46,6 +46,15 @@ module Gogol.ServiceControl.Internal.Sum
         V2LogEntry_Severity_Emergency,
         ..
       ),
+
+    -- * ViolationInfo_PolicyType
+    ViolationInfo_PolicyType
+      ( ViolationInfo_PolicyType_POLICYTYPEUNSPECIFIED,
+        ViolationInfo_PolicyType_BOOLEANCONSTRAINT,
+        ViolationInfo_PolicyType_LISTCONSTRAINT,
+        ViolationInfo_PolicyType_CUSTOMCONSTRAINT,
+        ..
+      ),
   )
 where
 
@@ -138,4 +147,41 @@ pattern V2LogEntry_Severity_Emergency = V2LogEntry_Severity "EMERGENCY"
   V2LogEntry_Severity_Alert,
   V2LogEntry_Severity_Emergency,
   V2LogEntry_Severity
+  #-}
+
+-- | Optional. Indicates the type of the policy.
+newtype ViolationInfo_PolicyType = ViolationInfo_PolicyType {fromViolationInfo_PolicyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value should not be used.
+pattern ViolationInfo_PolicyType_POLICYTYPEUNSPECIFIED :: ViolationInfo_PolicyType
+pattern ViolationInfo_PolicyType_POLICYTYPEUNSPECIFIED = ViolationInfo_PolicyType "POLICY_TYPE_UNSPECIFIED"
+
+-- | Indicates boolean policy constraint
+pattern ViolationInfo_PolicyType_BOOLEANCONSTRAINT :: ViolationInfo_PolicyType
+pattern ViolationInfo_PolicyType_BOOLEANCONSTRAINT = ViolationInfo_PolicyType "BOOLEAN_CONSTRAINT"
+
+-- | Indicates list policy constraint
+pattern ViolationInfo_PolicyType_LISTCONSTRAINT :: ViolationInfo_PolicyType
+pattern ViolationInfo_PolicyType_LISTCONSTRAINT = ViolationInfo_PolicyType "LIST_CONSTRAINT"
+
+-- | Indicates custom policy constraint
+pattern ViolationInfo_PolicyType_CUSTOMCONSTRAINT :: ViolationInfo_PolicyType
+pattern ViolationInfo_PolicyType_CUSTOMCONSTRAINT = ViolationInfo_PolicyType "CUSTOM_CONSTRAINT"
+
+{-# COMPLETE
+  ViolationInfo_PolicyType_POLICYTYPEUNSPECIFIED,
+  ViolationInfo_PolicyType_BOOLEANCONSTRAINT,
+  ViolationInfo_PolicyType_LISTCONSTRAINT,
+  ViolationInfo_PolicyType_CUSTOMCONSTRAINT,
+  ViolationInfo_PolicyType
   #-}

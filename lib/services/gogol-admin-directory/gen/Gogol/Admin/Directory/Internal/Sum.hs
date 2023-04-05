@@ -42,6 +42,22 @@ module Gogol.Admin.Directory.Internal.Sum
         ..
       ),
 
+    -- * ChromeOsDevice_DeprovisionReason
+    ChromeOsDevice_DeprovisionReason
+      ( ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
+        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
+        ..
+      ),
+
     -- * DirectoryChromeosdevicesCommand_State
     DirectoryChromeosdevicesCommand_State
       ( DirectoryChromeosdevicesCommand_State_STATEUNSPECIFIED,
@@ -62,6 +78,8 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesCommand_Type_SETVOLUME,
         DirectoryChromeosdevicesCommand_Type_WIPEUSERS,
         DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
+        DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
+        DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
         ..
       ),
 
@@ -82,6 +100,8 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_SETVOLUME,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_WIPEUSERS,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
+        DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
+        DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
         ..
       ),
 
@@ -107,6 +127,44 @@ module Gogol.Admin.Directory.Internal.Sum
         ..
       ),
 
+    -- * OsUpdateStatus_State
+    OsUpdateStatus_State
+      ( OsUpdateStatus_State_UpdateStateUnspecified,
+        OsUpdateStatus_State_UpdateStateNotStarted,
+        OsUpdateStatus_State_UpdateStateDownloadInProgress,
+        OsUpdateStatus_State_UpdateStateNeedReboot,
+        ..
+      ),
+
+    -- * PrintServerFailureInfo_ErrorCode
+    PrintServerFailureInfo_ErrorCode
+      ( PrintServerFailureInfo_ErrorCode_OK,
+        PrintServerFailureInfo_ErrorCode_Cancelled,
+        PrintServerFailureInfo_ErrorCode_Unknown,
+        PrintServerFailureInfo_ErrorCode_INVALIDARGUMENT,
+        PrintServerFailureInfo_ErrorCode_DEADLINEEXCEEDED,
+        PrintServerFailureInfo_ErrorCode_NOTFOUND,
+        PrintServerFailureInfo_ErrorCode_ALREADYEXISTS,
+        PrintServerFailureInfo_ErrorCode_PERMISSIONDENIED,
+        PrintServerFailureInfo_ErrorCode_Unauthenticated,
+        PrintServerFailureInfo_ErrorCode_RESOURCEEXHAUSTED,
+        PrintServerFailureInfo_ErrorCode_FAILEDPRECONDITION,
+        PrintServerFailureInfo_ErrorCode_Aborted,
+        PrintServerFailureInfo_ErrorCode_OUTOFRANGE,
+        PrintServerFailureInfo_ErrorCode_Unimplemented,
+        PrintServerFailureInfo_ErrorCode_Internal,
+        PrintServerFailureInfo_ErrorCode_Unavailable,
+        PrintServerFailureInfo_ErrorCode_DATALOSS,
+        ..
+      ),
+
+    -- * RoleAssignment_AssigneeType
+    RoleAssignment_AssigneeType
+      ( RoleAssignment_AssigneeType_User,
+        RoleAssignment_AssigneeType_Group,
+        ..
+      ),
+
     -- * ChromeosdevicesGetProjection
     ChromeosdevicesGetProjection
       ( ChromeosdevicesGetProjection_Basic,
@@ -122,7 +180,6 @@ module Gogol.Admin.Directory.Internal.Sum
         ChromeosdevicesListOrderBy_Notes,
         ChromeosdevicesListOrderBy_SerialNumber,
         ChromeosdevicesListOrderBy_Status,
-        ChromeosdevicesListOrderBy_SupportEndDate,
         ..
       ),
 
@@ -409,6 +466,78 @@ pattern AuxiliaryMessage_Severity_SEVERITYERROR = AuxiliaryMessage_Severity "SEV
   AuxiliaryMessage_Severity
   #-}
 
+-- | (Read-only) Deprovision reason.
+newtype ChromeOsDevice_DeprovisionReason = ChromeOsDevice_DeprovisionReason {fromChromeOsDevice_DeprovisionReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The deprovision reason is unknown.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified = ChromeOsDevice_DeprovisionReason "deprovisionReasonUnspecified"
+
+-- | The device was replaced by a device with the same model.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonSameModelReplacement"
+
+-- | The device was upgraded.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgrade"
+
+-- | The device\'s domain was changed.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove = ChromeOsDevice_DeprovisionReason "deprovisionReasonDomainMove"
+
+-- | Service expired for the device.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration = ChromeOsDevice_DeprovisionReason "deprovisionReasonServiceExpiration"
+
+-- | The device was deprovisioned for a legacy reason that is no longer supported.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther = ChromeOsDevice_DeprovisionReason "deprovisionReasonOther"
+
+-- | The device was replaced by a device with a different model.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonDifferentModelReplacement"
+
+-- | The device was retired.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice = ChromeOsDevice_DeprovisionReason "deprovisionReasonRetiringDevice"
+
+-- | The device\'s perpetual upgrade was transferred to a new device.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgradeTransfer"
+
+-- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired = ChromeOsDevice_DeprovisionReason "deprovisionReasonNotRequired"
+
+-- | The device was deprovisioned by a repair service center.
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter = ChromeOsDevice_DeprovisionReason "deprovisionReasonRepairCenter"
+
+{-# COMPLETE
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
+  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
+  ChromeOsDevice_DeprovisionReason
+  #-}
+
 -- | Indicates the command state.
 newtype DirectoryChromeosdevicesCommand_State = DirectoryChromeosdevicesCommand_State {fromDirectoryChromeosdevicesCommand_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -498,6 +627,14 @@ pattern DirectoryChromeosdevicesCommand_Type_WIPEUSERS = DirectoryChromeosdevice
 pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH = DirectoryChromeosdevicesCommand_Type "REMOTE_POWERWASH"
 
+-- | Starts a Chrome Remote Desktop session.
+pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesCommand_Type
+pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesCommand_Type "DEVICE_START_CRD_SESSION"
+
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS :: DirectoryChromeosdevicesCommand_Type
+pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS = DirectoryChromeosdevicesCommand_Type "CAPTURE_LOGS"
+
 {-# COMPLETE
   DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
   DirectoryChromeosdevicesCommand_Type_Reboot,
@@ -505,6 +642,8 @@ pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH = DirectoryChromeos
   DirectoryChromeosdevicesCommand_Type_SETVOLUME,
   DirectoryChromeosdevicesCommand_Type_WIPEUSERS,
   DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
+  DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
+  DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
   DirectoryChromeosdevicesCommand_Type
   #-}
 
@@ -582,6 +721,14 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_WIPEUSERS = Dire
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH = DirectoryChromeosdevicesIssueCommandRequest_CommandType "REMOTE_POWERWASH"
 
+-- | Starts a Chrome Remote Desktop session.
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesIssueCommandRequest_CommandType "DEVICE_START_CRD_SESSION"
+
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS = DirectoryChromeosdevicesIssueCommandRequest_CommandType "CAPTURE_LOGS"
+
 {-# COMPLETE
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot,
@@ -589,6 +736,8 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH 
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_SETVOLUME,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_WIPEUSERS,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType
   #-}
 
@@ -605,7 +754,7 @@ newtype FailureInfo_ErrorCode = FailureInfo_ErrorCode {fromFailureInfo_ErrorCode
       Core.FromJSONKey
     )
 
--- | Not an error; returned on success HTTP Mapping: 200 OK
+-- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern FailureInfo_ErrorCode_OK :: FailureInfo_ErrorCode
 pattern FailureInfo_ErrorCode_OK = FailureInfo_ErrorCode "OK"
 
@@ -694,6 +843,172 @@ pattern FailureInfo_ErrorCode_DATALOSS = FailureInfo_ErrorCode "DATA_LOSS"
   FailureInfo_ErrorCode
   #-}
 
+-- | The update state of an OS update.
+newtype OsUpdateStatus_State = OsUpdateStatus_State {fromOsUpdateStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The update state is unspecified.
+pattern OsUpdateStatus_State_UpdateStateUnspecified :: OsUpdateStatus_State
+pattern OsUpdateStatus_State_UpdateStateUnspecified = OsUpdateStatus_State "updateStateUnspecified"
+
+-- | There is an update pending but it hasn\'t started.
+pattern OsUpdateStatus_State_UpdateStateNotStarted :: OsUpdateStatus_State
+pattern OsUpdateStatus_State_UpdateStateNotStarted = OsUpdateStatus_State "updateStateNotStarted"
+
+-- | The pending update is being downloaded.
+pattern OsUpdateStatus_State_UpdateStateDownloadInProgress :: OsUpdateStatus_State
+pattern OsUpdateStatus_State_UpdateStateDownloadInProgress = OsUpdateStatus_State "updateStateDownloadInProgress"
+
+-- | The device is ready to install the update, but must reboot.
+pattern OsUpdateStatus_State_UpdateStateNeedReboot :: OsUpdateStatus_State
+pattern OsUpdateStatus_State_UpdateStateNeedReboot = OsUpdateStatus_State "updateStateNeedReboot"
+
+{-# COMPLETE
+  OsUpdateStatus_State_UpdateStateUnspecified,
+  OsUpdateStatus_State_UpdateStateNotStarted,
+  OsUpdateStatus_State_UpdateStateDownloadInProgress,
+  OsUpdateStatus_State_UpdateStateNeedReboot,
+  OsUpdateStatus_State
+  #-}
+
+-- | Canonical code for why the update failed to apply.
+newtype PrintServerFailureInfo_ErrorCode = PrintServerFailureInfo_ErrorCode {fromPrintServerFailureInfo_ErrorCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not an error; returned on success. HTTP Mapping: 200 OK
+pattern PrintServerFailureInfo_ErrorCode_OK :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_OK = PrintServerFailureInfo_ErrorCode "OK"
+
+-- | The operation was cancelled, typically by the caller. HTTP Mapping: 499 Client Closed Request
+pattern PrintServerFailureInfo_ErrorCode_Cancelled :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Cancelled = PrintServerFailureInfo_ErrorCode "CANCELLED"
+
+-- | Unknown error. For example, this error may be returned when a @Status@ value received from another address space belongs to an error space that is not known in this address space. Also errors raised by APIs that do not return enough error information may be converted to this error. HTTP Mapping: 500 Internal Server Error
+pattern PrintServerFailureInfo_ErrorCode_Unknown :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Unknown = PrintServerFailureInfo_ErrorCode "UNKNOWN"
+
+-- | The client specified an invalid argument. Note that this differs from @FAILED_PRECONDITION@. @INVALID_ARGUMENT@ indicates arguments that are problematic regardless of the state of the system (e.g., a malformed file name). HTTP Mapping: 400 Bad Request
+pattern PrintServerFailureInfo_ErrorCode_INVALIDARGUMENT :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_INVALIDARGUMENT = PrintServerFailureInfo_ErrorCode "INVALID_ARGUMENT"
+
+-- | The deadline expired before the operation could complete. For operations that change the state of the system, this error may be returned even if the operation has completed successfully. For example, a successful response from a server could have been delayed long enough for the deadline to expire. HTTP Mapping: 504 Gateway Timeout
+pattern PrintServerFailureInfo_ErrorCode_DEADLINEEXCEEDED :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_DEADLINEEXCEEDED = PrintServerFailureInfo_ErrorCode "DEADLINE_EXCEEDED"
+
+-- | Some requested entity (e.g., file or directory) was not found. Note to server developers: if a request is denied for an entire class of users, such as gradual feature rollout or undocumented allowlist, @NOT_FOUND@ may be used. If a request is denied for some users within a class of users, such as user-based access control, @PERMISSION_DENIED@ must be used. HTTP Mapping: 404 Not Found
+pattern PrintServerFailureInfo_ErrorCode_NOTFOUND :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_NOTFOUND = PrintServerFailureInfo_ErrorCode "NOT_FOUND"
+
+-- | The entity that a client attempted to create (e.g., file or directory) already exists. HTTP Mapping: 409 Conflict
+pattern PrintServerFailureInfo_ErrorCode_ALREADYEXISTS :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_ALREADYEXISTS = PrintServerFailureInfo_ErrorCode "ALREADY_EXISTS"
+
+-- | The caller does not have permission to execute the specified operation. @PERMISSION_DENIED@ must not be used for rejections caused by exhausting some resource (use @RESOURCE_EXHAUSTED@ instead for those errors). @PERMISSION_DENIED@ must not be used if the caller can not be identified (use @UNAUTHENTICATED@ instead for those errors). This error code does not imply the request is valid or the requested entity exists or satisfies other pre-conditions. HTTP Mapping: 403 Forbidden
+pattern PrintServerFailureInfo_ErrorCode_PERMISSIONDENIED :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_PERMISSIONDENIED = PrintServerFailureInfo_ErrorCode "PERMISSION_DENIED"
+
+-- | The request does not have valid authentication credentials for the operation. HTTP Mapping: 401 Unauthorized
+pattern PrintServerFailureInfo_ErrorCode_Unauthenticated :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Unauthenticated = PrintServerFailureInfo_ErrorCode "UNAUTHENTICATED"
+
+-- | Some resource has been exhausted, perhaps a per-user quota, or perhaps the entire file system is out of space. HTTP Mapping: 429 Too Many Requests
+pattern PrintServerFailureInfo_ErrorCode_RESOURCEEXHAUSTED :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_RESOURCEEXHAUSTED = PrintServerFailureInfo_ErrorCode "RESOURCE_EXHAUSTED"
+
+-- | The operation was rejected because the system is not in a state required for the operation\'s execution. For example, the directory to be deleted is non-empty, an rmdir operation is applied to a non-directory, etc. Service implementors can use the following guidelines to decide between @FAILED_PRECONDITION@, @ABORTED@, and @UNAVAILABLE@: (a) Use @UNAVAILABLE@ if the client can retry just the failing call. (b) Use @ABORTED@ if the client should retry at a higher level. For example, when a client-specified test-and-set fails, indicating the client should restart a read-modify-write sequence. (c) Use @FAILED_PRECONDITION@ if the client should not retry until the system state has been explicitly fixed. For example, if an \"rmdir\" fails because the directory is non-empty, @FAILED_PRECONDITION@ should be returned since the client should not retry unless the files are deleted from the directory. HTTP Mapping: 400 Bad Request
+pattern PrintServerFailureInfo_ErrorCode_FAILEDPRECONDITION :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_FAILEDPRECONDITION = PrintServerFailureInfo_ErrorCode "FAILED_PRECONDITION"
+
+-- | The operation was aborted, typically due to a concurrency issue such as a sequencer check failure or transaction abort. See the guidelines above for deciding between @FAILED_PRECONDITION@, @ABORTED@, and @UNAVAILABLE@. HTTP Mapping: 409 Conflict
+pattern PrintServerFailureInfo_ErrorCode_Aborted :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Aborted = PrintServerFailureInfo_ErrorCode "ABORTED"
+
+-- | The operation was attempted past the valid range. E.g., seeking or reading past end-of-file. Unlike @INVALID_ARGUMENT@, this error indicates a problem that may be fixed if the system state changes. For example, a 32-bit file system will generate @INVALID_ARGUMENT@ if asked to read at an offset that is not in the range [0,2^32-1], but it will generate @OUT_OF_RANGE@ if asked to read from an offset past the current file size. There is a fair bit of overlap between @FAILED_PRECONDITION@ and @OUT_OF_RANGE@. We recommend using @OUT_OF_RANGE@ (the more specific error) when it applies so that callers who are iterating through a space can easily look for an @OUT_OF_RANGE@ error to detect when they are done. HTTP Mapping: 400 Bad Request
+pattern PrintServerFailureInfo_ErrorCode_OUTOFRANGE :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_OUTOFRANGE = PrintServerFailureInfo_ErrorCode "OUT_OF_RANGE"
+
+-- | The operation is not implemented or is not supported\/enabled in this service. HTTP Mapping: 501 Not Implemented
+pattern PrintServerFailureInfo_ErrorCode_Unimplemented :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Unimplemented = PrintServerFailureInfo_ErrorCode "UNIMPLEMENTED"
+
+-- | Internal errors. This means that some invariants expected by the underlying system have been broken. This error code is reserved for serious errors. HTTP Mapping: 500 Internal Server Error
+pattern PrintServerFailureInfo_ErrorCode_Internal :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Internal = PrintServerFailureInfo_ErrorCode "INTERNAL"
+
+-- | The service is currently unavailable. This is most likely a transient condition, which can be corrected by retrying with a backoff. Note that it is not always safe to retry non-idempotent operations. See the guidelines above for deciding between @FAILED_PRECONDITION@, @ABORTED@, and @UNAVAILABLE@. HTTP Mapping: 503 Service Unavailable
+pattern PrintServerFailureInfo_ErrorCode_Unavailable :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_Unavailable = PrintServerFailureInfo_ErrorCode "UNAVAILABLE"
+
+-- | Unrecoverable data loss or corruption. HTTP Mapping: 500 Internal Server Error
+pattern PrintServerFailureInfo_ErrorCode_DATALOSS :: PrintServerFailureInfo_ErrorCode
+pattern PrintServerFailureInfo_ErrorCode_DATALOSS = PrintServerFailureInfo_ErrorCode "DATA_LOSS"
+
+{-# COMPLETE
+  PrintServerFailureInfo_ErrorCode_OK,
+  PrintServerFailureInfo_ErrorCode_Cancelled,
+  PrintServerFailureInfo_ErrorCode_Unknown,
+  PrintServerFailureInfo_ErrorCode_INVALIDARGUMENT,
+  PrintServerFailureInfo_ErrorCode_DEADLINEEXCEEDED,
+  PrintServerFailureInfo_ErrorCode_NOTFOUND,
+  PrintServerFailureInfo_ErrorCode_ALREADYEXISTS,
+  PrintServerFailureInfo_ErrorCode_PERMISSIONDENIED,
+  PrintServerFailureInfo_ErrorCode_Unauthenticated,
+  PrintServerFailureInfo_ErrorCode_RESOURCEEXHAUSTED,
+  PrintServerFailureInfo_ErrorCode_FAILEDPRECONDITION,
+  PrintServerFailureInfo_ErrorCode_Aborted,
+  PrintServerFailureInfo_ErrorCode_OUTOFRANGE,
+  PrintServerFailureInfo_ErrorCode_Unimplemented,
+  PrintServerFailureInfo_ErrorCode_Internal,
+  PrintServerFailureInfo_ErrorCode_Unavailable,
+  PrintServerFailureInfo_ErrorCode_DATALOSS,
+  PrintServerFailureInfo_ErrorCode
+  #-}
+
+-- | Output only. The type of the assignee (@USER@ or @GROUP@).
+newtype RoleAssignment_AssigneeType = RoleAssignment_AssigneeType {fromRoleAssignment_AssigneeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | An individual user within the domain.
+pattern RoleAssignment_AssigneeType_User :: RoleAssignment_AssigneeType
+pattern RoleAssignment_AssigneeType_User = RoleAssignment_AssigneeType "user"
+
+-- | A group within the domain.
+pattern RoleAssignment_AssigneeType_Group :: RoleAssignment_AssigneeType
+pattern RoleAssignment_AssigneeType_Group = RoleAssignment_AssigneeType "group"
+
+{-# COMPLETE
+  RoleAssignment_AssigneeType_User,
+  RoleAssignment_AssigneeType_Group,
+  RoleAssignment_AssigneeType
+  #-}
+
 -- | Determines whether the response contains the full list of properties or only a subset.
 newtype ChromeosdevicesGetProjection = ChromeosdevicesGetProjection {fromChromeosdevicesGetProjection :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -758,10 +1073,6 @@ pattern ChromeosdevicesListOrderBy_SerialNumber = ChromeosdevicesListOrderBy "se
 pattern ChromeosdevicesListOrderBy_Status :: ChromeosdevicesListOrderBy
 pattern ChromeosdevicesListOrderBy_Status = ChromeosdevicesListOrderBy "status"
 
--- | Chrome device support end date. This is applicable only for devices purchased directly from Google.
-pattern ChromeosdevicesListOrderBy_SupportEndDate :: ChromeosdevicesListOrderBy
-pattern ChromeosdevicesListOrderBy_SupportEndDate = ChromeosdevicesListOrderBy "supportEndDate"
-
 {-# COMPLETE
   ChromeosdevicesListOrderBy_AnnotatedLocation,
   ChromeosdevicesListOrderBy_AnnotatedUser,
@@ -769,7 +1080,6 @@ pattern ChromeosdevicesListOrderBy_SupportEndDate = ChromeosdevicesListOrderBy "
   ChromeosdevicesListOrderBy_Notes,
   ChromeosdevicesListOrderBy_SerialNumber,
   ChromeosdevicesListOrderBy_Status,
-  ChromeosdevicesListOrderBy_SupportEndDate,
   ChromeosdevicesListOrderBy
   #-}
 

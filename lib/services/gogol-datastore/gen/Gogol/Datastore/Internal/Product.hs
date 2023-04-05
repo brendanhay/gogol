@@ -26,7 +26,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Datastore.Internal.Product
-  ( -- * AllocateIdsRequest
+  ( -- * Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- * AggregationQuery
+    AggregationQuery (..),
+    newAggregationQuery,
+
+    -- * AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- * AggregationResult_AggregateProperties
+    AggregationResult_AggregateProperties (..),
+    newAggregationResult_AggregateProperties,
+
+    -- * AggregationResultBatch
+    AggregationResultBatch (..),
+    newAggregationResultBatch,
+
+    -- * AllocateIdsRequest
     AllocateIdsRequest (..),
     newAllocateIdsRequest,
 
@@ -57,6 +77,10 @@ module Gogol.Datastore.Internal.Product
     -- * CompositeFilter
     CompositeFilter (..),
     newCompositeFilter,
+
+    -- * Count
+    Count (..),
+    newCount,
 
     -- * Empty
     Empty (..),
@@ -302,6 +326,14 @@ module Gogol.Datastore.Internal.Product
     RollbackResponse (..),
     newRollbackResponse,
 
+    -- * RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- * RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
+
     -- * RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -331,11 +363,196 @@ where
 import Gogol.Datastore.Internal.Sum
 import qualified Gogol.Prelude as Core
 
+-- | Defines an aggregation that produces a single result.
+--
+-- /See:/ 'newAggregation' smart constructor.
+data Aggregation = Aggregation
+  { -- | Optional. Optional name of the property to store the result of the aggregation. If not provided, Datastore will pick a default name following the format @property_@. For example: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2), COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) OVER ( ... );@ becomes: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2) AS property_1, COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) AS property_2 OVER ( ... );@ Requires: * Must be unique across all aggregation aliases. * Conform to entity property name limitations.
+    alias :: (Core.Maybe Core.Text),
+    -- | Count aggregator.
+    count :: (Core.Maybe Count)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aggregation' with the minimum fields required to make a request.
+newAggregation ::
+  Aggregation
+newAggregation = Aggregation {alias = Core.Nothing, count = Core.Nothing}
+
+instance Core.FromJSON Aggregation where
+  parseJSON =
+    Core.withObject
+      "Aggregation"
+      ( \o ->
+          Aggregation
+            Core.<$> (o Core..:? "alias") Core.<*> (o Core..:? "count")
+      )
+
+instance Core.ToJSON Aggregation where
+  toJSON Aggregation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alias" Core..=) Core.<$> alias,
+            ("count" Core..=) Core.<$> count
+          ]
+      )
+
+-- | Datastore query for running an aggregation over a Query.
+--
+-- /See:/ 'newAggregationQuery' smart constructor.
+data AggregationQuery = AggregationQuery
+  { -- | Optional. Series of aggregations to apply over the results of the @nested_query@. Requires: * A minimum of one and maximum of five aggregations per query.
+    aggregations :: (Core.Maybe [Aggregation]),
+    -- | Nested query for aggregation
+    nestedQuery :: (Core.Maybe Query)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationQuery' with the minimum fields required to make a request.
+newAggregationQuery ::
+  AggregationQuery
+newAggregationQuery =
+  AggregationQuery {aggregations = Core.Nothing, nestedQuery = Core.Nothing}
+
+instance Core.FromJSON AggregationQuery where
+  parseJSON =
+    Core.withObject
+      "AggregationQuery"
+      ( \o ->
+          AggregationQuery
+            Core.<$> (o Core..:? "aggregations")
+            Core.<*> (o Core..:? "nestedQuery")
+      )
+
+instance Core.ToJSON AggregationQuery where
+  toJSON AggregationQuery {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregations" Core..=) Core.<$> aggregations,
+            ("nestedQuery" Core..=) Core.<$> nestedQuery
+          ]
+      )
+
+-- | The result of a single bucket from a Datastore aggregation query. The keys of @aggregate_properties@ are the same for all results in an aggregation query, unlike entity queries which can have different fields present for each result.
+--
+-- /See:/ 'newAggregationResult' smart constructor.
+newtype AggregationResult = AggregationResult
+  { -- | The result of the aggregation functions, ex: @COUNT(*) AS total_entities@. The key is the alias assigned to the aggregation function on input and the size of this map equals the number of aggregation functions in the query.
+    aggregateProperties :: (Core.Maybe AggregationResult_AggregateProperties)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationResult' with the minimum fields required to make a request.
+newAggregationResult ::
+  AggregationResult
+newAggregationResult = AggregationResult {aggregateProperties = Core.Nothing}
+
+instance Core.FromJSON AggregationResult where
+  parseJSON =
+    Core.withObject
+      "AggregationResult"
+      ( \o ->
+          AggregationResult
+            Core.<$> (o Core..:? "aggregateProperties")
+      )
+
+instance Core.ToJSON AggregationResult where
+  toJSON AggregationResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregateProperties" Core..=)
+              Core.<$> aggregateProperties
+          ]
+      )
+
+-- | The result of the aggregation functions, ex: @COUNT(*) AS total_entities@. The key is the alias assigned to the aggregation function on input and the size of this map equals the number of aggregation functions in the query.
+--
+-- /See:/ 'newAggregationResult_AggregateProperties' smart constructor.
+newtype AggregationResult_AggregateProperties = AggregationResult_AggregateProperties
+  { -- |
+    additional :: (Core.HashMap Core.Text Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationResult_AggregateProperties' with the minimum fields required to make a request.
+newAggregationResult_AggregateProperties ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Value ->
+  AggregationResult_AggregateProperties
+newAggregationResult_AggregateProperties additional =
+  AggregationResult_AggregateProperties {additional = additional}
+
+instance
+  Core.FromJSON
+    AggregationResult_AggregateProperties
+  where
+  parseJSON =
+    Core.withObject
+      "AggregationResult_AggregateProperties"
+      ( \o ->
+          AggregationResult_AggregateProperties
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    AggregationResult_AggregateProperties
+  where
+  toJSON AggregationResult_AggregateProperties {..} =
+    Core.toJSON additional
+
+-- | A batch of aggregation results produced by an aggregation query.
+--
+-- /See:/ 'newAggregationResultBatch' smart constructor.
+data AggregationResultBatch = AggregationResultBatch
+  { -- | The aggregation results for this batch.
+    aggregationResults :: (Core.Maybe [AggregationResult]),
+    -- | The state of the query after the current batch. Only COUNT(*) aggregations are supported in the initial launch. Therefore, expected result type is limited to @NO_MORE_RESULTS@.
+    moreResults :: (Core.Maybe AggregationResultBatch_MoreResults),
+    -- | Read timestamp this batch was returned from. In a single transaction, subsequent query result batches for the same query can have a greater timestamp. Each batch\'s read timestamp is valid for all preceding batches.
+    readTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationResultBatch' with the minimum fields required to make a request.
+newAggregationResultBatch ::
+  AggregationResultBatch
+newAggregationResultBatch =
+  AggregationResultBatch
+    { aggregationResults = Core.Nothing,
+      moreResults = Core.Nothing,
+      readTime = Core.Nothing
+    }
+
+instance Core.FromJSON AggregationResultBatch where
+  parseJSON =
+    Core.withObject
+      "AggregationResultBatch"
+      ( \o ->
+          AggregationResultBatch
+            Core.<$> (o Core..:? "aggregationResults")
+            Core.<*> (o Core..:? "moreResults")
+            Core.<*> (o Core..:? "readTime")
+      )
+
+instance Core.ToJSON AggregationResultBatch where
+  toJSON AggregationResultBatch {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregationResults" Core..=)
+              Core.<$> aggregationResults,
+            ("moreResults" Core..=) Core.<$> moreResults,
+            ("readTime" Core..=) Core.<$> readTime
+          ]
+      )
+
 -- | The request for Datastore.AllocateIds.
 --
 -- /See:/ 'newAllocateIdsRequest' smart constructor.
-newtype AllocateIdsRequest = AllocateIdsRequest
-  { -- | Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved\/read-only.
+data AllocateIdsRequest = AllocateIdsRequest
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | Required. A list of keys with incomplete key paths for which to allocate IDs. No key may be reserved\/read-only.
     keys :: (Core.Maybe [Key])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -343,20 +560,27 @@ newtype AllocateIdsRequest = AllocateIdsRequest
 -- | Creates a value of 'AllocateIdsRequest' with the minimum fields required to make a request.
 newAllocateIdsRequest ::
   AllocateIdsRequest
-newAllocateIdsRequest = AllocateIdsRequest {keys = Core.Nothing}
+newAllocateIdsRequest =
+  AllocateIdsRequest {databaseId = Core.Nothing, keys = Core.Nothing}
 
 instance Core.FromJSON AllocateIdsRequest where
   parseJSON =
     Core.withObject
       "AllocateIdsRequest"
       ( \o ->
-          AllocateIdsRequest Core.<$> (o Core..:? "keys")
+          AllocateIdsRequest
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "keys")
       )
 
 instance Core.ToJSON AllocateIdsRequest where
   toJSON AllocateIdsRequest {..} =
     Core.object
-      (Core.catMaybes [("keys" Core..=) Core.<$> keys])
+      ( Core.catMaybes
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("keys" Core..=) Core.<$> keys
+          ]
+      )
 
 -- | The response for Datastore.AllocateIds.
 --
@@ -413,8 +637,10 @@ instance Core.ToJSON ArrayValue where
 -- | The request for Datastore.BeginTransaction.
 --
 -- /See:/ 'newBeginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest = BeginTransactionRequest
-  { -- | Options for a new transaction.
+data BeginTransactionRequest = BeginTransactionRequest
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | Options for a new transaction.
     transactionOptions :: (Core.Maybe TransactionOptions)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -423,7 +649,10 @@ newtype BeginTransactionRequest = BeginTransactionRequest
 newBeginTransactionRequest ::
   BeginTransactionRequest
 newBeginTransactionRequest =
-  BeginTransactionRequest {transactionOptions = Core.Nothing}
+  BeginTransactionRequest
+    { databaseId = Core.Nothing,
+      transactionOptions = Core.Nothing
+    }
 
 instance Core.FromJSON BeginTransactionRequest where
   parseJSON =
@@ -431,14 +660,16 @@ instance Core.FromJSON BeginTransactionRequest where
       "BeginTransactionRequest"
       ( \o ->
           BeginTransactionRequest
-            Core.<$> (o Core..:? "transactionOptions")
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "transactionOptions")
       )
 
 instance Core.ToJSON BeginTransactionRequest where
   toJSON BeginTransactionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("transactionOptions" Core..=)
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("transactionOptions" Core..=)
               Core.<$> transactionOptions
           ]
       )
@@ -478,10 +709,14 @@ instance Core.ToJSON BeginTransactionResponse where
 --
 -- /See:/ 'newCommitRequest' smart constructor.
 data CommitRequest = CommitRequest
-  { -- | The type of commit to perform. Defaults to @TRANSACTIONAL@.
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | The type of commit to perform. Defaults to @TRANSACTIONAL@.
     mode :: (Core.Maybe CommitRequest_Mode),
     -- | The mutations to perform. When mode is @TRANSACTIONAL@, mutations affecting a single entity are applied in order. The following sequences of mutations affecting a single entity are not permitted in a single @Commit@ request: - @insert@ followed by @insert@ - @update@ followed by @insert@ - @upsert@ followed by @insert@ - @delete@ followed by @update@ When mode is @NON_TRANSACTIONAL@, no two mutations may affect a single entity.
     mutations :: (Core.Maybe [Mutation]),
+    -- | Options for beginning a new transaction for this request. The transaction is committed when the request completes. If specified, TransactionOptions.mode must be TransactionOptions.ReadWrite.
+    singleUseTransaction :: (Core.Maybe TransactionOptions),
     -- | The identifier of the transaction associated with the commit. A transaction identifier is returned by a call to Datastore.BeginTransaction.
     transaction :: (Core.Maybe Core.Base64)
   }
@@ -492,8 +727,10 @@ newCommitRequest ::
   CommitRequest
 newCommitRequest =
   CommitRequest
-    { mode = Core.Nothing,
+    { databaseId = Core.Nothing,
+      mode = Core.Nothing,
       mutations = Core.Nothing,
+      singleUseTransaction = Core.Nothing,
       transaction = Core.Nothing
     }
 
@@ -503,8 +740,10 @@ instance Core.FromJSON CommitRequest where
       "CommitRequest"
       ( \o ->
           CommitRequest
-            Core.<$> (o Core..:? "mode")
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "mutations")
+            Core.<*> (o Core..:? "singleUseTransaction")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -512,8 +751,11 @@ instance Core.ToJSON CommitRequest where
   toJSON CommitRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mode" Core..=) Core.<$> mode,
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("mode" Core..=) Core.<$> mode,
             ("mutations" Core..=) Core.<$> mutations,
+            ("singleUseTransaction" Core..=)
+              Core.<$> singleUseTransaction,
             ("transaction" Core..=) Core.<$> transaction
           ]
       )
@@ -522,7 +764,9 @@ instance Core.ToJSON CommitRequest where
 --
 -- /See:/ 'newCommitResponse' smart constructor.
 data CommitResponse = CommitResponse
-  { -- | The number of index entries updated during the commit, or zero if none were updated.
+  { -- | The transaction commit timestamp. Not set for non-transactional commits.
+    commitTime :: (Core.Maybe Core.DateTime),
+    -- | The number of index entries updated during the commit, or zero if none were updated.
     indexUpdates :: (Core.Maybe Core.Int32),
     -- | The result of performing the mutations. The i-th mutation result corresponds to the i-th mutation in the request.
     mutationResults :: (Core.Maybe [MutationResult])
@@ -533,7 +777,11 @@ data CommitResponse = CommitResponse
 newCommitResponse ::
   CommitResponse
 newCommitResponse =
-  CommitResponse {indexUpdates = Core.Nothing, mutationResults = Core.Nothing}
+  CommitResponse
+    { commitTime = Core.Nothing,
+      indexUpdates = Core.Nothing,
+      mutationResults = Core.Nothing
+    }
 
 instance Core.FromJSON CommitResponse where
   parseJSON =
@@ -541,7 +789,8 @@ instance Core.FromJSON CommitResponse where
       "CommitResponse"
       ( \o ->
           CommitResponse
-            Core.<$> (o Core..:? "indexUpdates")
+            Core.<$> (o Core..:? "commitTime")
+            Core.<*> (o Core..:? "indexUpdates")
             Core.<*> (o Core..:? "mutationResults")
       )
 
@@ -549,7 +798,8 @@ instance Core.ToJSON CommitResponse where
   toJSON CommitResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("indexUpdates" Core..=) Core.<$> indexUpdates,
+          [ ("commitTime" Core..=) Core.<$> commitTime,
+            ("indexUpdates" Core..=) Core.<$> indexUpdates,
             ("mutationResults" Core..=)
               Core.<$> mutationResults
           ]
@@ -559,7 +809,7 @@ instance Core.ToJSON CommitResponse where
 --
 -- /See:/ 'newCompositeFilter' smart constructor.
 data CompositeFilter = CompositeFilter
-  { -- | The list of filters to combine. Must contain at least one filter.
+  { -- | The list of filters to combine. Requires: * At least one filter is present.
     filters :: (Core.Maybe [Filter]),
     -- | The operator for combining multiple filters.
     op :: (Core.Maybe CompositeFilter_Op)
@@ -589,7 +839,39 @@ instance Core.ToJSON CompositeFilter where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | Count of entities that match the query. The @COUNT(*)@ aggregation function operates on the entire entity so it does not require a field reference.
+--
+-- /See:/ 'newCount' smart constructor.
+newtype Count = Count
+  { -- | Optional. Optional constraint on the maximum number of entities to count. This provides a way to set an upper bound on the number of entities to scan, limiting latency, and cost. Unspecified is interpreted as no bound. If a zero value is provided, a count result of zero should always be expected. High-Level Example: @AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );@ Requires: * Must be non-negative when present.
+    upTo :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Count' with the minimum fields required to make a request.
+newCount ::
+  Count
+newCount = Count {upTo = Core.Nothing}
+
+instance Core.FromJSON Count where
+  parseJSON =
+    Core.withObject
+      "Count"
+      ( \o ->
+          Count
+            Core.<$> ( o Core..:? "upTo"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Count where
+  toJSON Count {..} =
+    Core.object
+      ( Core.catMaybes
+          [("upTo" Core..=) Core.. Core.AsText Core.<$> upTo]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -613,7 +895,7 @@ instance Core.ToJSON Empty where
 data Entity = Entity
   { -- | The entity\'s key. An entity must have a key, unless otherwise documented (for example, an entity in @Value.entity_value@ may have no key). An entity\'s kind is its key path\'s last element\'s kind, or null if it has no key.
     key :: (Core.Maybe Key),
-    -- | The entity\'s properties. The map\'s keys are property names. A property name matching regex @__.*__@ is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. The name cannot be @\"\"@.
+    -- | The entity\'s properties. The map\'s keys are property names. A property name matching regex @__.*__@ is reserved. A reserved property name is forbidden in certain documented contexts. The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be empty.
     properties :: (Core.Maybe Entity_Properties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -642,7 +924,7 @@ instance Core.ToJSON Entity where
           ]
       )
 
--- | The entity\'s properties. The map\'s keys are property names. A property name matching regex @__.*__@ is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. The name cannot be @\"\"@.
+-- | The entity\'s properties. The map\'s keys are property names. A property name matching regex @__.*__@ is reserved. A reserved property name is forbidden in certain documented contexts. The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be empty.
 --
 -- /See:/ 'newEntity_Properties' smart constructor.
 newtype Entity_Properties = Entity_Properties
@@ -673,10 +955,14 @@ instance Core.ToJSON Entity_Properties where
 --
 -- /See:/ 'newEntityResult' smart constructor.
 data EntityResult = EntityResult
-  { -- | A cursor that points to the position after the result entity. Set only when the @EntityResult@ is part of a @QueryResultBatch@ message.
+  { -- | The time at which the entity was created. This field is set for @FULL@ entity results. If this entity is missing, this field will not be set.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | A cursor that points to the position after the result entity. Set only when the @EntityResult@ is part of a @QueryResultBatch@ message.
     cursor :: (Core.Maybe Core.Base64),
     -- | The resulting entity.
     entity :: (Core.Maybe Entity),
+    -- | The time at which the entity was last changed. This field is set for @FULL@ entity results. If this entity is missing, this field will not be set.
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The version of the entity, a strictly positive number that monotonically increases with changes to the entity. This field is set for @FULL@ entity results. For missing entities in @LookupResponse@, this is the version of the snapshot that was used to look up the entity, and it is always set except for eventually consistent reads.
     version :: (Core.Maybe Core.Int64)
   }
@@ -687,8 +973,10 @@ newEntityResult ::
   EntityResult
 newEntityResult =
   EntityResult
-    { cursor = Core.Nothing,
+    { createTime = Core.Nothing,
+      cursor = Core.Nothing,
       entity = Core.Nothing,
+      updateTime = Core.Nothing,
       version = Core.Nothing
     }
 
@@ -698,8 +986,10 @@ instance Core.FromJSON EntityResult where
       "EntityResult"
       ( \o ->
           EntityResult
-            Core.<$> (o Core..:? "cursor")
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "cursor")
             Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "updateTime")
             Core.<*> ( o Core..:? "version"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -709,8 +999,10 @@ instance Core.ToJSON EntityResult where
   toJSON EntityResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cursor" Core..=) Core.<$> cursor,
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("cursor" Core..=) Core.<$> cursor,
             ("entity" Core..=) Core.<$> entity,
+            ("updateTime" Core..=) Core.<$> updateTime,
             ("version" Core..=) Core.. Core.AsText
               Core.<$> version
           ]
@@ -1298,7 +1590,7 @@ data GoogleDatastoreAdminV1Index = GoogleDatastoreAdminV1Index
     kind :: (Core.Maybe Core.Text),
     -- | Output only. Project ID.
     projectId :: (Core.Maybe Core.Text),
-    -- | Required. An ordered sequence of property names and their index attributes.
+    -- | Required. An ordered sequence of property names and their index attributes. Requires: * A maximum of 100 properties.
     properties :: (Core.Maybe [GoogleDatastoreAdminV1IndexedProperty]),
     -- | Output only. The state of the index.
     state :: (Core.Maybe GoogleDatastoreAdminV1Index_State)
@@ -2450,7 +2742,9 @@ instance Core.ToJSON LatLng where
 --
 -- /See:/ 'newLookupRequest' smart constructor.
 data LookupRequest = LookupRequest
-  { -- | Required. Keys of entities to look up.
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | Required. Keys of entities to look up.
     keys :: (Core.Maybe [Key]),
     -- | The options for this lookup request.
     readOptions :: (Core.Maybe ReadOptions)
@@ -2461,7 +2755,11 @@ data LookupRequest = LookupRequest
 newLookupRequest ::
   LookupRequest
 newLookupRequest =
-  LookupRequest {keys = Core.Nothing, readOptions = Core.Nothing}
+  LookupRequest
+    { databaseId = Core.Nothing,
+      keys = Core.Nothing,
+      readOptions = Core.Nothing
+    }
 
 instance Core.FromJSON LookupRequest where
   parseJSON =
@@ -2469,7 +2767,8 @@ instance Core.FromJSON LookupRequest where
       "LookupRequest"
       ( \o ->
           LookupRequest
-            Core.<$> (o Core..:? "keys")
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "keys")
             Core.<*> (o Core..:? "readOptions")
       )
 
@@ -2477,7 +2776,8 @@ instance Core.ToJSON LookupRequest where
   toJSON LookupRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("keys" Core..=) Core.<$> keys,
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("keys" Core..=) Core.<$> keys,
             ("readOptions" Core..=) Core.<$> readOptions
           ]
       )
@@ -2491,7 +2791,11 @@ data LookupResponse = LookupResponse
     -- | Entities found as @ResultType.FULL@ entities. The order of results in this field is undefined and has no relation to the order of the keys in the input.
     found :: (Core.Maybe [EntityResult]),
     -- | Entities not found as @ResultType.KEY_ONLY@ entities. The order of results in this field is undefined and has no relation to the order of the keys in the input.
-    missing :: (Core.Maybe [EntityResult])
+    missing :: (Core.Maybe [EntityResult]),
+    -- | The time at which these entities were read or found missing.
+    readTime :: (Core.Maybe Core.DateTime),
+    -- | The identifier of the transaction that was started as part of this Lookup request. Set only when ReadOptions.new/transaction was set in LookupRequest.read/options.
+    transaction :: (Core.Maybe Core.Base64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2502,7 +2806,9 @@ newLookupResponse =
   LookupResponse
     { deferred = Core.Nothing,
       found = Core.Nothing,
-      missing = Core.Nothing
+      missing = Core.Nothing,
+      readTime = Core.Nothing,
+      transaction = Core.Nothing
     }
 
 instance Core.FromJSON LookupResponse where
@@ -2514,6 +2820,8 @@ instance Core.FromJSON LookupResponse where
             Core.<$> (o Core..:? "deferred")
             Core.<*> (o Core..:? "found")
             Core.<*> (o Core..:? "missing")
+            Core.<*> (o Core..:? "readTime")
+            Core.<*> (o Core..:? "transaction")
       )
 
 instance Core.ToJSON LookupResponse where
@@ -2522,7 +2830,9 @@ instance Core.ToJSON LookupResponse where
       ( Core.catMaybes
           [ ("deferred" Core..=) Core.<$> deferred,
             ("found" Core..=) Core.<$> found,
-            ("missing" Core..=) Core.<$> missing
+            ("missing" Core..=) Core.<$> missing,
+            ("readTime" Core..=) Core.<$> readTime,
+            ("transaction" Core..=) Core.<$> transaction
           ]
       )
 
@@ -2538,6 +2848,8 @@ data Mutation = Mutation
     insert :: (Core.Maybe Entity),
     -- | The entity to update. The entity must already exist. Must have a complete key path.
     update :: (Core.Maybe Entity),
+    -- | The update time of the entity that this mutation is being applied to. If this does not match the current update time on the server, the mutation conflicts.
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The entity to upsert. The entity may or may not already exist. The entity key\'s final path element may be incomplete.
     upsert :: (Core.Maybe Entity)
   }
@@ -2552,6 +2864,7 @@ newMutation =
       delete = Core.Nothing,
       insert = Core.Nothing,
       update = Core.Nothing,
+      updateTime = Core.Nothing,
       upsert = Core.Nothing
     }
 
@@ -2567,6 +2880,7 @@ instance Core.FromJSON Mutation where
             Core.<*> (o Core..:? "delete")
             Core.<*> (o Core..:? "insert")
             Core.<*> (o Core..:? "update")
+            Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "upsert")
       )
 
@@ -2579,6 +2893,7 @@ instance Core.ToJSON Mutation where
             ("delete" Core..=) Core.<$> delete,
             ("insert" Core..=) Core.<$> insert,
             ("update" Core..=) Core.<$> update,
+            ("updateTime" Core..=) Core.<$> updateTime,
             ("upsert" Core..=) Core.<$> upsert
           ]
       )
@@ -2589,8 +2904,12 @@ instance Core.ToJSON Mutation where
 data MutationResult = MutationResult
   { -- | Whether a conflict was detected for this mutation. Always false when a conflict detection strategy field is not set in the mutation.
     conflictDetected :: (Core.Maybe Core.Bool),
+    -- | The create time of the entity. This field will not be set after a \'delete\'.
+    createTime :: (Core.Maybe Core.DateTime),
     -- | The automatically allocated key. Set only when the mutation allocated a key.
     key :: (Core.Maybe Key),
+    -- | The update time of the entity on the server after processing the mutation. If the mutation doesn\'t change anything on the server, then the timestamp will be the update timestamp of the current entity. This field will not be set after a \'delete\'.
+    updateTime :: (Core.Maybe Core.DateTime),
     -- | The version of the entity on the server after processing the mutation. If the mutation doesn\'t change anything on the server, then the version will be the version of the current entity or, if no entity is present, a version that is strictly greater than the version of any previous entity and less than the version of any possible future entity.
     version :: (Core.Maybe Core.Int64)
   }
@@ -2602,7 +2921,9 @@ newMutationResult ::
 newMutationResult =
   MutationResult
     { conflictDetected = Core.Nothing,
+      createTime = Core.Nothing,
       key = Core.Nothing,
+      updateTime = Core.Nothing,
       version = Core.Nothing
     }
 
@@ -2613,7 +2934,9 @@ instance Core.FromJSON MutationResult where
       ( \o ->
           MutationResult
             Core.<$> (o Core..:? "conflictDetected")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "key")
+            Core.<*> (o Core..:? "updateTime")
             Core.<*> ( o Core..:? "version"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -2625,7 +2948,9 @@ instance Core.ToJSON MutationResult where
       ( Core.catMaybes
           [ ("conflictDetected" Core..=)
               Core.<$> conflictDetected,
+            ("createTime" Core..=) Core.<$> createTime,
             ("key" Core..=) Core.<$> key,
+            ("updateTime" Core..=) Core.<$> updateTime,
             ("version" Core..=) Core.. Core.AsText
               Core.<$> version
           ]
@@ -2635,7 +2960,9 @@ instance Core.ToJSON MutationResult where
 --
 -- /See:/ 'newPartitionId' smart constructor.
 data PartitionId = PartitionId
-  { -- | If not empty, the ID of the namespace to which the entities belong.
+  { -- | If not empty, the ID of the database to which the entities belong.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | If not empty, the ID of the namespace to which the entities belong.
     namespaceId :: (Core.Maybe Core.Text),
     -- | The ID of the project to which the entities belong.
     projectId :: (Core.Maybe Core.Text)
@@ -2646,7 +2973,11 @@ data PartitionId = PartitionId
 newPartitionId ::
   PartitionId
 newPartitionId =
-  PartitionId {namespaceId = Core.Nothing, projectId = Core.Nothing}
+  PartitionId
+    { databaseId = Core.Nothing,
+      namespaceId = Core.Nothing,
+      projectId = Core.Nothing
+    }
 
 instance Core.FromJSON PartitionId where
   parseJSON =
@@ -2654,7 +2985,8 @@ instance Core.FromJSON PartitionId where
       "PartitionId"
       ( \o ->
           PartitionId
-            Core.<$> (o Core..:? "namespaceId")
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "namespaceId")
             Core.<*> (o Core..:? "projectId")
       )
 
@@ -2662,7 +2994,8 @@ instance Core.ToJSON PartitionId where
   toJSON PartitionId {..} =
     Core.object
       ( Core.catMaybes
-          [ ("namespaceId" Core..=) Core.<$> namespaceId,
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("namespaceId" Core..=) Core.<$> namespaceId,
             ("projectId" Core..=) Core.<$> projectId
           ]
       )
@@ -2673,9 +3006,9 @@ instance Core.ToJSON PartitionId where
 data PathElement = PathElement
   { -- | The auto-allocated ID of the entity. Never equal to zero. Values less than zero are discouraged and may not be supported in the future.
     id :: (Core.Maybe Core.Int64),
-    -- | The kind of the entity. A kind matching regex @__.*__@ is reserved\/read-only. A kind must not contain more than 1500 bytes when UTF-8 encoded. Cannot be @\"\"@.
+    -- | The kind of the entity. A kind matching regex @__.*__@ is reserved\/read-only. A kind must not contain more than 1500 bytes when UTF-8 encoded. Cannot be @\"\"@. Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are encoded as @__bytes__@ where \`\` is the base-64 encoding of the bytes.
     kind :: (Core.Maybe Core.Text),
-    -- | The name of the entity. A name matching regex @__.*__@ is reserved\/read-only. A name must not be more than 1500 bytes when UTF-8 encoded. Cannot be @\"\"@.
+    -- | The name of the entity. A name matching regex @__.*__@ is reserved\/read-only. A name must not be more than 1500 bytes when UTF-8 encoded. Cannot be @\"\"@. Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are encoded as @__bytes__@ where \`\` is the base-64 encoding of the bytes.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2845,7 +3178,7 @@ instance Core.ToJSON PropertyReference where
 --
 -- /See:/ 'newQuery' smart constructor.
 data Query = Query
-  { -- | The properties to make distinct. The query results will contain the first result for each distinct combination of values for the given properties (if empty, all results are returned).
+  { -- | The properties to make distinct. The query results will contain the first result for each distinct combination of values for the given properties (if empty, all results are returned). Requires: * If @order@ is specified, the set of distinct on properties must appear before the non-distinct on properties in @order@.
     distinctOn :: (Core.Maybe [PropertyReference]),
     -- | An ending point for the query results. Query cursors are returned in query result batches and <https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets can only be used to limit the same query>.
     endCursor :: (Core.Maybe Core.Base64),
@@ -2927,6 +3260,8 @@ data QueryResultBatch = QueryResultBatch
     entityResults :: (Core.Maybe [EntityResult]),
     -- | The state of the query after the current batch.
     moreResults :: (Core.Maybe QueryResultBatch_MoreResults),
+    -- | Read timestamp this batch was returned from. This applies to the range of results from the query\'s @start_cursor@ (or the beginning of the query if no cursor was given) to this batch\'s @end_cursor@ (not the query\'s @end_cursor@). In a single transaction, subsequent query result batches for the same query can have a greater timestamp. Each batch\'s read timestamp is valid for all preceding batches. This value will not be set for eventually consistent queries in Cloud Datastore.
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A cursor that points to the position after the last skipped result. Will be set when @skipped_results@ != 0.
     skippedCursor :: (Core.Maybe Core.Base64),
     -- | The number of results skipped, typically because of an offset.
@@ -2945,6 +3280,7 @@ newQueryResultBatch =
       entityResultType = Core.Nothing,
       entityResults = Core.Nothing,
       moreResults = Core.Nothing,
+      readTime = Core.Nothing,
       skippedCursor = Core.Nothing,
       skippedResults = Core.Nothing,
       snapshotVersion = Core.Nothing
@@ -2960,6 +3296,7 @@ instance Core.FromJSON QueryResultBatch where
             Core.<*> (o Core..:? "entityResultType")
             Core.<*> (o Core..:? "entityResults")
             Core.<*> (o Core..:? "moreResults")
+            Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "skippedCursor")
             Core.<*> (o Core..:? "skippedResults")
             Core.<*> ( o Core..:? "snapshotVersion"
@@ -2976,6 +3313,7 @@ instance Core.ToJSON QueryResultBatch where
               Core.<$> entityResultType,
             ("entityResults" Core..=) Core.<$> entityResults,
             ("moreResults" Core..=) Core.<$> moreResults,
+            ("readTime" Core..=) Core.<$> readTime,
             ("skippedCursor" Core..=) Core.<$> skippedCursor,
             ("skippedResults" Core..=) Core.<$> skippedResults,
             ("snapshotVersion" Core..=) Core.. Core.AsText
@@ -2986,29 +3324,40 @@ instance Core.ToJSON QueryResultBatch where
 -- | Options specific to read-only transactions.
 --
 -- /See:/ 'newReadOnly' smart constructor.
-data ReadOnly = ReadOnly
+newtype ReadOnly = ReadOnly
+  { -- | Reads entities at the given time. This may not be older than 60 seconds.
+    readTime :: (Core.Maybe Core.DateTime)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ReadOnly' with the minimum fields required to make a request.
 newReadOnly ::
   ReadOnly
-newReadOnly = ReadOnly
+newReadOnly = ReadOnly {readTime = Core.Nothing}
 
 instance Core.FromJSON ReadOnly where
   parseJSON =
     Core.withObject
       "ReadOnly"
-      (\o -> Core.pure ReadOnly)
+      (\o -> ReadOnly Core.<$> (o Core..:? "readTime"))
 
 instance Core.ToJSON ReadOnly where
-  toJSON = Core.const Core.emptyObject
+  toJSON ReadOnly {..} =
+    Core.object
+      ( Core.catMaybes
+          [("readTime" Core..=) Core.<$> readTime]
+      )
 
 -- | The options shared by read requests.
 --
 -- /See:/ 'newReadOptions' smart constructor.
 data ReadOptions = ReadOptions
-  { -- | The non-transactional read consistency to use. Cannot be set to @STRONG@ for global queries.
+  { -- | Options for beginning a new transaction for this request. The new transaction identifier will be returned in the corresponding response as either LookupResponse.transaction or RunQueryResponse.transaction.
+    newTransaction' :: (Core.Maybe TransactionOptions),
+    -- | The non-transactional read consistency to use.
     readConsistency :: (Core.Maybe ReadOptions_ReadConsistency),
+    -- | Reads entities as they were at the given time. This may not be older than 270 seconds. This value is only supported for Cloud Firestore in Datastore mode.
+    readTime :: (Core.Maybe Core.DateTime),
     -- | The identifier of the transaction in which to read. A transaction identifier is returned by a call to Datastore.BeginTransaction.
     transaction :: (Core.Maybe Core.Base64)
   }
@@ -3018,7 +3367,12 @@ data ReadOptions = ReadOptions
 newReadOptions ::
   ReadOptions
 newReadOptions =
-  ReadOptions {readConsistency = Core.Nothing, transaction = Core.Nothing}
+  ReadOptions
+    { newTransaction' = Core.Nothing,
+      readConsistency = Core.Nothing,
+      readTime = Core.Nothing,
+      transaction = Core.Nothing
+    }
 
 instance Core.FromJSON ReadOptions where
   parseJSON =
@@ -3026,7 +3380,9 @@ instance Core.FromJSON ReadOptions where
       "ReadOptions"
       ( \o ->
           ReadOptions
-            Core.<$> (o Core..:? "readConsistency")
+            Core.<$> (o Core..:? "newTransaction")
+            Core.<*> (o Core..:? "readConsistency")
+            Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "transaction")
       )
 
@@ -3034,8 +3390,9 @@ instance Core.ToJSON ReadOptions where
   toJSON ReadOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("readConsistency" Core..=)
-              Core.<$> readConsistency,
+          [ ("newTransaction" Core..=) Core.<$> newTransaction',
+            ("readConsistency" Core..=) Core.<$> readConsistency,
+            ("readTime" Core..=) Core.<$> readTime,
             ("transaction" Core..=) Core.<$> transaction
           ]
       )
@@ -3076,7 +3433,7 @@ instance Core.ToJSON ReadWrite where
 --
 -- /See:/ 'newReserveIdsRequest' smart constructor.
 data ReserveIdsRequest = ReserveIdsRequest
-  { -- | If not empty, the ID of the database against which to make the request.
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
     databaseId :: (Core.Maybe Core.Text),
     -- | Required. A list of keys with complete key paths whose numeric IDs should not be auto-allocated.
     keys :: (Core.Maybe [Key])
@@ -3131,8 +3488,10 @@ instance Core.ToJSON ReserveIdsResponse where
 -- | The request for Datastore.Rollback.
 --
 -- /See:/ 'newRollbackRequest' smart constructor.
-newtype RollbackRequest = RollbackRequest
-  { -- | Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
+data RollbackRequest = RollbackRequest
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | Required. The transaction identifier, returned by a call to Datastore.BeginTransaction.
     transaction :: (Core.Maybe Core.Base64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3140,21 +3499,26 @@ newtype RollbackRequest = RollbackRequest
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
 newRollbackRequest ::
   RollbackRequest
-newRollbackRequest = RollbackRequest {transaction = Core.Nothing}
+newRollbackRequest =
+  RollbackRequest {databaseId = Core.Nothing, transaction = Core.Nothing}
 
 instance Core.FromJSON RollbackRequest where
   parseJSON =
     Core.withObject
       "RollbackRequest"
       ( \o ->
-          RollbackRequest Core.<$> (o Core..:? "transaction")
+          RollbackRequest
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "transaction")
       )
 
 instance Core.ToJSON RollbackRequest where
   toJSON RollbackRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("transaction" Core..=) Core.<$> transaction]
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("transaction" Core..=) Core.<$> transaction
+          ]
       )
 
 -- | The response for Datastore.Rollback. (an empty message).
@@ -3177,11 +3541,112 @@ instance Core.FromJSON RollbackResponse where
 instance Core.ToJSON RollbackResponse where
   toJSON = Core.const Core.emptyObject
 
+-- | The request for Datastore.RunAggregationQuery.
+--
+-- /See:/ 'newRunAggregationQueryRequest' smart constructor.
+data RunAggregationQueryRequest = RunAggregationQueryRequest
+  { -- | The query to run.
+    aggregationQuery :: (Core.Maybe AggregationQuery),
+    -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | The GQL query to run. This query must be an aggregation query.
+    gqlQuery :: (Core.Maybe GqlQuery),
+    -- | Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
+    partitionId :: (Core.Maybe PartitionId),
+    -- | The options for this query.
+    readOptions :: (Core.Maybe ReadOptions)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RunAggregationQueryRequest' with the minimum fields required to make a request.
+newRunAggregationQueryRequest ::
+  RunAggregationQueryRequest
+newRunAggregationQueryRequest =
+  RunAggregationQueryRequest
+    { aggregationQuery = Core.Nothing,
+      databaseId = Core.Nothing,
+      gqlQuery = Core.Nothing,
+      partitionId = Core.Nothing,
+      readOptions = Core.Nothing
+    }
+
+instance Core.FromJSON RunAggregationQueryRequest where
+  parseJSON =
+    Core.withObject
+      "RunAggregationQueryRequest"
+      ( \o ->
+          RunAggregationQueryRequest
+            Core.<$> (o Core..:? "aggregationQuery")
+            Core.<*> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "gqlQuery")
+            Core.<*> (o Core..:? "partitionId")
+            Core.<*> (o Core..:? "readOptions")
+      )
+
+instance Core.ToJSON RunAggregationQueryRequest where
+  toJSON RunAggregationQueryRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregationQuery" Core..=)
+              Core.<$> aggregationQuery,
+            ("databaseId" Core..=) Core.<$> databaseId,
+            ("gqlQuery" Core..=) Core.<$> gqlQuery,
+            ("partitionId" Core..=) Core.<$> partitionId,
+            ("readOptions" Core..=) Core.<$> readOptions
+          ]
+      )
+
+-- | The response for Datastore.RunAggregationQuery.
+--
+-- /See:/ 'newRunAggregationQueryResponse' smart constructor.
+data RunAggregationQueryResponse = RunAggregationQueryResponse
+  { -- | A batch of aggregation results. Always present.
+    batch :: (Core.Maybe AggregationResultBatch),
+    -- | The parsed form of the @GqlQuery@ from the request, if it was set.
+    query :: (Core.Maybe AggregationQuery),
+    -- | The identifier of the transaction that was started as part of this RunAggregationQuery request. Set only when ReadOptions.new/transaction was set in RunAggregationQueryRequest.read/options.
+    transaction :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RunAggregationQueryResponse' with the minimum fields required to make a request.
+newRunAggregationQueryResponse ::
+  RunAggregationQueryResponse
+newRunAggregationQueryResponse =
+  RunAggregationQueryResponse
+    { batch = Core.Nothing,
+      query = Core.Nothing,
+      transaction = Core.Nothing
+    }
+
+instance Core.FromJSON RunAggregationQueryResponse where
+  parseJSON =
+    Core.withObject
+      "RunAggregationQueryResponse"
+      ( \o ->
+          RunAggregationQueryResponse
+            Core.<$> (o Core..:? "batch")
+            Core.<*> (o Core..:? "query")
+            Core.<*> (o Core..:? "transaction")
+      )
+
+instance Core.ToJSON RunAggregationQueryResponse where
+  toJSON RunAggregationQueryResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("batch" Core..=) Core.<$> batch,
+            ("query" Core..=) Core.<$> query,
+            ("transaction" Core..=) Core.<$> transaction
+          ]
+      )
+
 -- | The request for Datastore.RunQuery.
 --
 -- /See:/ 'newRunQueryRequest' smart constructor.
 data RunQueryRequest = RunQueryRequest
-  { -- | The GQL query to run.
+  { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
+    databaseId :: (Core.Maybe Core.Text),
+    -- | The GQL query to run. This query must be a non-aggregation query.
     gqlQuery :: (Core.Maybe GqlQuery),
     -- | Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
     partitionId :: (Core.Maybe PartitionId),
@@ -3197,7 +3662,8 @@ newRunQueryRequest ::
   RunQueryRequest
 newRunQueryRequest =
   RunQueryRequest
-    { gqlQuery = Core.Nothing,
+    { databaseId = Core.Nothing,
+      gqlQuery = Core.Nothing,
       partitionId = Core.Nothing,
       query = Core.Nothing,
       readOptions = Core.Nothing
@@ -3209,7 +3675,8 @@ instance Core.FromJSON RunQueryRequest where
       "RunQueryRequest"
       ( \o ->
           RunQueryRequest
-            Core.<$> (o Core..:? "gqlQuery")
+            Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "gqlQuery")
             Core.<*> (o Core..:? "partitionId")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "readOptions")
@@ -3219,7 +3686,8 @@ instance Core.ToJSON RunQueryRequest where
   toJSON RunQueryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("gqlQuery" Core..=) Core.<$> gqlQuery,
+          [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("gqlQuery" Core..=) Core.<$> gqlQuery,
             ("partitionId" Core..=) Core.<$> partitionId,
             ("query" Core..=) Core.<$> query,
             ("readOptions" Core..=) Core.<$> readOptions
@@ -3233,7 +3701,9 @@ data RunQueryResponse = RunQueryResponse
   { -- | A batch of query results (always present).
     batch :: (Core.Maybe QueryResultBatch),
     -- | The parsed form of the @GqlQuery@ from the request, if it was set.
-    query :: (Core.Maybe Query)
+    query :: (Core.Maybe Query),
+    -- | The identifier of the transaction that was started as part of this RunQuery request. Set only when ReadOptions.new/transaction was set in RunQueryRequest.read/options.
+    transaction :: (Core.Maybe Core.Base64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3241,7 +3711,11 @@ data RunQueryResponse = RunQueryResponse
 newRunQueryResponse ::
   RunQueryResponse
 newRunQueryResponse =
-  RunQueryResponse {batch = Core.Nothing, query = Core.Nothing}
+  RunQueryResponse
+    { batch = Core.Nothing,
+      query = Core.Nothing,
+      transaction = Core.Nothing
+    }
 
 instance Core.FromJSON RunQueryResponse where
   parseJSON =
@@ -3249,7 +3723,9 @@ instance Core.FromJSON RunQueryResponse where
       "RunQueryResponse"
       ( \o ->
           RunQueryResponse
-            Core.<$> (o Core..:? "batch") Core.<*> (o Core..:? "query")
+            Core.<$> (o Core..:? "batch")
+            Core.<*> (o Core..:? "query")
+            Core.<*> (o Core..:? "transaction")
       )
 
 instance Core.ToJSON RunQueryResponse where
@@ -3257,7 +3733,8 @@ instance Core.ToJSON RunQueryResponse where
     Core.object
       ( Core.catMaybes
           [ ("batch" Core..=) Core.<$> batch,
-            ("query" Core..=) Core.<$> query
+            ("query" Core..=) Core.<$> query,
+            ("transaction" Core..=) Core.<$> transaction
           ]
       )
 

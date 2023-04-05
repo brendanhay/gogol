@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the set of products a user is entitled to access.
+-- Retrieves the set of products a user is entitled to access. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
 module Gogol.AndroidEnterprise.Users.GetAvailableProductSet
@@ -60,7 +60,7 @@ type AndroidEnterpriseUsersGetAvailableProductSetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ProductSet
 
--- | Retrieves the set of products a user is entitled to access.
+-- | Retrieves the set of products a user is entitled to access. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseUsersGetAvailableProductSet' smart constructor.
 data AndroidEnterpriseUsersGetAvailableProductSet = AndroidEnterpriseUsersGetAvailableProductSet

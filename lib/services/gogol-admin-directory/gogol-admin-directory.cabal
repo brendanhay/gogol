@@ -60,6 +60,13 @@ library
     Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.List
     Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.ListPrinterModels
     Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Patch
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.BatchCreatePrintServers
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.BatchDeletePrintServers
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Create
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Delete
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Get
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.List
+    Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Patch
     Gogol.Admin.Directory.Asps.Delete
     Gogol.Admin.Directory.Asps.Get
     Gogol.Admin.Directory.Asps.List
@@ -174,5 +181,5 @@ library
     Gogol.Admin.Directory.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

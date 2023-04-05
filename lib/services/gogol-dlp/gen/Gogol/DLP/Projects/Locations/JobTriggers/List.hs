@@ -80,7 +80,7 @@ data DLPProjectsLocationsJobTriggersList = DLPProjectsLocationsJobTriggersList
     filter :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | Comma separated list of triggeredJob fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to time the JobTrigger was created. - @update_time@: corresponds to time the JobTrigger was last updated. - @last_run_time@: corresponds to the last time the JobTrigger ran. - @name@: corresponds to JobTrigger\'s name. - @display_name@: corresponds to JobTrigger\'s display name. - @status@: corresponds to JobTrigger\'s status.
+    -- | Comma separated list of triggeredJob fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the JobTrigger was created. - @update_time@: corresponds to the time the JobTrigger was last updated. - @last_run_time@: corresponds to the last time the JobTrigger ran. - @name@: corresponds to the JobTrigger\'s name. - @display_name@: corresponds to the JobTrigger\'s display name. - @status@: corresponds to JobTrigger\'s status.
     orderBy :: (Core.Maybe Core.Text),
     -- | Size of the page, can be limited by a server.
     pageSize :: (Core.Maybe Core.Int32),

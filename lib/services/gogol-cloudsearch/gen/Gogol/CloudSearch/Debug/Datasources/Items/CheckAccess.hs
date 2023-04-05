@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks whether an item is accessible by specified principal. __Note:__ This API requires an admin account to execute.
+-- Checks whether an item is accessible by specified principal. Principal must be a user; groups and domain values aren\'t supported. __Note:__ This API requires an admin account to execute.
 --
 -- /See:/ <https://developers.google.com/cloud-search/docs/guides/ Cloud Search API Reference> for @cloudsearch.debug.datasources.items.checkAccess@.
 module Gogol.CloudSearch.Debug.Datasources.Items.CheckAccess
@@ -60,7 +60,7 @@ type CloudSearchDebugDatasourcesItemsCheckAccessResource =
     Core.:> Core.ReqBody '[Core.JSON] Principal
     Core.:> Core.Post '[Core.JSON] CheckAccessResponse
 
--- | Checks whether an item is accessible by specified principal. __Note:__ This API requires an admin account to execute.
+-- | Checks whether an item is accessible by specified principal. Principal must be a user; groups and domain values aren\'t supported. __Note:__ This API requires an admin account to execute.
 --
 -- /See:/ 'newCloudSearchDebugDatasourcesItemsCheckAccess' smart constructor.
 data CloudSearchDebugDatasourcesItemsCheckAccess = CloudSearchDebugDatasourcesItemsCheckAccess

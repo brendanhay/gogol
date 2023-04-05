@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.delete@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsDelete' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsDeleteResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text

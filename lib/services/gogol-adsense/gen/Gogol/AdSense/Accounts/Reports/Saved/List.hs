@@ -71,7 +71,7 @@ data AdSenseAccountsReportsSavedList = AdSenseAccountsReportsSavedList
     callback :: (Core.Maybe Core.Text),
     -- | The maximum number of reports to include in the response, used for paging. If unspecified, at most 10000 reports will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A page token, received from a previous @ListPayments@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListPayments@ must match the call that provided the page token.
+    -- | A page token, received from a previous @ListSavedReports@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListSavedReports@ must match the call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The account which owns the collection of reports. Format: accounts\/{account}
     parent :: Core.Text,

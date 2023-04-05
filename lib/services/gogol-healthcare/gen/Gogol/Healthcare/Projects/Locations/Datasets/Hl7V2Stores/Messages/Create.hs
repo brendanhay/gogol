@@ -67,7 +67,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate = HealthcarePr
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the dataset this message belongs to.
+    -- | The name of the HL7v2 store this message belongs to.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: CreateMessageRequest,
@@ -80,7 +80,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate = HealthcarePr
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate ::
-  -- |  The name of the dataset this message belongs to. See 'parent'.
+  -- |  The name of the HL7v2 store this message belongs to. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   CreateMessageRequest ->

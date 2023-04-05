@@ -57,6 +57,7 @@ type ComputeInstancesSuspendResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "discardLocalSsd" Core.Bool
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -73,6 +74,8 @@ data ComputeInstancesSuspend = ComputeInstancesSuspend
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | If true, discard the contents of any attached localSSD partitions. Default value is false.
+    discardLocalSsd :: (Core.Maybe Core.Bool),
     -- | Name of the instance resource to suspend.
     instance' :: Core.Text,
     -- | Project ID for this request.
@@ -102,6 +105,7 @@ newComputeInstancesSuspend instance' project zone =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      discardLocalSsd = Core.Nothing,
       instance' = instance',
       project = project,
       requestId = Core.Nothing,
@@ -123,6 +127,7 @@ instance Core.GoogleRequest ComputeInstancesSuspend where
       xgafv
       accessToken
       callback
+      discardLocalSsd
       requestId
       uploadType
       uploadProtocol

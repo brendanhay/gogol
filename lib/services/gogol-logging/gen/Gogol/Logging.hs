@@ -42,16 +42,6 @@ module Gogol.Logging
 
     -- * Resources
 
-    -- ** logging.billingAccounts.buckets.get
-    LoggingBillingAccountsBucketsGetResource,
-    LoggingBillingAccountsBucketsGet (..),
-    newLoggingBillingAccountsBucketsGet,
-
-    -- ** logging.billingAccounts.buckets.views.get
-    LoggingBillingAccountsBucketsViewsGetResource,
-    LoggingBillingAccountsBucketsViewsGet (..),
-    newLoggingBillingAccountsBucketsViewsGet,
-
     -- ** logging.billingAccounts.exclusions.create
     LoggingBillingAccountsExclusionsCreateResource,
     LoggingBillingAccountsExclusionsCreate (..),
@@ -92,10 +82,40 @@ module Gogol.Logging
     LoggingBillingAccountsLocationsBucketsCreate (..),
     newLoggingBillingAccountsLocationsBucketsCreate,
 
+    -- ** logging.billingAccounts.locations.buckets.createAsync
+    LoggingBillingAccountsLocationsBucketsCreateAsyncResource,
+    LoggingBillingAccountsLocationsBucketsCreateAsync (..),
+    newLoggingBillingAccountsLocationsBucketsCreateAsync,
+
     -- ** logging.billingAccounts.locations.buckets.delete
     LoggingBillingAccountsLocationsBucketsDeleteResource,
     LoggingBillingAccountsLocationsBucketsDelete (..),
     newLoggingBillingAccountsLocationsBucketsDelete,
+
+    -- ** logging.billingAccounts.locations.buckets.get
+    LoggingBillingAccountsLocationsBucketsGetResource,
+    LoggingBillingAccountsLocationsBucketsGet (..),
+    newLoggingBillingAccountsLocationsBucketsGet,
+
+    -- ** logging.billingAccounts.locations.buckets.links.create
+    LoggingBillingAccountsLocationsBucketsLinksCreateResource,
+    LoggingBillingAccountsLocationsBucketsLinksCreate (..),
+    newLoggingBillingAccountsLocationsBucketsLinksCreate,
+
+    -- ** logging.billingAccounts.locations.buckets.links.delete
+    LoggingBillingAccountsLocationsBucketsLinksDeleteResource,
+    LoggingBillingAccountsLocationsBucketsLinksDelete (..),
+    newLoggingBillingAccountsLocationsBucketsLinksDelete,
+
+    -- ** logging.billingAccounts.locations.buckets.links.get
+    LoggingBillingAccountsLocationsBucketsLinksGetResource,
+    LoggingBillingAccountsLocationsBucketsLinksGet (..),
+    newLoggingBillingAccountsLocationsBucketsLinksGet,
+
+    -- ** logging.billingAccounts.locations.buckets.links.list
+    LoggingBillingAccountsLocationsBucketsLinksListResource,
+    LoggingBillingAccountsLocationsBucketsLinksList (..),
+    newLoggingBillingAccountsLocationsBucketsLinksList,
 
     -- ** logging.billingAccounts.locations.buckets.list
     LoggingBillingAccountsLocationsBucketsListResource,
@@ -112,6 +132,11 @@ module Gogol.Logging
     LoggingBillingAccountsLocationsBucketsUndelete (..),
     newLoggingBillingAccountsLocationsBucketsUndelete,
 
+    -- ** logging.billingAccounts.locations.buckets.updateAsync
+    LoggingBillingAccountsLocationsBucketsUpdateAsyncResource,
+    LoggingBillingAccountsLocationsBucketsUpdateAsync (..),
+    newLoggingBillingAccountsLocationsBucketsUpdateAsync,
+
     -- ** logging.billingAccounts.locations.buckets.views.create
     LoggingBillingAccountsLocationsBucketsViewsCreateResource,
     LoggingBillingAccountsLocationsBucketsViewsCreate (..),
@@ -122,10 +147,20 @@ module Gogol.Logging
     LoggingBillingAccountsLocationsBucketsViewsDelete (..),
     newLoggingBillingAccountsLocationsBucketsViewsDelete,
 
+    -- ** logging.billingAccounts.locations.buckets.views.get
+    LoggingBillingAccountsLocationsBucketsViewsGetResource,
+    LoggingBillingAccountsLocationsBucketsViewsGet (..),
+    newLoggingBillingAccountsLocationsBucketsViewsGet,
+
     -- ** logging.billingAccounts.locations.buckets.views.list
     LoggingBillingAccountsLocationsBucketsViewsListResource,
     LoggingBillingAccountsLocationsBucketsViewsList (..),
     newLoggingBillingAccountsLocationsBucketsViewsList,
+
+    -- ** logging.billingAccounts.locations.buckets.views.logs.list
+    LoggingBillingAccountsLocationsBucketsViewsLogsListResource,
+    LoggingBillingAccountsLocationsBucketsViewsLogsList (..),
+    newLoggingBillingAccountsLocationsBucketsViewsLogsList,
 
     -- ** logging.billingAccounts.locations.buckets.views.patch
     LoggingBillingAccountsLocationsBucketsViewsPatchResource,
@@ -147,6 +182,11 @@ module Gogol.Logging
     LoggingBillingAccountsLocationsOperationsCancel (..),
     newLoggingBillingAccountsLocationsOperationsCancel,
 
+    -- ** logging.billingAccounts.locations.operations.get
+    LoggingBillingAccountsLocationsOperationsGetResource,
+    LoggingBillingAccountsLocationsOperationsGet (..),
+    newLoggingBillingAccountsLocationsOperationsGet,
+
     -- ** logging.billingAccounts.locations.operations.list
     LoggingBillingAccountsLocationsOperationsListResource,
     LoggingBillingAccountsLocationsOperationsList (..),
@@ -161,11 +201,6 @@ module Gogol.Logging
     LoggingBillingAccountsLogsListResource,
     LoggingBillingAccountsLogsList (..),
     newLoggingBillingAccountsLogsList,
-
-    -- ** logging.billingAccounts.operations.get
-    LoggingBillingAccountsOperationsGetResource,
-    LoggingBillingAccountsOperationsGet (..),
-    newLoggingBillingAccountsOperationsGet,
 
     -- ** logging.billingAccounts.sinks.create
     LoggingBillingAccountsSinksCreateResource,
@@ -282,6 +317,11 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsCreate (..),
     newLoggingFoldersLocationsBucketsCreate,
 
+    -- ** logging.folders.locations.buckets.createAsync
+    LoggingFoldersLocationsBucketsCreateAsyncResource,
+    LoggingFoldersLocationsBucketsCreateAsync (..),
+    newLoggingFoldersLocationsBucketsCreateAsync,
+
     -- ** logging.folders.locations.buckets.delete
     LoggingFoldersLocationsBucketsDeleteResource,
     LoggingFoldersLocationsBucketsDelete (..),
@@ -291,6 +331,26 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsGetResource,
     LoggingFoldersLocationsBucketsGet (..),
     newLoggingFoldersLocationsBucketsGet,
+
+    -- ** logging.folders.locations.buckets.links.create
+    LoggingFoldersLocationsBucketsLinksCreateResource,
+    LoggingFoldersLocationsBucketsLinksCreate (..),
+    newLoggingFoldersLocationsBucketsLinksCreate,
+
+    -- ** logging.folders.locations.buckets.links.delete
+    LoggingFoldersLocationsBucketsLinksDeleteResource,
+    LoggingFoldersLocationsBucketsLinksDelete (..),
+    newLoggingFoldersLocationsBucketsLinksDelete,
+
+    -- ** logging.folders.locations.buckets.links.get
+    LoggingFoldersLocationsBucketsLinksGetResource,
+    LoggingFoldersLocationsBucketsLinksGet (..),
+    newLoggingFoldersLocationsBucketsLinksGet,
+
+    -- ** logging.folders.locations.buckets.links.list
+    LoggingFoldersLocationsBucketsLinksListResource,
+    LoggingFoldersLocationsBucketsLinksList (..),
+    newLoggingFoldersLocationsBucketsLinksList,
 
     -- ** logging.folders.locations.buckets.list
     LoggingFoldersLocationsBucketsListResource,
@@ -306,6 +366,11 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsUndeleteResource,
     LoggingFoldersLocationsBucketsUndelete (..),
     newLoggingFoldersLocationsBucketsUndelete,
+
+    -- ** logging.folders.locations.buckets.updateAsync
+    LoggingFoldersLocationsBucketsUpdateAsyncResource,
+    LoggingFoldersLocationsBucketsUpdateAsync (..),
+    newLoggingFoldersLocationsBucketsUpdateAsync,
 
     -- ** logging.folders.locations.buckets.views.create
     LoggingFoldersLocationsBucketsViewsCreateResource,
@@ -326,6 +391,11 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsViewsListResource,
     LoggingFoldersLocationsBucketsViewsList (..),
     newLoggingFoldersLocationsBucketsViewsList,
+
+    -- ** logging.folders.locations.buckets.views.logs.list
+    LoggingFoldersLocationsBucketsViewsLogsListResource,
+    LoggingFoldersLocationsBucketsViewsLogsList (..),
+    newLoggingFoldersLocationsBucketsViewsLogsList,
 
     -- ** logging.folders.locations.buckets.views.patch
     LoggingFoldersLocationsBucketsViewsPatchResource,
@@ -417,6 +487,11 @@ module Gogol.Logging
     LoggingLocationsBucketsCreate (..),
     newLoggingLocationsBucketsCreate,
 
+    -- ** logging.locations.buckets.createAsync
+    LoggingLocationsBucketsCreateAsyncResource,
+    LoggingLocationsBucketsCreateAsync (..),
+    newLoggingLocationsBucketsCreateAsync,
+
     -- ** logging.locations.buckets.delete
     LoggingLocationsBucketsDeleteResource,
     LoggingLocationsBucketsDelete (..),
@@ -426,6 +501,26 @@ module Gogol.Logging
     LoggingLocationsBucketsGetResource,
     LoggingLocationsBucketsGet (..),
     newLoggingLocationsBucketsGet,
+
+    -- ** logging.locations.buckets.links.create
+    LoggingLocationsBucketsLinksCreateResource,
+    LoggingLocationsBucketsLinksCreate (..),
+    newLoggingLocationsBucketsLinksCreate,
+
+    -- ** logging.locations.buckets.links.delete
+    LoggingLocationsBucketsLinksDeleteResource,
+    LoggingLocationsBucketsLinksDelete (..),
+    newLoggingLocationsBucketsLinksDelete,
+
+    -- ** logging.locations.buckets.links.get
+    LoggingLocationsBucketsLinksGetResource,
+    LoggingLocationsBucketsLinksGet (..),
+    newLoggingLocationsBucketsLinksGet,
+
+    -- ** logging.locations.buckets.links.list
+    LoggingLocationsBucketsLinksListResource,
+    LoggingLocationsBucketsLinksList (..),
+    newLoggingLocationsBucketsLinksList,
 
     -- ** logging.locations.buckets.list
     LoggingLocationsBucketsListResource,
@@ -441,6 +536,11 @@ module Gogol.Logging
     LoggingLocationsBucketsUndeleteResource,
     LoggingLocationsBucketsUndelete (..),
     newLoggingLocationsBucketsUndelete,
+
+    -- ** logging.locations.buckets.updateAsync
+    LoggingLocationsBucketsUpdateAsyncResource,
+    LoggingLocationsBucketsUpdateAsync (..),
+    newLoggingLocationsBucketsUpdateAsync,
 
     -- ** logging.locations.buckets.views.create
     LoggingLocationsBucketsViewsCreateResource,
@@ -547,6 +647,11 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsCreate (..),
     newLoggingOrganizationsLocationsBucketsCreate,
 
+    -- ** logging.organizations.locations.buckets.createAsync
+    LoggingOrganizationsLocationsBucketsCreateAsyncResource,
+    LoggingOrganizationsLocationsBucketsCreateAsync (..),
+    newLoggingOrganizationsLocationsBucketsCreateAsync,
+
     -- ** logging.organizations.locations.buckets.delete
     LoggingOrganizationsLocationsBucketsDeleteResource,
     LoggingOrganizationsLocationsBucketsDelete (..),
@@ -556,6 +661,26 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsGetResource,
     LoggingOrganizationsLocationsBucketsGet (..),
     newLoggingOrganizationsLocationsBucketsGet,
+
+    -- ** logging.organizations.locations.buckets.links.create
+    LoggingOrganizationsLocationsBucketsLinksCreateResource,
+    LoggingOrganizationsLocationsBucketsLinksCreate (..),
+    newLoggingOrganizationsLocationsBucketsLinksCreate,
+
+    -- ** logging.organizations.locations.buckets.links.delete
+    LoggingOrganizationsLocationsBucketsLinksDeleteResource,
+    LoggingOrganizationsLocationsBucketsLinksDelete (..),
+    newLoggingOrganizationsLocationsBucketsLinksDelete,
+
+    -- ** logging.organizations.locations.buckets.links.get
+    LoggingOrganizationsLocationsBucketsLinksGetResource,
+    LoggingOrganizationsLocationsBucketsLinksGet (..),
+    newLoggingOrganizationsLocationsBucketsLinksGet,
+
+    -- ** logging.organizations.locations.buckets.links.list
+    LoggingOrganizationsLocationsBucketsLinksListResource,
+    LoggingOrganizationsLocationsBucketsLinksList (..),
+    newLoggingOrganizationsLocationsBucketsLinksList,
 
     -- ** logging.organizations.locations.buckets.list
     LoggingOrganizationsLocationsBucketsListResource,
@@ -571,6 +696,11 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsUndeleteResource,
     LoggingOrganizationsLocationsBucketsUndelete (..),
     newLoggingOrganizationsLocationsBucketsUndelete,
+
+    -- ** logging.organizations.locations.buckets.updateAsync
+    LoggingOrganizationsLocationsBucketsUpdateAsyncResource,
+    LoggingOrganizationsLocationsBucketsUpdateAsync (..),
+    newLoggingOrganizationsLocationsBucketsUpdateAsync,
 
     -- ** logging.organizations.locations.buckets.views.create
     LoggingOrganizationsLocationsBucketsViewsCreateResource,
@@ -591,6 +721,11 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsViewsListResource,
     LoggingOrganizationsLocationsBucketsViewsList (..),
     newLoggingOrganizationsLocationsBucketsViewsList,
+
+    -- ** logging.organizations.locations.buckets.views.logs.list
+    LoggingOrganizationsLocationsBucketsViewsLogsListResource,
+    LoggingOrganizationsLocationsBucketsViewsLogsList (..),
+    newLoggingOrganizationsLocationsBucketsViewsLogsList,
 
     -- ** logging.organizations.locations.buckets.views.patch
     LoggingOrganizationsLocationsBucketsViewsPatchResource,
@@ -712,6 +847,11 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsCreate (..),
     newLoggingProjectsLocationsBucketsCreate,
 
+    -- ** logging.projects.locations.buckets.createAsync
+    LoggingProjectsLocationsBucketsCreateAsyncResource,
+    LoggingProjectsLocationsBucketsCreateAsync (..),
+    newLoggingProjectsLocationsBucketsCreateAsync,
+
     -- ** logging.projects.locations.buckets.delete
     LoggingProjectsLocationsBucketsDeleteResource,
     LoggingProjectsLocationsBucketsDelete (..),
@@ -721,6 +861,26 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsGetResource,
     LoggingProjectsLocationsBucketsGet (..),
     newLoggingProjectsLocationsBucketsGet,
+
+    -- ** logging.projects.locations.buckets.links.create
+    LoggingProjectsLocationsBucketsLinksCreateResource,
+    LoggingProjectsLocationsBucketsLinksCreate (..),
+    newLoggingProjectsLocationsBucketsLinksCreate,
+
+    -- ** logging.projects.locations.buckets.links.delete
+    LoggingProjectsLocationsBucketsLinksDeleteResource,
+    LoggingProjectsLocationsBucketsLinksDelete (..),
+    newLoggingProjectsLocationsBucketsLinksDelete,
+
+    -- ** logging.projects.locations.buckets.links.get
+    LoggingProjectsLocationsBucketsLinksGetResource,
+    LoggingProjectsLocationsBucketsLinksGet (..),
+    newLoggingProjectsLocationsBucketsLinksGet,
+
+    -- ** logging.projects.locations.buckets.links.list
+    LoggingProjectsLocationsBucketsLinksListResource,
+    LoggingProjectsLocationsBucketsLinksList (..),
+    newLoggingProjectsLocationsBucketsLinksList,
 
     -- ** logging.projects.locations.buckets.list
     LoggingProjectsLocationsBucketsListResource,
@@ -736,6 +896,11 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsUndeleteResource,
     LoggingProjectsLocationsBucketsUndelete (..),
     newLoggingProjectsLocationsBucketsUndelete,
+
+    -- ** logging.projects.locations.buckets.updateAsync
+    LoggingProjectsLocationsBucketsUpdateAsyncResource,
+    LoggingProjectsLocationsBucketsUpdateAsync (..),
+    newLoggingProjectsLocationsBucketsUpdateAsync,
 
     -- ** logging.projects.locations.buckets.views.create
     LoggingProjectsLocationsBucketsViewsCreateResource,
@@ -756,6 +921,11 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsViewsListResource,
     LoggingProjectsLocationsBucketsViewsList (..),
     newLoggingProjectsLocationsBucketsViewsList,
+
+    -- ** logging.projects.locations.buckets.views.logs.list
+    LoggingProjectsLocationsBucketsViewsLogsListResource,
+    LoggingProjectsLocationsBucketsViewsLogsList (..),
+    newLoggingProjectsLocationsBucketsViewsLogsList,
 
     -- ** logging.projects.locations.buckets.views.patch
     LoggingProjectsLocationsBucketsViewsPatchResource,
@@ -892,9 +1062,20 @@ module Gogol.Logging
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** BigQueryDataset
+    BigQueryDataset (..),
+    newBigQueryDataset,
+
     -- ** BigQueryOptions
     BigQueryOptions (..),
     newBigQueryOptions,
+
+    -- ** BucketMetadata
+    BucketMetadata (..),
+    newBucketMetadata,
+
+    -- ** BucketMetadata_State
+    BucketMetadata_State (..),
 
     -- ** BucketOptions
     BucketOptions (..),
@@ -923,6 +1104,18 @@ module Gogol.Logging
     CopyLogEntriesResponse (..),
     newCopyLogEntriesResponse,
 
+    -- ** CreateBucketRequest
+    CreateBucketRequest (..),
+    newCreateBucketRequest,
+
+    -- ** CreateLinkRequest
+    CreateLinkRequest (..),
+    newCreateLinkRequest,
+
+    -- ** DeleteLinkRequest
+    DeleteLinkRequest (..),
+    newDeleteLinkRequest,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -939,6 +1132,13 @@ module Gogol.Logging
     HttpRequest (..),
     newHttpRequest,
 
+    -- ** IndexConfig
+    IndexConfig (..),
+    newIndexConfig,
+
+    -- ** IndexConfig_Type
+    IndexConfig_Type (..),
+
     -- ** LabelDescriptor
     LabelDescriptor (..),
     newLabelDescriptor,
@@ -950,6 +1150,20 @@ module Gogol.Logging
     Linear (..),
     newLinear,
 
+    -- ** Link
+    Link (..),
+    newLink,
+
+    -- ** Link_LifecycleState
+    Link_LifecycleState (..),
+
+    -- ** LinkMetadata
+    LinkMetadata (..),
+    newLinkMetadata,
+
+    -- ** LinkMetadata_State
+    LinkMetadata_State (..),
+
     -- ** ListBucketsResponse
     ListBucketsResponse (..),
     newListBucketsResponse,
@@ -957,6 +1171,10 @@ module Gogol.Logging
     -- ** ListExclusionsResponse
     ListExclusionsResponse (..),
     newListExclusionsResponse,
+
+    -- ** ListLinksResponse
+    ListLinksResponse (..),
+    newListLinksResponse,
 
     -- ** ListLocationsResponse
     ListLocationsResponse (..),
@@ -1005,6 +1223,10 @@ module Gogol.Logging
     -- ** Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
 
     -- ** LogBucket
     LogBucket (..),
@@ -1179,6 +1401,10 @@ module Gogol.Logging
     UndeleteBucketRequest (..),
     newUndeleteBucketRequest,
 
+    -- ** UpdateBucketRequest
+    UpdateBucketRequest (..),
+    newUpdateBucketRequest,
+
     -- ** WriteLogEntriesRequest
     WriteLogEntriesRequest (..),
     newWriteLogEntriesRequest,
@@ -1193,8 +1419,6 @@ module Gogol.Logging
   )
 where
 
-import Gogol.Logging.BillingAccounts.Buckets.Get
-import Gogol.Logging.BillingAccounts.Buckets.Views.Get
 import Gogol.Logging.BillingAccounts.Exclusions.Create
 import Gogol.Logging.BillingAccounts.Exclusions.Delete
 import Gogol.Logging.BillingAccounts.Exclusions.Get
@@ -1203,21 +1427,30 @@ import Gogol.Logging.BillingAccounts.Exclusions.Patch
 import Gogol.Logging.BillingAccounts.GetCmekSettings
 import Gogol.Logging.BillingAccounts.GetSettings
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Create
+import Gogol.Logging.BillingAccounts.Locations.Buckets.CreateAsync
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Delete
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Get
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Create
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Delete
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Get
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Links.List
 import Gogol.Logging.BillingAccounts.Locations.Buckets.List
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Patch
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Undelete
+import Gogol.Logging.BillingAccounts.Locations.Buckets.UpdateAsync
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Create
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Delete
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Get
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.List
+import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Patch
 import Gogol.Logging.BillingAccounts.Locations.Get
 import Gogol.Logging.BillingAccounts.Locations.List
 import Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
+import Gogol.Logging.BillingAccounts.Locations.Operations.Get
 import Gogol.Logging.BillingAccounts.Locations.Operations.List
 import Gogol.Logging.BillingAccounts.Logs.Delete
 import Gogol.Logging.BillingAccounts.Logs.List
-import Gogol.Logging.BillingAccounts.Operations.Get
 import Gogol.Logging.BillingAccounts.Sinks.Create
 import Gogol.Logging.BillingAccounts.Sinks.Delete
 import Gogol.Logging.BillingAccounts.Sinks.Get
@@ -1241,15 +1474,22 @@ import Gogol.Logging.Folders.Exclusions.Patch
 import Gogol.Logging.Folders.GetCmekSettings
 import Gogol.Logging.Folders.GetSettings
 import Gogol.Logging.Folders.Locations.Buckets.Create
+import Gogol.Logging.Folders.Locations.Buckets.CreateAsync
 import Gogol.Logging.Folders.Locations.Buckets.Delete
 import Gogol.Logging.Folders.Locations.Buckets.Get
+import Gogol.Logging.Folders.Locations.Buckets.Links.Create
+import Gogol.Logging.Folders.Locations.Buckets.Links.Delete
+import Gogol.Logging.Folders.Locations.Buckets.Links.Get
+import Gogol.Logging.Folders.Locations.Buckets.Links.List
 import Gogol.Logging.Folders.Locations.Buckets.List
 import Gogol.Logging.Folders.Locations.Buckets.Patch
 import Gogol.Logging.Folders.Locations.Buckets.Undelete
+import Gogol.Logging.Folders.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Folders.Locations.Buckets.Views.Create
 import Gogol.Logging.Folders.Locations.Buckets.Views.Delete
 import Gogol.Logging.Folders.Locations.Buckets.Views.Get
 import Gogol.Logging.Folders.Locations.Buckets.Views.List
+import Gogol.Logging.Folders.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Folders.Locations.Buckets.Views.Patch
 import Gogol.Logging.Folders.Locations.Get
 import Gogol.Logging.Folders.Locations.List
@@ -1268,11 +1508,17 @@ import Gogol.Logging.Folders.UpdateSettings
 import Gogol.Logging.GetCmekSettings
 import Gogol.Logging.GetSettings
 import Gogol.Logging.Locations.Buckets.Create
+import Gogol.Logging.Locations.Buckets.CreateAsync
 import Gogol.Logging.Locations.Buckets.Delete
 import Gogol.Logging.Locations.Buckets.Get
+import Gogol.Logging.Locations.Buckets.Links.Create
+import Gogol.Logging.Locations.Buckets.Links.Delete
+import Gogol.Logging.Locations.Buckets.Links.Get
+import Gogol.Logging.Locations.Buckets.Links.List
 import Gogol.Logging.Locations.Buckets.List
 import Gogol.Logging.Locations.Buckets.Patch
 import Gogol.Logging.Locations.Buckets.Undelete
+import Gogol.Logging.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Locations.Buckets.Views.Create
 import Gogol.Logging.Locations.Buckets.Views.Delete
 import Gogol.Logging.Locations.Buckets.Views.Get
@@ -1294,15 +1540,22 @@ import Gogol.Logging.Organizations.Exclusions.Patch
 import Gogol.Logging.Organizations.GetCmekSettings
 import Gogol.Logging.Organizations.GetSettings
 import Gogol.Logging.Organizations.Locations.Buckets.Create
+import Gogol.Logging.Organizations.Locations.Buckets.CreateAsync
 import Gogol.Logging.Organizations.Locations.Buckets.Delete
 import Gogol.Logging.Organizations.Locations.Buckets.Get
+import Gogol.Logging.Organizations.Locations.Buckets.Links.Create
+import Gogol.Logging.Organizations.Locations.Buckets.Links.Delete
+import Gogol.Logging.Organizations.Locations.Buckets.Links.Get
+import Gogol.Logging.Organizations.Locations.Buckets.Links.List
 import Gogol.Logging.Organizations.Locations.Buckets.List
 import Gogol.Logging.Organizations.Locations.Buckets.Patch
 import Gogol.Logging.Organizations.Locations.Buckets.Undelete
+import Gogol.Logging.Organizations.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Create
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Get
 import Gogol.Logging.Organizations.Locations.Buckets.Views.List
+import Gogol.Logging.Organizations.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
 import Gogol.Logging.Organizations.Locations.Get
 import Gogol.Logging.Organizations.Locations.List
@@ -1327,15 +1580,22 @@ import Gogol.Logging.Projects.Exclusions.Patch
 import Gogol.Logging.Projects.GetCmekSettings
 import Gogol.Logging.Projects.GetSettings
 import Gogol.Logging.Projects.Locations.Buckets.Create
+import Gogol.Logging.Projects.Locations.Buckets.CreateAsync
 import Gogol.Logging.Projects.Locations.Buckets.Delete
 import Gogol.Logging.Projects.Locations.Buckets.Get
+import Gogol.Logging.Projects.Locations.Buckets.Links.Create
+import Gogol.Logging.Projects.Locations.Buckets.Links.Delete
+import Gogol.Logging.Projects.Locations.Buckets.Links.Get
+import Gogol.Logging.Projects.Locations.Buckets.Links.List
 import Gogol.Logging.Projects.Locations.Buckets.List
 import Gogol.Logging.Projects.Locations.Buckets.Patch
 import Gogol.Logging.Projects.Locations.Buckets.Undelete
+import Gogol.Logging.Projects.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Projects.Locations.Buckets.Views.Create
 import Gogol.Logging.Projects.Locations.Buckets.Views.Delete
 import Gogol.Logging.Projects.Locations.Buckets.Views.Get
 import Gogol.Logging.Projects.Locations.Buckets.Views.List
+import Gogol.Logging.Projects.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Projects.Locations.Buckets.Views.Patch
 import Gogol.Logging.Projects.Locations.Get
 import Gogol.Logging.Projects.Locations.List

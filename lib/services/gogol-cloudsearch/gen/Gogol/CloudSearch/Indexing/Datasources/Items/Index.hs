@@ -67,7 +67,7 @@ data CloudSearchIndexingDatasourcesItemsIndex = CloudSearchIndexingDatasourcesIt
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Item. Format: datasources\/{source/id}\/items\/{item/id} This is a required field. The maximum length is 1536 characters.
+    -- | The name of the Item. Format: datasources\/{source/id}\/items\/{item/id} This is a required field. The maximum length is 1536 characters.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: IndexItemRequest,
@@ -80,7 +80,7 @@ data CloudSearchIndexingDatasourcesItemsIndex = CloudSearchIndexingDatasourcesIt
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesItemsIndex' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesItemsIndex ::
-  -- |  Name of the Item. Format: datasources\/{source/id}\/items\/{item/id} This is a required field. The maximum length is 1536 characters. See 'name'.
+  -- |  The name of the Item. Format: datasources\/{source/id}\/items\/{item/id} This is a required field. The maximum length is 1536 characters. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   IndexItemRequest ->

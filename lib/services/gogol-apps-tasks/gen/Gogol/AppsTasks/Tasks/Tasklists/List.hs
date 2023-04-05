@@ -28,7 +28,7 @@
 --
 -- Returns all the authenticated user\'s task lists.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.list@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.list@.
 module Gogol.AppsTasks.Tasks.Tasklists.List
   ( -- * Resource
     TasksTasklistsListResource,

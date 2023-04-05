@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new comment on a file.
+-- Creates a comment on a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.create@.
 module Gogol.Drive.Comments.Create
@@ -54,7 +54,7 @@ type DriveCommentsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Comment
     Core.:> Core.Post '[Core.JSON] Comment
 
--- | Creates a new comment on a file.
+-- | Creates a comment on a file.
 --
 -- /See:/ 'newDriveCommentsCreate' smart constructor.
 data DriveCommentsCreate = DriveCommentsCreate

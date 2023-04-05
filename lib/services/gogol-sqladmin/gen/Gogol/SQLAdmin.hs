@@ -219,10 +219,25 @@ module Gogol.SQLAdmin
     SqlOperationsList (..),
     newSqlOperationsList,
 
+    -- ** sql.projects.instances.getDiskShrinkConfig
+    SqlProjectsInstancesGetDiskShrinkConfigResource,
+    SqlProjectsInstancesGetDiskShrinkConfig (..),
+    newSqlProjectsInstancesGetDiskShrinkConfig,
+
+    -- ** sql.projects.instances.performDiskShrink
+    SqlProjectsInstancesPerformDiskShrinkResource,
+    SqlProjectsInstancesPerformDiskShrink (..),
+    newSqlProjectsInstancesPerformDiskShrink,
+
     -- ** sql.projects.instances.rescheduleMaintenance
     SqlProjectsInstancesRescheduleMaintenanceResource,
     SqlProjectsInstancesRescheduleMaintenance (..),
     newSqlProjectsInstancesRescheduleMaintenance,
+
+    -- ** sql.projects.instances.resetReplicaSize
+    SqlProjectsInstancesResetReplicaSizeResource,
+    SqlProjectsInstancesResetReplicaSize (..),
+    newSqlProjectsInstancesResetReplicaSize,
 
     -- ** sql.projects.instances.startExternalSync
     SqlProjectsInstancesStartExternalSyncResource,
@@ -268,6 +283,11 @@ module Gogol.SQLAdmin
     SqlUsersDeleteResource,
     SqlUsersDelete (..),
     newSqlUsersDelete,
+
+    -- ** sql.users.get
+    SqlUsersGetResource,
+    SqlUsersGet (..),
+    newSqlUsersGet,
 
     -- ** sql.users.insert
     SqlUsersInsertResource,
@@ -412,6 +432,10 @@ module Gogol.SQLAdmin
     -- ** ExportContext
     ExportContext (..),
     newExportContext,
+
+    -- ** ExportContext_BakExportOptions
+    ExportContext_BakExportOptions (..),
+    newExportContext_BakExportOptions,
 
     -- ** ExportContext_CsvExportOptions
     ExportContext_CsvExportOptions (..),
@@ -573,6 +597,10 @@ module Gogol.SQLAdmin
     OperationErrors (..),
     newOperationErrors,
 
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
     -- ** OperationsListResponse
     OperationsListResponse (..),
     newOperationsListResponse,
@@ -587,6 +615,10 @@ module Gogol.SQLAdmin
 
     -- ** PasswordValidationPolicy_Complexity
     PasswordValidationPolicy_Complexity (..),
+
+    -- ** PerformDiskShrinkContext
+    PerformDiskShrinkContext (..),
+    newPerformDiskShrinkContext,
 
     -- ** ReplicaConfiguration
     ReplicaConfiguration (..),
@@ -617,6 +649,9 @@ module Gogol.SQLAdmin
     -- ** Settings_AvailabilityType
     Settings_AvailabilityType (..),
 
+    -- ** Settings_ConnectorEnforcement
+    Settings_ConnectorEnforcement (..),
+
     -- ** Settings_DataDiskType
     Settings_DataDiskType (..),
 
@@ -641,9 +676,17 @@ module Gogol.SQLAdmin
     -- ** SqlExternalSyncSettingError_Type
     SqlExternalSyncSettingError_Type (..),
 
+    -- ** SqlInstancesGetDiskShrinkConfigResponse
+    SqlInstancesGetDiskShrinkConfigResponse (..),
+    newSqlInstancesGetDiskShrinkConfigResponse,
+
     -- ** SqlInstancesRescheduleMaintenanceRequestBody
     SqlInstancesRescheduleMaintenanceRequestBody (..),
     newSqlInstancesRescheduleMaintenanceRequestBody,
+
+    -- ** SqlInstancesResetReplicaSizeRequest
+    SqlInstancesResetReplicaSizeRequest (..),
+    newSqlInstancesResetReplicaSizeRequest,
 
     -- ** SqlInstancesStartExternalSyncRequest
     SqlInstancesStartExternalSyncRequest (..),
@@ -730,6 +773,9 @@ module Gogol.SQLAdmin
     User (..),
     newUser,
 
+    -- ** User_DualPasswordType
+    User_DualPasswordType (..),
+
     -- ** User_Type
     User_Type (..),
 
@@ -779,7 +825,10 @@ import Gogol.SQLAdmin.Sql.Instances.TruncateLog
 import Gogol.SQLAdmin.Sql.Instances.Update
 import Gogol.SQLAdmin.Sql.Operations.Get
 import Gogol.SQLAdmin.Sql.Operations.List
+import Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
+import Gogol.SQLAdmin.Sql.Projects.Instances.PerformDiskShrink
 import Gogol.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
+import Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
 import Gogol.SQLAdmin.Sql.Projects.Instances.StartExternalSync
 import Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
 import Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
@@ -789,6 +838,7 @@ import Gogol.SQLAdmin.Sql.SslCerts.Insert
 import Gogol.SQLAdmin.Sql.SslCerts.List
 import Gogol.SQLAdmin.Sql.Tiers.List
 import Gogol.SQLAdmin.Sql.Users.Delete
+import Gogol.SQLAdmin.Sql.Users.Get
 import Gogol.SQLAdmin.Sql.Users.Insert
 import Gogol.SQLAdmin.Sql.Users.List
 import Gogol.SQLAdmin.Sql.Users.Update

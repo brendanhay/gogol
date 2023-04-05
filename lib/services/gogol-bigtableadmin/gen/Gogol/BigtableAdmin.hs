@@ -91,6 +91,11 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesAppProfilesPatch (..),
     newBigtableAdminProjectsInstancesAppProfilesPatch,
 
+    -- ** bigtableadmin.projects.instances.clusters.backups.copy
+    BigtableAdminProjectsInstancesClustersBackupsCopyResource,
+    BigtableAdminProjectsInstancesClustersBackupsCopy (..),
+    newBigtableAdminProjectsInstancesClustersBackupsCopy,
+
     -- ** bigtableadmin.projects.instances.clusters.backups.create
     BigtableAdminProjectsInstancesClustersBackupsCreateResource,
     BigtableAdminProjectsInstancesClustersBackupsCreate (..),
@@ -145,6 +150,11 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesClustersGetResource,
     BigtableAdminProjectsInstancesClustersGet (..),
     newBigtableAdminProjectsInstancesClustersGet,
+
+    -- ** bigtableadmin.projects.instances.clusters.hotTablets.list
+    BigtableAdminProjectsInstancesClustersHotTabletsListResource,
+    BigtableAdminProjectsInstancesClustersHotTabletsList (..),
+    newBigtableAdminProjectsInstancesClustersHotTabletsList,
 
     -- ** bigtableadmin.projects.instances.clusters.list
     BigtableAdminProjectsInstancesClustersListResource,
@@ -241,6 +251,11 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesTablesModifyColumnFamilies (..),
     newBigtableAdminProjectsInstancesTablesModifyColumnFamilies,
 
+    -- ** bigtableadmin.projects.instances.tables.patch
+    BigtableAdminProjectsInstancesTablesPatchResource,
+    BigtableAdminProjectsInstancesTablesPatch (..),
+    newBigtableAdminProjectsInstancesTablesPatch,
+
     -- ** bigtableadmin.projects.instances.tables.restore
     BigtableAdminProjectsInstancesTablesRestoreResource,
     BigtableAdminProjectsInstancesTablesRestore (..),
@@ -255,6 +270,11 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesTablesTestIamPermissionsResource,
     BigtableAdminProjectsInstancesTablesTestIamPermissions (..),
     newBigtableAdminProjectsInstancesTablesTestIamPermissions,
+
+    -- ** bigtableadmin.projects.instances.tables.undelete
+    BigtableAdminProjectsInstancesTablesUndeleteResource,
+    BigtableAdminProjectsInstancesTablesUndelete (..),
+    newBigtableAdminProjectsInstancesTablesUndelete,
 
     -- ** bigtableadmin.projects.instances.testIamPermissions
     BigtableAdminProjectsInstancesTestIamPermissionsResource,
@@ -356,6 +376,18 @@ module Gogol.BigtableAdmin
     ColumnFamily (..),
     newColumnFamily,
 
+    -- ** ColumnFamilyStats
+    ColumnFamilyStats (..),
+    newColumnFamilyStats,
+
+    -- ** CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- ** CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -431,6 +463,10 @@ module Gogol.BigtableAdmin
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** HotTablet
+    HotTablet (..),
+    newHotTablet,
+
     -- ** Instance
     Instance (..),
     newInstance,
@@ -460,6 +496,10 @@ module Gogol.BigtableAdmin
     -- ** ListClustersResponse
     ListClustersResponse (..),
     newListClustersResponse,
+
+    -- ** ListHotTabletsResponse
+    ListHotTabletsResponse (..),
+    newListHotTabletsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),
@@ -597,6 +637,10 @@ module Gogol.BigtableAdmin
     -- ** TableProgress_State
     TableProgress_State (..),
 
+    -- ** TableStats
+    TableStats (..),
+    newTableStats,
+
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -604,6 +648,14 @@ module Gogol.BigtableAdmin
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** UndeleteTableMetadata
+    UndeleteTableMetadata (..),
+    newUndeleteTableMetadata,
+
+    -- ** UndeleteTableRequest
+    UndeleteTableRequest (..),
+    newUndeleteTableRequest,
 
     -- ** Union
     Union (..),
@@ -620,6 +672,10 @@ module Gogol.BigtableAdmin
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
+
+    -- ** UpdateTableMetadata
+    UpdateTableMetadata (..),
+    newUpdateTableMetadata,
 
     -- ** ProjectsInstancesTablesGetView
     ProjectsInstancesTablesGetView (..),
@@ -638,6 +694,7 @@ import Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Delete
 import Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Get
 import Gogol.BigtableAdmin.Projects.Instances.AppProfiles.List
 import Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Patch
+import Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Copy
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Create
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Delete
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Get
@@ -649,6 +706,7 @@ import Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.TestIamPermission
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Create
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Delete
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Get
+import Gogol.BigtableAdmin.Projects.Instances.Clusters.HotTablets.List
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.List
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.PartialUpdateCluster
 import Gogol.BigtableAdmin.Projects.Instances.Clusters.Update
@@ -668,9 +726,11 @@ import Gogol.BigtableAdmin.Projects.Instances.Tables.Get
 import Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
 import Gogol.BigtableAdmin.Projects.Instances.Tables.List
 import Gogol.BigtableAdmin.Projects.Instances.Tables.ModifyColumnFamilies
+import Gogol.BigtableAdmin.Projects.Instances.Tables.Patch
 import Gogol.BigtableAdmin.Projects.Instances.Tables.Restore
 import Gogol.BigtableAdmin.Projects.Instances.Tables.SetIamPolicy
 import Gogol.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
+import Gogol.BigtableAdmin.Projects.Instances.Tables.Undelete
 import Gogol.BigtableAdmin.Projects.Instances.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.Update
 import Gogol.BigtableAdmin.Projects.Locations.Get

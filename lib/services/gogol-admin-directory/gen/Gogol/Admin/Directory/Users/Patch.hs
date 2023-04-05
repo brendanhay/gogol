@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a user using patch semantics. The update method should be used instead, since it also supports patch semantics and has better performance. This method is unable to clear fields that contain repeated objects (@addresses@, @phones@, etc). Use the update method instead.
+-- Updates a user using patch semantics. The update method should be used instead, because it also supports patch semantics and has better performance. If you\'re mapping an external identity to a Google identity, use the <https://developers.google.com/admin-sdk/directory/v1/reference/users/update update> method instead of the @patch@ method. This method is unable to clear fields that contain repeated objects (@addresses@, @phones@, etc). Use the update method instead.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.users.patch@.
 module Gogol.Admin.Directory.Users.Patch
@@ -59,7 +59,7 @@ type DirectoryUsersPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] User
     Core.:> Core.Patch '[Core.JSON] User
 
--- | Updates a user using patch semantics. The update method should be used instead, since it also supports patch semantics and has better performance. This method is unable to clear fields that contain repeated objects (@addresses@, @phones@, etc). Use the update method instead.
+-- | Updates a user using patch semantics. The update method should be used instead, because it also supports patch semantics and has better performance. If you\'re mapping an external identity to a Google identity, use the <https://developers.google.com/admin-sdk/directory/v1/reference/users/update update> method instead of the @patch@ method. This method is unable to clear fields that contain repeated objects (@addresses@, @phones@, etc). Use the update method instead.
 --
 -- /See:/ 'newDirectoryUsersPatch' smart constructor.
 data DirectoryUsersPatch = DirectoryUsersPatch

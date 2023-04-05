@@ -411,6 +411,7 @@ module Gogol.Sheets.Internal.Sum
       ( DataExecutionStatus_ErrorCode_DATAEXECUTIONERRORCODEUNSPECIFIED,
         DataExecutionStatus_ErrorCode_TIMEDOUT,
         DataExecutionStatus_ErrorCode_TOOMANYROWS,
+        DataExecutionStatus_ErrorCode_TOOMANYCOLUMNS,
         DataExecutionStatus_ErrorCode_TOOMANYCELLS,
         DataExecutionStatus_ErrorCode_Engine,
         DataExecutionStatus_ErrorCode_PARAMETERINVALID,
@@ -1961,7 +1962,7 @@ pattern CellFormat_HorizontalAlignment_Right' = CellFormat_HorizontalAlignment "
   CellFormat_HorizontalAlignment
   #-}
 
--- | How a hyperlink, if it exists, should be displayed in the cell.
+-- | If one exists, how a hyperlink should be displayed in the cell.
 newtype CellFormat_HyperlinkDisplayType = CellFormat_HyperlinkDisplayType {fromCellFormat_HyperlinkDisplayType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -2607,6 +2608,10 @@ pattern DataExecutionStatus_ErrorCode_TIMEDOUT = DataExecutionStatus_ErrorCode "
 pattern DataExecutionStatus_ErrorCode_TOOMANYROWS :: DataExecutionStatus_ErrorCode
 pattern DataExecutionStatus_ErrorCode_TOOMANYROWS = DataExecutionStatus_ErrorCode "TOO_MANY_ROWS"
 
+-- | The data execution returns more columns than the limit.
+pattern DataExecutionStatus_ErrorCode_TOOMANYCOLUMNS :: DataExecutionStatus_ErrorCode
+pattern DataExecutionStatus_ErrorCode_TOOMANYCOLUMNS = DataExecutionStatus_ErrorCode "TOO_MANY_COLUMNS"
+
 -- | The data execution returns more cells than the limit.
 pattern DataExecutionStatus_ErrorCode_TOOMANYCELLS :: DataExecutionStatus_ErrorCode
 pattern DataExecutionStatus_ErrorCode_TOOMANYCELLS = DataExecutionStatus_ErrorCode "TOO_MANY_CELLS"
@@ -2671,6 +2676,7 @@ pattern DataExecutionStatus_ErrorCode_OBJECTSPECINVALID = DataExecutionStatus_Er
   DataExecutionStatus_ErrorCode_DATAEXECUTIONERRORCODEUNSPECIFIED,
   DataExecutionStatus_ErrorCode_TIMEDOUT,
   DataExecutionStatus_ErrorCode_TOOMANYROWS,
+  DataExecutionStatus_ErrorCode_TOOMANYCOLUMNS,
   DataExecutionStatus_ErrorCode_TOOMANYCELLS,
   DataExecutionStatus_ErrorCode_Engine,
   DataExecutionStatus_ErrorCode_PARAMETERINVALID,
@@ -4778,7 +4784,7 @@ pattern SpreadsheetsValuesGetDateTimeRenderOption_FORMATTEDSTRING = Spreadsheets
   SpreadsheetsValuesGetDateTimeRenderOption
   #-}
 
--- | The major dimension that results should use. For example, if the spreadsheet data is: @A1=1,B1=2,A2=3,B2=4@, then requesting @range=A1:B2,majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @range=A1:B2,majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
+-- | The major dimension that results should use. For example, if the spreadsheet data in Sheet1 is: @A1=1,B1=2,A2=3,B2=4@, then requesting @range=Sheet1!A1:B2?majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @range=Sheet1!A1:B2?majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
 newtype SpreadsheetsValuesGetMajorDimension = SpreadsheetsValuesGetMajorDimension {fromSpreadsheetsValuesGetMajorDimension :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

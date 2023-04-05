@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
+-- Returns the specified SSL policy resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.sslPolicies.insert@.
 module Gogol.Compute.SslPolicies.Insert
@@ -61,7 +61,7 @@ type ComputeSslPoliciesInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] SslPolicy
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
+-- | Returns the specified SSL policy resource.
 --
 -- /See:/ 'newComputeSslPoliciesInsert' smart constructor.
 data ComputeSslPoliciesInsert = ComputeSslPoliciesInsert

@@ -364,7 +364,9 @@ instance
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "messageValue")
-            Core.<*> (o Core..:? "multiIntValue")
+            Core.<*> ( o Core..:? "multiIntValue"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "multiMessageValue")
             Core.<*> (o Core..:? "multiValue")
             Core.<*> (o Core..:? "name")
@@ -382,7 +384,9 @@ instance
             ("intValue" Core..=) Core.. Core.AsText
               Core.<$> intValue,
             ("messageValue" Core..=) Core.<$> messageValue,
-            ("multiIntValue" Core..=) Core.<$> multiIntValue,
+            ("multiIntValue" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> multiIntValue,
             ("multiMessageValue" Core..=)
               Core.<$> multiMessageValue,
             ("multiValue" Core..=) Core.<$> multiValue,
@@ -676,7 +680,9 @@ instance Core.FromJSON NestedParameter where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "multiBoolValue")
-            Core.<*> (o Core..:? "multiIntValue")
+            Core.<*> ( o Core..:? "multiIntValue"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "multiValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "value")
@@ -690,7 +696,9 @@ instance Core.ToJSON NestedParameter where
             ("intValue" Core..=) Core.. Core.AsText
               Core.<$> intValue,
             ("multiBoolValue" Core..=) Core.<$> multiBoolValue,
-            ("multiIntValue" Core..=) Core.<$> multiIntValue,
+            ("multiIntValue" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> multiIntValue,
             ("multiValue" Core..=) Core.<$> multiValue,
             ("name" Core..=) Core.<$> name,
             ("value" Core..=) Core.<$> value

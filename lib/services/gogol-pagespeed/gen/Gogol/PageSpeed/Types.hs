@@ -61,9 +61,17 @@ module Gogol.PageSpeed.Types
     Environment (..),
     newEnvironment,
 
+    -- ** Environment_Credits
+    Environment_Credits (..),
+    newEnvironment_Credits,
+
     -- ** I18n
     I18n (..),
     newI18n,
+
+    -- ** LhrEntity
+    LhrEntity (..),
+    newLhrEntity,
 
     -- ** LighthouseAuditResultV5
     LighthouseAuditResultV5 (..),

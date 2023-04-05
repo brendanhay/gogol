@@ -70,7 +70,7 @@ data ServiceManagementServicesRolloutsCreate = ServiceManagementServicesRollouts
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Rollout,
-    -- | Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
+    -- | Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@.
     serviceName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +83,7 @@ data ServiceManagementServicesRolloutsCreate = ServiceManagementServicesRollouts
 newServiceManagementServicesRolloutsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   Rollout ->
-  -- |  Required. The name of the service. See the </service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
+  -- |  Required. The name of the service. See the <https://cloud.google.com/service-management/overview overview> for naming requirements. For example: @example.googleapis.com@. See 'serviceName'.
   Core.Text ->
   ServiceManagementServicesRolloutsCreate
 newServiceManagementServicesRolloutsCreate payload serviceName =

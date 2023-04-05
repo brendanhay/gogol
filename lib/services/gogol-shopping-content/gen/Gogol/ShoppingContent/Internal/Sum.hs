@@ -57,6 +57,58 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * AttributionSettings_AttributionModel
+    AttributionSettings_AttributionModel
+      ( AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED,
+        AttributionSettings_AttributionModel_CROSSCHANNELLASTCLICK,
+        AttributionSettings_AttributionModel_ADSPREFERREDLASTCLICK,
+        AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN,
+        AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK,
+        AttributionSettings_AttributionModel_CROSSCHANNELLINEAR,
+        AttributionSettings_AttributionModel_CROSSCHANNELPOSITIONBASED,
+        AttributionSettings_AttributionModel_CROSSCHANNELTIMEDECAY,
+        ..
+      ),
+
+    -- * BestSellers_PreviousRelativeDemand
+    BestSellers_PreviousRelativeDemand
+      ( BestSellers_PreviousRelativeDemand_RELATIVEDEMANDUNSPECIFIED,
+        BestSellers_PreviousRelativeDemand_VERYLOW,
+        BestSellers_PreviousRelativeDemand_Low,
+        BestSellers_PreviousRelativeDemand_Medium,
+        BestSellers_PreviousRelativeDemand_High,
+        BestSellers_PreviousRelativeDemand_VERYHIGH,
+        ..
+      ),
+
+    -- * BestSellers_RelativeDemand
+    BestSellers_RelativeDemand
+      ( BestSellers_RelativeDemand_RELATIVEDEMANDUNSPECIFIED,
+        BestSellers_RelativeDemand_VERYLOW,
+        BestSellers_RelativeDemand_Low,
+        BestSellers_RelativeDemand_Medium,
+        BestSellers_RelativeDemand_High,
+        BestSellers_RelativeDemand_VERYHIGH,
+        ..
+      ),
+
+    -- * BestSellers_RelativeDemandChange
+    BestSellers_RelativeDemandChange
+      ( BestSellers_RelativeDemandChange_RELATIVEDEMANDCHANGETYPEUNSPECIFIED,
+        BestSellers_RelativeDemandChange_Sinker,
+        BestSellers_RelativeDemandChange_Flat,
+        BestSellers_RelativeDemandChange_Riser,
+        ..
+      ),
+
+    -- * BestSellers_ReportGranularity
+    BestSellers_ReportGranularity
+      ( BestSellers_ReportGranularity_REPORTGRANULARITYUNSPECIFIED,
+        BestSellers_ReportGranularity_Weekly,
+        BestSellers_ReportGranularity_Monthly,
+        ..
+      ),
+
     -- * BuyOnGoogleProgramStatus_BusinessModelItem
     BuyOnGoogleProgramStatus_BusinessModelItem
       ( BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED,
@@ -97,6 +149,15 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * ConversionSource_State
+    ConversionSource_State
+      ( ConversionSource_State_STATEUNSPECIFIED,
+        ConversionSource_State_Active,
+        ConversionSource_State_Archived,
+        ConversionSource_State_Pending,
+        ..
+      ),
+
     -- * FreeListingsProgramStatus_GlobalState
     FreeListingsProgramStatus_GlobalState
       ( FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED,
@@ -134,6 +195,9 @@ module Gogol.ShoppingContent.Internal.Sum
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
         FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
+        FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY,
+        FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED,
+        FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED,
         ..
       ),
 
@@ -156,6 +220,59 @@ module Gogol.ShoppingContent.Internal.Sum
       ( OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED,
         OrderTrackingSignalShippingInfo_ShippingStatus_Shipped,
         OrderTrackingSignalShippingInfo_ShippingStatus_Delivered,
+        ..
+      ),
+
+    -- * ProductCluster_BrandInventoryStatus
+    ProductCluster_BrandInventoryStatus
+      ( ProductCluster_BrandInventoryStatus_INVENTORYSTATUSUNSPECIFIED,
+        ProductCluster_BrandInventoryStatus_INSTOCK,
+        ProductCluster_BrandInventoryStatus_OUTOFSTOCK,
+        ProductCluster_BrandInventoryStatus_NOTININVENTORY,
+        ..
+      ),
+
+    -- * ProductCluster_InventoryStatus
+    ProductCluster_InventoryStatus
+      ( ProductCluster_InventoryStatus_INVENTORYSTATUSUNSPECIFIED,
+        ProductCluster_InventoryStatus_INSTOCK,
+        ProductCluster_InventoryStatus_OUTOFSTOCK,
+        ProductCluster_InventoryStatus_NOTININVENTORY,
+        ..
+      ),
+
+    -- * ProductView_AggregatedDestinationStatus
+    ProductView_AggregatedDestinationStatus
+      ( ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED,
+        ProductView_AggregatedDestinationStatus_NOTELIGIBLEORDISAPPROVED,
+        ProductView_AggregatedDestinationStatus_Pending,
+        ProductView_AggregatedDestinationStatus_ELIGIBLELIMITED,
+        ProductView_AggregatedDestinationStatus_Eligible,
+        ..
+      ),
+
+    -- * ProductView_Channel
+    ProductView_Channel
+      ( ProductView_Channel_CHANNELUNSPECIFIED,
+        ProductView_Channel_Local,
+        ProductView_Channel_Online,
+        ..
+      ),
+
+    -- * ProductViewItemIssue_Resolution
+    ProductViewItemIssue_Resolution
+      ( ProductViewItemIssue_Resolution_Unknown,
+        ProductViewItemIssue_Resolution_MERCHANTACTION,
+        ProductViewItemIssue_Resolution_PENDINGPROCESSING,
+        ..
+      ),
+
+    -- * ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+    ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+      ( ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_AGGREGATEDISSUESEVERITYUNSPECIFIED,
+        ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Disapproved,
+        ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Demoted,
+        ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Pending,
         ..
       ),
 
@@ -198,6 +315,49 @@ module Gogol.ShoppingContent.Internal.Sum
       ( Promotion_RedemptionChannelItem_REDEMPTIONCHANNELUNSPECIFIED,
         Promotion_RedemptionChannelItem_INSTORE,
         Promotion_RedemptionChannelItem_Online,
+        ..
+      ),
+
+    -- * Promotion_StoreApplicability
+    Promotion_StoreApplicability
+      ( Promotion_StoreApplicability_STOREAPPLICABILITYUNSPECIFIED,
+        Promotion_StoreApplicability_ALLSTORES,
+        Promotion_StoreApplicability_SPECIFICSTORES,
+        ..
+      ),
+
+    -- * PromotionPromotionStatusDestinationStatus_Status
+    PromotionPromotionStatusDestinationStatus_Status
+      ( PromotionPromotionStatusDestinationStatus_Status_STATEUNSPECIFIED,
+        PromotionPromotionStatusDestinationStatus_Status_INREVIEW,
+        PromotionPromotionStatusDestinationStatus_Status_Rejected,
+        PromotionPromotionStatusDestinationStatus_Status_Live,
+        PromotionPromotionStatusDestinationStatus_Status_Stopped,
+        PromotionPromotionStatusDestinationStatus_Status_Expired,
+        PromotionPromotionStatusDestinationStatus_Status_Pending,
+        ..
+      ),
+
+    -- * RecommendationCreative_Type
+    RecommendationCreative_Type
+      ( RecommendationCreative_Type_CREATIVETYPEUNSPECIFIED,
+        RecommendationCreative_Type_Video,
+        RecommendationCreative_Type_Photo,
+        ..
+      ),
+
+    -- * RecommendationDescription_Type
+    RecommendationDescription_Type
+      ( RecommendationDescription_Type_DESCRIPTIONTYPEUNSPECIFIED,
+        RecommendationDescription_Type_Short,
+        RecommendationDescription_Type_Long,
+        ..
+      ),
+
+    -- * ReportInteractionRequest_InteractionType
+    ReportInteractionRequest_InteractionType
+      ( ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED,
+        ReportInteractionRequest_InteractionType_INTERACTIONCLICK,
         ..
       ),
 
@@ -346,6 +506,9 @@ module Gogol.ShoppingContent.Internal.Sum
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
         ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
+        ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY,
+        ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED,
+        ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED,
         ..
       ),
 
@@ -558,6 +721,226 @@ pattern AccountReturnCarrier_CarrierCode_Ups = AccountReturnCarrier_CarrierCode 
   AccountReturnCarrier_CarrierCode
   #-}
 
+-- | Required. Attribution model.
+newtype AttributionSettings_AttributionModel = AttributionSettings_AttributionModel {fromAttributionSettings_AttributionModel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED = AttributionSettings_AttributionModel "ATTRIBUTION_MODEL_UNSPECIFIED"
+
+-- | Cross-channel Last Click model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELLASTCLICK :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELLASTCLICK = AttributionSettings_AttributionModel "CROSS_CHANNEL_LAST_CLICK"
+
+-- | Ads-preferred Last Click model.
+pattern AttributionSettings_AttributionModel_ADSPREFERREDLASTCLICK :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_ADSPREFERREDLASTCLICK = AttributionSettings_AttributionModel "ADS_PREFERRED_LAST_CLICK"
+
+-- | Cross-channel Data Driven model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN = AttributionSettings_AttributionModel "CROSS_CHANNEL_DATA_DRIVEN"
+
+-- | Cross-channel Frist Click model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK = AttributionSettings_AttributionModel "CROSS_CHANNEL_FIRST_CLICK"
+
+-- | Cross-channel Linear model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELLINEAR :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELLINEAR = AttributionSettings_AttributionModel "CROSS_CHANNEL_LINEAR"
+
+-- | Cross-channel Position Based model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELPOSITIONBASED :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELPOSITIONBASED = AttributionSettings_AttributionModel "CROSS_CHANNEL_POSITION_BASED"
+
+-- | Cross-channel Time Decay model.
+pattern AttributionSettings_AttributionModel_CROSSCHANNELTIMEDECAY :: AttributionSettings_AttributionModel
+pattern AttributionSettings_AttributionModel_CROSSCHANNELTIMEDECAY = AttributionSettings_AttributionModel "CROSS_CHANNEL_TIME_DECAY"
+
+{-# COMPLETE
+  AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED,
+  AttributionSettings_AttributionModel_CROSSCHANNELLASTCLICK,
+  AttributionSettings_AttributionModel_ADSPREFERREDLASTCLICK,
+  AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN,
+  AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK,
+  AttributionSettings_AttributionModel_CROSSCHANNELLINEAR,
+  AttributionSettings_AttributionModel_CROSSCHANNELPOSITIONBASED,
+  AttributionSettings_AttributionModel_CROSSCHANNELTIMEDECAY,
+  AttributionSettings_AttributionModel
+  #-}
+
+-- | Estimated demand in relation to the item with the highest popularity rank in the same category and country in the previous week or month.
+newtype BestSellers_PreviousRelativeDemand = BestSellers_PreviousRelativeDemand {fromBestSellers_PreviousRelativeDemand :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Relative demand is unknown.
+pattern BestSellers_PreviousRelativeDemand_RELATIVEDEMANDUNSPECIFIED :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_RELATIVEDEMANDUNSPECIFIED = BestSellers_PreviousRelativeDemand "RELATIVE_DEMAND_UNSPECIFIED"
+
+-- | Demand is 0-5% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_PreviousRelativeDemand_VERYLOW :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_VERYLOW = BestSellers_PreviousRelativeDemand "VERY_LOW"
+
+-- | Demand is 6-10% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_PreviousRelativeDemand_Low :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_Low = BestSellers_PreviousRelativeDemand "LOW"
+
+-- | Demand is 11-20% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_PreviousRelativeDemand_Medium :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_Medium = BestSellers_PreviousRelativeDemand "MEDIUM"
+
+-- | Demand is 21-50% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_PreviousRelativeDemand_High :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_High = BestSellers_PreviousRelativeDemand "HIGH"
+
+-- | Demand is 51-100% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_PreviousRelativeDemand_VERYHIGH :: BestSellers_PreviousRelativeDemand
+pattern BestSellers_PreviousRelativeDemand_VERYHIGH = BestSellers_PreviousRelativeDemand "VERY_HIGH"
+
+{-# COMPLETE
+  BestSellers_PreviousRelativeDemand_RELATIVEDEMANDUNSPECIFIED,
+  BestSellers_PreviousRelativeDemand_VERYLOW,
+  BestSellers_PreviousRelativeDemand_Low,
+  BestSellers_PreviousRelativeDemand_Medium,
+  BestSellers_PreviousRelativeDemand_High,
+  BestSellers_PreviousRelativeDemand_VERYHIGH,
+  BestSellers_PreviousRelativeDemand
+  #-}
+
+-- | Estimated demand in relation to the item with the highest popularity rank in the same category and country.
+newtype BestSellers_RelativeDemand = BestSellers_RelativeDemand {fromBestSellers_RelativeDemand :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Relative demand is unknown.
+pattern BestSellers_RelativeDemand_RELATIVEDEMANDUNSPECIFIED :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_RELATIVEDEMANDUNSPECIFIED = BestSellers_RelativeDemand "RELATIVE_DEMAND_UNSPECIFIED"
+
+-- | Demand is 0-5% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_RelativeDemand_VERYLOW :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_VERYLOW = BestSellers_RelativeDemand "VERY_LOW"
+
+-- | Demand is 6-10% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_RelativeDemand_Low :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_Low = BestSellers_RelativeDemand "LOW"
+
+-- | Demand is 11-20% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_RelativeDemand_Medium :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_Medium = BestSellers_RelativeDemand "MEDIUM"
+
+-- | Demand is 21-50% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_RelativeDemand_High :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_High = BestSellers_RelativeDemand "HIGH"
+
+-- | Demand is 51-100% of the demand of the highest ranked product clusters or brands.
+pattern BestSellers_RelativeDemand_VERYHIGH :: BestSellers_RelativeDemand
+pattern BestSellers_RelativeDemand_VERYHIGH = BestSellers_RelativeDemand "VERY_HIGH"
+
+{-# COMPLETE
+  BestSellers_RelativeDemand_RELATIVEDEMANDUNSPECIFIED,
+  BestSellers_RelativeDemand_VERYLOW,
+  BestSellers_RelativeDemand_Low,
+  BestSellers_RelativeDemand_Medium,
+  BestSellers_RelativeDemand_High,
+  BestSellers_RelativeDemand_VERYHIGH,
+  BestSellers_RelativeDemand
+  #-}
+
+-- | Change in the estimated demand. Whether it rose, sank or remained flat.
+newtype BestSellers_RelativeDemandChange = BestSellers_RelativeDemandChange {fromBestSellers_RelativeDemandChange :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Relative demand change is unknown.
+pattern BestSellers_RelativeDemandChange_RELATIVEDEMANDCHANGETYPEUNSPECIFIED :: BestSellers_RelativeDemandChange
+pattern BestSellers_RelativeDemandChange_RELATIVEDEMANDCHANGETYPEUNSPECIFIED = BestSellers_RelativeDemandChange "RELATIVE_DEMAND_CHANGE_TYPE_UNSPECIFIED"
+
+-- | Relative demand is lower than previous time period.
+pattern BestSellers_RelativeDemandChange_Sinker :: BestSellers_RelativeDemandChange
+pattern BestSellers_RelativeDemandChange_Sinker = BestSellers_RelativeDemandChange "SINKER"
+
+-- | Relative demand is equal to previous time period.
+pattern BestSellers_RelativeDemandChange_Flat :: BestSellers_RelativeDemandChange
+pattern BestSellers_RelativeDemandChange_Flat = BestSellers_RelativeDemandChange "FLAT"
+
+-- | Relative demand is higher than the previous time period.
+pattern BestSellers_RelativeDemandChange_Riser :: BestSellers_RelativeDemandChange
+pattern BestSellers_RelativeDemandChange_Riser = BestSellers_RelativeDemandChange "RISER"
+
+{-# COMPLETE
+  BestSellers_RelativeDemandChange_RELATIVEDEMANDCHANGETYPEUNSPECIFIED,
+  BestSellers_RelativeDemandChange_Sinker,
+  BestSellers_RelativeDemandChange_Flat,
+  BestSellers_RelativeDemandChange_Riser,
+  BestSellers_RelativeDemandChange
+  #-}
+
+-- | Granularity of the report. The ranking can be done over a week or a month timeframe. A @WHERE@ condition on @best_sellers.report_granularity@ is required in the query.
+newtype BestSellers_ReportGranularity = BestSellers_ReportGranularity {fromBestSellers_ReportGranularity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Report granularity is unknown.
+pattern BestSellers_ReportGranularity_REPORTGRANULARITYUNSPECIFIED :: BestSellers_ReportGranularity
+pattern BestSellers_ReportGranularity_REPORTGRANULARITYUNSPECIFIED = BestSellers_ReportGranularity "REPORT_GRANULARITY_UNSPECIFIED"
+
+-- | Ranking is done over a week timeframe.
+pattern BestSellers_ReportGranularity_Weekly :: BestSellers_ReportGranularity
+pattern BestSellers_ReportGranularity_Weekly = BestSellers_ReportGranularity "WEEKLY"
+
+-- | Ranking is done over a month timeframe.
+pattern BestSellers_ReportGranularity_Monthly :: BestSellers_ReportGranularity
+pattern BestSellers_ReportGranularity_Monthly = BestSellers_ReportGranularity "MONTHLY"
+
+{-# COMPLETE
+  BestSellers_ReportGranularity_REPORTGRANULARITYUNSPECIFIED,
+  BestSellers_ReportGranularity_Weekly,
+  BestSellers_ReportGranularity_Monthly,
+  BestSellers_ReportGranularity
+  #-}
+
 newtype BuyOnGoogleProgramStatus_BusinessModelItem = BuyOnGoogleProgramStatus_BusinessModelItem {fromBuyOnGoogleProgramStatus_BusinessModelItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -725,7 +1108,44 @@ pattern CaptureOrderResponse_ExecutionStatus_Duplicate = CaptureOrderResponse_Ex
   CaptureOrderResponse_ExecutionStatus
   #-}
 
--- | State of the program, It is set to enabled if there are offers for at least one region.
+-- | Output only. Current state of this conversion source. Can\'t be edited through the API.
+newtype ConversionSource_State = ConversionSource_State {fromConversionSource_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern ConversionSource_State_STATEUNSPECIFIED :: ConversionSource_State
+pattern ConversionSource_State_STATEUNSPECIFIED = ConversionSource_State "STATE_UNSPECIFIED"
+
+-- | Conversion source is fully functional.
+pattern ConversionSource_State_Active :: ConversionSource_State
+pattern ConversionSource_State_Active = ConversionSource_State "ACTIVE"
+
+-- | Conversion source has been archived in the last 30 days and not currently functional. Can be restored using the undelete method.
+pattern ConversionSource_State_Archived :: ConversionSource_State
+pattern ConversionSource_State_Archived = ConversionSource_State "ARCHIVED"
+
+-- | Conversion source creation has started but not fully finished yet.
+pattern ConversionSource_State_Pending :: ConversionSource_State
+pattern ConversionSource_State_Pending = ConversionSource_State "PENDING"
+
+{-# COMPLETE
+  ConversionSource_State_STATEUNSPECIFIED,
+  ConversionSource_State_Active,
+  ConversionSource_State_Archived,
+  ConversionSource_State_Pending,
+  ConversionSource_State
+  #-}
+
+-- | State of the program. @ENABLED@ if there are offers for at least one region.
 newtype FreeListingsProgramStatus_GlobalState = FreeListingsProgramStatus_GlobalState {fromFreeListingsProgramStatus_GlobalState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -738,7 +1158,7 @@ newtype FreeListingsProgramStatus_GlobalState = FreeListingsProgramStatus_Global
       Core.FromJSONKey
     )
 
--- | State is not known.
+-- | State is unknown.
 pattern FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED :: FreeListingsProgramStatus_GlobalState
 pattern FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED = FreeListingsProgramStatus_GlobalState "PROGRAM_STATE_UNSPECIFIED"
 
@@ -746,7 +1166,7 @@ pattern FreeListingsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED = FreeList
 pattern FreeListingsProgramStatus_GlobalState_NOTENABLED :: FreeListingsProgramStatus_GlobalState
 pattern FreeListingsProgramStatus_GlobalState_NOTENABLED = FreeListingsProgramStatus_GlobalState "NOT_ENABLED"
 
--- | Offers are not uploaded targeting even a single country for this program.
+-- | No products have been uploaded for any region. Upload products to Merchant Center.
 pattern FreeListingsProgramStatus_GlobalState_NOOFFERSUPLOADED :: FreeListingsProgramStatus_GlobalState
 pattern FreeListingsProgramStatus_GlobalState_NOOFFERSUPLOADED = FreeListingsProgramStatus_GlobalState "NO_OFFERS_UPLOADED"
 
@@ -791,7 +1211,7 @@ pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_Disapproved = Fr
 pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_Warning :: FreeListingsProgramStatusRegionStatus_EligibilityStatus
 pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_Warning = FreeListingsProgramStatusRegionStatus_EligibilityStatus "WARNING"
 
--- | Account is under review. Deprecated: This state is not created.
+-- | Account is under review.
 pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW :: FreeListingsProgramStatusRegionStatus_EligibilityStatus
 pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW = FreeListingsProgramStatusRegionStatus_EligibilityStatus "UNDER_REVIEW"
 
@@ -814,7 +1234,7 @@ pattern FreeListingsProgramStatusRegionStatus_EligibilityStatus_Onboarding = Fre
   FreeListingsProgramStatusRegionStatus_EligibilityStatus
   #-}
 
--- | If a program in a given country is eligible for review. It will be present only if eligibility status is @DISAPPROVED@.
+-- | If a program is eligible for review in a specific region. Only visible if @eligibilityStatus@ is @DISAPPROVED@.
 newtype FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus = FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus {fromFreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -827,7 +1247,7 @@ newtype FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus = FreeList
       Core.FromJSONKey
     )
 
--- | Review eligibility reason state is unknown.
+-- | Review eligibility state is unknown.
 pattern FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED :: FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus
 pattern FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED = FreeListingsProgramStatusRegionStatus_ReviewEligibilityStatus "REVIEW_ELIGIBILITY_UNSPECIFIED"
 
@@ -883,6 +1303,18 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYU
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "NO_REVIEW_REQUIRED"
 
+-- | Account will be automatically reviewed at the end of the grace period.
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "WILL_BE_REVIEWED_AUTOMATICALLY"
+
+-- | Account is retired. Should not appear in MC.
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "IS_RETIRED"
+
+-- | Account was already reviewd.
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "ALREADY_REVIEWED"
+
 {-# COMPLETE
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ONBOARDINGISSUES,
@@ -890,6 +1322,9 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEW
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
+  FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY,
+  FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED,
+  FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED,
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
   #-}
 
@@ -987,6 +1422,223 @@ pattern OrderTrackingSignalShippingInfo_ShippingStatus_Delivered = OrderTracking
   OrderTrackingSignalShippingInfo_ShippingStatus
   #-}
 
+-- | Tells if there is at least one product of the brand currently @IN_STOCK@ in your product feed across multiple countries, all products are @OUT_OF_STOCK@ in your product feed, or @NOT_IN_INVENTORY@. The field doesn\'t take the Best Sellers report country filter into account.
+newtype ProductCluster_BrandInventoryStatus = ProductCluster_BrandInventoryStatus {fromProductCluster_BrandInventoryStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Inventory status is unknown.
+pattern ProductCluster_BrandInventoryStatus_INVENTORYSTATUSUNSPECIFIED :: ProductCluster_BrandInventoryStatus
+pattern ProductCluster_BrandInventoryStatus_INVENTORYSTATUSUNSPECIFIED = ProductCluster_BrandInventoryStatus "INVENTORY_STATUS_UNSPECIFIED"
+
+-- | Merchant has a product for this product cluster or brand in stock.
+pattern ProductCluster_BrandInventoryStatus_INSTOCK :: ProductCluster_BrandInventoryStatus
+pattern ProductCluster_BrandInventoryStatus_INSTOCK = ProductCluster_BrandInventoryStatus "IN_STOCK"
+
+-- | Merchant has a product for this product cluster or brand in inventory but it is currently out of stock.
+pattern ProductCluster_BrandInventoryStatus_OUTOFSTOCK :: ProductCluster_BrandInventoryStatus
+pattern ProductCluster_BrandInventoryStatus_OUTOFSTOCK = ProductCluster_BrandInventoryStatus "OUT_OF_STOCK"
+
+-- | Merchant does not have a product for this product cluster or brand in inventory.
+pattern ProductCluster_BrandInventoryStatus_NOTININVENTORY :: ProductCluster_BrandInventoryStatus
+pattern ProductCluster_BrandInventoryStatus_NOTININVENTORY = ProductCluster_BrandInventoryStatus "NOT_IN_INVENTORY"
+
+{-# COMPLETE
+  ProductCluster_BrandInventoryStatus_INVENTORYSTATUSUNSPECIFIED,
+  ProductCluster_BrandInventoryStatus_INSTOCK,
+  ProductCluster_BrandInventoryStatus_OUTOFSTOCK,
+  ProductCluster_BrandInventoryStatus_NOTININVENTORY,
+  ProductCluster_BrandInventoryStatus
+  #-}
+
+-- | Tells whether the product cluster is @IN_STOCK@ in your product feed across multiple countries, @OUT_OF_STOCK@ in your product feed, or @NOT_IN_INVENTORY@ at all. The field doesn\'t take the Best Sellers report country filter into account.
+newtype ProductCluster_InventoryStatus = ProductCluster_InventoryStatus {fromProductCluster_InventoryStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Inventory status is unknown.
+pattern ProductCluster_InventoryStatus_INVENTORYSTATUSUNSPECIFIED :: ProductCluster_InventoryStatus
+pattern ProductCluster_InventoryStatus_INVENTORYSTATUSUNSPECIFIED = ProductCluster_InventoryStatus "INVENTORY_STATUS_UNSPECIFIED"
+
+-- | Merchant has a product for this product cluster or brand in stock.
+pattern ProductCluster_InventoryStatus_INSTOCK :: ProductCluster_InventoryStatus
+pattern ProductCluster_InventoryStatus_INSTOCK = ProductCluster_InventoryStatus "IN_STOCK"
+
+-- | Merchant has a product for this product cluster or brand in inventory but it is currently out of stock.
+pattern ProductCluster_InventoryStatus_OUTOFSTOCK :: ProductCluster_InventoryStatus
+pattern ProductCluster_InventoryStatus_OUTOFSTOCK = ProductCluster_InventoryStatus "OUT_OF_STOCK"
+
+-- | Merchant does not have a product for this product cluster or brand in inventory.
+pattern ProductCluster_InventoryStatus_NOTININVENTORY :: ProductCluster_InventoryStatus
+pattern ProductCluster_InventoryStatus_NOTININVENTORY = ProductCluster_InventoryStatus "NOT_IN_INVENTORY"
+
+{-# COMPLETE
+  ProductCluster_InventoryStatus_INVENTORYSTATUSUNSPECIFIED,
+  ProductCluster_InventoryStatus_INSTOCK,
+  ProductCluster_InventoryStatus_OUTOFSTOCK,
+  ProductCluster_InventoryStatus_NOTININVENTORY,
+  ProductCluster_InventoryStatus
+  #-}
+
+-- | Aggregated destination status.
+newtype ProductView_AggregatedDestinationStatus = ProductView_AggregatedDestinationStatus {fromProductView_AggregatedDestinationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Undefined aggregated status.
+pattern ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED :: ProductView_AggregatedDestinationStatus
+pattern ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED = ProductView_AggregatedDestinationStatus "AGGREGATED_STATUS_UNSPECIFIED"
+
+-- | Offer isn\'t eligible, or is disapproved for all destinations.
+pattern ProductView_AggregatedDestinationStatus_NOTELIGIBLEORDISAPPROVED :: ProductView_AggregatedDestinationStatus
+pattern ProductView_AggregatedDestinationStatus_NOTELIGIBLEORDISAPPROVED = ProductView_AggregatedDestinationStatus "NOT_ELIGIBLE_OR_DISAPPROVED"
+
+-- | Offer\'s status is pending in all destinations.
+pattern ProductView_AggregatedDestinationStatus_Pending :: ProductView_AggregatedDestinationStatus
+pattern ProductView_AggregatedDestinationStatus_Pending = ProductView_AggregatedDestinationStatus "PENDING"
+
+-- | Offer is eligible for some (but not all) destinations.
+pattern ProductView_AggregatedDestinationStatus_ELIGIBLELIMITED :: ProductView_AggregatedDestinationStatus
+pattern ProductView_AggregatedDestinationStatus_ELIGIBLELIMITED = ProductView_AggregatedDestinationStatus "ELIGIBLE_LIMITED"
+
+-- | Offer is eligible for all destinations.
+pattern ProductView_AggregatedDestinationStatus_Eligible :: ProductView_AggregatedDestinationStatus
+pattern ProductView_AggregatedDestinationStatus_Eligible = ProductView_AggregatedDestinationStatus "ELIGIBLE"
+
+{-# COMPLETE
+  ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED,
+  ProductView_AggregatedDestinationStatus_NOTELIGIBLEORDISAPPROVED,
+  ProductView_AggregatedDestinationStatus_Pending,
+  ProductView_AggregatedDestinationStatus_ELIGIBLELIMITED,
+  ProductView_AggregatedDestinationStatus_Eligible,
+  ProductView_AggregatedDestinationStatus
+  #-}
+
+-- | Channel of the product (online versus local).
+newtype ProductView_Channel = ProductView_Channel {fromProductView_Channel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Indicates that the channel is unspecified.
+pattern ProductView_Channel_CHANNELUNSPECIFIED :: ProductView_Channel
+pattern ProductView_Channel_CHANNELUNSPECIFIED = ProductView_Channel "CHANNEL_UNSPECIFIED"
+
+-- | Indicates that the channel is local.
+pattern ProductView_Channel_Local :: ProductView_Channel
+pattern ProductView_Channel_Local = ProductView_Channel "LOCAL"
+
+-- | Indicates that the channel is online.
+pattern ProductView_Channel_Online :: ProductView_Channel
+pattern ProductView_Channel_Online = ProductView_Channel "ONLINE"
+
+{-# COMPLETE
+  ProductView_Channel_CHANNELUNSPECIFIED,
+  ProductView_Channel_Local,
+  ProductView_Channel_Online,
+  ProductView_Channel
+  #-}
+
+-- | Item issue resolution.
+newtype ProductViewItemIssue_Resolution = ProductViewItemIssue_Resolution {fromProductViewItemIssue_Resolution :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown resolution type.
+pattern ProductViewItemIssue_Resolution_Unknown :: ProductViewItemIssue_Resolution
+pattern ProductViewItemIssue_Resolution_Unknown = ProductViewItemIssue_Resolution "UNKNOWN"
+
+-- | The merchant has to fix the issue.
+pattern ProductViewItemIssue_Resolution_MERCHANTACTION :: ProductViewItemIssue_Resolution
+pattern ProductViewItemIssue_Resolution_MERCHANTACTION = ProductViewItemIssue_Resolution "MERCHANT_ACTION"
+
+-- | The issue will be resolved automatically (for example, image crawl), or Google review. No merchant action is required now. Resolution might lead to another issue (for example, if crawl fails).
+pattern ProductViewItemIssue_Resolution_PENDINGPROCESSING :: ProductViewItemIssue_Resolution
+pattern ProductViewItemIssue_Resolution_PENDINGPROCESSING = ProductViewItemIssue_Resolution "PENDING_PROCESSING"
+
+{-# COMPLETE
+  ProductViewItemIssue_Resolution_Unknown,
+  ProductViewItemIssue_Resolution_MERCHANTACTION,
+  ProductViewItemIssue_Resolution_PENDINGPROCESSING,
+  ProductViewItemIssue_Resolution
+  #-}
+
+-- | Severity of an issue aggregated for destination.
+newtype ProductViewItemIssueItemIssueSeverity_AggregatedSeverity = ProductViewItemIssueItemIssueSeverity_AggregatedSeverity {fromProductViewItemIssueItemIssueSeverity_AggregatedSeverity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Undefined Issue severity.
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_AGGREGATEDISSUESEVERITYUNSPECIFIED :: ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_AGGREGATEDISSUESEVERITYUNSPECIFIED = ProductViewItemIssueItemIssueSeverity_AggregatedSeverity "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED"
+
+-- | Issue disapproves the product in at least one of the selected destinations.
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Disapproved :: ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Disapproved = ProductViewItemIssueItemIssueSeverity_AggregatedSeverity "DISAPPROVED"
+
+-- | Issue demotes the product in all selected destinations it affects.
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Demoted :: ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Demoted = ProductViewItemIssueItemIssueSeverity_AggregatedSeverity "DEMOTED"
+
+-- | Issue resolution is @PENDING_PROCESSING@.
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Pending :: ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+pattern ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Pending = ProductViewItemIssueItemIssueSeverity_AggregatedSeverity "PENDING"
+
+{-# COMPLETE
+  ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_AGGREGATEDISSUESEVERITYUNSPECIFIED,
+  ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Disapproved,
+  ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Demoted,
+  ProductViewItemIssueItemIssueSeverity_AggregatedSeverity_Pending,
+  ProductViewItemIssueItemIssueSeverity_AggregatedSeverity
+  #-}
+
 -- | Required. Coupon value type for the promotion.
 newtype Promotion_CouponValueType = Promotion_CouponValueType {fromPromotion_CouponValueType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1012,23 +1664,23 @@ pattern Promotion_CouponValueType_MONEYOFF = Promotion_CouponValueType "MONEY_OF
 pattern Promotion_CouponValueType_PERCENTOFF :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_PERCENTOFF = Promotion_CouponValueType "PERCENT_OFF"
 
--- | Buy M quantity, get N money off coupon value type. buy/this/quantity and get/this/quantity must be present. money/off/amount must also be present.
+-- | Buy M quantity, get N money off coupon value type. @buy_this_quantity@ and @get_this_quantity@ must be present. @money_off_amount@ must also be present.
 pattern Promotion_CouponValueType_BUYMGETNMONEYOFF :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_BUYMGETNMONEYOFF = Promotion_CouponValueType "BUY_M_GET_N_MONEY_OFF"
 
--- | Buy M quantity, get N percent off coupon value type. buy/this/quantity and get/this/quantity must be present. percent/off/percentage must also be present.
+-- | Buy M quantity, get N percent off coupon value type. @buy_this_quantity@ and @get_this_quantity@ must be present. @percent_off_percentage@ must also be present.
 pattern Promotion_CouponValueType_BUYMGETNPERCENTOFF :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_BUYMGETNPERCENTOFF = Promotion_CouponValueType "BUY_M_GET_N_PERCENT_OFF"
 
--- | Buy M quantity, get money off. buy/this/quantity and money/off/amount must be present.
+-- | Buy M quantity, get money off. @buy_this_quantity@ and @money_off_amount@ must be present.
 pattern Promotion_CouponValueType_BUYMGETMONEYOFF :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_BUYMGETMONEYOFF = Promotion_CouponValueType "BUY_M_GET_MONEY_OFF"
 
--- | Buy M quantity, get money off. buy/this/quantity and percent/off/percentage must be present.
+-- | Buy M quantity, get money off. @buy_this_quantity@ and @percent_off_percentage@ must be present.
 pattern Promotion_CouponValueType_BUYMGETPERCENTOFF :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_BUYMGETPERCENTOFF = Promotion_CouponValueType "BUY_M_GET_PERCENT_OFF"
 
--- | Free gift with description only
+-- | Free gift with description only.
 pattern Promotion_CouponValueType_FREEGIFT :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_FREEGIFT = Promotion_CouponValueType "FREE_GIFT"
 
@@ -1036,7 +1688,7 @@ pattern Promotion_CouponValueType_FREEGIFT = Promotion_CouponValueType "FREE_GIF
 pattern Promotion_CouponValueType_FREEGIFTWITHVALUE :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_FREEGIFTWITHVALUE = Promotion_CouponValueType "FREE_GIFT_WITH_VALUE"
 
--- | Free gift with item id (description is optional).
+-- | Free gift with item ID (description is optional).
 pattern Promotion_CouponValueType_FREEGIFTWITHITEMID :: Promotion_CouponValueType
 pattern Promotion_CouponValueType_FREEGIFTWITHITEMID = Promotion_CouponValueType "FREE_GIFT_WITH_ITEM_ID"
 
@@ -1114,7 +1766,7 @@ newtype Promotion_ProductApplicability = Promotion_ProductApplicability {fromPro
       Core.FromJSONKey
     )
 
--- | Unknown product applicability.
+-- | Which products the promotion applies to is unknown.
 pattern Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED :: Promotion_ProductApplicability
 pattern Promotion_ProductApplicability_PRODUCTAPPLICABILITYUNSPECIFIED = Promotion_ProductApplicability "PRODUCT_APPLICABILITY_UNSPECIFIED"
 
@@ -1162,6 +1814,181 @@ pattern Promotion_RedemptionChannelItem_Online = Promotion_RedemptionChannelItem
   Promotion_RedemptionChannelItem_INSTORE,
   Promotion_RedemptionChannelItem_Online,
   Promotion_RedemptionChannelItem
+  #-}
+
+-- | Whether the promotion applies to all stores, or only specified stores. Local Inventory ads promotions throw an error if no store applicability is included. An INVALID/ARGUMENT error is thrown if store/applicability is set to ALL/STORES and store/code or score/code/exclusion is set to a value.
+newtype Promotion_StoreApplicability = Promotion_StoreApplicability {fromPromotion_StoreApplicability :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Which store codes the promotion applies to is unknown.
+pattern Promotion_StoreApplicability_STOREAPPLICABILITYUNSPECIFIED :: Promotion_StoreApplicability
+pattern Promotion_StoreApplicability_STOREAPPLICABILITYUNSPECIFIED = Promotion_StoreApplicability "STORE_APPLICABILITY_UNSPECIFIED"
+
+-- | Promotion applies to all stores.
+pattern Promotion_StoreApplicability_ALLSTORES :: Promotion_StoreApplicability
+pattern Promotion_StoreApplicability_ALLSTORES = Promotion_StoreApplicability "ALL_STORES"
+
+-- | Promotion applies to only the specified stores.
+pattern Promotion_StoreApplicability_SPECIFICSTORES :: Promotion_StoreApplicability
+pattern Promotion_StoreApplicability_SPECIFICSTORES = Promotion_StoreApplicability "SPECIFIC_STORES"
+
+{-# COMPLETE
+  Promotion_StoreApplicability_STOREAPPLICABILITYUNSPECIFIED,
+  Promotion_StoreApplicability_ALLSTORES,
+  Promotion_StoreApplicability_SPECIFICSTORES,
+  Promotion_StoreApplicability
+  #-}
+
+-- | The status for the specified destination.
+newtype PromotionPromotionStatusDestinationStatus_Status = PromotionPromotionStatusDestinationStatus_Status {fromPromotionPromotionStatusDestinationStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown promotion state.
+pattern PromotionPromotionStatusDestinationStatus_Status_STATEUNSPECIFIED :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_STATEUNSPECIFIED = PromotionPromotionStatusDestinationStatus_Status "STATE_UNSPECIFIED"
+
+-- | The promotion is under review.
+pattern PromotionPromotionStatusDestinationStatus_Status_INREVIEW :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_INREVIEW = PromotionPromotionStatusDestinationStatus_Status "IN_REVIEW"
+
+-- | The promotion is disapproved
+pattern PromotionPromotionStatusDestinationStatus_Status_Rejected :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_Rejected = PromotionPromotionStatusDestinationStatus_Status "REJECTED"
+
+-- | The promotion is approved and active.
+pattern PromotionPromotionStatusDestinationStatus_Status_Live :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_Live = PromotionPromotionStatusDestinationStatus_Status "LIVE"
+
+-- | The promotion is stopped by merchant.
+pattern PromotionPromotionStatusDestinationStatus_Status_Stopped :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_Stopped = PromotionPromotionStatusDestinationStatus_Status "STOPPED"
+
+-- | The promotion is no longer active.
+pattern PromotionPromotionStatusDestinationStatus_Status_Expired :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_Expired = PromotionPromotionStatusDestinationStatus_Status "EXPIRED"
+
+-- | The promotion is not stopped, and all reviews are approved, but the active date is in the future.
+pattern PromotionPromotionStatusDestinationStatus_Status_Pending :: PromotionPromotionStatusDestinationStatus_Status
+pattern PromotionPromotionStatusDestinationStatus_Status_Pending = PromotionPromotionStatusDestinationStatus_Status "PENDING"
+
+{-# COMPLETE
+  PromotionPromotionStatusDestinationStatus_Status_STATEUNSPECIFIED,
+  PromotionPromotionStatusDestinationStatus_Status_INREVIEW,
+  PromotionPromotionStatusDestinationStatus_Status_Rejected,
+  PromotionPromotionStatusDestinationStatus_Status_Live,
+  PromotionPromotionStatusDestinationStatus_Status_Stopped,
+  PromotionPromotionStatusDestinationStatus_Status_Expired,
+  PromotionPromotionStatusDestinationStatus_Status_Pending,
+  PromotionPromotionStatusDestinationStatus_Status
+  #-}
+
+-- | Type of the creative.
+newtype RecommendationCreative_Type = RecommendationCreative_Type {fromRecommendationCreative_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. If provided, shall be considered invalid.
+pattern RecommendationCreative_Type_CREATIVETYPEUNSPECIFIED :: RecommendationCreative_Type
+pattern RecommendationCreative_Type_CREATIVETYPEUNSPECIFIED = RecommendationCreative_Type "CREATIVE_TYPE_UNSPECIFIED"
+
+-- | Video creatives.
+pattern RecommendationCreative_Type_Video :: RecommendationCreative_Type
+pattern RecommendationCreative_Type_Video = RecommendationCreative_Type "VIDEO"
+
+-- | Photo creatives.
+pattern RecommendationCreative_Type_Photo :: RecommendationCreative_Type
+pattern RecommendationCreative_Type_Photo = RecommendationCreative_Type "PHOTO"
+
+{-# COMPLETE
+  RecommendationCreative_Type_CREATIVETYPEUNSPECIFIED,
+  RecommendationCreative_Type_Video,
+  RecommendationCreative_Type_Photo,
+  RecommendationCreative_Type
+  #-}
+
+-- | Output only. Type of the description.
+newtype RecommendationDescription_Type = RecommendationDescription_Type {fromRecommendationDescription_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern RecommendationDescription_Type_DESCRIPTIONTYPEUNSPECIFIED :: RecommendationDescription_Type
+pattern RecommendationDescription_Type_DESCRIPTIONTYPEUNSPECIFIED = RecommendationDescription_Type "DESCRIPTION_TYPE_UNSPECIFIED"
+
+-- | Short description.
+pattern RecommendationDescription_Type_Short :: RecommendationDescription_Type
+pattern RecommendationDescription_Type_Short = RecommendationDescription_Type "SHORT"
+
+-- | Long description.
+pattern RecommendationDescription_Type_Long :: RecommendationDescription_Type
+pattern RecommendationDescription_Type_Long = RecommendationDescription_Type "LONG"
+
+{-# COMPLETE
+  RecommendationDescription_Type_DESCRIPTIONTYPEUNSPECIFIED,
+  RecommendationDescription_Type_Short,
+  RecommendationDescription_Type_Long,
+  RecommendationDescription_Type
+  #-}
+
+-- | Required. Type of the interaction that is reported, for example INTERACTION_CLICK.
+newtype ReportInteractionRequest_InteractionType = ReportInteractionRequest_InteractionType {fromReportInteractionRequest_InteractionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. If provided, the service will throw ApiError with description \"Required parameter: interactionType\".
+pattern ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED :: ReportInteractionRequest_InteractionType
+pattern ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED = ReportInteractionRequest_InteractionType "INTERACTION_TYPE_UNSPECIFIED"
+
+-- | When a recommendation is clicked.
+pattern ReportInteractionRequest_InteractionType_INTERACTIONCLICK :: ReportInteractionRequest_InteractionType
+pattern ReportInteractionRequest_InteractionType_INTERACTIONCLICK = ReportInteractionRequest_InteractionType "INTERACTION_CLICK"
+
+{-# COMPLETE
+  ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED,
+  ReportInteractionRequest_InteractionType_INTERACTIONCLICK,
+  ReportInteractionRequest_InteractionType
   #-}
 
 -- | Type of the rule.
@@ -1564,7 +2391,7 @@ pattern ReturnPolicyOnlineReturnShippingFee_Type_CUSTOMERPAYINGACTUALFEE = Retur
   ReturnPolicyOnlineReturnShippingFee_Type
   #-}
 
--- | Program to which metrics apply, e.g., Free Product Listing.
+-- | Program to which metrics apply, for example, Free Product Listing.
 newtype Segments_Program = Segments_Program {fromSegments_Program :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1606,7 +2433,7 @@ pattern Segments_Program_BUYONGOOGLELISTING = Segments_Program "BUY_ON_GOOGLE_LI
   Segments_Program
   #-}
 
--- | State of the program, It is set to enabled if there are offers for at least one region.
+-- | State of the program. @ENABLED@ if there are offers for at least one region.
 newtype ShoppingAdsProgramStatus_GlobalState = ShoppingAdsProgramStatus_GlobalState {fromShoppingAdsProgramStatus_GlobalState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1619,7 +2446,7 @@ newtype ShoppingAdsProgramStatus_GlobalState = ShoppingAdsProgramStatus_GlobalSt
       Core.FromJSONKey
     )
 
--- | State is not known.
+-- | State is unknown.
 pattern ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED :: ShoppingAdsProgramStatus_GlobalState
 pattern ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED = ShoppingAdsProgramStatus_GlobalState "PROGRAM_STATE_UNSPECIFIED"
 
@@ -1627,7 +2454,7 @@ pattern ShoppingAdsProgramStatus_GlobalState_PROGRAMSTATEUNSPECIFIED = ShoppingA
 pattern ShoppingAdsProgramStatus_GlobalState_NOTENABLED :: ShoppingAdsProgramStatus_GlobalState
 pattern ShoppingAdsProgramStatus_GlobalState_NOTENABLED = ShoppingAdsProgramStatus_GlobalState "NOT_ENABLED"
 
--- | Offers are not uploaded targeting even a single country for this program.
+-- | No products have been uploaded for any region. Upload products to Merchant Center.
 pattern ShoppingAdsProgramStatus_GlobalState_NOOFFERSUPLOADED :: ShoppingAdsProgramStatus_GlobalState
 pattern ShoppingAdsProgramStatus_GlobalState_NOOFFERSUPLOADED = ShoppingAdsProgramStatus_GlobalState "NO_OFFERS_UPLOADED"
 
@@ -1672,7 +2499,7 @@ pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Disapproved = Sho
 pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Warning :: ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
 pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Warning = ShoppingAdsProgramStatusRegionStatus_EligibilityStatus "WARNING"
 
--- | Account is under review. Deprecated: This state is not created.
+-- | Account is under review.
 pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW :: ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
 pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_UNDERREVIEW = ShoppingAdsProgramStatusRegionStatus_EligibilityStatus "UNDER_REVIEW"
 
@@ -1695,7 +2522,7 @@ pattern ShoppingAdsProgramStatusRegionStatus_EligibilityStatus_Onboarding = Shop
   ShoppingAdsProgramStatusRegionStatus_EligibilityStatus
   #-}
 
--- | If a program in a given country is eligible for review. It will be present only if eligibility status is @DISAPPROVED@.
+-- | If a program is eligible for review in a specific region. Only visible if @eligibilityStatus@ is @DISAPPROVED@.
 newtype ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus = ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus {fromShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1708,7 +2535,7 @@ newtype ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus = ShoppingA
       Core.FromJSONKey
     )
 
--- | Review eligibility reason state is unknown.
+-- | Review eligibility state is unknown.
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED :: ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus_REVIEWELIGIBILITYUNSPECIFIED = ShoppingAdsProgramStatusRegionStatus_ReviewEligibilityStatus "REVIEW_ELIGIBILITY_UNSPECIFIED"
 
@@ -1764,6 +2591,18 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUN
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "NO_REVIEW_REQUIRED"
 
+-- | Account will be automatically reviewed at the end of the grace period.
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "WILL_BE_REVIEWED_AUTOMATICALLY"
+
+-- | Account is retired. Should not appear in MC.
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "IS_RETIRED"
+
+-- | Account was already reviewd.
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
+pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "ALREADY_REVIEWED"
+
 {-# COMPLETE
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_REVIEWINELIGIBILITYREASONUNSPECIFIED,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ONBOARDINGISSUES,
@@ -1771,6 +2610,9 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWR
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_INCOOLDOWNPERIOD,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYUNDERREVIEW,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_NOREVIEWREQUIRED,
+  ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREVIEWEDAUTOMATICALLY,
+  ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED,
+  ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
   #-}
 

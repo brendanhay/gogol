@@ -41,9 +41,21 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2Action (..),
     newGooglePrivacyDlpV2Action,
 
+    -- ** GooglePrivacyDlpV2ActionDetails
+    GooglePrivacyDlpV2ActionDetails (..),
+    newGooglePrivacyDlpV2ActionDetails,
+
     -- ** GooglePrivacyDlpV2ActivateJobTriggerRequest
     GooglePrivacyDlpV2ActivateJobTriggerRequest (..),
     newGooglePrivacyDlpV2ActivateJobTriggerRequest,
+
+    -- ** GooglePrivacyDlpV2AllInfoTypes
+    GooglePrivacyDlpV2AllInfoTypes (..),
+    newGooglePrivacyDlpV2AllInfoTypes,
+
+    -- ** GooglePrivacyDlpV2AllText
+    GooglePrivacyDlpV2AllText (..),
+    newGooglePrivacyDlpV2AllText,
 
     -- ** GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (..),
@@ -216,6 +228,40 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2CustomInfoType_Likelihood
     GooglePrivacyDlpV2CustomInfoType_Likelihood (..),
 
+    -- ** GooglePrivacyDlpV2DataProfileAction
+    GooglePrivacyDlpV2DataProfileAction (..),
+    newGooglePrivacyDlpV2DataProfileAction,
+
+    -- ** GooglePrivacyDlpV2DataProfileConfigSnapshot
+    GooglePrivacyDlpV2DataProfileConfigSnapshot (..),
+    newGooglePrivacyDlpV2DataProfileConfigSnapshot,
+
+    -- ** GooglePrivacyDlpV2DataProfileJobConfig
+    GooglePrivacyDlpV2DataProfileJobConfig (..),
+    newGooglePrivacyDlpV2DataProfileJobConfig,
+
+    -- ** GooglePrivacyDlpV2DataProfileLocation
+    GooglePrivacyDlpV2DataProfileLocation (..),
+    newGooglePrivacyDlpV2DataProfileLocation,
+
+    -- ** GooglePrivacyDlpV2DataProfilePubSubCondition
+    GooglePrivacyDlpV2DataProfilePubSubCondition (..),
+    newGooglePrivacyDlpV2DataProfilePubSubCondition,
+
+    -- ** GooglePrivacyDlpV2DataProfilePubSubMessage
+    GooglePrivacyDlpV2DataProfilePubSubMessage (..),
+    newGooglePrivacyDlpV2DataProfilePubSubMessage,
+
+    -- ** GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+    GooglePrivacyDlpV2DataProfilePubSubMessage_Event (..),
+
+    -- ** GooglePrivacyDlpV2DataRiskLevel
+    GooglePrivacyDlpV2DataRiskLevel (..),
+    newGooglePrivacyDlpV2DataRiskLevel,
+
+    -- ** GooglePrivacyDlpV2DataRiskLevel_Score
+    GooglePrivacyDlpV2DataRiskLevel_Score (..),
+
     -- ** GooglePrivacyDlpV2DatastoreKey
     GooglePrivacyDlpV2DatastoreKey (..),
     newGooglePrivacyDlpV2DatastoreKey,
@@ -235,6 +281,13 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2DateTime_DayOfWeek
     GooglePrivacyDlpV2DateTime_DayOfWeek (..),
 
+    -- ** GooglePrivacyDlpV2Deidentify
+    GooglePrivacyDlpV2Deidentify (..),
+    newGooglePrivacyDlpV2Deidentify,
+
+    -- ** GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+    GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem (..),
+
     -- ** GooglePrivacyDlpV2DeidentifyConfig
     GooglePrivacyDlpV2DeidentifyConfig (..),
     newGooglePrivacyDlpV2DeidentifyConfig,
@@ -246,6 +299,14 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2DeidentifyContentResponse
     GooglePrivacyDlpV2DeidentifyContentResponse (..),
     newGooglePrivacyDlpV2DeidentifyContentResponse,
+
+    -- ** GooglePrivacyDlpV2DeidentifyDataSourceDetails
+    GooglePrivacyDlpV2DeidentifyDataSourceDetails (..),
+    newGooglePrivacyDlpV2DeidentifyDataSourceDetails,
+
+    -- ** GooglePrivacyDlpV2DeidentifyDataSourceStats
+    GooglePrivacyDlpV2DeidentifyDataSourceStats (..),
+    newGooglePrivacyDlpV2DeidentifyDataSourceStats,
 
     -- ** GooglePrivacyDlpV2DeidentifyTemplate
     GooglePrivacyDlpV2DeidentifyTemplate (..),
@@ -297,6 +358,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2Error (..),
     newGooglePrivacyDlpV2Error,
 
+    -- ** GooglePrivacyDlpV2ExcludeByHotword
+    GooglePrivacyDlpV2ExcludeByHotword (..),
+    newGooglePrivacyDlpV2ExcludeByHotword,
+
     -- ** GooglePrivacyDlpV2ExcludeInfoTypes
     GooglePrivacyDlpV2ExcludeInfoTypes (..),
     newGooglePrivacyDlpV2ExcludeInfoTypes,
@@ -307,6 +372,10 @@ module Gogol.DLP.Types
 
     -- ** GooglePrivacyDlpV2ExclusionRule_MatchingType
     GooglePrivacyDlpV2ExclusionRule_MatchingType (..),
+
+    -- ** GooglePrivacyDlpV2Export
+    GooglePrivacyDlpV2Export (..),
+    newGooglePrivacyDlpV2Export,
 
     -- ** GooglePrivacyDlpV2Expressions
     GooglePrivacyDlpV2Expressions (..),
@@ -398,9 +467,30 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2ImageRedactionConfig (..),
     newGooglePrivacyDlpV2ImageRedactionConfig,
 
+    -- ** GooglePrivacyDlpV2ImageTransformation
+    GooglePrivacyDlpV2ImageTransformation (..),
+    newGooglePrivacyDlpV2ImageTransformation,
+
+    -- ** GooglePrivacyDlpV2ImageTransformations
+    GooglePrivacyDlpV2ImageTransformations (..),
+    newGooglePrivacyDlpV2ImageTransformations,
+
     -- ** GooglePrivacyDlpV2InfoType
     GooglePrivacyDlpV2InfoType (..),
     newGooglePrivacyDlpV2InfoType,
+
+    -- ** GooglePrivacyDlpV2InfoTypeCategory
+    GooglePrivacyDlpV2InfoTypeCategory (..),
+    newGooglePrivacyDlpV2InfoTypeCategory,
+
+    -- ** GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+    GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory (..),
+
+    -- ** GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+    GooglePrivacyDlpV2InfoTypeCategory_LocationCategory (..),
+
+    -- ** GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+    GooglePrivacyDlpV2InfoTypeCategory_TypeCategory (..),
 
     -- ** GooglePrivacyDlpV2InfoTypeDescription
     GooglePrivacyDlpV2InfoTypeDescription (..),
@@ -416,6 +506,10 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2InfoTypeStats
     GooglePrivacyDlpV2InfoTypeStats (..),
     newGooglePrivacyDlpV2InfoTypeStats,
+
+    -- ** GooglePrivacyDlpV2InfoTypeSummary
+    GooglePrivacyDlpV2InfoTypeSummary (..),
+    newGooglePrivacyDlpV2InfoTypeSummary,
 
     -- ** GooglePrivacyDlpV2InfoTypeTransformation
     GooglePrivacyDlpV2InfoTypeTransformation (..),
@@ -604,6 +698,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2NumericalStatsResult (..),
     newGooglePrivacyDlpV2NumericalStatsResult,
 
+    -- ** GooglePrivacyDlpV2OtherInfoTypeSummary
+    GooglePrivacyDlpV2OtherInfoTypeSummary (..),
+    newGooglePrivacyDlpV2OtherInfoTypeSummary,
+
     -- ** GooglePrivacyDlpV2OutputStorageConfig
     GooglePrivacyDlpV2OutputStorageConfig (..),
     newGooglePrivacyDlpV2OutputStorageConfig,
@@ -627,9 +725,40 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2PrivacyMetric (..),
     newGooglePrivacyDlpV2PrivacyMetric,
 
+    -- ** GooglePrivacyDlpV2ProfileStatus
+    GooglePrivacyDlpV2ProfileStatus (..),
+    newGooglePrivacyDlpV2ProfileStatus,
+
     -- ** GooglePrivacyDlpV2Proximity
     GooglePrivacyDlpV2Proximity (..),
     newGooglePrivacyDlpV2Proximity,
+
+    -- ** GooglePrivacyDlpV2PubSubCondition
+    GooglePrivacyDlpV2PubSubCondition (..),
+    newGooglePrivacyDlpV2PubSubCondition,
+
+    -- ** GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+    GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore (..),
+
+    -- ** GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+    GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore (..),
+
+    -- ** GooglePrivacyDlpV2PubSubExpressions
+    GooglePrivacyDlpV2PubSubExpressions (..),
+    newGooglePrivacyDlpV2PubSubExpressions,
+
+    -- ** GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+    GooglePrivacyDlpV2PubSubExpressions_LogicalOperator (..),
+
+    -- ** GooglePrivacyDlpV2PubSubNotification
+    GooglePrivacyDlpV2PubSubNotification (..),
+    newGooglePrivacyDlpV2PubSubNotification,
+
+    -- ** GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+    GooglePrivacyDlpV2PubSubNotification_DetailOfMessage (..),
+
+    -- ** GooglePrivacyDlpV2PubSubNotification_Event
+    GooglePrivacyDlpV2PubSubNotification_Event (..),
 
     -- ** GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog
     GooglePrivacyDlpV2PublishFindingsToCloudDataCatalog (..),
@@ -683,6 +812,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2RecordSuppression (..),
     newGooglePrivacyDlpV2RecordSuppression,
 
+    -- ** GooglePrivacyDlpV2RecordTransformation
+    GooglePrivacyDlpV2RecordTransformation (..),
+    newGooglePrivacyDlpV2RecordTransformation,
+
     -- ** GooglePrivacyDlpV2RecordTransformations
     GooglePrivacyDlpV2RecordTransformations (..),
     newGooglePrivacyDlpV2RecordTransformations,
@@ -723,6 +856,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2ReplaceWithInfoTypeConfig (..),
     newGooglePrivacyDlpV2ReplaceWithInfoTypeConfig,
 
+    -- ** GooglePrivacyDlpV2RequestedDeidentifyOptions
+    GooglePrivacyDlpV2RequestedDeidentifyOptions (..),
+    newGooglePrivacyDlpV2RequestedDeidentifyOptions,
+
     -- ** GooglePrivacyDlpV2RequestedOptions
     GooglePrivacyDlpV2RequestedOptions (..),
     newGooglePrivacyDlpV2RequestedOptions,
@@ -750,6 +887,17 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2Schedule
     GooglePrivacyDlpV2Schedule (..),
     newGooglePrivacyDlpV2Schedule,
+
+    -- ** GooglePrivacyDlpV2SelectedInfoTypes
+    GooglePrivacyDlpV2SelectedInfoTypes (..),
+    newGooglePrivacyDlpV2SelectedInfoTypes,
+
+    -- ** GooglePrivacyDlpV2SensitivityScore
+    GooglePrivacyDlpV2SensitivityScore (..),
+    newGooglePrivacyDlpV2SensitivityScore,
+
+    -- ** GooglePrivacyDlpV2SensitivityScore_Score
+    GooglePrivacyDlpV2SensitivityScore_Score (..),
 
     -- ** GooglePrivacyDlpV2StatisticalTable
     GooglePrivacyDlpV2StatisticalTable (..),
@@ -801,6 +949,23 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2Table (..),
     newGooglePrivacyDlpV2Table,
 
+    -- ** GooglePrivacyDlpV2TableDataProfile
+    GooglePrivacyDlpV2TableDataProfile (..),
+    newGooglePrivacyDlpV2TableDataProfile,
+
+    -- ** GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+    GooglePrivacyDlpV2TableDataProfile_EncryptionStatus (..),
+
+    -- ** GooglePrivacyDlpV2TableDataProfile_ResourceLabels
+    GooglePrivacyDlpV2TableDataProfile_ResourceLabels (..),
+    newGooglePrivacyDlpV2TableDataProfile_ResourceLabels,
+
+    -- ** GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+    GooglePrivacyDlpV2TableDataProfile_ResourceVisibility (..),
+
+    -- ** GooglePrivacyDlpV2TableDataProfile_State
+    GooglePrivacyDlpV2TableDataProfile_State (..),
+
     -- ** GooglePrivacyDlpV2TableLocation
     GooglePrivacyDlpV2TableLocation (..),
     newGooglePrivacyDlpV2TableLocation,
@@ -832,13 +997,46 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2TimespanConfig (..),
     newGooglePrivacyDlpV2TimespanConfig,
 
+    -- ** GooglePrivacyDlpV2TransformationConfig
+    GooglePrivacyDlpV2TransformationConfig (..),
+    newGooglePrivacyDlpV2TransformationConfig,
+
+    -- ** GooglePrivacyDlpV2TransformationDescription
+    GooglePrivacyDlpV2TransformationDescription (..),
+    newGooglePrivacyDlpV2TransformationDescription,
+
+    -- ** GooglePrivacyDlpV2TransformationDescription_Type
+    GooglePrivacyDlpV2TransformationDescription_Type (..),
+
+    -- ** GooglePrivacyDlpV2TransformationDetails
+    GooglePrivacyDlpV2TransformationDetails (..),
+    newGooglePrivacyDlpV2TransformationDetails,
+
+    -- ** GooglePrivacyDlpV2TransformationDetailsStorageConfig
+    GooglePrivacyDlpV2TransformationDetailsStorageConfig (..),
+    newGooglePrivacyDlpV2TransformationDetailsStorageConfig,
+
     -- ** GooglePrivacyDlpV2TransformationErrorHandling
     GooglePrivacyDlpV2TransformationErrorHandling (..),
     newGooglePrivacyDlpV2TransformationErrorHandling,
 
+    -- ** GooglePrivacyDlpV2TransformationLocation
+    GooglePrivacyDlpV2TransformationLocation (..),
+    newGooglePrivacyDlpV2TransformationLocation,
+
+    -- ** GooglePrivacyDlpV2TransformationLocation_ContainerType
+    GooglePrivacyDlpV2TransformationLocation_ContainerType (..),
+
     -- ** GooglePrivacyDlpV2TransformationOverview
     GooglePrivacyDlpV2TransformationOverview (..),
     newGooglePrivacyDlpV2TransformationOverview,
+
+    -- ** GooglePrivacyDlpV2TransformationResultStatus
+    GooglePrivacyDlpV2TransformationResultStatus (..),
+    newGooglePrivacyDlpV2TransformationResultStatus,
+
+    -- ** GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+    GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType (..),
 
     -- ** GooglePrivacyDlpV2TransformationSummary
     GooglePrivacyDlpV2TransformationSummary (..),
@@ -882,6 +1080,10 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2ValueFrequency
     GooglePrivacyDlpV2ValueFrequency (..),
     newGooglePrivacyDlpV2ValueFrequency,
+
+    -- ** GooglePrivacyDlpV2VersionDescription
+    GooglePrivacyDlpV2VersionDescription (..),
+    newGooglePrivacyDlpV2VersionDescription,
 
     -- ** GooglePrivacyDlpV2WordList
     GooglePrivacyDlpV2WordList (..),

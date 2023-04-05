@@ -72,7 +72,7 @@ data CloudSearchIndexingDatasourcesGetSchema = CloudSearchIndexingDatasourcesGet
     callback :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | Name of the data source to get Schema. Format: datasources\/{source_id}
+    -- | The name of the data source to get Schema. Format: datasources\/{source_id}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +83,7 @@ data CloudSearchIndexingDatasourcesGetSchema = CloudSearchIndexingDatasourcesGet
 
 -- | Creates a value of 'CloudSearchIndexingDatasourcesGetSchema' with the minimum fields required to make a request.
 newCloudSearchIndexingDatasourcesGetSchema ::
-  -- |  Name of the data source to get Schema. Format: datasources\/{source_id} See 'name'.
+  -- |  The name of the data source to get Schema. Format: datasources\/{source_id} See 'name'.
   Core.Text ->
   CloudSearchIndexingDatasourcesGetSchema
 newCloudSearchIndexingDatasourcesGetSchema name =

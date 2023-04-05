@@ -57,6 +57,7 @@ type ComputeSecurityPoliciesInsertResource =
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "validateOnly" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] SecurityPolicy
     Core.:> Core.Post '[Core.JSON] Operation
@@ -80,7 +81,9 @@ data ComputeSecurityPoliciesInsert = ComputeSecurityPoliciesInsert
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | If true, the request will not be committed.
+    validateOnly :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -100,7 +103,8 @@ newComputeSecurityPoliciesInsert payload project =
       project = project,
       requestId = Core.Nothing,
       uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+      uploadProtocol = Core.Nothing,
+      validateOnly = Core.Nothing
     }
 
 instance
@@ -120,6 +124,7 @@ instance
       requestId
       uploadType
       uploadProtocol
+      validateOnly
       (Core.Just Core.AltJSON)
       payload
       computeService

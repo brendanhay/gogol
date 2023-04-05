@@ -73,7 +73,7 @@ data ContainerProjectsLocationsClustersNodePoolsList = ContainerProjectsLocation
     clusterId :: (Core.Maybe Core.Text),
     -- | The parent (project, location, cluster name) where the node pools will be listed. Specified in the format @projects\/*\/locations\/*\/clusters\/*@.
     parent :: Core.Text,
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

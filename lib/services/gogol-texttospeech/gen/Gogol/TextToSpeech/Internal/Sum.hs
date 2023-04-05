@@ -44,6 +44,14 @@ module Gogol.TextToSpeech.Internal.Sum
         ..
       ),
 
+    -- * CustomVoiceParams_ReportedUsage
+    CustomVoiceParams_ReportedUsage
+      ( CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED,
+        CustomVoiceParams_ReportedUsage_Realtime,
+        CustomVoiceParams_ReportedUsage_Offline,
+        ..
+      ),
+
     -- * Voice_SsmlGender
     Voice_SsmlGender
       ( Voice_SsmlGender_SSMLVOICEGENDERUNSPECIFIED,
@@ -138,6 +146,38 @@ pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
   AudioConfig_AudioEncoding_Mulaw,
   AudioConfig_AudioEncoding_Alaw,
   AudioConfig_AudioEncoding
+  #-}
+
+-- | Optional. The usage of the synthesized audio to be reported.
+newtype CustomVoiceParams_ReportedUsage = CustomVoiceParams_ReportedUsage {fromCustomVoiceParams_ReportedUsage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Request with reported usage unspecified will be rejected.
+pattern CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED :: CustomVoiceParams_ReportedUsage
+pattern CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED = CustomVoiceParams_ReportedUsage "REPORTED_USAGE_UNSPECIFIED"
+
+-- | For scenarios where the synthesized audio is not downloadable and can only be used once. For example, real-time request in IVR system.
+pattern CustomVoiceParams_ReportedUsage_Realtime :: CustomVoiceParams_ReportedUsage
+pattern CustomVoiceParams_ReportedUsage_Realtime = CustomVoiceParams_ReportedUsage "REALTIME"
+
+-- | For scenarios where the synthesized audio is downloadable and can be reused. For example, the synthesized audio is downloaded, stored in customer service system and played repeatedly.
+pattern CustomVoiceParams_ReportedUsage_Offline :: CustomVoiceParams_ReportedUsage
+pattern CustomVoiceParams_ReportedUsage_Offline = CustomVoiceParams_ReportedUsage "OFFLINE"
+
+{-# COMPLETE
+  CustomVoiceParams_ReportedUsage_REPORTEDUSAGEUNSPECIFIED,
+  CustomVoiceParams_ReportedUsage_Realtime,
+  CustomVoiceParams_ReportedUsage_Offline,
+  CustomVoiceParams_ReportedUsage
   #-}
 
 -- | The gender of this voice.

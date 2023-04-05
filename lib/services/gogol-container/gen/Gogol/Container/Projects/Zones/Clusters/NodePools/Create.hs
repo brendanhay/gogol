@@ -76,7 +76,7 @@ data ContainerProjectsZonesClustersNodePoolsCreate = ContainerProjectsZonesClust
     clusterId :: Core.Text,
     -- | Multipart request metadata.
     payload :: CreateNodePoolRequest,
-    -- | Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,7 +93,7 @@ newContainerProjectsZonesClustersNodePoolsCreate ::
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   CreateNodePoolRequest ->
-  -- |  Deprecated. The Google Developers Console <https://developers.google.com/console/help/new/#projectnumber project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
+  -- |  Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
   Core.Text ->
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the parent field. See 'zone'.
   Core.Text ->

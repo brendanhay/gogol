@@ -28,7 +28,7 @@
 --
 -- Updates a page by blog id and page id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.update@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.update@.
 module Gogol.Blogger.Pages.Update
   ( -- * Resource
     BloggerPagesUpdateResource,

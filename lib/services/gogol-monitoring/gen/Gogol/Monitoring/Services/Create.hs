@@ -68,7 +68,7 @@ data MonitoringServicesCreate = MonitoringServicesCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) of the parent workspace. The format is: projects\/[PROJECT/ID/OR/NUMBER]
+    -- | Required. Resource name (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) of the parent Metrics Scope. The format is: projects\/[PROJECT/ID/OR/NUMBER]
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Service,
@@ -83,7 +83,7 @@ data MonitoringServicesCreate = MonitoringServicesCreate
 
 -- | Creates a value of 'MonitoringServicesCreate' with the minimum fields required to make a request.
 newMonitoringServicesCreate ::
-  -- |  Required. Resource name (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) of the parent workspace. The format is: projects\/[PROJECT/ID/OR/NUMBER] See 'parent'.
+  -- |  Required. Resource name (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) of the parent Metrics Scope. The format is: projects\/[PROJECT/ID/OR/NUMBER] See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Service ->

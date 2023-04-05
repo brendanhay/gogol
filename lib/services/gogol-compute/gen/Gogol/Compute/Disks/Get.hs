@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
+-- Returns the specified persistent disk.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.disks.get@.
 module Gogol.Compute.Disks.Get
@@ -61,7 +61,7 @@ type ComputeDisksGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Disk
 
--- | Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
+-- | Returns the specified persistent disk.
 --
 -- /See:/ 'newComputeDisksGet' smart constructor.
 data ComputeDisksGet = ComputeDisksGet

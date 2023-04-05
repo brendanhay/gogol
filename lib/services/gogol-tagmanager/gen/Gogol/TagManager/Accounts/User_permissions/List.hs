@@ -70,7 +70,7 @@ data TagManagerAccountsUser_permissionsList = TagManagerAccountsUser_permissions
     callback :: (Core.Maybe Core.Text),
     -- | Continuation token for fetching the next page of results.
     pageToken :: (Core.Maybe Core.Text),
-    -- | GTM Accounts\'s API relative path. Example: accounts\/{account_id}
+    -- | GTM Account\'s API relative path. Example: accounts\/{account_id}
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data TagManagerAccountsUser_permissionsList = TagManagerAccountsUser_permissions
 
 -- | Creates a value of 'TagManagerAccountsUser_permissionsList' with the minimum fields required to make a request.
 newTagManagerAccountsUser_permissionsList ::
-  -- |  GTM Accounts\'s API relative path. Example: accounts\/{account_id} See 'parent'.
+  -- |  GTM Account\'s API relative path. Example: accounts\/{account_id} See 'parent'.
   Core.Text ->
   TagManagerAccountsUser_permissionsList
 newTagManagerAccountsUser_permissionsList parent =

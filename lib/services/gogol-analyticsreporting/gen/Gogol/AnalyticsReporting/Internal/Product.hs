@@ -578,7 +578,9 @@ instance Core.FromJSON Dimension where
       "Dimension"
       ( \o ->
           Dimension
-            Core.<$> (o Core..:? "histogramBuckets")
+            Core.<$> ( o Core..:? "histogramBuckets"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "name")
       )
 
@@ -587,6 +589,7 @@ instance Core.ToJSON Dimension where
     Core.object
       ( Core.catMaybes
           [ ("histogramBuckets" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> histogramBuckets,
             ("name" Core..=) Core.<$> name
           ]
@@ -1656,8 +1659,12 @@ instance Core.FromJSON ReportData where
             Core.<*> (o Core..:? "minimums")
             Core.<*> (o Core..:? "rowCount")
             Core.<*> (o Core..:? "rows")
-            Core.<*> (o Core..:? "samplesReadCounts")
-            Core.<*> (o Core..:? "samplingSpaceSizes")
+            Core.<*> ( o Core..:? "samplesReadCounts"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "samplingSpaceSizes"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "totals")
       )
 
@@ -1674,8 +1681,10 @@ instance Core.ToJSON ReportData where
             ("rowCount" Core..=) Core.<$> rowCount,
             ("rows" Core..=) Core.<$> rows,
             ("samplesReadCounts" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> samplesReadCounts,
             ("samplingSpaceSizes" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> samplingSpaceSizes,
             ("totals" Core..=) Core.<$> totals
           ]

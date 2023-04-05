@@ -92,6 +92,21 @@ module Gogol.Spanner.Types
     -- ** ContextValue_Severity
     ContextValue_Severity (..),
 
+    -- ** CopyBackupEncryptionConfig
+    CopyBackupEncryptionConfig (..),
+    newCopyBackupEncryptionConfig,
+
+    -- ** CopyBackupEncryptionConfig_EncryptionType
+    CopyBackupEncryptionConfig_EncryptionType (..),
+
+    -- ** CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- ** CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -106,6 +121,14 @@ module Gogol.Spanner.Types
 
     -- ** CreateDatabaseRequest_DatabaseDialect
     CreateDatabaseRequest_DatabaseDialect (..),
+
+    -- ** CreateInstanceConfigMetadata
+    CreateInstanceConfigMetadata (..),
+    newCreateInstanceConfigMetadata,
+
+    -- ** CreateInstanceConfigRequest
+    CreateInstanceConfigRequest (..),
+    newCreateInstanceConfigRequest,
 
     -- ** CreateInstanceMetadata
     CreateInstanceMetadata (..),
@@ -128,6 +151,10 @@ module Gogol.Spanner.Types
 
     -- ** Database_State
     Database_State (..),
+
+    -- ** DatabaseRole
+    DatabaseRole (..),
+    newDatabaseRole,
 
     -- ** Delete'
     Delete' (..),
@@ -190,6 +217,13 @@ module Gogol.Spanner.Types
     Field (..),
     newField,
 
+    -- ** FreeInstanceMetadata
+    FreeInstanceMetadata (..),
+    newFreeInstanceMetadata,
+
+    -- ** FreeInstanceMetadata_ExpireBehavior
+    FreeInstanceMetadata_ExpireBehavior (..),
+
     -- ** GetDatabaseDdlResponse
     GetDatabaseDdlResponse (..),
     newGetDatabaseDdlResponse,
@@ -222,6 +256,9 @@ module Gogol.Spanner.Types
     Instance (..),
     newInstance,
 
+    -- ** Instance_InstanceType
+    Instance_InstanceType (..),
+
     -- ** Instance_Labels
     Instance_Labels (..),
     newInstance_Labels,
@@ -232,6 +269,23 @@ module Gogol.Spanner.Types
     -- ** InstanceConfig
     InstanceConfig (..),
     newInstanceConfig,
+
+    -- ** InstanceConfig_ConfigType
+    InstanceConfig_ConfigType (..),
+
+    -- ** InstanceConfig_FreeInstanceAvailability
+    InstanceConfig_FreeInstanceAvailability (..),
+
+    -- ** InstanceConfig_Labels
+    InstanceConfig_Labels (..),
+    newInstanceConfig_Labels,
+
+    -- ** InstanceConfig_State
+    InstanceConfig_State (..),
+
+    -- ** InstanceOperationProgress
+    InstanceOperationProgress (..),
+    newInstanceOperationProgress,
 
     -- ** KeyRange
     KeyRange (..),
@@ -261,9 +315,17 @@ module Gogol.Spanner.Types
     ListDatabaseOperationsResponse (..),
     newListDatabaseOperationsResponse,
 
+    -- ** ListDatabaseRolesResponse
+    ListDatabaseRolesResponse (..),
+    newListDatabaseRolesResponse,
+
     -- ** ListDatabasesResponse
     ListDatabasesResponse (..),
     newListDatabasesResponse,
+
+    -- ** ListInstanceConfigOperationsResponse
+    ListInstanceConfigOperationsResponse (..),
+    newListInstanceConfigOperationsResponse,
 
     -- ** ListInstanceConfigsResponse
     ListInstanceConfigsResponse (..),
@@ -419,6 +481,9 @@ module Gogol.Spanner.Types
     ReadWrite (..),
     newReadWrite,
 
+    -- ** ReadWrite_ReadLockMode
+    ReadWrite_ReadLockMode (..),
+
     -- ** ReplicaInfo
     ReplicaInfo (..),
     newReplicaInfo,
@@ -571,6 +636,14 @@ module Gogol.Spanner.Types
     -- ** UpdateDatabaseDdlRequest
     UpdateDatabaseDdlRequest (..),
     newUpdateDatabaseDdlRequest,
+
+    -- ** UpdateInstanceConfigMetadata
+    UpdateInstanceConfigMetadata (..),
+    newUpdateInstanceConfigMetadata,
+
+    -- ** UpdateInstanceConfigRequest
+    UpdateInstanceConfigRequest (..),
+    newUpdateInstanceConfigRequest,
 
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),

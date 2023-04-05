@@ -72,7 +72,7 @@ data CloudresourcemanagerTagValuesList = CloudresourcemanagerTagValuesList
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. A pagination token returned from a previous call to @ListTagValues@ that indicates where this listing should continue from.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for TagKey, parent of the TagValues to be listed, in the format @tagKeys\/123@.
+    -- | Required.
     parent :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

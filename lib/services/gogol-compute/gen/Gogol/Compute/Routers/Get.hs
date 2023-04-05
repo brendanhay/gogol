@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Router resource. Gets a list of available routers by making a list() request.
+-- Returns the specified Router resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.routers.get@.
 module Gogol.Compute.Routers.Get
@@ -61,7 +61,7 @@ type ComputeRoutersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Router
 
--- | Returns the specified Router resource. Gets a list of available routers by making a list() request.
+-- | Returns the specified Router resource.
 --
 -- /See:/ 'newComputeRoutersGet' smart constructor.
 data ComputeRoutersGet = ComputeRoutersGet

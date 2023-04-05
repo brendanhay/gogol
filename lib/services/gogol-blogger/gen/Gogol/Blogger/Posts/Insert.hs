@@ -28,7 +28,7 @@
 --
 -- Inserts a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.insert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.insert@.
 module Gogol.Blogger.Posts.Insert
   ( -- * Resource
     BloggerPostsInsertResource,

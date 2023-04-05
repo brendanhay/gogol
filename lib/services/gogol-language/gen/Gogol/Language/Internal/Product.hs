@@ -70,6 +70,10 @@ module Gogol.Language.Internal.Product
     ClassificationCategory (..),
     newClassificationCategory,
 
+    -- * ClassificationModelOptions
+    ClassificationModelOptions (..),
+    newClassificationModelOptions,
+
     -- * ClassifyTextRequest
     ClassifyTextRequest (..),
     newClassifyTextRequest,
@@ -129,6 +133,14 @@ module Gogol.Language.Internal.Product
     -- * Token
     Token (..),
     newToken,
+
+    -- * V1Model
+    V1Model (..),
+    newV1Model,
+
+    -- * V2Model
+    V2Model (..),
+    newV2Model,
   )
 where
 
@@ -586,11 +598,49 @@ instance Core.ToJSON ClassificationCategory where
           ]
       )
 
+-- | Model options available for classification requests.
+--
+-- /See:/ 'newClassificationModelOptions' smart constructor.
+data ClassificationModelOptions = ClassificationModelOptions
+  { -- | Setting this field will use the V1 model and V1 content categories version. The V1 model is a legacy model; support for this will be discontinued in the future.
+    v1Model :: (Core.Maybe V1Model),
+    -- | Setting this field will use the V2 model with the appropriate content categories version. The V2 model is a better performing model.
+    v2Model :: (Core.Maybe V2Model)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClassificationModelOptions' with the minimum fields required to make a request.
+newClassificationModelOptions ::
+  ClassificationModelOptions
+newClassificationModelOptions =
+  ClassificationModelOptions {v1Model = Core.Nothing, v2Model = Core.Nothing}
+
+instance Core.FromJSON ClassificationModelOptions where
+  parseJSON =
+    Core.withObject
+      "ClassificationModelOptions"
+      ( \o ->
+          ClassificationModelOptions
+            Core.<$> (o Core..:? "v1Model")
+            Core.<*> (o Core..:? "v2Model")
+      )
+
+instance Core.ToJSON ClassificationModelOptions where
+  toJSON ClassificationModelOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("v1Model" Core..=) Core.<$> v1Model,
+            ("v2Model" Core..=) Core.<$> v2Model
+          ]
+      )
+
 -- | The document classification request message.
 --
 -- /See:/ 'newClassifyTextRequest' smart constructor.
-newtype ClassifyTextRequest = ClassifyTextRequest
-  { -- | Required. Input document.
+data ClassifyTextRequest = ClassifyTextRequest
+  { -- | Model options to use for classification. Defaults to v1 options if not specified.
+    classificationModelOptions :: (Core.Maybe ClassificationModelOptions),
+    -- | Required. Input document.
     document :: (Core.Maybe Document)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -598,21 +648,30 @@ newtype ClassifyTextRequest = ClassifyTextRequest
 -- | Creates a value of 'ClassifyTextRequest' with the minimum fields required to make a request.
 newClassifyTextRequest ::
   ClassifyTextRequest
-newClassifyTextRequest = ClassifyTextRequest {document = Core.Nothing}
+newClassifyTextRequest =
+  ClassifyTextRequest
+    { classificationModelOptions = Core.Nothing,
+      document = Core.Nothing
+    }
 
 instance Core.FromJSON ClassifyTextRequest where
   parseJSON =
     Core.withObject
       "ClassifyTextRequest"
       ( \o ->
-          ClassifyTextRequest Core.<$> (o Core..:? "document")
+          ClassifyTextRequest
+            Core.<$> (o Core..:? "classificationModelOptions")
+            Core.<*> (o Core..:? "document")
       )
 
 instance Core.ToJSON ClassifyTextRequest where
   toJSON ClassifyTextRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("document" Core..=) Core.<$> document]
+          [ ("classificationModelOptions" Core..=)
+              Core.<$> classificationModelOptions,
+            ("document" Core..=) Core.<$> document
+          ]
       )
 
 -- | The document classification response message.
@@ -681,7 +740,7 @@ instance Core.ToJSON DependencyEdge where
           ]
       )
 
--- | ================================================================ # Represents the input to API methods.
+-- | Represents the input to API methods.
 --
 -- /See:/ 'newDocument' smart constructor.
 data Document = Document
@@ -864,7 +923,9 @@ instance Core.ToJSON EntityMention where
 --
 -- /See:/ 'newFeatures' smart constructor.
 data Features = Features
-  { -- | Classify the full document into categories.
+  { -- | The model options to use for classification. Defaults to v1 options if not specified. Only used if @classify_text@ is set to true.
+    classificationModelOptions :: (Core.Maybe ClassificationModelOptions),
+    -- | Classify the full document into categories.
     classifyText :: (Core.Maybe Core.Bool),
     -- | Extract document-level sentiment.
     extractDocumentSentiment :: (Core.Maybe Core.Bool),
@@ -882,7 +943,8 @@ newFeatures ::
   Features
 newFeatures =
   Features
-    { classifyText = Core.Nothing,
+    { classificationModelOptions = Core.Nothing,
+      classifyText = Core.Nothing,
       extractDocumentSentiment = Core.Nothing,
       extractEntities = Core.Nothing,
       extractEntitySentiment = Core.Nothing,
@@ -895,7 +957,8 @@ instance Core.FromJSON Features where
       "Features"
       ( \o ->
           Features
-            Core.<$> (o Core..:? "classifyText")
+            Core.<$> (o Core..:? "classificationModelOptions")
+            Core.<*> (o Core..:? "classifyText")
             Core.<*> (o Core..:? "extractDocumentSentiment")
             Core.<*> (o Core..:? "extractEntities")
             Core.<*> (o Core..:? "extractEntitySentiment")
@@ -906,7 +969,9 @@ instance Core.ToJSON Features where
   toJSON Features {..} =
     Core.object
       ( Core.catMaybes
-          [ ("classifyText" Core..=) Core.<$> classifyText,
+          [ ("classificationModelOptions" Core..=)
+              Core.<$> classificationModelOptions,
+            ("classifyText" Core..=) Core.<$> classifyText,
             ("extractDocumentSentiment" Core..=)
               Core.<$> extractDocumentSentiment,
             ("extractEntities" Core..=) Core.<$> extractEntities,
@@ -1223,5 +1288,57 @@ instance Core.ToJSON Token where
             ("lemma" Core..=) Core.<$> lemma,
             ("partOfSpeech" Core..=) Core.<$> partOfSpeech,
             ("text" Core..=) Core.<$> text
+          ]
+      )
+
+-- | Options for the V1 model.
+--
+-- /See:/ 'newV1Model' smart constructor.
+data V1Model = V1Model
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'V1Model' with the minimum fields required to make a request.
+newV1Model ::
+  V1Model
+newV1Model = V1Model
+
+instance Core.FromJSON V1Model where
+  parseJSON =
+    Core.withObject
+      "V1Model"
+      (\o -> Core.pure V1Model)
+
+instance Core.ToJSON V1Model where
+  toJSON = Core.const Core.emptyObject
+
+-- | Options for the V2 model.
+--
+-- /See:/ 'newV2Model' smart constructor.
+newtype V2Model = V2Model
+  { -- | The content categories used for classification.
+    contentCategoriesVersion :: (Core.Maybe V2Model_ContentCategoriesVersion)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'V2Model' with the minimum fields required to make a request.
+newV2Model ::
+  V2Model
+newV2Model = V2Model {contentCategoriesVersion = Core.Nothing}
+
+instance Core.FromJSON V2Model where
+  parseJSON =
+    Core.withObject
+      "V2Model"
+      ( \o ->
+          V2Model
+            Core.<$> (o Core..:? "contentCategoriesVersion")
+      )
+
+instance Core.ToJSON V2Model where
+  toJSON V2Model {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contentCategoriesVersion" Core..=)
+              Core.<$> contentCategoriesVersion
           ]
       )

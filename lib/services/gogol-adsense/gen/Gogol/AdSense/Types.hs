@@ -42,9 +42,19 @@ module Gogol.AdSense.Types
     Account (..),
     newAccount,
 
+    -- ** Account_State
+    Account_State (..),
+
+    -- ** AdBlockingRecoveryTag
+    AdBlockingRecoveryTag (..),
+    newAdBlockingRecoveryTag,
+
     -- ** AdClient
     AdClient (..),
     newAdClient,
+
+    -- ** AdClient_State
+    AdClient_State (..),
 
     -- ** AdClientAdCode
     AdClientAdCode (..),
@@ -86,6 +96,10 @@ module Gogol.AdSense.Types
     -- ** Date
     Date (..),
     newDate,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
     -- ** Header
     Header (..),

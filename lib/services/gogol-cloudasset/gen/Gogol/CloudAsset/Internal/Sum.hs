@@ -224,11 +224,11 @@ pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_Resource = Goog
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_IAMPOLICY :: GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_IAMPOLICY = GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType "IAM_POLICY"
 
--- | The Cloud Organization Policy set on an asset.
+-- | The organization policy set on an asset.
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ORGPOLICY :: GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ORGPOLICY = GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType "ORG_POLICY"
 
--- | The Cloud Access context manager Policy set on an asset.
+-- | The Access Context Manager policy set on an asset.
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ACCESSPOLICY :: GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType
 pattern GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType_ACCESSPOLICY = GoogleCloudAssetV1p7beta1ExportAssetsRequest_ContentType "ACCESS_POLICY"
 
@@ -535,7 +535,7 @@ pattern GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType_Ios = GoogleIden
   GoogleIdentityAccesscontextmanagerV1OsConstraint_OsType
   #-}
 
--- | Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
+-- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
 newtype GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType = GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType {fromGoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -548,7 +548,7 @@ newtype GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType = Goo
       Core.FromJSONKey
     )
 
--- | Regular Perimeter.
+-- | Regular Perimeter. When no value is specified, the perimeter uses this type.
 pattern GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR :: GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
 pattern GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR = GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType "PERIMETER_TYPE_REGULAR"
 

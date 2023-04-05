@@ -51,7 +51,6 @@ type StorageBucketsLockRetentionPolicyResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> "lockRetentionPolicy"
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,8 +64,6 @@ data StorageBucketsLockRetentionPolicy = StorageBucketsLockRetentionPolicy
     bucket :: Core.Text,
     -- | Makes the operation conditional on whether bucket\'s current metageneration matches the given value.
     ifMetagenerationMatch :: Core.Int64,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -85,7 +82,6 @@ newStorageBucketsLockRetentionPolicy bucket ifMetagenerationMatch =
   StorageBucketsLockRetentionPolicy
     { bucket = bucket,
       ifMetagenerationMatch = ifMetagenerationMatch,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -105,7 +101,6 @@ instance
     go
       bucket
       (Core.Just ifMetagenerationMatch)
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

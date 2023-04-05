@@ -46,7 +46,7 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingReportsFilesGet' request conforms to.
 type DFAReportingReportsFilesGetResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "reports"
@@ -61,7 +61,7 @@ type DFAReportingReportsFilesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] File
     Core.:<|> "dfareporting"
-      Core.:> "v3.5"
+      Core.:> "v4"
       Core.:> "userprofiles"
       Core.:> Core.Capture "profileId" Core.Int64
       Core.:> "reports"

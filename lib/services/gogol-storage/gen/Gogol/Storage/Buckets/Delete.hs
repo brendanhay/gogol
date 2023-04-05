@@ -51,7 +51,6 @@ type StorageBucketsDeleteResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,8 +66,6 @@ data StorageBucketsDelete = StorageBucketsDelete
     ifMetagenerationMatch :: (Core.Maybe Core.Int64),
     -- | If set, only deletes the bucket if its metageneration does not match this value.
     ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -86,7 +83,6 @@ newStorageBucketsDelete bucket =
     { bucket = bucket,
       ifMetagenerationMatch = Core.Nothing,
       ifMetagenerationNotMatch = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -104,7 +100,6 @@ instance Core.GoogleRequest StorageBucketsDelete where
       bucket
       ifMetagenerationMatch
       ifMetagenerationNotMatch
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

@@ -458,6 +458,10 @@ module Gogol.Docs.Internal.Product
     PersonProperties (..),
     newPersonProperties,
 
+    -- * PinTableHeaderRowsRequest
+    PinTableHeaderRowsRequest (..),
+    newPinTableHeaderRowsRequest,
+
     -- * PositionedObject
     PositionedObject (..),
     newPositionedObject,
@@ -735,13 +739,13 @@ where
 import Gogol.Docs.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | A ParagraphElement representing a spot in the text that is dynamically replaced with content that can change over time, like a page number.
+-- | A ParagraphElement representing a spot in the text that\'s dynamically replaced with content that can change over time, like a page number.
 --
 -- /See:/ 'newAutoText' smart constructor.
 data AutoText = AutoText
   { -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. An AutoText may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. An AutoText may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this AutoText, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe AutoText_SuggestedTextStyleChanges),
@@ -969,7 +973,7 @@ instance Core.ToJSON BatchUpdateDocumentResponse where
           ]
       )
 
--- | The document body. The body typically contains the full document contents except for headers, footers and footnotes.
+-- | The document body. The body typically contains the full document contents except for headers, footers, and footnotes.
 --
 -- /See:/ 'newBody' smart constructor.
 newtype Body = Body
@@ -1004,7 +1008,7 @@ data Bullet = Bullet
     listId :: (Core.Maybe Core.Text),
     -- | The nesting level of this paragraph in the list.
     nestingLevel :: (Core.Maybe Core.Int32),
-    -- | The paragraph specific text style applied to this bullet.
+    -- | The paragraph-specific text style applied to this bullet.
     textStyle :: (Core.Maybe TextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1040,7 +1044,7 @@ instance Core.ToJSON Bullet where
           ]
       )
 
--- | A mask that indicates which of the fields on the base Bullet have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base Bullet have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newBulletSuggestionState' smart constructor.
 data BulletSuggestionState = BulletSuggestionState
@@ -1120,11 +1124,11 @@ instance Core.ToJSON Color where
 data ColumnBreak = ColumnBreak
   { -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A ColumnBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A ColumnBreak may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this ColumnBreak, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe ColumnBreak_SuggestedTextStyleChanges),
-    -- | The text style of this ColumnBreak. Similar to text content, like text runs and footnote references, the text style of a column break can affect content layout as well as the styling of text inserted adjacent to it.
+    -- | The text style of this ColumnBreak. Similar to text content, like text runs and footnote references, the text style of a column break can affect content layout as well as the styling of text inserted next to it.
     textStyle :: (Core.Maybe TextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1202,7 +1206,7 @@ instance
   toJSON ColumnBreak_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
--- | Creates a Footer. The new footer is applied to the SectionStyle at the location of the SectionBreak if specificed, otherwise it is applied to the DocumentStyle. If a footer of the specified type already exists, a 400 bad request error is returned.
+-- | Creates a Footer. The new footer is applied to the SectionStyle at the location of the SectionBreak if specified, otherwise it is applied to the DocumentStyle. If a footer of the specified type already exists, a 400 bad request error is returned.
 --
 -- /See:/ 'newCreateFooterRequest' smart constructor.
 data CreateFooterRequest = CreateFooterRequest
@@ -1342,7 +1346,7 @@ instance Core.ToJSON CreateFootnoteResponse where
           [("footnoteId" Core..=) Core.<$> footnoteId]
       )
 
--- | Creates a Header. The new header is applied to the SectionStyle at the location of the SectionBreak if specificed, otherwise it is applied to the DocumentStyle. If a header of the specified type already exists, a 400 bad request error is returned.
+-- | Creates a Header. The new header is applied to the SectionStyle at the location of the SectionBreak if specified, otherwise it is applied to the DocumentStyle. If a header of the specified type already exists, a 400 bad request error is returned.
 --
 -- /See:/ 'newCreateHeaderRequest' smart constructor.
 data CreateHeaderRequest = CreateHeaderRequest
@@ -1517,7 +1521,7 @@ instance Core.ToJSON CreateParagraphBulletsRequest where
           ]
       )
 
--- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s four edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
+-- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
 --
 -- /See:/ 'newCropProperties' smart constructor.
 data CropProperties = CropProperties
@@ -1571,7 +1575,7 @@ instance Core.ToJSON CropProperties where
           ]
       )
 
--- | A mask that indicates which of the fields on the base CropProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base CropProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newCropPropertiesSuggestionState' smart constructor.
 data CropPropertiesSuggestionState = CropPropertiesSuggestionState
@@ -1938,7 +1942,7 @@ data Document = Document
     namedStyles :: (Core.Maybe NamedStyles),
     -- | Output only. The positioned objects in the document, keyed by object ID.
     positionedObjects :: (Core.Maybe Document_PositionedObjects),
-    -- | Output only. The revision ID of the document. Can be used in update requests to specify which revision of a document to apply updates to and how the request should behave if the document has been edited since that revision. Only populated if the user has edit access to the document. The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the document has not changed. Conversely, a changed ID (for the same document and user) usually means the document has been updated; however, a changed ID can also be due to internal factors such as ID format changes.
+    -- | Output only. The revision ID of the document. Can be used in update requests to specify which revision of a document to apply updates to and how the request should behave if the document has been edited since that revision. Only populated if the user has edit access to the document. The revision ID is not a sequential number but an opaque string. The format of the revision ID might change over time. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the document has not changed. Conversely, a changed ID (for the same document and user) usually means the document has been updated. However, a changed ID can also be due to internal factors such as ID format changes.
     revisionId :: (Core.Maybe Core.Text),
     -- | Output only. The suggested changes to the style of the document, keyed by suggestion ID.
     suggestedDocumentStyleChanges :: (Core.Maybe Document_SuggestedDocumentStyleChanges),
@@ -2302,17 +2306,17 @@ instance
 data DocumentStyle = DocumentStyle
   { -- | The background of the document. Documents cannot have a transparent background color.
     background :: (Core.Maybe Background),
-    -- | The ID of the default footer. If not set, there is no default footer. This property is read-only.
+    -- | The ID of the default footer. If not set, there\'s no default footer. This property is read-only.
     defaultFooterId :: (Core.Maybe Core.Text),
-    -- | The ID of the default header. If not set, there is no default header. This property is read-only.
+    -- | The ID of the default header. If not set, there\'s no default header. This property is read-only.
     defaultHeaderId :: (Core.Maybe Core.Text),
-    -- | The ID of the footer used only for even pages. The value of use/even/page/header/footer determines whether to use the default/footer/id or this value for the footer on even pages. If not set, there is no even page footer. This property is read-only.
+    -- | The ID of the footer used only for even pages. The value of use/even/page/header/footer determines whether to use the default/footer/id or this value for the footer on even pages. If not set, there\'s no even page footer. This property is read-only.
     evenPageFooterId :: (Core.Maybe Core.Text),
-    -- | The ID of the header used only for even pages. The value of use/even/page/header/footer determines whether to use the default/header/id or this value for the header on even pages. If not set, there is no even page header. This property is read-only.
+    -- | The ID of the header used only for even pages. The value of use/even/page/header/footer determines whether to use the default/header/id or this value for the header on even pages. If not set, there\'s no even page header. This property is read-only.
     evenPageHeaderId :: (Core.Maybe Core.Text),
-    -- | The ID of the footer used only for the first page. If not set then a unique footer for the first page does not exist. The value of use/first/page/header/footer determines whether to use the default/footer/id or this value for the footer on the first page. If not set, there is no first page footer. This property is read-only.
+    -- | The ID of the footer used only for the first page. If not set then a unique footer for the first page does not exist. The value of use/first/page/header/footer determines whether to use the default/footer/id or this value for the footer on the first page. If not set, there\'s no first page footer. This property is read-only.
     firstPageFooterId :: (Core.Maybe Core.Text),
-    -- | The ID of the header used only for the first page. If not set then a unique header for the first page does not exist. The value of use/first/page/header/footer determines whether to use the default/header/id or this value for the header on the first page. If not set, there is no first page header. This property is read-only.
+    -- | The ID of the header used only for the first page. If not set then a unique header for the first page does not exist. The value of use/first/page/header/footer determines whether to use the default/header/id or this value for the header on the first page. If not set, there\'s no first page header. This property is read-only.
     firstPageHeaderId :: (Core.Maybe Core.Text),
     -- | The bottom page margin. Updating the bottom page margin on the document style clears the bottom page margin on all section styles.
     marginBottom :: (Core.Maybe Dimension),
@@ -2422,7 +2426,7 @@ instance Core.ToJSON DocumentStyle where
           ]
       )
 
--- | A mask that indicates which of the fields on the base DocumentStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base DocumentStyle have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newDocumentStyleSuggestionState' smart constructor.
 data DocumentStyleSuggestionState = DocumentStyleSuggestionState
@@ -2559,7 +2563,7 @@ instance Core.ToJSON DocumentStyleSuggestionState where
           ]
       )
 
--- | The properties of an embedded drawing.
+-- | The properties of an embedded drawing and used to differentiate the object type. An embedded drawing is one that\'s created and edited within a document. Note that extensive details are not supported.
 --
 -- /See:/ 'newEmbeddedDrawingProperties' smart constructor.
 data EmbeddedDrawingProperties = EmbeddedDrawingProperties
@@ -2579,7 +2583,7 @@ instance Core.FromJSON EmbeddedDrawingProperties where
 instance Core.ToJSON EmbeddedDrawingProperties where
   toJSON = Core.const Core.emptyObject
 
--- | A mask that indicates which of the fields on the base EmbeddedDrawingProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base EmbeddedDrawingProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newEmbeddedDrawingPropertiesSuggestionState' smart constructor.
 data EmbeddedDrawingPropertiesSuggestionState = EmbeddedDrawingPropertiesSuggestionState
@@ -2620,7 +2624,7 @@ data EmbeddedObject = EmbeddedObject
     embeddedObjectBorder :: (Core.Maybe EmbeddedObjectBorder),
     -- | The properties of an image.
     imageProperties :: (Core.Maybe ImageProperties),
-    -- | A reference to the external linked source content. For example, it contains a reference to the source Sheets chart when the embedded object is a linked chart. If unset, then the embedded object is not linked.
+    -- | A reference to the external linked source content. For example, it contains a reference to the source Google Sheets chart when the embedded object is a linked chart. If unset, then the embedded object is not linked.
     linkedContentReference :: (Core.Maybe LinkedContentReference),
     -- | The bottom margin of the embedded object.
     marginBottom :: (Core.Maybe Dimension),
@@ -2744,7 +2748,7 @@ instance Core.ToJSON EmbeddedObjectBorder where
           ]
       )
 
--- | A mask that indicates which of the fields on the base EmbeddedObjectBorder have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base EmbeddedObjectBorder have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newEmbeddedObjectBorderSuggestionState' smart constructor.
 data EmbeddedObjectBorderSuggestionState = EmbeddedObjectBorderSuggestionState
@@ -2801,7 +2805,7 @@ instance
           ]
       )
 
--- | A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newEmbeddedObjectSuggestionState' smart constructor.
 data EmbeddedObjectSuggestionState = EmbeddedObjectSuggestionState
@@ -2933,7 +2937,7 @@ instance Core.ToJSON EndOfSegmentLocation where
 data Equation = Equation
   { -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A Equation may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. An Equation may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3048,7 +3052,7 @@ data FootnoteReference = FootnoteReference
     footnoteNumber :: (Core.Maybe Core.Text),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A FootnoteReference may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A FootnoteReference may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this FootnoteReference, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe FootnoteReference_SuggestedTextStyleChanges),
@@ -3182,7 +3186,7 @@ data HorizontalRule = HorizontalRule
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this HorizontalRule, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe HorizontalRule_SuggestedTextStyleChanges),
-    -- | The text style of this HorizontalRule. Similar to text content, like text runs and footnote references, the text style of a horizontal rule can affect content layout as well as the styling of text inserted adjacent to it.
+    -- | The text style of this HorizontalRule. Similar to text content, like text runs and footnote references, the text style of a horizontal rule can affect content layout as well as the styling of text inserted next to it.
     textStyle :: (Core.Maybe TextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3276,7 +3280,7 @@ data ImageProperties = ImageProperties
     cropProperties :: (Core.Maybe CropProperties),
     -- | The source URI is the URI used to insert the image. The source URI can be empty.
     sourceUri :: (Core.Maybe Core.Text),
-    -- | The transparency effect of the image. The value should be in the interval [0.0, 1.0], where 0 means no effect and 1 means completely transparent.
+    -- | The transparency effect of the image. The value should be in the interval [0.0, 1.0], where 0 means no effect and 1 means transparent.
     transparency :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3324,7 +3328,7 @@ instance Core.ToJSON ImageProperties where
           ]
       )
 
--- | A mask that indicates which of the fields on the base ImageProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base ImageProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newImagePropertiesSuggestionState' smart constructor.
 data ImagePropertiesSuggestionState = ImagePropertiesSuggestionState
@@ -3400,7 +3404,7 @@ instance Core.ToJSON ImagePropertiesSuggestionState where
 data InlineObject = InlineObject
   { -- | The properties of this inline object.
     inlineObjectProperties :: (Core.Maybe InlineObjectProperties),
-    -- | The ID of this inline object.
+    -- | The ID of this inline object. Can be used to update an object’s properties.
     objectId :: (Core.Maybe Core.Text),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
@@ -3497,11 +3501,11 @@ data InlineObjectElement = InlineObjectElement
     inlineObjectId :: (Core.Maybe Core.Text),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. An InlineObjectElement may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. An InlineObjectElement may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this InlineObject, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe InlineObjectElement_SuggestedTextStyleChanges),
-    -- | The text style of this InlineObjectElement. Similar to text content, like text runs and footnote references, the text style of an inline object element can affect content layout as well as the styling of text inserted adjacent to it.
+    -- | The text style of this InlineObjectElement. Similar to text content, like text runs and footnote references, the text style of an inline object element can affect content layout as well as the styling of text inserted next to it.
     textStyle :: (Core.Maybe TextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3614,7 +3618,7 @@ instance Core.ToJSON InlineObjectProperties where
           [("embeddedObject" Core..=) Core.<$> embeddedObject]
       )
 
--- | A mask that indicates which of the fields on the base InlineObjectProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base InlineObjectProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newInlineObjectPropertiesSuggestionState' smart constructor.
 newtype InlineObjectPropertiesSuggestionState = InlineObjectPropertiesSuggestionState
@@ -3665,7 +3669,7 @@ data InsertInlineImageRequest = InsertInlineImageRequest
     location :: (Core.Maybe Location),
     -- | The size that the image should appear as in the document. This property is optional and the final size of the image in the document is determined by the following rules: * If neither width nor height is specified, then a default size of the image is calculated based on its resolution. * If one dimension is specified then the other dimension is calculated to preserve the aspect ratio of the image. * If both width and height are specified, the image is scaled to fit within the provided dimensions while maintaining its aspect ratio.
     objectSize :: (Core.Maybe Size),
-    -- | The image URI. The image is fetched once at insertion time and a copy is stored for display inside the document. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format. The provided URI can be at most 2 kB in length. The URI itself is saved with the image, and exposed via the ImageProperties.content_uri field.
+    -- | The image URI. The image is fetched once at insertion time and a copy is stored for display inside the document. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format. The provided URI must be publicly accessible and at most 2 kB in length. The URI itself is saved with the image, and exposed via the ImageProperties.content_uri field.
     uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4103,7 +4107,7 @@ instance Core.ToJSON LinkedContentReference where
           ]
       )
 
--- | A mask that indicates which of the fields on the base LinkedContentReference have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base LinkedContentReference have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newLinkedContentReferenceSuggestionState' smart constructor.
 newtype LinkedContentReferenceSuggestionState = LinkedContentReferenceSuggestionState
@@ -4144,7 +4148,7 @@ instance
           ]
       )
 
--- | A List represents the list attributes for a group of paragraphs that all belong to the same list. A paragraph that is part of a list has a reference to the list\'s ID in its bullet.
+-- | A List represents the list attributes for a group of paragraphs that all belong to the same list. A paragraph that\'s part of a list has a reference to the list\'s ID in its bullet.
 --
 -- /See:/ 'newList' smart constructor.
 data List = List
@@ -4232,11 +4236,11 @@ instance
   toJSON List_SuggestedListPropertiesChanges {..} =
     Core.toJSON additional
 
--- | The properties of a list which describe the look and feel of bullets belonging to paragraphs associated with a list.
+-- | The properties of a list that describe the look and feel of bullets belonging to paragraphs associated with a list.
 --
 -- /See:/ 'newListProperties' smart constructor.
 newtype ListProperties = ListProperties
-  { -- | Describes the properties of the bullets at the associated level. A list has at most nine levels of nesting with nesting level 0 corresponding to the top-most level and nesting level 8 corresponding to the most nested level. The nesting levels are returned in ascending order with the least nested returned first.
+  { -- | Describes the properties of the bullets at the associated level. A list has at most 9 levels of nesting with nesting level 0 corresponding to the top-most level and nesting level 8 corresponding to the most nested level. The nesting levels are returned in ascending order with the least nested returned first.
     nestingLevels :: (Core.Maybe [NestingLevel])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4261,7 +4265,7 @@ instance Core.ToJSON ListProperties where
           [("nestingLevels" Core..=) Core.<$> nestingLevels]
       )
 
--- | A mask that indicates which of the fields on the base ListProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base ListProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newListPropertiesSuggestionState' smart constructor.
 newtype ListPropertiesSuggestionState = ListPropertiesSuggestionState
@@ -4359,7 +4363,7 @@ instance Core.ToJSON MergeTableCellsRequest where
           [("tableRange" Core..=) Core.<$> tableRange]
       )
 
--- | A collection of Ranges with the same named range ID. Named ranges allow developers to associate parts of a document with an arbitrary user-defined label so their contents can be programmatically read or edited at a later time. A document can contain multiple named ranges with the same name, but every named range has a unique ID. A named range is created with a single Range, and content inserted inside a named range generally expands that range. However, certain document changes can cause the range to be split into multiple ranges. Named ranges are not private. All applications and collaborators that have access to the document can see its named ranges.
+-- | A collection of Ranges with the same named range ID. Named ranges allow developers to associate parts of a document with an arbitrary user-defined label so their contents can be programmatically read or edited later. A document can contain multiple named ranges with the same name, but every named range has a unique ID. A named range is created with a single Range, and content inserted inside a named range generally expands that range. However, certain document changes can cause the range to be split into multiple ranges. Named ranges are not private. All applications and collaborators that have access to the document can see its named ranges.
 --
 -- /See:/ 'newNamedRange' smart constructor.
 data NamedRange = NamedRange
@@ -4532,7 +4536,7 @@ instance Core.ToJSON NamedStyleSuggestionState where
 --
 -- /See:/ 'newNamedStyles' smart constructor.
 newtype NamedStyles = NamedStyles
-  { -- | The named styles. There is an entry for each of the possible named style types.
+  { -- | The named styles. There\'s an entry for each of the possible named style types.
     styles :: (Core.Maybe [NamedStyle])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4557,7 +4561,7 @@ instance Core.ToJSON NamedStyles where
 --
 -- /See:/ 'newNamedStylesSuggestionState' smart constructor.
 newtype NamedStylesSuggestionState = NamedStylesSuggestionState
-  { -- | A mask that indicates which of the fields on the corresponding NamedStyle in styles have been changed in this suggestion. The order of these named style suggestion states match the order of the corresponding named style within the named styles suggestion.
+  { -- | A mask that indicates which of the fields on the corresponding NamedStyle in styles have been changed in this suggestion. The order of these named style suggestion states matches the order of the corresponding named style within the named styles suggestion.
     stylesSuggestionStates :: (Core.Maybe [NamedStyleSuggestionState])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4592,8 +4596,8 @@ instance Core.ToJSON NamedStylesSuggestionState where
 data NestingLevel = NestingLevel
   { -- | The alignment of the bullet within the space allotted for rendering the bullet.
     bulletAlignment :: (Core.Maybe NestingLevel_BulletAlignment),
-    -- | The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholder are replaced with the appropriate values depending on the glyph/type or glyph/symbol. The placeholders follow the pattern @%[nesting_level]@. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern @%[nesting_level]@. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format @%0.@ indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format @%0.@ at nesting level 0 will result in a list with rendered glyphs @A.@ @B.@ @C.@ The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of @%0.@ at nesting level 0 and a glyph format of @%0.%1.@
-    -- at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs @1.@ @2.@ @2.1.@ @2.2.@ @3.@ For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph\'s order within the list.
+    -- | The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholders are replaced with the appropriate values depending on the glyph/type or glyph/symbol. The placeholders follow the pattern @%[nesting_level]@. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern @%[nesting_level]@. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format @%0.@ indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format @%0.@ at nesting level 0 will result in a list with rendered glyphs @A.@ @B.@ @C.@ The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of @%0.@ at nesting level 0 and a glyph format of
+    -- @%0.%1.@ at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs @1.@ @2.@ @2.1.@ @2.2.@ @3.@ For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph\'s order within the list.
     glyphFormat :: (Core.Maybe Core.Text),
     -- | A custom glyph symbol used by bullets when paragraphs at this level of nesting are unordered. The glyph symbol replaces placeholders within the glyph/format. For example, if the glyph/symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is @%0@, the rendered glyph would be the solid circle.
     glyphSymbol :: (Core.Maybe Core.Text),
@@ -4603,7 +4607,7 @@ data NestingLevel = NestingLevel
     indentFirstLine :: (Core.Maybe Dimension),
     -- | The amount of indentation for paragraphs at this level of nesting. Applied to the side that corresponds to the start of the text, based on the paragraph\'s content direction.
     indentStart :: (Core.Maybe Dimension),
-    -- | The number of the first list item at this nesting level. A value of 0 is treated as a value of 1 for lettered lists and roman numeraled lists, i.e. for values of both 0 and 1, lettered and roman numeraled lists will begin at @a@ and @i@ respectively. This value is ignored for nesting levels with unordered glyphs.
+    -- | The number of the first list item at this nesting level. A value of 0 is treated as a value of 1 for lettered lists and Roman numeral lists. For values of both 0 and 1, lettered and Roman numeral lists will begin at @a@ and @i@ respectively. This value is ignored for nesting levels with unordered glyphs.
     startNumber :: (Core.Maybe Core.Int32),
     -- | The text style of bullets at this level of nesting.
     textStyle :: (Core.Maybe TextStyle)
@@ -4657,7 +4661,7 @@ instance Core.ToJSON NestingLevel where
           ]
       )
 
--- | A mask that indicates which of the fields on the base NestingLevel have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base NestingLevel have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newNestingLevelSuggestionState' smart constructor.
 data NestingLevelSuggestionState = NestingLevelSuggestionState
@@ -4794,11 +4798,11 @@ instance Core.ToJSON OptionalColor where
 data PageBreak = PageBreak
   { -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A PageBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A PageBreak may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this PageBreak, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe PageBreak_SuggestedTextStyleChanges),
-    -- | The text style of this PageBreak. Similar to text content, like text runs and footnote references, the text style of a page break can affect content layout as well as the styling of text inserted adjacent to it.
+    -- | The text style of this PageBreak. Similar to text content, like text runs and footnote references, the text style of a page break can affect content layout as well as the styling of text inserted next to it.
     textStyle :: (Core.Maybe TextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4876,13 +4880,13 @@ instance
   toJSON PageBreak_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
--- | A StructuralElement representing a paragraph. A paragraph is a range of content that is terminated with a newline character.
+-- | A StructuralElement representing a paragraph. A paragraph is a range of content that\'s terminated with a newline character.
 --
 -- /See:/ 'newParagraph' smart constructor.
 data Paragraph = Paragraph
   { -- | The bullet for this paragraph. If not present, the paragraph does not belong to a list.
     bullet :: (Core.Maybe Bullet),
-    -- | The content of the paragraph broken down into its component parts.
+    -- | The content of the paragraph, broken down into its component parts.
     elements :: (Core.Maybe [ParagraphElement]),
     -- | The style of this paragraph.
     paragraphStyle :: (Core.Maybe ParagraphStyle),
@@ -4892,7 +4896,7 @@ data Paragraph = Paragraph
     suggestedBulletChanges :: (Core.Maybe Paragraph_SuggestedBulletChanges),
     -- | The suggested paragraph style changes to this paragraph, keyed by suggestion ID.
     suggestedParagraphStyleChanges :: (Core.Maybe Paragraph_SuggestedParagraphStyleChanges),
-    -- | The IDs of the positioned objects that are suggested to be attached to this paragraph, keyed by suggestion ID.
+    -- | The IDs of the positioned objects suggested to be attached to this paragraph, keyed by suggestion ID.
     suggestedPositionedObjectIds :: (Core.Maybe Paragraph_SuggestedPositionedObjectIds)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5013,7 +5017,7 @@ instance
   toJSON Paragraph_SuggestedParagraphStyleChanges {..} =
     Core.toJSON additional
 
--- | The IDs of the positioned objects that are suggested to be attached to this paragraph, keyed by suggestion ID.
+-- | The IDs of the positioned objects suggested to be attached to this paragraph, keyed by suggestion ID.
 --
 -- /See:/ 'newParagraph_SuggestedPositionedObjectIds' smart constructor.
 newtype Paragraph_SuggestedPositionedObjectIds = Paragraph_SuggestedPositionedObjectIds
@@ -5120,7 +5124,7 @@ data ParagraphElement = ParagraphElement
     pageBreak :: (Core.Maybe PageBreak),
     -- | A paragraph element that links to a person or email address.
     person :: (Core.Maybe Person),
-    -- | A paragraph element that links to a Google resource (such as a file in Drive, a Youtube video, a Calendar event, etc.)
+    -- | A paragraph element that links to a Google resource (such as a file in Google Drive, a YouTube video, or a Calendar event.)
     richLink :: (Core.Maybe RichLink),
     -- | The zero-based start index of this paragraph element, in UTF-16 code units.
     startIndex :: (Core.Maybe Core.Int32),
@@ -5189,7 +5193,7 @@ instance Core.ToJSON ParagraphElement where
           ]
       )
 
--- | Styles that apply to a whole paragraph. Inherited paragraph styles are represented as unset fields in this message. A paragraph style\'s parent depends on where the paragraph style is defined: * The ParagraphStyle on a Paragraph inherits from the paragraph\'s corresponding named style type. * The ParagraphStyle on a named style inherits from the normal text named style. * The ParagraphStyle of the normal text named style inherits from the default paragraph style in the Docs editor. * The ParagraphStyle on a Paragraph element that is contained in a table may inherit its paragraph style from the table style. If the paragraph style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor.
+-- | Styles that apply to a whole paragraph. Inherited paragraph styles are represented as unset fields in this message. A paragraph style\'s parent depends on where the paragraph style is defined: * The ParagraphStyle on a Paragraph inherits from the paragraph\'s corresponding named style type. * The ParagraphStyle on a named style inherits from the normal text named style. * The ParagraphStyle of the normal text named style inherits from the default paragraph style in the Docs editor. * The ParagraphStyle on a Paragraph element that\'s contained in a table may inherit its paragraph style from the table style. If the paragraph style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor.
 --
 -- /See:/ 'newParagraphStyle' smart constructor.
 data ParagraphStyle = ParagraphStyle
@@ -5197,15 +5201,15 @@ data ParagraphStyle = ParagraphStyle
     alignment :: (Core.Maybe ParagraphStyle_Alignment),
     -- | Whether to avoid widows and orphans for the paragraph. If unset, the value is inherited from the parent.
     avoidWidowAndOrphan :: (Core.Maybe Core.Bool),
-    -- | The border between this paragraph and the next and previous paragraphs. If unset, the value is inherited from the parent. The between border is rendered when the adjacent paragraph has the same border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+    -- | The border between this paragraph and the next and previous paragraphs. If unset, the value is inherited from the parent. The between border is rendered when the adjacent paragraph has the same border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
     borderBetween :: (Core.Maybe ParagraphBorder),
-    -- | The border at the bottom of this paragraph. If unset, the value is inherited from the parent. The bottom border is rendered when the paragraph below has different border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+    -- | The border at the bottom of this paragraph. If unset, the value is inherited from the parent. The bottom border is rendered when the paragraph below has different border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
     borderBottom :: (Core.Maybe ParagraphBorder),
-    -- | The border to the left of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+    -- | The border to the left of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
     borderLeft :: (Core.Maybe ParagraphBorder),
-    -- | The border to the right of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+    -- | The border to the right of this paragraph. If unset, the value is inherited from the parent. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
     borderRight :: (Core.Maybe ParagraphBorder),
-    -- | The border at the top of this paragraph. If unset, the value is inherited from the parent. The top border is rendered when the paragraph above has different border and indent properties. Paragraph borders cannot be partially updated. When making changes to a paragraph border the new border must be specified in its entirety.
+    -- | The border at the top of this paragraph. If unset, the value is inherited from the parent. The top border is rendered when the paragraph above has different border and indent properties. Paragraph borders cannot be partially updated. When changing a paragraph border, the new border must be specified in its entirety.
     borderTop :: (Core.Maybe ParagraphBorder),
     -- | The text direction of this paragraph. If unset, the value defaults to LEFT/TO/RIGHT since paragraph direction is not inherited.
     direction :: (Core.Maybe ParagraphStyle_Direction),
@@ -5225,6 +5229,8 @@ data ParagraphStyle = ParagraphStyle
     lineSpacing :: (Core.Maybe Core.Double),
     -- | The named style type of the paragraph. Since updating the named style type affects other properties within ParagraphStyle, the named style type is applied before the other properties are updated.
     namedStyleType :: (Core.Maybe ParagraphStyle_NamedStyleType),
+    -- | Whether the current paragraph should always start at the beginning of a page. If unset, the value is inherited from the parent. Attempting to update page/break/before for paragraphs in unsupported regions, including Table, Header, Footer and Footnote, can result in an invalid document state that returns a 400 bad request error.
+    pageBreakBefore :: (Core.Maybe Core.Bool),
     -- | The shading of the paragraph. If unset, the value is inherited from the parent.
     shading :: (Core.Maybe Shading),
     -- | The amount of extra space above the paragraph. If unset, the value is inherited from the parent.
@@ -5259,6 +5265,7 @@ newParagraphStyle =
       keepWithNext = Core.Nothing,
       lineSpacing = Core.Nothing,
       namedStyleType = Core.Nothing,
+      pageBreakBefore = Core.Nothing,
       shading = Core.Nothing,
       spaceAbove = Core.Nothing,
       spaceBelow = Core.Nothing,
@@ -5288,6 +5295,7 @@ instance Core.FromJSON ParagraphStyle where
             Core.<*> (o Core..:? "keepWithNext")
             Core.<*> (o Core..:? "lineSpacing")
             Core.<*> (o Core..:? "namedStyleType")
+            Core.<*> (o Core..:? "pageBreakBefore")
             Core.<*> (o Core..:? "shading")
             Core.<*> (o Core..:? "spaceAbove")
             Core.<*> (o Core..:? "spaceBelow")
@@ -5317,6 +5325,7 @@ instance Core.ToJSON ParagraphStyle where
             ("keepWithNext" Core..=) Core.<$> keepWithNext,
             ("lineSpacing" Core..=) Core.<$> lineSpacing,
             ("namedStyleType" Core..=) Core.<$> namedStyleType,
+            ("pageBreakBefore" Core..=) Core.<$> pageBreakBefore,
             ("shading" Core..=) Core.<$> shading,
             ("spaceAbove" Core..=) Core.<$> spaceAbove,
             ("spaceBelow" Core..=) Core.<$> spaceBelow,
@@ -5325,7 +5334,7 @@ instance Core.ToJSON ParagraphStyle where
           ]
       )
 
--- | A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newParagraphStyleSuggestionState' smart constructor.
 data ParagraphStyleSuggestionState = ParagraphStyleSuggestionState
@@ -5361,6 +5370,8 @@ data ParagraphStyleSuggestionState = ParagraphStyleSuggestionState
     lineSpacingSuggested :: (Core.Maybe Core.Bool),
     -- | Indicates if there was a suggested change to named/style/type.
     namedStyleTypeSuggested :: (Core.Maybe Core.Bool),
+    -- | Indicates if there was a suggested change to page/break/before.
+    pageBreakBeforeSuggested :: (Core.Maybe Core.Bool),
     -- | A mask that indicates which of the fields in shading have been changed in this suggestion.
     shadingSuggestionState :: (Core.Maybe ShadingSuggestionState),
     -- | Indicates if there was a suggested change to space_above.
@@ -5393,6 +5404,7 @@ newParagraphStyleSuggestionState =
       keepWithNextSuggested = Core.Nothing,
       lineSpacingSuggested = Core.Nothing,
       namedStyleTypeSuggested = Core.Nothing,
+      pageBreakBeforeSuggested = Core.Nothing,
       shadingSuggestionState = Core.Nothing,
       spaceAboveSuggested = Core.Nothing,
       spaceBelowSuggested = Core.Nothing,
@@ -5421,6 +5433,7 @@ instance Core.FromJSON ParagraphStyleSuggestionState where
             Core.<*> (o Core..:? "keepWithNextSuggested")
             Core.<*> (o Core..:? "lineSpacingSuggested")
             Core.<*> (o Core..:? "namedStyleTypeSuggested")
+            Core.<*> (o Core..:? "pageBreakBeforeSuggested")
             Core.<*> (o Core..:? "shadingSuggestionState")
             Core.<*> (o Core..:? "spaceAboveSuggested")
             Core.<*> (o Core..:? "spaceBelowSuggested")
@@ -5463,6 +5476,8 @@ instance Core.ToJSON ParagraphStyleSuggestionState where
               Core.<$> lineSpacingSuggested,
             ("namedStyleTypeSuggested" Core..=)
               Core.<$> namedStyleTypeSuggested,
+            ("pageBreakBeforeSuggested" Core..=)
+              Core.<$> pageBreakBeforeSuggested,
             ("shadingSuggestionState" Core..=)
               Core.<$> shadingSuggestionState,
             ("spaceAboveSuggested" Core..=)
@@ -5482,9 +5497,9 @@ data Person = Person
     personId :: (Core.Maybe Core.Text),
     -- | Output only. The properties of this Person. This field is always present.
     personProperties :: (Core.Maybe PersonProperties),
-    -- | IDs for suggestions that remove this person link from the document. A Person might have multiple deletion IDs if, for example, multiple users suggest to delete it. If empty, then this person link isn\'t suggested for deletion.
+    -- | IDs for suggestions that remove this person link from the document. A Person might have multiple deletion IDs if, for example, multiple users suggest deleting it. If empty, then this person link isn\'t suggested for deletion.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | IDs for suggestions that insert this person link into the document. A Person might have multiple insertion IDs if it is a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn\'t a suggested insertion.
+    -- | IDs for suggestions that insert this person link into the document. A Person might have multiple insertion IDs if it\'s a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn\'t a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this Person, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe Person_SuggestedTextStyleChanges),
@@ -5576,7 +5591,7 @@ instance Core.ToJSON Person_SuggestedTextStyleChanges where
 data PersonProperties = PersonProperties
   { -- | Output only. The email address linked to this Person. This field is always present.
     email :: (Core.Maybe Core.Text),
-    -- | Output only. The name of the person if it is displayed in the link text instead of the person\'s email address.
+    -- | Output only. The name of the person if it\'s displayed in the link text instead of the person\'s email address.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5605,7 +5620,48 @@ instance Core.ToJSON PersonProperties where
           ]
       )
 
--- | An object that is tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
+-- | Updates the number of pinned table header rows in a table.
+--
+-- /See:/ 'newPinTableHeaderRowsRequest' smart constructor.
+data PinTableHeaderRowsRequest = PinTableHeaderRowsRequest
+  { -- | The number of table rows to pin, where 0 implies that all rows are unpinned.
+    pinnedHeaderRowsCount :: (Core.Maybe Core.Int32),
+    -- | The location where the table starts in the document.
+    tableStartLocation :: (Core.Maybe Location)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PinTableHeaderRowsRequest' with the minimum fields required to make a request.
+newPinTableHeaderRowsRequest ::
+  PinTableHeaderRowsRequest
+newPinTableHeaderRowsRequest =
+  PinTableHeaderRowsRequest
+    { pinnedHeaderRowsCount = Core.Nothing,
+      tableStartLocation = Core.Nothing
+    }
+
+instance Core.FromJSON PinTableHeaderRowsRequest where
+  parseJSON =
+    Core.withObject
+      "PinTableHeaderRowsRequest"
+      ( \o ->
+          PinTableHeaderRowsRequest
+            Core.<$> (o Core..:? "pinnedHeaderRowsCount")
+            Core.<*> (o Core..:? "tableStartLocation")
+      )
+
+instance Core.ToJSON PinTableHeaderRowsRequest where
+  toJSON PinTableHeaderRowsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pinnedHeaderRowsCount" Core..=)
+              Core.<$> pinnedHeaderRowsCount,
+            ("tableStartLocation" Core..=)
+              Core.<$> tableStartLocation
+          ]
+      )
+
+-- | An object that\'s tethered to a Paragraph and positioned relative to the beginning of the paragraph. A PositionedObject contains an EmbeddedObject such as an image.
 --
 -- /See:/ 'newPositionedObject' smart constructor.
 data PositionedObject = PositionedObject
@@ -5709,15 +5765,15 @@ instance
     PositionedObject_SuggestedPositionedObjectPropertiesChanges {..} =
       Core.toJSON additional
 
--- | The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it is tethered to.
+-- | The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it\'s tethered to.
 --
 -- /See:/ 'newPositionedObjectPositioning' smart constructor.
 data PositionedObjectPositioning = PositionedObjectPositioning
   { -- | The layout of this positioned object.
     layout :: (Core.Maybe PositionedObjectPositioning_Layout),
-    -- | The offset of the left edge of the positioned object relative to the beginning of the Paragraph it is tethered to. The exact positioning of the object can depend on other content in the document and the document\'s styling.
+    -- | The offset of the left edge of the positioned object relative to the beginning of the Paragraph it\'s tethered to. The exact positioning of the object can depend on other content in the document and the document\'s styling.
     leftOffset :: (Core.Maybe Dimension),
-    -- | The offset of the top edge of the positioned object relative to the beginning of the Paragraph it is tethered to. The exact positioning of the object can depend on other content in the document and the document\'s styling.
+    -- | The offset of the top edge of the positioned object relative to the beginning of the Paragraph it\'s tethered to. The exact positioning of the object can depend on other content in the document and the document\'s styling.
     topOffset :: (Core.Maybe Dimension)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5753,7 +5809,7 @@ instance Core.ToJSON PositionedObjectPositioning where
           ]
       )
 
--- | A mask that indicates which of the fields on the base PositionedObjectPositioning have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base PositionedObjectPositioning have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newPositionedObjectPositioningSuggestionState' smart constructor.
 data PositionedObjectPositioningSuggestionState = PositionedObjectPositioningSuggestionState
@@ -5845,7 +5901,7 @@ instance Core.ToJSON PositionedObjectProperties where
           ]
       )
 
--- | A mask that indicates which of the fields on the base PositionedObjectProperties have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base PositionedObjectProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newPositionedObjectPropertiesSuggestionState' smart constructor.
 data PositionedObjectPropertiesSuggestionState = PositionedObjectPropertiesSuggestionState
@@ -5898,7 +5954,7 @@ instance
 data Range = Range
   { -- | The zero-based end index of this range, exclusive, in UTF-16 code units. In all current uses, an end index must be provided. This field is an Int32Value in order to accommodate future use cases with open-ended ranges.
     endIndex :: (Core.Maybe Core.Int32),
-    -- | The ID of the header, footer or footnote that this range is contained in. An empty segment ID signifies the document\'s body.
+    -- | The ID of the header, footer, or footnote that this range is contained in. An empty segment ID signifies the document\'s body.
     segmentId :: (Core.Maybe Core.Text),
     -- | The zero-based start index of this range, in UTF-16 code units. In all current uses, a start index must be provided. This field is an Int32Value in order to accommodate future use cases with open-ended ranges.
     startIndex :: (Core.Maybe Core.Int32)
@@ -6012,11 +6068,11 @@ instance Core.ToJSON ReplaceAllTextResponse where
 --
 -- /See:/ 'newReplaceImageRequest' smart constructor.
 data ReplaceImageRequest = ReplaceImageRequest
-  { -- | The ID of the existing image that will be replaced.
+  { -- | The ID of the existing image that will be replaced. The ID can be retrieved from the response of a get request.
     imageObjectId :: (Core.Maybe Core.Text),
     -- | The replacement method.
     imageReplaceMethod :: (Core.Maybe ReplaceImageRequest_ImageReplaceMethod),
-    -- | The URI of the new image. The image is fetched once at insertion time and a copy is stored for display inside the document. Images must be less than 50MB in size, cannot exceed 25 megapixels, and must be in one of PNG, JPEG, or GIF format. The provided URI can be at most 2 kB in length. The URI itself is saved with the image, and exposed via the ImageProperties.source_uri field.
+    -- | The URI of the new image. The image is fetched once at insertion time and a copy is stored for display inside the document. Images must be less than 50MB, cannot exceed 25 megapixels, and must be in PNG, JPEG, or GIF format. The provided URI can\'t surpass 2 KB in length. The URI is saved with the image, and exposed through the ImageProperties.source_uri field.
     uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6146,6 +6202,8 @@ data Request' = Request'
     insertText :: (Core.Maybe InsertTextRequest),
     -- | Merges cells in a table.
     mergeTableCells :: (Core.Maybe MergeTableCellsRequest),
+    -- | Updates the number of pinned header rows in a table.
+    pinTableHeaderRows :: (Core.Maybe PinTableHeaderRowsRequest),
     -- | Replaces all instances of the specified text.
     replaceAllText :: (Core.Maybe ReplaceAllTextRequest),
     -- | Replaces an image in the document.
@@ -6197,6 +6255,7 @@ newRequest =
       insertTableRow = Core.Nothing,
       insertText = Core.Nothing,
       mergeTableCells = Core.Nothing,
+      pinTableHeaderRows = Core.Nothing,
       replaceAllText = Core.Nothing,
       replaceImage = Core.Nothing,
       replaceNamedRangeContent = Core.Nothing,
@@ -6237,6 +6296,7 @@ instance Core.FromJSON Request' where
             Core.<*> (o Core..:? "insertTableRow")
             Core.<*> (o Core..:? "insertText")
             Core.<*> (o Core..:? "mergeTableCells")
+            Core.<*> (o Core..:? "pinTableHeaderRows")
             Core.<*> (o Core..:? "replaceAllText")
             Core.<*> (o Core..:? "replaceImage")
             Core.<*> (o Core..:? "replaceNamedRangeContent")
@@ -6285,6 +6345,8 @@ instance Core.ToJSON Request' where
             ("insertTableRow" Core..=) Core.<$> insertTableRow,
             ("insertText" Core..=) Core.<$> insertText,
             ("mergeTableCells" Core..=) Core.<$> mergeTableCells,
+            ("pinTableHeaderRows" Core..=)
+              Core.<$> pinTableHeaderRows,
             ("replaceAllText" Core..=) Core.<$> replaceAllText,
             ("replaceImage" Core..=) Core.<$> replaceImage,
             ("replaceNamedRangeContent" Core..=)
@@ -6415,7 +6477,7 @@ instance Core.ToJSON RgbColor where
           ]
       )
 
--- | A link to a Google resource (e.g., a file in Drive, a YouTube video, a Calendar event, etc.).
+-- | A link to a Google resource (such as a file in Drive, a YouTube video, or a Calendar event).
 --
 -- /See:/ 'newRichLink' smart constructor.
 data RichLink = RichLink
@@ -6423,9 +6485,9 @@ data RichLink = RichLink
     richLinkId :: (Core.Maybe Core.Text),
     -- | Output only. The properties of this RichLink. This field is always present.
     richLinkProperties :: (Core.Maybe RichLinkProperties),
-    -- | IDs for suggestions that remove this link from the document. A RichLink might have multiple deletion IDs if, for example, multiple users suggest to delete it. If empty, then this person link isn\'t suggested for deletion.
+    -- | IDs for suggestions that remove this link from the document. A RichLink might have multiple deletion IDs if, for example, multiple users suggest deleting it. If empty, then this person link isn\'t suggested for deletion.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | IDs for suggestions that insert this link into the document. A RichLink might have multiple insertion IDs if it is a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn\'t a suggested insertion.
+    -- | IDs for suggestions that insert this link into the document. A RichLink might have multiple insertion IDs if it\'s a nested suggested change (a suggestion within a suggestion made by a different user, for example). If empty, then this person link isn\'t a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this RichLink, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe RichLink_SuggestedTextStyleChanges),
@@ -6518,7 +6580,7 @@ instance
 --
 -- /See:/ 'newRichLinkProperties' smart constructor.
 data RichLinkProperties = RichLinkProperties
-  { -- | Output only. The <https://developers.google.com/drive/api/v3/mime-types MIME type> of the RichLink, if there is one (i.e., when it is a file in Drive).
+  { -- | Output only. The <https://developers.google.com/drive/api/v3/mime-types MIME type> of the RichLink, if there\'s one (for example, when it\'s a file in Drive).
     mimeType :: (Core.Maybe Core.Text),
     -- | Output only. The title of the RichLink as displayed in the link. This title matches the title of the linked resource at the time of the insertion or last update of the link. This field is always present.
     title :: (Core.Maybe Core.Text),
@@ -6558,7 +6620,7 @@ instance Core.ToJSON RichLinkProperties where
           ]
       )
 
--- | A StructuralElement representing a section break. A section is a range of content which has the same SectionStyle. A section break represents the start of a new section, and the section style applies to the section after the section break. The document body always begins with a section break.
+-- | A StructuralElement representing a section break. A section is a range of content that has the same SectionStyle. A section break represents the start of a new section, and the section style applies to the section after the section break. The document body always begins with a section break.
 --
 -- /See:/ 'newSectionBreak' smart constructor.
 data SectionBreak = SectionBreak
@@ -6566,7 +6628,7 @@ data SectionBreak = SectionBreak
     sectionStyle :: (Core.Maybe SectionStyle),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A SectionBreak may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A SectionBreak may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6644,9 +6706,9 @@ instance Core.ToJSON SectionColumnProperties where
 --
 -- /See:/ 'newSectionStyle' smart constructor.
 data SectionStyle = SectionStyle
-  { -- | The section\'s columns properties. If empty, the section contains one column with the default properties in the Docs editor. A section can be updated to have no more than three columns. When updating this property, setting a concrete value is required. Unsetting this property will result in a 400 bad request error.
+  { -- | The section\'s columns properties. If empty, the section contains one column with the default properties in the Docs editor. A section can be updated to have no more than 3 columns. When updating this property, setting a concrete value is required. Unsetting this property will result in a 400 bad request error.
     columnProperties :: (Core.Maybe [SectionColumnProperties]),
-    -- | The style of column separators. This style can be set even when there is one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The style of column separators. This style can be set even when there\'s one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     columnSeparatorStyle :: (Core.Maybe SectionStyle_ColumnSeparatorStyle),
     -- | The content direction of this section. If unset, the value defaults to LEFT/TO/RIGHT. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     contentDirection :: (Core.Maybe SectionStyle_ContentDirection),
@@ -6654,25 +6716,25 @@ data SectionStyle = SectionStyle
     defaultFooterId :: (Core.Maybe Core.Text),
     -- | The ID of the default header. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s default/header/id. This property is read-only.
     defaultHeaderId :: (Core.Maybe Core.Text),
-    -- | The ID of the footer used only for even pages. If the value of DocumentStyle\'s use/even/page/header/footer is true, this value is used for the footers on even pages in the section. If it is false, the footers on even pages uses the default/footer/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s even/page/footer_id. This property is read-only.
+    -- | The ID of the footer used only for even pages. If the value of DocumentStyle\'s use/even/page/header/footer is true, this value is used for the footers on even pages in the section. If it is false, the footers on even pages use the default/footer/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s even/page/footer_id. This property is read-only.
     evenPageFooterId :: (Core.Maybe Core.Text),
-    -- | The ID of the header used only for even pages. If the value of DocumentStyle\'s use/even/page/header/footer is true, this value is used for the headers on even pages in the section. If it is false, the headers on even pages uses the default/header/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s even/page/header_id. This property is read-only.
+    -- | The ID of the header used only for even pages. If the value of DocumentStyle\'s use/even/page/header/footer is true, this value is used for the headers on even pages in the section. If it is false, the headers on even pages use the default/header/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s even/page/header_id. This property is read-only.
     evenPageHeaderId :: (Core.Maybe Core.Text),
-    -- | The ID of the footer used only for the first page of the section. If use/first/page/header/footer is true, this value is used for the footer on the first page of the section. If it is false, the footer on the first page of the section uses the default/footer/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s first/page/footer_id. This property is read-only.
+    -- | The ID of the footer used only for the first page of the section. If use/first/page/header/footer is true, this value is used for the footer on the first page of the section. If it\'s false, the footer on the first page of the section uses the default/footer/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s first/page/footer_id. This property is read-only.
     firstPageFooterId :: (Core.Maybe Core.Text),
-    -- | The ID of the header used only for the first page of the section. If use/first/page/header/footer is true, this value is used for the header on the first page of the section. If it is false, the header on the first page of the section uses the default/header/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s first/page/header_id. This property is read-only.
+    -- | The ID of the header used only for the first page of the section. If use/first/page/header/footer is true, this value is used for the header on the first page of the section. If it\'s false, the header on the first page of the section uses the default/header/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s first/page/header_id. This property is read-only.
     firstPageHeaderId :: (Core.Maybe Core.Text),
-    -- | The bottom page margin of the section. If unset, uses margin_bottom from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The bottom page margin of the section. If unset, the value defaults to margin_bottom from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginBottom :: (Core.Maybe Dimension),
-    -- | The footer margin of the section. If unset, uses margin/footer from DocumentStyle. If updated, use/custom/header/footer/margins is set to true on DocumentStyle. The value of use/custom/header/footer_margins on DocumentStyle indicates if a footer margin is being respected for this section When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The footer margin of the section. If unset, the value defaults to margin/footer from DocumentStyle. If updated, use/custom/header/footer/margins is set to true on DocumentStyle. The value of use/custom/header/footer_margins on DocumentStyle indicates if a footer margin is being respected for this section When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginFooter :: (Core.Maybe Dimension),
-    -- | The header margin of the section. If unset, uses margin/header from DocumentStyle. If updated, use/custom/header/footer/margins is set to true on DocumentStyle. The value of use/custom/header/footer_margins on DocumentStyle indicates if a header margin is being respected for this section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The header margin of the section. If unset, the value defaults to margin/header from DocumentStyle. If updated, use/custom/header/footer/margins is set to true on DocumentStyle. The value of use/custom/header/footer_margins on DocumentStyle indicates if a header margin is being respected for this section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginHeader :: (Core.Maybe Dimension),
-    -- | The left page margin of the section. If unset, uses margin_left from DocumentStyle. Updating left margin causes columns in this section to resize. Since the margin affects column width, it is applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The left page margin of the section. If unset, the value defaults to margin_left from DocumentStyle. Updating the left margin causes columns in this section to resize. Since the margin affects column width, it\'s applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginLeft :: (Core.Maybe Dimension),
-    -- | The right page margin of the section. If unset, uses margin_right from DocumentStyle. Updating right margin causes columns in this section to resize. Since the margin affects column width, it is applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The right page margin of the section. If unset, the value defaults to margin_right from DocumentStyle. Updating the right margin causes columns in this section to resize. Since the margin affects column width, it\'s applied before column properties. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginRight :: (Core.Maybe Dimension),
-    -- | The top page margin of the section. If unset, uses margin_top from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    -- | The top page margin of the section. If unset, the value defaults to margin_top from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginTop :: (Core.Maybe Dimension),
     -- | The page number from which to start counting the number of pages for this section. If unset, page numbering continues from the previous section. If the value is unset in the first SectionBreak, refer to DocumentStyle\'s page/number/start. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     pageNumberStart :: (Core.Maybe Core.Int32),
@@ -6798,7 +6860,7 @@ instance Core.ToJSON Shading where
           ]
       )
 
--- | A mask that indicates which of the fields on the base Shading have been changed in this suggested change. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base Shading have been changed in this suggested change. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newShadingSuggestionState' smart constructor.
 newtype ShadingSuggestionState = ShadingSuggestionState
@@ -6835,7 +6897,7 @@ instance Core.ToJSON ShadingSuggestionState where
 --
 -- /See:/ 'newSheetsChartReference' smart constructor.
 data SheetsChartReference = SheetsChartReference
-  { -- | The ID of the specific chart in the Google Sheets spreadsheet that is embedded.
+  { -- | The ID of the specific chart in the Google Sheets spreadsheet that\'s embedded.
     chartId :: (Core.Maybe Core.Int32),
     -- | The ID of the Google Sheets spreadsheet that contains the source chart.
     spreadsheetId :: (Core.Maybe Core.Text)
@@ -6867,7 +6929,7 @@ instance Core.ToJSON SheetsChartReference where
           ]
       )
 
--- | A mask that indicates which of the fields on the base SheetsChartReference have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base SheetsChartReference have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newSheetsChartReferenceSuggestionState' smart constructor.
 data SheetsChartReferenceSuggestionState = SheetsChartReferenceSuggestionState
@@ -7289,7 +7351,7 @@ instance Core.ToJSON SuggestedNamedStyles where
 --
 -- /See:/ 'newSuggestedParagraphStyle' smart constructor.
 data SuggestedParagraphStyle = SuggestedParagraphStyle
-  { -- | A ParagraphStyle that only includes the changes made in this suggestion. This can be used along with the paragraph/suggestion/state to see which fields have changed and their new values.
+  { -- | A ParagraphStyle that only includes the changes made in this suggestion. This can be used along with the paragraph/style/suggestion_state to see which fields have changed and their new values.
     paragraphStyle :: (Core.Maybe ParagraphStyle),
     -- | A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion.
     paragraphStyleSuggestionState :: (Core.Maybe ParagraphStyleSuggestionState)
@@ -7533,13 +7595,13 @@ instance Core.ToJSON TabStop where
 --
 -- /See:/ 'newTable' smart constructor.
 data Table = Table
-  { -- | Number of columns in the table. It is possible for a table to be non-rectangular, so some rows may have a different number of cells.
+  { -- | Number of columns in the table. It\'s possible for a table to be non-rectangular, so some rows may have a different number of cells.
     columns :: (Core.Maybe Core.Int32),
     -- | Number of rows in the table.
     rows :: (Core.Maybe Core.Int32),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A Table may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A Table may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The contents and style of each row.
     tableRows :: (Core.Maybe [TableRow]),
@@ -7602,7 +7664,7 @@ data TableCell = TableCell
     startIndex :: (Core.Maybe Core.Int32),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A TableCell may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A TableCell may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested changes to the table cell style, keyed by suggestion ID.
     suggestedTableCellStyleChanges :: (Core.Maybe TableCell_SuggestedTableCellStyleChanges),
@@ -7873,7 +7935,7 @@ instance Core.ToJSON TableCellStyle where
           ]
       )
 
--- | A mask that indicates which of the fields on the base TableCellStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base TableCellStyle have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newTableCellStyleSuggestionState' smart constructor.
 data TableCellStyleSuggestionState = TableCellStyleSuggestionState
@@ -8111,11 +8173,11 @@ data TableRow = TableRow
     startIndex :: (Core.Maybe Core.Int32),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A TableRow may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A TableRow may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested style changes to this row, keyed by suggestion ID.
     suggestedTableRowStyleChanges :: (Core.Maybe TableRow_SuggestedTableRowStyleChanges),
-    -- | The contents and style of each cell in this row. It is possible for a table to be non-rectangular, so some rows may have a different number of cells than other rows in the same table.
+    -- | The contents and style of each cell in this row. It\'s possible for a table to be non-rectangular, so some rows may have a different number of cells than other rows in the same table.
     tableCells :: (Core.Maybe [TableCell]),
     -- | The style of the table row.
     tableRowStyle :: (Core.Maybe TableRowStyle)
@@ -8207,33 +8269,48 @@ instance
 -- | Styles that apply to a table row.
 --
 -- /See:/ 'newTableRowStyle' smart constructor.
-newtype TableRowStyle = TableRowStyle
+data TableRowStyle = TableRowStyle
   { -- | The minimum height of the row. The row will be rendered in the Docs editor at a height equal to or greater than this value in order to show all the content in the row\'s cells.
-    minRowHeight :: (Core.Maybe Dimension)
+    minRowHeight :: (Core.Maybe Dimension),
+    -- | Whether the row cannot overflow across page or column boundaries.
+    preventOverflow :: (Core.Maybe Core.Bool),
+    -- | Whether the row is a table header.
+    tableHeader :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TableRowStyle' with the minimum fields required to make a request.
 newTableRowStyle ::
   TableRowStyle
-newTableRowStyle = TableRowStyle {minRowHeight = Core.Nothing}
+newTableRowStyle =
+  TableRowStyle
+    { minRowHeight = Core.Nothing,
+      preventOverflow = Core.Nothing,
+      tableHeader = Core.Nothing
+    }
 
 instance Core.FromJSON TableRowStyle where
   parseJSON =
     Core.withObject
       "TableRowStyle"
       ( \o ->
-          TableRowStyle Core.<$> (o Core..:? "minRowHeight")
+          TableRowStyle
+            Core.<$> (o Core..:? "minRowHeight")
+            Core.<*> (o Core..:? "preventOverflow")
+            Core.<*> (o Core..:? "tableHeader")
       )
 
 instance Core.ToJSON TableRowStyle where
   toJSON TableRowStyle {..} =
     Core.object
       ( Core.catMaybes
-          [("minRowHeight" Core..=) Core.<$> minRowHeight]
+          [ ("minRowHeight" Core..=) Core.<$> minRowHeight,
+            ("preventOverflow" Core..=) Core.<$> preventOverflow,
+            ("tableHeader" Core..=) Core.<$> tableHeader
+          ]
       )
 
--- | A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base TableRowStyle have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newTableRowStyleSuggestionState' smart constructor.
 newtype TableRowStyleSuggestionState = TableRowStyleSuggestionState
@@ -8306,7 +8383,7 @@ data TextRun = TextRun
     content :: (Core.Maybe Core.Text),
     -- | The suggested deletion IDs. If empty, then there are no suggested deletions of this content.
     suggestedDeletionIds :: (Core.Maybe [Core.Text]),
-    -- | The suggested insertion IDs. A TextRun may have multiple insertion IDs if it is a nested suggested change. If empty, then this is not a suggested insertion.
+    -- | The suggested insertion IDs. A TextRun may have multiple insertion IDs if it\'s a nested suggested change. If empty, then this is not a suggested insertion.
     suggestedInsertionIds :: (Core.Maybe [Core.Text]),
     -- | The suggested text style changes to this run, keyed by suggestion ID.
     suggestedTextStyleChanges :: (Core.Maybe TextRun_SuggestedTextStyleChanges),
@@ -8391,13 +8468,13 @@ instance
   toJSON TextRun_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
--- | Represents the styling that can be applied to text. Inherited text styles are represented as unset fields in this message. A text style\'s parent depends on where the text style is defined: * The TextStyle of text in a Paragraph inherits from the paragraph\'s corresponding named style type. * The TextStyle on a named style inherits from the normal text named style. * The TextStyle of the normal text named style inherits from the default text style in the Docs editor. * The TextStyle on a Paragraph element that is contained in a table may inherit its text style from the table style. If the text style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor.
+-- | Represents the styling that can be applied to text. Inherited text styles are represented as unset fields in this message. A text style\'s parent depends on where the text style is defined: * The TextStyle of text in a Paragraph inherits from the paragraph\'s corresponding named style type. * The TextStyle on a named style inherits from the normal text named style. * The TextStyle of the normal text named style inherits from the default text style in the Docs editor. * The TextStyle on a Paragraph element that\'s contained in a table may inherit its text style from the table style. If the text style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor.
 --
 -- /See:/ 'newTextStyle' smart constructor.
 data TextStyle = TextStyle
   { -- | The background color of the text. If set, the color is either an RGB color or transparent, depending on the @color@ field.
     backgroundColor :: (Core.Maybe OptionalColor),
-    -- | The text\'s vertical offset from its normal position. Text with @SUPERSCRIPT@ or @SUBSCRIPT@ baseline offsets is automatically rendered in a smaller font size, computed based on the @font_size@ field. The @font_size@ itself is not affected by changes in this field.
+    -- | The text\'s vertical offset from its normal position. Text with @SUPERSCRIPT@ or @SUBSCRIPT@ baseline offsets is automatically rendered in a smaller font size, computed based on the @font_size@ field. Changes in this field don\'t affect the @font_size@.
     baselineOffset :: (Core.Maybe TextStyle_BaselineOffset),
     -- | Whether or not the text is rendered as bold.
     bold :: (Core.Maybe Core.Bool),
@@ -8407,7 +8484,7 @@ data TextStyle = TextStyle
     foregroundColor :: (Core.Maybe OptionalColor),
     -- | Whether or not the text is italicized.
     italic :: (Core.Maybe Core.Bool),
-    -- | The hyperlink destination of the text. If unset, there is no link. Links are not inherited from parent text. Changing the link in an update request causes some other changes to the text style of the range: * When setting a link, the text foreground color will be updated to the default link color and the text will be underlined. If these fields are modified in the same request, those values will be used instead of the link defaults. * Setting a link on a text range that overlaps with an existing link will also update the existing link to point to the new URL. * Links are not settable on newline characters. As a result, setting a link on a text range that crosses a paragraph boundary, such as @\"ABC\\n123\"@, will separate the newline character(s) into their own text runs. The link will be applied separately to the runs before and after the newline. * Removing a link will update the text style of the range to match the style of the preceding text (or the default text styles if the preceding text is another
+    -- | The hyperlink destination of the text. If unset, there\'s no link. Links are not inherited from parent text. Changing the link in an update request causes some other changes to the text style of the range: * When setting a link, the text foreground color will be updated to the default link color and the text will be underlined. If these fields are modified in the same request, those values will be used instead of the link defaults. * Setting a link on a text range that overlaps with an existing link will also update the existing link to point to the new URL. * Links are not settable on newline characters. As a result, setting a link on a text range that crosses a paragraph boundary, such as @\"ABC\\n123\"@, will separate the newline character(s) into their own text runs. The link will be applied separately to the runs before and after the newline. * Removing a link will update the text style of the range to match the style of the preceding text (or the default text styles if the preceding text is another
     -- link) unless different styles are being set in the same request.
     link :: (Core.Maybe Link),
     -- | Whether or not the text is in small capital letters.
@@ -8478,7 +8555,7 @@ instance Core.ToJSON TextStyle where
           ]
       )
 
--- | A mask that indicates which of the fields on the base TextStyle have been changed in this suggestion. For any field set to true, there is a new suggested value.
+-- | A mask that indicates which of the fields on the base TextStyle have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
 -- /See:/ 'newTextStyleSuggestionState' smart constructor.
 data TextStyleSuggestionState = TextStyleSuggestionState
@@ -8644,7 +8721,7 @@ instance Core.ToJSON UpdateDocumentStyleRequest where
 --
 -- /See:/ 'newUpdateParagraphStyleRequest' smart constructor.
 data UpdateParagraphStyleRequest = UpdateParagraphStyleRequest
-  { -- | The fields that should be updated. At least one field must be specified. The root @paragraph_style@ is implied and should not be specified. For example, to update the paragraph style\'s alignment property, set @fields@ to @\"alignment\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
+  { -- | The fields that should be updated. At least one field must be specified. The root @paragraph_style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example, to update the paragraph style\'s alignment property, set @fields@ to @\"alignment\"@. To reset a property to its default value, include its field name in the field mask but leave the field itself unset.
     fields :: (Core.Maybe Core.FieldMask),
     -- | The styles to set on the paragraphs. Certain paragraph style changes may cause other changes in order to mirror the behavior of the Docs editor. See the documentation of ParagraphStyle for more information.
     paragraphStyle :: (Core.Maybe ParagraphStyle),
@@ -8935,7 +9012,7 @@ instance Core.ToJSON UpdateTextStyleRequest where
 data WeightedFontFamily = WeightedFontFamily
   { -- | The font family of the text. The font family can be any font from the Font menu in Docs or from [Google Fonts] (https:\/\/fonts.google.com\/). If the font name is unrecognized, the text is rendered in @Arial@.
     fontFamily :: (Core.Maybe Core.Text),
-    -- | The weight of the font. This field can have any value that is a multiple of @100@ between @100@ and @900@, inclusive. This range corresponds to the numerical values described in the CSS 2.1 Specification, <https://www.w3.org/TR/CSS21/fonts.html#font-boldness section 15.6>, with non-numerical values disallowed. The default value is @400@ (\"normal\"). The font weight makes up just one component of the rendered font weight. The rendered weight is determined by a combination of the @weight@ and the text style\'s resolved @bold@ value, after accounting for inheritance: * If the text is bold and the weight is less than @400@, the rendered weight is 400. * If the text is bold and the weight is greater than or equal to @400@ but is less than @700@, the rendered weight is @700@. * If the weight is greater than or equal to @700@, the rendered weight is equal to the weight. * If the text is not bold, the rendered weight is equal to the weight.
+    -- | The weight of the font. This field can have any value that\'s a multiple of @100@ between @100@ and @900@, inclusive. This range corresponds to the numerical values described in the CSS 2.1 Specification, <https://www.w3.org/TR/CSS21/fonts.html#font-boldness section 15.6>, with non-numerical values disallowed. The default value is @400@ (\"normal\"). The font weight makes up just one component of the rendered font weight. A combination of the @weight@ and the text style\'s resolved @bold@ value determine the rendered weight, after accounting for inheritance: * If the text is bold and the weight is less than @400@, the rendered weight is 400. * If the text is bold and the weight is greater than or equal to @400@ but is less than @700@, the rendered weight is @700@. * If the weight is greater than or equal to @700@, the rendered weight is equal to the weight. * If the text is not bold, the rendered weight is equal to the weight.
     weight :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8969,10 +9046,9 @@ instance Core.ToJSON WeightedFontFamily where
 --
 -- /See:/ 'newWriteControl' smart constructor.
 data WriteControl = WriteControl
-  { -- | The revision ID of the document that the write request will be applied to. If this is not the latest revision of the document, the request will not be processed and will return a 400 bad request error. When a required revision ID is returned in a response, it indicates the revision ID of the document after the request was applied.
+  { -- | The optional revision ID of the document the write request is applied to. If this is not the latest revision of the document, the request is not processed and returns a 400 bad request error. When a required revision ID is returned in a response, it indicates the revision ID of the document after the request was applied.
     requiredRevisionId :: (Core.Maybe Core.Text),
-    -- | The target revision ID of the document that the write request will be applied to. If collaborator changes have occurred after the document was read using the API, the changes produced by this write request will be transformed against the collaborator changes. This results in a new revision of the document which incorporates both the changes in the request and the collaborator changes, and the Docs server will resolve conflicting changes. When using @target_revision_id@, the API client can be thought of as another collaborator of the document. The target revision ID may only be used to write to recent versions of a document. If the target revision is too far behind the latest revision, the request will not be processed and will return a 400 bad request error and the request should be retried after reading the latest version of the document. In most cases a @revision_id@ will remain valid for use as a target revision for several minutes after it is read, but for frequently-edited documents this window may be
-    -- shorter.
+    -- | The optional target revision ID of the document the write request is applied to. If collaborator changes have occurred after the document was read using the API, the changes produced by this write request are applied against the collaborator changes. This results in a new revision of the document that incorporates both the collaborator changes and the changes in the request, with the Docs server resolving conflicting changes. When using target revision ID, the API client can be thought of as another collaborator of the document. The target revision ID can only be used to write to recent versions of a document. If the target revision is too far behind the latest revision, the request is not processed and returns a 400 bad request error. The request should be tried again after retrieving the latest version of the document. Usually a revision ID remains valid for use as a target revision for several minutes after it\'s read, but for frequently edited documents this window might be shorter.
     targetRevisionId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

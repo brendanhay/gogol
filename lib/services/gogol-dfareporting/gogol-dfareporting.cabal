@@ -21,7 +21,7 @@ description:
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
   .
-  This library is compatible with version @v3.5@
+  This library is compatible with version @v4@
   of the API.
 
 source-repository head
@@ -74,6 +74,7 @@ library
     Gogol.DFAReporting.AdvertiserGroups.List
     Gogol.DFAReporting.AdvertiserGroups.Patch
     Gogol.DFAReporting.AdvertiserGroups.Update
+    Gogol.DFAReporting.AdvertiserInvoices.List
     Gogol.DFAReporting.AdvertiserLandingPages.Get
     Gogol.DFAReporting.AdvertiserLandingPages.Insert
     Gogol.DFAReporting.AdvertiserLandingPages.List
@@ -84,6 +85,12 @@ library
     Gogol.DFAReporting.Advertisers.List
     Gogol.DFAReporting.Advertisers.Patch
     Gogol.DFAReporting.Advertisers.Update
+    Gogol.DFAReporting.BillingAssignments.Insert
+    Gogol.DFAReporting.BillingAssignments.List
+    Gogol.DFAReporting.BillingProfiles.Get
+    Gogol.DFAReporting.BillingProfiles.List
+    Gogol.DFAReporting.BillingProfiles.Update
+    Gogol.DFAReporting.BillingRates.List
     Gogol.DFAReporting.Browsers.List
     Gogol.DFAReporting.CampaignCreativeAssociations.Insert
     Gogol.DFAReporting.CampaignCreativeAssociations.List
@@ -260,5 +267,5 @@ library
     Gogol.DFAReporting.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

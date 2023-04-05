@@ -46,7 +46,7 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingRemarketingListsPatch' request conforms to.
 type DFAReportingRemarketingListsPatchResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "remarketingLists"

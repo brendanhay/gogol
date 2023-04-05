@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves details of an entitlement.
+-- Retrieves details of an entitlement. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
 module Gogol.AndroidEnterprise.Entitlements.Get
@@ -61,7 +61,7 @@ type AndroidEnterpriseEntitlementsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Entitlement
 
--- | Retrieves details of an entitlement.
+-- | Retrieves details of an entitlement. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseEntitlementsGet' smart constructor.
 data AndroidEnterpriseEntitlementsGet = AndroidEnterpriseEntitlementsGet

@@ -49,6 +49,9 @@ library
 
   exposed-modules:
     Gogol.CloudKMS
+    Gogol.CloudKMS.Projects.Locations.EkmConfig.GetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.EkmConfig.SetIamPolicy
+    Gogol.CloudKMS.Projects.Locations.EkmConfig.TestIamPermissions
     Gogol.CloudKMS.Projects.Locations.EkmConnections.Create
     Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
     Gogol.CloudKMS.Projects.Locations.EkmConnections.GetIamPolicy
@@ -58,6 +61,7 @@ library
     Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
     Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
     Gogol.CloudKMS.Projects.Locations.Get
+    Gogol.CloudKMS.Projects.Locations.GetEkmConfig
     Gogol.CloudKMS.Projects.Locations.KeyRings.Create
     Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
     Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
@@ -93,6 +97,7 @@ library
     Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
     Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
     Gogol.CloudKMS.Projects.Locations.List
+    Gogol.CloudKMS.Projects.Locations.UpdateEkmConfig
     Gogol.CloudKMS.Types
 
   other-modules:
@@ -100,5 +105,5 @@ library
     Gogol.CloudKMS.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an enterprise. This is the last step in the enterprise signup flow.
+-- Creates an enterprise. This is the last step in the enterprise signup flow. See also: SigninDetail
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.create@.
 module Gogol.AndroidManagement.Enterprises.Create
@@ -60,7 +60,7 @@ type AndroidManagementEnterprisesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Enterprise
     Core.:> Core.Post '[Core.JSON] Enterprise
 
--- | Creates an enterprise. This is the last step in the enterprise signup flow.
+-- | Creates an enterprise. This is the last step in the enterprise signup flow. See also: SigninDetail
 --
 -- /See:/ 'newAndroidManagementEnterprisesCreate' smart constructor.
 data AndroidManagementEnterprisesCreate = AndroidManagementEnterprisesCreate
@@ -68,17 +68,17 @@ data AndroidManagementEnterprisesCreate = AndroidManagementEnterprisesCreate
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Whether the enterprise admin has seen and agreed to the managed Google Play Agreement (https:\/\/www.android.com\/enterprise\/terms\/). Always set this to true when creating an EMM-managed enterprise. Do not create the enterprise until the admin has viewed and accepted the agreement.
+    -- | Whether the enterprise admin has seen and agreed to the managed Google Play Agreement (https:\/\/www.android.com\/enterprise\/terms\/). Do not set this field for any customer-managed enterprise (https:\/\/developers.google.com\/android\/management\/create-enterprise#customer-managed/enterprises). Set this to field to true for all EMM-managed enterprises (https:\/\/developers.google.com\/android\/management\/create-enterprise#emm-managed/enterprises).
     agreementAccepted :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The enterprise token appended to the callback URL. Only set this when creating a customer-managed enterprise.
+    -- | The enterprise token appended to the callback URL. Set this when creating a customer-managed enterprise (https:\/\/developers.google.com\/android\/management\/create-enterprise#customer-managed/enterprises) and not when creating a deprecated EMM-managed enterprise (https:\/\/developers.google.com\/android\/management\/create-enterprise#emm-managed/enterprises).
     enterpriseToken :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Enterprise,
     -- | The ID of the Google Cloud Platform project which will own the enterprise.
     projectId :: (Core.Maybe Core.Text),
-    -- | The name of the SignupUrl used to sign up for the enterprise. Only set this when creating a customer-managed enterprise.
+    -- | The name of the SignupUrl used to sign up for the enterprise. Set this when creating a customer-managed enterprise (https:\/\/developers.google.com\/android\/management\/create-enterprise#customer-managed/enterprises) and not when creating a deprecated EMM-managed enterprise (https:\/\/developers.google.com\/android\/management\/create-enterprise#emm-managed/enterprises).
     signupUrlName :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

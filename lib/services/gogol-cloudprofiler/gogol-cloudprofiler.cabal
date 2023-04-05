@@ -1,7 +1,7 @@
 cabal-version:      2.2
 name:               gogol-cloudprofiler
 version:            1.0.0.0
-synopsis:           Google Stackdriver Profiler SDK.
+synopsis:           Google Cloud Profiler SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
@@ -59,5 +59,5 @@ library
     Gogol.CloudProfiler.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

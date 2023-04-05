@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a data transfer request.
+-- Inserts a data transfer request. See the </admin-sdk/data-transfer/v1/parameters Transfer parameters> reference for specific application requirements.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @datatransfer.transfers.insert@.
 module Gogol.Admin.DataTransfer.Transfers.Insert
@@ -58,7 +58,7 @@ type DatatransferTransfersInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] DataTransfer
     Core.:> Core.Post '[Core.JSON] DataTransfer
 
--- | Inserts a data transfer request.
+-- | Inserts a data transfer request. See the </admin-sdk/data-transfer/v1/parameters Transfer parameters> reference for specific application requirements.
 --
 -- /See:/ 'newDatatransferTransfersInsert' smart constructor.
 data DatatransferTransfersInsert = DatatransferTransfersInsert

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Stackdriver Profiler.
+A client library for the Google Cloud Profiler.
 
 
 ## Contribute

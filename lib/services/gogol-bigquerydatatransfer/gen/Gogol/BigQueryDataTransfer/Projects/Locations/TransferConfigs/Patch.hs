@@ -68,7 +68,7 @@ data BigQueryDataTransferProjectsLocationsTransferConfigsPatch = BigQueryDataTra
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, please make a request to https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?client/id=&scope=&redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code * client/id should be OAuth client/id of BigQuery DTS API for the given data source returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
+    -- | Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source_scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
     authorizationCode :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data BigQueryDataTransferProjectsLocationsTransferConfigsPatch = BigQueryDataTra
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: TransferConfig,
-    -- | Optional service account name. If this field is set and \"service/account/name\" is set in update_mask, transfer config will be created with this service account credential. It requires that requesting user calling this API has permissions to act as this service account. Note that not all data sources support service account credentials when creating transfer config. Please refer to this public guide for the latest list of data sources with service account support: https:\/\/cloud.google.com\/bigquery-transfer\/docs\/use-service-accounts
+    -- | Optional service account email. If this field is set, the transfer config will be created with this service account\'s credentials. It requires that the requesting user calling this API has permissions to act as this service account. Note that not all data sources support service account credentials when creating a transfer config. For the latest list of data sources, read about <https://cloud.google.com/bigquery-transfer/docs/use-service-accounts using service accounts>.
     serviceAccountName :: (Core.Maybe Core.Text),
     -- | Required. Required list of fields to be updated in this request.
     updateMask :: (Core.Maybe Core.FieldMask),
@@ -84,7 +84,7 @@ data BigQueryDataTransferProjectsLocationsTransferConfigsPatch = BigQueryDataTra
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Optional version info. This is required only if @transferConfig.dataSourceId@ is anything else but \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, please make a request to https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?client/id=&scope=&redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info * client/id should be OAuth client/id of BigQuery DTS API for the given data source returned by ListDataSources method. * data/source_scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
+    -- | Optional version info. This is required only if @transferConfig.dataSourceId@ is not \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
     versionInfo :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

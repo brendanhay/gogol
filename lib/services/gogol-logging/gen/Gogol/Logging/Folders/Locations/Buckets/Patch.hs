@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a log bucket. This method replaces the following fields in the existing bucket with values from the new bucket: retention/periodIf the retention period is decreased and the bucket is locked, FAILED/PRECONDITION will be returned.If the bucket has a lifecycle/state of DELETE/REQUESTED, then FAILED_PRECONDITION will be returned.After a bucket has been created, the bucket\'s location cannot be changed.
+-- Updates a log bucket.If the bucket has a lifecycle/state of DELETE/REQUESTED, then FAILED_PRECONDITION will be returned.After a bucket has been created, the bucket\'s location cannot be changed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.locations.buckets.patch@.
 module Gogol.Logging.Folders.Locations.Buckets.Patch
@@ -57,7 +57,7 @@ type LoggingFoldersLocationsBucketsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] LogBucket
     Core.:> Core.Patch '[Core.JSON] LogBucket
 
--- | Updates a log bucket. This method replaces the following fields in the existing bucket with values from the new bucket: retention/periodIf the retention period is decreased and the bucket is locked, FAILED/PRECONDITION will be returned.If the bucket has a lifecycle/state of DELETE/REQUESTED, then FAILED_PRECONDITION will be returned.After a bucket has been created, the bucket\'s location cannot be changed.
+-- | Updates a log bucket.If the bucket has a lifecycle/state of DELETE/REQUESTED, then FAILED_PRECONDITION will be returned.After a bucket has been created, the bucket\'s location cannot be changed.
 --
 -- /See:/ 'newLoggingFoldersLocationsBucketsPatch' smart constructor.
 data LoggingFoldersLocationsBucketsPatch = LoggingFoldersLocationsBucketsPatch

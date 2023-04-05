@@ -46,6 +46,14 @@ module Gogol.Admin.Directory.Internal.Product
     AuxiliaryMessage (..),
     newAuxiliaryMessage,
 
+    -- * BatchCreatePrintServersRequest
+    BatchCreatePrintServersRequest (..),
+    newBatchCreatePrintServersRequest,
+
+    -- * BatchCreatePrintServersResponse
+    BatchCreatePrintServersResponse (..),
+    newBatchCreatePrintServersResponse,
+
     -- * BatchCreatePrintersRequest
     BatchCreatePrintersRequest (..),
     newBatchCreatePrintersRequest,
@@ -53,6 +61,14 @@ module Gogol.Admin.Directory.Internal.Product
     -- * BatchCreatePrintersResponse
     BatchCreatePrintersResponse (..),
     newBatchCreatePrintersResponse,
+
+    -- * BatchDeletePrintServersRequest
+    BatchDeletePrintServersRequest (..),
+    newBatchDeletePrintServersRequest,
+
+    -- * BatchDeletePrintServersResponse
+    BatchDeletePrintServersResponse (..),
+    newBatchDeletePrintServersResponse,
 
     -- * BatchDeletePrintersRequest
     BatchDeletePrintersRequest (..),
@@ -166,6 +182,10 @@ module Gogol.Admin.Directory.Internal.Product
     ChromeOsMoveDevicesToOu (..),
     newChromeOsMoveDevicesToOu,
 
+    -- * CreatePrintServerRequest
+    CreatePrintServerRequest (..),
+    newCreatePrintServerRequest,
+
     -- * CreatePrinterRequest
     CreatePrinterRequest (..),
     newCreatePrinterRequest,
@@ -238,9 +258,17 @@ module Gogol.Admin.Directory.Internal.Product
     Group (..),
     newGroup,
 
+    -- * GroupAlias
+    GroupAlias (..),
+    newGroupAlias,
+
     -- * Groups
     Groups (..),
     newGroups,
+
+    -- * ListPrintServersResponse
+    ListPrintServersResponse (..),
+    newListPrintServersResponse,
 
     -- * ListPrinterModelsResponse
     ListPrinterModelsResponse (..),
@@ -285,6 +313,18 @@ module Gogol.Admin.Directory.Internal.Product
     -- * OrgUnits
     OrgUnits (..),
     newOrgUnits,
+
+    -- * OsUpdateStatus
+    OsUpdateStatus (..),
+    newOsUpdateStatus,
+
+    -- * PrintServer
+    PrintServer (..),
+    newPrintServer,
+
+    -- * PrintServerFailureInfo
+    PrintServerFailureInfo (..),
+    newPrintServerFailureInfo,
 
     -- * Printer
     Printer (..),
@@ -361,6 +401,10 @@ module Gogol.Admin.Directory.Internal.Product
     -- * UserAddress
     UserAddress (..),
     newUserAddress,
+
+    -- * UserAlias
+    UserAlias (..),
+    newUserAlias,
 
     -- * UserCustomProperties
     UserCustomProperties (..),
@@ -711,6 +755,78 @@ instance Core.ToJSON AuxiliaryMessage where
           ]
       )
 
+-- | Request to add multiple new print servers in a batch.
+--
+-- /See:/ 'newBatchCreatePrintServersRequest' smart constructor.
+newtype BatchCreatePrintServersRequest = BatchCreatePrintServersRequest
+  { -- | Required. A list of @PrintServer@ resources to be created (max @50@ per batch).
+    requests :: (Core.Maybe [CreatePrintServerRequest])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreatePrintServersRequest' with the minimum fields required to make a request.
+newBatchCreatePrintServersRequest ::
+  BatchCreatePrintServersRequest
+newBatchCreatePrintServersRequest =
+  BatchCreatePrintServersRequest {requests = Core.Nothing}
+
+instance Core.FromJSON BatchCreatePrintServersRequest where
+  parseJSON =
+    Core.withObject
+      "BatchCreatePrintServersRequest"
+      ( \o ->
+          BatchCreatePrintServersRequest
+            Core.<$> (o Core..:? "requests")
+      )
+
+instance Core.ToJSON BatchCreatePrintServersRequest where
+  toJSON BatchCreatePrintServersRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("requests" Core..=) Core.<$> requests]
+      )
+
+--
+-- /See:/ 'newBatchCreatePrintServersResponse' smart constructor.
+data BatchCreatePrintServersResponse = BatchCreatePrintServersResponse
+  { -- | A list of create failures. @PrintServer@ IDs are not populated, as print servers were not created.
+    failures :: (Core.Maybe [PrintServerFailureInfo]),
+    -- | A list of successfully created print servers with their IDs populated.
+    printServers :: (Core.Maybe [PrintServer])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchCreatePrintServersResponse' with the minimum fields required to make a request.
+newBatchCreatePrintServersResponse ::
+  BatchCreatePrintServersResponse
+newBatchCreatePrintServersResponse =
+  BatchCreatePrintServersResponse
+    { failures = Core.Nothing,
+      printServers = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    BatchCreatePrintServersResponse
+  where
+  parseJSON =
+    Core.withObject
+      "BatchCreatePrintServersResponse"
+      ( \o ->
+          BatchCreatePrintServersResponse
+            Core.<$> (o Core..:? "failures")
+            Core.<*> (o Core..:? "printServers")
+      )
+
+instance Core.ToJSON BatchCreatePrintServersResponse where
+  toJSON BatchCreatePrintServersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("failures" Core..=) Core.<$> failures,
+            ("printServers" Core..=) Core.<$> printServers
+          ]
+      )
+
 -- | Request for adding new printers in batch.
 --
 -- /See:/ 'newBatchCreatePrintersRequest' smart constructor.
@@ -775,6 +891,79 @@ instance Core.ToJSON BatchCreatePrintersResponse where
       ( Core.catMaybes
           [ ("failures" Core..=) Core.<$> failures,
             ("printers" Core..=) Core.<$> printers
+          ]
+      )
+
+-- | Request to delete multiple existing print servers in a batch.
+--
+-- /See:/ 'newBatchDeletePrintServersRequest' smart constructor.
+newtype BatchDeletePrintServersRequest = BatchDeletePrintServersRequest
+  { -- | A list of print server IDs that should be deleted (max @100@ per batch).
+    printServerIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchDeletePrintServersRequest' with the minimum fields required to make a request.
+newBatchDeletePrintServersRequest ::
+  BatchDeletePrintServersRequest
+newBatchDeletePrintServersRequest =
+  BatchDeletePrintServersRequest {printServerIds = Core.Nothing}
+
+instance Core.FromJSON BatchDeletePrintServersRequest where
+  parseJSON =
+    Core.withObject
+      "BatchDeletePrintServersRequest"
+      ( \o ->
+          BatchDeletePrintServersRequest
+            Core.<$> (o Core..:? "printServerIds")
+      )
+
+instance Core.ToJSON BatchDeletePrintServersRequest where
+  toJSON BatchDeletePrintServersRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("printServerIds" Core..=) Core.<$> printServerIds]
+      )
+
+--
+-- /See:/ 'newBatchDeletePrintServersResponse' smart constructor.
+data BatchDeletePrintServersResponse = BatchDeletePrintServersResponse
+  { -- | A list of update failures.
+    failedPrintServers :: (Core.Maybe [PrintServerFailureInfo]),
+    -- | A list of print server IDs that were successfully deleted.
+    printServerIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchDeletePrintServersResponse' with the minimum fields required to make a request.
+newBatchDeletePrintServersResponse ::
+  BatchDeletePrintServersResponse
+newBatchDeletePrintServersResponse =
+  BatchDeletePrintServersResponse
+    { failedPrintServers = Core.Nothing,
+      printServerIds = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    BatchDeletePrintServersResponse
+  where
+  parseJSON =
+    Core.withObject
+      "BatchDeletePrintServersResponse"
+      ( \o ->
+          BatchDeletePrintServersResponse
+            Core.<$> (o Core..:? "failedPrintServers")
+            Core.<*> (o Core..:? "printServerIds")
+      )
+
+instance Core.ToJSON BatchDeletePrintServersResponse where
+  toJSON BatchDeletePrintServersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("failedPrintServers" Core..=)
+              Core.<$> failedPrintServers,
+            ("printServerIds" Core..=) Core.<$> printServerIds
           ]
       )
 
@@ -1245,7 +1434,7 @@ data Channel = Channel
     id :: (Core.Maybe Core.Text),
     -- | Identifies this as a notification channel used to watch for changes to a resource, which is @api#channel@.
     kind :: Core.Text,
-    -- | Additional parameters controlling delivery channel behavior. Optional.
+    -- | Additional parameters controlling delivery channel behavior. Optional. For example, @params.ttl@ specifies the time-to-live in seconds for the notification channel, where the default is 2 hours and the maximum TTL is 2 days.
     params :: (Core.Maybe Channel_Params),
     -- | A Boolean value to indicate whether payload is wanted. Optional.
     payload :: (Core.Maybe Core.Bool),
@@ -1315,7 +1504,7 @@ instance Core.ToJSON Channel where
           ]
       )
 
--- | Additional parameters controlling delivery channel behavior. Optional.
+-- | Additional parameters controlling delivery channel behavior. Optional. For example, @params.ttl@ specifies the time-to-live in seconds for the notification channel, where the default is 2 hours and the maximum TTL is 2 days.
 --
 -- /See:/ 'newChannel_Params' smart constructor.
 newtype Channel_Params = Channel_Params
@@ -1346,7 +1535,7 @@ instance Core.ToJSON Channel_Params where
 --
 -- /See:/ 'newChromeOsDevice' smart constructor.
 data ChromeOsDevice = ChromeOsDevice
-  { -- | List of active time ranges (Read-only).
+  { -- | A list of active time ranges (Read-only).
     activeTimeRanges :: (Core.Maybe [ChromeOsDevice_ActiveTimeRangesItem]),
     -- | The asset identifier as noted by an administrator or specified during enrollment.
     annotatedAssetId :: (Core.Maybe Core.Text),
@@ -1362,7 +1551,9 @@ data ChromeOsDevice = ChromeOsDevice
     cpuInfo :: (Core.Maybe [ChromeOsDevice_CpuInfoItem]),
     -- | Reports of CPU utilization and temperature (Read-only)
     cpuStatusReports :: (Core.Maybe [ChromeOsDevice_CpuStatusReportsItem]),
-    -- | List of device files to download (Read-only)
+    -- | (Read-only) Deprovision reason.
+    deprovisionReason :: (Core.Maybe ChromeOsDevice_DeprovisionReason),
+    -- | A list of device files to download (Read-only)
     deviceFiles :: (Core.Maybe [ChromeOsDevice_DeviceFilesItem]),
     -- | The unique ID of the Chrome device.
     deviceId :: (Core.Maybe Core.Text),
@@ -1378,8 +1569,12 @@ data ChromeOsDevice = ChromeOsDevice
     ethernetMacAddress0 :: (Core.Maybe Core.Text),
     -- | The Chrome device\'s firmware version.
     firmwareVersion :: (Core.Maybe Core.Text),
+    -- | Date and time for the first time the device was enrolled.
+    firstEnrollmentTime :: (Core.Maybe Core.Text),
     -- | The type of resource. For the Chromeosdevices resource, the value is @admin#directory#chromeosdevice@.
     kind :: Core.Text,
+    -- | (Read-only) Date and time for the last deprovision of the device.
+    lastDeprovisionTimestamp :: (Core.Maybe Core.Text),
     -- | Date and time the device was last enrolled (Read-only)
     lastEnrollmentTime :: (Core.Maybe Core.DateTime),
     -- | Contains last known network (Read-only)
@@ -1402,13 +1597,15 @@ data ChromeOsDevice = ChromeOsDevice
     orgUnitId :: (Core.Maybe Core.Text),
     -- | The full parent path with the organizational unit\'s name associated with the device. Path names are case insensitive. If the parent organizational unit is the top-level organization, it is represented as a forward slash, @\/@. This property can be </admin-sdk/directory/v1/guides/manage-chrome-devices#move_chrome_devices_to_ou updated> using the API. For more information about how to create an organizational structure for your device, see the <https://support.google.com/a/answer/182433 administration help center>.
     orgUnitPath :: (Core.Maybe Core.Text),
+    -- | The status of the OS updates for the device.
+    osUpdateStatus :: (Core.Maybe OsUpdateStatus),
     -- | The Chrome device\'s operating system version.
     osVersion :: (Core.Maybe Core.Text),
     -- | The Chrome device\'s platform version.
     platformVersion :: (Core.Maybe Core.Text),
-    -- | List of recent device users, in descending order, by last login time.
+    -- | A list of recent device users, in descending order, by last login time.
     recentUsers :: (Core.Maybe [ChromeOsDevice_RecentUsersItem]),
-    -- | List of screenshot files to download. Type is always \"SCREENSHOT_FILE\". (Read-only)
+    -- | A list of screenshot files to download. Type is always \"SCREENSHOT_FILE\". (Read-only)
     screenshotFiles :: (Core.Maybe [ChromeOsDevice_ScreenshotFilesItem]),
     -- | The Chrome device serial number entered when the device was enabled. This value is the same as the Admin console\'s /Serial Number/ in the /Chrome OS Devices/ tab.
     serialNumber :: (Core.Maybe Core.Text),
@@ -1440,6 +1637,7 @@ newChromeOsDevice =
       bootMode = Core.Nothing,
       cpuInfo = Core.Nothing,
       cpuStatusReports = Core.Nothing,
+      deprovisionReason = Core.Nothing,
       deviceFiles = Core.Nothing,
       deviceId = Core.Nothing,
       diskVolumeReports = Core.Nothing,
@@ -1448,7 +1646,9 @@ newChromeOsDevice =
       ethernetMacAddress = Core.Nothing,
       ethernetMacAddress0 = Core.Nothing,
       firmwareVersion = Core.Nothing,
+      firstEnrollmentTime = Core.Nothing,
       kind = "admin#directory#chromeosdevice",
+      lastDeprovisionTimestamp = Core.Nothing,
       lastEnrollmentTime = Core.Nothing,
       lastKnownNetwork = Core.Nothing,
       lastSync = Core.Nothing,
@@ -1460,6 +1660,7 @@ newChromeOsDevice =
       orderNumber = Core.Nothing,
       orgUnitId = Core.Nothing,
       orgUnitPath = Core.Nothing,
+      osUpdateStatus = Core.Nothing,
       osVersion = Core.Nothing,
       platformVersion = Core.Nothing,
       recentUsers = Core.Nothing,
@@ -1489,6 +1690,7 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "bootMode")
             Core.<*> (o Core..:? "cpuInfo")
             Core.<*> (o Core..:? "cpuStatusReports")
+            Core.<*> (o Core..:? "deprovisionReason")
             Core.<*> (o Core..:? "deviceFiles")
             Core.<*> (o Core..:? "deviceId")
             Core.<*> (o Core..:? "diskVolumeReports")
@@ -1497,9 +1699,11 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "ethernetMacAddress")
             Core.<*> (o Core..:? "ethernetMacAddress0")
             Core.<*> (o Core..:? "firmwareVersion")
+            Core.<*> (o Core..:? "firstEnrollmentTime")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#chromeosdevice"
                      )
+            Core.<*> (o Core..:? "lastDeprovisionTimestamp")
             Core.<*> (o Core..:? "lastEnrollmentTime")
             Core.<*> (o Core..:? "lastKnownNetwork")
             Core.<*> (o Core..:? "lastSync")
@@ -1511,6 +1715,7 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "orderNumber")
             Core.<*> (o Core..:? "orgUnitId")
             Core.<*> (o Core..:? "orgUnitPath")
+            Core.<*> (o Core..:? "osUpdateStatus")
             Core.<*> (o Core..:? "osVersion")
             Core.<*> (o Core..:? "platformVersion")
             Core.<*> (o Core..:? "recentUsers")
@@ -1543,6 +1748,8 @@ instance Core.ToJSON ChromeOsDevice where
             ("cpuInfo" Core..=) Core.<$> cpuInfo,
             ("cpuStatusReports" Core..=)
               Core.<$> cpuStatusReports,
+            ("deprovisionReason" Core..=)
+              Core.<$> deprovisionReason,
             ("deviceFiles" Core..=) Core.<$> deviceFiles,
             ("deviceId" Core..=) Core.<$> deviceId,
             ("diskVolumeReports" Core..=)
@@ -1554,7 +1761,11 @@ instance Core.ToJSON ChromeOsDevice where
             ("ethernetMacAddress0" Core..=)
               Core.<$> ethernetMacAddress0,
             ("firmwareVersion" Core..=) Core.<$> firmwareVersion,
+            ("firstEnrollmentTime" Core..=)
+              Core.<$> firstEnrollmentTime,
             Core.Just ("kind" Core..= kind),
+            ("lastDeprovisionTimestamp" Core..=)
+              Core.<$> lastDeprovisionTimestamp,
             ("lastEnrollmentTime" Core..=)
               Core.<$> lastEnrollmentTime,
             ("lastKnownNetwork" Core..=)
@@ -1568,6 +1779,7 @@ instance Core.ToJSON ChromeOsDevice where
             ("orderNumber" Core..=) Core.<$> orderNumber,
             ("orgUnitId" Core..=) Core.<$> orgUnitId,
             ("orgUnitPath" Core..=) Core.<$> orgUnitPath,
+            ("osUpdateStatus" Core..=) Core.<$> osUpdateStatus,
             ("osVersion" Core..=) Core.<$> osVersion,
             ("platformVersion" Core..=) Core.<$> platformVersion,
             ("recentUsers" Core..=) Core.<$> recentUsers,
@@ -1788,7 +2000,7 @@ instance
 --
 -- /See:/ 'newChromeOsDevice_CpuStatusReportsItem' smart constructor.
 data ChromeOsDevice_CpuStatusReportsItem = ChromeOsDevice_CpuStatusReportsItem
-  { -- | List of CPU temperature samples.
+  { -- | A list of CPU temperature samples.
     cpuTemperatureInfo ::
       ( Core.Maybe
           [ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem]
@@ -2069,7 +2281,7 @@ instance
           ]
       )
 
--- | List of recent device users, in descending order, by last login time.
+-- | A list of recent device users, in descending order, by last login time.
 --
 -- /See:/ 'newChromeOsDevice_RecentUsersItem' smart constructor.
 data ChromeOsDevice_RecentUsersItem = ChromeOsDevice_RecentUsersItem
@@ -2187,7 +2399,9 @@ instance
       ( \o ->
           ChromeOsDevice_SystemRamFreeReportsItem
             Core.<$> (o Core..:? "reportTime")
-            Core.<*> (o Core..:? "systemRamFreeInfo")
+            Core.<*> ( o Core..:? "systemRamFreeInfo"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance
@@ -2199,6 +2413,7 @@ instance
       ( Core.catMaybes
           [ ("reportTime" Core..=) Core.<$> reportTime,
             ("systemRamFreeInfo" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> systemRamFreeInfo
           ]
       )
@@ -2262,6 +2477,7 @@ instance Core.ToJSON ChromeOsDevice_TpmVersionInfo where
           ]
       )
 
+-- | Data about an update to the status of a Chrome OS device.
 --
 -- /See:/ 'newChromeOsDeviceAction' smart constructor.
 data ChromeOsDeviceAction = ChromeOsDeviceAction
@@ -2301,7 +2517,7 @@ instance Core.ToJSON ChromeOsDeviceAction where
 --
 -- /See:/ 'newChromeOsDevices' smart constructor.
 data ChromeOsDevices = ChromeOsDevices
-  { -- | List of Chrome OS Device objects.
+  { -- | A list of Chrome OS Device objects.
     chromeosdevices :: (Core.Maybe [ChromeOsDevice]),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
@@ -2376,6 +2592,42 @@ instance Core.ToJSON ChromeOsMoveDevicesToOu where
     Core.object
       ( Core.catMaybes
           [("deviceIds" Core..=) Core.<$> deviceIds]
+      )
+
+-- | Request for adding a new print server.
+--
+-- /See:/ 'newCreatePrintServerRequest' smart constructor.
+data CreatePrintServerRequest = CreatePrintServerRequest
+  { -- | Required. The <https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers unique ID> of the customer\'s Google Workspace account. Format: @customers\/{id}@
+    parent :: (Core.Maybe Core.Text),
+    -- | Required. A print server to create. If you want to place the print server under a specific organizational unit (OU), then populate the @org_unit_id@. Otherwise the print server is created under the root OU. The @org_unit_id@ can be retrieved using the <https://developers.google.com/admin-sdk/directory/v1/guides/manage-org-units Directory API>.
+    printServer :: (Core.Maybe PrintServer)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreatePrintServerRequest' with the minimum fields required to make a request.
+newCreatePrintServerRequest ::
+  CreatePrintServerRequest
+newCreatePrintServerRequest =
+  CreatePrintServerRequest {parent = Core.Nothing, printServer = Core.Nothing}
+
+instance Core.FromJSON CreatePrintServerRequest where
+  parseJSON =
+    Core.withObject
+      "CreatePrintServerRequest"
+      ( \o ->
+          CreatePrintServerRequest
+            Core.<$> (o Core..:? "parent")
+            Core.<*> (o Core..:? "printServer")
+      )
+
+instance Core.ToJSON CreatePrintServerRequest where
+  toJSON CreatePrintServerRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("parent" Core..=) Core.<$> parent,
+            ("printServer" Core..=) Core.<$> printServer
+          ]
       )
 
 -- | Request for adding a new printer.
@@ -2639,7 +2891,9 @@ instance Core.ToJSON DirectoryChromeosdevicesCommand where
 --
 -- /See:/ 'newDirectoryChromeosdevicesCommandResult' smart constructor.
 data DirectoryChromeosdevicesCommandResult = DirectoryChromeosdevicesCommandResult
-  { -- | The error message with a short explanation as to why the command failed. Only present if the command failed.
+  { -- | The payload for the command result. The following commands respond with a payload: * @DEVICE_START_CRD_SESSION@: Payload is a stringified JSON object in the form: { \"url\": url }. The URL provides a link to the Chrome Remote Desktop session.
+    commandResultPayload :: (Core.Maybe Core.Text),
+    -- | The error message with a short explanation as to why the command failed. Only present if the command failed.
     errorMessage :: (Core.Maybe Core.Text),
     -- | The time at which the command was executed or failed to execute.
     executeTime :: (Core.Maybe Core.DateTime),
@@ -2653,7 +2907,8 @@ newDirectoryChromeosdevicesCommandResult ::
   DirectoryChromeosdevicesCommandResult
 newDirectoryChromeosdevicesCommandResult =
   DirectoryChromeosdevicesCommandResult
-    { errorMessage = Core.Nothing,
+    { commandResultPayload = Core.Nothing,
+      errorMessage = Core.Nothing,
       executeTime = Core.Nothing,
       result = Core.Nothing
     }
@@ -2667,7 +2922,8 @@ instance
       "DirectoryChromeosdevicesCommandResult"
       ( \o ->
           DirectoryChromeosdevicesCommandResult
-            Core.<$> (o Core..:? "errorMessage")
+            Core.<$> (o Core..:? "commandResultPayload")
+            Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "executeTime")
             Core.<*> (o Core..:? "result")
       )
@@ -2679,7 +2935,9 @@ instance
   toJSON DirectoryChromeosdevicesCommandResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("errorMessage" Core..=) Core.<$> errorMessage,
+          [ ("commandResultPayload" Core..=)
+              Core.<$> commandResultPayload,
+            ("errorMessage" Core..=) Core.<$> errorMessage,
             ("executeTime" Core..=) Core.<$> executeTime,
             ("result" Core..=) Core.<$> result
           ]
@@ -2694,7 +2952,7 @@ data DirectoryChromeosdevicesIssueCommandRequest = DirectoryChromeosdevicesIssue
       ( Core.Maybe
           DirectoryChromeosdevicesIssueCommandRequest_CommandType
       ),
-    -- | The payload for the command, provide it only if command supports it. The following commands support adding payload: - SET_VOLUME: Payload is a stringified JSON object in the form: { \"volume\": 50 }. The volume has to be an integer in the range [0,100].
+    -- | The payload for the command, provide it only if command supports it. The following commands support adding payload: * @SET_VOLUME@: Payload is a stringified JSON object in the form: { \"volume\": 50 }. The volume has to be an integer in the range [0,100]. * @DEVICE_START_CRD_SESSION@: Payload is optionally a stringified JSON object in the form: { \"ackedUserPresence\": true }. @ackedUserPresence@ is a boolean. By default, @ackedUserPresence@ is set to @false@. To start a Chrome Remote Desktop session for an active device, set @ackedUserPresence@ to @true@.
     payload :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2843,7 +3101,7 @@ instance Core.ToJSON DomainAlias where
 --
 -- /See:/ 'newDomainAliases' smart constructor.
 data DomainAliases = DomainAliases
-  { -- | List of domain alias objects.
+  { -- | A list of domain alias objects.
     domainAliases :: (Core.Maybe [DomainAlias]),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
@@ -2890,7 +3148,7 @@ instance Core.ToJSON DomainAliases where
 data Domains = Domains
   { -- | Creation time of the domain. Expressed in <https://en.wikipedia.org/wiki/Epoch_time Unix time> format. (Read-only).
     creationTime :: (Core.Maybe Core.Int64),
-    -- | List of domain alias objects. (Read-only)
+    -- | A list of domain alias objects. (Read-only)
     domainAliases :: (Core.Maybe [DomainAlias]),
     -- | The domain name of the customer.
     domainName :: (Core.Maybe Core.Text),
@@ -2954,7 +3212,7 @@ instance Core.ToJSON Domains where
 --
 -- /See:/ 'newDomains2' smart constructor.
 data Domains2 = Domains2
-  { -- | List of domain objects.
+  { -- | A list of domain objects.
     domains :: (Core.Maybe [Domains]),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
@@ -2996,7 +3254,7 @@ instance Core.ToJSON Domains2 where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -3217,13 +3475,13 @@ instance Core.ToJSON Features where
           ]
       )
 
--- | Google Groups provide your users the ability to send messages to groups of people using the group\'s email address. For more information about common tasks, see the </admin-sdk/directory/v1/guides/manage-groups Developer\'s Guide>.
+-- | Google Groups provide your users the ability to send messages to groups of people using the group\'s email address. For more information about common tasks, see the <https://developers.google.com/admin-sdk/directory/v1/guides/manage-groups Developer\'s Guide>. For information about other types of groups, see the <https://cloud.google.com/identity/docs/groups Cloud Identity Groups API documentation>. Note: The user calling the API (or being impersonated by a service account) must have an assigned <https://developers.google.com/admin-sdk/directory/v1/guides/manage-roles role> that includes Admin API Groups permissions, such as Super Admin or Groups Admin.
 --
 -- /See:/ 'newGroup' smart constructor.
 data Group = Group
-  { -- | Value is @true@ if this group was created by an administrator rather than a user.
+  { -- | Read-only. Value is @true@ if this group was created by an administrator rather than a user.
     adminCreated :: (Core.Maybe Core.Bool),
-    -- | List of a group\'s alias email addresses.
+    -- | Read-only. The list of a group\'s alias email addresses. To add, update, or remove a group\'s aliases, use the @groups.aliases@ methods. If edited in a group\'s POST or PUT request, the edit is ignored.
     aliases :: (Core.Maybe [Core.Text]),
     -- | An extended description to help users determine the purpose of a group. For example, you can include information about who should join the group, the types of messages to send to the group, links to FAQs about the group, or related groups. Maximum length is @4,096@ characters.
     description :: (Core.Maybe Core.Text),
@@ -3233,13 +3491,13 @@ data Group = Group
     email :: (Core.Maybe Core.Text),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | The unique ID of a group. A group @id@ can be used as a group request URI\'s @groupKey@.
+    -- | Read-only. The unique ID of a group. A group @id@ can be used as a group request URI\'s @groupKey@.
     id :: (Core.Maybe Core.Text),
     -- | The type of the API resource. For Groups resources, the value is @admin#directory#group@.
     kind :: Core.Text,
     -- | The group\'s display name.
     name :: (Core.Maybe Core.Text),
-    -- | List of the group\'s non-editable alias email addresses that are outside of the account\'s primary domain or subdomains. These are functioning email addresses used by the group. This is a read-only property returned in the API\'s response for a group. If edited in a group\'s POST or PUT request, the edit is ignored by the API service.
+    -- | Read-only. The list of the group\'s non-editable alias email addresses that are outside of the account\'s primary domain or subdomains. These are functioning email addresses used by the group. This is a read-only property returned in the API\'s response for a group. If edited in a group\'s POST or PUT request, the edit is ignored.
     nonEditableAliases :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3300,12 +3558,66 @@ instance Core.ToJSON Group where
           ]
       )
 
+-- | The Directory API manages aliases, which are alternative email addresses.
+--
+-- /See:/ 'newGroupAlias' smart constructor.
+data GroupAlias = GroupAlias
+  { -- | The alias email address.
+    alias :: (Core.Maybe Core.Text),
+    -- | ETag of the resource.
+    etag :: (Core.Maybe Core.Text),
+    -- | The unique ID of the group.
+    id :: (Core.Maybe Core.Text),
+    -- | The type of the API resource. For Alias resources, the value is @admin#directory#alias@.
+    kind :: (Core.Maybe Core.Text),
+    -- | The primary email address of the group.
+    primaryEmail :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GroupAlias' with the minimum fields required to make a request.
+newGroupAlias ::
+  GroupAlias
+newGroupAlias =
+  GroupAlias
+    { alias = Core.Nothing,
+      etag = Core.Nothing,
+      id = Core.Nothing,
+      kind = Core.Nothing,
+      primaryEmail = Core.Nothing
+    }
+
+instance Core.FromJSON GroupAlias where
+  parseJSON =
+    Core.withObject
+      "GroupAlias"
+      ( \o ->
+          GroupAlias
+            Core.<$> (o Core..:? "alias")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "primaryEmail")
+      )
+
+instance Core.ToJSON GroupAlias where
+  toJSON GroupAlias {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alias" Core..=) Core.<$> alias,
+            ("etag" Core..=) Core.<$> etag,
+            ("id" Core..=) Core.<$> id,
+            ("kind" Core..=) Core.<$> kind,
+            ("primaryEmail" Core..=) Core.<$> primaryEmail
+          ]
+      )
+
 --
 -- /See:/ 'newGroups' smart constructor.
 data Groups = Groups
   { -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | List of group objects.
+    -- | A list of group objects.
     groups :: (Core.Maybe [Group]),
     -- | Kind of resource this is.
     kind :: Core.Text,
@@ -3345,6 +3657,44 @@ instance Core.ToJSON Groups where
             ("groups" Core..=) Core.<$> groups,
             Core.Just ("kind" Core..= kind),
             ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+--
+-- /See:/ 'newListPrintServersResponse' smart constructor.
+data ListPrintServersResponse = ListPrintServersResponse
+  { -- | A token that can be sent as @page_token@ in a request to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | List of print servers.
+    printServers :: (Core.Maybe [PrintServer])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListPrintServersResponse' with the minimum fields required to make a request.
+newListPrintServersResponse ::
+  ListPrintServersResponse
+newListPrintServersResponse =
+  ListPrintServersResponse
+    { nextPageToken = Core.Nothing,
+      printServers = Core.Nothing
+    }
+
+instance Core.FromJSON ListPrintServersResponse where
+  parseJSON =
+    Core.withObject
+      "ListPrintServersResponse"
+      ( \o ->
+          ListPrintServersResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "printServers")
+      )
+
+instance Core.ToJSON ListPrintServersResponse where
+  toJSON ListPrintServersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("printServers" Core..=) Core.<$> printServers
           ]
       )
 
@@ -3500,7 +3850,7 @@ data Members = Members
     etag :: (Core.Maybe Core.Text),
     -- | Kind of resource this is.
     kind :: Core.Text,
-    -- | List of member objects.
+    -- | A list of member objects.
     members :: (Core.Maybe [Member]),
     -- | Token used to access next page of this result.
     nextPageToken :: (Core.Maybe Core.Text)
@@ -3598,7 +3948,7 @@ data MobileDevice = MobileDevice
     deviceId :: (Core.Maybe Core.Text),
     -- | DevicePasswordStatus (Read-only)
     devicePasswordStatus :: (Core.Maybe Core.Text),
-    -- | List of owner\'s email addresses. If your application needs the current list of user emails, use the </admin-sdk/directory/v1/reference/mobiledevices/get.html get> method. For additional information, see the </admin-sdk/directory/v1/guides/manage-users#get_user retrieve a user> method.
+    -- | The list of the owner\'s email addresses. If your application needs the current list of user emails, use the </admin-sdk/directory/v1/reference/mobiledevices/get.html get> method. For additional information, see the </admin-sdk/directory/v1/guides/manage-users#get_user retrieve a user> method.
     email :: (Core.Maybe [Core.Text]),
     -- | Mobile Device Encryption Status (Read-only)
     encryptionStatus :: (Core.Maybe Core.Text),
@@ -3626,13 +3976,13 @@ data MobileDevice = MobileDevice
     meid :: (Core.Maybe Core.Text),
     -- | The mobile device\'s model name, for example Nexus S. This property can be </admin-sdk/directory/v1/reference/mobiledevices/update.html updated>. For more information, see the </admin-sdk/directory/v1/guides/manage-mobile=devices#update_mobile_device Developer\'s Guide>.
     model :: (Core.Maybe Core.Text),
-    -- | List of the owner\'s user names. If your application needs the current list of device owner names, use the </admin-sdk/directory/v1/reference/mobiledevices/get.html get> method. For more information about retrieving mobile device user information, see the </admin-sdk/directory/v1/guides/manage-users#get_user Developer\'s Guide>.
+    -- | The list of the owner\'s user names. If your application needs the current list of device owner names, use the </admin-sdk/directory/v1/reference/mobiledevices/get.html get> method. For more information about retrieving mobile device user information, see the </admin-sdk/directory/v1/guides/manage-users#get_user Developer\'s Guide>.
     name :: (Core.Maybe [Core.Text]),
     -- | Mobile Device mobile or network operator (if available) (Read-only)
     networkOperator :: (Core.Maybe Core.Text),
     -- | The mobile device\'s operating system, for example IOS 4.3 or Android 2.3.5. This property can be </admin-sdk/directory/v1/reference/mobiledevices/update.html updated>. For more information, see the </admin-sdk/directory/v1/guides/manage-mobile-devices#update_mobile_device Developer\'s Guide>.
     os :: (Core.Maybe Core.Text),
-    -- | List of accounts added on device (Read-only)
+    -- | The list of accounts added on device (Read-only)
     otherAccountsInfo :: (Core.Maybe [Core.Text]),
     -- | DMAgentPermission (Read-only)
     privilege :: (Core.Maybe Core.Text),
@@ -3901,7 +4251,7 @@ data MobileDevices = MobileDevices
     etag :: (Core.Maybe Core.Text),
     -- | Kind of resource this is.
     kind :: Core.Text,
-    -- | List of Mobile Device objects.
+    -- | A list of Mobile Device objects.
     mobiledevices :: (Core.Maybe [MobileDevice]),
     -- | Token used to access next page of this result.
     nextPageToken :: (Core.Maybe Core.Text)
@@ -4029,7 +4379,7 @@ data OrgUnits = OrgUnits
     etag :: (Core.Maybe Core.Text),
     -- | The type of the API resource. For Org Unit resources, the type is @admin#directory#orgUnits@.
     kind :: Core.Text,
-    -- | List of organizational unit objects.
+    -- | A list of organizational unit objects.
     organizationUnits :: (Core.Maybe [OrgUnit])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4065,6 +4415,179 @@ instance Core.ToJSON OrgUnits where
             Core.Just ("kind" Core..= kind),
             ("organizationUnits" Core..=)
               Core.<$> organizationUnits
+          ]
+      )
+
+-- | Contains information regarding the current OS update status.
+--
+-- /See:/ 'newOsUpdateStatus' smart constructor.
+data OsUpdateStatus = OsUpdateStatus
+  { -- | Date and time of the last reboot.
+    rebootTime :: (Core.Maybe Core.Text),
+    -- | The update state of an OS update.
+    state :: (Core.Maybe OsUpdateStatus_State),
+    -- | New required platform version from the pending updated kiosk app.
+    targetKioskAppVersion :: (Core.Maybe Core.Text),
+    -- | New platform version of the OS image being downloaded and applied. It is only set when update status is UPDATE/STATUS/DOWNLOAD/IN/PROGRESS or UPDATE/STATUS/NEED/REBOOT. Note this could be a dummy \"0.0.0.0\" for UPDATE/STATUS/NEED/REBOOT for some edge cases, e.g. update engine is restarted without a reboot.
+    targetOsVersion :: (Core.Maybe Core.Text),
+    -- | Date and time of the last update check.
+    updateCheckTime :: (Core.Maybe Core.Text),
+    -- | Date and time of the last successful OS update.
+    updateTime :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OsUpdateStatus' with the minimum fields required to make a request.
+newOsUpdateStatus ::
+  OsUpdateStatus
+newOsUpdateStatus =
+  OsUpdateStatus
+    { rebootTime = Core.Nothing,
+      state = Core.Nothing,
+      targetKioskAppVersion = Core.Nothing,
+      targetOsVersion = Core.Nothing,
+      updateCheckTime = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON OsUpdateStatus where
+  parseJSON =
+    Core.withObject
+      "OsUpdateStatus"
+      ( \o ->
+          OsUpdateStatus
+            Core.<$> (o Core..:? "rebootTime")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "targetKioskAppVersion")
+            Core.<*> (o Core..:? "targetOsVersion")
+            Core.<*> (o Core..:? "updateCheckTime")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON OsUpdateStatus where
+  toJSON OsUpdateStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rebootTime" Core..=) Core.<$> rebootTime,
+            ("state" Core..=) Core.<$> state,
+            ("targetKioskAppVersion" Core..=)
+              Core.<$> targetKioskAppVersion,
+            ("targetOsVersion" Core..=) Core.<$> targetOsVersion,
+            ("updateCheckTime" Core..=) Core.<$> updateCheckTime,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | Configuration for a print server.
+--
+-- /See:/ 'newPrintServer' smart constructor.
+data PrintServer = PrintServer
+  { -- | Output only. Time when the print server was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Editable. Description of the print server (as shown in the Admin console).
+    description :: (Core.Maybe Core.Text),
+    -- | Editable. Display name of the print server (as shown in the Admin console).
+    displayName :: (Core.Maybe Core.Text),
+    -- | Immutable. ID of the print server. Leave empty when creating.
+    id :: (Core.Maybe Core.Text),
+    -- | Immutable. Resource name of the print server. Leave empty when creating. Format: @customers\/{customer.id}\/printServers\/{print_server.id}@
+    name :: (Core.Maybe Core.Text),
+    -- | ID of the organization unit (OU) that owns this print server. This value can only be set when the print server is initially created. If it\'s not populated, the print server is placed under the root OU. The @org_unit_id@ can be retrieved using the </admin-sdk/directory/reference/rest/v1/orgunits Directory API>.
+    orgUnitId :: (Core.Maybe Core.Text),
+    -- | Editable. Print server URI.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrintServer' with the minimum fields required to make a request.
+newPrintServer ::
+  PrintServer
+newPrintServer =
+  PrintServer
+    { createTime = Core.Nothing,
+      description = Core.Nothing,
+      displayName = Core.Nothing,
+      id = Core.Nothing,
+      name = Core.Nothing,
+      orgUnitId = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance Core.FromJSON PrintServer where
+  parseJSON =
+    Core.withObject
+      "PrintServer"
+      ( \o ->
+          PrintServer
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "orgUnitId")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON PrintServer where
+  toJSON PrintServer {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("description" Core..=) Core.<$> description,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("id" Core..=) Core.<$> id,
+            ("name" Core..=) Core.<$> name,
+            ("orgUnitId" Core..=) Core.<$> orgUnitId,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
+
+-- | Info about failures
+--
+-- /See:/ 'newPrintServerFailureInfo' smart constructor.
+data PrintServerFailureInfo = PrintServerFailureInfo
+  { -- | Canonical code for why the update failed to apply.
+    errorCode :: (Core.Maybe PrintServerFailureInfo_ErrorCode),
+    -- | Failure reason message.
+    errorMessage :: (Core.Maybe Core.Text),
+    -- | Failed print server.
+    printServer :: (Core.Maybe PrintServer),
+    -- | ID of a failed print server.
+    printServerId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrintServerFailureInfo' with the minimum fields required to make a request.
+newPrintServerFailureInfo ::
+  PrintServerFailureInfo
+newPrintServerFailureInfo =
+  PrintServerFailureInfo
+    { errorCode = Core.Nothing,
+      errorMessage = Core.Nothing,
+      printServer = Core.Nothing,
+      printServerId = Core.Nothing
+    }
+
+instance Core.FromJSON PrintServerFailureInfo where
+  parseJSON =
+    Core.withObject
+      "PrintServerFailureInfo"
+      ( \o ->
+          PrintServerFailureInfo
+            Core.<$> (o Core..:? "errorCode")
+            Core.<*> (o Core..:? "errorMessage")
+            Core.<*> (o Core..:? "printServer")
+            Core.<*> (o Core..:? "printServerId")
+      )
+
+instance Core.ToJSON PrintServerFailureInfo where
+  toJSON PrintServerFailureInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("errorCode" Core..=) Core.<$> errorCode,
+            ("errorMessage" Core..=) Core.<$> errorMessage,
+            ("printServer" Core..=) Core.<$> printServer,
+            ("printServerId" Core..=) Core.<$> printServerId
           ]
       )
 
@@ -4418,8 +4941,10 @@ instance Core.ToJSON Role_RolePrivilegesItem where
 --
 -- /See:/ 'newRoleAssignment' smart constructor.
 data RoleAssignment = RoleAssignment
-  { -- | The unique ID of the user this role is assigned to.
+  { -- | The unique ID of the entity this role is assigned to—either the @user_id@ of a user or the @uniqueId@ of a service account, as defined in <https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts Identity and Access Management (IAM)>.
     assignedTo :: (Core.Maybe Core.Text),
+    -- | Output only. The type of the assignee (@USER@ or @GROUP@).
+    assigneeType :: (Core.Maybe RoleAssignment_AssigneeType),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
     -- | The type of the API resource. This is always @admin#directory#roleAssignment@.
@@ -4441,6 +4966,7 @@ newRoleAssignment ::
 newRoleAssignment =
   RoleAssignment
     { assignedTo = Core.Nothing,
+      assigneeType = Core.Nothing,
       etag = Core.Nothing,
       kind = "admin#directory#roleAssignment",
       orgUnitId = Core.Nothing,
@@ -4456,6 +4982,7 @@ instance Core.FromJSON RoleAssignment where
       ( \o ->
           RoleAssignment
             Core.<$> (o Core..:? "assignedTo")
+            Core.<*> (o Core..:? "assigneeType")
             Core.<*> (o Core..:? "etag")
             Core.<*> ( o Core..:? "kind"
                          Core..!= "admin#directory#roleAssignment"
@@ -4475,6 +5002,7 @@ instance Core.ToJSON RoleAssignment where
     Core.object
       ( Core.catMaybes
           [ ("assignedTo" Core..=) Core.<$> assignedTo,
+            ("assigneeType" Core..=) Core.<$> assigneeType,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
             ("orgUnitId" Core..=) Core.<$> orgUnitId,
@@ -4780,7 +5308,7 @@ data Schemas = Schemas
     etag :: (Core.Maybe Core.Text),
     -- | Kind of resource this is.
     kind :: Core.Text,
-    -- | List of UserSchema objects.
+    -- | A list of UserSchema objects.
     schemas :: (Core.Maybe [Schema])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4937,11 +5465,11 @@ instance Core.ToJSON Tokens where
 --
 -- /See:/ 'newUser' smart constructor.
 data User = User
-  { -- | A list of the user\'s addresses. The maximum allowed data size for this field is 10Kb.
+  { -- | The list of the user\'s addresses. The maximum allowed data size for this field is 10KB.
     addresses :: (Core.Maybe Core.Value),
     -- | Output only. This property is @true@ if the user has completed an initial login and accepted the Terms of Service agreement.
     agreedToTerms :: (Core.Maybe Core.Bool),
-    -- | Output only. A list of the user\'s alias email addresses.
+    -- | Output only. The list of the user\'s alias email addresses.
     aliases :: (Core.Maybe [Core.Text]),
     -- | Indicates if user is archived.
     archived :: (Core.Maybe Core.Bool),
@@ -4955,23 +5483,23 @@ data User = User
     customerId :: (Core.Maybe Core.Text),
     -- |
     deletionTime :: (Core.Maybe Core.DateTime),
-    -- | A list of the user\'s email addresses. The maximum allowed data size for this field is 10Kb.
+    -- | The list of the user\'s email addresses. The maximum allowed data size for this field is 10KB.
     emails :: (Core.Maybe Core.Value),
     -- | Output only. ETag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | A list of external IDs for the user, such as an employee or network ID. The maximum allowed data size for this field is 2Kb.
+    -- | The list of external IDs for the user, such as an employee or network ID. The maximum allowed data size for this field is 2KB.
     externalIds :: (Core.Maybe Core.Value),
-    -- | The user\'s gender. The maximum allowed data size for this field is 1Kb.
+    -- | The user\'s gender. The maximum allowed data size for this field is 1KB.
     gender :: (Core.Maybe Core.Value),
-    -- | Stores the hash format of the password property. We recommend sending the @password@ property value as a base 16 bit hexadecimal-encoded hash value. The following @hashFunction@ values are allowed: * @DES@ * @MD5@ - hash prefix is @$1$@ * @SHA2-256@ - hash prefix is @$5$@ * @SHA2-512@ - hash prefix is @$6$@ If rounds are specified as part of the prefix, they must be 10,000 or fewer.
+    -- | Stores the hash format of the @password@ property. The following @hashFunction@ values are allowed: * @MD5@ - Accepts simple hex-encoded values. * @SHA-1@ - Accepts simple hex-encoded values. * @crypt@ - Compliant with the <https://en.wikipedia.org/wiki/Crypt_%28C%29 C crypt library>. Supports the DES, MD5 (hash prefix @$1$@), SHA-256 (hash prefix @$5$@), and SHA-512 (hash prefix @$6$@) hash algorithms. If rounds are specified as part of the prefix, they must be 10,000 or fewer.
     hashFunction :: (Core.Maybe Core.Text),
     -- | The unique ID for the user. A user @id@ can be used as a user request URI\'s @userKey@.
     id :: (Core.Maybe Core.Text),
-    -- | The user\'s Instant Messenger (IM) accounts. A user account can have multiple ims properties. But, only one of these ims properties can be the primary IM contact. The maximum allowed data size for this field is 2Kb.
+    -- | The list of the user\'s Instant Messenger (IM) accounts. A user account can have multiple ims properties. But, only one of these ims properties can be the primary IM contact. The maximum allowed data size for this field is 2KB.
     ims :: (Core.Maybe Core.Value),
     -- | Indicates if the user\'s profile is visible in the Google Workspace global address list when the contact sharing feature is enabled for the domain. For more information about excluding user profiles, see the <https://support.google.com/a/answer/1285988 administration help center>.
     includeInGlobalAddressList :: (Core.Maybe Core.Bool),
-    -- | If @true@, the user\'s IP address is <https://support.google.com/a/answer/60752 whitelisted>.
+    -- | If @true@, the user\'s IP address is subject to a deprecated IP address <https://support.google.com/a/answer/60752 allowlist> configuration.
     ipWhitelisted :: (Core.Maybe Core.Bool),
     -- | Output only. Indicates a user with super admininistrator privileges. The @isAdmin@ property can only be edited in the </admin-sdk/directory/v1/guides/manage-users.html#make_admin Make a user an administrator> operation ( </admin-sdk/directory/v1/reference/users/makeAdmin.html makeAdmin> method). If edited in the user </admin-sdk/directory/v1/reference/users/insert.html insert> or </admin-sdk/directory/v1/reference/users/update.html update> methods, the edit is ignored by the API service.
     isAdmin :: (Core.Maybe Core.Bool),
@@ -4983,31 +5511,31 @@ data User = User
     isEnrolledIn2Sv :: (Core.Maybe Core.Bool),
     -- | Output only. Indicates if the user\'s Google mailbox is created. This property is only applicable if the user has been assigned a Gmail license.
     isMailboxSetup :: (Core.Maybe Core.Bool),
-    -- | The user\'s keywords. The maximum allowed data size for this field is 1Kb.
+    -- | The list of the user\'s keywords. The maximum allowed data size for this field is 1KB.
     keywords :: (Core.Maybe Core.Value),
     -- | Output only. The type of the API resource. For Users resources, the value is @admin#directory#user@.
     kind :: Core.Text,
-    -- | The user\'s languages. The maximum allowed data size for this field is 1Kb.
+    -- | The user\'s languages. The maximum allowed data size for this field is 1KB.
     languages :: (Core.Maybe Core.Value),
     -- | User\'s last login time. (Read-only)
     lastLoginTime :: (Core.Maybe Core.DateTime),
-    -- | The user\'s locations. The maximum allowed data size for this field is 10Kb.
+    -- | The user\'s locations. The maximum allowed data size for this field is 10KB.
     locations :: (Core.Maybe Core.Value),
-    -- | Holds the given and family names of the user, and the read-only @fullName@ value. The maximum number of characters in the @givenName@ and in the @familyName@ values is 60. In addition, name values support unicode\/UTF-8 characters, and can contain spaces, letters (a-z), numbers (0-9), dashes (-), forward slashes (\/), and periods (.). For more information about character usage rules, see the <https://support.google.com/a/answer/9193374 administration help center>. Maximum allowed data size for this field is 1Kb.
+    -- | Holds the given and family names of the user, and the read-only @fullName@ value. The maximum number of characters in the @givenName@ and in the @familyName@ values is 60. In addition, name values support unicode\/UTF-8 characters, and can contain spaces, letters (a-z), numbers (0-9), dashes (-), forward slashes (\/), and periods (.). For more information about character usage rules, see the <https://support.google.com/a/answer/9193374 administration help center>. Maximum allowed data size for this field is 1KB.
     name :: (Core.Maybe UserName),
-    -- | Output only. List of the user\'s non-editable alias email addresses. These are typically outside the account\'s primary domain or sub-domain.
+    -- | Output only. The list of the user\'s non-editable alias email addresses. These are typically outside the account\'s primary domain or sub-domain.
     nonEditableAliases :: (Core.Maybe [Core.Text]),
     -- | Notes for the user.
     notes :: (Core.Maybe Core.Value),
     -- | The full path of the parent organization associated with the user. If the parent organization is the top-level, it is represented as a forward slash (@\/@).
     orgUnitPath :: (Core.Maybe Core.Text),
-    -- | A list of organizations the user belongs to. The maximum allowed data size for this field is 10Kb.
+    -- | The list of organizations the user belongs to. The maximum allowed data size for this field is 10KB.
     organizations :: (Core.Maybe Core.Value),
     -- | User\'s password
     password :: (Core.Maybe Core.Text),
-    -- | A list of the user\'s phone numbers. The maximum allowed data size for this field is 1Kb.
+    -- | The list of the user\'s phone numbers. The maximum allowed data size for this field is 1KB.
     phones :: (Core.Maybe Core.Value),
-    -- | A list of <https://www.opengroup.org/austin/papers/posix_faq.html POSIX> account information for the user.
+    -- | The list of <https://www.opengroup.org/austin/papers/posix_faq.html POSIX> account information for the user.
     posixAccounts :: (Core.Maybe Core.Value),
     -- | The user\'s primary email address. This property is required in a request to create a user account. The @primaryEmail@ must be unique and cannot be an alias of another user.
     primaryEmail :: (Core.Maybe Core.Text),
@@ -5015,7 +5543,7 @@ data User = User
     recoveryEmail :: (Core.Maybe Core.Text),
     -- | Recovery phone of the user. The phone number must be in the E.164 format, starting with the plus sign (+). Example: /+16506661212/.
     recoveryPhone :: (Core.Maybe Core.Text),
-    -- | A list of the user\'s relationships to other users. The maximum allowed data size for this field is 2Kb.
+    -- | The list of the user\'s relationships to other users. The maximum allowed data size for this field is 2KB.
     relations :: (Core.Maybe Core.Value),
     -- | A list of SSH public keys.
     sshPublicKeys :: (Core.Maybe Core.Value),
@@ -5025,9 +5553,9 @@ data User = User
     suspensionReason :: (Core.Maybe Core.Text),
     -- | Output only. ETag of the user\'s photo (Read-only)
     thumbnailPhotoEtag :: (Core.Maybe Core.Text),
-    -- | Output only. Photo Url of the user (Read-only)
+    -- | Output only. The URL of the user\'s profile photo. The URL might be temporary or private.
     thumbnailPhotoUrl :: (Core.Maybe Core.Text),
-    -- | The user\'s websites. The maximum allowed data size for this field is 2Kb.
+    -- | The user\'s websites. The maximum allowed data size for this field is 2KB.
     websites :: (Core.Maybe Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5354,6 +5882,60 @@ instance Core.ToJSON UserAddress where
               Core.<$> sourceIsStructured,
             ("streetAddress" Core..=) Core.<$> streetAddress,
             ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | The Directory API manages aliases, which are alternative email addresses.
+--
+-- /See:/ 'newUserAlias' smart constructor.
+data UserAlias = UserAlias
+  { -- | The alias email address.
+    alias :: (Core.Maybe Core.Text),
+    -- | ETag of the resource.
+    etag :: (Core.Maybe Core.Text),
+    -- | The unique ID for the user.
+    id :: (Core.Maybe Core.Text),
+    -- | The type of the API resource. For Alias resources, the value is @admin#directory#alias@.
+    kind :: (Core.Maybe Core.Text),
+    -- | The user\'s primary email address.
+    primaryEmail :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserAlias' with the minimum fields required to make a request.
+newUserAlias ::
+  UserAlias
+newUserAlias =
+  UserAlias
+    { alias = Core.Nothing,
+      etag = Core.Nothing,
+      id = Core.Nothing,
+      kind = Core.Nothing,
+      primaryEmail = Core.Nothing
+    }
+
+instance Core.FromJSON UserAlias where
+  parseJSON =
+    Core.withObject
+      "UserAlias"
+      ( \o ->
+          UserAlias
+            Core.<$> (o Core..:? "alias")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "primaryEmail")
+      )
+
+instance Core.ToJSON UserAlias where
+  toJSON UserAlias {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alias" Core..=) Core.<$> alias,
+            ("etag" Core..=) Core.<$> etag,
+            ("id" Core..=) Core.<$> id,
+            ("kind" Core..=) Core.<$> kind,
+            ("primaryEmail" Core..=) Core.<$> primaryEmail
           ]
       )
 
@@ -5761,7 +6343,9 @@ instance Core.ToJSON UserMakeAdmin where
 --
 -- /See:/ 'newUserName' smart constructor.
 data UserName = UserName
-  { -- | The user\'s last name. Required when creating a user account.
+  { -- | The user\'s display name. Limit: 256 characters.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The user\'s last name. Required when creating a user account.
     familyName :: (Core.Maybe Core.Text),
     -- | The user\'s full name formed by concatenating the first and last name values.
     fullName :: (Core.Maybe Core.Text),
@@ -5775,7 +6359,8 @@ newUserName ::
   UserName
 newUserName =
   UserName
-    { familyName = Core.Nothing,
+    { displayName = Core.Nothing,
+      familyName = Core.Nothing,
       fullName = Core.Nothing,
       givenName = Core.Nothing
     }
@@ -5786,7 +6371,8 @@ instance Core.FromJSON UserName where
       "UserName"
       ( \o ->
           UserName
-            Core.<$> (o Core..:? "familyName")
+            Core.<$> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "familyName")
             Core.<*> (o Core..:? "fullName")
             Core.<*> (o Core..:? "givenName")
       )
@@ -5795,7 +6381,8 @@ instance Core.ToJSON UserName where
   toJSON UserName {..} =
     Core.object
       ( Core.catMaybes
-          [ ("familyName" Core..=) Core.<$> familyName,
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("familyName" Core..=) Core.<$> familyName,
             ("fullName" Core..=) Core.<$> fullName,
             ("givenName" Core..=) Core.<$> givenName
           ]
@@ -6269,7 +6856,7 @@ data Users = Users
     nextPageToken :: (Core.Maybe Core.Text),
     -- | Event that triggered this response (only used in case of Push Response)
     triggerEvent :: (Core.Maybe Core.Text),
-    -- | List of user objects.
+    -- | A list of user objects.
     users :: (Core.Maybe [User])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6363,7 +6950,7 @@ instance Core.ToJSON VerificationCode where
           ]
       )
 
--- | JSON response template for List verification codes operation in Directory API.
+-- | JSON response template for list verification codes operation in Directory API.
 --
 -- /See:/ 'newVerificationCodes' smart constructor.
 data VerificationCodes = VerificationCodes

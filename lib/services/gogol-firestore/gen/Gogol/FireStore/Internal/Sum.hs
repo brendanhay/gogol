@@ -37,6 +37,7 @@ module Gogol.FireStore.Internal.Sum
     CompositeFilter_Op
       ( CompositeFilter_Op_OPERATORUNSPECIFIED,
         CompositeFilter_Op_And,
+        CompositeFilter_Op_OR,
         ..
       ),
 
@@ -127,11 +128,19 @@ module Gogol.FireStore.Internal.Sum
         ..
       ),
 
+    -- * GoogleFirestoreAdminV1Index_ApiScope
+    GoogleFirestoreAdminV1Index_ApiScope
+      ( GoogleFirestoreAdminV1Index_ApiScope_ANYAPI,
+        GoogleFirestoreAdminV1Index_ApiScope_DATASTOREMODEAPI,
+        ..
+      ),
+
     -- * GoogleFirestoreAdminV1Index_QueryScope
     GoogleFirestoreAdminV1Index_QueryScope
       ( GoogleFirestoreAdminV1Index_QueryScope_QUERYSCOPEUNSPECIFIED,
         GoogleFirestoreAdminV1Index_QueryScope_Collection,
         GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP,
+        GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONRECURSIVE,
         ..
       ),
 
@@ -177,6 +186,23 @@ module Gogol.FireStore.Internal.Sum
         GoogleFirestoreAdminV1IndexOperationMetadata_State_Successful,
         GoogleFirestoreAdminV1IndexOperationMetadata_State_Failed,
         GoogleFirestoreAdminV1IndexOperationMetadata_State_Cancelled,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1TtlConfig_State
+    GoogleFirestoreAdminV1TtlConfig_State
+      ( GoogleFirestoreAdminV1TtlConfig_State_STATEUNSPECIFIED,
+        GoogleFirestoreAdminV1TtlConfig_State_Creating,
+        GoogleFirestoreAdminV1TtlConfig_State_Active,
+        GoogleFirestoreAdminV1TtlConfig_State_NEEDSREPAIR,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+    GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+      ( GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_CHANGETYPEUNSPECIFIED,
+        GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add,
+        GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove,
         ..
       ),
 
@@ -262,13 +288,18 @@ newtype CompositeFilter_Op = CompositeFilter_Op {fromCompositeFilter_Op :: Core.
 pattern CompositeFilter_Op_OPERATORUNSPECIFIED :: CompositeFilter_Op
 pattern CompositeFilter_Op_OPERATORUNSPECIFIED = CompositeFilter_Op "OPERATOR_UNSPECIFIED"
 
--- | The results are required to satisfy each of the combined filters.
+-- | Documents are required to satisfy all of the combined filters.
 pattern CompositeFilter_Op_And :: CompositeFilter_Op
 pattern CompositeFilter_Op_And = CompositeFilter_Op "AND"
+
+-- | Documents are required to satisfy at least one of the combined filters.
+pattern CompositeFilter_Op_OR :: CompositeFilter_Op
+pattern CompositeFilter_Op_OR = CompositeFilter_Op "OR"
 
 {-# COMPLETE
   CompositeFilter_Op_OPERATORUNSPECIFIED,
   CompositeFilter_Op_And,
+  CompositeFilter_Op_OR,
   CompositeFilter_Op
   #-}
 
@@ -317,15 +348,15 @@ pattern FieldFilter_Op_NOTEQUAL = FieldFilter_Op "NOT_EQUAL"
 pattern FieldFilter_Op_ARRAYCONTAINS :: FieldFilter_Op
 pattern FieldFilter_Op_ARRAYCONTAINS = FieldFilter_Op "ARRAY_CONTAINS"
 
--- | The given @field@ is equal to at least one value in the given array. Requires: * That @value@ is a non-empty @ArrayValue@ with at most 10 values. * No other @IN@ or @ARRAY_CONTAINS_ANY@ or @NOT_IN@.
+-- | The given @field@ is equal to at least one value in the given array. Requires: * That @value@ is a non-empty @ArrayValue@, subject to disjunction limits. * No @NOT_IN@ filters in the same query.
 pattern FieldFilter_Op_IN :: FieldFilter_Op
 pattern FieldFilter_Op_IN = FieldFilter_Op "IN"
 
--- | The given @field@ is an array that contains any of the values in the given array. Requires: * That @value@ is a non-empty @ArrayValue@ with at most 10 values. * No other @IN@ or @ARRAY_CONTAINS_ANY@ or @NOT_IN@.
+-- | The given @field@ is an array that contains any of the values in the given array. Requires: * That @value@ is a non-empty @ArrayValue@, subject to disjunction limits. * No other @ARRAY_CONTAINS_ANY@ filters within the same disjunction. * No @NOT_IN@ filters in the same query.
 pattern FieldFilter_Op_ARRAYCONTAINSANY :: FieldFilter_Op
 pattern FieldFilter_Op_ARRAYCONTAINSANY = FieldFilter_Op "ARRAY_CONTAINS_ANY"
 
--- | The value of the @field@ is not in the given array. Requires: * That @value@ is a non-empty @ArrayValue@ with at most 10 values. * No other @IN@, @ARRAY_CONTAINS_ANY@, @NOT_IN@, @NOT_EQUAL@, @IS_NOT_NULL@, or @IS_NOT_NAN@. * That @field@ comes first in the @order_by@.
+-- | The value of the @field@ is not in the given array. Requires: * That @value@ is a non-empty @ArrayValue@ with at most 10 values. * No other @OR@, @IN@, @ARRAY_CONTAINS_ANY@, @NOT_IN@, @NOT_EQUAL@, @IS_NOT_NULL@, or @IS_NOT_NAN@. * That @field@ comes first in the @order_by@.
 pattern FieldFilter_Op_NOTIN :: FieldFilter_Op
 pattern FieldFilter_Op_NOTIN = FieldFilter_Op "NOT_IN"
 
@@ -392,7 +423,7 @@ pattern GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_APPENGINEINTEGRA
 pattern GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_Enabled :: GoogleFirestoreAdminV1Database_AppEngineIntegrationMode
 pattern GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_Enabled = GoogleFirestoreAdminV1Database_AppEngineIntegrationMode "ENABLED"
 
--- | Appengine has no affect on the ability of this database to serve requests.
+-- | App Engine has no effect on the ability of this database to serve requests. This is the default setting for databases created with the Firestore API.
 pattern GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_Disabled :: GoogleFirestoreAdminV1Database_AppEngineIntegrationMode
 pattern GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_Disabled = GoogleFirestoreAdminV1Database_AppEngineIntegrationMode "DISABLED"
 
@@ -420,15 +451,15 @@ newtype GoogleFirestoreAdminV1Database_ConcurrencyMode = GoogleFirestoreAdminV1D
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED :: GoogleFirestoreAdminV1Database_ConcurrencyMode
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_CONCURRENCYMODEUNSPECIFIED = GoogleFirestoreAdminV1Database_ConcurrencyMode "CONCURRENCY_MODE_UNSPECIFIED"
 
--- | Use optimistic concurrency control by default. This setting is available for Cloud Firestore customers.
+-- | Use optimistic concurrency control by default. This mode is available for Cloud Firestore databases.
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_Optimistic :: GoogleFirestoreAdminV1Database_ConcurrencyMode
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_Optimistic = GoogleFirestoreAdminV1Database_ConcurrencyMode "OPTIMISTIC"
 
--- | Use pessimistic concurrency control by default. This setting is available for Cloud Firestore customers. This is the default setting for Cloud Firestore.
+-- | Use pessimistic concurrency control by default. This mode is available for Cloud Firestore databases. This is the default setting for Cloud Firestore.
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_Pessimistic :: GoogleFirestoreAdminV1Database_ConcurrencyMode
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_Pessimistic = GoogleFirestoreAdminV1Database_ConcurrencyMode "PESSIMISTIC"
 
--- | Use optimistic concurrency control with entity groups by default. This is the only available setting for Cloud Datastore customers. This is the default setting for Cloud Datastore.
+-- | Use optimistic concurrency control with entity groups by default. This is the only available mode for Cloud Datastore. This mode is also available for Cloud Firestore with Datastore Mode but is not recommended.
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS :: GoogleFirestoreAdminV1Database_ConcurrencyMode
 pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS = GoogleFirestoreAdminV1Database_ConcurrencyMode "OPTIMISTIC_WITH_ENTITY_GROUPS"
 
@@ -643,6 +674,33 @@ pattern GoogleFirestoreAdminV1ImportDocumentsMetadata_OperationState_Cancelled =
   GoogleFirestoreAdminV1ImportDocumentsMetadata_OperationState
   #-}
 
+-- | The API scope supported by this index.
+newtype GoogleFirestoreAdminV1Index_ApiScope = GoogleFirestoreAdminV1Index_ApiScope {fromGoogleFirestoreAdminV1Index_ApiScope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The index can be used by both Firestore Native and Firestore in Datastore Mode query API. This is the default.
+pattern GoogleFirestoreAdminV1Index_ApiScope_ANYAPI :: GoogleFirestoreAdminV1Index_ApiScope
+pattern GoogleFirestoreAdminV1Index_ApiScope_ANYAPI = GoogleFirestoreAdminV1Index_ApiScope "ANY_API"
+
+-- | The index can only be used by the Firestore in Datastore Mode query API.
+pattern GoogleFirestoreAdminV1Index_ApiScope_DATASTOREMODEAPI :: GoogleFirestoreAdminV1Index_ApiScope
+pattern GoogleFirestoreAdminV1Index_ApiScope_DATASTOREMODEAPI = GoogleFirestoreAdminV1Index_ApiScope "DATASTORE_MODE_API"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1Index_ApiScope_ANYAPI,
+  GoogleFirestoreAdminV1Index_ApiScope_DATASTOREMODEAPI,
+  GoogleFirestoreAdminV1Index_ApiScope
+  #-}
+
 -- | Indexes with a collection query scope specified allow queries against a collection that is the child of a specific document, specified at query time, and that has the same collection id. Indexes with a collection group query scope specified allow queries against all collections descended from a specific document, specified at query time, and that have the same collection id as this index.
 newtype GoogleFirestoreAdminV1Index_QueryScope = GoogleFirestoreAdminV1Index_QueryScope {fromGoogleFirestoreAdminV1Index_QueryScope :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -668,10 +726,15 @@ pattern GoogleFirestoreAdminV1Index_QueryScope_Collection = GoogleFirestoreAdmin
 pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP :: GoogleFirestoreAdminV1Index_QueryScope
 pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP = GoogleFirestoreAdminV1Index_QueryScope "COLLECTION_GROUP"
 
+-- | Include all the collections\'s ancestor in the index. Only available for Datastore Mode databases.
+pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONRECURSIVE :: GoogleFirestoreAdminV1Index_QueryScope
+pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONRECURSIVE = GoogleFirestoreAdminV1Index_QueryScope "COLLECTION_RECURSIVE"
+
 {-# COMPLETE
   GoogleFirestoreAdminV1Index_QueryScope_QUERYSCOPEUNSPECIFIED,
   GoogleFirestoreAdminV1Index_QueryScope_Collection,
   GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP,
+  GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONRECURSIVE,
   GoogleFirestoreAdminV1Index_QueryScope
   #-}
 
@@ -858,6 +921,75 @@ pattern GoogleFirestoreAdminV1IndexOperationMetadata_State_Cancelled = GoogleFir
   GoogleFirestoreAdminV1IndexOperationMetadata_State_Failed,
   GoogleFirestoreAdminV1IndexOperationMetadata_State_Cancelled,
   GoogleFirestoreAdminV1IndexOperationMetadata_State
+  #-}
+
+-- | Output only. The state of the TTL configuration.
+newtype GoogleFirestoreAdminV1TtlConfig_State = GoogleFirestoreAdminV1TtlConfig_State {fromGoogleFirestoreAdminV1TtlConfig_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state is unspecified or unknown.
+pattern GoogleFirestoreAdminV1TtlConfig_State_STATEUNSPECIFIED :: GoogleFirestoreAdminV1TtlConfig_State
+pattern GoogleFirestoreAdminV1TtlConfig_State_STATEUNSPECIFIED = GoogleFirestoreAdminV1TtlConfig_State "STATE_UNSPECIFIED"
+
+-- | The TTL is being applied. There is an active long-running operation to track the change. Newly written documents will have TTLs applied as requested. Requested TTLs on existing documents are still being processed. When TTLs on all existing documents have been processed, the state will move to \'ACTIVE\'.
+pattern GoogleFirestoreAdminV1TtlConfig_State_Creating :: GoogleFirestoreAdminV1TtlConfig_State
+pattern GoogleFirestoreAdminV1TtlConfig_State_Creating = GoogleFirestoreAdminV1TtlConfig_State "CREATING"
+
+-- | The TTL is active for all documents.
+pattern GoogleFirestoreAdminV1TtlConfig_State_Active :: GoogleFirestoreAdminV1TtlConfig_State
+pattern GoogleFirestoreAdminV1TtlConfig_State_Active = GoogleFirestoreAdminV1TtlConfig_State "ACTIVE"
+
+-- | The TTL configuration could not be enabled for all existing documents. Newly written documents will continue to have their TTL applied. The LRO returned when last attempting to enable TTL for this @Field@ has failed, and may have more details.
+pattern GoogleFirestoreAdminV1TtlConfig_State_NEEDSREPAIR :: GoogleFirestoreAdminV1TtlConfig_State
+pattern GoogleFirestoreAdminV1TtlConfig_State_NEEDSREPAIR = GoogleFirestoreAdminV1TtlConfig_State "NEEDS_REPAIR"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1TtlConfig_State_STATEUNSPECIFIED,
+  GoogleFirestoreAdminV1TtlConfig_State_Creating,
+  GoogleFirestoreAdminV1TtlConfig_State_Active,
+  GoogleFirestoreAdminV1TtlConfig_State_NEEDSREPAIR,
+  GoogleFirestoreAdminV1TtlConfig_State
+  #-}
+
+-- | Specifies how the TTL configuration is changing.
+newtype GoogleFirestoreAdminV1TtlConfigDelta_ChangeType = GoogleFirestoreAdminV1TtlConfigDelta_ChangeType {fromGoogleFirestoreAdminV1TtlConfigDelta_ChangeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The type of change is not specified or known.
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_CHANGETYPEUNSPECIFIED :: GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_CHANGETYPEUNSPECIFIED = GoogleFirestoreAdminV1TtlConfigDelta_ChangeType "CHANGE_TYPE_UNSPECIFIED"
+
+-- | The TTL config is being added.
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add :: GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add = GoogleFirestoreAdminV1TtlConfigDelta_ChangeType "ADD"
+
+-- | The TTL config is being removed.
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove :: GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove = GoogleFirestoreAdminV1TtlConfigDelta_ChangeType "REMOVE"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_CHANGETYPEUNSPECIFIED,
+  GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add,
+  GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove,
+  GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
   #-}
 
 -- | The direction to order by. Defaults to @ASCENDING@.

@@ -74,9 +74,9 @@ data DLPProjectsLocationsDeidentifyTemplatesList = DLPProjectsLocationsDeidentif
     callback :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | Comma separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to time the template was created. - @update_time@: corresponds to time the template was last updated. - @name@: corresponds to template\'s name. - @display_name@: corresponds to template\'s display name.
+    -- | Comma separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the template was created. - @update_time@: corresponds to the time the template was last updated. - @name@: corresponds to the template\'s name. - @display_name@: corresponds to the template\'s display name.
     orderBy :: (Core.Maybe Core.Text),
-    -- | Size of the page, can be limited by server. If zero server returns a page of max size 100.
+    -- | Size of the page, can be limited by the server. If zero server returns a page of max size 100.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Page token to continue retrieval. Comes from previous call to @ListDeidentifyTemplates@.
     pageToken :: (Core.Maybe Core.Text),

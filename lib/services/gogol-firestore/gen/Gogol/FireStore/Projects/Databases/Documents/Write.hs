@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Streams batches of document updates and deletes, in order.
+-- Streams batches of document updates and deletes, in order. This method is only available via gRPC or WebChannel (not REST).
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.documents.write@.
 module Gogol.FireStore.Projects.Databases.Documents.Write
@@ -57,7 +57,7 @@ type FireStoreProjectsDatabasesDocumentsWriteResource =
     Core.:> Core.ReqBody '[Core.JSON] WriteRequest
     Core.:> Core.Post '[Core.JSON] WriteResponse
 
--- | Streams batches of document updates and deletes, in order.
+-- | Streams batches of document updates and deletes, in order. This method is only available via gRPC or WebChannel (not REST).
 --
 -- /See:/ 'newFireStoreProjectsDatabasesDocumentsWrite' smart constructor.
 data FireStoreProjectsDatabasesDocumentsWrite = FireStoreProjectsDatabasesDocumentsWrite

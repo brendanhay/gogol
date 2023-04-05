@@ -46,10 +46,6 @@ module Gogol.GamesConfiguration.Internal.Product
     GamesNumberFormatConfiguration (..),
     newGamesNumberFormatConfiguration,
 
-    -- * ImageConfiguration
-    ImageConfiguration (..),
-    newImageConfiguration,
-
     -- * LeaderboardConfiguration
     LeaderboardConfiguration (..),
     newLeaderboardConfiguration,
@@ -361,55 +357,6 @@ instance Core.ToJSON GamesNumberFormatConfiguration where
             ("numberFormatType" Core..=)
               Core.<$> numberFormatType,
             ("suffix" Core..=) Core.<$> suffix
-          ]
-      )
-
--- | An image configuration resource.
---
--- /See:/ 'newImageConfiguration' smart constructor.
-data ImageConfiguration = ImageConfiguration
-  { -- | The image type for the image.
-    imageType :: (Core.Maybe ImageConfiguration_ImageType),
-    -- | Uniquely identifies the type of this resource. Value is always the fixed string @gamesConfiguration#imageConfiguration@.
-    kind :: (Core.Maybe Core.Text),
-    -- | The resource ID of resource which the image belongs to.
-    resourceId :: (Core.Maybe Core.Text),
-    -- | The url for this image.
-    url :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ImageConfiguration' with the minimum fields required to make a request.
-newImageConfiguration ::
-  ImageConfiguration
-newImageConfiguration =
-  ImageConfiguration
-    { imageType = Core.Nothing,
-      kind = Core.Nothing,
-      resourceId = Core.Nothing,
-      url = Core.Nothing
-    }
-
-instance Core.FromJSON ImageConfiguration where
-  parseJSON =
-    Core.withObject
-      "ImageConfiguration"
-      ( \o ->
-          ImageConfiguration
-            Core.<$> (o Core..:? "imageType")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "resourceId")
-            Core.<*> (o Core..:? "url")
-      )
-
-instance Core.ToJSON ImageConfiguration where
-  toJSON ImageConfiguration {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("imageType" Core..=) Core.<$> imageType,
-            ("kind" Core..=) Core.<$> kind,
-            ("resourceId" Core..=) Core.<$> resourceId,
-            ("url" Core..=) Core.<$> url
           ]
       )
 

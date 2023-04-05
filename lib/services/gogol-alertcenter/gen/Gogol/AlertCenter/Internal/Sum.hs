@@ -106,6 +106,7 @@ module Gogol.AlertCenter.Internal.Sum
       ( RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+        RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE,
         RuleViolationInfo_SuppressedActionTypesItem_Alert,
         RuleViolationInfo_SuppressedActionTypesItem_RULEACTIVATE,
         RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE,
@@ -124,9 +125,45 @@ module Gogol.AlertCenter.Internal.Sum
       ( RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+        RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE,
         RuleViolationInfo_TriggeredActionTypesItem_Alert,
         RuleViolationInfo_TriggeredActionTypesItem_RULEACTIVATE,
         RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,
+        ..
+      ),
+
+    -- * TransferError_EntityType
+    TransferError_EntityType
+      ( TransferError_EntityType_TRANSFERENTITYTYPEUNSPECIFIED,
+        TransferError_EntityType_TRANSFERAUTOATTENDANT,
+        TransferError_EntityType_TRANSFERRINGGROUP,
+        TransferError_EntityType_TRANSFERUSER,
+        ..
+      ),
+
+    -- * TransferError_InvalidReason
+    TransferError_InvalidReason
+      ( TransferError_InvalidReason_TRANSFERINVALIDREASONUNSPECIFIED,
+        TransferError_InvalidReason_TRANSFERTARGETDELETED,
+        TransferError_InvalidReason_Unlicensed,
+        TransferError_InvalidReason_Suspended,
+        TransferError_InvalidReason_NOPHONENUMBER,
+        ..
+      ),
+
+    -- * VoiceMisconfiguration_EntityType
+    VoiceMisconfiguration_EntityType
+      ( VoiceMisconfiguration_EntityType_ENTITYTYPEUNSPECIFIED,
+        VoiceMisconfiguration_EntityType_AUTOATTENDANT,
+        VoiceMisconfiguration_EntityType_RINGGROUP,
+        ..
+      ),
+
+    -- * VoicemailRecipientError_InvalidReason
+    VoicemailRecipientError_InvalidReason
+      ( VoicemailRecipientError_InvalidReason_EMAILINVALIDREASONUNSPECIFIED,
+        VoicemailRecipientError_InvalidReason_OUTOFQUOTA,
+        VoicemailRecipientError_InvalidReason_RECIPIENTDELETED,
         ..
       ),
   )
@@ -469,6 +506,10 @@ pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING = 
 pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING :: RuleViolationInfo_SuppressedActionTypesItem
 pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING = RuleViolationInfo_SuppressedActionTypesItem "DRIVE_WARN_ON_EXTERNAL_SHARING"
 
+-- | Delete web protect evidence file
+pattern RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE = RuleViolationInfo_SuppressedActionTypesItem "DELETE_WEBPROTECT_EVIDENCE"
+
 -- | Send alert.
 pattern RuleViolationInfo_SuppressedActionTypesItem_Alert :: RuleViolationInfo_SuppressedActionTypesItem
 pattern RuleViolationInfo_SuppressedActionTypesItem_Alert = RuleViolationInfo_SuppressedActionTypesItem "ALERT"
@@ -485,6 +526,7 @@ pattern RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE = RuleViolati
   RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
   RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
   RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+  RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE,
   RuleViolationInfo_SuppressedActionTypesItem_Alert,
   RuleViolationInfo_SuppressedActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE,
@@ -542,6 +584,10 @@ pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING = R
 pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING :: RuleViolationInfo_TriggeredActionTypesItem
 pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING = RuleViolationInfo_TriggeredActionTypesItem "DRIVE_WARN_ON_EXTERNAL_SHARING"
 
+-- | Delete web protect evidence file
+pattern RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE = RuleViolationInfo_TriggeredActionTypesItem "DELETE_WEBPROTECT_EVIDENCE"
+
 -- | Send alert.
 pattern RuleViolationInfo_TriggeredActionTypesItem_Alert :: RuleViolationInfo_TriggeredActionTypesItem
 pattern RuleViolationInfo_TriggeredActionTypesItem_Alert = RuleViolationInfo_TriggeredActionTypesItem "ALERT"
@@ -558,8 +604,152 @@ pattern RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE = RuleViolatio
   RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
   RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
   RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+  RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE,
   RuleViolationInfo_TriggeredActionTypesItem_Alert,
   RuleViolationInfo_TriggeredActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,
   RuleViolationInfo_TriggeredActionTypesItem
+  #-}
+
+-- | Type of entity being transferred to. For ring group members, this should always be USER.
+newtype TransferError_EntityType = TransferError_EntityType {fromTransferError_EntityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Entity type wasn\'t set.
+pattern TransferError_EntityType_TRANSFERENTITYTYPEUNSPECIFIED :: TransferError_EntityType
+pattern TransferError_EntityType_TRANSFERENTITYTYPEUNSPECIFIED = TransferError_EntityType "TRANSFER_ENTITY_TYPE_UNSPECIFIED"
+
+-- | Transfer to auto attendant.
+pattern TransferError_EntityType_TRANSFERAUTOATTENDANT :: TransferError_EntityType
+pattern TransferError_EntityType_TRANSFERAUTOATTENDANT = TransferError_EntityType "TRANSFER_AUTO_ATTENDANT"
+
+-- | Transfer to ring group.
+pattern TransferError_EntityType_TRANSFERRINGGROUP :: TransferError_EntityType
+pattern TransferError_EntityType_TRANSFERRINGGROUP = TransferError_EntityType "TRANSFER_RING_GROUP"
+
+-- | Transfer to user.
+pattern TransferError_EntityType_TRANSFERUSER :: TransferError_EntityType
+pattern TransferError_EntityType_TRANSFERUSER = TransferError_EntityType "TRANSFER_USER"
+
+{-# COMPLETE
+  TransferError_EntityType_TRANSFERENTITYTYPEUNSPECIFIED,
+  TransferError_EntityType_TRANSFERAUTOATTENDANT,
+  TransferError_EntityType_TRANSFERRINGGROUP,
+  TransferError_EntityType_TRANSFERUSER,
+  TransferError_EntityType
+  #-}
+
+-- | Reason for the error.
+newtype TransferError_InvalidReason = TransferError_InvalidReason {fromTransferError_InvalidReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reason wasn\'t specified.
+pattern TransferError_InvalidReason_TRANSFERINVALIDREASONUNSPECIFIED :: TransferError_InvalidReason
+pattern TransferError_InvalidReason_TRANSFERINVALIDREASONUNSPECIFIED = TransferError_InvalidReason "TRANSFER_INVALID_REASON_UNSPECIFIED"
+
+-- | The transfer target can\'t be found—most likely it was deleted.
+pattern TransferError_InvalidReason_TRANSFERTARGETDELETED :: TransferError_InvalidReason
+pattern TransferError_InvalidReason_TRANSFERTARGETDELETED = TransferError_InvalidReason "TRANSFER_TARGET_DELETED"
+
+-- | The user\'s Google Voice license was removed.
+pattern TransferError_InvalidReason_Unlicensed :: TransferError_InvalidReason
+pattern TransferError_InvalidReason_Unlicensed = TransferError_InvalidReason "UNLICENSED"
+
+-- | The user\'s Google Workspace account was suspended.
+pattern TransferError_InvalidReason_Suspended :: TransferError_InvalidReason
+pattern TransferError_InvalidReason_Suspended = TransferError_InvalidReason "SUSPENDED"
+
+-- | The transfer target no longer has a phone number. This reason should become deprecated once we support numberless transfer.
+pattern TransferError_InvalidReason_NOPHONENUMBER :: TransferError_InvalidReason
+pattern TransferError_InvalidReason_NOPHONENUMBER = TransferError_InvalidReason "NO_PHONE_NUMBER"
+
+{-# COMPLETE
+  TransferError_InvalidReason_TRANSFERINVALIDREASONUNSPECIFIED,
+  TransferError_InvalidReason_TRANSFERTARGETDELETED,
+  TransferError_InvalidReason_Unlicensed,
+  TransferError_InvalidReason_Suspended,
+  TransferError_InvalidReason_NOPHONENUMBER,
+  TransferError_InvalidReason
+  #-}
+
+-- | Type of the entity whose configuration is now invalid.
+newtype VoiceMisconfiguration_EntityType = VoiceMisconfiguration_EntityType {fromVoiceMisconfiguration_EntityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Entity type wasn\'t set.
+pattern VoiceMisconfiguration_EntityType_ENTITYTYPEUNSPECIFIED :: VoiceMisconfiguration_EntityType
+pattern VoiceMisconfiguration_EntityType_ENTITYTYPEUNSPECIFIED = VoiceMisconfiguration_EntityType "ENTITY_TYPE_UNSPECIFIED"
+
+-- | Invalid auto attendant.
+pattern VoiceMisconfiguration_EntityType_AUTOATTENDANT :: VoiceMisconfiguration_EntityType
+pattern VoiceMisconfiguration_EntityType_AUTOATTENDANT = VoiceMisconfiguration_EntityType "AUTO_ATTENDANT"
+
+-- | Invalid ring group.
+pattern VoiceMisconfiguration_EntityType_RINGGROUP :: VoiceMisconfiguration_EntityType
+pattern VoiceMisconfiguration_EntityType_RINGGROUP = VoiceMisconfiguration_EntityType "RING_GROUP"
+
+{-# COMPLETE
+  VoiceMisconfiguration_EntityType_ENTITYTYPEUNSPECIFIED,
+  VoiceMisconfiguration_EntityType_AUTOATTENDANT,
+  VoiceMisconfiguration_EntityType_RINGGROUP,
+  VoiceMisconfiguration_EntityType
+  #-}
+
+-- | Reason for the error.
+newtype VoicemailRecipientError_InvalidReason = VoicemailRecipientError_InvalidReason {fromVoicemailRecipientError_InvalidReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reason wasn\'t specified.
+pattern VoicemailRecipientError_InvalidReason_EMAILINVALIDREASONUNSPECIFIED :: VoicemailRecipientError_InvalidReason
+pattern VoicemailRecipientError_InvalidReason_EMAILINVALIDREASONUNSPECIFIED = VoicemailRecipientError_InvalidReason "EMAIL_INVALID_REASON_UNSPECIFIED"
+
+-- | User can\'t receive emails due to insufficient quota.
+pattern VoicemailRecipientError_InvalidReason_OUTOFQUOTA :: VoicemailRecipientError_InvalidReason
+pattern VoicemailRecipientError_InvalidReason_OUTOFQUOTA = VoicemailRecipientError_InvalidReason "OUT_OF_QUOTA"
+
+-- | All recipients were deleted.
+pattern VoicemailRecipientError_InvalidReason_RECIPIENTDELETED :: VoicemailRecipientError_InvalidReason
+pattern VoicemailRecipientError_InvalidReason_RECIPIENTDELETED = VoicemailRecipientError_InvalidReason "RECIPIENT_DELETED"
+
+{-# COMPLETE
+  VoicemailRecipientError_InvalidReason_EMAILINVALIDREASONUNSPECIFIED,
+  VoicemailRecipientError_InvalidReason_OUTOFQUOTA,
+  VoicemailRecipientError_InvalidReason_RECIPIENTDELETED,
+  VoicemailRecipientError_InvalidReason
   #-}

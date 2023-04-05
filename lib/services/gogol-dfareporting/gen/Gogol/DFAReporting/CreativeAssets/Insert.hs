@@ -46,7 +46,7 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingCreativeAssetsInsert' request conforms to.
 type DFAReportingCreativeAssetsInsertResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "creativeAssets"
@@ -62,7 +62,7 @@ type DFAReportingCreativeAssetsInsertResource =
     Core.:> Core.Post '[Core.JSON] CreativeAssetMetadata
     Core.:<|> "upload"
       Core.:> "dfareporting"
-      Core.:> "v3.5"
+      Core.:> "v4"
       Core.:> "userprofiles"
       Core.:> Core.Capture "profileId" Core.Int64
       Core.:> "creativeAssets"

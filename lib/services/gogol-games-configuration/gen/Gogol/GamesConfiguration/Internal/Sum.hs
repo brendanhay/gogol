@@ -58,27 +58,11 @@ module Gogol.GamesConfiguration.Internal.Sum
         ..
       ),
 
-    -- * ImageConfiguration_ImageType
-    ImageConfiguration_ImageType
-      ( ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED,
-        ImageConfiguration_ImageType_ACHIEVEMENTICON,
-        ImageConfiguration_ImageType_LEADERBOARDICON,
-        ..
-      ),
-
     -- * LeaderboardConfiguration_ScoreOrder
     LeaderboardConfiguration_ScoreOrder
       ( LeaderboardConfiguration_ScoreOrder_SCOREORDERUNSPECIFIED,
         LeaderboardConfiguration_ScoreOrder_LARGERISBETTER,
         LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER,
-        ..
-      ),
-
-    -- * ImageConfigurationsUploadImageType
-    ImageConfigurationsUploadImageType
-      ( ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED,
-        ImageConfigurationsUploadImageType_ACHIEVEMENTICON,
-        ImageConfigurationsUploadImageType_LEADERBOARDICON,
         ..
       ),
   )
@@ -214,38 +198,6 @@ pattern GamesNumberFormatConfiguration_NumberFormatType_Currency = GamesNumberFo
   GamesNumberFormatConfiguration_NumberFormatType
   #-}
 
--- | The image type for the image.
-newtype ImageConfiguration_ImageType = ImageConfiguration_ImageType {fromImageConfiguration_ImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default value. This value is unused.
-pattern ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED :: ImageConfiguration_ImageType
-pattern ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED = ImageConfiguration_ImageType "IMAGE_TYPE_UNSPECIFIED"
-
--- | The icon image for an achievement resource.
-pattern ImageConfiguration_ImageType_ACHIEVEMENTICON :: ImageConfiguration_ImageType
-pattern ImageConfiguration_ImageType_ACHIEVEMENTICON = ImageConfiguration_ImageType "ACHIEVEMENT_ICON"
-
--- | The icon image for a leaderboard resource.
-pattern ImageConfiguration_ImageType_LEADERBOARDICON :: ImageConfiguration_ImageType
-pattern ImageConfiguration_ImageType_LEADERBOARDICON = ImageConfiguration_ImageType "LEADERBOARD_ICON"
-
-{-# COMPLETE
-  ImageConfiguration_ImageType_IMAGETYPEUNSPECIFIED,
-  ImageConfiguration_ImageType_ACHIEVEMENTICON,
-  ImageConfiguration_ImageType_LEADERBOARDICON,
-  ImageConfiguration_ImageType
-  #-}
-
 newtype LeaderboardConfiguration_ScoreOrder = LeaderboardConfiguration_ScoreOrder {fromLeaderboardConfiguration_ScoreOrder :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -275,36 +227,4 @@ pattern LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER = LeaderboardConfigu
   LeaderboardConfiguration_ScoreOrder_LARGERISBETTER,
   LeaderboardConfiguration_ScoreOrder_SMALLERISBETTER,
   LeaderboardConfiguration_ScoreOrder
-  #-}
-
--- | Selects which image in a resource for this method.
-newtype ImageConfigurationsUploadImageType = ImageConfigurationsUploadImageType {fromImageConfigurationsUploadImageType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default value. This value is unused.
-pattern ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED :: ImageConfigurationsUploadImageType
-pattern ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED = ImageConfigurationsUploadImageType "IMAGE_TYPE_UNSPECIFIED"
-
--- | The icon image for an achievement resource.
-pattern ImageConfigurationsUploadImageType_ACHIEVEMENTICON :: ImageConfigurationsUploadImageType
-pattern ImageConfigurationsUploadImageType_ACHIEVEMENTICON = ImageConfigurationsUploadImageType "ACHIEVEMENT_ICON"
-
--- | The icon image for a leaderboard resource.
-pattern ImageConfigurationsUploadImageType_LEADERBOARDICON :: ImageConfigurationsUploadImageType
-pattern ImageConfigurationsUploadImageType_LEADERBOARDICON = ImageConfigurationsUploadImageType "LEADERBOARD_ICON"
-
-{-# COMPLETE
-  ImageConfigurationsUploadImageType_IMAGETYPEUNSPECIFIED,
-  ImageConfigurationsUploadImageType_ACHIEVEMENTICON,
-  ImageConfigurationsUploadImageType_LEADERBOARDICON,
-  ImageConfigurationsUploadImageType
   #-}

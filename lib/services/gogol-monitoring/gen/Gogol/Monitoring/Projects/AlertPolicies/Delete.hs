@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an alerting policy.
+-- Deletes an alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.delete@.
 module Gogol.Monitoring.Projects.AlertPolicies.Delete
@@ -55,7 +55,7 @@ type MonitoringProjectsAlertPoliciesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes an alerting policy.
+-- | Deletes an alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ 'newMonitoringProjectsAlertPoliciesDelete' smart constructor.
 data MonitoringProjectsAlertPoliciesDelete = MonitoringProjectsAlertPoliciesDelete

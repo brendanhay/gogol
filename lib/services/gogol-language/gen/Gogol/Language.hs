@@ -133,6 +133,10 @@ module Gogol.Language
     ClassificationCategory (..),
     newClassificationCategory,
 
+    -- ** ClassificationModelOptions
+    ClassificationModelOptions (..),
+    newClassificationModelOptions,
+
     -- ** ClassifyTextRequest
     ClassifyTextRequest (..),
     newClassifyTextRequest,
@@ -240,6 +244,17 @@ module Gogol.Language
     -- ** Token
     Token (..),
     newToken,
+
+    -- ** V1Model
+    V1Model (..),
+    newV1Model,
+
+    -- ** V2Model
+    V2Model (..),
+    newV2Model,
+
+    -- ** V2Model_ContentCategoriesVersion
+    V2Model_ContentCategoriesVersion (..),
   )
 where
 

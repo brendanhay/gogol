@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks whether the given user is a member of the group. Membership can be direct or nested.
+-- Checks whether the given user is a member of the group. Membership can be direct or nested, but if nested, the @memberKey@ and @groupKey@ must be entities in the same domain or an @Invalid input@ error is returned. To check for nested memberships that include entities outside of the group\'s domain, use the <https://cloud.google.com/identity/docs/reference/rest/v1/groups.memberships/checkTransitiveMembership checkTransitiveMembership()> method in the Cloud Identity Groups API.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.members.hasMember@.
 module Gogol.Admin.Directory.Members.HasMember
@@ -60,7 +60,7 @@ type DirectoryMembersHasMemberResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] MembersHasMember
 
--- | Checks whether the given user is a member of the group. Membership can be direct or nested.
+-- | Checks whether the given user is a member of the group. Membership can be direct or nested, but if nested, the @memberKey@ and @groupKey@ must be entities in the same domain or an @Invalid input@ error is returned. To check for nested memberships that include entities outside of the group\'s domain, use the <https://cloud.google.com/identity/docs/reference/rest/v1/groups.memberships/checkTransitiveMembership checkTransitiveMembership()> method in the Cloud Identity Groups API.
 --
 -- /See:/ 'newDirectoryMembersHasMember' smart constructor.
 data DirectoryMembersHasMember = DirectoryMembersHasMember

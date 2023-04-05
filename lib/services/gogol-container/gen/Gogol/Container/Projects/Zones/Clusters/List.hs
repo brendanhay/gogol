@@ -72,7 +72,7 @@ data ContainerProjectsZonesClustersList = ContainerProjectsZonesClustersList
     callback :: (Core.Maybe Core.Text),
     -- | The parent (project and location) where the clusters will be listed. Specified in the format @projects\/*\/locations\/*@. Location \"-\" matches all zones and all regions.
     parent :: (Core.Maybe Core.Text),
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,7 +85,7 @@ data ContainerProjectsZonesClustersList = ContainerProjectsZonesClustersList
 
 -- | Creates a value of 'ContainerProjectsZonesClustersList' with the minimum fields required to make a request.
 newContainerProjectsZonesClustersList ::
-  -- |  Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
+  -- |  Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field. See 'projectId'.
   Core.Text ->
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides, or \"-\" for all zones. This field has been deprecated and replaced by the parent field. See 'zone'.
   Core.Text ->

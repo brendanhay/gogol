@@ -38,35 +38,40 @@ module Gogol.DoubleClickBids
 
     -- * Resources
 
-    -- ** doubleclickbidmanager.queries.createquery
-    DoubleclickbidmanagerQueriesCreatequeryResource,
-    DoubleclickbidmanagerQueriesCreatequery (..),
-    newDoubleclickbidmanagerQueriesCreatequery,
+    -- ** doubleclickbidmanager.queries.create
+    DoubleclickbidmanagerQueriesCreateResource,
+    DoubleclickbidmanagerQueriesCreate (..),
+    newDoubleclickbidmanagerQueriesCreate,
 
-    -- ** doubleclickbidmanager.queries.deletequery
-    DoubleclickbidmanagerQueriesDeletequeryResource,
-    DoubleclickbidmanagerQueriesDeletequery (..),
-    newDoubleclickbidmanagerQueriesDeletequery,
+    -- ** doubleclickbidmanager.queries.delete
+    DoubleclickbidmanagerQueriesDeleteResource,
+    DoubleclickbidmanagerQueriesDelete (..),
+    newDoubleclickbidmanagerQueriesDelete,
 
-    -- ** doubleclickbidmanager.queries.getquery
-    DoubleclickbidmanagerQueriesGetqueryResource,
-    DoubleclickbidmanagerQueriesGetquery (..),
-    newDoubleclickbidmanagerQueriesGetquery,
+    -- ** doubleclickbidmanager.queries.get
+    DoubleclickbidmanagerQueriesGetResource,
+    DoubleclickbidmanagerQueriesGet (..),
+    newDoubleclickbidmanagerQueriesGet,
 
-    -- ** doubleclickbidmanager.queries.listqueries
-    DoubleclickbidmanagerQueriesListqueriesResource,
-    DoubleclickbidmanagerQueriesListqueries (..),
-    newDoubleclickbidmanagerQueriesListqueries,
+    -- ** doubleclickbidmanager.queries.list
+    DoubleclickbidmanagerQueriesListResource,
+    DoubleclickbidmanagerQueriesList (..),
+    newDoubleclickbidmanagerQueriesList,
 
-    -- ** doubleclickbidmanager.queries.runquery
-    DoubleclickbidmanagerQueriesRunqueryResource,
-    DoubleclickbidmanagerQueriesRunquery (..),
-    newDoubleclickbidmanagerQueriesRunquery,
+    -- ** doubleclickbidmanager.queries.reports.get
+    DoubleclickbidmanagerQueriesReportsGetResource,
+    DoubleclickbidmanagerQueriesReportsGet (..),
+    newDoubleclickbidmanagerQueriesReportsGet,
 
-    -- ** doubleclickbidmanager.reports.listreports
-    DoubleclickbidmanagerReportsListreportsResource,
-    DoubleclickbidmanagerReportsListreports (..),
-    newDoubleclickbidmanagerReportsListreports,
+    -- ** doubleclickbidmanager.queries.reports.list
+    DoubleclickbidmanagerQueriesReportsListResource,
+    DoubleclickbidmanagerQueriesReportsList (..),
+    newDoubleclickbidmanagerQueriesReportsList,
+
+    -- ** doubleclickbidmanager.queries.run
+    DoubleclickbidmanagerQueriesRunResource,
+    DoubleclickbidmanagerQueriesRun (..),
+    newDoubleclickbidmanagerQueriesRun,
 
     -- * Types
 
@@ -76,6 +81,17 @@ module Gogol.DoubleClickBids
     -- ** ChannelGrouping
     ChannelGrouping (..),
     newChannelGrouping,
+
+    -- ** DataRange
+    DataRange (..),
+    newDataRange,
+
+    -- ** DataRange_Range
+    DataRange_Range (..),
+
+    -- ** Date
+    Date (..),
+    newDate,
 
     -- ** DisjunctiveMatchStatement
     DisjunctiveMatchStatement (..),
@@ -88,9 +104,6 @@ module Gogol.DoubleClickBids
     -- ** FilterPair
     FilterPair (..),
     newFilterPair,
-
-    -- ** FilterPair_Type
-    FilterPair_Type (..),
 
     -- ** ListQueriesResponse
     ListQueriesResponse (..),
@@ -107,12 +120,6 @@ module Gogol.DoubleClickBids
     -- ** Parameters
     Parameters (..),
     newParameters,
-
-    -- ** Parameters_GroupBysItem
-    Parameters_GroupBysItem (..),
-
-    -- ** Parameters_MetricsItem
-    Parameters_MetricsItem (..),
 
     -- ** Parameters_Type
     Parameters_Type (..),
@@ -132,9 +139,6 @@ module Gogol.DoubleClickBids
     PathQueryOptionsFilter (..),
     newPathQueryOptionsFilter,
 
-    -- ** PathQueryOptionsFilter_Filter
-    PathQueryOptionsFilter_Filter (..),
-
     -- ** PathQueryOptionsFilter_Match
     PathQueryOptionsFilter_Match (..),
 
@@ -145,9 +149,6 @@ module Gogol.DoubleClickBids
     -- ** QueryMetadata
     QueryMetadata (..),
     newQueryMetadata,
-
-    -- ** QueryMetadata_DataRange
-    QueryMetadata_DataRange (..),
 
     -- ** QueryMetadata_Format
     QueryMetadata_Format (..),
@@ -162,13 +163,6 @@ module Gogol.DoubleClickBids
     -- ** Report
     Report (..),
     newReport,
-
-    -- ** ReportFailure
-    ReportFailure (..),
-    newReportFailure,
-
-    -- ** ReportFailure_ErrorCode
-    ReportFailure_ErrorCode (..),
 
     -- ** ReportKey
     ReportKey (..),
@@ -195,16 +189,14 @@ module Gogol.DoubleClickBids
     -- ** RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
-
-    -- ** RunQueryRequest_DataRange
-    RunQueryRequest_DataRange (..),
   )
 where
 
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
-import Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Create
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Get
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.List
+import Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
 import Gogol.DoubleClickBids.Types

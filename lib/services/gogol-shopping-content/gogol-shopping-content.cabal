@@ -90,6 +90,12 @@ library
     Gogol.ShoppingContent.Content.Collections.List
     Gogol.ShoppingContent.Content.Collectionstatuses.Get
     Gogol.ShoppingContent.Content.Collectionstatuses.List
+    Gogol.ShoppingContent.Content.Conversionsources.Create
+    Gogol.ShoppingContent.Content.Conversionsources.Delete
+    Gogol.ShoppingContent.Content.Conversionsources.Get
+    Gogol.ShoppingContent.Content.Conversionsources.List
+    Gogol.ShoppingContent.Content.Conversionsources.Patch
+    Gogol.ShoppingContent.Content.Conversionsources.Undelete
     Gogol.ShoppingContent.Content.Csses.Get
     Gogol.ShoppingContent.Content.Csses.List
     Gogol.ShoppingContent.Content.Csses.Updatelabels
@@ -157,6 +163,9 @@ library
     Gogol.ShoppingContent.Content.Pos.Inventory
     Gogol.ShoppingContent.Content.Pos.List
     Gogol.ShoppingContent.Content.Pos.Sale
+    Gogol.ShoppingContent.Content.Productdeliverytime.Create
+    Gogol.ShoppingContent.Content.Productdeliverytime.Delete
+    Gogol.ShoppingContent.Content.Productdeliverytime.Get
     Gogol.ShoppingContent.Content.Products.Custombatch
     Gogol.ShoppingContent.Content.Products.Delete
     Gogol.ShoppingContent.Content.Products.Get
@@ -171,6 +180,9 @@ library
     Gogol.ShoppingContent.Content.Promotions.Get
     Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Get
     Gogol.ShoppingContent.Content.Pubsubnotificationsettings.Update
+    Gogol.ShoppingContent.Content.Quotas.List
+    Gogol.ShoppingContent.Content.Recommendations.Generate
+    Gogol.ShoppingContent.Content.Recommendations.ReportInteraction
     Gogol.ShoppingContent.Content.Regionalinventory.Custombatch
     Gogol.ShoppingContent.Content.Regionalinventory.Insert
     Gogol.ShoppingContent.Content.Regions.Create
@@ -219,5 +231,5 @@ library
     Gogol.ShoppingContent.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

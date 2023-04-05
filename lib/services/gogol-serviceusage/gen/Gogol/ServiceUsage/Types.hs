@@ -78,6 +78,10 @@ module Gogol.ServiceUsage.Types
     BackendRule (..),
     newBackendRule,
 
+    -- ** BackendRule_OverridesByRequestProtocol
+    BackendRule_OverridesByRequestProtocol (..),
+    newBackendRule_OverridesByRequestProtocol,
+
     -- ** BackendRule_PathTranslation
     BackendRule_PathTranslation (..),
 
@@ -113,6 +117,20 @@ module Gogol.ServiceUsage.Types
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** ClientLibrarySettings
+    ClientLibrarySettings (..),
+    newClientLibrarySettings,
+
+    -- ** ClientLibrarySettings_LaunchStage
+    ClientLibrarySettings_LaunchStage (..),
+
+    -- ** CommonLanguageSettings
+    CommonLanguageSettings (..),
+    newCommonLanguageSettings,
+
+    -- ** CommonLanguageSettings_DestinationsItem
+    CommonLanguageSettings_DestinationsItem (..),
+
     -- ** Context
     Context (..),
     newContext,
@@ -124,6 +142,10 @@ module Gogol.ServiceUsage.Types
     -- ** Control
     Control (..),
     newControl,
+
+    -- ** CppSettings
+    CppSettings (..),
+    newCppSettings,
 
     -- ** CreateAdminQuotaPolicyMetadata
     CreateAdminQuotaPolicyMetadata (..),
@@ -163,6 +185,18 @@ module Gogol.ServiceUsage.Types
     -- ** DocumentationRule
     DocumentationRule (..),
     newDocumentationRule,
+
+    -- ** DotnetSettings
+    DotnetSettings (..),
+    newDotnetSettings,
+
+    -- ** DotnetSettings_RenamedResources
+    DotnetSettings_RenamedResources (..),
+    newDotnetSettings_RenamedResources,
+
+    -- ** DotnetSettings_RenamedServices
+    DotnetSettings_RenamedServices (..),
+    newDotnetSettings_RenamedServices,
 
     -- ** Empty
     Empty (..),
@@ -215,6 +249,10 @@ module Gogol.ServiceUsage.Types
 
     -- ** GetServiceIdentityResponse_State
     GetServiceIdentityResponse_State (..),
+
+    -- ** GoSettings
+    GoSettings (..),
+    newGoSettings,
 
     -- ** GoogleApiService
     GoogleApiService (..),
@@ -278,6 +316,14 @@ module Gogol.ServiceUsage.Types
     ImportConsumerOverridesResponse (..),
     newImportConsumerOverridesResponse,
 
+    -- ** JavaSettings
+    JavaSettings (..),
+    newJavaSettings,
+
+    -- ** JavaSettings_ServiceClassNames
+    JavaSettings_ServiceClassNames (..),
+    newJavaSettings_ServiceClassNames,
+
     -- ** JwtLocation
     JwtLocation (..),
     newJwtLocation,
@@ -309,12 +355,20 @@ module Gogol.ServiceUsage.Types
     LoggingDestination (..),
     newLoggingDestination,
 
+    -- ** LongRunning
+    LongRunning (..),
+    newLongRunning,
+
     -- ** Method
     Method (..),
     newMethod,
 
     -- ** Method_Syntax
     Method_Syntax (..),
+
+    -- ** MethodSettings
+    MethodSettings (..),
+    newMethodSettings,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -363,6 +417,10 @@ module Gogol.ServiceUsage.Types
     MonitoringDestination (..),
     newMonitoringDestination,
 
+    -- ** NodeSettings
+    NodeSettings (..),
+    newNodeSettings,
+
     -- ** OAuthRequirements
     OAuthRequirements (..),
     newOAuthRequirements,
@@ -395,6 +453,21 @@ module Gogol.ServiceUsage.Types
     Page (..),
     newPage,
 
+    -- ** PhpSettings
+    PhpSettings (..),
+    newPhpSettings,
+
+    -- ** Publishing
+    Publishing (..),
+    newPublishing,
+
+    -- ** Publishing_Organization
+    Publishing_Organization (..),
+
+    -- ** PythonSettings
+    PythonSettings (..),
+    newPythonSettings,
+
     -- ** Quota
     Quota (..),
     newQuota,
@@ -414,6 +487,10 @@ module Gogol.ServiceUsage.Types
     -- ** QuotaOverride_Dimensions
     QuotaOverride_Dimensions (..),
     newQuotaOverride_Dimensions,
+
+    -- ** RubySettings
+    RubySettings (..),
+    newRubySettings,
 
     -- ** ServiceIdentity
     ServiceIdentity (..),

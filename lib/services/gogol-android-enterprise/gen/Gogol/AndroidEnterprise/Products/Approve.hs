@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design.
+-- Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.approve@.
 module Gogol.AndroidEnterprise.Products.Approve
@@ -61,7 +61,7 @@ type AndroidEnterpriseProductsApproveResource =
     Core.:> Core.ReqBody '[Core.JSON] ProductsApproveRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design.
+-- | Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000. To learn how to use managed Google Play to design and create a store layout to display approved products to your users, see Store Layout Design. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseProductsApprove' smart constructor.
 data AndroidEnterpriseProductsApprove = AndroidEnterpriseProductsApprove

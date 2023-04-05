@@ -63,9 +63,6 @@ type StorageObjectsInsertResource =
     Core.:> Core.QueryParam
               "projection"
               ObjectsInsertProjection
-    Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -90,9 +87,6 @@ type StorageObjectsInsertResource =
       Core.:> Core.QueryParam
                 "projection"
                 ObjectsInsertProjection
-      Core.:> Core.QueryParam
-                "provisionalUserProject"
-                Core.Text
       Core.:> Core.QueryParam "uploadType" Core.Text
       Core.:> Core.QueryParam "userProject" Core.Text
       Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -130,8 +124,6 @@ data StorageObjectsInsert = StorageObjectsInsert
     predefinedAcl :: (Core.Maybe ObjectsInsertPredefinedAcl),
     -- | Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
     projection :: (Core.Maybe ObjectsInsertProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -159,7 +151,6 @@ newStorageObjectsInsert bucket payload =
       payload = payload,
       predefinedAcl = Core.Nothing,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -184,7 +175,6 @@ instance Core.GoogleRequest StorageObjectsInsert where
       name
       predefinedAcl
       projection
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)
@@ -221,7 +211,6 @@ instance
         name
         predefinedAcl
         projection
-        provisionalUserProject
         uploadType
         userProject
         (Core.Just Core.AltJSON)

@@ -46,14 +46,16 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingPlacementGroupsList' request conforms to.
 type DFAReportingPlacementGroupsListResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "placementGroups"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParams
+              "activeStatus"
+              PlacementGroupsListActiveStatus
     Core.:> Core.QueryParams "advertiserIds" Core.Int64
-    Core.:> Core.QueryParam "archived" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "campaignIds" Core.Int64
     Core.:> Core.QueryParams "contentCategoryIds" Core.Int64
@@ -109,10 +111,10 @@ data DFAReportingPlacementGroupsList = DFAReportingPlacementGroupsList
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | Select only placements with these active statuses.
+    activeStatus :: (Core.Maybe [PlacementGroupsListActiveStatus]),
     -- | Select only placement groups that belong to these advertisers.
     advertiserIds :: (Core.Maybe [Core.Int64]),
-    -- | Select only archived placements. Don\'t set this field to select both archived and non-archived placements.
-    archived :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Select only placement groups that belong to these campaigns.
@@ -167,8 +169,8 @@ newDFAReportingPlacementGroupsList profileId =
   DFAReportingPlacementGroupsList
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      activeStatus = Core.Nothing,
       advertiserIds = Core.Nothing,
-      archived = Core.Nothing,
       callback = Core.Nothing,
       campaignIds = Core.Nothing,
       contentCategoryIds = Core.Nothing,
@@ -207,8 +209,8 @@ instance
       profileId
       xgafv
       accessToken
+      (activeStatus Core.^. Core._Default)
       (advertiserIds Core.^. Core._Default)
-      archived
       callback
       (campaignIds Core.^. Core._Default)
       (contentCategoryIds Core.^. Core._Default)

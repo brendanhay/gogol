@@ -105,6 +105,9 @@ module Gogol.Redis.Types
     -- ** Instance_State
     Instance_State (..),
 
+    -- ** Instance_SuspensionReasonsItem
+    Instance_SuspensionReasonsItem (..),
+
     -- ** Instance_Tier
     Instance_Tier (..),
 
@@ -176,6 +179,13 @@ module Gogol.Redis.Types
 
     -- ** PersistenceConfig_RdbSnapshotPeriod
     PersistenceConfig_RdbSnapshotPeriod (..),
+
+    -- ** ReconciliationOperationMetadata
+    ReconciliationOperationMetadata (..),
+    newReconciliationOperationMetadata,
+
+    -- ** ReconciliationOperationMetadata_ExclusiveAction
+    ReconciliationOperationMetadata_ExclusiveAction (..),
 
     -- ** RescheduleMaintenanceRequest
     RescheduleMaintenanceRequest (..),

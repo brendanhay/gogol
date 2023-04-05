@@ -138,6 +138,7 @@ library
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Vread
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Get
+    Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetFHIRStoreMetrics
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.List
@@ -179,5 +180,5 @@ library
     Gogol.Healthcare.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -42,6 +42,18 @@ module Gogol.CloudIdentity.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AddIdpCredentialOperationMetadata
+    AddIdpCredentialOperationMetadata (..),
+    newAddIdpCredentialOperationMetadata,
+
+    -- ** AddIdpCredentialRequest
+    AddIdpCredentialRequest (..),
+    newAddIdpCredentialRequest,
+
+    -- ** CancelUserInvitationRequest
+    CancelUserInvitationRequest (..),
+    newCancelUserInvitationRequest,
+
     -- ** CheckTransitiveMembershipResponse
     CheckTransitiveMembershipResponse (..),
     newCheckTransitiveMembershipResponse,
@@ -49,6 +61,14 @@ module Gogol.CloudIdentity.Types
     -- ** CreateGroupMetadata
     CreateGroupMetadata (..),
     newCreateGroupMetadata,
+
+    -- ** CreateInboundSamlSsoProfileOperationMetadata
+    CreateInboundSamlSsoProfileOperationMetadata (..),
+    newCreateInboundSamlSsoProfileOperationMetadata,
+
+    -- ** CreateInboundSsoAssignmentOperationMetadata
+    CreateInboundSsoAssignmentOperationMetadata (..),
+    newCreateInboundSsoAssignmentOperationMetadata,
 
     -- ** CreateMembershipMetadata
     CreateMembershipMetadata (..),
@@ -58,9 +78,25 @@ module Gogol.CloudIdentity.Types
     DeleteGroupMetadata (..),
     newDeleteGroupMetadata,
 
+    -- ** DeleteIdpCredentialOperationMetadata
+    DeleteIdpCredentialOperationMetadata (..),
+    newDeleteIdpCredentialOperationMetadata,
+
+    -- ** DeleteInboundSamlSsoProfileOperationMetadata
+    DeleteInboundSamlSsoProfileOperationMetadata (..),
+    newDeleteInboundSamlSsoProfileOperationMetadata,
+
+    -- ** DeleteInboundSsoAssignmentOperationMetadata
+    DeleteInboundSsoAssignmentOperationMetadata (..),
+    newDeleteInboundSsoAssignmentOperationMetadata,
+
     -- ** DeleteMembershipMetadata
     DeleteMembershipMetadata (..),
     newDeleteMembershipMetadata,
+
+    -- ** DsaPublicKeyInfo
+    DsaPublicKeyInfo (..),
+    newDsaPublicKeyInfo,
 
     -- ** DynamicGroupMetadata
     DynamicGroupMetadata (..),
@@ -294,13 +330,48 @@ module Gogol.CloudIdentity.Types
     -- ** GroupRelation_RelationType
     GroupRelation_RelationType (..),
 
+    -- ** IdpCredential
+    IdpCredential (..),
+    newIdpCredential,
+
+    -- ** InboundSamlSsoProfile
+    InboundSamlSsoProfile (..),
+    newInboundSamlSsoProfile,
+
+    -- ** InboundSsoAssignment
+    InboundSsoAssignment (..),
+    newInboundSsoAssignment,
+
+    -- ** InboundSsoAssignment_SsoMode
+    InboundSsoAssignment_SsoMode (..),
+
+    -- ** IsInvitableUserResponse
+    IsInvitableUserResponse (..),
+    newIsInvitableUserResponse,
+
     -- ** ListGroupsResponse
     ListGroupsResponse (..),
     newListGroupsResponse,
 
+    -- ** ListIdpCredentialsResponse
+    ListIdpCredentialsResponse (..),
+    newListIdpCredentialsResponse,
+
+    -- ** ListInboundSamlSsoProfilesResponse
+    ListInboundSamlSsoProfilesResponse (..),
+    newListInboundSamlSsoProfilesResponse,
+
+    -- ** ListInboundSsoAssignmentsResponse
+    ListInboundSsoAssignmentsResponse (..),
+    newListInboundSsoAssignmentsResponse,
+
     -- ** ListMembershipsResponse
     ListMembershipsResponse (..),
     newListMembershipsResponse,
+
+    -- ** ListUserInvitationsResponse
+    ListUserInvitationsResponse (..),
+    newListUserInvitationsResponse,
 
     -- ** LookupGroupNameResponse
     LookupGroupNameResponse (..),
@@ -325,12 +396,23 @@ module Gogol.CloudIdentity.Types
     Membership (..),
     newMembership,
 
+    -- ** Membership_DeliverySetting
+    Membership_DeliverySetting (..),
+
     -- ** Membership_Type
     Membership_Type (..),
 
     -- ** MembershipAdjacencyList
     MembershipAdjacencyList (..),
     newMembershipAdjacencyList,
+
+    -- ** MembershipRelation
+    MembershipRelation (..),
+    newMembershipRelation,
+
+    -- ** MembershipRelation_Labels
+    MembershipRelation_Labels (..),
+    newMembershipRelation_Labels,
 
     -- ** MembershipRole
     MembershipRole (..),
@@ -374,6 +456,26 @@ module Gogol.CloudIdentity.Types
     RestrictionEvaluations (..),
     newRestrictionEvaluations,
 
+    -- ** RsaPublicKeyInfo
+    RsaPublicKeyInfo (..),
+    newRsaPublicKeyInfo,
+
+    -- ** SamlIdpConfig
+    SamlIdpConfig (..),
+    newSamlIdpConfig,
+
+    -- ** SamlSpConfig
+    SamlSpConfig (..),
+    newSamlSpConfig,
+
+    -- ** SamlSsoInfo
+    SamlSsoInfo (..),
+    newSamlSsoInfo,
+
+    -- ** SearchDirectGroupsResponse
+    SearchDirectGroupsResponse (..),
+    newSearchDirectGroupsResponse,
+
     -- ** SearchGroupsResponse
     SearchGroupsResponse (..),
     newSearchGroupsResponse,
@@ -389,6 +491,17 @@ module Gogol.CloudIdentity.Types
     -- ** SecuritySettings
     SecuritySettings (..),
     newSecuritySettings,
+
+    -- ** SendUserInvitationRequest
+    SendUserInvitationRequest (..),
+    newSendUserInvitationRequest,
+
+    -- ** SignInBehavior
+    SignInBehavior (..),
+    newSignInBehavior,
+
+    -- ** SignInBehavior_RedirectCondition
+    SignInBehavior_RedirectCondition (..),
 
     -- ** Status
     Status (..),
@@ -406,6 +519,14 @@ module Gogol.CloudIdentity.Types
     UpdateGroupMetadata (..),
     newUpdateGroupMetadata,
 
+    -- ** UpdateInboundSamlSsoProfileOperationMetadata
+    UpdateInboundSamlSsoProfileOperationMetadata (..),
+    newUpdateInboundSamlSsoProfileOperationMetadata,
+
+    -- ** UpdateInboundSsoAssignmentOperationMetadata
+    UpdateInboundSsoAssignmentOperationMetadata (..),
+    newUpdateInboundSsoAssignmentOperationMetadata,
+
     -- ** UpdateMembershipMetadata
     UpdateMembershipMetadata (..),
     newUpdateMembershipMetadata,
@@ -413,6 +534,13 @@ module Gogol.CloudIdentity.Types
     -- ** UpdateMembershipRolesParams
     UpdateMembershipRolesParams (..),
     newUpdateMembershipRolesParams,
+
+    -- ** UserInvitation
+    UserInvitation (..),
+    newUserInvitation,
+
+    -- ** UserInvitation_State
+    UserInvitation_State (..),
 
     -- ** DevicesListView
     DevicesListView (..),

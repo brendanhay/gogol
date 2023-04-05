@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the metadate for a shared drive.
+-- Updates the metadata for a shared drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.drives.update@.
 module Gogol.Drive.Drives.Update
@@ -54,7 +54,7 @@ type DriveDrivesUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Drive
     Core.:> Core.Patch '[Core.JSON] Drive
 
--- | Updates the metadate for a shared drive.
+-- | Updates the metadata for a shared drive.
 --
 -- /See:/ 'newDriveDrivesUpdate' smart constructor.
 data DriveDrivesUpdate = DriveDrivesUpdate
@@ -62,7 +62,7 @@ data DriveDrivesUpdate = DriveDrivesUpdate
     driveId :: Core.Text,
     -- | Multipart request metadata.
     payload :: Drive,
-    -- | Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    -- | Issue the request as a domain administrator. If set to true, then the requester is granted access if they\'re an administrator of the domain to which the shared drive belongs.
     useDomainAdminAccess :: Core.Bool
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

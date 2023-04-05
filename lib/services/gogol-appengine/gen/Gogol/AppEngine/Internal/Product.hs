@@ -138,6 +138,10 @@ module Gogol.AppEngine.Internal.Product
     FirewallRule (..),
     newFirewallRule,
 
+    -- * FlexibleRuntimeSettings
+    FlexibleRuntimeSettings (..),
+    newFlexibleRuntimeSettings,
+
     -- * GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -258,9 +262,25 @@ module Gogol.AppEngine.Internal.Product
     OperationMetadataV1Beta (..),
     newOperationMetadataV1Beta,
 
+    -- * ProjectEvent
+    ProjectEvent (..),
+    newProjectEvent,
+
+    -- * ProjectState
+    ProjectState (..),
+    newProjectState,
+
+    -- * ProjectsMetadata
+    ProjectsMetadata (..),
+    newProjectsMetadata,
+
     -- * ReadinessCheck
     ReadinessCheck (..),
     newReadinessCheck,
+
+    -- * Reasons
+    Reasons (..),
+    newReasons,
 
     -- * RepairApplicationRequest
     RepairApplicationRequest (..),
@@ -363,7 +383,7 @@ where
 import Gogol.AppEngine.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Google Cloud Endpoints (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/) configuration for API handlers.
+-- | Google Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration for API handlers.
 --
 -- /See:/ 'newApiConfigHandler' smart constructor.
 data ApiConfigHandler = ApiConfigHandler
@@ -453,21 +473,21 @@ instance Core.ToJSON ApiEndpointHandler where
 data Application = Application
   { -- | Google Apps authentication domain that controls which users can access this application.Defaults to open access for any Google Account.
     authDomain :: (Core.Maybe Core.Text),
-    -- | Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.\@OutputOnly
+    -- | Output only. Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.\@OutputOnly
     codeBucket :: (Core.Maybe Core.Text),
     -- | The type of the Cloud Firestore or Cloud Datastore database associated with this application.
     databaseType :: (Core.Maybe Application_DatabaseType),
-    -- | Google Cloud Storage bucket that can be used by this application to store content.\@OutputOnly
+    -- | Output only. Google Cloud Storage bucket that can be used by this application to store content.\@OutputOnly
     defaultBucket :: (Core.Maybe Core.Text),
     -- | Cookie expiration policy for this application.
     defaultCookieExpiration :: (Core.Maybe Core.Duration),
-    -- | Hostname used to reach this application, as resolved by App Engine.\@OutputOnly
+    -- | Output only. Hostname used to reach this application, as resolved by App Engine.\@OutputOnly
     defaultHostname :: (Core.Maybe Core.Text),
     -- | HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.
     dispatchRules :: (Core.Maybe [UrlDispatchRule]),
     -- | The feature specific settings to be used in the application.
     featureSettings :: (Core.Maybe FeatureSettings),
-    -- | The Google Container Registry domain used for storing managed build docker images for this application.
+    -- | Output only. The Google Container Registry domain used for storing managed build docker images for this application.
     gcrDomain :: (Core.Maybe Core.Text),
     -- |
     iap :: (Core.Maybe IdentityAwareProxy),
@@ -475,7 +495,7 @@ data Application = Application
     id :: (Core.Maybe Core.Text),
     -- | Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application\'s end user content is stored.Defaults to us-central.View the list of supported locations (https:\/\/cloud.google.com\/appengine\/docs\/locations).
     locationId :: (Core.Maybe Core.Text),
-    -- | Full path to the Application resource in the API. Example: apps\/myapp.\@OutputOnly
+    -- | Output only. Full path to the Application resource in the API. Example: apps\/myapp.\@OutputOnly
     name :: (Core.Maybe Core.Text),
     -- | The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
     serviceAccount :: (Core.Maybe Core.Text),
@@ -1314,7 +1334,7 @@ instance Core.ToJSON DomainMapping where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1332,7 +1352,7 @@ instance Core.FromJSON Empty where
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
 
--- | Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration. The Endpoints API Service provides tooling for serving Open API and gRPC endpoints via an NGINX proxy. Only valid for App Engine Flexible environment deployments.The fields here refer to the name and configuration ID of a \"service\" resource in the Service Management API (https:\/\/cloud.google.com\/service-management\/overview).
+-- | Google Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration. The Endpoints API Service provides tooling for serving Open API and gRPC endpoints via an NGINX proxy. Only valid for App Engine Flexible environment deployments.The fields here refer to the name and configuration ID of a \"service\" resource in the Service Management API (https:\/\/cloud.google.com\/service-management\/overview).
 --
 -- /See:/ 'newEndpointsApiService' smart constructor.
 data EndpointsApiService = EndpointsApiService
@@ -1586,6 +1606,46 @@ instance Core.ToJSON FirewallRule where
           ]
       )
 
+-- | Runtime settings for the App Engine flexible environment.
+--
+-- /See:/ 'newFlexibleRuntimeSettings' smart constructor.
+data FlexibleRuntimeSettings = FlexibleRuntimeSettings
+  { -- | The operating system of the application runtime.
+    operatingSystem :: (Core.Maybe Core.Text),
+    -- | The runtime version of an App Engine flexible application.
+    runtimeVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FlexibleRuntimeSettings' with the minimum fields required to make a request.
+newFlexibleRuntimeSettings ::
+  FlexibleRuntimeSettings
+newFlexibleRuntimeSettings =
+  FlexibleRuntimeSettings
+    { operatingSystem = Core.Nothing,
+      runtimeVersion = Core.Nothing
+    }
+
+instance Core.FromJSON FlexibleRuntimeSettings where
+  parseJSON =
+    Core.withObject
+      "FlexibleRuntimeSettings"
+      ( \o ->
+          FlexibleRuntimeSettings
+            Core.<$> (o Core..:? "operatingSystem")
+            Core.<*> (o Core..:? "runtimeVersion")
+      )
+
+instance Core.ToJSON FlexibleRuntimeSettings where
+  toJSON FlexibleRuntimeSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("operatingSystem" Core..=)
+              Core.<$> operatingSystem,
+            ("runtimeVersion" Core..=) Core.<$> runtimeVersion
+          ]
+      )
+
 -- | Metadata for the given google.cloud.location.Location.
 --
 -- /See:/ 'newGoogleAppengineV1betaLocationMetadata' smart constructor.
@@ -1717,7 +1777,7 @@ data IdentityAwareProxy = IdentityAwareProxy
     oauth2ClientId :: (Core.Maybe Core.Text),
     -- | OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2/client/secret_sha256 field.\@InputOnly
     oauth2ClientSecret :: (Core.Maybe Core.Text),
-    -- | Hex-encoded SHA-256 hash of the client secret.\@OutputOnly
+    -- | Output only. Hex-encoded SHA-256 hash of the client secret.\@OutputOnly
     oauth2ClientSecretSha256 :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2548,6 +2608,8 @@ instance Core.ToJSON ManualScaling where
 data Network = Network
   { -- | List of ports, or port pairs, to forward from the virtual machine to the application container. Only applicable in the App Engine flexible environment.
     forwardedPorts :: (Core.Maybe [Core.Text]),
+    -- | The IP mode for instances. Only applicable in the App Engine flexible environment.
+    instanceIpMode :: (Core.Maybe Network_InstanceIpMode),
     -- | Tag to apply to the instance during creation. Only applicable in the App Engine flexible environment.
     instanceTag :: (Core.Maybe Core.Text),
     -- | Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.
@@ -2565,6 +2627,7 @@ newNetwork ::
 newNetwork =
   Network
     { forwardedPorts = Core.Nothing,
+      instanceIpMode = Core.Nothing,
       instanceTag = Core.Nothing,
       name = Core.Nothing,
       sessionAffinity = Core.Nothing,
@@ -2578,6 +2641,7 @@ instance Core.FromJSON Network where
       ( \o ->
           Network
             Core.<$> (o Core..:? "forwardedPorts")
+            Core.<*> (o Core..:? "instanceIpMode")
             Core.<*> (o Core..:? "instanceTag")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "sessionAffinity")
@@ -2589,6 +2653,7 @@ instance Core.ToJSON Network where
     Core.object
       ( Core.catMaybes
           [ ("forwardedPorts" Core..=) Core.<$> forwardedPorts,
+            ("instanceIpMode" Core..=) Core.<$> instanceIpMode,
             ("instanceTag" Core..=) Core.<$> instanceTag,
             ("name" Core..=) Core.<$> name,
             ("sessionAffinity" Core..=) Core.<$> sessionAffinity,
@@ -3004,6 +3069,181 @@ instance Core.ToJSON OperationMetadataV1Beta where
           ]
       )
 
+-- | The request sent to CLHs during project events.
+--
+-- /See:/ 'newProjectEvent' smart constructor.
+data ProjectEvent = ProjectEvent
+  { -- | The unique ID for this project event. CLHs can use this value to dedup repeated calls. required
+    eventId :: (Core.Maybe Core.Text),
+    -- |
+    phase :: (Core.Maybe ProjectEvent_Phase),
+    -- | The projects metadata for this project. required
+    projectMetadata :: (Core.Maybe ProjectsMetadata),
+    -- | The state of the project that led to this event.
+    state :: (Core.Maybe ProjectState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProjectEvent' with the minimum fields required to make a request.
+newProjectEvent ::
+  ProjectEvent
+newProjectEvent =
+  ProjectEvent
+    { eventId = Core.Nothing,
+      phase = Core.Nothing,
+      projectMetadata = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON ProjectEvent where
+  parseJSON =
+    Core.withObject
+      "ProjectEvent"
+      ( \o ->
+          ProjectEvent
+            Core.<$> (o Core..:? "eventId")
+            Core.<*> (o Core..:? "phase")
+            Core.<*> (o Core..:? "projectMetadata")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON ProjectEvent where
+  toJSON ProjectEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eventId" Core..=) Core.<$> eventId,
+            ("phase" Core..=) Core.<$> phase,
+            ("projectMetadata" Core..=) Core.<$> projectMetadata,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
+-- | ProjectState contains the externally-visible project state that is used to communicate the state and reasoning for that state to the CLH. This data is not persisted by CCFE, but is instead derived from CCFE\'s internal representation of the project state.
+--
+-- /See:/ 'newProjectState' smart constructor.
+data ProjectState = ProjectState
+  { -- |
+    currentReasons :: (Core.Maybe Reasons),
+    -- | The previous and current reasons for a project state will be sent for a project event. CLHs that need to know the signal that caused the project event to trigger (edges) as opposed to just knowing the state can act upon differences in the previous and current reasons.Reasons will be provided for every system: service management, data governance, abuse, and billing.If this is a CCFE-triggered event used for reconciliation then the current reasons will be set to their */CONTROL/PLANE/SYNC state. The previous reasons will contain the last known set of non-unknown non-control/plane_sync reasons for the state.Reasons fields are deprecated. New tenants should only use the state field. If you must know the reason(s) behind a specific state, please consult with CCFE team first (cloud-ccfe-discuss\@google.com).
+    previousReasons :: (Core.Maybe Reasons),
+    -- | The current state of the project. This state is the culmination of all of the opinions from external systems that CCFE knows about of the project.
+    state :: (Core.Maybe ProjectState_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProjectState' with the minimum fields required to make a request.
+newProjectState ::
+  ProjectState
+newProjectState =
+  ProjectState
+    { currentReasons = Core.Nothing,
+      previousReasons = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON ProjectState where
+  parseJSON =
+    Core.withObject
+      "ProjectState"
+      ( \o ->
+          ProjectState
+            Core.<$> (o Core..:? "currentReasons")
+            Core.<*> (o Core..:? "previousReasons")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON ProjectState where
+  toJSON ProjectState {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("currentReasons" Core..=) Core.<$> currentReasons,
+            ("previousReasons" Core..=) Core.<$> previousReasons,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
+-- | ProjectsMetadata is the metadata CCFE stores about the all the relevant projects (tenant, consumer, producer).
+--
+-- /See:/ 'newProjectsMetadata' smart constructor.
+data ProjectsMetadata = ProjectsMetadata
+  { -- | The consumer project id.
+    consumerProjectId :: (Core.Maybe Core.Text),
+    -- | The consumer project number.
+    consumerProjectNumber :: (Core.Maybe Core.Int64),
+    -- | The CCFE state of the consumer project. It is the same state that is communicated to the CLH during project events. Notice that this field is not set in the DB, it is only set in this proto when communicated to CLH in the side channel.
+    consumerProjectState :: (Core.Maybe ProjectsMetadata_ConsumerProjectState),
+    -- | The service account authorized to operate on the consumer project. Note: CCFE only propagates P4SA with default tag to CLH.
+    p4ServiceAccount :: (Core.Maybe Core.Text),
+    -- | The producer project id.
+    producerProjectId :: (Core.Maybe Core.Text),
+    -- | The producer project number.
+    producerProjectNumber :: (Core.Maybe Core.Int64),
+    -- | The tenant project id.
+    tenantProjectId :: (Core.Maybe Core.Text),
+    -- | The tenant project number.
+    tenantProjectNumber :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProjectsMetadata' with the minimum fields required to make a request.
+newProjectsMetadata ::
+  ProjectsMetadata
+newProjectsMetadata =
+  ProjectsMetadata
+    { consumerProjectId = Core.Nothing,
+      consumerProjectNumber = Core.Nothing,
+      consumerProjectState = Core.Nothing,
+      p4ServiceAccount = Core.Nothing,
+      producerProjectId = Core.Nothing,
+      producerProjectNumber = Core.Nothing,
+      tenantProjectId = Core.Nothing,
+      tenantProjectNumber = Core.Nothing
+    }
+
+instance Core.FromJSON ProjectsMetadata where
+  parseJSON =
+    Core.withObject
+      "ProjectsMetadata"
+      ( \o ->
+          ProjectsMetadata
+            Core.<$> (o Core..:? "consumerProjectId")
+            Core.<*> ( o Core..:? "consumerProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "consumerProjectState")
+            Core.<*> (o Core..:? "p4ServiceAccount")
+            Core.<*> (o Core..:? "producerProjectId")
+            Core.<*> ( o Core..:? "producerProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "tenantProjectId")
+            Core.<*> ( o Core..:? "tenantProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON ProjectsMetadata where
+  toJSON ProjectsMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consumerProjectId" Core..=)
+              Core.<$> consumerProjectId,
+            ("consumerProjectNumber" Core..=) Core.. Core.AsText
+              Core.<$> consumerProjectNumber,
+            ("consumerProjectState" Core..=)
+              Core.<$> consumerProjectState,
+            ("p4ServiceAccount" Core..=)
+              Core.<$> p4ServiceAccount,
+            ("producerProjectId" Core..=)
+              Core.<$> producerProjectId,
+            ("producerProjectNumber" Core..=) Core.. Core.AsText
+              Core.<$> producerProjectNumber,
+            ("tenantProjectId" Core..=) Core.<$> tenantProjectId,
+            ("tenantProjectNumber" Core..=) Core.. Core.AsText
+              Core.<$> tenantProjectNumber
+          ]
+      )
+
 -- | Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
 --
 -- /See:/ 'newReadinessCheck' smart constructor.
@@ -3068,6 +3308,56 @@ instance Core.ToJSON ReadinessCheck where
             ("successThreshold" Core..=)
               Core.<$> successThreshold,
             ("timeout" Core..=) Core.<$> timeout
+          ]
+      )
+
+-- | Projects transition between and within states based on reasons sent from various systems. CCFE will provide the CLH with reasons for the current state per system.The current systems that CCFE supports are: Service Management (Inception) Data Governance (Wipeout) Abuse (Ares) Billing (Internal Cloud Billing API)
+--
+-- /See:/ 'newReasons' smart constructor.
+data Reasons = Reasons
+  { -- |
+    abuse :: (Core.Maybe Reasons_Abuse),
+    -- |
+    billing :: (Core.Maybe Reasons_Billing),
+    -- |
+    dataGovernance :: (Core.Maybe Reasons_DataGovernance),
+    -- |
+    serviceManagement :: (Core.Maybe Reasons_ServiceManagement)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Reasons' with the minimum fields required to make a request.
+newReasons ::
+  Reasons
+newReasons =
+  Reasons
+    { abuse = Core.Nothing,
+      billing = Core.Nothing,
+      dataGovernance = Core.Nothing,
+      serviceManagement = Core.Nothing
+    }
+
+instance Core.FromJSON Reasons where
+  parseJSON =
+    Core.withObject
+      "Reasons"
+      ( \o ->
+          Reasons
+            Core.<$> (o Core..:? "abuse")
+            Core.<*> (o Core..:? "billing")
+            Core.<*> (o Core..:? "dataGovernance")
+            Core.<*> (o Core..:? "serviceManagement")
+      )
+
+instance Core.ToJSON Reasons where
+  toJSON Reasons {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("abuse" Core..=) Core.<$> abuse,
+            ("billing" Core..=) Core.<$> billing,
+            ("dataGovernance" Core..=) Core.<$> dataGovernance,
+            ("serviceManagement" Core..=)
+              Core.<$> serviceManagement
           ]
       )
 
@@ -3785,8 +4075,10 @@ instance Core.ToJSON UrlMap where
 --
 -- /See:/ 'newVersion' smart constructor.
 data Version = Version
-  { -- | Serving configuration for Google Cloud Endpoints (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/).Only returned in GET requests if view=FULL is set.
+  { -- | Serving configuration for Google Cloud Endpoints (https:\/\/cloud.google.com\/endpoints).Only returned in GET requests if view=FULL is set.
     apiConfig :: (Core.Maybe ApiConfigHandler),
+    -- | Allows App Engine second generation runtimes to access the legacy bundled services.
+    appEngineApis :: (Core.Maybe Core.Bool),
     -- | Automatic scaling is based on request rate, response latencies, and other application metrics. Instances are dynamically created and destroyed as needed in order to handle traffic.
     automaticScaling :: (Core.Maybe AutomaticScaling),
     -- | A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
@@ -3815,6 +4107,8 @@ data Version = Version
     envVariables :: (Core.Maybe Version_EnvVariables),
     -- | Custom static error pages. Limited to 10KB per page.Only returned in GET requests if view=FULL is set.
     errorHandlers :: (Core.Maybe [ErrorHandler]),
+    -- | Settings for App Engine flexible runtimes.
+    flexibleRuntimeSettings :: (Core.Maybe FlexibleRuntimeSettings),
     -- | An ordered list of URL-matching patterns that should be applied to incoming requests. The first matching URL handles the request and other request handlers are not attempted.Only returned in GET requests if view=FULL is set.
     handlers :: (Core.Maybe [UrlMap]),
     -- | Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.Only returned in GET requests if view=FULL is set.
@@ -3872,6 +4166,7 @@ newVersion ::
 newVersion =
   Version
     { apiConfig = Core.Nothing,
+      appEngineApis = Core.Nothing,
       automaticScaling = Core.Nothing,
       basicScaling = Core.Nothing,
       betaSettings = Core.Nothing,
@@ -3886,6 +4181,7 @@ newVersion =
       env = Core.Nothing,
       envVariables = Core.Nothing,
       errorHandlers = Core.Nothing,
+      flexibleRuntimeSettings = Core.Nothing,
       handlers = Core.Nothing,
       healthCheck = Core.Nothing,
       id = Core.Nothing,
@@ -3919,6 +4215,7 @@ instance Core.FromJSON Version where
       ( \o ->
           Version
             Core.<$> (o Core..:? "apiConfig")
+            Core.<*> (o Core..:? "appEngineApis")
             Core.<*> (o Core..:? "automaticScaling")
             Core.<*> (o Core..:? "basicScaling")
             Core.<*> (o Core..:? "betaSettings")
@@ -3935,6 +4232,7 @@ instance Core.FromJSON Version where
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "envVariables")
             Core.<*> (o Core..:? "errorHandlers")
+            Core.<*> (o Core..:? "flexibleRuntimeSettings")
             Core.<*> (o Core..:? "handlers")
             Core.<*> (o Core..:? "healthCheck")
             Core.<*> (o Core..:? "id")
@@ -3966,6 +4264,7 @@ instance Core.ToJSON Version where
     Core.object
       ( Core.catMaybes
           [ ("apiConfig" Core..=) Core.<$> apiConfig,
+            ("appEngineApis" Core..=) Core.<$> appEngineApis,
             ("automaticScaling" Core..=)
               Core.<$> automaticScaling,
             ("basicScaling" Core..=) Core.<$> basicScaling,
@@ -3985,6 +4284,8 @@ instance Core.ToJSON Version where
             ("env" Core..=) Core.<$> env,
             ("envVariables" Core..=) Core.<$> envVariables,
             ("errorHandlers" Core..=) Core.<$> errorHandlers,
+            ("flexibleRuntimeSettings" Core..=)
+              Core.<$> flexibleRuntimeSettings,
             ("handlers" Core..=) Core.<$> handlers,
             ("healthCheck" Core..=) Core.<$> healthCheck,
             ("id" Core..=) Core.<$> id,

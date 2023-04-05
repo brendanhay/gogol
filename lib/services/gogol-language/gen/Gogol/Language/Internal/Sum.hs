@@ -341,6 +341,14 @@ module Gogol.Language.Internal.Sum
         PartOfSpeech_Voice_Passive,
         ..
       ),
+
+    -- * V2Model_ContentCategoriesVersion
+    V2Model_ContentCategoriesVersion
+      ( V2Model_ContentCategoriesVersion_CONTENTCATEGORIESVERSIONUNSPECIFIED,
+        V2Model_ContentCategoriesVersion_V1,
+        V2Model_ContentCategoriesVersion_V2,
+        ..
+      ),
   )
 where
 
@@ -1748,4 +1756,36 @@ pattern PartOfSpeech_Voice_Passive = PartOfSpeech_Voice "PASSIVE"
   PartOfSpeech_Voice_Causative,
   PartOfSpeech_Voice_Passive,
   PartOfSpeech_Voice
+  #-}
+
+-- | The content categories used for classification.
+newtype V2Model_ContentCategoriesVersion = V2Model_ContentCategoriesVersion {fromV2Model_ContentCategoriesVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If @ContentCategoriesVersion@ is not specified, this option will default to @V1@.
+pattern V2Model_ContentCategoriesVersion_CONTENTCATEGORIESVERSIONUNSPECIFIED :: V2Model_ContentCategoriesVersion
+pattern V2Model_ContentCategoriesVersion_CONTENTCATEGORIESVERSIONUNSPECIFIED = V2Model_ContentCategoriesVersion "CONTENT_CATEGORIES_VERSION_UNSPECIFIED"
+
+-- | Legacy content categories of our initial launch in 2017.
+pattern V2Model_ContentCategoriesVersion_V1 :: V2Model_ContentCategoriesVersion
+pattern V2Model_ContentCategoriesVersion_V1 = V2Model_ContentCategoriesVersion "V1"
+
+-- | Updated content categories in 2022.
+pattern V2Model_ContentCategoriesVersion_V2 :: V2Model_ContentCategoriesVersion
+pattern V2Model_ContentCategoriesVersion_V2 = V2Model_ContentCategoriesVersion "V2"
+
+{-# COMPLETE
+  V2Model_ContentCategoriesVersion_CONTENTCATEGORIESVERSIONUNSPECIFIED,
+  V2Model_ContentCategoriesVersion_V1,
+  V2Model_ContentCategoriesVersion_V2,
+  V2Model_ContentCategoriesVersion
   #-}

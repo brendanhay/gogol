@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
+-- Returns the specified network endpoint group.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.globalNetworkEndpointGroups.get@.
 module Gogol.Compute.GlobalNetworkEndpointGroups.Get
@@ -60,7 +60,7 @@ type ComputeGlobalNetworkEndpointGroupsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] NetworkEndpointGroup
 
--- | Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
+-- | Returns the specified network endpoint group.
 --
 -- /See:/ 'newComputeGlobalNetworkEndpointGroupsGet' smart constructor.
 data ComputeGlobalNetworkEndpointGroupsGet = ComputeGlobalNetworkEndpointGroupsGet

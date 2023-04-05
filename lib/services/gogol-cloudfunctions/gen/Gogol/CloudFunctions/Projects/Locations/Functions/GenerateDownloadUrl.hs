@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateDownloadUrl@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrl' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource =
-  "v2beta"
+  "v2"
     Core.:> Core.CaptureMode
               "name"
               "generateDownloadUrl"

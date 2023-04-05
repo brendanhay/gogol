@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes all the historical versions of a resource (excluding the current version) from the FHIR store. To remove all versions of a resource, first delete the current version and then call this method. This is not a FHIR standard operation. For samples that show how to call @Resource-purge@, see </healthcare/docs/how-tos/fhir-resources#deleting_historical_versions_of_a_fhir_resource Deleting historical versions of a FHIR resource>.
+-- Deletes all the historical versions of a resource (excluding the current version) from the FHIR store. To remove all versions of a resource, first delete the current version and then call this method. This is not a FHIR standard operation. For samples that show how to call @Resource-purge@, see <https://cloud.google.com/healthcare/docs/how-tos/fhir-resources#deleting_historical_versions_of_a_fhir_resource Deleting historical versions of a FHIR resource>.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.fhirStores.fhir.Resourcepurge@.
 module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcepurge
@@ -56,7 +56,7 @@ type HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurgeResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes all the historical versions of a resource (excluding the current version) from the FHIR store. To remove all versions of a resource, first delete the current version and then call this method. This is not a FHIR standard operation. For samples that show how to call @Resource-purge@, see </healthcare/docs/how-tos/fhir-resources#deleting_historical_versions_of_a_fhir_resource Deleting historical versions of a FHIR resource>.
+-- | Deletes all the historical versions of a resource (excluding the current version) from the FHIR store. To remove all versions of a resource, first delete the current version and then call this method. This is not a FHIR standard operation. For samples that show how to call @Resource-purge@, see <https://cloud.google.com/healthcare/docs/how-tos/fhir-resources#deleting_historical_versions_of_a_fhir_resource Deleting historical versions of a FHIR resource>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge' smart constructor.
 data HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge = HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcepurge

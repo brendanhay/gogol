@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create a new table by restoring from a completed backup. The new table must be in the same project as the instance containing the backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
+-- Create a new table by restoring from a completed backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.restore@.
 module Gogol.BigtableAdmin.Projects.Instances.Tables.Restore
@@ -57,7 +57,7 @@ type BigtableAdminProjectsInstancesTablesRestoreResource =
     Core.:> Core.ReqBody '[Core.JSON] RestoreTableRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Create a new table by restoring from a completed backup. The new table must be in the same project as the instance containing the backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
+-- | Create a new table by restoring from a completed backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesTablesRestore' smart constructor.
 data BigtableAdminProjectsInstancesTablesRestore = BigtableAdminProjectsInstancesTablesRestore
@@ -67,7 +67,7 @@ data BigtableAdminProjectsInstancesTablesRestore = BigtableAdminProjectsInstance
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the instance in which to create the restored table. This instance must be in the same project as the source backup. Values are of the form @projects\/\/instances\/@.
+    -- | Required. The name of the instance in which to create the restored table. Values are of the form @projects\/\/instances\/@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: RestoreTableRequest,
@@ -80,7 +80,7 @@ data BigtableAdminProjectsInstancesTablesRestore = BigtableAdminProjectsInstance
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesTablesRestore' with the minimum fields required to make a request.
 newBigtableAdminProjectsInstancesTablesRestore ::
-  -- |  Required. The name of the instance in which to create the restored table. This instance must be in the same project as the source backup. Values are of the form @projects\/\/instances\/@. See 'parent'.
+  -- |  Required. The name of the instance in which to create the restored table. Values are of the form @projects\/\/instances\/@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   RestoreTableRequest ->

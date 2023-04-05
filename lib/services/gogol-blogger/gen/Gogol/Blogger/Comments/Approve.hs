@@ -28,7 +28,7 @@
 --
 -- Marks a comment as not spam by blog id, post id and comment id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.approve@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.approve@.
 module Gogol.Blogger.Comments.Approve
   ( -- * Resource
     BloggerCommentsApproveResource,

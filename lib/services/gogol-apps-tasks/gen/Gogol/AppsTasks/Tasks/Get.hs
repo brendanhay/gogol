@@ -28,7 +28,7 @@
 --
 -- Returns the specified task.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.get@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.get@.
 module Gogol.AppsTasks.Tasks.Get
   ( -- * Resource
     TasksTasksGetResource,

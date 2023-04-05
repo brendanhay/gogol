@@ -28,7 +28,7 @@
 --
 -- Deletes the specified task from the task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.delete@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.delete@.
 module Gogol.AppsTasks.Tasks.Delete
   ( -- * Resource
     TasksTasksDeleteResource,

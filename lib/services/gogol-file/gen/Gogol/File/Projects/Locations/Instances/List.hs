@@ -78,7 +78,7 @@ data FileProjectsLocationsInstancesList = FileProjectsLocationsInstancesList
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value to use if there are additional results to retrieve for this list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The project and location for which to retrieve instance information, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to GCP zones, for example __us-west1-b__. To retrieve instance information for all locations, use \"-\" for the @{location}@ value.
+    -- | Required. The project and location for which to retrieve instance information, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to Google Cloud zones, for example __us-west1-b__. To retrieve instance information for all locations, use \"-\" for the @{location}@ value.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -89,7 +89,7 @@ data FileProjectsLocationsInstancesList = FileProjectsLocationsInstancesList
 
 -- | Creates a value of 'FileProjectsLocationsInstancesList' with the minimum fields required to make a request.
 newFileProjectsLocationsInstancesList ::
-  -- |  Required. The project and location for which to retrieve instance information, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to GCP zones, for example __us-west1-b__. To retrieve instance information for all locations, use \"-\" for the @{location}@ value. See 'parent'.
+  -- |  Required. The project and location for which to retrieve instance information, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to Google Cloud zones, for example __us-west1-b__. To retrieve instance information for all locations, use \"-\" for the @{location}@ value. See 'parent'.
   Core.Text ->
   FileProjectsLocationsInstancesList
 newFileProjectsLocationsInstancesList parent =

@@ -72,7 +72,7 @@ data AdSenseAccountsListChildAccounts = AdSenseAccountsListChildAccounts
     callback :: (Core.Maybe Core.Text),
     -- | The maximum number of accounts to include in the response, used for paging. If unspecified, at most 10000 accounts will be returned. The maximum value is 10000; values above 10000 will be coerced to 10000.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A page token, received from a previous @ListAccounts@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListAccounts@ must match the call that provided the page token.
+    -- | A page token, received from a previous @ListChildAccounts@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListChildAccounts@ must match the call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The parent account, which owns the child accounts. Format: accounts\/{account}
     parent :: Core.Text,

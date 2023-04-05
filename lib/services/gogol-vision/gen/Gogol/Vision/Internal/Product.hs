@@ -5723,7 +5723,7 @@ instance
 data GoogleCloudVisionV1p2beta1Feature = GoogleCloudVisionV1p2beta1Feature
   { -- | Maximum number of results of this type. Does not apply to @TEXT_DETECTION@, @DOCUMENT_TEXT_DETECTION@, or @CROP_HINTS@.
     maxResults :: (Core.Maybe Core.Int32),
-    -- | Model to use for the feature. Supported values: \"builtin\/stable\" (the default if unset) and \"builtin\/latest\".
+    -- | Model to use for the feature. Supported values: \"builtin\/stable\" (the default if unset) and \"builtin\/latest\". @DOCUMENT_TEXT_DETECTION@ and @TEXT_DETECTION@ also support \"builtin\/weekly\" for the bleeding edge release updated weekly.
     model :: (Core.Maybe Core.Text),
     -- | The feature type.
     type' :: (Core.Maybe GoogleCloudVisionV1p2beta1Feature_Type)
@@ -7301,8 +7301,10 @@ instance
 -- | Parameters for text detections. This is used to control TEXT/DETECTION and DOCUMENT/TEXT_DETECTION features.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1TextDetectionParams' smart constructor.
-newtype GoogleCloudVisionV1p2beta1TextDetectionParams = GoogleCloudVisionV1p2beta1TextDetectionParams
-  { -- | By default, Cloud Vision API only includes confidence score for DOCUMENT/TEXT/DETECTION result. Set the flag to true to include confidence score for TEXT_DETECTION as well.
+data GoogleCloudVisionV1p2beta1TextDetectionParams = GoogleCloudVisionV1p2beta1TextDetectionParams
+  { -- | A list of advanced OCR options to fine-tune OCR behavior.
+    advancedOcrOptions :: (Core.Maybe [Core.Text]),
+    -- | By default, Cloud Vision API only includes confidence score for DOCUMENT/TEXT/DETECTION result. Set the flag to true to include confidence score for TEXT_DETECTION as well.
     enableTextDetectionConfidenceScore :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7312,7 +7314,8 @@ newGoogleCloudVisionV1p2beta1TextDetectionParams ::
   GoogleCloudVisionV1p2beta1TextDetectionParams
 newGoogleCloudVisionV1p2beta1TextDetectionParams =
   GoogleCloudVisionV1p2beta1TextDetectionParams
-    { enableTextDetectionConfidenceScore = Core.Nothing
+    { advancedOcrOptions = Core.Nothing,
+      enableTextDetectionConfidenceScore = Core.Nothing
     }
 
 instance
@@ -7324,7 +7327,8 @@ instance
       "GoogleCloudVisionV1p2beta1TextDetectionParams"
       ( \o ->
           GoogleCloudVisionV1p2beta1TextDetectionParams
-            Core.<$> (o Core..:? "enableTextDetectionConfidenceScore")
+            Core.<$> (o Core..:? "advancedOcrOptions")
+              Core.<*> (o Core..:? "enableTextDetectionConfidenceScore")
       )
 
 instance
@@ -7335,7 +7339,9 @@ instance
     GoogleCloudVisionV1p2beta1TextDetectionParams {..} =
       Core.object
         ( Core.catMaybes
-            [ ("enableTextDetectionConfidenceScore" Core..=)
+            [ ("advancedOcrOptions" Core..=)
+                Core.<$> advancedOcrOptions,
+              ("enableTextDetectionConfidenceScore" Core..=)
                 Core.<$> enableTextDetectionConfidenceScore
             ]
         )

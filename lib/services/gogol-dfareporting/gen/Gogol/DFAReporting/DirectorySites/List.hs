@@ -46,7 +46,7 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingDirectorySitesList' request conforms to.
 type DFAReportingDirectorySitesListResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "directorySites"

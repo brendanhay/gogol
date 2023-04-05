@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance template. Gets a list of available instance templates by making a list() request.
+-- Returns the specified instance template.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
 module Gogol.Compute.InstanceTemplates.Get
@@ -60,7 +60,7 @@ type ComputeInstanceTemplatesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] InstanceTemplate
 
--- | Returns the specified instance template. Gets a list of available instance templates by making a list() request.
+-- | Returns the specified instance template.
 --
 -- /See:/ 'newComputeInstanceTemplatesGet' smart constructor.
 data ComputeInstanceTemplatesGet = ComputeInstanceTemplatesGet

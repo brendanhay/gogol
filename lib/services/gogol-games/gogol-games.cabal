@@ -68,6 +68,8 @@ library
     Gogol.Games.Metagame.GetMetagameConfig
     Gogol.Games.Metagame.ListCategoriesByPlayer
     Gogol.Games.Players.Get
+    Gogol.Games.Players.GetMultipleApplicationPlayerIds
+    Gogol.Games.Players.GetScopedPlayerIds
     Gogol.Games.Players.List
     Gogol.Games.Revisions.Check
     Gogol.Games.Scores.Get
@@ -85,5 +87,5 @@ library
     Gogol.Games.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

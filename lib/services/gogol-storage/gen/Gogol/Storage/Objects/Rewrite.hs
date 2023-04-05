@@ -89,9 +89,6 @@ type StorageObjectsRewriteResource =
               "projection"
               ObjectsRewriteProjection
     Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
-    Core.:> Core.QueryParam
               "rewriteToken"
               Core.Text
     Core.:> Core.QueryParam
@@ -147,8 +144,6 @@ data StorageObjectsRewrite = StorageObjectsRewrite
     payload :: Object,
     -- | Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
     projection :: (Core.Maybe ObjectsRewriteProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response \'done\' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.
     rewriteToken :: (Core.Maybe Core.Text),
     -- | Name of the bucket in which to find the source object.
@@ -194,7 +189,6 @@ newStorageObjectsRewrite destinationBucket destinationObject payload sourceBucke
       maxBytesRewrittenPerCall = Core.Nothing,
       payload = payload,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       rewriteToken = Core.Nothing,
       sourceBucket = sourceBucket,
       sourceGeneration = Core.Nothing,
@@ -229,7 +223,6 @@ instance Core.GoogleRequest StorageObjectsRewrite where
       ifSourceMetagenerationNotMatch
       maxBytesRewrittenPerCall
       projection
-      provisionalUserProject
       rewriteToken
       sourceGeneration
       uploadType

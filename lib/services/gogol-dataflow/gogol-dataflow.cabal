@@ -80,7 +80,6 @@ library
     Gogol.Dataflow.Projects.Locations.Snapshots.Delete
     Gogol.Dataflow.Projects.Locations.Snapshots.Get
     Gogol.Dataflow.Projects.Locations.Snapshots.List
-    Gogol.Dataflow.Projects.Locations.Sql.Validate
     Gogol.Dataflow.Projects.Locations.Templates.Create
     Gogol.Dataflow.Projects.Locations.Templates.Get
     Gogol.Dataflow.Projects.Locations.Templates.Launch
@@ -98,5 +97,5 @@ library
     Gogol.Dataflow.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

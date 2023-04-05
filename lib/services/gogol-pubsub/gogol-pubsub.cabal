@@ -49,11 +49,15 @@ library
 
   exposed-modules:
     Gogol.PubSub
+    Gogol.PubSub.Projects.Schemas.Commit
     Gogol.PubSub.Projects.Schemas.Create
     Gogol.PubSub.Projects.Schemas.Delete
+    Gogol.PubSub.Projects.Schemas.DeleteRevision
     Gogol.PubSub.Projects.Schemas.Get
     Gogol.PubSub.Projects.Schemas.GetIamPolicy
     Gogol.PubSub.Projects.Schemas.List
+    Gogol.PubSub.Projects.Schemas.ListRevisions
+    Gogol.PubSub.Projects.Schemas.Rollback
     Gogol.PubSub.Projects.Schemas.SetIamPolicy
     Gogol.PubSub.Projects.Schemas.TestIamPermissions
     Gogol.PubSub.Projects.Schemas.Validate
@@ -98,5 +102,5 @@ library
     Gogol.PubSub.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

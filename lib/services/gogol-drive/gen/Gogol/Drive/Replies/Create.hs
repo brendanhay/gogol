@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new reply to a comment.
+-- Creates a reply to a comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.create@.
 module Gogol.Drive.Replies.Create
@@ -56,7 +56,7 @@ type DriveRepliesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Reply
     Core.:> Core.Post '[Core.JSON] Reply
 
--- | Creates a new reply to a comment.
+-- | Creates a reply to a comment.
 --
 -- /See:/ 'newDriveRepliesCreate' smart constructor.
 data DriveRepliesCreate = DriveRepliesCreate

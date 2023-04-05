@@ -62,6 +62,10 @@ module Gogol.AlertCenter.Internal.Product
     AlertMetadata (..),
     newAlertMetadata,
 
+    -- * ApnsCertificateExpirationInfo
+    ApnsCertificateExpirationInfo (..),
+    newApnsCertificateExpirationInfo,
+
     -- * AppMakerSqlSetupNotification
     AppMakerSqlSetupNotification (..),
     newAppMakerSqlSetupNotification,
@@ -194,6 +198,10 @@ module Gogol.AlertCenter.Internal.Product
     PredefinedDetectorInfo (..),
     newPredefinedDetectorInfo,
 
+    -- * PrimaryAdminChangedEvent
+    PrimaryAdminChangedEvent (..),
+    newPrimaryAdminChangedEvent,
+
     -- * ReportingRule
     ReportingRule (..),
     newReportingRule,
@@ -214,6 +222,22 @@ module Gogol.AlertCenter.Internal.Product
     RuleViolationInfo (..),
     newRuleViolationInfo,
 
+    -- * SSOProfileCreatedEvent
+    SSOProfileCreatedEvent (..),
+    newSSOProfileCreatedEvent,
+
+    -- * SSOProfileDeletedEvent
+    SSOProfileDeletedEvent (..),
+    newSSOProfileDeletedEvent,
+
+    -- * SSOProfileUpdatedEvent
+    SSOProfileUpdatedEvent (..),
+    newSSOProfileUpdatedEvent,
+
+    -- * SensitiveAdminAction
+    SensitiveAdminAction (..),
+    newSensitiveAdminAction,
+
     -- * Settings
     Settings (..),
     newSettings,
@@ -230,6 +254,10 @@ module Gogol.AlertCenter.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * SuperAdminPasswordResetEvent
+    SuperAdminPasswordResetEvent (..),
+    newSuperAdminPasswordResetEvent,
+
     -- * SuspiciousActivity
     SuspiciousActivity (..),
     newSuspiciousActivity,
@@ -237,6 +265,14 @@ module Gogol.AlertCenter.Internal.Product
     -- * SuspiciousActivitySecurityDetail
     SuspiciousActivitySecurityDetail (..),
     newSuspiciousActivitySecurityDetail,
+
+    -- * TransferError
+    TransferError (..),
+    newTransferError,
+
+    -- * TransferMisconfiguration
+    TransferMisconfiguration (..),
+    newTransferMisconfiguration,
 
     -- * UndeleteAlertRequest
     UndeleteAlertRequest (..),
@@ -253,6 +289,18 @@ module Gogol.AlertCenter.Internal.Product
     -- * UserDefinedDetectorInfo
     UserDefinedDetectorInfo (..),
     newUserDefinedDetectorInfo,
+
+    -- * VoiceMisconfiguration
+    VoiceMisconfiguration (..),
+    newVoiceMisconfiguration,
+
+    -- * VoicemailMisconfiguration
+    VoicemailMisconfiguration (..),
+    newVoicemailMisconfiguration,
+
+    -- * VoicemailRecipientError
+    VoicemailRecipientError (..),
+    newVoicemailRecipientError,
   )
 where
 
@@ -498,7 +546,7 @@ data Alert = Alert
     alertId :: (Core.Maybe Core.Text),
     -- | Output only. The time this alert was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. The unique identifier of the Google account of the customer.
+    -- | Output only. The unique identifier of the Google Workspace account of the customer.
     customerId :: (Core.Maybe Core.Text),
     -- | Optional. The data associated with this alert, for example google.apps.alertcenter.type.DeviceCompromised.
     data' :: (Core.Maybe Alert_Data),
@@ -618,7 +666,7 @@ data AlertFeedback = AlertFeedback
     alertId :: (Core.Maybe Core.Text),
     -- | Output only. The time this feedback was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Output only. The unique identifier of the Google account of the customer.
+    -- | Output only. The unique identifier of the Google Workspace account of the customer.
     customerId :: (Core.Maybe Core.Text),
     -- | Output only. The email of the user that provided the feedback.
     email :: (Core.Maybe Core.Text),
@@ -677,7 +725,7 @@ data AlertMetadata = AlertMetadata
     alertId :: (Core.Maybe Core.Text),
     -- | The email address of the user assigned to the alert.
     assignee :: (Core.Maybe Core.Text),
-    -- | Output only. The unique identifier of the Google account of the customer.
+    -- | Output only. The unique identifier of the Google Workspace account of the customer.
     customerId :: (Core.Maybe Core.Text),
     -- | Optional. @etag@ is used for optimistic concurrency control as a way to help prevent simultaneous updates of an alert metadata from overwriting each other. It is strongly suggested that systems make use of the @etag@ in the read-modify-write cycle to perform metadata updates in order to avoid race conditions: An @etag@ is returned in the response which contains alert metadata, and systems are expected to put that etag in the request to update alert metadata to ensure that their change will be applied to the same version of the alert metadata. If no @etag@ is provided in the call to update alert metadata, then the existing alert metadata is overwritten blindly.
     etag :: (Core.Maybe Core.Text),
@@ -730,6 +778,50 @@ instance Core.ToJSON AlertMetadata where
             ("severity" Core..=) Core.<$> severity,
             ("status" Core..=) Core.<$> status,
             ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | The explanation message associated with ApnsCertificationExpiring and ApnsCertificationExpired alerts.
+--
+-- /See:/ 'newApnsCertificateExpirationInfo' smart constructor.
+data ApnsCertificateExpirationInfo = ApnsCertificateExpirationInfo
+  { -- | The Apple ID used for the certificate may be blank if admins didn\'t enter it.
+    appleId :: (Core.Maybe Core.Text),
+    -- | The expiration date of the APNS Certificate.
+    expirationTime :: (Core.Maybe Core.DateTime),
+    -- | The UID for the certificate.
+    uid :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApnsCertificateExpirationInfo' with the minimum fields required to make a request.
+newApnsCertificateExpirationInfo ::
+  ApnsCertificateExpirationInfo
+newApnsCertificateExpirationInfo =
+  ApnsCertificateExpirationInfo
+    { appleId = Core.Nothing,
+      expirationTime = Core.Nothing,
+      uid = Core.Nothing
+    }
+
+instance Core.FromJSON ApnsCertificateExpirationInfo where
+  parseJSON =
+    Core.withObject
+      "ApnsCertificateExpirationInfo"
+      ( \o ->
+          ApnsCertificateExpirationInfo
+            Core.<$> (o Core..:? "appleId")
+            Core.<*> (o Core..:? "expirationTime")
+            Core.<*> (o Core..:? "uid")
+      )
+
+instance Core.ToJSON ApnsCertificateExpirationInfo where
+  toJSON ApnsCertificateExpirationInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("appleId" Core..=) Core.<$> appleId,
+            ("expirationTime" Core..=) Core.<$> expirationTime,
+            ("uid" Core..=) Core.<$> uid
           ]
       )
 
@@ -943,9 +1035,9 @@ instance Core.ToJSON BadWhitelist where
 --
 -- /See:/ 'newBatchDeleteAlertsRequest' smart constructor.
 data BatchDeleteAlertsRequest = BatchDeleteAlertsRequest
-  { -- | Required. list of alert IDs.
+  { -- | Required. The list of alert IDs to delete.
     alertId :: (Core.Maybe [Core.Text]),
-    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
+    -- | Optional. The unique identifier of the Google Workspace account of the customer the alerts are associated with. The @customer_id@ must have the initial \"C\" stripped (for example, @046psxkn@). Inferred from the caller identity if not provided. <https://support.google.com/cloudidentity/answer/10070793 Find your customer ID>.
     customerId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -979,7 +1071,7 @@ instance Core.ToJSON BatchDeleteAlertsRequest where
 --
 -- /See:/ 'newBatchDeleteAlertsResponse' smart constructor.
 data BatchDeleteAlertsResponse = BatchDeleteAlertsResponse
-  { -- | The status details for each failed alert_id.
+  { -- | The status details for each failed @alert_id@.
     failedAlertStatus :: (Core.Maybe BatchDeleteAlertsResponse_FailedAlertStatus),
     -- | The successful list of alert IDs.
     successAlertIds :: (Core.Maybe [Core.Text])
@@ -1016,7 +1108,7 @@ instance Core.ToJSON BatchDeleteAlertsResponse where
           ]
       )
 
--- | The status details for each failed alert_id.
+-- | The status details for each failed @alert_id@.
 --
 -- /See:/ 'newBatchDeleteAlertsResponse_FailedAlertStatus' smart constructor.
 newtype BatchDeleteAlertsResponse_FailedAlertStatus = BatchDeleteAlertsResponse_FailedAlertStatus
@@ -1057,9 +1149,9 @@ instance
 --
 -- /See:/ 'newBatchUndeleteAlertsRequest' smart constructor.
 data BatchUndeleteAlertsRequest = BatchUndeleteAlertsRequest
-  { -- | Required. list of alert IDs.
+  { -- | Required. The list of alert IDs to undelete.
     alertId :: (Core.Maybe [Core.Text]),
-    -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
+    -- | Optional. The unique identifier of the Google Workspace account of the customer the alerts are associated with. The @customer_id@ must have the initial \"C\" stripped (for example, @046psxkn@). Inferred from the caller identity if not provided. <https://support.google.com/cloudidentity/answer/10070793 Find your customer ID>.
     customerId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1093,7 +1185,7 @@ instance Core.ToJSON BatchUndeleteAlertsRequest where
 --
 -- /See:/ 'newBatchUndeleteAlertsResponse' smart constructor.
 data BatchUndeleteAlertsResponse = BatchUndeleteAlertsResponse
-  { -- | The status details for each failed alert_id.
+  { -- | The status details for each failed @alert_id@.
     failedAlertStatus :: (Core.Maybe BatchUndeleteAlertsResponse_FailedAlertStatus),
     -- | The successful list of alert IDs.
     successAlertIds :: (Core.Maybe [Core.Text])
@@ -1130,7 +1222,7 @@ instance Core.ToJSON BatchUndeleteAlertsResponse where
           ]
       )
 
--- | The status details for each failed alert_id.
+-- | The status details for each failed @alert_id@.
 --
 -- /See:/ 'newBatchUndeleteAlertsResponse_FailedAlertStatus' smart constructor.
 newtype BatchUndeleteAlertsResponse_FailedAlertStatus = BatchUndeleteAlertsResponse_FailedAlertStatus
@@ -1472,7 +1564,7 @@ instance Core.ToJSON DomainWideTakeoutInitiated where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1508,6 +1600,8 @@ data GmailMessageInfo = GmailMessageInfo
     messageId :: (Core.Maybe Core.Text),
     -- | The recipient of this email.
     recipient :: (Core.Maybe Core.Text),
+    -- | The sent time of the email.
+    sentTime :: (Core.Maybe Core.DateTime),
     -- | The email subject text (only available for reported emails).
     subjectText :: (Core.Maybe Core.Text)
   }
@@ -1525,6 +1619,7 @@ newGmailMessageInfo =
       messageBodySnippet = Core.Nothing,
       messageId = Core.Nothing,
       recipient = Core.Nothing,
+      sentTime = Core.Nothing,
       subjectText = Core.Nothing
     }
 
@@ -1541,6 +1636,7 @@ instance Core.FromJSON GmailMessageInfo where
             Core.<*> (o Core..:? "messageBodySnippet")
             Core.<*> (o Core..:? "messageId")
             Core.<*> (o Core..:? "recipient")
+            Core.<*> (o Core..:? "sentTime")
             Core.<*> (o Core..:? "subjectText")
       )
 
@@ -1558,6 +1654,7 @@ instance Core.ToJSON GmailMessageInfo where
               Core.<$> messageBodySnippet,
             ("messageId" Core..=) Core.<$> messageId,
             ("recipient" Core..=) Core.<$> recipient,
+            ("sentTime" Core..=) Core.<$> sentTime,
             ("subjectText" Core..=) Core.<$> subjectText
           ]
       )
@@ -2052,6 +2149,52 @@ instance Core.ToJSON PredefinedDetectorInfo where
           [("detectorName" Core..=) Core.<$> detectorName]
       )
 
+-- | Event occurred when primary admin changed in customer\'s account. The event are being received from insight forwarder
+--
+-- /See:/ 'newPrimaryAdminChangedEvent' smart constructor.
+data PrimaryAdminChangedEvent = PrimaryAdminChangedEvent
+  { -- | domain in which actioned occurred
+    domain :: (Core.Maybe Core.Text),
+    -- | Email of person who was the primary admin before the action
+    previousAdminEmail :: (Core.Maybe Core.Text),
+    -- | Email of person who is the primary admin after the action
+    updatedAdminEmail :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrimaryAdminChangedEvent' with the minimum fields required to make a request.
+newPrimaryAdminChangedEvent ::
+  PrimaryAdminChangedEvent
+newPrimaryAdminChangedEvent =
+  PrimaryAdminChangedEvent
+    { domain = Core.Nothing,
+      previousAdminEmail = Core.Nothing,
+      updatedAdminEmail = Core.Nothing
+    }
+
+instance Core.FromJSON PrimaryAdminChangedEvent where
+  parseJSON =
+    Core.withObject
+      "PrimaryAdminChangedEvent"
+      ( \o ->
+          PrimaryAdminChangedEvent
+            Core.<$> (o Core..:? "domain")
+            Core.<*> (o Core..:? "previousAdminEmail")
+            Core.<*> (o Core..:? "updatedAdminEmail")
+      )
+
+instance Core.ToJSON PrimaryAdminChangedEvent where
+  toJSON PrimaryAdminChangedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("domain" Core..=) Core.<$> domain,
+            ("previousAdminEmail" Core..=)
+              Core.<$> previousAdminEmail,
+            ("updatedAdminEmail" Core..=)
+              Core.<$> updatedAdminEmail
+          ]
+      )
+
 -- | Alerts from Reporting Rules configured by Admin.
 --
 -- /See:/ 'newReportingRule' smart constructor.
@@ -2298,6 +2441,182 @@ instance Core.ToJSON RuleViolationInfo where
           ]
       )
 
+-- | Event occurred when SSO Profile created in customer\'s account. The event are being received from insight forwarder
+--
+-- /See:/ 'newSSOProfileCreatedEvent' smart constructor.
+newtype SSOProfileCreatedEvent = SSOProfileCreatedEvent
+  { -- | sso profile name which got created
+    inboundSsoProfileName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SSOProfileCreatedEvent' with the minimum fields required to make a request.
+newSSOProfileCreatedEvent ::
+  SSOProfileCreatedEvent
+newSSOProfileCreatedEvent =
+  SSOProfileCreatedEvent {inboundSsoProfileName = Core.Nothing}
+
+instance Core.FromJSON SSOProfileCreatedEvent where
+  parseJSON =
+    Core.withObject
+      "SSOProfileCreatedEvent"
+      ( \o ->
+          SSOProfileCreatedEvent
+            Core.<$> (o Core..:? "inboundSsoProfileName")
+      )
+
+instance Core.ToJSON SSOProfileCreatedEvent where
+  toJSON SSOProfileCreatedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSsoProfileName" Core..=)
+              Core.<$> inboundSsoProfileName
+          ]
+      )
+
+-- | Event occurred when SSO Profile deleted in customer\'s account. The event are being received from insight forwarder
+--
+-- /See:/ 'newSSOProfileDeletedEvent' smart constructor.
+newtype SSOProfileDeletedEvent = SSOProfileDeletedEvent
+  { -- | sso profile name which got deleted
+    inboundSsoProfileName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SSOProfileDeletedEvent' with the minimum fields required to make a request.
+newSSOProfileDeletedEvent ::
+  SSOProfileDeletedEvent
+newSSOProfileDeletedEvent =
+  SSOProfileDeletedEvent {inboundSsoProfileName = Core.Nothing}
+
+instance Core.FromJSON SSOProfileDeletedEvent where
+  parseJSON =
+    Core.withObject
+      "SSOProfileDeletedEvent"
+      ( \o ->
+          SSOProfileDeletedEvent
+            Core.<$> (o Core..:? "inboundSsoProfileName")
+      )
+
+instance Core.ToJSON SSOProfileDeletedEvent where
+  toJSON SSOProfileDeletedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSsoProfileName" Core..=)
+              Core.<$> inboundSsoProfileName
+          ]
+      )
+
+-- | Event occurred when SSO Profile updated in customer\'s account. The event are being received from insight forwarder
+--
+-- /See:/ 'newSSOProfileUpdatedEvent' smart constructor.
+data SSOProfileUpdatedEvent = SSOProfileUpdatedEvent
+  { -- | changes made to sso profile
+    inboundSsoProfileChanges :: (Core.Maybe Core.Text),
+    -- | sso profile name which got updated
+    inboundSsoProfileName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SSOProfileUpdatedEvent' with the minimum fields required to make a request.
+newSSOProfileUpdatedEvent ::
+  SSOProfileUpdatedEvent
+newSSOProfileUpdatedEvent =
+  SSOProfileUpdatedEvent
+    { inboundSsoProfileChanges = Core.Nothing,
+      inboundSsoProfileName = Core.Nothing
+    }
+
+instance Core.FromJSON SSOProfileUpdatedEvent where
+  parseJSON =
+    Core.withObject
+      "SSOProfileUpdatedEvent"
+      ( \o ->
+          SSOProfileUpdatedEvent
+            Core.<$> (o Core..:? "inboundSsoProfileChanges")
+            Core.<*> (o Core..:? "inboundSsoProfileName")
+      )
+
+instance Core.ToJSON SSOProfileUpdatedEvent where
+  toJSON SSOProfileUpdatedEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSsoProfileChanges" Core..=)
+              Core.<$> inboundSsoProfileChanges,
+            ("inboundSsoProfileName" Core..=)
+              Core.<$> inboundSsoProfileName
+          ]
+      )
+
+-- | Alert that is triggered when Sensitive Admin Action occur in customer account.
+--
+-- /See:/ 'newSensitiveAdminAction' smart constructor.
+data SensitiveAdminAction = SensitiveAdminAction
+  { -- | Email of person who performed the action
+    actorEmail :: (Core.Maybe Core.Text),
+    -- | The time at which event occurred
+    eventTime :: (Core.Maybe Core.DateTime),
+    -- | Event occurred when primary admin changed in customer\'s account
+    primaryAdminChangedEvent :: (Core.Maybe PrimaryAdminChangedEvent),
+    -- | Event occurred when SSO Profile created in customer\'s account
+    ssoProfileCreatedEvent :: (Core.Maybe SSOProfileCreatedEvent),
+    -- | Event occurred when SSO Profile deleted in customer\'s account
+    ssoProfileDeletedEvent :: (Core.Maybe SSOProfileDeletedEvent),
+    -- | Event occurred when SSO Profile updated in customer\'s account
+    ssoProfileUpdatedEvent :: (Core.Maybe SSOProfileUpdatedEvent),
+    -- | Event occurred when password was reset for super admin in customer\'s account
+    superAdminPasswordResetEvent :: (Core.Maybe SuperAdminPasswordResetEvent)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SensitiveAdminAction' with the minimum fields required to make a request.
+newSensitiveAdminAction ::
+  SensitiveAdminAction
+newSensitiveAdminAction =
+  SensitiveAdminAction
+    { actorEmail = Core.Nothing,
+      eventTime = Core.Nothing,
+      primaryAdminChangedEvent = Core.Nothing,
+      ssoProfileCreatedEvent = Core.Nothing,
+      ssoProfileDeletedEvent = Core.Nothing,
+      ssoProfileUpdatedEvent = Core.Nothing,
+      superAdminPasswordResetEvent = Core.Nothing
+    }
+
+instance Core.FromJSON SensitiveAdminAction where
+  parseJSON =
+    Core.withObject
+      "SensitiveAdminAction"
+      ( \o ->
+          SensitiveAdminAction
+            Core.<$> (o Core..:? "actorEmail")
+            Core.<*> (o Core..:? "eventTime")
+            Core.<*> (o Core..:? "primaryAdminChangedEvent")
+            Core.<*> (o Core..:? "ssoProfileCreatedEvent")
+            Core.<*> (o Core..:? "ssoProfileDeletedEvent")
+            Core.<*> (o Core..:? "ssoProfileUpdatedEvent")
+            Core.<*> (o Core..:? "superAdminPasswordResetEvent")
+      )
+
+instance Core.ToJSON SensitiveAdminAction where
+  toJSON SensitiveAdminAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actorEmail" Core..=) Core.<$> actorEmail,
+            ("eventTime" Core..=) Core.<$> eventTime,
+            ("primaryAdminChangedEvent" Core..=)
+              Core.<$> primaryAdminChangedEvent,
+            ("ssoProfileCreatedEvent" Core..=)
+              Core.<$> ssoProfileCreatedEvent,
+            ("ssoProfileDeletedEvent" Core..=)
+              Core.<$> ssoProfileDeletedEvent,
+            ("ssoProfileUpdatedEvent" Core..=)
+              Core.<$> ssoProfileUpdatedEvent,
+            ("superAdminPasswordResetEvent" Core..=)
+              Core.<$> superAdminPasswordResetEvent
+          ]
+      )
+
 -- | Customer-level settings.
 --
 -- /See:/ 'newSettings' smart constructor.
@@ -2421,6 +2740,37 @@ instance Core.ToJSON Status_DetailsItem where
   toJSON Status_DetailsItem {..} =
     Core.toJSON additional
 
+-- | Event occurred when password was reset for super admin in customer\'s account. The event are being received from insight forwarder
+--
+-- /See:/ 'newSuperAdminPasswordResetEvent' smart constructor.
+newtype SuperAdminPasswordResetEvent = SuperAdminPasswordResetEvent
+  { -- | email of person whose password was reset
+    userEmail :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SuperAdminPasswordResetEvent' with the minimum fields required to make a request.
+newSuperAdminPasswordResetEvent ::
+  SuperAdminPasswordResetEvent
+newSuperAdminPasswordResetEvent =
+  SuperAdminPasswordResetEvent {userEmail = Core.Nothing}
+
+instance Core.FromJSON SuperAdminPasswordResetEvent where
+  parseJSON =
+    Core.withObject
+      "SuperAdminPasswordResetEvent"
+      ( \o ->
+          SuperAdminPasswordResetEvent
+            Core.<$> (o Core..:? "userEmail")
+      )
+
+instance Core.ToJSON SuperAdminPasswordResetEvent where
+  toJSON SuperAdminPasswordResetEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [("userEmail" Core..=) Core.<$> userEmail]
+      )
+
 -- | A mobile suspicious activity alert. Derived from audit logs.
 --
 -- /See:/ 'newSuspiciousActivity' smart constructor.
@@ -2533,11 +2883,93 @@ instance Core.ToJSON SuspiciousActivitySecurityDetail where
           ]
       )
 
+-- | Details for an invalid transfer or forward.
+--
+-- /See:/ 'newTransferError' smart constructor.
+data TransferError = TransferError
+  { -- | User\'s email address. This may be unavailable if the entity was deleted.
+    email :: (Core.Maybe Core.Text),
+    -- | Type of entity being transferred to. For ring group members, this should always be USER.
+    entityType :: (Core.Maybe TransferError_EntityType),
+    -- | Ring group or auto attendant ID. Not set for users.
+    id :: (Core.Maybe Core.Text),
+    -- | Reason for the error.
+    invalidReason :: (Core.Maybe TransferError_InvalidReason),
+    -- | User\'s full name, or the ring group \/ auto attendant name. This may be unavailable if the entity was deleted.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TransferError' with the minimum fields required to make a request.
+newTransferError ::
+  TransferError
+newTransferError =
+  TransferError
+    { email = Core.Nothing,
+      entityType = Core.Nothing,
+      id = Core.Nothing,
+      invalidReason = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON TransferError where
+  parseJSON =
+    Core.withObject
+      "TransferError"
+      ( \o ->
+          TransferError
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "entityType")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "invalidReason")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON TransferError where
+  toJSON TransferError {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("email" Core..=) Core.<$> email,
+            ("entityType" Core..=) Core.<$> entityType,
+            ("id" Core..=) Core.<$> id,
+            ("invalidReason" Core..=) Core.<$> invalidReason,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Error related to transferring or forwarding a phone call.
+--
+-- /See:/ 'newTransferMisconfiguration' smart constructor.
+newtype TransferMisconfiguration = TransferMisconfiguration
+  { -- | Details for each invalid transfer or forward.
+    errors :: (Core.Maybe [TransferError])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TransferMisconfiguration' with the minimum fields required to make a request.
+newTransferMisconfiguration ::
+  TransferMisconfiguration
+newTransferMisconfiguration = TransferMisconfiguration {errors = Core.Nothing}
+
+instance Core.FromJSON TransferMisconfiguration where
+  parseJSON =
+    Core.withObject
+      "TransferMisconfiguration"
+      ( \o ->
+          TransferMisconfiguration
+            Core.<$> (o Core..:? "errors")
+      )
+
+instance Core.ToJSON TransferMisconfiguration where
+  toJSON TransferMisconfiguration {..} =
+    Core.object
+      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+
 -- | A request to undelete a specific alert that was marked for deletion.
 --
 -- /See:/ 'newUndeleteAlertRequest' smart constructor.
 newtype UndeleteAlertRequest = UndeleteAlertRequest
-  { -- | Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+  { -- | Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The @customer_id@ must have the initial \"C\" stripped (for example, @046psxkn@). Inferred from the caller identity if not provided. <https://support.google.com/cloudidentity/answer/10070793 Find your customer ID>.
     customerId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2659,5 +3091,131 @@ instance Core.ToJSON UserDefinedDetectorInfo where
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
             ("resourceName" Core..=) Core.<$> resourceName
+          ]
+      )
+
+-- | An alert triggered when Google Voice configuration becomes invalid, generally due to an external entity being modified or deleted.
+--
+-- /See:/ 'newVoiceMisconfiguration' smart constructor.
+data VoiceMisconfiguration = VoiceMisconfiguration
+  { -- | Name of the entity whose configuration is now invalid.
+    entityName :: (Core.Maybe Core.Text),
+    -- | Type of the entity whose configuration is now invalid.
+    entityType :: (Core.Maybe VoiceMisconfiguration_EntityType),
+    -- | Link that the admin can follow to fix the issue.
+    fixUri :: (Core.Maybe Core.Text),
+    -- | Issue(s) with members of a ring group.
+    membersMisconfiguration :: (Core.Maybe TransferMisconfiguration),
+    -- | Issue(s) with transferring or forwarding to an external entity.
+    transferMisconfiguration :: (Core.Maybe TransferMisconfiguration),
+    -- | Issue(s) with sending to voicemail.
+    voicemailMisconfiguration :: (Core.Maybe VoicemailMisconfiguration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VoiceMisconfiguration' with the minimum fields required to make a request.
+newVoiceMisconfiguration ::
+  VoiceMisconfiguration
+newVoiceMisconfiguration =
+  VoiceMisconfiguration
+    { entityName = Core.Nothing,
+      entityType = Core.Nothing,
+      fixUri = Core.Nothing,
+      membersMisconfiguration = Core.Nothing,
+      transferMisconfiguration = Core.Nothing,
+      voicemailMisconfiguration = Core.Nothing
+    }
+
+instance Core.FromJSON VoiceMisconfiguration where
+  parseJSON =
+    Core.withObject
+      "VoiceMisconfiguration"
+      ( \o ->
+          VoiceMisconfiguration
+            Core.<$> (o Core..:? "entityName")
+            Core.<*> (o Core..:? "entityType")
+            Core.<*> (o Core..:? "fixUri")
+            Core.<*> (o Core..:? "membersMisconfiguration")
+            Core.<*> (o Core..:? "transferMisconfiguration")
+            Core.<*> (o Core..:? "voicemailMisconfiguration")
+      )
+
+instance Core.ToJSON VoiceMisconfiguration where
+  toJSON VoiceMisconfiguration {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("entityName" Core..=) Core.<$> entityName,
+            ("entityType" Core..=) Core.<$> entityType,
+            ("fixUri" Core..=) Core.<$> fixUri,
+            ("membersMisconfiguration" Core..=)
+              Core.<$> membersMisconfiguration,
+            ("transferMisconfiguration" Core..=)
+              Core.<$> transferMisconfiguration,
+            ("voicemailMisconfiguration" Core..=)
+              Core.<$> voicemailMisconfiguration
+          ]
+      )
+
+-- | Issue(s) with sending to voicemail.
+--
+-- /See:/ 'newVoicemailMisconfiguration' smart constructor.
+newtype VoicemailMisconfiguration = VoicemailMisconfiguration
+  { -- | Issue(s) with voicemail recipients.
+    errors :: (Core.Maybe [VoicemailRecipientError])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VoicemailMisconfiguration' with the minimum fields required to make a request.
+newVoicemailMisconfiguration ::
+  VoicemailMisconfiguration
+newVoicemailMisconfiguration = VoicemailMisconfiguration {errors = Core.Nothing}
+
+instance Core.FromJSON VoicemailMisconfiguration where
+  parseJSON =
+    Core.withObject
+      "VoicemailMisconfiguration"
+      ( \o ->
+          VoicemailMisconfiguration
+            Core.<$> (o Core..:? "errors")
+      )
+
+instance Core.ToJSON VoicemailMisconfiguration where
+  toJSON VoicemailMisconfiguration {..} =
+    Core.object
+      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+
+-- | Issue(s) with a voicemail recipient.
+--
+-- /See:/ 'newVoicemailRecipientError' smart constructor.
+data VoicemailRecipientError = VoicemailRecipientError
+  { -- | Email address of the invalid recipient. This may be unavailable if the recipient was deleted.
+    email :: (Core.Maybe Core.Text),
+    -- | Reason for the error.
+    invalidReason :: (Core.Maybe VoicemailRecipientError_InvalidReason)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VoicemailRecipientError' with the minimum fields required to make a request.
+newVoicemailRecipientError ::
+  VoicemailRecipientError
+newVoicemailRecipientError =
+  VoicemailRecipientError {email = Core.Nothing, invalidReason = Core.Nothing}
+
+instance Core.FromJSON VoicemailRecipientError where
+  parseJSON =
+    Core.withObject
+      "VoicemailRecipientError"
+      ( \o ->
+          VoicemailRecipientError
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "invalidReason")
+      )
+
+instance Core.ToJSON VoicemailRecipientError where
+  toJSON VoicemailRecipientError {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("email" Core..=) Core.<$> email,
+            ("invalidReason" Core..=) Core.<$> invalidReason
           ]
       )

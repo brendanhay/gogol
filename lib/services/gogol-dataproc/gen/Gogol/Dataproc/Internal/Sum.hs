@@ -73,6 +73,7 @@ module Gogol.Dataproc.Internal.Sum
         ClusterStatus_State_Stopping,
         ClusterStatus_State_Stopped,
         ClusterStatus_State_Starting,
+        ClusterStatus_State_Repairing,
         ..
       ),
 
@@ -93,11 +94,22 @@ module Gogol.Dataproc.Internal.Sum
         ..
       ),
 
+    -- * GkeNodePoolTarget_RolesItem
+    GkeNodePoolTarget_RolesItem
+      ( GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED,
+        GkeNodePoolTarget_RolesItem_Default,
+        GkeNodePoolTarget_RolesItem_Controller,
+        GkeNodePoolTarget_RolesItem_SPARKDRIVER,
+        GkeNodePoolTarget_RolesItem_SPARKEXECUTOR,
+        ..
+      ),
+
     -- * InstanceGroupConfig_Preemptibility
     InstanceGroupConfig_Preemptibility
       ( InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED,
         InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE,
         InstanceGroupConfig_Preemptibility_Preemptible,
+        InstanceGroupConfig_Preemptibility_Spot,
         ..
       ),
 
@@ -148,6 +160,31 @@ module Gogol.Dataproc.Internal.Sum
         Metric_MetricSource_Yarn,
         Metric_MetricSource_SPARKHISTORYSERVER,
         Metric_MetricSource_HIVESERVER2,
+        Metric_MetricSource_Hivemetastore,
+        ..
+      ),
+
+    -- * NodeGroup_RolesItem
+    NodeGroup_RolesItem
+      ( NodeGroup_RolesItem_ROLEUNSPECIFIED,
+        NodeGroup_RolesItem_Driver,
+        ..
+      ),
+
+    -- * NodeGroupOperationMetadata_OperationType
+    NodeGroupOperationMetadata_OperationType
+      ( NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED,
+        NodeGroupOperationMetadata_OperationType_Create,
+        NodeGroupOperationMetadata_OperationType_Update,
+        NodeGroupOperationMetadata_OperationType_Delete',
+        NodeGroupOperationMetadata_OperationType_Resize,
+        ..
+      ),
+
+    -- * NodePool_RepairAction
+    NodePool_RepairAction
+      ( NodePool_RepairAction_REPAIRACTIONUNSPECIFIED,
+        NodePool_RepairAction_Delete',
         ..
       ),
 
@@ -178,8 +215,10 @@ module Gogol.Dataproc.Internal.Sum
         SoftwareConfig_OptionalComponentsItem_Flink,
         SoftwareConfig_OptionalComponentsItem_Hbase,
         SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT,
+        SoftwareConfig_OptionalComponentsItem_Hudi,
         SoftwareConfig_OptionalComponentsItem_Jupyter,
         SoftwareConfig_OptionalComponentsItem_Presto,
+        SoftwareConfig_OptionalComponentsItem_Trino,
         SoftwareConfig_OptionalComponentsItem_Ranger,
         SoftwareConfig_OptionalComponentsItem_Solr,
         SoftwareConfig_OptionalComponentsItem_Zeppelin,
@@ -449,6 +488,10 @@ pattern ClusterStatus_State_Stopped = ClusterStatus_State "STOPPED"
 pattern ClusterStatus_State_Starting :: ClusterStatus_State
 pattern ClusterStatus_State_Starting = ClusterStatus_State "STARTING"
 
+-- | The cluster is being repaired. It is not ready for use.
+pattern ClusterStatus_State_Repairing :: ClusterStatus_State
+pattern ClusterStatus_State_Repairing = ClusterStatus_State "REPAIRING"
+
 {-# COMPLETE
   ClusterStatus_State_Unknown,
   ClusterStatus_State_Creating,
@@ -460,6 +503,7 @@ pattern ClusterStatus_State_Starting = ClusterStatus_State "STARTING"
   ClusterStatus_State_Stopping,
   ClusterStatus_State_Stopped,
   ClusterStatus_State_Starting,
+  ClusterStatus_State_Repairing,
   ClusterStatus_State
   #-}
 
@@ -532,6 +576,47 @@ pattern GceClusterConfig_PrivateIpv6GoogleAccess_Bidirectional = GceClusterConfi
   GceClusterConfig_PrivateIpv6GoogleAccess
   #-}
 
+newtype GkeNodePoolTarget_RolesItem = GkeNodePoolTarget_RolesItem {fromGkeNodePoolTarget_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Role is unspecified.
+pattern GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED :: GkeNodePoolTarget_RolesItem
+pattern GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED = GkeNodePoolTarget_RolesItem "ROLE_UNSPECIFIED"
+
+-- | At least one node pool must have the DEFAULT role. Work assigned to a role that is not associated with a node pool is assigned to the node pool with the DEFAULT role. For example, work assigned to the CONTROLLER role will be assigned to the node pool with the DEFAULT role if no node pool has the CONTROLLER role.
+pattern GkeNodePoolTarget_RolesItem_Default :: GkeNodePoolTarget_RolesItem
+pattern GkeNodePoolTarget_RolesItem_Default = GkeNodePoolTarget_RolesItem "DEFAULT"
+
+-- | Run work associated with the Dataproc control plane (for example, controllers and webhooks). Very low resource requirements.
+pattern GkeNodePoolTarget_RolesItem_Controller :: GkeNodePoolTarget_RolesItem
+pattern GkeNodePoolTarget_RolesItem_Controller = GkeNodePoolTarget_RolesItem "CONTROLLER"
+
+-- | Run work associated with a Spark driver of a job.
+pattern GkeNodePoolTarget_RolesItem_SPARKDRIVER :: GkeNodePoolTarget_RolesItem
+pattern GkeNodePoolTarget_RolesItem_SPARKDRIVER = GkeNodePoolTarget_RolesItem "SPARK_DRIVER"
+
+-- | Run work associated with a Spark executor of a job.
+pattern GkeNodePoolTarget_RolesItem_SPARKEXECUTOR :: GkeNodePoolTarget_RolesItem
+pattern GkeNodePoolTarget_RolesItem_SPARKEXECUTOR = GkeNodePoolTarget_RolesItem "SPARK_EXECUTOR"
+
+{-# COMPLETE
+  GkeNodePoolTarget_RolesItem_ROLEUNSPECIFIED,
+  GkeNodePoolTarget_RolesItem_Default,
+  GkeNodePoolTarget_RolesItem_Controller,
+  GkeNodePoolTarget_RolesItem_SPARKDRIVER,
+  GkeNodePoolTarget_RolesItem_SPARKEXECUTOR,
+  GkeNodePoolTarget_RolesItem
+  #-}
+
 -- | Optional. Specifies the preemptibility of the instance group.The default value for master and worker groups is NON_PREEMPTIBLE. This default cannot be changed.The default value for secondary instances is PREEMPTIBLE.
 newtype InstanceGroupConfig_Preemptibility = InstanceGroupConfig_Preemptibility {fromInstanceGroupConfig_Preemptibility :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -553,14 +638,19 @@ pattern InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED = InstanceG
 pattern InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE :: InstanceGroupConfig_Preemptibility
 pattern InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE = InstanceGroupConfig_Preemptibility "NON_PREEMPTIBLE"
 
--- | Instances are preemptible.This option is allowed only for secondary worker groups.
+-- | Instances are preemptible (https:\/\/cloud.google.com\/compute\/docs\/instances\/preemptible).This option is allowed only for secondary worker (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/compute\/secondary-vms) groups.
 pattern InstanceGroupConfig_Preemptibility_Preemptible :: InstanceGroupConfig_Preemptibility
 pattern InstanceGroupConfig_Preemptibility_Preemptible = InstanceGroupConfig_Preemptibility "PREEMPTIBLE"
+
+-- | Instances are Spot VMs (https:\/\/cloud.google.com\/compute\/docs\/instances\/spot).This option is allowed only for secondary worker (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/compute\/secondary-vms) groups. Spot VMs are the latest version of preemptible VMs (https:\/\/cloud.google.com\/compute\/docs\/instances\/preemptible), and provide additional features.
+pattern InstanceGroupConfig_Preemptibility_Spot :: InstanceGroupConfig_Preemptibility
+pattern InstanceGroupConfig_Preemptibility_Spot = InstanceGroupConfig_Preemptibility "SPOT"
 
 {-# COMPLETE
   InstanceGroupConfig_Preemptibility_PREEMPTIBILITYUNSPECIFIED,
   InstanceGroupConfig_Preemptibility_NONPREEMPTIBLE,
   InstanceGroupConfig_Preemptibility_Preemptible,
+  InstanceGroupConfig_Preemptibility_Spot,
   InstanceGroupConfig_Preemptibility
   #-}
 
@@ -729,7 +819,7 @@ pattern LoggingConfig_DriverLogLevelsAdditional_Off = LoggingConfig_DriverLogLev
   LoggingConfig_DriverLogLevelsAdditional
   #-}
 
--- | Required. MetricSource that should be enabled
+-- | Required. Default metrics are collected unless metricOverrides are specified for the metric source (see Available OSS metrics (https:\/\/cloud.google.com\/dataproc\/docs\/guides\/monitoring#available/oss/metrics) for more information).
 newtype Metric_MetricSource = Metric_MetricSource {fromMetric_MetricSource :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -742,33 +832,37 @@ newtype Metric_MetricSource = Metric_MetricSource {fromMetric_MetricSource :: Co
       Core.FromJSONKey
     )
 
--- | Required unspecified metric source
+-- | Required unspecified metric source.
 pattern Metric_MetricSource_METRICSOURCEUNSPECIFIED :: Metric_MetricSource
 pattern Metric_MetricSource_METRICSOURCEUNSPECIFIED = Metric_MetricSource "METRIC_SOURCE_UNSPECIFIED"
 
--- | all default monitoring agent metrics that are published with prefix \"agent.googleapis.com\" when we enable a monitoring agent in Compute Engine
+-- | Default monitoring agent metrics. If this source is enabled, Dataproc enables the monitoring agent in Compute Engine, and collects default monitoring agent metrics, which are published with an agent.googleapis.com prefix.
 pattern Metric_MetricSource_MONITORINGAGENTDEFAULTS :: Metric_MetricSource
 pattern Metric_MetricSource_MONITORINGAGENTDEFAULTS = Metric_MetricSource "MONITORING_AGENT_DEFAULTS"
 
--- | Hdfs metric source
+-- | HDFS metric source.
 pattern Metric_MetricSource_Hdfs :: Metric_MetricSource
 pattern Metric_MetricSource_Hdfs = Metric_MetricSource "HDFS"
 
--- | Spark metric source
+-- | Spark metric source.
 pattern Metric_MetricSource_Spark :: Metric_MetricSource
 pattern Metric_MetricSource_Spark = Metric_MetricSource "SPARK"
 
--- | Yarn metric source
+-- | YARN metric source.
 pattern Metric_MetricSource_Yarn :: Metric_MetricSource
 pattern Metric_MetricSource_Yarn = Metric_MetricSource "YARN"
 
--- | Spark history server metric source
+-- | Spark History Server metric source.
 pattern Metric_MetricSource_SPARKHISTORYSERVER :: Metric_MetricSource
 pattern Metric_MetricSource_SPARKHISTORYSERVER = Metric_MetricSource "SPARK_HISTORY_SERVER"
 
--- | hiveserver2 metric source
+-- | Hiveserver2 metric source.
 pattern Metric_MetricSource_HIVESERVER2 :: Metric_MetricSource
 pattern Metric_MetricSource_HIVESERVER2 = Metric_MetricSource "HIVESERVER2"
+
+-- | hivemetastore metric source
+pattern Metric_MetricSource_Hivemetastore :: Metric_MetricSource
+pattern Metric_MetricSource_Hivemetastore = Metric_MetricSource "HIVEMETASTORE"
 
 {-# COMPLETE
   Metric_MetricSource_METRICSOURCEUNSPECIFIED,
@@ -778,7 +872,103 @@ pattern Metric_MetricSource_HIVESERVER2 = Metric_MetricSource "HIVESERVER2"
   Metric_MetricSource_Yarn,
   Metric_MetricSource_SPARKHISTORYSERVER,
   Metric_MetricSource_HIVESERVER2,
+  Metric_MetricSource_Hivemetastore,
   Metric_MetricSource
+  #-}
+
+newtype NodeGroup_RolesItem = NodeGroup_RolesItem {fromNodeGroup_RolesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Required unspecified role.
+pattern NodeGroup_RolesItem_ROLEUNSPECIFIED :: NodeGroup_RolesItem
+pattern NodeGroup_RolesItem_ROLEUNSPECIFIED = NodeGroup_RolesItem "ROLE_UNSPECIFIED"
+
+-- | Job drivers run on the node pool.
+pattern NodeGroup_RolesItem_Driver :: NodeGroup_RolesItem
+pattern NodeGroup_RolesItem_Driver = NodeGroup_RolesItem "DRIVER"
+
+{-# COMPLETE
+  NodeGroup_RolesItem_ROLEUNSPECIFIED,
+  NodeGroup_RolesItem_Driver,
+  NodeGroup_RolesItem
+  #-}
+
+-- | The operation type.
+newtype NodeGroupOperationMetadata_OperationType = NodeGroupOperationMetadata_OperationType {fromNodeGroupOperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Node group operation type is unknown.
+pattern NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED :: NodeGroupOperationMetadata_OperationType
+pattern NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED = NodeGroupOperationMetadata_OperationType "NODE_GROUP_OPERATION_TYPE_UNSPECIFIED"
+
+-- | Create node group operation type.
+pattern NodeGroupOperationMetadata_OperationType_Create :: NodeGroupOperationMetadata_OperationType
+pattern NodeGroupOperationMetadata_OperationType_Create = NodeGroupOperationMetadata_OperationType "CREATE"
+
+-- | Update node group operation type.
+pattern NodeGroupOperationMetadata_OperationType_Update :: NodeGroupOperationMetadata_OperationType
+pattern NodeGroupOperationMetadata_OperationType_Update = NodeGroupOperationMetadata_OperationType "UPDATE"
+
+-- | Delete node group operation type.
+pattern NodeGroupOperationMetadata_OperationType_Delete' :: NodeGroupOperationMetadata_OperationType
+pattern NodeGroupOperationMetadata_OperationType_Delete' = NodeGroupOperationMetadata_OperationType "DELETE"
+
+-- | Resize node group operation type.
+pattern NodeGroupOperationMetadata_OperationType_Resize :: NodeGroupOperationMetadata_OperationType
+pattern NodeGroupOperationMetadata_OperationType_Resize = NodeGroupOperationMetadata_OperationType "RESIZE"
+
+{-# COMPLETE
+  NodeGroupOperationMetadata_OperationType_NODEGROUPOPERATIONTYPEUNSPECIFIED,
+  NodeGroupOperationMetadata_OperationType_Create,
+  NodeGroupOperationMetadata_OperationType_Update,
+  NodeGroupOperationMetadata_OperationType_Delete',
+  NodeGroupOperationMetadata_OperationType_Resize,
+  NodeGroupOperationMetadata_OperationType
+  #-}
+
+-- | Required. Repair action to take on specified resources of the node pool.
+newtype NodePool_RepairAction = NodePool_RepairAction {fromNodePool_RepairAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No action will be taken by default.
+pattern NodePool_RepairAction_REPAIRACTIONUNSPECIFIED :: NodePool_RepairAction
+pattern NodePool_RepairAction_REPAIRACTIONUNSPECIFIED = NodePool_RepairAction "REPAIR_ACTION_UNSPECIFIED"
+
+-- | delete the specified list of nodes.
+pattern NodePool_RepairAction_Delete' :: NodePool_RepairAction
+pattern NodePool_RepairAction_Delete' = NodePool_RepairAction "DELETE"
+
+{-# COMPLETE
+  NodePool_RepairAction_REPAIRACTIONUNSPECIFIED,
+  NodePool_RepairAction_Delete',
+  NodePool_RepairAction
   #-}
 
 -- | Optional. Type of reservation to consume
@@ -895,6 +1085,10 @@ pattern SoftwareConfig_OptionalComponentsItem_Hbase = SoftwareConfig_OptionalCom
 pattern SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT :: SoftwareConfig_OptionalComponentsItem
 pattern SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT = SoftwareConfig_OptionalComponentsItem "HIVE_WEBHCAT"
 
+-- | Hudi.
+pattern SoftwareConfig_OptionalComponentsItem_Hudi :: SoftwareConfig_OptionalComponentsItem
+pattern SoftwareConfig_OptionalComponentsItem_Hudi = SoftwareConfig_OptionalComponentsItem "HUDI"
+
 -- | The Jupyter Notebook.
 pattern SoftwareConfig_OptionalComponentsItem_Jupyter :: SoftwareConfig_OptionalComponentsItem
 pattern SoftwareConfig_OptionalComponentsItem_Jupyter = SoftwareConfig_OptionalComponentsItem "JUPYTER"
@@ -902,6 +1096,10 @@ pattern SoftwareConfig_OptionalComponentsItem_Jupyter = SoftwareConfig_OptionalC
 -- | The Presto query engine.
 pattern SoftwareConfig_OptionalComponentsItem_Presto :: SoftwareConfig_OptionalComponentsItem
 pattern SoftwareConfig_OptionalComponentsItem_Presto = SoftwareConfig_OptionalComponentsItem "PRESTO"
+
+-- | The Trino query engine.
+pattern SoftwareConfig_OptionalComponentsItem_Trino :: SoftwareConfig_OptionalComponentsItem
+pattern SoftwareConfig_OptionalComponentsItem_Trino = SoftwareConfig_OptionalComponentsItem "TRINO"
 
 -- | The Ranger service.
 pattern SoftwareConfig_OptionalComponentsItem_Ranger :: SoftwareConfig_OptionalComponentsItem
@@ -927,8 +1125,10 @@ pattern SoftwareConfig_OptionalComponentsItem_Zookeeper = SoftwareConfig_Optiona
   SoftwareConfig_OptionalComponentsItem_Flink,
   SoftwareConfig_OptionalComponentsItem_Hbase,
   SoftwareConfig_OptionalComponentsItem_HIVEWEBHCAT,
+  SoftwareConfig_OptionalComponentsItem_Hudi,
   SoftwareConfig_OptionalComponentsItem_Jupyter,
   SoftwareConfig_OptionalComponentsItem_Presto,
+  SoftwareConfig_OptionalComponentsItem_Trino,
   SoftwareConfig_OptionalComponentsItem_Ranger,
   SoftwareConfig_OptionalComponentsItem_Solr,
   SoftwareConfig_OptionalComponentsItem_Zeppelin,

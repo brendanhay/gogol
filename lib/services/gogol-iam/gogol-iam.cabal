@@ -21,7 +21,7 @@ description:
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
   .
-  This library is compatible with version @v1@
+  This library is compatible with version @v2@
   of the API.
 
 source-repository head
@@ -49,64 +49,12 @@ library
 
   exposed-modules:
     Gogol.IAM
-    Gogol.IAM.IamPolicies.LintPolicy
-    Gogol.IAM.IamPolicies.QueryAuditableServices
-    Gogol.IAM.Locations.WorkforcePools.Operations.Get
-    Gogol.IAM.Locations.WorkforcePools.Providers.Keys.Operations.Get
-    Gogol.IAM.Locations.WorkforcePools.Providers.Operations.Get
-    Gogol.IAM.Locations.WorkforcePools.Subjects.Operations.Get
-    Gogol.IAM.Organizations.Roles.Create
-    Gogol.IAM.Organizations.Roles.Delete
-    Gogol.IAM.Organizations.Roles.Get
-    Gogol.IAM.Organizations.Roles.List
-    Gogol.IAM.Organizations.Roles.Patch
-    Gogol.IAM.Organizations.Roles.Undelete
-    Gogol.IAM.Permissions.QueryTestablePermissions
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Create
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Delete
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Get
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.List
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Operations.Get
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Patch
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Create
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Delete
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Get
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Keys.Operations.Get
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.List
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Operations.Get
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Patch
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Providers.Undelete
-    Gogol.IAM.Projects.Locations.WorkloadIdentityPools.Undelete
-    Gogol.IAM.Projects.Roles.Create
-    Gogol.IAM.Projects.Roles.Delete
-    Gogol.IAM.Projects.Roles.Get
-    Gogol.IAM.Projects.Roles.List
-    Gogol.IAM.Projects.Roles.Patch
-    Gogol.IAM.Projects.Roles.Undelete
-    Gogol.IAM.Projects.ServiceAccounts.Create
-    Gogol.IAM.Projects.ServiceAccounts.Delete
-    Gogol.IAM.Projects.ServiceAccounts.Disable
-    Gogol.IAM.Projects.ServiceAccounts.Enable
-    Gogol.IAM.Projects.ServiceAccounts.Get
-    Gogol.IAM.Projects.ServiceAccounts.GetIamPolicy
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Create
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Delete
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Disable
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Enable
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Get
-    Gogol.IAM.Projects.ServiceAccounts.Keys.List
-    Gogol.IAM.Projects.ServiceAccounts.Keys.Upload
-    Gogol.IAM.Projects.ServiceAccounts.List
-    Gogol.IAM.Projects.ServiceAccounts.Patch
-    Gogol.IAM.Projects.ServiceAccounts.SetIamPolicy
-    Gogol.IAM.Projects.ServiceAccounts.SignBlob
-    Gogol.IAM.Projects.ServiceAccounts.SignJwt
-    Gogol.IAM.Projects.ServiceAccounts.TestIamPermissions
-    Gogol.IAM.Projects.ServiceAccounts.Undelete
-    Gogol.IAM.Projects.ServiceAccounts.Update
-    Gogol.IAM.Roles.Get
-    Gogol.IAM.Roles.List
-    Gogol.IAM.Roles.QueryGrantableRoles
+    Gogol.IAM.Policies.CreatePolicy
+    Gogol.IAM.Policies.Delete
+    Gogol.IAM.Policies.Get
+    Gogol.IAM.Policies.ListPolicies
+    Gogol.IAM.Policies.Operations.Get
+    Gogol.IAM.Policies.Update
     Gogol.IAM.Types
 
   other-modules:
@@ -114,5 +62,5 @@ library
     Gogol.IAM.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

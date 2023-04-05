@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+-- Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionInstanceGroupManagers.patchPerInstanceConfigs@.
 module Gogol.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
@@ -66,7 +66,7 @@ type ComputeRegionInstanceGroupManagersPatchPerInstanceConfigsResource =
               RegionInstanceGroupManagerPatchInstanceConfigReq
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+-- | Inserts or patches per-instance configurations for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
 --
 -- /See:/ 'newComputeRegionInstanceGroupManagersPatchPerInstanceConfigs' smart constructor.
 data ComputeRegionInstanceGroupManagersPatchPerInstanceConfigs = ComputeRegionInstanceGroupManagersPatchPerInstanceConfigs

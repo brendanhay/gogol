@@ -54,6 +54,9 @@ type DirectoryRoleAssignmentsListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "includeIndirectRoleAssignments"
+              Core.Bool
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "roleId" Core.Text
@@ -73,8 +76,10 @@ data DirectoryRoleAssignmentsList = DirectoryRoleAssignmentsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable ID of the Google Workspace account.
+    -- | The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter.
     customer :: Core.Text,
+    -- | When set to @true@, fetches indirect role assignments (i.e. role assignment via a group) as well as direct ones. Defaults to @false@. You must specify @user_key@ or the indirect role assignments will not be included.
+    includeIndirectRoleAssignments :: (Core.Maybe Core.Bool),
     -- | Maximum number of results to return.
     maxResults :: (Core.Maybe Core.Int32),
     -- | Token to specify the next page in the list.
@@ -85,14 +90,14 @@ data DirectoryRoleAssignmentsList = DirectoryRoleAssignmentsList
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | The user\'s primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
+    -- | The primary email address, alias email address, or unique user or group ID. If included in the request, returns role assignments only for this user or group.
     userKey :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DirectoryRoleAssignmentsList' with the minimum fields required to make a request.
 newDirectoryRoleAssignmentsList ::
-  -- |  Immutable ID of the Google Workspace account. See 'customer'.
+  -- |  The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter. See 'customer'.
   Core.Text ->
   DirectoryRoleAssignmentsList
 newDirectoryRoleAssignmentsList customer =
@@ -101,6 +106,7 @@ newDirectoryRoleAssignmentsList customer =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       customer = customer,
+      includeIndirectRoleAssignments = Core.Nothing,
       maxResults = Core.Nothing,
       pageToken = Core.Nothing,
       roleId = Core.Nothing,
@@ -127,6 +133,7 @@ instance
       xgafv
       accessToken
       callback
+      includeIndirectRoleAssignments
       maxResults
       pageToken
       roleId

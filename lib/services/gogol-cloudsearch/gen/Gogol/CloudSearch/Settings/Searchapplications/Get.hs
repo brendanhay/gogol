@@ -71,7 +71,7 @@ data CloudSearchSettingsSearchapplicationsGet = CloudSearchSettingsSearchapplica
     callback :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | Name of the search application. Format: searchapplications\/{application_id}.
+    -- | The name of the search application. Format: searchapplications\/{application_id}.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,7 +82,7 @@ data CloudSearchSettingsSearchapplicationsGet = CloudSearchSettingsSearchapplica
 
 -- | Creates a value of 'CloudSearchSettingsSearchapplicationsGet' with the minimum fields required to make a request.
 newCloudSearchSettingsSearchapplicationsGet ::
-  -- |  Name of the search application. Format: searchapplications\/{application_id}. See 'name'.
+  -- |  The name of the search application. Format: searchapplications\/{application_id}. See 'name'.
   Core.Text ->
   CloudSearchSettingsSearchapplicationsGet
 newCloudSearchSettingsSearchapplicationsGet name =

@@ -54,6 +54,7 @@ type ContentDatafeedstatusesGetResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "country" Core.Text
+    Core.:> Core.QueryParam "feedLabel" Core.Text
     Core.:> Core.QueryParam "language" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -70,11 +71,13 @@ data ContentDatafeedstatusesGet = ContentDatafeedstatusesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The country for which to get the datafeed status. If this parameter is provided then language must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.
+    -- | Deprecated. Use @feedLabel@ instead. The country to get the datafeed status for. If this parameter is provided then @language@ must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.
     country :: (Core.Maybe Core.Text),
     -- | The ID of the datafeed.
     datafeedId :: Core.Word64,
-    -- | The language for which to get the datafeed status. If this parameter is provided then country must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.
+    -- | The feed label to get the datafeed status for. If this parameter is provided then @language@ must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.
+    feedLabel :: (Core.Maybe Core.Text),
+    -- | The language to get the datafeed status for. If this parameter is provided then @country@ must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.
     language :: (Core.Maybe Core.Text),
     -- | The ID of the account that manages the datafeed. This account cannot be a multi-client account.
     merchantId :: Core.Word64,
@@ -99,6 +102,7 @@ newContentDatafeedstatusesGet datafeedId merchantId =
       callback = Core.Nothing,
       country = Core.Nothing,
       datafeedId = datafeedId,
+      feedLabel = Core.Nothing,
       language = Core.Nothing,
       merchantId = merchantId,
       uploadType = Core.Nothing,
@@ -121,6 +125,7 @@ instance
       accessToken
       callback
       country
+      feedLabel
       language
       uploadType
       uploadProtocol

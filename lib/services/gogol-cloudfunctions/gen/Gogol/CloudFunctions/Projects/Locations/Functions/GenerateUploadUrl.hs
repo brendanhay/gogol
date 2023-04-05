@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.generateUploadUrl@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrl' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsGenerateUploadUrlResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "functions:generateUploadUrl"
     Core.:> Core.QueryParam "$.xgafv" Xgafv

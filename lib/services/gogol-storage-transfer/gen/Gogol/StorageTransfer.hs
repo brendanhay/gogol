@@ -73,6 +73,11 @@ module Gogol.StorageTransfer
     StorageTransferTransferJobsCreate (..),
     newStorageTransferTransferJobsCreate,
 
+    -- ** storagetransfer.transferJobs.delete
+    StorageTransferTransferJobsDeleteResource,
+    StorageTransferTransferJobsDelete (..),
+    newStorageTransferTransferJobsDelete,
+
     -- ** storagetransfer.transferJobs.get
     StorageTransferTransferJobsGetResource,
     StorageTransferTransferJobsGet (..),
@@ -134,6 +139,10 @@ module Gogol.StorageTransfer
     AwsAccessKey (..),
     newAwsAccessKey,
 
+    -- ** AwsS3CompatibleData
+    AwsS3CompatibleData (..),
+    newAwsS3CompatibleData,
+
     -- ** AwsS3Data
     AwsS3Data (..),
     newAwsS3Data,
@@ -172,6 +181,10 @@ module Gogol.StorageTransfer
 
     -- ** ErrorSummary_ErrorCode
     ErrorSummary_ErrorCode (..),
+
+    -- ** EventStream
+    EventStream (..),
+    newEventStream,
 
     -- ** GcsData
     GcsData (..),
@@ -280,6 +293,22 @@ module Gogol.StorageTransfer
     RunTransferJobRequest (..),
     newRunTransferJobRequest,
 
+    -- ** S3CompatibleMetadata
+    S3CompatibleMetadata (..),
+    newS3CompatibleMetadata,
+
+    -- ** S3CompatibleMetadata_AuthMethod
+    S3CompatibleMetadata_AuthMethod (..),
+
+    -- ** S3CompatibleMetadata_ListApi
+    S3CompatibleMetadata_ListApi (..),
+
+    -- ** S3CompatibleMetadata_Protocol
+    S3CompatibleMetadata_Protocol (..),
+
+    -- ** S3CompatibleMetadata_RequestModel
+    S3CompatibleMetadata_RequestModel (..),
+
     -- ** Schedule
     Schedule (..),
     newSchedule,
@@ -322,6 +351,9 @@ module Gogol.StorageTransfer
     TransferOptions (..),
     newTransferOptions,
 
+    -- ** TransferOptions_OverwriteWhen
+    TransferOptions_OverwriteWhen (..),
+
     -- ** TransferSpec
     TransferSpec (..),
     newTransferSpec,
@@ -339,6 +371,7 @@ import Gogol.StorageTransfer.Projects.AgentPools.Get
 import Gogol.StorageTransfer.Projects.AgentPools.List
 import Gogol.StorageTransfer.Projects.AgentPools.Patch
 import Gogol.StorageTransfer.TransferJobs.Create
+import Gogol.StorageTransfer.TransferJobs.Delete
 import Gogol.StorageTransfer.TransferJobs.Get
 import Gogol.StorageTransfer.TransferJobs.List
 import Gogol.StorageTransfer.TransferJobs.Patch

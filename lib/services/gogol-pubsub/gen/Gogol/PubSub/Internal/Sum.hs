@@ -33,6 +33,16 @@ module Gogol.PubSub.Internal.Sum
         ..
       ),
 
+    -- * BigQueryConfig_State
+    BigQueryConfig_State
+      ( BigQueryConfig_State_STATEUNSPECIFIED,
+        BigQueryConfig_State_Active,
+        BigQueryConfig_State_PERMISSIONDENIED,
+        BigQueryConfig_State_NOTFOUND,
+        BigQueryConfig_State_SCHEMAMISMATCH,
+        ..
+      ),
+
     -- * Schema_Type
     Schema_Type
       ( Schema_Type_TYPEUNSPECIFIED,
@@ -80,6 +90,14 @@ module Gogol.PubSub.Internal.Sum
         ProjectsSchemasListView_Full,
         ..
       ),
+
+    -- * ProjectsSchemasListRevisionsView
+    ProjectsSchemasListRevisionsView
+      ( ProjectsSchemasListRevisionsView_SCHEMAVIEWUNSPECIFIED,
+        ProjectsSchemasListRevisionsView_Basic,
+        ProjectsSchemasListRevisionsView_Full,
+        ..
+      ),
   )
 where
 
@@ -110,6 +128,48 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Output only. An output-only field that indicates whether or not the subscription can receive messages.
+newtype BigQueryConfig_State = BigQueryConfig_State {fromBigQueryConfig_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern BigQueryConfig_State_STATEUNSPECIFIED :: BigQueryConfig_State
+pattern BigQueryConfig_State_STATEUNSPECIFIED = BigQueryConfig_State "STATE_UNSPECIFIED"
+
+-- | The subscription can actively send messages to BigQuery
+pattern BigQueryConfig_State_Active :: BigQueryConfig_State
+pattern BigQueryConfig_State_Active = BigQueryConfig_State "ACTIVE"
+
+-- | Cannot write to the BigQuery table because of permission denied errors. This can happen if - Pub\/Sub SA has not been granted the <https://cloud.google.com/pubsub/docs/create-subscription#assign_bigquery_service_account appropriate BigQuery IAM permissions> - bigquery.googleapis.com API is not enabled for the project (<https://cloud.google.com/service-usage/docs/enable-disable instructions>)
+pattern BigQueryConfig_State_PERMISSIONDENIED :: BigQueryConfig_State
+pattern BigQueryConfig_State_PERMISSIONDENIED = BigQueryConfig_State "PERMISSION_DENIED"
+
+-- | Cannot write to the BigQuery table because it does not exist.
+pattern BigQueryConfig_State_NOTFOUND :: BigQueryConfig_State
+pattern BigQueryConfig_State_NOTFOUND = BigQueryConfig_State "NOT_FOUND"
+
+-- | Cannot write to the BigQuery table due to a schema mismatch.
+pattern BigQueryConfig_State_SCHEMAMISMATCH :: BigQueryConfig_State
+pattern BigQueryConfig_State_SCHEMAMISMATCH = BigQueryConfig_State "SCHEMA_MISMATCH"
+
+{-# COMPLETE
+  BigQueryConfig_State_STATEUNSPECIFIED,
+  BigQueryConfig_State_Active,
+  BigQueryConfig_State_PERMISSIONDENIED,
+  BigQueryConfig_State_NOTFOUND,
+  BigQueryConfig_State_SCHEMAMISMATCH,
+  BigQueryConfig_State
   #-}
 
 -- | The type of the schema definition.
@@ -302,4 +362,36 @@ pattern ProjectsSchemasListView_Full = ProjectsSchemasListView "FULL"
   ProjectsSchemasListView_Basic,
   ProjectsSchemasListView_Full,
   ProjectsSchemasListView
+  #-}
+
+-- | The set of Schema fields to return in the response. If not set, returns Schemas with @name@ and @type@, but not @definition@. Set to @FULL@ to retrieve all fields.
+newtype ProjectsSchemasListRevisionsView = ProjectsSchemasListRevisionsView {fromProjectsSchemasListRevisionsView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The default \/ unset value. The API will default to the BASIC view.
+pattern ProjectsSchemasListRevisionsView_SCHEMAVIEWUNSPECIFIED :: ProjectsSchemasListRevisionsView
+pattern ProjectsSchemasListRevisionsView_SCHEMAVIEWUNSPECIFIED = ProjectsSchemasListRevisionsView "SCHEMA_VIEW_UNSPECIFIED"
+
+-- | Include the name and type of the schema, but not the definition.
+pattern ProjectsSchemasListRevisionsView_Basic :: ProjectsSchemasListRevisionsView
+pattern ProjectsSchemasListRevisionsView_Basic = ProjectsSchemasListRevisionsView "BASIC"
+
+-- | Include all Schema object fields.
+pattern ProjectsSchemasListRevisionsView_Full :: ProjectsSchemasListRevisionsView
+pattern ProjectsSchemasListRevisionsView_Full = ProjectsSchemasListRevisionsView "FULL"
+
+{-# COMPLETE
+  ProjectsSchemasListRevisionsView_SCHEMAVIEWUNSPECIFIED,
+  ProjectsSchemasListRevisionsView_Basic,
+  ProjectsSchemasListRevisionsView_Full,
+  ProjectsSchemasListRevisionsView
   #-}

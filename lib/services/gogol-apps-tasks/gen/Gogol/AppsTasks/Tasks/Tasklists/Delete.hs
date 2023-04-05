@@ -28,7 +28,7 @@
 --
 -- Deletes the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.delete@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.delete@.
 module Gogol.AppsTasks.Tasks.Tasklists.Delete
   ( -- * Resource
     TasksTasklistsDeleteResource,

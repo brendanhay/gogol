@@ -49,8 +49,6 @@ library
 
   exposed-modules:
     Gogol.Logging
-    Gogol.Logging.BillingAccounts.Buckets.Get
-    Gogol.Logging.BillingAccounts.Buckets.Views.Get
     Gogol.Logging.BillingAccounts.Exclusions.Create
     Gogol.Logging.BillingAccounts.Exclusions.Delete
     Gogol.Logging.BillingAccounts.Exclusions.Get
@@ -59,21 +57,30 @@ library
     Gogol.Logging.BillingAccounts.GetCmekSettings
     Gogol.Logging.BillingAccounts.GetSettings
     Gogol.Logging.BillingAccounts.Locations.Buckets.Create
+    Gogol.Logging.BillingAccounts.Locations.Buckets.CreateAsync
     Gogol.Logging.BillingAccounts.Locations.Buckets.Delete
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Get
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Create
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Delete
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Get
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Links.List
     Gogol.Logging.BillingAccounts.Locations.Buckets.List
     Gogol.Logging.BillingAccounts.Locations.Buckets.Patch
     Gogol.Logging.BillingAccounts.Locations.Buckets.Undelete
+    Gogol.Logging.BillingAccounts.Locations.Buckets.UpdateAsync
     Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Create
     Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Delete
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Get
     Gogol.Logging.BillingAccounts.Locations.Buckets.Views.List
+    Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Logs.List
     Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Patch
     Gogol.Logging.BillingAccounts.Locations.Get
     Gogol.Logging.BillingAccounts.Locations.List
     Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
+    Gogol.Logging.BillingAccounts.Locations.Operations.Get
     Gogol.Logging.BillingAccounts.Locations.Operations.List
     Gogol.Logging.BillingAccounts.Logs.Delete
     Gogol.Logging.BillingAccounts.Logs.List
-    Gogol.Logging.BillingAccounts.Operations.Get
     Gogol.Logging.BillingAccounts.Sinks.Create
     Gogol.Logging.BillingAccounts.Sinks.Delete
     Gogol.Logging.BillingAccounts.Sinks.Get
@@ -97,15 +104,22 @@ library
     Gogol.Logging.Folders.GetCmekSettings
     Gogol.Logging.Folders.GetSettings
     Gogol.Logging.Folders.Locations.Buckets.Create
+    Gogol.Logging.Folders.Locations.Buckets.CreateAsync
     Gogol.Logging.Folders.Locations.Buckets.Delete
     Gogol.Logging.Folders.Locations.Buckets.Get
+    Gogol.Logging.Folders.Locations.Buckets.Links.Create
+    Gogol.Logging.Folders.Locations.Buckets.Links.Delete
+    Gogol.Logging.Folders.Locations.Buckets.Links.Get
+    Gogol.Logging.Folders.Locations.Buckets.Links.List
     Gogol.Logging.Folders.Locations.Buckets.List
     Gogol.Logging.Folders.Locations.Buckets.Patch
     Gogol.Logging.Folders.Locations.Buckets.Undelete
+    Gogol.Logging.Folders.Locations.Buckets.UpdateAsync
     Gogol.Logging.Folders.Locations.Buckets.Views.Create
     Gogol.Logging.Folders.Locations.Buckets.Views.Delete
     Gogol.Logging.Folders.Locations.Buckets.Views.Get
     Gogol.Logging.Folders.Locations.Buckets.Views.List
+    Gogol.Logging.Folders.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Folders.Locations.Buckets.Views.Patch
     Gogol.Logging.Folders.Locations.Get
     Gogol.Logging.Folders.Locations.List
@@ -124,11 +138,17 @@ library
     Gogol.Logging.GetCmekSettings
     Gogol.Logging.GetSettings
     Gogol.Logging.Locations.Buckets.Create
+    Gogol.Logging.Locations.Buckets.CreateAsync
     Gogol.Logging.Locations.Buckets.Delete
     Gogol.Logging.Locations.Buckets.Get
+    Gogol.Logging.Locations.Buckets.Links.Create
+    Gogol.Logging.Locations.Buckets.Links.Delete
+    Gogol.Logging.Locations.Buckets.Links.Get
+    Gogol.Logging.Locations.Buckets.Links.List
     Gogol.Logging.Locations.Buckets.List
     Gogol.Logging.Locations.Buckets.Patch
     Gogol.Logging.Locations.Buckets.Undelete
+    Gogol.Logging.Locations.Buckets.UpdateAsync
     Gogol.Logging.Locations.Buckets.Views.Create
     Gogol.Logging.Locations.Buckets.Views.Delete
     Gogol.Logging.Locations.Buckets.Views.Get
@@ -150,15 +170,22 @@ library
     Gogol.Logging.Organizations.GetCmekSettings
     Gogol.Logging.Organizations.GetSettings
     Gogol.Logging.Organizations.Locations.Buckets.Create
+    Gogol.Logging.Organizations.Locations.Buckets.CreateAsync
     Gogol.Logging.Organizations.Locations.Buckets.Delete
     Gogol.Logging.Organizations.Locations.Buckets.Get
+    Gogol.Logging.Organizations.Locations.Buckets.Links.Create
+    Gogol.Logging.Organizations.Locations.Buckets.Links.Delete
+    Gogol.Logging.Organizations.Locations.Buckets.Links.Get
+    Gogol.Logging.Organizations.Locations.Buckets.Links.List
     Gogol.Logging.Organizations.Locations.Buckets.List
     Gogol.Logging.Organizations.Locations.Buckets.Patch
     Gogol.Logging.Organizations.Locations.Buckets.Undelete
+    Gogol.Logging.Organizations.Locations.Buckets.UpdateAsync
     Gogol.Logging.Organizations.Locations.Buckets.Views.Create
     Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
     Gogol.Logging.Organizations.Locations.Buckets.Views.Get
     Gogol.Logging.Organizations.Locations.Buckets.Views.List
+    Gogol.Logging.Organizations.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
     Gogol.Logging.Organizations.Locations.Get
     Gogol.Logging.Organizations.Locations.List
@@ -183,15 +210,22 @@ library
     Gogol.Logging.Projects.GetCmekSettings
     Gogol.Logging.Projects.GetSettings
     Gogol.Logging.Projects.Locations.Buckets.Create
+    Gogol.Logging.Projects.Locations.Buckets.CreateAsync
     Gogol.Logging.Projects.Locations.Buckets.Delete
     Gogol.Logging.Projects.Locations.Buckets.Get
+    Gogol.Logging.Projects.Locations.Buckets.Links.Create
+    Gogol.Logging.Projects.Locations.Buckets.Links.Delete
+    Gogol.Logging.Projects.Locations.Buckets.Links.Get
+    Gogol.Logging.Projects.Locations.Buckets.Links.List
     Gogol.Logging.Projects.Locations.Buckets.List
     Gogol.Logging.Projects.Locations.Buckets.Patch
     Gogol.Logging.Projects.Locations.Buckets.Undelete
+    Gogol.Logging.Projects.Locations.Buckets.UpdateAsync
     Gogol.Logging.Projects.Locations.Buckets.Views.Create
     Gogol.Logging.Projects.Locations.Buckets.Views.Delete
     Gogol.Logging.Projects.Locations.Buckets.Views.Get
     Gogol.Logging.Projects.Locations.Buckets.Views.List
+    Gogol.Logging.Projects.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Projects.Locations.Buckets.Views.Patch
     Gogol.Logging.Projects.Locations.Get
     Gogol.Logging.Projects.Locations.List
@@ -225,5 +259,5 @@ library
     Gogol.Logging.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

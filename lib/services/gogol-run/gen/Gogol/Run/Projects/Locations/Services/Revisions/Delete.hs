@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a Revision.
+-- Deletes a Revision.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.revisions.delete@.
 module Gogol.Run.Projects.Locations.Services.Revisions.Delete
@@ -57,7 +57,7 @@ type RunProjectsLocationsServicesRevisionsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleLongrunningOperation
 
--- | Delete a Revision.
+-- | Deletes a Revision.
 --
 -- /See:/ 'newRunProjectsLocationsServicesRevisionsDelete' smart constructor.
 data RunProjectsLocationsServicesRevisionsDelete = RunProjectsLocationsServicesRevisionsDelete

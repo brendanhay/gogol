@@ -50,9 +50,17 @@ module Gogol.PageSpeed.Internal.Product
     Environment (..),
     newEnvironment,
 
+    -- * Environment_Credits
+    Environment_Credits (..),
+    newEnvironment_Credits,
+
     -- * I18n
     I18n (..),
     newI18n,
+
+    -- * LhrEntity
+    LhrEntity (..),
+    newLhrEntity,
 
     -- * LighthouseAuditResultV5
     LighthouseAuditResultV5 (..),
@@ -368,6 +376,8 @@ instance Core.ToJSON ConfigSettings where
 data Environment = Environment
   { -- | The benchmark index number that indicates rough device class.
     benchmarkIndex :: (Core.Maybe Core.Double),
+    -- | The version of libraries with which these results were generated. Ex: axe-core.
+    credits :: (Core.Maybe Environment_Credits),
     -- | The user agent string of the version of Chrome used.
     hostUserAgent :: (Core.Maybe Core.Text),
     -- | The user agent string that was sent over the network.
@@ -381,6 +391,7 @@ newEnvironment ::
 newEnvironment =
   Environment
     { benchmarkIndex = Core.Nothing,
+      credits = Core.Nothing,
       hostUserAgent = Core.Nothing,
       networkUserAgent = Core.Nothing
     }
@@ -392,6 +403,7 @@ instance Core.FromJSON Environment where
       ( \o ->
           Environment
             Core.<$> (o Core..:? "benchmarkIndex")
+            Core.<*> (o Core..:? "credits")
             Core.<*> (o Core..:? "hostUserAgent")
             Core.<*> (o Core..:? "networkUserAgent")
       )
@@ -401,11 +413,42 @@ instance Core.ToJSON Environment where
     Core.object
       ( Core.catMaybes
           [ ("benchmarkIndex" Core..=) Core.<$> benchmarkIndex,
+            ("credits" Core..=) Core.<$> credits,
             ("hostUserAgent" Core..=) Core.<$> hostUserAgent,
             ("networkUserAgent" Core..=)
               Core.<$> networkUserAgent
           ]
       )
+
+-- | The version of libraries with which these results were generated. Ex: axe-core.
+--
+-- /See:/ 'newEnvironment_Credits' smart constructor.
+newtype Environment_Credits = Environment_Credits
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Environment_Credits' with the minimum fields required to make a request.
+newEnvironment_Credits ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Environment_Credits
+newEnvironment_Credits additional =
+  Environment_Credits {additional = additional}
+
+instance Core.FromJSON Environment_Credits where
+  parseJSON =
+    Core.withObject
+      "Environment_Credits"
+      ( \o ->
+          Environment_Credits
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON Environment_Credits where
+  toJSON Environment_Credits {..} =
+    Core.toJSON additional
 
 -- | Message containing the i18n data for the LHR - Version 1.
 --
@@ -436,6 +479,65 @@ instance Core.ToJSON I18n where
       ( Core.catMaybes
           [ ("rendererFormattedStrings" Core..=)
               Core.<$> rendererFormattedStrings
+          ]
+      )
+
+-- | Message containing an Entity.
+--
+-- /See:/ 'newLhrEntity' smart constructor.
+data LhrEntity = LhrEntity
+  { -- | Optional. An optional category name for the entity.
+    category :: (Core.Maybe Core.Text),
+    -- | Optional. An optional homepage URL of the entity.
+    homepage :: (Core.Maybe Core.Text),
+    -- | Optional. An optional flag indicating if the entity is the first party.
+    isFirstParty :: (Core.Maybe Core.Bool),
+    -- | Optional. An optional flag indicating if the entity is not recognized.
+    isUnrecognized :: (Core.Maybe Core.Bool),
+    -- | Required. Name of the entity.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. A list of URL origin strings that belong to this entity.
+    origins :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LhrEntity' with the minimum fields required to make a request.
+newLhrEntity ::
+  LhrEntity
+newLhrEntity =
+  LhrEntity
+    { category = Core.Nothing,
+      homepage = Core.Nothing,
+      isFirstParty = Core.Nothing,
+      isUnrecognized = Core.Nothing,
+      name = Core.Nothing,
+      origins = Core.Nothing
+    }
+
+instance Core.FromJSON LhrEntity where
+  parseJSON =
+    Core.withObject
+      "LhrEntity"
+      ( \o ->
+          LhrEntity
+            Core.<$> (o Core..:? "category")
+            Core.<*> (o Core..:? "homepage")
+            Core.<*> (o Core..:? "isFirstParty")
+            Core.<*> (o Core..:? "isUnrecognized")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "origins")
+      )
+
+instance Core.ToJSON LhrEntity where
+  toJSON LhrEntity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("category" Core..=) Core.<$> category,
+            ("homepage" Core..=) Core.<$> homepage,
+            ("isFirstParty" Core..=) Core.<$> isFirstParty,
+            ("isUnrecognized" Core..=) Core.<$> isUnrecognized,
+            ("name" Core..=) Core.<$> name,
+            ("origins" Core..=) Core.<$> origins
           ]
       )
 
@@ -634,16 +736,24 @@ data LighthouseResultV5 = LighthouseResultV5
     categoryGroups :: (Core.Maybe LighthouseResultV5_CategoryGroups),
     -- | The configuration settings for this LHR.
     configSettings :: (Core.Maybe ConfigSettings),
+    -- | Entity classification data.
+    entities :: (Core.Maybe [LhrEntity]),
     -- | Environment settings that were used when making this LHR.
     environment :: (Core.Maybe Environment),
     -- | The time that this run was fetched.
     fetchTime :: (Core.Maybe Core.Text),
+    -- | URL displayed on the page after Lighthouse finishes.
+    finalDisplayedUrl :: (Core.Maybe Core.Text),
     -- | The final resolved url that was audited.
     finalUrl :: (Core.Maybe Core.Text),
+    -- | Screenshot data of the full page, along with node rects relevant to the audit results.
+    fullPageScreenshot :: (Core.Maybe Core.Value),
     -- | The internationalization strings that are required to render the LHR.
     i18n :: (Core.Maybe I18n),
     -- | The lighthouse version that was used to generate this LHR.
     lighthouseVersion :: (Core.Maybe Core.Text),
+    -- | URL of the main document request of the final navigation.
+    mainDocumentUrl :: (Core.Maybe Core.Text),
     -- | The original requested url.
     requestedUrl :: (Core.Maybe Core.Text),
     -- | List of all run warnings in the LHR. Will always output to at least @[]@.
@@ -668,11 +778,15 @@ newLighthouseResultV5 =
       categories = Core.Nothing,
       categoryGroups = Core.Nothing,
       configSettings = Core.Nothing,
+      entities = Core.Nothing,
       environment = Core.Nothing,
       fetchTime = Core.Nothing,
+      finalDisplayedUrl = Core.Nothing,
       finalUrl = Core.Nothing,
+      fullPageScreenshot = Core.Nothing,
       i18n = Core.Nothing,
       lighthouseVersion = Core.Nothing,
+      mainDocumentUrl = Core.Nothing,
       requestedUrl = Core.Nothing,
       runWarnings = Core.Nothing,
       runtimeError = Core.Nothing,
@@ -691,11 +805,15 @@ instance Core.FromJSON LighthouseResultV5 where
             Core.<*> (o Core..:? "categories")
             Core.<*> (o Core..:? "categoryGroups")
             Core.<*> (o Core..:? "configSettings")
+            Core.<*> (o Core..:? "entities")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "fetchTime")
+            Core.<*> (o Core..:? "finalDisplayedUrl")
             Core.<*> (o Core..:? "finalUrl")
+            Core.<*> (o Core..:? "fullPageScreenshot")
             Core.<*> (o Core..:? "i18n")
             Core.<*> (o Core..:? "lighthouseVersion")
+            Core.<*> (o Core..:? "mainDocumentUrl")
             Core.<*> (o Core..:? "requestedUrl")
             Core.<*> (o Core..:? "runWarnings")
             Core.<*> (o Core..:? "runtimeError")
@@ -712,12 +830,18 @@ instance Core.ToJSON LighthouseResultV5 where
             ("categories" Core..=) Core.<$> categories,
             ("categoryGroups" Core..=) Core.<$> categoryGroups,
             ("configSettings" Core..=) Core.<$> configSettings,
+            ("entities" Core..=) Core.<$> entities,
             ("environment" Core..=) Core.<$> environment,
             ("fetchTime" Core..=) Core.<$> fetchTime,
+            ("finalDisplayedUrl" Core..=)
+              Core.<$> finalDisplayedUrl,
             ("finalUrl" Core..=) Core.<$> finalUrl,
+            ("fullPageScreenshot" Core..=)
+              Core.<$> fullPageScreenshot,
             ("i18n" Core..=) Core.<$> i18n,
             ("lighthouseVersion" Core..=)
               Core.<$> lighthouseVersion,
+            ("mainDocumentUrl" Core..=) Core.<$> mainDocumentUrl,
             ("requestedUrl" Core..=) Core.<$> requestedUrl,
             ("runWarnings" Core..=) Core.<$> runWarnings,
             ("runtimeError" Core..=) Core.<$> runtimeError,

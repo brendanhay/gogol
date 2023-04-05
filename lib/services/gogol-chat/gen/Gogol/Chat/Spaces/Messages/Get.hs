@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a message.
+-- Returns a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#read_a_message Read a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts Service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.readonly@ authorization scope. Note: Might return a message from a blocked member or space.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.get@.
 module Gogol.Chat.Spaces.Messages.Get
@@ -55,7 +55,7 @@ type ChatSpacesMessagesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Message
 
--- | Returns a message.
+-- | Returns a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#read_a_message Read a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts Service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.readonly@ authorization scope. Note: Might return a message from a blocked member or space.
 --
 -- /See:/ 'newChatSpacesMessagesGet' smart constructor.
 data ChatSpacesMessagesGet = ChatSpacesMessagesGet
@@ -65,7 +65,7 @@ data ChatSpacesMessagesGet = ChatSpacesMessagesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the message to be retrieved, in the form \"spaces\//\/messages\//\". Example: spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB
+    -- | Required. Resource name of the message to retrieve. Format: spaces\/{space}\/messages\/{message} If the message begins with @client-@, then it has a custom name assigned by a Chat app that created it with the Chat REST API. That Chat app (but not others) can pass the custom name to get, update, or delete the message. To learn more, see [create and name a message] (https:\/\/developers.google.com\/chat\/api\/guides\/crudl\/messages#name/a/created_message).
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data ChatSpacesMessagesGet = ChatSpacesMessagesGet
 
 -- | Creates a value of 'ChatSpacesMessagesGet' with the minimum fields required to make a request.
 newChatSpacesMessagesGet ::
-  -- |  Required. Resource name of the message to be retrieved, in the form \"spaces\//\/messages\//\". Example: spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB See 'name'.
+  -- |  Required. Resource name of the message to retrieve. Format: spaces\/{space}\/messages\/{message} If the message begins with @client-@, then it has a custom name assigned by a Chat app that created it with the Chat REST API. That Chat app (but not others) can pass the custom name to get, update, or delete the message. To learn more, see [create and name a message] (https:\/\/developers.google.com\/chat\/api\/guides\/crudl\/messages#name/a/created_message). See 'name'.
   Core.Text ->
   ChatSpacesMessagesGet
 newChatSpacesMessagesGet name =
@@ -91,7 +91,9 @@ newChatSpacesMessagesGet name =
 
 instance Core.GoogleRequest ChatSpacesMessagesGet where
   type Rs ChatSpacesMessagesGet = Message
-  type Scopes ChatSpacesMessagesGet = '[]
+  type
+    Scopes ChatSpacesMessagesGet =
+      '[Chat'Bot, Chat'Messages, Chat'Messages'Readonly]
   requestClient ChatSpacesMessagesGet {..} =
     go
       name

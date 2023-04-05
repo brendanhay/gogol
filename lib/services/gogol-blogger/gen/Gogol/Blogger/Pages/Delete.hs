@@ -28,7 +28,7 @@
 --
 -- Deletes a page by blog id and page id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.delete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.delete@.
 module Gogol.Blogger.Pages.Delete
   ( -- * Resource
     BloggerPagesDeleteResource,
@@ -55,6 +55,7 @@ type BloggerPagesDeleteResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "useTrash" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
@@ -75,7 +76,9 @@ data BloggerPagesDelete = BloggerPagesDelete
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Move to Trash if possible
+    useTrash :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -94,7 +97,8 @@ newBloggerPagesDelete blogId pageId =
       callback = Core.Nothing,
       pageId = pageId,
       uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+      uploadProtocol = Core.Nothing,
+      useTrash = Core.Nothing
     }
 
 instance Core.GoogleRequest BloggerPagesDelete where
@@ -111,6 +115,7 @@ instance Core.GoogleRequest BloggerPagesDelete where
       callback
       uploadType
       uploadProtocol
+      useTrash
       (Core.Just Core.AltJSON)
       bloggerService
     where

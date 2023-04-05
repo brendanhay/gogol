@@ -71,7 +71,7 @@ data ServiceManagementServicesList = ServiceManagementServicesList
     callback :: (Core.Maybe Core.Text),
     -- | Include services consumed by the specified consumer. The Google Service Management implementation accepts the following forms: - project:
     consumerId :: (Core.Maybe Core.Text),
-    -- | The max number of items to include in the response list. Page size is 50 if not specified. Maximum value is 100.
+    -- | The max number of items to include in the response list. Page size is 50 if not specified. Maximum value is 500.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Token identifying which result to start with; returned by a previous list call.
     pageToken :: (Core.Maybe Core.Text),

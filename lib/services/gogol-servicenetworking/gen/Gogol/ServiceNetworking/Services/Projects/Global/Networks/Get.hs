@@ -50,6 +50,7 @@ type ServiceNetworkingServicesProjectsGlobalNetworksGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "includeUsedIpRanges" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,6 +66,8 @@ data ServiceNetworkingServicesProjectsGlobalNetworksGet = ServiceNetworkingServi
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Optional. When true, include the used IP ranges as part of the GetConsumerConfig output. This includes routes created inside the service networking network, consumer network, peers of the consumer network, and reserved ranges inside the service networking network. By default, this is false
+    includeUsedIpRanges :: (Core.Maybe Core.Bool),
     -- | Required. Name of the consumer config to retrieve in the format: @services\/{service}\/projects\/{project}\/global\/networks\/{network}@. {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this functionality, this value is @servicenetworking.googleapis.com@. {project} is a project number e.g. @12345@ that contains the service consumer\'s VPC network. {network} is the name of the service consumer\'s VPC network.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -84,6 +87,7 @@ newServiceNetworkingServicesProjectsGlobalNetworksGet name =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      includeUsedIpRanges = Core.Nothing,
       name = name,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -108,6 +112,7 @@ instance
         xgafv
         accessToken
         callback
+        includeUsedIpRanges
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)

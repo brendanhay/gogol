@@ -56,6 +56,7 @@ library
     Gogol.Container.Projects.Locations.Clusters.Get
     Gogol.Container.Projects.Locations.Clusters.GetJwks
     Gogol.Container.Projects.Locations.Clusters.List
+    Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
     Gogol.Container.Projects.Locations.Clusters.NodePools.Create
     Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
     Gogol.Container.Projects.Locations.Clusters.NodePools.Get
@@ -119,5 +120,5 @@ library
     Gogol.Container.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

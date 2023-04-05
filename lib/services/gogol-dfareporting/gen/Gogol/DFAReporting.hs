@@ -165,6 +165,11 @@ module Gogol.DFAReporting
     DFAReportingAdvertiserGroupsUpdate (..),
     newDFAReportingAdvertiserGroupsUpdate,
 
+    -- ** dfareporting.advertiserInvoices.list
+    DFAReportingAdvertiserInvoicesListResource,
+    DFAReportingAdvertiserInvoicesList (..),
+    newDFAReportingAdvertiserInvoicesList,
+
     -- ** dfareporting.advertiserLandingPages.get
     DFAReportingAdvertiserLandingPagesGetResource,
     DFAReportingAdvertiserLandingPagesGet (..),
@@ -214,6 +219,36 @@ module Gogol.DFAReporting
     DFAReportingAdvertisersUpdateResource,
     DFAReportingAdvertisersUpdate (..),
     newDFAReportingAdvertisersUpdate,
+
+    -- ** dfareporting.billingAssignments.insert
+    DFAReportingBillingAssignmentsInsertResource,
+    DFAReportingBillingAssignmentsInsert (..),
+    newDFAReportingBillingAssignmentsInsert,
+
+    -- ** dfareporting.billingAssignments.list
+    DFAReportingBillingAssignmentsListResource,
+    DFAReportingBillingAssignmentsList (..),
+    newDFAReportingBillingAssignmentsList,
+
+    -- ** dfareporting.billingProfiles.get
+    DFAReportingBillingProfilesGetResource,
+    DFAReportingBillingProfilesGet (..),
+    newDFAReportingBillingProfilesGet,
+
+    -- ** dfareporting.billingProfiles.list
+    DFAReportingBillingProfilesListResource,
+    DFAReportingBillingProfilesList (..),
+    newDFAReportingBillingProfilesList,
+
+    -- ** dfareporting.billingProfiles.update
+    DFAReportingBillingProfilesUpdateResource,
+    DFAReportingBillingProfilesUpdate (..),
+    newDFAReportingBillingProfilesUpdate,
+
+    -- ** dfareporting.billingRates.list
+    DFAReportingBillingRatesListResource,
+    DFAReportingBillingRatesList (..),
+    newDFAReportingBillingRatesList,
 
     -- ** dfareporting.browsers.list
     DFAReportingBrowsersListResource,
@@ -1169,6 +1204,10 @@ module Gogol.DFAReporting
     AdvertiserGroupsListResponse (..),
     newAdvertiserGroupsListResponse,
 
+    -- ** AdvertiserInvoicesListResponse
+    AdvertiserInvoicesListResponse (..),
+    newAdvertiserInvoicesListResponse,
+
     -- ** AdvertiserLandingPagesListResponse
     AdvertiserLandingPagesListResponse (..),
     newAdvertiserLandingPagesListResponse,
@@ -1184,6 +1223,46 @@ module Gogol.DFAReporting
     -- ** AudienceSegmentGroup
     AudienceSegmentGroup (..),
     newAudienceSegmentGroup,
+
+    -- ** BillingAssignment
+    BillingAssignment (..),
+    newBillingAssignment,
+
+    -- ** BillingAssignmentsListResponse
+    BillingAssignmentsListResponse (..),
+    newBillingAssignmentsListResponse,
+
+    -- ** BillingProfile
+    BillingProfile (..),
+    newBillingProfile,
+
+    -- ** BillingProfile_InvoiceLevel
+    BillingProfile_InvoiceLevel (..),
+
+    -- ** BillingProfile_Status
+    BillingProfile_Status (..),
+
+    -- ** BillingProfilesListResponse
+    BillingProfilesListResponse (..),
+    newBillingProfilesListResponse,
+
+    -- ** BillingRate
+    BillingRate (..),
+    newBillingRate,
+
+    -- ** BillingRate_Type
+    BillingRate_Type (..),
+
+    -- ** BillingRate_UnitOfMeasure
+    BillingRate_UnitOfMeasure (..),
+
+    -- ** BillingRateTieredRate
+    BillingRateTieredRate (..),
+    newBillingRateTieredRate,
+
+    -- ** BillingRatesListResponse
+    BillingRatesListResponse (..),
+    newBillingRatesListResponse,
 
     -- ** Browser
     Browser (..),
@@ -1204,6 +1283,10 @@ module Gogol.DFAReporting
     -- ** CampaignCreativeAssociationsListResponse
     CampaignCreativeAssociationsListResponse (..),
     newCampaignCreativeAssociationsListResponse,
+
+    -- ** CampaignSummary
+    CampaignSummary (..),
+    newCampaignSummary,
 
     -- ** CampaignsListResponse
     CampaignsListResponse (..),
@@ -1737,6 +1820,13 @@ module Gogol.DFAReporting
     InventoryItemsListResponse (..),
     newInventoryItemsListResponse,
 
+    -- ** Invoice
+    Invoice (..),
+    newInvoice,
+
+    -- ** Invoice_InvoiceType
+    Invoice_InvoiceType (..),
+
     -- ** KeyValueTargetingExpression
     KeyValueTargetingExpression (..),
     newKeyValueTargetingExpression,
@@ -1942,6 +2032,9 @@ module Gogol.DFAReporting
     Placement (..),
     newPlacement,
 
+    -- ** Placement_ActiveStatus
+    Placement_ActiveStatus (..),
+
     -- ** Placement_Compatibility
     Placement_Compatibility (..),
 
@@ -1964,6 +2057,9 @@ module Gogol.DFAReporting
     -- ** PlacementGroup
     PlacementGroup (..),
     newPlacementGroup,
+
+    -- ** PlacementGroup_ActiveStatus
+    PlacementGroup_ActiveStatus (..),
 
     -- ** PlacementGroup_PlacementGroupType
     PlacementGroup_PlacementGroupType (..),
@@ -2359,6 +2455,13 @@ module Gogol.DFAReporting
     UserRolesListResponse (..),
     newUserRolesListResponse,
 
+    -- ** UvarFilter
+    UvarFilter (..),
+    newUvarFilter,
+
+    -- ** UvarFilter_Match
+    UvarFilter_Match (..),
+
     -- ** VideoFormat
     VideoFormat (..),
     newVideoFormat,
@@ -2425,6 +2528,15 @@ module Gogol.DFAReporting
 
     -- ** AdvertisersListStatus
     AdvertisersListStatus (..),
+
+    -- ** BillingProfilesListSortField
+    BillingProfilesListSortField (..),
+
+    -- ** BillingProfilesListSortOrder
+    BillingProfilesListSortOrder (..),
+
+    -- ** BillingProfilesListStatus
+    BillingProfilesListStatus (..),
 
     -- ** CampaignCreativeAssociationsListSortOrder
     CampaignCreativeAssociationsListSortOrder (..),
@@ -2546,6 +2658,9 @@ module Gogol.DFAReporting
     -- ** OrdersListSortOrder
     OrdersListSortOrder (..),
 
+    -- ** PlacementGroupsListActiveStatus
+    PlacementGroupsListActiveStatus (..),
+
     -- ** PlacementGroupsListPlacementGroupType
     PlacementGroupsListPlacementGroupType (..),
 
@@ -2566,6 +2681,9 @@ module Gogol.DFAReporting
 
     -- ** PlacementsGeneratetagsTagFormats
     PlacementsGeneratetagsTagFormats (..),
+
+    -- ** PlacementsListActiveStatus
+    PlacementsListActiveStatus (..),
 
     -- ** PlacementsListCompatibilities
     PlacementsListCompatibilities (..),
@@ -2666,6 +2784,7 @@ import Gogol.DFAReporting.AdvertiserGroups.Insert
 import Gogol.DFAReporting.AdvertiserGroups.List
 import Gogol.DFAReporting.AdvertiserGroups.Patch
 import Gogol.DFAReporting.AdvertiserGroups.Update
+import Gogol.DFAReporting.AdvertiserInvoices.List
 import Gogol.DFAReporting.AdvertiserLandingPages.Get
 import Gogol.DFAReporting.AdvertiserLandingPages.Insert
 import Gogol.DFAReporting.AdvertiserLandingPages.List
@@ -2676,6 +2795,12 @@ import Gogol.DFAReporting.Advertisers.Insert
 import Gogol.DFAReporting.Advertisers.List
 import Gogol.DFAReporting.Advertisers.Patch
 import Gogol.DFAReporting.Advertisers.Update
+import Gogol.DFAReporting.BillingAssignments.Insert
+import Gogol.DFAReporting.BillingAssignments.List
+import Gogol.DFAReporting.BillingProfiles.Get
+import Gogol.DFAReporting.BillingProfiles.List
+import Gogol.DFAReporting.BillingProfiles.Update
+import Gogol.DFAReporting.BillingRates.List
 import Gogol.DFAReporting.Browsers.List
 import Gogol.DFAReporting.CampaignCreativeAssociations.Insert
 import Gogol.DFAReporting.CampaignCreativeAssociations.List

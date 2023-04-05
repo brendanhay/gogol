@@ -46,6 +46,10 @@ module Gogol.DoubleClickSearch.Internal.Product
     CustomMetric (..),
     newCustomMetric,
 
+    -- * IdMappingFile
+    IdMappingFile (..),
+    newIdMappingFile,
+
     -- * Report
     Report (..),
     newReport,
@@ -113,6 +117,8 @@ data Availability = Availability
     agencyId :: (Core.Maybe Core.Int64),
     -- | The time by which all conversions have been uploaded, in epoch millis UTC.
     availabilityTimestamp :: (Core.Maybe Core.Int64),
+    -- | Customer ID of a client account in the new Search Ads 360 experience.
+    customerId :: (Core.Maybe Core.Text),
     -- | The numeric segmentation identifier (for example, DoubleClick Search Floodlight activity ID).
     segmentationId :: (Core.Maybe Core.Int64),
     -- | The friendly segmentation identifier (for example, DoubleClick Search Floodlight activity name).
@@ -130,6 +136,7 @@ newAvailability =
     { advertiserId = Core.Nothing,
       agencyId = Core.Nothing,
       availabilityTimestamp = Core.Nothing,
+      customerId = Core.Nothing,
       segmentationId = Core.Nothing,
       segmentationName = Core.Nothing,
       segmentationType = Core.Nothing
@@ -150,6 +157,7 @@ instance Core.FromJSON Availability where
             Core.<*> ( o Core..:? "availabilityTimestamp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "customerId")
             Core.<*> ( o Core..:? "segmentationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -167,6 +175,7 @@ instance Core.ToJSON Availability where
               Core.<$> agencyId,
             ("availabilityTimestamp" Core..=) Core.. Core.AsText
               Core.<$> availabilityTimestamp,
+            ("customerId" Core..=) Core.<$> customerId,
             ("segmentationId" Core..=) Core.. Core.AsText
               Core.<$> segmentationId,
             ("segmentationName" Core..=)
@@ -212,6 +221,8 @@ data Conversion = Conversion
     customDimension :: (Core.Maybe [CustomDimension]),
     -- | Custom metrics for the conversion.
     customMetric :: (Core.Maybe [CustomMetric]),
+    -- | Customer ID of a client account in the new Search Ads 360 experience.
+    customerId :: (Core.Maybe Core.Text),
     -- | The type of device on which the conversion occurred.
     deviceType :: (Core.Maybe Core.Text),
     -- | ID that DoubleClick Search generates for each conversion.
@@ -270,6 +281,7 @@ newConversion =
       currencyCode = Core.Nothing,
       customDimension = Core.Nothing,
       customMetric = Core.Nothing,
+      customerId = Core.Nothing,
       deviceType = Core.Nothing,
       dsConversionId = Core.Nothing,
       engineAccountId = Core.Nothing,
@@ -327,6 +339,7 @@ instance Core.FromJSON Conversion where
             Core.<*> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "customDimension")
             Core.<*> (o Core..:? "customMetric")
+            Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "deviceType")
             Core.<*> ( o Core..:? "dsConversionId"
                          Core.<&> Core.fmap Core.fromAsText
@@ -388,6 +401,7 @@ instance Core.ToJSON Conversion where
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("customDimension" Core..=) Core.<$> customDimension,
             ("customMetric" Core..=) Core.<$> customMetric,
+            ("customerId" Core..=) Core.<$> customerId,
             ("deviceType" Core..=) Core.<$> deviceType,
             ("dsConversionId" Core..=) Core.. Core.AsText
               Core.<$> dsConversionId,
@@ -520,6 +534,26 @@ instance Core.ToJSON CustomMetric where
             ("value" Core..=) Core.<$> value
           ]
       )
+
+-- | File returned to https:\/\/developers.google.com\/search-ads\/v2\/reference\/reports\/getIdMappingFile.
+--
+-- /See:/ 'newIdMappingFile' smart constructor.
+data IdMappingFile = IdMappingFile
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IdMappingFile' with the minimum fields required to make a request.
+newIdMappingFile ::
+  IdMappingFile
+newIdMappingFile = IdMappingFile
+
+instance Core.FromJSON IdMappingFile where
+  parseJSON =
+    Core.withObject
+      "IdMappingFile"
+      (\o -> Core.pure IdMappingFile)
+
+instance Core.ToJSON IdMappingFile where
+  toJSON = Core.const Core.emptyObject
 
 -- | A DoubleClick Search report. This object contains the report request, some report metadata such as currency code, and the generated report rows or report files.
 --

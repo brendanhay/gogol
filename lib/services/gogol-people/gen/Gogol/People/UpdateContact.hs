@@ -78,7 +78,7 @@ data PeoplePeopleUpdateContact = PeoplePeopleUpdateContact
     payload :: Person,
     -- | Optional. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Defaults to all fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined
     personFields :: (Core.Maybe Core.FieldMask),
-    -- | The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of @people\/{person_id}@.
+    -- | The resource name for the person, assigned by the server. An ASCII string in the form of @people\/{person_id}@.
     resourceName :: Core.Text,
     -- | Optional. A mask of what source types to return. Defaults to READ/SOURCE/TYPE/CONTACT and READ/SOURCE/TYPE/PROFILE if not set.
     sources :: (Core.Maybe [PeopleUpdateContactSources]),
@@ -95,7 +95,7 @@ data PeoplePeopleUpdateContact = PeoplePeopleUpdateContact
 newPeoplePeopleUpdateContact ::
   -- |  Multipart request metadata. See 'payload'.
   Person ->
-  -- |  The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of @people\/{person_id}@. See 'resourceName'.
+  -- |  The resource name for the person, assigned by the server. An ASCII string in the form of @people\/{person_id}@. See 'resourceName'.
   Core.Text ->
   PeoplePeopleUpdateContact
 newPeoplePeopleUpdateContact payload resourceName =

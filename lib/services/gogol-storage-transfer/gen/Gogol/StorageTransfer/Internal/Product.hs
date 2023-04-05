@@ -34,6 +34,10 @@ module Gogol.StorageTransfer.Internal.Product
     AwsAccessKey (..),
     newAwsAccessKey,
 
+    -- * AwsS3CompatibleData
+    AwsS3CompatibleData (..),
+    newAwsS3CompatibleData,
+
     -- * AwsS3Data
     AwsS3Data (..),
     newAwsS3Data,
@@ -69,6 +73,10 @@ module Gogol.StorageTransfer.Internal.Product
     -- * ErrorSummary
     ErrorSummary (..),
     newErrorSummary,
+
+    -- * EventStream
+    EventStream (..),
+    newEventStream,
 
     -- * GcsData
     GcsData (..),
@@ -137,6 +145,10 @@ module Gogol.StorageTransfer.Internal.Product
     -- * RunTransferJobRequest
     RunTransferJobRequest (..),
     newRunTransferJobRequest,
+
+    -- * S3CompatibleMetadata
+    S3CompatibleMetadata (..),
+    newS3CompatibleMetadata,
 
     -- * Schedule
     Schedule (..),
@@ -270,6 +282,60 @@ instance Core.ToJSON AwsAccessKey where
           [ ("accessKeyId" Core..=) Core.<$> accessKeyId,
             ("secretAccessKey" Core..=)
               Core.<$> secretAccessKey
+          ]
+      )
+
+-- | An AwsS3CompatibleData resource.
+--
+-- /See:/ 'newAwsS3CompatibleData' smart constructor.
+data AwsS3CompatibleData = AwsS3CompatibleData
+  { -- | Required. Specifies the name of the bucket.
+    bucketName :: (Core.Maybe Core.Text),
+    -- | Required. Specifies the endpoint of the storage service.
+    endpoint :: (Core.Maybe Core.Text),
+    -- | Specifies the root path to transfer objects. Must be an empty string or full path name that ends with a \'\/\'. This field is treated as an object prefix. As such, it should generally not begin with a \'\/\'.
+    path :: (Core.Maybe Core.Text),
+    -- | Specifies the region to sign requests with. This can be left blank if requests should be signed with an empty region.
+    region :: (Core.Maybe Core.Text),
+    -- | A S3 compatible metadata.
+    s3Metadata :: (Core.Maybe S3CompatibleMetadata)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AwsS3CompatibleData' with the minimum fields required to make a request.
+newAwsS3CompatibleData ::
+  AwsS3CompatibleData
+newAwsS3CompatibleData =
+  AwsS3CompatibleData
+    { bucketName = Core.Nothing,
+      endpoint = Core.Nothing,
+      path = Core.Nothing,
+      region = Core.Nothing,
+      s3Metadata = Core.Nothing
+    }
+
+instance Core.FromJSON AwsS3CompatibleData where
+  parseJSON =
+    Core.withObject
+      "AwsS3CompatibleData"
+      ( \o ->
+          AwsS3CompatibleData
+            Core.<$> (o Core..:? "bucketName")
+            Core.<*> (o Core..:? "endpoint")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "region")
+            Core.<*> (o Core..:? "s3Metadata")
+      )
+
+instance Core.ToJSON AwsS3CompatibleData where
+  toJSON AwsS3CompatibleData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bucketName" Core..=) Core.<$> bucketName,
+            ("endpoint" Core..=) Core.<$> endpoint,
+            ("path" Core..=) Core.<$> path,
+            ("region" Core..=) Core.<$> region,
+            ("s3Metadata" Core..=) Core.<$> s3Metadata
           ]
       )
 
@@ -494,7 +560,7 @@ instance Core.ToJSON Date where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -593,6 +659,52 @@ instance Core.ToJSON ErrorSummary where
               Core.<$> errorCount,
             ("errorLogEntries" Core..=)
               Core.<$> errorLogEntries
+          ]
+      )
+
+-- | Specifies the Event-driven transfer options. Event-driven transfers listen to an event stream to transfer updated files.
+--
+-- /See:/ 'newEventStream' smart constructor.
+data EventStream = EventStream
+  { -- | Specifies the data and time at which Storage Transfer Service stops listening for events from this stream. After this time, any transfers in progress will complete, but no new transfers are initiated.
+    eventStreamExpirationTime :: (Core.Maybe Core.DateTime),
+    -- | Specifies the date and time that Storage Transfer Service starts listening for events from this stream. If no start time is specified or start time is in the past, Storage Transfer Service starts listening immediately.
+    eventStreamStartTime :: (Core.Maybe Core.DateTime),
+    -- | Required. Specifies a unique name of the resource such as AWS SQS ARN in the form \'arn:aws:sqs:region:account/id:queue/name\', or Pub\/Sub subscription resource name in the form \'projects\/{project}\/subscriptions\/{sub}\'.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventStream' with the minimum fields required to make a request.
+newEventStream ::
+  EventStream
+newEventStream =
+  EventStream
+    { eventStreamExpirationTime = Core.Nothing,
+      eventStreamStartTime = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON EventStream where
+  parseJSON =
+    Core.withObject
+      "EventStream"
+      ( \o ->
+          EventStream
+            Core.<$> (o Core..:? "eventStreamExpirationTime")
+            Core.<*> (o Core..:? "eventStreamStartTime")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON EventStream where
+  toJSON EventStream {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eventStreamExpirationTime" Core..=)
+              Core.<$> eventStreamExpirationTime,
+            ("eventStreamStartTime" Core..=)
+              Core.<$> eventStreamStartTime,
+            ("name" Core..=) Core.<$> name
           ]
       )
 
@@ -857,27 +969,27 @@ instance Core.ToJSON LoggingConfig where
           ]
       )
 
--- | Specifies the metadata options for running a transfer. These options only apply to transfers involving a POSIX filesystem and are ignored for other transfers.
+-- | Specifies the metadata options for running a transfer.
 --
 -- /See:/ 'newMetadataOptions' smart constructor.
 data MetadataOptions = MetadataOptions
   { -- | Specifies how each object\'s ACLs should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as ACL/DESTINATION/BUCKET_DEFAULT.
     acl :: (Core.Maybe MetadataOptions_Acl),
-    -- | Specifies how each file\'s POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved.
+    -- | Specifies how each file\'s POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
     gid :: (Core.Maybe MetadataOptions_Gid),
     -- | Specifies how each object\'s Cloud KMS customer-managed encryption key (CMEK) is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as KMS/KEY/DESTINATION/BUCKET/DEFAULT.
     kmsKey :: (Core.Maybe MetadataOptions_KmsKey),
-    -- | Specifies how each file\'s mode attribute should be handled by the transfer. By default, mode is not preserved.
+    -- | Specifies how each file\'s mode attribute should be handled by the transfer. By default, mode is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
     mode :: (Core.Maybe MetadataOptions_Mode),
     -- | Specifies the storage class to set on objects being transferred to Google Cloud Storage buckets. If unspecified, the default behavior is the same as STORAGE/CLASS/DESTINATION/BUCKET/DEFAULT.
     storageClass :: (Core.Maybe MetadataOptions_StorageClass),
-    -- | Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved.
+    -- | Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
     symlink :: (Core.Maybe MetadataOptions_Symlink),
     -- | Specifies how each object\'s temporary hold status should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TEMPORARY/HOLD/PRESERVE.
     temporaryHold :: (Core.Maybe MetadataOptions_TemporaryHold),
     -- | Specifies how each object\'s @timeCreated@ metadata is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TIME/CREATED/SKIP.
     timeCreated :: (Core.Maybe MetadataOptions_TimeCreated),
-    -- | Specifies how each file\'s POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved.
+    -- | Specifies how each file\'s POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
     uid :: (Core.Maybe MetadataOptions_Uid)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1249,6 +1361,55 @@ instance Core.ToJSON RunTransferJobRequest where
     Core.object
       ( Core.catMaybes
           [("projectId" Core..=) Core.<$> projectId]
+      )
+
+-- | S3CompatibleMetadata contains the metadata fields that apply to the basic types of S3-compatible data providers.
+--
+-- /See:/ 'newS3CompatibleMetadata' smart constructor.
+data S3CompatibleMetadata = S3CompatibleMetadata
+  { -- | Specifies the authentication and authorization method used by the storage service. When not specified, Transfer Service will attempt to determine right auth method to use.
+    authMethod :: (Core.Maybe S3CompatibleMetadata_AuthMethod),
+    -- | The Listing API to use for discovering objects. When not specified, Transfer Service will attempt to determine the right API to use.
+    listApi :: (Core.Maybe S3CompatibleMetadata_ListApi),
+    -- | Specifies the network protocol of the agent. When not specified, the default value of NetworkProtocol NETWORK/PROTOCOL/HTTPS is used.
+    protocol :: (Core.Maybe S3CompatibleMetadata_Protocol),
+    -- | Specifies the API request model used to call the storage service. When not specified, the default value of RequestModel REQUEST/MODEL/VIRTUAL/HOSTED/STYLE is used.
+    requestModel :: (Core.Maybe S3CompatibleMetadata_RequestModel)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'S3CompatibleMetadata' with the minimum fields required to make a request.
+newS3CompatibleMetadata ::
+  S3CompatibleMetadata
+newS3CompatibleMetadata =
+  S3CompatibleMetadata
+    { authMethod = Core.Nothing,
+      listApi = Core.Nothing,
+      protocol = Core.Nothing,
+      requestModel = Core.Nothing
+    }
+
+instance Core.FromJSON S3CompatibleMetadata where
+  parseJSON =
+    Core.withObject
+      "S3CompatibleMetadata"
+      ( \o ->
+          S3CompatibleMetadata
+            Core.<$> (o Core..:? "authMethod")
+            Core.<*> (o Core..:? "listApi")
+            Core.<*> (o Core..:? "protocol")
+            Core.<*> (o Core..:? "requestModel")
+      )
+
+instance Core.ToJSON S3CompatibleMetadata where
+  toJSON S3CompatibleMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("authMethod" Core..=) Core.<$> authMethod,
+            ("listApi" Core..=) Core.<$> listApi,
+            ("protocol" Core..=) Core.<$> protocol,
+            ("requestModel" Core..=) Core.<$> requestModel
+          ]
       )
 
 -- | Transfers can be scheduled to recur or to run just once.
@@ -1641,6 +1802,8 @@ data TransferJob = TransferJob
     deletionTime :: (Core.Maybe Core.DateTime),
     -- | A description provided by the user for the job. Its max length is 1024 bytes when Unicode-encoded.
     description :: (Core.Maybe Core.Text),
+    -- | Specifies the event stream for the transfer job for event-driven transfers. When EventStream is specified, the Schedule fields are ignored.
+    eventStream :: (Core.Maybe EventStream),
     -- | Output only. The time that the transfer job was last modified.
     lastModificationTime :: (Core.Maybe Core.DateTime),
     -- | The name of the most recently started TransferOperation of this JobConfig. Present if a TransferOperation has been created for this JobConfig.
@@ -1670,6 +1833,7 @@ newTransferJob =
     { creationTime = Core.Nothing,
       deletionTime = Core.Nothing,
       description = Core.Nothing,
+      eventStream = Core.Nothing,
       lastModificationTime = Core.Nothing,
       latestOperationName = Core.Nothing,
       loggingConfig = Core.Nothing,
@@ -1690,6 +1854,7 @@ instance Core.FromJSON TransferJob where
             Core.<$> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "deletionTime")
             Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "eventStream")
             Core.<*> (o Core..:? "lastModificationTime")
             Core.<*> (o Core..:? "latestOperationName")
             Core.<*> (o Core..:? "loggingConfig")
@@ -1708,6 +1873,7 @@ instance Core.ToJSON TransferJob where
           [ ("creationTime" Core..=) Core.<$> creationTime,
             ("deletionTime" Core..=) Core.<$> deletionTime,
             ("description" Core..=) Core.<$> description,
+            ("eventStream" Core..=) Core.<$> eventStream,
             ("lastModificationTime" Core..=)
               Core.<$> lastModificationTime,
             ("latestOperationName" Core..=)
@@ -1762,6 +1928,8 @@ data TransferOperation = TransferOperation
     endTime :: (Core.Maybe Core.DateTime),
     -- | Summarizes errors encountered with sample error log entries.
     errorBreakdowns :: (Core.Maybe [ErrorSummary]),
+    -- | Cloud Logging configuration.
+    loggingConfig :: (Core.Maybe LoggingConfig),
     -- | A globally unique ID assigned by the system.
     name :: (Core.Maybe Core.Text),
     -- | Notification configuration.
@@ -1787,6 +1955,7 @@ newTransferOperation =
     { counters = Core.Nothing,
       endTime = Core.Nothing,
       errorBreakdowns = Core.Nothing,
+      loggingConfig = Core.Nothing,
       name = Core.Nothing,
       notificationConfig = Core.Nothing,
       projectId = Core.Nothing,
@@ -1805,6 +1974,7 @@ instance Core.FromJSON TransferOperation where
             Core.<$> (o Core..:? "counters")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "errorBreakdowns")
+            Core.<*> (o Core..:? "loggingConfig")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
             Core.<*> (o Core..:? "projectId")
@@ -1821,6 +1991,7 @@ instance Core.ToJSON TransferOperation where
           [ ("counters" Core..=) Core.<$> counters,
             ("endTime" Core..=) Core.<$> endTime,
             ("errorBreakdowns" Core..=) Core.<$> errorBreakdowns,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
             ("name" Core..=) Core.<$> name,
             ("notificationConfig" Core..=)
               Core.<$> notificationConfig,
@@ -1840,10 +2011,12 @@ data TransferOptions = TransferOptions
     deleteObjectsFromSourceAfterTransfer :: (Core.Maybe Core.Bool),
     -- | Whether objects that exist only in the sink should be deleted. __Note:__ This option and delete/objects/from/source/after_transfer are mutually exclusive.
     deleteObjectsUniqueInSink :: (Core.Maybe Core.Bool),
-    -- | Represents the selected metadata options for a transfer job. This feature is in Preview.
+    -- | Represents the selected metadata options for a transfer job.
     metadataOptions :: (Core.Maybe MetadataOptions),
     -- | When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are ovewritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
-    overwriteObjectsAlreadyExistingInSink :: (Core.Maybe Core.Bool)
+    overwriteObjectsAlreadyExistingInSink :: (Core.Maybe Core.Bool),
+    -- | When to overwrite objects that already exist in the sink. If not set, overwrite behavior is determined by overwrite/objects/already/existing/in_sink.
+    overwriteWhen :: (Core.Maybe TransferOptions_OverwriteWhen)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1855,7 +2028,8 @@ newTransferOptions =
     { deleteObjectsFromSourceAfterTransfer = Core.Nothing,
       deleteObjectsUniqueInSink = Core.Nothing,
       metadataOptions = Core.Nothing,
-      overwriteObjectsAlreadyExistingInSink = Core.Nothing
+      overwriteObjectsAlreadyExistingInSink = Core.Nothing,
+      overwriteWhen = Core.Nothing
     }
 
 instance Core.FromJSON TransferOptions where
@@ -1868,6 +2042,7 @@ instance Core.FromJSON TransferOptions where
             Core.<*> (o Core..:? "deleteObjectsUniqueInSink")
             Core.<*> (o Core..:? "metadataOptions")
             Core.<*> (o Core..:? "overwriteObjectsAlreadyExistingInSink")
+            Core.<*> (o Core..:? "overwriteWhen")
       )
 
 instance Core.ToJSON TransferOptions where
@@ -1880,7 +2055,8 @@ instance Core.ToJSON TransferOptions where
               Core.<$> deleteObjectsUniqueInSink,
             ("metadataOptions" Core..=) Core.<$> metadataOptions,
             ("overwriteObjectsAlreadyExistingInSink" Core..=)
-              Core.<$> overwriteObjectsAlreadyExistingInSink
+              Core.<$> overwriteObjectsAlreadyExistingInSink,
+            ("overwriteWhen" Core..=) Core.<$> overwriteWhen
           ]
       )
 
@@ -1888,7 +2064,9 @@ instance Core.ToJSON TransferOptions where
 --
 -- /See:/ 'newTransferSpec' smart constructor.
 data TransferSpec = TransferSpec
-  { -- | An AWS S3 data source.
+  { -- | An AWS S3 compatible data source.
+    awsS3CompatibleDataSource :: (Core.Maybe AwsS3CompatibleData),
+    -- | An AWS S3 data source.
     awsS3DataSource :: (Core.Maybe AwsS3Data),
     -- | An Azure Blob Storage data source.
     azureBlobStorageDataSource :: (Core.Maybe AzureBlobStorageData),
@@ -1922,7 +2100,8 @@ newTransferSpec ::
   TransferSpec
 newTransferSpec =
   TransferSpec
-    { awsS3DataSource = Core.Nothing,
+    { awsS3CompatibleDataSource = Core.Nothing,
+      awsS3DataSource = Core.Nothing,
       azureBlobStorageDataSource = Core.Nothing,
       gcsDataSink = Core.Nothing,
       gcsDataSource = Core.Nothing,
@@ -1943,7 +2122,8 @@ instance Core.FromJSON TransferSpec where
       "TransferSpec"
       ( \o ->
           TransferSpec
-            Core.<$> (o Core..:? "awsS3DataSource")
+            Core.<$> (o Core..:? "awsS3CompatibleDataSource")
+            Core.<*> (o Core..:? "awsS3DataSource")
             Core.<*> (o Core..:? "azureBlobStorageDataSource")
             Core.<*> (o Core..:? "gcsDataSink")
             Core.<*> (o Core..:? "gcsDataSource")
@@ -1962,8 +2142,9 @@ instance Core.ToJSON TransferSpec where
   toJSON TransferSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("awsS3DataSource" Core..=)
-              Core.<$> awsS3DataSource,
+          [ ("awsS3CompatibleDataSource" Core..=)
+              Core.<$> awsS3CompatibleDataSource,
+            ("awsS3DataSource" Core..=) Core.<$> awsS3DataSource,
             ("azureBlobStorageDataSource" Core..=)
               Core.<$> azureBlobStorageDataSource,
             ("gcsDataSink" Core..=) Core.<$> gcsDataSink,
@@ -1992,7 +2173,7 @@ instance Core.ToJSON TransferSpec where
 data UpdateTransferJobRequest = UpdateTransferJobRequest
   { -- | Required. The ID of the Google Cloud project that owns the job.
     projectId :: (Core.Maybe Core.Text),
-    -- | Required. The job to update. @transferJob@ is expected to specify one or more of five fields: description, transfer/spec, notification/config, logging/config, and status. An @UpdateTransferJobRequest@ that specifies other fields are rejected with the error INVALID/ARGUMENT. Updating a job status to DELETED requires @storagetransfer.jobs.delete@ permissions.
+    -- | Required. The job to update. @transferJob@ is expected to specify one or more of five fields: description, transfer/spec, notification/config, logging/config, and status. An @UpdateTransferJobRequest@ that specifies other fields are rejected with the error INVALID/ARGUMENT. Updating a job status to DELETED requires @storagetransfer.jobs.delete@ permission.
     transferJob :: (Core.Maybe TransferJob),
     -- | The field mask of the fields in @transferJob@ that are to be updated in this request. Fields in @transferJob@ that can be updated are: description, transfer/spec, notification/config, logging/config, and status. To update the @transfer_spec@ of the job, a complete transfer specification must be provided. An incomplete specification missing any required fields is rejected with the error INVALID/ARGUMENT.
     updateTransferJobFieldMask :: (Core.Maybe Core.FieldMask)

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies the set of products that a user is entitled to access (referred to as /whitelisted/ products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
+-- Modifies the set of products that a user is entitled to access (referred to as /whitelisted/ products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.setAvailableProductSet@.
 module Gogol.AndroidEnterprise.Users.SetAvailableProductSet
@@ -61,7 +61,7 @@ type AndroidEnterpriseUsersSetAvailableProductSetResource =
     Core.:> Core.ReqBody '[Core.JSON] ProductSet
     Core.:> Core.Put '[Core.JSON] ProductSet
 
--- | Modifies the set of products that a user is entitled to access (referred to as /whitelisted/ products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted.
+-- | Modifies the set of products that a user is entitled to access (referred to as /whitelisted/ products). Only products that are approved or products that were previously approved (products with revoked approval) can be whitelisted. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseUsersSetAvailableProductSet' smart constructor.
 data AndroidEnterpriseUsersSetAvailableProductSet = AndroidEnterpriseUsersSetAvailableProductSet

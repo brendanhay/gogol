@@ -63,6 +63,31 @@ module Gogol.StreetViewPublish
     StreetViewPublishPhotoUpdate (..),
     newStreetViewPublishPhotoUpdate,
 
+    -- ** streetviewpublish.photoSequence.create
+    StreetViewPublishPhotoSequenceCreateResource,
+    StreetViewPublishPhotoSequenceCreate (..),
+    newStreetViewPublishPhotoSequenceCreate,
+
+    -- ** streetviewpublish.photoSequence.delete
+    StreetViewPublishPhotoSequenceDeleteResource,
+    StreetViewPublishPhotoSequenceDelete (..),
+    newStreetViewPublishPhotoSequenceDelete,
+
+    -- ** streetviewpublish.photoSequence.get
+    StreetViewPublishPhotoSequenceGetResource,
+    StreetViewPublishPhotoSequenceGet (..),
+    newStreetViewPublishPhotoSequenceGet,
+
+    -- ** streetviewpublish.photoSequence.startUpload
+    StreetViewPublishPhotoSequenceStartUploadResource,
+    StreetViewPublishPhotoSequenceStartUpload (..),
+    newStreetViewPublishPhotoSequenceStartUpload,
+
+    -- ** streetviewpublish.photoSequences.list
+    StreetViewPublishPhotoSequencesListResource,
+    StreetViewPublishPhotoSequencesList (..),
+    newStreetViewPublishPhotoSequencesList,
+
     -- ** streetviewpublish.photos.batchDelete
     StreetViewPublishPhotosBatchDeleteResource,
     StreetViewPublishPhotosBatchDelete (..),
@@ -116,17 +141,53 @@ module Gogol.StreetViewPublish
     Empty (..),
     newEmpty,
 
+    -- ** GpsDataGapFailureDetails
+    GpsDataGapFailureDetails (..),
+    newGpsDataGapFailureDetails,
+
+    -- ** Imu
+    Imu (..),
+    newImu,
+
+    -- ** ImuDataGapFailureDetails
+    ImuDataGapFailureDetails (..),
+    newImuDataGapFailureDetails,
+
+    -- ** InsufficientGpsFailureDetails
+    InsufficientGpsFailureDetails (..),
+    newInsufficientGpsFailureDetails,
+
     -- ** LatLng
     LatLng (..),
     newLatLng,
+
+    -- ** LatLngBounds
+    LatLngBounds (..),
+    newLatLngBounds,
 
     -- ** Level
     Level (..),
     newLevel,
 
+    -- ** ListPhotoSequencesResponse
+    ListPhotoSequencesResponse (..),
+    newListPhotoSequencesResponse,
+
     -- ** ListPhotosResponse
     ListPhotosResponse (..),
     newListPhotosResponse,
+
+    -- ** Measurement3d
+    Measurement3d (..),
+    newMeasurement3d,
+
+    -- ** NoOverlapGpsFailureDetails
+    NoOverlapGpsFailureDetails (..),
+    newNoOverlapGpsFailureDetails,
+
+    -- ** NotOutdoorsFailureDetails
+    NotOutdoorsFailureDetails (..),
+    newNotOutdoorsFailureDetails,
 
     -- ** Operation
     Operation (..),
@@ -158,6 +219,19 @@ module Gogol.StreetViewPublish
     PhotoResponse (..),
     newPhotoResponse,
 
+    -- ** PhotoSequence
+    PhotoSequence (..),
+    newPhotoSequence,
+
+    -- ** PhotoSequence_FailureReason
+    PhotoSequence_FailureReason (..),
+
+    -- ** PhotoSequence_GpsSource
+    PhotoSequence_GpsSource (..),
+
+    -- ** PhotoSequence_ProcessingState
+    PhotoSequence_ProcessingState (..),
+
     -- ** Place
     Place (..),
     newPlace,
@@ -165,6 +239,10 @@ module Gogol.StreetViewPublish
     -- ** Pose
     Pose (..),
     newPose,
+
+    -- ** ProcessingFailureDetails
+    ProcessingFailureDetails (..),
+    newProcessingFailureDetails,
 
     -- ** Status
     Status (..),
@@ -185,6 +263,12 @@ module Gogol.StreetViewPublish
     -- ** PhotoGetView
     PhotoGetView (..),
 
+    -- ** PhotoSequenceCreateInputType
+    PhotoSequenceCreateInputType (..),
+
+    -- ** PhotoSequenceGetView
+    PhotoSequenceGetView (..),
+
     -- ** PhotosBatchGetView
     PhotosBatchGetView (..),
 
@@ -198,6 +282,11 @@ import Gogol.StreetViewPublish.Photo.Delete
 import Gogol.StreetViewPublish.Photo.Get
 import Gogol.StreetViewPublish.Photo.StartUpload
 import Gogol.StreetViewPublish.Photo.Update
+import Gogol.StreetViewPublish.PhotoSequence.Create
+import Gogol.StreetViewPublish.PhotoSequence.Delete
+import Gogol.StreetViewPublish.PhotoSequence.Get
+import Gogol.StreetViewPublish.PhotoSequence.StartUpload
+import Gogol.StreetViewPublish.PhotoSequences.List
 import Gogol.StreetViewPublish.Photos.BatchDelete
 import Gogol.StreetViewPublish.Photos.BatchGet
 import Gogol.StreetViewPublish.Photos.BatchUpdate

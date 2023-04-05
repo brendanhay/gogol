@@ -104,6 +104,14 @@ module Gogol.DialogFlow.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+    GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+      ( GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_DATAFORMATUNSPECIFIED,
+        GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_Blob,
+        GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_JSONPACKAGE,
+        ..
+      ),
+
     -- * GoogleCloudDialogflowCxV3ExportTestCasesRequest_DataFormat
     GoogleCloudDialogflowCxV3ExportTestCasesRequest_DataFormat
       ( GoogleCloudDialogflowCxV3ExportTestCasesRequest_DataFormat_DATAFORMATUNSPECIFIED,
@@ -228,6 +236,15 @@ module Gogol.DialogFlow.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+      ( GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_AUDIOFORMATUNSPECIFIED,
+        GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Mulaw,
+        GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_MP3,
+        GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Ogg,
+        ..
+      ),
+
     -- * GoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode
     GoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode
       ( GoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode_ENTITYOVERRIDEMODEUNSPECIFIED,
@@ -251,6 +268,14 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowCxV3TestRunDifference_Type_Page,
         GoogleCloudDialogflowCxV3TestRunDifference_Type_Parameters,
         GoogleCloudDialogflowCxV3TestRunDifference_Type_Utterance,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+      ( GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+        GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDINTENT,
+        GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
         ..
       ),
 
@@ -371,6 +396,14 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowCxV3beta1TestRunDifference_Type_Page,
         GoogleCloudDialogflowCxV3beta1TestRunDifference_Type_Parameters,
         GoogleCloudDialogflowCxV3beta1TestRunDifference_Type_Utterance,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+      ( GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+        GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDINTENT,
+        GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
         ..
       ),
 
@@ -619,6 +652,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
         GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
         GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+        GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
         ..
       ),
 
@@ -814,6 +848,7 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
         GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+        GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
         ..
       ),
 
@@ -823,6 +858,14 @@ module Gogol.DialogFlow.Internal.Sum
         GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Pending,
         GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Running,
         GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Done,
+        ..
+      ),
+
+    -- * GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+      ( GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+        GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDINTENT,
+        GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
         ..
       ),
 
@@ -1171,6 +1214,38 @@ pattern GoogleCloudDialogflowCxV3ExperimentResultMetric_Type_SESSIONENDRATE = Go
   GoogleCloudDialogflowCxV3ExperimentResultMetric_Type_ABANDONEDSESSIONRATE,
   GoogleCloudDialogflowCxV3ExperimentResultMetric_Type_SESSIONENDRATE,
   GoogleCloudDialogflowCxV3ExperimentResultMetric_Type
+  #-}
+
+-- | Optional. The data format of the exported agent. If not specified, @BLOB@ is assumed.
+newtype GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat = GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat {fromGoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified format.
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_DATAFORMATUNSPECIFIED :: GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_DATAFORMATUNSPECIFIED = GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat "DATA_FORMAT_UNSPECIFIED"
+
+-- | Agent content will be exported as raw bytes.
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_Blob :: GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_Blob = GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat "BLOB"
+
+-- | Agent content will be exported in JSON Package format.
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_JSONPACKAGE :: GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+pattern GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_JSONPACKAGE = GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat "JSON_PACKAGE"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_DATAFORMATUNSPECIFIED,
+  GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_Blob,
+  GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat_JSONPACKAGE,
+  GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
   #-}
 
 -- | The data format of the exported test cases. If not specified, @BLOB@ is assumed.
@@ -1680,6 +1755,43 @@ pattern GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy_REDACTWITHSE
   GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy
   #-}
 
+-- | File format for exported audio file. Currently only in telephony recordings.
+newtype GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat {fromGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Do not use.
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_AUDIOFORMATUNSPECIFIED :: GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_AUDIOFORMATUNSPECIFIED = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat "AUDIO_FORMAT_UNSPECIFIED"
+
+-- | G.711 mu-law PCM with 8kHz sample rate.
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Mulaw :: GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Mulaw = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat "MULAW"
+
+-- | MP3 file format.
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_MP3 :: GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_MP3 = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat "MP3"
+
+-- | OGG Vorbis.
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Ogg :: GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+pattern GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Ogg = GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat "OGG"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_AUDIOFORMATUNSPECIFIED,
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Mulaw,
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_MP3,
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat_Ogg,
+  GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+  #-}
+
 -- | Required. Indicates whether the additional data should override or supplement the custom entity type definition.
 newtype GoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode = GoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode {fromGoogleCloudDialogflowCxV3SessionEntityType_EntityOverrideMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1784,6 +1896,37 @@ pattern GoogleCloudDialogflowCxV3TestRunDifference_Type_Utterance = GoogleCloudD
   GoogleCloudDialogflowCxV3TestRunDifference_Type_Parameters,
   GoogleCloudDialogflowCxV3TestRunDifference_Type_Utterance,
   GoogleCloudDialogflowCxV3TestRunDifference_Type
+  #-}
+
+newtype GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem = GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem {fromGoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Failure reason is not assigned.
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED :: GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED = GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem "FAILURE_REASON_UNSPECIFIED"
+
+-- | Whether NLU failed to recognize user intent.
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDINTENT :: GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDINTENT = GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem "FAILED_INTENT"
+
+-- | Whether webhook failed during the turn.
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDWEBHOOK :: GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDWEBHOOK = GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem "FAILED_WEBHOOK"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+  GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDINTENT,
+  GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
+  GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
   #-}
 
 -- | The type of the resources where the message is found.
@@ -2290,6 +2433,37 @@ pattern GoogleCloudDialogflowCxV3beta1TestRunDifference_Type_Utterance = GoogleC
   GoogleCloudDialogflowCxV3beta1TestRunDifference_Type
   #-}
 
+newtype GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem = GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem {fromGoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Failure reason is not assigned.
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED :: GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED = GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem "FAILURE_REASON_UNSPECIFIED"
+
+-- | Whether NLU failed to recognize user intent.
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDINTENT :: GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDINTENT = GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem "FAILED_INTENT"
+
+-- | Whether webhook failed during the turn.
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK :: GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK = GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem "FAILED_WEBHOOK"
+
+{-# COMPLETE
+  GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+  GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDINTENT,
+  GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
+  GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+  #-}
+
 -- | Merge behavior for @messages@.
 newtype GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse_MergeBehavior = GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse_MergeBehavior {fromGoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse_MergeBehavior :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2408,15 +2582,15 @@ newtype GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_Sug
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "TYPE_UNSPECIFIED"
 
--- | Run article suggestion model.
+-- | Run article suggestion model for chat.
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "ARTICLE_SUGGESTION"
 
--- | Run FAQ model.
+-- | Run FAQ model for chat.
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "FAQ"
 
--- | Run smart reply model.
+-- | Run smart reply model for chat.
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
 
@@ -3195,15 +3369,15 @@ newtype GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_Sugge
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "TYPE_UNSPECIFIED"
 
--- | Run article suggestion model.
+-- | Run article suggestion model for chat.
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "ARTICLE_SUGGESTION"
 
--- | Run FAQ model.
+-- | Run FAQ model for chat.
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "FAQ"
 
--- | Run smart reply model.
+-- | Run smart reply model for chat.
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
 
@@ -3301,7 +3475,7 @@ newtype GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadat
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED :: GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED = GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "TYPE_UNSPECIFIED"
 
--- | Run article suggestion model.
+-- | Run article suggestion model for chat.
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION :: GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION = GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "ARTICLE_SUGGESTION"
 
@@ -3309,15 +3483,20 @@ pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadat
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq :: GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq = GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "FAQ"
 
--- | Run smart reply model.
+-- | Run smart reply model for chat.
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
+
+-- | Run conversation summarization model for chat.
+pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION :: GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
+pattern GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION = GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "CONVERSATION_SUMMARIZATION"
 
 {-# COMPLETE
   GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED,
   GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
   GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
   GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+  GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
   GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
   #-}
 
@@ -3899,7 +4078,7 @@ pattern GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type_TYPEUNSPECIFIED = 
 pattern GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type_Example :: GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type
 pattern GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type_Example = GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type "EXAMPLE"
 
--- | Templates are not annotated with entity types, but they can contain \@-prefixed entity type names as substrings. Template mode has been deprecated. Example mode is the only supported way to create new training phrases. If you have existing training phrases that you\'ve created in template mode, those will continue to work.
+-- | Templates are not annotated with entity types, but they can contain \@-prefixed entity type names as substrings. Note: Template mode has been deprecated. Example mode is the only supported way to create new training phrases. If you have existing training phrases in template mode, they will be removed during training and it can cause a drop in agent performance.
 pattern GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type_Template :: GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type
 pattern GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type_Template = GoogleCloudDialogflowV2beta1IntentTrainingPhrase_Type "TEMPLATE"
 
@@ -4107,7 +4286,7 @@ newtype GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED :: GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED = GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "TYPE_UNSPECIFIED"
 
--- | Run article suggestion model.
+-- | Run article suggestion model for chat.
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION :: GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION = GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "ARTICLE_SUGGESTION"
 
@@ -4115,15 +4294,20 @@ pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq :: GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq = GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "FAQ"
 
--- | Run smart reply model.
+-- | Run smart reply model for chat.
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY :: GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
 pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY = GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "SMART_REPLY"
+
+-- | Run conversation summarization model for chat.
+pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION :: GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
+pattern GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION = GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType "CONVERSATION_SUMMARIZATION"
 
 {-# COMPLETE
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_TYPEUNSPECIFIED,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_ARTICLESUGGESTION,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_Faq,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_SMARTREPLY,
+  GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType_CONVERSATIONSUMMARIZATION,
   GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigOperationMetadata_SuggestionFeatureType
   #-}
 
@@ -4162,6 +4346,37 @@ pattern GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Don
   GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Running,
   GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State_Done,
   GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State
+  #-}
+
+newtype GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem = GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem {fromGoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Failure reason is not assigned.
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED :: GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED = GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem "FAILURE_REASON_UNSPECIFIED"
+
+-- | Whether NLU failed to recognize user intent.
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDINTENT :: GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDINTENT = GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem "FAILED_INTENT"
+
+-- | Whether webhook failed during the turn.
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK :: GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+pattern GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK = GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem "FAILED_WEBHOOK"
+
+{-# COMPLETE
+  GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILUREREASONUNSPECIFIED,
+  GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDINTENT,
+  GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem_FAILEDWEBHOOK,
+  GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
   #-}
 
 -- | The resource view to apply to the returned intent.

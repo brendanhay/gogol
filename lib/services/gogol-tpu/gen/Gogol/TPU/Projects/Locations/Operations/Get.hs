@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.operations.get@ method which the
 -- 'TPUProjectsLocationsOperationsGet' request conforms to.
 type TPUProjectsLocationsOperationsGetResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text

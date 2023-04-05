@@ -73,7 +73,7 @@ data CloudIdentityGroupsList = CloudIdentityGroupsList
     pageSize :: (Core.Maybe Core.Int32),
     -- | The @next_page_token@ value returned from a previous list request, if any.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The parent resource under which to list all @Group@ resources. Must be of the form @identitysources\/{identity_source}@ for external- identity-mapped groups or @customers\/{customer}@ for Google Groups. The @customer@ must begin with \"C\" (for example, \'C046psxkn\').
+    -- | Required. The parent resource under which to list all @Group@ resources. Must be of the form @identitysources\/{identity_source}@ for external- identity-mapped groups or @customers\/{customer_id}@ for Google Groups. The @customer_id@ must begin with \"C\" (for example, \'C046psxkn\'). [Find your customer ID.] (https:\/\/support.google.com\/cloudidentity\/answer\/10070793)
     parent :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

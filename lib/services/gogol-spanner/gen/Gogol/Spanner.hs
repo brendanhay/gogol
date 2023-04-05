@@ -40,6 +40,21 @@ module Gogol.Spanner
 
     -- * Resources
 
+    -- ** spanner.projects.instanceConfigOperations.list
+    SpannerProjectsInstanceConfigOperationsListResource,
+    SpannerProjectsInstanceConfigOperationsList (..),
+    newSpannerProjectsInstanceConfigOperationsList,
+
+    -- ** spanner.projects.instanceConfigs.create
+    SpannerProjectsInstanceConfigsCreateResource,
+    SpannerProjectsInstanceConfigsCreate (..),
+    newSpannerProjectsInstanceConfigsCreate,
+
+    -- ** spanner.projects.instanceConfigs.delete
+    SpannerProjectsInstanceConfigsDeleteResource,
+    SpannerProjectsInstanceConfigsDelete (..),
+    newSpannerProjectsInstanceConfigsDelete,
+
     -- ** spanner.projects.instanceConfigs.get
     SpannerProjectsInstanceConfigsGetResource,
     SpannerProjectsInstanceConfigsGet (..),
@@ -50,10 +65,40 @@ module Gogol.Spanner
     SpannerProjectsInstanceConfigsList (..),
     newSpannerProjectsInstanceConfigsList,
 
+    -- ** spanner.projects.instanceConfigs.operations.cancel
+    SpannerProjectsInstanceConfigsOperationsCancelResource,
+    SpannerProjectsInstanceConfigsOperationsCancel (..),
+    newSpannerProjectsInstanceConfigsOperationsCancel,
+
+    -- ** spanner.projects.instanceConfigs.operations.delete
+    SpannerProjectsInstanceConfigsOperationsDeleteResource,
+    SpannerProjectsInstanceConfigsOperationsDelete (..),
+    newSpannerProjectsInstanceConfigsOperationsDelete,
+
+    -- ** spanner.projects.instanceConfigs.operations.get
+    SpannerProjectsInstanceConfigsOperationsGetResource,
+    SpannerProjectsInstanceConfigsOperationsGet (..),
+    newSpannerProjectsInstanceConfigsOperationsGet,
+
+    -- ** spanner.projects.instanceConfigs.operations.list
+    SpannerProjectsInstanceConfigsOperationsListResource,
+    SpannerProjectsInstanceConfigsOperationsList (..),
+    newSpannerProjectsInstanceConfigsOperationsList,
+
+    -- ** spanner.projects.instanceConfigs.patch
+    SpannerProjectsInstanceConfigsPatchResource,
+    SpannerProjectsInstanceConfigsPatch (..),
+    newSpannerProjectsInstanceConfigsPatch,
+
     -- ** spanner.projects.instances.backupOperations.list
     SpannerProjectsInstancesBackupOperationsListResource,
     SpannerProjectsInstancesBackupOperationsList (..),
     newSpannerProjectsInstancesBackupOperationsList,
+
+    -- ** spanner.projects.instances.backups.copy
+    SpannerProjectsInstancesBackupsCopyResource,
+    SpannerProjectsInstancesBackupsCopy (..),
+    newSpannerProjectsInstancesBackupsCopy,
 
     -- ** spanner.projects.instances.backups.create
     SpannerProjectsInstancesBackupsCreateResource,
@@ -129,6 +174,16 @@ module Gogol.Spanner
     SpannerProjectsInstancesDatabasesCreateResource,
     SpannerProjectsInstancesDatabasesCreate (..),
     newSpannerProjectsInstancesDatabasesCreate,
+
+    -- ** spanner.projects.instances.databases.databaseRoles.list
+    SpannerProjectsInstancesDatabasesDatabaseRolesListResource,
+    SpannerProjectsInstancesDatabasesDatabaseRolesList (..),
+    newSpannerProjectsInstancesDatabasesDatabaseRolesList,
+
+    -- ** spanner.projects.instances.databases.databaseRoles.testIamPermissions
+    SpannerProjectsInstancesDatabasesDatabaseRolesTestIamPermissionsResource,
+    SpannerProjectsInstancesDatabasesDatabaseRolesTestIamPermissions (..),
+    newSpannerProjectsInstancesDatabasesDatabaseRolesTestIamPermissions,
 
     -- ** spanner.projects.instances.databases.dropDatabase
     SpannerProjectsInstancesDatabasesDropDatabaseResource,
@@ -393,6 +448,21 @@ module Gogol.Spanner
     -- ** ContextValue_Severity
     ContextValue_Severity (..),
 
+    -- ** CopyBackupEncryptionConfig
+    CopyBackupEncryptionConfig (..),
+    newCopyBackupEncryptionConfig,
+
+    -- ** CopyBackupEncryptionConfig_EncryptionType
+    CopyBackupEncryptionConfig_EncryptionType (..),
+
+    -- ** CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- ** CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -407,6 +477,14 @@ module Gogol.Spanner
 
     -- ** CreateDatabaseRequest_DatabaseDialect
     CreateDatabaseRequest_DatabaseDialect (..),
+
+    -- ** CreateInstanceConfigMetadata
+    CreateInstanceConfigMetadata (..),
+    newCreateInstanceConfigMetadata,
+
+    -- ** CreateInstanceConfigRequest
+    CreateInstanceConfigRequest (..),
+    newCreateInstanceConfigRequest,
 
     -- ** CreateInstanceMetadata
     CreateInstanceMetadata (..),
@@ -429,6 +507,10 @@ module Gogol.Spanner
 
     -- ** Database_State
     Database_State (..),
+
+    -- ** DatabaseRole
+    DatabaseRole (..),
+    newDatabaseRole,
 
     -- ** Delete'
     Delete' (..),
@@ -491,6 +573,13 @@ module Gogol.Spanner
     Field (..),
     newField,
 
+    -- ** FreeInstanceMetadata
+    FreeInstanceMetadata (..),
+    newFreeInstanceMetadata,
+
+    -- ** FreeInstanceMetadata_ExpireBehavior
+    FreeInstanceMetadata_ExpireBehavior (..),
+
     -- ** GetDatabaseDdlResponse
     GetDatabaseDdlResponse (..),
     newGetDatabaseDdlResponse,
@@ -523,6 +612,9 @@ module Gogol.Spanner
     Instance (..),
     newInstance,
 
+    -- ** Instance_InstanceType
+    Instance_InstanceType (..),
+
     -- ** Instance_Labels
     Instance_Labels (..),
     newInstance_Labels,
@@ -533,6 +625,23 @@ module Gogol.Spanner
     -- ** InstanceConfig
     InstanceConfig (..),
     newInstanceConfig,
+
+    -- ** InstanceConfig_ConfigType
+    InstanceConfig_ConfigType (..),
+
+    -- ** InstanceConfig_FreeInstanceAvailability
+    InstanceConfig_FreeInstanceAvailability (..),
+
+    -- ** InstanceConfig_Labels
+    InstanceConfig_Labels (..),
+    newInstanceConfig_Labels,
+
+    -- ** InstanceConfig_State
+    InstanceConfig_State (..),
+
+    -- ** InstanceOperationProgress
+    InstanceOperationProgress (..),
+    newInstanceOperationProgress,
 
     -- ** KeyRange
     KeyRange (..),
@@ -562,9 +671,17 @@ module Gogol.Spanner
     ListDatabaseOperationsResponse (..),
     newListDatabaseOperationsResponse,
 
+    -- ** ListDatabaseRolesResponse
+    ListDatabaseRolesResponse (..),
+    newListDatabaseRolesResponse,
+
     -- ** ListDatabasesResponse
     ListDatabasesResponse (..),
     newListDatabasesResponse,
+
+    -- ** ListInstanceConfigOperationsResponse
+    ListInstanceConfigOperationsResponse (..),
+    newListInstanceConfigOperationsResponse,
 
     -- ** ListInstanceConfigsResponse
     ListInstanceConfigsResponse (..),
@@ -720,6 +837,9 @@ module Gogol.Spanner
     ReadWrite (..),
     newReadWrite,
 
+    -- ** ReadWrite_ReadLockMode
+    ReadWrite_ReadLockMode (..),
+
     -- ** ReplicaInfo
     ReplicaInfo (..),
     newReplicaInfo,
@@ -873,6 +993,14 @@ module Gogol.Spanner
     UpdateDatabaseDdlRequest (..),
     newUpdateDatabaseDdlRequest,
 
+    -- ** UpdateInstanceConfigMetadata
+    UpdateInstanceConfigMetadata (..),
+    newUpdateInstanceConfigMetadata,
+
+    -- ** UpdateInstanceConfigRequest
+    UpdateInstanceConfigRequest (..),
+    newUpdateInstanceConfigRequest,
+
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
@@ -903,9 +1031,18 @@ module Gogol.Spanner
   )
 where
 
+import Gogol.Spanner.Projects.InstanceConfigOperations.List
+import Gogol.Spanner.Projects.InstanceConfigs.Create
+import Gogol.Spanner.Projects.InstanceConfigs.Delete
 import Gogol.Spanner.Projects.InstanceConfigs.Get
 import Gogol.Spanner.Projects.InstanceConfigs.List
+import Gogol.Spanner.Projects.InstanceConfigs.Operations.Cancel
+import Gogol.Spanner.Projects.InstanceConfigs.Operations.Delete
+import Gogol.Spanner.Projects.InstanceConfigs.Operations.Get
+import Gogol.Spanner.Projects.InstanceConfigs.Operations.List
+import Gogol.Spanner.Projects.InstanceConfigs.Patch
 import Gogol.Spanner.Projects.Instances.BackupOperations.List
+import Gogol.Spanner.Projects.Instances.Backups.Copy
 import Gogol.Spanner.Projects.Instances.Backups.Create
 import Gogol.Spanner.Projects.Instances.Backups.Delete
 import Gogol.Spanner.Projects.Instances.Backups.Get
@@ -921,6 +1058,8 @@ import Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
 import Gogol.Spanner.Projects.Instances.Create
 import Gogol.Spanner.Projects.Instances.DatabaseOperations.List
 import Gogol.Spanner.Projects.Instances.Databases.Create
+import Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.List
+import Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.TestIamPermissions
 import Gogol.Spanner.Projects.Instances.Databases.DropDatabase
 import Gogol.Spanner.Projects.Instances.Databases.Get
 import Gogol.Spanner.Projects.Instances.Databases.GetDdl

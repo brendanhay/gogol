@@ -57,6 +57,7 @@ library
     Gogol.AndroidEnterprise.Devices.Update
     Gogol.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
     Gogol.AndroidEnterprise.Enterprises.CompleteSignup
+    Gogol.AndroidEnterprise.Enterprises.CreateEnrollmentToken
     Gogol.AndroidEnterprise.Enterprises.CreateWebToken
     Gogol.AndroidEnterprise.Enterprises.Enroll
     Gogol.AndroidEnterprise.Enterprises.GenerateSignupUrl
@@ -131,5 +132,5 @@ library
     Gogol.AndroidEnterprise.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

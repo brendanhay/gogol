@@ -61,6 +61,14 @@ module Gogol.Composer.Internal.Sum
         ..
       ),
 
+    -- * NetworkingConfig_ConnectionType
+    NetworkingConfig_ConnectionType
+      ( NetworkingConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+        NetworkingConfig_ConnectionType_VPCPEERING,
+        NetworkingConfig_ConnectionType_PRIVATESERVICECONNECT,
+        ..
+      ),
+
     -- * OperationMetadata_OperationType
     OperationMetadata_OperationType
       ( OperationMetadata_OperationType_TYPEUNSPECIFIED,
@@ -229,6 +237,38 @@ pattern EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZELARGE = EnvironmentConf
   EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZEMEDIUM,
   EnvironmentConfig_EnvironmentSize_ENVIRONMENTSIZELARGE,
   EnvironmentConfig_EnvironmentSize
+  #-}
+
+-- | Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+newtype NetworkingConfig_ConnectionType = NetworkingConfig_ConnectionType {fromNetworkingConfig_ConnectionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No specific connection type was requested, so the environment uses the default value corresponding to the rest of its configuration.
+pattern NetworkingConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED :: NetworkingConfig_ConnectionType
+pattern NetworkingConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED = NetworkingConfig_ConnectionType "CONNECTION_TYPE_UNSPECIFIED"
+
+-- | Requests the use of VPC peerings for connecting the Customer and Tenant projects.
+pattern NetworkingConfig_ConnectionType_VPCPEERING :: NetworkingConfig_ConnectionType
+pattern NetworkingConfig_ConnectionType_VPCPEERING = NetworkingConfig_ConnectionType "VPC_PEERING"
+
+-- | Requests the use of Private Service Connect for connecting the Customer and Tenant projects.
+pattern NetworkingConfig_ConnectionType_PRIVATESERVICECONNECT :: NetworkingConfig_ConnectionType
+pattern NetworkingConfig_ConnectionType_PRIVATESERVICECONNECT = NetworkingConfig_ConnectionType "PRIVATE_SERVICE_CONNECT"
+
+{-# COMPLETE
+  NetworkingConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+  NetworkingConfig_ConnectionType_VPCPEERING,
+  NetworkingConfig_ConnectionType_PRIVATESERVICECONNECT,
+  NetworkingConfig_ConnectionType
   #-}
 
 -- | Output only. The type of operation being performed.

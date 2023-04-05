@@ -256,6 +256,9 @@ module Gogol.Blogger.Types
     -- ** PostsListOrderBy
     PostsListOrderBy (..),
 
+    -- ** PostsListSortOption
+    PostsListSortOption (..),
+
     -- ** PostsListStatus
     PostsListStatus (..),
 
@@ -271,7 +274,7 @@ import Gogol.Blogger.Internal.Product
 import Gogol.Blogger.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v3@ of the Blogger API v3. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v3@ of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
 bloggerService :: Core.ServiceConfig
 bloggerService =
   Core.defaultService

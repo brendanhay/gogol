@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Subscribes to changes to a file. While you can establish a channel forchanges to a file on a shared drive, a change to a shared drive file won\'t create a notification.
+-- Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won\'t create a notification.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.watch@.
 module Gogol.Drive.Files.Watch
@@ -51,6 +51,7 @@ type DriveFilesWatchResource =
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> "watch"
     Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
@@ -63,13 +64,14 @@ type DriveFilesWatchResource =
       Core.:> Core.Capture "fileId" Core.Text
       Core.:> "watch"
       Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
+      Core.:> Core.QueryParam "includeLabels" Core.Text
       Core.:> Core.QueryParam "includePermissionsForView" Core.Text
       Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
       Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
       Core.:> Core.QueryParam "alt" Core.AltMedia
       Core.:> Core.Post '[Core.OctetStream] Core.Stream
 
--- | Subscribes to changes to a file. While you can establish a channel forchanges to a file on a shared drive, a change to a shared drive file won\'t create a notification.
+-- | Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won\'t create a notification.
 --
 -- /See:/ 'newDriveFilesWatch' smart constructor.
 data DriveFilesWatch = DriveFilesWatch
@@ -77,6 +79,8 @@ data DriveFilesWatch = DriveFilesWatch
     acknowledgeAbuse :: Core.Bool,
     -- | The ID of the file.
     fileId :: Core.Text,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
@@ -99,6 +103,7 @@ newDriveFilesWatch fileId payload =
   DriveFilesWatch
     { acknowledgeAbuse = Core.False,
       fileId = fileId,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       payload = payload,
       supportsAllDrives = Core.False,
@@ -121,6 +126,7 @@ instance Core.GoogleRequest DriveFilesWatch where
     go
       fileId
       (Core.Just acknowledgeAbuse)
+      includeLabels
       includePermissionsForView
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
@@ -148,6 +154,7 @@ instance
       go
         fileId
         (Core.Just acknowledgeAbuse)
+        includeLabels
         includePermissionsForView
         (Core.Just supportsAllDrives)
         (Core.Just supportsTeamDrives)

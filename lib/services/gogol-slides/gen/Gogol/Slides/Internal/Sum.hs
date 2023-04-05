@@ -3062,7 +3062,7 @@ pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUN
 pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERINSIDE :: ReplaceAllShapesWithImageRequest_ImageReplaceMethod
 pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERINSIDE = ReplaceAllShapesWithImageRequest_ImageReplaceMethod "CENTER_INSIDE"
 
--- | Scales and centers the image to fill the bounds of the original shape. The image may be cropped in order to fill the shape. The rendered size of the image will be the same as that of the original shape.
+-- | Scales and centers the image to fill the bounds of the original shape. The image may be cropped in order to fill the shape. The rendered size of the image will be the same as the original shape.
 pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERCROP :: ReplaceAllShapesWithImageRequest_ImageReplaceMethod
 pattern ReplaceAllShapesWithImageRequest_ImageReplaceMethod_CENTERCROP = ReplaceAllShapesWithImageRequest_ImageReplaceMethod "CENTER_CROP"
 
@@ -3148,7 +3148,7 @@ pattern ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED = R
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERINSIDE :: ReplaceImageRequest_ImageReplaceMethod
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERINSIDE = ReplaceImageRequest_ImageReplaceMethod "CENTER_INSIDE"
 
--- | Scales and centers the image to fill the bounds of the original shape. The image may be cropped in order to fill the shape. The rendered size of the image will be the same as that of the original shape.
+-- | Scales and centers the image to fill the bounds of the original shape. The image may be cropped in order to fill the shape. The rendered size of the image will be the same as the original shape.
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP :: ReplaceImageRequest_ImageReplaceMethod
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP = ReplaceImageRequest_ImageReplaceMethod "CENTER_CROP"
 

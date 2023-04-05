@@ -87,6 +87,8 @@ library
     Gogol.AppEngine.Apps.Services.Versions.Instances.List
     Gogol.AppEngine.Apps.Services.Versions.List
     Gogol.AppEngine.Apps.Services.Versions.Patch
+    Gogol.AppEngine.Projects.Locations.Applications.Create
+    Gogol.AppEngine.Projects.Locations.Applications.Get
     Gogol.AppEngine.Types
 
   other-modules:
@@ -94,5 +96,5 @@ library
     Gogol.AppEngine.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

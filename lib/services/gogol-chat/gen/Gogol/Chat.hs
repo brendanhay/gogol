@@ -26,49 +26,29 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables apps to fetch information and perform actions in Google Chat. Authentication using a service account is a prerequisite for using the Google Chat REST API.
+-- Enables apps to fetch information and perform actions in Google Chat. Authentication is a prerequisite for using the Google Chat REST API.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference>
 module Gogol.Chat
   ( -- * Configuration
     chatService,
 
+    -- * OAuth Scopes
+    Chat'Bot,
+    Chat'Memberships,
+    Chat'Memberships'Readonly,
+    Chat'Messages,
+    Chat'Messages'Create,
+    Chat'Messages'Readonly,
+    Chat'Spaces,
+    Chat'Spaces'Readonly,
+
     -- * Resources
-
-    -- ** chat.dms.conversations.messages
-    ChatDmsConversationsMessagesResource,
-    ChatDmsConversationsMessages (..),
-    newChatDmsConversationsMessages,
-
-    -- ** chat.dms.messages
-    ChatDmsMessagesResource,
-    ChatDmsMessages (..),
-    newChatDmsMessages,
-
-    -- ** chat.dms.webhooks
-    ChatDmsWebhooksResource,
-    ChatDmsWebhooks (..),
-    newChatDmsWebhooks,
 
     -- ** chat.media.download
     ChatMediaDownloadResource,
     ChatMediaDownload (..),
     newChatMediaDownload,
-
-    -- ** chat.rooms.conversations.messages
-    ChatRoomsConversationsMessagesResource,
-    ChatRoomsConversationsMessages (..),
-    newChatRoomsConversationsMessages,
-
-    -- ** chat.rooms.messages
-    ChatRoomsMessagesResource,
-    ChatRoomsMessages (..),
-    newChatRoomsMessages,
-
-    -- ** chat.rooms.webhooks
-    ChatRoomsWebhooksResource,
-    ChatRoomsWebhooks (..),
-    newChatRoomsWebhooks,
 
     -- ** chat.spaces.get
     ChatSpacesGetResource,
@@ -110,15 +90,15 @@ module Gogol.Chat
     ChatSpacesMessagesGet (..),
     newChatSpacesMessagesGet,
 
+    -- ** chat.spaces.messages.patch
+    ChatSpacesMessagesPatchResource,
+    ChatSpacesMessagesPatch (..),
+    newChatSpacesMessagesPatch,
+
     -- ** chat.spaces.messages.update
     ChatSpacesMessagesUpdateResource,
     ChatSpacesMessagesUpdate (..),
     newChatSpacesMessagesUpdate,
-
-    -- ** chat.spaces.webhooks
-    ChatSpacesWebhooksResource,
-    ChatSpacesWebhooks (..),
-    newChatSpacesWebhooks,
 
     -- * Types
 
@@ -180,6 +160,14 @@ module Gogol.Chat
     -- ** CardHeader_ImageStyle
     CardHeader_ImageStyle (..),
 
+    -- ** CardWithId
+    CardWithId (..),
+    newCardWithId,
+
+    -- ** ChatAppLogEntry
+    ChatAppLogEntry (..),
+    newChatAppLogEntry,
+
     -- ** Color
     Color (..),
     newColor,
@@ -232,10 +220,6 @@ module Gogol.Chat
     DriveDataRef (..),
     newDriveDataRef,
 
-    -- ** DynamiteIntegrationLogEntry
-    DynamiteIntegrationLogEntry (..),
-    newDynamiteIntegrationLogEntry,
-
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -247,6 +231,9 @@ module Gogol.Chat
     -- ** GoogleAppsCardV1Action
     GoogleAppsCardV1Action (..),
     newGoogleAppsCardV1Action,
+
+    -- ** GoogleAppsCardV1Action_Interaction
+    GoogleAppsCardV1Action_Interaction (..),
 
     -- ** GoogleAppsCardV1Action_LoadIndicator
     GoogleAppsCardV1Action_LoadIndicator (..),
@@ -317,9 +304,6 @@ module Gogol.Chat
 
     -- ** GoogleAppsCardV1GridItem_Layout
     GoogleAppsCardV1GridItem_Layout (..),
-
-    -- ** GoogleAppsCardV1GridItem_TextAlignment
-    GoogleAppsCardV1GridItem_TextAlignment (..),
 
     -- ** GoogleAppsCardV1Icon
     GoogleAppsCardV1Icon (..),
@@ -402,9 +386,6 @@ module Gogol.Chat
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
 
-    -- ** GoogleAppsCardV1Widget_HorizontalAlignment
-    GoogleAppsCardV1Widget_HorizontalAlignment (..),
-
     -- ** Image
     Image (..),
     newImage,
@@ -447,6 +428,9 @@ module Gogol.Chat
     Membership (..),
     newMembership,
 
+    -- ** Membership_Role
+    Membership_Role (..),
+
     -- ** Membership_State
     Membership_State (..),
 
@@ -481,8 +465,15 @@ module Gogol.Chat
     Space (..),
     newSpace,
 
+    -- ** Space_SpaceThreadingState
+    Space_SpaceThreadingState (..),
+
     -- ** Space_Type
     Space_Type (..),
+
+    -- ** SpaceDetails
+    SpaceDetails (..),
+    newSpaceDetails,
 
     -- ** Status
     Status (..),
@@ -533,16 +524,13 @@ module Gogol.Chat
     -- ** WidgetMarkup
     WidgetMarkup (..),
     newWidgetMarkup,
+
+    -- ** SpacesMessagesCreateMessageReplyOption
+    SpacesMessagesCreateMessageReplyOption (..),
   )
 where
 
-import Gogol.Chat.Dms.Conversations.Messages
-import Gogol.Chat.Dms.Messages
-import Gogol.Chat.Dms.Webhooks
 import Gogol.Chat.Media.Download
-import Gogol.Chat.Rooms.Conversations.Messages
-import Gogol.Chat.Rooms.Messages
-import Gogol.Chat.Rooms.Webhooks
 import Gogol.Chat.Spaces.Get
 import Gogol.Chat.Spaces.List
 import Gogol.Chat.Spaces.Members.Get
@@ -551,6 +539,6 @@ import Gogol.Chat.Spaces.Messages.Attachments.Get
 import Gogol.Chat.Spaces.Messages.Create
 import Gogol.Chat.Spaces.Messages.Delete
 import Gogol.Chat.Spaces.Messages.Get
+import Gogol.Chat.Spaces.Messages.Patch
 import Gogol.Chat.Spaces.Messages.Update
-import Gogol.Chat.Spaces.Webhooks
 import Gogol.Chat.Types

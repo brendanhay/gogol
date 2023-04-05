@@ -57,6 +57,10 @@ module Gogol.DoubleClickSearch.Types
     CustomMetric (..),
     newCustomMetric,
 
+    -- ** IdMappingFile
+    IdMappingFile (..),
+    newIdMappingFile,
+
     -- ** Report
     Report (..),
     newReport,

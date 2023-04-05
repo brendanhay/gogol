@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes an entitlement to an app for a user.
+-- Removes an entitlement to an app for a user. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.delete@.
 module Gogol.AndroidEnterprise.Entitlements.Delete
@@ -61,7 +61,7 @@ type AndroidEnterpriseEntitlementsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
--- | Removes an entitlement to an app for a user.
+-- | Removes an entitlement to an app for a user. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseEntitlementsDelete' smart constructor.
 data AndroidEnterpriseEntitlementsDelete = AndroidEnterpriseEntitlementsDelete

@@ -143,6 +143,68 @@ module Gogol.DFAReporting.Internal.Sum
         ..
       ),
 
+    -- * BillingProfile_InvoiceLevel
+    BillingProfile_InvoiceLevel
+      ( BillingProfile_InvoiceLevel_ACCOUNTLEVEL,
+        BillingProfile_InvoiceLevel_ADVERTISERLEVEL,
+        BillingProfile_InvoiceLevel_CAMPAIGNLEVEL,
+        ..
+      ),
+
+    -- * BillingProfile_Status
+    BillingProfile_Status
+      ( BillingProfile_Status_UNDERREVIEW,
+        BillingProfile_Status_Active,
+        BillingProfile_Status_Archived,
+        ..
+      ),
+
+    -- * BillingRate_Type
+    BillingRate_Type
+      ( BillingRate_Type_ADSERVING,
+        BillingRate_Type_Clicks,
+        BillingRate_Type_MINIMUMSERVICE,
+        BillingRate_Type_PATHTOCONVERSION,
+        BillingRate_Type_RICHMEDIAINPAGE,
+        BillingRate_Type_RICHMEDIAEXPANDING,
+        BillingRate_Type_RICHMEDIAFLOATING,
+        BillingRate_Type_RICHMEDIAVIDEO,
+        BillingRate_Type_RICHMEDIATEASER,
+        BillingRate_Type_RICHMEDIAVPAID,
+        BillingRate_Type_INSTREAMVIDEO,
+        BillingRate_Type_Pixel,
+        BillingRate_Type_Tracking,
+        BillingRate_Type_TRAFFICKINGFEATURE,
+        BillingRate_Type_CUSTOMREPORTS,
+        BillingRate_Type_EXPOSURETOCONVERSION,
+        BillingRate_Type_DATATRANSFER,
+        BillingRate_Type_DATATRANSFERSETUP,
+        BillingRate_Type_Startup,
+        BillingRate_Type_STATEMENTOFWORK,
+        BillingRate_Type_PROVIDEDLIST,
+        BillingRate_Type_PROVIDEDLISTSETUP,
+        BillingRate_Type_ENHANCEDFORMATS,
+        BillingRate_Type_TRACKINGADIMPRESSIONS,
+        BillingRate_Type_TRACKINGADCLICKS,
+        BillingRate_Type_NIELSENDIGITALADRATINGSFEE,
+        BillingRate_Type_INSTREAMVIDEOREDIRECT,
+        BillingRate_Type_INSTREAMVIDEOVPAID,
+        BillingRate_Type_DISPLAYADSERVING,
+        BillingRate_Type_VIDEOADSERVING,
+        BillingRate_Type_AUDIOADSERVING,
+        BillingRate_Type_ADVANCEDDISPLAYADSERVING,
+        ..
+      ),
+
+    -- * BillingRate_UnitOfMeasure
+    BillingRate_UnitOfMeasure
+      ( BillingRate_UnitOfMeasure_Cpm,
+        BillingRate_UnitOfMeasure_Cpc,
+        BillingRate_UnitOfMeasure_EA,
+        BillingRate_UnitOfMeasure_P2C,
+        ..
+      ),
+
     -- * ConversionError_Code
     ConversionError_Code
       ( ConversionError_Code_INVALIDARGUMENT,
@@ -167,6 +229,7 @@ module Gogol.DFAReporting.Internal.Sum
         Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDBM,
         Creative_AuthoringSource_CREATIVEAUTHORINGSOURCESTUDIO,
         Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD,
+        Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS,
         ..
       ),
 
@@ -573,6 +636,7 @@ module Gogol.DFAReporting.Internal.Sum
         CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGHARDCODED,
         CreativeAssetMetadata_WarnedValidationRulesItem_SVGINVALID,
         CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA,
+        CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE,
         ..
       ),
 
@@ -886,6 +950,7 @@ module Gogol.DFAReporting.Internal.Sum
         File_Status_REPORTAVAILABLE,
         File_Status_Failed,
         File_Status_Cancelled,
+        File_Status_Queued,
         ..
       ),
 
@@ -1081,6 +1146,14 @@ module Gogol.DFAReporting.Internal.Sum
         ..
       ),
 
+    -- * Invoice_InvoiceType
+    Invoice_InvoiceType
+      ( Invoice_InvoiceType_INVOICETYPEUNSPECIFIED,
+        Invoice_InvoiceType_INVOICETYPECREDIT,
+        Invoice_InvoiceType_INVOICETYPEINVOICE,
+        ..
+      ),
+
     -- * ListPopulationTerm_Operator
     ListPopulationTerm_Operator
       ( ListPopulationTerm_Operator_NUMEQUALS,
@@ -1118,6 +1191,7 @@ module Gogol.DFAReporting.Internal.Sum
     MeasurementPartnerAdvertiserLink_MeasurementPartner
       ( MeasurementPartnerAdvertiserLink_MeasurementPartner_None,
         MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE,
+        MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY,
         ..
       ),
 
@@ -1138,6 +1212,7 @@ module Gogol.DFAReporting.Internal.Sum
     MeasurementPartnerCampaignLink_MeasurementPartner
       ( MeasurementPartnerCampaignLink_MeasurementPartner_None,
         MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE,
+        MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY,
         ..
       ),
 
@@ -1158,6 +1233,7 @@ module Gogol.DFAReporting.Internal.Sum
     MeasurementPartnerWrappingData_MeasurementPartner
       ( MeasurementPartnerWrappingData_MeasurementPartner_None,
         MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE,
+        MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY,
         ..
       ),
 
@@ -1166,10 +1242,17 @@ module Gogol.DFAReporting.Internal.Sum
       ( MeasurementPartnerWrappingData_TagWrappingMode_None,
         MeasurementPartnerWrappingData_TagWrappingMode_Blocking,
         MeasurementPartnerWrappingData_TagWrappingMode_Monitoring,
-        MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGONLY,
+        MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY,
         MeasurementPartnerWrappingData_TagWrappingMode_VIDEOPIXELMONITORING,
         MeasurementPartnerWrappingData_TagWrappingMode_Tracking,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING,
         MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING,
+        MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING,
+        MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING,
         ..
       ),
 
@@ -1178,6 +1261,14 @@ module Gogol.DFAReporting.Internal.Sum
       ( MobileApp_Directory_Unknown,
         MobileApp_Directory_APPLEAPPSTORE,
         MobileApp_Directory_GOOGLEPLAYSTORE,
+        MobileApp_Directory_ROKUAPPSTORE,
+        MobileApp_Directory_AMAZONFIRETVAPPSTORE,
+        MobileApp_Directory_PLAYSTATIONAPPSTORE,
+        MobileApp_Directory_APPLETVAPPSTORE,
+        MobileApp_Directory_XBOXAPPSTORE,
+        MobileApp_Directory_SAMSUNGTVAPPSTORE,
+        MobileApp_Directory_ANDROIDTVAPPSTORE,
+        MobileApp_Directory_GENERICCTVAPPSTORE,
         ..
       ),
 
@@ -1219,6 +1310,16 @@ module Gogol.DFAReporting.Internal.Sum
         PathReportDimensionValue_MatchType_BEGINSWITH,
         PathReportDimensionValue_MatchType_Contains,
         PathReportDimensionValue_MatchType_WILDCARDEXPRESSION,
+        ..
+      ),
+
+    -- * Placement_ActiveStatus
+    Placement_ActiveStatus
+      ( Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN,
+        Placement_ActiveStatus_PLACEMENTSTATUSACTIVE,
+        Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE,
+        Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED,
+        Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
         ..
       ),
 
@@ -1282,6 +1383,16 @@ module Gogol.DFAReporting.Internal.Sum
         Placement_VpaidAdapterChoice_Flash,
         Placement_VpaidAdapterChoice_HTML5,
         Placement_VpaidAdapterChoice_Both,
+        ..
+      ),
+
+    -- * PlacementGroup_ActiveStatus
+    PlacementGroup_ActiveStatus
+      ( PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN,
+        PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE,
+        PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE,
+        PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED,
+        PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
         ..
       ),
 
@@ -1686,6 +1797,14 @@ module Gogol.DFAReporting.Internal.Sum
         ..
       ),
 
+    -- * UvarFilter_Match
+    UvarFilter_Match
+      ( UvarFilter_Match_Unspecified,
+        UvarFilter_Match_Exact,
+        UvarFilter_Match_Contains,
+        ..
+      ),
+
     -- * VideoFormat_FileType
     VideoFormat_FileType
       ( VideoFormat_FileType_Flv,
@@ -1816,6 +1935,28 @@ module Gogol.DFAReporting.Internal.Sum
         ..
       ),
 
+    -- * BillingProfilesListSortField
+    BillingProfilesListSortField
+      ( BillingProfilesListSortField_ID,
+        BillingProfilesListSortField_Name,
+        ..
+      ),
+
+    -- * BillingProfilesListSortOrder
+    BillingProfilesListSortOrder
+      ( BillingProfilesListSortOrder_Ascending,
+        BillingProfilesListSortOrder_Descending,
+        ..
+      ),
+
+    -- * BillingProfilesListStatus
+    BillingProfilesListStatus
+      ( BillingProfilesListStatus_UNDERREVIEW,
+        BillingProfilesListStatus_Active,
+        BillingProfilesListStatus_Archived,
+        ..
+      ),
+
     -- * CampaignCreativeAssociationsListSortOrder
     CampaignCreativeAssociationsListSortOrder
       ( CampaignCreativeAssociationsListSortOrder_Ascending,
@@ -1901,6 +2042,7 @@ module Gogol.DFAReporting.Internal.Sum
         ChangeLogsListObjectType_OBJECTTARGETINGTEMPLATE,
         ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY,
         ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK,
+        ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK,
         ..
       ),
 
@@ -2148,6 +2290,14 @@ module Gogol.DFAReporting.Internal.Sum
       ( MobileAppsListDirectories_Unknown,
         MobileAppsListDirectories_APPLEAPPSTORE,
         MobileAppsListDirectories_GOOGLEPLAYSTORE,
+        MobileAppsListDirectories_ROKUAPPSTORE,
+        MobileAppsListDirectories_AMAZONFIRETVAPPSTORE,
+        MobileAppsListDirectories_PLAYSTATIONAPPSTORE,
+        MobileAppsListDirectories_APPLETVAPPSTORE,
+        MobileAppsListDirectories_XBOXAPPSTORE,
+        MobileAppsListDirectories_SAMSUNGTVAPPSTORE,
+        MobileAppsListDirectories_ANDROIDTVAPPSTORE,
+        MobileAppsListDirectories_GENERICCTVAPPSTORE,
         ..
       ),
 
@@ -2176,6 +2326,16 @@ module Gogol.DFAReporting.Internal.Sum
     OrdersListSortOrder
       ( OrdersListSortOrder_Ascending,
         OrdersListSortOrder_Descending,
+        ..
+      ),
+
+    -- * PlacementGroupsListActiveStatus
+    PlacementGroupsListActiveStatus
+      ( PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN,
+        PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE,
+        PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE,
+        PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED,
+        PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
         ..
       ),
 
@@ -2247,6 +2407,16 @@ module Gogol.DFAReporting.Internal.Sum
         PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY,
         PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4,
         PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT,
+        ..
+      ),
+
+    -- * PlacementsListActiveStatus
+    PlacementsListActiveStatus
+      ( PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN,
+        PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE,
+        PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE,
+        PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED,
+        PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
         ..
       ),
 
@@ -2911,6 +3081,284 @@ pattern Advertiser_Status_ONHOLD = Advertiser_Status "ON_HOLD"
   Advertiser_Status
   #-}
 
+-- | Invoice level for this billing profile. Used to group fees into separate invoices by account, advertiser, or campaign.
+newtype BillingProfile_InvoiceLevel = BillingProfile_InvoiceLevel {fromBillingProfile_InvoiceLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingProfile_InvoiceLevel_ACCOUNTLEVEL :: BillingProfile_InvoiceLevel
+pattern BillingProfile_InvoiceLevel_ACCOUNTLEVEL = BillingProfile_InvoiceLevel "ACCOUNT_LEVEL"
+
+-- |
+pattern BillingProfile_InvoiceLevel_ADVERTISERLEVEL :: BillingProfile_InvoiceLevel
+pattern BillingProfile_InvoiceLevel_ADVERTISERLEVEL = BillingProfile_InvoiceLevel "ADVERTISER_LEVEL"
+
+-- |
+pattern BillingProfile_InvoiceLevel_CAMPAIGNLEVEL :: BillingProfile_InvoiceLevel
+pattern BillingProfile_InvoiceLevel_CAMPAIGNLEVEL = BillingProfile_InvoiceLevel "CAMPAIGN_LEVEL"
+
+{-# COMPLETE
+  BillingProfile_InvoiceLevel_ACCOUNTLEVEL,
+  BillingProfile_InvoiceLevel_ADVERTISERLEVEL,
+  BillingProfile_InvoiceLevel_CAMPAIGNLEVEL,
+  BillingProfile_InvoiceLevel
+  #-}
+
+-- | Status of this billing profile.This is a read-only field.
+newtype BillingProfile_Status = BillingProfile_Status {fromBillingProfile_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingProfile_Status_UNDERREVIEW :: BillingProfile_Status
+pattern BillingProfile_Status_UNDERREVIEW = BillingProfile_Status "UNDER_REVIEW"
+
+-- |
+pattern BillingProfile_Status_Active :: BillingProfile_Status
+pattern BillingProfile_Status_Active = BillingProfile_Status "ACTIVE"
+
+-- |
+pattern BillingProfile_Status_Archived :: BillingProfile_Status
+pattern BillingProfile_Status_Archived = BillingProfile_Status "ARCHIVED"
+
+{-# COMPLETE
+  BillingProfile_Status_UNDERREVIEW,
+  BillingProfile_Status_Active,
+  BillingProfile_Status_Archived,
+  BillingProfile_Status
+  #-}
+
+-- | Type of this billing rate.
+newtype BillingRate_Type = BillingRate_Type {fromBillingRate_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingRate_Type_ADSERVING :: BillingRate_Type
+pattern BillingRate_Type_ADSERVING = BillingRate_Type "AD_SERVING"
+
+-- |
+pattern BillingRate_Type_Clicks :: BillingRate_Type
+pattern BillingRate_Type_Clicks = BillingRate_Type "CLICKS"
+
+-- |
+pattern BillingRate_Type_MINIMUMSERVICE :: BillingRate_Type
+pattern BillingRate_Type_MINIMUMSERVICE = BillingRate_Type "MINIMUM_SERVICE"
+
+-- |
+pattern BillingRate_Type_PATHTOCONVERSION :: BillingRate_Type
+pattern BillingRate_Type_PATHTOCONVERSION = BillingRate_Type "PATH_TO_CONVERSION"
+
+-- |
+pattern BillingRate_Type_RICHMEDIAINPAGE :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIAINPAGE = BillingRate_Type "RICH_MEDIA_INPAGE"
+
+-- |
+pattern BillingRate_Type_RICHMEDIAEXPANDING :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIAEXPANDING = BillingRate_Type "RICH_MEDIA_EXPANDING"
+
+-- |
+pattern BillingRate_Type_RICHMEDIAFLOATING :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIAFLOATING = BillingRate_Type "RICH_MEDIA_FLOATING"
+
+-- |
+pattern BillingRate_Type_RICHMEDIAVIDEO :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIAVIDEO = BillingRate_Type "RICH_MEDIA_VIDEO"
+
+-- |
+pattern BillingRate_Type_RICHMEDIATEASER :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIATEASER = BillingRate_Type "RICH_MEDIA_TEASER"
+
+-- |
+pattern BillingRate_Type_RICHMEDIAVPAID :: BillingRate_Type
+pattern BillingRate_Type_RICHMEDIAVPAID = BillingRate_Type "RICH_MEDIA_VPAID"
+
+-- |
+pattern BillingRate_Type_INSTREAMVIDEO :: BillingRate_Type
+pattern BillingRate_Type_INSTREAMVIDEO = BillingRate_Type "INSTREAM_VIDEO"
+
+-- |
+pattern BillingRate_Type_Pixel :: BillingRate_Type
+pattern BillingRate_Type_Pixel = BillingRate_Type "PIXEL"
+
+-- |
+pattern BillingRate_Type_Tracking :: BillingRate_Type
+pattern BillingRate_Type_Tracking = BillingRate_Type "TRACKING"
+
+-- |
+pattern BillingRate_Type_TRAFFICKINGFEATURE :: BillingRate_Type
+pattern BillingRate_Type_TRAFFICKINGFEATURE = BillingRate_Type "TRAFFICKING_FEATURE"
+
+-- |
+pattern BillingRate_Type_CUSTOMREPORTS :: BillingRate_Type
+pattern BillingRate_Type_CUSTOMREPORTS = BillingRate_Type "CUSTOM_REPORTS"
+
+-- |
+pattern BillingRate_Type_EXPOSURETOCONVERSION :: BillingRate_Type
+pattern BillingRate_Type_EXPOSURETOCONVERSION = BillingRate_Type "EXPOSURE_TO_CONVERSION"
+
+-- |
+pattern BillingRate_Type_DATATRANSFER :: BillingRate_Type
+pattern BillingRate_Type_DATATRANSFER = BillingRate_Type "DATA_TRANSFER"
+
+-- |
+pattern BillingRate_Type_DATATRANSFERSETUP :: BillingRate_Type
+pattern BillingRate_Type_DATATRANSFERSETUP = BillingRate_Type "DATA_TRANSFER_SETUP"
+
+-- |
+pattern BillingRate_Type_Startup :: BillingRate_Type
+pattern BillingRate_Type_Startup = BillingRate_Type "STARTUP"
+
+-- |
+pattern BillingRate_Type_STATEMENTOFWORK :: BillingRate_Type
+pattern BillingRate_Type_STATEMENTOFWORK = BillingRate_Type "STATEMENT_OF_WORK"
+
+-- |
+pattern BillingRate_Type_PROVIDEDLIST :: BillingRate_Type
+pattern BillingRate_Type_PROVIDEDLIST = BillingRate_Type "PROVIDED_LIST"
+
+-- |
+pattern BillingRate_Type_PROVIDEDLISTSETUP :: BillingRate_Type
+pattern BillingRate_Type_PROVIDEDLISTSETUP = BillingRate_Type "PROVIDED_LIST_SETUP"
+
+-- |
+pattern BillingRate_Type_ENHANCEDFORMATS :: BillingRate_Type
+pattern BillingRate_Type_ENHANCEDFORMATS = BillingRate_Type "ENHANCED_FORMATS"
+
+-- |
+pattern BillingRate_Type_TRACKINGADIMPRESSIONS :: BillingRate_Type
+pattern BillingRate_Type_TRACKINGADIMPRESSIONS = BillingRate_Type "TRACKING_AD_IMPRESSIONS"
+
+-- |
+pattern BillingRate_Type_TRACKINGADCLICKS :: BillingRate_Type
+pattern BillingRate_Type_TRACKINGADCLICKS = BillingRate_Type "TRACKING_AD_CLICKS"
+
+-- |
+pattern BillingRate_Type_NIELSENDIGITALADRATINGSFEE :: BillingRate_Type
+pattern BillingRate_Type_NIELSENDIGITALADRATINGSFEE = BillingRate_Type "NIELSEN_DIGITAL_AD_RATINGS_FEE"
+
+-- |
+pattern BillingRate_Type_INSTREAMVIDEOREDIRECT :: BillingRate_Type
+pattern BillingRate_Type_INSTREAMVIDEOREDIRECT = BillingRate_Type "INSTREAM_VIDEO_REDIRECT"
+
+-- |
+pattern BillingRate_Type_INSTREAMVIDEOVPAID :: BillingRate_Type
+pattern BillingRate_Type_INSTREAMVIDEOVPAID = BillingRate_Type "INSTREAM_VIDEO_VPAID"
+
+-- |
+pattern BillingRate_Type_DISPLAYADSERVING :: BillingRate_Type
+pattern BillingRate_Type_DISPLAYADSERVING = BillingRate_Type "DISPLAY_AD_SERVING"
+
+-- |
+pattern BillingRate_Type_VIDEOADSERVING :: BillingRate_Type
+pattern BillingRate_Type_VIDEOADSERVING = BillingRate_Type "VIDEO_AD_SERVING"
+
+-- |
+pattern BillingRate_Type_AUDIOADSERVING :: BillingRate_Type
+pattern BillingRate_Type_AUDIOADSERVING = BillingRate_Type "AUDIO_AD_SERVING"
+
+-- |
+pattern BillingRate_Type_ADVANCEDDISPLAYADSERVING :: BillingRate_Type
+pattern BillingRate_Type_ADVANCEDDISPLAYADSERVING = BillingRate_Type "ADVANCED_DISPLAY_AD_SERVING"
+
+{-# COMPLETE
+  BillingRate_Type_ADSERVING,
+  BillingRate_Type_Clicks,
+  BillingRate_Type_MINIMUMSERVICE,
+  BillingRate_Type_PATHTOCONVERSION,
+  BillingRate_Type_RICHMEDIAINPAGE,
+  BillingRate_Type_RICHMEDIAEXPANDING,
+  BillingRate_Type_RICHMEDIAFLOATING,
+  BillingRate_Type_RICHMEDIAVIDEO,
+  BillingRate_Type_RICHMEDIATEASER,
+  BillingRate_Type_RICHMEDIAVPAID,
+  BillingRate_Type_INSTREAMVIDEO,
+  BillingRate_Type_Pixel,
+  BillingRate_Type_Tracking,
+  BillingRate_Type_TRAFFICKINGFEATURE,
+  BillingRate_Type_CUSTOMREPORTS,
+  BillingRate_Type_EXPOSURETOCONVERSION,
+  BillingRate_Type_DATATRANSFER,
+  BillingRate_Type_DATATRANSFERSETUP,
+  BillingRate_Type_Startup,
+  BillingRate_Type_STATEMENTOFWORK,
+  BillingRate_Type_PROVIDEDLIST,
+  BillingRate_Type_PROVIDEDLISTSETUP,
+  BillingRate_Type_ENHANCEDFORMATS,
+  BillingRate_Type_TRACKINGADIMPRESSIONS,
+  BillingRate_Type_TRACKINGADCLICKS,
+  BillingRate_Type_NIELSENDIGITALADRATINGSFEE,
+  BillingRate_Type_INSTREAMVIDEOREDIRECT,
+  BillingRate_Type_INSTREAMVIDEOVPAID,
+  BillingRate_Type_DISPLAYADSERVING,
+  BillingRate_Type_VIDEOADSERVING,
+  BillingRate_Type_AUDIOADSERVING,
+  BillingRate_Type_ADVANCEDDISPLAYADSERVING,
+  BillingRate_Type
+  #-}
+
+-- | Unit of measure for this billing rate.
+newtype BillingRate_UnitOfMeasure = BillingRate_UnitOfMeasure {fromBillingRate_UnitOfMeasure :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingRate_UnitOfMeasure_Cpm :: BillingRate_UnitOfMeasure
+pattern BillingRate_UnitOfMeasure_Cpm = BillingRate_UnitOfMeasure "CPM"
+
+-- |
+pattern BillingRate_UnitOfMeasure_Cpc :: BillingRate_UnitOfMeasure
+pattern BillingRate_UnitOfMeasure_Cpc = BillingRate_UnitOfMeasure "CPC"
+
+-- |
+pattern BillingRate_UnitOfMeasure_EA :: BillingRate_UnitOfMeasure
+pattern BillingRate_UnitOfMeasure_EA = BillingRate_UnitOfMeasure "EA"
+
+-- |
+pattern BillingRate_UnitOfMeasure_P2C :: BillingRate_UnitOfMeasure
+pattern BillingRate_UnitOfMeasure_P2C = BillingRate_UnitOfMeasure "P2C"
+
+{-# COMPLETE
+  BillingRate_UnitOfMeasure_Cpm,
+  BillingRate_UnitOfMeasure_Cpc,
+  BillingRate_UnitOfMeasure_EA,
+  BillingRate_UnitOfMeasure_P2C,
+  BillingRate_UnitOfMeasure
+  #-}
+
 -- | The error code.
 newtype ConversionError_Code = ConversionError_Code {fromConversionError_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -3014,11 +3462,16 @@ pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCESTUDIO = Creative_Author
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_GWD"
 
+-- |
+pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS :: Creative_AuthoringSource
+pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_ACS"
+
 {-# COMPLETE
   Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDCM,
   Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDBM,
   Creative_AuthoringSource_CREATIVEAUTHORINGSOURCESTUDIO,
   Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD,
+  Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS,
   Creative_AuthoringSource
   #-}
 
@@ -4867,6 +5320,10 @@ pattern CreativeAssetMetadata_WarnedValidationRulesItem_SVGINVALID = CreativeAss
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_IN_RICH_MEDIA"
 
+-- |
+pattern CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE :: CreativeAssetMetadata_WarnedValidationRulesItem
+pattern CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE = CreativeAssetMetadata_WarnedValidationRulesItem "MISSING_ENABLER_REFERENCE"
+
 {-# COMPLETE
   CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGNONTOPLEVEL,
   CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGMISSING,
@@ -4893,6 +5350,7 @@ pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA = Cr
   CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGHARDCODED,
   CreativeAssetMetadata_WarnedValidationRulesItem_SVGINVALID,
   CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA,
+  CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE,
   CreativeAssetMetadata_WarnedValidationRulesItem
   #-}
 
@@ -6274,11 +6732,16 @@ pattern File_Status_Failed = File_Status "FAILED"
 pattern File_Status_Cancelled :: File_Status
 pattern File_Status_Cancelled = File_Status "CANCELLED"
 
+-- |
+pattern File_Status_Queued :: File_Status
+pattern File_Status_Queued = File_Status "QUEUED"
+
 {-# COMPLETE
   File_Status_Processing,
   File_Status_REPORTAVAILABLE,
   File_Status_Failed,
   File_Status_Cancelled,
+  File_Status_Queued,
   File_Status
   #-}
 
@@ -7145,6 +7608,38 @@ pattern InventoryItem_Type_PLANNINGPLACEMENTTYPECREDIT = InventoryItem_Type "PLA
   InventoryItem_Type
   #-}
 
+-- | The type of invoice document.
+newtype Invoice_InvoiceType = Invoice_InvoiceType {fromInvoice_InvoiceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Invoice_InvoiceType_INVOICETYPEUNSPECIFIED :: Invoice_InvoiceType
+pattern Invoice_InvoiceType_INVOICETYPEUNSPECIFIED = Invoice_InvoiceType "INVOICE_TYPE_UNSPECIFIED"
+
+-- |
+pattern Invoice_InvoiceType_INVOICETYPECREDIT :: Invoice_InvoiceType
+pattern Invoice_InvoiceType_INVOICETYPECREDIT = Invoice_InvoiceType "INVOICE_TYPE_CREDIT"
+
+-- |
+pattern Invoice_InvoiceType_INVOICETYPEINVOICE :: Invoice_InvoiceType
+pattern Invoice_InvoiceType_INVOICETYPEINVOICE = Invoice_InvoiceType "INVOICE_TYPE_INVOICE"
+
+{-# COMPLETE
+  Invoice_InvoiceType_INVOICETYPEUNSPECIFIED,
+  Invoice_InvoiceType_INVOICETYPECREDIT,
+  Invoice_InvoiceType_INVOICETYPEINVOICE,
+  Invoice_InvoiceType
+  #-}
+
 -- | Comparison operator of this term. This field is only relevant when type is left unset or set to CUSTOM/VARIABLE/TERM or REFERRER_TERM.
 newtype ListPopulationTerm_Operator = ListPopulationTerm_Operator {fromListPopulationTerm_Operator :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -7307,9 +7802,14 @@ pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_None = MeasurementPa
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerAdvertiserLink_MeasurementPartner
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerAdvertiserLink_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
+-- |
+pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerAdvertiserLink_MeasurementPartner
+pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerAdvertiserLink_MeasurementPartner "DOUBLE_VERIFY"
+
 {-# COMPLETE
   MeasurementPartnerAdvertiserLink_MeasurementPartner_None,
   MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE,
+  MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY,
   MeasurementPartnerAdvertiserLink_MeasurementPartner
   #-}
 
@@ -7391,9 +7891,14 @@ pattern MeasurementPartnerCampaignLink_MeasurementPartner_None = MeasurementPart
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerCampaignLink_MeasurementPartner
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerCampaignLink_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
+-- |
+pattern MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerCampaignLink_MeasurementPartner
+pattern MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerCampaignLink_MeasurementPartner "DOUBLE_VERIFY"
+
 {-# COMPLETE
   MeasurementPartnerCampaignLink_MeasurementPartner_None,
   MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE,
+  MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY,
   MeasurementPartnerCampaignLink_MeasurementPartner
   #-}
 
@@ -7475,9 +7980,14 @@ pattern MeasurementPartnerWrappingData_MeasurementPartner_None = MeasurementPart
 pattern MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerWrappingData_MeasurementPartner
 pattern MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerWrappingData_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
+-- |
+pattern MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerWrappingData_MeasurementPartner
+pattern MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerWrappingData_MeasurementPartner "DOUBLE_VERIFY"
+
 {-# COMPLETE
   MeasurementPartnerWrappingData_MeasurementPartner_None,
   MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE,
+  MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY,
   MeasurementPartnerWrappingData_MeasurementPartner
   #-}
 
@@ -7507,8 +8017,8 @@ pattern MeasurementPartnerWrappingData_TagWrappingMode_Monitoring :: Measurement
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Monitoring = MeasurementPartnerWrappingData_TagWrappingMode "MONITORING"
 
 -- |
-pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGONLY :: MeasurementPartnerWrappingData_TagWrappingMode
-pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGONLY = MeasurementPartnerWrappingData_TagWrappingMode "MONITORING_ONLY"
+pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY = MeasurementPartnerWrappingData_TagWrappingMode "MONITORING_READ_ONLY"
 
 -- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VIDEOPIXELMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
@@ -7519,17 +8029,52 @@ pattern MeasurementPartnerWrappingData_TagWrappingMode_Tracking :: MeasurementPa
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Tracking = MeasurementPartnerWrappingData_TagWrappingMode "TRACKING"
 
 -- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_MONITORING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_BLOCKING"
+
+-- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "NON_VPAID_MONITORING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_MONITORING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_BLOCKING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_FILTERING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_FILTERING"
+
+-- |
+pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
+pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "NON_VPAID_FILTERING"
 
 {-# COMPLETE
   MeasurementPartnerWrappingData_TagWrappingMode_None,
   MeasurementPartnerWrappingData_TagWrappingMode_Blocking,
   MeasurementPartnerWrappingData_TagWrappingMode_Monitoring,
-  MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGONLY,
+  MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY,
   MeasurementPartnerWrappingData_TagWrappingMode_VIDEOPIXELMONITORING,
   MeasurementPartnerWrappingData_TagWrappingMode_Tracking,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING,
   MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING,
+  MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING,
+  MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING,
   MeasurementPartnerWrappingData_TagWrappingMode
   #-}
 
@@ -7558,10 +8103,50 @@ pattern MobileApp_Directory_APPLEAPPSTORE = MobileApp_Directory "APPLE_APP_STORE
 pattern MobileApp_Directory_GOOGLEPLAYSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_GOOGLEPLAYSTORE = MobileApp_Directory "GOOGLE_PLAY_STORE"
 
+-- |
+pattern MobileApp_Directory_ROKUAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_ROKUAPPSTORE = MobileApp_Directory "ROKU_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_AMAZONFIRETVAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_AMAZONFIRETVAPPSTORE = MobileApp_Directory "AMAZON_FIRETV_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_PLAYSTATIONAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_PLAYSTATIONAPPSTORE = MobileApp_Directory "PLAYSTATION_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_APPLETVAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_APPLETVAPPSTORE = MobileApp_Directory "APPLE_TV_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_XBOXAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_XBOXAPPSTORE = MobileApp_Directory "XBOX_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_SAMSUNGTVAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_SAMSUNGTVAPPSTORE = MobileApp_Directory "SAMSUNG_TV_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_ANDROIDTVAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_ANDROIDTVAPPSTORE = MobileApp_Directory "ANDROID_TV_APP_STORE"
+
+-- |
+pattern MobileApp_Directory_GENERICCTVAPPSTORE :: MobileApp_Directory
+pattern MobileApp_Directory_GENERICCTVAPPSTORE = MobileApp_Directory "GENERIC_CTV_APP_STORE"
+
 {-# COMPLETE
   MobileApp_Directory_Unknown,
   MobileApp_Directory_APPLEAPPSTORE,
   MobileApp_Directory_GOOGLEPLAYSTORE,
+  MobileApp_Directory_ROKUAPPSTORE,
+  MobileApp_Directory_AMAZONFIRETVAPPSTORE,
+  MobileApp_Directory_PLAYSTATIONAPPSTORE,
+  MobileApp_Directory_APPLETVAPPSTORE,
+  MobileApp_Directory_XBOXAPPSTORE,
+  MobileApp_Directory_SAMSUNGTVAPPSTORE,
+  MobileApp_Directory_ANDROIDTVAPPSTORE,
+  MobileApp_Directory_GENERICCTVAPPSTORE,
   MobileApp_Directory
   #-}
 
@@ -7728,6 +8313,48 @@ pattern PathReportDimensionValue_MatchType_WILDCARDEXPRESSION = PathReportDimens
   PathReportDimensionValue_MatchType_Contains,
   PathReportDimensionValue_MatchType_WILDCARDEXPRESSION,
   PathReportDimensionValue_MatchType
+  #-}
+
+-- | Whether this placement is active, inactive, archived or permanently archived.
+newtype Placement_ActiveStatus = Placement_ActiveStatus {fromPlacement_ActiveStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN :: Placement_ActiveStatus
+pattern Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN = Placement_ActiveStatus "PLACEMENT_STATUS_UNKNOWN"
+
+-- |
+pattern Placement_ActiveStatus_PLACEMENTSTATUSACTIVE :: Placement_ActiveStatus
+pattern Placement_ActiveStatus_PLACEMENTSTATUSACTIVE = Placement_ActiveStatus "PLACEMENT_STATUS_ACTIVE"
+
+-- |
+pattern Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE :: Placement_ActiveStatus
+pattern Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE = Placement_ActiveStatus "PLACEMENT_STATUS_INACTIVE"
+
+-- |
+pattern Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED :: Placement_ActiveStatus
+pattern Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED = Placement_ActiveStatus "PLACEMENT_STATUS_ARCHIVED"
+
+-- |
+pattern Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: Placement_ActiveStatus
+pattern Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = Placement_ActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
+
+{-# COMPLETE
+  Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN,
+  Placement_ActiveStatus_PLACEMENTSTATUSACTIVE,
+  Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE,
+  Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED,
+  Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
+  Placement_ActiveStatus
   #-}
 
 -- | Placement compatibility. DISPLAY and DISPLAY/INTERSTITIAL refer to rendering on desktop, on mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP/INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY/INTERSTITIAL. IN/STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.
@@ -8002,6 +8629,48 @@ pattern Placement_VpaidAdapterChoice_Both = Placement_VpaidAdapterChoice "BOTH"
   Placement_VpaidAdapterChoice_HTML5,
   Placement_VpaidAdapterChoice_Both,
   Placement_VpaidAdapterChoice
+  #-}
+
+-- | Whether this placement group is active, inactive, archived or permanently archived.
+newtype PlacementGroup_ActiveStatus = PlacementGroup_ActiveStatus {fromPlacementGroup_ActiveStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementGroup_ActiveStatus
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_UNKNOWN"
+
+-- |
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementGroup_ActiveStatus
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_ACTIVE"
+
+-- |
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementGroup_ActiveStatus
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_INACTIVE"
+
+-- |
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementGroup_ActiveStatus
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_ARCHIVED"
+
+-- |
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementGroup_ActiveStatus
+pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
+
+{-# COMPLETE
+  PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN,
+  PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE,
+  PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE,
+  PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED,
+  PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
+  PlacementGroup_ActiveStatus
   #-}
 
 -- | Type of this placement group. A package is a simple group of placements that acts as a single pricing point for a group of tags. A roadblock is a group of placements that not only acts as a single pricing point, but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned placements to be marked as primary for reporting. This field is required on insertion.
@@ -9768,6 +10437,38 @@ pattern UserRolePermission_Availability_USERPROFILEONLY = UserRolePermission_Ava
   UserRolePermission_Availability
   #-}
 
+-- | Indicates how the filter should be matched to the values.
+newtype UvarFilter_Match = UvarFilter_Match {fromUvarFilter_Match :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern UvarFilter_Match_Unspecified :: UvarFilter_Match
+pattern UvarFilter_Match_Unspecified = UvarFilter_Match "UNSPECIFIED"
+
+-- |
+pattern UvarFilter_Match_Exact :: UvarFilter_Match
+pattern UvarFilter_Match_Exact = UvarFilter_Match "EXACT"
+
+-- |
+pattern UvarFilter_Match_Contains :: UvarFilter_Match
+pattern UvarFilter_Match_Contains = UvarFilter_Match "CONTAINS"
+
+{-# COMPLETE
+  UvarFilter_Match_Unspecified,
+  UvarFilter_Match_Exact,
+  UvarFilter_Match_Contains,
+  UvarFilter_Match
+  #-}
+
 -- | File type of the video format.
 newtype VideoFormat_FileType = VideoFormat_FileType {fromVideoFormat_FileType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -10282,6 +10983,92 @@ pattern AdvertisersListStatus_ONHOLD = AdvertisersListStatus "ON_HOLD"
   AdvertisersListStatus
   #-}
 
+-- | Field by which to sort the list.
+newtype BillingProfilesListSortField = BillingProfilesListSortField {fromBillingProfilesListSortField :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingProfilesListSortField_ID :: BillingProfilesListSortField
+pattern BillingProfilesListSortField_ID = BillingProfilesListSortField "ID"
+
+-- |
+pattern BillingProfilesListSortField_Name :: BillingProfilesListSortField
+pattern BillingProfilesListSortField_Name = BillingProfilesListSortField "NAME"
+
+{-# COMPLETE
+  BillingProfilesListSortField_ID,
+  BillingProfilesListSortField_Name,
+  BillingProfilesListSortField
+  #-}
+
+-- | Order of sorted results.
+newtype BillingProfilesListSortOrder = BillingProfilesListSortOrder {fromBillingProfilesListSortOrder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingProfilesListSortOrder_Ascending :: BillingProfilesListSortOrder
+pattern BillingProfilesListSortOrder_Ascending = BillingProfilesListSortOrder "ASCENDING"
+
+-- |
+pattern BillingProfilesListSortOrder_Descending :: BillingProfilesListSortOrder
+pattern BillingProfilesListSortOrder_Descending = BillingProfilesListSortOrder "DESCENDING"
+
+{-# COMPLETE
+  BillingProfilesListSortOrder_Ascending,
+  BillingProfilesListSortOrder_Descending,
+  BillingProfilesListSortOrder
+  #-}
+
+-- | Select only billing profile with the specified status.
+newtype BillingProfilesListStatus = BillingProfilesListStatus {fromBillingProfilesListStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern BillingProfilesListStatus_UNDERREVIEW :: BillingProfilesListStatus
+pattern BillingProfilesListStatus_UNDERREVIEW = BillingProfilesListStatus "UNDER_REVIEW"
+
+-- |
+pattern BillingProfilesListStatus_Active :: BillingProfilesListStatus
+pattern BillingProfilesListStatus_Active = BillingProfilesListStatus "ACTIVE"
+
+-- |
+pattern BillingProfilesListStatus_Archived :: BillingProfilesListStatus
+pattern BillingProfilesListStatus_Archived = BillingProfilesListStatus "ARCHIVED"
+
+{-# COMPLETE
+  BillingProfilesListStatus_UNDERREVIEW,
+  BillingProfilesListStatus_Active,
+  BillingProfilesListStatus_Archived,
+  BillingProfilesListStatus
+  #-}
+
 -- | Order of sorted results.
 newtype CampaignCreativeAssociationsListSortOrder = CampaignCreativeAssociationsListSortOrder {fromCampaignCreativeAssociationsListSortOrder :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -10638,6 +11425,10 @@ pattern ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY = ChangeLogsListObjectTyp
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK = ChangeLogsListObjectType "OBJECT_FLOODLIGHT_DV360_LINK"
 
+-- |
+pattern ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK :: ChangeLogsListObjectType
+pattern ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK = ChangeLogsListObjectType "OBJECT_ADVERTISER_CUSTOMER_LINK"
+
 {-# COMPLETE
   ChangeLogsListObjectType_OBJECTADVERTISER,
   ChangeLogsListObjectType_OBJECTFLOODLIGHTCONFIGURATION,
@@ -10679,6 +11470,7 @@ pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK = ChangeLogsListObjec
   ChangeLogsListObjectType_OBJECTTARGETINGTEMPLATE,
   ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY,
   ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK,
+  ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK,
   ChangeLogsListObjectType
   #-}
 
@@ -11662,10 +12454,50 @@ pattern MobileAppsListDirectories_APPLEAPPSTORE = MobileAppsListDirectories "APP
 pattern MobileAppsListDirectories_GOOGLEPLAYSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_GOOGLEPLAYSTORE = MobileAppsListDirectories "GOOGLE_PLAY_STORE"
 
+-- |
+pattern MobileAppsListDirectories_ROKUAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_ROKUAPPSTORE = MobileAppsListDirectories "ROKU_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_AMAZONFIRETVAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_AMAZONFIRETVAPPSTORE = MobileAppsListDirectories "AMAZON_FIRETV_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_PLAYSTATIONAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_PLAYSTATIONAPPSTORE = MobileAppsListDirectories "PLAYSTATION_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_APPLETVAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_APPLETVAPPSTORE = MobileAppsListDirectories "APPLE_TV_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_XBOXAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_XBOXAPPSTORE = MobileAppsListDirectories "XBOX_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_SAMSUNGTVAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_SAMSUNGTVAPPSTORE = MobileAppsListDirectories "SAMSUNG_TV_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_ANDROIDTVAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_ANDROIDTVAPPSTORE = MobileAppsListDirectories "ANDROID_TV_APP_STORE"
+
+-- |
+pattern MobileAppsListDirectories_GENERICCTVAPPSTORE :: MobileAppsListDirectories
+pattern MobileAppsListDirectories_GENERICCTVAPPSTORE = MobileAppsListDirectories "GENERIC_CTV_APP_STORE"
+
 {-# COMPLETE
   MobileAppsListDirectories_Unknown,
   MobileAppsListDirectories_APPLEAPPSTORE,
   MobileAppsListDirectories_GOOGLEPLAYSTORE,
+  MobileAppsListDirectories_ROKUAPPSTORE,
+  MobileAppsListDirectories_AMAZONFIRETVAPPSTORE,
+  MobileAppsListDirectories_PLAYSTATIONAPPSTORE,
+  MobileAppsListDirectories_APPLETVAPPSTORE,
+  MobileAppsListDirectories_XBOXAPPSTORE,
+  MobileAppsListDirectories_SAMSUNGTVAPPSTORE,
+  MobileAppsListDirectories_ANDROIDTVAPPSTORE,
+  MobileAppsListDirectories_GENERICCTVAPPSTORE,
   MobileAppsListDirectories
   #-}
 
@@ -11775,6 +12607,48 @@ pattern OrdersListSortOrder_Descending = OrdersListSortOrder "DESCENDING"
   OrdersListSortOrder_Ascending,
   OrdersListSortOrder_Descending,
   OrdersListSortOrder
+  #-}
+
+-- | Select only placements with these active statuses.
+newtype PlacementGroupsListActiveStatus = PlacementGroupsListActiveStatus {fromPlacementGroupsListActiveStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementGroupsListActiveStatus
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_UNKNOWN"
+
+-- |
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementGroupsListActiveStatus
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_ACTIVE"
+
+-- |
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementGroupsListActiveStatus
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_INACTIVE"
+
+-- |
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementGroupsListActiveStatus
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_ARCHIVED"
+
+-- |
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementGroupsListActiveStatus
+pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
+
+{-# COMPLETE
+  PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN,
+  PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE,
+  PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE,
+  PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED,
+  PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
+  PlacementGroupsListActiveStatus
   #-}
 
 -- | Select only placement groups belonging with this group type. A package is a simple group of placements that acts as a single pricing point for a group of tags. A roadblock is a group of placements that not only acts as a single pricing point but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned placements to be marked as primary for reporting.
@@ -12074,6 +12948,48 @@ pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREME
   PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4,
   PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT,
   PlacementsGeneratetagsTagFormats
+  #-}
+
+-- | Select only placements with these active statuses.
+newtype PlacementsListActiveStatus = PlacementsListActiveStatus {fromPlacementsListActiveStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementsListActiveStatus
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementsListActiveStatus "PLACEMENT_STATUS_UNKNOWN"
+
+-- |
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementsListActiveStatus
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE = PlacementsListActiveStatus "PLACEMENT_STATUS_ACTIVE"
+
+-- |
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementsListActiveStatus
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementsListActiveStatus "PLACEMENT_STATUS_INACTIVE"
+
+-- |
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementsListActiveStatus
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementsListActiveStatus "PLACEMENT_STATUS_ARCHIVED"
+
+-- |
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementsListActiveStatus
+pattern PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementsListActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
+
+{-# COMPLETE
+  PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN,
+  PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE,
+  PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE,
+  PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED,
+  PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED,
+  PlacementsListActiveStatus
   #-}
 
 -- | Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY/INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP/INTERSTITIAL are for rendering in mobile apps. IN/STREAM/VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
@@ -12399,11 +13315,11 @@ newtype ReportsFilesListSortOrder = ReportsFilesListSortOrder {fromReportsFilesL
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern ReportsFilesListSortOrder_Ascending :: ReportsFilesListSortOrder
 pattern ReportsFilesListSortOrder_Ascending = ReportsFilesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern ReportsFilesListSortOrder_Descending :: ReportsFilesListSortOrder
 pattern ReportsFilesListSortOrder_Descending = ReportsFilesListSortOrder "DESCENDING"
 

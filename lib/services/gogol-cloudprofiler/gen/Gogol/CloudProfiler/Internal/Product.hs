@@ -55,9 +55,9 @@ import qualified Gogol.Prelude as Core
 --
 -- /See:/ 'newCreateProfileRequest' smart constructor.
 data CreateProfileRequest = CreateProfileRequest
-  { -- | Required. Deployment details.
+  { -- | Deployment details.
     deployment :: (Core.Maybe Deployment),
-    -- | Required. One or more profile types that the agent is capable of providing.
+    -- | One or more profile types that the agent is capable of providing.
     profileType :: (Core.Maybe [CreateProfileRequest_ProfileTypeItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -95,7 +95,7 @@ data Deployment = Deployment
     labels :: (Core.Maybe Deployment_Labels),
     -- | Project ID is the ID of a cloud project. Validation regex: @^a-z{4,61}[a-z0-9]$@.
     projectId :: (Core.Maybe Core.Text),
-    -- | Target is the service name used to group related deployments: * Service name for App Engine Flex \/ Standard. * Cluster and container name for GKE. * User-specified string for direct Compute Engine profiling (e.g. Java). * Job name for Dataflow. Validation regex: @^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$@.
+    -- | Target is the service name used to group related deployments: * Service name for App Engine Flex \/ Standard. * Cluster and container name for GKE. * User-specified string for direct Compute Engine profiling (e.g. Java). * Job name for Dataflow. Validation regex: @^[a-z0-9]([-a-z0-9_.]{0,253}[a-z0-9])?$@.
     target :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

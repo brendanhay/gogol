@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
+-- Returns the specified TargetInstance resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.targetInstances.get@.
 module Gogol.Compute.TargetInstances.Get
@@ -61,7 +61,7 @@ type ComputeTargetInstancesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TargetInstance
 
--- | Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
+-- | Returns the specified TargetInstance resource.
 --
 -- /See:/ 'newComputeTargetInstancesGet' smart constructor.
 data ComputeTargetInstancesGet = ComputeTargetInstancesGet

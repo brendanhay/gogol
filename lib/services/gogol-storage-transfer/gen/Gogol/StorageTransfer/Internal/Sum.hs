@@ -174,6 +174,38 @@ module Gogol.StorageTransfer.Internal.Sum
         ..
       ),
 
+    -- * S3CompatibleMetadata_AuthMethod
+    S3CompatibleMetadata_AuthMethod
+      ( S3CompatibleMetadata_AuthMethod_AUTHMETHODUNSPECIFIED,
+        S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V4,
+        S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V2,
+        ..
+      ),
+
+    -- * S3CompatibleMetadata_ListApi
+    S3CompatibleMetadata_ListApi
+      ( S3CompatibleMetadata_ListApi_LISTAPIUNSPECIFIED,
+        S3CompatibleMetadata_ListApi_LIST_OBJECTS_V2,
+        S3CompatibleMetadata_ListApi_LISTOBJECTS,
+        ..
+      ),
+
+    -- * S3CompatibleMetadata_Protocol
+    S3CompatibleMetadata_Protocol
+      ( S3CompatibleMetadata_Protocol_NETWORKPROTOCOLUNSPECIFIED,
+        S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTPS,
+        S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTP,
+        ..
+      ),
+
+    -- * S3CompatibleMetadata_RequestModel
+    S3CompatibleMetadata_RequestModel
+      ( S3CompatibleMetadata_RequestModel_REQUESTMODELUNSPECIFIED,
+        S3CompatibleMetadata_RequestModel_REQUESTMODELVIRTUALHOSTEDSTYLE,
+        S3CompatibleMetadata_RequestModel_REQUESTMODELPATHSTYLE,
+        ..
+      ),
+
     -- * TransferJob_Status
     TransferJob_Status
       ( TransferJob_Status_STATUSUNSPECIFIED,
@@ -192,6 +224,16 @@ module Gogol.StorageTransfer.Internal.Sum
         TransferOperation_Status_Failed,
         TransferOperation_Status_Aborted,
         TransferOperation_Status_Queued,
+        TransferOperation_Status_Suspending,
+        ..
+      ),
+
+    -- * TransferOptions_OverwriteWhen
+    TransferOptions_OverwriteWhen
+      ( TransferOptions_OverwriteWhen_OVERWRITEWHENUNSPECIFIED,
+        TransferOptions_OverwriteWhen_Different,
+        TransferOptions_OverwriteWhen_Never,
+        TransferOptions_OverwriteWhen_Always,
         ..
       ),
   )
@@ -276,7 +318,7 @@ newtype ErrorSummary_ErrorCode = ErrorSummary_ErrorCode {fromErrorSummary_ErrorC
       Core.FromJSONKey
     )
 
--- | Not an error; returned on success HTTP Mapping: 200 OK
+-- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern ErrorSummary_ErrorCode_OK :: ErrorSummary_ErrorCode
 pattern ErrorSummary_ErrorCode_OK = ErrorSummary_ErrorCode "OK"
 
@@ -464,7 +506,7 @@ pattern MetadataOptions_Acl_ACLPRESERVE = MetadataOptions_Acl "ACL_PRESERVE"
   MetadataOptions_Acl
   #-}
 
--- | Specifies how each file\'s POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved.
+-- | Specifies how each file\'s POSIX group ID (GID) attribute should be handled by the transfer. By default, GID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
 newtype MetadataOptions_Gid = MetadataOptions_Gid {fromMetadataOptions_Gid :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -528,7 +570,7 @@ pattern MetadataOptions_KmsKey_KMSKEYPRESERVE = MetadataOptions_KmsKey "KMS_KEY_
   MetadataOptions_KmsKey
   #-}
 
--- | Specifies how each file\'s mode attribute should be handled by the transfer. By default, mode is not preserved.
+-- | Specifies how each file\'s mode attribute should be handled by the transfer. By default, mode is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
 newtype MetadataOptions_Mode = MetadataOptions_Mode {fromMetadataOptions_Mode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -612,7 +654,7 @@ pattern MetadataOptions_StorageClass_STORAGECLASSARCHIVE = MetadataOptions_Stora
   MetadataOptions_StorageClass
   #-}
 
--- | Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved.
+-- | Specifies how symlinks should be handled by the transfer. By default, symlinks are not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
 newtype MetadataOptions_Symlink = MetadataOptions_Symlink {fromMetadataOptions_Symlink :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -708,7 +750,7 @@ pattern MetadataOptions_TimeCreated_TIMECREATEDPRESERVEASCUSTOMTIME = MetadataOp
   MetadataOptions_TimeCreated
   #-}
 
--- | Specifies how each file\'s POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved.
+-- | Specifies how each file\'s POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
 newtype MetadataOptions_Uid = MetadataOptions_Uid {fromMetadataOptions_Uid :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -808,6 +850,134 @@ pattern NotificationConfig_PayloadFormat_Json = NotificationConfig_PayloadFormat
   NotificationConfig_PayloadFormat
   #-}
 
+-- | Specifies the authentication and authorization method used by the storage service. When not specified, Transfer Service will attempt to determine right auth method to use.
+newtype S3CompatibleMetadata_AuthMethod = S3CompatibleMetadata_AuthMethod {fromS3CompatibleMetadata_AuthMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | AuthMethod is not specified.
+pattern S3CompatibleMetadata_AuthMethod_AUTHMETHODUNSPECIFIED :: S3CompatibleMetadata_AuthMethod
+pattern S3CompatibleMetadata_AuthMethod_AUTHMETHODUNSPECIFIED = S3CompatibleMetadata_AuthMethod "AUTH_METHOD_UNSPECIFIED"
+
+-- | Auth requests with AWS SigV4.
+pattern S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V4 :: S3CompatibleMetadata_AuthMethod
+pattern S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V4 = S3CompatibleMetadata_AuthMethod "AUTH_METHOD_AWS_SIGNATURE_V4"
+
+-- | Auth requests with AWS SigV2.
+pattern S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V2 :: S3CompatibleMetadata_AuthMethod
+pattern S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V2 = S3CompatibleMetadata_AuthMethod "AUTH_METHOD_AWS_SIGNATURE_V2"
+
+{-# COMPLETE
+  S3CompatibleMetadata_AuthMethod_AUTHMETHODUNSPECIFIED,
+  S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V4,
+  S3CompatibleMetadata_AuthMethod_AUTH_METHOD_AWS_SIGNATURE_V2,
+  S3CompatibleMetadata_AuthMethod
+  #-}
+
+-- | The Listing API to use for discovering objects. When not specified, Transfer Service will attempt to determine the right API to use.
+newtype S3CompatibleMetadata_ListApi = S3CompatibleMetadata_ListApi {fromS3CompatibleMetadata_ListApi :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | ListApi is not specified.
+pattern S3CompatibleMetadata_ListApi_LISTAPIUNSPECIFIED :: S3CompatibleMetadata_ListApi
+pattern S3CompatibleMetadata_ListApi_LISTAPIUNSPECIFIED = S3CompatibleMetadata_ListApi "LIST_API_UNSPECIFIED"
+
+-- | Perform listing using ListObjectsV2 API.
+pattern S3CompatibleMetadata_ListApi_LIST_OBJECTS_V2 :: S3CompatibleMetadata_ListApi
+pattern S3CompatibleMetadata_ListApi_LIST_OBJECTS_V2 = S3CompatibleMetadata_ListApi "LIST_OBJECTS_V2"
+
+-- | Legacy ListObjects API.
+pattern S3CompatibleMetadata_ListApi_LISTOBJECTS :: S3CompatibleMetadata_ListApi
+pattern S3CompatibleMetadata_ListApi_LISTOBJECTS = S3CompatibleMetadata_ListApi "LIST_OBJECTS"
+
+{-# COMPLETE
+  S3CompatibleMetadata_ListApi_LISTAPIUNSPECIFIED,
+  S3CompatibleMetadata_ListApi_LIST_OBJECTS_V2,
+  S3CompatibleMetadata_ListApi_LISTOBJECTS,
+  S3CompatibleMetadata_ListApi
+  #-}
+
+-- | Specifies the network protocol of the agent. When not specified, the default value of NetworkProtocol NETWORK/PROTOCOL/HTTPS is used.
+newtype S3CompatibleMetadata_Protocol = S3CompatibleMetadata_Protocol {fromS3CompatibleMetadata_Protocol :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | NetworkProtocol is not specified.
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLUNSPECIFIED :: S3CompatibleMetadata_Protocol
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLUNSPECIFIED = S3CompatibleMetadata_Protocol "NETWORK_PROTOCOL_UNSPECIFIED"
+
+-- | Perform requests using HTTPS.
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTPS :: S3CompatibleMetadata_Protocol
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTPS = S3CompatibleMetadata_Protocol "NETWORK_PROTOCOL_HTTPS"
+
+-- | Not recommended: This sends data in clear-text. This is only appropriate within a closed network or for publicly available data. Perform requests using HTTP.
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTP :: S3CompatibleMetadata_Protocol
+pattern S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTP = S3CompatibleMetadata_Protocol "NETWORK_PROTOCOL_HTTP"
+
+{-# COMPLETE
+  S3CompatibleMetadata_Protocol_NETWORKPROTOCOLUNSPECIFIED,
+  S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTPS,
+  S3CompatibleMetadata_Protocol_NETWORKPROTOCOLHTTP,
+  S3CompatibleMetadata_Protocol
+  #-}
+
+-- | Specifies the API request model used to call the storage service. When not specified, the default value of RequestModel REQUEST/MODEL/VIRTUAL/HOSTED/STYLE is used.
+newtype S3CompatibleMetadata_RequestModel = S3CompatibleMetadata_RequestModel {fromS3CompatibleMetadata_RequestModel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | RequestModel is not specified.
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELUNSPECIFIED :: S3CompatibleMetadata_RequestModel
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELUNSPECIFIED = S3CompatibleMetadata_RequestModel "REQUEST_MODEL_UNSPECIFIED"
+
+-- | Perform requests using Virtual Hosted Style. Example: https:\/\/bucket-name.s3.region.amazonaws.com\/key-name
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELVIRTUALHOSTEDSTYLE :: S3CompatibleMetadata_RequestModel
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELVIRTUALHOSTEDSTYLE = S3CompatibleMetadata_RequestModel "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE"
+
+-- | Perform requests using Path Style. Example: https:\/\/s3.region.amazonaws.com\/bucket-name\/key-name
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELPATHSTYLE :: S3CompatibleMetadata_RequestModel
+pattern S3CompatibleMetadata_RequestModel_REQUESTMODELPATHSTYLE = S3CompatibleMetadata_RequestModel "REQUEST_MODEL_PATH_STYLE"
+
+{-# COMPLETE
+  S3CompatibleMetadata_RequestModel_REQUESTMODELUNSPECIFIED,
+  S3CompatibleMetadata_RequestModel_REQUESTMODELVIRTUALHOSTEDSTYLE,
+  S3CompatibleMetadata_RequestModel_REQUESTMODELPATHSTYLE,
+  S3CompatibleMetadata_RequestModel
+  #-}
+
 -- | Status of the job. This value MUST be specified for @CreateTransferJobRequests@. __Note:__ The effect of the new job status takes place during a subsequent job run. For example, if you change the job status from ENABLED to DISABLED, and an operation spawned by the transfer is running, the status change would not affect the current operation.
 newtype TransferJob_Status = TransferJob_Status {fromTransferJob_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -886,6 +1056,10 @@ pattern TransferOperation_Status_Aborted = TransferOperation_Status "ABORTED"
 pattern TransferOperation_Status_Queued :: TransferOperation_Status
 pattern TransferOperation_Status_Queued = TransferOperation_Status "QUEUED"
 
+-- | The operation is suspending and draining the ongoing work to completion.
+pattern TransferOperation_Status_Suspending :: TransferOperation_Status
+pattern TransferOperation_Status_Suspending = TransferOperation_Status "SUSPENDING"
+
 {-# COMPLETE
   TransferOperation_Status_STATUSUNSPECIFIED,
   TransferOperation_Status_INPROGRESS,
@@ -894,5 +1068,43 @@ pattern TransferOperation_Status_Queued = TransferOperation_Status "QUEUED"
   TransferOperation_Status_Failed,
   TransferOperation_Status_Aborted,
   TransferOperation_Status_Queued,
+  TransferOperation_Status_Suspending,
   TransferOperation_Status
+  #-}
+
+-- | When to overwrite objects that already exist in the sink. If not set, overwrite behavior is determined by overwrite/objects/already/existing/in_sink.
+newtype TransferOptions_OverwriteWhen = TransferOptions_OverwriteWhen {fromTransferOptions_OverwriteWhen :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Overwrite behavior is unspecified.
+pattern TransferOptions_OverwriteWhen_OVERWRITEWHENUNSPECIFIED :: TransferOptions_OverwriteWhen
+pattern TransferOptions_OverwriteWhen_OVERWRITEWHENUNSPECIFIED = TransferOptions_OverwriteWhen "OVERWRITE_WHEN_UNSPECIFIED"
+
+-- | Overwrites destination objects with the source objects, only if the objects have the same name but different HTTP ETags or checksum values.
+pattern TransferOptions_OverwriteWhen_Different :: TransferOptions_OverwriteWhen
+pattern TransferOptions_OverwriteWhen_Different = TransferOptions_OverwriteWhen "DIFFERENT"
+
+-- | Never overwrites a destination object if a source object has the same name. In this case, the source object is not transferred.
+pattern TransferOptions_OverwriteWhen_Never :: TransferOptions_OverwriteWhen
+pattern TransferOptions_OverwriteWhen_Never = TransferOptions_OverwriteWhen "NEVER"
+
+-- | Always overwrite the destination object with the source object, even if the HTTP Etags or checksum values are the same.
+pattern TransferOptions_OverwriteWhen_Always :: TransferOptions_OverwriteWhen
+pattern TransferOptions_OverwriteWhen_Always = TransferOptions_OverwriteWhen "ALWAYS"
+
+{-# COMPLETE
+  TransferOptions_OverwriteWhen_OVERWRITEWHENUNSPECIFIED,
+  TransferOptions_OverwriteWhen_Different,
+  TransferOptions_OverwriteWhen_Never,
+  TransferOptions_OverwriteWhen_Always,
+  TransferOptions_OverwriteWhen
   #-}

@@ -136,6 +136,25 @@ module Gogol.DLP.Internal.Sum
         ..
       ),
 
+    -- * GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+    GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+      ( GooglePrivacyDlpV2DataProfilePubSubMessage_Event_EVENTTYPEUNSPECIFIED,
+        GooglePrivacyDlpV2DataProfilePubSubMessage_Event_NEWPROFILE,
+        GooglePrivacyDlpV2DataProfilePubSubMessage_Event_CHANGEDPROFILE,
+        GooglePrivacyDlpV2DataProfilePubSubMessage_Event_SCOREINCREASED,
+        GooglePrivacyDlpV2DataProfilePubSubMessage_Event_ERRORCHANGED,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2DataRiskLevel_Score
+    GooglePrivacyDlpV2DataRiskLevel_Score
+      ( GooglePrivacyDlpV2DataRiskLevel_Score_RISKSCOREUNSPECIFIED,
+        GooglePrivacyDlpV2DataRiskLevel_Score_RISKLOW,
+        GooglePrivacyDlpV2DataRiskLevel_Score_RISKMODERATE,
+        GooglePrivacyDlpV2DataRiskLevel_Score_RISKHIGH,
+        ..
+      ),
+
     -- * GooglePrivacyDlpV2DateTime_DayOfWeek
     GooglePrivacyDlpV2DateTime_DayOfWeek
       ( GooglePrivacyDlpV2DateTime_DayOfWeek_DAYOFWEEKUNSPECIFIED,
@@ -146,6 +165,22 @@ module Gogol.DLP.Internal.Sum
         GooglePrivacyDlpV2DateTime_DayOfWeek_Friday,
         GooglePrivacyDlpV2DateTime_DayOfWeek_Saturday,
         GooglePrivacyDlpV2DateTime_DayOfWeek_Sunday,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+    GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+      ( GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_FILETYPEUNSPECIFIED,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_BINARYFILE,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_TEXTFILE,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Image,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Word,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Pdf,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Avro,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Csv,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Tsv,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Powerpoint,
+        GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Excel,
         ..
       ),
 
@@ -193,6 +228,76 @@ module Gogol.DLP.Internal.Sum
         GooglePrivacyDlpV2Finding_Likelihood_Possible,
         GooglePrivacyDlpV2Finding_Likelihood_Likely,
         GooglePrivacyDlpV2Finding_Likelihood_VERYLIKELY,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+    GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+      ( GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_INDUSTRYUNSPECIFIED,
+        GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Finance,
+        GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Health,
+        GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Telecommunications,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+    GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+      ( GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_LOCATIONUNSPECIFIED,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Global,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Argentina,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Australia,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Belgium,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Brazil,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Canada,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Chile,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Germany,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_HONGKONG,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_India,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Indonesia,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Ireland,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Israel,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Italy,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Japan,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Korea,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Mexico,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_NEWZEALAND,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_THENETHERLANDS,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Norway,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Paraguay,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Peru,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Poland,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Portugal,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Singapore,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_SOUTHAFRICA,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Spain,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Sweden,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Taiwan,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Thailand,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Turkey,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDKINGDOM,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDSTATES,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Uruguay,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Venezuela,
+        GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Internal,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+    GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+      ( GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_TYPEUNSPECIFIED,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Pii,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Spii,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Demographic,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Credential,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document,
+        GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION,
         ..
       ),
 
@@ -261,6 +366,57 @@ module Gogol.DLP.Internal.Sum
         ..
       ),
 
+    -- * GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+    GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+      ( GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_PROFILESCOREBUCKETUNSPECIFIED,
+        GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_High,
+        GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_MEDIUMORHIGH,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+    GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+      ( GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_PROFILESCOREBUCKETUNSPECIFIED,
+        GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_High,
+        GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_MEDIUMORHIGH,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+    GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+      ( GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_LOGICALOPERATORUNSPECIFIED,
+        GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_OR,
+        GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_And,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+    GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+      ( GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_DETAILLEVELUNSPECIFIED,
+        GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_TABLEPROFILE,
+        GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_RESOURCENAME,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2PubSubNotification_Event
+    GooglePrivacyDlpV2PubSubNotification_Event
+      ( GooglePrivacyDlpV2PubSubNotification_Event_EVENTTYPEUNSPECIFIED,
+        GooglePrivacyDlpV2PubSubNotification_Event_NEWPROFILE,
+        GooglePrivacyDlpV2PubSubNotification_Event_CHANGEDPROFILE,
+        GooglePrivacyDlpV2PubSubNotification_Event_SCOREINCREASED,
+        GooglePrivacyDlpV2PubSubNotification_Event_ERRORCHANGED,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2SensitivityScore_Score
+    GooglePrivacyDlpV2SensitivityScore_Score
+      ( GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYSCOREUNSPECIFIED,
+        GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYLOW,
+        GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYMODERATE,
+        GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYHIGH,
+        ..
+      ),
+
     -- * GooglePrivacyDlpV2StoredInfoTypeVersion_State
     GooglePrivacyDlpV2StoredInfoTypeVersion_State
       ( GooglePrivacyDlpV2StoredInfoTypeVersion_State_STOREDINFOTYPESTATEUNSPECIFIED,
@@ -279,6 +435,30 @@ module Gogol.DLP.Internal.Sum
         ..
       ),
 
+    -- * GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+    GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+      ( GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONSTATUSUNSPECIFIED,
+        GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONGOOGLEMANAGED,
+        GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONCUSTOMERMANAGED,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+    GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+      ( GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED,
+        GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYPUBLIC,
+        GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2TableDataProfile_State
+    GooglePrivacyDlpV2TableDataProfile_State
+      ( GooglePrivacyDlpV2TableDataProfile_State_STATEUNSPECIFIED,
+        GooglePrivacyDlpV2TableDataProfile_State_Running,
+        GooglePrivacyDlpV2TableDataProfile_State_Done,
+        ..
+      ),
+
     -- * GooglePrivacyDlpV2TimePartConfig_PartToExtract
     GooglePrivacyDlpV2TimePartConfig_PartToExtract
       ( GooglePrivacyDlpV2TimePartConfig_PartToExtract_TIMEPARTUNSPECIFIED,
@@ -288,6 +468,45 @@ module Gogol.DLP.Internal.Sum
         GooglePrivacyDlpV2TimePartConfig_PartToExtract_DAYOFWEEK,
         GooglePrivacyDlpV2TimePartConfig_PartToExtract_WEEKOFYEAR,
         GooglePrivacyDlpV2TimePartConfig_PartToExtract_HOUROFDAY,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2TransformationDescription_Type
+    GooglePrivacyDlpV2TransformationDescription_Type
+      ( GooglePrivacyDlpV2TransformationDescription_Type_TRANSFORMATIONTYPEUNSPECIFIED,
+        GooglePrivacyDlpV2TransformationDescription_Type_RECORDSUPPRESSION,
+        GooglePrivacyDlpV2TransformationDescription_Type_REPLACEVALUE,
+        GooglePrivacyDlpV2TransformationDescription_Type_REPLACEDICTIONARY,
+        GooglePrivacyDlpV2TransformationDescription_Type_Redact,
+        GooglePrivacyDlpV2TransformationDescription_Type_CHARACTERMASK,
+        GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOREPLACEFFXFPE,
+        GooglePrivacyDlpV2TransformationDescription_Type_FIXEDSIZEBUCKETING,
+        GooglePrivacyDlpV2TransformationDescription_Type_Bucketing,
+        GooglePrivacyDlpV2TransformationDescription_Type_REPLACEWITHINFOTYPE,
+        GooglePrivacyDlpV2TransformationDescription_Type_TIMEPART,
+        GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOHASH,
+        GooglePrivacyDlpV2TransformationDescription_Type_DATESHIFT,
+        GooglePrivacyDlpV2TransformationDescription_Type_CRYPTODETERMINISTICCONFIG,
+        GooglePrivacyDlpV2TransformationDescription_Type_REDACTIMAGE,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2TransformationLocation_ContainerType
+    GooglePrivacyDlpV2TransformationLocation_ContainerType
+      ( GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMUNKNOWNCONTAINER,
+        GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMBODY,
+        GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMMETADATA,
+        GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMTABLE,
+        ..
+      ),
+
+    -- * GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+    GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+      ( GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_STATETYPEUNSPECIFIED,
+        GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_INVALIDTRANSFORM,
+        GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_BIGQUERYMAXROWSIZEEXCEEDED,
+        GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_METADATAUNRETRIEVABLE,
+        GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_Success,
         ..
       ),
 
@@ -463,11 +682,11 @@ pattern GooglePrivacyDlpV2ByteContentItem_Type_WORDDOCUMENT = GooglePrivacyDlpV2
 pattern GooglePrivacyDlpV2ByteContentItem_Type_Pdf :: GooglePrivacyDlpV2ByteContentItem_Type
 pattern GooglePrivacyDlpV2ByteContentItem_Type_Pdf = GooglePrivacyDlpV2ByteContentItem_Type "PDF"
 
--- | powerpoint
+-- | pptx, pptm, potx, potm, pot
 pattern GooglePrivacyDlpV2ByteContentItem_Type_POWERPOINTDOCUMENT :: GooglePrivacyDlpV2ByteContentItem_Type
 pattern GooglePrivacyDlpV2ByteContentItem_Type_POWERPOINTDOCUMENT = GooglePrivacyDlpV2ByteContentItem_Type "POWERPOINT_DOCUMENT"
 
--- | excel
+-- | xlsx, xlsm, xltx, xltm
 pattern GooglePrivacyDlpV2ByteContentItem_Type_EXCELDOCUMENT :: GooglePrivacyDlpV2ByteContentItem_Type
 pattern GooglePrivacyDlpV2ByteContentItem_Type_EXCELDOCUMENT = GooglePrivacyDlpV2ByteContentItem_Type "EXCEL_DOCUMENT"
 
@@ -793,23 +1012,23 @@ newtype GooglePrivacyDlpV2CustomInfoType_Likelihood = GooglePrivacyDlpV2CustomIn
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_LIKELIHOODUNSPECIFIED :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_LIKELIHOODUNSPECIFIED = GooglePrivacyDlpV2CustomInfoType_Likelihood "LIKELIHOOD_UNSPECIFIED"
 
--- | Few matching elements.
+-- | Highest chance of a false positive.
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYUNLIKELY :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYUNLIKELY = GooglePrivacyDlpV2CustomInfoType_Likelihood "VERY_UNLIKELY"
 
--- |
+-- | High chance of a false positive.
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Unlikely :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Unlikely = GooglePrivacyDlpV2CustomInfoType_Likelihood "UNLIKELY"
 
--- | Some matching elements.
+-- | Some matching signals. The default value.
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Possible :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Possible = GooglePrivacyDlpV2CustomInfoType_Likelihood "POSSIBLE"
 
--- |
+-- | Low chance of a false positive.
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Likely :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_Likely = GooglePrivacyDlpV2CustomInfoType_Likelihood "LIKELY"
 
--- | Many matching elements.
+-- | Confidence level is high. Lowest chance of a false positive.
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYLIKELY :: GooglePrivacyDlpV2CustomInfoType_Likelihood
 pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYLIKELY = GooglePrivacyDlpV2CustomInfoType_Likelihood "VERY_LIKELY"
 
@@ -821,6 +1040,85 @@ pattern GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYLIKELY = GooglePrivacyDl
   GooglePrivacyDlpV2CustomInfoType_Likelihood_Likely,
   GooglePrivacyDlpV2CustomInfoType_Likelihood_VERYLIKELY,
   GooglePrivacyDlpV2CustomInfoType_Likelihood
+  #-}
+
+-- | The event that caused the Pub\/Sub message to be sent.
+newtype GooglePrivacyDlpV2DataProfilePubSubMessage_Event = GooglePrivacyDlpV2DataProfilePubSubMessage_Event {fromGooglePrivacyDlpV2DataProfilePubSubMessage_Event :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_EVENTTYPEUNSPECIFIED :: GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_EVENTTYPEUNSPECIFIED = GooglePrivacyDlpV2DataProfilePubSubMessage_Event "EVENT_TYPE_UNSPECIFIED"
+
+-- | New profile (not a re-profile).
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_NEWPROFILE :: GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_NEWPROFILE = GooglePrivacyDlpV2DataProfilePubSubMessage_Event "NEW_PROFILE"
+
+-- | Changed one of the following profile metrics: * Table data risk score * Table sensitivity score * Table resource visibility * Table encryption type * Table predicted infoTypes * Table other infoTypes
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_CHANGEDPROFILE :: GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_CHANGEDPROFILE = GooglePrivacyDlpV2DataProfilePubSubMessage_Event "CHANGED_PROFILE"
+
+-- | Table data risk score or sensitivity score increased.
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_SCOREINCREASED :: GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_SCOREINCREASED = GooglePrivacyDlpV2DataProfilePubSubMessage_Event "SCORE_INCREASED"
+
+-- | A user (non-internal) error occurred.
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_ERRORCHANGED :: GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+pattern GooglePrivacyDlpV2DataProfilePubSubMessage_Event_ERRORCHANGED = GooglePrivacyDlpV2DataProfilePubSubMessage_Event "ERROR_CHANGED"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event_EVENTTYPEUNSPECIFIED,
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event_NEWPROFILE,
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event_CHANGEDPROFILE,
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event_SCOREINCREASED,
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event_ERRORCHANGED,
+  GooglePrivacyDlpV2DataProfilePubSubMessage_Event
+  #-}
+
+-- | The score applied to the resource.
+newtype GooglePrivacyDlpV2DataRiskLevel_Score = GooglePrivacyDlpV2DataRiskLevel_Score {fromGooglePrivacyDlpV2DataRiskLevel_Score :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKSCOREUNSPECIFIED :: GooglePrivacyDlpV2DataRiskLevel_Score
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKSCOREUNSPECIFIED = GooglePrivacyDlpV2DataRiskLevel_Score "RISK_SCORE_UNSPECIFIED"
+
+-- | Low risk - Lower indication of sensitive data that appears to have additional access restrictions in place or no indication of sensitive data found.
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKLOW :: GooglePrivacyDlpV2DataRiskLevel_Score
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKLOW = GooglePrivacyDlpV2DataRiskLevel_Score "RISK_LOW"
+
+-- | Medium risk - Sensitive data may be present but additional access or fine grain access restrictions appear to be present. Consider limiting access even further or transform data to mask.
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKMODERATE :: GooglePrivacyDlpV2DataRiskLevel_Score
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKMODERATE = GooglePrivacyDlpV2DataRiskLevel_Score "RISK_MODERATE"
+
+-- | High risk – SPII may be present. Access controls may include public ACLs. Exfiltration of data may lead to user data loss. Re-identification of users may be possible. Consider limiting usage and or removing SPII.
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKHIGH :: GooglePrivacyDlpV2DataRiskLevel_Score
+pattern GooglePrivacyDlpV2DataRiskLevel_Score_RISKHIGH = GooglePrivacyDlpV2DataRiskLevel_Score "RISK_HIGH"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2DataRiskLevel_Score_RISKSCOREUNSPECIFIED,
+  GooglePrivacyDlpV2DataRiskLevel_Score_RISKLOW,
+  GooglePrivacyDlpV2DataRiskLevel_Score_RISKMODERATE,
+  GooglePrivacyDlpV2DataRiskLevel_Score_RISKHIGH,
+  GooglePrivacyDlpV2DataRiskLevel_Score
   #-}
 
 -- | Day of week
@@ -880,6 +1178,77 @@ pattern GooglePrivacyDlpV2DateTime_DayOfWeek_Sunday = GooglePrivacyDlpV2DateTime
   GooglePrivacyDlpV2DateTime_DayOfWeek
   #-}
 
+newtype GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem {fromGooglePrivacyDlpV2Deidentify_FileTypesToTransformItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Includes all files.
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_FILETYPEUNSPECIFIED :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_FILETYPEUNSPECIFIED = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "FILE_TYPE_UNSPECIFIED"
+
+-- | Includes all file extensions not covered by another entry. Binary scanning attempts to convert the content of the file to utf_8 to scan the file. If you wish to avoid this fall back, specify one or more of the other FileType\'s in your storage scan.
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_BINARYFILE :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_BINARYFILE = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "BINARY_FILE"
+
+-- | Included file extensions: asc,asp, aspx, brf, c, cc,cfm, cgi, cpp, csv, cxx, c++, cs, css, dart, dat, dot, eml,, epbub, ged, go, h, hh, hpp, hxx, h++, hs, html, htm, mkd, markdown, m, ml, mli, perl, pl, plist, pm, php, phtml, pht, properties, py, pyw, rb, rbw, rs, rss, rc, scala, sh, sql, swift, tex, shtml, shtm, xhtml, lhs, ics, ini, java, js, json, kix, kml, ocaml, md, txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml, xsl, xsd, yml, yaml.
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_TEXTFILE :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_TEXTFILE = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "TEXT_FILE"
+
+-- | Included file extensions: bmp, gif, jpg, jpeg, jpe, png. bytes/limit/per_file has no effect on image files. Image inspection is restricted to \'global\', \'us\', \'asia\', and \'europe\'.
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Image :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Image = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "IMAGE"
+
+-- | Word files >30 MB will be scanned as binary files. Included file extensions: docx, dotx, docm, dotm
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Word :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Word = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "WORD"
+
+-- | PDF files >30 MB will be scanned as binary files. Included file extensions: pdf
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Pdf :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Pdf = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "PDF"
+
+-- | Included file extensions: avro
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Avro :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Avro = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "AVRO"
+
+-- | Included file extensions: csv
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Csv :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Csv = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "CSV"
+
+-- | Included file extensions: tsv
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Tsv :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Tsv = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "TSV"
+
+-- | Powerpoint files >30 MB will be scanned as binary files. Included file extensions: pptx, pptm, potx, potm, pot
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Powerpoint :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Powerpoint = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "POWERPOINT"
+
+-- | Excel files >30 MB will be scanned as binary files. Included file extensions: xlsx, xlsm, xltx, xltm
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Excel :: GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+pattern GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Excel = GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem "EXCEL"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_FILETYPEUNSPECIFIED,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_BINARYFILE,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_TEXTFILE,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Image,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Word,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Pdf,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Avro,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Csv,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Tsv,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Powerpoint,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem_Excel,
+  GooglePrivacyDlpV2Deidentify_FileTypesToTransformItem
+  #-}
+
 -- | State of a job.
 newtype GooglePrivacyDlpV2DlpJob_State = GooglePrivacyDlpV2DlpJob_State {fromGooglePrivacyDlpV2DlpJob_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -909,7 +1278,7 @@ pattern GooglePrivacyDlpV2DlpJob_State_Running = GooglePrivacyDlpV2DlpJob_State 
 pattern GooglePrivacyDlpV2DlpJob_State_Done :: GooglePrivacyDlpV2DlpJob_State
 pattern GooglePrivacyDlpV2DlpJob_State_Done = GooglePrivacyDlpV2DlpJob_State "DONE"
 
--- | The job was canceled before it could complete.
+-- | The job was canceled before it could be completed.
 pattern GooglePrivacyDlpV2DlpJob_State_Canceled :: GooglePrivacyDlpV2DlpJob_State
 pattern GooglePrivacyDlpV2DlpJob_State_Canceled = GooglePrivacyDlpV2DlpJob_State "CANCELED"
 
@@ -917,7 +1286,7 @@ pattern GooglePrivacyDlpV2DlpJob_State_Canceled = GooglePrivacyDlpV2DlpJob_State
 pattern GooglePrivacyDlpV2DlpJob_State_Failed :: GooglePrivacyDlpV2DlpJob_State
 pattern GooglePrivacyDlpV2DlpJob_State_Failed = GooglePrivacyDlpV2DlpJob_State "FAILED"
 
--- | The job is currently accepting findings via hybridInspect. A hybrid job in ACTIVE state may continue to have findings added to it through calling of hybridInspect. After the job has finished no more calls to hybridInspect may be made. ACTIVE jobs can transition to DONE.
+-- | The job is currently accepting findings via hybridInspect. A hybrid job in ACTIVE state may continue to have findings added to it through the calling of hybridInspect. After the job has finished no more calls to hybridInspect may be made. ACTIVE jobs can transition to DONE.
 pattern GooglePrivacyDlpV2DlpJob_State_Active :: GooglePrivacyDlpV2DlpJob_State
 pattern GooglePrivacyDlpV2DlpJob_State_Active = GooglePrivacyDlpV2DlpJob_State "ACTIVE"
 
@@ -1045,23 +1414,23 @@ newtype GooglePrivacyDlpV2Finding_Likelihood = GooglePrivacyDlpV2Finding_Likelih
 pattern GooglePrivacyDlpV2Finding_Likelihood_LIKELIHOODUNSPECIFIED :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_LIKELIHOODUNSPECIFIED = GooglePrivacyDlpV2Finding_Likelihood "LIKELIHOOD_UNSPECIFIED"
 
--- | Few matching elements.
+-- | Highest chance of a false positive.
 pattern GooglePrivacyDlpV2Finding_Likelihood_VERYUNLIKELY :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_VERYUNLIKELY = GooglePrivacyDlpV2Finding_Likelihood "VERY_UNLIKELY"
 
--- |
+-- | High chance of a false positive.
 pattern GooglePrivacyDlpV2Finding_Likelihood_Unlikely :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_Unlikely = GooglePrivacyDlpV2Finding_Likelihood "UNLIKELY"
 
--- | Some matching elements.
+-- | Some matching signals. The default value.
 pattern GooglePrivacyDlpV2Finding_Likelihood_Possible :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_Possible = GooglePrivacyDlpV2Finding_Likelihood "POSSIBLE"
 
--- |
+-- | Low chance of a false positive.
 pattern GooglePrivacyDlpV2Finding_Likelihood_Likely :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_Likely = GooglePrivacyDlpV2Finding_Likelihood "LIKELY"
 
--- | Many matching elements.
+-- | Confidence level is high. Lowest chance of a false positive.
 pattern GooglePrivacyDlpV2Finding_Likelihood_VERYLIKELY :: GooglePrivacyDlpV2Finding_Likelihood
 pattern GooglePrivacyDlpV2Finding_Likelihood_VERYLIKELY = GooglePrivacyDlpV2Finding_Likelihood "VERY_LIKELY"
 
@@ -1073,6 +1442,332 @@ pattern GooglePrivacyDlpV2Finding_Likelihood_VERYLIKELY = GooglePrivacyDlpV2Find
   GooglePrivacyDlpV2Finding_Likelihood_Likely,
   GooglePrivacyDlpV2Finding_Likelihood_VERYLIKELY,
   GooglePrivacyDlpV2Finding_Likelihood
+  #-}
+
+-- | The group of relevant businesses where this infoType is commonly used
+newtype GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory = GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory {fromGooglePrivacyDlpV2InfoTypeCategory_IndustryCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused industry
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_INDUSTRYUNSPECIFIED :: GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_INDUSTRYUNSPECIFIED = GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory "INDUSTRY_UNSPECIFIED"
+
+-- | The infoType is typically used in the finance industry.
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Finance :: GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Finance = GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory "FINANCE"
+
+-- | The infoType is typically used in the health industry.
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Health :: GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Health = GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory "HEALTH"
+
+-- | The infoType is typically used in the telecommunications industry.
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Telecommunications :: GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Telecommunications = GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory "TELECOMMUNICATIONS"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_INDUSTRYUNSPECIFIED,
+  GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Finance,
+  GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Health,
+  GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory_Telecommunications,
+  GooglePrivacyDlpV2InfoTypeCategory_IndustryCategory
+  #-}
+
+-- | The region or country that issued the ID or document represented by the infoType.
+newtype GooglePrivacyDlpV2InfoTypeCategory_LocationCategory = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory {fromGooglePrivacyDlpV2InfoTypeCategory_LocationCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused location
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_LOCATIONUNSPECIFIED :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_LOCATIONUNSPECIFIED = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "LOCATION_UNSPECIFIED"
+
+-- | The infoType is not issued by or tied to a specific region, but is used almost everywhere.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Global :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Global = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "GLOBAL"
+
+-- | The infoType is typically used in Argentina.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Argentina :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Argentina = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "ARGENTINA"
+
+-- | The infoType is typically used in Australia.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Australia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Australia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "AUSTRALIA"
+
+-- | The infoType is typically used in Belgium.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Belgium :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Belgium = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "BELGIUM"
+
+-- | The infoType is typically used in Brazil.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Brazil :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Brazil = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "BRAZIL"
+
+-- | The infoType is typically used in Canada.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Canada :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Canada = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CANADA"
+
+-- | The infoType is typically used in Chile.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Chile :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Chile = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CHILE"
+
+-- | The infoType is typically used in China.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CHINA"
+
+-- | The infoType is typically used in Colombia.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "COLOMBIA"
+
+-- | The infoType is typically used in Croatia.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "CROATIA"
+
+-- | The infoType is typically used in Denmark.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "DENMARK"
+
+-- | The infoType is typically used in France.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "FRANCE"
+
+-- | The infoType is typically used in Finland.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "FINLAND"
+
+-- | The infoType is typically used in Germany.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Germany :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Germany = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "GERMANY"
+
+-- | The infoType is typically used in Hong Kong.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_HONGKONG :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_HONGKONG = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "HONG_KONG"
+
+-- | The infoType is typically used in India.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_India :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_India = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "INDIA"
+
+-- | The infoType is typically used in Indonesia.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Indonesia :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Indonesia = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "INDONESIA"
+
+-- | The infoType is typically used in Ireland.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Ireland :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Ireland = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "IRELAND"
+
+-- | The infoType is typically used in Israel.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Israel :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Israel = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "ISRAEL"
+
+-- | The infoType is typically used in Italy.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Italy :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Italy = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "ITALY"
+
+-- | The infoType is typically used in Japan.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Japan :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Japan = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "JAPAN"
+
+-- | The infoType is typically used in Korea.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Korea :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Korea = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "KOREA"
+
+-- | The infoType is typically used in Mexico.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Mexico :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Mexico = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "MEXICO"
+
+-- | The infoType is typically used in New Zealand.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_NEWZEALAND :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_NEWZEALAND = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "NEW_ZEALAND"
+
+-- | The infoType is typically used in the Netherlands.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_THENETHERLANDS :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_THENETHERLANDS = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "THE_NETHERLANDS"
+
+-- | The infoType is typically used in Norway.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Norway :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Norway = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "NORWAY"
+
+-- | The infoType is typically used in Paraguay.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Paraguay :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Paraguay = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "PARAGUAY"
+
+-- | The infoType is typically used in Peru.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Peru :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Peru = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "PERU"
+
+-- | The infoType is typically used in Poland.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Poland :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Poland = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "POLAND"
+
+-- | The infoType is typically used in Portugal.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Portugal :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Portugal = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "PORTUGAL"
+
+-- | The infoType is typically used in Singapore.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Singapore :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Singapore = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "SINGAPORE"
+
+-- | The infoType is typically used in South Africa.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_SOUTHAFRICA :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_SOUTHAFRICA = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "SOUTH_AFRICA"
+
+-- | The infoType is typically used in Spain.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Spain :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Spain = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "SPAIN"
+
+-- | The infoType is typically used in Sweden.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Sweden :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Sweden = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "SWEDEN"
+
+-- | The infoType is typically used in Taiwan.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Taiwan :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Taiwan = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "TAIWAN"
+
+-- | The infoType is typically used in Thailand.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Thailand :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Thailand = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "THAILAND"
+
+-- | The infoType is typically used in Turkey.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Turkey :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Turkey = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "TURKEY"
+
+-- | The infoType is typically used in the United Kingdom.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDKINGDOM :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDKINGDOM = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "UNITED_KINGDOM"
+
+-- | The infoType is typically used in the United States.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDSTATES :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDSTATES = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "UNITED_STATES"
+
+-- | The infoType is typically used in Uruguay.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Uruguay :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Uruguay = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "URUGUAY"
+
+-- | The infoType is typically used in Venezuela.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Venezuela :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Venezuela = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "VENEZUELA"
+
+-- | The infoType is typically used in Google internally.
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Internal :: GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Internal = GooglePrivacyDlpV2InfoTypeCategory_LocationCategory "INTERNAL"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_LOCATIONUNSPECIFIED,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Global,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Argentina,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Australia,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Belgium,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Brazil,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Canada,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Chile,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_China,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Colombia,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Croatia,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Denmark,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_France,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Finland,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Germany,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_HONGKONG,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_India,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Indonesia,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Ireland,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Israel,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Italy,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Japan,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Korea,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Mexico,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_NEWZEALAND,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_THENETHERLANDS,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Norway,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Paraguay,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Peru,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Poland,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Portugal,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Singapore,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_SOUTHAFRICA,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Spain,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Sweden,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Taiwan,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Thailand,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Turkey,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDKINGDOM,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_UNITEDSTATES,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Uruguay,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Venezuela,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory_Internal,
+  GooglePrivacyDlpV2InfoTypeCategory_LocationCategory
+  #-}
+
+-- | The class of identifiers where this infoType belongs
+newtype GooglePrivacyDlpV2InfoTypeCategory_TypeCategory = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory {fromGooglePrivacyDlpV2InfoTypeCategory_TypeCategory :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused type
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_TYPEUNSPECIFIED :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_TYPEUNSPECIFIED = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "TYPE_UNSPECIFIED"
+
+-- | Personally identifiable information, for example, a name or phone number
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Pii :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Pii = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "PII"
+
+-- | Personally identifiable information that is especially sensitive, for example, a passport number.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Spii :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Spii = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "SPII"
+
+-- | Attributes that can partially identify someone, especially in combination with other attributes, like age, height, and gender.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Demographic :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Demographic = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "DEMOGRAPHIC"
+
+-- | Confidential or secret information, for example, a password.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Credential :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Credential = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "CREDENTIAL"
+
+-- | An identification document issued by a government.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "GOVERNMENT_ID"
+
+-- | A document, for example, a resume or source code.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "DOCUMENT"
+
+-- | Information that is not sensitive on its own, but provides details about the circumstances surrounding an entity or an event.
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION :: GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
+pattern GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION = GooglePrivacyDlpV2InfoTypeCategory_TypeCategory "CONTEXTUAL_INFORMATION"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_TYPEUNSPECIFIED,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Pii,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Spii,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Demographic,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Credential,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_GOVERNMENTID,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_Document,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory_CONTEXTUALINFORMATION,
+  GooglePrivacyDlpV2InfoTypeCategory_TypeCategory
   #-}
 
 newtype GooglePrivacyDlpV2InfoTypeDescription_SupportedByItem = GooglePrivacyDlpV2InfoTypeDescription_SupportedByItem {fromGooglePrivacyDlpV2InfoTypeDescription_SupportedByItem :: Core.Text}
@@ -1154,23 +1849,23 @@ newtype GooglePrivacyDlpV2InspectConfig_MinLikelihood = GooglePrivacyDlpV2Inspec
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_LIKELIHOODUNSPECIFIED :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_LIKELIHOODUNSPECIFIED = GooglePrivacyDlpV2InspectConfig_MinLikelihood "LIKELIHOOD_UNSPECIFIED"
 
--- | Few matching elements.
+-- | Highest chance of a false positive.
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_VERYUNLIKELY :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_VERYUNLIKELY = GooglePrivacyDlpV2InspectConfig_MinLikelihood "VERY_UNLIKELY"
 
--- |
+-- | High chance of a false positive.
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Unlikely :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Unlikely = GooglePrivacyDlpV2InspectConfig_MinLikelihood "UNLIKELY"
 
--- | Some matching elements.
+-- | Some matching signals. The default value.
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Possible :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Possible = GooglePrivacyDlpV2InspectConfig_MinLikelihood "POSSIBLE"
 
--- |
+-- | Low chance of a false positive.
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Likely :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_Likely = GooglePrivacyDlpV2InspectConfig_MinLikelihood "LIKELY"
 
--- | Many matching elements.
+-- | Confidence level is high. Lowest chance of a false positive.
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_VERYLIKELY :: GooglePrivacyDlpV2InspectConfig_MinLikelihood
 pattern GooglePrivacyDlpV2InspectConfig_MinLikelihood_VERYLIKELY = GooglePrivacyDlpV2InspectConfig_MinLikelihood "VERY_LIKELY"
 
@@ -1238,23 +1933,23 @@ newtype GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood = GooglePrivacyDl
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_LIKELIHOODUNSPECIFIED :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_LIKELIHOODUNSPECIFIED = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "LIKELIHOOD_UNSPECIFIED"
 
--- | Few matching elements.
+-- | Highest chance of a false positive.
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_VERYUNLIKELY :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_VERYUNLIKELY = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "VERY_UNLIKELY"
 
--- |
+-- | High chance of a false positive.
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Unlikely :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Unlikely = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "UNLIKELY"
 
--- | Some matching elements.
+-- | Some matching signals. The default value.
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Possible :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Possible = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "POSSIBLE"
 
--- |
+-- | Low chance of a false positive.
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Likely :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_Likely = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "LIKELY"
 
--- | Many matching elements.
+-- | Confidence level is high. Lowest chance of a false positive.
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_VERYLIKELY :: GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
 pattern GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood_VERYLIKELY = GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood "VERY_LIKELY"
 
@@ -1316,7 +2011,7 @@ pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_OUTPUTSCHEMAUNSPECIFI
 pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_BASICCOLUMNS :: GooglePrivacyDlpV2OutputStorageConfig_OutputSchema
 pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_BASICCOLUMNS = GooglePrivacyDlpV2OutputStorageConfig_OutputSchema "BASIC_COLUMNS"
 
--- | Schema tailored to findings from scanning Google Cloud Storage.
+-- | Schema tailored to findings from scanning Cloud Storage.
 pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_GCSCOLUMNS :: GooglePrivacyDlpV2OutputStorageConfig_OutputSchema
 pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_GCSCOLUMNS = GooglePrivacyDlpV2OutputStorageConfig_OutputSchema "GCS_COLUMNS"
 
@@ -1340,6 +2035,213 @@ pattern GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_ALLCOLUMNS = GooglePr
   GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_BIGQUERYCOLUMNS,
   GooglePrivacyDlpV2OutputStorageConfig_OutputSchema_ALLCOLUMNS,
   GooglePrivacyDlpV2OutputStorageConfig_OutputSchema
+  #-}
+
+-- | The minimum data risk score that triggers the condition.
+newtype GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore = GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore {fromGooglePrivacyDlpV2PubSubCondition_MinimumRiskScore :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_PROFILESCOREBUCKETUNSPECIFIED :: GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_PROFILESCOREBUCKETUNSPECIFIED = GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore "PROFILE_SCORE_BUCKET_UNSPECIFIED"
+
+-- | High risk\/sensitivity detected.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_High :: GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_High = GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore "HIGH"
+
+-- | Medium or high risk\/sensitivity detected.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_MEDIUMORHIGH :: GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_MEDIUMORHIGH = GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore "MEDIUM_OR_HIGH"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_PROFILESCOREBUCKETUNSPECIFIED,
+  GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_High,
+  GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore_MEDIUMORHIGH,
+  GooglePrivacyDlpV2PubSubCondition_MinimumRiskScore
+  #-}
+
+-- | The minimum sensitivity level that triggers the condition.
+newtype GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore = GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore {fromGooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_PROFILESCOREBUCKETUNSPECIFIED :: GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_PROFILESCOREBUCKETUNSPECIFIED = GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore "PROFILE_SCORE_BUCKET_UNSPECIFIED"
+
+-- | High risk\/sensitivity detected.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_High :: GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_High = GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore "HIGH"
+
+-- | Medium or high risk\/sensitivity detected.
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_MEDIUMORHIGH :: GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+pattern GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_MEDIUMORHIGH = GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore "MEDIUM_OR_HIGH"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_PROFILESCOREBUCKETUNSPECIFIED,
+  GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_High,
+  GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore_MEDIUMORHIGH,
+  GooglePrivacyDlpV2PubSubCondition_MinimumSensitivityScore
+  #-}
+
+-- | The operator to apply to the collection of conditions.
+newtype GooglePrivacyDlpV2PubSubExpressions_LogicalOperator = GooglePrivacyDlpV2PubSubExpressions_LogicalOperator {fromGooglePrivacyDlpV2PubSubExpressions_LogicalOperator :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_LOGICALOPERATORUNSPECIFIED :: GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_LOGICALOPERATORUNSPECIFIED = GooglePrivacyDlpV2PubSubExpressions_LogicalOperator "LOGICAL_OPERATOR_UNSPECIFIED"
+
+-- | Conditional OR.
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_OR :: GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_OR = GooglePrivacyDlpV2PubSubExpressions_LogicalOperator "OR"
+
+-- | Conditional AND.
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_And :: GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+pattern GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_And = GooglePrivacyDlpV2PubSubExpressions_LogicalOperator "AND"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_LOGICALOPERATORUNSPECIFIED,
+  GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_OR,
+  GooglePrivacyDlpV2PubSubExpressions_LogicalOperator_And,
+  GooglePrivacyDlpV2PubSubExpressions_LogicalOperator
+  #-}
+
+-- | How much data to include in the Pub\/Sub message. If the user wishes to limit the size of the message, they can use resource_name and fetch the profile fields they wish to. Per table profile (not per column).
+newtype GooglePrivacyDlpV2PubSubNotification_DetailOfMessage = GooglePrivacyDlpV2PubSubNotification_DetailOfMessage {fromGooglePrivacyDlpV2PubSubNotification_DetailOfMessage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_DETAILLEVELUNSPECIFIED :: GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_DETAILLEVELUNSPECIFIED = GooglePrivacyDlpV2PubSubNotification_DetailOfMessage "DETAIL_LEVEL_UNSPECIFIED"
+
+-- | The full table data profile.
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_TABLEPROFILE :: GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_TABLEPROFILE = GooglePrivacyDlpV2PubSubNotification_DetailOfMessage "TABLE_PROFILE"
+
+-- | The resource name of the table.
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_RESOURCENAME :: GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+pattern GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_RESOURCENAME = GooglePrivacyDlpV2PubSubNotification_DetailOfMessage "RESOURCE_NAME"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_DETAILLEVELUNSPECIFIED,
+  GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_TABLEPROFILE,
+  GooglePrivacyDlpV2PubSubNotification_DetailOfMessage_RESOURCENAME,
+  GooglePrivacyDlpV2PubSubNotification_DetailOfMessage
+  #-}
+
+-- | The type of event that triggers a Pub\/Sub. At most one @PubSubNotification@ per EventType is permitted.
+newtype GooglePrivacyDlpV2PubSubNotification_Event = GooglePrivacyDlpV2PubSubNotification_Event {fromGooglePrivacyDlpV2PubSubNotification_Event :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2PubSubNotification_Event_EVENTTYPEUNSPECIFIED :: GooglePrivacyDlpV2PubSubNotification_Event
+pattern GooglePrivacyDlpV2PubSubNotification_Event_EVENTTYPEUNSPECIFIED = GooglePrivacyDlpV2PubSubNotification_Event "EVENT_TYPE_UNSPECIFIED"
+
+-- | New profile (not a re-profile).
+pattern GooglePrivacyDlpV2PubSubNotification_Event_NEWPROFILE :: GooglePrivacyDlpV2PubSubNotification_Event
+pattern GooglePrivacyDlpV2PubSubNotification_Event_NEWPROFILE = GooglePrivacyDlpV2PubSubNotification_Event "NEW_PROFILE"
+
+-- | Changed one of the following profile metrics: * Table data risk score * Table sensitivity score * Table resource visibility * Table encryption type * Table predicted infoTypes * Table other infoTypes
+pattern GooglePrivacyDlpV2PubSubNotification_Event_CHANGEDPROFILE :: GooglePrivacyDlpV2PubSubNotification_Event
+pattern GooglePrivacyDlpV2PubSubNotification_Event_CHANGEDPROFILE = GooglePrivacyDlpV2PubSubNotification_Event "CHANGED_PROFILE"
+
+-- | Table data risk score or sensitivity score increased.
+pattern GooglePrivacyDlpV2PubSubNotification_Event_SCOREINCREASED :: GooglePrivacyDlpV2PubSubNotification_Event
+pattern GooglePrivacyDlpV2PubSubNotification_Event_SCOREINCREASED = GooglePrivacyDlpV2PubSubNotification_Event "SCORE_INCREASED"
+
+-- | A user (non-internal) error occurred.
+pattern GooglePrivacyDlpV2PubSubNotification_Event_ERRORCHANGED :: GooglePrivacyDlpV2PubSubNotification_Event
+pattern GooglePrivacyDlpV2PubSubNotification_Event_ERRORCHANGED = GooglePrivacyDlpV2PubSubNotification_Event "ERROR_CHANGED"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2PubSubNotification_Event_EVENTTYPEUNSPECIFIED,
+  GooglePrivacyDlpV2PubSubNotification_Event_NEWPROFILE,
+  GooglePrivacyDlpV2PubSubNotification_Event_CHANGEDPROFILE,
+  GooglePrivacyDlpV2PubSubNotification_Event_SCOREINCREASED,
+  GooglePrivacyDlpV2PubSubNotification_Event_ERRORCHANGED,
+  GooglePrivacyDlpV2PubSubNotification_Event
+  #-}
+
+-- | The score applied to the resource.
+newtype GooglePrivacyDlpV2SensitivityScore_Score = GooglePrivacyDlpV2SensitivityScore_Score {fromGooglePrivacyDlpV2SensitivityScore_Score :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYSCOREUNSPECIFIED :: GooglePrivacyDlpV2SensitivityScore_Score
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYSCOREUNSPECIFIED = GooglePrivacyDlpV2SensitivityScore_Score "SENSITIVITY_SCORE_UNSPECIFIED"
+
+-- | No sensitive information detected. Limited access.
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYLOW :: GooglePrivacyDlpV2SensitivityScore_Score
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYLOW = GooglePrivacyDlpV2SensitivityScore_Score "SENSITIVITY_LOW"
+
+-- | Medium risk - PII, potentially sensitive data, or fields with free-text data that are at higher risk of having intermittent sensitive data. Consider limiting access.
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYMODERATE :: GooglePrivacyDlpV2SensitivityScore_Score
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYMODERATE = GooglePrivacyDlpV2SensitivityScore_Score "SENSITIVITY_MODERATE"
+
+-- | High risk – SPII may be present. Exfiltration of data may lead to user data loss. Re-identification of users may be possible. Consider limiting usage and or removing SPII.
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYHIGH :: GooglePrivacyDlpV2SensitivityScore_Score
+pattern GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYHIGH = GooglePrivacyDlpV2SensitivityScore_Score "SENSITIVITY_HIGH"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYSCOREUNSPECIFIED,
+  GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYLOW,
+  GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYMODERATE,
+  GooglePrivacyDlpV2SensitivityScore_Score_SENSITIVITYHIGH,
+  GooglePrivacyDlpV2SensitivityScore_Score
   #-}
 
 -- | Stored info type version state. Read-only, updated by the system during dictionary creation.
@@ -1416,6 +2318,102 @@ pattern GooglePrivacyDlpV2SummaryResult_Code_Error' = GooglePrivacyDlpV2SummaryR
   GooglePrivacyDlpV2SummaryResult_Code
   #-}
 
+-- | How the table is encrypted.
+newtype GooglePrivacyDlpV2TableDataProfile_EncryptionStatus = GooglePrivacyDlpV2TableDataProfile_EncryptionStatus {fromGooglePrivacyDlpV2TableDataProfile_EncryptionStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONSTATUSUNSPECIFIED :: GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONSTATUSUNSPECIFIED = GooglePrivacyDlpV2TableDataProfile_EncryptionStatus "ENCRYPTION_STATUS_UNSPECIFIED"
+
+-- | Google manages server-side encryption keys on your behalf.
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONGOOGLEMANAGED :: GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONGOOGLEMANAGED = GooglePrivacyDlpV2TableDataProfile_EncryptionStatus "ENCRYPTION_GOOGLE_MANAGED"
+
+-- | Customer provides the key.
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONCUSTOMERMANAGED :: GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+pattern GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONCUSTOMERMANAGED = GooglePrivacyDlpV2TableDataProfile_EncryptionStatus "ENCRYPTION_CUSTOMER_MANAGED"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONSTATUSUNSPECIFIED,
+  GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONGOOGLEMANAGED,
+  GooglePrivacyDlpV2TableDataProfile_EncryptionStatus_ENCRYPTIONCUSTOMERMANAGED,
+  GooglePrivacyDlpV2TableDataProfile_EncryptionStatus
+  #-}
+
+-- | How broadly a resource has been shared.
+newtype GooglePrivacyDlpV2TableDataProfile_ResourceVisibility = GooglePrivacyDlpV2TableDataProfile_ResourceVisibility {fromGooglePrivacyDlpV2TableDataProfile_ResourceVisibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED :: GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED = GooglePrivacyDlpV2TableDataProfile_ResourceVisibility "RESOURCE_VISIBILITY_UNSPECIFIED"
+
+-- | Visible to any user.
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYPUBLIC :: GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYPUBLIC = GooglePrivacyDlpV2TableDataProfile_ResourceVisibility "RESOURCE_VISIBILITY_PUBLIC"
+
+-- | Visible only to specific users.
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED :: GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+pattern GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED = GooglePrivacyDlpV2TableDataProfile_ResourceVisibility "RESOURCE_VISIBILITY_RESTRICTED"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYUNSPECIFIED,
+  GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYPUBLIC,
+  GooglePrivacyDlpV2TableDataProfile_ResourceVisibility_RESOURCEVISIBILITYRESTRICTED,
+  GooglePrivacyDlpV2TableDataProfile_ResourceVisibility
+  #-}
+
+-- | State of a profile.
+newtype GooglePrivacyDlpV2TableDataProfile_State = GooglePrivacyDlpV2TableDataProfile_State {fromGooglePrivacyDlpV2TableDataProfile_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused.
+pattern GooglePrivacyDlpV2TableDataProfile_State_STATEUNSPECIFIED :: GooglePrivacyDlpV2TableDataProfile_State
+pattern GooglePrivacyDlpV2TableDataProfile_State_STATEUNSPECIFIED = GooglePrivacyDlpV2TableDataProfile_State "STATE_UNSPECIFIED"
+
+-- | The profile is currently running. Once a profile has finished it will transition to DONE.
+pattern GooglePrivacyDlpV2TableDataProfile_State_Running :: GooglePrivacyDlpV2TableDataProfile_State
+pattern GooglePrivacyDlpV2TableDataProfile_State_Running = GooglePrivacyDlpV2TableDataProfile_State "RUNNING"
+
+-- | The profile is no longer generating. If profile_status.status.code is 0, the profile succeeded, otherwise, it failed.
+pattern GooglePrivacyDlpV2TableDataProfile_State_Done :: GooglePrivacyDlpV2TableDataProfile_State
+pattern GooglePrivacyDlpV2TableDataProfile_State_Done = GooglePrivacyDlpV2TableDataProfile_State "DONE"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TableDataProfile_State_STATEUNSPECIFIED,
+  GooglePrivacyDlpV2TableDataProfile_State_Running,
+  GooglePrivacyDlpV2TableDataProfile_State_Done,
+  GooglePrivacyDlpV2TableDataProfile_State
+  #-}
+
 -- | The part of the time to keep.
 newtype GooglePrivacyDlpV2TimePartConfig_PartToExtract = GooglePrivacyDlpV2TimePartConfig_PartToExtract {fromGooglePrivacyDlpV2TimePartConfig_PartToExtract :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1466,6 +2464,177 @@ pattern GooglePrivacyDlpV2TimePartConfig_PartToExtract_HOUROFDAY = GooglePrivacy
   GooglePrivacyDlpV2TimePartConfig_PartToExtract_WEEKOFYEAR,
   GooglePrivacyDlpV2TimePartConfig_PartToExtract_HOUROFDAY,
   GooglePrivacyDlpV2TimePartConfig_PartToExtract
+  #-}
+
+-- | The transformation type.
+newtype GooglePrivacyDlpV2TransformationDescription_Type = GooglePrivacyDlpV2TransformationDescription_Type {fromGooglePrivacyDlpV2TransformationDescription_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unused
+pattern GooglePrivacyDlpV2TransformationDescription_Type_TRANSFORMATIONTYPEUNSPECIFIED :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_TRANSFORMATIONTYPEUNSPECIFIED = GooglePrivacyDlpV2TransformationDescription_Type "TRANSFORMATION_TYPE_UNSPECIFIED"
+
+-- | Record suppression
+pattern GooglePrivacyDlpV2TransformationDescription_Type_RECORDSUPPRESSION :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_RECORDSUPPRESSION = GooglePrivacyDlpV2TransformationDescription_Type "RECORD_SUPPRESSION"
+
+-- | Replace value
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEVALUE :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEVALUE = GooglePrivacyDlpV2TransformationDescription_Type "REPLACE_VALUE"
+
+-- | Replace value using a dictionary.
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEDICTIONARY :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEDICTIONARY = GooglePrivacyDlpV2TransformationDescription_Type "REPLACE_DICTIONARY"
+
+-- | Redact
+pattern GooglePrivacyDlpV2TransformationDescription_Type_Redact :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_Redact = GooglePrivacyDlpV2TransformationDescription_Type "REDACT"
+
+-- | Character mask
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CHARACTERMASK :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CHARACTERMASK = GooglePrivacyDlpV2TransformationDescription_Type "CHARACTER_MASK"
+
+-- | FFX-FPE
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOREPLACEFFXFPE :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOREPLACEFFXFPE = GooglePrivacyDlpV2TransformationDescription_Type "CRYPTO_REPLACE_FFX_FPE"
+
+-- | Fixed size bucketing
+pattern GooglePrivacyDlpV2TransformationDescription_Type_FIXEDSIZEBUCKETING :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_FIXEDSIZEBUCKETING = GooglePrivacyDlpV2TransformationDescription_Type "FIXED_SIZE_BUCKETING"
+
+-- | Bucketing
+pattern GooglePrivacyDlpV2TransformationDescription_Type_Bucketing :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_Bucketing = GooglePrivacyDlpV2TransformationDescription_Type "BUCKETING"
+
+-- | Replace with info type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEWITHINFOTYPE :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REPLACEWITHINFOTYPE = GooglePrivacyDlpV2TransformationDescription_Type "REPLACE_WITH_INFO_TYPE"
+
+-- | Time part
+pattern GooglePrivacyDlpV2TransformationDescription_Type_TIMEPART :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_TIMEPART = GooglePrivacyDlpV2TransformationDescription_Type "TIME_PART"
+
+-- | Crypto hash
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOHASH :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOHASH = GooglePrivacyDlpV2TransformationDescription_Type "CRYPTO_HASH"
+
+-- | Date shift
+pattern GooglePrivacyDlpV2TransformationDescription_Type_DATESHIFT :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_DATESHIFT = GooglePrivacyDlpV2TransformationDescription_Type "DATE_SHIFT"
+
+-- | Deterministic crypto
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTODETERMINISTICCONFIG :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_CRYPTODETERMINISTICCONFIG = GooglePrivacyDlpV2TransformationDescription_Type "CRYPTO_DETERMINISTIC_CONFIG"
+
+-- | Redact image
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REDACTIMAGE :: GooglePrivacyDlpV2TransformationDescription_Type
+pattern GooglePrivacyDlpV2TransformationDescription_Type_REDACTIMAGE = GooglePrivacyDlpV2TransformationDescription_Type "REDACT_IMAGE"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TransformationDescription_Type_TRANSFORMATIONTYPEUNSPECIFIED,
+  GooglePrivacyDlpV2TransformationDescription_Type_RECORDSUPPRESSION,
+  GooglePrivacyDlpV2TransformationDescription_Type_REPLACEVALUE,
+  GooglePrivacyDlpV2TransformationDescription_Type_REPLACEDICTIONARY,
+  GooglePrivacyDlpV2TransformationDescription_Type_Redact,
+  GooglePrivacyDlpV2TransformationDescription_Type_CHARACTERMASK,
+  GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOREPLACEFFXFPE,
+  GooglePrivacyDlpV2TransformationDescription_Type_FIXEDSIZEBUCKETING,
+  GooglePrivacyDlpV2TransformationDescription_Type_Bucketing,
+  GooglePrivacyDlpV2TransformationDescription_Type_REPLACEWITHINFOTYPE,
+  GooglePrivacyDlpV2TransformationDescription_Type_TIMEPART,
+  GooglePrivacyDlpV2TransformationDescription_Type_CRYPTOHASH,
+  GooglePrivacyDlpV2TransformationDescription_Type_DATESHIFT,
+  GooglePrivacyDlpV2TransformationDescription_Type_CRYPTODETERMINISTICCONFIG,
+  GooglePrivacyDlpV2TransformationDescription_Type_REDACTIMAGE,
+  GooglePrivacyDlpV2TransformationDescription_Type
+  #-}
+
+-- | Information about the functionality of the container where this finding occurred, if available.
+newtype GooglePrivacyDlpV2TransformationLocation_ContainerType = GooglePrivacyDlpV2TransformationLocation_ContainerType {fromGooglePrivacyDlpV2TransformationLocation_ContainerType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMUNKNOWNCONTAINER :: GooglePrivacyDlpV2TransformationLocation_ContainerType
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMUNKNOWNCONTAINER = GooglePrivacyDlpV2TransformationLocation_ContainerType "TRANSFORM_UNKNOWN_CONTAINER"
+
+-- |
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMBODY :: GooglePrivacyDlpV2TransformationLocation_ContainerType
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMBODY = GooglePrivacyDlpV2TransformationLocation_ContainerType "TRANSFORM_BODY"
+
+-- |
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMMETADATA :: GooglePrivacyDlpV2TransformationLocation_ContainerType
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMMETADATA = GooglePrivacyDlpV2TransformationLocation_ContainerType "TRANSFORM_METADATA"
+
+-- |
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMTABLE :: GooglePrivacyDlpV2TransformationLocation_ContainerType
+pattern GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMTABLE = GooglePrivacyDlpV2TransformationLocation_ContainerType "TRANSFORM_TABLE"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMUNKNOWNCONTAINER,
+  GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMBODY,
+  GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMMETADATA,
+  GooglePrivacyDlpV2TransformationLocation_ContainerType_TRANSFORMTABLE,
+  GooglePrivacyDlpV2TransformationLocation_ContainerType
+  #-}
+
+-- | Transformation result status type, this will be either SUCCESS, or it will be the reason for why the transformation was not completely successful.
+newtype GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType {fromGooglePrivacyDlpV2TransformationResultStatus_ResultStatusType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_STATETYPEUNSPECIFIED :: GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_STATETYPEUNSPECIFIED = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType "STATE_TYPE_UNSPECIFIED"
+
+-- | This will be set when a finding could not be transformed (i.e. outside user set bucket range).
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_INVALIDTRANSFORM :: GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_INVALIDTRANSFORM = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType "INVALID_TRANSFORM"
+
+-- | This will be set when a BigQuery transformation was successful but could not be stored back in BigQuery because the transformed row exceeds BigQuery\'s max row size.
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_BIGQUERYMAXROWSIZEEXCEEDED :: GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_BIGQUERYMAXROWSIZEEXCEEDED = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType "BIGQUERY_MAX_ROW_SIZE_EXCEEDED"
+
+-- | This will be set when there is a finding in the custom metadata of a file, but at the write time of the transformed file, this key \/ value pair is unretrievable.
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_METADATAUNRETRIEVABLE :: GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_METADATAUNRETRIEVABLE = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType "METADATA_UNRETRIEVABLE"
+
+-- | This will be set when the transformation and storing of it is successful.
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_Success :: GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
+pattern GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_Success = GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType "SUCCESS"
+
+{-# COMPLETE
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_STATETYPEUNSPECIFIED,
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_INVALIDTRANSFORM,
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_BIGQUERYMAXROWSIZEEXCEEDED,
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_METADATAUNRETRIEVABLE,
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType_Success,
+  GooglePrivacyDlpV2TransformationResultStatus_ResultStatusType
   #-}
 
 -- | day of week

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Pulls messages from the server. The server may return @UNAVAILABLE@ if there are too many concurrent pull requests pending for the given subscription.
+-- Pulls messages from the server.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.pull@.
 module Gogol.PubSub.Projects.Subscriptions.Pull
@@ -56,7 +56,7 @@ type PubSubProjectsSubscriptionsPullResource =
     Core.:> Core.ReqBody '[Core.JSON] PullRequest
     Core.:> Core.Post '[Core.JSON] PullResponse
 
--- | Pulls messages from the server. The server may return @UNAVAILABLE@ if there are too many concurrent pull requests pending for the given subscription.
+-- | Pulls messages from the server.
 --
 -- /See:/ 'newPubSubProjectsSubscriptionsPull' smart constructor.
 data PubSubProjectsSubscriptionsPull = PubSubProjectsSubscriptionsPull

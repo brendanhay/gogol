@@ -70,7 +70,7 @@ data FileProjectsLocationsInstancesCreate = FileProjectsLocationsInstancesCreate
     callback :: (Core.Maybe Core.Text),
     -- | Required. The name of the instance to create. The name must be unique for the specified project and location.
     instanceId :: (Core.Maybe Core.Text),
-    -- | Required. The instance\'s project and location, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to GCP zones, for example __us-west1-b__.
+    -- | Required. The instance\'s project and location, in the format @projects\/{project_id}\/locations\/{location}@. In Filestore, locations map to Google Cloud zones, for example __us-west1-b__.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Instance,
@@ -83,7 +83,7 @@ data FileProjectsLocationsInstancesCreate = FileProjectsLocationsInstancesCreate
 
 -- | Creates a value of 'FileProjectsLocationsInstancesCreate' with the minimum fields required to make a request.
 newFileProjectsLocationsInstancesCreate ::
-  -- |  Required. The instance\'s project and location, in the format @projects\/{project_id}\/locations\/{location}@. In Cloud Filestore, locations map to GCP zones, for example __us-west1-b__. See 'parent'.
+  -- |  Required. The instance\'s project and location, in the format @projects\/{project_id}\/locations\/{location}@. In Filestore, locations map to Google Cloud zones, for example __us-west1-b__. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Instance ->

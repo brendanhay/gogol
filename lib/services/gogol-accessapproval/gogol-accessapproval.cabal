@@ -52,6 +52,7 @@ library
     Gogol.AccessApproval.Folders.ApprovalRequests.Approve
     Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
     Gogol.AccessApproval.Folders.ApprovalRequests.Get
+    Gogol.AccessApproval.Folders.ApprovalRequests.Invalidate
     Gogol.AccessApproval.Folders.ApprovalRequests.List
     Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
     Gogol.AccessApproval.Folders.GetAccessApprovalSettings
@@ -60,6 +61,7 @@ library
     Gogol.AccessApproval.Organizations.ApprovalRequests.Approve
     Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
     Gogol.AccessApproval.Organizations.ApprovalRequests.Get
+    Gogol.AccessApproval.Organizations.ApprovalRequests.Invalidate
     Gogol.AccessApproval.Organizations.ApprovalRequests.List
     Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
     Gogol.AccessApproval.Organizations.GetAccessApprovalSettings
@@ -68,6 +70,7 @@ library
     Gogol.AccessApproval.Projects.ApprovalRequests.Approve
     Gogol.AccessApproval.Projects.ApprovalRequests.Dismiss
     Gogol.AccessApproval.Projects.ApprovalRequests.Get
+    Gogol.AccessApproval.Projects.ApprovalRequests.Invalidate
     Gogol.AccessApproval.Projects.ApprovalRequests.List
     Gogol.AccessApproval.Projects.DeleteAccessApprovalSettings
     Gogol.AccessApproval.Projects.GetAccessApprovalSettings
@@ -80,5 +83,5 @@ library
     Gogol.AccessApproval.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

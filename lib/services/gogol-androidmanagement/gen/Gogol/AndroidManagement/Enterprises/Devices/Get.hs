@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a device.
+-- Gets a device. Deleted devices will respond with a 404 error.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.devices.get@.
 module Gogol.AndroidManagement.Enterprises.Devices.Get
@@ -55,7 +55,7 @@ type AndroidManagementEnterprisesDevicesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Device
 
--- | Gets a device.
+-- | Gets a device. Deleted devices will respond with a 404 error.
 --
 -- /See:/ 'newAndroidManagementEnterprisesDevicesGet' smart constructor.
 data AndroidManagementEnterprisesDevicesGet = AndroidManagementEnterprisesDevicesGet

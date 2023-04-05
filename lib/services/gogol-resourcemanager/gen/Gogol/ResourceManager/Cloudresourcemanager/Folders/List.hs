@@ -73,7 +73,7 @@ data CloudresourcemanagerFoldersList = CloudresourcemanagerFoldersList
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. A pagination token returned from a previous call to @ListFolders@ that indicates where this listing should continue from.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the organization or folder whose folders are being listed. Must be of the form @folders\/{folder_id}@ or @organizations\/{org_id}@. Access to this method is controlled by checking the @resourcemanager.folders.list@ permission on the @parent@.
+    -- | Required. The name of the parent resource whose folders are being listed. Only children of this parent resource are listed; descendants are not listed. If the parent is a folder, use the value @folders\/{folder_id}@. If the parent is an organization, use the value @organizations\/{org_id}@. Access to this method is controlled by checking the @resourcemanager.folders.list@ permission on the @parent@.
     parent :: (Core.Maybe Core.Text),
     -- | Optional. Controls whether folders in the DELETE_REQUESTED state should be returned. Defaults to false.
     showDeleted :: (Core.Maybe Core.Bool),

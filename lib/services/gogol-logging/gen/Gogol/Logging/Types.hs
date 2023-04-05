@@ -41,9 +41,20 @@ module Gogol.Logging.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** BigQueryDataset
+    BigQueryDataset (..),
+    newBigQueryDataset,
+
     -- ** BigQueryOptions
     BigQueryOptions (..),
     newBigQueryOptions,
+
+    -- ** BucketMetadata
+    BucketMetadata (..),
+    newBucketMetadata,
+
+    -- ** BucketMetadata_State
+    BucketMetadata_State (..),
 
     -- ** BucketOptions
     BucketOptions (..),
@@ -72,6 +83,18 @@ module Gogol.Logging.Types
     CopyLogEntriesResponse (..),
     newCopyLogEntriesResponse,
 
+    -- ** CreateBucketRequest
+    CreateBucketRequest (..),
+    newCreateBucketRequest,
+
+    -- ** CreateLinkRequest
+    CreateLinkRequest (..),
+    newCreateLinkRequest,
+
+    -- ** DeleteLinkRequest
+    DeleteLinkRequest (..),
+    newDeleteLinkRequest,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -88,6 +111,13 @@ module Gogol.Logging.Types
     HttpRequest (..),
     newHttpRequest,
 
+    -- ** IndexConfig
+    IndexConfig (..),
+    newIndexConfig,
+
+    -- ** IndexConfig_Type
+    IndexConfig_Type (..),
+
     -- ** LabelDescriptor
     LabelDescriptor (..),
     newLabelDescriptor,
@@ -99,6 +129,20 @@ module Gogol.Logging.Types
     Linear (..),
     newLinear,
 
+    -- ** Link
+    Link (..),
+    newLink,
+
+    -- ** Link_LifecycleState
+    Link_LifecycleState (..),
+
+    -- ** LinkMetadata
+    LinkMetadata (..),
+    newLinkMetadata,
+
+    -- ** LinkMetadata_State
+    LinkMetadata_State (..),
+
     -- ** ListBucketsResponse
     ListBucketsResponse (..),
     newListBucketsResponse,
@@ -106,6 +150,10 @@ module Gogol.Logging.Types
     -- ** ListExclusionsResponse
     ListExclusionsResponse (..),
     newListExclusionsResponse,
+
+    -- ** ListLinksResponse
+    ListLinksResponse (..),
+    newListLinksResponse,
 
     -- ** ListLocationsResponse
     ListLocationsResponse (..),
@@ -154,6 +202,10 @@ module Gogol.Logging.Types
     -- ** Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- ** LocationMetadata
+    LocationMetadata (..),
+    newLocationMetadata,
 
     -- ** LogBucket
     LogBucket (..),
@@ -327,6 +379,10 @@ module Gogol.Logging.Types
     -- ** UndeleteBucketRequest
     UndeleteBucketRequest (..),
     newUndeleteBucketRequest,
+
+    -- ** UpdateBucketRequest
+    UpdateBucketRequest (..),
+    newUpdateBucketRequest,
 
     -- ** WriteLogEntriesRequest
     WriteLogEntriesRequest (..),

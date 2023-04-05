@@ -54,6 +54,7 @@ type DataflowProjectsJobsListResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" ProjectsJobsListFilter
     Core.:> Core.QueryParam "location" Core.Text
+    Core.:> Core.QueryParam "name" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -76,6 +77,8 @@ data DataflowProjectsJobsList = DataflowProjectsJobsList
     filter :: (Core.Maybe ProjectsJobsListFilter),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains this job.
     location :: (Core.Maybe Core.Text),
+    -- | Optional. The job name. Optional.
+    name :: (Core.Maybe Core.Text),
     -- | If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Set this to the \'next/page/token\' field of a previous response to request additional results in a long list.
@@ -103,6 +106,7 @@ newDataflowProjectsJobsList projectId =
       callback = Core.Nothing,
       filter = Core.Nothing,
       location = Core.Nothing,
+      name = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       projectId = projectId,
@@ -128,6 +132,7 @@ instance Core.GoogleRequest DataflowProjectsJobsList where
       callback
       filter
       location
+      name
       pageSize
       pageToken
       uploadType

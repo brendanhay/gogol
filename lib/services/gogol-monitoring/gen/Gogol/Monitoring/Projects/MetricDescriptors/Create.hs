@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new metric descriptor. The creation is executed asynchronously and callers may check the returned operation to track its progress. User-created metric descriptors define custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics).
+-- Creates a new metric descriptor. The creation is executed asynchronously. User-created metric descriptors define custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics). The metric descriptor is updated if it already exists, except that metric labels are never removed.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
 module Gogol.Monitoring.Projects.MetricDescriptors.Create
@@ -57,7 +57,7 @@ type MonitoringProjectsMetricDescriptorsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] MetricDescriptor
     Core.:> Core.Post '[Core.JSON] MetricDescriptor
 
--- | Creates a new metric descriptor. The creation is executed asynchronously and callers may check the returned operation to track its progress. User-created metric descriptors define custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics).
+-- | Creates a new metric descriptor. The creation is executed asynchronously. User-created metric descriptors define custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics). The metric descriptor is updated if it already exists, except that metric labels are never removed.
 --
 -- /See:/ 'newMonitoringProjectsMetricDescriptorsCreate' smart constructor.
 data MonitoringProjectsMetricDescriptorsCreate = MonitoringProjectsMetricDescriptorsCreate

@@ -397,7 +397,7 @@ pattern AmpInspectionResult_AmpIndexStatusVerdict_VERDICTUNSPECIFIED = AmpInspec
 pattern AmpInspectionResult_AmpIndexStatusVerdict_Pass :: AmpInspectionResult_AmpIndexStatusVerdict
 pattern AmpInspectionResult_AmpIndexStatusVerdict_Pass = AmpInspectionResult_AmpIndexStatusVerdict "PASS"
 
--- | Equivalent to \"Valid with warnings\" for the page or item in Search Console.
+-- | Reserved, no longer in use.
 pattern AmpInspectionResult_AmpIndexStatusVerdict_Partial :: AmpInspectionResult_AmpIndexStatusVerdict
 pattern AmpInspectionResult_AmpIndexStatusVerdict_Partial = AmpInspectionResult_AmpIndexStatusVerdict "PARTIAL"
 
@@ -585,7 +585,7 @@ pattern AmpInspectionResult_Verdict_VERDICTUNSPECIFIED = AmpInspectionResult_Ver
 pattern AmpInspectionResult_Verdict_Pass :: AmpInspectionResult_Verdict
 pattern AmpInspectionResult_Verdict_Pass = AmpInspectionResult_Verdict "PASS"
 
--- | Equivalent to \"Valid with warnings\" for the page or item in Search Console.
+-- | Reserved, no longer in use.
 pattern AmpInspectionResult_Verdict_Partial :: AmpInspectionResult_Verdict
 pattern AmpInspectionResult_Verdict_Partial = AmpInspectionResult_Verdict "PARTIAL"
 
@@ -950,7 +950,7 @@ pattern IndexStatusInspectionResult_Verdict_VERDICTUNSPECIFIED = IndexStatusInsp
 pattern IndexStatusInspectionResult_Verdict_Pass :: IndexStatusInspectionResult_Verdict
 pattern IndexStatusInspectionResult_Verdict_Pass = IndexStatusInspectionResult_Verdict "PASS"
 
--- | Equivalent to \"Valid with warnings\" for the page or item in Search Console.
+-- | Reserved, no longer in use.
 pattern IndexStatusInspectionResult_Verdict_Partial :: IndexStatusInspectionResult_Verdict
 pattern IndexStatusInspectionResult_Verdict_Partial = IndexStatusInspectionResult_Verdict "PARTIAL"
 
@@ -1044,7 +1044,7 @@ pattern MobileUsabilityInspectionResult_Verdict_VERDICTUNSPECIFIED = MobileUsabi
 pattern MobileUsabilityInspectionResult_Verdict_Pass :: MobileUsabilityInspectionResult_Verdict
 pattern MobileUsabilityInspectionResult_Verdict_Pass = MobileUsabilityInspectionResult_Verdict "PASS"
 
--- | Equivalent to \"Valid with warnings\" for the page or item in Search Console.
+-- | Reserved, no longer in use.
 pattern MobileUsabilityInspectionResult_Verdict_Partial :: MobileUsabilityInspectionResult_Verdict
 pattern MobileUsabilityInspectionResult_Verdict_Partial = MobileUsabilityInspectionResult_Verdict "PARTIAL"
 
@@ -1170,7 +1170,7 @@ pattern RichResultsInspectionResult_Verdict_VERDICTUNSPECIFIED = RichResultsInsp
 pattern RichResultsInspectionResult_Verdict_Pass :: RichResultsInspectionResult_Verdict
 pattern RichResultsInspectionResult_Verdict_Pass = RichResultsInspectionResult_Verdict "PASS"
 
--- | Equivalent to \"Valid with warnings\" for the page or item in Search Console.
+-- | Reserved, no longer in use.
 pattern RichResultsInspectionResult_Verdict_Partial :: RichResultsInspectionResult_Verdict
 pattern RichResultsInspectionResult_Verdict_Partial = RichResultsInspectionResult_Verdict "PARTIAL"
 

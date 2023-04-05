@@ -26,13 +26,33 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudIdentity.Internal.Product
-  ( -- * CheckTransitiveMembershipResponse
+  ( -- * AddIdpCredentialOperationMetadata
+    AddIdpCredentialOperationMetadata (..),
+    newAddIdpCredentialOperationMetadata,
+
+    -- * AddIdpCredentialRequest
+    AddIdpCredentialRequest (..),
+    newAddIdpCredentialRequest,
+
+    -- * CancelUserInvitationRequest
+    CancelUserInvitationRequest (..),
+    newCancelUserInvitationRequest,
+
+    -- * CheckTransitiveMembershipResponse
     CheckTransitiveMembershipResponse (..),
     newCheckTransitiveMembershipResponse,
 
     -- * CreateGroupMetadata
     CreateGroupMetadata (..),
     newCreateGroupMetadata,
+
+    -- * CreateInboundSamlSsoProfileOperationMetadata
+    CreateInboundSamlSsoProfileOperationMetadata (..),
+    newCreateInboundSamlSsoProfileOperationMetadata,
+
+    -- * CreateInboundSsoAssignmentOperationMetadata
+    CreateInboundSsoAssignmentOperationMetadata (..),
+    newCreateInboundSsoAssignmentOperationMetadata,
 
     -- * CreateMembershipMetadata
     CreateMembershipMetadata (..),
@@ -42,9 +62,25 @@ module Gogol.CloudIdentity.Internal.Product
     DeleteGroupMetadata (..),
     newDeleteGroupMetadata,
 
+    -- * DeleteIdpCredentialOperationMetadata
+    DeleteIdpCredentialOperationMetadata (..),
+    newDeleteIdpCredentialOperationMetadata,
+
+    -- * DeleteInboundSamlSsoProfileOperationMetadata
+    DeleteInboundSamlSsoProfileOperationMetadata (..),
+    newDeleteInboundSamlSsoProfileOperationMetadata,
+
+    -- * DeleteInboundSsoAssignmentOperationMetadata
+    DeleteInboundSsoAssignmentOperationMetadata (..),
+    newDeleteInboundSsoAssignmentOperationMetadata,
+
     -- * DeleteMembershipMetadata
     DeleteMembershipMetadata (..),
     newDeleteMembershipMetadata,
+
+    -- * DsaPublicKeyInfo
+    DsaPublicKeyInfo (..),
+    newDsaPublicKeyInfo,
 
     -- * DynamicGroupMetadata
     DynamicGroupMetadata (..),
@@ -230,13 +266,45 @@ module Gogol.CloudIdentity.Internal.Product
     GroupRelation_Labels (..),
     newGroupRelation_Labels,
 
+    -- * IdpCredential
+    IdpCredential (..),
+    newIdpCredential,
+
+    -- * InboundSamlSsoProfile
+    InboundSamlSsoProfile (..),
+    newInboundSamlSsoProfile,
+
+    -- * InboundSsoAssignment
+    InboundSsoAssignment (..),
+    newInboundSsoAssignment,
+
+    -- * IsInvitableUserResponse
+    IsInvitableUserResponse (..),
+    newIsInvitableUserResponse,
+
     -- * ListGroupsResponse
     ListGroupsResponse (..),
     newListGroupsResponse,
 
+    -- * ListIdpCredentialsResponse
+    ListIdpCredentialsResponse (..),
+    newListIdpCredentialsResponse,
+
+    -- * ListInboundSamlSsoProfilesResponse
+    ListInboundSamlSsoProfilesResponse (..),
+    newListInboundSamlSsoProfilesResponse,
+
+    -- * ListInboundSsoAssignmentsResponse
+    ListInboundSsoAssignmentsResponse (..),
+    newListInboundSsoAssignmentsResponse,
+
     -- * ListMembershipsResponse
     ListMembershipsResponse (..),
     newListMembershipsResponse,
+
+    -- * ListUserInvitationsResponse
+    ListUserInvitationsResponse (..),
+    newListUserInvitationsResponse,
 
     -- * LookupGroupNameResponse
     LookupGroupNameResponse (..),
@@ -261,6 +329,14 @@ module Gogol.CloudIdentity.Internal.Product
     -- * MembershipAdjacencyList
     MembershipAdjacencyList (..),
     newMembershipAdjacencyList,
+
+    -- * MembershipRelation
+    MembershipRelation (..),
+    newMembershipRelation,
+
+    -- * MembershipRelation_Labels
+    MembershipRelation_Labels (..),
+    newMembershipRelation_Labels,
 
     -- * MembershipRole
     MembershipRole (..),
@@ -298,6 +374,26 @@ module Gogol.CloudIdentity.Internal.Product
     RestrictionEvaluations (..),
     newRestrictionEvaluations,
 
+    -- * RsaPublicKeyInfo
+    RsaPublicKeyInfo (..),
+    newRsaPublicKeyInfo,
+
+    -- * SamlIdpConfig
+    SamlIdpConfig (..),
+    newSamlIdpConfig,
+
+    -- * SamlSpConfig
+    SamlSpConfig (..),
+    newSamlSpConfig,
+
+    -- * SamlSsoInfo
+    SamlSsoInfo (..),
+    newSamlSsoInfo,
+
+    -- * SearchDirectGroupsResponse
+    SearchDirectGroupsResponse (..),
+    newSearchDirectGroupsResponse,
+
     -- * SearchGroupsResponse
     SearchGroupsResponse (..),
     newSearchGroupsResponse,
@@ -313,6 +409,14 @@ module Gogol.CloudIdentity.Internal.Product
     -- * SecuritySettings
     SecuritySettings (..),
     newSecuritySettings,
+
+    -- * SendUserInvitationRequest
+    SendUserInvitationRequest (..),
+    newSendUserInvitationRequest,
+
+    -- * SignInBehavior
+    SignInBehavior (..),
+    newSignInBehavior,
 
     -- * Status
     Status (..),
@@ -330,6 +434,14 @@ module Gogol.CloudIdentity.Internal.Product
     UpdateGroupMetadata (..),
     newUpdateGroupMetadata,
 
+    -- * UpdateInboundSamlSsoProfileOperationMetadata
+    UpdateInboundSamlSsoProfileOperationMetadata (..),
+    newUpdateInboundSamlSsoProfileOperationMetadata,
+
+    -- * UpdateInboundSsoAssignmentOperationMetadata
+    UpdateInboundSsoAssignmentOperationMetadata (..),
+    newUpdateInboundSsoAssignmentOperationMetadata,
+
     -- * UpdateMembershipMetadata
     UpdateMembershipMetadata (..),
     newUpdateMembershipMetadata,
@@ -337,11 +449,91 @@ module Gogol.CloudIdentity.Internal.Product
     -- * UpdateMembershipRolesParams
     UpdateMembershipRolesParams (..),
     newUpdateMembershipRolesParams,
+
+    -- * UserInvitation
+    UserInvitation (..),
+    newUserInvitation,
   )
 where
 
 import Gogol.CloudIdentity.Internal.Sum
 import qualified Gogol.Prelude as Core
+
+-- | LRO response metadata for InboundSamlSsoProfilesService.AddIdpCredential.
+--
+-- /See:/ 'newAddIdpCredentialOperationMetadata' smart constructor.
+data AddIdpCredentialOperationMetadata = AddIdpCredentialOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddIdpCredentialOperationMetadata' with the minimum fields required to make a request.
+newAddIdpCredentialOperationMetadata ::
+  AddIdpCredentialOperationMetadata
+newAddIdpCredentialOperationMetadata = AddIdpCredentialOperationMetadata
+
+instance
+  Core.FromJSON
+    AddIdpCredentialOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "AddIdpCredentialOperationMetadata"
+      (\o -> Core.pure AddIdpCredentialOperationMetadata)
+
+instance
+  Core.ToJSON
+    AddIdpCredentialOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | The request for creating an IdpCredential with its associated payload. An InboundSamlSsoProfile can own up to 2 credentials.
+--
+-- /See:/ 'newAddIdpCredentialRequest' smart constructor.
+newtype AddIdpCredentialRequest = AddIdpCredentialRequest
+  { -- | PEM encoded x509 certificate containing the public key for verifying IdP signatures.
+    pemData :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddIdpCredentialRequest' with the minimum fields required to make a request.
+newAddIdpCredentialRequest ::
+  AddIdpCredentialRequest
+newAddIdpCredentialRequest = AddIdpCredentialRequest {pemData = Core.Nothing}
+
+instance Core.FromJSON AddIdpCredentialRequest where
+  parseJSON =
+    Core.withObject
+      "AddIdpCredentialRequest"
+      ( \o ->
+          AddIdpCredentialRequest
+            Core.<$> (o Core..:? "pemData")
+      )
+
+instance Core.ToJSON AddIdpCredentialRequest where
+  toJSON AddIdpCredentialRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("pemData" Core..=) Core.<$> pemData]
+      )
+
+-- | Request to cancel sent invitation for target email in UserInvitation.
+--
+-- /See:/ 'newCancelUserInvitationRequest' smart constructor.
+data CancelUserInvitationRequest = CancelUserInvitationRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelUserInvitationRequest' with the minimum fields required to make a request.
+newCancelUserInvitationRequest ::
+  CancelUserInvitationRequest
+newCancelUserInvitationRequest = CancelUserInvitationRequest
+
+instance Core.FromJSON CancelUserInvitationRequest where
+  parseJSON =
+    Core.withObject
+      "CancelUserInvitationRequest"
+      (\o -> Core.pure CancelUserInvitationRequest)
+
+instance Core.ToJSON CancelUserInvitationRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | The response message for MembershipsService.CheckTransitiveMembership.
 --
@@ -400,6 +592,66 @@ instance Core.FromJSON CreateGroupMetadata where
 instance Core.ToJSON CreateGroupMetadata where
   toJSON = Core.const Core.emptyObject
 
+-- | LRO response metadata for InboundSamlSsoProfilesService.CreateInboundSamlSsoProfile.
+--
+-- /See:/ 'newCreateInboundSamlSsoProfileOperationMetadata' smart constructor.
+data CreateInboundSamlSsoProfileOperationMetadata = CreateInboundSamlSsoProfileOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateInboundSamlSsoProfileOperationMetadata' with the minimum fields required to make a request.
+newCreateInboundSamlSsoProfileOperationMetadata ::
+  CreateInboundSamlSsoProfileOperationMetadata
+newCreateInboundSamlSsoProfileOperationMetadata =
+  CreateInboundSamlSsoProfileOperationMetadata
+
+instance
+  Core.FromJSON
+    CreateInboundSamlSsoProfileOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "CreateInboundSamlSsoProfileOperationMetadata"
+      ( \o ->
+          Core.pure
+            CreateInboundSamlSsoProfileOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    CreateInboundSamlSsoProfileOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | LRO response metadata for InboundSsoAssignmentsService.CreateInboundSsoAssignment.
+--
+-- /See:/ 'newCreateInboundSsoAssignmentOperationMetadata' smart constructor.
+data CreateInboundSsoAssignmentOperationMetadata = CreateInboundSsoAssignmentOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateInboundSsoAssignmentOperationMetadata' with the minimum fields required to make a request.
+newCreateInboundSsoAssignmentOperationMetadata ::
+  CreateInboundSsoAssignmentOperationMetadata
+newCreateInboundSsoAssignmentOperationMetadata =
+  CreateInboundSsoAssignmentOperationMetadata
+
+instance
+  Core.FromJSON
+    CreateInboundSsoAssignmentOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "CreateInboundSsoAssignmentOperationMetadata"
+      ( \o ->
+          Core.pure
+            CreateInboundSsoAssignmentOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    CreateInboundSsoAssignmentOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
 -- | Metadata for CreateMembership LRO.
 --
 -- /See:/ 'newCreateMembershipMetadata' smart constructor.
@@ -440,6 +692,94 @@ instance Core.FromJSON DeleteGroupMetadata where
 instance Core.ToJSON DeleteGroupMetadata where
   toJSON = Core.const Core.emptyObject
 
+-- | LRO response metadata for InboundSamlSsoProfilesService.DeleteIdpCredential.
+--
+-- /See:/ 'newDeleteIdpCredentialOperationMetadata' smart constructor.
+data DeleteIdpCredentialOperationMetadata = DeleteIdpCredentialOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeleteIdpCredentialOperationMetadata' with the minimum fields required to make a request.
+newDeleteIdpCredentialOperationMetadata ::
+  DeleteIdpCredentialOperationMetadata
+newDeleteIdpCredentialOperationMetadata = DeleteIdpCredentialOperationMetadata
+
+instance
+  Core.FromJSON
+    DeleteIdpCredentialOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "DeleteIdpCredentialOperationMetadata"
+      ( \o ->
+          Core.pure DeleteIdpCredentialOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    DeleteIdpCredentialOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | LRO response metadata for InboundSamlSsoProfilesService.DeleteInboundSamlSsoProfile.
+--
+-- /See:/ 'newDeleteInboundSamlSsoProfileOperationMetadata' smart constructor.
+data DeleteInboundSamlSsoProfileOperationMetadata = DeleteInboundSamlSsoProfileOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeleteInboundSamlSsoProfileOperationMetadata' with the minimum fields required to make a request.
+newDeleteInboundSamlSsoProfileOperationMetadata ::
+  DeleteInboundSamlSsoProfileOperationMetadata
+newDeleteInboundSamlSsoProfileOperationMetadata =
+  DeleteInboundSamlSsoProfileOperationMetadata
+
+instance
+  Core.FromJSON
+    DeleteInboundSamlSsoProfileOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "DeleteInboundSamlSsoProfileOperationMetadata"
+      ( \o ->
+          Core.pure
+            DeleteInboundSamlSsoProfileOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    DeleteInboundSamlSsoProfileOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | LRO response metadata for InboundSsoAssignmentsService.DeleteInboundSsoAssignment.
+--
+-- /See:/ 'newDeleteInboundSsoAssignmentOperationMetadata' smart constructor.
+data DeleteInboundSsoAssignmentOperationMetadata = DeleteInboundSsoAssignmentOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeleteInboundSsoAssignmentOperationMetadata' with the minimum fields required to make a request.
+newDeleteInboundSsoAssignmentOperationMetadata ::
+  DeleteInboundSsoAssignmentOperationMetadata
+newDeleteInboundSsoAssignmentOperationMetadata =
+  DeleteInboundSsoAssignmentOperationMetadata
+
+instance
+  Core.FromJSON
+    DeleteInboundSsoAssignmentOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "DeleteInboundSsoAssignmentOperationMetadata"
+      ( \o ->
+          Core.pure
+            DeleteInboundSsoAssignmentOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    DeleteInboundSsoAssignmentOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
 -- | Metadata for DeleteMembership LRO.
 --
 -- /See:/ 'newDeleteMembershipMetadata' smart constructor.
@@ -459,6 +799,35 @@ instance Core.FromJSON DeleteMembershipMetadata where
 
 instance Core.ToJSON DeleteMembershipMetadata where
   toJSON = Core.const Core.emptyObject
+
+-- | Information of a DSA public key.
+--
+-- /See:/ 'newDsaPublicKeyInfo' smart constructor.
+newtype DsaPublicKeyInfo = DsaPublicKeyInfo
+  { -- | Key size in bits (size of parameter P).
+    keySize :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DsaPublicKeyInfo' with the minimum fields required to make a request.
+newDsaPublicKeyInfo ::
+  DsaPublicKeyInfo
+newDsaPublicKeyInfo = DsaPublicKeyInfo {keySize = Core.Nothing}
+
+instance Core.FromJSON DsaPublicKeyInfo where
+  parseJSON =
+    Core.withObject
+      "DsaPublicKeyInfo"
+      ( \o ->
+          DsaPublicKeyInfo Core.<$> (o Core..:? "keySize")
+      )
+
+instance Core.ToJSON DsaPublicKeyInfo where
+  toJSON DsaPublicKeyInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [("keySize" Core..=) Core.<$> keySize]
+      )
 
 -- | Dynamic group metadata like queries and status.
 --
@@ -1503,6 +1872,8 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
       ),
     -- | Output only. When the Company-Owned device was imported. This field is empty for BYOD devices.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Unique identifier for the device.
+    deviceId :: (Core.Maybe Core.Text),
     -- | Output only. Type of device.
     deviceType :: (Core.Maybe GoogleAppsCloudidentityDevicesV1Device_DeviceType),
     -- | Output only. Whether developer options is enabled on device.
@@ -1559,6 +1930,7 @@ newGoogleAppsCloudidentityDevicesV1Device =
       buildNumber = Core.Nothing,
       compromisedState = Core.Nothing,
       createTime = Core.Nothing,
+      deviceId = Core.Nothing,
       deviceType = Core.Nothing,
       enabledDeveloperOptions = Core.Nothing,
       enabledUsbDebugging = Core.Nothing,
@@ -1598,6 +1970,7 @@ instance
             Core.<*> (o Core..:? "buildNumber")
             Core.<*> (o Core..:? "compromisedState")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "deviceId")
             Core.<*> (o Core..:? "deviceType")
             Core.<*> (o Core..:? "enabledDeveloperOptions")
             Core.<*> (o Core..:? "enabledUsbDebugging")
@@ -1638,6 +2011,7 @@ instance
             ("compromisedState" Core..=)
               Core.<$> compromisedState,
             ("createTime" Core..=) Core.<$> createTime,
+            ("deviceId" Core..=) Core.<$> deviceId,
             ("deviceType" Core..=) Core.<$> deviceType,
             ("enabledDeveloperOptions" Core..=)
               Core.<$> enabledDeveloperOptions,
@@ -1932,7 +2306,7 @@ instance
 --
 -- /See:/ 'newGoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse' smart constructor.
 data GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse = GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-  { -- | The obfuscated customer Id that may be passed back to other Devices API methods such as List, Get, etc.
+  { -- | The customer resource name that may be passed back to other Devices API methods such as List, Get, etc.
     customer :: (Core.Maybe Core.Text),
     -- | <https://cloud.google.com/apis/design/resource_names Resource names> of the DeviceUsers in the format: @devices\/{device}\/deviceUsers\/{user_resource}@, where device is the unique ID assigned to a Device and user_resource is the unique user ID
     names :: (Core.Maybe [Core.Text]),
@@ -2295,7 +2669,9 @@ instance
 --
 -- /See:/ 'newGroup' smart constructor.
 data Group = Group
-  { -- | Output only. The time when the @Group@ was created.
+  { -- | Output only. Additional group keys associated with the Group.
+    additionalGroupKeys :: (Core.Maybe [EntityKey]),
+    -- | Output only. The time when the @Group@ was created.
     createTime :: (Core.Maybe Core.DateTime),
     -- | An extended description to help users determine the purpose of a @Group@. Must not be longer than 4,096 characters.
     description :: (Core.Maybe Core.Text),
@@ -2309,7 +2685,7 @@ data Group = Group
     labels :: (Core.Maybe Group_Labels),
     -- | Output only. The <https://cloud.google.com/apis/design/resource_names resource name> of the @Group@. Shall be of the form @groups\/{group}@.
     name :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. The resource name of the entity under which this @Group@ resides in the Cloud Identity resource hierarchy. Must be of the form @identitysources\/{identity_source}@ for external- identity-mapped groups or @customers\/{customer}@ for Google Groups. The @customer@ must begin with \"C\" (for example, \'C046psxkn\').
+    -- | Required. Immutable. The resource name of the entity under which this @Group@ resides in the Cloud Identity resource hierarchy. Must be of the form @identitysources\/{identity_source}@ for external <https://support.google.com/a/answer/9039510 identity-mapped groups> or @customers\/{customer_id}@ for Google Groups. The @customer_id@ must begin with \"C\" (for example, \'C046psxkn\'). [Find your customer ID.] (https:\/\/support.google.com\/cloudidentity\/answer\/10070793)
     parent :: (Core.Maybe Core.Text),
     -- | Output only. The time when the @Group@ was last updated.
     updateTime :: (Core.Maybe Core.DateTime)
@@ -2321,7 +2697,8 @@ newGroup ::
   Group
 newGroup =
   Group
-    { createTime = Core.Nothing,
+    { additionalGroupKeys = Core.Nothing,
+      createTime = Core.Nothing,
       description = Core.Nothing,
       displayName = Core.Nothing,
       dynamicGroupMetadata = Core.Nothing,
@@ -2338,7 +2715,8 @@ instance Core.FromJSON Group where
       "Group"
       ( \o ->
           Group
-            Core.<$> (o Core..:? "createTime")
+            Core.<$> (o Core..:? "additionalGroupKeys")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "dynamicGroupMetadata")
@@ -2353,7 +2731,9 @@ instance Core.ToJSON Group where
   toJSON Group {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createTime" Core..=) Core.<$> createTime,
+          [ ("additionalGroupKeys" Core..=)
+              Core.<$> additionalGroupKeys,
+            ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
             ("dynamicGroupMetadata" Core..=)
@@ -2482,6 +2862,211 @@ instance Core.ToJSON GroupRelation_Labels where
   toJSON GroupRelation_Labels {..} =
     Core.toJSON additional
 
+-- | Credential for verifying signatures produced by the Identity Provider.
+--
+-- /See:/ 'newIdpCredential' smart constructor.
+data IdpCredential = IdpCredential
+  { -- | Output only. Information of a DSA public key.
+    dsaKeyInfo :: (Core.Maybe DsaPublicKeyInfo),
+    -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the credential.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. Information of a RSA public key.
+    rsaKeyInfo :: (Core.Maybe RsaPublicKeyInfo),
+    -- | Output only. Time when the @IdpCredential@ was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IdpCredential' with the minimum fields required to make a request.
+newIdpCredential ::
+  IdpCredential
+newIdpCredential =
+  IdpCredential
+    { dsaKeyInfo = Core.Nothing,
+      name = Core.Nothing,
+      rsaKeyInfo = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON IdpCredential where
+  parseJSON =
+    Core.withObject
+      "IdpCredential"
+      ( \o ->
+          IdpCredential
+            Core.<$> (o Core..:? "dsaKeyInfo")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "rsaKeyInfo")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON IdpCredential where
+  toJSON IdpCredential {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dsaKeyInfo" Core..=) Core.<$> dsaKeyInfo,
+            ("name" Core..=) Core.<$> name,
+            ("rsaKeyInfo" Core..=) Core.<$> rsaKeyInfo,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | A <https://www.oasis-open.org/standards#samlv2.0 SAML 2.0> federation between a Google enterprise customer and a SAML identity provider.
+--
+-- /See:/ 'newInboundSamlSsoProfile' smart constructor.
+data InboundSamlSsoProfile = InboundSamlSsoProfile
+  { -- | Immutable. The customer. For example: @customers\/C0123abc@.
+    customer :: (Core.Maybe Core.Text),
+    -- | Human-readable name of the SAML SSO profile.
+    displayName :: (Core.Maybe Core.Text),
+    -- | SAML identity provider configuration.
+    idpConfig :: (Core.Maybe SamlIdpConfig),
+    -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the SAML SSO profile.
+    name :: (Core.Maybe Core.Text),
+    -- | SAML service provider configuration for this SAML SSO profile. These are the service provider details provided by Google that should be configured on the corresponding identity provider.
+    spConfig :: (Core.Maybe SamlSpConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InboundSamlSsoProfile' with the minimum fields required to make a request.
+newInboundSamlSsoProfile ::
+  InboundSamlSsoProfile
+newInboundSamlSsoProfile =
+  InboundSamlSsoProfile
+    { customer = Core.Nothing,
+      displayName = Core.Nothing,
+      idpConfig = Core.Nothing,
+      name = Core.Nothing,
+      spConfig = Core.Nothing
+    }
+
+instance Core.FromJSON InboundSamlSsoProfile where
+  parseJSON =
+    Core.withObject
+      "InboundSamlSsoProfile"
+      ( \o ->
+          InboundSamlSsoProfile
+            Core.<$> (o Core..:? "customer")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "idpConfig")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "spConfig")
+      )
+
+instance Core.ToJSON InboundSamlSsoProfile where
+  toJSON InboundSamlSsoProfile {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customer" Core..=) Core.<$> customer,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("idpConfig" Core..=) Core.<$> idpConfig,
+            ("name" Core..=) Core.<$> name,
+            ("spConfig" Core..=) Core.<$> spConfig
+          ]
+      )
+
+-- | Targets with \"set\" SSO assignments and their respective assignments.
+--
+-- /See:/ 'newInboundSsoAssignment' smart constructor.
+data InboundSsoAssignment = InboundSsoAssignment
+  { -- | Immutable. The customer. For example: @customers\/C0123abc@.
+    customer :: (Core.Maybe Core.Text),
+    -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the Inbound SSO Assignment.
+    name :: (Core.Maybe Core.Text),
+    -- | Must be zero (which is the default value so it can be omitted) for assignments with @target_org_unit@ set and must be greater-than-or-equal-to one for assignments with @target_group@ set.
+    rank :: (Core.Maybe Core.Int32),
+    -- | SAML SSO details. Must be set if and only if @sso_mode@ is set to @SAML_SSO@.
+    samlSsoInfo :: (Core.Maybe SamlSsoInfo),
+    -- | Assertions about users assigned to an IdP will always be accepted from that IdP. This controls whether\/when Google should redirect a user to the IdP. Unset (defaults) is the recommended configuration.
+    signInBehavior :: (Core.Maybe SignInBehavior),
+    -- | Inbound SSO behavior.
+    ssoMode :: (Core.Maybe InboundSsoAssignment_SsoMode),
+    -- | Immutable. Must be of the form @groups\/{group}@.
+    targetGroup :: (Core.Maybe Core.Text),
+    -- | Immutable. Must be of the form @orgUnits\/{org_unit}@.
+    targetOrgUnit :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InboundSsoAssignment' with the minimum fields required to make a request.
+newInboundSsoAssignment ::
+  InboundSsoAssignment
+newInboundSsoAssignment =
+  InboundSsoAssignment
+    { customer = Core.Nothing,
+      name = Core.Nothing,
+      rank = Core.Nothing,
+      samlSsoInfo = Core.Nothing,
+      signInBehavior = Core.Nothing,
+      ssoMode = Core.Nothing,
+      targetGroup = Core.Nothing,
+      targetOrgUnit = Core.Nothing
+    }
+
+instance Core.FromJSON InboundSsoAssignment where
+  parseJSON =
+    Core.withObject
+      "InboundSsoAssignment"
+      ( \o ->
+          InboundSsoAssignment
+            Core.<$> (o Core..:? "customer")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "rank")
+            Core.<*> (o Core..:? "samlSsoInfo")
+            Core.<*> (o Core..:? "signInBehavior")
+            Core.<*> (o Core..:? "ssoMode")
+            Core.<*> (o Core..:? "targetGroup")
+            Core.<*> (o Core..:? "targetOrgUnit")
+      )
+
+instance Core.ToJSON InboundSsoAssignment where
+  toJSON InboundSsoAssignment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customer" Core..=) Core.<$> customer,
+            ("name" Core..=) Core.<$> name,
+            ("rank" Core..=) Core.<$> rank,
+            ("samlSsoInfo" Core..=) Core.<$> samlSsoInfo,
+            ("signInBehavior" Core..=) Core.<$> signInBehavior,
+            ("ssoMode" Core..=) Core.<$> ssoMode,
+            ("targetGroup" Core..=) Core.<$> targetGroup,
+            ("targetOrgUnit" Core..=) Core.<$> targetOrgUnit
+          ]
+      )
+
+-- | Response for IsInvitableUser RPC.
+--
+-- /See:/ 'newIsInvitableUserResponse' smart constructor.
+newtype IsInvitableUserResponse = IsInvitableUserResponse
+  { -- | Returns true if the email address is invitable.
+    isInvitableUser :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IsInvitableUserResponse' with the minimum fields required to make a request.
+newIsInvitableUserResponse ::
+  IsInvitableUserResponse
+newIsInvitableUserResponse =
+  IsInvitableUserResponse {isInvitableUser = Core.Nothing}
+
+instance Core.FromJSON IsInvitableUserResponse where
+  parseJSON =
+    Core.withObject
+      "IsInvitableUserResponse"
+      ( \o ->
+          IsInvitableUserResponse
+            Core.<$> (o Core..:? "isInvitableUser")
+      )
+
+instance Core.ToJSON IsInvitableUserResponse where
+  toJSON IsInvitableUserResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isInvitableUser" Core..=)
+              Core.<$> isInvitableUser
+          ]
+      )
+
 -- | Response message for ListGroups operation.
 --
 -- /See:/ 'newListGroupsResponse' smart constructor.
@@ -2514,6 +3099,137 @@ instance Core.ToJSON ListGroupsResponse where
     Core.object
       ( Core.catMaybes
           [ ("groups" Core..=) Core.<$> groups,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response of the InboundSamlSsoProfilesService.ListIdpCredentials method.
+--
+-- /See:/ 'newListIdpCredentialsResponse' smart constructor.
+data ListIdpCredentialsResponse = ListIdpCredentialsResponse
+  { -- | The IdpCredentials from the specified InboundSamlSsoProfile.
+    idpCredentials :: (Core.Maybe [IdpCredential]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListIdpCredentialsResponse' with the minimum fields required to make a request.
+newListIdpCredentialsResponse ::
+  ListIdpCredentialsResponse
+newListIdpCredentialsResponse =
+  ListIdpCredentialsResponse
+    { idpCredentials = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListIdpCredentialsResponse where
+  parseJSON =
+    Core.withObject
+      "ListIdpCredentialsResponse"
+      ( \o ->
+          ListIdpCredentialsResponse
+            Core.<$> (o Core..:? "idpCredentials")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListIdpCredentialsResponse where
+  toJSON ListIdpCredentialsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("idpCredentials" Core..=) Core.<$> idpCredentials,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response of the InboundSamlSsoProfilesService.ListInboundSamlSsoProfiles method.
+--
+-- /See:/ 'newListInboundSamlSsoProfilesResponse' smart constructor.
+data ListInboundSamlSsoProfilesResponse = ListInboundSamlSsoProfilesResponse
+  { -- | List of InboundSamlSsoProfiles.
+    inboundSamlSsoProfiles :: (Core.Maybe [InboundSamlSsoProfile]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListInboundSamlSsoProfilesResponse' with the minimum fields required to make a request.
+newListInboundSamlSsoProfilesResponse ::
+  ListInboundSamlSsoProfilesResponse
+newListInboundSamlSsoProfilesResponse =
+  ListInboundSamlSsoProfilesResponse
+    { inboundSamlSsoProfiles = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ListInboundSamlSsoProfilesResponse
+  where
+  parseJSON =
+    Core.withObject
+      "ListInboundSamlSsoProfilesResponse"
+      ( \o ->
+          ListInboundSamlSsoProfilesResponse
+            Core.<$> (o Core..:? "inboundSamlSsoProfiles")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance
+  Core.ToJSON
+    ListInboundSamlSsoProfilesResponse
+  where
+  toJSON ListInboundSamlSsoProfilesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSamlSsoProfiles" Core..=)
+              Core.<$> inboundSamlSsoProfiles,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response of the InboundSsoAssignmentsService.ListInboundSsoAssignments method.
+--
+-- /See:/ 'newListInboundSsoAssignmentsResponse' smart constructor.
+data ListInboundSsoAssignmentsResponse = ListInboundSsoAssignmentsResponse
+  { -- | The assignments.
+    inboundSsoAssignments :: (Core.Maybe [InboundSsoAssignment]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListInboundSsoAssignmentsResponse' with the minimum fields required to make a request.
+newListInboundSsoAssignmentsResponse ::
+  ListInboundSsoAssignmentsResponse
+newListInboundSsoAssignmentsResponse =
+  ListInboundSsoAssignmentsResponse
+    { inboundSsoAssignments = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ListInboundSsoAssignmentsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "ListInboundSsoAssignmentsResponse"
+      ( \o ->
+          ListInboundSsoAssignmentsResponse
+            Core.<$> (o Core..:? "inboundSsoAssignments")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance
+  Core.ToJSON
+    ListInboundSsoAssignmentsResponse
+  where
+  toJSON ListInboundSsoAssignmentsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSsoAssignments" Core..=)
+              Core.<$> inboundSsoAssignments,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -2554,6 +3270,46 @@ instance Core.ToJSON ListMembershipsResponse where
       ( Core.catMaybes
           [ ("memberships" Core..=) Core.<$> memberships,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Response message for UserInvitation listing request.
+--
+-- /See:/ 'newListUserInvitationsResponse' smart constructor.
+data ListUserInvitationsResponse = ListUserInvitationsResponse
+  { -- | The token for the next page. If not empty, indicates that there may be more @UserInvitation@ resources that match the listing request; this value can be used in a subsequent ListUserInvitationsRequest to get continued results with the current list call.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of UserInvitation resources.
+    userInvitations :: (Core.Maybe [UserInvitation])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListUserInvitationsResponse' with the minimum fields required to make a request.
+newListUserInvitationsResponse ::
+  ListUserInvitationsResponse
+newListUserInvitationsResponse =
+  ListUserInvitationsResponse
+    { nextPageToken = Core.Nothing,
+      userInvitations = Core.Nothing
+    }
+
+instance Core.FromJSON ListUserInvitationsResponse where
+  parseJSON =
+    Core.withObject
+      "ListUserInvitationsResponse"
+      ( \o ->
+          ListUserInvitationsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "userInvitations")
+      )
+
+instance Core.ToJSON ListUserInvitationsResponse where
+  toJSON ListUserInvitationsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("userInvitations" Core..=)
+              Core.<$> userInvitations
           ]
       )
 
@@ -2705,6 +3461,8 @@ instance Core.ToJSON MemberRestriction where
 data Membership = Membership
   { -- | Output only. The time when the @Membership@ was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Delivery setting associated with the membership.
+    deliverySetting :: (Core.Maybe Membership_DeliverySetting),
     -- | Output only. The <https://cloud.google.com/apis/design/resource_names resource name> of the @Membership@. Shall be of the form @groups\/{group}\/memberships\/{membership}@.
     name :: (Core.Maybe Core.Text),
     -- | Required. Immutable. The @EntityKey@ of the member.
@@ -2724,6 +3482,7 @@ newMembership ::
 newMembership =
   Membership
     { createTime = Core.Nothing,
+      deliverySetting = Core.Nothing,
       name = Core.Nothing,
       preferredMemberKey = Core.Nothing,
       roles = Core.Nothing,
@@ -2738,6 +3497,7 @@ instance Core.FromJSON Membership where
       ( \o ->
           Membership
             Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "deliverySetting")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "preferredMemberKey")
             Core.<*> (o Core..:? "roles")
@@ -2750,6 +3510,7 @@ instance Core.ToJSON Membership where
     Core.object
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
+            ("deliverySetting" Core..=) Core.<$> deliverySetting,
             ("name" Core..=) Core.<$> name,
             ("preferredMemberKey" Core..=)
               Core.<$> preferredMemberKey,
@@ -2793,6 +3554,100 @@ instance Core.ToJSON MembershipAdjacencyList where
             ("group" Core..=) Core.<$> group'
           ]
       )
+
+-- | Message containing membership relation.
+--
+-- /See:/ 'newMembershipRelation' smart constructor.
+data MembershipRelation = MembershipRelation
+  { -- | An extended description to help users determine the purpose of a @Group@.
+    description :: (Core.Maybe Core.Text),
+    -- | The display name of the @Group@.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The <https://cloud.google.com/apis/design/resource_names resource name> of the @Group@. Shall be of the form @groups\/{group_id}@.
+    group' :: (Core.Maybe Core.Text),
+    -- | The @EntityKey@ of the @Group@.
+    groupKey :: (Core.Maybe EntityKey),
+    -- | One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value.
+    labels :: (Core.Maybe MembershipRelation_Labels),
+    -- | The <https://cloud.google.com/apis/design/resource_names resource name> of the @Membership@. Shall be of the form @groups\/{group_id}\/memberships\/{membership_id}@.
+    membership :: (Core.Maybe Core.Text),
+    -- | The @MembershipRole@s that apply to the @Membership@.
+    roles :: (Core.Maybe [MembershipRole])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MembershipRelation' with the minimum fields required to make a request.
+newMembershipRelation ::
+  MembershipRelation
+newMembershipRelation =
+  MembershipRelation
+    { description = Core.Nothing,
+      displayName = Core.Nothing,
+      group' = Core.Nothing,
+      groupKey = Core.Nothing,
+      labels = Core.Nothing,
+      membership = Core.Nothing,
+      roles = Core.Nothing
+    }
+
+instance Core.FromJSON MembershipRelation where
+  parseJSON =
+    Core.withObject
+      "MembershipRelation"
+      ( \o ->
+          MembershipRelation
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "group")
+            Core.<*> (o Core..:? "groupKey")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "membership")
+            Core.<*> (o Core..:? "roles")
+      )
+
+instance Core.ToJSON MembershipRelation where
+  toJSON MembershipRelation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("group" Core..=) Core.<$> group',
+            ("groupKey" Core..=) Core.<$> groupKey,
+            ("labels" Core..=) Core.<$> labels,
+            ("membership" Core..=) Core.<$> membership,
+            ("roles" Core..=) Core.<$> roles
+          ]
+      )
+
+-- | One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value.
+--
+-- /See:/ 'newMembershipRelation_Labels' smart constructor.
+newtype MembershipRelation_Labels = MembershipRelation_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MembershipRelation_Labels' with the minimum fields required to make a request.
+newMembershipRelation_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  MembershipRelation_Labels
+newMembershipRelation_Labels additional =
+  MembershipRelation_Labels {additional = additional}
+
+instance Core.FromJSON MembershipRelation_Labels where
+  parseJSON =
+    Core.withObject
+      "MembershipRelation_Labels"
+      ( \o ->
+          MembershipRelation_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON MembershipRelation_Labels where
+  toJSON MembershipRelation_Labels {..} =
+    Core.toJSON additional
 
 -- | A membership role within the Cloud Identity Groups API. A @MembershipRole@ defines the privileges granted to a @Membership@.
 --
@@ -3120,6 +3975,198 @@ instance Core.ToJSON RestrictionEvaluations where
           ]
       )
 
+-- | Information of a RSA public key.
+--
+-- /See:/ 'newRsaPublicKeyInfo' smart constructor.
+newtype RsaPublicKeyInfo = RsaPublicKeyInfo
+  { -- | Key size in bits (size of the modulus).
+    keySize :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RsaPublicKeyInfo' with the minimum fields required to make a request.
+newRsaPublicKeyInfo ::
+  RsaPublicKeyInfo
+newRsaPublicKeyInfo = RsaPublicKeyInfo {keySize = Core.Nothing}
+
+instance Core.FromJSON RsaPublicKeyInfo where
+  parseJSON =
+    Core.withObject
+      "RsaPublicKeyInfo"
+      ( \o ->
+          RsaPublicKeyInfo Core.<$> (o Core..:? "keySize")
+      )
+
+instance Core.ToJSON RsaPublicKeyInfo where
+  toJSON RsaPublicKeyInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [("keySize" Core..=) Core.<$> keySize]
+      )
+
+-- | SAML IDP (identity provider) configuration.
+--
+-- /See:/ 'newSamlIdpConfig' smart constructor.
+data SamlIdpConfig = SamlIdpConfig
+  { -- | The __Change Password URL__ of the identity provider. Users will be sent to this URL when changing their passwords at @myaccount.google.com@. This takes precedence over the change password URL configured at customer-level. Must use @HTTPS@.
+    changePasswordUri :: (Core.Maybe Core.Text),
+    -- | Required. The SAML __Entity ID__ of the identity provider.
+    entityId :: (Core.Maybe Core.Text),
+    -- | The __Logout Redirect URL__ (sign-out page URL) of the identity provider. When a user clicks the sign-out link on a Google page, they will be redirected to this URL. This is a pure redirect with no attached SAML @LogoutRequest@ i.e. SAML single logout is not supported. Must use @HTTPS@.
+    logoutRedirectUri :: (Core.Maybe Core.Text),
+    -- | Required. The @SingleSignOnService@ endpoint location (sign-in page URL) of the identity provider. This is the URL where the @AuthnRequest@ will be sent. Must use @HTTPS@. Assumed to accept the @HTTP-Redirect@ binding.
+    singleSignOnServiceUri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SamlIdpConfig' with the minimum fields required to make a request.
+newSamlIdpConfig ::
+  SamlIdpConfig
+newSamlIdpConfig =
+  SamlIdpConfig
+    { changePasswordUri = Core.Nothing,
+      entityId = Core.Nothing,
+      logoutRedirectUri = Core.Nothing,
+      singleSignOnServiceUri = Core.Nothing
+    }
+
+instance Core.FromJSON SamlIdpConfig where
+  parseJSON =
+    Core.withObject
+      "SamlIdpConfig"
+      ( \o ->
+          SamlIdpConfig
+            Core.<$> (o Core..:? "changePasswordUri")
+            Core.<*> (o Core..:? "entityId")
+            Core.<*> (o Core..:? "logoutRedirectUri")
+            Core.<*> (o Core..:? "singleSignOnServiceUri")
+      )
+
+instance Core.ToJSON SamlIdpConfig where
+  toJSON SamlIdpConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("changePasswordUri" Core..=)
+              Core.<$> changePasswordUri,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("logoutRedirectUri" Core..=)
+              Core.<$> logoutRedirectUri,
+            ("singleSignOnServiceUri" Core..=)
+              Core.<$> singleSignOnServiceUri
+          ]
+      )
+
+-- | SAML SP (service provider) configuration.
+--
+-- /See:/ 'newSamlSpConfig' smart constructor.
+data SamlSpConfig = SamlSpConfig
+  { -- | Output only. The SAML __Assertion Consumer Service (ACS) URL__ to be used for the IDP-initiated login. Assumed to accept response messages via the @HTTP-POST@ binding.
+    assertionConsumerServiceUri :: (Core.Maybe Core.Text),
+    -- | Output only. The SAML __Entity ID__ for this service provider.
+    entityId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SamlSpConfig' with the minimum fields required to make a request.
+newSamlSpConfig ::
+  SamlSpConfig
+newSamlSpConfig =
+  SamlSpConfig
+    { assertionConsumerServiceUri = Core.Nothing,
+      entityId = Core.Nothing
+    }
+
+instance Core.FromJSON SamlSpConfig where
+  parseJSON =
+    Core.withObject
+      "SamlSpConfig"
+      ( \o ->
+          SamlSpConfig
+            Core.<$> (o Core..:? "assertionConsumerServiceUri")
+            Core.<*> (o Core..:? "entityId")
+      )
+
+instance Core.ToJSON SamlSpConfig where
+  toJSON SamlSpConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("assertionConsumerServiceUri" Core..=)
+              Core.<$> assertionConsumerServiceUri,
+            ("entityId" Core..=) Core.<$> entityId
+          ]
+      )
+
+-- | Details that are applicable when @sso_mode@ == @SAML_SSO@.
+--
+-- /See:/ 'newSamlSsoInfo' smart constructor.
+newtype SamlSsoInfo = SamlSsoInfo
+  { -- | Required. Name of the @InboundSamlSsoProfile@ to use. Must be of the form @inboundSamlSsoProfiles\/{inbound_saml_sso_profile}@.
+    inboundSamlSsoProfile :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SamlSsoInfo' with the minimum fields required to make a request.
+newSamlSsoInfo ::
+  SamlSsoInfo
+newSamlSsoInfo = SamlSsoInfo {inboundSamlSsoProfile = Core.Nothing}
+
+instance Core.FromJSON SamlSsoInfo where
+  parseJSON =
+    Core.withObject
+      "SamlSsoInfo"
+      ( \o ->
+          SamlSsoInfo
+            Core.<$> (o Core..:? "inboundSamlSsoProfile")
+      )
+
+instance Core.ToJSON SamlSsoInfo where
+  toJSON SamlSsoInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inboundSamlSsoProfile" Core..=)
+              Core.<$> inboundSamlSsoProfile
+          ]
+      )
+
+-- | The response message for MembershipsService.SearchDirectGroups.
+--
+-- /See:/ 'newSearchDirectGroupsResponse' smart constructor.
+data SearchDirectGroupsResponse = SearchDirectGroupsResponse
+  { -- | List of direct groups satisfying the query.
+    memberships :: (Core.Maybe [MembershipRelation]),
+    -- | Token to retrieve the next page of results, or empty if there are no more results available for listing.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SearchDirectGroupsResponse' with the minimum fields required to make a request.
+newSearchDirectGroupsResponse ::
+  SearchDirectGroupsResponse
+newSearchDirectGroupsResponse =
+  SearchDirectGroupsResponse
+    { memberships = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON SearchDirectGroupsResponse where
+  parseJSON =
+    Core.withObject
+      "SearchDirectGroupsResponse"
+      ( \o ->
+          SearchDirectGroupsResponse
+            Core.<$> (o Core..:? "memberships")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON SearchDirectGroupsResponse where
+  toJSON SearchDirectGroupsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("memberships" Core..=) Core.<$> memberships,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | The response message for GroupsService.SearchGroups.
 --
 -- /See:/ 'newSearchGroupsResponse' smart constructor.
@@ -3277,6 +4324,58 @@ instance Core.ToJSON SecuritySettings where
           ]
       )
 
+-- | A request to send email for inviting target user corresponding to the UserInvitation.
+--
+-- /See:/ 'newSendUserInvitationRequest' smart constructor.
+data SendUserInvitationRequest = SendUserInvitationRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SendUserInvitationRequest' with the minimum fields required to make a request.
+newSendUserInvitationRequest ::
+  SendUserInvitationRequest
+newSendUserInvitationRequest = SendUserInvitationRequest
+
+instance Core.FromJSON SendUserInvitationRequest where
+  parseJSON =
+    Core.withObject
+      "SendUserInvitationRequest"
+      (\o -> Core.pure SendUserInvitationRequest)
+
+instance Core.ToJSON SendUserInvitationRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Controls sign-in behavior.
+--
+-- /See:/ 'newSignInBehavior' smart constructor.
+newtype SignInBehavior = SignInBehavior
+  { -- | When to redirect sign-ins to the IdP.
+    redirectCondition :: (Core.Maybe SignInBehavior_RedirectCondition)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SignInBehavior' with the minimum fields required to make a request.
+newSignInBehavior ::
+  SignInBehavior
+newSignInBehavior = SignInBehavior {redirectCondition = Core.Nothing}
+
+instance Core.FromJSON SignInBehavior where
+  parseJSON =
+    Core.withObject
+      "SignInBehavior"
+      ( \o ->
+          SignInBehavior
+            Core.<$> (o Core..:? "redirectCondition")
+      )
+
+instance Core.ToJSON SignInBehavior where
+  toJSON SignInBehavior {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("redirectCondition" Core..=)
+              Core.<$> redirectCondition
+          ]
+      )
+
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
 -- /See:/ 'newStatus' smart constructor.
@@ -3392,6 +4491,66 @@ instance Core.FromJSON UpdateGroupMetadata where
 instance Core.ToJSON UpdateGroupMetadata where
   toJSON = Core.const Core.emptyObject
 
+-- | LRO response metadata for InboundSamlSsoProfilesService.UpdateInboundSamlSsoProfile.
+--
+-- /See:/ 'newUpdateInboundSamlSsoProfileOperationMetadata' smart constructor.
+data UpdateInboundSamlSsoProfileOperationMetadata = UpdateInboundSamlSsoProfileOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateInboundSamlSsoProfileOperationMetadata' with the minimum fields required to make a request.
+newUpdateInboundSamlSsoProfileOperationMetadata ::
+  UpdateInboundSamlSsoProfileOperationMetadata
+newUpdateInboundSamlSsoProfileOperationMetadata =
+  UpdateInboundSamlSsoProfileOperationMetadata
+
+instance
+  Core.FromJSON
+    UpdateInboundSamlSsoProfileOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "UpdateInboundSamlSsoProfileOperationMetadata"
+      ( \o ->
+          Core.pure
+            UpdateInboundSamlSsoProfileOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    UpdateInboundSamlSsoProfileOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | LRO response metadata for InboundSsoAssignmentsService.UpdateInboundSsoAssignment.
+--
+-- /See:/ 'newUpdateInboundSsoAssignmentOperationMetadata' smart constructor.
+data UpdateInboundSsoAssignmentOperationMetadata = UpdateInboundSsoAssignmentOperationMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateInboundSsoAssignmentOperationMetadata' with the minimum fields required to make a request.
+newUpdateInboundSsoAssignmentOperationMetadata ::
+  UpdateInboundSsoAssignmentOperationMetadata
+newUpdateInboundSsoAssignmentOperationMetadata =
+  UpdateInboundSsoAssignmentOperationMetadata
+
+instance
+  Core.FromJSON
+    UpdateInboundSsoAssignmentOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "UpdateInboundSsoAssignmentOperationMetadata"
+      ( \o ->
+          Core.pure
+            UpdateInboundSsoAssignmentOperationMetadata
+      )
+
+instance
+  Core.ToJSON
+    UpdateInboundSsoAssignmentOperationMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
 -- | Metadata for UpdateMembership LRO.
 --
 -- /See:/ 'newUpdateMembershipMetadata' smart constructor.
@@ -3448,5 +4607,57 @@ instance Core.ToJSON UpdateMembershipRolesParams where
       ( Core.catMaybes
           [ ("fieldMask" Core..=) Core.<$> fieldMask,
             ("membershipRole" Core..=) Core.<$> membershipRole
+          ]
+      )
+
+-- | The @UserInvitation@ resource represents an email that can be sent to an unmanaged user account inviting them to join the customer\'s Google Workspace or Cloud Identity account. An unmanaged account shares an email address domain with the Google Workspace or Cloud Identity account but is not managed by it yet. If the user accepts the @UserInvitation@, the user account will become managed.
+--
+-- /See:/ 'newUserInvitation' smart constructor.
+data UserInvitation = UserInvitation
+  { -- | Number of invitation emails sent to the user.
+    mailsSentCount :: (Core.Maybe Core.Int64),
+    -- | Shall be of the form @customers\/{customer}\/userinvitations\/{user_email_address}@.
+    name :: (Core.Maybe Core.Text),
+    -- | State of the @UserInvitation@.
+    state :: (Core.Maybe UserInvitation_State),
+    -- | Time when the @UserInvitation@ was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserInvitation' with the minimum fields required to make a request.
+newUserInvitation ::
+  UserInvitation
+newUserInvitation =
+  UserInvitation
+    { mailsSentCount = Core.Nothing,
+      name = Core.Nothing,
+      state = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON UserInvitation where
+  parseJSON =
+    Core.withObject
+      "UserInvitation"
+      ( \o ->
+          UserInvitation
+            Core.<$> ( o Core..:? "mailsSentCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON UserInvitation where
+  toJSON UserInvitation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("mailsSentCount" Core..=) Core.. Core.AsText
+              Core.<$> mailsSentCount,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
           ]
       )

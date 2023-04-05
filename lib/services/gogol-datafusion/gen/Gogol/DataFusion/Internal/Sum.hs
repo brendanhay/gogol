@@ -39,6 +39,7 @@ module Gogol.DataFusion.Internal.Sum
         Accelerator_AcceleratorType_Cdc,
         Accelerator_AcceleratorType_Healthcare,
         Accelerator_AcceleratorType_CCAIINSIGHTS,
+        Accelerator_AcceleratorType_Cloudsearch,
         ..
       ),
 
@@ -160,15 +161,20 @@ pattern Accelerator_AcceleratorType_Healthcare = Accelerator_AcceleratorType "HE
 pattern Accelerator_AcceleratorType_CCAIINSIGHTS :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_CCAIINSIGHTS = Accelerator_AcceleratorType "CCAI_INSIGHTS"
 
+-- | Cloud search accelerator for CDF. This accelerator is to enable Cloud search specific CDF plugins developed by Cloudsearch team.
+pattern Accelerator_AcceleratorType_Cloudsearch :: Accelerator_AcceleratorType
+pattern Accelerator_AcceleratorType_Cloudsearch = Accelerator_AcceleratorType "CLOUDSEARCH"
+
 {-# COMPLETE
   Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED,
   Accelerator_AcceleratorType_Cdc,
   Accelerator_AcceleratorType_Healthcare,
   Accelerator_AcceleratorType_CCAIINSIGHTS,
+  Accelerator_AcceleratorType_Cloudsearch,
   Accelerator_AcceleratorType
   #-}
 
--- | The state of the accelerator
+-- | The state of the accelerator.
 newtype Accelerator_State = Accelerator_State {fromAccelerator_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -181,19 +187,19 @@ newtype Accelerator_State = Accelerator_State {fromAccelerator_State :: Core.Tex
       Core.FromJSONKey
     )
 
--- | Default value, do not use
+-- | Default value, do not use.
 pattern Accelerator_State_STATEUNSPECIFIED :: Accelerator_State
 pattern Accelerator_State_STATEUNSPECIFIED = Accelerator_State "STATE_UNSPECIFIED"
 
--- | Indicates that the accelerator is enabled and available to use
+-- | Indicates that the accelerator is enabled and available to use.
 pattern Accelerator_State_Enabled :: Accelerator_State
 pattern Accelerator_State_Enabled = Accelerator_State "ENABLED"
 
--- | Indicates that the accelerator is disabled and not available to use
+-- | Indicates that the accelerator is disabled and not available to use.
 pattern Accelerator_State_Disabled :: Accelerator_State
 pattern Accelerator_State_Disabled = Accelerator_State "DISABLED"
 
--- | Indicates that accelerator state is currently unknown. Requests for enable, disable could be retried while in this state
+-- | Indicates that accelerator state is currently unknown. Requests for enable, disable could be retried while in this state.
 pattern Accelerator_State_Unknown :: Accelerator_State
 pattern Accelerator_State_Unknown = Accelerator_State "UNKNOWN"
 

@@ -51,7 +51,6 @@ type RunProjectsLocationsServicesPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "allowMissing" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "validateOnly" Core.Bool
@@ -67,7 +66,7 @@ data RunProjectsLocationsServicesPatch = RunProjectsLocationsServicesPatch
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | If set to true, and if the Service does not exist, it will create a new one. Caller must have both create and update permissions for this call if this is set to true.
+    -- | This field is currently not used by Cloud Run; setting it does not have any effect.
     allowMissing :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -75,8 +74,6 @@ data RunProjectsLocationsServicesPatch = RunProjectsLocationsServicesPatch
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudRunV2Service,
-    -- | The list of fields to be updated.
-    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -101,7 +98,6 @@ newRunProjectsLocationsServicesPatch name payload =
       callback = Core.Nothing,
       name = name,
       payload = payload,
-      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       validateOnly = Core.Nothing
@@ -124,7 +120,6 @@ instance
       accessToken
       allowMissing
       callback
-      updateMask
       uploadType
       uploadProtocol
       validateOnly

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a notification channel. Fields not specified in the field mask remain unchanged.
+-- Updates a notification channel. Fields not specified in the field mask remain unchanged.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.patch@.
 module Gogol.Monitoring.Projects.NotificationChannels.Patch
@@ -57,7 +57,7 @@ type MonitoringProjectsNotificationChannelsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] NotificationChannel
     Core.:> Core.Patch '[Core.JSON] NotificationChannel
 
--- | Updates a notification channel. Fields not specified in the field mask remain unchanged.
+-- | Updates a notification channel. Fields not specified in the field mask remain unchanged.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ 'newMonitoringProjectsNotificationChannelsPatch' smart constructor.
 data MonitoringProjectsNotificationChannelsPatch = MonitoringProjectsNotificationChannelsPatch

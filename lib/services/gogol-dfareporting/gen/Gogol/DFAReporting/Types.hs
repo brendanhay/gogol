@@ -143,6 +143,10 @@ module Gogol.DFAReporting.Types
     AdvertiserGroupsListResponse (..),
     newAdvertiserGroupsListResponse,
 
+    -- ** AdvertiserInvoicesListResponse
+    AdvertiserInvoicesListResponse (..),
+    newAdvertiserInvoicesListResponse,
+
     -- ** AdvertiserLandingPagesListResponse
     AdvertiserLandingPagesListResponse (..),
     newAdvertiserLandingPagesListResponse,
@@ -158,6 +162,46 @@ module Gogol.DFAReporting.Types
     -- ** AudienceSegmentGroup
     AudienceSegmentGroup (..),
     newAudienceSegmentGroup,
+
+    -- ** BillingAssignment
+    BillingAssignment (..),
+    newBillingAssignment,
+
+    -- ** BillingAssignmentsListResponse
+    BillingAssignmentsListResponse (..),
+    newBillingAssignmentsListResponse,
+
+    -- ** BillingProfile
+    BillingProfile (..),
+    newBillingProfile,
+
+    -- ** BillingProfile_InvoiceLevel
+    BillingProfile_InvoiceLevel (..),
+
+    -- ** BillingProfile_Status
+    BillingProfile_Status (..),
+
+    -- ** BillingProfilesListResponse
+    BillingProfilesListResponse (..),
+    newBillingProfilesListResponse,
+
+    -- ** BillingRate
+    BillingRate (..),
+    newBillingRate,
+
+    -- ** BillingRate_Type
+    BillingRate_Type (..),
+
+    -- ** BillingRate_UnitOfMeasure
+    BillingRate_UnitOfMeasure (..),
+
+    -- ** BillingRateTieredRate
+    BillingRateTieredRate (..),
+    newBillingRateTieredRate,
+
+    -- ** BillingRatesListResponse
+    BillingRatesListResponse (..),
+    newBillingRatesListResponse,
 
     -- ** Browser
     Browser (..),
@@ -178,6 +222,10 @@ module Gogol.DFAReporting.Types
     -- ** CampaignCreativeAssociationsListResponse
     CampaignCreativeAssociationsListResponse (..),
     newCampaignCreativeAssociationsListResponse,
+
+    -- ** CampaignSummary
+    CampaignSummary (..),
+    newCampaignSummary,
 
     -- ** CampaignsListResponse
     CampaignsListResponse (..),
@@ -711,6 +759,13 @@ module Gogol.DFAReporting.Types
     InventoryItemsListResponse (..),
     newInventoryItemsListResponse,
 
+    -- ** Invoice
+    Invoice (..),
+    newInvoice,
+
+    -- ** Invoice_InvoiceType
+    Invoice_InvoiceType (..),
+
     -- ** KeyValueTargetingExpression
     KeyValueTargetingExpression (..),
     newKeyValueTargetingExpression,
@@ -916,6 +971,9 @@ module Gogol.DFAReporting.Types
     Placement (..),
     newPlacement,
 
+    -- ** Placement_ActiveStatus
+    Placement_ActiveStatus (..),
+
     -- ** Placement_Compatibility
     Placement_Compatibility (..),
 
@@ -938,6 +996,9 @@ module Gogol.DFAReporting.Types
     -- ** PlacementGroup
     PlacementGroup (..),
     newPlacementGroup,
+
+    -- ** PlacementGroup_ActiveStatus
+    PlacementGroup_ActiveStatus (..),
 
     -- ** PlacementGroup_PlacementGroupType
     PlacementGroup_PlacementGroupType (..),
@@ -1333,6 +1394,13 @@ module Gogol.DFAReporting.Types
     UserRolesListResponse (..),
     newUserRolesListResponse,
 
+    -- ** UvarFilter
+    UvarFilter (..),
+    newUvarFilter,
+
+    -- ** UvarFilter_Match
+    UvarFilter_Match (..),
+
     -- ** VideoFormat
     VideoFormat (..),
     newVideoFormat,
@@ -1399,6 +1467,15 @@ module Gogol.DFAReporting.Types
 
     -- ** AdvertisersListStatus
     AdvertisersListStatus (..),
+
+    -- ** BillingProfilesListSortField
+    BillingProfilesListSortField (..),
+
+    -- ** BillingProfilesListSortOrder
+    BillingProfilesListSortOrder (..),
+
+    -- ** BillingProfilesListStatus
+    BillingProfilesListStatus (..),
 
     -- ** CampaignCreativeAssociationsListSortOrder
     CampaignCreativeAssociationsListSortOrder (..),
@@ -1520,6 +1597,9 @@ module Gogol.DFAReporting.Types
     -- ** OrdersListSortOrder
     OrdersListSortOrder (..),
 
+    -- ** PlacementGroupsListActiveStatus
+    PlacementGroupsListActiveStatus (..),
+
     -- ** PlacementGroupsListPlacementGroupType
     PlacementGroupsListPlacementGroupType (..),
 
@@ -1540,6 +1620,9 @@ module Gogol.DFAReporting.Types
 
     -- ** PlacementsGeneratetagsTagFormats
     PlacementsGeneratetagsTagFormats (..),
+
+    -- ** PlacementsListActiveStatus
+    PlacementsListActiveStatus (..),
 
     -- ** PlacementsListCompatibilities
     PlacementsListCompatibilities (..),
@@ -1619,11 +1702,11 @@ import Gogol.DFAReporting.Internal.Product
 import Gogol.DFAReporting.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v3.5@ of the Campaign Manager 360 API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v4@ of the Campaign Manager 360 API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: Core.ServiceConfig
 dFAReportingService =
   Core.defaultService
-    (Core.ServiceId "dfareporting:v3.5")
+    (Core.ServiceId "dfareporting:v4")
     "dfareporting.googleapis.com"
 
 -- | Manage DoubleClick Digital Marketing conversions

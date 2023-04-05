@@ -156,6 +156,10 @@ module Gogol.ServiceConsumerManagement
     BackendRule (..),
     newBackendRule,
 
+    -- ** BackendRule_OverridesByRequestProtocol
+    BackendRule_OverridesByRequestProtocol (..),
+    newBackendRule_OverridesByRequestProtocol,
+
     -- ** BackendRule_PathTranslation
     BackendRule_PathTranslation (..),
 
@@ -175,6 +179,20 @@ module Gogol.ServiceConsumerManagement
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** ClientLibrarySettings
+    ClientLibrarySettings (..),
+    newClientLibrarySettings,
+
+    -- ** ClientLibrarySettings_LaunchStage
+    ClientLibrarySettings_LaunchStage (..),
+
+    -- ** CommonLanguageSettings
+    CommonLanguageSettings (..),
+    newCommonLanguageSettings,
+
+    -- ** CommonLanguageSettings_DestinationsItem
+    CommonLanguageSettings_DestinationsItem (..),
+
     -- ** Context
     Context (..),
     newContext,
@@ -186,6 +204,10 @@ module Gogol.ServiceConsumerManagement
     -- ** Control
     Control (..),
     newControl,
+
+    -- ** CppSettings
+    CppSettings (..),
+    newCppSettings,
 
     -- ** CreateTenancyUnitRequest
     CreateTenancyUnitRequest (..),
@@ -214,6 +236,18 @@ module Gogol.ServiceConsumerManagement
     -- ** DocumentationRule
     DocumentationRule (..),
     newDocumentationRule,
+
+    -- ** DotnetSettings
+    DotnetSettings (..),
+    newDotnetSettings,
+
+    -- ** DotnetSettings_RenamedResources
+    DotnetSettings_RenamedResources (..),
+    newDotnetSettings_RenamedResources,
+
+    -- ** DotnetSettings_RenamedServices
+    DotnetSettings_RenamedServices (..),
+    newDotnetSettings_RenamedServices,
 
     -- ** Empty
     Empty (..),
@@ -244,6 +278,10 @@ module Gogol.ServiceConsumerManagement
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** GoSettings
+    GoSettings (..),
+    newGoSettings,
+
     -- ** Http
     Http (..),
     newHttp,
@@ -251,6 +289,14 @@ module Gogol.ServiceConsumerManagement
     -- ** HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- ** JavaSettings
+    JavaSettings (..),
+    newJavaSettings,
+
+    -- ** JavaSettings_ServiceClassNames
+    JavaSettings_ServiceClassNames (..),
+    newJavaSettings_ServiceClassNames,
 
     -- ** JwtLocation
     JwtLocation (..),
@@ -283,12 +329,20 @@ module Gogol.ServiceConsumerManagement
     LoggingDestination (..),
     newLoggingDestination,
 
+    -- ** LongRunning
+    LongRunning (..),
+    newLongRunning,
+
     -- ** Method
     Method (..),
     newMethod,
 
     -- ** Method_Syntax
     Method_Syntax (..),
+
+    -- ** MethodSettings
+    MethodSettings (..),
+    newMethodSettings,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -337,6 +391,10 @@ module Gogol.ServiceConsumerManagement
     MonitoringDestination (..),
     newMonitoringDestination,
 
+    -- ** NodeSettings
+    NodeSettings (..),
+    newNodeSettings,
+
     -- ** OAuthRequirements
     OAuthRequirements (..),
     newOAuthRequirements,
@@ -365,9 +423,24 @@ module Gogol.ServiceConsumerManagement
     Page (..),
     newPage,
 
+    -- ** PhpSettings
+    PhpSettings (..),
+    newPhpSettings,
+
     -- ** PolicyBinding
     PolicyBinding (..),
     newPolicyBinding,
+
+    -- ** Publishing
+    Publishing (..),
+    newPublishing,
+
+    -- ** Publishing_Organization
+    Publishing_Organization (..),
+
+    -- ** PythonSettings
+    PythonSettings (..),
+    newPythonSettings,
 
     -- ** Quota
     Quota (..),
@@ -384,6 +457,10 @@ module Gogol.ServiceConsumerManagement
     -- ** RemoveTenantProjectRequest
     RemoveTenantProjectRequest (..),
     newRemoveTenantProjectRequest,
+
+    -- ** RubySettings
+    RubySettings (..),
+    newRubySettings,
 
     -- ** SearchTenancyUnitsResponse
     SearchTenancyUnitsResponse (..),

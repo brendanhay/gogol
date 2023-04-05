@@ -254,6 +254,10 @@ module Gogol.YouTube.Internal.Product
     ContentRating (..),
     newContentRating,
 
+    -- * Cuepoint
+    Cuepoint (..),
+    newCuepoint,
+
     -- * Entity
     Entity (..),
     newEntity,
@@ -621,6 +625,10 @@ module Gogol.YouTube.Internal.Product
     -- * ThirdPartyLink
     ThirdPartyLink (..),
     newThirdPartyLink,
+
+    -- * ThirdPartyLinkListResponse
+    ThirdPartyLinkListResponse (..),
+    newThirdPartyLinkListResponse,
 
     -- * ThirdPartyLinkSnippet
     ThirdPartyLinkSnippet (..),
@@ -3146,7 +3154,9 @@ instance Core.ToJSON ChannelStatus where
 --
 -- /See:/ 'newChannelToStoreLinkDetails' smart constructor.
 data ChannelToStoreLinkDetails = ChannelToStoreLinkDetails
-  { -- | Name of the store.
+  { -- | Google Merchant Center id of the store.
+    merchantId :: (Core.Maybe Core.Word64),
+    -- | Name of the store.
     storeName :: (Core.Maybe Core.Text),
     -- | Landing page of the store.
     storeUrl :: (Core.Maybe Core.Text)
@@ -3157,7 +3167,11 @@ data ChannelToStoreLinkDetails = ChannelToStoreLinkDetails
 newChannelToStoreLinkDetails ::
   ChannelToStoreLinkDetails
 newChannelToStoreLinkDetails =
-  ChannelToStoreLinkDetails {storeName = Core.Nothing, storeUrl = Core.Nothing}
+  ChannelToStoreLinkDetails
+    { merchantId = Core.Nothing,
+      storeName = Core.Nothing,
+      storeUrl = Core.Nothing
+    }
 
 instance Core.FromJSON ChannelToStoreLinkDetails where
   parseJSON =
@@ -3165,7 +3179,10 @@ instance Core.FromJSON ChannelToStoreLinkDetails where
       "ChannelToStoreLinkDetails"
       ( \o ->
           ChannelToStoreLinkDetails
-            Core.<$> (o Core..:? "storeName")
+            Core.<$> ( o Core..:? "merchantId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "storeName")
             Core.<*> (o Core..:? "storeUrl")
       )
 
@@ -3173,7 +3190,9 @@ instance Core.ToJSON ChannelToStoreLinkDetails where
   toJSON ChannelToStoreLinkDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("storeName" Core..=) Core.<$> storeName,
+          [ ("merchantId" Core..=) Core.. Core.AsText
+              Core.<$> merchantId,
+            ("storeName" Core..=) Core.<$> storeName,
             ("storeUrl" Core..=) Core.<$> storeUrl
           ]
       )
@@ -4071,6 +4090,71 @@ instance Core.ToJSON ContentRating where
             ("smsaRating" Core..=) Core.<$> smsaRating,
             ("tvpgRating" Core..=) Core.<$> tvpgRating,
             ("ytRating" Core..=) Core.<$> ytRating
+          ]
+      )
+
+-- | Note that there may be a 5-second end-point resolution issue. For instance, if a cuepoint comes in for 22:03:27, we may stuff the cuepoint into 22:03:25 or 22:03:30, depending. This is an artifact of HLS.
+--
+-- /See:/ 'newCuepoint' smart constructor.
+data Cuepoint = Cuepoint
+  { -- |
+    cueType :: (Core.Maybe Cuepoint_CueType),
+    -- | The duration of this cuepoint.
+    durationSecs :: (Core.Maybe Core.Word32),
+    -- |
+    etag :: (Core.Maybe Core.Text),
+    -- | The identifier for cuepoint resource.
+    id :: (Core.Maybe Core.Text),
+    -- | The time when the cuepoint should be inserted by offset to the broadcast actual start time.
+    insertionOffsetTimeMs :: (Core.Maybe Core.Int64),
+    -- | The wall clock time at which the cuepoint should be inserted. Only one of insertion/offset/time/ms and walltime/ms may be set at a time.
+    walltimeMs :: (Core.Maybe Core.Word64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Cuepoint' with the minimum fields required to make a request.
+newCuepoint ::
+  Cuepoint
+newCuepoint =
+  Cuepoint
+    { cueType = Core.Nothing,
+      durationSecs = Core.Nothing,
+      etag = Core.Nothing,
+      id = Core.Nothing,
+      insertionOffsetTimeMs = Core.Nothing,
+      walltimeMs = Core.Nothing
+    }
+
+instance Core.FromJSON Cuepoint where
+  parseJSON =
+    Core.withObject
+      "Cuepoint"
+      ( \o ->
+          Cuepoint
+            Core.<$> (o Core..:? "cueType")
+            Core.<*> (o Core..:? "durationSecs")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "id")
+            Core.<*> ( o Core..:? "insertionOffsetTimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "walltimeMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Cuepoint where
+  toJSON Cuepoint {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cueType" Core..=) Core.<$> cueType,
+            ("durationSecs" Core..=) Core.<$> durationSecs,
+            ("etag" Core..=) Core.<$> etag,
+            ("id" Core..=) Core.<$> id,
+            ("insertionOffsetTimeMs" Core..=) Core.. Core.AsText
+              Core.<$> insertionOffsetTimeMs,
+            ("walltimeMs" Core..=) Core.. Core.AsText
+              Core.<$> walltimeMs
           ]
       )
 
@@ -5195,8 +5279,8 @@ instance Core.ToJSON LiveBroadcastSnippet where
 --
 -- /See:/ 'newLiveBroadcastStatistics' smart constructor.
 newtype LiveBroadcastStatistics = LiveBroadcastStatistics
-  { -- | The total number of live chat messages currently on the broadcast. The property and its value will be present if the broadcast is public, has the live chat feature enabled, and has at least one message. Note that this field will not be filled after the broadcast ends. So this property would not identify the number of chat messages for an archived video of a completed live broadcast.
-    totalChatCount :: (Core.Maybe Core.Word64)
+  { -- | The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
+    concurrentViewers :: (Core.Maybe Core.Word64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5204,7 +5288,7 @@ newtype LiveBroadcastStatistics = LiveBroadcastStatistics
 newLiveBroadcastStatistics ::
   LiveBroadcastStatistics
 newLiveBroadcastStatistics =
-  LiveBroadcastStatistics {totalChatCount = Core.Nothing}
+  LiveBroadcastStatistics {concurrentViewers = Core.Nothing}
 
 instance Core.FromJSON LiveBroadcastStatistics where
   parseJSON =
@@ -5212,7 +5296,7 @@ instance Core.FromJSON LiveBroadcastStatistics where
       "LiveBroadcastStatistics"
       ( \o ->
           LiveBroadcastStatistics
-            Core.<$> ( o Core..:? "totalChatCount"
+            Core.<$> ( o Core..:? "concurrentViewers"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -5221,8 +5305,8 @@ instance Core.ToJSON LiveBroadcastStatistics where
   toJSON LiveBroadcastStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("totalChatCount" Core..=) Core.. Core.AsText
-              Core.<$> totalChatCount
+          [ ("concurrentViewers" Core..=) Core.. Core.AsText
+              Core.<$> concurrentViewers
           ]
       )
 
@@ -8992,6 +9076,51 @@ instance Core.ToJSON ThirdPartyLink where
           ]
       )
 
+--
+-- /See:/ 'newThirdPartyLinkListResponse' smart constructor.
+data ThirdPartyLinkListResponse = ThirdPartyLinkListResponse
+  { -- | Etag of this resource.
+    etag :: (Core.Maybe Core.Text),
+    -- |
+    items :: (Core.Maybe [ThirdPartyLink]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#thirdPartyLinkListResponse\".
+    kind :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ThirdPartyLinkListResponse' with the minimum fields required to make a request.
+newThirdPartyLinkListResponse ::
+  ThirdPartyLinkListResponse
+newThirdPartyLinkListResponse =
+  ThirdPartyLinkListResponse
+    { etag = Core.Nothing,
+      items = Core.Nothing,
+      kind = "youtube#thirdPartyLinkListResponse"
+    }
+
+instance Core.FromJSON ThirdPartyLinkListResponse where
+  parseJSON =
+    Core.withObject
+      "ThirdPartyLinkListResponse"
+      ( \o ->
+          ThirdPartyLinkListResponse
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "items")
+            Core.<*> ( o Core..:? "kind"
+                         Core..!= "youtube#thirdPartyLinkListResponse"
+                     )
+      )
+
+instance Core.ToJSON ThirdPartyLinkListResponse where
+  toJSON ThirdPartyLinkListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            ("items" Core..=) Core.<$> items,
+            Core.Just ("kind" Core..= kind)
+          ]
+      )
+
 -- | Basic information about a third party account link, including its type and type-specific information.
 --
 -- /See:/ 'newThirdPartyLinkSnippet' smart constructor.
@@ -10880,7 +11009,7 @@ instance Core.ToJSON VideoStatistics where
           ]
       )
 
--- | Basic details about a video category, such as its localized title. Next Id: 17
+-- | Basic details about a video category, such as its localized title. Next Id: 18
 --
 -- /See:/ 'newVideoStatus' smart constructor.
 data VideoStatus = VideoStatus

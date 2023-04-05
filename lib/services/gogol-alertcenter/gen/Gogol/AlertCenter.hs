@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages alerts on issues affecting your domain.
+-- Manages alerts on issues affecting your domain. Note: The current version of this API (v1beta1) is available to all Google Workspace customers.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/alertcenter/ Google Workspace Alert Center API Reference>
 module Gogol.AlertCenter
@@ -142,6 +142,10 @@ module Gogol.AlertCenter
     -- ** AlertMetadata
     AlertMetadata (..),
     newAlertMetadata,
+
+    -- ** ApnsCertificateExpirationInfo
+    ApnsCertificateExpirationInfo (..),
+    newApnsCertificateExpirationInfo,
 
     -- ** AppMakerSqlSetupNotification
     AppMakerSqlSetupNotification (..),
@@ -284,6 +288,10 @@ module Gogol.AlertCenter
     PredefinedDetectorInfo (..),
     newPredefinedDetectorInfo,
 
+    -- ** PrimaryAdminChangedEvent
+    PrimaryAdminChangedEvent (..),
+    newPrimaryAdminChangedEvent,
+
     -- ** ReportingRule
     ReportingRule (..),
     newReportingRule,
@@ -316,6 +324,22 @@ module Gogol.AlertCenter
     -- ** RuleViolationInfo_TriggeredActionTypesItem
     RuleViolationInfo_TriggeredActionTypesItem (..),
 
+    -- ** SSOProfileCreatedEvent
+    SSOProfileCreatedEvent (..),
+    newSSOProfileCreatedEvent,
+
+    -- ** SSOProfileDeletedEvent
+    SSOProfileDeletedEvent (..),
+    newSSOProfileDeletedEvent,
+
+    -- ** SSOProfileUpdatedEvent
+    SSOProfileUpdatedEvent (..),
+    newSSOProfileUpdatedEvent,
+
+    -- ** SensitiveAdminAction
+    SensitiveAdminAction (..),
+    newSensitiveAdminAction,
+
     -- ** Settings
     Settings (..),
     newSettings,
@@ -332,6 +356,10 @@ module Gogol.AlertCenter
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SuperAdminPasswordResetEvent
+    SuperAdminPasswordResetEvent (..),
+    newSuperAdminPasswordResetEvent,
+
     -- ** SuspiciousActivity
     SuspiciousActivity (..),
     newSuspiciousActivity,
@@ -339,6 +367,20 @@ module Gogol.AlertCenter
     -- ** SuspiciousActivitySecurityDetail
     SuspiciousActivitySecurityDetail (..),
     newSuspiciousActivitySecurityDetail,
+
+    -- ** TransferError
+    TransferError (..),
+    newTransferError,
+
+    -- ** TransferError_EntityType
+    TransferError_EntityType (..),
+
+    -- ** TransferError_InvalidReason
+    TransferError_InvalidReason (..),
+
+    -- ** TransferMisconfiguration
+    TransferMisconfiguration (..),
+    newTransferMisconfiguration,
 
     -- ** UndeleteAlertRequest
     UndeleteAlertRequest (..),
@@ -355,6 +397,24 @@ module Gogol.AlertCenter
     -- ** UserDefinedDetectorInfo
     UserDefinedDetectorInfo (..),
     newUserDefinedDetectorInfo,
+
+    -- ** VoiceMisconfiguration
+    VoiceMisconfiguration (..),
+    newVoiceMisconfiguration,
+
+    -- ** VoiceMisconfiguration_EntityType
+    VoiceMisconfiguration_EntityType (..),
+
+    -- ** VoicemailMisconfiguration
+    VoicemailMisconfiguration (..),
+    newVoicemailMisconfiguration,
+
+    -- ** VoicemailRecipientError
+    VoicemailRecipientError (..),
+    newVoicemailRecipientError,
+
+    -- ** VoicemailRecipientError_InvalidReason
+    VoicemailRecipientError_InvalidReason (..),
   )
 where
 

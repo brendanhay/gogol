@@ -52,6 +52,15 @@ module Gogol.Vault.Internal.Sum
         ..
       ),
 
+    -- * DriveOptions_ClientSideEncryptedOption
+    DriveOptions_ClientSideEncryptedOption
+      ( DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED,
+        DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY,
+        DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED,
+        DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED,
+        ..
+      ),
+
     -- * Export_Status
     Export_Status
       ( Export_Status_EXPORTSTATUSUNSPECIFIED,
@@ -159,6 +168,7 @@ module Gogol.Vault.Internal.Sum
         Query_Method_TEAMDRIVE,
         Query_Method_ENTIREORG,
         Query_Method_Room,
+        Query_Method_SITESURL,
         Query_Method_SHAREDDRIVE,
         ..
       ),
@@ -171,6 +181,7 @@ module Gogol.Vault.Internal.Sum
         Query_SearchMethod_TEAMDRIVE,
         Query_SearchMethod_ENTIREORG,
         Query_SearchMethod_Room,
+        Query_SearchMethod_SITESURL,
         Query_SearchMethod_SHAREDDRIVE,
         ..
       ),
@@ -343,6 +354,43 @@ pattern CountArtifactsRequest_View_All = CountArtifactsRequest_View "ALL"
   CountArtifactsRequest_View
   #-}
 
+-- | Set whether the results include only content encrypted with <https://support.google.com/a?p=cse_ov Google Workspace Client-side encryption> content, only unencrypted content, or both. Defaults to both. Currently supported for Drive.
+newtype DriveOptions_ClientSideEncryptedOption = DriveOptions_ClientSideEncryptedOption {fromDriveOptions_ClientSideEncryptedOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Encryption status unspecified. Results include both client-side encrypted and non-encrypted content.
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED :: DriveOptions_ClientSideEncryptedOption
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED = DriveOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_UNSPECIFIED"
+
+-- | Include both client-side encrypted and unencrypted content in results.
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY :: DriveOptions_ClientSideEncryptedOption
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY = DriveOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_ANY"
+
+-- | Include client-side encrypted content only.
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED :: DriveOptions_ClientSideEncryptedOption
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED = DriveOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_ENCRYPTED"
+
+-- | Include unencrypted content only.
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED :: DriveOptions_ClientSideEncryptedOption
+pattern DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED = DriveOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_UNENCRYPTED"
+
+{-# COMPLETE
+  DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED,
+  DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY,
+  DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED,
+  DriveOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED,
+  DriveOptions_ClientSideEncryptedOption
+  #-}
+
 -- | Output only. The status of the export.
 newtype Export_Status = Export_Status {fromExport_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -434,11 +482,11 @@ newtype GroupsExportOptions_ExportFormat = GroupsExportOptions_ExportFormat {fro
 pattern GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = GroupsExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
 
--- | Export as MBOX.
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
 pattern GroupsExportOptions_ExportFormat_Mbox :: GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_Mbox = GroupsExportOptions_ExportFormat "MBOX"
 
--- | Export as PST.
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
 pattern GroupsExportOptions_ExportFormat_Pst :: GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_Pst = GroupsExportOptions_ExportFormat "PST"
 
@@ -466,11 +514,11 @@ newtype HangoutsChatExportOptions_ExportFormat = HangoutsChatExportOptions_Expor
 pattern HangoutsChatExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: HangoutsChatExportOptions_ExportFormat
 pattern HangoutsChatExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = HangoutsChatExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
 
--- | Export as MBOX.
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
 pattern HangoutsChatExportOptions_ExportFormat_Mbox :: HangoutsChatExportOptions_ExportFormat
 pattern HangoutsChatExportOptions_ExportFormat_Mbox = HangoutsChatExportOptions_ExportFormat "MBOX"
 
--- | Export as PST.
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
 pattern HangoutsChatExportOptions_ExportFormat_Pst :: HangoutsChatExportOptions_ExportFormat
 pattern HangoutsChatExportOptions_ExportFormat_Pst = HangoutsChatExportOptions_ExportFormat "PST"
 
@@ -546,7 +594,7 @@ pattern Hold_Corpus_Mail = Hold_Corpus "MAIL"
 pattern Hold_Corpus_Groups :: Hold_Corpus
 pattern Hold_Corpus_Groups = Hold_Corpus "GROUPS"
 
--- | For search, Google Chat only. For holds, Google Chat and classic Hangouts.
+-- | For export, Google Chat only. For holds, Google Chat and classic Hangouts.
 pattern Hold_Corpus_HANGOUTSCHAT :: Hold_Corpus
 pattern Hold_Corpus_HANGOUTSCHAT = Hold_Corpus "HANGOUTS_CHAT"
 
@@ -581,11 +629,11 @@ newtype MailExportOptions_ExportFormat = MailExportOptions_ExportFormat {fromMai
 pattern MailExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: MailExportOptions_ExportFormat
 pattern MailExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = MailExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
 
--- | Export as MBOX.
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
 pattern MailExportOptions_ExportFormat_Mbox :: MailExportOptions_ExportFormat
 pattern MailExportOptions_ExportFormat_Mbox = MailExportOptions_ExportFormat "MBOX"
 
--- | Export as PST.
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
 pattern MailExportOptions_ExportFormat_Pst :: MailExportOptions_ExportFormat
 pattern MailExportOptions_ExportFormat_Pst = MailExportOptions_ExportFormat "PST"
 
@@ -694,7 +742,7 @@ pattern Query_Corpus_Mail = Query_Corpus "MAIL"
 pattern Query_Corpus_Groups :: Query_Corpus
 pattern Query_Corpus_Groups = Query_Corpus "GROUPS"
 
--- | For search, Google Chat only. For holds, Google Chat and classic Hangouts.
+-- | For export, Google Chat only. For holds, Google Chat and classic Hangouts.
 pattern Query_Corpus_HANGOUTSCHAT :: Query_Corpus
 pattern Query_Corpus_HANGOUTSCHAT = Query_Corpus "HANGOUTS_CHAT"
 
@@ -786,6 +834,10 @@ pattern Query_Method_ENTIREORG = Query_Method "ENTIRE_ORG"
 pattern Query_Method_Room :: Query_Method
 pattern Query_Method_Room = Query_Method "ROOM"
 
+-- | Search for sites by the published site URLs specified in <https://developers.google.com/vault/reference/rest/v1/Query#sitesurlinfo SitesUrlInfo>.
+pattern Query_Method_SITESURL :: Query_Method
+pattern Query_Method_SITESURL = Query_Method "SITES_URL"
+
 -- | Search the files in the shared drives specified in <https://developers.google.com/vault/reference/rest/v1/Query#shareddriveinfo SharedDriveInfo>.
 pattern Query_Method_SHAREDDRIVE :: Query_Method
 pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
@@ -797,6 +849,7 @@ pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
   Query_Method_TEAMDRIVE,
   Query_Method_ENTIREORG,
   Query_Method_Room,
+  Query_Method_SITESURL,
   Query_Method_SHAREDDRIVE,
   Query_Method
   #-}
@@ -838,6 +891,10 @@ pattern Query_SearchMethod_ENTIREORG = Query_SearchMethod "ENTIRE_ORG"
 pattern Query_SearchMethod_Room :: Query_SearchMethod
 pattern Query_SearchMethod_Room = Query_SearchMethod "ROOM"
 
+-- | Search for sites by the published site URLs specified in <https://developers.google.com/vault/reference/rest/v1/Query#sitesurlinfo SitesUrlInfo>.
+pattern Query_SearchMethod_SITESURL :: Query_SearchMethod
+pattern Query_SearchMethod_SITESURL = Query_SearchMethod "SITES_URL"
+
 -- | Search the files in the shared drives specified in <https://developers.google.com/vault/reference/rest/v1/Query#shareddriveinfo SharedDriveInfo>.
 pattern Query_SearchMethod_SHAREDDRIVE :: Query_SearchMethod
 pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
@@ -849,6 +906,7 @@ pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
   Query_SearchMethod_TEAMDRIVE,
   Query_SearchMethod_ENTIREORG,
   Query_SearchMethod_Room,
+  Query_SearchMethod_SITESURL,
   Query_SearchMethod_SHAREDDRIVE,
   Query_SearchMethod
   #-}
@@ -870,11 +928,11 @@ newtype VoiceExportOptions_ExportFormat = VoiceExportOptions_ExportFormat {fromV
 pattern VoiceExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: VoiceExportOptions_ExportFormat
 pattern VoiceExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = VoiceExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
 
--- | Export as MBOX.
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
 pattern VoiceExportOptions_ExportFormat_Mbox :: VoiceExportOptions_ExportFormat
 pattern VoiceExportOptions_ExportFormat_Mbox = VoiceExportOptions_ExportFormat "MBOX"
 
--- | Export as PST.
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
 pattern VoiceExportOptions_ExportFormat_Pst :: VoiceExportOptions_ExportFormat
 pattern VoiceExportOptions_ExportFormat_Pst = VoiceExportOptions_ExportFormat "PST"
 

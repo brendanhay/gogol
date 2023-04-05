@@ -68,7 +68,7 @@ data CloudresourcemanagerFoldersSetIamPolicy = CloudresourcemanagerFoldersSetIam
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    -- | REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
     resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data CloudresourcemanagerFoldersSetIamPolicy = CloudresourcemanagerFoldersSetIam
 newCloudresourcemanagerFoldersSetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
   SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   CloudresourcemanagerFoldersSetIamPolicy
 newCloudresourcemanagerFoldersSetIamPolicy payload resource =

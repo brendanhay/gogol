@@ -102,6 +102,10 @@ module Gogol.File.Internal.Product
     GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata,
 
+    -- * GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter (..),
+    newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter,
+
     -- * GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
     GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility,
@@ -239,7 +243,7 @@ where
 import Gogol.File.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | A Cloud Filestore backup.
+-- | A Filestore backup.
 --
 -- /See:/ 'newBackup' smart constructor.
 data Backup = Backup
@@ -251,17 +255,19 @@ data Backup = Backup
     description :: (Core.Maybe Core.Text),
     -- | Output only. Amount of bytes that will be downloaded if the backup is restored. This may be different than storage bytes, since sequential backups of the same disk will share storage.
     downloadBytes :: (Core.Maybe Core.Int64),
+    -- | Immutable. KMS key name used for data encryption.
+    kmsKey :: (Core.Maybe Core.Text),
     -- | Resource labels to represent user provided metadata.
     labels :: (Core.Maybe Backup_Labels),
     -- | Output only. The resource name of the backup, in the format @projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
-    -- | Name of the file share in the source Cloud Filestore instance that the backup is created from.
+    -- | Name of the file share in the source Filestore instance that the backup is created from.
     sourceFileShare :: (Core.Maybe Core.Text),
-    -- | The resource name of the source Cloud Filestore instance, in the format @projects\/{project_number}\/locations\/{location_id}\/instances\/{instance_id}@, used to create this backup.
+    -- | The resource name of the source Filestore instance, in the format @projects\/{project_number}\/locations\/{location_id}\/instances\/{instance_id}@, used to create this backup.
     sourceInstance :: (Core.Maybe Core.Text),
-    -- | Output only. The service tier of the source Cloud Filestore instance that this backup is created from.
+    -- | Output only. The service tier of the source Filestore instance that this backup is created from.
     sourceInstanceTier :: (Core.Maybe Backup_SourceInstanceTier),
     -- | Output only. The backup state.
     state :: (Core.Maybe Backup_State),
@@ -279,6 +285,7 @@ newBackup =
       createTime = Core.Nothing,
       description = Core.Nothing,
       downloadBytes = Core.Nothing,
+      kmsKey = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
       satisfiesPzs = Core.Nothing,
@@ -303,6 +310,7 @@ instance Core.FromJSON Backup where
             Core.<*> ( o Core..:? "downloadBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "kmsKey")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
@@ -325,6 +333,7 @@ instance Core.ToJSON Backup where
             ("description" Core..=) Core.<$> description,
             ("downloadBytes" Core..=) Core.. Core.AsText
               Core.<$> downloadBytes,
+            ("kmsKey" Core..=) Core.<$> kmsKey,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
@@ -420,7 +429,7 @@ instance Core.ToJSON DailyCycle where
           ]
       )
 
--- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day, with a zero year (e.g., an anniversary) * A year on its own, with a zero month and a zero day * A year and month, with a zero day (e.g., a credit card expiration date) Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+-- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
 --
 -- /See:/ 'newDate' smart constructor.
 data Date = Date
@@ -503,7 +512,7 @@ instance Core.ToJSON DenyMaintenancePeriod where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -525,7 +534,7 @@ instance Core.ToJSON Empty where
 --
 -- /See:/ 'newFileShareConfig' smart constructor.
 data FileShareConfig = FileShareConfig
-  { -- | File share capacity in gigabytes (GB). Cloud Filestore defines 1 GB as 1024^3 bytes.
+  { -- | File share capacity in gigabytes (GB). Filestore defines 1 GB as 1024^3 bytes.
     capacityGb :: (Core.Maybe Core.Int64),
     -- | The name of the file share (must be 16 characters or less).
     name :: (Core.Maybe Core.Text),
@@ -574,21 +583,24 @@ instance Core.ToJSON FileShareConfig where
           ]
       )
 
+-- | Instance represents the interface for SLM services to actuate the state of control plane resources. Example Instance in JSON, where consumer-project-number=123456, producer-project-id=cloud-sql:
+-- @json Instance: { \"name\": \"projects\/123456\/locations\/us-east1\/instances\/prod-instance\", \"create_time\": { \"seconds\": 1526406431, }, \"labels\": { \"env\": \"prod\", \"foo\": \"bar\" }, \"state\": READY, \"software_versions\": { \"software_update\": \"cloud-sql-09-28-2018\", }, \"maintenance_policy_names\": { \"UpdatePolicy\": \"projects\/123456\/locations\/us-east1\/maintenancePolicies\/prod-update-policy\", } \"tenant_project_id\": \"cloud-sql-test-tenant\", \"producer_metadata\": { \"cloud-sql-tier\": \"basic\", \"cloud-sql-instance-size\": \"1G\", }, \"provisioned_resources\": [ { \"resource-type\": \"compute-instance\", \"resource-url\": \"https:\/\/www.googleapis.com\/compute\/v1\/projects\/cloud-sql\/zones\/us-east1-b\/instances\/vm-1\", } ], \"maintenance_schedules\": { \"csa_rollout\": { \"start_time\": { \"seconds\": 1526406431, }, \"end_time\": { \"seconds\": 1535406431, }, }, \"ncsa_rollout\": { \"start_time\": { \"seconds\": 1526406431, }, \"end_time\": { \"seconds\": 1535406431, }, } }, \"consumer_defined_name\": \"my-sql-instance1\", }@
+-- LINT.IfChange
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance' smart constructor.
 data GoogleCloudSaasacceleratorManagementProvidersV1Instance = GoogleCloudSaasacceleratorManagementProvidersV1Instance
-  { -- | consumer/defined/name is the name that is set by the consumer. On the other hand Name field represents system-assigned id of an instance so consumers are not necessarily aware of it. consumer/defined/name is used for notification\/UI purposes for consumer to recognize their instances.
+  { -- | consumer/defined/name is the name of the instance set by the service consumers. Generally this is different from the @name@ field which reperesents the system-assigned id of the instance which the service consumers do not recognize. This is a required field for tenants onboarding to Maintenance Window notifications (go\/slm-rollout-maintenance-policies#prerequisites).
     consumerDefinedName :: (Core.Maybe Core.Text),
     -- | Output only. Timestamp when the resource was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Optional. The instance/type of this instance of format: projects\/{project/id}\/locations\/{location/id}\/instanceTypes\/{instance/type/id}. Instance Type represents a high-level tier or SKU of the service that this instance belong to. When enabled(eg: Maintenance Rollout), Rollout uses \'instance/type\' along with \'software_versions\' to determine whether instance needs an update or not.
+    -- | Optional. The instance/type of this instance of format: projects\/{project/number}\/locations\/{location/id}\/instanceTypes\/{instance/type/id}. Instance Type represents a high-level tier or SKU of the service that this instance belong to. When enabled(eg: Maintenance Rollout), Rollout uses \'instance/type\' along with \'software_versions\' to determine whether instance needs an update or not.
     instanceType :: (Core.Maybe Core.Text),
     -- | Optional. Resource labels to represent user provided metadata. Each label is a key-value pair, where both the key and the value are arbitrary strings provided by the user.
     labels ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
       ),
-    -- | Deprecated. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go\/cloud-saas-mw-ug.
+    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/settings.maintenance/policies is set.
     maintenancePolicyNames ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
@@ -603,9 +615,9 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance = GoogleCloudSaasac
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
       ),
-    -- | Unique name of the resource. It uses the form: @projects\/{project_id|project_number}\/locations\/{location_id}\/instances\/{instance_id}@ Note: Either project/id or project/number can be used, but keep it consistent with other APIs (e.g. RescheduleUpdate)
+    -- | Unique name of the resource. It uses the form: @projects\/{project_number}\/locations\/{location_id}\/instances\/{instance_id}@ Note: This name is passed, stored and logged across the rollout system. So use of consumer project/id or any other consumer PII in the name is strongly discouraged for wipeout (go\/wipeout) compliance. See go\/elysium\/project/ids#storage-guidance for more details.
     name :: (Core.Maybe Core.Text),
-    -- | Optional. notification_parameters are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification\/logging purpose.
+    -- | Optional. notification_parameter are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification\/logging purpose.
     notificationParameters ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
@@ -772,7 +784,7 @@ instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels {..} =
       Core.toJSON additional
 
--- | Deprecated. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go\/cloud-saas-mw-ug.
+-- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/settings.maintenance/policies is set.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames = GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
@@ -854,19 +866,23 @@ instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules {..} =
       Core.toJSON additional
 
--- | Optional. notification_parameters are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification\/logging purpose.
+-- | Optional. notification_parameter are information that service producers may like to include that is not relevant to Rollout. This parameter will only be passed to Gamma and Cloud Logging for notification\/logging purpose.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters = GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
   { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+    additional ::
+      ( Core.HashMap
+          Core.Text
+          GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
+  Core.HashMap Core.Text GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters additional =
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
@@ -1042,7 +1058,7 @@ data GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings = Google
     exclude :: (Core.Maybe Core.Bool),
     -- | Optional. If the update call is triggered from rollback, set the value as true.
     isRollback :: (Core.Maybe Core.Bool),
-    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go\/cloud-saas-mw-ug. If only the name is needed (like in the deprecated Instance.maintenance/policy/names field) then only populate MaintenancePolicy.name.
+    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
     maintenancePolicies ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
@@ -1089,7 +1105,7 @@ instance
             ]
         )
 
--- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go\/cloud-saas-mw-ug. If only the name is needed (like in the deprecated Instance.maintenance/policy/names field) then only populate MaintenancePolicy.name.
+-- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies = GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
@@ -1182,6 +1198,44 @@ instance
                 Core.<$> perSliEligibility
             ]
         )
+
+-- | Contains notification related data.
+--
+-- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter' smart constructor.
+newtype GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter = GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+  { -- | Optional. Array of string values. e.g. instance\'s replica information.
+    values :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter' with the minimum fields required to make a request.
+newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter ::
+  GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter =
+  GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+    { values = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter"
+      ( \o ->
+          GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+            Core.<$> (o Core..:? "values")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+  where
+  toJSON
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter {..} =
+      Core.object
+        (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | PerSliSloEligibility is a mapping from an SLI name to eligibility.
 --
@@ -1419,7 +1473,7 @@ instance
             ]
         )
 
--- | A Cloud Filestore instance.
+-- | A Filestore instance.
 --
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
@@ -1445,7 +1499,7 @@ data Instance = Instance
     state :: (Core.Maybe Instance_State),
     -- | Output only. Additional information about the instance state, if available.
     statusMessage :: (Core.Maybe Core.Text),
-    -- | Output only. field indicates all the reasons the instance is in \"SUSPENDED\" state.
+    -- | Output only. Field indicates all the reasons the instance is in \"SUSPENDED\" state.
     suspensionReasons :: (Core.Maybe [Instance_SuspensionReasonsItem]),
     -- | The service tier of the instance.
     tier :: (Core.Maybe Instance_Tier)
@@ -1848,7 +1902,7 @@ instance Core.FromJSON Location_Metadata where
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
 
--- | Defines policies to service maintenance events.
+-- | LINT.IfChange Defines policies to service maintenance events.
 --
 -- /See:/ 'newMaintenancePolicy' smart constructor.
 data MaintenancePolicy = MaintenancePolicy
@@ -1990,7 +2044,7 @@ data NetworkConfig = NetworkConfig
     modes :: (Core.Maybe [NetworkConfig_ModesItem]),
     -- | The name of the Google Compute Engine <https://cloud.google.com/vpc/docs/vpc VPC network> to which the instance is connected.
     network :: (Core.Maybe Core.Text),
-    -- | Optional, reserved/ip/range can have one of the following two types of values. * CIDR range value when using DIRECT/PEERING connect mode. * <https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address Allocated IP address range> when using PRIVATE/SERVICE_ACCESS connect mode. When the name of an allocated IP address range is specified, it must be one of the ranges associated with the private service access connection. When specified as a direct CIDR value, it must be a \/29 CIDR block for Basic tier or a \/24 CIDR block for High Scale or Enterprise tier in one of the <https://www.arin.net/reference/research/statistics/address_filters/ internal IP address ranges> that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0\/29 or 192.168.0.0\/24. The range you specify can\'t overlap with either existing subnets or assigned IP address ranges for other Cloud Filestore instances in the selected VPC network.
+    -- | Optional, reserved/ip/range can have one of the following two types of values. * CIDR range value when using DIRECT/PEERING connect mode. * <https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address Allocated IP address range> when using PRIVATE/SERVICE_ACCESS connect mode. When the name of an allocated IP address range is specified, it must be one of the ranges associated with the private service access connection. When specified as a direct CIDR value, it must be a \/29 CIDR block for Basic tier, a \/24 CIDR block for High Scale tier, or a \/26 CIDR block for Enterprise tier in one of the <https://www.arin.net/reference/research/statistics/address_filters/ internal IP address ranges> that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0\/29, 192.168.0.0\/24 or 192.168.0.0\/26, respectively. The range you specify can\'t overlap with either existing subnets or assigned IP address ranges for other Filestore instances in the selected VPC network.
     reservedIpRange :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2271,7 +2325,7 @@ instance Core.ToJSON OperationMetadata where
 --
 -- /See:/ 'newRestoreInstanceRequest' smart constructor.
 data RestoreInstanceRequest = RestoreInstanceRequest
-  { -- | Required. Name of the file share in the Cloud Filestore instance that the backup is being restored to.
+  { -- | Required. Name of the file share in the Filestore instance that the backup is being restored to.
     fileShare :: (Core.Maybe Core.Text),
     -- | The resource name of the backup, in the format @projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id}@.
     sourceBackup :: (Core.Maybe Core.Text)

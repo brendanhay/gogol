@@ -70,7 +70,7 @@ data ContainerProjectsLocationsClustersList = ContainerProjectsLocationsClusters
     callback :: (Core.Maybe Core.Text),
     -- | The parent (project and location) where the clusters will be listed. Specified in the format @projects\/*\/locations\/*@. Location \"-\" matches all zones and all regions.
     parent :: Core.Text,
-    -- | Deprecated. The Google Developers Console <https://support.google.com/cloud/answer/6158840 project ID or project number>. This field has been deprecated and replaced by the parent field.
+    -- | Deprecated. The Google Developers Console <https://cloud.google.com/resource-manager/docs/creating-managing-projects project ID or project number>. This field has been deprecated and replaced by the parent field.
     projectId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

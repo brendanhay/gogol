@@ -605,7 +605,9 @@ instance Core.FromJSON AdTechnologyProviders where
       "AdTechnologyProviders"
       ( \o ->
           AdTechnologyProviders
-            Core.<$> (o Core..:? "detectedProviderIds")
+            Core.<$> ( o Core..:? "detectedProviderIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "hasUnidentifiedProvider")
       )
 
@@ -614,6 +616,7 @@ instance Core.ToJSON AdTechnologyProviders where
     Core.object
       ( Core.catMaybes
           [ ("detectedProviderIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> detectedProviderIds,
             ("hasUnidentifiedProvider" Core..=)
               Core.<$> hasUnidentifiedProvider
@@ -1025,7 +1028,7 @@ instance Core.ToJSON Client where
           ]
       )
 
--- | A client user is created under a client buyer and has restricted access to the Marketplace and certain other sections of the Authorized Buyers UI based on the role granted to the associated client buyer. The only way a new client user can be created is via accepting an email invitation (see the accounts.clients.invitations.create method). All fields are required unless otherwise specified.
+-- | A client user is created under a client buyer and has restricted access to the Marketplace and certain other sections of the Authorized Buyers UI based on the role granted to the associated client buyer. The only way a new client user can be created is through accepting an email invitation (see the accounts.clients.invitations.create method). All fields are required unless otherwise specified.
 --
 -- /See:/ 'newClientUser' smart constructor.
 data ClientUser = ClientUser
@@ -1243,7 +1246,7 @@ data Creative = Creative
     advertiserName :: (Core.Maybe Core.Text),
     -- | The agency ID for this creative.
     agencyId :: (Core.Maybe Core.Int64),
-    -- | Output only. The last update timestamp of the creative via API.
+    -- | Output only. The last update timestamp of the creative through the API.
     apiUpdateTime :: (Core.Maybe Core.DateTime),
     -- | All attributes for the ads that may be shown from this creative. Can be used to filter the response of the creatives.list method.
     attributes :: (Core.Maybe [Creative_AttributesItem]),
@@ -1277,7 +1280,7 @@ data Creative = Creative
     openAuctionStatus :: (Core.Maybe Creative_OpenAuctionStatus),
     -- | All restricted categories for the ads that may be shown from this creative.
     restrictedCategories :: (Core.Maybe [Creative_RestrictedCategoriesItem]),
-    -- | Output only. The granular status of this ad in specific contexts. A context here relates to where something ultimately serves (for example, a physical location, a platform, an HTTPS vs HTTP request, or the type of auction).
+    -- | Output only. The granular status of this ad in specific contexts. A context here relates to where something ultimately serves (for example, a physical location, a platform, an HTTPS versus HTTP request, or the type of auction).
     servingRestrictions :: (Core.Maybe [ServingRestriction]),
     -- | All vendor IDs for the ads that may be shown from this creative. See https:\/\/storage.googleapis.com\/adx-rtb-dictionaries\/vendors.txt for possible values.
     vendorIds :: (Core.Maybe [Core.Int32]),
@@ -1341,7 +1344,9 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "creativeId")
             Core.<*> (o Core..:? "dealsStatus")
             Core.<*> (o Core..:? "declaredClickThroughUrls")
-            Core.<*> (o Core..:? "detectedAdvertiserIds")
+            Core.<*> ( o Core..:? "detectedAdvertiserIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "detectedDomains")
             Core.<*> (o Core..:? "detectedLanguages")
             Core.<*> (o Core..:? "detectedProductCategories")
@@ -1379,6 +1384,7 @@ instance Core.ToJSON Creative where
             ("declaredClickThroughUrls" Core..=)
               Core.<$> declaredClickThroughUrls,
             ("detectedAdvertiserIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> detectedAdvertiserIds,
             ("detectedDomains" Core..=) Core.<$> detectedDomains,
             ("detectedLanguages" Core..=)
@@ -1665,8 +1671,12 @@ instance Core.FromJSON CriteriaTargeting where
       "CriteriaTargeting"
       ( \o ->
           CriteriaTargeting
-            Core.<$> (o Core..:? "excludedCriteriaIds")
-            Core.<*> (o Core..:? "targetedCriteriaIds")
+            Core.<$> ( o Core..:? "excludedCriteriaIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "targetedCriteriaIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance Core.ToJSON CriteriaTargeting where
@@ -1674,8 +1684,10 @@ instance Core.ToJSON CriteriaTargeting where
     Core.object
       ( Core.catMaybes
           [ ("excludedCriteriaIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> excludedCriteriaIds,
             ("targetedCriteriaIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> targetedCriteriaIds
           ]
       )
@@ -1805,7 +1817,7 @@ instance Core.ToJSON DayPartTargeting where
 data Deal = Deal
   { -- | Proposed flight end time of the deal. This will generally be stored in a granularity of a second. A value is not required for Private Auction deals or Preferred Deals.
     availableEndTime :: (Core.Maybe Core.DateTime),
-    -- | Optional. Proposed flight start time of the deal. This will generally be stored in the granularity of one second since deal serving starts at seconds boundary. Any time specified with more granularity (e.g., in milliseconds) will be truncated towards the start of time in seconds.
+    -- | Optional. Proposed flight start time of the deal. This will generally be stored in the granularity of one second since deal serving starts at seconds boundary. Any time specified with more granularity (for example, in milliseconds) will be truncated towards the start of time in seconds.
     availableStartTime :: (Core.Maybe Core.DateTime),
     -- | Buyer private data (hidden from seller).
     buyerPrivateData :: (Core.Maybe PrivateData),
@@ -1817,7 +1829,7 @@ data Deal = Deal
     createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. Specifies the creative pre-approval policy.
     creativePreApprovalPolicy :: (Core.Maybe Deal_CreativePreApprovalPolicy),
-    -- | Output only. Restricitions about the creatives associated with the deal (i.e., size) This is available for Programmatic Guaranteed\/Preferred Deals in Ad Manager.
+    -- | Output only. Restricitions about the creatives associated with the deal (for example, size) This is available for Programmatic Guaranteed\/Preferred Deals in Ad Manager.
     creativeRestrictions :: (Core.Maybe CreativeRestrictions),
     -- | Output only. Specifies whether the creative is safeFrame compatible.
     creativeSafeFrameCompatibility :: (Core.Maybe Deal_CreativeSafeFrameCompatibility),
@@ -2055,7 +2067,7 @@ instance Core.ToJSON DealServingMetadata where
           ]
       )
 
--- | The deal terms specify the details of a Product\/deal. They specify things like price per buyer, the type of pricing model (e.g., fixed price, auction) and expected impressions from the publisher.
+-- | The deal terms specify the details of a Product\/deal. They specify things like price per buyer, the type of pricing model (for example, fixed price, auction) and expected impressions from the publisher.
 --
 -- /See:/ 'newDealTerms' smart constructor.
 data DealTerms = DealTerms
@@ -2213,7 +2225,7 @@ instance Core.ToJSON Disapproval where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -2231,7 +2243,7 @@ instance Core.FromJSON Empty where
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
 
--- | A set of filters that is applied to a request for data. Within a filter set, an AND operation is performed across the filters represented by each field. An OR operation is performed across the filters represented by the multiple values of a repeated field, e.g., \"format=VIDEO AND deal/id=12 AND (seller/network/id=34 OR seller/network_id=56)\".
+-- | A set of filters that is applied to a request for data. Within a filter set, an AND operation is performed across the filters represented by each field. An OR operation is performed across the filters represented by the multiple values of a repeated field, for example, \"format=VIDEO AND deal/id=12 AND (seller/network/id=34 OR seller/network_id=56)\".
 --
 -- /See:/ 'newFilterSet' smart constructor.
 data FilterSet = FilterSet
@@ -2239,9 +2251,9 @@ data FilterSet = FilterSet
     absoluteDateRange :: (Core.Maybe AbsoluteDateRange),
     -- | The set of dimensions along which to break down the response; may be empty. If multiple dimensions are requested, the breakdown is along the Cartesian product of the requested dimensions.
     breakdownDimensions :: (Core.Maybe [FilterSet_BreakdownDimensionsItem]),
-    -- | The ID of the creative on which to filter; optional. This field may be set only for a filter set that accesses account-level troubleshooting data, i.e., one whose name matches the @bidders\/*\/accounts\/*\/filterSets\/*@ pattern.
+    -- | The ID of the creative on which to filter; optional. This field may be set only for a filter set that accesses account-level troubleshooting data, for example, one whose name matches the @bidders\/*\/accounts\/*\/filterSets\/*@ pattern.
     creativeId :: (Core.Maybe Core.Text),
-    -- | The ID of the deal on which to filter; optional. This field may be set only for a filter set that accesses account-level troubleshooting data, i.e., one whose name matches the @bidders\/*\/accounts\/*\/filterSets\/*@ pattern.
+    -- | The ID of the deal on which to filter; optional. This field may be set only for a filter set that accesses account-level troubleshooting data, for example, one whose name matches the @bidders\/*\/accounts\/*\/filterSets\/*@ pattern.
     dealId :: (Core.Maybe Core.Int64),
     -- | The environment on which to filter; optional.
     environment :: (Core.Maybe FilterSet_Environment),
@@ -2251,7 +2263,7 @@ data FilterSet = FilterSet
     formats :: (Core.Maybe [FilterSet_FormatsItem]),
     -- | A user-defined name of the filter set. Filter set names must be unique globally and match one of the patterns: - @bidders\/*\/filterSets\/*@ (for accessing bidder-level troubleshooting data) - @bidders\/*\/accounts\/*\/filterSets\/*@ (for accessing account-level troubleshooting data) This field is required in create operations.
     name :: (Core.Maybe Core.Text),
-    -- | The list of platforms on which to filter; may be empty. The filters represented by multiple platforms are ORed together (i.e., if non-empty, results must match any one of the platforms).
+    -- | The list of platforms on which to filter; may be empty. The filters represented by multiple platforms are ORed together (for example, if non-empty, results must match any one of the platforms).
     platforms :: (Core.Maybe [FilterSet_PlatformsItem]),
     -- | For Open Bidding partners only. The list of publisher identifiers on which to filter; may be empty. The filters represented by multiple publisher identifiers are ORed together.
     publisherIdentifiers :: (Core.Maybe [Core.Text]),
@@ -2259,9 +2271,9 @@ data FilterSet = FilterSet
     realtimeTimeRange :: (Core.Maybe RealtimeTimeRange),
     -- | A relative date range, defined by an offset from today and a duration. Interpreted relative to Pacific time zone.
     relativeDateRange :: (Core.Maybe RelativeDateRange),
-    -- | For Authorized Buyers only. The list of IDs of the seller (publisher) networks on which to filter; may be empty. The filters represented by multiple seller network IDs are ORed together (i.e., if non-empty, results must match any one of the publisher networks). See <https://developers.google.com/authorized-buyers/rtb/downloads/seller-network-ids seller-network-ids> file for the set of existing seller network IDs.
+    -- | For Authorized Buyers only. The list of IDs of the seller (publisher) networks on which to filter; may be empty. The filters represented by multiple seller network IDs are ORed together (for example, if non-empty, results must match any one of the publisher networks). See <https://developers.google.com/authorized-buyers/rtb/downloads/seller-network-ids seller-network-ids> file for the set of existing seller network IDs.
     sellerNetworkIds :: (Core.Maybe [Core.Int32]),
-    -- | The granularity of time intervals if a time series breakdown is desired; optional.
+    -- | The granularity of time intervals if a time series breakdown is preferred; optional.
     timeSeriesGranularity :: (Core.Maybe FilterSet_TimeSeriesGranularity)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2384,7 +2396,7 @@ instance Core.ToJSON FilteredBidCreativeRow where
           ]
       )
 
--- | The number of filtered bids with the specified dimension values, among those filtered due to the requested filtering reason (i.e. creative status), that have the specified detail.
+-- | The number of filtered bids with the specified dimension values, among those filtered due to the requested filtering reason (for example, creative status), that have the specified detail.
 --
 -- /See:/ 'newFilteredBidDetailRow' smart constructor.
 data FilteredBidDetailRow = FilteredBidDetailRow
@@ -3289,7 +3301,7 @@ instance Core.ToJSON ListFilteredBidRequestsResponse where
 --
 -- /See:/ 'newListFilteredBidsResponse' smart constructor.
 data ListFilteredBidsResponse = ListFilteredBidsResponse
-  { -- | List of rows, with counts of filtered bids aggregated by filtering reason (i.e. creative status).
+  { -- | List of rows, with counts of filtered bids aggregated by filtering reason (for example, creative status).
     creativeStatusRows :: (Core.Maybe [CreativeStatusRow]),
     -- | A token to retrieve the next page of results. Pass this value in the ListFilteredBidsRequest.pageToken field in the subsequent call to the filteredBids.list method to retrieve the next page of results.
     nextPageToken :: (Core.Maybe Core.Text)
@@ -3369,7 +3381,7 @@ instance Core.ToJSON ListImpressionMetricsResponse where
 --
 -- /See:/ 'newListLosingBidsResponse' smart constructor.
 data ListLosingBidsResponse = ListLosingBidsResponse
-  { -- | List of rows, with counts of losing bids aggregated by loss reason (i.e. creative status).
+  { -- | List of rows, with counts of losing bids aggregated by loss reason (for example, creative status).
     creativeStatusRows :: (Core.Maybe [CreativeStatusRow]),
     -- | A token to retrieve the next page of results. Pass this value in the ListLosingBidsRequest.pageToken field in the subsequent call to the losingBids.list method to retrieve the next page of results.
     nextPageToken :: (Core.Maybe Core.Text)
@@ -3567,7 +3579,7 @@ instance Core.ToJSON ListPublisherProfilesResponse where
 --
 -- /See:/ 'newLocationContext' smart constructor.
 newtype LocationContext = LocationContext
-  { -- | IDs representing the geo location for this context. Please refer to the <https://storage.googleapis.com/adx-rtb-dictionaries/geo-table.csv geo-table.csv> file for different geo criteria IDs.
+  { -- | IDs representing the geo location for this context. Refer to the <https://storage.googleapis.com/adx-rtb-dictionaries/geo-table.csv geo-table.csv> file for different geo criteria IDs.
     geoCriteriaIds :: (Core.Maybe [Core.Int32])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3601,9 +3613,9 @@ data MarketplaceTargeting = MarketplaceTargeting
     geoTargeting :: (Core.Maybe CriteriaTargeting),
     -- | Inventory sizes to be included\/excluded.
     inventorySizeTargeting :: (Core.Maybe InventorySizeTargeting),
-    -- | Placement targeting information, e.g., URL, mobile applications.
+    -- | Placement targeting information, for example, URL, mobile applications.
     placementTargeting :: (Core.Maybe PlacementTargeting),
-    -- | Technology targeting information, e.g., operating system, device category.
+    -- | Technology targeting information, for example, operating system, device category.
     technologyTargeting :: (Core.Maybe TechnologyTargeting),
     -- | Video targeting information.
     videoTargeting :: (Core.Maybe VideoTargeting)
@@ -3650,13 +3662,13 @@ instance Core.ToJSON MarketplaceTargeting where
           ]
       )
 
--- | A metric value, with an expected value and a variance; represents a count that may be either exact or estimated (i.e. when sampled).
+-- | A metric value, with an expected value and a variance; represents a count that may be either exact or estimated (for example, when sampled).
 --
 -- /See:/ 'newMetricValue' smart constructor.
 data MetricValue = MetricValue
   { -- | The expected value of the metric.
     value :: (Core.Maybe Core.Int64),
-    -- | The variance (i.e. square of the standard deviation) of the metric value. If value is exact, variance is 0. Can be used to calculate margin of error as a percentage of value, using the following formula, where Z is the standard constant that depends on the desired size of the confidence interval (e.g. for 90% confidence interval, use Z = 1.645): marginOfError = 100 * Z * sqrt(variance) \/ value
+    -- | The variance (for example, square of the standard deviation) of the metric value. If value is exact, variance is 0. Can be used to calculate margin of error as a percentage of value, using the following formula, where Z is the standard constant that depends on the preferred size of the confidence interval (for example, for 90% confidence interval, use Z = 1.645): marginOfError = 100 * Z * sqrt(variance) \/ value
     variance :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4146,7 +4158,7 @@ instance Core.ToJSON PauseProposalRequest where
     Core.object
       (Core.catMaybes [("reason" Core..=) Core.<$> reason])
 
--- | Represents targeting about where the ads can appear, e.g., certain sites or mobile applications. Different placement targeting types will be logically OR\'ed.
+-- | Represents targeting about where the ads can appear, for example, certain sites or mobile applications. Different placement targeting types will be logically OR\'ed.
 --
 -- /See:/ 'newPlacementTargeting' smart constructor.
 data PlacementTargeting = PlacementTargeting
@@ -4323,7 +4335,7 @@ instance Core.ToJSON PrivateData where
           [("referenceId" Core..=) Core.<$> referenceId]
       )
 
--- | A product is a segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps the buyer know more about the inventory.
+-- | A product is a segment of inventory that a seller wants to sell. It is associated with certain terms and targeting information which helps the buyer know more about the inventory.
 --
 -- /See:/ 'newProduct' smart constructor.
 data Product = Product
@@ -4767,13 +4779,13 @@ instance Core.ToJSON RealtimeTimeRange where
           [("startTimestamp" Core..=) Core.<$> startTimestamp]
       )
 
--- | A relative date range, specified by an offset and a duration. The supported range of dates begins 30 days before today and ends today, i.e., the limits for these values are: offset/days >= 0 duration/days >= 1 offset/days + duration/days \<= 30
+-- | A relative date range, specified by an offset and a duration. The supported range of dates begins 30 days before today and ends today, for example, the limits for these values are: offset/days >= 0 duration/days >= 1 offset/days + duration/days \<= 30
 --
 -- /See:/ 'newRelativeDateRange' smart constructor.
 data RelativeDateRange = RelativeDateRange
-  { -- | The number of days in the requested date range, e.g., for a range spanning today: 1. For a range spanning the last 7 days: 7.
+  { -- | The number of days in the requested date range, for example, for a range spanning today: 1. For a range spanning the last 7 days: 7.
     durationDays :: (Core.Maybe Core.Int32),
-    -- | The end date of the filter set, specified as the number of days before today, e.g., for a range where the last date is today: 0.
+    -- | The end date of the filter set, specified as the number of days before today, for example, for a range where the last date is today: 0.
     offsetDays :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5050,7 +5062,7 @@ instance Core.ToJSON ServingContext where
           ]
       )
 
--- | Output only. A representation of the status of an ad in a specific context. A context here relates to where something ultimately serves (for example, a user or publisher geo, a platform, an HTTPS vs HTTP request, or the type of auction).
+-- | Output only. A representation of the status of an ad in a specific context. A context here relates to where something ultimately serves (for example, a user or publisher geo, a platform, an HTTPS versus HTTP request, or the type of auction).
 --
 -- /See:/ 'newServingRestriction' smart constructor.
 data ServingRestriction = ServingRestriction
@@ -5058,7 +5070,7 @@ data ServingRestriction = ServingRestriction
     contexts :: (Core.Maybe [ServingContext]),
     -- | Disapproval bound to this restriction. Only present if status=DISAPPROVED. Can be used to filter the response of the creatives.list method.
     disapproval :: (Core.Maybe Disapproval),
-    -- | Any disapprovals bound to this restriction. Only present if status=DISAPPROVED. Can be used to filter the response of the creatives.list method. Deprecated; please use disapproval field instead.
+    -- | Any disapprovals bound to this restriction. Only present if status=DISAPPROVED. Can be used to filter the response of the creatives.list method. Deprecated; use disapproval field instead.
     disapprovalReasons :: (Core.Maybe [Disapproval]),
     -- | The status of the creative in this context (for example, it has been explicitly disapproved or is pending review).
     status :: (Core.Maybe ServingRestriction_Status)
@@ -5384,7 +5396,7 @@ instance Core.ToJSON TimeOfDay' where
           ]
       )
 
--- | Represents a list of targeted and excluded URLs (e.g., google.com). For Private Auction and AdX Preferred Deals, URLs are either included or excluded. For Programmatic Guaranteed and Preferred Deals, this doesn\'t apply.
+-- | Represents a list of targeted and excluded URLs (for example, google.com). For Private Auction and AdX Preferred Deals, URLs are either included or excluded. For Programmatic Guaranteed and Preferred Deals, this doesn\'t apply.
 --
 -- /See:/ 'newUrlTargeting' smart constructor.
 data UrlTargeting = UrlTargeting

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a paginated list of all members in a group.
+-- Retrieves a paginated list of all members in a group. This method times out after 60 minutes. For more information, see <https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes Troubleshoot error codes>.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.members.list@.
 module Gogol.Admin.Directory.Members.List
@@ -63,7 +63,7 @@ type DirectoryMembersListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Members
 
--- | Retrieves a paginated list of all members in a group.
+-- | Retrieves a paginated list of all members in a group. This method times out after 60 minutes. For more information, see <https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes Troubleshoot error codes>.
 --
 -- /See:/ 'newDirectoryMembersList' smart constructor.
 data DirectoryMembersList = DirectoryMembersList

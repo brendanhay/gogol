@@ -110,6 +110,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     ConfigurationVariables (..),
     newConfigurationVariables,
 
+    -- * CreateEnrollmentTokenResponse
+    CreateEnrollmentTokenResponse (..),
+    newCreateEnrollmentTokenResponse,
+
     -- * Device
     Device (..),
     newDevice,
@@ -138,6 +142,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     EnterpriseAccount (..),
     newEnterpriseAccount,
 
+    -- * EnterpriseAuthenticationAppLinkConfig
+    EnterpriseAuthenticationAppLinkConfig (..),
+    newEnterpriseAuthenticationAppLinkConfig,
+
     -- * EnterprisesListResponse
     EnterprisesListResponse (..),
     newEnterprisesListResponse,
@@ -153,6 +161,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     -- * EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- * GoogleAuthenticationSettings
+    GoogleAuthenticationSettings (..),
+    newGoogleAuthenticationSettings,
 
     -- * GroupLicense
     GroupLicense (..),
@@ -1224,18 +1236,65 @@ instance Core.ToJSON ConfigurationVariables where
           ]
       )
 
+-- | Response message for create enrollment token.
+--
+-- /See:/ 'newCreateEnrollmentTokenResponse' smart constructor.
+newtype CreateEnrollmentTokenResponse = CreateEnrollmentTokenResponse
+  { -- | Enrollment token.
+    enrollmentToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateEnrollmentTokenResponse' with the minimum fields required to make a request.
+newCreateEnrollmentTokenResponse ::
+  CreateEnrollmentTokenResponse
+newCreateEnrollmentTokenResponse =
+  CreateEnrollmentTokenResponse {enrollmentToken = Core.Nothing}
+
+instance Core.FromJSON CreateEnrollmentTokenResponse where
+  parseJSON =
+    Core.withObject
+      "CreateEnrollmentTokenResponse"
+      ( \o ->
+          CreateEnrollmentTokenResponse
+            Core.<$> (o Core..:? "enrollmentToken")
+      )
+
+instance Core.ToJSON CreateEnrollmentTokenResponse where
+  toJSON CreateEnrollmentTokenResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enrollmentToken" Core..=)
+              Core.<$> enrollmentToken
+          ]
+      )
+
 -- | A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
 --
 -- /See:/ 'newDevice' smart constructor.
 data Device = Device
   { -- | The Google Play Services Android ID for the device encoded as a lowercase hex string. For example, \"123456789abcdef0\".
     androidId :: (Core.Maybe Core.Text),
+    -- | The internal hardware codename of the device. This comes from android.os.Build.DEVICE. (field named \"device\" per logs\/wireless\/android\/android_checkin.proto)
+    device :: (Core.Maybe Core.Text),
+    -- | The build fingerprint of the device if known.
+    latestBuildFingerprint :: (Core.Maybe Core.Text),
+    -- | The manufacturer of the device. This comes from android.os.Build.MANUFACTURER.
+    maker :: (Core.Maybe Core.Text),
     -- | Identifies the extent to which the device is controlled by a managed Google Play EMM in various deployment configurations. Possible values include: - \"managedDevice\", a device that has the EMM\'s device policy controller (DPC) as the device owner. - \"managedProfile\", a device that has a profile managed by the DPC (DPC is profile owner) in addition to a separate, personal profile that is unavailable to the DPC. - \"containerApp\", no longer used (deprecated). - \"unmanagedProfile\", a device that has been allowed (by the domain\'s admin, using the Admin Console to enable the privilege) to use managed Google Play, but the profile is itself not owned by a DPC.
     managementType :: (Core.Maybe Device_ManagementType),
+    -- | The model name of the device. This comes from android.os.Build.MODEL.
+    model :: (Core.Maybe Core.Text),
     -- | The policy enforced on the device.
     policy :: (Core.Maybe Policy),
+    -- | The product name of the device. This comes from android.os.Build.PRODUCT.
+    product :: (Core.Maybe Core.Text),
     -- | The device report updated with the latest app states.
-    report :: (Core.Maybe DeviceReport)
+    report :: (Core.Maybe DeviceReport),
+    -- | Retail brand for the device, if set. See https:\/\/developer.android.com\/reference\/android\/os\/Build.html#BRAND
+    retailBrand :: (Core.Maybe Core.Text),
+    -- | API compatibility version.
+    sdkVersion :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1245,9 +1304,16 @@ newDevice ::
 newDevice =
   Device
     { androidId = Core.Nothing,
+      device = Core.Nothing,
+      latestBuildFingerprint = Core.Nothing,
+      maker = Core.Nothing,
       managementType = Core.Nothing,
+      model = Core.Nothing,
       policy = Core.Nothing,
-      report = Core.Nothing
+      product = Core.Nothing,
+      report = Core.Nothing,
+      retailBrand = Core.Nothing,
+      sdkVersion = Core.Nothing
     }
 
 instance Core.FromJSON Device where
@@ -1257,9 +1323,16 @@ instance Core.FromJSON Device where
       ( \o ->
           Device
             Core.<$> (o Core..:? "androidId")
+            Core.<*> (o Core..:? "device")
+            Core.<*> (o Core..:? "latestBuildFingerprint")
+            Core.<*> (o Core..:? "maker")
             Core.<*> (o Core..:? "managementType")
+            Core.<*> (o Core..:? "model")
             Core.<*> (o Core..:? "policy")
+            Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "report")
+            Core.<*> (o Core..:? "retailBrand")
+            Core.<*> (o Core..:? "sdkVersion")
       )
 
 instance Core.ToJSON Device where
@@ -1267,9 +1340,17 @@ instance Core.ToJSON Device where
     Core.object
       ( Core.catMaybes
           [ ("androidId" Core..=) Core.<$> androidId,
+            ("device" Core..=) Core.<$> device,
+            ("latestBuildFingerprint" Core..=)
+              Core.<$> latestBuildFingerprint,
+            ("maker" Core..=) Core.<$> maker,
             ("managementType" Core..=) Core.<$> managementType,
+            ("model" Core..=) Core.<$> model,
             ("policy" Core..=) Core.<$> policy,
-            ("report" Core..=) Core.<$> report
+            ("product" Core..=) Core.<$> product,
+            ("report" Core..=) Core.<$> report,
+            ("retailBrand" Core..=) Core.<$> retailBrand,
+            ("sdkVersion" Core..=) Core.<$> sdkVersion
           ]
       )
 
@@ -1421,6 +1502,8 @@ instance Core.ToJSON DevicesListResponse where
 data Enterprise = Enterprise
   { -- | Admins of the enterprise. This is only supported for enterprises created via the EMM-initiated flow.
     administrator :: (Core.Maybe [Administrator]),
+    -- | Output only. Settings for Google-provided user authentication.
+    googleAuthenticationSettings :: (Core.Maybe GoogleAuthenticationSettings),
     -- | The unique ID for the enterprise.
     id :: (Core.Maybe Core.Text),
     -- | The name of the enterprise, for example, \"Example, Inc\".
@@ -1436,6 +1519,7 @@ newEnterprise ::
 newEnterprise =
   Enterprise
     { administrator = Core.Nothing,
+      googleAuthenticationSettings = Core.Nothing,
       id = Core.Nothing,
       name = Core.Nothing,
       primaryDomain = Core.Nothing
@@ -1448,6 +1532,7 @@ instance Core.FromJSON Enterprise where
       ( \o ->
           Enterprise
             Core.<$> (o Core..:? "administrator")
+            Core.<*> (o Core..:? "googleAuthenticationSettings")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primaryDomain")
@@ -1458,6 +1543,8 @@ instance Core.ToJSON Enterprise where
     Core.object
       ( Core.catMaybes
           [ ("administrator" Core..=) Core.<$> administrator,
+            ("googleAuthenticationSettings" Core..=)
+              Core.<$> googleAuthenticationSettings,
             ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
             ("primaryDomain" Core..=) Core.<$> primaryDomain
@@ -1493,6 +1580,41 @@ instance Core.ToJSON EnterpriseAccount where
       ( Core.catMaybes
           [("accountEmail" Core..=) Core.<$> accountEmail]
       )
+
+-- | An authentication URL configuration for the authenticator app of an identity provider.
+--
+-- /See:/ 'newEnterpriseAuthenticationAppLinkConfig' smart constructor.
+newtype EnterpriseAuthenticationAppLinkConfig = EnterpriseAuthenticationAppLinkConfig
+  { -- | An authentication url.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnterpriseAuthenticationAppLinkConfig' with the minimum fields required to make a request.
+newEnterpriseAuthenticationAppLinkConfig ::
+  EnterpriseAuthenticationAppLinkConfig
+newEnterpriseAuthenticationAppLinkConfig =
+  EnterpriseAuthenticationAppLinkConfig {uri = Core.Nothing}
+
+instance
+  Core.FromJSON
+    EnterpriseAuthenticationAppLinkConfig
+  where
+  parseJSON =
+    Core.withObject
+      "EnterpriseAuthenticationAppLinkConfig"
+      ( \o ->
+          EnterpriseAuthenticationAppLinkConfig
+            Core.<$> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    EnterpriseAuthenticationAppLinkConfig
+  where
+  toJSON EnterpriseAuthenticationAppLinkConfig {..} =
+    Core.object
+      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 --
 -- /See:/ 'newEnterprisesListResponse' smart constructor.
@@ -1632,6 +1754,50 @@ instance Core.ToJSON EntitlementsListResponse where
     Core.object
       ( Core.catMaybes
           [("entitlement" Core..=) Core.<$> entitlement]
+      )
+
+-- | Contains settings for Google-provided user authentication.
+--
+-- /See:/ 'newGoogleAuthenticationSettings' smart constructor.
+data GoogleAuthenticationSettings = GoogleAuthenticationSettings
+  { -- | Whether dedicated devices are allowed.
+    dedicatedDevicesAllowed :: (Core.Maybe GoogleAuthenticationSettings_DedicatedDevicesAllowed),
+    -- | Whether Google authentication is required.
+    googleAuthenticationRequired ::
+      ( Core.Maybe
+          GoogleAuthenticationSettings_GoogleAuthenticationRequired
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAuthenticationSettings' with the minimum fields required to make a request.
+newGoogleAuthenticationSettings ::
+  GoogleAuthenticationSettings
+newGoogleAuthenticationSettings =
+  GoogleAuthenticationSettings
+    { dedicatedDevicesAllowed = Core.Nothing,
+      googleAuthenticationRequired = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleAuthenticationSettings where
+  parseJSON =
+    Core.withObject
+      "GoogleAuthenticationSettings"
+      ( \o ->
+          GoogleAuthenticationSettings
+            Core.<$> (o Core..:? "dedicatedDevicesAllowed")
+            Core.<*> (o Core..:? "googleAuthenticationRequired")
+      )
+
+instance Core.ToJSON GoogleAuthenticationSettings where
+  toJSON GoogleAuthenticationSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dedicatedDevicesAllowed" Core..=)
+              Core.<$> dedicatedDevicesAllowed,
+            ("googleAuthenticationRequired" Core..=)
+              Core.<$> googleAuthenticationRequired
+          ]
       )
 
 -- | Group license objects allow you to keep track of licenses (called entitlements) for both free and paid apps. For a free app, a group license is created when an enterprise admin first approves the product in Google Play or when the first entitlement for the product is created for a user via the API. For a paid app, a group license object is only created when an enterprise admin purchases the product in Google Play for the first time. Use the API to query group licenses. A Grouplicenses resource includes the total number of licenses purchased (paid apps only) and the total number of licenses currently in use. In other words, the total number of Entitlements that exist for the product. Only one group license object is created per product and group license objects are never deleted. If a product is unapproved, its group license remains. This allows enterprise admins to keep track of any remaining entitlements for the product.
@@ -2654,7 +2820,7 @@ instance Core.ToJSON Permission where
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
-  { -- | Deprecated. Use autoUpdateMode instead. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
+  { -- | Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
     autoUpdatePolicy :: (Core.Maybe Policy_AutoUpdatePolicy),
     -- | Whether the device reports app states to the EMM. The default value is \"deviceReportDisabled\".
     deviceReportPolicy :: (Core.Maybe Policy_DeviceReportPolicy),
@@ -2712,7 +2878,9 @@ instance Core.ToJSON Policy where
 --
 -- /See:/ 'newProduct' smart constructor.
 data Product = Product
-  { -- | The tracks visible to the enterprise.
+  { -- | The app restriction schema
+    appRestrictionsSchema :: (Core.Maybe AppRestrictionsSchema),
+    -- | The tracks visible to the enterprise.
     appTracks :: (Core.Maybe [TrackInfo]),
     -- | App versions currently available for this product.
     appVersion :: (Core.Maybe [AppVersion]),
@@ -2768,7 +2936,8 @@ newProduct ::
   Product
 newProduct =
   Product
-    { appTracks = Core.Nothing,
+    { appRestrictionsSchema = Core.Nothing,
+      appTracks = Core.Nothing,
       appVersion = Core.Nothing,
       authorName = Core.Nothing,
       availableCountries = Core.Nothing,
@@ -2800,7 +2969,8 @@ instance Core.FromJSON Product where
       "Product"
       ( \o ->
           Product
-            Core.<$> (o Core..:? "appTracks")
+            Core.<$> (o Core..:? "appRestrictionsSchema")
+            Core.<*> (o Core..:? "appTracks")
             Core.<*> (o Core..:? "appVersion")
             Core.<*> (o Core..:? "authorName")
             Core.<*> (o Core..:? "availableCountries")
@@ -2832,7 +3002,9 @@ instance Core.ToJSON Product where
   toJSON Product {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appTracks" Core..=) Core.<$> appTracks,
+          [ ("appRestrictionsSchema" Core..=)
+              Core.<$> appRestrictionsSchema,
+            ("appTracks" Core..=) Core.<$> appTracks,
             ("appVersion" Core..=) Core.<$> appVersion,
             ("authorName" Core..=) Core.<$> authorName,
             ("availableCountries" Core..=)
@@ -3022,6 +3194,8 @@ data ProductPolicy = ProductPolicy
     autoInstallPolicy :: (Core.Maybe AutoInstallPolicy),
     -- | The auto-update mode for the product.
     autoUpdateMode :: (Core.Maybe ProductPolicy_AutoUpdateMode),
+    -- | An authentication URL configuration for the authenticator app of an identity provider. This helps to launch the identity provider\'s authenticator app during the authentication happening in a private app using Android WebView. Authenticator app should already be the <https://developer.android.com/training/app-links/verify-site-associations default handler> for the authentication url on the device.
+    enterpriseAuthenticationAppLinkConfigs :: (Core.Maybe [EnterpriseAuthenticationAppLinkConfig]),
     -- | The managed configuration for the product.
     managedConfiguration :: (Core.Maybe ManagedConfiguration),
     -- | The ID of the product. For example, \"app:com.google.android.gm\".
@@ -3040,6 +3214,7 @@ newProductPolicy =
   ProductPolicy
     { autoInstallPolicy = Core.Nothing,
       autoUpdateMode = Core.Nothing,
+      enterpriseAuthenticationAppLinkConfigs = Core.Nothing,
       managedConfiguration = Core.Nothing,
       productId = Core.Nothing,
       trackIds = Core.Nothing,
@@ -3054,6 +3229,7 @@ instance Core.FromJSON ProductPolicy where
           ProductPolicy
             Core.<$> (o Core..:? "autoInstallPolicy")
             Core.<*> (o Core..:? "autoUpdateMode")
+            Core.<*> (o Core..:? "enterpriseAuthenticationAppLinkConfigs")
             Core.<*> (o Core..:? "managedConfiguration")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "trackIds")
@@ -3067,6 +3243,8 @@ instance Core.ToJSON ProductPolicy where
           [ ("autoInstallPolicy" Core..=)
               Core.<$> autoInstallPolicy,
             ("autoUpdateMode" Core..=) Core.<$> autoUpdateMode,
+            ("enterpriseAuthenticationAppLinkConfigs" Core..=)
+              Core.<$> enterpriseAuthenticationAppLinkConfigs,
             ("managedConfiguration" Core..=)
               Core.<$> managedConfiguration,
             ("productId" Core..=) Core.<$> productId,

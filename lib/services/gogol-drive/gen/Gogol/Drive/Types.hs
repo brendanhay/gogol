@@ -153,6 +153,10 @@ module Gogol.Drive.Types
     File_ImageMediaMetadata_Location (..),
     newFile_ImageMediaMetadata_Location,
 
+    -- ** File_LabelInfo
+    File_LabelInfo (..),
+    newFile_LabelInfo,
+
     -- ** File_LinkShareMetadata
     File_LinkShareMetadata (..),
     newFile_LinkShareMetadata,
@@ -176,6 +180,38 @@ module Gogol.Drive.Types
     -- ** GeneratedIds
     GeneratedIds (..),
     newGeneratedIds,
+
+    -- ** Label
+    Label (..),
+    newLabel,
+
+    -- ** Label_Fields
+    Label_Fields (..),
+    newLabel_Fields,
+
+    -- ** LabelField
+    LabelField (..),
+    newLabelField,
+
+    -- ** LabelFieldModification
+    LabelFieldModification (..),
+    newLabelFieldModification,
+
+    -- ** LabelList
+    LabelList (..),
+    newLabelList,
+
+    -- ** LabelModification
+    LabelModification (..),
+    newLabelModification,
+
+    -- ** ModifyLabelsRequest
+    ModifyLabelsRequest (..),
+    newModifyLabelsRequest,
+
+    -- ** ModifyLabelsResponse
+    ModifyLabelsResponse (..),
+    newModifyLabelsResponse,
 
     -- ** Permission
     Permission (..),

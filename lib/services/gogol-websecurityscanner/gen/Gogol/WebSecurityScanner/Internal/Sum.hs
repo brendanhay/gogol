@@ -142,6 +142,7 @@ module Gogol.WebSecurityScanner.Internal.Sum
         ScanRunErrorTrace_Code_TIMEDOUTWHILESCANNING,
         ScanRunErrorTrace_Code_TOOMANYREDIRECTS,
         ScanRunErrorTrace_Code_TOOMANYHTTPERRORS,
+        ScanRunErrorTrace_Code_STARTINGURLSCRAWLHTTPERRORS,
         ..
       ),
 
@@ -700,6 +701,10 @@ pattern ScanRunErrorTrace_Code_TOOMANYREDIRECTS = ScanRunErrorTrace_Code "TOO_MA
 pattern ScanRunErrorTrace_Code_TOOMANYHTTPERRORS :: ScanRunErrorTrace_Code
 pattern ScanRunErrorTrace_Code_TOOMANYHTTPERRORS = ScanRunErrorTrace_Code "TOO_MANY_HTTP_ERRORS"
 
+-- | Indicates that some of the starting web urls returned HTTP errors during the scan.
+pattern ScanRunErrorTrace_Code_STARTINGURLSCRAWLHTTPERRORS :: ScanRunErrorTrace_Code
+pattern ScanRunErrorTrace_Code_STARTINGURLSCRAWLHTTPERRORS = ScanRunErrorTrace_Code "STARTING_URLS_CRAWL_HTTP_ERRORS"
+
 {-# COMPLETE
   ScanRunErrorTrace_Code_CODEUNSPECIFIED,
   ScanRunErrorTrace_Code_INTERNALERROR,
@@ -708,6 +713,7 @@ pattern ScanRunErrorTrace_Code_TOOMANYHTTPERRORS = ScanRunErrorTrace_Code "TOO_M
   ScanRunErrorTrace_Code_TIMEDOUTWHILESCANNING,
   ScanRunErrorTrace_Code_TOOMANYREDIRECTS,
   ScanRunErrorTrace_Code_TOOMANYHTTPERRORS,
+  ScanRunErrorTrace_Code_STARTINGURLSCRAWLHTTPERRORS,
   ScanRunErrorTrace_Code
   #-}
 

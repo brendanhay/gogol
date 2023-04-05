@@ -82,6 +82,18 @@ module Gogol.Translate.Types
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** Dataset
+    Dataset (..),
+    newDataset,
+
+    -- ** DatasetInputConfig
+    DatasetInputConfig (..),
+    newDatasetInputConfig,
+
+    -- ** DatasetOutputConfig
+    DatasetOutputConfig (..),
+    newDatasetOutputConfig,
+
     -- ** DetectLanguageRequest
     DetectLanguageRequest (..),
     newDetectLanguageRequest,
@@ -114,9 +126,25 @@ module Gogol.Translate.Types
     Empty (..),
     newEmpty,
 
+    -- ** Example
+    Example (..),
+    newExample,
+
+    -- ** ExportDataRequest
+    ExportDataRequest (..),
+    newExportDataRequest,
+
     -- ** GcsDestination
     GcsDestination (..),
     newGcsDestination,
+
+    -- ** GcsInputSource
+    GcsInputSource (..),
+    newGcsInputSource,
+
+    -- ** GcsOutputDestination
+    GcsOutputDestination (..),
+    newGcsOutputDestination,
 
     -- ** GcsSource
     GcsSource (..),
@@ -126,13 +154,37 @@ module Gogol.Translate.Types
     Glossary (..),
     newGlossary,
 
+    -- ** GlossaryEntry
+    GlossaryEntry (..),
+    newGlossaryEntry,
+
     -- ** GlossaryInputConfig
     GlossaryInputConfig (..),
     newGlossaryInputConfig,
 
+    -- ** GlossaryTerm
+    GlossaryTerm (..),
+    newGlossaryTerm,
+
+    -- ** GlossaryTermsPair
+    GlossaryTermsPair (..),
+    newGlossaryTermsPair,
+
+    -- ** GlossaryTermsSet
+    GlossaryTermsSet (..),
+    newGlossaryTermsSet,
+
+    -- ** ImportDataRequest
+    ImportDataRequest (..),
+    newImportDataRequest,
+
     -- ** InputConfig
     InputConfig (..),
     newInputConfig,
+
+    -- ** InputFile
+    InputFile (..),
+    newInputFile,
 
     -- ** LanguageCodePair
     LanguageCodePair (..),
@@ -142,13 +194,29 @@ module Gogol.Translate.Types
     LanguageCodesSet (..),
     newLanguageCodesSet,
 
+    -- ** ListDatasetsResponse
+    ListDatasetsResponse (..),
+    newListDatasetsResponse,
+
+    -- ** ListExamplesResponse
+    ListExamplesResponse (..),
+    newListExamplesResponse,
+
     -- ** ListGlossariesResponse
     ListGlossariesResponse (..),
     newListGlossariesResponse,
 
+    -- ** ListGlossaryEntriesResponse
+    ListGlossaryEntriesResponse (..),
+    newListGlossaryEntriesResponse,
+
     -- ** ListLocationsResponse
     ListLocationsResponse (..),
     newListLocationsResponse,
+
+    -- ** ListModelsResponse
+    ListModelsResponse (..),
+    newListModelsResponse,
 
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
@@ -165,6 +233,10 @@ module Gogol.Translate.Types
     -- ** Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- ** Model
+    Model (..),
+    newModel,
 
     -- ** Operation
     Operation (..),

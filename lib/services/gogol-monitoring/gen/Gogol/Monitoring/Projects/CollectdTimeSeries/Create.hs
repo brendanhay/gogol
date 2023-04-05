@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stackdriver Monitoring Agent only: Creates a new time series.This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.
+-- Cloud Monitoring Agent only: Creates a new time series.This method is only for use by the Cloud Monitoring Agent. Use projects.timeSeries.create instead.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.collectdTimeSeries.create@.
 module Gogol.Monitoring.Projects.CollectdTimeSeries.Create
@@ -61,7 +61,7 @@ type MonitoringProjectsCollectdTimeSeriesCreateResource =
               '[Core.JSON]
               CreateCollectdTimeSeriesResponse
 
--- | Stackdriver Monitoring Agent only: Creates a new time series.This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.
+-- | Cloud Monitoring Agent only: Creates a new time series.This method is only for use by the Cloud Monitoring Agent. Use projects.timeSeries.create instead.
 --
 -- /See:/ 'newMonitoringProjectsCollectdTimeSeriesCreate' smart constructor.
 data MonitoringProjectsCollectdTimeSeriesCreate = MonitoringProjectsCollectdTimeSeriesCreate

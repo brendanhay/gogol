@@ -138,6 +138,10 @@ module Gogol.Healthcare.Internal.Product
     DateShiftConfig (..),
     newDateShiftConfig,
 
+    -- * DeidentifiedStoreDestination
+    DeidentifiedStoreDestination (..),
+    newDeidentifiedStoreDestination,
+
     -- * DeidentifyConfig
     DeidentifyConfig (..),
     newDeidentifyConfig,
@@ -253,6 +257,14 @@ module Gogol.Healthcare.Internal.Product
     -- * FhirStore_Labels
     FhirStore_Labels (..),
     newFhirStore_Labels,
+
+    -- * FhirStoreMetric
+    FhirStoreMetric (..),
+    newFhirStoreMetric,
+
+    -- * FhirStoreMetrics
+    FhirStoreMetrics (..),
+    newFhirStoreMetrics,
 
     -- * Field
     Field (..),
@@ -389,6 +401,10 @@ module Gogol.Healthcare.Internal.Product
     -- * IngestMessageResponse
     IngestMessageResponse (..),
     newIngestMessageResponse,
+
+    -- * KmsWrappedCryptoKey
+    KmsWrappedCryptoKey (..),
+    newKmsWrappedCryptoKey,
 
     -- * LinkedEntity
     LinkedEntity (..),
@@ -625,6 +641,10 @@ module Gogol.Healthcare.Internal.Product
     -- * TextSpan
     TextSpan (..),
     newTextSpan,
+
+    -- * TimePartitioning
+    TimePartitioning (..),
+    newTimePartitioning,
 
     -- * Type
     Type (..),
@@ -916,7 +936,7 @@ instance Core.ToJSON AttributeDefinition where
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -996,8 +1016,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -1631,30 +1652,37 @@ instance Core.ToJSON CreateMessageRequest where
 -- | Pseudonymization method that generates surrogates via cryptographic hashing. Uses SHA-256. Outputs a base64-encoded representation of the hashed output (for example, @L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=@).
 --
 -- /See:/ 'newCryptoHashConfig' smart constructor.
-newtype CryptoHashConfig = CryptoHashConfig
-  { -- | An AES 128\/192\/256 bit key. Causes the hash to be computed based on this key. A default key is generated for each Deidentify operation and is used wherever crypto_key is not specified.
-    cryptoKey :: (Core.Maybe Core.Base64)
+data CryptoHashConfig = CryptoHashConfig
+  { -- | An AES 128\/192\/256 bit key. Causes the hash to be computed based on this key. A default key is generated for each Deidentify operation and is used when neither @crypto_key@ nor @kms_wrapped@ is specified. Must not be set if @kms_wrapped@ is set.
+    cryptoKey :: (Core.Maybe Core.Base64),
+    -- | KMS wrapped key. Must not be set if @crypto_key@ is set.
+    kmsWrapped :: (Core.Maybe KmsWrappedCryptoKey)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CryptoHashConfig' with the minimum fields required to make a request.
 newCryptoHashConfig ::
   CryptoHashConfig
-newCryptoHashConfig = CryptoHashConfig {cryptoKey = Core.Nothing}
+newCryptoHashConfig =
+  CryptoHashConfig {cryptoKey = Core.Nothing, kmsWrapped = Core.Nothing}
 
 instance Core.FromJSON CryptoHashConfig where
   parseJSON =
     Core.withObject
       "CryptoHashConfig"
       ( \o ->
-          CryptoHashConfig Core.<$> (o Core..:? "cryptoKey")
+          CryptoHashConfig
+            Core.<$> (o Core..:? "cryptoKey")
+            Core.<*> (o Core..:? "kmsWrapped")
       )
 
 instance Core.ToJSON CryptoHashConfig where
   toJSON CryptoHashConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("cryptoKey" Core..=) Core.<$> cryptoKey]
+          [ ("cryptoKey" Core..=) Core.<$> cryptoKey,
+            ("kmsWrapped" Core..=) Core.<$> kmsWrapped
+          ]
       )
 
 -- | A message representing a health dataset. A health dataset represents a collection of healthcare data pertaining to one or more patients. This may include multiple modalities of healthcare data, such as electronic medical records or medical imaging data.
@@ -1694,30 +1722,72 @@ instance Core.ToJSON Dataset where
 -- | Shift a date forward or backward in time by a random amount which is consistent for a given patient and crypto key combination.
 --
 -- /See:/ 'newDateShiftConfig' smart constructor.
-newtype DateShiftConfig = DateShiftConfig
-  { -- | An AES 128\/192\/256 bit key. Causes the shift to be computed based on this key and the patient ID. A default key is generated for each Deidentify operation and is used wherever crypto_key is not specified.
-    cryptoKey :: (Core.Maybe Core.Base64)
+data DateShiftConfig = DateShiftConfig
+  { -- | An AES 128\/192\/256 bit key. The date shift is computed based on this key and the patient ID. If the patient ID is empty for a DICOM resource, the date shift is computed based on this key and the study instance UID. If @crypto_key@ is not set, then @kms_wrapped@ is used to calculate the date shift. If neither is set, a default key is generated for each de-identify operation. Must not be set if @kms_wrapped@ is set.
+    cryptoKey :: (Core.Maybe Core.Base64),
+    -- | KMS wrapped key. If @kms_wrapped@ is not set, then @crypto_key@ is used to calculate the date shift. If neither is set, a default key is generated for each de-identify operation. Must not be set if @crypto_key@ is set.
+    kmsWrapped :: (Core.Maybe KmsWrappedCryptoKey)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DateShiftConfig' with the minimum fields required to make a request.
 newDateShiftConfig ::
   DateShiftConfig
-newDateShiftConfig = DateShiftConfig {cryptoKey = Core.Nothing}
+newDateShiftConfig =
+  DateShiftConfig {cryptoKey = Core.Nothing, kmsWrapped = Core.Nothing}
 
 instance Core.FromJSON DateShiftConfig where
   parseJSON =
     Core.withObject
       "DateShiftConfig"
       ( \o ->
-          DateShiftConfig Core.<$> (o Core..:? "cryptoKey")
+          DateShiftConfig
+            Core.<$> (o Core..:? "cryptoKey")
+            Core.<*> (o Core..:? "kmsWrapped")
       )
 
 instance Core.ToJSON DateShiftConfig where
   toJSON DateShiftConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("cryptoKey" Core..=) Core.<$> cryptoKey]
+          [ ("cryptoKey" Core..=) Core.<$> cryptoKey,
+            ("kmsWrapped" Core..=) Core.<$> kmsWrapped
+          ]
+      )
+
+-- | Contains configuration for streaming de-identified FHIR export.
+--
+-- /See:/ 'newDeidentifiedStoreDestination' smart constructor.
+data DeidentifiedStoreDestination = DeidentifiedStoreDestination
+  { -- | The configuration to use when de-identifying resources that are added to this store.
+    config :: (Core.Maybe DeidentifyConfig),
+    -- | The full resource name of a Cloud Healthcare FHIR store, for example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    store :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeidentifiedStoreDestination' with the minimum fields required to make a request.
+newDeidentifiedStoreDestination ::
+  DeidentifiedStoreDestination
+newDeidentifiedStoreDestination =
+  DeidentifiedStoreDestination {config = Core.Nothing, store = Core.Nothing}
+
+instance Core.FromJSON DeidentifiedStoreDestination where
+  parseJSON =
+    Core.withObject
+      "DeidentifiedStoreDestination"
+      ( \o ->
+          DeidentifiedStoreDestination
+            Core.<$> (o Core..:? "config") Core.<*> (o Core..:? "store")
+      )
+
+instance Core.ToJSON DeidentifiedStoreDestination where
+  toJSON DeidentifiedStoreDestination {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("config" Core..=) Core.<$> config,
+            ("store" Core..=) Core.<$> store
+          ]
       )
 
 -- | Configures de-id options specific to different types of content. Each submessage customizes the handling of an https:\/\/tools.ietf.org\/html\/rfc6838 media type or subtype. Configs are applied in a nested manner at runtime.
@@ -1773,10 +1843,12 @@ instance Core.ToJSON DeidentifyConfig where
 --
 -- /See:/ 'newDeidentifyDatasetRequest' smart constructor.
 data DeidentifyDatasetRequest = DeidentifyDatasetRequest
-  { -- | Deidentify configuration.
+  { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
     -- | The name of the dataset resource to create and write the redacted data to. * The destination dataset must not exist. * The destination dataset must be in the same location as the source dataset. De-identifying data across multiple locations is not supported.
-    destinationDataset :: (Core.Maybe Core.Text)
+    destinationDataset :: (Core.Maybe Core.Text),
+    -- | Cloud Storage location to read the JSON cloud.healthcare.deidentify.DeidentifyConfig from, overriding the default config. Must be of the form @gs:\/\/{bucket_id}\/path\/to\/object@. The Cloud Storage location must grant the Cloud IAM role @roles\/storage.objectViewer@ to the project\'s Cloud Healthcare Service Agent service account. Only one of @config@ and @gcs_config_uri@ can be specified.
+    gcsConfigUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1786,7 +1858,8 @@ newDeidentifyDatasetRequest ::
 newDeidentifyDatasetRequest =
   DeidentifyDatasetRequest
     { config = Core.Nothing,
-      destinationDataset = Core.Nothing
+      destinationDataset = Core.Nothing,
+      gcsConfigUri = Core.Nothing
     }
 
 instance Core.FromJSON DeidentifyDatasetRequest where
@@ -1797,6 +1870,7 @@ instance Core.FromJSON DeidentifyDatasetRequest where
           DeidentifyDatasetRequest
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "destinationDataset")
+            Core.<*> (o Core..:? "gcsConfigUri")
       )
 
 instance Core.ToJSON DeidentifyDatasetRequest where
@@ -1805,7 +1879,8 @@ instance Core.ToJSON DeidentifyDatasetRequest where
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
             ("destinationDataset" Core..=)
-              Core.<$> destinationDataset
+              Core.<$> destinationDataset,
+            ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri
           ]
       )
 
@@ -1813,12 +1888,14 @@ instance Core.ToJSON DeidentifyDatasetRequest where
 --
 -- /See:/ 'newDeidentifyDicomStoreRequest' smart constructor.
 data DeidentifyDicomStoreRequest = DeidentifyDicomStoreRequest
-  { -- | Deidentify configuration.
+  { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
     -- | The name of the DICOM store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination DICOM store must not exist. * The caller must have the necessary permissions to create the destination DICOM store.
     destinationStore :: (Core.Maybe Core.Text),
     -- | Filter configuration.
-    filterConfig :: (Core.Maybe DicomFilterConfig)
+    filterConfig :: (Core.Maybe DicomFilterConfig),
+    -- | Cloud Storage location to read the JSON cloud.healthcare.deidentify.DeidentifyConfig from, overriding the default config. Must be of the form @gs:\/\/{bucket_id}\/path\/to\/object@. The Cloud Storage location must grant the Cloud IAM role @roles\/storage.objectViewer@ to the project\'s Cloud Healthcare Service Agent service account. Only one of @config@ and @gcs_config_uri@ can be specified.
+    gcsConfigUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1829,7 +1906,8 @@ newDeidentifyDicomStoreRequest =
   DeidentifyDicomStoreRequest
     { config = Core.Nothing,
       destinationStore = Core.Nothing,
-      filterConfig = Core.Nothing
+      filterConfig = Core.Nothing,
+      gcsConfigUri = Core.Nothing
     }
 
 instance Core.FromJSON DeidentifyDicomStoreRequest where
@@ -1841,6 +1919,7 @@ instance Core.FromJSON DeidentifyDicomStoreRequest where
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "destinationStore")
             Core.<*> (o Core..:? "filterConfig")
+            Core.<*> (o Core..:? "gcsConfigUri")
       )
 
 instance Core.ToJSON DeidentifyDicomStoreRequest where
@@ -1850,7 +1929,8 @@ instance Core.ToJSON DeidentifyDicomStoreRequest where
           [ ("config" Core..=) Core.<$> config,
             ("destinationStore" Core..=)
               Core.<$> destinationStore,
-            ("filterConfig" Core..=) Core.<$> filterConfig
+            ("filterConfig" Core..=) Core.<$> filterConfig,
+            ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri
           ]
       )
 
@@ -1858,12 +1938,16 @@ instance Core.ToJSON DeidentifyDicomStoreRequest where
 --
 -- /See:/ 'newDeidentifyFhirStoreRequest' smart constructor.
 data DeidentifyFhirStoreRequest = DeidentifyFhirStoreRequest
-  { -- | Deidentify configuration.
+  { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
     -- | The name of the FHIR store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination FHIR store must exist. * The caller must have the healthcare.fhirResources.update permission to write to the destination FHIR store.
     destinationStore :: (Core.Maybe Core.Text),
+    -- | Cloud Storage location to read the JSON cloud.healthcare.deidentify.DeidentifyConfig from, overriding the default config. Must be of the form @gs:\/\/{bucket_id}\/path\/to\/object@. The Cloud Storage location must grant the Cloud IAM role @roles\/storage.objectViewer@ to the project\'s Cloud Healthcare Service Agent service account. Only one of @config@ and @gcs_config_uri@ can be specified.
+    gcsConfigUri :: (Core.Maybe Core.Text),
     -- | A filter specifying the resources to include in the output. If not specified, all resources are included in the output.
-    resourceFilter :: (Core.Maybe FhirFilter)
+    resourceFilter :: (Core.Maybe FhirFilter),
+    -- | If true, skips resources that are created or modified after the de-identify operation is created.
+    skipModifiedResources :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1874,7 +1958,9 @@ newDeidentifyFhirStoreRequest =
   DeidentifyFhirStoreRequest
     { config = Core.Nothing,
       destinationStore = Core.Nothing,
-      resourceFilter = Core.Nothing
+      gcsConfigUri = Core.Nothing,
+      resourceFilter = Core.Nothing,
+      skipModifiedResources = Core.Nothing
     }
 
 instance Core.FromJSON DeidentifyFhirStoreRequest where
@@ -1885,7 +1971,9 @@ instance Core.FromJSON DeidentifyFhirStoreRequest where
           DeidentifyFhirStoreRequest
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "destinationStore")
+            Core.<*> (o Core..:? "gcsConfigUri")
             Core.<*> (o Core..:? "resourceFilter")
+            Core.<*> (o Core..:? "skipModifiedResources")
       )
 
 instance Core.ToJSON DeidentifyFhirStoreRequest where
@@ -1895,7 +1983,10 @@ instance Core.ToJSON DeidentifyFhirStoreRequest where
           [ ("config" Core..=) Core.<$> config,
             ("destinationStore" Core..=)
               Core.<$> destinationStore,
-            ("resourceFilter" Core..=) Core.<$> resourceFilter
+            ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri,
+            ("resourceFilter" Core..=) Core.<$> resourceFilter,
+            ("skipModifiedResources" Core..=)
+              Core.<$> skipModifiedResources
           ]
       )
 
@@ -2073,7 +2164,7 @@ instance Core.FromJSON DicomStore_Labels where
 instance Core.ToJSON DicomStore_Labels where
   toJSON DicomStore_Labels {..} = Core.toJSON additional
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -2144,7 +2235,7 @@ data EntityMention = EntityMention
     certaintyAssessment :: (Core.Maybe Feature),
     -- | The model\'s confidence in this entity mention annotation. A number between 0 and 1.
     confidence :: (Core.Maybe Core.Double),
-    -- | linked_entities are candidate ontological concepts that this entity mention may refer to. They are sorted by decreasing confidence.it
+    -- | linked_entities are candidate ontological concepts that this entity mention may refer to. They are sorted by decreasing confidence.
     linkedEntities :: (Core.Maybe [LinkedEntity]),
     -- | mention_id uniquely identifies each entity mention in a single response.
     mentionId :: (Core.Maybe Core.Text),
@@ -2780,7 +2871,9 @@ instance Core.ToJSON FhirFilter where
 --
 -- /See:/ 'newFhirStore' smart constructor.
 data FhirStore = FhirStore
-  { -- | If true, overrides the default search behavior for this FHIR store to @handling=strict@ which returns an error for unrecognized search parameters. If false, uses the FHIR specification default @handling=lenient@ which ignores unrecognized search parameters. The handling can always be changed from the default on an individual API call by setting the HTTP header @Prefer: handling=strict@ or @Prefer: handling=lenient@.
+  { -- | Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+    complexDataTypeReferenceParsing :: (Core.Maybe FhirStore_ComplexDataTypeReferenceParsing),
+    -- | If true, overrides the default search behavior for this FHIR store to @handling=strict@ which returns an error for unrecognized search parameters. If false, uses the FHIR specification default @handling=lenient@ which ignores unrecognized search parameters. The handling can always be changed from the default on an individual API call by setting the HTTP header @Prefer: handling=strict@ or @Prefer: handling=lenient@.
     defaultSearchHandlingStrict :: (Core.Maybe Core.Bool),
     -- | Immutable. Whether to disable referential integrity in this FHIR store. This field is immutable after FHIR store creation. The default value is false, meaning that the API enforces referential integrity and fails the requests that result in inconsistent state in the FHIR store. When this field is set to true, the API skips referential integrity checks. Consequently, operations that rely on references, such as GetPatientEverything, do not return all the results if broken references exist.
     disableReferentialIntegrity :: (Core.Maybe Core.Bool),
@@ -2808,7 +2901,8 @@ newFhirStore ::
   FhirStore
 newFhirStore =
   FhirStore
-    { defaultSearchHandlingStrict = Core.Nothing,
+    { complexDataTypeReferenceParsing = Core.Nothing,
+      defaultSearchHandlingStrict = Core.Nothing,
       disableReferentialIntegrity = Core.Nothing,
       disableResourceVersioning = Core.Nothing,
       enableUpdateCreate = Core.Nothing,
@@ -2826,7 +2920,8 @@ instance Core.FromJSON FhirStore where
       "FhirStore"
       ( \o ->
           FhirStore
-            Core.<$> (o Core..:? "defaultSearchHandlingStrict")
+            Core.<$> (o Core..:? "complexDataTypeReferenceParsing")
+            Core.<*> (o Core..:? "defaultSearchHandlingStrict")
             Core.<*> (o Core..:? "disableReferentialIntegrity")
             Core.<*> (o Core..:? "disableResourceVersioning")
             Core.<*> (o Core..:? "enableUpdateCreate")
@@ -2842,7 +2937,9 @@ instance Core.ToJSON FhirStore where
   toJSON FhirStore {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultSearchHandlingStrict" Core..=)
+          [ ("complexDataTypeReferenceParsing" Core..=)
+              Core.<$> complexDataTypeReferenceParsing,
+            ("defaultSearchHandlingStrict" Core..=)
               Core.<$> defaultSearchHandlingStrict,
             ("disableReferentialIntegrity" Core..=)
               Core.<$> disableReferentialIntegrity,
@@ -2887,6 +2984,91 @@ instance Core.FromJSON FhirStore_Labels where
 
 instance Core.ToJSON FhirStore_Labels where
   toJSON FhirStore_Labels {..} = Core.toJSON additional
+
+-- | Count of resources and total storage size by type for a given FHIR store.
+--
+-- /See:/ 'newFhirStoreMetric' smart constructor.
+data FhirStoreMetric = FhirStoreMetric
+  { -- | The total count of FHIR resources in the store of this resource type.
+    count :: (Core.Maybe Core.Int64),
+    -- | The FHIR resource type this metric applies to.
+    resourceType :: (Core.Maybe Core.Text),
+    -- | The total amount of structured storage used by FHIR resources of this resource type in the store.
+    structuredStorageSizeBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FhirStoreMetric' with the minimum fields required to make a request.
+newFhirStoreMetric ::
+  FhirStoreMetric
+newFhirStoreMetric =
+  FhirStoreMetric
+    { count = Core.Nothing,
+      resourceType = Core.Nothing,
+      structuredStorageSizeBytes = Core.Nothing
+    }
+
+instance Core.FromJSON FhirStoreMetric where
+  parseJSON =
+    Core.withObject
+      "FhirStoreMetric"
+      ( \o ->
+          FhirStoreMetric
+            Core.<$> ( o Core..:? "count"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "resourceType")
+            Core.<*> ( o Core..:? "structuredStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON FhirStoreMetric where
+  toJSON FhirStoreMetric {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("count" Core..=) Core.. Core.AsText Core.<$> count,
+            ("resourceType" Core..=) Core.<$> resourceType,
+            ("structuredStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> structuredStorageSizeBytes
+          ]
+      )
+
+-- | List of metrics for a given FHIR store.
+--
+-- /See:/ 'newFhirStoreMetrics' smart constructor.
+data FhirStoreMetrics = FhirStoreMetrics
+  { -- | List of FhirStoreMetric by resource type.
+    metrics :: (Core.Maybe [FhirStoreMetric]),
+    -- | The resource name of the FHIR store to get metrics for, in the format @projects\/{project_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FhirStoreMetrics' with the minimum fields required to make a request.
+newFhirStoreMetrics ::
+  FhirStoreMetrics
+newFhirStoreMetrics =
+  FhirStoreMetrics {metrics = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON FhirStoreMetrics where
+  parseJSON =
+    Core.withObject
+      "FhirStoreMetrics"
+      ( \o ->
+          FhirStoreMetrics
+            Core.<$> (o Core..:? "metrics") Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON FhirStoreMetrics where
+  toJSON FhirStoreMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metrics" Core..=) Core.<$> metrics,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
 
 -- | A (sub) field of a type.
 --
@@ -3646,7 +3828,7 @@ instance Core.ToJSON Hl7V2NotificationConfig where
 data Hl7V2Store = Hl7V2Store
   { -- | User-supplied key-value pairs used to organize HL7v2 stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
     labels :: (Core.Maybe Hl7V2Store_Labels),
-    -- | Resource name of the HL7v2 store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
+    -- | Resource name of the HL7v2 store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
     name :: (Core.Maybe Core.Text),
     -- | A list of notification configs. Each configuration uses a filter to determine whether to publish a message (both Ingest & Create) on the corresponding notification destination. Only the message name is sent as part of the notification. Supplied by the client.
     notificationConfigs :: (Core.Maybe [Hl7V2NotificationConfig]),
@@ -4148,6 +4330,42 @@ instance Core.ToJSON IngestMessageResponse where
       ( Core.catMaybes
           [ ("hl7Ack" Core..=) Core.<$> hl7Ack,
             ("message" Core..=) Core.<$> message
+          ]
+      )
+
+-- | Include to use an existing data crypto key wrapped by KMS. The wrapped key must be a 128-, 192-, or 256-bit key. The key must grant the Cloud IAM permission @cloudkms.cryptoKeyVersions.useToDecrypt@ to the project\'s Cloud Healthcare Service Agent service account. For more information, see [Creating a wrapped key] (https:\/\/cloud.google.com\/dlp\/docs\/create-wrapped-key).
+--
+-- /See:/ 'newKmsWrappedCryptoKey' smart constructor.
+data KmsWrappedCryptoKey = KmsWrappedCryptoKey
+  { -- | Required. The resource name of the KMS CryptoKey to use for unwrapping. For example, @projects\/{project_id}\/locations\/{location_id}\/keyRings\/{keyring}\/cryptoKeys\/{key}@.
+    cryptoKey :: (Core.Maybe Core.Text),
+    -- | Required. The wrapped data crypto key.
+    wrappedKey :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KmsWrappedCryptoKey' with the minimum fields required to make a request.
+newKmsWrappedCryptoKey ::
+  KmsWrappedCryptoKey
+newKmsWrappedCryptoKey =
+  KmsWrappedCryptoKey {cryptoKey = Core.Nothing, wrappedKey = Core.Nothing}
+
+instance Core.FromJSON KmsWrappedCryptoKey where
+  parseJSON =
+    Core.withObject
+      "KmsWrappedCryptoKey"
+      ( \o ->
+          KmsWrappedCryptoKey
+            Core.<$> (o Core..:? "cryptoKey")
+            Core.<*> (o Core..:? "wrappedKey")
+      )
+
+instance Core.ToJSON KmsWrappedCryptoKey where
+  toJSON KmsWrappedCryptoKey {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cryptoKey" Core..=) Core.<$> cryptoKey,
+            ("wrappedKey" Core..=) Core.<$> wrappedKey
           ]
       )
 
@@ -4798,7 +5016,7 @@ data Message = Message
     labels :: (Core.Maybe Message_Labels),
     -- | The message type for this message. MSH-9.1.
     messageType :: (Core.Maybe Core.Text),
-    -- | Resource name of the Message, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
+    -- | Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The parsed version of the raw message data.
     parsedData :: (Core.Maybe ParsedData),
@@ -5669,7 +5887,9 @@ instance Core.ToJSON RevokeConsentRequest where
 --
 -- /See:/ 'newSchemaConfig' smart constructor.
 data SchemaConfig = SchemaConfig
-  { -- | The depth for all recursive structures in the output analytics schema. For example, @concept@ in the CodeSystem resource is a recursive structure; when the depth is 2, the CodeSystem table will have a column called @concept.concept@ but not @concept.concept.concept@. If not specified or set to 0, the server will use the default value 2. The maximum depth allowed is 5.
+  { -- | The configuration for exported BigQuery tables to be partitioned by FHIR resource\'s last updated time column.
+    lastUpdatedPartitionConfig :: (Core.Maybe TimePartitioning),
+    -- | The depth for all recursive structures in the output analytics schema. For example, @concept@ in the CodeSystem resource is a recursive structure; when the depth is 2, the CodeSystem table will have a column called @concept.concept@ but not @concept.concept.concept@. If not specified or set to 0, the server will use the default value 2. The maximum depth allowed is 5.
     recursiveStructureDepth :: (Core.Maybe Core.Int64),
     -- | Specifies the output schema type. Schema type is required.
     schemaType :: (Core.Maybe SchemaConfig_SchemaType)
@@ -5681,7 +5901,8 @@ newSchemaConfig ::
   SchemaConfig
 newSchemaConfig =
   SchemaConfig
-    { recursiveStructureDepth = Core.Nothing,
+    { lastUpdatedPartitionConfig = Core.Nothing,
+      recursiveStructureDepth = Core.Nothing,
       schemaType = Core.Nothing
     }
 
@@ -5691,7 +5912,8 @@ instance Core.FromJSON SchemaConfig where
       "SchemaConfig"
       ( \o ->
           SchemaConfig
-            Core.<$> ( o Core..:? "recursiveStructureDepth"
+            Core.<$> (o Core..:? "lastUpdatedPartitionConfig")
+            Core.<*> ( o Core..:? "recursiveStructureDepth"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "schemaType")
@@ -5701,7 +5923,9 @@ instance Core.ToJSON SchemaConfig where
   toJSON SchemaConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("recursiveStructureDepth" Core..=)
+          [ ("lastUpdatedPartitionConfig" Core..=)
+              Core.<$> lastUpdatedPartitionConfig,
+            ("recursiveStructureDepth" Core..=)
               Core.. Core.AsText
               Core.<$> recursiveStructureDepth,
             ("schemaType" Core..=) Core.<$> schemaType
@@ -6003,7 +6227,7 @@ instance Core.ToJSON Segment_Fields where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -6187,6 +6411,9 @@ data StreamConfig = StreamConfig
     -- Different versions of the same resource are distinguishable by the meta.versionId and meta.lastUpdated columns. The operation (CREATE\/UPDATE\/DELETE) that results in the new version is recorded in the meta.tag. The tables contain all historical resource versions since streaming was enabled. For query convenience, the server also creates one view per table of the same name containing only the current resource version. The streamed data in the BigQuery dataset is not guaranteed to be completely unique. The combination of the id and meta.versionId columns should ideally identify a single unique row. But in rare cases, duplicates may exist. At query time, users may use the SQL select statement to keep only one of the duplicate rows given an id and meta.versionId pair. Alternatively, the server created view mentioned above also filters out duplicates. If a resource mutation cannot be streamed to BigQuery, errors are logged to Cloud Logging. For more information, see
     -- <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
     bigqueryDestination :: (Core.Maybe GoogleCloudHealthcareV1FhirBigQueryDestination),
+    -- | The destination FHIR store for de-identified resources. After this field is added, all subsequent creates\/updates\/patches to the source store will be de-identified using the provided configuration and applied to the destination store. Importing resources to the source store will not trigger the streaming. If the source store already contains resources when this option is enabled, those resources will not be copied to the destination store unless they are subsequently updated. This may result in invalid references in the destination store. Before adding this config, you must grant the healthcare.fhirResources.update permission on the destination store to your project\'s __Cloud Healthcare Service Agent__ <https://cloud.google.com/healthcare/docs/how-tos/permissions-healthcare-api-gcp-products#the_cloud_healthcare_service_agent service account>. The destination store must set enable/update/create to true. The destination store must have disable/referential/integrity set to true. If a resource cannot be
+    -- de-identified, errors will be logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
+    deidentifiedStoreDestination :: (Core.Maybe DeidentifiedStoreDestination),
     -- | Supply a FHIR resource type (such as \"Patient\" or \"Observation\"). See https:\/\/www.hl7.org\/fhir\/valueset-resource-types.html for a list of all FHIR resource types. The server treats an empty list as an intent to stream all the supported resource types in this FHIR store.
     resourceTypes :: (Core.Maybe [Core.Text])
   }
@@ -6198,6 +6425,7 @@ newStreamConfig ::
 newStreamConfig =
   StreamConfig
     { bigqueryDestination = Core.Nothing,
+      deidentifiedStoreDestination = Core.Nothing,
       resourceTypes = Core.Nothing
     }
 
@@ -6208,6 +6436,7 @@ instance Core.FromJSON StreamConfig where
       ( \o ->
           StreamConfig
             Core.<$> (o Core..:? "bigqueryDestination")
+            Core.<*> (o Core..:? "deidentifiedStoreDestination")
             Core.<*> (o Core..:? "resourceTypes")
       )
 
@@ -6217,6 +6446,8 @@ instance Core.ToJSON StreamConfig where
       ( Core.catMaybes
           [ ("bigqueryDestination" Core..=)
               Core.<$> bigqueryDestination,
+            ("deidentifiedStoreDestination" Core..=)
+              Core.<$> deidentifiedStoreDestination,
             ("resourceTypes" Core..=) Core.<$> resourceTypes
           ]
       )
@@ -6250,7 +6481,7 @@ instance Core.ToJSON TagFilterList where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6311,7 +6542,7 @@ instance Core.ToJSON TestIamPermissionsResponse where
 --
 -- /See:/ 'newTextConfig' smart constructor.
 newtype TextConfig = TextConfig
-  { -- | The transformations to apply to the detected data.
+  { -- | The transformations to apply to the detected data. Deprecated. Use @additional_transformations@ instead.
     transformations :: (Core.Maybe [InfoTypeTransformation])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6370,6 +6601,45 @@ instance Core.ToJSON TextSpan where
       ( Core.catMaybes
           [ ("beginOffset" Core..=) Core.<$> beginOffset,
             ("content" Core..=) Core.<$> content
+          ]
+      )
+
+-- | Configuration for FHIR BigQuery time-partitioned tables.
+--
+-- /See:/ 'newTimePartitioning' smart constructor.
+data TimePartitioning = TimePartitioning
+  { -- | Number of milliseconds for which to keep the storage for a partition.
+    expirationMs :: (Core.Maybe Core.Int64),
+    -- | Type of partitioning.
+    type' :: (Core.Maybe TimePartitioning_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimePartitioning' with the minimum fields required to make a request.
+newTimePartitioning ::
+  TimePartitioning
+newTimePartitioning =
+  TimePartitioning {expirationMs = Core.Nothing, type' = Core.Nothing}
+
+instance Core.FromJSON TimePartitioning where
+  parseJSON =
+    Core.withObject
+      "TimePartitioning"
+      ( \o ->
+          TimePartitioning
+            Core.<$> ( o Core..:? "expirationMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON TimePartitioning where
+  toJSON TimePartitioning {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expirationMs" Core..=) Core.. Core.AsText
+              Core.<$> expirationMs,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 

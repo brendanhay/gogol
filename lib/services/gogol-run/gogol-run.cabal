@@ -49,9 +49,24 @@ library
 
   exposed-modules:
     Gogol.Run
+    Gogol.Run.Projects.Locations.Jobs.Create
+    Gogol.Run.Projects.Locations.Jobs.Delete
+    Gogol.Run.Projects.Locations.Jobs.Executions.Delete
+    Gogol.Run.Projects.Locations.Jobs.Executions.Get
+    Gogol.Run.Projects.Locations.Jobs.Executions.List
+    Gogol.Run.Projects.Locations.Jobs.Executions.Tasks.Get
+    Gogol.Run.Projects.Locations.Jobs.Executions.Tasks.List
+    Gogol.Run.Projects.Locations.Jobs.Get
+    Gogol.Run.Projects.Locations.Jobs.GetIamPolicy
+    Gogol.Run.Projects.Locations.Jobs.List
+    Gogol.Run.Projects.Locations.Jobs.Patch
+    Gogol.Run.Projects.Locations.Jobs.Run
+    Gogol.Run.Projects.Locations.Jobs.SetIamPolicy
+    Gogol.Run.Projects.Locations.Jobs.TestIamPermissions
     Gogol.Run.Projects.Locations.Operations.Delete
     Gogol.Run.Projects.Locations.Operations.Get
     Gogol.Run.Projects.Locations.Operations.List
+    Gogol.Run.Projects.Locations.Operations.Wait
     Gogol.Run.Projects.Locations.Services.Create
     Gogol.Run.Projects.Locations.Services.Delete
     Gogol.Run.Projects.Locations.Services.Get
@@ -70,5 +85,5 @@ library
     Gogol.Run.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

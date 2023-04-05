@@ -102,7 +102,9 @@ newChatMediaDownload resourceName =
 
 instance Core.GoogleRequest ChatMediaDownload where
   type Rs ChatMediaDownload = Media
-  type Scopes ChatMediaDownload = '[]
+  type
+    Scopes ChatMediaDownload =
+      '[Chat'Bot, Chat'Messages, Chat'Messages'Readonly]
   requestClient ChatMediaDownload {..} =
     go
       resourceName

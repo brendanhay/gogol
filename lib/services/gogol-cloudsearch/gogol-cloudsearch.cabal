@@ -77,12 +77,14 @@ library
     Gogol.CloudSearch.Settings.Datasources.Delete
     Gogol.CloudSearch.Settings.Datasources.Get
     Gogol.CloudSearch.Settings.Datasources.List
+    Gogol.CloudSearch.Settings.Datasources.Patch
     Gogol.CloudSearch.Settings.Datasources.Update
     Gogol.CloudSearch.Settings.GetCustomer
     Gogol.CloudSearch.Settings.Searchapplications.Create
     Gogol.CloudSearch.Settings.Searchapplications.Delete
     Gogol.CloudSearch.Settings.Searchapplications.Get
     Gogol.CloudSearch.Settings.Searchapplications.List
+    Gogol.CloudSearch.Settings.Searchapplications.Patch
     Gogol.CloudSearch.Settings.Searchapplications.Reset
     Gogol.CloudSearch.Settings.Searchapplications.Update
     Gogol.CloudSearch.Settings.UpdateCustomer
@@ -102,5 +104,5 @@ library
     Gogol.CloudSearch.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

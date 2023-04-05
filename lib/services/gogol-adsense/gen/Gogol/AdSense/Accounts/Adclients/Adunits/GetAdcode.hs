@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the AdSense code for a given ad unit.
+-- Gets the ad unit code for a given ad unit. For more information, see <https://support.google.com/adsense/answer/9274634 About the AdSense code> and <https://support.google.com/adsense/answer/9190028 Where to place the ad code in your HTML>.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.adunits.getAdcode@.
 module Gogol.AdSense.Accounts.Adclients.Adunits.GetAdcode
@@ -56,7 +56,7 @@ type AdSenseAccountsAdclientsAdunitsGetAdcodeResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] AdUnitAdCode
 
--- | Gets the AdSense code for a given ad unit.
+-- | Gets the ad unit code for a given ad unit. For more information, see <https://support.google.com/adsense/answer/9274634 About the AdSense code> and <https://support.google.com/adsense/answer/9190028 Where to place the ad code in your HTML>.
 --
 -- /See:/ 'newAdSenseAccountsAdclientsAdunitsGetAdcode' smart constructor.
 data AdSenseAccountsAdclientsAdunitsGetAdcode = AdSenseAccountsAdclientsAdunitsGetAdcode

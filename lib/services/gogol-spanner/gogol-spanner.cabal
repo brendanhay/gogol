@@ -49,9 +49,18 @@ library
 
   exposed-modules:
     Gogol.Spanner
+    Gogol.Spanner.Projects.InstanceConfigOperations.List
+    Gogol.Spanner.Projects.InstanceConfigs.Create
+    Gogol.Spanner.Projects.InstanceConfigs.Delete
     Gogol.Spanner.Projects.InstanceConfigs.Get
     Gogol.Spanner.Projects.InstanceConfigs.List
+    Gogol.Spanner.Projects.InstanceConfigs.Operations.Cancel
+    Gogol.Spanner.Projects.InstanceConfigs.Operations.Delete
+    Gogol.Spanner.Projects.InstanceConfigs.Operations.Get
+    Gogol.Spanner.Projects.InstanceConfigs.Operations.List
+    Gogol.Spanner.Projects.InstanceConfigs.Patch
     Gogol.Spanner.Projects.Instances.BackupOperations.List
+    Gogol.Spanner.Projects.Instances.Backups.Copy
     Gogol.Spanner.Projects.Instances.Backups.Create
     Gogol.Spanner.Projects.Instances.Backups.Delete
     Gogol.Spanner.Projects.Instances.Backups.Get
@@ -67,6 +76,8 @@ library
     Gogol.Spanner.Projects.Instances.Create
     Gogol.Spanner.Projects.Instances.DatabaseOperations.List
     Gogol.Spanner.Projects.Instances.Databases.Create
+    Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.List
+    Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.TestIamPermissions
     Gogol.Spanner.Projects.Instances.Databases.DropDatabase
     Gogol.Spanner.Projects.Instances.Databases.Get
     Gogol.Spanner.Projects.Instances.Databases.GetDdl
@@ -115,5 +126,5 @@ library
     Gogol.Spanner.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -366,6 +366,15 @@ module Gogol.Jobs.Internal.Sum
       ( LocationFilter_TelecommutePreference_TELECOMMUTEPREFERENCEUNSPECIFIED,
         LocationFilter_TelecommutePreference_TELECOMMUTEEXCLUDED,
         LocationFilter_TelecommutePreference_TELECOMMUTEALLOWED,
+        LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED,
+        ..
+      ),
+
+    -- * NamespacedDebugInput_TestingMode
+    NamespacedDebugInput_TestingMode
+      ( NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED,
+        NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF,
+        NamespacedDebugInput_TestingMode_TESTINGMODEALLON,
         ..
       ),
 
@@ -1930,7 +1939,8 @@ pattern Location_LocationType_STREETADDRESS = Location_LocationType "STREET_ADDR
   Location_LocationType
   #-}
 
--- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location. Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, telecommute job are not searched. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only used for job search requests.
+-- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or latlng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
+-- used for job search requests.
 newtype LocationFilter_TelecommutePreference = LocationFilter_TelecommutePreference {fromLocationFilter_TelecommutePreference :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1947,7 +1957,7 @@ newtype LocationFilter_TelecommutePreference = LocationFilter_TelecommutePrefere
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEPREFERENCEUNSPECIFIED :: LocationFilter_TelecommutePreference
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEPREFERENCEUNSPECIFIED = LocationFilter_TelecommutePreference "TELECOMMUTE_PREFERENCE_UNSPECIFIED"
 
--- | Exclude telecommute jobs.
+-- | Deprecated: Ignore telecommute status of jobs. Use TELECOMMUTE/JOBS/EXCLUDED if want to exclude telecommute jobs.
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEEXCLUDED :: LocationFilter_TelecommutePreference
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEEXCLUDED = LocationFilter_TelecommutePreference "TELECOMMUTE_EXCLUDED"
 
@@ -1955,11 +1965,48 @@ pattern LocationFilter_TelecommutePreference_TELECOMMUTEEXCLUDED = LocationFilte
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEALLOWED :: LocationFilter_TelecommutePreference
 pattern LocationFilter_TelecommutePreference_TELECOMMUTEALLOWED = LocationFilter_TelecommutePreference "TELECOMMUTE_ALLOWED"
 
+-- | Exclude telecommute jobs.
+pattern LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED :: LocationFilter_TelecommutePreference
+pattern LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED = LocationFilter_TelecommutePreference "TELECOMMUTE_JOBS_EXCLUDED"
+
 {-# COMPLETE
   LocationFilter_TelecommutePreference_TELECOMMUTEPREFERENCEUNSPECIFIED,
   LocationFilter_TelecommutePreference_TELECOMMUTEEXCLUDED,
   LocationFilter_TelecommutePreference_TELECOMMUTEALLOWED,
+  LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED,
   LocationFilter_TelecommutePreference
+  #-}
+
+-- | Sets different testing modes. See the documentation in the TestingMode message for more information.
+newtype NamespacedDebugInput_TestingMode = NamespacedDebugInput_TestingMode {fromNamespacedDebugInput_TestingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED :: NamespacedDebugInput_TestingMode
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED = NamespacedDebugInput_TestingMode "TESTING_MODE_UNSPECIFIED"
+
+-- |
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF :: NamespacedDebugInput_TestingMode
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF = NamespacedDebugInput_TestingMode "TESTING_MODE_ALL_OFF"
+
+-- |
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLON :: NamespacedDebugInput_TestingMode
+pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLON = NamespacedDebugInput_TestingMode "TESTING_MODE_ALL_ON"
+
+{-# COMPLETE
+  NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED,
+  NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF,
+  NamespacedDebugInput_TestingMode_TESTINGMODEALLON,
+  NamespacedDebugInput_TestingMode
   #-}
 
 -- | Option for job HTML content sanitization. Applied fields are: * description * applicationInfo.instruction * incentives * qualifications * responsibilities HTML tags in these fields may be stripped if sanitiazation isn\'t disabled. Defaults to HtmlSanitization.SIMPLE/FORMATTING/ONLY.

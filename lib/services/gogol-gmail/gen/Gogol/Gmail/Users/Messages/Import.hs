@@ -102,7 +102,7 @@ data GmailUsersMessagesImport = GmailUsersMessagesImport
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
+    -- | Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for Google Workspace accounts.
     deleted :: Core.Bool,
     -- | Source for Gmail\'s internal date of the message.
     internalDateSource :: UsersMessagesImportInternalDateSource,

@@ -70,9 +70,17 @@ module Gogol.DataFusion.Types
     CryptoKeyConfig (..),
     newCryptoKeyConfig,
 
+    -- ** DnsPeering
+    DnsPeering (..),
+    newDnsPeering,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EventPublishConfig
+    EventPublishConfig (..),
+    newEventPublishConfig,
 
     -- ** Expr
     Expr (..),
@@ -102,6 +110,10 @@ module Gogol.DataFusion.Types
     -- ** ListAvailableVersionsResponse
     ListAvailableVersionsResponse (..),
     newListAvailableVersionsResponse,
+
+    -- ** ListDnsPeeringsResponse
+    ListDnsPeeringsResponse (..),
+    newListDnsPeeringsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),

@@ -58,6 +58,7 @@ type AndroidPublisherEditsBundlesUploadResource =
               "ackBundleInstallationWarning"
               Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "deviceTierConfigId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -76,10 +77,13 @@ type AndroidPublisherEditsBundlesUploadResource =
                 "ackBundleInstallationWarning"
                 Core.Bool
       Core.:> Core.QueryParam "callback" Core.Text
+      Core.:> Core.QueryParam "deviceTierConfigId" Core.Text
       Core.:> Core.QueryParam "uploadType" Core.Text
       Core.:> Core.QueryParam "upload_protocol" Core.Text
       Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
+      Core.:> Core.QueryParam
+                "uploadType"
+                Core.AltMedia
       Core.:> Core.AltMedia
       Core.:> Core.Post '[Core.JSON] Bundle
 
@@ -95,6 +99,8 @@ data AndroidPublisherEditsBundlesUpload = AndroidPublisherEditsBundlesUpload
     ackBundleInstallationWarning :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Device tier config (DTC) to be used for generating deliverables (APKs). Contains id of the DTC or \"LATEST\" for last uploaded DTC.
+    deviceTierConfigId :: (Core.Maybe Core.Text),
     -- | Identifier of the edit.
     editId :: Core.Text,
     -- | Package name of the app.
@@ -119,6 +125,7 @@ newAndroidPublisherEditsBundlesUpload editId packageName =
       accessToken = Core.Nothing,
       ackBundleInstallationWarning = Core.Nothing,
       callback = Core.Nothing,
+      deviceTierConfigId = Core.Nothing,
       editId = editId,
       packageName = packageName,
       uploadType = Core.Nothing,
@@ -141,6 +148,7 @@ instance
       accessToken
       ackBundleInstallationWarning
       callback
+      deviceTierConfigId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -178,6 +186,7 @@ instance
         accessToken
         ackBundleInstallationWarning
         callback
+        deviceTierConfigId
         uploadType
         uploadProtocol
         (Core.Just Core.AltJSON)

@@ -54,7 +54,6 @@ library
     Gogol.GamesConfiguration.AchievementConfigurations.Insert
     Gogol.GamesConfiguration.AchievementConfigurations.List
     Gogol.GamesConfiguration.AchievementConfigurations.Update
-    Gogol.GamesConfiguration.ImageConfigurations.Upload
     Gogol.GamesConfiguration.LeaderboardConfigurations.Delete
     Gogol.GamesConfiguration.LeaderboardConfigurations.Get
     Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
@@ -67,5 +66,5 @@ library
     Gogol.GamesConfiguration.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -41,6 +41,10 @@ module Gogol.Container.Types
     AcceleratorConfig (..),
     newAcceleratorConfig,
 
+    -- ** AdditionalPodRangesConfig
+    AdditionalPodRangesConfig (..),
+    newAdditionalPodRangesConfig,
+
     -- ** AddonsConfig
     AddonsConfig (..),
     newAddonsConfig,
@@ -72,6 +76,20 @@ module Gogol.Container.Types
     -- ** BinaryAuthorization
     BinaryAuthorization (..),
     newBinaryAuthorization,
+
+    -- ** BinaryAuthorization_EvaluationMode
+    BinaryAuthorization_EvaluationMode (..),
+
+    -- ** BlueGreenInfo
+    BlueGreenInfo (..),
+    newBlueGreenInfo,
+
+    -- ** BlueGreenInfo_Phase
+    BlueGreenInfo_Phase (..),
+
+    -- ** BlueGreenSettings
+    BlueGreenSettings (..),
+    newBlueGreenSettings,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -120,9 +138,16 @@ module Gogol.Container.Types
     -- ** ClusterUpdate_DesiredPrivateIpv6GoogleAccess
     ClusterUpdate_DesiredPrivateIpv6GoogleAccess (..),
 
+    -- ** ClusterUpdate_DesiredStackType
+    ClusterUpdate_DesiredStackType (..),
+
     -- ** CompleteIPRotationRequest
     CompleteIPRotationRequest (..),
     newCompleteIPRotationRequest,
+
+    -- ** CompleteNodePoolUpgradeRequest
+    CompleteNodePoolUpgradeRequest (..),
+    newCompleteNodePoolUpgradeRequest,
 
     -- ** ConfidentialNodes
     ConfidentialNodes (..),
@@ -135,6 +160,10 @@ module Gogol.Container.Types
     -- ** ConsumptionMeteringConfig
     ConsumptionMeteringConfig (..),
     newConsumptionMeteringConfig,
+
+    -- ** CostManagementConfig
+    CostManagementConfig (..),
+    newCostManagementConfig,
 
     -- ** CreateClusterRequest
     CreateClusterRequest (..),
@@ -177,12 +206,38 @@ module Gogol.Container.Types
     Empty (..),
     newEmpty,
 
+    -- ** EphemeralStorageLocalSsdConfig
+    EphemeralStorageLocalSsdConfig (..),
+    newEphemeralStorageLocalSsdConfig,
+
+    -- ** FastSocket
+    FastSocket (..),
+    newFastSocket,
+
     -- ** Filter
     Filter (..),
     newFilter,
 
     -- ** Filter_EventTypeItem
     Filter_EventTypeItem (..),
+
+    -- ** Fleet
+    Fleet (..),
+    newFleet,
+
+    -- ** GPUSharingConfig
+    GPUSharingConfig (..),
+    newGPUSharingConfig,
+
+    -- ** GPUSharingConfig_GpuSharingStrategy
+    GPUSharingConfig_GpuSharingStrategy (..),
+
+    -- ** GatewayAPIConfig
+    GatewayAPIConfig (..),
+    newGatewayAPIConfig,
+
+    -- ** GatewayAPIConfig_Channel
+    GatewayAPIConfig_Channel (..),
 
     -- ** GcePersistentDiskCsiDriverConfig
     GcePersistentDiskCsiDriverConfig (..),
@@ -204,6 +259,10 @@ module Gogol.Container.Types
     GetOpenIDConfigResponse (..),
     newGetOpenIDConfigResponse,
 
+    -- ** GkeBackupAgentConfig
+    GkeBackupAgentConfig (..),
+    newGkeBackupAgentConfig,
+
     -- ** HorizontalPodAutoscaling
     HorizontalPodAutoscaling (..),
     newHorizontalPodAutoscaling,
@@ -223,6 +282,12 @@ module Gogol.Container.Types
     -- ** IPAllocationPolicy
     IPAllocationPolicy (..),
     newIPAllocationPolicy,
+
+    -- ** IPAllocationPolicy_Ipv6AccessType
+    IPAllocationPolicy_Ipv6AccessType (..),
+
+    -- ** IPAllocationPolicy_StackType
+    IPAllocationPolicy_StackType (..),
 
     -- ** IdentityServiceConfig
     IdentityServiceConfig (..),
@@ -248,6 +313,9 @@ module Gogol.Container.Types
     LinuxNodeConfig (..),
     newLinuxNodeConfig,
 
+    -- ** LinuxNodeConfig_CgroupMode
+    LinuxNodeConfig_CgroupMode (..),
+
     -- ** LinuxNodeConfig_Sysctls
     LinuxNodeConfig_Sysctls (..),
     newLinuxNodeConfig_Sysctls,
@@ -268,6 +336,10 @@ module Gogol.Container.Types
     ListUsableSubnetworksResponse (..),
     newListUsableSubnetworksResponse,
 
+    -- ** LocalNvmeSsdBlockConfig
+    LocalNvmeSsdBlockConfig (..),
+    newLocalNvmeSsdBlockConfig,
+
     -- ** LoggingComponentConfig
     LoggingComponentConfig (..),
     newLoggingComponentConfig,
@@ -278,6 +350,13 @@ module Gogol.Container.Types
     -- ** LoggingConfig
     LoggingConfig (..),
     newLoggingConfig,
+
+    -- ** LoggingVariantConfig
+    LoggingVariantConfig (..),
+    newLoggingVariantConfig,
+
+    -- ** LoggingVariantConfig_Variant
+    LoggingVariantConfig_Variant (..),
 
     -- ** MaintenanceExclusionOptions
     MaintenanceExclusionOptions (..),
@@ -297,6 +376,10 @@ module Gogol.Container.Types
     -- ** MaintenanceWindow_MaintenanceExclusions
     MaintenanceWindow_MaintenanceExclusions (..),
     newMaintenanceWindow_MaintenanceExclusions,
+
+    -- ** ManagedPrometheusConfig
+    ManagedPrometheusConfig (..),
+    newManagedPrometheusConfig,
 
     -- ** MasterAuth
     MasterAuth (..),
@@ -339,6 +422,13 @@ module Gogol.Container.Types
     -- ** NetworkConfig_PrivateIpv6GoogleAccess
     NetworkConfig_PrivateIpv6GoogleAccess (..),
 
+    -- ** NetworkPerformanceConfig
+    NetworkPerformanceConfig (..),
+    newNetworkPerformanceConfig,
+
+    -- ** NetworkPerformanceConfig_TotalEgressBandwidthTier
+    NetworkPerformanceConfig_TotalEgressBandwidthTier (..),
+
     -- ** NetworkPolicy
     NetworkPolicy (..),
     newNetworkPolicy,
@@ -366,6 +456,10 @@ module Gogol.Container.Types
     NodeConfig_Metadata (..),
     newNodeConfig_Metadata,
 
+    -- ** NodeConfig_ResourceLabels
+    NodeConfig_ResourceLabels (..),
+    newNodeConfig_ResourceLabels,
+
     -- ** NodeConfigDefaults
     NodeConfigDefaults (..),
     newNodeConfigDefaults,
@@ -373,6 +467,14 @@ module Gogol.Container.Types
     -- ** NodeKubeletConfig
     NodeKubeletConfig (..),
     newNodeKubeletConfig,
+
+    -- ** NodeLabels
+    NodeLabels (..),
+    newNodeLabels,
+
+    -- ** NodeLabels_Labels
+    NodeLabels_Labels (..),
+    newNodeLabels_Labels,
 
     -- ** NodeManagement
     NodeManagement (..),
@@ -397,9 +499,16 @@ module Gogol.Container.Types
     NodePoolAutoscaling (..),
     newNodePoolAutoscaling,
 
+    -- ** NodePoolAutoscaling_LocationPolicy
+    NodePoolAutoscaling_LocationPolicy (..),
+
     -- ** NodePoolDefaults
     NodePoolDefaults (..),
     newNodePoolDefaults,
+
+    -- ** NodePoolLoggingConfig
+    NodePoolLoggingConfig (..),
+    newNodePoolLoggingConfig,
 
     -- ** NodeTaint
     NodeTaint (..),
@@ -407,6 +516,10 @@ module Gogol.Container.Types
 
     -- ** NodeTaint_Effect
     NodeTaint_Effect (..),
+
+    -- ** NodeTaints
+    NodeTaints (..),
+    newNodeTaints,
 
     -- ** NotificationConfig
     NotificationConfig (..),
@@ -428,6 +541,17 @@ module Gogol.Container.Types
 
     -- ** OperationProgress_Status
     OperationProgress_Status (..),
+
+    -- ** PlacementPolicy
+    PlacementPolicy (..),
+    newPlacementPolicy,
+
+    -- ** PlacementPolicy_Type
+    PlacementPolicy_Type (..),
+
+    -- ** PodCIDROverprovisionConfig
+    PodCIDROverprovisionConfig (..),
+    newPodCIDROverprovisionConfig,
 
     -- ** PrivateClusterConfig
     PrivateClusterConfig (..),
@@ -465,6 +589,14 @@ module Gogol.Container.Types
 
     -- ** ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType (..),
+
+    -- ** ResourceLabels
+    ResourceLabels (..),
+    newResourceLabels,
+
+    -- ** ResourceLabels_Labels
+    ResourceLabels_Labels (..),
+    newResourceLabels_Labels,
 
     -- ** ResourceLimit
     ResourceLimit (..),
@@ -560,6 +692,10 @@ module Gogol.Container.Types
     ShieldedNodes (..),
     newShieldedNodes,
 
+    -- ** StandardRolloutPolicy
+    StandardRolloutPolicy (..),
+    newStandardRolloutPolicy,
+
     -- ** StartIPRotationRequest
     StartIPRotationRequest (..),
     newStartIPRotationRequest,
@@ -590,6 +726,10 @@ module Gogol.Container.Types
     UpdateClusterRequest (..),
     newUpdateClusterRequest,
 
+    -- ** UpdateInfo
+    UpdateInfo (..),
+    newUpdateInfo,
+
     -- ** UpdateMasterRequest
     UpdateMasterRequest (..),
     newUpdateMasterRequest,
@@ -616,6 +756,9 @@ module Gogol.Container.Types
     UpgradeSettings (..),
     newUpgradeSettings,
 
+    -- ** UpgradeSettings_Strategy
+    UpgradeSettings_Strategy (..),
+
     -- ** UsableSubnetwork
     UsableSubnetwork (..),
     newUsableSubnetwork,
@@ -634,6 +777,13 @@ module Gogol.Container.Types
     -- ** VirtualNIC
     VirtualNIC (..),
     newVirtualNIC,
+
+    -- ** WindowsNodeConfig
+    WindowsNodeConfig (..),
+    newWindowsNodeConfig,
+
+    -- ** WindowsNodeConfig_OsVersion
+    WindowsNodeConfig_OsVersion (..),
 
     -- ** WorkloadIdentityConfig
     WorkloadIdentityConfig (..),

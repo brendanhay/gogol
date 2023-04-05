@@ -69,11 +69,11 @@ data RunProjectsLocationsServicesCreate = RunProjectsLocationsServicesCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The location and project in which this service should be created. Format: projects\/{projectnumber}\/locations\/{location}
+    -- | Required. The location and project in which this service should be created. Format: projects\/{project}\/locations\/{location}, where {project} can be project id or number. Only lowercase characters, digits, and hyphens.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudRunV2Service,
-    -- | Required. The unique identifier for the Service. The name of the service becomes {parent}\/services\/{service_id}.
+    -- | Required. The unique identifier for the Service. It must begin with letter, and cannot end with hyphen; must contain fewer than 50 characters. The name of the service becomes {parent}\/services\/{service_id}.
     serviceId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +86,7 @@ data RunProjectsLocationsServicesCreate = RunProjectsLocationsServicesCreate
 
 -- | Creates a value of 'RunProjectsLocationsServicesCreate' with the minimum fields required to make a request.
 newRunProjectsLocationsServicesCreate ::
-  -- |  Required. The location and project in which this service should be created. Format: projects\/{projectnumber}\/locations\/{location} See 'parent'.
+  -- |  Required. The location and project in which this service should be created. Format: projects\/{project}\/locations\/{location}, where {project} can be project id or number. Only lowercase characters, digits, and hyphens. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudRunV2Service ->

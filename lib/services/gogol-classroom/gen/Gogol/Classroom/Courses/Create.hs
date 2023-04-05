@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a course. The user specified in @ownerId@ is the owner of the created course and added as a teacher. A non-admin requesting user can only create a course with themselves as the owner. Domain admins can create courses owned by any user within their domain. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create courses or for access errors. * @NOT_FOUND@ if the primary teacher is not a valid user. * @FAILED_PRECONDITION@ if the course owner\'s account is disabled or for the following request errors: * UserGroupsMembershipLimitReached * @ALREADY_EXISTS@ if an alias was specified in the @id@ and already exists.
+-- Creates a course. The user specified in @ownerId@ is the owner of the created course and added as a teacher. A non-admin requesting user can only create a course with themselves as the owner. Domain admins can create courses owned by any user within their domain. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create courses or for access errors. * @NOT_FOUND@ if the primary teacher is not a valid user. * @FAILED_PRECONDITION@ if the course owner\'s account is disabled or for the following request errors: * UserCannotOwnCourse * UserGroupsMembershipLimitReached * @ALREADY_EXISTS@ if an alias was specified in the @id@ and already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.create@.
 module Gogol.Classroom.Courses.Create
@@ -56,7 +56,7 @@ type ClassroomCoursesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Course
     Core.:> Core.Post '[Core.JSON] Course
 
--- | Creates a course. The user specified in @ownerId@ is the owner of the created course and added as a teacher. A non-admin requesting user can only create a course with themselves as the owner. Domain admins can create courses owned by any user within their domain. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create courses or for access errors. * @NOT_FOUND@ if the primary teacher is not a valid user. * @FAILED_PRECONDITION@ if the course owner\'s account is disabled or for the following request errors: * UserGroupsMembershipLimitReached * @ALREADY_EXISTS@ if an alias was specified in the @id@ and already exists.
+-- | Creates a course. The user specified in @ownerId@ is the owner of the created course and added as a teacher. A non-admin requesting user can only create a course with themselves as the owner. Domain admins can create courses owned by any user within their domain. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to create courses or for access errors. * @NOT_FOUND@ if the primary teacher is not a valid user. * @FAILED_PRECONDITION@ if the course owner\'s account is disabled or for the following request errors: * UserCannotOwnCourse * UserGroupsMembershipLimitReached * @ALREADY_EXISTS@ if an alias was specified in the @id@ and already exists.
 --
 -- /See:/ 'newClassroomCoursesCreate' smart constructor.
 data ClassroomCoursesCreate = ClassroomCoursesCreate

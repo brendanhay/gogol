@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.nodes.start@ method which the
 -- 'TPUProjectsLocationsNodesStart' request conforms to.
 type TPUProjectsLocationsNodesStartResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.CaptureMode "name" "start" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -66,7 +66,7 @@ data TPUProjectsLocationsNodesStart = TPUProjectsLocationsNodesStart
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name.
+    -- | Required. The resource name.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: StartNodeRequest,
@@ -79,7 +79,7 @@ data TPUProjectsLocationsNodesStart = TPUProjectsLocationsNodesStart
 
 -- | Creates a value of 'TPUProjectsLocationsNodesStart' with the minimum fields required to make a request.
 newTPUProjectsLocationsNodesStart ::
-  -- |  The resource name. See 'name'.
+  -- |  Required. The resource name. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   StartNodeRequest ->

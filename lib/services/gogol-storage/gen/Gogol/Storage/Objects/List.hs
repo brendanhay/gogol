@@ -53,11 +53,11 @@ type StorageObjectsListResource =
     Core.:> Core.QueryParam "delimiter" Core.Text
     Core.:> Core.QueryParam "endOffset" Core.Text
     Core.:> Core.QueryParam "includeTrailingDelimiter" Core.Bool
+    Core.:> Core.QueryParam "matchGlob" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "prefix" Core.Text
     Core.:> Core.QueryParam "projection" ObjectsListProjection
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "startOffset" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
@@ -77,6 +77,8 @@ data StorageObjectsList = StorageObjectsList
     endOffset :: (Core.Maybe Core.Text),
     -- | If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.
     includeTrailingDelimiter :: (Core.Maybe Core.Bool),
+    -- | Filter results to objects and prefixes that match this glob pattern.
+    matchGlob :: (Core.Maybe Core.Text),
     -- | Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.
     maxResults :: Core.Word32,
     -- | A previously-returned page token representing part of the larger set of results to view.
@@ -85,8 +87,6 @@ data StorageObjectsList = StorageObjectsList
     prefix :: (Core.Maybe Core.Text),
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe ObjectsListProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
     startOffset :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
@@ -109,11 +109,11 @@ newStorageObjectsList bucket =
       delimiter = Core.Nothing,
       endOffset = Core.Nothing,
       includeTrailingDelimiter = Core.Nothing,
+      matchGlob = Core.Nothing,
       maxResults = 1000,
       pageToken = Core.Nothing,
       prefix = Core.Nothing,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       startOffset = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing,
@@ -136,11 +136,11 @@ instance Core.GoogleRequest StorageObjectsList where
       delimiter
       endOffset
       includeTrailingDelimiter
+      matchGlob
       (Core.Just maxResults)
       pageToken
       prefix
       projection
-      provisionalUserProject
       startOffset
       uploadType
       userProject

@@ -53,6 +53,11 @@ module Gogol.AccessApproval
     AccessApprovalFoldersApprovalRequestsGet (..),
     newAccessApprovalFoldersApprovalRequestsGet,
 
+    -- ** accessapproval.folders.approvalRequests.invalidate
+    AccessApprovalFoldersApprovalRequestsInvalidateResource,
+    AccessApprovalFoldersApprovalRequestsInvalidate (..),
+    newAccessApprovalFoldersApprovalRequestsInvalidate,
+
     -- ** accessapproval.folders.approvalRequests.list
     AccessApprovalFoldersApprovalRequestsListResource,
     AccessApprovalFoldersApprovalRequestsList (..),
@@ -93,6 +98,11 @@ module Gogol.AccessApproval
     AccessApprovalOrganizationsApprovalRequestsGet (..),
     newAccessApprovalOrganizationsApprovalRequestsGet,
 
+    -- ** accessapproval.organizations.approvalRequests.invalidate
+    AccessApprovalOrganizationsApprovalRequestsInvalidateResource,
+    AccessApprovalOrganizationsApprovalRequestsInvalidate (..),
+    newAccessApprovalOrganizationsApprovalRequestsInvalidate,
+
     -- ** accessapproval.organizations.approvalRequests.list
     AccessApprovalOrganizationsApprovalRequestsListResource,
     AccessApprovalOrganizationsApprovalRequestsList (..),
@@ -132,6 +142,11 @@ module Gogol.AccessApproval
     AccessApprovalProjectsApprovalRequestsGetResource,
     AccessApprovalProjectsApprovalRequestsGet (..),
     newAccessApprovalProjectsApprovalRequestsGet,
+
+    -- ** accessapproval.projects.approvalRequests.invalidate
+    AccessApprovalProjectsApprovalRequestsInvalidateResource,
+    AccessApprovalProjectsApprovalRequestsInvalidate (..),
+    newAccessApprovalProjectsApprovalRequestsInvalidate,
 
     -- ** accessapproval.projects.approvalRequests.list
     AccessApprovalProjectsApprovalRequestsListResource,
@@ -213,6 +228,10 @@ module Gogol.AccessApproval
     -- ** EnrolledService_EnrollmentLevel
     EnrolledService_EnrollmentLevel (..),
 
+    -- ** InvalidateApprovalRequestMessage
+    InvalidateApprovalRequestMessage (..),
+    newInvalidateApprovalRequestMessage,
+
     -- ** ListApprovalRequestsResponse
     ListApprovalRequestsResponse (..),
     newListApprovalRequestsResponse,
@@ -230,6 +249,7 @@ where
 import Gogol.AccessApproval.Folders.ApprovalRequests.Approve
 import Gogol.AccessApproval.Folders.ApprovalRequests.Dismiss
 import Gogol.AccessApproval.Folders.ApprovalRequests.Get
+import Gogol.AccessApproval.Folders.ApprovalRequests.Invalidate
 import Gogol.AccessApproval.Folders.ApprovalRequests.List
 import Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
 import Gogol.AccessApproval.Folders.GetAccessApprovalSettings
@@ -238,6 +258,7 @@ import Gogol.AccessApproval.Folders.UpdateAccessApprovalSettings
 import Gogol.AccessApproval.Organizations.ApprovalRequests.Approve
 import Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
 import Gogol.AccessApproval.Organizations.ApprovalRequests.Get
+import Gogol.AccessApproval.Organizations.ApprovalRequests.Invalidate
 import Gogol.AccessApproval.Organizations.ApprovalRequests.List
 import Gogol.AccessApproval.Organizations.DeleteAccessApprovalSettings
 import Gogol.AccessApproval.Organizations.GetAccessApprovalSettings
@@ -246,6 +267,7 @@ import Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
 import Gogol.AccessApproval.Projects.ApprovalRequests.Approve
 import Gogol.AccessApproval.Projects.ApprovalRequests.Dismiss
 import Gogol.AccessApproval.Projects.ApprovalRequests.Get
+import Gogol.AccessApproval.Projects.ApprovalRequests.Invalidate
 import Gogol.AccessApproval.Projects.ApprovalRequests.List
 import Gogol.AccessApproval.Projects.DeleteAccessApprovalSettings
 import Gogol.AccessApproval.Projects.GetAccessApprovalSettings

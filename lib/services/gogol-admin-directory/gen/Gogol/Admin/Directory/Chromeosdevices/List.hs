@@ -90,7 +90,7 @@ data DirectoryChromeosdevicesList = DirectoryChromeosdevicesList
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID for the customer\'s Google Workspace account. As an account administrator, you can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users resource>.
     customerId :: Core.Text,
-    -- | Return devices from all child orgunits, as well as the specified org unit. If this is set to true \'orgUnitPath\' must be provided.
+    -- | Return devices from all child orgunits, as well as the specified org unit. If this is set to true, \'orgUnitPath\' must be provided.
     includeChildOrgunits :: (Core.Maybe Core.Bool),
     -- | Maximum number of results to return.
     maxResults :: Core.Int32,

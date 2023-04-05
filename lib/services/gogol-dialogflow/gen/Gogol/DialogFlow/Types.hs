@@ -97,6 +97,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ContinuousTestResult_Result
     GoogleCloudDialogflowCxV3ContinuousTestResult_Result (..),
 
+    -- ** GoogleCloudDialogflowCxV3ConversationSignals
+    GoogleCloudDialogflowCxV3ConversationSignals (..),
+    newGoogleCloudDialogflowCxV3ConversationSignals,
+
     -- ** GoogleCloudDialogflowCxV3ConversationTurn
     GoogleCloudDialogflowCxV3ConversationTurn (..),
     newGoogleCloudDialogflowCxV3ConversationTurn,
@@ -201,6 +205,10 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3EnvironmentVersionConfig (..),
     newGoogleCloudDialogflowCxV3EnvironmentVersionConfig,
 
+    -- ** GoogleCloudDialogflowCxV3EnvironmentWebhookConfig
+    GoogleCloudDialogflowCxV3EnvironmentWebhookConfig (..),
+    newGoogleCloudDialogflowCxV3EnvironmentWebhookConfig,
+
     -- ** GoogleCloudDialogflowCxV3EventHandler
     GoogleCloudDialogflowCxV3EventHandler (..),
     newGoogleCloudDialogflowCxV3EventHandler,
@@ -245,6 +253,9 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ExportAgentRequest
     GoogleCloudDialogflowCxV3ExportAgentRequest (..),
     newGoogleCloudDialogflowCxV3ExportAgentRequest,
+
+    -- ** GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
+    GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat (..),
 
     -- ** GoogleCloudDialogflowCxV3ExportAgentResponse
     GoogleCloudDialogflowCxV3ExportAgentResponse (..),
@@ -320,6 +331,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3FulfillmentSetParameterAction
     GoogleCloudDialogflowCxV3FulfillmentSetParameterAction (..),
     newGoogleCloudDialogflowCxV3FulfillmentSetParameterAction,
+
+    -- ** GoogleCloudDialogflowCxV3GcsDestination
+    GoogleCloudDialogflowCxV3GcsDestination (..),
+    newGoogleCloudDialogflowCxV3GcsDestination,
 
     -- ** GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata
     GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata (..),
@@ -684,6 +699,13 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy
     GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy (..),
 
+    -- ** GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings (..),
+    newGoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings,
+
+    -- ** GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat
+    GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings_AudioFormat (..),
+
     -- ** GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings
     GoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings (..),
     newGoogleCloudDialogflowCxV3SecuritySettingsInsightsExportSettings,
@@ -757,6 +779,14 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3TextInput (..),
     newGoogleCloudDialogflowCxV3TextInput,
 
+    -- ** GoogleCloudDialogflowCxV3TextToSpeechSettings
+    GoogleCloudDialogflowCxV3TextToSpeechSettings (..),
+    newGoogleCloudDialogflowCxV3TextToSpeechSettings,
+
+    -- ** GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs
+    GoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs (..),
+    newGoogleCloudDialogflowCxV3TextToSpeechSettings_SynthesizeSpeechConfigs,
+
     -- ** GoogleCloudDialogflowCxV3TrainFlowRequest
     GoogleCloudDialogflowCxV3TrainFlowRequest (..),
     newGoogleCloudDialogflowCxV3TrainFlowRequest,
@@ -792,6 +822,13 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition
     GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition (..),
     newGoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition,
+
+    -- ** GoogleCloudDialogflowCxV3TurnSignals
+    GoogleCloudDialogflowCxV3TurnSignals (..),
+    newGoogleCloudDialogflowCxV3TurnSignals,
+
+    -- ** GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem (..),
 
     -- ** GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata
     GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata (..),
@@ -919,6 +956,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3beta1ContinuousTestResult_Result
     GoogleCloudDialogflowCxV3beta1ContinuousTestResult_Result (..),
 
+    -- ** GoogleCloudDialogflowCxV3beta1ConversationSignals
+    GoogleCloudDialogflowCxV3beta1ConversationSignals (..),
+    newGoogleCloudDialogflowCxV3beta1ConversationSignals,
+
     -- ** GoogleCloudDialogflowCxV3beta1ConversationTurn
     GoogleCloudDialogflowCxV3beta1ConversationTurn (..),
     newGoogleCloudDialogflowCxV3beta1ConversationTurn,
@@ -978,6 +1019,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig
     GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig (..),
     newGoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig,
+
+    -- ** GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig
+    GoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig (..),
+    newGoogleCloudDialogflowCxV3beta1EnvironmentWebhookConfig,
 
     -- ** GoogleCloudDialogflowCxV3beta1EventHandler
     GoogleCloudDialogflowCxV3beta1EventHandler (..),
@@ -1237,9 +1282,28 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1TransitionRoute (..),
     newGoogleCloudDialogflowCxV3beta1TransitionRoute,
 
+    -- ** GoogleCloudDialogflowCxV3beta1TurnSignals
+    GoogleCloudDialogflowCxV3beta1TurnSignals (..),
+    newGoogleCloudDialogflowCxV3beta1TurnSignals,
+
+    -- ** GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem (..),
+
     -- ** GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata
     GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata (..),
     newGoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3beta1Webhook
+    GoogleCloudDialogflowCxV3beta1Webhook (..),
+    newGoogleCloudDialogflowCxV3beta1Webhook,
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService,
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders,
 
     -- ** GoogleCloudDialogflowCxV3beta1WebhookRequest
     GoogleCloudDialogflowCxV3beta1WebhookRequest (..),
@@ -1283,6 +1347,10 @@ module Gogol.DialogFlow.Types
 
     -- ** GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse_MergeBehavior
     GoogleCloudDialogflowCxV3beta1WebhookResponseFulfillmentResponse_MergeBehavior (..),
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig
+    GoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookServiceDirectoryConfig,
 
     -- ** GoogleCloudDialogflowV2AnnotatedMessagePart
     GoogleCloudDialogflowV2AnnotatedMessagePart (..),
@@ -2138,6 +2206,10 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2beta1WebhookResponse_Payload (..),
     newGoogleCloudDialogflowV2beta1WebhookResponse_Payload,
 
+    -- ** GoogleCloudDialogflowV3alpha1ConversationSignals
+    GoogleCloudDialogflowV3alpha1ConversationSignals (..),
+    newGoogleCloudDialogflowV3alpha1ConversationSignals,
+
     -- ** GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata (..),
     newGoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata,
@@ -2164,6 +2236,13 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata (..),
     newGoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata,
+
+    -- ** GoogleCloudDialogflowV3alpha1TurnSignals
+    GoogleCloudDialogflowV3alpha1TurnSignals (..),
+    newGoogleCloudDialogflowV3alpha1TurnSignals,
+
+    -- ** GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
+    GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem (..),
 
     -- ** GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata
     GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata (..),

@@ -28,7 +28,7 @@
 --
 -- Gets a blog by id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.blogs.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogs.get@.
 module Gogol.Blogger.Blogs.Get
   ( -- * Resource
     BloggerBlogsGetResource,

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Subscribes to changes for a user.
+-- Subscribes to changes for a user. To use this method, you must include the pageToken query parameter.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.watch@.
 module Gogol.Drive.Changes.Watch
@@ -53,6 +53,7 @@ type DriveChangesWatchResource =
     Core.:> Core.QueryParam "driveId" Core.Text
     Core.:> Core.QueryParam "includeCorpusRemovals" Core.Bool
     Core.:> Core.QueryParam "includeItemsFromAllDrives" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "includeRemoved" Core.Bool
     Core.:> Core.QueryParam "includeTeamDriveItems" Core.Bool
@@ -68,7 +69,7 @@ type DriveChangesWatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Channel
     Core.:> Core.Post '[Core.JSON] Channel
 
--- | Subscribes to changes for a user.
+-- | Subscribes to changes for a user. To use this method, you must include the pageToken query parameter.
 --
 -- /See:/ 'newDriveChangesWatch' smart constructor.
 data DriveChangesWatch = DriveChangesWatch
@@ -78,6 +79,8 @@ data DriveChangesWatch = DriveChangesWatch
     includeCorpusRemovals :: Core.Bool,
     -- | Whether both My Drive and shared drive items should be included in results.
     includeItemsFromAllDrives :: Core.Bool,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
@@ -92,7 +95,7 @@ data DriveChangesWatch = DriveChangesWatch
     payload :: Channel,
     -- | Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
     restrictToMyDrive :: Core.Bool,
-    -- | A comma-separated list of spaces to query within the user corpus. Supported values are \'drive\', \'appDataFolder\' and \'photos\'.
+    -- | A comma-separated list of spaces to query within the corpora. Supported values are \'drive\' and \'appDataFolder\'.
     spaces :: Core.Text,
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
@@ -115,6 +118,7 @@ newDriveChangesWatch pageToken payload =
     { driveId = Core.Nothing,
       includeCorpusRemovals = Core.False,
       includeItemsFromAllDrives = Core.False,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       includeRemoved = Core.True,
       includeTeamDriveItems = Core.False,
@@ -146,6 +150,7 @@ instance Core.GoogleRequest DriveChangesWatch where
       driveId
       (Core.Just includeCorpusRemovals)
       (Core.Just includeItemsFromAllDrives)
+      includeLabels
       includePermissionsForView
       (Core.Just includeRemoved)
       (Core.Just includeTeamDriveItems)

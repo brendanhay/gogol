@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud Dataflow job from a template.
+-- Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.templates.create@.
 module Gogol.Dataflow.Projects.Templates.Create
@@ -60,7 +60,7 @@ type DataflowProjectsTemplatesCreateResource =
               CreateJobFromTemplateRequest
     Core.:> Core.Post '[Core.JSON] Job
 
--- | Creates a Cloud Dataflow job from a template.
+-- | Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
 --
 -- /See:/ 'newDataflowProjectsTemplatesCreate' smart constructor.
 data DataflowProjectsTemplatesCreate = DataflowProjectsTemplatesCreate

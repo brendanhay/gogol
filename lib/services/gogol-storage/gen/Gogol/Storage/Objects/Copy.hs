@@ -86,9 +86,6 @@ type StorageObjectsCopyResource =
               "projection"
               ObjectsCopyProjection
     Core.:> Core.QueryParam
-              "provisionalUserProject"
-              Core.Text
-    Core.:> Core.QueryParam
               "sourceGeneration"
               Core.Int64
     Core.:> Core.QueryParam
@@ -139,8 +136,6 @@ data StorageObjectsCopy = StorageObjectsCopy
     payload :: Object,
     -- | Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.
     projection :: (Core.Maybe ObjectsCopyProjection),
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Name of the bucket in which to find the source object.
     sourceBucket :: Core.Text,
     -- | If present, selects a specific revision of the source object (as opposed to the latest version, the default).
@@ -183,7 +178,6 @@ newStorageObjectsCopy destinationBucket destinationObject payload sourceBucket s
       ifSourceMetagenerationNotMatch = Core.Nothing,
       payload = payload,
       projection = Core.Nothing,
-      provisionalUserProject = Core.Nothing,
       sourceBucket = sourceBucket,
       sourceGeneration = Core.Nothing,
       sourceObject = sourceObject,
@@ -216,7 +210,6 @@ instance Core.GoogleRequest StorageObjectsCopy where
       ifSourceMetagenerationMatch
       ifSourceMetagenerationNotMatch
       projection
-      provisionalUserProject
       sourceGeneration
       uploadType
       userProject

@@ -56,6 +56,7 @@ library
     Gogol.StorageTransfer.Projects.AgentPools.List
     Gogol.StorageTransfer.Projects.AgentPools.Patch
     Gogol.StorageTransfer.TransferJobs.Create
+    Gogol.StorageTransfer.TransferJobs.Delete
     Gogol.StorageTransfer.TransferJobs.Get
     Gogol.StorageTransfer.TransferJobs.List
     Gogol.StorageTransfer.TransferJobs.Patch
@@ -72,5 +73,5 @@ library
     Gogol.StorageTransfer.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

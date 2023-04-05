@@ -1866,19 +1866,19 @@ instance Core.ToJSON BandedRange where
 --
 -- /See:/ 'newBandingProperties' smart constructor.
 data BandingProperties = BandingProperties
-  { -- | The first color that is alternating. (Required)
+  { -- | The first color that is alternating. (Required) Deprecated: Use first/band/color_style.
     firstBandColor :: (Core.Maybe Color),
     -- | The first color that is alternating. (Required) If first/band/color is also set, this field takes precedence.
     firstBandColorStyle :: (Core.Maybe ColorStyle),
-    -- | The color of the last row or column. If this field is not set, the last row or column is filled with either first/band/color or second/band/color, depending on the color of the previous row or column.
+    -- | The color of the last row or column. If this field is not set, the last row or column is filled with either first/band/color or second/band/color, depending on the color of the previous row or column. Deprecated: Use footer/color/style.
     footerColor :: (Core.Maybe Color),
     -- | The color of the last row or column. If this field is not set, the last row or column is filled with either first/band/color or second/band/color, depending on the color of the previous row or column. If footer_color is also set, this field takes precedence.
     footerColorStyle :: (Core.Maybe ColorStyle),
-    -- | The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first/band/color and second/band/color starting from the second row or column. Otherwise, the first row or column is filled with first/band/color and the colors proceed to alternate as they normally would.
+    -- | The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first/band/color and second/band/color starting from the second row or column. Otherwise, the first row or column is filled with first/band/color and the colors proceed to alternate as they normally would. Deprecated: Use header/color/style.
     headerColor :: (Core.Maybe Color),
     -- | The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first/band/color and second/band/color starting from the second row or column. Otherwise, the first row or column is filled with first/band/color and the colors proceed to alternate as they normally would. If header_color is also set, this field takes precedence.
     headerColorStyle :: (Core.Maybe ColorStyle),
-    -- | The second color that is alternating. (Required)
+    -- | The second color that is alternating. (Required) Deprecated: Use second/band/color_style.
     secondBandColor :: (Core.Maybe Color),
     -- | The second color that is alternating. (Required) If second/band/color is also set, this field takes precedence.
     secondBandColorStyle :: (Core.Maybe ColorStyle)
@@ -1943,13 +1943,13 @@ data BaselineValueFormat = BaselineValueFormat
     comparisonType :: (Core.Maybe BaselineValueFormat_ComparisonType),
     -- | Description which is appended after the baseline value. This field is optional.
     description :: (Core.Maybe Core.Text),
-    -- | Color to be used, in case baseline value represents a negative change for key value. This field is optional.
+    -- | Color to be used, in case baseline value represents a negative change for key value. This field is optional. Deprecated: Use negative/color/style.
     negativeColor :: (Core.Maybe Color),
     -- | Color to be used, in case baseline value represents a negative change for key value. This field is optional. If negative_color is also set, this field takes precedence.
     negativeColorStyle :: (Core.Maybe ColorStyle),
     -- | Specifies the horizontal text positioning of baseline value. This field is optional. If not specified, default positioning is used.
     position :: (Core.Maybe TextPosition),
-    -- | Color to be used, in case baseline value represents a positive change for key value. This field is optional.
+    -- | Color to be used, in case baseline value represents a positive change for key value. This field is optional. Deprecated: Use positive/color/style.
     positiveColor :: (Core.Maybe Color),
     -- | Color to be used, in case baseline value represents a positive change for key value. This field is optional. If positive_color is also set, this field takes precedence.
     positiveColorStyle :: (Core.Maybe ColorStyle),
@@ -2102,7 +2102,7 @@ instance Core.ToJSON BasicChartDomain where
 --
 -- /See:/ 'newBasicChartSeries' smart constructor.
 data BasicChartSeries = BasicChartSeries
-  { -- | The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used.
+  { -- | The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),
@@ -2346,7 +2346,7 @@ instance Core.ToJSON BasicFilter_Criteria where
 --
 -- /See:/ 'newBasicSeriesDataPointStyleOverride' smart constructor.
 data BasicSeriesDataPointStyleOverride = BasicSeriesDataPointStyleOverride
-  { -- | Color of the series data point. If empty, the series default is used.
+  { -- | Color of the series data point. If empty, the series default is used. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | Color of the series data point. If empty, the series default is used. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),
@@ -3234,7 +3234,7 @@ instance Core.ToJSON BooleanRule where
 --
 -- /See:/ 'newBorder' smart constructor.
 data Border = Border
-  { -- | The color of the border.
+  { -- | The color of the border. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | The color of the border. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),
@@ -3332,7 +3332,7 @@ instance Core.ToJSON Borders where
 --
 -- /See:/ 'newBubbleChartSpec' smart constructor.
 data BubbleChartSpec = BubbleChartSpec
-  { -- | The bubble border color.
+  { -- | The bubble border color. Deprecated: Use bubble/border/color_style.
     bubbleBorderColor :: (Core.Maybe Color),
     -- | The bubble border color. If bubble/border/color is also set, this field takes precedence.
     bubbleBorderColorStyle :: (Core.Maybe ColorStyle),
@@ -3593,7 +3593,7 @@ data CellData = CellData
     textFormatRuns :: (Core.Maybe [TextFormatRun]),
     -- | The format the user entered for the cell. When writing, the new format will be merged with the existing format.
     userEnteredFormat :: (Core.Maybe CellFormat),
-    -- | The value the user entered in the cell. e.g, @1234@, @\'Hello\'@, or @=NOW()@ Note: Dates, Times and DateTimes are represented as doubles in serial number format.
+    -- | The value the user entered in the cell. e.g., @1234@, @\'Hello\'@, or @=NOW()@ Note: Dates, Times and DateTimes are represented as doubles in serial number format.
     userEnteredValue :: (Core.Maybe ExtendedValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3663,7 +3663,7 @@ instance Core.ToJSON CellData where
 --
 -- /See:/ 'newCellFormat' smart constructor.
 data CellFormat = CellFormat
-  { -- | The background color of the cell.
+  { -- | The background color of the cell. Deprecated: Use background/color/style.
     backgroundColor :: (Core.Maybe Color),
     -- | The background color of the cell. If background_color is also set, this field takes precedence.
     backgroundColorStyle :: (Core.Maybe ColorStyle),
@@ -3671,7 +3671,7 @@ data CellFormat = CellFormat
     borders :: (Core.Maybe Borders),
     -- | The horizontal alignment of the value in the cell.
     horizontalAlignment :: (Core.Maybe CellFormat_HorizontalAlignment),
-    -- | How a hyperlink, if it exists, should be displayed in the cell.
+    -- | If one exists, how a hyperlink should be displayed in the cell.
     hyperlinkDisplayType :: (Core.Maybe CellFormat_HyperlinkDisplayType),
     -- | A format describing how number values should be represented to the user.
     numberFormat :: (Core.Maybe NumberFormat),
@@ -3679,9 +3679,9 @@ data CellFormat = CellFormat
     padding :: (Core.Maybe Padding),
     -- | The direction of the text in the cell.
     textDirection :: (Core.Maybe CellFormat_TextDirection),
-    -- | The format of the text in the cell (unless overridden by a format run). Setting a cell-level link here will clear the cell\'s existing links. Setting the link field in a TextFormatRun will take precedence over the cell-level link.
+    -- | The format of the text in the cell (unless overridden by a format run). Setting a cell-level link here clears the cell\'s existing links. Setting the link field in a TextFormatRun takes precedence over the cell-level link.
     textFormat :: (Core.Maybe TextFormat),
-    -- | The rotation applied to text in a cell
+    -- | The rotation applied to text in the cell.
     textRotation :: (Core.Maybe TextRotation),
     -- | The vertical alignment of the value in the cell.
     verticalAlignment :: (Core.Maybe CellFormat_VerticalAlignment),
@@ -4023,7 +4023,7 @@ instance Core.ToJSON ChartSourceRange where
 data ChartSpec = ChartSpec
   { -- | The alternative text that describes the chart. This is often used for accessibility.
     altText :: (Core.Maybe Core.Text),
-    -- | The background color of the entire chart. Not applicable to Org charts.
+    -- | The background color of the entire chart. Not applicable to Org charts. Deprecated: Use background/color/style.
     backgroundColor :: (Core.Maybe Color),
     -- | The background color of the entire chart. Not applicable to Org charts. If background_color is also set, this field takes precedence.
     backgroundColorStyle :: (Core.Maybe ColorStyle),
@@ -4318,7 +4318,7 @@ instance Core.ToJSON Color where
 --
 -- /See:/ 'newColorStyle' smart constructor.
 data ColorStyle = ColorStyle
-  { -- | RGB color.
+  { -- | RGB color. The </sheets/api/reference/rest/v4/spreadsheets/other#Color.FIELDS.alpha alpha> value in the </sheets/api/reference/rest/v4/spreadsheets/other#color Color> object isn\'t generally supported.
     rgbColor :: (Core.Maybe Color),
     -- | Theme color.
     themeColor :: (Core.Maybe ColorStyle_ThemeColor)
@@ -6696,7 +6696,7 @@ instance Core.ToJSON EmbeddedChart where
 --
 -- /See:/ 'newEmbeddedObjectBorder' smart constructor.
 data EmbeddedObjectBorder = EmbeddedObjectBorder
-  { -- | The color of the border.
+  { -- | The color of the border. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | The color of the border. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle)
@@ -6868,11 +6868,11 @@ data FilterCriteria = FilterCriteria
     condition :: (Core.Maybe BooleanCondition),
     -- | Values that should be hidden.
     hiddenValues :: (Core.Maybe [Core.Text]),
-    -- | The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible/foreground/color.
+    -- | The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible/foreground/color. Deprecated: Use visible/background/color_style.
     visibleBackgroundColor :: (Core.Maybe Color),
     -- | The background fill color to filter by; only cells with this fill color are shown. This field is mutually exclusive with visible/foreground/color, and must be set to an RGB-type color. If visible/background/color is also set, this field takes precedence.
     visibleBackgroundColorStyle :: (Core.Maybe ColorStyle),
-    -- | The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible/background/color.
+    -- | The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible/background/color. Deprecated: Use visible/foreground/color_style.
     visibleForegroundColor :: (Core.Maybe Color),
     -- | The foreground color to filter by; only cells with this foreground color are shown. This field is mutually exclusive with visible/background/color, and must be set to an RGB-type color. If visible/foreground/color is also set, this field takes precedence.
     visibleForegroundColorStyle :: (Core.Maybe ColorStyle)
@@ -7607,7 +7607,7 @@ instance Core.ToJSON HistogramRule where
 --
 -- /See:/ 'newHistogramSeries' smart constructor.
 data HistogramSeries = HistogramSeries
-  { -- | The color of the column representing this series in each bucket. This field is optional.
+  { -- | The color of the column representing this series in each bucket. This field is optional. Deprecated: Use bar/color/style.
     barColor :: (Core.Maybe Color),
     -- | The color of the column representing this series in each bucket. This field is optional. If bar_color is also set, this field takes precedence.
     barColorStyle :: (Core.Maybe ColorStyle),
@@ -7727,7 +7727,7 @@ instance Core.ToJSON InsertRangeRequest where
 --
 -- /See:/ 'newInterpolationPoint' smart constructor.
 data InterpolationPoint = InterpolationPoint
-  { -- | The color this interpolation point should use.
+  { -- | The color this interpolation point should use. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | The color this interpolation point should use. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),
@@ -8236,7 +8236,7 @@ instance Core.ToJSON NumberFormat where
 data OrgChartSpec = OrgChartSpec
   { -- | The data containing the labels for all the nodes in the chart. Labels must be unique.
     labels :: (Core.Maybe ChartData),
-    -- | The color of the org chart nodes.
+    -- | The color of the org chart nodes. Deprecated: Use node/color/style.
     nodeColor :: (Core.Maybe Color),
     -- | The color of the org chart nodes. If node_color is also set, this field takes precedence.
     nodeColorStyle :: (Core.Maybe ColorStyle),
@@ -8244,7 +8244,7 @@ data OrgChartSpec = OrgChartSpec
     nodeSize :: (Core.Maybe OrgChartSpec_NodeSize),
     -- | The data containing the label of the parent for the corresponding node. A blank value indicates that the node has no parent and is a top-level node. This field is optional.
     parentLabels :: (Core.Maybe ChartData),
-    -- | The color of the selected org chart nodes.
+    -- | The color of the selected org chart nodes. Deprecated: Use selected/node/color_style.
     selectedNodeColor :: (Core.Maybe Color),
     -- | The color of the selected org chart nodes. If selected/node/color is also set, this field takes precedence.
     selectedNodeColorStyle :: (Core.Maybe ColorStyle),
@@ -10191,7 +10191,7 @@ data SheetProperties = SheetProperties
     sheetId :: (Core.Maybe Core.Int32),
     -- | The type of sheet. Defaults to GRID. This field cannot be changed once set.
     sheetType :: (Core.Maybe SheetProperties_SheetType),
-    -- | The color of the tab in the UI.
+    -- | The color of the tab in the UI. Deprecated: Use tab/color/style.
     tabColor :: (Core.Maybe Color),
     -- | The color of the tab in the UI. If tab_color is also set, this field takes precedence.
     tabColorStyle :: (Core.Maybe ColorStyle),
@@ -10299,7 +10299,7 @@ instance Core.ToJSON Slicer where
 data SlicerSpec = SlicerSpec
   { -- | True if the filter should apply to pivot tables. If not set, default to @True@.
     applyToPivotTables :: (Core.Maybe Core.Bool),
-    -- | The background color of the slicer.
+    -- | The background color of the slicer. Deprecated: Use background/color/style.
     backgroundColor :: (Core.Maybe Color),
     -- | The background color of the slicer. If background_color is also set, this field takes precedence.
     backgroundColorStyle :: (Core.Maybe ColorStyle),
@@ -10410,7 +10410,7 @@ instance Core.ToJSON SortRangeRequest where
 --
 -- /See:/ 'newSortSpec' smart constructor.
 data SortSpec = SortSpec
-  { -- | The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color.
+  { -- | The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground/color. Deprecated: Use background/color_style.
     backgroundColor :: (Core.Maybe Color),
     -- | The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground/color, and must be an RGB-type color. If background/color is also set, this field takes precedence.
     backgroundColorStyle :: (Core.Maybe ColorStyle),
@@ -10418,7 +10418,7 @@ data SortSpec = SortSpec
     dataSourceColumnReference :: (Core.Maybe DataSourceColumnReference),
     -- | The dimension the sort should be applied to.
     dimensionIndex :: (Core.Maybe Core.Int32),
-    -- | The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color.
+    -- | The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background/color. Deprecated: Use foreground/color_style.
     foregroundColor :: (Core.Maybe Color),
     -- | The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background/color, and must be an RGB-type color. If foreground/color is also set, this field takes precedence.
     foregroundColorStyle :: (Core.Maybe ColorStyle),
@@ -10705,7 +10705,7 @@ data TextFormat = TextFormat
     fontFamily :: (Core.Maybe Core.Text),
     -- | The size of the font.
     fontSize :: (Core.Maybe Core.Int32),
-    -- | The foreground color of the text.
+    -- | The foreground color of the text. Deprecated: Use foreground/color/style.
     foregroundColor :: (Core.Maybe Color),
     -- | The foreground color of the text. If foreground_color is also set, this field takes precedence.
     foregroundColorStyle :: (Core.Maybe ColorStyle),
@@ -11006,19 +11006,19 @@ instance Core.ToJSON TimeOfDay' where
 --
 -- /See:/ 'newTreemapChartColorScale' smart constructor.
 data TreemapChartColorScale = TreemapChartColorScale
-  { -- | The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified.
+  { -- | The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. Deprecated: Use max/value/color_style.
     maxValueColor :: (Core.Maybe Color),
     -- | The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. If max/value/color is also set, this field takes precedence.
     maxValueColorStyle :: (Core.Maybe ColorStyle),
-    -- | The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified.
+    -- | The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. Deprecated: Use mid/value/color_style.
     midValueColor :: (Core.Maybe Color),
     -- | The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. If mid/value/color is also set, this field takes precedence.
     midValueColorStyle :: (Core.Maybe ColorStyle),
-    -- | The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified.
+    -- | The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. Deprecated: Use min/value/color_style.
     minValueColor :: (Core.Maybe Color),
     -- | The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. If min/value/color is also set, this field takes precedence.
     minValueColorStyle :: (Core.Maybe ColorStyle),
-    -- | The background color for cells that have no color data associated with them. Defaults to #000000 if not specified.
+    -- | The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. Deprecated: Use no/data/color_style.
     noDataColor :: (Core.Maybe Color),
     -- | The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. If no/data/color is also set, this field takes precedence.
     noDataColorStyle :: (Core.Maybe ColorStyle)
@@ -11083,7 +11083,7 @@ data TreemapChartSpec = TreemapChartSpec
     colorData :: (Core.Maybe ChartData),
     -- | The color scale for data cells in the treemap chart. Data cells are assigned colors based on their color values. These color values come from color/data, or from size/data if color/data is not specified. Cells with color values less than or equal to min/value will have minValueColor as their background color. Cells with color values greater than or equal to max/value will have maxValueColor as their background color. Cells with color values between min/value and max_value will have background colors on a gradient between minValueColor and maxValueColor, the midpoint of the gradient being midValueColor. Cells with missing or non-numeric color values will have noDataColor as their background color.
     colorScale :: (Core.Maybe TreemapChartColorScale),
-    -- | The background color for header cells.
+    -- | The background color for header cells. Deprecated: Use header/color/style.
     headerColor :: (Core.Maybe Color),
     -- | The background color for header cells. If header_color is also set, this field takes precedence.
     headerColorStyle :: (Core.Maybe ColorStyle),
@@ -12344,7 +12344,7 @@ instance Core.ToJSON ValueRange where
 --
 -- /See:/ 'newWaterfallChartColumnStyle' smart constructor.
 data WaterfallChartColumnStyle = WaterfallChartColumnStyle
-  { -- | The color of the column.
+  { -- | The color of the column. Deprecated: Use color_style.
     color :: (Core.Maybe Color),
     -- | The color of the column. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),

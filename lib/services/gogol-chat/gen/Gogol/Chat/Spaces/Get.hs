@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a space.
+-- Returns a space. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.get@.
 module Gogol.Chat.Spaces.Get
@@ -55,7 +55,7 @@ type ChatSpacesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Space
 
--- | Returns a space.
+-- | Returns a space. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope.
 --
 -- /See:/ 'newChatSpacesGet' smart constructor.
 data ChatSpacesGet = ChatSpacesGet
@@ -65,7 +65,7 @@ data ChatSpacesGet = ChatSpacesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the space, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAAA
+    -- | Required. Resource name of the space, in the form \"spaces\/*\". Format: spaces\/{space}
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data ChatSpacesGet = ChatSpacesGet
 
 -- | Creates a value of 'ChatSpacesGet' with the minimum fields required to make a request.
 newChatSpacesGet ::
-  -- |  Required. Resource name of the space, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAAA See 'name'.
+  -- |  Required. Resource name of the space, in the form \"spaces\/*\". Format: spaces\/{space} See 'name'.
   Core.Text ->
   ChatSpacesGet
 newChatSpacesGet name =
@@ -91,7 +91,9 @@ newChatSpacesGet name =
 
 instance Core.GoogleRequest ChatSpacesGet where
   type Rs ChatSpacesGet = Space
-  type Scopes ChatSpacesGet = '[]
+  type
+    Scopes ChatSpacesGet =
+      '[Chat'Bot, Chat'Spaces, Chat'Spaces'Readonly]
   requestClient ChatSpacesGet {..} =
     go
       name

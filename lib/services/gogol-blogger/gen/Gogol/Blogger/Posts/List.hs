@@ -28,7 +28,7 @@
 --
 -- Lists posts.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.posts.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.list@.
 module Gogol.Blogger.Posts.List
   ( -- * Resource
     BloggerPostsListResource,
@@ -59,6 +59,9 @@ type BloggerPostsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "orderBy" PostsListOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam
+              "sortOption"
+              PostsListSortOption
     Core.:> Core.QueryParam "startDate" Core.Text
     Core.:> Core.QueryParams "status" PostsListStatus
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -95,6 +98,8 @@ data BloggerPostsList = BloggerPostsList
     orderBy :: PostsListOrderBy,
     -- |
     pageToken :: (Core.Maybe Core.Text),
+    -- | Sort direction applied to post list.
+    sortOption :: PostsListSortOption,
     -- |
     startDate :: (Core.Maybe Core.Text),
     -- |
@@ -126,6 +131,7 @@ newBloggerPostsList blogId =
       maxResults = Core.Nothing,
       orderBy = PostsListOrderBy_Published,
       pageToken = Core.Nothing,
+      sortOption = PostsListSortOption_Descending,
       startDate = Core.Nothing,
       status = Core.Nothing,
       uploadType = Core.Nothing,
@@ -151,6 +157,7 @@ instance Core.GoogleRequest BloggerPostsList where
       maxResults
       (Core.Just orderBy)
       pageToken
+      (Core.Just sortOption)
       startDate
       (status Core.^. Core._Default)
       uploadType

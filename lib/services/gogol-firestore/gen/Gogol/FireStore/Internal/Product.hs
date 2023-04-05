@@ -26,7 +26,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FireStore.Internal.Product
-  ( -- * ArrayValue
+  ( -- * Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- * AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- * AggregationResult_AggregateFields
+    AggregationResult_AggregateFields (..),
+    newAggregationResult_AggregateFields,
+
+    -- * ArrayValue
     ArrayValue (..),
     newArrayValue,
 
@@ -73,6 +85,10 @@ module Gogol.FireStore.Internal.Product
     -- * CompositeFilter
     CompositeFilter (..),
     newCompositeFilter,
+
+    -- * Count
+    Count (..),
+    newCount,
 
     -- * Cursor
     Cursor (..),
@@ -206,6 +222,14 @@ module Gogol.FireStore.Internal.Product
     GoogleFirestoreAdminV1Progress (..),
     newGoogleFirestoreAdminV1Progress,
 
+    -- * GoogleFirestoreAdminV1TtlConfig
+    GoogleFirestoreAdminV1TtlConfig (..),
+    newGoogleFirestoreAdminV1TtlConfig,
+
+    -- * GoogleFirestoreAdminV1TtlConfigDelta
+    GoogleFirestoreAdminV1TtlConfigDelta (..),
+    newGoogleFirestoreAdminV1TtlConfigDelta,
+
     -- * GoogleFirestoreAdminV1UpdateDatabaseMetadata
     GoogleFirestoreAdminV1UpdateDatabaseMetadata (..),
     newGoogleFirestoreAdminV1UpdateDatabaseMetadata,
@@ -318,6 +342,14 @@ module Gogol.FireStore.Internal.Product
     RollbackRequest (..),
     newRollbackRequest,
 
+    -- * RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- * RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
+
     -- * RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -333,6 +365,10 @@ module Gogol.FireStore.Internal.Product
     -- * Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- * StructuredAggregationQuery
+    StructuredAggregationQuery (..),
+    newStructuredAggregationQuery,
 
     -- * StructuredQuery
     StructuredQuery (..),
@@ -382,6 +418,108 @@ where
 
 import Gogol.FireStore.Internal.Sum
 import qualified Gogol.Prelude as Core
+
+-- | Defines an aggregation that produces a single result.
+--
+-- /See:/ 'newAggregation' smart constructor.
+data Aggregation = Aggregation
+  { -- | Optional. Optional name of the field to store the result of the aggregation into. If not provided, Firestore will pick a default name following the format @field_@. For example: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2), COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) OVER ( ... );@ becomes: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2) AS field_1, COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) AS field_2 OVER ( ... );@ Requires: * Must be unique across all aggregation aliases. * Conform to document field name limitations.
+    alias :: (Core.Maybe Core.Text),
+    -- | Count aggregator.
+    count :: (Core.Maybe Count)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aggregation' with the minimum fields required to make a request.
+newAggregation ::
+  Aggregation
+newAggregation = Aggregation {alias = Core.Nothing, count = Core.Nothing}
+
+instance Core.FromJSON Aggregation where
+  parseJSON =
+    Core.withObject
+      "Aggregation"
+      ( \o ->
+          Aggregation
+            Core.<$> (o Core..:? "alias") Core.<*> (o Core..:? "count")
+      )
+
+instance Core.ToJSON Aggregation where
+  toJSON Aggregation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alias" Core..=) Core.<$> alias,
+            ("count" Core..=) Core.<$> count
+          ]
+      )
+
+-- | The result of a single bucket from a Firestore aggregation query. The keys of @aggregate_fields@ are the same for all results in an aggregation query, unlike document queries which can have different fields present for each result.
+--
+-- /See:/ 'newAggregationResult' smart constructor.
+newtype AggregationResult = AggregationResult
+  { -- | The result of the aggregation functions, ex: @COUNT(*) AS total_docs@. The key is the alias assigned to the aggregation function on input and the size of this map equals the number of aggregation functions in the query.
+    aggregateFields :: (Core.Maybe AggregationResult_AggregateFields)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationResult' with the minimum fields required to make a request.
+newAggregationResult ::
+  AggregationResult
+newAggregationResult = AggregationResult {aggregateFields = Core.Nothing}
+
+instance Core.FromJSON AggregationResult where
+  parseJSON =
+    Core.withObject
+      "AggregationResult"
+      ( \o ->
+          AggregationResult
+            Core.<$> (o Core..:? "aggregateFields")
+      )
+
+instance Core.ToJSON AggregationResult where
+  toJSON AggregationResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregateFields" Core..=)
+              Core.<$> aggregateFields
+          ]
+      )
+
+-- | The result of the aggregation functions, ex: @COUNT(*) AS total_docs@. The key is the alias assigned to the aggregation function on input and the size of this map equals the number of aggregation functions in the query.
+--
+-- /See:/ 'newAggregationResult_AggregateFields' smart constructor.
+newtype AggregationResult_AggregateFields = AggregationResult_AggregateFields
+  { -- |
+    additional :: (Core.HashMap Core.Text Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationResult_AggregateFields' with the minimum fields required to make a request.
+newAggregationResult_AggregateFields ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Value ->
+  AggregationResult_AggregateFields
+newAggregationResult_AggregateFields additional =
+  AggregationResult_AggregateFields {additional = additional}
+
+instance
+  Core.FromJSON
+    AggregationResult_AggregateFields
+  where
+  parseJSON =
+    Core.withObject
+      "AggregationResult_AggregateFields"
+      ( \o ->
+          AggregationResult_AggregateFields
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    AggregationResult_AggregateFields
+  where
+  toJSON AggregationResult_AggregateFields {..} =
+    Core.toJSON additional
 
 -- | An array value.
 --
@@ -788,7 +926,7 @@ instance Core.ToJSON CommitResponse where
 --
 -- /See:/ 'newCompositeFilter' smart constructor.
 data CompositeFilter = CompositeFilter
-  { -- | The list of filters to combine. Must contain at least one filter.
+  { -- | The list of filters to combine. Requires: * At least one filter is present.
     filters :: (Core.Maybe [Filter]),
     -- | The operator for combining multiple filters.
     op :: (Core.Maybe CompositeFilter_Op)
@@ -816,6 +954,38 @@ instance Core.ToJSON CompositeFilter where
           [ ("filters" Core..=) Core.<$> filters,
             ("op" Core..=) Core.<$> op
           ]
+      )
+
+-- | Count of documents that match the query. The @COUNT(*)@ aggregation function operates on the entire document so it does not require a field reference.
+--
+-- /See:/ 'newCount' smart constructor.
+newtype Count = Count
+  { -- | Optional. Optional constraint on the maximum number of documents to count. This provides a way to set an upper bound on the number of documents to scan, limiting latency, and cost. Unspecified is interpreted as no bound. High-Level Example: @AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );@ Requires: * Must be greater than zero when present.
+    upTo :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Count' with the minimum fields required to make a request.
+newCount ::
+  Count
+newCount = Count {upTo = Core.Nothing}
+
+instance Core.FromJSON Count where
+  parseJSON =
+    Core.withObject
+      "Count"
+      ( \o ->
+          Count
+            Core.<$> ( o Core..:? "upTo"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Count where
+  toJSON Count {..} =
+    Core.object
+      ( Core.catMaybes
+          [("upTo" Core..=) Core.. Core.AsText Core.<$> upTo]
       )
 
 -- | A position in a query result set.
@@ -1160,7 +1330,7 @@ instance Core.ToJSON DocumentsTarget where
           [("documents" Core..=) Core.<$> documents]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1254,11 +1424,11 @@ instance Core.ToJSON FieldFilter where
           ]
       )
 
--- | A reference to a field, such as @max(messages.time) as max_time@.
+-- | A reference to a field in a document, ex: @stats.operations@.
 --
 -- /See:/ 'newFieldReference' smart constructor.
 newtype FieldReference = FieldReference
-  { -- |
+  { -- | The relative path of the document being referenced. Requires: * Conform to document field name limitations.
     fieldPath :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1406,6 +1576,8 @@ data GoogleFirestoreAdminV1Database = GoogleFirestoreAdminV1Database
       ),
     -- | The concurrency control mode to use for this database.
     concurrencyMode :: (Core.Maybe GoogleFirestoreAdminV1Database_ConcurrencyMode),
+    -- | Output only. The timestamp at which this database was created.
+    createTime :: (Core.Maybe Core.DateTime),
     -- | This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
     etag :: (Core.Maybe Core.Text),
     -- | Output only. The key/prefix for this database. This key/prefix is used, in combination with the project id (\"~\") to construct the application id that is returned from the Cloud Datastore APIs in Google App Engine first generation runtimes. This value may be empty in which case the appid to use for URL-encoded keys is the project_id (eg: foo instead of v~foo).
@@ -1415,7 +1587,11 @@ data GoogleFirestoreAdminV1Database = GoogleFirestoreAdminV1Database
     -- | The resource name of the Database. Format: @projects\/{project}\/databases\/{database}@
     name :: (Core.Maybe Core.Text),
     -- | The type of the database. See https:\/\/cloud.google.com\/datastore\/docs\/firestore-or-datastore for information about how to choose.
-    type' :: (Core.Maybe GoogleFirestoreAdminV1Database_Type)
+    type' :: (Core.Maybe GoogleFirestoreAdminV1Database_Type),
+    -- | Output only. The system-generated UUID4 for this Database.
+    uid :: (Core.Maybe Core.Text),
+    -- | Output only. The timestamp at which this database was most recently updated. Note this only includes updates to the database resource and not data contained by the database.
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1426,11 +1602,14 @@ newGoogleFirestoreAdminV1Database =
   GoogleFirestoreAdminV1Database
     { appEngineIntegrationMode = Core.Nothing,
       concurrencyMode = Core.Nothing,
+      createTime = Core.Nothing,
       etag = Core.Nothing,
       keyPrefix = Core.Nothing,
       locationId = Core.Nothing,
       name = Core.Nothing,
-      type' = Core.Nothing
+      type' = Core.Nothing,
+      uid = Core.Nothing,
+      updateTime = Core.Nothing
     }
 
 instance Core.FromJSON GoogleFirestoreAdminV1Database where
@@ -1441,11 +1620,14 @@ instance Core.FromJSON GoogleFirestoreAdminV1Database where
           GoogleFirestoreAdminV1Database
             Core.<$> (o Core..:? "appEngineIntegrationMode")
             Core.<*> (o Core..:? "concurrencyMode")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "keyPrefix")
             Core.<*> (o Core..:? "locationId")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance Core.ToJSON GoogleFirestoreAdminV1Database where
@@ -1455,11 +1637,14 @@ instance Core.ToJSON GoogleFirestoreAdminV1Database where
           [ ("appEngineIntegrationMode" Core..=)
               Core.<$> appEngineIntegrationMode,
             ("concurrencyMode" Core..=) Core.<$> concurrencyMode,
+            ("createTime" Core..=) Core.<$> createTime,
             ("etag" Core..=) Core.<$> etag,
             ("keyPrefix" Core..=) Core.<$> keyPrefix,
             ("locationId" Core..=) Core.<$> locationId,
             ("name" Core..=) Core.<$> name,
-            ("type" Core..=) Core.<$> type'
+            ("type" Core..=) Core.<$> type',
+            ("uid" Core..=) Core.<$> uid,
+            ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
 
@@ -1471,12 +1656,14 @@ data GoogleFirestoreAdminV1ExportDocumentsMetadata = GoogleFirestoreAdminV1Expor
     collectionIds :: (Core.Maybe [Core.Text]),
     -- | The time this operation completed. Will be unset if operation still in progress.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | Which namespace ids are being exported.
+    namespaceIds :: (Core.Maybe [Core.Text]),
     -- | The state of the export operation.
     operationState ::
       ( Core.Maybe
           GoogleFirestoreAdminV1ExportDocumentsMetadata_OperationState
       ),
-    -- | Where the entities are being exported to.
+    -- | Where the documents are being exported to.
     outputUriPrefix :: (Core.Maybe Core.Text),
     -- | The progress, in bytes, of this operation.
     progressBytes :: (Core.Maybe GoogleFirestoreAdminV1Progress),
@@ -1494,6 +1681,7 @@ newGoogleFirestoreAdminV1ExportDocumentsMetadata =
   GoogleFirestoreAdminV1ExportDocumentsMetadata
     { collectionIds = Core.Nothing,
       endTime = Core.Nothing,
+      namespaceIds = Core.Nothing,
       operationState = Core.Nothing,
       outputUriPrefix = Core.Nothing,
       progressBytes = Core.Nothing,
@@ -1512,6 +1700,7 @@ instance
           GoogleFirestoreAdminV1ExportDocumentsMetadata
             Core.<$> (o Core..:? "collectionIds")
               Core.<*> (o Core..:? "endTime")
+              Core.<*> (o Core..:? "namespaceIds")
               Core.<*> (o Core..:? "operationState")
               Core.<*> (o Core..:? "outputUriPrefix")
               Core.<*> (o Core..:? "progressBytes")
@@ -1529,6 +1718,7 @@ instance
         ( Core.catMaybes
             [ ("collectionIds" Core..=) Core.<$> collectionIds,
               ("endTime" Core..=) Core.<$> endTime,
+              ("namespaceIds" Core..=) Core.<$> namespaceIds,
               ("operationState" Core..=) Core.<$> operationState,
               ("outputUriPrefix" Core..=) Core.<$> outputUriPrefix,
               ("progressBytes" Core..=) Core.<$> progressBytes,
@@ -1544,6 +1734,8 @@ instance
 data GoogleFirestoreAdminV1ExportDocumentsRequest = GoogleFirestoreAdminV1ExportDocumentsRequest
   { -- | Which collection ids to export. Unspecified means all collections.
     collectionIds :: (Core.Maybe [Core.Text]),
+    -- | An empty list represents all namespaces. This is the preferred usage for databases that don\'t use namespaces. An empty string element represents the default namespace. This should be used if the database has data in non-default namespaces, but doesn\'t want to include them. Each namespace in this list must be unique.
+    namespaceIds :: (Core.Maybe [Core.Text]),
     -- | The output URI. Currently only supports Google Cloud Storage URIs of the form: @gs:\/\/BUCKET_NAME[\/NAMESPACE_PATH]@, where @BUCKET_NAME@ is the name of the Google Cloud Storage bucket and @NAMESPACE_PATH@ is an optional Google Cloud Storage namespace path. When choosing a name, be sure to consider Google Cloud Storage naming guidelines: https:\/\/cloud.google.com\/storage\/docs\/naming. If the URI is a bucket (without a namespace path), a prefix will be generated based on the start time.
     outputUriPrefix :: (Core.Maybe Core.Text)
   }
@@ -1555,6 +1747,7 @@ newGoogleFirestoreAdminV1ExportDocumentsRequest ::
 newGoogleFirestoreAdminV1ExportDocumentsRequest =
   GoogleFirestoreAdminV1ExportDocumentsRequest
     { collectionIds = Core.Nothing,
+      namespaceIds = Core.Nothing,
       outputUriPrefix = Core.Nothing
     }
 
@@ -1568,6 +1761,7 @@ instance
       ( \o ->
           GoogleFirestoreAdminV1ExportDocumentsRequest
             Core.<$> (o Core..:? "collectionIds")
+            Core.<*> (o Core..:? "namespaceIds")
             Core.<*> (o Core..:? "outputUriPrefix")
       )
 
@@ -1580,6 +1774,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("collectionIds" Core..=) Core.<$> collectionIds,
+              ("namespaceIds" Core..=) Core.<$> namespaceIds,
               ("outputUriPrefix" Core..=)
                 Core.<$> outputUriPrefix
             ]
@@ -1633,7 +1828,9 @@ data GoogleFirestoreAdminV1Field = GoogleFirestoreAdminV1Field
     indexConfig :: (Core.Maybe GoogleFirestoreAdminV1IndexConfig),
     -- | Required. A field name of the form @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@ A field path may be a simple field name, e.g. @address@ or a path to fields within map_value , e.g. @address.city@, or a special field path. The only valid special field is @*@, which represents any field. Field paths may be quoted using
     -- @(backtick). The only character that needs to be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include:@/@,@.@, \`\`\` (backtick),@[@,@]@, as well as any ascii symbolic characters. Examples: (Note: Comments here are written in markdown syntax, so there is an additional layer of backticks to represent a code block)@\`address.city\`@represents a field named@address.city@, not the map key@city@in the field@address@.@\`/\`@represents a field named@/@, not any field. A special@Field@contains the default indexing settings for all fields. This field\'s resource name is:@projects\/{project/id}\/databases\/{database/id}\/collectionGroups\/__default__\/fields\//@Indexes defined on this@Field@will be applied to all fields which do not have their own@Field\` index configuration.
-    name :: (Core.Maybe Core.Text)
+    name :: (Core.Maybe Core.Text),
+    -- | The TTL configuration for this @Field@. Setting or unsetting this will enable or disable the TTL for documents that have this @Field@.
+    ttlConfig :: (Core.Maybe GoogleFirestoreAdminV1TtlConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1641,7 +1838,11 @@ data GoogleFirestoreAdminV1Field = GoogleFirestoreAdminV1Field
 newGoogleFirestoreAdminV1Field ::
   GoogleFirestoreAdminV1Field
 newGoogleFirestoreAdminV1Field =
-  GoogleFirestoreAdminV1Field {indexConfig = Core.Nothing, name = Core.Nothing}
+  GoogleFirestoreAdminV1Field
+    { indexConfig = Core.Nothing,
+      name = Core.Nothing,
+      ttlConfig = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleFirestoreAdminV1Field where
   parseJSON =
@@ -1651,6 +1852,7 @@ instance Core.FromJSON GoogleFirestoreAdminV1Field where
           GoogleFirestoreAdminV1Field
             Core.<$> (o Core..:? "indexConfig")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "ttlConfig")
       )
 
 instance Core.ToJSON GoogleFirestoreAdminV1Field where
@@ -1658,7 +1860,8 @@ instance Core.ToJSON GoogleFirestoreAdminV1Field where
     Core.object
       ( Core.catMaybes
           [ ("indexConfig" Core..=) Core.<$> indexConfig,
-            ("name" Core..=) Core.<$> name
+            ("name" Core..=) Core.<$> name,
+            ("ttlConfig" Core..=) Core.<$> ttlConfig
           ]
       )
 
@@ -1679,7 +1882,9 @@ data GoogleFirestoreAdminV1FieldOperationMetadata = GoogleFirestoreAdminV1FieldO
     -- | The time this operation started.
     startTime :: (Core.Maybe Core.DateTime),
     -- | The state of the operation.
-    state :: (Core.Maybe GoogleFirestoreAdminV1FieldOperationMetadata_State)
+    state :: (Core.Maybe GoogleFirestoreAdminV1FieldOperationMetadata_State),
+    -- | Describes the deltas of TTL configuration.
+    ttlConfigDelta :: (Core.Maybe GoogleFirestoreAdminV1TtlConfigDelta)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1694,7 +1899,8 @@ newGoogleFirestoreAdminV1FieldOperationMetadata =
       progressBytes = Core.Nothing,
       progressDocuments = Core.Nothing,
       startTime = Core.Nothing,
-      state = Core.Nothing
+      state = Core.Nothing,
+      ttlConfigDelta = Core.Nothing
     }
 
 instance
@@ -1713,6 +1919,7 @@ instance
             Core.<*> (o Core..:? "progressDocuments")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "ttlConfigDelta")
       )
 
 instance
@@ -1731,7 +1938,8 @@ instance
               ("progressDocuments" Core..=)
                 Core.<$> progressDocuments,
               ("startTime" Core..=) Core.<$> startTime,
-              ("state" Core..=) Core.<$> state
+              ("state" Core..=) Core.<$> state,
+              ("ttlConfigDelta" Core..=) Core.<$> ttlConfigDelta
             ]
         )
 
@@ -1745,6 +1953,8 @@ data GoogleFirestoreAdminV1ImportDocumentsMetadata = GoogleFirestoreAdminV1Impor
     endTime :: (Core.Maybe Core.DateTime),
     -- | The location of the documents being imported.
     inputUriPrefix :: (Core.Maybe Core.Text),
+    -- | Which namespace ids are being imported.
+    namespaceIds :: (Core.Maybe [Core.Text]),
     -- | The state of the import operation.
     operationState ::
       ( Core.Maybe
@@ -1767,6 +1977,7 @@ newGoogleFirestoreAdminV1ImportDocumentsMetadata =
     { collectionIds = Core.Nothing,
       endTime = Core.Nothing,
       inputUriPrefix = Core.Nothing,
+      namespaceIds = Core.Nothing,
       operationState = Core.Nothing,
       progressBytes = Core.Nothing,
       progressDocuments = Core.Nothing,
@@ -1785,6 +1996,7 @@ instance
             Core.<$> (o Core..:? "collectionIds")
               Core.<*> (o Core..:? "endTime")
               Core.<*> (o Core..:? "inputUriPrefix")
+              Core.<*> (o Core..:? "namespaceIds")
               Core.<*> (o Core..:? "operationState")
               Core.<*> (o Core..:? "progressBytes")
               Core.<*> (o Core..:? "progressDocuments")
@@ -1802,6 +2014,7 @@ instance
             [ ("collectionIds" Core..=) Core.<$> collectionIds,
               ("endTime" Core..=) Core.<$> endTime,
               ("inputUriPrefix" Core..=) Core.<$> inputUriPrefix,
+              ("namespaceIds" Core..=) Core.<$> namespaceIds,
               ("operationState" Core..=) Core.<$> operationState,
               ("progressBytes" Core..=) Core.<$> progressBytes,
               ("progressDocuments" Core..=)
@@ -1817,7 +2030,9 @@ data GoogleFirestoreAdminV1ImportDocumentsRequest = GoogleFirestoreAdminV1Import
   { -- | Which collection ids to import. Unspecified means all collections included in the import.
     collectionIds :: (Core.Maybe [Core.Text]),
     -- | Location of the exported files. This must match the output/uri/prefix of an ExportDocumentsResponse from an export that has completed successfully. See: google.firestore.admin.v1.ExportDocumentsResponse.output/uri/prefix.
-    inputUriPrefix :: (Core.Maybe Core.Text)
+    inputUriPrefix :: (Core.Maybe Core.Text),
+    -- | An empty list represents all namespaces. This is the preferred usage for databases that don\'t use namespaces. An empty string element represents the default namespace. This should be used if the database has data in non-default namespaces, but doesn\'t want to include them. Each namespace in this list must be unique.
+    namespaceIds :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1827,7 +2042,8 @@ newGoogleFirestoreAdminV1ImportDocumentsRequest ::
 newGoogleFirestoreAdminV1ImportDocumentsRequest =
   GoogleFirestoreAdminV1ImportDocumentsRequest
     { collectionIds = Core.Nothing,
-      inputUriPrefix = Core.Nothing
+      inputUriPrefix = Core.Nothing,
+      namespaceIds = Core.Nothing
     }
 
 instance
@@ -1841,6 +2057,7 @@ instance
           GoogleFirestoreAdminV1ImportDocumentsRequest
             Core.<$> (o Core..:? "collectionIds")
             Core.<*> (o Core..:? "inputUriPrefix")
+            Core.<*> (o Core..:? "namespaceIds")
       )
 
 instance
@@ -1852,7 +2069,8 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("collectionIds" Core..=) Core.<$> collectionIds,
-              ("inputUriPrefix" Core..=) Core.<$> inputUriPrefix
+              ("inputUriPrefix" Core..=) Core.<$> inputUriPrefix,
+              ("namespaceIds" Core..=) Core.<$> namespaceIds
             ]
         )
 
@@ -1860,7 +2078,9 @@ instance
 --
 -- /See:/ 'newGoogleFirestoreAdminV1Index' smart constructor.
 data GoogleFirestoreAdminV1Index = GoogleFirestoreAdminV1Index
-  { -- | The fields supported by this index. For composite indexes, this is always 2 or more fields. The last field entry is always for the field path @__name__@. If, on creation, @__name__@ was not specified as the last field, it will be added automatically with the same direction as that of the last field defined. If the final field in a composite index is not directional, the @__name__@ will be ordered ASCENDING (unless explicitly specified). For single field indexes, this will always be exactly one entry with a field path equal to the field path of the associated field.
+  { -- | The API scope supported by this index.
+    apiScope :: (Core.Maybe GoogleFirestoreAdminV1Index_ApiScope),
+    -- | The fields supported by this index. For composite indexes, this requires a minimum of 2 and a maximum of 100 fields. The last field entry is always for the field path @__name__@. If, on creation, @__name__@ was not specified as the last field, it will be added automatically with the same direction as that of the last field defined. If the final field in a composite index is not directional, the @__name__@ will be ordered ASCENDING (unless explicitly specified). For single field indexes, this will always be exactly one entry with a field path equal to the field path of the associated field.
     fields :: (Core.Maybe [GoogleFirestoreAdminV1IndexField]),
     -- | Output only. A server defined name for this index. The form of this name for composite indexes will be: @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/indexes\/{composite_index_id}@ For single field indexes, this field will be empty.
     name :: (Core.Maybe Core.Text),
@@ -1876,7 +2096,8 @@ newGoogleFirestoreAdminV1Index ::
   GoogleFirestoreAdminV1Index
 newGoogleFirestoreAdminV1Index =
   GoogleFirestoreAdminV1Index
-    { fields = Core.Nothing,
+    { apiScope = Core.Nothing,
+      fields = Core.Nothing,
       name = Core.Nothing,
       queryScope = Core.Nothing,
       state = Core.Nothing
@@ -1888,7 +2109,8 @@ instance Core.FromJSON GoogleFirestoreAdminV1Index where
       "GoogleFirestoreAdminV1Index"
       ( \o ->
           GoogleFirestoreAdminV1Index
-            Core.<$> (o Core..:? "fields")
+            Core.<$> (o Core..:? "apiScope")
+            Core.<*> (o Core..:? "fields")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "queryScope")
             Core.<*> (o Core..:? "state")
@@ -1898,7 +2120,8 @@ instance Core.ToJSON GoogleFirestoreAdminV1Index where
   toJSON GoogleFirestoreAdminV1Index {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fields" Core..=) Core.<$> fields,
+          [ ("apiScope" Core..=) Core.<$> apiScope,
+            ("fields" Core..=) Core.<$> fields,
             ("name" Core..=) Core.<$> name,
             ("queryScope" Core..=) Core.<$> queryScope,
             ("state" Core..=) Core.<$> state
@@ -2322,6 +2545,75 @@ instance Core.ToJSON GoogleFirestoreAdminV1Progress where
           ]
       )
 
+-- | The TTL (time-to-live) configuration for documents that have this @Field@ set. Storing a timestamp value into a TTL-enabled field will be treated as the document\'s absolute expiration time. Timestamp values in the past indicate that the document is eligible for immediate expiration. Using any other data type or leaving the field absent will disable expiration for the individual document.
+--
+-- /See:/ 'newGoogleFirestoreAdminV1TtlConfig' smart constructor.
+newtype GoogleFirestoreAdminV1TtlConfig = GoogleFirestoreAdminV1TtlConfig
+  { -- | Output only. The state of the TTL configuration.
+    state :: (Core.Maybe GoogleFirestoreAdminV1TtlConfig_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleFirestoreAdminV1TtlConfig' with the minimum fields required to make a request.
+newGoogleFirestoreAdminV1TtlConfig ::
+  GoogleFirestoreAdminV1TtlConfig
+newGoogleFirestoreAdminV1TtlConfig =
+  GoogleFirestoreAdminV1TtlConfig {state = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleFirestoreAdminV1TtlConfig
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleFirestoreAdminV1TtlConfig"
+      ( \o ->
+          GoogleFirestoreAdminV1TtlConfig
+            Core.<$> (o Core..:? "state")
+      )
+
+instance Core.ToJSON GoogleFirestoreAdminV1TtlConfig where
+  toJSON GoogleFirestoreAdminV1TtlConfig {..} =
+    Core.object
+      (Core.catMaybes [("state" Core..=) Core.<$> state])
+
+-- | Information about an TTL configuration change.
+--
+-- /See:/ 'newGoogleFirestoreAdminV1TtlConfigDelta' smart constructor.
+newtype GoogleFirestoreAdminV1TtlConfigDelta = GoogleFirestoreAdminV1TtlConfigDelta
+  { -- | Specifies how the TTL configuration is changing.
+    changeType :: (Core.Maybe GoogleFirestoreAdminV1TtlConfigDelta_ChangeType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleFirestoreAdminV1TtlConfigDelta' with the minimum fields required to make a request.
+newGoogleFirestoreAdminV1TtlConfigDelta ::
+  GoogleFirestoreAdminV1TtlConfigDelta
+newGoogleFirestoreAdminV1TtlConfigDelta =
+  GoogleFirestoreAdminV1TtlConfigDelta {changeType = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GoogleFirestoreAdminV1TtlConfigDelta
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleFirestoreAdminV1TtlConfigDelta"
+      ( \o ->
+          GoogleFirestoreAdminV1TtlConfigDelta
+            Core.<$> (o Core..:? "changeType")
+      )
+
+instance
+  Core.ToJSON
+    GoogleFirestoreAdminV1TtlConfigDelta
+  where
+  toJSON GoogleFirestoreAdminV1TtlConfigDelta {..} =
+    Core.object
+      ( Core.catMaybes
+          [("changeType" Core..=) Core.<$> changeType]
+      )
+
 -- | Metadata related to the update database operation.
 --
 -- /See:/ 'newGoogleFirestoreAdminV1UpdateDatabaseMetadata' smart constructor.
@@ -2594,7 +2886,9 @@ data ListCollectionIdsRequest = ListCollectionIdsRequest
   { -- | The maximum number of results to return.
     pageSize :: (Core.Maybe Core.Int32),
     -- | A page token. Must be a value from ListCollectionIdsResponse.
-    pageToken :: (Core.Maybe Core.Text)
+    pageToken :: (Core.Maybe Core.Text),
+    -- | Reads documents as they were at the given time. This may not be older than 270 seconds.
+    readTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2602,7 +2896,11 @@ data ListCollectionIdsRequest = ListCollectionIdsRequest
 newListCollectionIdsRequest ::
   ListCollectionIdsRequest
 newListCollectionIdsRequest =
-  ListCollectionIdsRequest {pageSize = Core.Nothing, pageToken = Core.Nothing}
+  ListCollectionIdsRequest
+    { pageSize = Core.Nothing,
+      pageToken = Core.Nothing,
+      readTime = Core.Nothing
+    }
 
 instance Core.FromJSON ListCollectionIdsRequest where
   parseJSON =
@@ -2612,6 +2910,7 @@ instance Core.FromJSON ListCollectionIdsRequest where
           ListCollectionIdsRequest
             Core.<$> (o Core..:? "pageSize")
             Core.<*> (o Core..:? "pageToken")
+            Core.<*> (o Core..:? "readTime")
       )
 
 instance Core.ToJSON ListCollectionIdsRequest where
@@ -2619,7 +2918,8 @@ instance Core.ToJSON ListCollectionIdsRequest where
     Core.object
       ( Core.catMaybes
           [ ("pageSize" Core..=) Core.<$> pageSize,
-            ("pageToken" Core..=) Core.<$> pageToken
+            ("pageToken" Core..=) Core.<$> pageToken,
+            ("readTime" Core..=) Core.<$> readTime
           ]
       )
 
@@ -2668,7 +2968,7 @@ instance Core.ToJSON ListCollectionIdsResponse where
 data ListDocumentsResponse = ListDocumentsResponse
   { -- | The Documents found.
     documents :: (Core.Maybe [Document]),
-    -- | The next page token.
+    -- | A token to retrieve the next page of documents. If this field is omitted, there are no subsequent pages.
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3067,6 +3367,8 @@ data PartitionQueryRequest = PartitionQueryRequest
     pageToken :: (Core.Maybe Core.Text),
     -- | The desired maximum number of partition points. The partitions may be returned across multiple pages of results. The number must be positive. The actual number of partitions returned may be fewer. For example, this may be set to one fewer than the number of parallel queries to be run, or in running a data pipeline job, one fewer than the number of workers or compute instances available.
     partitionCount :: (Core.Maybe Core.Int64),
+    -- | Reads documents as they were at the given time. This may not be older than 270 seconds.
+    readTime :: (Core.Maybe Core.DateTime),
     -- | A structured query. Query must specify collection with all descendants and be ordered by name ascending. Other filters, order bys, limits, offsets, and start\/end cursors are not supported.
     structuredQuery :: (Core.Maybe StructuredQuery)
   }
@@ -3080,6 +3382,7 @@ newPartitionQueryRequest =
     { pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       partitionCount = Core.Nothing,
+      readTime = Core.Nothing,
       structuredQuery = Core.Nothing
     }
 
@@ -3094,6 +3397,7 @@ instance Core.FromJSON PartitionQueryRequest where
             Core.<*> ( o Core..:? "partitionCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "structuredQuery")
       )
 
@@ -3105,6 +3409,7 @@ instance Core.ToJSON PartitionQueryRequest where
             ("pageToken" Core..=) Core.<$> pageToken,
             ("partitionCount" Core..=) Core.. Core.AsText
               Core.<$> partitionCount,
+            ("readTime" Core..=) Core.<$> readTime,
             ("structuredQuery" Core..=)
               Core.<$> structuredQuery
           ]
@@ -3334,6 +3639,100 @@ instance Core.ToJSON RollbackRequest where
           [("transaction" Core..=) Core.<$> transaction]
       )
 
+-- | The request for Firestore.RunAggregationQuery.
+--
+-- /See:/ 'newRunAggregationQueryRequest' smart constructor.
+data RunAggregationQueryRequest = RunAggregationQueryRequest
+  { -- | Starts a new transaction as part of the query, defaulting to read-only. The new transaction ID will be returned as the first response in the stream.
+    newTransaction' :: (Core.Maybe TransactionOptions),
+    -- | Executes the query at the given timestamp. Requires: * Cannot be more than 270 seconds in the past.
+    readTime :: (Core.Maybe Core.DateTime),
+    -- | An aggregation query.
+    structuredAggregationQuery :: (Core.Maybe StructuredAggregationQuery),
+    -- | Run the aggregation within an already active transaction. The value here is the opaque transaction ID to execute the query in.
+    transaction :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RunAggregationQueryRequest' with the minimum fields required to make a request.
+newRunAggregationQueryRequest ::
+  RunAggregationQueryRequest
+newRunAggregationQueryRequest =
+  RunAggregationQueryRequest
+    { newTransaction' = Core.Nothing,
+      readTime = Core.Nothing,
+      structuredAggregationQuery = Core.Nothing,
+      transaction = Core.Nothing
+    }
+
+instance Core.FromJSON RunAggregationQueryRequest where
+  parseJSON =
+    Core.withObject
+      "RunAggregationQueryRequest"
+      ( \o ->
+          RunAggregationQueryRequest
+            Core.<$> (o Core..:? "newTransaction")
+            Core.<*> (o Core..:? "readTime")
+            Core.<*> (o Core..:? "structuredAggregationQuery")
+            Core.<*> (o Core..:? "transaction")
+      )
+
+instance Core.ToJSON RunAggregationQueryRequest where
+  toJSON RunAggregationQueryRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("newTransaction" Core..=) Core.<$> newTransaction',
+            ("readTime" Core..=) Core.<$> readTime,
+            ("structuredAggregationQuery" Core..=)
+              Core.<$> structuredAggregationQuery,
+            ("transaction" Core..=) Core.<$> transaction
+          ]
+      )
+
+-- | The response for Firestore.RunAggregationQuery.
+--
+-- /See:/ 'newRunAggregationQueryResponse' smart constructor.
+data RunAggregationQueryResponse = RunAggregationQueryResponse
+  { -- | The time at which the aggregate result was computed. This is always monotonically increasing; in this case, the previous AggregationResult in the result stream are guaranteed not to have changed between their @read_time@ and this one. If the query returns no results, a response with @read_time@ and no @result@ will be sent, and this represents the time at which the query was run.
+    readTime :: (Core.Maybe Core.DateTime),
+    -- | A single aggregation result. Not present when reporting partial progress.
+    result :: (Core.Maybe AggregationResult),
+    -- | The transaction that was started as part of this request. Only present on the first response when the request requested to start a new transaction.
+    transaction :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RunAggregationQueryResponse' with the minimum fields required to make a request.
+newRunAggregationQueryResponse ::
+  RunAggregationQueryResponse
+newRunAggregationQueryResponse =
+  RunAggregationQueryResponse
+    { readTime = Core.Nothing,
+      result = Core.Nothing,
+      transaction = Core.Nothing
+    }
+
+instance Core.FromJSON RunAggregationQueryResponse where
+  parseJSON =
+    Core.withObject
+      "RunAggregationQueryResponse"
+      ( \o ->
+          RunAggregationQueryResponse
+            Core.<$> (o Core..:? "readTime")
+            Core.<*> (o Core..:? "result")
+            Core.<*> (o Core..:? "transaction")
+      )
+
+instance Core.ToJSON RunAggregationQueryResponse where
+  toJSON RunAggregationQueryResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("readTime" Core..=) Core.<$> readTime,
+            ("result" Core..=) Core.<$> result,
+            ("transaction" Core..=) Core.<$> transaction
+          ]
+      )
+
 -- | The request for Firestore.RunQuery.
 --
 -- /See:/ 'newRunQueryRequest' smart constructor.
@@ -3504,23 +3903,64 @@ instance Core.ToJSON Status_DetailsItem where
   toJSON Status_DetailsItem {..} =
     Core.toJSON additional
 
+-- | Firestore query for running an aggregation over a StructuredQuery.
+--
+-- /See:/ 'newStructuredAggregationQuery' smart constructor.
+data StructuredAggregationQuery = StructuredAggregationQuery
+  { -- | Optional. Series of aggregations to apply over the results of the @structured_query@. Requires: * A minimum of one and maximum of five aggregations per query.
+    aggregations :: (Core.Maybe [Aggregation]),
+    -- | Nested structured query.
+    structuredQuery :: (Core.Maybe StructuredQuery)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StructuredAggregationQuery' with the minimum fields required to make a request.
+newStructuredAggregationQuery ::
+  StructuredAggregationQuery
+newStructuredAggregationQuery =
+  StructuredAggregationQuery
+    { aggregations = Core.Nothing,
+      structuredQuery = Core.Nothing
+    }
+
+instance Core.FromJSON StructuredAggregationQuery where
+  parseJSON =
+    Core.withObject
+      "StructuredAggregationQuery"
+      ( \o ->
+          StructuredAggregationQuery
+            Core.<$> (o Core..:? "aggregations")
+            Core.<*> (o Core..:? "structuredQuery")
+      )
+
+instance Core.ToJSON StructuredAggregationQuery where
+  toJSON StructuredAggregationQuery {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregations" Core..=) Core.<$> aggregations,
+            ("structuredQuery" Core..=)
+              Core.<$> structuredQuery
+          ]
+      )
+
 -- | A Firestore query.
 --
 -- /See:/ 'newStructuredQuery' smart constructor.
 data StructuredQuery = StructuredQuery
-  { -- | A end point for the query results.
+  { -- | A potential prefix of a position in the result set to end the query at. This is similar to @START_AT@ but with it controlling the end position rather than the start position. Requires: * The number of values cannot be greater than the number of fields specified in the @ORDER BY@ clause.
     endAt :: (Core.Maybe Cursor),
     -- | The collections to query.
     from :: (Core.Maybe [CollectionSelector]),
-    -- | The maximum number of results to return. Applies after all other constraints. Must be >= 0 if specified.
+    -- | The maximum number of results to return. Applies after all other constraints. Requires: * The value must be greater than or equal to zero if specified.
     limit :: (Core.Maybe Core.Int32),
-    -- | The number of results to skip. Applies before limit, but after all other constraints. Must be >= 0 if specified.
+    -- | The number of documents to skip before returning the first result. This applies after the constraints specified by the @WHERE@, @START AT@, & @END AT@ but before the @LIMIT@ clause. Requires: * The value must be greater than or equal to zero if specified.
     offset :: (Core.Maybe Core.Int32),
-    -- | The order to apply to the query results. Firestore guarantees a stable ordering through the following rules: * Any field required to appear in @order_by@, that is not already specified in @order_by@, is appended to the order in field name order by default. * If an order on @__name__@ is not specified, it is appended by default. Fields are appended with the same sort direction as the last order specified, or \'ASCENDING\' if no order was specified. For example: * @SELECT * FROM Foo ORDER BY A@ becomes @SELECT * FROM Foo ORDER BY A, __name__@ * @SELECT * FROM Foo ORDER BY A DESC@ becomes @SELECT * FROM Foo ORDER BY A DESC, __name__ DESC@ * @SELECT * FROM Foo WHERE A > 1@ becomes @SELECT * FROM Foo WHERE A > 1 ORDER BY A, __name__@
+    -- | The order to apply to the query results. Firestore allows callers to provide a full ordering, a partial ordering, or no ordering at all. In all cases, Firestore guarantees a stable ordering through the following rules: * The @order_by@ is required to reference all fields used with an inequality filter. * All fields that are required to be in the @order_by@ but are not already present are appended in lexicographical ordering of the field name. * If an order on @__name__@ is not specified, it is appended by default. Fields are appended with the same sort direction as the last order specified, or \'ASCENDING\' if no order was specified. For example: * @ORDER BY a@ becomes @ORDER BY a ASC, __name__ ASC@ * @ORDER BY a DESC@ becomes @ORDER BY a DESC, __name__ DESC@ * @WHERE a > 1@ becomes @WHERE a > 1 ORDER BY a ASC, __name__ ASC@ * @WHERE __name__ > ... AND a > 1@ becomes @WHERE __name__ > ... AND a > 1 ORDER BY a ASC, __name__ ASC@
     orderBy :: (Core.Maybe [Order]),
-    -- | The projection to return.
+    -- | Optional sub-set of the fields to return. This acts as a DocumentMask over the documents returned from a query. When not set, assumes that the caller wants all fields returned.
     select :: (Core.Maybe Projection),
-    -- | A starting point for the query results.
+    -- | A potential prefix of a position in the result set to start the query at. The ordering of the result set is based on the @ORDER BY@ clause of the original query. @SELECT * FROM k WHERE a = 1 AND b > 2 ORDER BY b ASC, __name__ ASC;@ This query\'s results are ordered by @(b ASC, __name__ ASC)@. Cursors can reference either the full ordering or a prefix of the location, though it cannot reference more fields than what are in the provided @ORDER BY@. Continuing off the example above, attaching the following start cursors will have varying impact: - @START BEFORE (2, \/k\/123)@: start the query right before @a = 1 AND b > 2 AND __name__ > \/k\/123@. - @START AFTER (10)@: start the query right after @a = 1 AND b > 10@. Unlike @OFFSET@ which requires scanning over the first N results to skip, a start cursor allows the query to begin at a logical position. This position is not required to match an actual result, it will scan forward from this position to find the next document. Requires: * The number of values cannot
+    -- be greater than the number of fields specified in the @ORDER BY@ clause.
     startAt :: (Core.Maybe Cursor),
     -- | The filter to apply.
     where' :: (Core.Maybe Filter)

@@ -79,7 +79,7 @@ data SheetsSpreadsheetsValuesGet = SheetsSpreadsheetsValuesGet
     callback :: (Core.Maybe Core.Text),
     -- | How dates, times, and durations should be represented in the output. This is ignored if value/render/option is FORMATTED/VALUE. The default dateTime render option is SERIAL/NUMBER.
     dateTimeRenderOption :: (Core.Maybe SpreadsheetsValuesGetDateTimeRenderOption),
-    -- | The major dimension that results should use. For example, if the spreadsheet data is: @A1=1,B1=2,A2=3,B2=4@, then requesting @range=A1:B2,majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @range=A1:B2,majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
+    -- | The major dimension that results should use. For example, if the spreadsheet data in Sheet1 is: @A1=1,B1=2,A2=3,B2=4@, then requesting @range=Sheet1!A1:B2?majorDimension=ROWS@ returns @[[1,2],[3,4]]@, whereas requesting @range=Sheet1!A1:B2?majorDimension=COLUMNS@ returns @[[1,3],[2,4]]@.
     majorDimension :: (Core.Maybe SpreadsheetsValuesGetMajorDimension),
     -- | The </sheets/api/guides/concepts#cell A1 notation or R1C1 notation> of the range to retrieve values from.
     range :: Core.Text,

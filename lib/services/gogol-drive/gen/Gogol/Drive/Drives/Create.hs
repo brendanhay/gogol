@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new shared drive.
+-- Creates a shared drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.drives.create@.
 module Gogol.Drive.Drives.Create
@@ -53,7 +53,7 @@ type DriveDrivesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Drive
     Core.:> Core.Post '[Core.JSON] Drive
 
--- | Creates a new shared drive.
+-- | Creates a shared drive.
 --
 -- /See:/ 'newDriveDrivesCreate' smart constructor.
 data DriveDrivesCreate = DriveDrivesCreate

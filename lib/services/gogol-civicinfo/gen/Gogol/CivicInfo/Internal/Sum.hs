@@ -64,6 +64,14 @@ module Gogol.CivicInfo.Internal.Sum
         ..
       ),
 
+    -- * Election_ShapeLookupBehavior
+    Election_ShapeLookupBehavior
+      ( Election_ShapeLookupBehavior_ShapeLookupDefault,
+        Election_ShapeLookupBehavior_ShapeLookupDisabled,
+        Election_ShapeLookupBehavior_ShapeLookupEnabled,
+        ..
+      ),
+
     -- * ElectoralDistrict_Scope
     ElectoralDistrict_Scope
       ( ElectoralDistrict_Scope_Statewide,
@@ -144,7 +152,7 @@ module Gogol.CivicInfo.Internal.Sum
         GeocodingSummary_FeatureType_TypeTransitDeparture,
         GeocodingSummary_FeatureType_TypeTransitLeg,
         GeocodingSummary_FeatureType_TypeTransitLine,
-        GeocodingSummary_FeatureType_TypeTransitAgency,
+        GeocodingSummary_FeatureType_TypeTransitAgencyDeprecatedValue,
         GeocodingSummary_FeatureType_TypeTransitTransfer,
         GeocodingSummary_FeatureType_TypeSegmentPath,
         GeocodingSummary_FeatureType_TypeRoadSign,
@@ -400,6 +408,8 @@ module Gogol.CivicInfo.Internal.Sum
         GeocodingSummary_FeatureType_TypePhoneNumberAreaCode,
         GeocodingSummary_FeatureType_TypeBusinessCorridor,
         GeocodingSummary_FeatureType_TypeAddressTemplate,
+        GeocodingSummary_FeatureType_TypeTransitAgency,
+        GeocodingSummary_FeatureType_TypeFutureGeometry,
         GeocodingSummary_FeatureType_TypeEvent,
         GeocodingSummary_FeatureType_TypeEarthquake,
         GeocodingSummary_FeatureType_TypeHurricane,
@@ -450,6 +460,7 @@ module Gogol.CivicInfo.Internal.Sum
         GeocodingSummary_FeatureType_TypeCompoundSection,
         GeocodingSummary_FeatureType_TypeTerminalPoint,
         GeocodingSummary_FeatureType_TypeRegulatedArea,
+        GeocodingSummary_FeatureType_TypeLogicalBorder,
         GeocodingSummary_FeatureType_TypeDoNotUseReservedToCatchGeneratedFiles,
         GeocodingSummary_FeatureType_TypeUnknown,
         ..
@@ -714,6 +725,37 @@ pattern Contest_RolesItem_OtherRole = Contest_RolesItem "otherRole"
   Contest_RolesItem_SpecialPurposeOfficer,
   Contest_RolesItem_OtherRole,
   Contest_RolesItem
+  #-}
+
+newtype Election_ShapeLookupBehavior = Election_ShapeLookupBehavior {fromElection_ShapeLookupBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern Election_ShapeLookupBehavior_ShapeLookupDefault :: Election_ShapeLookupBehavior
+pattern Election_ShapeLookupBehavior_ShapeLookupDefault = Election_ShapeLookupBehavior "shapeLookupDefault"
+
+-- |
+pattern Election_ShapeLookupBehavior_ShapeLookupDisabled :: Election_ShapeLookupBehavior
+pattern Election_ShapeLookupBehavior_ShapeLookupDisabled = Election_ShapeLookupBehavior "shapeLookupDisabled"
+
+-- |
+pattern Election_ShapeLookupBehavior_ShapeLookupEnabled :: Election_ShapeLookupBehavior
+pattern Election_ShapeLookupBehavior_ShapeLookupEnabled = Election_ShapeLookupBehavior "shapeLookupEnabled"
+
+{-# COMPLETE
+  Election_ShapeLookupBehavior_ShapeLookupDefault,
+  Election_ShapeLookupBehavior_ShapeLookupDisabled,
+  Election_ShapeLookupBehavior_ShapeLookupEnabled,
+  Election_ShapeLookupBehavior
   #-}
 
 -- | The geographic scope of this district. If unspecified the district\'s geography is not known. One of: national, statewide, congressional, stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil, cityCouncil, ward, special
@@ -1052,9 +1094,9 @@ pattern GeocodingSummary_FeatureType_TypeTransitLeg = GeocodingSummary_FeatureTy
 pattern GeocodingSummary_FeatureType_TypeTransitLine :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTransitLine = GeocodingSummary_FeatureType "typeTransitLine"
 
--- | A transit agency operates a number of lines, typically all in the same city, region or country. See also transitagency.proto
-pattern GeocodingSummary_FeatureType_TypeTransitAgency :: GeocodingSummary_FeatureType
-pattern GeocodingSummary_FeatureType_TypeTransitAgency = GeocodingSummary_FeatureType "typeTransitAgency"
+-- | TYPE/TRANSIT/AGENCY was moved to 0xC91. This deprecated enum value still exists for debugging purposes only.
+pattern GeocodingSummary_FeatureType_TypeTransitAgencyDeprecatedValue :: GeocodingSummary_FeatureType
+pattern GeocodingSummary_FeatureType_TypeTransitAgencyDeprecatedValue = GeocodingSummary_FeatureType "typeTransitAgencyDeprecatedValue"
 
 -- | DEPRECATED
 pattern GeocodingSummary_FeatureType_TypeTransitTransfer :: GeocodingSummary_FeatureType
@@ -1273,7 +1315,7 @@ pattern GeocodingSummary_FeatureType_TypePoliceJurisdiction = GeocodingSummary_F
 pattern GeocodingSummary_FeatureType_TypeStatisticalArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeStatisticalArea = GeocodingSummary_FeatureType "typeStatisticalArea"
 
--- | RESERVED
+-- | DEPRECATED
 pattern GeocodingSummary_FeatureType_TypeConstituencyFuture :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeConstituencyFuture = GeocodingSummary_FeatureType "typeConstituencyFuture"
 
@@ -2077,6 +2119,14 @@ pattern GeocodingSummary_FeatureType_TypeBusinessCorridor = GeocodingSummary_Fea
 pattern GeocodingSummary_FeatureType_TypeAddressTemplate :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeAddressTemplate = GeocodingSummary_FeatureType "typeAddressTemplate"
 
+-- | A transit agency operates a number of lines, typically all in the same city, region or country. See also transitagency.proto
+pattern GeocodingSummary_FeatureType_TypeTransitAgency :: GeocodingSummary_FeatureType
+pattern GeocodingSummary_FeatureType_TypeTransitAgency = GeocodingSummary_FeatureType "typeTransitAgency"
+
+-- | A feature whose geometry is planned to replace the geometry on another feature.
+pattern GeocodingSummary_FeatureType_TypeFutureGeometry :: GeocodingSummary_FeatureType
+pattern GeocodingSummary_FeatureType_TypeFutureGeometry = GeocodingSummary_FeatureType "typeFutureGeometry"
+
 -- | DEPRECATED
 pattern GeocodingSummary_FeatureType_TypeEvent :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeEvent = GeocodingSummary_FeatureType "typeEvent"
@@ -2221,11 +2271,11 @@ pattern GeocodingSummary_FeatureType_TypeEstablishmentGrounds = GeocodingSummary
 pattern GeocodingSummary_FeatureType_TypeEstablishmentBuilding :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeEstablishmentBuilding = GeocodingSummary_FeatureType "typeEstablishmentBuilding"
 
--- | Establishment POIs can be referenced by TYPE/COMPOUND features using the RELATION/PRIMARILY/OCCUPIED/BY. This is the reciprocal relation of the RELATION_OCCUPIES.
+-- | An establishment which has a address (a.k.a. location or storefront). Note that it /may/ also have a service area (e.g. a restaurant that offers both dine-in and delivery). This type of business is also known as a \"hybrid\" Service Area Business. Establishment POIs can be referenced by TYPE/COMPOUND features using the RELATION/PRIMARILY/OCCUPIED/BY. This is the reciprocal relation of the RELATION_OCCUPIES.
 pattern GeocodingSummary_FeatureType_TypeEstablishmentPoi :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeEstablishmentPoi = GeocodingSummary_FeatureType "typeEstablishmentPoi"
 
--- | Represents service-only establishments (those without a storefront location). NOTE(tcain): Using value 0xD441, since we could find ourselves with a need to differentiate service areas from online-only at this level in the future, but still benefit from being able to group those under a common parent, disjoint from TYPE/ESTABLISHMENT/POI.
+-- | A business without a storefront, e.g. a plumber. It would normally not have a place that a customer could visit to receive service, but it would have an area served by the business. Also known as a \"pure\" Service Area Business. NOTE(tcain): Using value 0xD441, since we could find ourselves with a need to differentiate service areas from online-only at this level in the future, but still benefit from being able to group those under a common parent, disjoint from TYPE/ESTABLISHMENT/POI.
 pattern GeocodingSummary_FeatureType_TypeEstablishmentService :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeEstablishmentService = GeocodingSummary_FeatureType "typeEstablishmentService"
 
@@ -2273,9 +2323,13 @@ pattern GeocodingSummary_FeatureType_TypeCompoundSection = GeocodingSummary_Feat
 pattern GeocodingSummary_FeatureType_TypeTerminalPoint :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeTerminalPoint = GeocodingSummary_FeatureType "typeTerminalPoint"
 
--- | An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone. Features of this type should have one or more gcids corresponding to their specific regulation.
+-- | An area controlled in some way by an authoritative source, such as a government-designated COVID containment zone or an area under government sanctions. Features of this type should have one or more gcids corresponding to their specific regulation, and client handling of these features may vary based on the type of regulation.
 pattern GeocodingSummary_FeatureType_TypeRegulatedArea :: GeocodingSummary_FeatureType
 pattern GeocodingSummary_FeatureType_TypeRegulatedArea = GeocodingSummary_FeatureType "typeRegulatedArea"
+
+-- | A grouping of TYPE_BORDER features (\"border segments\"), which together represent a border between two features of the same type.
+pattern GeocodingSummary_FeatureType_TypeLogicalBorder :: GeocodingSummary_FeatureType
+pattern GeocodingSummary_FeatureType_TypeLogicalBorder = GeocodingSummary_FeatureType "typeLogicalBorder"
 
 -- | DEPRECATED
 pattern GeocodingSummary_FeatureType_TypeDoNotUseReservedToCatchGeneratedFiles :: GeocodingSummary_FeatureType
@@ -2345,7 +2399,7 @@ pattern GeocodingSummary_FeatureType_TypeUnknown = GeocodingSummary_FeatureType 
   GeocodingSummary_FeatureType_TypeTransitDeparture,
   GeocodingSummary_FeatureType_TypeTransitLeg,
   GeocodingSummary_FeatureType_TypeTransitLine,
-  GeocodingSummary_FeatureType_TypeTransitAgency,
+  GeocodingSummary_FeatureType_TypeTransitAgencyDeprecatedValue,
   GeocodingSummary_FeatureType_TypeTransitTransfer,
   GeocodingSummary_FeatureType_TypeSegmentPath,
   GeocodingSummary_FeatureType_TypeRoadSign,
@@ -2601,6 +2655,8 @@ pattern GeocodingSummary_FeatureType_TypeUnknown = GeocodingSummary_FeatureType 
   GeocodingSummary_FeatureType_TypePhoneNumberAreaCode,
   GeocodingSummary_FeatureType_TypeBusinessCorridor,
   GeocodingSummary_FeatureType_TypeAddressTemplate,
+  GeocodingSummary_FeatureType_TypeTransitAgency,
+  GeocodingSummary_FeatureType_TypeFutureGeometry,
   GeocodingSummary_FeatureType_TypeEvent,
   GeocodingSummary_FeatureType_TypeEarthquake,
   GeocodingSummary_FeatureType_TypeHurricane,
@@ -2651,6 +2707,7 @@ pattern GeocodingSummary_FeatureType_TypeUnknown = GeocodingSummary_FeatureType 
   GeocodingSummary_FeatureType_TypeCompoundSection,
   GeocodingSummary_FeatureType_TypeTerminalPoint,
   GeocodingSummary_FeatureType_TypeRegulatedArea,
+  GeocodingSummary_FeatureType_TypeLogicalBorder,
   GeocodingSummary_FeatureType_TypeDoNotUseReservedToCatchGeneratedFiles,
   GeocodingSummary_FeatureType_TypeUnknown,
   GeocodingSummary_FeatureType

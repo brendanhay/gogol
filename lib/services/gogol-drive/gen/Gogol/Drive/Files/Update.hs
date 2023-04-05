@@ -51,6 +51,7 @@ type DriveFilesUpdateResource =
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> Core.QueryParam "addParents" Core.Text
     Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
+    Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "keepRevisionForever" Core.Bool
     Core.:> Core.QueryParam "ocrLanguage" Core.Text
@@ -70,6 +71,7 @@ type DriveFilesUpdateResource =
       Core.:> Core.Capture "fileId" Core.Text
       Core.:> Core.QueryParam "addParents" Core.Text
       Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
+      Core.:> Core.QueryParam "includeLabels" Core.Text
       Core.:> Core.QueryParam "includePermissionsForView" Core.Text
       Core.:> Core.QueryParam "keepRevisionForever" Core.Bool
       Core.:> Core.QueryParam "ocrLanguage" Core.Text
@@ -80,7 +82,9 @@ type DriveFilesUpdateResource =
                 "useContentAsIndexableText"
                 Core.Bool
       Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
+      Core.:> Core.QueryParam
+                "uploadType"
+                Core.Multipart
       Core.:> Core.MultipartRelated '[Core.JSON] File
       Core.:> Core.Patch '[Core.JSON] File
 
@@ -94,6 +98,8 @@ data DriveFilesUpdate = DriveFilesUpdate
     enforceSingleParent :: Core.Bool,
     -- | The ID of the file.
     fileId :: Core.Text,
+    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
     -- | Whether to set the \'keepForever\' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.
@@ -125,6 +131,7 @@ newDriveFilesUpdate fileId payload =
     { addParents = Core.Nothing,
       enforceSingleParent = Core.False,
       fileId = fileId,
+      includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       keepRevisionForever = Core.False,
       ocrLanguage = Core.Nothing,
@@ -150,6 +157,7 @@ instance Core.GoogleRequest DriveFilesUpdate where
       fileId
       addParents
       (Core.Just enforceSingleParent)
+      includeLabels
       includePermissionsForView
       (Core.Just keepRevisionForever)
       ocrLanguage
@@ -180,6 +188,7 @@ instance
         fileId
         addParents
         (Core.Just enforceSingleParent)
+        includeLabels
         includePermissionsForView
         (Core.Just keepRevisionForever)
         ocrLanguage

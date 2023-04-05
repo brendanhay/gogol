@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a user. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to @null@ will be cleared.
+-- Updates a user. This method supports patch semantics, meaning that you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to @null@ will be cleared. For repeating fields that contain arrays, individual items in the array can\'t be patched piecemeal; they must be supplied in the request body with the desired values for all items. See the <https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user user accounts guide> for more information.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.users.update@.
 module Gogol.Admin.Directory.Users.Update
@@ -59,7 +59,7 @@ type DirectoryUsersUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] User
     Core.:> Core.Put '[Core.JSON] User
 
--- | Updates a user. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to @null@ will be cleared.
+-- | Updates a user. This method supports patch semantics, meaning that you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to @null@ will be cleared. For repeating fields that contain arrays, individual items in the array can\'t be patched piecemeal; they must be supplied in the request body with the desired values for all items. See the <https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user user accounts guide> for more information.
 --
 -- /See:/ 'newDirectoryUsersUpdate' smart constructor.
 data DirectoryUsersUpdate = DirectoryUsersUpdate

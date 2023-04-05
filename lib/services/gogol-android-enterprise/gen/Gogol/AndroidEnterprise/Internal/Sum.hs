@@ -133,6 +133,22 @@ module Gogol.AndroidEnterprise.Internal.Sum
         ..
       ),
 
+    -- * GoogleAuthenticationSettings_DedicatedDevicesAllowed
+    GoogleAuthenticationSettings_DedicatedDevicesAllowed
+      ( GoogleAuthenticationSettings_DedicatedDevicesAllowed_DedicatedDevicesAllowedUnspecified,
+        GoogleAuthenticationSettings_DedicatedDevicesAllowed_Disallowed,
+        GoogleAuthenticationSettings_DedicatedDevicesAllowed_Allowed,
+        ..
+      ),
+
+    -- * GoogleAuthenticationSettings_GoogleAuthenticationRequired
+    GoogleAuthenticationSettings_GoogleAuthenticationRequired
+      ( GoogleAuthenticationSettings_GoogleAuthenticationRequired_GoogleAuthenticationRequiredUnspecified,
+        GoogleAuthenticationSettings_GoogleAuthenticationRequired_NotRequired,
+        GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required,
+        ..
+      ),
+
     -- * GroupLicense_AcquisitionKind
     GroupLicense_AcquisitionKind
       ( GroupLicense_AcquisitionKind_Free,
@@ -370,6 +386,14 @@ module Gogol.AndroidEnterprise.Internal.Sum
         WebApp_DisplayMode_MinimalUi,
         WebApp_DisplayMode_Standalone,
         WebApp_DisplayMode_FullScreen,
+        ..
+      ),
+
+    -- * EnterprisesCreateEnrollmentTokenDeviceType
+    EnterprisesCreateEnrollmentTokenDeviceType
+      ( EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
+        EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
+        EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
         ..
       ),
 
@@ -829,6 +853,70 @@ pattern Entitlement_Reason_UserPurchase = Entitlement_Reason "userPurchase"
   Entitlement_Reason
   #-}
 
+-- | Whether dedicated devices are allowed.
+newtype GoogleAuthenticationSettings_DedicatedDevicesAllowed = GoogleAuthenticationSettings_DedicatedDevicesAllowed {fromGoogleAuthenticationSettings_DedicatedDevicesAllowed :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is unused.
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_DedicatedDevicesAllowedUnspecified :: GoogleAuthenticationSettings_DedicatedDevicesAllowed
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_DedicatedDevicesAllowedUnspecified = GoogleAuthenticationSettings_DedicatedDevicesAllowed "dedicatedDevicesAllowedUnspecified"
+
+-- | Dedicated devices are not allowed.
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_Disallowed :: GoogleAuthenticationSettings_DedicatedDevicesAllowed
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_Disallowed = GoogleAuthenticationSettings_DedicatedDevicesAllowed "disallowed"
+
+-- | Dedicated devices are allowed.
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_Allowed :: GoogleAuthenticationSettings_DedicatedDevicesAllowed
+pattern GoogleAuthenticationSettings_DedicatedDevicesAllowed_Allowed = GoogleAuthenticationSettings_DedicatedDevicesAllowed "allowed"
+
+{-# COMPLETE
+  GoogleAuthenticationSettings_DedicatedDevicesAllowed_DedicatedDevicesAllowedUnspecified,
+  GoogleAuthenticationSettings_DedicatedDevicesAllowed_Disallowed,
+  GoogleAuthenticationSettings_DedicatedDevicesAllowed_Allowed,
+  GoogleAuthenticationSettings_DedicatedDevicesAllowed
+  #-}
+
+-- | Whether Google authentication is required.
+newtype GoogleAuthenticationSettings_GoogleAuthenticationRequired = GoogleAuthenticationSettings_GoogleAuthenticationRequired {fromGoogleAuthenticationSettings_GoogleAuthenticationRequired :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is unused.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_GoogleAuthenticationRequiredUnspecified :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_GoogleAuthenticationRequiredUnspecified = GoogleAuthenticationSettings_GoogleAuthenticationRequired "googleAuthenticationRequiredUnspecified"
+
+-- | Google authentication is not required.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_NotRequired :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_NotRequired = GoogleAuthenticationSettings_GoogleAuthenticationRequired "notRequired"
+
+-- | User is required to be successfully authenticated by Google.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required = GoogleAuthenticationSettings_GoogleAuthenticationRequired "required"
+
+{-# COMPLETE
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_GoogleAuthenticationRequiredUnspecified,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_NotRequired,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired
+  #-}
+
 -- | How this group license was acquired. \"bulkPurchase\" means that this Grouplicenses resource was created because the enterprise purchased licenses for this product; otherwise, the value is \"free\" (for free products).
 newtype GroupLicense_AcquisitionKind = GroupLicense_AcquisitionKind {fromGroupLicense_AcquisitionKind :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1095,7 +1183,7 @@ pattern Notification_NotificationType_DeviceReportUpdate = Notification_Notifica
   Notification_NotificationType
   #-}
 
--- | Deprecated. Use autoUpdateMode instead. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
+-- | Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
 newtype Policy_AutoUpdatePolicy = Policy_AutoUpdatePolicy {fromPolicy_AutoUpdatePolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1793,6 +1881,38 @@ pattern WebApp_DisplayMode_FullScreen = WebApp_DisplayMode "fullScreen"
   WebApp_DisplayMode
   #-}
 
+-- | Whether it’s a dedicated device or a knowledge worker device.
+newtype EnterprisesCreateEnrollmentTokenDeviceType = EnterprisesCreateEnrollmentTokenDeviceType {fromEnterprisesCreateEnrollmentTokenDeviceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is unused
+pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown :: EnterprisesCreateEnrollmentTokenDeviceType
+pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown = EnterprisesCreateEnrollmentTokenDeviceType "unknown"
+
+-- | This device is a dedicated device.
+pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice :: EnterprisesCreateEnrollmentTokenDeviceType
+pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice = EnterprisesCreateEnrollmentTokenDeviceType "dedicatedDevice"
+
+-- | This device is required to have an authenticated user.
+pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker :: EnterprisesCreateEnrollmentTokenDeviceType
+pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker = EnterprisesCreateEnrollmentTokenDeviceType "knowledgeWorker"
+
+{-# COMPLETE
+  EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
+  EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
+  EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
+  EnterprisesCreateEnrollmentTokenDeviceType
+  #-}
+
 -- | The type of credential to return with the service account. Required.
 newtype EnterprisesGetServiceAccountKeyType = EnterprisesGetServiceAccountKeyType {fromEnterprisesGetServiceAccountKeyType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1820,7 +1940,7 @@ pattern EnterprisesGetServiceAccountKeyType_PKCS12 = EnterprisesGetServiceAccoun
   EnterprisesGetServiceAccountKeyType
   #-}
 
--- | The request mode for pulling notifications. Specifying waitForNotifications will cause the request to block and wait until one or more notifications are present, or return an empty notification list if no notifications are present after some time. Speciying returnImmediately will cause the request to immediately return the pending notifications, or an empty list if no notifications are present. If omitted, defaults to waitForNotifications.
+-- | The request mode for pulling notifications. Specifying waitForNotifications will cause the request to block and wait until one or more notifications are present, or return an empty notification list if no notifications are present after some time. Specifying returnImmediately will cause the request to immediately return the pending notifications, or an empty list if no notifications are present. If omitted, defaults to waitForNotifications.
 newtype EnterprisesPullNotificationSetRequestMode = EnterprisesPullNotificationSetRequestMode {fromEnterprisesPullNotificationSetRequestMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

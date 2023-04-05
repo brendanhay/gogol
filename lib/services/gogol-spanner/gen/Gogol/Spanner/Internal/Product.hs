@@ -70,6 +70,18 @@ module Gogol.Spanner.Internal.Product
     ContextValue (..),
     newContextValue,
 
+    -- * CopyBackupEncryptionConfig
+    CopyBackupEncryptionConfig (..),
+    newCopyBackupEncryptionConfig,
+
+    -- * CopyBackupMetadata
+    CopyBackupMetadata (..),
+    newCopyBackupMetadata,
+
+    -- * CopyBackupRequest
+    CopyBackupRequest (..),
+    newCopyBackupRequest,
+
     -- * CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -81,6 +93,14 @@ module Gogol.Spanner.Internal.Product
     -- * CreateDatabaseRequest
     CreateDatabaseRequest (..),
     newCreateDatabaseRequest,
+
+    -- * CreateInstanceConfigMetadata
+    CreateInstanceConfigMetadata (..),
+    newCreateInstanceConfigMetadata,
+
+    -- * CreateInstanceConfigRequest
+    CreateInstanceConfigRequest (..),
+    newCreateInstanceConfigRequest,
 
     -- * CreateInstanceMetadata
     CreateInstanceMetadata (..),
@@ -97,6 +117,10 @@ module Gogol.Spanner.Internal.Product
     -- * Database
     Database (..),
     newDatabase,
+
+    -- * DatabaseRole
+    DatabaseRole (..),
+    newDatabaseRole,
 
     -- * Delete'
     Delete' (..),
@@ -150,6 +174,10 @@ module Gogol.Spanner.Internal.Product
     Field (..),
     newField,
 
+    -- * FreeInstanceMetadata
+    FreeInstanceMetadata (..),
+    newFreeInstanceMetadata,
+
     -- * GetDatabaseDdlResponse
     GetDatabaseDdlResponse (..),
     newGetDatabaseDdlResponse,
@@ -190,6 +218,14 @@ module Gogol.Spanner.Internal.Product
     InstanceConfig (..),
     newInstanceConfig,
 
+    -- * InstanceConfig_Labels
+    InstanceConfig_Labels (..),
+    newInstanceConfig_Labels,
+
+    -- * InstanceOperationProgress
+    InstanceOperationProgress (..),
+    newInstanceOperationProgress,
+
     -- * KeyRange
     KeyRange (..),
     newKeyRange,
@@ -218,9 +254,17 @@ module Gogol.Spanner.Internal.Product
     ListDatabaseOperationsResponse (..),
     newListDatabaseOperationsResponse,
 
+    -- * ListDatabaseRolesResponse
+    ListDatabaseRolesResponse (..),
+    newListDatabaseRolesResponse,
+
     -- * ListDatabasesResponse
     ListDatabasesResponse (..),
     newListDatabasesResponse,
+
+    -- * ListInstanceConfigOperationsResponse
+    ListInstanceConfigOperationsResponse (..),
+    newListInstanceConfigOperationsResponse,
 
     -- * ListInstanceConfigsResponse
     ListInstanceConfigsResponse (..),
@@ -502,6 +546,14 @@ module Gogol.Spanner.Internal.Product
     UpdateDatabaseDdlRequest (..),
     newUpdateDatabaseDdlRequest,
 
+    -- * UpdateInstanceConfigMetadata
+    UpdateInstanceConfigMetadata (..),
+    newUpdateInstanceConfigMetadata,
+
+    -- * UpdateInstanceConfigRequest
+    UpdateInstanceConfigRequest (..),
+    newUpdateInstanceConfigRequest,
+
     -- * UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
@@ -537,8 +589,12 @@ data Backup = Backup
     encryptionInfo :: (Core.Maybe EncryptionInfo),
     -- | Required for the CreateBackup operation. The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 366 days from the time the CreateBackup request is processed. Once the @expire_time@ has passed, the backup is eligible to be automatically deleted by Cloud Spanner to free the resources used by the backup.
     expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The max allowed expiration time of the backup, with microseconds granularity. A backup\'s expiration time can be configured in multiple APIs: CreateBackup, UpdateBackup, CopyBackup. When updating or copying an existing backup, the expiration time specified must be less than @Backup.max_expire_time@.
+    maxExpireTime :: (Core.Maybe Core.DateTime),
     -- | Output only for the CreateBackup operation. Required for the UpdateBackup operation. A globally unique identifier for the backup which cannot be changed. Values are of the form @projects\/\/instances\/\/backups\/a-z*[a-z0-9]@ The final segment of the name must be between 2 and 60 characters in length. The backup is stored in the location(s) specified in the instance configuration of the instance containing the backup, identified by the prefix of the backup name of the form @projects\/\/instances\/@.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. The names of the destination backups being created by copying this source backup. The backup names are of the form @projects\/\/instances\/\/backups\/@. Referencing backups may exist in different instances. The existence of any referencing backup prevents the backup from being deleted. When the copy operation is done (either successfully completed or cancelled or the destination backup is deleted), the reference to the backup is removed.
+    referencingBackups :: (Core.Maybe [Core.Text]),
     -- | Output only. The names of the restored databases that reference the backup. The database names are of the form @projects\/\/instances\/\/databases\/@. Referencing databases may exist in different instances. The existence of any referencing database prevents the backup from being deleted. When a restored database from the backup enters the @READY@ state, the reference to the backup is removed.
     referencingDatabases :: (Core.Maybe [Core.Text]),
     -- | Output only. Size of the backup in bytes.
@@ -560,7 +616,9 @@ newBackup =
       databaseDialect = Core.Nothing,
       encryptionInfo = Core.Nothing,
       expireTime = Core.Nothing,
+      maxExpireTime = Core.Nothing,
       name = Core.Nothing,
+      referencingBackups = Core.Nothing,
       referencingDatabases = Core.Nothing,
       sizeBytes = Core.Nothing,
       state = Core.Nothing,
@@ -578,7 +636,9 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "databaseDialect")
             Core.<*> (o Core..:? "encryptionInfo")
             Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "maxExpireTime")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "referencingBackups")
             Core.<*> (o Core..:? "referencingDatabases")
             Core.<*> ( o Core..:? "sizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
@@ -596,7 +656,10 @@ instance Core.ToJSON Backup where
             ("databaseDialect" Core..=) Core.<$> databaseDialect,
             ("encryptionInfo" Core..=) Core.<$> encryptionInfo,
             ("expireTime" Core..=) Core.<$> expireTime,
+            ("maxExpireTime" Core..=) Core.<$> maxExpireTime,
             ("name" Core..=) Core.<$> name,
+            ("referencingBackups" Core..=)
+              Core.<$> referencingBackups,
             ("referencingDatabases" Core..=)
               Core.<$> referencingDatabases,
             ("sizeBytes" Core..=) Core.. Core.AsText
@@ -771,8 +834,9 @@ instance Core.ToJSON BeginTransactionRequest where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -1030,6 +1094,144 @@ instance Core.ToJSON ContextValue where
           ]
       )
 
+-- | Encryption configuration for the copied backup.
+--
+-- /See:/ 'newCopyBackupEncryptionConfig' smart constructor.
+data CopyBackupEncryptionConfig = CopyBackupEncryptionConfig
+  { -- | Required. The encryption type of the backup.
+    encryptionType :: (Core.Maybe CopyBackupEncryptionConfig_EncryptionType),
+    -- | Optional. The Cloud KMS key that will be used to protect the backup. This field should be set only when encryption_type is @CUSTOMER_MANAGED_ENCRYPTION@. Values are of the form @projects\/\/locations\/\/keyRings\/\/cryptoKeys\/@.
+    kmsKeyName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyBackupEncryptionConfig' with the minimum fields required to make a request.
+newCopyBackupEncryptionConfig ::
+  CopyBackupEncryptionConfig
+newCopyBackupEncryptionConfig =
+  CopyBackupEncryptionConfig
+    { encryptionType = Core.Nothing,
+      kmsKeyName = Core.Nothing
+    }
+
+instance Core.FromJSON CopyBackupEncryptionConfig where
+  parseJSON =
+    Core.withObject
+      "CopyBackupEncryptionConfig"
+      ( \o ->
+          CopyBackupEncryptionConfig
+            Core.<$> (o Core..:? "encryptionType")
+            Core.<*> (o Core..:? "kmsKeyName")
+      )
+
+instance Core.ToJSON CopyBackupEncryptionConfig where
+  toJSON CopyBackupEncryptionConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("encryptionType" Core..=) Core.<$> encryptionType,
+            ("kmsKeyName" Core..=) Core.<$> kmsKeyName
+          ]
+      )
+
+-- | Metadata type for the operation returned by CopyBackup.
+--
+-- /See:/ 'newCopyBackupMetadata' smart constructor.
+data CopyBackupMetadata = CopyBackupMetadata
+  { -- | The time at which cancellation of CopyBackup operation was received. Operations.CancelOperation starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    cancelTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the backup being created through the copy operation. Values are of the form @projects\/\/instances\/\/backups\/@.
+    name :: (Core.Maybe Core.Text),
+    -- | The progress of the CopyBackup operation.
+    progress :: (Core.Maybe OperationProgress),
+    -- | The name of the source backup that is being copied. Values are of the form @projects\/\/instances\/\/backups\/@.
+    sourceBackup :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyBackupMetadata' with the minimum fields required to make a request.
+newCopyBackupMetadata ::
+  CopyBackupMetadata
+newCopyBackupMetadata =
+  CopyBackupMetadata
+    { cancelTime = Core.Nothing,
+      name = Core.Nothing,
+      progress = Core.Nothing,
+      sourceBackup = Core.Nothing
+    }
+
+instance Core.FromJSON CopyBackupMetadata where
+  parseJSON =
+    Core.withObject
+      "CopyBackupMetadata"
+      ( \o ->
+          CopyBackupMetadata
+            Core.<$> (o Core..:? "cancelTime")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "progress")
+            Core.<*> (o Core..:? "sourceBackup")
+      )
+
+instance Core.ToJSON CopyBackupMetadata where
+  toJSON CopyBackupMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cancelTime" Core..=) Core.<$> cancelTime,
+            ("name" Core..=) Core.<$> name,
+            ("progress" Core..=) Core.<$> progress,
+            ("sourceBackup" Core..=) Core.<$> sourceBackup
+          ]
+      )
+
+-- | The request for CopyBackup.
+--
+-- /See:/ 'newCopyBackupRequest' smart constructor.
+data CopyBackupRequest = CopyBackupRequest
+  { -- | Required. The id of the backup copy. The @backup_id@ appended to @parent@ forms the full backup_uri of the form @projects\/\/instances\/\/backups\/@.
+    backupId :: (Core.Maybe Core.Text),
+    -- | Optional. The encryption configuration used to encrypt the backup. If this field is not specified, the backup will use the same encryption configuration as the source backup by default, namely encryption_type = @USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION@.
+    encryptionConfig :: (Core.Maybe CopyBackupEncryptionConfig),
+    -- | Required. The expiration time of the backup in microsecond granularity. The expiration time must be at least 6 hours and at most 366 days from the @create_time@ of the source backup. Once the @expire_time@ has passed, the backup is eligible to be automatically deleted by Cloud Spanner to free the resources used by the backup.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The source backup to be copied. The source backup needs to be in READY state for it to be copied. Once CopyBackup is in progress, the source backup cannot be deleted or cleaned up on expiration until CopyBackup is finished. Values are of the form: @projects\/\/instances\/\/backups\/@.
+    sourceBackup :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyBackupRequest' with the minimum fields required to make a request.
+newCopyBackupRequest ::
+  CopyBackupRequest
+newCopyBackupRequest =
+  CopyBackupRequest
+    { backupId = Core.Nothing,
+      encryptionConfig = Core.Nothing,
+      expireTime = Core.Nothing,
+      sourceBackup = Core.Nothing
+    }
+
+instance Core.FromJSON CopyBackupRequest where
+  parseJSON =
+    Core.withObject
+      "CopyBackupRequest"
+      ( \o ->
+          CopyBackupRequest
+            Core.<$> (o Core..:? "backupId")
+            Core.<*> (o Core..:? "encryptionConfig")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "sourceBackup")
+      )
+
+instance Core.ToJSON CopyBackupRequest where
+  toJSON CopyBackupRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backupId" Core..=) Core.<$> backupId,
+            ("encryptionConfig" Core..=)
+              Core.<$> encryptionConfig,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("sourceBackup" Core..=) Core.<$> sourceBackup
+          ]
+      )
+
 -- | Metadata type for the operation returned by CreateBackup.
 --
 -- /See:/ 'newCreateBackupMetadata' smart constructor.
@@ -1120,7 +1322,9 @@ data CreateDatabaseRequest = CreateDatabaseRequest
     -- | Optional. The encryption configuration for the database. If this field is not specified, Cloud Spanner will encrypt\/decrypt all data at rest using Google default encryption.
     encryptionConfig :: (Core.Maybe EncryptionConfig),
     -- | Optional. A list of DDL statements to run inside the newly created database. Statements can create tables, indexes, etc. These statements execute atomically with the creation of the database: if there is an error in any statement, the database is not created.
-    extraStatements :: (Core.Maybe [Core.Text])
+    extraStatements :: (Core.Maybe [Core.Text]),
+    -- | Optional. Proto descriptors used by CREATE\/ALTER PROTO BUNDLE statements in \'extra/statements\' above. Contains a protobuf-serialized <https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto google.protobuf.FileDescriptorSet>. To generate it, <https://grpc.io/docs/protoc-installation/ install> and run @protoc@ with --include/imports and --descriptor/set/out. For example, to generate for moon\/shot\/app.proto, run \"\"\" $protoc --proto/path=\/app/path --proto/path=\/lib/path \\ --include/imports \\ --descriptor/set_out=descriptors.data \\ moon\/shot\/app.proto \"\"\" For more details, see protobuffer <https://developers.google.com/protocol-buffers/docs/techniques#self-description self description>.
+    protoDescriptors :: (Core.Maybe Core.Base64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1132,7 +1336,8 @@ newCreateDatabaseRequest =
     { createStatement = Core.Nothing,
       databaseDialect = Core.Nothing,
       encryptionConfig = Core.Nothing,
-      extraStatements = Core.Nothing
+      extraStatements = Core.Nothing,
+      protoDescriptors = Core.Nothing
     }
 
 instance Core.FromJSON CreateDatabaseRequest where
@@ -1145,6 +1350,7 @@ instance Core.FromJSON CreateDatabaseRequest where
             Core.<*> (o Core..:? "databaseDialect")
             Core.<*> (o Core..:? "encryptionConfig")
             Core.<*> (o Core..:? "extraStatements")
+            Core.<*> (o Core..:? "protoDescriptors")
       )
 
 instance Core.ToJSON CreateDatabaseRequest where
@@ -1156,8 +1362,98 @@ instance Core.ToJSON CreateDatabaseRequest where
             ("databaseDialect" Core..=) Core.<$> databaseDialect,
             ("encryptionConfig" Core..=)
               Core.<$> encryptionConfig,
-            ("extraStatements" Core..=)
-              Core.<$> extraStatements
+            ("extraStatements" Core..=) Core.<$> extraStatements,
+            ("protoDescriptors" Core..=)
+              Core.<$> protoDescriptors
+          ]
+      )
+
+-- | Metadata type for the operation returned by CreateInstanceConfig.
+--
+-- /See:/ 'newCreateInstanceConfigMetadata' smart constructor.
+data CreateInstanceConfigMetadata = CreateInstanceConfigMetadata
+  { -- | The time at which this operation was cancelled.
+    cancelTime :: (Core.Maybe Core.DateTime),
+    -- | The target instance config end state.
+    instanceConfig :: (Core.Maybe InstanceConfig),
+    -- | The progress of the CreateInstanceConfig operation.
+    progress :: (Core.Maybe InstanceOperationProgress)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateInstanceConfigMetadata' with the minimum fields required to make a request.
+newCreateInstanceConfigMetadata ::
+  CreateInstanceConfigMetadata
+newCreateInstanceConfigMetadata =
+  CreateInstanceConfigMetadata
+    { cancelTime = Core.Nothing,
+      instanceConfig = Core.Nothing,
+      progress = Core.Nothing
+    }
+
+instance Core.FromJSON CreateInstanceConfigMetadata where
+  parseJSON =
+    Core.withObject
+      "CreateInstanceConfigMetadata"
+      ( \o ->
+          CreateInstanceConfigMetadata
+            Core.<$> (o Core..:? "cancelTime")
+            Core.<*> (o Core..:? "instanceConfig")
+            Core.<*> (o Core..:? "progress")
+      )
+
+instance Core.ToJSON CreateInstanceConfigMetadata where
+  toJSON CreateInstanceConfigMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cancelTime" Core..=) Core.<$> cancelTime,
+            ("instanceConfig" Core..=) Core.<$> instanceConfig,
+            ("progress" Core..=) Core.<$> progress
+          ]
+      )
+
+-- | The request for CreateInstanceConfigRequest.
+--
+-- /See:/ 'newCreateInstanceConfigRequest' smart constructor.
+data CreateInstanceConfigRequest = CreateInstanceConfigRequest
+  { -- | Required. The InstanceConfig proto of the configuration to create. instance/config.name must be @\/instanceConfigs\/@. instance/config.base_config must be a Google managed configuration name, e.g. \/instanceConfigs\/us-east1, \/instanceConfigs\/nam3.
+    instanceConfig :: (Core.Maybe InstanceConfig),
+    -- | Required. The ID of the instance config to create. Valid identifiers are of the form @custom-[-a-z0-9]*[a-z0-9]@ and must be between 2 and 64 characters in length. The @custom-@ prefix is required to avoid name conflicts with Google managed configurations.
+    instanceConfigId :: (Core.Maybe Core.Text),
+    -- | An option to validate, but not actually execute, a request, and provide the same response.
+    validateOnly :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreateInstanceConfigRequest' with the minimum fields required to make a request.
+newCreateInstanceConfigRequest ::
+  CreateInstanceConfigRequest
+newCreateInstanceConfigRequest =
+  CreateInstanceConfigRequest
+    { instanceConfig = Core.Nothing,
+      instanceConfigId = Core.Nothing,
+      validateOnly = Core.Nothing
+    }
+
+instance Core.FromJSON CreateInstanceConfigRequest where
+  parseJSON =
+    Core.withObject
+      "CreateInstanceConfigRequest"
+      ( \o ->
+          CreateInstanceConfigRequest
+            Core.<$> (o Core..:? "instanceConfig")
+            Core.<*> (o Core..:? "instanceConfigId")
+            Core.<*> (o Core..:? "validateOnly")
+      )
+
+instance Core.ToJSON CreateInstanceConfigRequest where
+  toJSON CreateInstanceConfigRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("instanceConfig" Core..=) Core.<$> instanceConfig,
+            ("instanceConfigId" Core..=)
+              Core.<$> instanceConfigId,
+            ("validateOnly" Core..=) Core.<$> validateOnly
           ]
       )
 
@@ -1289,7 +1585,7 @@ data Database = Database
     earliestVersionTime :: (Core.Maybe Core.DateTime),
     -- | Output only. For databases that are using customer managed encryption, this field contains the encryption configuration for the database. For databases that are using Google default or other types of encryption, this field is empty.
     encryptionConfig :: (Core.Maybe EncryptionConfig),
-    -- | Output only. For databases that are using customer managed encryption, this field contains the encryption information for the database, such as encryption state and the Cloud KMS key versions that are in use. For databases that are using Google default or other types of encryption, this field is empty. This field is propagated lazily from the backend. There might be a delay from when a key version is being used and when it appears in this field.
+    -- | Output only. For databases that are using customer managed encryption, this field contains the encryption information for the database, such as all Cloud KMS key versions that are in use. The @encryption_status\' field inside of each@EncryptionInfo\` is not populated. For databases that are using Google default or other types of encryption, this field is empty. This field is propagated lazily from the backend. There might be a delay from when a key version is being used and when it appears in this field.
     encryptionInfo :: (Core.Maybe [EncryptionInfo]),
     -- | Required. The name of the database. Values are of the form @projects\/\/instances\/\/databases\/@, where \`@is as specified in the@CREATE DATABASE\` statement. This name can be passed to other API methods to identify the database.
     name :: (Core.Maybe Core.Text),
@@ -1356,6 +1652,31 @@ instance Core.ToJSON Database where
               Core.<$> versionRetentionPeriod
           ]
       )
+
+-- | A Cloud Spanner database role.
+--
+-- /See:/ 'newDatabaseRole' smart constructor.
+newtype DatabaseRole = DatabaseRole
+  { -- | Required. The name of the database role. Values are of the form @projects\/\/instances\/\/databases\/\/databaseRoles\/@ where \`@is as specified in the@CREATE ROLE\` DDL statement.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DatabaseRole' with the minimum fields required to make a request.
+newDatabaseRole ::
+  DatabaseRole
+newDatabaseRole = DatabaseRole {name = Core.Nothing}
+
+instance Core.FromJSON DatabaseRole where
+  parseJSON =
+    Core.withObject
+      "DatabaseRole"
+      (\o -> DatabaseRole Core.<$> (o Core..:? "name"))
+
+instance Core.ToJSON DatabaseRole where
+  toJSON DatabaseRole {..} =
+    Core.object
+      (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Arguments to delete operations.
 --
@@ -1481,7 +1802,7 @@ instance Core.ToJSON DiagnosticMessage where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -1665,7 +1986,9 @@ instance Core.ToJSON ExecuteBatchDmlResponse where
 --
 -- /See:/ 'newExecuteSqlRequest' smart constructor.
 data ExecuteSqlRequest = ExecuteSqlRequest
-  { -- | It is not always possible for Cloud Spanner to infer the right SQL type from a JSON value. For example, values of type @BYTES@ and values of type @STRING@ both appear in params as JSON strings. In these cases, @param_types@ can be used to specify the exact SQL type for some or all of the SQL statement parameters. See the definition of Type for more information about SQL types.
+  { -- | If this is for a partitioned query and this field is set to @true@, the request will be executed via Spanner independent compute resources. If the field is set to @true@ but the request does not set @partition_token@, the API will return an @INVALID_ARGUMENT@ error.
+    dataBoostEnabled :: (Core.Maybe Core.Bool),
+    -- | It is not always possible for Cloud Spanner to infer the right SQL type from a JSON value. For example, values of type @BYTES@ and values of type @STRING@ both appear in params as JSON strings. In these cases, @param_types@ can be used to specify the exact SQL type for some or all of the SQL statement parameters. See the definition of Type for more information about SQL types.
     paramTypes :: (Core.Maybe ExecuteSqlRequest_ParamTypes),
     -- | Parameter names and values that bind to placeholders in the SQL string. A parameter placeholder consists of the @\@@ character followed by the parameter name (for example, @\@firstName@). Parameter names must conform to the naming requirements of identifiers as specified at https:\/\/cloud.google.com\/spanner\/docs\/lexical#identifiers. Parameters can appear anywhere that a literal value is expected. The same parameter name can be used more than once, for example: @\"WHERE id > \@msg_id AND id \< \@msg_id + 100\"@ It is an error to execute a SQL statement with unbound parameters.
     params :: (Core.Maybe ExecuteSqlRequest_Params),
@@ -1693,7 +2016,8 @@ newExecuteSqlRequest ::
   ExecuteSqlRequest
 newExecuteSqlRequest =
   ExecuteSqlRequest
-    { paramTypes = Core.Nothing,
+    { dataBoostEnabled = Core.Nothing,
+      paramTypes = Core.Nothing,
       params = Core.Nothing,
       partitionToken = Core.Nothing,
       queryMode = Core.Nothing,
@@ -1711,7 +2035,8 @@ instance Core.FromJSON ExecuteSqlRequest where
       "ExecuteSqlRequest"
       ( \o ->
           ExecuteSqlRequest
-            Core.<$> (o Core..:? "paramTypes")
+            Core.<$> (o Core..:? "dataBoostEnabled")
+            Core.<*> (o Core..:? "paramTypes")
             Core.<*> (o Core..:? "params")
             Core.<*> (o Core..:? "partitionToken")
             Core.<*> (o Core..:? "queryMode")
@@ -1729,7 +2054,9 @@ instance Core.ToJSON ExecuteSqlRequest where
   toJSON ExecuteSqlRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("paramTypes" Core..=) Core.<$> paramTypes,
+          [ ("dataBoostEnabled" Core..=)
+              Core.<$> dataBoostEnabled,
+            ("paramTypes" Core..=) Core.<$> paramTypes,
             ("params" Core..=) Core.<$> params,
             ("partitionToken" Core..=) Core.<$> partitionToken,
             ("queryMode" Core..=) Core.<$> queryMode,
@@ -1886,11 +2213,57 @@ instance Core.ToJSON Field where
           ]
       )
 
+-- | Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
+--
+-- /See:/ 'newFreeInstanceMetadata' smart constructor.
+data FreeInstanceMetadata = FreeInstanceMetadata
+  { -- | Specifies the expiration behavior of a free instance. The default of ExpireBehavior is @REMOVE_AFTER_GRACE_PERIOD@. This can be modified during or after creation, and before expiration.
+    expireBehavior :: (Core.Maybe FreeInstanceMetadata_ExpireBehavior),
+    -- | Output only. Timestamp after which the instance will either be upgraded or scheduled for deletion after a grace period. ExpireBehavior is used to choose between upgrading or scheduling the free instance for deletion. This timestamp is set during the creation of a free instance.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. If present, the timestamp at which the free instance was upgraded to a provisioned instance.
+    upgradeTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FreeInstanceMetadata' with the minimum fields required to make a request.
+newFreeInstanceMetadata ::
+  FreeInstanceMetadata
+newFreeInstanceMetadata =
+  FreeInstanceMetadata
+    { expireBehavior = Core.Nothing,
+      expireTime = Core.Nothing,
+      upgradeTime = Core.Nothing
+    }
+
+instance Core.FromJSON FreeInstanceMetadata where
+  parseJSON =
+    Core.withObject
+      "FreeInstanceMetadata"
+      ( \o ->
+          FreeInstanceMetadata
+            Core.<$> (o Core..:? "expireBehavior")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "upgradeTime")
+      )
+
+instance Core.ToJSON FreeInstanceMetadata where
+  toJSON FreeInstanceMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expireBehavior" Core..=) Core.<$> expireBehavior,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("upgradeTime" Core..=) Core.<$> upgradeTime
+          ]
+      )
+
 -- | The response for GetDatabaseDdl.
 --
 -- /See:/ 'newGetDatabaseDdlResponse' smart constructor.
-newtype GetDatabaseDdlResponse = GetDatabaseDdlResponse
-  { -- | A list of formatted DDL statements defining the schema of the database specified in the request.
+data GetDatabaseDdlResponse = GetDatabaseDdlResponse
+  { -- | Proto descriptors stored in the database. Contains a protobuf-serialized <https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto google.protobuf.FileDescriptorSet>. For more details, see protobuffer <https://developers.google.com/protocol-buffers/docs/techniques#self-description self description>.
+    protoDescriptors :: (Core.Maybe Core.Base64),
+    -- | A list of formatted DDL statements defining the schema of the database specified in the request.
     statements :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1898,7 +2271,11 @@ newtype GetDatabaseDdlResponse = GetDatabaseDdlResponse
 -- | Creates a value of 'GetDatabaseDdlResponse' with the minimum fields required to make a request.
 newGetDatabaseDdlResponse ::
   GetDatabaseDdlResponse
-newGetDatabaseDdlResponse = GetDatabaseDdlResponse {statements = Core.Nothing}
+newGetDatabaseDdlResponse =
+  GetDatabaseDdlResponse
+    { protoDescriptors = Core.Nothing,
+      statements = Core.Nothing
+    }
 
 instance Core.FromJSON GetDatabaseDdlResponse where
   parseJSON =
@@ -1906,14 +2283,18 @@ instance Core.FromJSON GetDatabaseDdlResponse where
       "GetDatabaseDdlResponse"
       ( \o ->
           GetDatabaseDdlResponse
-            Core.<$> (o Core..:? "statements")
+            Core.<$> (o Core..:? "protoDescriptors")
+            Core.<*> (o Core..:? "statements")
       )
 
 instance Core.ToJSON GetDatabaseDdlResponse where
   toJSON GetDatabaseDdlResponse {..} =
     Core.object
       ( Core.catMaybes
-          [("statements" Core..=) Core.<$> statements]
+          [ ("protoDescriptors" Core..=)
+              Core.<$> protoDescriptors,
+            ("statements" Core..=) Core.<$> statements
+          ]
       )
 
 -- | Request message for @GetIamPolicy@ method.
@@ -2108,21 +2489,29 @@ instance
 data Instance = Instance
   { -- | Required. The name of the instance\'s configuration. Values are of the form @projects\/\/instanceConfigs\/@. See also InstanceConfig and ListInstanceConfigs.
     config :: (Core.Maybe Core.Text),
+    -- | Output only. The time at which the instance was created.
+    createTime :: (Core.Maybe Core.DateTime),
     -- | Required. The descriptive name for this instance as it appears in UIs. Must be unique per project and between 4 and 30 characters in length.
     displayName :: (Core.Maybe Core.Text),
     -- | Deprecated. This field is not populated.
     endpointUris :: (Core.Maybe [Core.Text]),
+    -- | Free instance metadata. Only populated for free instances.
+    freeInstanceMetadata :: (Core.Maybe FreeInstanceMetadata),
+    -- | The @InstanceType@ of the current instance.
+    instanceType :: (Core.Maybe Instance_InstanceType),
     -- | Cloud Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. Cloud Labels can be used to filter collections of resources. They can be used to control how resource metrics are aggregated. And they can be used as arguments to policy management rules (e.g. route, firewall, load balancing, etc.). * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @a-z{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @[a-z0-9_-]{0,63}@. * No more than 64 labels can be associated with a given resource. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels. If you plan to use labels in your own code, please note that additional characters may be allowed in the future. And so you are advised to use an internal label representation, such as JSON, which doesn\'t rely upon specific characters
     -- being disallowed. For example, representing labels as the string: name + \"/\" + value would prove problematic if we were to allow \"/\" in a future release.
     labels :: (Core.Maybe Instance_Labels),
     -- | Required. A unique identifier for the instance, which cannot be changed after the instance is created. Values are of the form @projects\/\/instances\/a-z*[a-z0-9]@. The final segment of the name must be between 2 and 64 characters in length.
     name :: (Core.Maybe Core.Text),
-    -- | The number of nodes allocated to this instance. At most one of either node/count or processing/units should be present in the message. This may be zero in API responses for instances that are not yet in state @READY@. See <https://cloud.google.com/spanner/docs/compute-capacity the documentation> for more information about nodes and processing units.
+    -- | The number of nodes allocated to this instance. At most one of either node/count or processing/units should be present in the message. Users can set the node_count field to specify the target number of nodes allocated to the instance. This may be zero in API responses for instances that are not yet in state @READY@. See <https://cloud.google.com/spanner/docs/compute-capacity the documentation> for more information about nodes and processing units.
     nodeCount :: (Core.Maybe Core.Int32),
-    -- | The number of processing units allocated to this instance. At most one of processing/units or node/count should be present in the message. This may be zero in API responses for instances that are not yet in state @READY@. See <https://cloud.google.com/spanner/docs/compute-capacity the documentation> for more information about nodes and processing units.
+    -- | The number of processing units allocated to this instance. At most one of processing/units or node/count should be present in the message. Users can set the processing_units field to specify the target number of processing units allocated to the instance. This may be zero in API responses for instances that are not yet in state @READY@. See <https://cloud.google.com/spanner/docs/compute-capacity the documentation> for more information about nodes and processing units.
     processingUnits :: (Core.Maybe Core.Int32),
     -- | Output only. The current instance state. For CreateInstance, the state must be either omitted or set to @CREATING@. For UpdateInstance, the state must be either omitted or set to @READY@.
-    state :: (Core.Maybe Instance_State)
+    state :: (Core.Maybe Instance_State),
+    -- | Output only. The time at which the instance was most recently updated.
+    updateTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2132,13 +2521,17 @@ newInstance ::
 newInstance =
   Instance
     { config = Core.Nothing,
+      createTime = Core.Nothing,
       displayName = Core.Nothing,
       endpointUris = Core.Nothing,
+      freeInstanceMetadata = Core.Nothing,
+      instanceType = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
       nodeCount = Core.Nothing,
       processingUnits = Core.Nothing,
-      state = Core.Nothing
+      state = Core.Nothing,
+      updateTime = Core.Nothing
     }
 
 instance Core.FromJSON Instance where
@@ -2148,13 +2541,17 @@ instance Core.FromJSON Instance where
       ( \o ->
           Instance
             Core.<$> (o Core..:? "config")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "endpointUris")
+            Core.<*> (o Core..:? "freeInstanceMetadata")
+            Core.<*> (o Core..:? "instanceType")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nodeCount")
             Core.<*> (o Core..:? "processingUnits")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance Core.ToJSON Instance where
@@ -2162,13 +2559,18 @@ instance Core.ToJSON Instance where
     Core.object
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
+            ("createTime" Core..=) Core.<$> createTime,
             ("displayName" Core..=) Core.<$> displayName,
             ("endpointUris" Core..=) Core.<$> endpointUris,
+            ("freeInstanceMetadata" Core..=)
+              Core.<$> freeInstanceMetadata,
+            ("instanceType" Core..=) Core.<$> instanceType,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("nodeCount" Core..=) Core.<$> nodeCount,
             ("processingUnits" Core..=) Core.<$> processingUnits,
-            ("state" Core..=) Core.<$> state
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
 
@@ -2204,14 +2606,31 @@ instance Core.ToJSON Instance_Labels where
 --
 -- /See:/ 'newInstanceConfig' smart constructor.
 data InstanceConfig = InstanceConfig
-  { -- | The name of this instance configuration as it appears in UIs.
+  { -- | Base configuration name, e.g. projects\/\/instanceConfigs\/nam3, based on which this configuration is created. Only set for user managed configurations. @base_config@ must refer to a configuration of type GOOGLE_MANAGED in the same project as this configuration.
+    baseConfig :: (Core.Maybe Core.Text),
+    -- | Output only. Whether this instance config is a Google or User Managed Configuration.
+    configType :: (Core.Maybe InstanceConfig_ConfigType),
+    -- | The name of this instance configuration as it appears in UIs.
     displayName :: (Core.Maybe Core.Text),
+    -- | etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a instance config from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform instance config updates in order to avoid race conditions: An etag is returned in the response which contains instance configs, and systems are expected to put that etag in the request to update instance config to ensure that their change will be applied to the same version of the instance config. If no etag is provided in the call to update instance config, then the existing instance config is overwritten blindly.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. Describes whether free instances are available to be created in this instance config.
+    freeInstanceAvailability :: (Core.Maybe InstanceConfig_FreeInstanceAvailability),
+    -- | Cloud Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. Cloud Labels can be used to filter collections of resources. They can be used to control how resource metrics are aggregated. And they can be used as arguments to policy management rules (e.g. route, firewall, load balancing, etc.). * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @a-z{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @[a-z0-9_-]{0,63}@. * No more than 64 labels can be associated with a given resource. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels. If you plan to use labels in your own code, please note that additional characters may be allowed in the future. Therefore, you are advised to use an internal label representation, such as JSON, which doesn\'t rely upon specific
+    -- characters being disallowed. For example, representing labels as the string: name + \"/\" + value would prove problematic if we were to allow \"/\" in a future release.
+    labels :: (Core.Maybe InstanceConfig_Labels),
     -- | Allowed values of the \"default_leader\" schema option for databases in instances that use this instance configuration.
     leaderOptions :: (Core.Maybe [Core.Text]),
     -- | A unique identifier for the instance configuration. Values are of the form @projects\/\/instanceConfigs\/a-z*@.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. The available optional replicas to choose from for user managed configurations. Populated for Google managed configurations.
+    optionalReplicas :: (Core.Maybe [ReplicaInfo]),
+    -- | Output only. If true, the instance config is being created or updated. If false, there are no ongoing operations for the instance config.
+    reconciling :: (Core.Maybe Core.Bool),
     -- | The geographic placement of nodes in this instance configuration and their replication properties.
-    replicas :: (Core.Maybe [ReplicaInfo])
+    replicas :: (Core.Maybe [ReplicaInfo]),
+    -- | Output only. The current instance config state.
+    state :: (Core.Maybe InstanceConfig_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2220,10 +2639,18 @@ newInstanceConfig ::
   InstanceConfig
 newInstanceConfig =
   InstanceConfig
-    { displayName = Core.Nothing,
+    { baseConfig = Core.Nothing,
+      configType = Core.Nothing,
+      displayName = Core.Nothing,
+      etag = Core.Nothing,
+      freeInstanceAvailability = Core.Nothing,
+      labels = Core.Nothing,
       leaderOptions = Core.Nothing,
       name = Core.Nothing,
-      replicas = Core.Nothing
+      optionalReplicas = Core.Nothing,
+      reconciling = Core.Nothing,
+      replicas = Core.Nothing,
+      state = Core.Nothing
     }
 
 instance Core.FromJSON InstanceConfig where
@@ -2232,20 +2659,113 @@ instance Core.FromJSON InstanceConfig where
       "InstanceConfig"
       ( \o ->
           InstanceConfig
-            Core.<$> (o Core..:? "displayName")
+            Core.<$> (o Core..:? "baseConfig")
+            Core.<*> (o Core..:? "configType")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "freeInstanceAvailability")
+            Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "leaderOptions")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "optionalReplicas")
+            Core.<*> (o Core..:? "reconciling")
             Core.<*> (o Core..:? "replicas")
+            Core.<*> (o Core..:? "state")
       )
 
 instance Core.ToJSON InstanceConfig where
   toJSON InstanceConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("displayName" Core..=) Core.<$> displayName,
+          [ ("baseConfig" Core..=) Core.<$> baseConfig,
+            ("configType" Core..=) Core.<$> configType,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("etag" Core..=) Core.<$> etag,
+            ("freeInstanceAvailability" Core..=)
+              Core.<$> freeInstanceAvailability,
+            ("labels" Core..=) Core.<$> labels,
             ("leaderOptions" Core..=) Core.<$> leaderOptions,
             ("name" Core..=) Core.<$> name,
-            ("replicas" Core..=) Core.<$> replicas
+            ("optionalReplicas" Core..=)
+              Core.<$> optionalReplicas,
+            ("reconciling" Core..=) Core.<$> reconciling,
+            ("replicas" Core..=) Core.<$> replicas,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
+-- | Cloud Labels are a flexible and lightweight mechanism for organizing cloud resources into groups that reflect a customer\'s organizational needs and deployment strategies. Cloud Labels can be used to filter collections of resources. They can be used to control how resource metrics are aggregated. And they can be used as arguments to policy management rules (e.g. route, firewall, load balancing, etc.). * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @a-z{0,62}@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @[a-z0-9_-]{0,63}@. * No more than 64 labels can be associated with a given resource. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels. If you plan to use labels in your own code, please note that additional characters may be allowed in the future. Therefore, you are advised to use an internal label representation, such as JSON, which doesn\'t rely upon specific
+-- characters being disallowed. For example, representing labels as the string: name + \"/\" + value would prove problematic if we were to allow \"/\" in a future release.
+--
+-- /See:/ 'newInstanceConfig_Labels' smart constructor.
+newtype InstanceConfig_Labels = InstanceConfig_Labels
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstanceConfig_Labels' with the minimum fields required to make a request.
+newInstanceConfig_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  InstanceConfig_Labels
+newInstanceConfig_Labels additional =
+  InstanceConfig_Labels {additional = additional}
+
+instance Core.FromJSON InstanceConfig_Labels where
+  parseJSON =
+    Core.withObject
+      "InstanceConfig_Labels"
+      ( \o ->
+          InstanceConfig_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON InstanceConfig_Labels where
+  toJSON InstanceConfig_Labels {..} =
+    Core.toJSON additional
+
+-- | Encapsulates progress related information for a Cloud Spanner long running instance operations.
+--
+-- /See:/ 'newInstanceOperationProgress' smart constructor.
+data InstanceOperationProgress = InstanceOperationProgress
+  { -- | If set, the time at which this operation failed or was completed successfully.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Percent completion of the operation. Values are between 0 and 100 inclusive.
+    progressPercent :: (Core.Maybe Core.Int32),
+    -- | Time the request was received.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstanceOperationProgress' with the minimum fields required to make a request.
+newInstanceOperationProgress ::
+  InstanceOperationProgress
+newInstanceOperationProgress =
+  InstanceOperationProgress
+    { endTime = Core.Nothing,
+      progressPercent = Core.Nothing,
+      startTime = Core.Nothing
+    }
+
+instance Core.FromJSON InstanceOperationProgress where
+  parseJSON =
+    Core.withObject
+      "InstanceOperationProgress"
+      ( \o ->
+          InstanceOperationProgress
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON InstanceOperationProgress where
+  toJSON InstanceOperationProgress {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("progressPercent" Core..=) Core.<$> progressPercent,
+            ("startTime" Core..=) Core.<$> startTime
           ]
       )
 
@@ -2567,6 +3087,45 @@ instance Core.ToJSON ListDatabaseOperationsResponse where
           ]
       )
 
+-- | The response for ListDatabaseRoles.
+--
+-- /See:/ 'newListDatabaseRolesResponse' smart constructor.
+data ListDatabaseRolesResponse = ListDatabaseRolesResponse
+  { -- | Database roles that matched the request.
+    databaseRoles :: (Core.Maybe [DatabaseRole]),
+    -- | @next_page_token@ can be sent in a subsequent ListDatabaseRoles call to fetch more of the matching roles.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListDatabaseRolesResponse' with the minimum fields required to make a request.
+newListDatabaseRolesResponse ::
+  ListDatabaseRolesResponse
+newListDatabaseRolesResponse =
+  ListDatabaseRolesResponse
+    { databaseRoles = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListDatabaseRolesResponse where
+  parseJSON =
+    Core.withObject
+      "ListDatabaseRolesResponse"
+      ( \o ->
+          ListDatabaseRolesResponse
+            Core.<$> (o Core..:? "databaseRoles")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListDatabaseRolesResponse where
+  toJSON ListDatabaseRolesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("databaseRoles" Core..=) Core.<$> databaseRoles,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | The response for ListDatabases.
 --
 -- /See:/ 'newListDatabasesResponse' smart constructor.
@@ -2600,6 +3159,51 @@ instance Core.ToJSON ListDatabasesResponse where
       ( Core.catMaybes
           [ ("databases" Core..=) Core.<$> databases,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | The response for ListInstanceConfigOperations.
+--
+-- /See:/ 'newListInstanceConfigOperationsResponse' smart constructor.
+data ListInstanceConfigOperationsResponse = ListInstanceConfigOperationsResponse
+  { -- | @next_page_token@ can be sent in a subsequent ListInstanceConfigOperations call to fetch more of the matching metadata.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of matching instance config long-running operations. Each operation\'s name will be prefixed by the instance config\'s name. The operation\'s metadata field type @metadata.type_url@ describes the type of the metadata.
+    operations :: (Core.Maybe [Operation])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListInstanceConfigOperationsResponse' with the minimum fields required to make a request.
+newListInstanceConfigOperationsResponse ::
+  ListInstanceConfigOperationsResponse
+newListInstanceConfigOperationsResponse =
+  ListInstanceConfigOperationsResponse
+    { nextPageToken = Core.Nothing,
+      operations = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ListInstanceConfigOperationsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "ListInstanceConfigOperationsResponse"
+      ( \o ->
+          ListInstanceConfigOperationsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "operations")
+      )
+
+instance
+  Core.ToJSON
+    ListInstanceConfigOperationsResponse
+  where
+  toJSON ListInstanceConfigOperationsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("operations" Core..=) Core.<$> operations
           ]
       )
 
@@ -3335,7 +3939,7 @@ data PartialResultSet = PartialResultSet
     stats :: (Core.Maybe ResultSetStats),
     -- | A streamed result set consists of a stream of values, which might be split into many @PartialResultSet@ messages to accommodate large rows and\/or large values. Every N complete values defines a row, where N is equal to the number of entries in metadata.row/type.fields. Most values are encoded based on type as described here. It is possible that the last value in values is \"chunked\", meaning that the rest of the value is sent in subsequent @PartialResultSet@(s). This is denoted by the chunked/value field. Two or more chunked values can be merged to form a complete value as follows: * @bool\/number\/null@: cannot be chunked * @string@: concatenate the strings * @list@: concatenate the lists. If the last element in a list is a @string@, @list@, or @object@, merge it with the first element in the next list by applying these rules recursively. * @object@: concatenate the (field name, field value) pairs. If a field name is duplicated, then apply these rules recursively to merge the field values. Some examples of
     -- merging: # Strings are concatenated. \"foo\", \"bar\" => \"foobar\" # Lists of non-strings are concatenated. [2, 3], [4] => [2, 3, 4] # Lists are concatenated, but the last and first elements are merged # because they are strings. [\"a\", \"b\"], [\"c\", \"d\"] => [\"a\", \"bc\", \"d\"] # Lists are concatenated, but the last and first elements are merged # because they are lists. Recursively, the last and first elements # of the inner lists are merged because they are strings. [\"a\", [\"b\", \"c\"]], [[\"d\"], \"e\"] => [\"a\", [\"b\", \"cd\"], \"e\"] # Non-overlapping object fields are combined. {\"a\": \"1\"}, {\"b\": \"2\"} => {\"a\": \"1\", \"b\": 2\"} # Overlapping object fields are merged. {\"a\": \"1\"}, {\"a\": \"2\"} => {\"a\": \"12\"} # Examples of merging objects containing lists of strings. {\"a\": [\"1\"]}, {\"a\": [\"2\"]} => {\"a\": [\"12\"]} For a more complete example, suppose a streaming SQL query is yielding a result set whose rows contain a single string field. The following
-    -- @PartialResultSet@s might be yielded: { \"metadata\": { ... } \"values\": [\"Hello\", \"W\"] \"chunked/value\": true \"resume/token\": \"Af65...\" } { \"values\": [\"orl\"] \"chunked/value\": true \"resume/token\": \"Bqp2...\" } { \"values\": [\"d\"] \"resume_token\": \"Zx1B...\" } This sequence of @PartialResultSet@s encodes two rows, one containing the field value @\"Hello\"@, and a second containing the field value @\"World\" = \"W\" + \"orl\" + \"d\"@.
+    -- @PartialResultSet@s might be yielded: { \"metadata\": { ... } \"values\": [\"Hello\", \"W\"] \"chunked/value\": true \"resume/token\": \"Af65...\" } { \"values\": [\"orl\"] \"chunked/value\": true } { \"values\": [\"d\"] \"resume/token\": \"Zx1B...\" } This sequence of @PartialResultSet@s encodes two rows, one containing the field value @\"Hello\"@, and a second containing the field value @\"World\" = \"W\" + \"orl\" + \"d\"@. Not all @PartialResultSet@s contain a @resume_token@. Execution can only be resumed from a previously yielded @resume_token@. For the above sequence of @PartialResultSet@s, resuming the query with @\"resume_token\": \"Af65...\"@ will yield results from the @PartialResultSet@ with value @[\"orl\"]@.
     values :: (Core.Maybe [Core.Value])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4039,6 +4643,8 @@ instance Core.ToJSON ReadOnly where
 data ReadRequest = ReadRequest
   { -- | Required. The columns of table to be returned for each row matching this request.
     columns :: (Core.Maybe [Core.Text]),
+    -- | If this is for a partitioned read and this field is set to @true@, the request will be executed via Spanner independent compute resources. If the field is set to @true@ but the request does not set @partition_token@, the API will return an @INVALID_ARGUMENT@ error.
+    dataBoostEnabled :: (Core.Maybe Core.Bool),
     -- | If non-empty, the name of an index on table. This index is used instead of the table primary key when interpreting key/set and sorting result rows. See key/set for further information.
     index :: (Core.Maybe Core.Text),
     -- | Required. @key_set@ identifies the rows to be yielded. @key_set@ names the primary keys of the rows in table to be yielded, unless index is present. If index is present, then key/set instead names index keys in index. If the partition/token field is empty, rows are yielded in table primary key order (if index is empty) or index key order (if index is non-empty). If the partition_token field is not empty, rows will be yielded in an unspecified order. It is not an error for the @key_set@ to name rows that do not exist in the database. Read yields nothing for nonexistent rows.
@@ -4064,6 +4670,7 @@ newReadRequest ::
 newReadRequest =
   ReadRequest
     { columns = Core.Nothing,
+      dataBoostEnabled = Core.Nothing,
       index = Core.Nothing,
       keySet = Core.Nothing,
       limit = Core.Nothing,
@@ -4081,6 +4688,7 @@ instance Core.FromJSON ReadRequest where
       ( \o ->
           ReadRequest
             Core.<$> (o Core..:? "columns")
+            Core.<*> (o Core..:? "dataBoostEnabled")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "keySet")
             Core.<*> ( o Core..:? "limit"
@@ -4098,6 +4706,8 @@ instance Core.ToJSON ReadRequest where
     Core.object
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
+            ("dataBoostEnabled" Core..=)
+              Core.<$> dataBoostEnabled,
             ("index" Core..=) Core.<$> index,
             ("keySet" Core..=) Core.<$> keySet,
             ("limit" Core..=) Core.. Core.AsText Core.<$> limit,
@@ -4112,22 +4722,31 @@ instance Core.ToJSON ReadRequest where
 -- | Message type to initiate a read-write transaction. Currently this transaction type has no options.
 --
 -- /See:/ 'newReadWrite' smart constructor.
-data ReadWrite = ReadWrite
+newtype ReadWrite = ReadWrite
+  { -- | Read lock mode for the transaction.
+    readLockMode :: (Core.Maybe ReadWrite_ReadLockMode)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ReadWrite' with the minimum fields required to make a request.
 newReadWrite ::
   ReadWrite
-newReadWrite = ReadWrite
+newReadWrite = ReadWrite {readLockMode = Core.Nothing}
 
 instance Core.FromJSON ReadWrite where
   parseJSON =
     Core.withObject
       "ReadWrite"
-      (\o -> Core.pure ReadWrite)
+      ( \o ->
+          ReadWrite Core.<$> (o Core..:? "readLockMode")
+      )
 
 instance Core.ToJSON ReadWrite where
-  toJSON = Core.const Core.emptyObject
+  toJSON ReadWrite {..} =
+    Core.object
+      ( Core.catMaybes
+          [("readLockMode" Core..=) Core.<$> readLockMode]
+      )
 
 --
 -- /See:/ 'newReplicaInfo' smart constructor.
@@ -4447,7 +5066,9 @@ data ResultSetMetadata = ResultSetMetadata
   { -- | Indicates the field names and types for the rows in the result set. For example, a SQL query like @\"SELECT UserId, UserName FROM Users\"@ could return a @row_type@ value like: \"fields\": [ { \"name\": \"UserId\", \"type\": { \"code\": \"INT64\" } }, { \"name\": \"UserName\", \"type\": { \"code\": \"STRING\" } }, ]
     rowType :: (Core.Maybe StructType),
     -- | If the read or SQL query began a transaction as a side-effect, the information about the new transaction is yielded here.
-    transaction :: (Core.Maybe Transaction)
+    transaction :: (Core.Maybe Transaction),
+    -- | A SQL query can be parameterized. In PLAN mode, these parameters can be undeclared. This indicates the field names and types for those undeclared parameters in the SQL query. For example, a SQL query like @\"SELECT * FROM Users where UserId = \@userId and UserName = \@userName \"@ could return a @undeclared_parameters@ value like: \"fields\": [ { \"name\": \"UserId\", \"type\": { \"code\": \"INT64\" } }, { \"name\": \"UserName\", \"type\": { \"code\": \"STRING\" } }, ]
+    undeclaredParameters :: (Core.Maybe StructType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4455,7 +5076,11 @@ data ResultSetMetadata = ResultSetMetadata
 newResultSetMetadata ::
   ResultSetMetadata
 newResultSetMetadata =
-  ResultSetMetadata {rowType = Core.Nothing, transaction = Core.Nothing}
+  ResultSetMetadata
+    { rowType = Core.Nothing,
+      transaction = Core.Nothing,
+      undeclaredParameters = Core.Nothing
+    }
 
 instance Core.FromJSON ResultSetMetadata where
   parseJSON =
@@ -4465,6 +5090,7 @@ instance Core.FromJSON ResultSetMetadata where
           ResultSetMetadata
             Core.<$> (o Core..:? "rowType")
             Core.<*> (o Core..:? "transaction")
+            Core.<*> (o Core..:? "undeclaredParameters")
       )
 
 instance Core.ToJSON ResultSetMetadata where
@@ -4472,7 +5098,9 @@ instance Core.ToJSON ResultSetMetadata where
     Core.object
       ( Core.catMaybes
           [ ("rowType" Core..=) Core.<$> rowType,
-            ("transaction" Core..=) Core.<$> transaction
+            ("transaction" Core..=) Core.<$> transaction,
+            ("undeclaredParameters" Core..=)
+              Core.<$> undeclaredParameters
           ]
       )
 
@@ -4724,6 +5352,8 @@ data Session = Session
     approximateLastUseTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The timestamp when the session is created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | The database role which created this session.
+    creatorRole :: (Core.Maybe Core.Text),
     -- | The labels for the session. * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @[a-z]([-a-z0-9]*[a-z0-9])?@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @([a-z]([-a-z0-9]*[a-z0-9])?)?@. * No more than 64 labels can be associated with a given session. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels.
     labels :: (Core.Maybe Session_Labels),
     -- | Output only. The name of the session. This is always system-assigned.
@@ -4738,6 +5368,7 @@ newSession =
   Session
     { approximateLastUseTime = Core.Nothing,
       createTime = Core.Nothing,
+      creatorRole = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing
     }
@@ -4750,6 +5381,7 @@ instance Core.FromJSON Session where
           Session
             Core.<$> (o Core..:? "approximateLastUseTime")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "creatorRole")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
       )
@@ -4761,6 +5393,7 @@ instance Core.ToJSON Session where
           [ ("approximateLastUseTime" Core..=)
               Core.<$> approximateLastUseTime,
             ("createTime" Core..=) Core.<$> createTime,
+            ("creatorRole" Core..=) Core.<$> creatorRole,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name
           ]
@@ -4797,7 +5430,7 @@ instance Core.ToJSON Session_Labels where
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 newtype SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5176,18 +5809,20 @@ instance Core.ToJSON Transaction where
           ]
       )
 
--- | Transactions: Each session can have at most one active transaction at a time (note that standalone reads and queries use a transaction internally and do count towards the one transaction limit). After the active transaction is completed, the session can immediately be re-used for the next transaction. It is not necessary to create a new session for each transaction. Transaction Modes: Cloud Spanner supports three transaction modes: 1. Locking read-write. This type of transaction is the only way to write data into Cloud Spanner. These transactions rely on pessimistic locking and, if necessary, two-phase commit. Locking read-write transactions may abort, requiring the application to retry. 2. Snapshot read-only. This transaction type provides guaranteed consistency across several reads, but does not allow writes. Snapshot read-only transactions can be configured to read at timestamps in the past. Snapshot read-only transactions do not need to be committed. 3. Partitioned DML. This type of transaction is used to
--- execute a single Partitioned DML statement. Partitioned DML partitions the key space and runs the DML statement over each partition in parallel using separate, internal transactions that commit independently. Partitioned DML transactions do not need to be committed. For transactions that only read, snapshot read-only transactions provide simpler semantics and are almost always faster. In particular, read-only transactions do not take locks, so they do not conflict with read-write transactions. As a consequence of not taking locks, they also do not abort, so retry loops are not needed. Transactions may only read\/write data in a single database. They may, however, read\/write data in different tables within that database. Locking Read-Write Transactions: Locking transactions may be used to atomically read-modify-write data anywhere in a database. This type of transaction is externally consistent. Clients should attempt to minimize the amount of time a transaction is active. Faster transactions commit with
--- higher probability and cause less contention. Cloud Spanner attempts to keep read locks active as long as the transaction continues to do reads, and the transaction has not been terminated by Commit or Rollback. Long periods of inactivity at the client may cause Cloud Spanner to release a transaction\'s locks and abort it. Conceptually, a read-write transaction consists of zero or more reads or SQL statements followed by Commit. At any time before Commit, the client can send a Rollback request to abort the transaction. Semantics: Cloud Spanner can commit the transaction if all read locks it acquired are still valid at commit time, and it is able to acquire write locks for all writes. Cloud Spanner can abort the transaction for any reason. If a commit attempt returns @ABORTED@, Cloud Spanner guarantees that the transaction has not modified any user data in Cloud Spanner. Unless the transaction commits, Cloud Spanner makes no guarantees about how long the transaction\'s locks were held for. It is an error to
--- use Cloud Spanner locks for any sort of mutual exclusion other than between Cloud Spanner transactions themselves. Retrying Aborted Transactions: When a transaction aborts, the application can choose to retry the whole transaction again. To maximize the chances of successfully committing the retry, the client should execute the retry in the same session as the original attempt. The original session\'s lock priority increases with each consecutive abort, meaning that each attempt has a slightly better chance of success than the previous. Under some circumstances (for example, many transactions attempting to modify the same row(s)), a transaction can abort many times in a short period before successfully committing. Thus, it is not a good idea to cap the number of retries a transaction can attempt; instead, it is better to limit the total amount of time spent retrying. Idle Transactions: A transaction is considered idle if it has no outstanding reads or SQL queries and has not started a read or SQL query within
--- the last 10 seconds. Idle transactions can be aborted by Cloud Spanner so that they don\'t hold on to locks indefinitely. If an idle transaction is aborted, the commit will fail with error @ABORTED@. If this behavior is undesirable, periodically executing a simple SQL query in the transaction (for example, @SELECT 1@) prevents the transaction from becoming idle. Snapshot Read-Only Transactions: Snapshot read-only transactions provides a simpler method than locking read-write transactions for doing several consistent reads. However, this type of transaction does not support writes. Snapshot transactions do not take locks. Instead, they work by choosing a Cloud Spanner timestamp, then executing all reads at that timestamp. Since they do not acquire locks, they do not block concurrent read-write transactions. Unlike locking read-write transactions, snapshot read-only transactions never abort. They can fail if the chosen read timestamp is garbage collected; however, the default garbage collection policy is
--- generous enough that most applications do not need to worry about this in practice. Snapshot read-only transactions do not need to call Commit or Rollback (and in fact are not permitted to do so). To execute a snapshot transaction, the client specifies a timestamp bound, which tells Cloud Spanner how to choose a read timestamp. The types of timestamp bound are: - Strong (the default). - Bounded staleness. - Exact staleness. If the Cloud Spanner database to be read is geographically distributed, stale read-only transactions can execute more quickly than strong or read-write transaction, because they are able to execute far from the leader replica. Each type of timestamp bound is discussed in detail below. Strong: Strong reads are guaranteed to see the effects of all transactions that have committed before the start of the read. Furthermore, all rows yielded by a single read are consistent with each other -- if any part of the read observes a transaction, all parts of the read see the transaction. Strong reads
--- are not repeatable: two consecutive strong read-only transactions might return inconsistent results if there are concurrent writes. If consistency across reads is required, the reads should be executed within a transaction or at an exact read timestamp. See TransactionOptions.ReadOnly.strong. Exact Staleness: These timestamp bounds execute reads at a user-specified timestamp. Reads at a timestamp are guaranteed to see a consistent prefix of the global transaction history: they observe modifications done by all transactions with a commit timestamp less than or equal to the read timestamp, and observe none of the modifications done by transactions with a larger commit timestamp. They will block until all conflicting transactions that may be assigned commit timestamps \<= the read timestamp have finished. The timestamp can either be expressed as an absolute Cloud Spanner commit timestamp or a staleness relative to the current time. These modes do not require a \"negotiation phase\" to pick a timestamp. As a
--- result, they execute slightly faster than the equivalent boundedly stale concurrency modes. On the other hand, boundedly stale reads usually return fresher results. See TransactionOptions.ReadOnly.read/timestamp and TransactionOptions.ReadOnly.exact/staleness. Bounded Staleness: Bounded staleness modes allow Cloud Spanner to pick the read timestamp, subject to a user-provided staleness bound. Cloud Spanner chooses the newest timestamp within the staleness bound that allows execution of the reads at the closest available replica without blocking. All rows yielded are consistent with each other -- if any part of the read observes a transaction, all parts of the read see the transaction. Boundedly stale reads are not repeatable: two stale reads, even if they use the same staleness bound, can execute at different timestamps and thus return inconsistent results. Boundedly stale reads execute in two phases: the first phase negotiates a timestamp among all replicas needed to serve the read. In the second phase,
--- reads are executed at the negotiated timestamp. As a result of the two phase execution, bounded staleness reads are usually a little slower than comparable exact staleness reads. However, they are typically able to return fresher results, and are more likely to execute at the closest replica. Because the timestamp negotiation requires up-front knowledge of which rows will be read, it can only be used with single-use read-only transactions. See TransactionOptions.ReadOnly.max/staleness and TransactionOptions.ReadOnly.min/read_timestamp. Old Read Timestamps and Garbage Collection: Cloud Spanner continuously garbage collects deleted and overwritten data in the background to reclaim storage space. This process is known as \"version GC\". By default, version GC reclaims versions after they are one hour old. Because of this, Cloud Spanner cannot perform reads at read timestamps more than one hour in the past. This restriction also applies to in-progress reads and\/or SQL queries whose timestamp become too old while
--- executing. Reads and SQL queries with too-old read timestamps fail with the error @FAILED_PRECONDITION@. Partitioned DML Transactions: Partitioned DML transactions are used to execute DML statements with a different execution strategy that provides different, and often better, scalability properties for large, table-wide operations than DML in a ReadWrite transaction. Smaller scoped statements, such as an OLTP workload, should prefer using ReadWrite transactions. Partitioned DML partitions the keyspace and runs the DML statement on each partition in separate, internal transactions. These transactions commit automatically when complete, and run independently from one another. To reduce lock contention, this execution strategy only acquires read locks on rows that match the WHERE clause of the statement. Additionally, the smaller per-partition transactions hold locks for less time. That said, Partitioned DML is not a drop-in replacement for standard DML used in ReadWrite transactions. - The DML statement must
--- be fully-partitionable. Specifically, the statement must be expressible as the union of many statements which each access only a single row of the table. - The statement is not applied atomically to all rows of the table. Rather, the statement is applied atomically to partitions of the table, in independent transactions. Secondary index rows are updated atomically with the base table rows. - Partitioned DML does not guarantee exactly-once execution semantics against a partition. The statement will be applied at least once to each partition. It is strongly recommended that the DML statement should be idempotent to avoid unexpected results. For instance, it is potentially dangerous to run a statement such as @UPDATE table SET column = column + 1@ as it could be run multiple times against some rows. - The partitions are committed automatically - there is no support for Commit or Rollback. If the call returns an error, or if the client issuing the ExecuteSql call dies, it is possible that some rows had the
--- statement executed on them successfully. It is also possible that statement was never executed against other rows. - Partitioned DML transactions may only contain the execution of a single DML statement via ExecuteSql or ExecuteStreamingSql. - If any error is encountered during the execution of the partitioned DML operation (for instance, a UNIQUE INDEX violation, division by zero, or a value that cannot be stored due to schema constraints), then the operation is stopped at that point and an error is returned. It is possible that at this point, some partitions have been committed (or even committed multiple times), and other partitions have not been run at all. Given the above, Partitioned DML is good fit for large, database-wide, operations that are idempotent, such as deleting old rows from a very large table.
+-- | Transactions: Each session can have at most one active transaction at a time (note that standalone reads and queries use a transaction internally and do count towards the one transaction limit). After the active transaction is completed, the session can immediately be re-used for the next transaction. It is not necessary to create a new session for each transaction. Transaction modes: Cloud Spanner supports three transaction modes: 1. Locking read-write. This type of transaction is the only way to write data into Cloud Spanner. These transactions rely on pessimistic locking and, if necessary, two-phase commit. Locking read-write transactions may abort, requiring the application to retry. 2. Snapshot read-only. Snapshot read-only transactions provide guaranteed consistency across several reads, but do not allow writes. Snapshot read-only transactions can be configured to read at timestamps in the past, or configured to perform a strong read (where Spanner will select a timestamp such that the read is
+-- guaranteed to see the effects of all transactions that have committed before the start of the read). Snapshot read-only transactions do not need to be committed. Queries on change streams must be performed with the snapshot read-only transaction mode, specifying a strong read. Please see TransactionOptions.ReadOnly.strong for more details. 3. Partitioned DML. This type of transaction is used to execute a single Partitioned DML statement. Partitioned DML partitions the key space and runs the DML statement over each partition in parallel using separate, internal transactions that commit independently. Partitioned DML transactions do not need to be committed. For transactions that only read, snapshot read-only transactions provide simpler semantics and are almost always faster. In particular, read-only transactions do not take locks, so they do not conflict with read-write transactions. As a consequence of not taking locks, they also do not abort, so retry loops are not needed. Transactions may only read-write
+-- data in a single database. They may, however, read-write data in different tables within that database. Locking read-write transactions: Locking transactions may be used to atomically read-modify-write data anywhere in a database. This type of transaction is externally consistent. Clients should attempt to minimize the amount of time a transaction is active. Faster transactions commit with higher probability and cause less contention. Cloud Spanner attempts to keep read locks active as long as the transaction continues to do reads, and the transaction has not been terminated by Commit or Rollback. Long periods of inactivity at the client may cause Cloud Spanner to release a transaction\'s locks and abort it. Conceptually, a read-write transaction consists of zero or more reads or SQL statements followed by Commit. At any time before Commit, the client can send a Rollback request to abort the transaction. Semantics: Cloud Spanner can commit the transaction if all read locks it acquired are still valid at
+-- commit time, and it is able to acquire write locks for all writes. Cloud Spanner can abort the transaction for any reason. If a commit attempt returns @ABORTED@, Cloud Spanner guarantees that the transaction has not modified any user data in Cloud Spanner. Unless the transaction commits, Cloud Spanner makes no guarantees about how long the transaction\'s locks were held for. It is an error to use Cloud Spanner locks for any sort of mutual exclusion other than between Cloud Spanner transactions themselves. Retrying aborted transactions: When a transaction aborts, the application can choose to retry the whole transaction again. To maximize the chances of successfully committing the retry, the client should execute the retry in the same session as the original attempt. The original session\'s lock priority increases with each consecutive abort, meaning that each attempt has a slightly better chance of success than the previous. Under some circumstances (for example, many transactions attempting to modify the
+-- same row(s)), a transaction can abort many times in a short period before successfully committing. Thus, it is not a good idea to cap the number of retries a transaction can attempt; instead, it is better to limit the total amount of time spent retrying. Idle transactions: A transaction is considered idle if it has no outstanding reads or SQL queries and has not started a read or SQL query within the last 10 seconds. Idle transactions can be aborted by Cloud Spanner so that they don\'t hold on to locks indefinitely. If an idle transaction is aborted, the commit will fail with error @ABORTED@. If this behavior is undesirable, periodically executing a simple SQL query in the transaction (for example, @SELECT 1@) prevents the transaction from becoming idle. Snapshot read-only transactions: Snapshot read-only transactions provides a simpler method than locking read-write transactions for doing several consistent reads. However, this type of transaction does not support writes. Snapshot transactions do not take
+-- locks. Instead, they work by choosing a Cloud Spanner timestamp, then executing all reads at that timestamp. Since they do not acquire locks, they do not block concurrent read-write transactions. Unlike locking read-write transactions, snapshot read-only transactions never abort. They can fail if the chosen read timestamp is garbage collected; however, the default garbage collection policy is generous enough that most applications do not need to worry about this in practice. Snapshot read-only transactions do not need to call Commit or Rollback (and in fact are not permitted to do so). To execute a snapshot transaction, the client specifies a timestamp bound, which tells Cloud Spanner how to choose a read timestamp. The types of timestamp bound are: - Strong (the default). - Bounded staleness. - Exact staleness. If the Cloud Spanner database to be read is geographically distributed, stale read-only transactions can execute more quickly than strong or read-write transactions, because they are able to execute
+-- far from the leader replica. Each type of timestamp bound is discussed in detail below. Strong: Strong reads are guaranteed to see the effects of all transactions that have committed before the start of the read. Furthermore, all rows yielded by a single read are consistent with each other -- if any part of the read observes a transaction, all parts of the read see the transaction. Strong reads are not repeatable: two consecutive strong read-only transactions might return inconsistent results if there are concurrent writes. If consistency across reads is required, the reads should be executed within a transaction or at an exact read timestamp. Queries on change streams (see below for more details) must also specify the strong read timestamp bound. See TransactionOptions.ReadOnly.strong. Exact staleness: These timestamp bounds execute reads at a user-specified timestamp. Reads at a timestamp are guaranteed to see a consistent prefix of the global transaction history: they observe modifications done by all
+-- transactions with a commit timestamp less than or equal to the read timestamp, and observe none of the modifications done by transactions with a larger commit timestamp. They will block until all conflicting transactions that may be assigned commit timestamps \<= the read timestamp have finished. The timestamp can either be expressed as an absolute Cloud Spanner commit timestamp or a staleness relative to the current time. These modes do not require a \"negotiation phase\" to pick a timestamp. As a result, they execute slightly faster than the equivalent boundedly stale concurrency modes. On the other hand, boundedly stale reads usually return fresher results. See TransactionOptions.ReadOnly.read/timestamp and TransactionOptions.ReadOnly.exact/staleness. Bounded staleness: Bounded staleness modes allow Cloud Spanner to pick the read timestamp, subject to a user-provided staleness bound. Cloud Spanner chooses the newest timestamp within the staleness bound that allows execution of the reads at the closest
+-- available replica without blocking. All rows yielded are consistent with each other -- if any part of the read observes a transaction, all parts of the read see the transaction. Boundedly stale reads are not repeatable: two stale reads, even if they use the same staleness bound, can execute at different timestamps and thus return inconsistent results. Boundedly stale reads execute in two phases: the first phase negotiates a timestamp among all replicas needed to serve the read. In the second phase, reads are executed at the negotiated timestamp. As a result of the two phase execution, bounded staleness reads are usually a little slower than comparable exact staleness reads. However, they are typically able to return fresher results, and are more likely to execute at the closest replica. Because the timestamp negotiation requires up-front knowledge of which rows will be read, it can only be used with single-use read-only transactions. See TransactionOptions.ReadOnly.max/staleness and
+-- TransactionOptions.ReadOnly.min/read/timestamp. Old read timestamps and garbage collection: Cloud Spanner continuously garbage collects deleted and overwritten data in the background to reclaim storage space. This process is known as \"version GC\". By default, version GC reclaims versions after they are one hour old. Because of this, Cloud Spanner cannot perform reads at read timestamps more than one hour in the past. This restriction also applies to in-progress reads and\/or SQL queries whose timestamp become too old while executing. Reads and SQL queries with too-old read timestamps fail with the error @FAILED_PRECONDITION@. You can configure and extend the @VERSION_RETENTION_PERIOD@ of a database up to a period as long as one week, which allows Cloud Spanner to perform reads up to one week in the past. Querying change Streams: A Change Stream is a schema object that can be configured to watch data changes on the entire database, a set of tables, or a set of columns in a database. When a change stream is
+-- created, Spanner automatically defines a corresponding SQL Table-Valued Function (TVF) that can be used to query the change records in the associated change stream using the ExecuteStreamingSql API. The name of the TVF for a change stream is generated from the name of the change stream: READ/. All queries on change stream TVFs must be executed using the ExecuteStreamingSql API with a single-use read-only transaction with a strong read-only timestamp/bound. The change stream TVF allows users to specify the start/timestamp and end/timestamp for the time range of interest. All change records within the retention period is accessible using the strong read-only timestamp/bound. All other TransactionOptions are invalid for change stream queries. In addition, if TransactionOptions.read/only.return/read_timestamp is set to true, a special value of 2^63 - 2 will be returned in the Transaction message that describes the transaction, instead of a valid read timestamp. This special value should be discarded and not used
+-- for any subsequent queries. Please see https:\/\/cloud.google.com\/spanner\/docs\/change-streams for more details on how to query the change stream TVFs. Partitioned DML transactions: Partitioned DML transactions are used to execute DML statements with a different execution strategy that provides different, and often better, scalability properties for large, table-wide operations than DML in a ReadWrite transaction. Smaller scoped statements, such as an OLTP workload, should prefer using ReadWrite transactions. Partitioned DML partitions the keyspace and runs the DML statement on each partition in separate, internal transactions. These transactions commit automatically when complete, and run independently from one another. To reduce lock contention, this execution strategy only acquires read locks on rows that match the WHERE clause of the statement. Additionally, the smaller per-partition transactions hold locks for less time. That said, Partitioned DML is not a drop-in replacement for standard DML used in
+-- ReadWrite transactions. - The DML statement must be fully-partitionable. Specifically, the statement must be expressible as the union of many statements which each access only a single row of the table. - The statement is not applied atomically to all rows of the table. Rather, the statement is applied atomically to partitions of the table, in independent transactions. Secondary index rows are updated atomically with the base table rows. - Partitioned DML does not guarantee exactly-once execution semantics against a partition. The statement will be applied at least once to each partition. It is strongly recommended that the DML statement should be idempotent to avoid unexpected results. For instance, it is potentially dangerous to run a statement such as @UPDATE table SET column = column + 1@ as it could be run multiple times against some rows. - The partitions are committed automatically - there is no support for Commit or Rollback. If the call returns an error, or if the client issuing the ExecuteSql call
+-- dies, it is possible that some rows had the statement executed on them successfully. It is also possible that statement was never executed against other rows. - Partitioned DML transactions may only contain the execution of a single DML statement via ExecuteSql or ExecuteStreamingSql. - If any error is encountered during the execution of the partitioned DML operation (for instance, a UNIQUE INDEX violation, division by zero, or a value that cannot be stored due to schema constraints), then the operation is stopped at that point and an error is returned. It is possible that at this point, some partitions have been committed (or even committed multiple times), and other partitions have not been run at all. Given the above, Partitioned DML is good fit for large, database-wide, operations that are idempotent, such as deleting old rows from a very large table.
 --
 -- /See:/ 'newTransactionOptions' smart constructor.
 data TransactionOptions = TransactionOptions
@@ -5283,6 +5918,8 @@ data Type = Type
     arrayElementType :: (Core.Maybe Type),
     -- | Required. The TypeCode for this type.
     code :: (Core.Maybe Type_Code),
+    -- | If code == PROTO or code == ENUM, then @proto_type_fqn@ is the fully qualified name of the proto type representing the proto\/enum definition.
+    protoTypeFqn :: (Core.Maybe Core.Text),
     -- | If code == STRUCT, then @struct_type@ provides type information for the struct\'s fields.
     structType :: (Core.Maybe StructType),
     -- | The TypeAnnotationCode that disambiguates SQL type that Spanner will use to represent values of this type during query processing. This is necessary for some type codes because a single TypeCode can be mapped to different SQL types depending on the SQL dialect. type_annotation typically is not needed to process the content of a value (it doesn\'t affect serialization) and clients can ignore it on the read path.
@@ -5297,6 +5934,7 @@ newType =
   Type
     { arrayElementType = Core.Nothing,
       code = Core.Nothing,
+      protoTypeFqn = Core.Nothing,
       structType = Core.Nothing,
       typeAnnotation = Core.Nothing
     }
@@ -5309,6 +5947,7 @@ instance Core.FromJSON Type where
           Type
             Core.<$> (o Core..:? "arrayElementType")
             Core.<*> (o Core..:? "code")
+            Core.<*> (o Core..:? "protoTypeFqn")
             Core.<*> (o Core..:? "structType")
             Core.<*> (o Core..:? "typeAnnotation")
       )
@@ -5320,6 +5959,7 @@ instance Core.ToJSON Type where
           [ ("arrayElementType" Core..=)
               Core.<$> arrayElementType,
             ("code" Core..=) Core.<$> code,
+            ("protoTypeFqn" Core..=) Core.<$> protoTypeFqn,
             ("structType" Core..=) Core.<$> structType,
             ("typeAnnotation" Core..=) Core.<$> typeAnnotation
           ]
@@ -5337,7 +5977,7 @@ data UpdateDatabaseDdlMetadata = UpdateDatabaseDdlMetadata
     progress :: (Core.Maybe [OperationProgress]),
     -- | For an update this list contains all the statements. For an individual statement, this list contains only that statement.
     statements :: (Core.Maybe [Core.Text]),
-    -- | Output only. When true, indicates that the operation is throttled e.g due to resource constraints. When resources become available the operation will resume and this field will be false again.
+    -- | Output only. When true, indicates that the operation is throttled e.g. due to resource constraints. When resources become available the operation will resume and this field will be false again.
     throttled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5386,6 +6026,8 @@ instance Core.ToJSON UpdateDatabaseDdlMetadata where
 data UpdateDatabaseDdlRequest = UpdateDatabaseDdlRequest
   { -- | If empty, the new update request is assigned an automatically-generated operation ID. Otherwise, @operation_id@ is used to construct the name of the resulting Operation. Specifying an explicit operation ID simplifies determining whether the statements were executed in the event that the UpdateDatabaseDdl call is replayed, or the return value is otherwise lost: the database and @operation_id@ fields can be combined to form the name of the resulting longrunning.Operation: @\/operations\/@. @operation_id@ should be unique within the database, and must be a valid identifier: @a-z*@. Note that automatically-generated operation IDs always begin with an underscore. If the named operation already exists, UpdateDatabaseDdl returns @ALREADY_EXISTS@.
     operationId :: (Core.Maybe Core.Text),
+    -- | Optional. Proto descriptors used by CREATE\/ALTER PROTO BUNDLE statements. Contains a protobuf-serialized <https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto google.protobuf.FileDescriptorSet>. To generate it, <https://grpc.io/docs/protoc-installation/ install> and run @protoc@ with --include/imports and --descriptor/set/out. For example, to generate for moon\/shot\/app.proto, run \"\"\" $protoc --proto/path=\/app/path --proto/path=\/lib/path \\ --include/imports \\ --descriptor/set/out=descriptors.data \\ moon\/shot\/app.proto \"\"\" For more details, see protobuffer <https://developers.google.com/protocol-buffers/docs/techniques#self-description self description>.
+    protoDescriptors :: (Core.Maybe Core.Base64),
     -- | Required. DDL statements to be applied to the database.
     statements :: (Core.Maybe [Core.Text])
   }
@@ -5397,6 +6039,7 @@ newUpdateDatabaseDdlRequest ::
 newUpdateDatabaseDdlRequest =
   UpdateDatabaseDdlRequest
     { operationId = Core.Nothing,
+      protoDescriptors = Core.Nothing,
       statements = Core.Nothing
     }
 
@@ -5407,6 +6050,7 @@ instance Core.FromJSON UpdateDatabaseDdlRequest where
       ( \o ->
           UpdateDatabaseDdlRequest
             Core.<$> (o Core..:? "operationId")
+            Core.<*> (o Core..:? "protoDescriptors")
             Core.<*> (o Core..:? "statements")
       )
 
@@ -5415,7 +6059,97 @@ instance Core.ToJSON UpdateDatabaseDdlRequest where
     Core.object
       ( Core.catMaybes
           [ ("operationId" Core..=) Core.<$> operationId,
+            ("protoDescriptors" Core..=)
+              Core.<$> protoDescriptors,
             ("statements" Core..=) Core.<$> statements
+          ]
+      )
+
+-- | Metadata type for the operation returned by UpdateInstanceConfig.
+--
+-- /See:/ 'newUpdateInstanceConfigMetadata' smart constructor.
+data UpdateInstanceConfigMetadata = UpdateInstanceConfigMetadata
+  { -- | The time at which this operation was cancelled.
+    cancelTime :: (Core.Maybe Core.DateTime),
+    -- | The desired instance config after updating.
+    instanceConfig :: (Core.Maybe InstanceConfig),
+    -- | The progress of the UpdateInstanceConfig operation.
+    progress :: (Core.Maybe InstanceOperationProgress)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateInstanceConfigMetadata' with the minimum fields required to make a request.
+newUpdateInstanceConfigMetadata ::
+  UpdateInstanceConfigMetadata
+newUpdateInstanceConfigMetadata =
+  UpdateInstanceConfigMetadata
+    { cancelTime = Core.Nothing,
+      instanceConfig = Core.Nothing,
+      progress = Core.Nothing
+    }
+
+instance Core.FromJSON UpdateInstanceConfigMetadata where
+  parseJSON =
+    Core.withObject
+      "UpdateInstanceConfigMetadata"
+      ( \o ->
+          UpdateInstanceConfigMetadata
+            Core.<$> (o Core..:? "cancelTime")
+            Core.<*> (o Core..:? "instanceConfig")
+            Core.<*> (o Core..:? "progress")
+      )
+
+instance Core.ToJSON UpdateInstanceConfigMetadata where
+  toJSON UpdateInstanceConfigMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cancelTime" Core..=) Core.<$> cancelTime,
+            ("instanceConfig" Core..=) Core.<$> instanceConfig,
+            ("progress" Core..=) Core.<$> progress
+          ]
+      )
+
+-- | The request for UpdateInstanceConfigRequest.
+--
+-- /See:/ 'newUpdateInstanceConfigRequest' smart constructor.
+data UpdateInstanceConfigRequest = UpdateInstanceConfigRequest
+  { -- | Required. The user instance config to update, which must always include the instance config name. Otherwise, only fields mentioned in update_mask need be included. To prevent conflicts of concurrent updates, etag can be used.
+    instanceConfig :: (Core.Maybe InstanceConfig),
+    -- | Required. A mask specifying which fields in InstanceConfig should be updated. The field mask must always be specified; this prevents any future fields in InstanceConfig from being erased accidentally by clients that do not know about them. Only display_name and labels can be updated.
+    updateMask :: (Core.Maybe Core.FieldMask),
+    -- | An option to validate, but not actually execute, a request, and provide the same response.
+    validateOnly :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateInstanceConfigRequest' with the minimum fields required to make a request.
+newUpdateInstanceConfigRequest ::
+  UpdateInstanceConfigRequest
+newUpdateInstanceConfigRequest =
+  UpdateInstanceConfigRequest
+    { instanceConfig = Core.Nothing,
+      updateMask = Core.Nothing,
+      validateOnly = Core.Nothing
+    }
+
+instance Core.FromJSON UpdateInstanceConfigRequest where
+  parseJSON =
+    Core.withObject
+      "UpdateInstanceConfigRequest"
+      ( \o ->
+          UpdateInstanceConfigRequest
+            Core.<$> (o Core..:? "instanceConfig")
+            Core.<*> (o Core..:? "updateMask")
+            Core.<*> (o Core..:? "validateOnly")
+      )
+
+instance Core.ToJSON UpdateInstanceConfigRequest where
+  toJSON UpdateInstanceConfigRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("instanceConfig" Core..=) Core.<$> instanceConfig,
+            ("updateMask" Core..=) Core.<$> updateMask,
+            ("validateOnly" Core..=) Core.<$> validateOnly
           ]
       )
 

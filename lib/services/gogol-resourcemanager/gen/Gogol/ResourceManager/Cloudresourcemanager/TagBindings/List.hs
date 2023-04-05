@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the TagBindings for the given cloud resource, as specified with @parent@. NOTE: The @parent@ field is expected to be a full resource name: https:\/\/cloud.google.com\/apis\/design\/resource/names#full/resource_name
+-- Lists the TagBindings for the given Google Cloud resource, as specified with @parent@. NOTE: The @parent@ field is expected to be a full resource name: https:\/\/cloud.google.com\/apis\/design\/resource/names#full/resource_name
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagBindings.list@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagBindings.List
@@ -58,7 +58,7 @@ type CloudresourcemanagerTagBindingsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListTagBindingsResponse
 
--- | Lists the TagBindings for the given cloud resource, as specified with @parent@. NOTE: The @parent@ field is expected to be a full resource name: https:\/\/cloud.google.com\/apis\/design\/resource/names#full/resource_name
+-- | Lists the TagBindings for the given Google Cloud resource, as specified with @parent@. NOTE: The @parent@ field is expected to be a full resource name: https:\/\/cloud.google.com\/apis\/design\/resource/names#full/resource_name
 --
 -- /See:/ 'newCloudresourcemanagerTagBindingsList' smart constructor.
 data CloudresourcemanagerTagBindingsList = CloudresourcemanagerTagBindingsList
@@ -68,9 +68,9 @@ data CloudresourcemanagerTagBindingsList = CloudresourcemanagerTagBindingsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The maximum number of TagBindings to return in the response. The server allows a maximum of 300 TagBindings to return. If unspecified, the server will use 100 as the default. Currently this api returns unpaginated response and @page_size@ is ignored.
+    -- | Optional. The maximum number of TagBindings to return in the response. The server allows a maximum of 300 TagBindings to return. If unspecified, the server will use 100 as the default.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Optional. A pagination token returned from a previous call to @ListTagBindings@ that indicates where this listing should continue from. Currently this api returns unpaginated response and @page_token@ is ignored.
+    -- | Optional. A pagination token returned from a previous call to @ListTagBindings@ that indicates where this listing should continue from.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The full resource name of a resource for which you want to list existing TagBindings. E.g. \"\/\/cloudresourcemanager.googleapis.com\/projects\/123\"
     parent :: (Core.Maybe Core.Text),

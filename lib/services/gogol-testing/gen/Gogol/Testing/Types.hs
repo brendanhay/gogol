@@ -235,6 +235,10 @@ module Gogol.Testing.Types
     ManualSharding (..),
     newManualSharding,
 
+    -- ** Metadata
+    Metadata (..),
+    newMetadata,
+
     -- ** NetworkConfiguration
     NetworkConfiguration (..),
     newNetworkConfiguration,
@@ -250,6 +254,20 @@ module Gogol.Testing.Types
     -- ** Orientation
     Orientation (..),
     newOrientation,
+
+    -- ** PerAndroidVersionInfo
+    PerAndroidVersionInfo (..),
+    newPerAndroidVersionInfo,
+
+    -- ** PerAndroidVersionInfo_DeviceCapacity
+    PerAndroidVersionInfo_DeviceCapacity (..),
+
+    -- ** PerIosVersionInfo
+    PerIosVersionInfo (..),
+    newPerIosVersionInfo,
+
+    -- ** PerIosVersionInfo_DeviceCapacity
+    PerIosVersionInfo_DeviceCapacity (..),
 
     -- ** ProvidedSoftwareCatalog
     ProvidedSoftwareCatalog (..),
@@ -349,6 +367,10 @@ module Gogol.Testing.Types
     -- ** UniformSharding
     UniformSharding (..),
     newUniformSharding,
+
+    -- ** UsesFeature
+    UsesFeature (..),
+    newUsesFeature,
 
     -- ** XcodeVersion
     XcodeVersion (..),

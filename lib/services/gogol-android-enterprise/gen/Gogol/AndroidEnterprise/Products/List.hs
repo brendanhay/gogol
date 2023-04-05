@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Finds approved products that match a query, or all approved products if there is no query.
+-- Finds approved products that match a query, or all approved products if there is no query. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.list@.
 module Gogol.AndroidEnterprise.Products.List
@@ -63,7 +63,7 @@ type AndroidEnterpriseProductsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ProductsListResponse
 
--- | Finds approved products that match a query, or all approved products if there is no query.
+-- | Finds approved products that match a query, or all approved products if there is no query. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newAndroidEnterpriseProductsList' smart constructor.
 data AndroidEnterpriseProductsList = AndroidEnterpriseProductsList

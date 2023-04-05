@@ -49,8 +49,12 @@ library
 
   exposed-modules:
     Gogol.TagManager
+    Gogol.TagManager.Accounts.Containers.Combine
     Gogol.TagManager.Accounts.Containers.Create
     Gogol.TagManager.Accounts.Containers.Delete
+    Gogol.TagManager.Accounts.Containers.Destinations.Get
+    Gogol.TagManager.Accounts.Containers.Destinations.Link
+    Gogol.TagManager.Accounts.Containers.Destinations.List
     Gogol.TagManager.Accounts.Containers.Environments.Create
     Gogol.TagManager.Accounts.Containers.Environments.Delete
     Gogol.TagManager.Accounts.Containers.Environments.Get
@@ -59,6 +63,9 @@ library
     Gogol.TagManager.Accounts.Containers.Environments.Update
     Gogol.TagManager.Accounts.Containers.Get
     Gogol.TagManager.Accounts.Containers.List
+    Gogol.TagManager.Accounts.Containers.Lookup
+    Gogol.TagManager.Accounts.Containers.Move_tag_id
+    Gogol.TagManager.Accounts.Containers.Snippet
     Gogol.TagManager.Accounts.Containers.Update
     Gogol.TagManager.Accounts.Containers.Version_headers.Latest
     Gogol.TagManager.Accounts.Containers.Version_headers.List
@@ -92,6 +99,11 @@ library
     Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Update
     Gogol.TagManager.Accounts.Containers.Workspaces.Get
     Gogol.TagManager.Accounts.Containers.Workspaces.GetStatus
+    Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Create
+    Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Delete
+    Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Get
+    Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.List
+    Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Update
     Gogol.TagManager.Accounts.Containers.Workspaces.List
     Gogol.TagManager.Accounts.Containers.Workspaces.Quick_preview
     Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
@@ -142,5 +154,5 @@ library
     Gogol.TagManager.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

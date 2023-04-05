@@ -102,6 +102,18 @@ module Gogol.ServiceControl.Internal.Product
     FirstPartyPrincipal_ServiceMetadata (..),
     newFirstPartyPrincipal_ServiceMetadata,
 
+    -- * OrgPolicyViolationInfo
+    OrgPolicyViolationInfo (..),
+    newOrgPolicyViolationInfo,
+
+    -- * OrgPolicyViolationInfo_Payload
+    OrgPolicyViolationInfo_Payload (..),
+    newOrgPolicyViolationInfo_Payload,
+
+    -- * OrgPolicyViolationInfo_ResourceTags
+    OrgPolicyViolationInfo_ResourceTags (..),
+    newOrgPolicyViolationInfo_ResourceTags,
+
     -- * Peer
     Peer (..),
     newPeer,
@@ -109,6 +121,10 @@ module Gogol.ServiceControl.Internal.Product
     -- * Peer_Labels
     Peer_Labels (..),
     newPeer_Labels,
+
+    -- * PolicyViolationInfo
+    PolicyViolationInfo (..),
+    newPolicyViolationInfo,
 
     -- * ReportRequest
     ReportRequest (..),
@@ -213,6 +229,10 @@ module Gogol.ServiceControl.Internal.Product
     -- * V2LogEntrySourceLocation
     V2LogEntrySourceLocation (..),
     newV2LogEntrySourceLocation,
+
+    -- * ViolationInfo
+    ViolationInfo (..),
+    newViolationInfo,
   )
 where
 
@@ -383,6 +403,8 @@ data AuditLog = AuditLog
     methodName :: (Core.Maybe Core.Text),
     -- | The number of items returned from a List or Query API method, if applicable.
     numResponseItems :: (Core.Maybe Core.Int64),
+    -- | Indicates the policy violations for this request. If the request is denied by the policy, violation information will be logged here.
+    policyViolationInfo :: (Core.Maybe PolicyViolationInfo),
     -- | The operation request. This may not include all request parameters, such as those that are too large, privacy-sensitive, or duplicated elsewhere in the log record. It should never include user-generated data, such as file contents. When the JSON object represented here has a proto equivalent, the proto name will be indicated in the @\@type@ property.
     request' :: (Core.Maybe AuditLog_Request),
     -- | Metadata about the operation.
@@ -414,6 +436,7 @@ newAuditLog =
       metadata = Core.Nothing,
       methodName = Core.Nothing,
       numResponseItems = Core.Nothing,
+      policyViolationInfo = Core.Nothing,
       request' = Core.Nothing,
       requestMetadata = Core.Nothing,
       resourceLocation = Core.Nothing,
@@ -438,6 +461,7 @@ instance Core.FromJSON AuditLog where
             Core.<*> ( o Core..:? "numResponseItems"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "policyViolationInfo")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "requestMetadata")
             Core.<*> (o Core..:? "resourceLocation")
@@ -461,6 +485,8 @@ instance Core.ToJSON AuditLog where
             ("methodName" Core..=) Core.<$> methodName,
             ("numResponseItems" Core..=) Core.. Core.AsText
               Core.<$> numResponseItems,
+            ("policyViolationInfo" Core..=)
+              Core.<$> policyViolationInfo,
             ("request" Core..=) Core.<$> request',
             ("requestMetadata" Core..=) Core.<$> requestMetadata,
             ("resourceLocation" Core..=)
@@ -903,7 +929,7 @@ instance Core.ToJSON CheckRequest where
 data CheckResponse = CheckResponse
   { -- | Returns a set of request contexts generated from the @CheckRequest@.
     headers :: (Core.Maybe CheckResponse_Headers),
-    -- | Operation is allowed when this field is not set. Any non-\'OK\' status indicates a denial; < google.rpc.Status.details> would contain additional details about the denial.
+    -- | Operation is allowed when this field is not set. Any non-\'OK\' status indicates a denial; google.rpc.Status.details would contain additional details about the denial.
     status :: (Core.Maybe Status)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1038,6 +1064,121 @@ instance
   toJSON FirstPartyPrincipal_ServiceMetadata {..} =
     Core.toJSON additional
 
+-- | Represents OrgPolicy Violation information.
+--
+-- /See:/ 'newOrgPolicyViolationInfo' smart constructor.
+data OrgPolicyViolationInfo = OrgPolicyViolationInfo
+  { -- | Optional. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request. This payload should not contain any core content.
+    payload :: (Core.Maybe OrgPolicyViolationInfo_Payload),
+    -- | Optional. Tags referenced on the resource at the time of evaluation. These also include the federated tags, if they are supplied in the CheckOrgPolicy or CheckCustomConstraints Requests. Optional field as of now. These tags are the Cloud tags that are available on the resource during the policy evaluation and will be available as part of the OrgPolicy check response for logging purposes.
+    resourceTags :: (Core.Maybe OrgPolicyViolationInfo_ResourceTags),
+    -- | Optional. Resource type that the orgpolicy is checked against. Example: compute.googleapis.com\/Instance, store.googleapis.com\/bucket
+    resourceType :: (Core.Maybe Core.Text),
+    -- | Optional. Policy violations
+    violationInfo :: (Core.Maybe [ViolationInfo])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OrgPolicyViolationInfo' with the minimum fields required to make a request.
+newOrgPolicyViolationInfo ::
+  OrgPolicyViolationInfo
+newOrgPolicyViolationInfo =
+  OrgPolicyViolationInfo
+    { payload = Core.Nothing,
+      resourceTags = Core.Nothing,
+      resourceType = Core.Nothing,
+      violationInfo = Core.Nothing
+    }
+
+instance Core.FromJSON OrgPolicyViolationInfo where
+  parseJSON =
+    Core.withObject
+      "OrgPolicyViolationInfo"
+      ( \o ->
+          OrgPolicyViolationInfo
+            Core.<$> (o Core..:? "payload")
+            Core.<*> (o Core..:? "resourceTags")
+            Core.<*> (o Core..:? "resourceType")
+            Core.<*> (o Core..:? "violationInfo")
+      )
+
+instance Core.ToJSON OrgPolicyViolationInfo where
+  toJSON OrgPolicyViolationInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("payload" Core..=) Core.<$> payload,
+            ("resourceTags" Core..=) Core.<$> resourceTags,
+            ("resourceType" Core..=) Core.<$> resourceType,
+            ("violationInfo" Core..=) Core.<$> violationInfo
+          ]
+      )
+
+-- | Optional. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request. This payload should not contain any core content.
+--
+-- /See:/ 'newOrgPolicyViolationInfo_Payload' smart constructor.
+newtype OrgPolicyViolationInfo_Payload = OrgPolicyViolationInfo_Payload
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OrgPolicyViolationInfo_Payload' with the minimum fields required to make a request.
+newOrgPolicyViolationInfo_Payload ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  OrgPolicyViolationInfo_Payload
+newOrgPolicyViolationInfo_Payload additional =
+  OrgPolicyViolationInfo_Payload {additional = additional}
+
+instance Core.FromJSON OrgPolicyViolationInfo_Payload where
+  parseJSON =
+    Core.withObject
+      "OrgPolicyViolationInfo_Payload"
+      ( \o ->
+          OrgPolicyViolationInfo_Payload
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON OrgPolicyViolationInfo_Payload where
+  toJSON OrgPolicyViolationInfo_Payload {..} =
+    Core.toJSON additional
+
+-- | Optional. Tags referenced on the resource at the time of evaluation. These also include the federated tags, if they are supplied in the CheckOrgPolicy or CheckCustomConstraints Requests. Optional field as of now. These tags are the Cloud tags that are available on the resource during the policy evaluation and will be available as part of the OrgPolicy check response for logging purposes.
+--
+-- /See:/ 'newOrgPolicyViolationInfo_ResourceTags' smart constructor.
+newtype OrgPolicyViolationInfo_ResourceTags = OrgPolicyViolationInfo_ResourceTags
+  { -- |
+    additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OrgPolicyViolationInfo_ResourceTags' with the minimum fields required to make a request.
+newOrgPolicyViolationInfo_ResourceTags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  OrgPolicyViolationInfo_ResourceTags
+newOrgPolicyViolationInfo_ResourceTags additional =
+  OrgPolicyViolationInfo_ResourceTags {additional = additional}
+
+instance
+  Core.FromJSON
+    OrgPolicyViolationInfo_ResourceTags
+  where
+  parseJSON =
+    Core.withObject
+      "OrgPolicyViolationInfo_ResourceTags"
+      ( \o ->
+          OrgPolicyViolationInfo_ResourceTags
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    OrgPolicyViolationInfo_ResourceTags
+  where
+  toJSON OrgPolicyViolationInfo_ResourceTags {..} =
+    Core.toJSON additional
+
 -- | This message defines attributes for a node that handles a network request. The node can be either a service or an application that sends, forwards, or receives the request. Service peers should fill in @principal@ and @labels@ as appropriate.
 --
 -- /See:/ 'newPeer' smart constructor.
@@ -1048,7 +1189,7 @@ data Peer = Peer
     labels :: (Core.Maybe Peer_Labels),
     -- | The network port of the peer.
     port :: (Core.Maybe Core.Int64),
-    -- | The identity of this peer. Similar to @Request.auth.principal@, but relative to the peer instead of the request. For example, the idenity associated with a load balancer that forwared the request.
+    -- | The identity of this peer. Similar to @Request.auth.principal@, but relative to the peer instead of the request. For example, the identity associated with a load balancer that forwarded the request.
     principal :: (Core.Maybe Core.Text),
     -- | The CLDR country\/region code associated with the above IP address. If the IP address is private, the @region_code@ should reflect the physical location where this peer is running.
     regionCode :: (Core.Maybe Core.Text)
@@ -1120,6 +1261,39 @@ instance Core.FromJSON Peer_Labels where
 
 instance Core.ToJSON Peer_Labels where
   toJSON Peer_Labels {..} = Core.toJSON additional
+
+-- | Information related to policy violations for this request.
+--
+-- /See:/ 'newPolicyViolationInfo' smart constructor.
+newtype PolicyViolationInfo = PolicyViolationInfo
+  { -- | Indicates the orgpolicy violations for this resource.
+    orgPolicyViolationInfo :: (Core.Maybe OrgPolicyViolationInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PolicyViolationInfo' with the minimum fields required to make a request.
+newPolicyViolationInfo ::
+  PolicyViolationInfo
+newPolicyViolationInfo =
+  PolicyViolationInfo {orgPolicyViolationInfo = Core.Nothing}
+
+instance Core.FromJSON PolicyViolationInfo where
+  parseJSON =
+    Core.withObject
+      "PolicyViolationInfo"
+      ( \o ->
+          PolicyViolationInfo
+            Core.<$> (o Core..:? "orgPolicyViolationInfo")
+      )
+
+instance Core.ToJSON PolicyViolationInfo where
+  toJSON PolicyViolationInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("orgPolicyViolationInfo" Core..=)
+              Core.<$> orgPolicyViolationInfo
+          ]
+      )
 
 -- | Request message for the Report method.
 --
@@ -1300,11 +1474,11 @@ instance Core.ToJSON Request_Headers where
 --
 -- /See:/ 'newRequestMetadata' smart constructor.
 data RequestMetadata = RequestMetadata
-  { -- | The IP address of the caller. For caller from internet, this will be public IPv4 or IPv6 address. For caller from a Compute Engine VM with external IP address, this will be the VM\'s external IP address. For caller from a Compute Engine VM without external IP address, if the VM is in the same organization (or project) as the accessed resource, @caller_ip@ will be the VM\'s internal IPv4 address, otherwise the @caller_ip@ will be redacted to \"gce-internal-ip\". See https:\/\/cloud.google.com\/compute\/docs\/vpc\/ for more information.
+  { -- | The IP address of the caller. For a caller from the internet, this will be the public IPv4 or IPv6 address. For calls made from inside Google\'s internal production network from one GCP service to another, @caller_ip@ will be redacted to \"private\". For a caller from a Compute Engine VM with a external IP address, @caller_ip@ will be the VM\'s external IP address. For a caller from a Compute Engine VM without a external IP address, if the VM is in the same organization (or project) as the accessed resource, @caller_ip@ will be the VM\'s internal IPv4 address, otherwise @caller_ip@ will be redacted to \"gce-internal-ip\". See https:\/\/cloud.google.com\/compute\/docs\/vpc\/ for more information.
     callerIp :: (Core.Maybe Core.Text),
     -- | The network of the caller. Set only if the network host project is part of the same GCP organization (or project) as the accessed resource. See https:\/\/cloud.google.com\/compute\/docs\/vpc\/ for more information. This is a scheme-less URI full resource name. For example: \"\/\/compute.googleapis.com\/projects\/PROJECT/ID\/global\/networks\/NETWORK/ID\"
     callerNetwork :: (Core.Maybe Core.Text),
-    -- | The user agent of the caller. This information is not authenticated and should be treated accordingly. For example: + @google-api-python-client\/1.4.0@: The request was made by the Google API client for Python. + @Cloud SDK Command Line Tool apitools-client\/1.0 gcloud\/0.9.62@: The request was made by the Google Cloud SDK CLI (gcloud). + @AppEngine-Google; (+http:\/\/code.google.com\/appengine; appid: s~my-project@: The request was made from the @my-project@ App Engine app. NOLINT
+    -- | The user agent of the caller. This information is not authenticated and should be treated accordingly. For example: + @google-api-python-client\/1.4.0@: The request was made by the Google API client for Python. + @Cloud SDK Command Line Tool apitools-client\/1.0 gcloud\/0.9.62@: The request was made by the Google Cloud SDK CLI (gcloud). + @AppEngine-Google; (+http:\/\/code.google.com\/appengine; appid: s~my-project@: The request was made from the @my-project@ App Engine app.
     callerSuppliedUserAgent :: (Core.Maybe Core.Text),
     -- | The destination of a network activity, such as accepting a TCP connection. In a multi hop network activity, the destination represents the receiver of the last hop. Only two fields are used in this message, Peer.port and Peer.ip. These fields are optionally populated by those services utilizing the IAM condition feature.
     destinationAttributes :: (Core.Maybe Peer),
@@ -1357,7 +1531,7 @@ instance Core.ToJSON RequestMetadata where
 --
 -- /See:/ 'newResource' smart constructor.
 data Resource = Resource
-  { -- | Annotations is an unstructured key-value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+  { -- | Annotations is an unstructured key-value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https:\/\/kubernetes.io\/docs\/concepts\/overview\/working-with-objects\/annotations\/
     annotations :: (Core.Maybe Resource_Annotations),
     -- | Output only. The timestamp when the resource was created. This may be either the time creation was initiated or when it was completed.
     createTime :: (Core.Maybe Core.DateTime),
@@ -1442,7 +1616,7 @@ instance Core.ToJSON Resource where
           ]
       )
 
--- | Annotations is an unstructured key-value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https:\/\/kubernetes.io\/docs\/user-guide\/annotations
+-- | Annotations is an unstructured key-value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: https:\/\/kubernetes.io\/docs\/concepts\/overview\/working-with-objects\/annotations\/
 --
 -- /See:/ 'newResource_Annotations' smart constructor.
 newtype Resource_Annotations = Resource_Annotations
@@ -2312,5 +2486,54 @@ instance Core.ToJSON V2LogEntrySourceLocation where
           [ ("file" Core..=) Core.<$> file,
             ("function" Core..=) Core.<$> function,
             ("line" Core..=) Core.. Core.AsText Core.<$> line
+          ]
+      )
+
+-- | Provides information about the Policy violation info for this request.
+--
+-- /See:/ 'newViolationInfo' smart constructor.
+data ViolationInfo = ViolationInfo
+  { -- | Optional. Value that is being checked for the policy. This could be in encrypted form (if pii sensitive). This field will only be emitted in LIST_POLICY types
+    checkedValue :: (Core.Maybe Core.Text),
+    -- | Optional. Constraint name
+    constraint :: (Core.Maybe Core.Text),
+    -- | Optional. Error message that policy is indicating.
+    errorMessage :: (Core.Maybe Core.Text),
+    -- | Optional. Indicates the type of the policy.
+    policyType :: (Core.Maybe ViolationInfo_PolicyType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ViolationInfo' with the minimum fields required to make a request.
+newViolationInfo ::
+  ViolationInfo
+newViolationInfo =
+  ViolationInfo
+    { checkedValue = Core.Nothing,
+      constraint = Core.Nothing,
+      errorMessage = Core.Nothing,
+      policyType = Core.Nothing
+    }
+
+instance Core.FromJSON ViolationInfo where
+  parseJSON =
+    Core.withObject
+      "ViolationInfo"
+      ( \o ->
+          ViolationInfo
+            Core.<$> (o Core..:? "checkedValue")
+            Core.<*> (o Core..:? "constraint")
+            Core.<*> (o Core..:? "errorMessage")
+            Core.<*> (o Core..:? "policyType")
+      )
+
+instance Core.ToJSON ViolationInfo where
+  toJSON ViolationInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("checkedValue" Core..=) Core.<$> checkedValue,
+            ("constraint" Core..=) Core.<$> constraint,
+            ("errorMessage" Core..=) Core.<$> errorMessage,
+            ("policyType" Core..=) Core.<$> policyType
           ]
       )

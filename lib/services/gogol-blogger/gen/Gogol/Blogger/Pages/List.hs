@@ -28,7 +28,7 @@
 --
 -- Lists pages.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.list@.
 module Gogol.Blogger.Pages.List
   ( -- * Resource
     BloggerPagesListResource,

@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.acceleratorTypes.list@ method which the
 -- 'TPUProjectsLocationsAcceleratorTypesList' request conforms to.
 type TPUProjectsLocationsAcceleratorTypesListResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "acceleratorTypes"
     Core.:> Core.QueryParam "$.xgafv" Xgafv

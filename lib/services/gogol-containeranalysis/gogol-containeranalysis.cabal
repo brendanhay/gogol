@@ -70,6 +70,7 @@ library
     Gogol.ContainerAnalysis.Projects.Occurrences.Patch
     Gogol.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
     Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
+    Gogol.ContainerAnalysis.Projects.Resources.GeneratePackagesSummary
     Gogol.ContainerAnalysis.Types
 
   other-modules:
@@ -77,5 +78,5 @@ library
     Gogol.ContainerAnalysis.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

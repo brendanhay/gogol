@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates testers.
+-- Updates testers. Note: Testers resource does not support email lists.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.edits.testers.update@.
 module Gogol.AndroidPublisher.Edits.Testers.Update
@@ -62,7 +62,7 @@ type AndroidPublisherEditsTestersUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Testers
     Core.:> Core.Put '[Core.JSON] Testers
 
--- | Updates testers.
+-- | Updates testers. Note: Testers resource does not support email lists.
 --
 -- /See:/ 'newAndroidPublisherEditsTestersUpdate' smart constructor.
 data AndroidPublisherEditsTestersUpdate = AndroidPublisherEditsTestersUpdate

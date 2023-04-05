@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new alerting policy.
+-- Creates a new alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.alertPolicies.create@.
 module Gogol.Monitoring.Projects.AlertPolicies.Create
@@ -57,7 +57,7 @@ type MonitoringProjectsAlertPoliciesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] AlertPolicy
     Core.:> Core.Post '[Core.JSON] AlertPolicy
 
--- | Creates a new alerting policy.
+-- | Creates a new alerting policy.Design your application to single-thread API calls that modify the state of alerting policies in a single project. This includes calls to CreateAlertPolicy, DeleteAlertPolicy and UpdateAlertPolicy.
 --
 -- /See:/ 'newMonitoringProjectsAlertPoliciesCreate' smart constructor.
 data MonitoringProjectsAlertPoliciesCreate = MonitoringProjectsAlertPoliciesCreate
@@ -67,7 +67,7 @@ data MonitoringProjectsAlertPoliciesCreate = MonitoringProjectsAlertPoliciesCrea
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) in which to create the alerting policy. The format is: projects\/[PROJECT/ID/OR/NUMBER] Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. |name| must be a host project of a workspace, otherwise INVALID/ARGUMENT error will return. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form \/alertPolicies\/[ALERT/POLICY_ID], identifying the policy in the container.
+    -- | Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) in which to create the alerting policy. The format is: projects\/[PROJECT/ID/OR/NUMBER] Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. |name| must be a host project of a Metrics Scope, otherwise INVALID/ARGUMENT error will return. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form \/alertPolicies\/[ALERT/POLICY_ID], identifying the policy in the container.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: AlertPolicy,
@@ -80,7 +80,7 @@ data MonitoringProjectsAlertPoliciesCreate = MonitoringProjectsAlertPoliciesCrea
 
 -- | Creates a value of 'MonitoringProjectsAlertPoliciesCreate' with the minimum fields required to make a request.
 newMonitoringProjectsAlertPoliciesCreate ::
-  -- |  Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) in which to create the alerting policy. The format is: projects\/[PROJECT/ID/OR/NUMBER] Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. |name| must be a host project of a workspace, otherwise INVALID/ARGUMENT error will return. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form \/alertPolicies\/[ALERT/POLICY_ID], identifying the policy in the container. See 'name'.
+  -- |  Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) in which to create the alerting policy. The format is: projects\/[PROJECT/ID/OR/NUMBER] Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. |name| must be a host project of a Metrics Scope, otherwise INVALID/ARGUMENT error will return. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form \/alertPolicies\/[ALERT/POLICY_ID], identifying the policy in the container. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   AlertPolicy ->

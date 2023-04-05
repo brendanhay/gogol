@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, e.g. when paused. Important: This method is only whitelisted for selected merchants.
+-- Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, for example, when paused. This method is only available to selected merchants.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.buyongoogleprograms.activate@.
 module Gogol.ShoppingContent.Content.Buyongoogleprograms.Activate
@@ -62,7 +62,7 @@ type ContentBuyongoogleprogramsActivateResource =
               ActivateBuyOnGoogleProgramRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, e.g. when paused. Important: This method is only whitelisted for selected merchants.
+-- | Reactivates the BoG program in your Merchant Center account. Moves the program to the active state when allowed, for example, when paused. This method is only available to selected merchants.
 --
 -- /See:/ 'newContentBuyongoogleprogramsActivate' smart constructor.
 data ContentBuyongoogleprogramsActivate = ContentBuyongoogleprogramsActivate

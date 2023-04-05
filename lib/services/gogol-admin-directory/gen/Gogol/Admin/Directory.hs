@@ -81,6 +81,41 @@ module Gogol.Admin.Directory
     AdminCustomerDevicesChromeosIssueCommand (..),
     newAdminCustomerDevicesChromeosIssueCommand,
 
+    -- ** admin.customers.chrome.printServers.batchCreatePrintServers
+    AdminCustomersChromePrintServersBatchCreatePrintServersResource,
+    AdminCustomersChromePrintServersBatchCreatePrintServers (..),
+    newAdminCustomersChromePrintServersBatchCreatePrintServers,
+
+    -- ** admin.customers.chrome.printServers.batchDeletePrintServers
+    AdminCustomersChromePrintServersBatchDeletePrintServersResource,
+    AdminCustomersChromePrintServersBatchDeletePrintServers (..),
+    newAdminCustomersChromePrintServersBatchDeletePrintServers,
+
+    -- ** admin.customers.chrome.printServers.create
+    AdminCustomersChromePrintServersCreateResource,
+    AdminCustomersChromePrintServersCreate (..),
+    newAdminCustomersChromePrintServersCreate,
+
+    -- ** admin.customers.chrome.printServers.delete
+    AdminCustomersChromePrintServersDeleteResource,
+    AdminCustomersChromePrintServersDelete (..),
+    newAdminCustomersChromePrintServersDelete,
+
+    -- ** admin.customers.chrome.printServers.get
+    AdminCustomersChromePrintServersGetResource,
+    AdminCustomersChromePrintServersGet (..),
+    newAdminCustomersChromePrintServersGet,
+
+    -- ** admin.customers.chrome.printServers.list
+    AdminCustomersChromePrintServersListResource,
+    AdminCustomersChromePrintServersList (..),
+    newAdminCustomersChromePrintServersList,
+
+    -- ** admin.customers.chrome.printServers.patch
+    AdminCustomersChromePrintServersPatchResource,
+    AdminCustomersChromePrintServersPatch (..),
+    newAdminCustomersChromePrintServersPatch,
+
     -- ** admin.customers.chrome.printers.batchCreatePrinters
     AdminCustomersChromePrintersBatchCreatePrintersResource,
     AdminCustomersChromePrintersBatchCreatePrinters (..),
@@ -684,6 +719,14 @@ module Gogol.Admin.Directory
     -- ** AuxiliaryMessage_Severity
     AuxiliaryMessage_Severity (..),
 
+    -- ** BatchCreatePrintServersRequest
+    BatchCreatePrintServersRequest (..),
+    newBatchCreatePrintServersRequest,
+
+    -- ** BatchCreatePrintServersResponse
+    BatchCreatePrintServersResponse (..),
+    newBatchCreatePrintServersResponse,
+
     -- ** BatchCreatePrintersRequest
     BatchCreatePrintersRequest (..),
     newBatchCreatePrintersRequest,
@@ -691,6 +734,14 @@ module Gogol.Admin.Directory
     -- ** BatchCreatePrintersResponse
     BatchCreatePrintersResponse (..),
     newBatchCreatePrintersResponse,
+
+    -- ** BatchDeletePrintServersRequest
+    BatchDeletePrintServersRequest (..),
+    newBatchDeletePrintServersRequest,
+
+    -- ** BatchDeletePrintServersResponse
+    BatchDeletePrintServersResponse (..),
+    newBatchDeletePrintServersResponse,
 
     -- ** BatchDeletePrintersRequest
     BatchDeletePrintersRequest (..),
@@ -760,6 +811,9 @@ module Gogol.Admin.Directory
     ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem (..),
     newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem,
 
+    -- ** ChromeOsDevice_DeprovisionReason
+    ChromeOsDevice_DeprovisionReason (..),
+
     -- ** ChromeOsDevice_DeviceFilesItem
     ChromeOsDevice_DeviceFilesItem (..),
     newChromeOsDevice_DeviceFilesItem,
@@ -803,6 +857,10 @@ module Gogol.Admin.Directory
     -- ** ChromeOsMoveDevicesToOu
     ChromeOsMoveDevicesToOu (..),
     newChromeOsMoveDevicesToOu,
+
+    -- ** CreatePrintServerRequest
+    CreatePrintServerRequest (..),
+    newCreatePrintServerRequest,
 
     -- ** CreatePrinterRequest
     CreatePrinterRequest (..),
@@ -891,9 +949,17 @@ module Gogol.Admin.Directory
     Group (..),
     newGroup,
 
+    -- ** GroupAlias
+    GroupAlias (..),
+    newGroupAlias,
+
     -- ** Groups
     Groups (..),
     newGroups,
+
+    -- ** ListPrintServersResponse
+    ListPrintServersResponse (..),
+    newListPrintServersResponse,
 
     -- ** ListPrinterModelsResponse
     ListPrinterModelsResponse (..),
@@ -939,6 +1005,24 @@ module Gogol.Admin.Directory
     OrgUnits (..),
     newOrgUnits,
 
+    -- ** OsUpdateStatus
+    OsUpdateStatus (..),
+    newOsUpdateStatus,
+
+    -- ** OsUpdateStatus_State
+    OsUpdateStatus_State (..),
+
+    -- ** PrintServer
+    PrintServer (..),
+    newPrintServer,
+
+    -- ** PrintServerFailureInfo
+    PrintServerFailureInfo (..),
+    newPrintServerFailureInfo,
+
+    -- ** PrintServerFailureInfo_ErrorCode
+    PrintServerFailureInfo_ErrorCode (..),
+
     -- ** Printer
     Printer (..),
     newPrinter,
@@ -966,6 +1050,9 @@ module Gogol.Admin.Directory
     -- ** RoleAssignment
     RoleAssignment (..),
     newRoleAssignment,
+
+    -- ** RoleAssignment_AssigneeType
+    RoleAssignment_AssigneeType (..),
 
     -- ** RoleAssignments
     RoleAssignments (..),
@@ -1014,6 +1101,10 @@ module Gogol.Admin.Directory
     -- ** UserAddress
     UserAddress (..),
     newUserAddress,
+
+    -- ** UserAlias
+    UserAlias (..),
+    newUserAlias,
 
     -- ** UserCustomProperties
     UserCustomProperties (..),
@@ -1194,6 +1285,13 @@ where
 import Gogol.Admin.Directory.Admin.Channels.Stop
 import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
 import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.BatchCreatePrintServers
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.BatchDeletePrintServers
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Create
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Delete
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Get
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.List
+import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.Patch
 import Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchCreatePrinters
 import Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
 import Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.Create

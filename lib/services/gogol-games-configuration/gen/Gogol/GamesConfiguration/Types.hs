@@ -66,13 +66,6 @@ module Gogol.GamesConfiguration.Types
     -- ** GamesNumberFormatConfiguration_NumberFormatType
     GamesNumberFormatConfiguration_NumberFormatType (..),
 
-    -- ** ImageConfiguration
-    ImageConfiguration (..),
-    newImageConfiguration,
-
-    -- ** ImageConfiguration_ImageType
-    ImageConfiguration_ImageType (..),
-
     -- ** LeaderboardConfiguration
     LeaderboardConfiguration (..),
     newLeaderboardConfiguration,
@@ -95,9 +88,6 @@ module Gogol.GamesConfiguration.Types
     -- ** LocalizedStringBundle
     LocalizedStringBundle (..),
     newLocalizedStringBundle,
-
-    -- ** ImageConfigurationsUploadImageType
-    ImageConfigurationsUploadImageType (..),
   )
 where
 

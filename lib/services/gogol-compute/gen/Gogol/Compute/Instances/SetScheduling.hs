@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets an instance\'s scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a @TERMINATED@ state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM availability policies.
+-- Sets an instance\'s scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a @TERMINATED@ state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instances.setScheduling@.
 module Gogol.Compute.Instances.SetScheduling
@@ -64,7 +64,7 @@ type ComputeInstancesSetSchedulingResource =
     Core.:> Core.ReqBody '[Core.JSON] Scheduling
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Sets an instance\'s scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a @TERMINATED@ state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM availability policies.
+-- | Sets an instance\'s scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a @TERMINATED@ state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM host maintenance policy.
 --
 -- /See:/ 'newComputeInstancesSetScheduling' smart constructor.
 data ComputeInstancesSetScheduling = ComputeInstancesSetScheduling

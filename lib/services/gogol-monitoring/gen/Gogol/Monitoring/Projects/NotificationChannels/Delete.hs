@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a notification channel.
+-- Deletes a notification channel.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.notificationChannels.delete@.
 module Gogol.Monitoring.Projects.NotificationChannels.Delete
@@ -56,7 +56,7 @@ type MonitoringProjectsNotificationChannelsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a notification channel.
+-- | Deletes a notification channel.Design your application to single-thread API calls that modify the state of notification channels in a single project. This includes calls to CreateNotificationChannel, DeleteNotificationChannel and UpdateNotificationChannel.
 --
 -- /See:/ 'newMonitoringProjectsNotificationChannelsDelete' smart constructor.
 data MonitoringProjectsNotificationChannelsDelete = MonitoringProjectsNotificationChannelsDelete

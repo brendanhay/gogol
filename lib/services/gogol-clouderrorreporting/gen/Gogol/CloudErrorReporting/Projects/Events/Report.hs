@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Report an individual error event and record the event to a log. This endpoint accepts __either__ an OAuth token, __or__ an <https://support.google.com/cloud/answer/6158862 API key> for authentication. To use an API key, append it to the URL as the value of a @key@ parameter. For example: @POST https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/{projectName}\/events:report?key=123ABC456@ __Note:__ [Error Reporting] (https:\/\/cloud.google.com\/error-reporting) is a global service built on Cloud Logging and doesn\'t analyze logs stored in regional log buckets or logs routed to other Google Cloud projects. For more information, see [Using Error Reporting with regionalized logs] (https:\/\/cloud.google.com\/error-reporting\/docs\/regionalization).
+-- Report an individual error event and record the event to a log. This endpoint accepts __either__ an OAuth token, __or__ an <https://support.google.com/cloud/answer/6158862 API key> for authentication. To use an API key, append it to the URL as the value of a @key@ parameter. For example: @POST https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/{projectName}\/events:report?key=123ABC456@ __Note:__ [Error Reporting] (https:\/\/cloud.google.com\/error-reporting) is a global service built on Cloud Logging and doesn\'t analyze logs stored in regional log buckets or logs routed to other Google Cloud projects.
 --
 -- /See:/ <https://cloud.google.com/error-reporting/ Error Reporting API Reference> for @clouderrorreporting.projects.events.report@.
 module Gogol.CloudErrorReporting.Projects.Events.Report
@@ -57,7 +57,7 @@ type CloudErrorReportingProjectsEventsReportResource =
     Core.:> Core.ReqBody '[Core.JSON] ReportedErrorEvent
     Core.:> Core.Post '[Core.JSON] ReportErrorEventResponse
 
--- | Report an individual error event and record the event to a log. This endpoint accepts __either__ an OAuth token, __or__ an <https://support.google.com/cloud/answer/6158862 API key> for authentication. To use an API key, append it to the URL as the value of a @key@ parameter. For example: @POST https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/{projectName}\/events:report?key=123ABC456@ __Note:__ [Error Reporting] (https:\/\/cloud.google.com\/error-reporting) is a global service built on Cloud Logging and doesn\'t analyze logs stored in regional log buckets or logs routed to other Google Cloud projects. For more information, see [Using Error Reporting with regionalized logs] (https:\/\/cloud.google.com\/error-reporting\/docs\/regionalization).
+-- | Report an individual error event and record the event to a log. This endpoint accepts __either__ an OAuth token, __or__ an <https://support.google.com/cloud/answer/6158862 API key> for authentication. To use an API key, append it to the URL as the value of a @key@ parameter. For example: @POST https:\/\/clouderrorreporting.googleapis.com\/v1beta1\/{projectName}\/events:report?key=123ABC456@ __Note:__ [Error Reporting] (https:\/\/cloud.google.com\/error-reporting) is a global service built on Cloud Logging and doesn\'t analyze logs stored in regional log buckets or logs routed to other Google Cloud projects.
 --
 -- /See:/ 'newCloudErrorReportingProjectsEventsReport' smart constructor.
 data CloudErrorReportingProjectsEventsReport = CloudErrorReportingProjectsEventsReport

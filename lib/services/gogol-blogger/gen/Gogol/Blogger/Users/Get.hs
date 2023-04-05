@@ -28,7 +28,7 @@
 --
 -- Gets one user by user_id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.users.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.users.get@.
 module Gogol.Blogger.Users.Get
   ( -- * Resource
     BloggerUsersGetResource,

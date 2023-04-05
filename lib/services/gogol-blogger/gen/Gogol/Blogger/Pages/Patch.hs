@@ -28,7 +28,7 @@
 --
 -- Patches a page.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.pages.patch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.patch@.
 module Gogol.Blogger.Pages.Patch
   ( -- * Resource
     BloggerPagesPatchResource,

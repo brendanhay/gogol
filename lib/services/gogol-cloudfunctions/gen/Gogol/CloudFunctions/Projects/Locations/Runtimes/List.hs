@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.runtimes.list@ method which the
 -- 'CloudFunctionsProjectsLocationsRuntimesList' request conforms to.
 type CloudFunctionsProjectsLocationsRuntimesListResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "parent" Core.Text
     Core.:> "runtimes"
     Core.:> Core.QueryParam "$.xgafv" Xgafv

@@ -75,7 +75,7 @@ data AndroidPublisherEditsTracksGet = AndroidPublisherEditsTracksGet
     editId :: Core.Text,
     -- | Package name of the app.
     packageName :: Core.Text,
-    -- | Identifier of the track.
+    -- | Identifier of the track. <https://developers.google.com/android-publisher/tracks#ff-track-name More on track name>
     track :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -90,7 +90,7 @@ newAndroidPublisherEditsTracksGet ::
   Core.Text ->
   -- |  Package name of the app. See 'packageName'.
   Core.Text ->
-  -- |  Identifier of the track. See 'track'.
+  -- |  Identifier of the track. <https://developers.google.com/android-publisher/tracks#ff-track-name More on track name> See 'track'.
   Core.Text ->
   AndroidPublisherEditsTracksGet
 newAndroidPublisherEditsTracksGet editId packageName track =

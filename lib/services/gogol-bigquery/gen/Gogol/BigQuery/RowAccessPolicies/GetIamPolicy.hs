@@ -58,7 +58,7 @@ type BigQueryRowAccessPoliciesGetIamPolicyResource =
 data BigQueryRowAccessPoliciesGetIamPolicy = BigQueryRowAccessPoliciesGetIamPolicy
   { -- | Multipart request metadata.
     payload :: GetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.
+    -- | REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
     resource :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -67,7 +67,7 @@ data BigQueryRowAccessPoliciesGetIamPolicy = BigQueryRowAccessPoliciesGetIamPoli
 newBigQueryRowAccessPoliciesGetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
   GetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field. See 'resource'.
+  -- |  REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   BigQueryRowAccessPoliciesGetIamPolicy
 newBigQueryRowAccessPoliciesGetIamPolicy payload resource =

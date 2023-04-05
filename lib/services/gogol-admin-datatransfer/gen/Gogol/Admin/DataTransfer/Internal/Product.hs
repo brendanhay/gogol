@@ -55,19 +55,19 @@ where
 import Gogol.Admin.DataTransfer.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Applications resources represent applications installed on the domain that support transferring ownership of user data.
+-- | Application resources represent applications installed on the domain that support transferring ownership of user data.
 --
 -- /See:/ 'newApplication' smart constructor.
 data Application = Application
   { -- | Etag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | The application\'s ID.
+    -- | The application\'s ID. Retrievable by using the </admin-sdk/data-transfer/reference/rest/v1/applications/list applications.list()> method.
     id :: (Core.Maybe Core.Int64),
     -- | Identifies the resource as a DataTransfer Application Resource.
     kind :: Core.Text,
     -- | The application\'s name.
     name :: (Core.Maybe Core.Text),
-    -- | The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transferred.
+    -- | The list of all possible transfer parameters for this application. These parameters select which categories of the user\'s data to transfer.
     transferParams :: (Core.Maybe [ApplicationTransferParam])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -117,9 +117,9 @@ instance Core.ToJSON Application where
 data ApplicationDataTransfer = ApplicationDataTransfer
   { -- | The application\'s ID.
     applicationId :: (Core.Maybe Core.Int64),
-    -- | The transfer parameters for the application. These parameters are used to select the data which will get transferred in context of this application.
+    -- | The transfer parameters for the application. These parameters are used to select the data which will get transferred in context of this application. For more information about the specific values available for each application, see the </admin-sdk/data-transfer/v1/parameters Transfer parameters> reference.
     applicationTransferParams :: (Core.Maybe [ApplicationTransferParam]),
-    -- | Current status of transfer for this application. (Read-only)
+    -- | Read-only. Current status of transfer for this application.
     applicationTransferStatus :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -164,9 +164,9 @@ instance Core.ToJSON ApplicationDataTransfer where
 --
 -- /See:/ 'newApplicationTransferParam' smart constructor.
 data ApplicationTransferParam = ApplicationTransferParam
-  { -- | The type of the transfer parameter. eg: \'PRIVACY_LEVEL\'
+  { -- | The type of the transfer parameter, such as @PRIVACY_LEVEL@.
     key :: (Core.Maybe Core.Text),
-    -- | The value of the corresponding transfer parameter. eg: \'PRIVATE\' or \'SHARED\'
+    -- | The value of the transfer parameter, such as @PRIVATE@ or @SHARED@.
     value :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -199,13 +199,13 @@ instance Core.ToJSON ApplicationTransferParam where
 --
 -- /See:/ 'newApplicationsListResponse' smart constructor.
 data ApplicationsListResponse = ApplicationsListResponse
-  { -- | List of applications that support data transfer and are also installed for the customer.
+  { -- | The list of applications that support data transfer and are also installed for the customer.
     applications :: (Core.Maybe [Application]),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
     -- | Identifies the resource as a collection of Applications.
     kind :: Core.Text,
-    -- | Continuation token which will be used to specify next page in list API.
+    -- | Token to specify the next page in the list.
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -250,11 +250,11 @@ instance Core.ToJSON ApplicationsListResponse where
 --
 -- /See:/ 'newDataTransfer' smart constructor.
 data DataTransfer = DataTransfer
-  { -- | List of per application data transfer resources. It contains data transfer details of the applications associated with this transfer resource. Note that this list is also used to specify the applications for which data transfer has to be done at the time of the transfer resource creation.
+  { -- | The list of per-application data transfer resources. It contains details of the applications associated with this transfer resource, and also specifies the applications for which data transfer has to be done at the time of the transfer resource creation.
     applicationDataTransfers :: (Core.Maybe [ApplicationDataTransfer]),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | The transfer\'s ID (Read-only).
+    -- | Read-only. The transfer\'s ID.
     id :: (Core.Maybe Core.Text),
     -- | Identifies the resource as a DataTransfer request.
     kind :: Core.Text,
@@ -262,9 +262,9 @@ data DataTransfer = DataTransfer
     newOwnerUserId' :: (Core.Maybe Core.Text),
     -- | ID of the user whose data is being transferred.
     oldOwnerUserId :: (Core.Maybe Core.Text),
-    -- | Overall transfer status (Read-only).
+    -- | Read-only. Overall transfer status.
     overallTransferStatusCode :: (Core.Maybe Core.Text),
-    -- | The time at which the data transfer was requested (Read-only).
+    -- | Read-only. The time at which the data transfer was requested.
     requestTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -329,7 +329,7 @@ data DataTransfersListResponse = DataTransfersListResponse
     etag :: (Core.Maybe Core.Text),
     -- | Identifies the resource as a collection of data transfer requests.
     kind :: Core.Text,
-    -- | Continuation token which will be used to specify next page in list API.
+    -- | Token to specify the next page in the list.
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

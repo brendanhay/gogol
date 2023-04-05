@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.runtimeVersions.get@ method which the
 -- 'TPUProjectsLocationsRuntimeVersionsGet' request conforms to.
 type TPUProjectsLocationsRuntimeVersionsGetResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text

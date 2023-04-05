@@ -33,6 +33,15 @@ module Gogol.TPU.Internal.Sum
         ..
       ),
 
+    -- * AcceleratorConfig_Type
+    AcceleratorConfig_Type
+      ( AcceleratorConfig_Type_TYPEUNSPECIFIED,
+        AcceleratorConfig_Type_V2,
+        AcceleratorConfig_Type_V3,
+        AcceleratorConfig_Type_V4,
+        ..
+      ),
+
     -- * AttachedDisk_Mode
     AttachedDisk_Mode
       ( AttachedDisk_Mode_DISKMODEUNSPECIFIED,
@@ -47,6 +56,7 @@ module Gogol.TPU.Internal.Sum
         Node_ApiVersion_V1_ALPHA1,
         Node_ApiVersion_V1,
         Node_ApiVersion_V2_ALPHA1,
+        Node_ApiVersion_V2,
         ..
       ),
 
@@ -123,6 +133,43 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
+-- | Required. Type of TPU.
+newtype AcceleratorConfig_Type = AcceleratorConfig_Type {fromAcceleratorConfig_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified version.
+pattern AcceleratorConfig_Type_TYPEUNSPECIFIED :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_TYPEUNSPECIFIED = AcceleratorConfig_Type "TYPE_UNSPECIFIED"
+
+-- | TPU v2.
+pattern AcceleratorConfig_Type_V2 :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V2 = AcceleratorConfig_Type "V2"
+
+-- | TPU v3.
+pattern AcceleratorConfig_Type_V3 :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V3 = AcceleratorConfig_Type "V3"
+
+-- | TPU v4.
+pattern AcceleratorConfig_Type_V4 :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V4 = AcceleratorConfig_Type "V4"
+
+{-# COMPLETE
+  AcceleratorConfig_Type_TYPEUNSPECIFIED,
+  AcceleratorConfig_Type_V2,
+  AcceleratorConfig_Type_V3,
+  AcceleratorConfig_Type_V4,
+  AcceleratorConfig_Type
+  #-}
+
 -- | The mode in which to attach this disk. If not specified, the default is READ/WRITE mode. Only applicable to data/disks.
 newtype AttachedDisk_Mode = AttachedDisk_Mode {fromAttachedDisk_Mode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -184,11 +231,16 @@ pattern Node_ApiVersion_V1 = Node_ApiVersion "V1"
 pattern Node_ApiVersion_V2_ALPHA1 :: Node_ApiVersion
 pattern Node_ApiVersion_V2_ALPHA1 = Node_ApiVersion "V2_ALPHA1"
 
+-- | TPU API V2 version.
+pattern Node_ApiVersion_V2 :: Node_ApiVersion
+pattern Node_ApiVersion_V2 = Node_ApiVersion "V2"
+
 {-# COMPLETE
   Node_ApiVersion_APIVERSIONUNSPECIFIED,
   Node_ApiVersion_V1_ALPHA1,
   Node_ApiVersion_V1,
   Node_ApiVersion_V2_ALPHA1,
+  Node_ApiVersion_V2,
   Node_ApiVersion
   #-}
 

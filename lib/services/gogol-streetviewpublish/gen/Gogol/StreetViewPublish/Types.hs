@@ -65,17 +65,53 @@ module Gogol.StreetViewPublish.Types
     Empty (..),
     newEmpty,
 
+    -- ** GpsDataGapFailureDetails
+    GpsDataGapFailureDetails (..),
+    newGpsDataGapFailureDetails,
+
+    -- ** Imu
+    Imu (..),
+    newImu,
+
+    -- ** ImuDataGapFailureDetails
+    ImuDataGapFailureDetails (..),
+    newImuDataGapFailureDetails,
+
+    -- ** InsufficientGpsFailureDetails
+    InsufficientGpsFailureDetails (..),
+    newInsufficientGpsFailureDetails,
+
     -- ** LatLng
     LatLng (..),
     newLatLng,
+
+    -- ** LatLngBounds
+    LatLngBounds (..),
+    newLatLngBounds,
 
     -- ** Level
     Level (..),
     newLevel,
 
+    -- ** ListPhotoSequencesResponse
+    ListPhotoSequencesResponse (..),
+    newListPhotoSequencesResponse,
+
     -- ** ListPhotosResponse
     ListPhotosResponse (..),
     newListPhotosResponse,
+
+    -- ** Measurement3d
+    Measurement3d (..),
+    newMeasurement3d,
+
+    -- ** NoOverlapGpsFailureDetails
+    NoOverlapGpsFailureDetails (..),
+    newNoOverlapGpsFailureDetails,
+
+    -- ** NotOutdoorsFailureDetails
+    NotOutdoorsFailureDetails (..),
+    newNotOutdoorsFailureDetails,
 
     -- ** Operation
     Operation (..),
@@ -107,6 +143,19 @@ module Gogol.StreetViewPublish.Types
     PhotoResponse (..),
     newPhotoResponse,
 
+    -- ** PhotoSequence
+    PhotoSequence (..),
+    newPhotoSequence,
+
+    -- ** PhotoSequence_FailureReason
+    PhotoSequence_FailureReason (..),
+
+    -- ** PhotoSequence_GpsSource
+    PhotoSequence_GpsSource (..),
+
+    -- ** PhotoSequence_ProcessingState
+    PhotoSequence_ProcessingState (..),
+
     -- ** Place
     Place (..),
     newPlace,
@@ -114,6 +163,10 @@ module Gogol.StreetViewPublish.Types
     -- ** Pose
     Pose (..),
     newPose,
+
+    -- ** ProcessingFailureDetails
+    ProcessingFailureDetails (..),
+    newProcessingFailureDetails,
 
     -- ** Status
     Status (..),
@@ -133,6 +186,12 @@ module Gogol.StreetViewPublish.Types
 
     -- ** PhotoGetView
     PhotoGetView (..),
+
+    -- ** PhotoSequenceCreateInputType
+    PhotoSequenceCreateInputType (..),
+
+    -- ** PhotoSequenceGetView
+    PhotoSequenceGetView (..),
 
     -- ** PhotosBatchGetView
     PhotosBatchGetView (..),

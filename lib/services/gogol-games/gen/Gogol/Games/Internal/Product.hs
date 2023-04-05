@@ -74,6 +74,10 @@ module Gogol.Games.Internal.Product
     ApplicationCategory (..),
     newApplicationCategory,
 
+    -- * ApplicationPlayerId
+    ApplicationPlayerId (..),
+    newApplicationPlayerId,
+
     -- * ApplicationVerifyResponse
     ApplicationVerifyResponse (..),
     newApplicationVerifyResponse,
@@ -137,6 +141,10 @@ module Gogol.Games.Internal.Product
     -- * GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- * GetMultipleApplicationPlayerIdsResponse
+    GetMultipleApplicationPlayerIdsResponse (..),
+    newGetMultipleApplicationPlayerIdsResponse,
 
     -- * ImageAsset
     ImageAsset (..),
@@ -249,6 +257,10 @@ module Gogol.Games.Internal.Product
     -- * RevisionCheckResponse
     RevisionCheckResponse (..),
     newRevisionCheckResponse,
+
+    -- * ScopedPlayerIds
+    ScopedPlayerIds (..),
+    newScopedPlayerIds,
 
     -- * ScoreSubmission
     ScoreSubmission (..),
@@ -932,6 +944,42 @@ instance Core.ToJSON ApplicationCategory where
           [ ("kind" Core..=) Core.<$> kind,
             ("primary" Core..=) Core.<$> primary,
             ("secondary" Core..=) Core.<$> secondary
+          ]
+      )
+
+-- | Primary scoped player identifier for an application.
+--
+-- /See:/ 'newApplicationPlayerId' smart constructor.
+data ApplicationPlayerId = ApplicationPlayerId
+  { -- | The application that this player identifier is for.
+    applicationId :: (Core.Maybe Core.Text),
+    -- | The player identifier for the application.
+    playerId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplicationPlayerId' with the minimum fields required to make a request.
+newApplicationPlayerId ::
+  ApplicationPlayerId
+newApplicationPlayerId =
+  ApplicationPlayerId {applicationId = Core.Nothing, playerId = Core.Nothing}
+
+instance Core.FromJSON ApplicationPlayerId where
+  parseJSON =
+    Core.withObject
+      "ApplicationPlayerId"
+      ( \o ->
+          ApplicationPlayerId
+            Core.<$> (o Core..:? "applicationId")
+            Core.<*> (o Core..:? "playerId")
+      )
+
+instance Core.ToJSON ApplicationPlayerId where
+  toJSON ApplicationPlayerId {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationId" Core..=) Core.<$> applicationId,
+            ("playerId" Core..=) Core.<$> playerId
           ]
       )
 
@@ -1662,6 +1710,43 @@ instance Core.ToJSON GamesAchievementSetStepsAtLeast where
           ]
       )
 
+-- | Response message for GetMultipleApplicationPlayerIds rpc.
+--
+-- /See:/ 'newGetMultipleApplicationPlayerIdsResponse' smart constructor.
+newtype GetMultipleApplicationPlayerIdsResponse = GetMultipleApplicationPlayerIdsResponse
+  { -- | Output only. The requested applications along with the scoped ids for tha player, if that player has an id for the application. If not, the application is not included in the response.
+    playerIds :: (Core.Maybe [ApplicationPlayerId])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GetMultipleApplicationPlayerIdsResponse' with the minimum fields required to make a request.
+newGetMultipleApplicationPlayerIdsResponse ::
+  GetMultipleApplicationPlayerIdsResponse
+newGetMultipleApplicationPlayerIdsResponse =
+  GetMultipleApplicationPlayerIdsResponse {playerIds = Core.Nothing}
+
+instance
+  Core.FromJSON
+    GetMultipleApplicationPlayerIdsResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GetMultipleApplicationPlayerIdsResponse"
+      ( \o ->
+          GetMultipleApplicationPlayerIdsResponse
+            Core.<$> (o Core..:? "playerIds")
+      )
+
+instance
+  Core.ToJSON
+    GetMultipleApplicationPlayerIdsResponse
+  where
+  toJSON GetMultipleApplicationPlayerIdsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("playerIds" Core..=) Core.<$> playerIds]
+      )
+
 -- | An image asset object.
 --
 -- /See:/ 'newImageAsset' smart constructor.
@@ -2321,6 +2406,8 @@ data Player = Player
     experienceInfo :: (Core.Maybe PlayerExperienceInfo),
     -- | The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.
     friendStatus :: (Core.Maybe Player_FriendStatus),
+    -- | Per-application unique player identifier.
+    gamePlayerId :: (Core.Maybe Core.Text),
     -- | Uniquely identifies the type of this resource. Value is always the fixed string @games#player@
     kind :: (Core.Maybe Core.Text),
     -- | A representation of the individual components of the name.
@@ -2347,6 +2434,7 @@ newPlayer =
       displayName = Core.Nothing,
       experienceInfo = Core.Nothing,
       friendStatus = Core.Nothing,
+      gamePlayerId = Core.Nothing,
       kind = Core.Nothing,
       name = Core.Nothing,
       originalPlayerId = Core.Nothing,
@@ -2367,6 +2455,7 @@ instance Core.FromJSON Player where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "experienceInfo")
             Core.<*> (o Core..:? "friendStatus")
+            Core.<*> (o Core..:? "gamePlayerId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "originalPlayerId")
@@ -2387,6 +2476,7 @@ instance Core.ToJSON Player where
             ("displayName" Core..=) Core.<$> displayName,
             ("experienceInfo" Core..=) Core.<$> experienceInfo,
             ("friendStatus" Core..=) Core.<$> friendStatus,
+            ("gamePlayerId" Core..=) Core.<$> gamePlayerId,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("originalPlayerId" Core..=)
@@ -3226,6 +3316,46 @@ instance Core.ToJSON RevisionCheckResponse where
           [ ("apiVersion" Core..=) Core.<$> apiVersion,
             ("kind" Core..=) Core.<$> kind,
             ("revisionStatus" Core..=) Core.<$> revisionStatus
+          ]
+      )
+
+-- | Scoped player identifiers.
+--
+-- /See:/ 'newScopedPlayerIds' smart constructor.
+data ScopedPlayerIds = ScopedPlayerIds
+  { -- | Identifier of the player across all games of the given developer. Every player has the same developer/player/key in all games of one developer. Developer player key changes for the game if the game is transferred to another developer. Note that game/player/id will stay unchanged.
+    developerPlayerKey :: (Core.Maybe Core.Text),
+    -- | Game-scoped player identifier. This is the same id that is returned in GetPlayer game/player/id field.
+    gamePlayerId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ScopedPlayerIds' with the minimum fields required to make a request.
+newScopedPlayerIds ::
+  ScopedPlayerIds
+newScopedPlayerIds =
+  ScopedPlayerIds
+    { developerPlayerKey = Core.Nothing,
+      gamePlayerId = Core.Nothing
+    }
+
+instance Core.FromJSON ScopedPlayerIds where
+  parseJSON =
+    Core.withObject
+      "ScopedPlayerIds"
+      ( \o ->
+          ScopedPlayerIds
+            Core.<$> (o Core..:? "developerPlayerKey")
+            Core.<*> (o Core..:? "gamePlayerId")
+      )
+
+instance Core.ToJSON ScopedPlayerIds where
+  toJSON ScopedPlayerIds {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("developerPlayerKey" Core..=)
+              Core.<$> developerPlayerKey,
+            ("gamePlayerId" Core..=) Core.<$> gamePlayerId
           ]
       )
 

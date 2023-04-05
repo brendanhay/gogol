@@ -49,6 +49,11 @@ library
 
   exposed-modules:
     Gogol.TextToSpeech
+    Gogol.TextToSpeech.Operations.Cancel
+    Gogol.TextToSpeech.Operations.Delete
+    Gogol.TextToSpeech.Projects.Locations.Operations.Get
+    Gogol.TextToSpeech.Projects.Locations.Operations.List
+    Gogol.TextToSpeech.Projects.Locations.SynthesizeLongAudio
     Gogol.TextToSpeech.Text.Synthesize
     Gogol.TextToSpeech.Types
     Gogol.TextToSpeech.Voices.List
@@ -58,5 +63,5 @@ library
     Gogol.TextToSpeech.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

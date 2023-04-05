@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
+-- Returns the specified VpnTunnel resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.vpnTunnels.get@.
 module Gogol.Compute.VpnTunnels.Get
@@ -61,7 +61,7 @@ type ComputeVpnTunnelsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] VpnTunnel
 
--- | Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
+-- | Returns the specified VpnTunnel resource.
 --
 -- /See:/ 'newComputeVpnTunnelsGet' smart constructor.
 data ComputeVpnTunnelsGet = ComputeVpnTunnelsGet

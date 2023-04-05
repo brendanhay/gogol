@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud Dataflow job. To create a job, we recommend using @projects.locations.jobs.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.jobs.create@ is not recommended, as your job will always start in @us-central1@.
+-- Creates a Cloud Dataflow job. To create a job, we recommend using @projects.locations.jobs.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.jobs.create@ is not recommended, as your job will always start in @us-central1@. Do not enter confidential information when you supply string values using the API.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.jobs.create@.
 module Gogol.Dataflow.Projects.Locations.Jobs.Create
@@ -64,7 +64,7 @@ type DataflowProjectsLocationsJobsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Job
     Core.:> Core.Post '[Core.JSON] Job
 
--- | Creates a Cloud Dataflow job. To create a job, we recommend using @projects.locations.jobs.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.jobs.create@ is not recommended, as your job will always start in @us-central1@.
+-- | Creates a Cloud Dataflow job. To create a job, we recommend using @projects.locations.jobs.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.jobs.create@ is not recommended, as your job will always start in @us-central1@. Do not enter confidential information when you supply string values using the API.
 --
 -- /See:/ 'newDataflowProjectsLocationsJobsCreate' smart constructor.
 data DataflowProjectsLocationsJobsCreate = DataflowProjectsLocationsJobsCreate

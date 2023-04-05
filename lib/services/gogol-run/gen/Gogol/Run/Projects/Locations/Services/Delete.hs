@@ -69,7 +69,7 @@ data RunProjectsLocationsServicesDelete = RunProjectsLocationsServicesDelete
     callback :: (Core.Maybe Core.Text),
     -- | A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
-    -- | Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service}
+    -- | Required. The full name of the Service. Format: projects\/{project}\/locations\/{location}\/services\/{service}, where {project} can be project id or number.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,7 +82,7 @@ data RunProjectsLocationsServicesDelete = RunProjectsLocationsServicesDelete
 
 -- | Creates a value of 'RunProjectsLocationsServicesDelete' with the minimum fields required to make a request.
 newRunProjectsLocationsServicesDelete ::
-  -- |  Required. The full name of the Service. Format: projects\/{projectnumber}\/locations\/{location}\/services\/{service} See 'name'.
+  -- |  Required. The full name of the Service. Format: projects\/{project}\/locations\/{location}\/services\/{service}, where {project} can be project id or number. See 'name'.
   Core.Text ->
   RunProjectsLocationsServicesDelete
 newRunProjectsLocationsServicesDelete name =

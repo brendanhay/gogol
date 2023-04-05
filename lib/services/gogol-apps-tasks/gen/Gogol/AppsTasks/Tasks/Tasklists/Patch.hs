@@ -28,7 +28,7 @@
 --
 -- Updates the authenticated user\'s specified task list. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasklists.patch@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.patch@.
 module Gogol.AppsTasks.Tasks.Tasklists.Patch
   ( -- * Resource
     TasksTasklistsPatchResource,

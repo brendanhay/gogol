@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+-- Updates the specified Interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.patch@.
 module Gogol.Compute.Interconnects.Patch
@@ -62,7 +62,7 @@ type ComputeInterconnectsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Interconnect
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Updates the specified interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+-- | Updates the specified Interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
 --
 -- /See:/ 'newComputeInterconnectsPatch' smart constructor.
 data ComputeInterconnectsPatch = ComputeInterconnectsPatch

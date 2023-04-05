@@ -77,6 +77,8 @@ module Gogol.DeploymentManager.Internal.Sum
         Operation_WarningsItem_Code_DEPRECATEDTYPEUSED,
         Operation_WarningsItem_Code_PARTIALSUCCESS,
         Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+        Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ..
       ),
 
@@ -107,6 +109,8 @@ module Gogol.DeploymentManager.Internal.Sum
         Resource_WarningsItem_Code_DEPRECATEDTYPEUSED,
         Resource_WarningsItem_Code_PARTIALSUCCESS,
         Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+        Resource_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        Resource_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ..
       ),
 
@@ -158,6 +162,8 @@ module Gogol.DeploymentManager.Internal.Sum
         ResourceUpdate_WarningsItem_Code_DEPRECATEDTYPEUSED,
         ResourceUpdate_WarningsItem_Code_PARTIALSUCCESS,
         ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+        ResourceUpdate_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        ResourceUpdate_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
         ..
       ),
 
@@ -416,6 +422,14 @@ pattern Operation_WarningsItem_Code_PARTIALSUCCESS = Operation_WarningsItem_Code
 pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: Operation_WarningsItem_Code
 pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Operation_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
 
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: Operation_WarningsItem_Code
+pattern Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = Operation_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: Operation_WarningsItem_Code
+pattern Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = Operation_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 {-# COMPLETE
   Operation_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
   Operation_WarningsItem_Code_NORESULTSONPAGE,
@@ -442,6 +456,8 @@ pattern Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Operation_WarningsI
   Operation_WarningsItem_Code_DEPRECATEDTYPEUSED,
   Operation_WarningsItem_Code_PARTIALSUCCESS,
   Operation_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+  Operation_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  Operation_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   Operation_WarningsItem_Code
   #-}
 
@@ -558,6 +574,14 @@ pattern Resource_WarningsItem_Code_PARTIALSUCCESS = Resource_WarningsItem_Code "
 pattern Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: Resource_WarningsItem_Code
 pattern Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Resource_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
 
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern Resource_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: Resource_WarningsItem_Code
+pattern Resource_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = Resource_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern Resource_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: Resource_WarningsItem_Code
+pattern Resource_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = Resource_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 {-# COMPLETE
   Resource_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
   Resource_WarningsItem_Code_NORESULTSONPAGE,
@@ -584,6 +608,8 @@ pattern Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING = Resource_WarningsIte
   Resource_WarningsItem_Code_DEPRECATEDTYPEUSED,
   Resource_WarningsItem_Code_PARTIALSUCCESS,
   Resource_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+  Resource_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  Resource_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   Resource_WarningsItem_Code
   #-}
 
@@ -789,6 +815,14 @@ pattern ResourceUpdate_WarningsItem_Code_PARTIALSUCCESS = ResourceUpdate_Warning
 pattern ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING :: ResourceUpdate_WarningsItem_Code
 pattern ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING = ResourceUpdate_WarningsItem_Code "LARGE_DEPLOYMENT_WARNING"
 
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern ResourceUpdate_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: ResourceUpdate_WarningsItem_Code
+pattern ResourceUpdate_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = ResourceUpdate_WarningsItem_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern ResourceUpdate_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: ResourceUpdate_WarningsItem_Code
+pattern ResourceUpdate_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = ResourceUpdate_WarningsItem_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
 {-# COMPLETE
   ResourceUpdate_WarningsItem_Code_DEPRECATEDRESOURCEUSED,
   ResourceUpdate_WarningsItem_Code_NORESULTSONPAGE,
@@ -815,6 +849,8 @@ pattern ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING = ResourceUpdate
   ResourceUpdate_WarningsItem_Code_DEPRECATEDTYPEUSED,
   ResourceUpdate_WarningsItem_Code_PARTIALSUCCESS,
   ResourceUpdate_WarningsItem_Code_LARGEDEPLOYMENTWARNING,
+  ResourceUpdate_WarningsItem_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  ResourceUpdate_WarningsItem_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
   ResourceUpdate_WarningsItem_Code
   #-}
 

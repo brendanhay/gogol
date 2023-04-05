@@ -110,6 +110,9 @@ module Gogol.AndroidDeviceProvisioning.Types
     DeviceIdentifier (..),
     newDeviceIdentifier,
 
+    -- ** DeviceIdentifier_DeviceType
+    DeviceIdentifier_DeviceType (..),
+
     -- ** DeviceMetadata
     DeviceMetadata (..),
     newDeviceMetadata,
@@ -159,6 +162,10 @@ module Gogol.AndroidDeviceProvisioning.Types
     -- ** FindDevicesByOwnerResponse
     FindDevicesByOwnerResponse (..),
     newFindDevicesByOwnerResponse,
+
+    -- ** GoogleWorkspaceAccount
+    GoogleWorkspaceAccount (..),
+    newGoogleWorkspaceAccount,
 
     -- ** ListCustomersResponse
     ListCustomersResponse (..),

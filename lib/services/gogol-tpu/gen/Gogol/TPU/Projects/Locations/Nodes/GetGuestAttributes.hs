@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.nodes.getGuestAttributes@ method which the
 -- 'TPUProjectsLocationsNodesGetGuestAttributes' request conforms to.
 type TPUProjectsLocationsNodesGetGuestAttributesResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.CaptureMode
               "name"
               "getGuestAttributes"

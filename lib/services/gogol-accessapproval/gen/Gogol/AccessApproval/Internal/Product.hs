@@ -70,6 +70,10 @@ module Gogol.AccessApproval.Internal.Product
     EnrolledService (..),
     newEnrolledService,
 
+    -- * InvalidateApprovalRequestMessage
+    InvalidateApprovalRequestMessage (..),
+    newInvalidateApprovalRequestMessage,
+
     -- * ListApprovalRequestsResponse
     ListApprovalRequestsResponse (..),
     newListApprovalRequestsResponse,
@@ -389,6 +393,8 @@ data ApproveDecision = ApproveDecision
     autoApproved :: (Core.Maybe Core.Bool),
     -- | The time at which the approval expires.
     expireTime :: (Core.Maybe Core.DateTime),
+    -- | If set, denotes the timestamp at which the approval is invalidated.
+    invalidateTime :: (Core.Maybe Core.DateTime),
     -- | The signature for the ApprovalRequest and details on how it was signed.
     signatureInfo :: (Core.Maybe SignatureInfo)
   }
@@ -402,6 +408,7 @@ newApproveDecision =
     { approveTime = Core.Nothing,
       autoApproved = Core.Nothing,
       expireTime = Core.Nothing,
+      invalidateTime = Core.Nothing,
       signatureInfo = Core.Nothing
     }
 
@@ -414,6 +421,7 @@ instance Core.FromJSON ApproveDecision where
             Core.<$> (o Core..:? "approveTime")
             Core.<*> (o Core..:? "autoApproved")
             Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "invalidateTime")
             Core.<*> (o Core..:? "signatureInfo")
       )
 
@@ -424,6 +432,7 @@ instance Core.ToJSON ApproveDecision where
           [ ("approveTime" Core..=) Core.<$> approveTime,
             ("autoApproved" Core..=) Core.<$> autoApproved,
             ("expireTime" Core..=) Core.<$> expireTime,
+            ("invalidateTime" Core..=) Core.<$> invalidateTime,
             ("signatureInfo" Core..=) Core.<$> signatureInfo
           ]
       )
@@ -484,7 +493,7 @@ instance Core.ToJSON DismissDecision where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -506,8 +515,8 @@ instance Core.ToJSON Empty where
 --
 -- /See:/ 'newEnrolledService' smart constructor.
 data EnrolledService = EnrolledService
-  { -- | The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): * all * GA * App Engine * BigQuery * Cloud Bigtable * Cloud Key Management Service * Compute Engine * Cloud Dataflow * Cloud DLP * Cloud EKM * Cloud HSM * Cloud Identity and Access Management * Cloud Logging * Cloud Pub\/Sub * Cloud Spanner * Cloud SQL * Cloud Storage * Google Kubernetes Engine * Organization Policy Serivice * Persistent Disk * Resource Manager * Speaker ID Note: These values are supported as input for legacy purposes, but will not be returned from the API. * all * ga-only * appengine.googleapis.com * bigquery.googleapis.com * bigtable.googleapis.com * container.googleapis.com * cloudkms.googleapis.com * cloudresourcemanager.googleapis.com * cloudsql.googleapis.com * compute.googleapis.com * dataflow.googleapis.com * dlp.googleapis.com * iam.googleapis.com * logging.googleapis.com * orgpolicy.googleapis.com * pubsub.googleapis.com * spanner.googleapis.com * speakerid.googleapis.com *
-    -- storage.googleapis.com Calls to UpdateAccessApprovalSettings using \'all\' or any of the XXX.googleapis.com will be translated to the associated product name (\'all\', \'App Engine\', etc.). Note: \'all\' will enroll the resource in all products supported at both \'GA\' and \'Preview\' levels. More information about levels of support is available at https:\/\/cloud.google.com\/access-approval\/docs\/supported-services
+  { -- | The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): * all * GA * App Engine * Artifact Registry * BigQuery * Certificate Authority Service * Cloud Bigtable * Cloud Key Management Service * Compute Engine * Cloud Composer * Cloud Dataflow * Cloud Dataproc * Cloud DLP * Cloud EKM * Cloud Firestore * Cloud HSM * Cloud Identity and Access Management * Cloud Logging * Cloud NAT * Cloud Pub\/Sub * Cloud Spanner * Cloud SQL * Cloud Storage * Google Kubernetes Engine * Organization Policy Serivice * Persistent Disk * Resource Manager * Secret Manager * Speaker ID Note: These values are supported as input for legacy purposes, but will not be returned from the API. * all * ga-only * appengine.googleapis.com * artifactregistry.googleapis.com * bigquery.googleapis.com * bigtable.googleapis.com * container.googleapis.com * cloudkms.googleapis.com * cloudresourcemanager.googleapis.com * cloudsql.googleapis.com * compute.googleapis.com * dataflow.googleapis.com *
+    -- dataproc.googleapis.com * dlp.googleapis.com * iam.googleapis.com * logging.googleapis.com * orgpolicy.googleapis.com * pubsub.googleapis.com * spanner.googleapis.com * secretmanager.googleapis.com * speakerid.googleapis.com * storage.googleapis.com Calls to UpdateAccessApprovalSettings using \'all\' or any of the XXX.googleapis.com will be translated to the associated product name (\'all\', \'App Engine\', etc.). Note: \'all\' will enroll the resource in all products supported at both \'GA\' and \'Preview\' levels. More information about levels of support is available at https:\/\/cloud.google.com\/access-approval\/docs\/supported-services
     cloudProduct :: (Core.Maybe Core.Text),
     -- | The enrollment level of the service.
     enrollmentLevel :: (Core.Maybe EnrolledService_EnrollmentLevel)
@@ -539,6 +548,29 @@ instance Core.ToJSON EnrolledService where
               Core.<$> enrollmentLevel
           ]
       )
+
+-- | Request to invalidate an existing approval.
+--
+-- /See:/ 'newInvalidateApprovalRequestMessage' smart constructor.
+data InvalidateApprovalRequestMessage = InvalidateApprovalRequestMessage
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InvalidateApprovalRequestMessage' with the minimum fields required to make a request.
+newInvalidateApprovalRequestMessage ::
+  InvalidateApprovalRequestMessage
+newInvalidateApprovalRequestMessage = InvalidateApprovalRequestMessage
+
+instance
+  Core.FromJSON
+    InvalidateApprovalRequestMessage
+  where
+  parseJSON =
+    Core.withObject
+      "InvalidateApprovalRequestMessage"
+      (\o -> Core.pure InvalidateApprovalRequestMessage)
+
+instance Core.ToJSON InvalidateApprovalRequestMessage where
+  toJSON = Core.const Core.emptyObject
 
 -- | Response to listing of ApprovalRequest objects.
 --

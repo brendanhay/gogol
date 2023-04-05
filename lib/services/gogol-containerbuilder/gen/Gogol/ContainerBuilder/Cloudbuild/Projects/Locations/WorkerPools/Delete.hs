@@ -72,7 +72,7 @@ data CloudbuildProjectsLocationsWorkerPoolsDelete = CloudbuildProjectsLocationsW
     callback :: (Core.Maybe Core.Text),
     -- | Optional. If provided, it must match the server\'s etag on the workerpool for the request to be processed.
     etag :: (Core.Maybe Core.Text),
-    -- | Required. The name of the @WorkerPool@ to delete. Format: @projects\/{project}\/locations\/{workerPool}\/workerPools\/{workerPool}@.
+    -- | Required. The name of the @WorkerPool@ to delete. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{workerPool}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,7 +85,7 @@ data CloudbuildProjectsLocationsWorkerPoolsDelete = CloudbuildProjectsLocationsW
 
 -- | Creates a value of 'CloudbuildProjectsLocationsWorkerPoolsDelete' with the minimum fields required to make a request.
 newCloudbuildProjectsLocationsWorkerPoolsDelete ::
-  -- |  Required. The name of the @WorkerPool@ to delete. Format: @projects\/{project}\/locations\/{workerPool}\/workerPools\/{workerPool}@. See 'name'.
+  -- |  Required. The name of the @WorkerPool@ to delete. Format: @projects\/{project}\/locations\/{location}\/workerPools\/{workerPool}@. See 'name'.
   Core.Text ->
   CloudbuildProjectsLocationsWorkerPoolsDelete
 newCloudbuildProjectsLocationsWorkerPoolsDelete name =

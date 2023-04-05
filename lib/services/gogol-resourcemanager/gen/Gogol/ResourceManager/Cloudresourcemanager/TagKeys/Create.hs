@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 300 TagKeys can exist under a parent at any given time.
+-- Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 1000 TagKeys can exist under a parent at any given time.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.tagKeys.create@.
 module Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Create
@@ -57,7 +57,7 @@ type CloudresourcemanagerTagKeysCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] TagKey
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 300 TagKeys can exist under a parent at any given time.
+-- | Creates a new TagKey. If another request with the same parameters is sent while the original request is in process, the second request will receive an error. A maximum of 1000 TagKeys can exist under a parent at any given time.
 --
 -- /See:/ 'newCloudresourcemanagerTagKeysCreate' smart constructor.
 data CloudresourcemanagerTagKeysCreate = CloudresourcemanagerTagKeysCreate

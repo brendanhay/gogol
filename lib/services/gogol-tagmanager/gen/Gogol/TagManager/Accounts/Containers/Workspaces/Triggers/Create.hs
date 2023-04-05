@@ -68,7 +68,7 @@ data TagManagerAccountsContainersWorkspacesTriggersCreate = TagManagerAccountsCo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | GTM Workspaces\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
+    -- | GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id}
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Trigger,
@@ -81,7 +81,7 @@ data TagManagerAccountsContainersWorkspacesTriggersCreate = TagManagerAccountsCo
 
 -- | Creates a value of 'TagManagerAccountsContainersWorkspacesTriggersCreate' with the minimum fields required to make a request.
 newTagManagerAccountsContainersWorkspacesTriggersCreate ::
-  -- |  GTM Workspaces\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'parent'.
+  -- |  GTM Workspace\'s API relative path. Example: accounts\/{account/id}\/containers\/{container/id}\/workspaces\/{workspace_id} See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Trigger ->

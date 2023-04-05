@@ -94,6 +94,10 @@ module Gogol.DFAReporting.Internal.Product
     AdvertiserGroupsListResponse (..),
     newAdvertiserGroupsListResponse,
 
+    -- * AdvertiserInvoicesListResponse
+    AdvertiserInvoicesListResponse (..),
+    newAdvertiserInvoicesListResponse,
+
     -- * AdvertiserLandingPagesListResponse
     AdvertiserLandingPagesListResponse (..),
     newAdvertiserLandingPagesListResponse,
@@ -109,6 +113,34 @@ module Gogol.DFAReporting.Internal.Product
     -- * AudienceSegmentGroup
     AudienceSegmentGroup (..),
     newAudienceSegmentGroup,
+
+    -- * BillingAssignment
+    BillingAssignment (..),
+    newBillingAssignment,
+
+    -- * BillingAssignmentsListResponse
+    BillingAssignmentsListResponse (..),
+    newBillingAssignmentsListResponse,
+
+    -- * BillingProfile
+    BillingProfile (..),
+    newBillingProfile,
+
+    -- * BillingProfilesListResponse
+    BillingProfilesListResponse (..),
+    newBillingProfilesListResponse,
+
+    -- * BillingRate
+    BillingRate (..),
+    newBillingRate,
+
+    -- * BillingRateTieredRate
+    BillingRateTieredRate (..),
+    newBillingRateTieredRate,
+
+    -- * BillingRatesListResponse
+    BillingRatesListResponse (..),
+    newBillingRatesListResponse,
 
     -- * Browser
     Browser (..),
@@ -129,6 +161,10 @@ module Gogol.DFAReporting.Internal.Product
     -- * CampaignCreativeAssociationsListResponse
     CampaignCreativeAssociationsListResponse (..),
     newCampaignCreativeAssociationsListResponse,
+
+    -- * CampaignSummary
+    CampaignSummary (..),
+    newCampaignSummary,
 
     -- * CampaignsListResponse
     CampaignsListResponse (..),
@@ -493,6 +529,10 @@ module Gogol.DFAReporting.Internal.Product
     -- * InventoryItemsListResponse
     InventoryItemsListResponse (..),
     newInventoryItemsListResponse,
+
+    -- * Invoice
+    Invoice (..),
+    newInvoice,
 
     -- * KeyValueTargetingExpression
     KeyValueTargetingExpression (..),
@@ -966,6 +1006,10 @@ module Gogol.DFAReporting.Internal.Product
     UserRolesListResponse (..),
     newUserRolesListResponse,
 
+    -- * UvarFilter
+    UvarFilter (..),
+    newUvarFilter,
+
     -- * VideoFormat
     VideoFormat (..),
     newVideoFormat,
@@ -1064,12 +1108,16 @@ instance Core.FromJSON Account where
       "Account"
       ( \o ->
           Account
-            Core.<$> (o Core..:? "accountPermissionIds")
+            Core.<$> ( o Core..:? "accountPermissionIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "accountProfile")
             Core.<*> (o Core..:? "active")
             Core.<*> (o Core..:? "activeAdsLimitTier")
             Core.<*> (o Core..:? "activeViewOptOut")
-            Core.<*> (o Core..:? "availablePermissionIds")
+            Core.<*> ( o Core..:? "availablePermissionIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> ( o Core..:? "countryId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -1100,6 +1148,7 @@ instance Core.ToJSON Account where
     Core.object
       ( Core.catMaybes
           [ ("accountPermissionIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> accountPermissionIds,
             ("accountProfile" Core..=) Core.<$> accountProfile,
             ("active" Core..=) Core.<$> active,
@@ -1108,6 +1157,7 @@ instance Core.ToJSON Account where
             ("activeViewOptOut" Core..=)
               Core.<$> activeViewOptOut,
             ("availablePermissionIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> availablePermissionIds,
             ("countryId" Core..=) Core.. Core.AsText
               Core.<$> countryId,
@@ -2289,6 +2339,50 @@ instance Core.ToJSON AdvertiserGroupsListResponse where
           ]
       )
 
+-- | Invoice List Response
+--
+-- /See:/ 'newAdvertiserInvoicesListResponse' smart constructor.
+data AdvertiserInvoicesListResponse = AdvertiserInvoicesListResponse
+  { -- | Invoice collection
+    invoices :: (Core.Maybe [Invoice]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#advertiserInvoicesListResponse\".
+    kind :: (Core.Maybe Core.Text),
+    -- | Pagination token to be used for the next list operation.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdvertiserInvoicesListResponse' with the minimum fields required to make a request.
+newAdvertiserInvoicesListResponse ::
+  AdvertiserInvoicesListResponse
+newAdvertiserInvoicesListResponse =
+  AdvertiserInvoicesListResponse
+    { invoices = Core.Nothing,
+      kind = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON AdvertiserInvoicesListResponse where
+  parseJSON =
+    Core.withObject
+      "AdvertiserInvoicesListResponse"
+      ( \o ->
+          AdvertiserInvoicesListResponse
+            Core.<$> (o Core..:? "invoices")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON AdvertiserInvoicesListResponse where
+  toJSON AdvertiserInvoicesListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("invoices" Core..=) Core.<$> invoices,
+            ("kind" Core..=) Core.<$> kind,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | Landing Page List Response
 --
 -- /See:/ 'newAdvertiserLandingPagesListResponse' smart constructor.
@@ -2472,6 +2566,415 @@ instance Core.ToJSON AudienceSegmentGroup where
           ]
       )
 
+-- | List account, subaccount, advertiser, and campaign associated with a given Billing Profile.
+--
+-- /See:/ 'newBillingAssignment' smart constructor.
+data BillingAssignment = BillingAssignment
+  { -- | ID of the account associated with the billing assignment.This is a read-only, auto-generated field.
+    accountId :: (Core.Maybe Core.Text),
+    -- | ID of the advertiser associated with the billing assignment.Wildcard (*) means this assignment is not limited to a single advertiser
+    advertiserId :: (Core.Maybe Core.Text),
+    -- | ID of the campaign associated with the billing assignment. Wildcard (*) means this assignment is not limited to a single campaign
+    campaignId :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#billingAssignment\".
+    kind :: (Core.Maybe Core.Text),
+    -- | ID of the subaccount associated with the billing assignment.Wildcard (*) means this assignment is not limited to a single subaccountThis is a read-only, auto-generated field.
+    subaccountId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingAssignment' with the minimum fields required to make a request.
+newBillingAssignment ::
+  BillingAssignment
+newBillingAssignment =
+  BillingAssignment
+    { accountId = Core.Nothing,
+      advertiserId = Core.Nothing,
+      campaignId = Core.Nothing,
+      kind = Core.Nothing,
+      subaccountId = Core.Nothing
+    }
+
+instance Core.FromJSON BillingAssignment where
+  parseJSON =
+    Core.withObject
+      "BillingAssignment"
+      ( \o ->
+          BillingAssignment
+            Core.<$> (o Core..:? "accountId")
+            Core.<*> (o Core..:? "advertiserId")
+            Core.<*> (o Core..:? "campaignId")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "subaccountId")
+      )
+
+instance Core.ToJSON BillingAssignment where
+  toJSON BillingAssignment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accountId" Core..=) Core.<$> accountId,
+            ("advertiserId" Core..=) Core.<$> advertiserId,
+            ("campaignId" Core..=) Core.<$> campaignId,
+            ("kind" Core..=) Core.<$> kind,
+            ("subaccountId" Core..=) Core.<$> subaccountId
+          ]
+      )
+
+-- | Billing assignment List Response
+--
+-- /See:/ 'newBillingAssignmentsListResponse' smart constructor.
+data BillingAssignmentsListResponse = BillingAssignmentsListResponse
+  { -- | Billing assignments collection.
+    billingAssignments :: (Core.Maybe [BillingAssignment]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#billingAssignmentsListResponse\".
+    kind :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingAssignmentsListResponse' with the minimum fields required to make a request.
+newBillingAssignmentsListResponse ::
+  BillingAssignmentsListResponse
+newBillingAssignmentsListResponse =
+  BillingAssignmentsListResponse
+    { billingAssignments = Core.Nothing,
+      kind = Core.Nothing
+    }
+
+instance Core.FromJSON BillingAssignmentsListResponse where
+  parseJSON =
+    Core.withObject
+      "BillingAssignmentsListResponse"
+      ( \o ->
+          BillingAssignmentsListResponse
+            Core.<$> (o Core..:? "billingAssignments")
+            Core.<*> (o Core..:? "kind")
+      )
+
+instance Core.ToJSON BillingAssignmentsListResponse where
+  toJSON BillingAssignmentsListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingAssignments" Core..=)
+              Core.<$> billingAssignments,
+            ("kind" Core..=) Core.<$> kind
+          ]
+      )
+
+-- | Contains properties of a Campaign Manager Billing Profile.
+--
+-- /See:/ 'newBillingProfile' smart constructor.
+data BillingProfile = BillingProfile
+  { -- | Consolidated invoice option for this billing profile. Used to get a single, consolidated invoice across the chosen invoice level.
+    consolidatedInvoice :: (Core.Maybe Core.Bool),
+    -- | Country code of this billing profile.This is a read-only field.
+    countryCode :: (Core.Maybe Core.Text),
+    -- | Billing currency code in ISO 4217 format.This is a read-only field.
+    currencyCode :: (Core.Maybe Core.Text),
+    -- | ID of this billing profile. This is a read-only, auto-generated field.
+    id :: (Core.Maybe Core.Int64),
+    -- | Invoice level for this billing profile. Used to group fees into separate invoices by account, advertiser, or campaign.
+    invoiceLevel :: (Core.Maybe BillingProfile_InvoiceLevel),
+    -- | True if the billing profile is the account default profile. This is a read-only field.
+    isDefault :: (Core.Maybe Core.Bool),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#billingProfile\".
+    kind :: (Core.Maybe Core.Text),
+    -- | Name of this billing profile. This is a required field and must be less than 256 characters long and must be unique among billing profile in the same account.
+    name :: (Core.Maybe Core.Text),
+    -- | The ID of the payment account the billing profile belongs to. This is a read-only field.
+    paymentsAccountId :: (Core.Maybe Core.Text),
+    -- | The ID of the payment customer the billing profile belongs to. This is a read-only field.
+    paymentsCustomerId :: (Core.Maybe Core.Text),
+    -- | Purchase order (PO) for this billing profile. This PO number is used in the invoices for all of the advertisers in this billing profile.
+    purchaseOrder :: (Core.Maybe Core.Text),
+    -- | The ID of the secondary payment customer the billing profile belongs to. This is a read-only field.
+    secondaryPaymentsCustomerId :: (Core.Maybe Core.Text),
+    -- | Status of this billing profile.This is a read-only field.
+    status :: (Core.Maybe BillingProfile_Status)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingProfile' with the minimum fields required to make a request.
+newBillingProfile ::
+  BillingProfile
+newBillingProfile =
+  BillingProfile
+    { consolidatedInvoice = Core.Nothing,
+      countryCode = Core.Nothing,
+      currencyCode = Core.Nothing,
+      id = Core.Nothing,
+      invoiceLevel = Core.Nothing,
+      isDefault = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing,
+      paymentsAccountId = Core.Nothing,
+      paymentsCustomerId = Core.Nothing,
+      purchaseOrder = Core.Nothing,
+      secondaryPaymentsCustomerId = Core.Nothing,
+      status = Core.Nothing
+    }
+
+instance Core.FromJSON BillingProfile where
+  parseJSON =
+    Core.withObject
+      "BillingProfile"
+      ( \o ->
+          BillingProfile
+            Core.<$> (o Core..:? "consolidatedInvoice")
+            Core.<*> (o Core..:? "countryCode")
+            Core.<*> (o Core..:? "currencyCode")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "invoiceLevel")
+            Core.<*> (o Core..:? "isDefault")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "paymentsAccountId")
+            Core.<*> (o Core..:? "paymentsCustomerId")
+            Core.<*> (o Core..:? "purchaseOrder")
+            Core.<*> (o Core..:? "secondaryPaymentsCustomerId")
+            Core.<*> (o Core..:? "status")
+      )
+
+instance Core.ToJSON BillingProfile where
+  toJSON BillingProfile {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consolidatedInvoice" Core..=)
+              Core.<$> consolidatedInvoice,
+            ("countryCode" Core..=) Core.<$> countryCode,
+            ("currencyCode" Core..=) Core.<$> currencyCode,
+            ("id" Core..=) Core.. Core.AsText Core.<$> id,
+            ("invoiceLevel" Core..=) Core.<$> invoiceLevel,
+            ("isDefault" Core..=) Core.<$> isDefault,
+            ("kind" Core..=) Core.<$> kind,
+            ("name" Core..=) Core.<$> name,
+            ("paymentsAccountId" Core..=)
+              Core.<$> paymentsAccountId,
+            ("paymentsCustomerId" Core..=)
+              Core.<$> paymentsCustomerId,
+            ("purchaseOrder" Core..=) Core.<$> purchaseOrder,
+            ("secondaryPaymentsCustomerId" Core..=)
+              Core.<$> secondaryPaymentsCustomerId,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | Billing profile List Response
+--
+-- /See:/ 'newBillingProfilesListResponse' smart constructor.
+data BillingProfilesListResponse = BillingProfilesListResponse
+  { -- | Billing profiles collection.
+    billingProfiles :: (Core.Maybe [BillingProfile]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#billingProfilesListResponse\".
+    kind :: (Core.Maybe Core.Text),
+    -- | Pagination token to be used for the next list operation.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingProfilesListResponse' with the minimum fields required to make a request.
+newBillingProfilesListResponse ::
+  BillingProfilesListResponse
+newBillingProfilesListResponse =
+  BillingProfilesListResponse
+    { billingProfiles = Core.Nothing,
+      kind = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON BillingProfilesListResponse where
+  parseJSON =
+    Core.withObject
+      "BillingProfilesListResponse"
+      ( \o ->
+          BillingProfilesListResponse
+            Core.<$> (o Core..:? "billingProfiles")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON BillingProfilesListResponse where
+  toJSON BillingProfilesListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingProfiles" Core..=)
+              Core.<$> billingProfiles,
+            ("kind" Core..=) Core.<$> kind,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+--
+-- /See:/ 'newBillingRate' smart constructor.
+data BillingRate = BillingRate
+  { -- | Billing currency code in ISO 4217 format.
+    currencyCode :: (Core.Maybe Core.Text),
+    -- | End date of this billing rate.
+    endDate :: (Core.Maybe Core.Text),
+    -- | ID of this billing rate.
+    id :: (Core.Maybe Core.Int64),
+    -- | Name of this billing rate. This must be less than 256 characters long.
+    name :: (Core.Maybe Core.Text),
+    -- | Flat rate in micros of this billing rate. This cannot co-exist with tiered rate.
+    rateInMicros :: (Core.Maybe Core.Int64),
+    -- | Start date of this billing rate.
+    startDate :: (Core.Maybe Core.Text),
+    -- | Tiered rate of this billing rate. This cannot co-exist with flat rate.
+    tieredRates :: (Core.Maybe [BillingRateTieredRate]),
+    -- | Type of this billing rate.
+    type' :: (Core.Maybe BillingRate_Type),
+    -- | Unit of measure for this billing rate.
+    unitOfMeasure :: (Core.Maybe BillingRate_UnitOfMeasure)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingRate' with the minimum fields required to make a request.
+newBillingRate ::
+  BillingRate
+newBillingRate =
+  BillingRate
+    { currencyCode = Core.Nothing,
+      endDate = Core.Nothing,
+      id = Core.Nothing,
+      name = Core.Nothing,
+      rateInMicros = Core.Nothing,
+      startDate = Core.Nothing,
+      tieredRates = Core.Nothing,
+      type' = Core.Nothing,
+      unitOfMeasure = Core.Nothing
+    }
+
+instance Core.FromJSON BillingRate where
+  parseJSON =
+    Core.withObject
+      "BillingRate"
+      ( \o ->
+          BillingRate
+            Core.<$> (o Core..:? "currencyCode")
+            Core.<*> (o Core..:? "endDate")
+            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "name")
+            Core.<*> ( o Core..:? "rateInMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "startDate")
+            Core.<*> (o Core..:? "tieredRates")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "unitOfMeasure")
+      )
+
+instance Core.ToJSON BillingRate where
+  toJSON BillingRate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("currencyCode" Core..=) Core.<$> currencyCode,
+            ("endDate" Core..=) Core.<$> endDate,
+            ("id" Core..=) Core.. Core.AsText Core.<$> id,
+            ("name" Core..=) Core.<$> name,
+            ("rateInMicros" Core..=) Core.. Core.AsText
+              Core.<$> rateInMicros,
+            ("startDate" Core..=) Core.<$> startDate,
+            ("tieredRates" Core..=) Core.<$> tieredRates,
+            ("type" Core..=) Core.<$> type',
+            ("unitOfMeasure" Core..=) Core.<$> unitOfMeasure
+          ]
+      )
+
+--
+-- /See:/ 'newBillingRateTieredRate' smart constructor.
+data BillingRateTieredRate = BillingRateTieredRate
+  { -- | The maximum for this tier range.
+    highValue :: (Core.Maybe Core.Int64),
+    -- | The minimum for this tier range.
+    lowValue :: (Core.Maybe Core.Int64),
+    -- | Rate in micros for this tier.
+    rateInMicros :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingRateTieredRate' with the minimum fields required to make a request.
+newBillingRateTieredRate ::
+  BillingRateTieredRate
+newBillingRateTieredRate =
+  BillingRateTieredRate
+    { highValue = Core.Nothing,
+      lowValue = Core.Nothing,
+      rateInMicros = Core.Nothing
+    }
+
+instance Core.FromJSON BillingRateTieredRate where
+  parseJSON =
+    Core.withObject
+      "BillingRateTieredRate"
+      ( \o ->
+          BillingRateTieredRate
+            Core.<$> ( o Core..:? "highValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "lowValue"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "rateInMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON BillingRateTieredRate where
+  toJSON BillingRateTieredRate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("highValue" Core..=) Core.. Core.AsText
+              Core.<$> highValue,
+            ("lowValue" Core..=) Core.. Core.AsText
+              Core.<$> lowValue,
+            ("rateInMicros" Core..=) Core.. Core.AsText
+              Core.<$> rateInMicros
+          ]
+      )
+
+-- | Billing Rate List Response
+--
+-- /See:/ 'newBillingRatesListResponse' smart constructor.
+data BillingRatesListResponse = BillingRatesListResponse
+  { -- | Billing rates collection.
+    billingRates :: (Core.Maybe [BillingRate]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#billingRatesListResponse\".
+    kind :: (Core.Maybe Core.Text),
+    -- | Pagination token to be used for the next list operation.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BillingRatesListResponse' with the minimum fields required to make a request.
+newBillingRatesListResponse ::
+  BillingRatesListResponse
+newBillingRatesListResponse =
+  BillingRatesListResponse
+    { billingRates = Core.Nothing,
+      kind = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON BillingRatesListResponse where
+  parseJSON =
+    Core.withObject
+      "BillingRatesListResponse"
+      ( \o ->
+          BillingRatesListResponse
+            Core.<$> (o Core..:? "billingRates")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON BillingRatesListResponse where
+  toJSON BillingRatesListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingRates" Core..=) Core.<$> billingRates,
+            ("kind" Core..=) Core.<$> kind,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | Contains information about a browser that can be targeted by ads.
 --
 -- /See:/ 'newBrowser' smart constructor.
@@ -2624,16 +3127,12 @@ data Campaign = Campaign
     lastModifiedInfo :: (Core.Maybe LastModifiedInfo),
     -- | Measurement partner campaign link for tag wrapping.
     measurementPartnerLink :: (Core.Maybe MeasurementPartnerCampaignLink),
-    -- | Name of this campaign. This is a required field and must be less than 256 characters long and unique among campaigns of the same advertiser.
+    -- | Name of this campaign. This is a required field and must be less than 512 characters long and unique among campaigns of the same advertiser.
     name :: (Core.Maybe Core.Text),
-    -- | Whether Nielsen reports are enabled for this campaign.
-    nielsenOcrEnabled :: (Core.Maybe Core.Bool),
     -- |
     startDate :: (Core.Maybe Core.Date),
     -- | Subaccount ID of this campaign. This is a read-only field that can be left blank.
-    subaccountId :: (Core.Maybe Core.Int64),
-    -- | Campaign trafficker contact emails.
-    traffickerEmails :: (Core.Maybe [Core.Text])
+    subaccountId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2667,10 +3166,8 @@ newCampaign =
       lastModifiedInfo = Core.Nothing,
       measurementPartnerLink = Core.Nothing,
       name = Core.Nothing,
-      nielsenOcrEnabled = Core.Nothing,
       startDate = Core.Nothing,
-      subaccountId = Core.Nothing,
-      traffickerEmails = Core.Nothing
+      subaccountId = Core.Nothing
     }
 
 instance Core.FromJSON Campaign where
@@ -2699,7 +3196,9 @@ instance Core.FromJSON Campaign where
             Core.<*> (o Core..:? "clickThroughUrlSuffixProperties")
             Core.<*> (o Core..:? "comment")
             Core.<*> (o Core..:? "createInfo")
-            Core.<*> (o Core..:? "creativeGroupIds")
+            Core.<*> ( o Core..:? "creativeGroupIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "creativeOptimizationConfiguration")
             Core.<*> (o Core..:? "defaultClickThroughEventTagProperties")
             Core.<*> ( o Core..:? "defaultLandingPageId"
@@ -2714,12 +3213,10 @@ instance Core.FromJSON Campaign where
             Core.<*> (o Core..:? "lastModifiedInfo")
             Core.<*> (o Core..:? "measurementPartnerLink")
             Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "nielsenOcrEnabled")
             Core.<*> (o Core..:? "startDate")
             Core.<*> ( o Core..:? "subaccountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "traffickerEmails")
       )
 
 instance Core.ToJSON Campaign where
@@ -2750,6 +3247,7 @@ instance Core.ToJSON Campaign where
             ("comment" Core..=) Core.<$> comment,
             ("createInfo" Core..=) Core.<$> createInfo,
             ("creativeGroupIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> creativeGroupIds,
             ("creativeOptimizationConfiguration" Core..=)
               Core.<$> creativeOptimizationConfiguration,
@@ -2770,13 +3268,9 @@ instance Core.ToJSON Campaign where
             ("measurementPartnerLink" Core..=)
               Core.<$> measurementPartnerLink,
             ("name" Core..=) Core.<$> name,
-            ("nielsenOcrEnabled" Core..=)
-              Core.<$> nielsenOcrEnabled,
             ("startDate" Core..=) Core.<$> startDate,
             ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("traffickerEmails" Core..=)
-              Core.<$> traffickerEmails
+              Core.<$> subaccountId
           ]
       )
 
@@ -2867,6 +3361,73 @@ instance
               Core.<$> campaignCreativeAssociations,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Represents a summarized campaign information associated with this invoice.
+--
+-- /See:/ 'newCampaignSummary' smart constructor.
+data CampaignSummary = CampaignSummary
+  { -- | Campaign billing invoice code.
+    billingInvoiceCode :: (Core.Maybe Core.Text),
+    -- | Campaign ID.
+    campaignId :: (Core.Maybe Core.Int64),
+    -- | The pre-tax amount for this campaign, in micros of the invoice\'s currency.
+    preTaxAmountMicros :: (Core.Maybe Core.Int64),
+    -- | The tax amount for this campaign, in micros of the invoice\'s currency.
+    taxAmountMicros :: (Core.Maybe Core.Int64),
+    -- | The total amount of charges for this campaign, in micros of the invoice\'s currency.
+    totalAmountMicros :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CampaignSummary' with the minimum fields required to make a request.
+newCampaignSummary ::
+  CampaignSummary
+newCampaignSummary =
+  CampaignSummary
+    { billingInvoiceCode = Core.Nothing,
+      campaignId = Core.Nothing,
+      preTaxAmountMicros = Core.Nothing,
+      taxAmountMicros = Core.Nothing,
+      totalAmountMicros = Core.Nothing
+    }
+
+instance Core.FromJSON CampaignSummary where
+  parseJSON =
+    Core.withObject
+      "CampaignSummary"
+      ( \o ->
+          CampaignSummary
+            Core.<$> (o Core..:? "billingInvoiceCode")
+            Core.<*> ( o Core..:? "campaignId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "preTaxAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "taxAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON CampaignSummary where
+  toJSON CampaignSummary {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("billingInvoiceCode" Core..=)
+              Core.<$> billingInvoiceCode,
+            ("campaignId" Core..=) Core.. Core.AsText
+              Core.<$> campaignId,
+            ("preTaxAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> preTaxAmountMicros,
+            ("taxAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> taxAmountMicros,
+            ("totalAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> totalAmountMicros
           ]
       )
 
@@ -3790,25 +4351,27 @@ data Conversion = Conversion
     childDirectedTreatment :: (Core.Maybe Core.Bool),
     -- | Custom floodlight variables. This field may only be used when calling batchinsert; it is not supported by batchupdate.
     customVariables :: (Core.Maybe [CustomFloodlightVariable]),
-    -- | The display click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId and gclid. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or mobileDeviceId or gclid is a required field.
+    -- | The display click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId, gclid, and impressionId. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or mobileDeviceId or gclid or impressionId is a required field.
     dclid :: (Core.Maybe Core.Text),
-    -- | The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[], matchId, mobileDeviceId, gclid and dclid. This or encryptedUserIdCandidates[] or matchId or mobileDeviceId or gclid or dclid is a required field.
+    -- | The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with encryptedUserIdCandidates[], matchId, mobileDeviceId, gclid, dclid, and impressionId. This or encryptedUserIdCandidates[] or matchId or mobileDeviceId or gclid or dclid or impressionId is a required field.
     encryptedUserId :: (Core.Maybe Core.Text),
-    -- | A list of the alphanumeric encrypted user IDs. Any user ID with exposure prior to the conversion timestamp will be used in the inserted conversion. If no such user ID is found then the conversion will be rejected with INVALID_ARGUMENT error. When set, encryptionInfo should also be specified. This field may only be used when calling batchinsert; it is not supported by batchupdate. This field is mutually exclusive with encryptedUserId, matchId, mobileDeviceId, gclid and dclid. This or encryptedUserId or matchId or mobileDeviceId or gclid or dclid is a required field.
+    -- | A list of the alphanumeric encrypted user IDs. Any user ID with exposure prior to the conversion timestamp will be used in the inserted conversion. If no such user ID is found then the conversion will be rejected with INVALID_ARGUMENT error. When set, encryptionInfo should also be specified. This field may only be used when calling batchinsert; it is not supported by batchupdate. This field is mutually exclusive with encryptedUserId, matchId, mobileDeviceId, gclid dclid, and impressionId. This or encryptedUserId or matchId or mobileDeviceId or gclid or dclid or impressionId is a required field.
     encryptedUserIdCandidates :: (Core.Maybe [Core.Text]),
     -- | Floodlight Activity ID of this conversion. This is a required field.
     floodlightActivityId :: (Core.Maybe Core.Int64),
     -- | Floodlight Configuration ID of this conversion. This is a required field.
     floodlightConfigurationId :: (Core.Maybe Core.Int64),
-    -- | The Google click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId and dclid. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or mobileDeviceId or dclid is a required field.
+    -- | The Google click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId, dclid, and impressionId. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or mobileDeviceId or dclid or impressionId is a required field.
     gclid :: (Core.Maybe Core.Text),
+    -- | The impression ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId, and gclid. One of these identifiers must be set.
+    impressionId :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#conversion\".
     kind :: (Core.Maybe Core.Text),
     -- | Whether Limit Ad Tracking is enabled. When set to true, the conversion will be used for reporting but not targeting. This will prevent remarketing.
     limitAdTracking :: (Core.Maybe Core.Bool),
-    -- | The match ID field. A match ID is your own first-party identifier that has been synced with Google using the match ID feature in Floodlight. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[],mobileDeviceId, gclid and dclid. This or encryptedUserId or encryptedUserIdCandidates[] or mobileDeviceId or gclid or dclid is a required field.
+    -- | The match ID field. A match ID is your own first-party identifier that has been synced with Google using the match ID feature in Floodlight. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[],mobileDeviceId, gclid, dclid, and impressionId. This or encryptedUserId orencryptedUserIdCandidates[] or mobileDeviceId or gclid or dclid or impressionIdis a required field.
     matchId :: (Core.Maybe Core.Text),
-    -- | The mobile device ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, gclid and dclid. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or gclid or dclid is a required field.
+    -- | The mobile device ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, gclid, dclid, and impressionId. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or gclid or dclid or impressionId is a required field.
     mobileDeviceId :: (Core.Maybe Core.Text),
     -- | Whether the conversion was for a non personalized ad.
     nonPersonalizedAd :: (Core.Maybe Core.Bool),
@@ -3838,6 +4401,7 @@ newConversion =
       floodlightActivityId = Core.Nothing,
       floodlightConfigurationId = Core.Nothing,
       gclid = Core.Nothing,
+      impressionId = Core.Nothing,
       kind = Core.Nothing,
       limitAdTracking = Core.Nothing,
       matchId = Core.Nothing,
@@ -3868,6 +4432,7 @@ instance Core.FromJSON Conversion where
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "gclid")
+            Core.<*> (o Core..:? "impressionId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "limitAdTracking")
             Core.<*> (o Core..:? "matchId")
@@ -3901,6 +4466,7 @@ instance Core.ToJSON Conversion where
               Core.. Core.AsText
               Core.<$> floodlightConfigurationId,
             ("gclid" Core..=) Core.<$> gclid,
+            ("impressionId" Core..=) Core.<$> impressionId,
             ("kind" Core..=) Core.<$> kind,
             ("limitAdTracking" Core..=) Core.<$> limitAdTracking,
             ("matchId" Core..=) Core.<$> matchId,
@@ -4513,7 +5079,9 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "backupImageTargetWindow")
             Core.<*> (o Core..:? "clickTags")
             Core.<*> (o Core..:? "commercialId")
-            Core.<*> (o Core..:? "companionCreatives")
+            Core.<*> ( o Core..:? "companionCreatives"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "compatibility")
             Core.<*> (o Core..:? "convertFlashToHtml5")
             Core.<*> (o Core..:? "counterCustomEvents")
@@ -4607,6 +5175,7 @@ instance Core.ToJSON Creative where
             ("clickTags" Core..=) Core.<$> clickTags,
             ("commercialId" Core..=) Core.<$> commercialId,
             ("companionCreatives" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> companionCreatives,
             ("compatibility" Core..=) Core.<$> compatibility,
             ("convertFlashToHtml5" Core..=)
@@ -4863,7 +5432,9 @@ instance Core.FromJSON CreativeAsset where
             Core.<*> (o Core..:? "bitRate")
             Core.<*> (o Core..:? "childAssetType")
             Core.<*> (o Core..:? "collapsedSize")
-            Core.<*> (o Core..:? "companionCreativeIds")
+            Core.<*> ( o Core..:? "companionCreativeIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "customStartTimeValue")
             Core.<*> (o Core..:? "detectedFeatures")
             Core.<*> (o Core..:? "displayType")
@@ -4922,6 +5493,7 @@ instance Core.ToJSON CreativeAsset where
             ("childAssetType" Core..=) Core.<$> childAssetType,
             ("collapsedSize" Core..=) Core.<$> collapsedSize,
             ("companionCreativeIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> companionCreativeIds,
             ("customStartTimeValue" Core..=)
               Core.<$> customStartTimeValue,
@@ -6330,7 +6902,9 @@ instance Core.FromJSON DeepLink where
             Core.<*> (o Core..:? "fallbackUrl")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "mobileApp")
-            Core.<*> (o Core..:? "remarketingListIds")
+            Core.<*> ( o Core..:? "remarketingListIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance Core.ToJSON DeepLink where
@@ -6342,6 +6916,7 @@ instance Core.ToJSON DeepLink where
             ("kind" Core..=) Core.<$> kind,
             ("mobileApp" Core..=) Core.<$> mobileApp,
             ("remarketingListIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> remarketingListIds
           ]
       )
@@ -6511,7 +7086,7 @@ instance Core.ToJSON DfpSettings where
 data Dimension = Dimension
   { -- | The kind of resource this is, in this case dfareporting#dimension.
     kind :: (Core.Maybe Core.Text),
-    -- | The dimension name, e.g. dfa:advertiser
+    -- | The dimension name, e.g. advertiser
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7105,7 +7680,9 @@ data EventFilter = EventFilter
   { -- | The dimension filter contained within this EventFilter.
     dimensionFilter :: (Core.Maybe PathReportDimensionValue),
     -- | The kind of resource this is, in this case dfareporting#eventFilter.
-    kind :: (Core.Maybe Core.Text)
+    kind :: (Core.Maybe Core.Text),
+    -- | Filter on a custom variable.
+    uvarFilter :: (Core.Maybe UvarFilter)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7113,7 +7690,11 @@ data EventFilter = EventFilter
 newEventFilter ::
   EventFilter
 newEventFilter =
-  EventFilter {dimensionFilter = Core.Nothing, kind = Core.Nothing}
+  EventFilter
+    { dimensionFilter = Core.Nothing,
+      kind = Core.Nothing,
+      uvarFilter = Core.Nothing
+    }
 
 instance Core.FromJSON EventFilter where
   parseJSON =
@@ -7123,6 +7704,7 @@ instance Core.FromJSON EventFilter where
           EventFilter
             Core.<$> (o Core..:? "dimensionFilter")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "uvarFilter")
       )
 
 instance Core.ToJSON EventFilter where
@@ -7131,7 +7713,8 @@ instance Core.ToJSON EventFilter where
       ( Core.catMaybes
           [ ("dimensionFilter" Core..=)
               Core.<$> dimensionFilter,
-            ("kind" Core..=) Core.<$> kind
+            ("kind" Core..=) Core.<$> kind,
+            ("uvarFilter" Core..=) Core.<$> uvarFilter
           ]
       )
 
@@ -7226,7 +7809,9 @@ instance Core.FromJSON EventTag where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "siteFilterType")
-            Core.<*> (o Core..:? "siteIds")
+            Core.<*> ( o Core..:? "siteIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "sslCompliant")
             Core.<*> (o Core..:? "status")
             Core.<*> ( o Core..:? "subaccountId"
@@ -7259,7 +7844,8 @@ instance Core.ToJSON EventTag where
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("siteFilterType" Core..=) Core.<$> siteFilterType,
-            ("siteIds" Core..=) Core.<$> siteIds,
+            ("siteIds" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> siteIds,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("status" Core..=) Core.<$> status,
             ("subaccountId" Core..=) Core.. Core.AsText
@@ -8753,6 +9339,141 @@ instance Core.ToJSON InventoryItemsListResponse where
           ]
       )
 
+-- | Contains information about a single invoice
+--
+-- /See:/ 'newInvoice' smart constructor.
+data Invoice = Invoice
+  { -- | The list of summarized campaign information associated with this invoice.
+    campaignSummaries :: (Core.Maybe [CampaignSummary]),
+    -- | The originally issued invoice that is being adjusted by this invoice, if applicable. May appear on invoice PDF as /Reference invoice number/.
+    correctedInvoiceId :: (Core.Maybe Core.Text),
+    -- | Invoice currency code in ISO 4217 format.
+    currencyCode :: (Core.Maybe Core.Text),
+    -- | The invoice due date.
+    dueDate :: (Core.Maybe Core.Text),
+    -- | ID of this invoice.
+    id :: (Core.Maybe Core.Text),
+    -- | The type of invoice document.
+    invoiceType :: (Core.Maybe Invoice_InvoiceType),
+    -- | The date when the invoice was issued.
+    issueDate :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#invoice\".
+    kind :: (Core.Maybe Core.Text),
+    -- | The ID of the payments account the invoice belongs to. Appears on the invoice PDF as /Billing Account Number/.
+    paymentsAccountId :: (Core.Maybe Core.Text),
+    -- | The ID of the payments profile the invoice belongs to. Appears on the invoice PDF as /Billing ID/.
+    paymentsProfileId :: (Core.Maybe Core.Text),
+    -- | The URL to download a PDF copy of the invoice. Note that this URL is user specific and requires a valid OAuth 2.0 access token to access. The access token must be provided in an /Authorization: Bearer/ HTTP header. The URL will only be usable for 7 days from when the api is called.
+    pdfUrl :: (Core.Maybe Core.Text),
+    -- | Purchase order number associated with the invoice.
+    purchaseOrderNumber :: (Core.Maybe Core.Text),
+    -- | The originally issued invoice(s) that is being cancelled by this invoice, if applicable. May appear on invoice PDF as /Replaced invoice numbers/. Note: There may be multiple replaced invoices due to consolidation of multiple invoices into a single invoice.
+    replacedInvoiceIds :: (Core.Maybe [Core.Text]),
+    -- | The invoice service end date.
+    serviceEndDate :: (Core.Maybe Core.Text),
+    -- | The invoice service start date.
+    serviceStartDate :: (Core.Maybe Core.Text),
+    -- | The pre-tax subtotal amount, in micros of the invoice\'s currency.
+    subtotalAmountMicros :: (Core.Maybe Core.Int64),
+    -- | The invoice total amount, in micros of the invoice\'s currency.
+    totalAmountMicros :: (Core.Maybe Core.Int64),
+    -- | The sum of all taxes in invoice, in micros of the invoice\'s currency.
+    totalTaxAmountMicros :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Invoice' with the minimum fields required to make a request.
+newInvoice ::
+  Invoice
+newInvoice =
+  Invoice
+    { campaignSummaries = Core.Nothing,
+      correctedInvoiceId = Core.Nothing,
+      currencyCode = Core.Nothing,
+      dueDate = Core.Nothing,
+      id = Core.Nothing,
+      invoiceType = Core.Nothing,
+      issueDate = Core.Nothing,
+      kind = Core.Nothing,
+      paymentsAccountId = Core.Nothing,
+      paymentsProfileId = Core.Nothing,
+      pdfUrl = Core.Nothing,
+      purchaseOrderNumber = Core.Nothing,
+      replacedInvoiceIds = Core.Nothing,
+      serviceEndDate = Core.Nothing,
+      serviceStartDate = Core.Nothing,
+      subtotalAmountMicros = Core.Nothing,
+      totalAmountMicros = Core.Nothing,
+      totalTaxAmountMicros = Core.Nothing
+    }
+
+instance Core.FromJSON Invoice where
+  parseJSON =
+    Core.withObject
+      "Invoice"
+      ( \o ->
+          Invoice
+            Core.<$> (o Core..:? "campaign_summaries")
+            Core.<*> (o Core..:? "correctedInvoiceId")
+            Core.<*> (o Core..:? "currencyCode")
+            Core.<*> (o Core..:? "dueDate")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "invoiceType")
+            Core.<*> (o Core..:? "issueDate")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "paymentsAccountId")
+            Core.<*> (o Core..:? "paymentsProfileId")
+            Core.<*> (o Core..:? "pdfUrl")
+            Core.<*> (o Core..:? "purchaseOrderNumber")
+            Core.<*> (o Core..:? "replacedInvoiceIds")
+            Core.<*> (o Core..:? "serviceEndDate")
+            Core.<*> (o Core..:? "serviceStartDate")
+            Core.<*> ( o Core..:? "subtotalAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o Core..:? "totalTaxAmountMicros"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Invoice where
+  toJSON Invoice {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("campaign_summaries" Core..=)
+              Core.<$> campaignSummaries,
+            ("correctedInvoiceId" Core..=)
+              Core.<$> correctedInvoiceId,
+            ("currencyCode" Core..=) Core.<$> currencyCode,
+            ("dueDate" Core..=) Core.<$> dueDate,
+            ("id" Core..=) Core.<$> id,
+            ("invoiceType" Core..=) Core.<$> invoiceType,
+            ("issueDate" Core..=) Core.<$> issueDate,
+            ("kind" Core..=) Core.<$> kind,
+            ("paymentsAccountId" Core..=)
+              Core.<$> paymentsAccountId,
+            ("paymentsProfileId" Core..=)
+              Core.<$> paymentsProfileId,
+            ("pdfUrl" Core..=) Core.<$> pdfUrl,
+            ("purchaseOrderNumber" Core..=)
+              Core.<$> purchaseOrderNumber,
+            ("replacedInvoiceIds" Core..=)
+              Core.<$> replacedInvoiceIds,
+            ("serviceEndDate" Core..=) Core.<$> serviceEndDate,
+            ("serviceStartDate" Core..=)
+              Core.<$> serviceStartDate,
+            ("subtotalAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> subtotalAmountMicros,
+            ("totalAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> totalAmountMicros,
+            ("totalTaxAmountMicros" Core..=) Core.. Core.AsText
+              Core.<$> totalTaxAmountMicros
+          ]
+      )
+
 -- | Key Value Targeting Expression.
 --
 -- /See:/ 'newKeyValueTargetingExpression' smart constructor.
@@ -9796,7 +10517,9 @@ instance Core.FromJSON ObjectFilter where
       ( \o ->
           ObjectFilter
             Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "objectIds")
+            Core.<*> ( o Core..:? "objectIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "status")
       )
 
@@ -9805,7 +10528,8 @@ instance Core.ToJSON ObjectFilter where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("objectIds" Core..=) Core.<$> objectIds,
+            ("objectIds" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> objectIds,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -10222,7 +10946,9 @@ instance Core.FromJSON Order where
             Core.<*> ( o Core..:? "advertiserId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "approverUserProfileIds")
+            Core.<*> ( o Core..:? "approverUserProfileIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "buyerInvoiceId")
             Core.<*> (o Core..:? "buyerOrganizationName")
             Core.<*> (o Core..:? "comments")
@@ -10240,7 +10966,9 @@ instance Core.FromJSON Order where
                      )
             Core.<*> (o Core..:? "sellerOrderId")
             Core.<*> (o Core..:? "sellerOrganizationName")
-            Core.<*> (o Core..:? "siteId")
+            Core.<*> ( o Core..:? "siteId"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "siteNames")
             Core.<*> ( o Core..:? "subaccountId"
                          Core.<&> Core.fmap Core.fromAsText
@@ -10257,6 +10985,7 @@ instance Core.ToJSON Order where
             ("advertiserId" Core..=) Core.. Core.AsText
               Core.<$> advertiserId,
             ("approverUserProfileIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> approverUserProfileIds,
             ("buyerInvoiceId" Core..=) Core.<$> buyerInvoiceId,
             ("buyerOrganizationName" Core..=)
@@ -10276,7 +11005,8 @@ instance Core.ToJSON Order where
             ("sellerOrderId" Core..=) Core.<$> sellerOrderId,
             ("sellerOrganizationName" Core..=)
               Core.<$> sellerOrganizationName,
-            ("siteId" Core..=) Core.<$> siteId,
+            ("siteId" Core..=) Core.. Core.fmap Core.AsText
+              Core.<$> siteId,
             ("siteNames" Core..=) Core.<$> siteNames,
             ("subaccountId" Core..=) Core.. Core.AsText
               Core.<$> subaccountId,
@@ -10422,7 +11152,9 @@ instance Core.FromJSON OrderDocument where
             Core.<*> ( o Core..:? "amendedOrderDocumentId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "approvedByUserProfileIds")
+            Core.<*> ( o Core..:? "approvedByUserProfileIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "cancelled")
             Core.<*> (o Core..:? "createdInfo")
             Core.<*> (o Core..:? "effectiveDate")
@@ -10455,6 +11187,7 @@ instance Core.ToJSON OrderDocument where
             ("amendedOrderDocumentId" Core..=) Core.. Core.AsText
               Core.<$> amendedOrderDocumentId,
             ("approvedByUserProfileIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> approvedByUserProfileIds,
             ("cancelled" Core..=) Core.<$> cancelled,
             ("createdInfo" Core..=) Core.<$> createdInfo,
@@ -10787,6 +11520,8 @@ instance
 data Placement = Placement
   { -- | Account ID of this placement. This field can be left blank.
     accountId :: (Core.Maybe Core.Int64),
+    -- | Whether this placement is active, inactive, archived or permanently archived.
+    activeStatus :: (Core.Maybe Placement_ActiveStatus),
     -- | Whether this placement opts out of ad blocking. When true, ad blocking is disabled for this placement. When false, the campaign and site settings take effect.
     adBlockingOptOut :: (Core.Maybe Core.Bool),
     -- | Additional sizes associated with this placement. When inserting or updating a placement, only the size ID field is used.
@@ -10795,8 +11530,6 @@ data Placement = Placement
     advertiserId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.
     advertiserIdDimensionValue :: (Core.Maybe DimensionValue),
-    -- | Whether this placement is archived.
-    archived :: (Core.Maybe Core.Bool),
     -- | Campaign ID of this placement. This field is a required field on insertion.
     campaignId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the campaign. This is a read-only, auto-generated field.
@@ -10827,7 +11560,7 @@ data Placement = Placement
     lastModifiedInfo :: (Core.Maybe LastModifiedInfo),
     -- | Lookback window settings for this placement.
     lookbackConfiguration :: (Core.Maybe LookbackConfiguration),
-    -- | Name of this placement.This is a required field and must be less than or equal to 256 characters long.
+    -- | Name of this placement.This is a required field and must be less than or equal to 512 characters long.
     name :: (Core.Maybe Core.Text),
     -- | Measurement partner provided settings for a wrapped placement.
     partnerWrappingData :: (Core.Maybe MeasurementPartnerWrappingData),
@@ -10880,11 +11613,11 @@ newPlacement ::
 newPlacement =
   Placement
     { accountId = Core.Nothing,
+      activeStatus = Core.Nothing,
       adBlockingOptOut = Core.Nothing,
       additionalSizes = Core.Nothing,
       advertiserId = Core.Nothing,
       advertiserIdDimensionValue = Core.Nothing,
-      archived = Core.Nothing,
       campaignId = Core.Nothing,
       campaignIdDimensionValue = Core.Nothing,
       comment = Core.Nothing,
@@ -10933,13 +11666,13 @@ instance Core.FromJSON Placement where
             Core.<$> ( o Core..:? "accountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "activeStatus")
             Core.<*> (o Core..:? "adBlockingOptOut")
             Core.<*> (o Core..:? "additionalSizes")
             Core.<*> ( o Core..:? "advertiserId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> (o Core..:? "archived")
             Core.<*> ( o Core..:? "campaignId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
@@ -10999,6 +11732,7 @@ instance Core.ToJSON Placement where
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.. Core.AsText
               Core.<$> accountId,
+            ("activeStatus" Core..=) Core.<$> activeStatus,
             ("adBlockingOptOut" Core..=)
               Core.<$> adBlockingOptOut,
             ("additionalSizes" Core..=) Core.<$> additionalSizes,
@@ -11006,7 +11740,6 @@ instance Core.ToJSON Placement where
               Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("archived" Core..=) Core.<$> archived,
             ("campaignId" Core..=) Core.. Core.AsText
               Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
@@ -11124,12 +11857,12 @@ instance Core.ToJSON PlacementAssignment where
 data PlacementGroup = PlacementGroup
   { -- | Account ID of this placement group. This is a read-only field that can be left blank.
     accountId :: (Core.Maybe Core.Int64),
+    -- | Whether this placement group is active, inactive, archived or permanently archived.
+    activeStatus :: (Core.Maybe PlacementGroup_ActiveStatus),
     -- | Advertiser ID of this placement group. This is a required field on insertion.
     advertiserId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.
     advertiserIdDimensionValue :: (Core.Maybe DimensionValue),
-    -- | Whether this placement group is archived.
-    archived :: (Core.Maybe Core.Bool),
     -- | Campaign ID of this placement group. This field is required on insertion.
     campaignId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the campaign. This is a read-only, auto-generated field.
@@ -11183,9 +11916,9 @@ newPlacementGroup ::
 newPlacementGroup =
   PlacementGroup
     { accountId = Core.Nothing,
+      activeStatus = Core.Nothing,
       advertiserId = Core.Nothing,
       advertiserIdDimensionValue = Core.Nothing,
-      archived = Core.Nothing,
       campaignId = Core.Nothing,
       campaignIdDimensionValue = Core.Nothing,
       childPlacementIds = Core.Nothing,
@@ -11219,16 +11952,18 @@ instance Core.FromJSON PlacementGroup where
             Core.<$> ( o Core..:? "accountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "activeStatus")
             Core.<*> ( o Core..:? "advertiserId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> (o Core..:? "archived")
             Core.<*> ( o Core..:? "campaignId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "campaignIdDimensionValue")
-            Core.<*> (o Core..:? "childPlacementIds")
+            Core.<*> ( o Core..:? "childPlacementIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "comment")
             Core.<*> ( o Core..:? "contentCategoryId"
                          Core.<&> Core.fmap Core.fromAsText
@@ -11268,16 +12003,17 @@ instance Core.ToJSON PlacementGroup where
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.. Core.AsText
               Core.<$> accountId,
+            ("activeStatus" Core..=) Core.<$> activeStatus,
             ("advertiserId" Core..=) Core.. Core.AsText
               Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("archived" Core..=) Core.<$> archived,
             ("campaignId" Core..=) Core.. Core.AsText
               Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
               Core.<$> campaignIdDimensionValue,
             ("childPlacementIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> childPlacementIds,
             ("comment" Core..=) Core.<$> comment,
             ("contentCategoryId" Core..=) Core.. Core.AsText
@@ -12587,8 +13323,12 @@ instance Core.FromJSON RemarketingListShare where
             Core.<*> ( o Core..:? "remarketingListId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "sharedAccountIds")
-            Core.<*> (o Core..:? "sharedAdvertiserIds")
+            Core.<*> ( o Core..:? "sharedAccountIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> ( o Core..:? "sharedAdvertiserIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
       )
 
 instance Core.ToJSON RemarketingListShare where
@@ -12599,8 +13339,10 @@ instance Core.ToJSON RemarketingListShare where
             ("remarketingListId" Core..=) Core.. Core.AsText
               Core.<$> remarketingListId,
             ("sharedAccountIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> sharedAccountIds,
             ("sharedAdvertiserIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> sharedAdvertiserIds
           ]
       )
@@ -13497,7 +14239,9 @@ data Report_Schedule = Report_Schedule
     -- | Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Example: If \'startDate\' is Monday, April 2nd 2012 (2012-04-02), \"DAY/OF/MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK/OF/MONTH\" would run subsequent reports on the first Monday of the month.
     runsOnDayOfMonth :: (Core.Maybe Report_Schedule_RunsOnDayOfMonth),
     -- |
-    startDate :: (Core.Maybe Core.Date)
+    startDate :: (Core.Maybe Core.Date),
+    -- | The timezone when the report will run.
+    timezone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -13512,7 +14256,8 @@ newReport_Schedule =
       repeats = Core.Nothing,
       repeatsOnWeekDays = Core.Nothing,
       runsOnDayOfMonth = Core.Nothing,
-      startDate = Core.Nothing
+      startDate = Core.Nothing,
+      timezone = Core.Nothing
     }
 
 instance Core.FromJSON Report_Schedule where
@@ -13528,6 +14273,7 @@ instance Core.FromJSON Report_Schedule where
             Core.<*> (o Core..:? "repeatsOnWeekDays")
             Core.<*> (o Core..:? "runsOnDayOfMonth")
             Core.<*> (o Core..:? "startDate")
+            Core.<*> (o Core..:? "timezone")
       )
 
 instance Core.ToJSON Report_Schedule where
@@ -13542,7 +14288,8 @@ instance Core.ToJSON Report_Schedule where
               Core.<$> repeatsOnWeekDays,
             ("runsOnDayOfMonth" Core..=)
               Core.<$> runsOnDayOfMonth,
-            ("startDate" Core..=) Core.<$> startDate
+            ("startDate" Core..=) Core.<$> startDate,
+            ("timezone" Core..=) Core.<$> timezone
           ]
       )
 
@@ -14188,6 +14935,8 @@ data SiteVideoSettings = SiteVideoSettings
     obaSettings :: (Core.Maybe ObaIcon),
     -- | Orientation of a site template used for video. This will act as default for new placements created under this site.
     orientation :: (Core.Maybe SiteVideoSettings_Orientation),
+    -- | Publisher specification ID used to identify site-associated publisher requirements and automatically populate transcode settings. If publisher specification ID is specified, it will take precedence over transcode settings.
+    publisherSpecificationId :: (Core.Maybe Core.Int64),
     -- | Settings for the skippability of video creatives served to this site. This will act as default for new placements created under this site.
     skippableSettings :: (Core.Maybe SiteSkippableSetting),
     -- | Settings for the transcodes of video creatives served to this site. This will act as default for new placements created under this site.
@@ -14205,6 +14954,7 @@ newSiteVideoSettings =
       obaEnabled = Core.Nothing,
       obaSettings = Core.Nothing,
       orientation = Core.Nothing,
+      publisherSpecificationId = Core.Nothing,
       skippableSettings = Core.Nothing,
       transcodeSettings = Core.Nothing
     }
@@ -14220,6 +14970,9 @@ instance Core.FromJSON SiteVideoSettings where
             Core.<*> (o Core..:? "obaEnabled")
             Core.<*> (o Core..:? "obaSettings")
             Core.<*> (o Core..:? "orientation")
+            Core.<*> ( o Core..:? "publisherSpecificationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "skippableSettings")
             Core.<*> (o Core..:? "transcodeSettings")
       )
@@ -14234,6 +14987,9 @@ instance Core.ToJSON SiteVideoSettings where
             ("obaEnabled" Core..=) Core.<$> obaEnabled,
             ("obaSettings" Core..=) Core.<$> obaSettings,
             ("orientation" Core..=) Core.<$> orientation,
+            ("publisherSpecificationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> publisherSpecificationId,
             ("skippableSettings" Core..=)
               Core.<$> skippableSettings,
             ("transcodeSettings" Core..=)
@@ -14505,7 +15261,9 @@ instance Core.FromJSON Subaccount where
             Core.<$> ( o Core..:? "accountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> (o Core..:? "availablePermissionIds")
+            Core.<*> ( o Core..:? "availablePermissionIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
@@ -14518,6 +15276,7 @@ instance Core.ToJSON Subaccount where
           [ ("accountId" Core..=) Core.. Core.AsText
               Core.<$> accountId,
             ("availablePermissionIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> availablePermissionIds,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
@@ -15751,6 +16510,62 @@ instance Core.ToJSON UserRolesListResponse where
           ]
       )
 
+-- | Defines the filtering on a single uvar.
+--
+-- /See:/ 'newUvarFilter' smart constructor.
+data UvarFilter = UvarFilter
+  { -- | Return rows which don\'t match this filter.
+    complement :: (Core.Maybe Core.Bool),
+    -- | Custom variable index the filter is applied to.
+    index :: (Core.Maybe Core.Int64),
+    -- | The kind of resource this is, in this case dfareporting#uvarFilter.
+    kind :: (Core.Maybe Core.Text),
+    -- | Indicates how the filter should be matched to the values.
+    match :: (Core.Maybe UvarFilter_Match),
+    -- | Values to filter on.
+    values :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UvarFilter' with the minimum fields required to make a request.
+newUvarFilter ::
+  UvarFilter
+newUvarFilter =
+  UvarFilter
+    { complement = Core.Nothing,
+      index = Core.Nothing,
+      kind = Core.Nothing,
+      match = Core.Nothing,
+      values = Core.Nothing
+    }
+
+instance Core.FromJSON UvarFilter where
+  parseJSON =
+    Core.withObject
+      "UvarFilter"
+      ( \o ->
+          UvarFilter
+            Core.<$> (o Core..:? "complement")
+            Core.<*> ( o Core..:? "index"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "match")
+            Core.<*> (o Core..:? "values")
+      )
+
+instance Core.ToJSON UvarFilter where
+  toJSON UvarFilter {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("complement" Core..=) Core.<$> complement,
+            ("index" Core..=) Core.. Core.AsText Core.<$> index,
+            ("kind" Core..=) Core.<$> kind,
+            ("match" Core..=) Core.<$> match,
+            ("values" Core..=) Core.<$> values
+          ]
+      )
+
 -- | Contains information about supported video formats.
 --
 -- /See:/ 'newVideoFormat' smart constructor.
@@ -15894,6 +16709,8 @@ data VideoSettings = VideoSettings
     obaSettings :: (Core.Maybe ObaIcon),
     -- | Orientation of a video placement. If this value is set, placement will return assets matching the specified orientation.
     orientation :: (Core.Maybe VideoSettings_Orientation),
+    -- | Publisher specification ID of a video placement.
+    publisherSpecificationId :: (Core.Maybe Core.Int64),
     -- | Settings for the skippability of video creatives served to this placement. If this object is provided, the creative-level skippable settings will be overridden.
     skippableSettings :: (Core.Maybe SkippableSetting),
     -- | Settings for the transcodes of video creatives served to this placement. If this object is provided, the creative-level transcode settings will be overridden.
@@ -15912,6 +16729,7 @@ newVideoSettings =
       obaEnabled = Core.Nothing,
       obaSettings = Core.Nothing,
       orientation = Core.Nothing,
+      publisherSpecificationId = Core.Nothing,
       skippableSettings = Core.Nothing,
       transcodeSettings = Core.Nothing
     }
@@ -15928,6 +16746,9 @@ instance Core.FromJSON VideoSettings where
             Core.<*> (o Core..:? "obaEnabled")
             Core.<*> (o Core..:? "obaSettings")
             Core.<*> (o Core..:? "orientation")
+            Core.<*> ( o Core..:? "publisherSpecificationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "skippableSettings")
             Core.<*> (o Core..:? "transcodeSettings")
       )
@@ -15943,6 +16764,9 @@ instance Core.ToJSON VideoSettings where
             ("obaEnabled" Core..=) Core.<$> obaEnabled,
             ("obaSettings" Core..=) Core.<$> obaSettings,
             ("orientation" Core..=) Core.<$> orientation,
+            ("publisherSpecificationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> publisherSpecificationId,
             ("skippableSettings" Core..=)
               Core.<$> skippableSettings,
             ("transcodeSettings" Core..=)

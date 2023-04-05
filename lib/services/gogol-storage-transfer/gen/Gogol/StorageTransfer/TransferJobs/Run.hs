@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error will be returned.
+-- Starts a new operation for the specified transfer job. A @TransferJob@ has a maximum of one active @TransferOperation@. If this method is called while a @TransferOperation@ is active, an error is returned.
 --
 -- /See:/ <https://cloud.google.com/storage-transfer/docs Storage Transfer API Reference> for @storagetransfer.transferJobs.run@.
 module Gogol.StorageTransfer.TransferJobs.Run
@@ -56,7 +56,7 @@ type StorageTransferTransferJobsRunResource =
     Core.:> Core.ReqBody '[Core.JSON] RunTransferJobRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Attempts to start a new TransferOperation for the current TransferJob. A TransferJob has a maximum of one active TransferOperation. If this method is called while a TransferOperation is active, an error will be returned.
+-- | Starts a new operation for the specified transfer job. A @TransferJob@ has a maximum of one active @TransferOperation@. If this method is called while a @TransferOperation@ is active, an error is returned.
 --
 -- /See:/ 'newStorageTransferTransferJobsRun' smart constructor.
 data StorageTransferTransferJobsRun = StorageTransferTransferJobsRun

@@ -265,13 +265,8 @@ module Gogol.Dataflow.Internal.Sum
         ParameterMetadata_ParamType_GCSWRITEFOLDER,
         ParameterMetadata_ParamType_PUBSUBTOPIC,
         ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION,
-        ..
-      ),
-
-    -- * QueryInfo_QueryPropertyItem
-    QueryInfo_QueryPropertyItem
-      ( QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED,
-        QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE,
+        ParameterMetadata_ParamType_BIGQUERYTABLE,
+        ParameterMetadata_ParamType_JAVASCRIPTUDFFILE,
         ..
       ),
 
@@ -288,6 +283,7 @@ module Gogol.Dataflow.Internal.Sum
       ( SDKInfo_Language_Unknown,
         SDKInfo_Language_Java,
         SDKInfo_Language_Python,
+        SDKInfo_Language_GO,
         ..
       ),
 
@@ -1570,6 +1566,14 @@ pattern ParameterMetadata_ParamType_PUBSUBTOPIC = ParameterMetadata_ParamType "P
 pattern ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION :: ParameterMetadata_ParamType
 pattern ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION = ParameterMetadata_ParamType "PUBSUB_SUBSCRIPTION"
 
+-- | The parameter specifies a BigQuery table.
+pattern ParameterMetadata_ParamType_BIGQUERYTABLE :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_BIGQUERYTABLE = ParameterMetadata_ParamType "BIGQUERY_TABLE"
+
+-- | The parameter specifies a JavaScript UDF in Cloud Storage.
+pattern ParameterMetadata_ParamType_JAVASCRIPTUDFFILE :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_JAVASCRIPTUDFFILE = ParameterMetadata_ParamType "JAVASCRIPT_UDF_FILE"
+
 {-# COMPLETE
   ParameterMetadata_ParamType_Default,
   ParameterMetadata_ParamType_Text,
@@ -1581,36 +1585,12 @@ pattern ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION = ParameterMetadata_Param
   ParameterMetadata_ParamType_GCSWRITEFOLDER,
   ParameterMetadata_ParamType_PUBSUBTOPIC,
   ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION,
+  ParameterMetadata_ParamType_BIGQUERYTABLE,
+  ParameterMetadata_ParamType_JAVASCRIPTUDFFILE,
   ParameterMetadata_ParamType
   #-}
 
-newtype QueryInfo_QueryPropertyItem = QueryInfo_QueryPropertyItem {fromQueryInfo_QueryPropertyItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | The query property is unknown or unspecified.
-pattern QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED :: QueryInfo_QueryPropertyItem
-pattern QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED = QueryInfo_QueryPropertyItem "QUERY_PROPERTY_UNSPECIFIED"
-
--- | Indicates this query reads from >= 1 unbounded source.
-pattern QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE :: QueryInfo_QueryPropertyItem
-pattern QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE = QueryInfo_QueryPropertyItem "HAS_UNBOUNDED_SOURCE"
-
-{-# COMPLETE
-  QueryInfo_QueryPropertyItem_QUERYPROPERTYUNSPECIFIED,
-  QueryInfo_QueryPropertyItem_HASUNBOUNDEDSOURCE,
-  QueryInfo_QueryPropertyItem
-  #-}
-
--- | Configuration for VM IPs.
+-- | Optional. Configuration for VM IPs.
 newtype RuntimeEnvironment_IpConfiguration = RuntimeEnvironment_IpConfiguration {fromRuntimeEnvironment_IpConfiguration :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1667,10 +1647,15 @@ pattern SDKInfo_Language_Java = SDKInfo_Language "JAVA"
 pattern SDKInfo_Language_Python :: SDKInfo_Language
 pattern SDKInfo_Language_Python = SDKInfo_Language "PYTHON"
 
+-- | Go.
+pattern SDKInfo_Language_GO :: SDKInfo_Language
+pattern SDKInfo_Language_GO = SDKInfo_Language "GO"
+
 {-# COMPLETE
   SDKInfo_Language_Unknown,
   SDKInfo_Language_Java,
   SDKInfo_Language_Python,
+  SDKInfo_Language_GO,
   SDKInfo_Language
   #-}
 
@@ -2283,7 +2268,7 @@ pattern ProjectsJobsAggregatedView_JOBVIEWUNKNOWN = ProjectsJobsAggregatedView "
 pattern ProjectsJobsAggregatedView_JOBVIEWSUMMARY :: ProjectsJobsAggregatedView
 pattern ProjectsJobsAggregatedView_JOBVIEWSUMMARY = ProjectsJobsAggregatedView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsJobsAggregatedView_JOBVIEWALL :: ProjectsJobsAggregatedView
 pattern ProjectsJobsAggregatedView_JOBVIEWALL = ProjectsJobsAggregatedView "JOB_VIEW_ALL"
 
@@ -2320,7 +2305,7 @@ pattern ProjectsJobsCreateView_JOBVIEWUNKNOWN = ProjectsJobsCreateView "JOB_VIEW
 pattern ProjectsJobsCreateView_JOBVIEWSUMMARY :: ProjectsJobsCreateView
 pattern ProjectsJobsCreateView_JOBVIEWSUMMARY = ProjectsJobsCreateView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsJobsCreateView_JOBVIEWALL :: ProjectsJobsCreateView
 pattern ProjectsJobsCreateView_JOBVIEWALL = ProjectsJobsCreateView "JOB_VIEW_ALL"
 
@@ -2357,7 +2342,7 @@ pattern ProjectsJobsGetView_JOBVIEWUNKNOWN = ProjectsJobsGetView "JOB_VIEW_UNKNO
 pattern ProjectsJobsGetView_JOBVIEWSUMMARY :: ProjectsJobsGetView
 pattern ProjectsJobsGetView_JOBVIEWSUMMARY = ProjectsJobsGetView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsJobsGetView_JOBVIEWALL :: ProjectsJobsGetView
 pattern ProjectsJobsGetView_JOBVIEWALL = ProjectsJobsGetView "JOB_VIEW_ALL"
 
@@ -2431,7 +2416,7 @@ pattern ProjectsJobsListView_JOBVIEWUNKNOWN = ProjectsJobsListView "JOB_VIEW_UNK
 pattern ProjectsJobsListView_JOBVIEWSUMMARY :: ProjectsJobsListView
 pattern ProjectsJobsListView_JOBVIEWSUMMARY = ProjectsJobsListView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsJobsListView_JOBVIEWALL :: ProjectsJobsListView
 pattern ProjectsJobsListView_JOBVIEWALL = ProjectsJobsListView "JOB_VIEW_ALL"
 
@@ -2515,7 +2500,7 @@ pattern ProjectsLocationsJobsCreateView_JOBVIEWUNKNOWN = ProjectsLocationsJobsCr
 pattern ProjectsLocationsJobsCreateView_JOBVIEWSUMMARY :: ProjectsLocationsJobsCreateView
 pattern ProjectsLocationsJobsCreateView_JOBVIEWSUMMARY = ProjectsLocationsJobsCreateView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsLocationsJobsCreateView_JOBVIEWALL :: ProjectsLocationsJobsCreateView
 pattern ProjectsLocationsJobsCreateView_JOBVIEWALL = ProjectsLocationsJobsCreateView "JOB_VIEW_ALL"
 
@@ -2552,7 +2537,7 @@ pattern ProjectsLocationsJobsGetView_JOBVIEWUNKNOWN = ProjectsLocationsJobsGetVi
 pattern ProjectsLocationsJobsGetView_JOBVIEWSUMMARY :: ProjectsLocationsJobsGetView
 pattern ProjectsLocationsJobsGetView_JOBVIEWSUMMARY = ProjectsLocationsJobsGetView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsLocationsJobsGetView_JOBVIEWALL :: ProjectsLocationsJobsGetView
 pattern ProjectsLocationsJobsGetView_JOBVIEWALL = ProjectsLocationsJobsGetView "JOB_VIEW_ALL"
 
@@ -2626,7 +2611,7 @@ pattern ProjectsLocationsJobsListView_JOBVIEWUNKNOWN = ProjectsLocationsJobsList
 pattern ProjectsLocationsJobsListView_JOBVIEWSUMMARY :: ProjectsLocationsJobsListView
 pattern ProjectsLocationsJobsListView_JOBVIEWSUMMARY = ProjectsLocationsJobsListView "JOB_VIEW_SUMMARY"
 
--- | Request all information available for this job.
+-- | Request all information available for this job. When the job is in @JOB_STATE_PENDING@, the job has been created but is not yet running, and not all job information is available. For complete job information, wait until the job in is @JOB_STATE_RUNNING@. For more information, see <https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate JobState>.
 pattern ProjectsLocationsJobsListView_JOBVIEWALL :: ProjectsLocationsJobsListView
 pattern ProjectsLocationsJobsListView_JOBVIEWALL = ProjectsLocationsJobsListView "JOB_VIEW_ALL"
 

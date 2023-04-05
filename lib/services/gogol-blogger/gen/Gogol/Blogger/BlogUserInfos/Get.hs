@@ -28,7 +28,7 @@
 --
 -- Gets one blog and user info pair by blog id and user id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.blogUserInfos.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogUserInfos.get@.
 module Gogol.Blogger.BlogUserInfos.Get
   ( -- * Resource
     BloggerBlogUserInfosGetResource,

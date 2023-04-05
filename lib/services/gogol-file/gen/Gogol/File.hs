@@ -238,6 +238,10 @@ module Gogol.File
     GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata,
 
+    -- ** GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter (..),
+    newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter,
+
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
     GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility,

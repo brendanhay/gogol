@@ -98,6 +98,26 @@ module Gogol.Dataproc
     DataprocProjectsLocationsBatchesList (..),
     newDataprocProjectsLocationsBatchesList,
 
+    -- ** dataproc.projects.locations.operations.cancel
+    DataprocProjectsLocationsOperationsCancelResource,
+    DataprocProjectsLocationsOperationsCancel (..),
+    newDataprocProjectsLocationsOperationsCancel,
+
+    -- ** dataproc.projects.locations.operations.delete
+    DataprocProjectsLocationsOperationsDeleteResource,
+    DataprocProjectsLocationsOperationsDelete (..),
+    newDataprocProjectsLocationsOperationsDelete,
+
+    -- ** dataproc.projects.locations.operations.get
+    DataprocProjectsLocationsOperationsGetResource,
+    DataprocProjectsLocationsOperationsGet (..),
+    newDataprocProjectsLocationsOperationsGet,
+
+    -- ** dataproc.projects.locations.operations.list
+    DataprocProjectsLocationsOperationsListResource,
+    DataprocProjectsLocationsOperationsList (..),
+    newDataprocProjectsLocationsOperationsList,
+
     -- ** dataproc.projects.locations.workflowTemplates.create
     DataprocProjectsLocationsWorkflowTemplatesCreateResource,
     DataprocProjectsLocationsWorkflowTemplatesCreate (..),
@@ -222,6 +242,21 @@ module Gogol.Dataproc
     DataprocProjectsRegionsClustersListResource,
     DataprocProjectsRegionsClustersList (..),
     newDataprocProjectsRegionsClustersList,
+
+    -- ** dataproc.projects.regions.clusters.nodeGroups.create
+    DataprocProjectsRegionsClustersNodeGroupsCreateResource,
+    DataprocProjectsRegionsClustersNodeGroupsCreate (..),
+    newDataprocProjectsRegionsClustersNodeGroupsCreate,
+
+    -- ** dataproc.projects.regions.clusters.nodeGroups.get
+    DataprocProjectsRegionsClustersNodeGroupsGetResource,
+    DataprocProjectsRegionsClustersNodeGroupsGet (..),
+    newDataprocProjectsRegionsClustersNodeGroupsGet,
+
+    -- ** dataproc.projects.regions.clusters.nodeGroups.resize
+    DataprocProjectsRegionsClustersNodeGroupsResizeResource,
+    DataprocProjectsRegionsClustersNodeGroupsResize (..),
+    newDataprocProjectsRegionsClustersNodeGroupsResize,
 
     -- ** dataproc.projects.regions.clusters.patch
     DataprocProjectsRegionsClustersPatchResource,
@@ -409,6 +444,14 @@ module Gogol.Dataproc
     AutoscalingPolicy_Labels (..),
     newAutoscalingPolicy_Labels,
 
+    -- ** AuxiliaryNodeGroup
+    AuxiliaryNodeGroup (..),
+    newAuxiliaryNodeGroup,
+
+    -- ** AuxiliaryServicesConfig
+    AuxiliaryServicesConfig (..),
+    newAuxiliaryServicesConfig,
+
     -- ** BasicAutoscalingAlgorithm
     BasicAutoscalingAlgorithm (..),
     newBasicAutoscalingAlgorithm,
@@ -528,6 +571,10 @@ module Gogol.Dataproc
     DiskConfig (..),
     newDiskConfig,
 
+    -- ** DriverSchedulingConfig
+    DriverSchedulingConfig (..),
+    newDriverSchedulingConfig,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -578,6 +625,29 @@ module Gogol.Dataproc
     -- ** GkeClusterConfig
     GkeClusterConfig (..),
     newGkeClusterConfig,
+
+    -- ** GkeNodeConfig
+    GkeNodeConfig (..),
+    newGkeNodeConfig,
+
+    -- ** GkeNodePoolAcceleratorConfig
+    GkeNodePoolAcceleratorConfig (..),
+    newGkeNodePoolAcceleratorConfig,
+
+    -- ** GkeNodePoolAutoscalingConfig
+    GkeNodePoolAutoscalingConfig (..),
+    newGkeNodePoolAutoscalingConfig,
+
+    -- ** GkeNodePoolConfig
+    GkeNodePoolConfig (..),
+    newGkeNodePoolConfig,
+
+    -- ** GkeNodePoolTarget
+    GkeNodePoolTarget (..),
+    newGkeNodePoolTarget,
+
+    -- ** GkeNodePoolTarget_RolesItem
+    GkeNodePoolTarget_RolesItem (..),
 
     -- ** HadoopJob
     HadoopJob (..),
@@ -634,6 +704,10 @@ module Gogol.Dataproc
     InstantiateWorkflowTemplateRequest_Parameters (..),
     newInstantiateWorkflowTemplateRequest_Parameters,
 
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
     -- ** Job
     Job (..),
     newJob,
@@ -675,6 +749,22 @@ module Gogol.Dataproc
     -- ** KerberosConfig
     KerberosConfig (..),
     newKerberosConfig,
+
+    -- ** KubernetesClusterConfig
+    KubernetesClusterConfig (..),
+    newKubernetesClusterConfig,
+
+    -- ** KubernetesSoftwareConfig
+    KubernetesSoftwareConfig (..),
+    newKubernetesSoftwareConfig,
+
+    -- ** KubernetesSoftwareConfig_ComponentVersion
+    KubernetesSoftwareConfig_ComponentVersion (..),
+    newKubernetesSoftwareConfig_ComponentVersion,
+
+    -- ** KubernetesSoftwareConfig_Properties
+    KubernetesSoftwareConfig_Properties (..),
+    newKubernetesSoftwareConfig_Properties,
 
     -- ** LifecycleConfig
     LifecycleConfig (..),
@@ -742,13 +832,42 @@ module Gogol.Dataproc
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
 
+    -- ** NodeGroup
+    NodeGroup (..),
+    newNodeGroup,
+
+    -- ** NodeGroup_Labels
+    NodeGroup_Labels (..),
+    newNodeGroup_Labels,
+
+    -- ** NodeGroup_RolesItem
+    NodeGroup_RolesItem (..),
+
     -- ** NodeGroupAffinity
     NodeGroupAffinity (..),
     newNodeGroupAffinity,
 
+    -- ** NodeGroupOperationMetadata
+    NodeGroupOperationMetadata (..),
+    newNodeGroupOperationMetadata,
+
+    -- ** NodeGroupOperationMetadata_Labels
+    NodeGroupOperationMetadata_Labels (..),
+    newNodeGroupOperationMetadata_Labels,
+
+    -- ** NodeGroupOperationMetadata_OperationType
+    NodeGroupOperationMetadata_OperationType (..),
+
     -- ** NodeInitializationAction
     NodeInitializationAction (..),
     newNodeInitializationAction,
+
+    -- ** NodePool
+    NodePool (..),
+    newNodePool,
+
+    -- ** NodePool_RepairAction
+    NodePool_RepairAction (..),
 
     -- ** Operation
     Operation (..),
@@ -832,6 +951,10 @@ module Gogol.Dataproc
 
     -- ** ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType (..),
+
+    -- ** ResizeNodeGroupRequest
+    ResizeNodeGroupRequest (..),
+    newResizeNodeGroupRequest,
 
     -- ** RuntimeConfig
     RuntimeConfig (..),
@@ -974,9 +1097,29 @@ module Gogol.Dataproc
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** TrinoJob
+    TrinoJob (..),
+    newTrinoJob,
+
+    -- ** TrinoJob_Properties
+    TrinoJob_Properties (..),
+    newTrinoJob_Properties,
+
+    -- ** UsageMetrics
+    UsageMetrics (..),
+    newUsageMetrics,
+
+    -- ** UsageSnapshot
+    UsageSnapshot (..),
+    newUsageSnapshot,
+
     -- ** ValueValidation
     ValueValidation (..),
     newValueValidation,
+
+    -- ** VirtualClusterConfig
+    VirtualClusterConfig (..),
+    newVirtualClusterConfig,
 
     -- ** WorkflowGraph
     WorkflowGraph (..),
@@ -1039,6 +1182,10 @@ import Gogol.Dataproc.Projects.Locations.Batches.Create
 import Gogol.Dataproc.Projects.Locations.Batches.Delete
 import Gogol.Dataproc.Projects.Locations.Batches.Get
 import Gogol.Dataproc.Projects.Locations.Batches.List
+import Gogol.Dataproc.Projects.Locations.Operations.Cancel
+import Gogol.Dataproc.Projects.Locations.Operations.Delete
+import Gogol.Dataproc.Projects.Locations.Operations.Get
+import Gogol.Dataproc.Projects.Locations.Operations.List
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
@@ -1064,6 +1211,9 @@ import Gogol.Dataproc.Projects.Regions.Clusters.Get
 import Gogol.Dataproc.Projects.Regions.Clusters.GetIamPolicy
 import Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
 import Gogol.Dataproc.Projects.Regions.Clusters.List
+import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
+import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Get
+import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Resize
 import Gogol.Dataproc.Projects.Regions.Clusters.Patch
 import Gogol.Dataproc.Projects.Regions.Clusters.Repair
 import Gogol.Dataproc.Projects.Regions.Clusters.SetIamPolicy

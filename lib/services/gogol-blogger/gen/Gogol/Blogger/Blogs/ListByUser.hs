@@ -28,7 +28,7 @@
 --
 -- Lists blogs by user.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.blogs.listByUser@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogs.listByUser@.
 module Gogol.Blogger.Blogs.ListByUser
   ( -- * Resource
     BloggerBlogsListByUserResource,

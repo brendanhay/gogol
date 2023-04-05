@@ -21,7 +21,7 @@ description:
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
   .
-  This library is compatible with version @v1.1@
+  This library is compatible with version @v2@
   of the API.
 
 source-repository head
@@ -49,12 +49,13 @@ library
 
   exposed-modules:
     Gogol.DoubleClickBids
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Createquery
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Deletequery
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Getquery
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Listqueries
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Runquery
-    Gogol.DoubleClickBids.Doubleclickbidmanager.Reports.Listreports
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Create
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Get
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.List
+    Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
     Gogol.DoubleClickBids.Types
 
   other-modules:
@@ -62,5 +63,5 @@ library
     Gogol.DoubleClickBids.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

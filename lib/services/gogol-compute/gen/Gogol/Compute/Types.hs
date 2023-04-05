@@ -119,6 +119,9 @@ module Gogol.Compute.Types
     -- ** Address_IpVersion
     Address_IpVersion (..),
 
+    -- ** Address_Ipv6EndpointType
+    Address_Ipv6EndpointType (..),
+
     -- ** Address_NetworkTier
     Address_NetworkTier (..),
 
@@ -185,6 +188,14 @@ module Gogol.Compute.Types
     AliasIpRange (..),
     newAliasIpRange,
 
+    -- ** AllocationResourceStatus
+    AllocationResourceStatus (..),
+    newAllocationResourceStatus,
+
+    -- ** AllocationResourceStatusSpecificSKUAllocation
+    AllocationResourceStatusSpecificSKUAllocation (..),
+    newAllocationResourceStatusSpecificSKUAllocation,
+
     -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
     newAllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk,
@@ -204,6 +215,9 @@ module Gogol.Compute.Types
     AttachedDisk (..),
     newAttachedDisk,
 
+    -- ** AttachedDisk_Architecture
+    AttachedDisk_Architecture (..),
+
     -- ** AttachedDisk_Interface
     AttachedDisk_Interface (..),
 
@@ -217,12 +231,19 @@ module Gogol.Compute.Types
     AttachedDiskInitializeParams (..),
     newAttachedDiskInitializeParams,
 
+    -- ** AttachedDiskInitializeParams_Architecture
+    AttachedDiskInitializeParams_Architecture (..),
+
     -- ** AttachedDiskInitializeParams_Labels
     AttachedDiskInitializeParams_Labels (..),
     newAttachedDiskInitializeParams_Labels,
 
     -- ** AttachedDiskInitializeParams_OnUpdateAction
     AttachedDiskInitializeParams_OnUpdateAction (..),
+
+    -- ** AttachedDiskInitializeParams_ResourceManagerTags
+    AttachedDiskInitializeParams_ResourceManagerTags (..),
+    newAttachedDiskInitializeParams_ResourceManagerTags,
 
     -- ** AuditConfig
     AuditConfig (..),
@@ -357,6 +378,9 @@ module Gogol.Compute.Types
     BackendBucket (..),
     newBackendBucket,
 
+    -- ** BackendBucket_CompressionMode
+    BackendBucket_CompressionMode (..),
+
     -- ** BackendBucketCdnPolicy
     BackendBucketCdnPolicy (..),
     newBackendBucketCdnPolicy,
@@ -394,6 +418,9 @@ module Gogol.Compute.Types
     -- ** BackendService
     BackendService (..),
     newBackendService,
+
+    -- ** BackendService_CompressionMode
+    BackendService_CompressionMode (..),
 
     -- ** BackendService_LoadBalancingScheme
     BackendService_LoadBalancingScheme (..),
@@ -482,9 +509,27 @@ module Gogol.Compute.Types
     BackendServiceList_Warning_DataItem (..),
     newBackendServiceList_Warning_DataItem,
 
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfig
+    BackendServiceLocalityLoadBalancingPolicyConfig (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfig,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy
+    BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigPolicy
+    BackendServiceLocalityLoadBalancingPolicyConfigPolicy (..),
+    newBackendServiceLocalityLoadBalancingPolicyConfigPolicy,
+
+    -- ** BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+    BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name (..),
+
     -- ** BackendServiceLogConfig
     BackendServiceLogConfig (..),
     newBackendServiceLogConfig,
+
+    -- ** BackendServiceLogConfig_OptionalMode
+    BackendServiceLogConfig_OptionalMode (..),
 
     -- ** BackendServiceReference
     BackendServiceReference (..),
@@ -677,6 +722,9 @@ module Gogol.Compute.Types
     Disk (..),
     newDisk,
 
+    -- ** Disk_Architecture
+    Disk_Architecture (..),
+
     -- ** Disk_Labels
     Disk_Labels (..),
     newDisk_Labels,
@@ -728,6 +776,14 @@ module Gogol.Compute.Types
     -- ** DiskMoveRequest
     DiskMoveRequest (..),
     newDiskMoveRequest,
+
+    -- ** DiskParams
+    DiskParams (..),
+    newDiskParams,
+
+    -- ** DiskParams_ResourceManagerTags
+    DiskParams_ResourceManagerTags (..),
+    newDiskParams_ResourceManagerTags,
 
     -- ** DiskType
     DiskType (..),
@@ -827,6 +883,14 @@ module Gogol.Compute.Types
     -- ** Duration
     Duration (..),
     newDuration,
+
+    -- ** ErrorInfo
+    ErrorInfo (..),
+    newErrorInfo,
+
+    -- ** ErrorInfo_Metadatas
+    ErrorInfo_Metadatas (..),
+    newErrorInfo_Metadatas,
 
     -- ** ExchangedPeeringRoute
     ExchangedPeeringRoute (..),
@@ -1252,6 +1316,14 @@ module Gogol.Compute.Types
     -- ** HealthStatusForNetworkEndpoint_HealthState
     HealthStatusForNetworkEndpoint_HealthState (..),
 
+    -- ** Help
+    Help (..),
+    newHelp,
+
+    -- ** HelpLink
+    HelpLink (..),
+    newHelpLink,
+
     -- ** HostRule
     HostRule (..),
     newHostRule,
@@ -1349,6 +1421,9 @@ module Gogol.Compute.Types
     Image (..),
     newImage,
 
+    -- ** Image_Architecture
+    Image_Architecture (..),
+
     -- ** Image_Labels
     Image_Labels (..),
     newImage_Labels,
@@ -1393,6 +1468,9 @@ module Gogol.Compute.Types
     Instance (..),
     newInstance,
 
+    -- ** Instance_KeyRevocationActionType
+    Instance_KeyRevocationActionType (..),
+
     -- ** Instance_Labels
     Instance_Labels (..),
     newInstance_Labels,
@@ -1421,6 +1499,14 @@ module Gogol.Compute.Types
     -- ** InstanceAggregatedList_Warning_DataItem
     InstanceAggregatedList_Warning_DataItem (..),
     newInstanceAggregatedList_Warning_DataItem,
+
+    -- ** InstanceConsumptionData
+    InstanceConsumptionData (..),
+    newInstanceConsumptionData,
+
+    -- ** InstanceConsumptionInfo
+    InstanceConsumptionInfo (..),
+    newInstanceConsumptionInfo,
 
     -- ** InstanceGroup
     InstanceGroup (..),
@@ -1463,6 +1549,9 @@ module Gogol.Compute.Types
     -- ** InstanceGroupManager
     InstanceGroupManager (..),
     newInstanceGroupManager,
+
+    -- ** InstanceGroupManager_ListManagedInstancesResults
+    InstanceGroupManager_ListManagedInstancesResults (..),
 
     -- ** InstanceGroupManagerActionsSummary
     InstanceGroupManagerActionsSummary (..),
@@ -1739,6 +1828,9 @@ module Gogol.Compute.Types
     InstanceProperties (..),
     newInstanceProperties,
 
+    -- ** InstanceProperties_KeyRevocationActionType
+    InstanceProperties_KeyRevocationActionType (..),
+
     -- ** InstanceProperties_Labels
     InstanceProperties_Labels (..),
     newInstanceProperties_Labels,
@@ -1758,6 +1850,25 @@ module Gogol.Compute.Types
     InstanceTemplate (..),
     newInstanceTemplate,
 
+    -- ** InstanceTemplateAggregatedList
+    InstanceTemplateAggregatedList (..),
+    newInstanceTemplateAggregatedList,
+
+    -- ** InstanceTemplateAggregatedList_Items
+    InstanceTemplateAggregatedList_Items (..),
+    newInstanceTemplateAggregatedList_Items,
+
+    -- ** InstanceTemplateAggregatedList_Warning
+    InstanceTemplateAggregatedList_Warning (..),
+    newInstanceTemplateAggregatedList_Warning,
+
+    -- ** InstanceTemplateAggregatedList_Warning_Code
+    InstanceTemplateAggregatedList_Warning_Code (..),
+
+    -- ** InstanceTemplateAggregatedList_Warning_DataItem
+    InstanceTemplateAggregatedList_Warning_DataItem (..),
+    newInstanceTemplateAggregatedList_Warning_DataItem,
+
     -- ** InstanceTemplateList
     InstanceTemplateList (..),
     newInstanceTemplateList,
@@ -1772,6 +1883,21 @@ module Gogol.Compute.Types
     -- ** InstanceTemplateList_Warning_DataItem
     InstanceTemplateList_Warning_DataItem (..),
     newInstanceTemplateList_Warning_DataItem,
+
+    -- ** InstanceTemplatesScopedList
+    InstanceTemplatesScopedList (..),
+    newInstanceTemplatesScopedList,
+
+    -- ** InstanceTemplatesScopedList_Warning
+    InstanceTemplatesScopedList_Warning (..),
+    newInstanceTemplatesScopedList_Warning,
+
+    -- ** InstanceTemplatesScopedList_Warning_Code
+    InstanceTemplatesScopedList_Warning_Code (..),
+
+    -- ** InstanceTemplatesScopedList_Warning_DataItem
+    InstanceTemplatesScopedList_Warning_DataItem (..),
+    newInstanceTemplatesScopedList_Warning_DataItem,
 
     -- ** InstanceWithNamedPorts
     InstanceWithNamedPorts (..),
@@ -1833,6 +1959,10 @@ module Gogol.Compute.Types
     -- ** InstancesSetMinCpuPlatformRequest
     InstancesSetMinCpuPlatformRequest (..),
     newInstancesSetMinCpuPlatformRequest,
+
+    -- ** InstancesSetNameRequest
+    InstancesSetNameRequest (..),
+    newInstancesSetNameRequest,
 
     -- ** InstancesSetServiceAccountRequest
     InstancesSetServiceAccountRequest (..),
@@ -1952,6 +2082,12 @@ module Gogol.Compute.Types
     InterconnectDiagnostics (..),
     newInterconnectDiagnostics,
 
+    -- ** InterconnectDiagnostics_BundleAggregationType
+    InterconnectDiagnostics_BundleAggregationType (..),
+
+    -- ** InterconnectDiagnostics_BundleOperationalStatus
+    InterconnectDiagnostics_BundleOperationalStatus (..),
+
     -- ** InterconnectDiagnosticsARPEntry
     InterconnectDiagnosticsARPEntry (..),
     newInterconnectDiagnosticsARPEntry,
@@ -1973,6 +2109,9 @@ module Gogol.Compute.Types
     -- ** InterconnectDiagnosticsLinkStatus
     InterconnectDiagnosticsLinkStatus (..),
     newInterconnectDiagnosticsLinkStatus,
+
+    -- ** InterconnectDiagnosticsLinkStatus_OperationalStatus
+    InterconnectDiagnosticsLinkStatus_OperationalStatus (..),
 
     -- ** InterconnectList
     InterconnectList (..),
@@ -2080,6 +2219,10 @@ module Gogol.Compute.Types
     LocalDisk (..),
     newLocalDisk,
 
+    -- ** LocalizedMessage
+    LocalizedMessage (..),
+    newLocalizedMessage,
+
     -- ** LocationPolicy
     LocationPolicy (..),
     newLocationPolicy,
@@ -2088,12 +2231,19 @@ module Gogol.Compute.Types
     LocationPolicy_Locations (..),
     newLocationPolicy_Locations,
 
+    -- ** LocationPolicy_TargetShape
+    LocationPolicy_TargetShape (..),
+
     -- ** LocationPolicyLocation
     LocationPolicyLocation (..),
     newLocationPolicyLocation,
 
     -- ** LocationPolicyLocation_Preference
     LocationPolicyLocation_Preference (..),
+
+    -- ** LocationPolicyLocationConstraints
+    LocationPolicyLocationConstraints (..),
+    newLocationPolicyLocationConstraints,
 
     -- ** LogConfig
     LogConfig (..),
@@ -2233,6 +2383,10 @@ module Gogol.Compute.Types
     ManagedInstanceLastAttempt_Errors_ErrorsItem (..),
     newManagedInstanceLastAttempt_Errors_ErrorsItem,
 
+    -- ** ManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem
+    ManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem (..),
+    newManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem,
+
     -- ** ManagedInstanceVersion
     ManagedInstanceVersion (..),
     newManagedInstanceVersion,
@@ -2266,6 +2420,107 @@ module Gogol.Compute.Types
 
     -- ** Network_NetworkFirewallPolicyEnforcementOrder
     Network_NetworkFirewallPolicyEnforcementOrder (..),
+
+    -- ** NetworkAttachment
+    NetworkAttachment (..),
+    newNetworkAttachment,
+
+    -- ** NetworkAttachment_ConnectionPreference
+    NetworkAttachment_ConnectionPreference (..),
+
+    -- ** NetworkAttachmentAggregatedList
+    NetworkAttachmentAggregatedList (..),
+    newNetworkAttachmentAggregatedList,
+
+    -- ** NetworkAttachmentAggregatedList_Items
+    NetworkAttachmentAggregatedList_Items (..),
+    newNetworkAttachmentAggregatedList_Items,
+
+    -- ** NetworkAttachmentAggregatedList_Warning
+    NetworkAttachmentAggregatedList_Warning (..),
+    newNetworkAttachmentAggregatedList_Warning,
+
+    -- ** NetworkAttachmentAggregatedList_Warning_Code
+    NetworkAttachmentAggregatedList_Warning_Code (..),
+
+    -- ** NetworkAttachmentAggregatedList_Warning_DataItem
+    NetworkAttachmentAggregatedList_Warning_DataItem (..),
+    newNetworkAttachmentAggregatedList_Warning_DataItem,
+
+    -- ** NetworkAttachmentConnectedEndpoint
+    NetworkAttachmentConnectedEndpoint (..),
+    newNetworkAttachmentConnectedEndpoint,
+
+    -- ** NetworkAttachmentConnectedEndpoint_Status
+    NetworkAttachmentConnectedEndpoint_Status (..),
+
+    -- ** NetworkAttachmentList
+    NetworkAttachmentList (..),
+    newNetworkAttachmentList,
+
+    -- ** NetworkAttachmentList_Warning
+    NetworkAttachmentList_Warning (..),
+    newNetworkAttachmentList_Warning,
+
+    -- ** NetworkAttachmentList_Warning_Code
+    NetworkAttachmentList_Warning_Code (..),
+
+    -- ** NetworkAttachmentList_Warning_DataItem
+    NetworkAttachmentList_Warning_DataItem (..),
+    newNetworkAttachmentList_Warning_DataItem,
+
+    -- ** NetworkAttachmentsScopedList
+    NetworkAttachmentsScopedList (..),
+    newNetworkAttachmentsScopedList,
+
+    -- ** NetworkAttachmentsScopedList_Warning
+    NetworkAttachmentsScopedList_Warning (..),
+    newNetworkAttachmentsScopedList_Warning,
+
+    -- ** NetworkAttachmentsScopedList_Warning_Code
+    NetworkAttachmentsScopedList_Warning_Code (..),
+
+    -- ** NetworkAttachmentsScopedList_Warning_DataItem
+    NetworkAttachmentsScopedList_Warning_DataItem (..),
+    newNetworkAttachmentsScopedList_Warning_DataItem,
+
+    -- ** NetworkEdgeSecurityService
+    NetworkEdgeSecurityService (..),
+    newNetworkEdgeSecurityService,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList
+    NetworkEdgeSecurityServiceAggregatedList (..),
+    newNetworkEdgeSecurityServiceAggregatedList,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Items
+    NetworkEdgeSecurityServiceAggregatedList_Items (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Items,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning
+    NetworkEdgeSecurityServiceAggregatedList_Warning (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Warning,
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning_Code
+    NetworkEdgeSecurityServiceAggregatedList_Warning_Code (..),
+
+    -- ** NetworkEdgeSecurityServiceAggregatedList_Warning_DataItem
+    NetworkEdgeSecurityServiceAggregatedList_Warning_DataItem (..),
+    newNetworkEdgeSecurityServiceAggregatedList_Warning_DataItem,
+
+    -- ** NetworkEdgeSecurityServicesScopedList
+    NetworkEdgeSecurityServicesScopedList (..),
+    newNetworkEdgeSecurityServicesScopedList,
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning
+    NetworkEdgeSecurityServicesScopedList_Warning (..),
+    newNetworkEdgeSecurityServicesScopedList_Warning,
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning_Code
+    NetworkEdgeSecurityServicesScopedList_Warning_Code (..),
+
+    -- ** NetworkEdgeSecurityServicesScopedList_Warning_DataItem
+    NetworkEdgeSecurityServicesScopedList_Warning_DataItem (..),
+    newNetworkEdgeSecurityServicesScopedList_Warning_DataItem,
 
     -- ** NetworkEndpoint
     NetworkEndpoint (..),
@@ -2331,6 +2586,13 @@ module Gogol.Compute.Types
     -- ** NetworkEndpointGroupList_Warning_DataItem
     NetworkEndpointGroupList_Warning_DataItem (..),
     newNetworkEndpointGroupList_Warning_DataItem,
+
+    -- ** NetworkEndpointGroupPscData
+    NetworkEndpointGroupPscData (..),
+    newNetworkEndpointGroupPscData,
+
+    -- ** NetworkEndpointGroupPscData_PscConnectionStatus
+    NetworkEndpointGroupPscData_PscConnectionStatus (..),
 
     -- ** NetworkEndpointGroupsAttachEndpointsRequest
     NetworkEndpointGroupsAttachEndpointsRequest (..),
@@ -2412,6 +2674,9 @@ module Gogol.Compute.Types
     -- ** NetworkPeering
     NetworkPeering (..),
     newNetworkPeering,
+
+    -- ** NetworkPeering_StackType
+    NetworkPeering_StackType (..),
 
     -- ** NetworkPeering_State
     NetworkPeering_State (..),
@@ -2559,6 +2824,10 @@ module Gogol.Compute.Types
     -- ** NodeGroupsSetNodeTemplateRequest
     NodeGroupsSetNodeTemplateRequest (..),
     newNodeGroupsSetNodeTemplateRequest,
+
+    -- ** NodeGroupsSimulateMaintenanceEventRequest
+    NodeGroupsSimulateMaintenanceEventRequest (..),
+    newNodeGroupsSimulateMaintenanceEventRequest,
 
     -- ** NodeTemplate
     NodeTemplate (..),
@@ -2714,6 +2983,10 @@ module Gogol.Compute.Types
     -- ** Operation_Error_ErrorsItem
     Operation_Error_ErrorsItem (..),
     newOperation_Error_ErrorsItem,
+
+    -- ** Operation_Error_ErrorsItem_ErrorDetailsItem
+    Operation_Error_ErrorsItem_ErrorDetailsItem (..),
+    newOperation_Error_ErrorsItem_ErrorDetailsItem,
 
     -- ** Operation_Status
     Operation_Status (..),
@@ -2927,6 +3200,9 @@ module Gogol.Compute.Types
     -- ** Project_DefaultNetworkTier
     Project_DefaultNetworkTier (..),
 
+    -- ** Project_VmDnsSetting
+    Project_VmDnsSetting (..),
+
     -- ** Project_XpnProjectStatus
     Project_XpnProjectStatus (..),
 
@@ -3048,6 +3324,14 @@ module Gogol.Compute.Types
 
     -- ** Quota_Metric
     Quota_Metric (..),
+
+    -- ** QuotaExceededInfo
+    QuotaExceededInfo (..),
+    newQuotaExceededInfo,
+
+    -- ** QuotaExceededInfo_Dimensions
+    QuotaExceededInfo_Dimensions (..),
+    newQuotaExceededInfo_Dimensions,
 
     -- ** Reference
     Reference (..),
@@ -3281,6 +3565,10 @@ module Gogol.Compute.Types
     Reservation (..),
     newReservation,
 
+    -- ** Reservation_ResourcePolicies
+    Reservation_ResourcePolicies (..),
+    newReservation_ResourcePolicies,
+
     -- ** Reservation_Status
     Reservation_Status (..),
 
@@ -3476,9 +3764,16 @@ module Gogol.Compute.Types
     -- ** ResourcePolicyWeeklyCycleDayOfWeek_Day
     ResourcePolicyWeeklyCycleDayOfWeek_Day (..),
 
+    -- ** ResourceStatus
+    ResourceStatus (..),
+    newResourceStatus,
+
     -- ** Route
     Route (..),
     newRoute,
+
+    -- ** Route_RouteStatus
+    Route_RouteStatus (..),
 
     -- ** Route_RouteType
     Route_RouteType (..),
@@ -3598,9 +3893,16 @@ module Gogol.Compute.Types
     RouterList_Warning_DataItem (..),
     newRouterList_Warning_DataItem,
 
+    -- ** RouterMd5AuthenticationKey
+    RouterMd5AuthenticationKey (..),
+    newRouterMd5AuthenticationKey,
+
     -- ** RouterNat
     RouterNat (..),
     newRouterNat,
+
+    -- ** RouterNat_EndpointTypesItem
+    RouterNat_EndpointTypesItem (..),
 
     -- ** RouterNat_NatIpAllocateOption
     RouterNat_NatIpAllocateOption (..),
@@ -3640,6 +3942,9 @@ module Gogol.Compute.Types
 
     -- ** RouterStatusBgpPeerStatus_Status
     RouterStatusBgpPeerStatus_Status (..),
+
+    -- ** RouterStatusBgpPeerStatus_StatusReason
+    RouterStatusBgpPeerStatus_StatusReason (..),
 
     -- ** RouterStatusNatStatus
     RouterStatusNatStatus (..),
@@ -3709,6 +4014,9 @@ module Gogol.Compute.Types
     SavedDisk (..),
     newSavedDisk,
 
+    -- ** SavedDisk_Architecture
+    SavedDisk_Architecture (..),
+
     -- ** SavedDisk_StorageBytesStatus
     SavedDisk_StorageBytesStatus (..),
 
@@ -3743,9 +4051,43 @@ module Gogol.Compute.Types
     Screenshot (..),
     newScreenshot,
 
+    -- ** SecurityPoliciesAggregatedList
+    SecurityPoliciesAggregatedList (..),
+    newSecurityPoliciesAggregatedList,
+
+    -- ** SecurityPoliciesAggregatedList_Items
+    SecurityPoliciesAggregatedList_Items (..),
+    newSecurityPoliciesAggregatedList_Items,
+
+    -- ** SecurityPoliciesAggregatedList_Warning
+    SecurityPoliciesAggregatedList_Warning (..),
+    newSecurityPoliciesAggregatedList_Warning,
+
+    -- ** SecurityPoliciesAggregatedList_Warning_Code
+    SecurityPoliciesAggregatedList_Warning_Code (..),
+
+    -- ** SecurityPoliciesAggregatedList_Warning_DataItem
+    SecurityPoliciesAggregatedList_Warning_DataItem (..),
+    newSecurityPoliciesAggregatedList_Warning_DataItem,
+
     -- ** SecurityPoliciesListPreconfiguredExpressionSetsResponse
     SecurityPoliciesListPreconfiguredExpressionSetsResponse (..),
     newSecurityPoliciesListPreconfiguredExpressionSetsResponse,
+
+    -- ** SecurityPoliciesScopedList
+    SecurityPoliciesScopedList (..),
+    newSecurityPoliciesScopedList,
+
+    -- ** SecurityPoliciesScopedList_Warning
+    SecurityPoliciesScopedList_Warning (..),
+    newSecurityPoliciesScopedList_Warning,
+
+    -- ** SecurityPoliciesScopedList_Warning_Code
+    SecurityPoliciesScopedList_Warning_Code (..),
+
+    -- ** SecurityPoliciesScopedList_Warning_DataItem
+    SecurityPoliciesScopedList_Warning_DataItem (..),
+    newSecurityPoliciesScopedList_Warning_DataItem,
 
     -- ** SecurityPoliciesWafConfig
     SecurityPoliciesWafConfig (..),
@@ -3778,6 +4120,17 @@ module Gogol.Compute.Types
 
     -- ** SecurityPolicyAdvancedOptionsConfig_LogLevel
     SecurityPolicyAdvancedOptionsConfig_LogLevel (..),
+
+    -- ** SecurityPolicyAdvancedOptionsConfigJsonCustomConfig
+    SecurityPolicyAdvancedOptionsConfigJsonCustomConfig (..),
+    newSecurityPolicyAdvancedOptionsConfigJsonCustomConfig,
+
+    -- ** SecurityPolicyDdosProtectionConfig
+    SecurityPolicyDdosProtectionConfig (..),
+    newSecurityPolicyDdosProtectionConfig,
+
+    -- ** SecurityPolicyDdosProtectionConfig_DdosProtection
+    SecurityPolicyDdosProtectionConfig_DdosProtection (..),
 
     -- ** SecurityPolicyList
     SecurityPolicyList (..),
@@ -3824,6 +4177,21 @@ module Gogol.Compute.Types
     -- ** SecurityPolicyRuleMatcherConfig
     SecurityPolicyRuleMatcherConfig (..),
     newSecurityPolicyRuleMatcherConfig,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfig
+    SecurityPolicyRulePreconfiguredWafConfig (..),
+    newSecurityPolicyRulePreconfiguredWafConfig,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusion
+    SecurityPolicyRulePreconfiguredWafConfigExclusion (..),
+    newSecurityPolicyRulePreconfiguredWafConfigExclusion,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams (..),
+    newSecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams,
+
+    -- ** SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op
+    SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams_Op (..),
 
     -- ** SecurityPolicyRuleRateLimitOptions
     SecurityPolicyRuleRateLimitOptions (..),
@@ -3968,9 +4336,15 @@ module Gogol.Compute.Types
     Snapshot (..),
     newSnapshot,
 
+    -- ** Snapshot_Architecture
+    Snapshot_Architecture (..),
+
     -- ** Snapshot_Labels
     Snapshot_Labels (..),
     newSnapshot_Labels,
+
+    -- ** Snapshot_SnapshotType
+    Snapshot_SnapshotType (..),
 
     -- ** Snapshot_Status
     Snapshot_Status (..),
@@ -4004,6 +4378,9 @@ module Gogol.Compute.Types
     -- ** SourceInstanceProperties
     SourceInstanceProperties (..),
     newSourceInstanceProperties,
+
+    -- ** SourceInstanceProperties_KeyRevocationActionType
+    SourceInstanceProperties_KeyRevocationActionType (..),
 
     -- ** SourceInstanceProperties_Labels
     SourceInstanceProperties_Labels (..),
@@ -4083,6 +4460,25 @@ module Gogol.Compute.Types
     SslCertificatesScopedList_Warning_DataItem (..),
     newSslCertificatesScopedList_Warning_DataItem,
 
+    -- ** SslPoliciesAggregatedList
+    SslPoliciesAggregatedList (..),
+    newSslPoliciesAggregatedList,
+
+    -- ** SslPoliciesAggregatedList_Items
+    SslPoliciesAggregatedList_Items (..),
+    newSslPoliciesAggregatedList_Items,
+
+    -- ** SslPoliciesAggregatedList_Warning
+    SslPoliciesAggregatedList_Warning (..),
+    newSslPoliciesAggregatedList_Warning,
+
+    -- ** SslPoliciesAggregatedList_Warning_Code
+    SslPoliciesAggregatedList_Warning_Code (..),
+
+    -- ** SslPoliciesAggregatedList_Warning_DataItem
+    SslPoliciesAggregatedList_Warning_DataItem (..),
+    newSslPoliciesAggregatedList_Warning_DataItem,
+
     -- ** SslPoliciesList
     SslPoliciesList (..),
     newSslPoliciesList,
@@ -4101,6 +4497,21 @@ module Gogol.Compute.Types
     -- ** SslPoliciesListAvailableFeaturesResponse
     SslPoliciesListAvailableFeaturesResponse (..),
     newSslPoliciesListAvailableFeaturesResponse,
+
+    -- ** SslPoliciesScopedList
+    SslPoliciesScopedList (..),
+    newSslPoliciesScopedList,
+
+    -- ** SslPoliciesScopedList_Warning
+    SslPoliciesScopedList_Warning (..),
+    newSslPoliciesScopedList_Warning,
+
+    -- ** SslPoliciesScopedList_Warning_Code
+    SslPoliciesScopedList_Warning_Code (..),
+
+    -- ** SslPoliciesScopedList_Warning_DataItem
+    SslPoliciesScopedList_Warning_DataItem (..),
+    newSslPoliciesScopedList_Warning_DataItem,
 
     -- ** SslPolicy
     SslPolicy (..),
@@ -4336,6 +4747,10 @@ module Gogol.Compute.Types
     TargetHttpsProxiesScopedList_Warning_DataItem (..),
     newTargetHttpsProxiesScopedList_Warning_DataItem,
 
+    -- ** TargetHttpsProxiesSetCertificateMapRequest
+    TargetHttpsProxiesSetCertificateMapRequest (..),
+    newTargetHttpsProxiesSetCertificateMapRequest,
+
     -- ** TargetHttpsProxiesSetQuicOverrideRequest
     TargetHttpsProxiesSetQuicOverrideRequest (..),
     newTargetHttpsProxiesSetQuicOverrideRequest,
@@ -4528,6 +4943,10 @@ module Gogol.Compute.Types
     TargetSslProxiesSetBackendServiceRequest (..),
     newTargetSslProxiesSetBackendServiceRequest,
 
+    -- ** TargetSslProxiesSetCertificateMapRequest
+    TargetSslProxiesSetCertificateMapRequest (..),
+    newTargetSslProxiesSetCertificateMapRequest,
+
     -- ** TargetSslProxiesSetProxyHeaderRequest
     TargetSslProxiesSetProxyHeaderRequest (..),
     newTargetSslProxiesSetProxyHeaderRequest,
@@ -4561,6 +4980,21 @@ module Gogol.Compute.Types
     TargetSslProxyList_Warning_DataItem (..),
     newTargetSslProxyList_Warning_DataItem,
 
+    -- ** TargetTcpProxiesScopedList
+    TargetTcpProxiesScopedList (..),
+    newTargetTcpProxiesScopedList,
+
+    -- ** TargetTcpProxiesScopedList_Warning
+    TargetTcpProxiesScopedList_Warning (..),
+    newTargetTcpProxiesScopedList_Warning,
+
+    -- ** TargetTcpProxiesScopedList_Warning_Code
+    TargetTcpProxiesScopedList_Warning_Code (..),
+
+    -- ** TargetTcpProxiesScopedList_Warning_DataItem
+    TargetTcpProxiesScopedList_Warning_DataItem (..),
+    newTargetTcpProxiesScopedList_Warning_DataItem,
+
     -- ** TargetTcpProxiesSetBackendServiceRequest
     TargetTcpProxiesSetBackendServiceRequest (..),
     newTargetTcpProxiesSetBackendServiceRequest,
@@ -4578,6 +5012,25 @@ module Gogol.Compute.Types
 
     -- ** TargetTcpProxy_ProxyHeader
     TargetTcpProxy_ProxyHeader (..),
+
+    -- ** TargetTcpProxyAggregatedList
+    TargetTcpProxyAggregatedList (..),
+    newTargetTcpProxyAggregatedList,
+
+    -- ** TargetTcpProxyAggregatedList_Items
+    TargetTcpProxyAggregatedList_Items (..),
+    newTargetTcpProxyAggregatedList_Items,
+
+    -- ** TargetTcpProxyAggregatedList_Warning
+    TargetTcpProxyAggregatedList_Warning (..),
+    newTargetTcpProxyAggregatedList_Warning,
+
+    -- ** TargetTcpProxyAggregatedList_Warning_Code
+    TargetTcpProxyAggregatedList_Warning_Code (..),
+
+    -- ** TargetTcpProxyAggregatedList_Warning_DataItem
+    TargetTcpProxyAggregatedList_Warning_DataItem (..),
+    newTargetTcpProxyAggregatedList_Warning_DataItem,
 
     -- ** TargetTcpProxyList
     TargetTcpProxyList (..),
@@ -4754,6 +5207,18 @@ module Gogol.Compute.Types
     UsableSubnetwork (..),
     newUsableSubnetwork,
 
+    -- ** UsableSubnetwork_Ipv6AccessType
+    UsableSubnetwork_Ipv6AccessType (..),
+
+    -- ** UsableSubnetwork_Purpose
+    UsableSubnetwork_Purpose (..),
+
+    -- ** UsableSubnetwork_Role
+    UsableSubnetwork_Role (..),
+
+    -- ** UsableSubnetwork_StackType
+    UsableSubnetwork_StackType (..),
+
     -- ** UsableSubnetworkSecondaryRange
     UsableSubnetworkSecondaryRange (..),
     newUsableSubnetworkSecondaryRange,
@@ -4784,6 +5249,10 @@ module Gogol.Compute.Types
     -- ** VmEndpointNatMappingsInterfaceNatMappings
     VmEndpointNatMappingsInterfaceNatMappings (..),
     newVmEndpointNatMappingsInterfaceNatMappings,
+
+    -- ** VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings
+    VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings (..),
+    newVmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings,
 
     -- ** VmEndpointNatMappingsList
     VmEndpointNatMappingsList (..),

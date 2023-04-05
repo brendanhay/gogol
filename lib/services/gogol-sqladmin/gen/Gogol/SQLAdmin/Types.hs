@@ -162,6 +162,10 @@ module Gogol.SQLAdmin.Types
     ExportContext (..),
     newExportContext,
 
+    -- ** ExportContext_BakExportOptions
+    ExportContext_BakExportOptions (..),
+    newExportContext_BakExportOptions,
+
     -- ** ExportContext_CsvExportOptions
     ExportContext_CsvExportOptions (..),
     newExportContext_CsvExportOptions,
@@ -322,6 +326,10 @@ module Gogol.SQLAdmin.Types
     OperationErrors (..),
     newOperationErrors,
 
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
+
     -- ** OperationsListResponse
     OperationsListResponse (..),
     newOperationsListResponse,
@@ -336,6 +344,10 @@ module Gogol.SQLAdmin.Types
 
     -- ** PasswordValidationPolicy_Complexity
     PasswordValidationPolicy_Complexity (..),
+
+    -- ** PerformDiskShrinkContext
+    PerformDiskShrinkContext (..),
+    newPerformDiskShrinkContext,
 
     -- ** ReplicaConfiguration
     ReplicaConfiguration (..),
@@ -366,6 +378,9 @@ module Gogol.SQLAdmin.Types
     -- ** Settings_AvailabilityType
     Settings_AvailabilityType (..),
 
+    -- ** Settings_ConnectorEnforcement
+    Settings_ConnectorEnforcement (..),
+
     -- ** Settings_DataDiskType
     Settings_DataDiskType (..),
 
@@ -390,9 +405,17 @@ module Gogol.SQLAdmin.Types
     -- ** SqlExternalSyncSettingError_Type
     SqlExternalSyncSettingError_Type (..),
 
+    -- ** SqlInstancesGetDiskShrinkConfigResponse
+    SqlInstancesGetDiskShrinkConfigResponse (..),
+    newSqlInstancesGetDiskShrinkConfigResponse,
+
     -- ** SqlInstancesRescheduleMaintenanceRequestBody
     SqlInstancesRescheduleMaintenanceRequestBody (..),
     newSqlInstancesRescheduleMaintenanceRequestBody,
+
+    -- ** SqlInstancesResetReplicaSizeRequest
+    SqlInstancesResetReplicaSizeRequest (..),
+    newSqlInstancesResetReplicaSizeRequest,
 
     -- ** SqlInstancesStartExternalSyncRequest
     SqlInstancesStartExternalSyncRequest (..),
@@ -478,6 +501,9 @@ module Gogol.SQLAdmin.Types
     -- ** User
     User (..),
     newUser,
+
+    -- ** User_DualPasswordType
+    User_DualPasswordType (..),
 
     -- ** User_Type
     User_Type (..),

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified node type. Gets a list of available node types by making a list() request.
+-- Returns the specified node type.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.nodeTypes.get@.
 module Gogol.Compute.NodeTypes.Get
@@ -61,7 +61,7 @@ type ComputeNodeTypesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] NodeType
 
--- | Returns the specified node type. Gets a list of available node types by making a list() request.
+-- | Returns the specified node type.
 --
 -- /See:/ 'newComputeNodeTypesGet' smart constructor.
 data ComputeNodeTypesGet = ComputeNodeTypesGet

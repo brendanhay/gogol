@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified node template. Gets a list of available node templates by making a list() request.
+-- Returns the specified node template.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.nodeTemplates.get@.
 module Gogol.Compute.NodeTemplates.Get
@@ -61,7 +61,7 @@ type ComputeNodeTemplatesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] NodeTemplate
 
--- | Returns the specified node template. Gets a list of available node templates by making a list() request.
+-- | Returns the specified node template.
 --
 -- /See:/ 'newComputeNodeTemplatesGet' smart constructor.
 data ComputeNodeTemplatesGet = ComputeNodeTemplatesGet

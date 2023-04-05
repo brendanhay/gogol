@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
+-- Returns the specified TargetHttpProxy resource in the specified region.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionTargetHttpProxies.get@.
 module Gogol.Compute.RegionTargetHttpProxies.Get
@@ -61,7 +61,7 @@ type ComputeRegionTargetHttpProxiesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TargetHttpProxy
 
--- | Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
+-- | Returns the specified TargetHttpProxy resource in the specified region.
 --
 -- /See:/ 'newComputeRegionTargetHttpProxiesGet' smart constructor.
 data ComputeRegionTargetHttpProxiesGet = ComputeRegionTargetHttpProxiesGet

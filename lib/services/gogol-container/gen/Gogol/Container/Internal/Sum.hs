@@ -33,6 +33,27 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * BinaryAuthorization_EvaluationMode
+    BinaryAuthorization_EvaluationMode
+      ( BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED,
+        BinaryAuthorization_EvaluationMode_Disabled,
+        BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE,
+        ..
+      ),
+
+    -- * BlueGreenInfo_Phase
+    BlueGreenInfo_Phase
+      ( BlueGreenInfo_Phase_PHASEUNSPECIFIED,
+        BlueGreenInfo_Phase_UPDATESTARTED,
+        BlueGreenInfo_Phase_CREATINGGREENPOOL,
+        BlueGreenInfo_Phase_CORDONINGBLUEPOOL,
+        BlueGreenInfo_Phase_DRAININGBLUEPOOL,
+        BlueGreenInfo_Phase_NODEPOOLSOAKING,
+        BlueGreenInfo_Phase_DELETINGBLUEPOOL,
+        BlueGreenInfo_Phase_ROLLBACKSTARTED,
+        ..
+      ),
+
     -- * CloudRunConfig_LoadBalancerType
     CloudRunConfig_LoadBalancerType
       ( CloudRunConfig_LoadBalancerType_LOADBALANCERTYPEUNSPECIFIED,
@@ -78,6 +99,14 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * ClusterUpdate_DesiredStackType
+    ClusterUpdate_DesiredStackType
+      ( ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED,
+        ClusterUpdate_DesiredStackType_IPV4,
+        ClusterUpdate_DesiredStackType_IPV4_IPV6,
+        ..
+      ),
+
     -- * DNSConfig_ClusterDns
     DNSConfig_ClusterDns
       ( DNSConfig_ClusterDns_PROVIDERUNSPECIFIED,
@@ -89,6 +118,7 @@ module Gogol.Container.Internal.Sum
     -- * DNSConfig_ClusterDnsScope
     DNSConfig_ClusterDnsScope
       ( DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED,
+        DNSConfig_ClusterDnsScope_CLUSTERSCOPE,
         DNSConfig_ClusterDnsScope_VPCSCOPE,
         ..
       ),
@@ -110,11 +140,62 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * GPUSharingConfig_GpuSharingStrategy
+    GPUSharingConfig_GpuSharingStrategy
+      ( GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED,
+        GPUSharingConfig_GpuSharingStrategy_TIMESHARING,
+        ..
+      ),
+
+    -- * GatewayAPIConfig_Channel
+    GatewayAPIConfig_Channel
+      ( GatewayAPIConfig_Channel_CHANNELUNSPECIFIED,
+        GatewayAPIConfig_Channel_CHANNELDISABLED,
+        GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL,
+        GatewayAPIConfig_Channel_CHANNELSTANDARD,
+        ..
+      ),
+
+    -- * IPAllocationPolicy_Ipv6AccessType
+    IPAllocationPolicy_Ipv6AccessType
+      ( IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED,
+        IPAllocationPolicy_Ipv6AccessType_Internal,
+        IPAllocationPolicy_Ipv6AccessType_External,
+        ..
+      ),
+
+    -- * IPAllocationPolicy_StackType
+    IPAllocationPolicy_StackType
+      ( IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED,
+        IPAllocationPolicy_StackType_IPV4,
+        IPAllocationPolicy_StackType_IPV4_IPV6,
+        ..
+      ),
+
+    -- * LinuxNodeConfig_CgroupMode
+    LinuxNodeConfig_CgroupMode
+      ( LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED,
+        LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1,
+        LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2,
+        ..
+      ),
+
     -- * LoggingComponentConfig_EnableComponentsItem
     LoggingComponentConfig_EnableComponentsItem
       ( LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
         LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
         LoggingComponentConfig_EnableComponentsItem_Workloads,
+        LoggingComponentConfig_EnableComponentsItem_Apiserver,
+        LoggingComponentConfig_EnableComponentsItem_Scheduler,
+        LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
+        ..
+      ),
+
+    -- * LoggingVariantConfig_Variant
+    LoggingVariantConfig_Variant
+      ( LoggingVariantConfig_Variant_VARIANTUNSPECIFIED,
+        LoggingVariantConfig_Variant_Default,
+        LoggingVariantConfig_Variant_MAXTHROUGHPUT,
         ..
       ),
 
@@ -130,6 +211,9 @@ module Gogol.Container.Internal.Sum
     MonitoringComponentConfig_EnableComponentsItem
       ( MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
         MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
+        MonitoringComponentConfig_EnableComponentsItem_Apiserver,
+        MonitoringComponentConfig_EnableComponentsItem_Scheduler,
+        MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
         ..
       ),
 
@@ -150,6 +234,13 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * NetworkPerformanceConfig_TotalEgressBandwidthTier
+    NetworkPerformanceConfig_TotalEgressBandwidthTier
+      ( NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
+        NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
+        ..
+      ),
+
     -- * NetworkPolicy_Provider
     NetworkPolicy_Provider
       ( NetworkPolicy_Provider_PROVIDERUNSPECIFIED,
@@ -166,6 +257,14 @@ module Gogol.Container.Internal.Sum
         NodePool_Status_Reconciling,
         NodePool_Status_Stopping,
         NodePool_Status_Error',
+        ..
+      ),
+
+    -- * NodePoolAutoscaling_LocationPolicy
+    NodePoolAutoscaling_LocationPolicy
+      ( NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED,
+        NodePoolAutoscaling_LocationPolicy_Balanced,
+        NodePoolAutoscaling_LocationPolicy_Any,
         ..
       ),
 
@@ -217,6 +316,13 @@ module Gogol.Container.Internal.Sum
         OperationProgress_Status_Running,
         OperationProgress_Status_Done,
         OperationProgress_Status_Aborting,
+        ..
+      ),
+
+    -- * PlacementPolicy_Type
+    PlacementPolicy_Type
+      ( PlacementPolicy_Type_TYPEUNSPECIFIED,
+        PlacementPolicy_Type_Compact,
         ..
       ),
 
@@ -313,6 +419,14 @@ module Gogol.Container.Internal.Sum
         ..
       ),
 
+    -- * UpgradeSettings_Strategy
+    UpgradeSettings_Strategy
+      ( UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED,
+        UpgradeSettings_Strategy_BLUEGREEN,
+        UpgradeSettings_Strategy_Surge,
+        ..
+      ),
+
     -- * UsableSubnetworkSecondaryRange_Status
     UsableSubnetworkSecondaryRange_Status
       ( UsableSubnetworkSecondaryRange_Status_Unknown,
@@ -320,6 +434,14 @@ module Gogol.Container.Internal.Sum
         UsableSubnetworkSecondaryRange_Status_INUSESERVICE,
         UsableSubnetworkSecondaryRange_Status_INUSESHAREABLEPOD,
         UsableSubnetworkSecondaryRange_Status_INUSEMANAGEDPOD,
+        ..
+      ),
+
+    -- * WindowsNodeConfig_OsVersion
+    WindowsNodeConfig_OsVersion
+      ( WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED,
+        WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019,
+        WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022,
         ..
       ),
 
@@ -360,6 +482,95 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
+newtype BinaryAuthorization_EvaluationMode = BinaryAuthorization_EvaluationMode {fromBinaryAuthorization_EvaluationMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value
+pattern BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED :: BinaryAuthorization_EvaluationMode
+pattern BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED = BinaryAuthorization_EvaluationMode "EVALUATION_MODE_UNSPECIFIED"
+
+-- | Disable BinaryAuthorization
+pattern BinaryAuthorization_EvaluationMode_Disabled :: BinaryAuthorization_EvaluationMode
+pattern BinaryAuthorization_EvaluationMode_Disabled = BinaryAuthorization_EvaluationMode "DISABLED"
+
+-- | Enforce Kubernetes admission requests with BinaryAuthorization using the project\'s singleton policy. This is equivalent to setting the enabled boolean to true.
+pattern BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE :: BinaryAuthorization_EvaluationMode
+pattern BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE = BinaryAuthorization_EvaluationMode "PROJECT_SINGLETON_POLICY_ENFORCE"
+
+{-# COMPLETE
+  BinaryAuthorization_EvaluationMode_EVALUATIONMODEUNSPECIFIED,
+  BinaryAuthorization_EvaluationMode_Disabled,
+  BinaryAuthorization_EvaluationMode_PROJECTSINGLETONPOLICYENFORCE,
+  BinaryAuthorization_EvaluationMode
+  #-}
+
+-- | Current blue-green upgrade phase.
+newtype BlueGreenInfo_Phase = BlueGreenInfo_Phase {fromBlueGreenInfo_Phase :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified phase.
+pattern BlueGreenInfo_Phase_PHASEUNSPECIFIED :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_PHASEUNSPECIFIED = BlueGreenInfo_Phase "PHASE_UNSPECIFIED"
+
+-- | blue-green upgrade has been initiated.
+pattern BlueGreenInfo_Phase_UPDATESTARTED :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_UPDATESTARTED = BlueGreenInfo_Phase "UPDATE_STARTED"
+
+-- | Start creating green pool nodes.
+pattern BlueGreenInfo_Phase_CREATINGGREENPOOL :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_CREATINGGREENPOOL = BlueGreenInfo_Phase "CREATING_GREEN_POOL"
+
+-- | Start cordoning blue pool nodes.
+pattern BlueGreenInfo_Phase_CORDONINGBLUEPOOL :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_CORDONINGBLUEPOOL = BlueGreenInfo_Phase "CORDONING_BLUE_POOL"
+
+-- | Start draining blue pool nodes.
+pattern BlueGreenInfo_Phase_DRAININGBLUEPOOL :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_DRAININGBLUEPOOL = BlueGreenInfo_Phase "DRAINING_BLUE_POOL"
+
+-- | Start soaking time after draining entire blue pool.
+pattern BlueGreenInfo_Phase_NODEPOOLSOAKING :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_NODEPOOLSOAKING = BlueGreenInfo_Phase "NODE_POOL_SOAKING"
+
+-- | Start deleting blue nodes.
+pattern BlueGreenInfo_Phase_DELETINGBLUEPOOL :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_DELETINGBLUEPOOL = BlueGreenInfo_Phase "DELETING_BLUE_POOL"
+
+-- | Rollback has been initiated.
+pattern BlueGreenInfo_Phase_ROLLBACKSTARTED :: BlueGreenInfo_Phase
+pattern BlueGreenInfo_Phase_ROLLBACKSTARTED = BlueGreenInfo_Phase "ROLLBACK_STARTED"
+
+{-# COMPLETE
+  BlueGreenInfo_Phase_PHASEUNSPECIFIED,
+  BlueGreenInfo_Phase_UPDATESTARTED,
+  BlueGreenInfo_Phase_CREATINGGREENPOOL,
+  BlueGreenInfo_Phase_CORDONINGBLUEPOOL,
+  BlueGreenInfo_Phase_DRAININGBLUEPOOL,
+  BlueGreenInfo_Phase_NODEPOOLSOAKING,
+  BlueGreenInfo_Phase_DELETINGBLUEPOOL,
+  BlueGreenInfo_Phase_ROLLBACKSTARTED,
+  BlueGreenInfo_Phase
   #-}
 
 -- | Which load balancer type is installed for Cloud Run.
@@ -535,7 +746,7 @@ pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISA
 pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE :: ClusterUpdate_DesiredPrivateIpv6GoogleAccess
 pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE = ClusterUpdate_DesiredPrivateIpv6GoogleAccess "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE"
 
--- | Enables priate IPv6 access to and from Google Services
+-- | Enables private IPv6 access to and from Google Services
 pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL :: ClusterUpdate_DesiredPrivateIpv6GoogleAccess
 pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL = ClusterUpdate_DesiredPrivateIpv6GoogleAccess "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
 
@@ -545,6 +756,38 @@ pattern ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDI
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
   ClusterUpdate_DesiredPrivateIpv6GoogleAccess
+  #-}
+
+-- | The desired stack type of the cluster. If a stack type is provided and does not match the current stack type of the cluster, update will attempt to change the stack type to the new type.
+newtype ClusterUpdate_DesiredStackType = ClusterUpdate_DesiredStackType {fromClusterUpdate_DesiredStackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, will be defaulted as IPV4 only
+pattern ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED :: ClusterUpdate_DesiredStackType
+pattern ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED = ClusterUpdate_DesiredStackType "STACK_TYPE_UNSPECIFIED"
+
+-- | Cluster is IPV4 only
+pattern ClusterUpdate_DesiredStackType_IPV4 :: ClusterUpdate_DesiredStackType
+pattern ClusterUpdate_DesiredStackType_IPV4 = ClusterUpdate_DesiredStackType "IPV4"
+
+-- | Cluster can use both IPv4 and IPv6
+pattern ClusterUpdate_DesiredStackType_IPV4_IPV6 :: ClusterUpdate_DesiredStackType
+pattern ClusterUpdate_DesiredStackType_IPV4_IPV6 = ClusterUpdate_DesiredStackType "IPV4_IPV6"
+
+{-# COMPLETE
+  ClusterUpdate_DesiredStackType_STACKTYPEUNSPECIFIED,
+  ClusterUpdate_DesiredStackType_IPV4,
+  ClusterUpdate_DesiredStackType_IPV4_IPV6,
+  ClusterUpdate_DesiredStackType
   #-}
 
 -- | cluster_dns indicates which in-cluster DNS provider should be used.
@@ -596,12 +839,17 @@ newtype DNSConfig_ClusterDnsScope = DNSConfig_ClusterDnsScope {fromDNSConfig_Clu
 pattern DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED :: DNSConfig_ClusterDnsScope
 pattern DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED = DNSConfig_ClusterDnsScope "DNS_SCOPE_UNSPECIFIED"
 
+-- | DNS records are accessible from within the cluster.
+pattern DNSConfig_ClusterDnsScope_CLUSTERSCOPE :: DNSConfig_ClusterDnsScope
+pattern DNSConfig_ClusterDnsScope_CLUSTERSCOPE = DNSConfig_ClusterDnsScope "CLUSTER_SCOPE"
+
 -- | DNS records are accessible from within the VPC.
 pattern DNSConfig_ClusterDnsScope_VPCSCOPE :: DNSConfig_ClusterDnsScope
 pattern DNSConfig_ClusterDnsScope_VPCSCOPE = DNSConfig_ClusterDnsScope "VPC_SCOPE"
 
 {-# COMPLETE
   DNSConfig_ClusterDnsScope_DNSSCOPEUNSPECIFIED,
+  DNSConfig_ClusterDnsScope_CLUSTERSCOPE,
   DNSConfig_ClusterDnsScope_VPCSCOPE,
   DNSConfig_ClusterDnsScope
   #-}
@@ -674,6 +922,166 @@ pattern Filter_EventTypeItem_SECURITYBULLETINEVENT = Filter_EventTypeItem "SECUR
   Filter_EventTypeItem
   #-}
 
+-- | The type of GPU sharing strategy to enable on the GPU node.
+newtype GPUSharingConfig_GpuSharingStrategy = GPUSharingConfig_GpuSharingStrategy {fromGPUSharingConfig_GpuSharingStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED :: GPUSharingConfig_GpuSharingStrategy
+pattern GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED = GPUSharingConfig_GpuSharingStrategy "GPU_SHARING_STRATEGY_UNSPECIFIED"
+
+-- | GPUs are time-shared between containers.
+pattern GPUSharingConfig_GpuSharingStrategy_TIMESHARING :: GPUSharingConfig_GpuSharingStrategy
+pattern GPUSharingConfig_GpuSharingStrategy_TIMESHARING = GPUSharingConfig_GpuSharingStrategy "TIME_SHARING"
+
+{-# COMPLETE
+  GPUSharingConfig_GpuSharingStrategy_GPUSHARINGSTRATEGYUNSPECIFIED,
+  GPUSharingConfig_GpuSharingStrategy_TIMESHARING,
+  GPUSharingConfig_GpuSharingStrategy
+  #-}
+
+-- | The Gateway API release channel to use for Gateway API.
+newtype GatewayAPIConfig_Channel = GatewayAPIConfig_Channel {fromGatewayAPIConfig_Channel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern GatewayAPIConfig_Channel_CHANNELUNSPECIFIED :: GatewayAPIConfig_Channel
+pattern GatewayAPIConfig_Channel_CHANNELUNSPECIFIED = GatewayAPIConfig_Channel "CHANNEL_UNSPECIFIED"
+
+-- | Gateway API support is disabled
+pattern GatewayAPIConfig_Channel_CHANNELDISABLED :: GatewayAPIConfig_Channel
+pattern GatewayAPIConfig_Channel_CHANNELDISABLED = GatewayAPIConfig_Channel "CHANNEL_DISABLED"
+
+-- | Gateway API support is enabled, experimental CRDs are installed
+pattern GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL :: GatewayAPIConfig_Channel
+pattern GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL = GatewayAPIConfig_Channel "CHANNEL_EXPERIMENTAL"
+
+-- | Gateway API support is enabled, standard CRDs are installed
+pattern GatewayAPIConfig_Channel_CHANNELSTANDARD :: GatewayAPIConfig_Channel
+pattern GatewayAPIConfig_Channel_CHANNELSTANDARD = GatewayAPIConfig_Channel "CHANNEL_STANDARD"
+
+{-# COMPLETE
+  GatewayAPIConfig_Channel_CHANNELUNSPECIFIED,
+  GatewayAPIConfig_Channel_CHANNELDISABLED,
+  GatewayAPIConfig_Channel_CHANNELEXPERIMENTAL,
+  GatewayAPIConfig_Channel_CHANNELSTANDARD,
+  GatewayAPIConfig_Channel
+  #-}
+
+-- | The ipv6 access type (internal or external) when create_subnetwork is true
+newtype IPAllocationPolicy_Ipv6AccessType = IPAllocationPolicy_Ipv6AccessType {fromIPAllocationPolicy_Ipv6AccessType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, will be defaulted as type external.
+pattern IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED :: IPAllocationPolicy_Ipv6AccessType
+pattern IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED = IPAllocationPolicy_Ipv6AccessType "IPV6_ACCESS_TYPE_UNSPECIFIED"
+
+-- | Access type internal (all v6 addresses are internal IPs)
+pattern IPAllocationPolicy_Ipv6AccessType_Internal :: IPAllocationPolicy_Ipv6AccessType
+pattern IPAllocationPolicy_Ipv6AccessType_Internal = IPAllocationPolicy_Ipv6AccessType "INTERNAL"
+
+-- | Access type external (all v6 addresses are external IPs)
+pattern IPAllocationPolicy_Ipv6AccessType_External :: IPAllocationPolicy_Ipv6AccessType
+pattern IPAllocationPolicy_Ipv6AccessType_External = IPAllocationPolicy_Ipv6AccessType "EXTERNAL"
+
+{-# COMPLETE
+  IPAllocationPolicy_Ipv6AccessType_IPV6ACCESSTYPEUNSPECIFIED,
+  IPAllocationPolicy_Ipv6AccessType_Internal,
+  IPAllocationPolicy_Ipv6AccessType_External,
+  IPAllocationPolicy_Ipv6AccessType
+  #-}
+
+-- | The IP stack type of the cluster
+newtype IPAllocationPolicy_StackType = IPAllocationPolicy_StackType {fromIPAllocationPolicy_StackType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, will be defaulted as IPV4 only
+pattern IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED :: IPAllocationPolicy_StackType
+pattern IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED = IPAllocationPolicy_StackType "STACK_TYPE_UNSPECIFIED"
+
+-- | Cluster is IPV4 only
+pattern IPAllocationPolicy_StackType_IPV4 :: IPAllocationPolicy_StackType
+pattern IPAllocationPolicy_StackType_IPV4 = IPAllocationPolicy_StackType "IPV4"
+
+-- | Cluster can use both IPv4 and IPv6
+pattern IPAllocationPolicy_StackType_IPV4_IPV6 :: IPAllocationPolicy_StackType
+pattern IPAllocationPolicy_StackType_IPV4_IPV6 = IPAllocationPolicy_StackType "IPV4_IPV6"
+
+{-# COMPLETE
+  IPAllocationPolicy_StackType_STACKTYPEUNSPECIFIED,
+  IPAllocationPolicy_StackType_IPV4,
+  IPAllocationPolicy_StackType_IPV4_IPV6,
+  IPAllocationPolicy_StackType
+  #-}
+
+-- | cgroup_mode specifies the cgroup mode to be used on the node.
+newtype LinuxNodeConfig_CgroupMode = LinuxNodeConfig_CgroupMode {fromLinuxNodeConfig_CgroupMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | CGROUP/MODE/UNSPECIFIED is when unspecified cgroup configuration is used. The default for the GKE node OS image will be used.
+pattern LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED :: LinuxNodeConfig_CgroupMode
+pattern LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED = LinuxNodeConfig_CgroupMode "CGROUP_MODE_UNSPECIFIED"
+
+-- | CGROUP/MODE/V1 specifies to use cgroupv1 for the cgroup configuration on the node image.
+pattern LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1 :: LinuxNodeConfig_CgroupMode
+pattern LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1 = LinuxNodeConfig_CgroupMode "CGROUP_MODE_V1"
+
+-- | CGROUP/MODE/V2 specifies to use cgroupv2 for the cgroup configuration on the node image.
+pattern LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2 :: LinuxNodeConfig_CgroupMode
+pattern LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2 = LinuxNodeConfig_CgroupMode "CGROUP_MODE_V2"
+
+{-# COMPLETE
+  LinuxNodeConfig_CgroupMode_CGROUPMODEUNSPECIFIED,
+  LinuxNodeConfig_CgroupMode_CGROUP_MODE_V1,
+  LinuxNodeConfig_CgroupMode_CGROUP_MODE_V2,
+  LinuxNodeConfig_CgroupMode
+  #-}
+
 newtype LoggingComponentConfig_EnableComponentsItem = LoggingComponentConfig_EnableComponentsItem {fromLoggingComponentConfig_EnableComponentsItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -698,11 +1106,58 @@ pattern LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS = LoggingCo
 pattern LoggingComponentConfig_EnableComponentsItem_Workloads :: LoggingComponentConfig_EnableComponentsItem
 pattern LoggingComponentConfig_EnableComponentsItem_Workloads = LoggingComponentConfig_EnableComponentsItem "WORKLOADS"
 
+-- | kube-apiserver
+pattern LoggingComponentConfig_EnableComponentsItem_Apiserver :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_Apiserver = LoggingComponentConfig_EnableComponentsItem "APISERVER"
+
+-- | kube-scheduler
+pattern LoggingComponentConfig_EnableComponentsItem_Scheduler :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_Scheduler = LoggingComponentConfig_EnableComponentsItem "SCHEDULER"
+
+-- | kube-controller-manager
+pattern LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER :: LoggingComponentConfig_EnableComponentsItem
+pattern LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER = LoggingComponentConfig_EnableComponentsItem "CONTROLLER_MANAGER"
+
 {-# COMPLETE
   LoggingComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   LoggingComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
   LoggingComponentConfig_EnableComponentsItem_Workloads,
+  LoggingComponentConfig_EnableComponentsItem_Apiserver,
+  LoggingComponentConfig_EnableComponentsItem_Scheduler,
+  LoggingComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
   LoggingComponentConfig_EnableComponentsItem
+  #-}
+
+-- | Logging variant deployed on nodes.
+newtype LoggingVariantConfig_Variant = LoggingVariantConfig_Variant {fromLoggingVariantConfig_Variant :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This shouldn\'t be used.
+pattern LoggingVariantConfig_Variant_VARIANTUNSPECIFIED :: LoggingVariantConfig_Variant
+pattern LoggingVariantConfig_Variant_VARIANTUNSPECIFIED = LoggingVariantConfig_Variant "VARIANT_UNSPECIFIED"
+
+-- | default logging variant.
+pattern LoggingVariantConfig_Variant_Default :: LoggingVariantConfig_Variant
+pattern LoggingVariantConfig_Variant_Default = LoggingVariantConfig_Variant "DEFAULT"
+
+-- | maximum logging throughput variant.
+pattern LoggingVariantConfig_Variant_MAXTHROUGHPUT :: LoggingVariantConfig_Variant
+pattern LoggingVariantConfig_Variant_MAXTHROUGHPUT = LoggingVariantConfig_Variant "MAX_THROUGHPUT"
+
+{-# COMPLETE
+  LoggingVariantConfig_Variant_VARIANTUNSPECIFIED,
+  LoggingVariantConfig_Variant_Default,
+  LoggingVariantConfig_Variant_MAXTHROUGHPUT,
+  LoggingVariantConfig_Variant
   #-}
 
 -- | Scope specifies the upgrade scope which upgrades are blocked by the exclusion.
@@ -757,9 +1212,24 @@ pattern MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED = Mo
 pattern MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS :: MonitoringComponentConfig_EnableComponentsItem
 pattern MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS = MonitoringComponentConfig_EnableComponentsItem "SYSTEM_COMPONENTS"
 
+-- | kube-apiserver
+pattern MonitoringComponentConfig_EnableComponentsItem_Apiserver :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Apiserver = MonitoringComponentConfig_EnableComponentsItem "APISERVER"
+
+-- | kube-scheduler
+pattern MonitoringComponentConfig_EnableComponentsItem_Scheduler :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_Scheduler = MonitoringComponentConfig_EnableComponentsItem "SCHEDULER"
+
+-- | kube-controller-manager
+pattern MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER :: MonitoringComponentConfig_EnableComponentsItem
+pattern MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER = MonitoringComponentConfig_EnableComponentsItem "CONTROLLER_MANAGER"
+
 {-# COMPLETE
   MonitoringComponentConfig_EnableComponentsItem_COMPONENTUNSPECIFIED,
   MonitoringComponentConfig_EnableComponentsItem_SYSTEMCOMPONENTS,
+  MonitoringComponentConfig_EnableComponentsItem_Apiserver,
+  MonitoringComponentConfig_EnableComponentsItem_Scheduler,
+  MonitoringComponentConfig_EnableComponentsItem_CONTROLLERMANAGER,
   MonitoringComponentConfig_EnableComponentsItem
   #-}
 
@@ -820,7 +1290,7 @@ pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSDISABLED = 
 pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE :: NetworkConfig_PrivateIpv6GoogleAccess
 pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE = NetworkConfig_PrivateIpv6GoogleAccess "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE"
 
--- | Enables priate IPv6 access to and from Google Services
+-- | Enables private IPv6 access to and from Google Services
 pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL :: NetworkConfig_PrivateIpv6GoogleAccess
 pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL = NetworkConfig_PrivateIpv6GoogleAccess "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
 
@@ -830,6 +1300,33 @@ pattern NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTION
   NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSTOGOOGLE,
   NetworkConfig_PrivateIpv6GoogleAccess_PRIVATEIPV6GOOGLEACCESSBIDIRECTIONAL,
   NetworkConfig_PrivateIpv6GoogleAccess
+  #-}
+
+-- | Specifies the total network bandwidth tier for the NodePool.
+newtype NetworkPerformanceConfig_TotalEgressBandwidthTier = NetworkPerformanceConfig_TotalEgressBandwidthTier {fromNetworkPerformanceConfig_TotalEgressBandwidthTier :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value
+pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED :: NetworkPerformanceConfig_TotalEgressBandwidthTier
+pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED = NetworkPerformanceConfig_TotalEgressBandwidthTier "TIER_UNSPECIFIED"
+
+-- | Higher bandwidth, actual values based on VM size.
+pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 :: NetworkPerformanceConfig_TotalEgressBandwidthTier
+pattern NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1 = NetworkPerformanceConfig_TotalEgressBandwidthTier "TIER_1"
+
+{-# COMPLETE
+  NetworkPerformanceConfig_TotalEgressBandwidthTier_TIERUNSPECIFIED,
+  NetworkPerformanceConfig_TotalEgressBandwidthTier_TIER_1,
+  NetworkPerformanceConfig_TotalEgressBandwidthTier
   #-}
 
 -- | The selected network policy provider.
@@ -909,6 +1406,38 @@ pattern NodePool_Status_Error' = NodePool_Status "ERROR"
   NodePool_Status_Stopping,
   NodePool_Status_Error',
   NodePool_Status
+  #-}
+
+-- | Location policy used when scaling up a nodepool.
+newtype NodePoolAutoscaling_LocationPolicy = NodePoolAutoscaling_LocationPolicy {fromNodePoolAutoscaling_LocationPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not set.
+pattern NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED :: NodePoolAutoscaling_LocationPolicy
+pattern NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED = NodePoolAutoscaling_LocationPolicy "LOCATION_POLICY_UNSPECIFIED"
+
+-- | BALANCED is a best effort policy that aims to balance the sizes of different zones.
+pattern NodePoolAutoscaling_LocationPolicy_Balanced :: NodePoolAutoscaling_LocationPolicy
+pattern NodePoolAutoscaling_LocationPolicy_Balanced = NodePoolAutoscaling_LocationPolicy "BALANCED"
+
+-- | ANY policy picks zones that have the highest capacity available.
+pattern NodePoolAutoscaling_LocationPolicy_Any :: NodePoolAutoscaling_LocationPolicy
+pattern NodePoolAutoscaling_LocationPolicy_Any = NodePoolAutoscaling_LocationPolicy "ANY"
+
+{-# COMPLETE
+  NodePoolAutoscaling_LocationPolicy_LOCATIONPOLICYUNSPECIFIED,
+  NodePoolAutoscaling_LocationPolicy_Balanced,
+  NodePoolAutoscaling_LocationPolicy_Any,
+  NodePoolAutoscaling_LocationPolicy
   #-}
 
 -- | Effect for taint.
@@ -1134,6 +1663,33 @@ pattern OperationProgress_Status_Aborting = OperationProgress_Status "ABORTING"
   OperationProgress_Status
   #-}
 
+-- | The type of placement.
+newtype PlacementPolicy_Type = PlacementPolicy_Type {fromPlacementPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | TYPE_UNSPECIFIED specifies no requirements on nodes placement.
+pattern PlacementPolicy_Type_TYPEUNSPECIFIED :: PlacementPolicy_Type
+pattern PlacementPolicy_Type_TYPEUNSPECIFIED = PlacementPolicy_Type "TYPE_UNSPECIFIED"
+
+-- | COMPACT specifies node placement in the same availability domain to ensure low communication latency.
+pattern PlacementPolicy_Type_Compact :: PlacementPolicy_Type
+pattern PlacementPolicy_Type_Compact = PlacementPolicy_Type "COMPACT"
+
+{-# COMPLETE
+  PlacementPolicy_Type_TYPEUNSPECIFIED,
+  PlacementPolicy_Type_Compact,
+  PlacementPolicy_Type
+  #-}
+
 -- | channel specifies which release channel the cluster is subscribed to.
 newtype ReleaseChannel_Channel = ReleaseChannel_Channel {fromReleaseChannel_Channel :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1322,7 +1878,7 @@ newtype StatusCondition_CanonicalCode = StatusCondition_CanonicalCode {fromStatu
       Core.FromJSONKey
     )
 
--- | Not an error; returned on success HTTP Mapping: 200 OK
+-- | Not an error; returned on success. HTTP Mapping: 200 OK
 pattern StatusCondition_CanonicalCode_OK :: StatusCondition_CanonicalCode
 pattern StatusCondition_CanonicalCode_OK = StatusCondition_CanonicalCode "OK"
 
@@ -1527,6 +2083,38 @@ pattern UpgradeEvent_ResourceType_NODEPOOL = UpgradeEvent_ResourceType "NODE_POO
   UpgradeEvent_ResourceType
   #-}
 
+-- | Update strategy of the node pool.
+newtype UpgradeSettings_Strategy = UpgradeSettings_Strategy {fromUpgradeSettings_Strategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value if unset. GKE internally defaults the update strategy to SURGE for unspecified strategies.
+pattern UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED :: UpgradeSettings_Strategy
+pattern UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED = UpgradeSettings_Strategy "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED"
+
+-- | blue-green upgrade.
+pattern UpgradeSettings_Strategy_BLUEGREEN :: UpgradeSettings_Strategy
+pattern UpgradeSettings_Strategy_BLUEGREEN = UpgradeSettings_Strategy "BLUE_GREEN"
+
+-- | SURGE is the traditional way of upgrade a node pool. max/surge and max/unavailable determines the level of upgrade parallelism.
+pattern UpgradeSettings_Strategy_Surge :: UpgradeSettings_Strategy
+pattern UpgradeSettings_Strategy_Surge = UpgradeSettings_Strategy "SURGE"
+
+{-# COMPLETE
+  UpgradeSettings_Strategy_NODEPOOLUPDATESTRATEGYUNSPECIFIED,
+  UpgradeSettings_Strategy_BLUEGREEN,
+  UpgradeSettings_Strategy_Surge,
+  UpgradeSettings_Strategy
+  #-}
+
 -- | This field is to determine the status of the secondary range programmably.
 newtype UsableSubnetworkSecondaryRange_Status = UsableSubnetworkSecondaryRange_Status {fromUsableSubnetworkSecondaryRange_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1548,7 +2136,7 @@ pattern UsableSubnetworkSecondaryRange_Status_Unknown = UsableSubnetworkSecondar
 pattern UsableSubnetworkSecondaryRange_Status_Unused :: UsableSubnetworkSecondaryRange_Status
 pattern UsableSubnetworkSecondaryRange_Status_Unused = UsableSubnetworkSecondaryRange_Status "UNUSED"
 
--- | IN/USE/SERVICE denotes that this range is claimed by a cluster for services. It cannot be used for other clusters.
+-- | IN/USE/SERVICE denotes that this range is claimed by cluster(s) for services. User-managed services range can be shared between clusters within the same subnetwork.
 pattern UsableSubnetworkSecondaryRange_Status_INUSESERVICE :: UsableSubnetworkSecondaryRange_Status
 pattern UsableSubnetworkSecondaryRange_Status_INUSESERVICE = UsableSubnetworkSecondaryRange_Status "IN_USE_SERVICE"
 
@@ -1567,6 +2155,38 @@ pattern UsableSubnetworkSecondaryRange_Status_INUSEMANAGEDPOD = UsableSubnetwork
   UsableSubnetworkSecondaryRange_Status_INUSESHAREABLEPOD,
   UsableSubnetworkSecondaryRange_Status_INUSEMANAGEDPOD,
   UsableSubnetworkSecondaryRange_Status
+  #-}
+
+-- | OSVersion specifies the Windows node config to be used on the node
+newtype WindowsNodeConfig_OsVersion = WindowsNodeConfig_OsVersion {fromWindowsNodeConfig_OsVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | When OSVersion is not specified
+pattern WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED :: WindowsNodeConfig_OsVersion
+pattern WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED = WindowsNodeConfig_OsVersion "OS_VERSION_UNSPECIFIED"
+
+-- | LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image
+pattern WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019 :: WindowsNodeConfig_OsVersion
+pattern WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019 = WindowsNodeConfig_OsVersion "OS_VERSION_LTSC2019"
+
+-- | LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image
+pattern WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022 :: WindowsNodeConfig_OsVersion
+pattern WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022 = WindowsNodeConfig_OsVersion "OS_VERSION_LTSC2022"
+
+{-# COMPLETE
+  WindowsNodeConfig_OsVersion_OSVERSIONUNSPECIFIED,
+  WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2019,
+  WindowsNodeConfig_OsVersion_OS_VERSION_LTSC2022,
+  WindowsNodeConfig_OsVersion
   #-}
 
 -- | Mode is the configuration for how to expose metadata to workloads running on the node pool.

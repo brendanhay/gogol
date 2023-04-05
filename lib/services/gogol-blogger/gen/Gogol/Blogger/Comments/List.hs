@@ -28,7 +28,7 @@
 --
 -- Lists comments.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.list@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.list@.
 module Gogol.Blogger.Comments.List
   ( -- * Resource
     BloggerCommentsListResource,

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified target pool. Gets a list of available target pools by making a list() request.
+-- Returns the specified target pool.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.targetPools.get@.
 module Gogol.Compute.TargetPools.Get
@@ -61,7 +61,7 @@ type ComputeTargetPoolsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TargetPool
 
--- | Returns the specified target pool. Gets a list of available target pools by making a list() request.
+-- | Returns the specified target pool.
 --
 -- /See:/ 'newComputeTargetPoolsGet' smart constructor.
 data ComputeTargetPoolsGet = ComputeTargetPoolsGet

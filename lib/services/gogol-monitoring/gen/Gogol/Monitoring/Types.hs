@@ -77,6 +77,14 @@ module Gogol.Monitoring.Types
     BasicAuthentication (..),
     newBasicAuthentication,
 
+    -- ** BasicService
+    BasicService (..),
+    newBasicService,
+
+    -- ** BasicService_ServiceLabels
+    BasicService_ServiceLabels (..),
+    newBasicService_ServiceLabels,
+
     -- ** BasicSli
     BasicSli (..),
     newBasicSli,
@@ -88,6 +96,10 @@ module Gogol.Monitoring.Types
     -- ** CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- ** CloudRun
+    CloudRun (..),
+    newCloudRun,
 
     -- ** ClusterIstio
     ClusterIstio (..),
@@ -142,6 +154,10 @@ module Gogol.Monitoring.Types
     -- ** CreateTimeSeriesSummary
     CreateTimeSeriesSummary (..),
     newCreateTimeSeriesSummary,
+
+    -- ** Criteria
+    Criteria (..),
+    newCriteria,
 
     -- ** Custom
     Custom (..),
@@ -201,6 +217,10 @@ module Gogol.Monitoring.Types
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** ForecastOptions
+    ForecastOptions (..),
+    newForecastOptions,
+
     -- ** GetNotificationChannelVerificationCodeRequest
     GetNotificationChannelVerificationCodeRequest (..),
     newGetNotificationChannelVerificationCodeRequest,
@@ -208,6 +228,18 @@ module Gogol.Monitoring.Types
     -- ** GetNotificationChannelVerificationCodeResponse
     GetNotificationChannelVerificationCodeResponse (..),
     newGetNotificationChannelVerificationCodeResponse,
+
+    -- ** GkeNamespace
+    GkeNamespace (..),
+    newGkeNamespace,
+
+    -- ** GkeService
+    GkeService (..),
+    newGkeService,
+
+    -- ** GkeWorkload
+    GkeWorkload (..),
+    newGkeWorkload,
 
     -- ** GoogleMonitoringV3Range
     GoogleMonitoringV3Range (..),
@@ -241,6 +273,13 @@ module Gogol.Monitoring.Types
     -- ** IstioCanonicalService
     IstioCanonicalService (..),
     newIstioCanonicalService,
+
+    -- ** JsonPathMatcher
+    JsonPathMatcher (..),
+    newJsonPathMatcher,
+
+    -- ** JsonPathMatcher_JsonMatcher
+    JsonPathMatcher_JsonMatcher (..),
 
     -- ** LabelDescriptor
     LabelDescriptor (..),
@@ -296,6 +335,10 @@ module Gogol.Monitoring.Types
     -- ** ListServicesResponse
     ListServicesResponse (..),
     newListServicesResponse,
+
+    -- ** ListSnoozesResponse
+    ListSnoozesResponse (..),
+    newListSnoozesResponse,
 
     -- ** ListTimeSeriesResponse
     ListTimeSeriesResponse (..),
@@ -430,6 +473,10 @@ module Gogol.Monitoring.Types
     -- ** NotificationChannelDescriptor_SupportedTiersItem
     NotificationChannelDescriptor_SupportedTiersItem (..),
 
+    -- ** NotificationChannelStrategy
+    NotificationChannelStrategy (..),
+    newNotificationChannelStrategy,
+
     -- ** NotificationRateLimit
     NotificationRateLimit (..),
     newNotificationRateLimit,
@@ -452,6 +499,10 @@ module Gogol.Monitoring.Types
     -- ** PerformanceThreshold
     PerformanceThreshold (..),
     newPerformanceThreshold,
+
+    -- ** PingConfig
+    PingConfig (..),
+    newPingConfig,
 
     -- ** Point
     Point (..),
@@ -484,6 +535,13 @@ module Gogol.Monitoring.Types
     -- ** ResourceGroup_ResourceType
     ResourceGroup_ResourceType (..),
 
+    -- ** ResponseStatusCode
+    ResponseStatusCode (..),
+    newResponseStatusCode,
+
+    -- ** ResponseStatusCode_StatusClass
+    ResponseStatusCode_StatusClass (..),
+
     -- ** SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -510,6 +568,10 @@ module Gogol.Monitoring.Types
     -- ** ServiceLevelObjective_UserLabels
     ServiceLevelObjective_UserLabels (..),
     newServiceLevelObjective_UserLabels,
+
+    -- ** Snooze
+    Snooze (..),
+    newSnooze,
 
     -- ** SourceContext
     SourceContext (..),
@@ -585,6 +647,10 @@ module Gogol.Monitoring.Types
 
     -- ** UptimeCheckConfig_SelectedRegionsItem
     UptimeCheckConfig_SelectedRegionsItem (..),
+
+    -- ** UptimeCheckConfig_UserLabels
+    UptimeCheckConfig_UserLabels (..),
+    newUptimeCheckConfig_UserLabels,
 
     -- ** UptimeCheckIp
     UptimeCheckIp (..),

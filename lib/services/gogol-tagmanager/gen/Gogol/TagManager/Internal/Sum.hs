@@ -157,6 +157,7 @@ module Gogol.TagManager.Internal.Sum
         BuiltInVariable_Type_ServerPageLocationUrl,
         BuiltInVariable_Type_ServerPageLocationPath,
         BuiltInVariable_Type_ServerPageLocationHostname,
+        BuiltInVariable_Type_VisitorRegion,
         ..
       ),
 
@@ -298,6 +299,14 @@ module Gogol.TagManager.Internal.Sum
         ..
       ),
 
+    -- * AccountsContainersCombineSettingSource
+    AccountsContainersCombineSettingSource
+      ( AccountsContainersCombineSettingSource_SettingSourceUnspecified,
+        AccountsContainersCombineSettingSource_Current,
+        AccountsContainersCombineSettingSource_Other,
+        ..
+      ),
+
     -- * AccountsContainersWorkspacesBuilt_in_variablesCreateType
     AccountsContainersWorkspacesBuilt_in_variablesCreateType
       ( AccountsContainersWorkspacesBuilt_in_variablesCreateType_BuiltInVariableTypeUnspecified,
@@ -413,6 +422,7 @@ module Gogol.TagManager.Internal.Sum
         AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationUrl,
         AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationPath,
         AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationHostname,
+        AccountsContainersWorkspacesBuilt_in_variablesCreateType_VisitorRegion,
         ..
       ),
 
@@ -531,6 +541,7 @@ module Gogol.TagManager.Internal.Sum
         AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationUrl,
         AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationPath,
         AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationHostname,
+        AccountsContainersWorkspacesBuilt_in_variablesDeleteType_VisitorRegion,
         ..
       ),
 
@@ -649,6 +660,7 @@ module Gogol.TagManager.Internal.Sum
         AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationUrl,
         AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationPath,
         AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationHostname,
+        AccountsContainersWorkspacesBuilt_in_variablesRevertType_VisitorRegion,
         ..
       ),
   )
@@ -1185,6 +1197,10 @@ pattern BuiltInVariable_Type_ServerPageLocationPath = BuiltInVariable_Type "serv
 pattern BuiltInVariable_Type_ServerPageLocationHostname :: BuiltInVariable_Type
 pattern BuiltInVariable_Type_ServerPageLocationHostname = BuiltInVariable_Type "serverPageLocationHostname"
 
+-- |
+pattern BuiltInVariable_Type_VisitorRegion :: BuiltInVariable_Type
+pattern BuiltInVariable_Type_VisitorRegion = BuiltInVariable_Type "visitorRegion"
+
 {-# COMPLETE
   BuiltInVariable_Type_BuiltInVariableTypeUnspecified,
   BuiltInVariable_Type_PageUrl,
@@ -1299,6 +1315,7 @@ pattern BuiltInVariable_Type_ServerPageLocationHostname = BuiltInVariable_Type "
   BuiltInVariable_Type_ServerPageLocationUrl,
   BuiltInVariable_Type_ServerPageLocationPath,
   BuiltInVariable_Type_ServerPageLocationHostname,
+  BuiltInVariable_Type_VisitorRegion,
   BuiltInVariable_Type
   #-}
 
@@ -1911,6 +1928,38 @@ pattern VariableFormatValue_CaseConversionType_Uppercase = VariableFormatValue_C
   VariableFormatValue_CaseConversionType
   #-}
 
+-- | Specify the source of config setting after combine
+newtype AccountsContainersCombineSettingSource = AccountsContainersCombineSettingSource {fromAccountsContainersCombineSettingSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- |
+pattern AccountsContainersCombineSettingSource_SettingSourceUnspecified :: AccountsContainersCombineSettingSource
+pattern AccountsContainersCombineSettingSource_SettingSourceUnspecified = AccountsContainersCombineSettingSource "settingSourceUnspecified"
+
+-- | Keep the current container config setting after combine
+pattern AccountsContainersCombineSettingSource_Current :: AccountsContainersCombineSettingSource
+pattern AccountsContainersCombineSettingSource_Current = AccountsContainersCombineSettingSource "current"
+
+-- | Use config setting from the other tag after combine
+pattern AccountsContainersCombineSettingSource_Other :: AccountsContainersCombineSettingSource
+pattern AccountsContainersCombineSettingSource_Other = AccountsContainersCombineSettingSource "other"
+
+{-# COMPLETE
+  AccountsContainersCombineSettingSource_SettingSourceUnspecified,
+  AccountsContainersCombineSettingSource_Current,
+  AccountsContainersCombineSettingSource_Other,
+  AccountsContainersCombineSettingSource
+  #-}
+
 -- | The types of built-in variables to enable.
 newtype AccountsContainersWorkspacesBuilt_in_variablesCreateType = AccountsContainersWorkspacesBuilt_in_variablesCreateType {fromAccountsContainersWorkspacesBuilt_in_variablesCreateType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2376,6 +2425,10 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocat
 pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationHostname :: AccountsContainersWorkspacesBuilt_in_variablesCreateType
 pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationHostname = AccountsContainersWorkspacesBuilt_in_variablesCreateType "serverPageLocationHostname"
 
+-- |
+pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_VisitorRegion :: AccountsContainersWorkspacesBuilt_in_variablesCreateType
+pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_VisitorRegion = AccountsContainersWorkspacesBuilt_in_variablesCreateType "visitorRegion"
+
 {-# COMPLETE
   AccountsContainersWorkspacesBuilt_in_variablesCreateType_BuiltInVariableTypeUnspecified,
   AccountsContainersWorkspacesBuilt_in_variablesCreateType_PageUrl,
@@ -2490,6 +2543,7 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocat
   AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationUrl,
   AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationPath,
   AccountsContainersWorkspacesBuilt_in_variablesCreateType_ServerPageLocationHostname,
+  AccountsContainersWorkspacesBuilt_in_variablesCreateType_VisitorRegion,
   AccountsContainersWorkspacesBuilt_in_variablesCreateType
   #-}
 
@@ -2958,6 +3012,10 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocat
 pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationHostname :: AccountsContainersWorkspacesBuilt_in_variablesDeleteType
 pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationHostname = AccountsContainersWorkspacesBuilt_in_variablesDeleteType "serverPageLocationHostname"
 
+-- |
+pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_VisitorRegion :: AccountsContainersWorkspacesBuilt_in_variablesDeleteType
+pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_VisitorRegion = AccountsContainersWorkspacesBuilt_in_variablesDeleteType "visitorRegion"
+
 {-# COMPLETE
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType_BuiltInVariableTypeUnspecified,
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType_PageUrl,
@@ -3072,6 +3130,7 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocat
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationUrl,
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationPath,
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType_ServerPageLocationHostname,
+  AccountsContainersWorkspacesBuilt_in_variablesDeleteType_VisitorRegion,
   AccountsContainersWorkspacesBuilt_in_variablesDeleteType
   #-}
 
@@ -3540,6 +3599,10 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocat
 pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationHostname :: AccountsContainersWorkspacesBuilt_in_variablesRevertType
 pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationHostname = AccountsContainersWorkspacesBuilt_in_variablesRevertType "serverPageLocationHostname"
 
+-- |
+pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_VisitorRegion :: AccountsContainersWorkspacesBuilt_in_variablesRevertType
+pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_VisitorRegion = AccountsContainersWorkspacesBuilt_in_variablesRevertType "visitorRegion"
+
 {-# COMPLETE
   AccountsContainersWorkspacesBuilt_in_variablesRevertType_BuiltInVariableTypeUnspecified,
   AccountsContainersWorkspacesBuilt_in_variablesRevertType_PageUrl,
@@ -3654,5 +3717,6 @@ pattern AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocat
   AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationUrl,
   AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationPath,
   AccountsContainersWorkspacesBuilt_in_variablesRevertType_ServerPageLocationHostname,
+  AccountsContainersWorkspacesBuilt_in_variablesRevertType_VisitorRegion,
   AccountsContainersWorkspacesBuilt_in_variablesRevertType
   #-}

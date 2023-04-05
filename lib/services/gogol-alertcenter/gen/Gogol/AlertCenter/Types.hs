@@ -82,6 +82,10 @@ module Gogol.AlertCenter.Types
     AlertMetadata (..),
     newAlertMetadata,
 
+    -- ** ApnsCertificateExpirationInfo
+    ApnsCertificateExpirationInfo (..),
+    newApnsCertificateExpirationInfo,
+
     -- ** AppMakerSqlSetupNotification
     AppMakerSqlSetupNotification (..),
     newAppMakerSqlSetupNotification,
@@ -223,6 +227,10 @@ module Gogol.AlertCenter.Types
     PredefinedDetectorInfo (..),
     newPredefinedDetectorInfo,
 
+    -- ** PrimaryAdminChangedEvent
+    PrimaryAdminChangedEvent (..),
+    newPrimaryAdminChangedEvent,
+
     -- ** ReportingRule
     ReportingRule (..),
     newReportingRule,
@@ -255,6 +263,22 @@ module Gogol.AlertCenter.Types
     -- ** RuleViolationInfo_TriggeredActionTypesItem
     RuleViolationInfo_TriggeredActionTypesItem (..),
 
+    -- ** SSOProfileCreatedEvent
+    SSOProfileCreatedEvent (..),
+    newSSOProfileCreatedEvent,
+
+    -- ** SSOProfileDeletedEvent
+    SSOProfileDeletedEvent (..),
+    newSSOProfileDeletedEvent,
+
+    -- ** SSOProfileUpdatedEvent
+    SSOProfileUpdatedEvent (..),
+    newSSOProfileUpdatedEvent,
+
+    -- ** SensitiveAdminAction
+    SensitiveAdminAction (..),
+    newSensitiveAdminAction,
+
     -- ** Settings
     Settings (..),
     newSettings,
@@ -271,6 +295,10 @@ module Gogol.AlertCenter.Types
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SuperAdminPasswordResetEvent
+    SuperAdminPasswordResetEvent (..),
+    newSuperAdminPasswordResetEvent,
+
     -- ** SuspiciousActivity
     SuspiciousActivity (..),
     newSuspiciousActivity,
@@ -278,6 +306,20 @@ module Gogol.AlertCenter.Types
     -- ** SuspiciousActivitySecurityDetail
     SuspiciousActivitySecurityDetail (..),
     newSuspiciousActivitySecurityDetail,
+
+    -- ** TransferError
+    TransferError (..),
+    newTransferError,
+
+    -- ** TransferError_EntityType
+    TransferError_EntityType (..),
+
+    -- ** TransferError_InvalidReason
+    TransferError_InvalidReason (..),
+
+    -- ** TransferMisconfiguration
+    TransferMisconfiguration (..),
+    newTransferMisconfiguration,
 
     -- ** UndeleteAlertRequest
     UndeleteAlertRequest (..),
@@ -294,6 +336,24 @@ module Gogol.AlertCenter.Types
     -- ** UserDefinedDetectorInfo
     UserDefinedDetectorInfo (..),
     newUserDefinedDetectorInfo,
+
+    -- ** VoiceMisconfiguration
+    VoiceMisconfiguration (..),
+    newVoiceMisconfiguration,
+
+    -- ** VoiceMisconfiguration_EntityType
+    VoiceMisconfiguration_EntityType (..),
+
+    -- ** VoicemailMisconfiguration
+    VoicemailMisconfiguration (..),
+    newVoicemailMisconfiguration,
+
+    -- ** VoicemailRecipientError
+    VoicemailRecipientError (..),
+    newVoicemailRecipientError,
+
+    -- ** VoicemailRecipientError_InvalidReason
+    VoicemailRecipientError_InvalidReason (..),
   )
 where
 

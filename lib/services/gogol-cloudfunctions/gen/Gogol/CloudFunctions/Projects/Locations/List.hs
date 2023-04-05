@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.list@ method which the
 -- 'CloudFunctionsProjectsLocationsList' request conforms to.
 type CloudFunctionsProjectsLocationsListResource =
-  "v2beta"
+  "v2"
     Core.:> Core.Capture "name" Core.Text
     Core.:> "locations"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
@@ -69,7 +69,7 @@ data CloudFunctionsProjectsLocationsList = CloudFunctionsProjectsLocationsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A filter to narrow down results to a preferred subset. The filtering language accepts strings like \"displayName=tokyo\", and is documented in more detail in <https://google.aip.dev/160 AIP-160>.
+    -- | A filter to narrow down results to a preferred subset. The filtering language accepts strings like @\"displayName=tokyo\"@, and is documented in more detail in <https://google.aip.dev/160 AIP-160>.
     filter :: (Core.Maybe Core.Text),
     -- | The resource that owns the locations collection, if applicable.
     name :: Core.Text,

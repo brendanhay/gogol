@@ -28,7 +28,7 @@
 --
 -- Gets a blog by url.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.blogs.getByUrl@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogs.getByUrl@.
 module Gogol.Blogger.Blogs.GetByUrl
   ( -- * Resource
     BloggerBlogsGetByUrlResource,

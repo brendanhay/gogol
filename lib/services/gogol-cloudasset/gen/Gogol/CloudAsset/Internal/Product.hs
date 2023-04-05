@@ -215,7 +215,7 @@ where
 import Gogol.CloudAsset.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Represents the metadata of the longrunning operation for the AnalyzeIamPolicyLongrunning rpc.
+-- | Represents the metadata of the longrunning operation for the AnalyzeIamPolicyLongrunning RPC.
 --
 -- /See:/ 'newAnalyzeIamPolicyLongrunningMetadata' smart constructor.
 newtype AnalyzeIamPolicyLongrunningMetadata = AnalyzeIamPolicyLongrunningMetadata
@@ -281,7 +281,7 @@ instance
   toJSON = Core.const Core.emptyObject
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -361,8 +361,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -450,7 +451,7 @@ instance Core.ToJSON Expr where
           ]
       )
 
--- | An asset in Google Cloud. An asset can be any resource in the Google Cloud <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy resource hierarchy>, a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy). See <https://cloud.google.com/asset-inventory/docs/supported-asset-types Supported asset types> for more information.
+-- | An asset in Google Cloud. An asset can be any resource in the Google Cloud <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy resource hierarchy>, a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. IAM policy). See <https://cloud.google.com/asset-inventory/docs/supported-asset-types Supported asset types> for more information.
 --
 -- /See:/ 'newGoogleCloudAssetV1p7beta1Asset' smart constructor.
 data GoogleCloudAssetV1p7beta1Asset = GoogleCloudAssetV1p7beta1Asset
@@ -462,7 +463,7 @@ data GoogleCloudAssetV1p7beta1Asset = GoogleCloudAssetV1p7beta1Asset
     ancestors :: (Core.Maybe [Core.Text]),
     -- | The type of the asset. Example: @compute.googleapis.com\/Disk@ See <https://cloud.google.com/asset-inventory/docs/supported-asset-types Supported asset types> for more information.
     assetType :: (Core.Maybe Core.Text),
-    -- | A representation of the Cloud IAM policy set on a Google Cloud resource. There can be a maximum of one Cloud IAM policy set on any given resource. In addition, Cloud IAM policies inherit their granted access scope from any policies set on parent resources in the resource hierarchy. Therefore, the effectively policy is the union of both the policy set on this resource and each policy set on all of the resource\'s ancestry resource levels in the hierarchy. See <https://cloud.google.com/iam/docs/policies#inheritance this topic> for more information.
+    -- | A representation of the IAM policy set on a Google Cloud resource. There can be a maximum of one IAM policy set on any given resource. In addition, IAM policies inherit their granted access scope from any policies set on parent resources in the resource hierarchy. Therefore, the effectively policy is the union of both the policy set on this resource and each policy set on all of the resource\'s ancestry resource levels in the hierarchy. See <https://cloud.google.com/iam/help/allow-policies/inheritance this topic> for more information.
     iamPolicy :: (Core.Maybe Policy),
     -- | The full name of the asset. Example: @\/\/compute.googleapis.com\/projects\/my_project_123\/zones\/zone1\/instances\/instance1@ See <https://cloud.google.com/apis/design/resource_names#full_resource_name Resource names> for more information.
     name :: (Core.Maybe Core.Text),
@@ -667,9 +668,9 @@ instance
 --
 -- /See:/ 'newGoogleCloudAssetV1p7beta1GcsDestination' smart constructor.
 data GoogleCloudAssetV1p7beta1GcsDestination = GoogleCloudAssetV1p7beta1GcsDestination
-  { -- | The uri of the Cloud Storage object. It\'s the same uri that is used by gsutil. Example: \"gs:\/\/bucket/name\/object/name\". See <https://cloud.google.com/storage/docs/viewing-editing-metadata Viewing and Editing Object Metadata> for more information.
+  { -- | The URI of the Cloud Storage object. It\'s the same URI that is used by gsutil. Example: \"gs:\/\/bucket/name\/object/name\". See <https://cloud.google.com/storage/docs/viewing-editing-metadata Viewing and Editing Object Metadata> for more information.
     uri :: (Core.Maybe Core.Text),
-    -- | The uri prefix of all generated Cloud Storage objects. Example: \"gs:\/\/bucket/name\/object/name/prefix\". Each object uri is in format: \"gs:\/\/bucket/name\/object/name/prefix\/{ASSET/TYPE}\/{SHARD/NUMBER} and only contains assets for that type. starts from 0. Example: \"gs:\/\/bucket/name\/object/name/prefix\/compute.googleapis.com\/Disk\/0\" is the first shard of output objects containing all compute.googleapis.com\/Disk assets. An INVALID/ARGUMENT error will be returned if file with the same name \"gs:\/\/bucket/name\/object/name_prefix\" already exists.
+    -- | The URI prefix of all generated Cloud Storage objects. Example: \"gs:\/\/bucket/name\/object/name/prefix\". Each object URI is in format: \"gs:\/\/bucket/name\/object/name/prefix\/{ASSET/TYPE}\/{SHARD/NUMBER} and only contains assets for that type. starts from 0. Example: \"gs:\/\/bucket/name\/object/name/prefix\/compute.googleapis.com\/Disk\/0\" is the first shard of output objects containing all compute.googleapis.com\/Disk assets. An INVALID/ARGUMENT error will be returned if file with the same name \"gs:\/\/bucket/name\/object/name_prefix\" already exists.
     uriPrefix :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -790,7 +791,7 @@ instance
           [("partitionKey" Core..=) Core.<$> partitionKey]
       )
 
--- | An asset identify in Google Cloud which contains its name, type and ancestors. An asset can be any resource in the Google Cloud <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy resource hierarchy>, a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy). See <https://cloud.google.com/asset-inventory/docs/supported-asset-types Supported asset types> for more information.
+-- | An asset identify in Google Cloud which contains its name, type and ancestors. An asset can be any resource in the Google Cloud <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy resource hierarchy>, a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. IAM policy). See <https://cloud.google.com/asset-inventory/docs/supported-asset-types Supported asset types> for more information.
 --
 -- /See:/ 'newGoogleCloudAssetV1p7beta1RelatedAsset' smart constructor.
 data GoogleCloudAssetV1p7beta1RelatedAsset = GoogleCloudAssetV1p7beta1RelatedAsset
@@ -956,7 +957,7 @@ data GoogleCloudAssetV1p7beta1Resource = GoogleCloudAssetV1p7beta1Resource
     discoveryName :: (Core.Maybe Core.Text),
     -- | The location of the resource in Google Cloud, such as its zone and region. For more information, see https:\/\/cloud.google.com\/about\/locations\/.
     location :: (Core.Maybe Core.Text),
-    -- | The full name of the immediate parent of this resource. See <https://cloud.google.com/apis/design/resource_names#full_resource_name Resource Names> for more information. For Google Cloud assets, this value is the parent resource defined in the <https://cloud.google.com/iam/docs/overview#policy_hierarchy Cloud IAM policy hierarchy>. Example: @\/\/cloudresourcemanager.googleapis.com\/projects\/my_project_123@ For third-party assets, this field may be set differently.
+    -- | The full name of the immediate parent of this resource. See <https://cloud.google.com/apis/design/resource_names#full_resource_name Resource Names> for more information. For Google Cloud assets, this value is the parent resource defined in the <https://cloud.google.com/iam/docs/overview#policy_hierarchy IAM policy hierarchy>. Example: @\/\/cloudresourcemanager.googleapis.com\/projects\/my_project_123@ For third-party assets, this field may be set differently.
     parent :: (Core.Maybe Core.Text),
     -- | The REST URL for accessing the resource. An HTTP @GET@ request using this URL returns the resource itself. Example: @https:\/\/cloudresourcemanager.googleapis.com\/v1\/projects\/my-project-123@ This value is unspecified for resources without a REST API.
     resourceUrl :: (Core.Maybe Core.Text),
@@ -1254,7 +1255,7 @@ data GoogleIdentityAccesscontextmanagerV1AccessLevel = GoogleIdentityAccessconte
     custom :: (Core.Maybe GoogleIdentityAccesscontextmanagerV1CustomLevel),
     -- | Description of the @AccessLevel@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the Access Level. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The maximum length of the @access_level@ component is 50 characters.
+    -- | Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
     -- | Human readable title. Must be unique within the Policy.
     title :: (Core.Maybe Core.Text)
@@ -1740,7 +1741,9 @@ instance
 --
 -- /See:/ 'newGoogleIdentityAccesscontextmanagerV1EgressTo' smart constructor.
 data GoogleIdentityAccesscontextmanagerV1EgressTo = GoogleIdentityAccesscontextmanagerV1EgressTo
-  { -- | A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation\/service in this list.
+  { -- | A list of external resources that are allowed to be accessed. Only AWS and Azure resources are supported. For Amazon S3, the supported format is s3:\/\/BUCKET/NAME. For Azure Storage, the supported format is azure:\/\/myaccount.blob.core.windows.net\/CONTAINER/NAME. A request matches if it contains an external resource in this list (Example: s3:\/\/bucket\/path). Currently \'*\' is not allowed.
+    externalResources :: (Core.Maybe [Core.Text]),
+    -- | A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation\/service in this list.
     operations :: (Core.Maybe [GoogleIdentityAccesscontextmanagerV1ApiOperation]),
     -- | A list of resources, currently only projects in the form @projects\/@, that are allowed to be accessed by sources defined in the corresponding EgressFrom. A request matches if it contains a resource in this list. If @*@ is specified for @resources@, then this EgressTo rule will authorize access to all resources outside the perimeter.
     resources :: (Core.Maybe [Core.Text])
@@ -1752,7 +1755,8 @@ newGoogleIdentityAccesscontextmanagerV1EgressTo ::
   GoogleIdentityAccesscontextmanagerV1EgressTo
 newGoogleIdentityAccesscontextmanagerV1EgressTo =
   GoogleIdentityAccesscontextmanagerV1EgressTo
-    { operations = Core.Nothing,
+    { externalResources = Core.Nothing,
+      operations = Core.Nothing,
       resources = Core.Nothing
     }
 
@@ -1765,7 +1769,8 @@ instance
       "GoogleIdentityAccesscontextmanagerV1EgressTo"
       ( \o ->
           GoogleIdentityAccesscontextmanagerV1EgressTo
-            Core.<$> (o Core..:? "operations")
+            Core.<$> (o Core..:? "externalResources")
+            Core.<*> (o Core..:? "operations")
             Core.<*> (o Core..:? "resources")
       )
 
@@ -1777,7 +1782,9 @@ instance
     GoogleIdentityAccesscontextmanagerV1EgressTo {..} =
       Core.object
         ( Core.catMaybes
-            [ ("operations" Core..=) Core.<$> operations,
+            [ ("externalResources" Core..=)
+                Core.<$> externalResources,
+              ("operations" Core..=) Core.<$> operations,
               ("resources" Core..=) Core.<$> resources
             ]
         )
@@ -1888,7 +1895,7 @@ instance
 data GoogleIdentityAccesscontextmanagerV1IngressSource = GoogleIdentityAccesscontextmanagerV1IngressSource
   { -- | An AccessLevel resource name that allow resources within the ServicePerimeters to be accessed from the internet. AccessLevels listed must be in the same policy as this ServicePerimeter. Referencing a nonexistent AccessLevel will cause an error. If no AccessLevel names are listed, resources within the perimeter can only be accessed via Google Cloud calls with request origins within the perimeter. Example: @accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL@. If a single @*@ is specified for @access_level@, then all IngressSources will be allowed.
     accessLevel :: (Core.Maybe Core.Text),
-    -- | A Google Cloud resource that is allowed to ingress the perimeter. Requests from these resources will be allowed to access perimeter data. Currently only projects are allowed. Format: @projects\/{project_number}@ The project may be in any Google Cloud organization, not just the organization that the perimeter is defined in. @*@ is not allowed, the case of allowing all Google Cloud resources only is not supported.
+    -- | A Google Cloud resource that is allowed to ingress the perimeter. Requests from these resources will be allowed to access perimeter data. Currently only projects and VPCs are allowed. Project format: @projects\/{project_number}@ VPC network format: @\/\/compute.googleapis.com\/projects\/{PROJECT_ID}\/global\/networks\/{NAME}@. The project may be in any Google Cloud organization, not just the organization that the perimeter is defined in. @*@ is not allowed, the case of allowing all Google Cloud resources only is not supported.
     resource :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2075,15 +2082,15 @@ instance
             ]
         )
 
--- | @ServicePerimeter@ describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the @ServicePerimeter@. If a request with a source within this @ServicePerimeter@ has a target outside of the @ServicePerimeter@, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges.
+-- | @ServicePerimeter@ describes a set of Google Cloud resources which can freely import and export data amongst themselves, but not export outside of the @ServicePerimeter@. If a request with a source within this @ServicePerimeter@ has a target outside of the @ServicePerimeter@, the request will be blocked. Otherwise the request is allowed. There are two types of Service Perimeter - Regular and Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud project or VPC network can only belong to a single regular Service Perimeter. Service Perimeter Bridges can contain only Google Cloud projects as members, a single Google Cloud project may belong to multiple Service Perimeter Bridges.
 --
 -- /See:/ 'newGoogleIdentityAccesscontextmanagerV1ServicePerimeter' smart constructor.
 data GoogleIdentityAccesscontextmanagerV1ServicePerimeter = GoogleIdentityAccesscontextmanagerV1ServicePerimeter
   { -- | Description of the @ServicePerimeter@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Required. Resource name for the ServicePerimeter. The @short_name@ component must begin with a letter and only include alphanumeric and \'_\'. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@
+    -- | Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
-    -- | Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
+    -- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
     perimeterType ::
       ( Core.Maybe
           GoogleIdentityAccesscontextmanagerV1ServicePerimeter_PerimeterType
@@ -2166,7 +2173,7 @@ data GoogleIdentityAccesscontextmanagerV1ServicePerimeterConfig = GoogleIdentity
     egressPolicies :: (Core.Maybe [GoogleIdentityAccesscontextmanagerV1EgressPolicy]),
     -- | List of IngressPolicies to apply to the perimeter. A perimeter may have multiple IngressPolicies, each of which is evaluated separately. Access is granted if any Ingress Policy grants it. Must be empty for a perimeter bridge.
     ingressPolicies :: (Core.Maybe [GoogleIdentityAccesscontextmanagerV1IngressPolicy]),
-    -- | A list of Google Cloud resources that are inside of the service perimeter. Currently only projects are allowed. Format: @projects\/{project_number}@
+    -- | A list of Google Cloud resources that are inside of the service perimeter. Currently only projects and VPCs are allowed. Project format: @projects\/{project_number}@ VPC network format: @\/\/compute.googleapis.com\/projects\/{PROJECT_ID}\/global\/networks\/{NAME}@.
     resources :: (Core.Maybe [Core.Text]),
     -- | Google Cloud services that are subject to the Service Perimeter restrictions. For example, if @storage.googleapis.com@ is specified, access to the storage buckets inside the perimeter must meet the perimeter\'s access restrictions.
     restrictedServices :: (Core.Maybe [Core.Text]),

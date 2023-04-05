@@ -28,7 +28,7 @@
 --
 -- Marks a comment as spam by blog id, post id and comment id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.markAsSpam@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.markAsSpam@.
 module Gogol.Blogger.Comments.MarkAsSpam
   ( -- * Resource
     BloggerCommentsMarkAsSpamResource,

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity <https://cloud.google.com/identity/docs/concepts/overview-devices Devices API> instead.
+-- Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity <https://cloud.google.com/identity/docs/concepts/overview-devices Devices API> instead. This method times out after 60 minutes. For more information, see <https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes Troubleshoot error codes>.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.mobiledevices.list@.
 module Gogol.Admin.Directory.Mobiledevices.List
@@ -72,7 +72,7 @@ type DirectoryMobiledevicesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] MobileDevices
 
--- | Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity <https://cloud.google.com/identity/docs/concepts/overview-devices Devices API> instead.
+-- | Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity <https://cloud.google.com/identity/docs/concepts/overview-devices Devices API> instead. This method times out after 60 minutes. For more information, see <https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes Troubleshoot error codes>.
 --
 -- /See:/ 'newDirectoryMobiledevicesList' smart constructor.
 data DirectoryMobiledevicesList = DirectoryMobiledevicesList

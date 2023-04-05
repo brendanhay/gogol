@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.operations.cancel@ method which the
 -- 'TPUProjectsLocationsOperationsCancel' request conforms to.
 type TPUProjectsLocationsOperationsCancelResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.CaptureMode "name" "cancel" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text

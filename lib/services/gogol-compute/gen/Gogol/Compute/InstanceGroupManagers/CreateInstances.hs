@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+-- Creates instances with per-instance configurations in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instanceGroupManagers.createInstances@.
 module Gogol.Compute.InstanceGroupManagers.CreateInstances
@@ -66,7 +66,7 @@ type ComputeInstanceGroupManagersCreateInstancesResource =
               InstanceGroupManagersCreateInstancesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+-- | Creates instances with per-instance configurations in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
 --
 -- /See:/ 'newComputeInstanceGroupManagersCreateInstances' smart constructor.
 data ComputeInstanceGroupManagersCreateInstances = ComputeInstanceGroupManagersCreateInstances

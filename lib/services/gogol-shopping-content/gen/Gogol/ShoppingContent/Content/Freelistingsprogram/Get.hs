@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the status and review eligibility for the free listing program.
+-- Retrieves the status and review eligibility for the free listing program. Returns errors and warnings if they require action to resolve, will become disapprovals, or impact impressions. Use @accountstatuses@ to view all issues for an account.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.freelistingsprogram.get@.
 module Gogol.ShoppingContent.Content.Freelistingsprogram.Get
@@ -57,7 +57,7 @@ type ContentFreelistingsprogramGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] FreeListingsProgramStatus
 
--- | Retrieves the status and review eligibility for the free listing program.
+-- | Retrieves the status and review eligibility for the free listing program. Returns errors and warnings if they require action to resolve, will become disapprovals, or impact impressions. Use @accountstatuses@ to view all issues for an account.
 --
 -- /See:/ 'newContentFreelistingsprogramGet' smart constructor.
 data ContentFreelistingsprogramGet = ContentFreelistingsprogramGet

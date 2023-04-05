@@ -34,6 +34,10 @@ module Gogol.TagManager.Internal.Product
     AccountAccess (..),
     newAccountAccess,
 
+    -- * AccountFeatures
+    AccountFeatures (..),
+    newAccountFeatures,
+
     -- * BuiltInVariable
     BuiltInVariable (..),
     newBuiltInVariable,
@@ -53,6 +57,10 @@ module Gogol.TagManager.Internal.Product
     -- * ContainerAccess
     ContainerAccess (..),
     newContainerAccess,
+
+    -- * ContainerFeatures
+    ContainerFeatures (..),
+    newContainerFeatures,
 
     -- * ContainerVersion
     ContainerVersion (..),
@@ -78,6 +86,10 @@ module Gogol.TagManager.Internal.Product
     CustomTemplate (..),
     newCustomTemplate,
 
+    -- * Destination
+    Destination (..),
+    newDestination,
+
     -- * Entity
     Entity (..),
     newEntity,
@@ -98,9 +110,17 @@ module Gogol.TagManager.Internal.Product
     GalleryReference (..),
     newGalleryReference,
 
+    -- * GetContainerSnippetResponse
+    GetContainerSnippetResponse (..),
+    newGetContainerSnippetResponse,
+
     -- * GetWorkspaceStatusResponse
     GetWorkspaceStatusResponse (..),
     newGetWorkspaceStatusResponse,
+
+    -- * GtagConfig
+    GtagConfig (..),
+    newGtagConfig,
 
     -- * ListAccountsResponse
     ListAccountsResponse (..),
@@ -118,6 +138,10 @@ module Gogol.TagManager.Internal.Product
     ListContainersResponse (..),
     newListContainersResponse,
 
+    -- * ListDestinationsResponse
+    ListDestinationsResponse (..),
+    newListDestinationsResponse,
+
     -- * ListEnabledBuiltInVariablesResponse
     ListEnabledBuiltInVariablesResponse (..),
     newListEnabledBuiltInVariablesResponse,
@@ -129,6 +153,10 @@ module Gogol.TagManager.Internal.Product
     -- * ListFoldersResponse
     ListFoldersResponse (..),
     newListFoldersResponse,
+
+    -- * ListGtagConfigResponse
+    ListGtagConfigResponse (..),
+    newListGtagConfigResponse,
 
     -- * ListTagsResponse
     ListTagsResponse (..),
@@ -277,6 +305,8 @@ import Gogol.TagManager.Internal.Sum
 data Account = Account
   { -- | The Account ID uniquely identifies the GTM Account.
     accountId :: (Core.Maybe Core.Text),
+    -- | Read-only Account feature set
+    features :: (Core.Maybe AccountFeatures),
     -- | The fingerprint of the GTM Account as computed at storage time. This value is recomputed whenever the account is modified.
     fingerprint :: (Core.Maybe Core.Text),
     -- | Account display name. \@mutable tagmanager.accounts.create \@mutable tagmanager.accounts.update
@@ -296,6 +326,7 @@ newAccount ::
 newAccount =
   Account
     { accountId = Core.Nothing,
+      features = Core.Nothing,
       fingerprint = Core.Nothing,
       name = Core.Nothing,
       path = Core.Nothing,
@@ -310,6 +341,7 @@ instance Core.FromJSON Account where
       ( \o ->
           Account
             Core.<$> (o Core..:? "accountId")
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "path")
@@ -322,6 +354,7 @@ instance Core.ToJSON Account where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
+            ("features" Core..=) Core.<$> features,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("name" Core..=) Core.<$> name,
             ("path" Core..=) Core.<$> path,
@@ -359,7 +392,47 @@ instance Core.ToJSON AccountAccess where
           [("permission" Core..=) Core.<$> permission]
       )
 
--- | Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing propeties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.
+--
+-- /See:/ 'newAccountFeatures' smart constructor.
+data AccountFeatures = AccountFeatures
+  { -- | Whether this Account supports multiple Containers.
+    supportMultipleContainers :: (Core.Maybe Core.Bool),
+    -- | Whether this Account supports user permissions managed by GTM.
+    supportUserPermissions :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccountFeatures' with the minimum fields required to make a request.
+newAccountFeatures ::
+  AccountFeatures
+newAccountFeatures =
+  AccountFeatures
+    { supportMultipleContainers = Core.Nothing,
+      supportUserPermissions = Core.Nothing
+    }
+
+instance Core.FromJSON AccountFeatures where
+  parseJSON =
+    Core.withObject
+      "AccountFeatures"
+      ( \o ->
+          AccountFeatures
+            Core.<$> (o Core..:? "supportMultipleContainers")
+            Core.<*> (o Core..:? "supportUserPermissions")
+      )
+
+instance Core.ToJSON AccountFeatures where
+  toJSON AccountFeatures {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("supportMultipleContainers" Core..=)
+              Core.<$> supportMultipleContainers,
+            ("supportUserPermissions" Core..=)
+              Core.<$> supportUserPermissions
+          ]
+      )
+
+-- | Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing properties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.
 --
 -- /See:/ 'newBuiltInVariable' smart constructor.
 data BuiltInVariable = BuiltInVariable
@@ -556,6 +629,8 @@ data Container = Container
     containerId :: (Core.Maybe Core.Text),
     -- | List of domain names associated with the Container. \@mutable tagmanager.accounts.containers.create \@mutable tagmanager.accounts.containers.update
     domainName :: (Core.Maybe [Core.Text]),
+    -- | Read-only Container feature set.
+    features :: (Core.Maybe ContainerFeatures),
     -- | The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the account is modified.
     fingerprint :: (Core.Maybe Core.Text),
     -- | Container display name. \@mutable tagmanager.accounts.containers.create \@mutable tagmanager.accounts.containers.update
@@ -566,8 +641,12 @@ data Container = Container
     path :: (Core.Maybe Core.Text),
     -- | Container Public ID.
     publicId :: (Core.Maybe Core.Text),
+    -- | All Tag IDs that refer to this Container.
+    tagIds :: (Core.Maybe [Core.Text]),
     -- | Auto generated link to the tag manager UI
     tagManagerUrl :: (Core.Maybe Core.Text),
+    -- | List of server-side container URLs for the Container. If multiple URLs are provided, all URL paths must match. \@mutable tagmanager.accounts.containers.create \@mutable tagmanager.accounts.containers.update
+    taggingServerUrls :: (Core.Maybe [Core.Text]),
     -- | List of Usage Contexts for the Container. Valid values include: web, android, or ios. \@mutable tagmanager.accounts.containers.create \@mutable tagmanager.accounts.containers.update
     usageContext :: (Core.Maybe [Container_UsageContextItem])
   }
@@ -581,12 +660,15 @@ newContainer =
     { accountId = Core.Nothing,
       containerId = Core.Nothing,
       domainName = Core.Nothing,
+      features = Core.Nothing,
       fingerprint = Core.Nothing,
       name = Core.Nothing,
       notes = Core.Nothing,
       path = Core.Nothing,
       publicId = Core.Nothing,
+      tagIds = Core.Nothing,
       tagManagerUrl = Core.Nothing,
+      taggingServerUrls = Core.Nothing,
       usageContext = Core.Nothing
     }
 
@@ -599,12 +681,15 @@ instance Core.FromJSON Container where
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "containerId")
             Core.<*> (o Core..:? "domainName")
+            Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "publicId")
+            Core.<*> (o Core..:? "tagIds")
             Core.<*> (o Core..:? "tagManagerUrl")
+            Core.<*> (o Core..:? "taggingServerUrls")
             Core.<*> (o Core..:? "usageContext")
       )
 
@@ -615,12 +700,16 @@ instance Core.ToJSON Container where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("containerId" Core..=) Core.<$> containerId,
             ("domainName" Core..=) Core.<$> domainName,
+            ("features" Core..=) Core.<$> features,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("name" Core..=) Core.<$> name,
             ("notes" Core..=) Core.<$> notes,
             ("path" Core..=) Core.<$> path,
             ("publicId" Core..=) Core.<$> publicId,
+            ("tagIds" Core..=) Core.<$> tagIds,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
+            ("taggingServerUrls" Core..=)
+              Core.<$> taggingServerUrls,
             ("usageContext" Core..=) Core.<$> usageContext
           ]
       )
@@ -661,6 +750,106 @@ instance Core.ToJSON ContainerAccess where
           ]
       )
 
+--
+-- /See:/ 'newContainerFeatures' smart constructor.
+data ContainerFeatures = ContainerFeatures
+  { -- | Whether this Container supports built-in variables
+    supportBuiltInVariables :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports clients.
+    supportClients :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports environments.
+    supportEnvironments :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports folders.
+    supportFolders :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports Google tag config.
+    supportGtagConfigs :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports tags.
+    supportTags :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports templates.
+    supportTemplates :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports triggers.
+    supportTriggers :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports user permissions managed by GTM.
+    supportUserPermissions :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports variables.
+    supportVariables :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports Container versions.
+    supportVersions :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports workspaces.
+    supportWorkspaces :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports zones.
+    supportZones :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContainerFeatures' with the minimum fields required to make a request.
+newContainerFeatures ::
+  ContainerFeatures
+newContainerFeatures =
+  ContainerFeatures
+    { supportBuiltInVariables = Core.Nothing,
+      supportClients = Core.Nothing,
+      supportEnvironments = Core.Nothing,
+      supportFolders = Core.Nothing,
+      supportGtagConfigs = Core.Nothing,
+      supportTags = Core.Nothing,
+      supportTemplates = Core.Nothing,
+      supportTriggers = Core.Nothing,
+      supportUserPermissions = Core.Nothing,
+      supportVariables = Core.Nothing,
+      supportVersions = Core.Nothing,
+      supportWorkspaces = Core.Nothing,
+      supportZones = Core.Nothing
+    }
+
+instance Core.FromJSON ContainerFeatures where
+  parseJSON =
+    Core.withObject
+      "ContainerFeatures"
+      ( \o ->
+          ContainerFeatures
+            Core.<$> (o Core..:? "supportBuiltInVariables")
+            Core.<*> (o Core..:? "supportClients")
+            Core.<*> (o Core..:? "supportEnvironments")
+            Core.<*> (o Core..:? "supportFolders")
+            Core.<*> (o Core..:? "supportGtagConfigs")
+            Core.<*> (o Core..:? "supportTags")
+            Core.<*> (o Core..:? "supportTemplates")
+            Core.<*> (o Core..:? "supportTriggers")
+            Core.<*> (o Core..:? "supportUserPermissions")
+            Core.<*> (o Core..:? "supportVariables")
+            Core.<*> (o Core..:? "supportVersions")
+            Core.<*> (o Core..:? "supportWorkspaces")
+            Core.<*> (o Core..:? "supportZones")
+      )
+
+instance Core.ToJSON ContainerFeatures where
+  toJSON ContainerFeatures {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("supportBuiltInVariables" Core..=)
+              Core.<$> supportBuiltInVariables,
+            ("supportClients" Core..=) Core.<$> supportClients,
+            ("supportEnvironments" Core..=)
+              Core.<$> supportEnvironments,
+            ("supportFolders" Core..=) Core.<$> supportFolders,
+            ("supportGtagConfigs" Core..=)
+              Core.<$> supportGtagConfigs,
+            ("supportTags" Core..=) Core.<$> supportTags,
+            ("supportTemplates" Core..=)
+              Core.<$> supportTemplates,
+            ("supportTriggers" Core..=) Core.<$> supportTriggers,
+            ("supportUserPermissions" Core..=)
+              Core.<$> supportUserPermissions,
+            ("supportVariables" Core..=)
+              Core.<$> supportVariables,
+            ("supportVersions" Core..=) Core.<$> supportVersions,
+            ("supportWorkspaces" Core..=)
+              Core.<$> supportWorkspaces,
+            ("supportZones" Core..=) Core.<$> supportZones
+          ]
+      )
+
 -- | Represents a Google Tag Manager Container Version.
 --
 -- /See:/ 'newContainerVersion' smart constructor.
@@ -687,9 +876,11 @@ data ContainerVersion = ContainerVersion
     fingerprint :: (Core.Maybe Core.Text),
     -- | The folders in the container that this version was taken from.
     folder :: (Core.Maybe [Folder]),
+    -- | The Google tag configs in the container that this version was taken from.
+    gtagConfig :: (Core.Maybe [GtagConfig]),
     -- | Container version display name. \@mutable tagmanager.accounts.containers.versions.update
     name :: (Core.Maybe Core.Text),
-    -- | GTM ContainerVersions\'s API relative path.
+    -- | GTM Container Version\'s API relative path.
     path :: (Core.Maybe Core.Text),
     -- | The tags in the container that this version was taken from.
     tag :: (Core.Maybe [Tag]),
@@ -720,6 +911,7 @@ newContainerVersion =
       description = Core.Nothing,
       fingerprint = Core.Nothing,
       folder = Core.Nothing,
+      gtagConfig = Core.Nothing,
       name = Core.Nothing,
       path = Core.Nothing,
       tag = Core.Nothing,
@@ -746,6 +938,7 @@ instance Core.FromJSON ContainerVersion where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "folder")
+            Core.<*> (o Core..:? "gtagConfig")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "tag")
@@ -771,6 +964,7 @@ instance Core.ToJSON ContainerVersion where
             ("description" Core..=) Core.<$> description,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("folder" Core..=) Core.<$> folder,
+            ("gtagConfig" Core..=) Core.<$> gtagConfig,
             ("name" Core..=) Core.<$> name,
             ("path" Core..=) Core.<$> path,
             ("tag" Core..=) Core.<$> tag,
@@ -799,6 +993,8 @@ data ContainerVersionHeader = ContainerVersionHeader
     numClients :: (Core.Maybe Core.Text),
     -- | Number of custom templates in the container version.
     numCustomTemplates :: (Core.Maybe Core.Text),
+    -- | Number of Google tag configs in the container version.
+    numGtagConfigs :: (Core.Maybe Core.Text),
     -- | Number of macros in the container version.
     numMacros :: (Core.Maybe Core.Text),
     -- | Number of rules in the container version.
@@ -811,7 +1007,7 @@ data ContainerVersionHeader = ContainerVersionHeader
     numVariables :: (Core.Maybe Core.Text),
     -- | Number of zones in the container version.
     numZones :: (Core.Maybe Core.Text),
-    -- | GTM Container Versions\'s API relative path.
+    -- | GTM Container Version\'s API relative path.
     path :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -828,6 +1024,7 @@ newContainerVersionHeader =
       name = Core.Nothing,
       numClients = Core.Nothing,
       numCustomTemplates = Core.Nothing,
+      numGtagConfigs = Core.Nothing,
       numMacros = Core.Nothing,
       numRules = Core.Nothing,
       numTags = Core.Nothing,
@@ -850,6 +1047,7 @@ instance Core.FromJSON ContainerVersionHeader where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "numClients")
             Core.<*> (o Core..:? "numCustomTemplates")
+            Core.<*> (o Core..:? "numGtagConfigs")
             Core.<*> (o Core..:? "numMacros")
             Core.<*> (o Core..:? "numRules")
             Core.<*> (o Core..:? "numTags")
@@ -872,6 +1070,7 @@ instance Core.ToJSON ContainerVersionHeader where
             ("numClients" Core..=) Core.<$> numClients,
             ("numCustomTemplates" Core..=)
               Core.<$> numCustomTemplates,
+            ("numGtagConfigs" Core..=) Core.<$> numGtagConfigs,
             ("numMacros" Core..=) Core.<$> numMacros,
             ("numRules" Core..=) Core.<$> numRules,
             ("numTags" Core..=) Core.<$> numTags,
@@ -1087,6 +1286,76 @@ instance Core.ToJSON CustomTemplate where
             ("templateData" Core..=) Core.<$> templateData,
             ("templateId" Core..=) Core.<$> templateId,
             ("workspaceId" Core..=) Core.<$> workspaceId
+          ]
+      )
+
+-- | Represents a Google Tag Destination.
+--
+-- /See:/ 'newDestination' smart constructor.
+data Destination = Destination
+  { -- | GTM Account ID.
+    accountId :: (Core.Maybe Core.Text),
+    -- | GTM Container ID.
+    containerId :: (Core.Maybe Core.Text),
+    -- | Destination ID.
+    destinationId :: (Core.Maybe Core.Text),
+    -- | The Destination link ID uniquely identifies the Destination.
+    destinationLinkId :: (Core.Maybe Core.Text),
+    -- | The fingerprint of the Google Tag Destination as computed at storage time. This value is recomputed whenever the destination is modified.
+    fingerprint :: (Core.Maybe Core.Text),
+    -- | Destination display name.
+    name :: (Core.Maybe Core.Text),
+    -- | Destination\'s API relative path.
+    path :: (Core.Maybe Core.Text),
+    -- | Auto generated link to the tag manager UI.
+    tagManagerUrl :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Destination' with the minimum fields required to make a request.
+newDestination ::
+  Destination
+newDestination =
+  Destination
+    { accountId = Core.Nothing,
+      containerId = Core.Nothing,
+      destinationId = Core.Nothing,
+      destinationLinkId = Core.Nothing,
+      fingerprint = Core.Nothing,
+      name = Core.Nothing,
+      path = Core.Nothing,
+      tagManagerUrl = Core.Nothing
+    }
+
+instance Core.FromJSON Destination where
+  parseJSON =
+    Core.withObject
+      "Destination"
+      ( \o ->
+          Destination
+            Core.<$> (o Core..:? "accountId")
+            Core.<*> (o Core..:? "containerId")
+            Core.<*> (o Core..:? "destinationId")
+            Core.<*> (o Core..:? "destinationLinkId")
+            Core.<*> (o Core..:? "fingerprint")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "tagManagerUrl")
+      )
+
+instance Core.ToJSON Destination where
+  toJSON Destination {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accountId" Core..=) Core.<$> accountId,
+            ("containerId" Core..=) Core.<$> containerId,
+            ("destinationId" Core..=) Core.<$> destinationId,
+            ("destinationLinkId" Core..=)
+              Core.<$> destinationLinkId,
+            ("fingerprint" Core..=) Core.<$> fingerprint,
+            ("name" Core..=) Core.<$> name,
+            ("path" Core..=) Core.<$> path,
+            ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl
           ]
       )
 
@@ -1438,6 +1707,36 @@ instance Core.ToJSON GalleryReference where
           ]
       )
 
+--
+-- /See:/ 'newGetContainerSnippetResponse' smart constructor.
+newtype GetContainerSnippetResponse = GetContainerSnippetResponse
+  { -- | Tagging snippet for a Container.
+    snippet :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GetContainerSnippetResponse' with the minimum fields required to make a request.
+newGetContainerSnippetResponse ::
+  GetContainerSnippetResponse
+newGetContainerSnippetResponse =
+  GetContainerSnippetResponse {snippet = Core.Nothing}
+
+instance Core.FromJSON GetContainerSnippetResponse where
+  parseJSON =
+    Core.withObject
+      "GetContainerSnippetResponse"
+      ( \o ->
+          GetContainerSnippetResponse
+            Core.<$> (o Core..:? "snippet")
+      )
+
+instance Core.ToJSON GetContainerSnippetResponse where
+  toJSON GetContainerSnippetResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("snippet" Core..=) Core.<$> snippet]
+      )
+
 -- | The changes that have occurred in the workspace since the base container version.
 --
 -- /See:/ 'newGetWorkspaceStatusResponse' smart constructor.
@@ -1475,6 +1774,80 @@ instance Core.ToJSON GetWorkspaceStatusResponse where
           [ ("mergeConflict" Core..=) Core.<$> mergeConflict,
             ("workspaceChange" Core..=)
               Core.<$> workspaceChange
+          ]
+      )
+
+-- | Represents a Google tag configuration.
+--
+-- /See:/ 'newGtagConfig' smart constructor.
+data GtagConfig = GtagConfig
+  { -- | Google tag account ID.
+    accountId :: (Core.Maybe Core.Text),
+    -- | Google tag container ID.
+    containerId :: (Core.Maybe Core.Text),
+    -- | The fingerprint of the Google tag config as computed at storage time. This value is recomputed whenever the config is modified.
+    fingerprint :: (Core.Maybe Core.Text),
+    -- | The ID uniquely identifies the Google tag config.
+    gtagConfigId :: (Core.Maybe Core.Text),
+    -- | The Google tag config\'s parameters. \@mutable tagmanager.accounts.containers.workspaces.gtag/config.create \@mutable tagmanager.accounts.containers.workspaces.gtag/config.update
+    parameter :: (Core.Maybe [Parameter]),
+    -- | Google tag config\'s API relative path.
+    path :: (Core.Maybe Core.Text),
+    -- | Auto generated link to the tag manager UI
+    tagManagerUrl :: (Core.Maybe Core.Text),
+    -- | Google tag config type. \@required tagmanager.accounts.containers.workspaces.gtag/config.create \@required tagmanager.accounts.containers.workspaces.gtag/config.update \@mutable tagmanager.accounts.containers.workspaces.gtag/config.create \@mutable tagmanager.accounts.containers.workspaces.gtag/config.update
+    type' :: (Core.Maybe Core.Text),
+    -- | Google tag workspace ID. Only used by GTM containers. Set to 0 otherwise.
+    workspaceId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GtagConfig' with the minimum fields required to make a request.
+newGtagConfig ::
+  GtagConfig
+newGtagConfig =
+  GtagConfig
+    { accountId = Core.Nothing,
+      containerId = Core.Nothing,
+      fingerprint = Core.Nothing,
+      gtagConfigId = Core.Nothing,
+      parameter = Core.Nothing,
+      path = Core.Nothing,
+      tagManagerUrl = Core.Nothing,
+      type' = Core.Nothing,
+      workspaceId = Core.Nothing
+    }
+
+instance Core.FromJSON GtagConfig where
+  parseJSON =
+    Core.withObject
+      "GtagConfig"
+      ( \o ->
+          GtagConfig
+            Core.<$> (o Core..:? "accountId")
+            Core.<*> (o Core..:? "containerId")
+            Core.<*> (o Core..:? "fingerprint")
+            Core.<*> (o Core..:? "gtagConfigId")
+            Core.<*> (o Core..:? "parameter")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "tagManagerUrl")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "workspaceId")
+      )
+
+instance Core.ToJSON GtagConfig where
+  toJSON GtagConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accountId" Core..=) Core.<$> accountId,
+            ("containerId" Core..=) Core.<$> containerId,
+            ("fingerprint" Core..=) Core.<$> fingerprint,
+            ("gtagConfigId" Core..=) Core.<$> gtagConfigId,
+            ("parameter" Core..=) Core.<$> parameter,
+            ("path" Core..=) Core.<$> path,
+            ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
+            ("type" Core..=) Core.<$> type',
+            ("workspaceId" Core..=) Core.<$> workspaceId
           ]
       )
 
@@ -1628,6 +2001,44 @@ instance Core.ToJSON ListContainersResponse where
           ]
       )
 
+--
+-- /See:/ 'newListDestinationsResponse' smart constructor.
+data ListDestinationsResponse = ListDestinationsResponse
+  { -- | All Destinations linked to a GTM Container.
+    destination :: (Core.Maybe [Destination]),
+    -- | Continuation token for fetching the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListDestinationsResponse' with the minimum fields required to make a request.
+newListDestinationsResponse ::
+  ListDestinationsResponse
+newListDestinationsResponse =
+  ListDestinationsResponse
+    { destination = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListDestinationsResponse where
+  parseJSON =
+    Core.withObject
+      "ListDestinationsResponse"
+      ( \o ->
+          ListDestinationsResponse
+            Core.<$> (o Core..:? "destination")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListDestinationsResponse where
+  toJSON ListDestinationsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("destination" Core..=) Core.<$> destination,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | A list of enabled built-in variables.
 --
 -- /See:/ 'newListEnabledBuiltInVariablesResponse' smart constructor.
@@ -1745,6 +2156,44 @@ instance Core.ToJSON ListFoldersResponse where
     Core.object
       ( Core.catMaybes
           [ ("folder" Core..=) Core.<$> folder,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+--
+-- /See:/ 'newListGtagConfigResponse' smart constructor.
+data ListGtagConfigResponse = ListGtagConfigResponse
+  { -- | All Google tag configs in a Container.
+    gtagConfig :: (Core.Maybe [GtagConfig]),
+    -- | Continuation token for fetching the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListGtagConfigResponse' with the minimum fields required to make a request.
+newListGtagConfigResponse ::
+  ListGtagConfigResponse
+newListGtagConfigResponse =
+  ListGtagConfigResponse
+    { gtagConfig = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListGtagConfigResponse where
+  parseJSON =
+    Core.withObject
+      "ListGtagConfigResponse"
+      ( \o ->
+          ListGtagConfigResponse
+            Core.<$> (o Core..:? "gtagConfig")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListGtagConfigResponse where
+  toJSON ListGtagConfigResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gtagConfig" Core..=) Core.<$> gtagConfig,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3294,8 +3743,6 @@ data Zone = Zone
     name :: (Core.Maybe Core.Text),
     -- | User notes on how to apply this zone in the container.
     notes :: (Core.Maybe Core.Text),
-    -- | Additional parameters.
-    parameter :: (Core.Maybe [Parameter]),
     -- | GTM Zone\'s API relative path.
     path :: (Core.Maybe Core.Text),
     -- | Auto generated link to the tag manager UI
@@ -3321,7 +3768,6 @@ newZone =
       fingerprint = Core.Nothing,
       name = Core.Nothing,
       notes = Core.Nothing,
-      parameter = Core.Nothing,
       path = Core.Nothing,
       tagManagerUrl = Core.Nothing,
       typeRestriction = Core.Nothing,
@@ -3342,7 +3788,6 @@ instance Core.FromJSON Zone where
             Core.<*> (o Core..:? "fingerprint")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "tagManagerUrl")
             Core.<*> (o Core..:? "typeRestriction")
@@ -3361,7 +3806,6 @@ instance Core.ToJSON Zone where
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("name" Core..=) Core.<$> name,
             ("notes" Core..=) Core.<$> notes,
-            ("parameter" Core..=) Core.<$> parameter,
             ("path" Core..=) Core.<$> path,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
             ("typeRestriction" Core..=) Core.<$> typeRestriction,

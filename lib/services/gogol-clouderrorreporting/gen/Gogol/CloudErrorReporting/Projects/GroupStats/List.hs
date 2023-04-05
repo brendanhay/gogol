@@ -101,9 +101,9 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     order :: (Core.Maybe ProjectsGroupStatsListOrder),
     -- | Optional. The maximum number of results to return per response. Default is 20.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Optional. A @next_page_token@ provided by a previous response. To view additional results, pass this token along with the identical query parameters as the first request.
+    -- | Optional. A next/page/token provided by a previous response. To view additional results, pass this token along with the identical query parameters as the first request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud Console>. Examples: @projects\/my-project-123@, @projects\/5551234@.
+    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. Examples: @projects\/my-project-123@, @projects\/5551234@.
     projectName :: Core.Text,
     -- | Optional. The exact value to match against </error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type ServiceContext.resource_type>.
     serviceFilterResourceType :: (Core.Maybe Core.Text),
@@ -113,7 +113,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     serviceFilterVersion :: (Core.Maybe Core.Text),
     -- | Restricts the query to the specified time range.
     timeRangePeriod :: (Core.Maybe ProjectsGroupStatsListTimeRangePeriod),
-    -- | Optional. The preferred duration for a single returned @TimedCount@. If not set, no timed counts are returned.
+    -- | Optional. The preferred duration for a single returned TimedCount. If not set, no timed counts are returned.
     timedCountDuration :: (Core.Maybe Core.Duration),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -124,7 +124,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
 
 -- | Creates a value of 'CloudErrorReportingProjectsGroupStatsList' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsGroupStatsList ::
-  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud Console>. Examples: @projects\/my-project-123@, @projects\/5551234@. See 'projectName'.
+  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. Examples: @projects\/my-project-123@, @projects\/5551234@. See 'projectName'.
   Core.Text ->
   CloudErrorReportingProjectsGroupStatsList
 newCloudErrorReportingProjectsGroupStatsList projectName =

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists devices for a given enterprise.
+-- Lists devices for a given enterprise. Deleted devices are not returned in the response.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.devices.list@.
 module Gogol.AndroidManagement.Enterprises.Devices.List
@@ -58,7 +58,7 @@ type AndroidManagementEnterprisesDevicesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListDevicesResponse
 
--- | Lists devices for a given enterprise.
+-- | Lists devices for a given enterprise. Deleted devices are not returned in the response.
 --
 -- /See:/ 'newAndroidManagementEnterprisesDevicesList' smart constructor.
 data AndroidManagementEnterprisesDevicesList = AndroidManagementEnterprisesDevicesList

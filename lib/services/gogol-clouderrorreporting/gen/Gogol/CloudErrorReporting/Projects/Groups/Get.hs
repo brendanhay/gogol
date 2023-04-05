@@ -65,7 +65,7 @@ data CloudErrorReportingProjectsGroupsGet = CloudErrorReportingProjectsGroupsGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call <https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.groupStats/list groupStats.list> to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@
+    -- | Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call groupStats.list to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@
     groupName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data CloudErrorReportingProjectsGroupsGet = CloudErrorReportingProjectsGroupsGet
 
 -- | Creates a value of 'CloudErrorReportingProjectsGroupsGet' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsGroupsGet ::
-  -- |  Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call <https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.groupStats/list groupStats.list> to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@ See 'groupName'.
+  -- |  Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call groupStats.list to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@ See 'groupName'.
   Core.Text ->
   CloudErrorReportingProjectsGroupsGet
 newCloudErrorReportingProjectsGroupsGet groupName =

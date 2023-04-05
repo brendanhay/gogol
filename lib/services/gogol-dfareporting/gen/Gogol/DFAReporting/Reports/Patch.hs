@@ -46,7 +46,7 @@ import qualified Gogol.Prelude as Core
 -- 'DFAReportingReportsPatch' request conforms to.
 type DFAReportingReportsPatchResource =
   "dfareporting"
-    Core.:> "v3.5"
+    Core.:> "v4"
     Core.:> "userprofiles"
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "reports"
@@ -72,7 +72,7 @@ data DFAReportingReportsPatch = DFAReportingReportsPatch
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Report,
-    -- | The DFA user profile ID.
+    -- | The Campaign Manager 360 user profile ID.
     profileId :: Core.Int64,
     -- | The ID of the report.
     reportId :: Core.Int64,
@@ -87,7 +87,7 @@ data DFAReportingReportsPatch = DFAReportingReportsPatch
 newDFAReportingReportsPatch ::
   -- |  Multipart request metadata. See 'payload'.
   Report ->
-  -- |  The DFA user profile ID. See 'profileId'.
+  -- |  The Campaign Manager 360 user profile ID. See 'profileId'.
   Core.Int64 ->
   -- |  The ID of the report. See 'reportId'.
   Core.Int64 ->

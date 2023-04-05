@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists spaces the caller is a member of.
+-- Lists spaces the caller is a member of. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope. Lists spaces visible to the caller or authenticated user. Group chats and DMs aren\'t listed until the first message is sent.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.list@.
 module Gogol.Chat.Spaces.List
@@ -57,7 +57,7 @@ type ChatSpacesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListSpacesResponse
 
--- | Lists spaces the caller is a member of.
+-- | Lists spaces the caller is a member of. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope. Lists spaces visible to the caller or authenticated user. Group chats and DMs aren\'t listed until the first message is sent.
 --
 -- /See:/ 'newChatSpacesList' smart constructor.
 data ChatSpacesList = ChatSpacesList
@@ -67,9 +67,9 @@ data ChatSpacesList = ChatSpacesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+    -- | Optional. The maximum number of spaces to return. The service may return fewer than this value. If unspecified, at most 100 spaces are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an @INVALID_ARGUMENT@ error.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A token identifying a page of results the server should return.
+    -- | Optional. A page token, received from a previous list spaces call. Provide this to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value may lead to unexpected results.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -94,7 +94,9 @@ newChatSpacesList =
 
 instance Core.GoogleRequest ChatSpacesList where
   type Rs ChatSpacesList = ListSpacesResponse
-  type Scopes ChatSpacesList = '[]
+  type
+    Scopes ChatSpacesList =
+      '[Chat'Bot, Chat'Spaces, Chat'Spaces'Readonly]
   requestClient ChatSpacesList {..} =
     go
       xgafv

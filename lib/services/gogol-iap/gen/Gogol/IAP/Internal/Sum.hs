@@ -33,12 +33,22 @@ module Gogol.IAP.Internal.Sum
         ..
       ),
 
+    -- * AttributePropagationSettings_OutputCredentialsItem
+    AttributePropagationSettings_OutputCredentialsItem
+      ( AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED,
+        AttributePropagationSettings_OutputCredentialsItem_Header,
+        AttributePropagationSettings_OutputCredentialsItem_Jwt,
+        AttributePropagationSettings_OutputCredentialsItem_Rctoken,
+        ..
+      ),
+
     -- * ReauthSettings_Method
     ReauthSettings_Method
       ( ReauthSettings_Method_METHODUNSPECIFIED,
         ReauthSettings_Method_Login,
         ReauthSettings_Method_Password,
         ReauthSettings_Method_SECUREKEY,
+        ReauthSettings_Method_ENROLLEDSECONDFACTORS,
         ..
       ),
 
@@ -81,7 +91,43 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
--- | Reauth method required by the policy.
+newtype AttributePropagationSettings_OutputCredentialsItem = AttributePropagationSettings_OutputCredentialsItem {fromAttributePropagationSettings_OutputCredentialsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Output credential not provided. This is unsupported in IAP. An output credential is required.
+pattern AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED :: AttributePropagationSettings_OutputCredentialsItem
+pattern AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED = AttributePropagationSettings_OutputCredentialsItem "OUTPUT_CREDENTIALS_UNSPECIFIED"
+
+-- | Propagate attributes in the headers with \"x-goog-iap-attr-\" prefix.
+pattern AttributePropagationSettings_OutputCredentialsItem_Header :: AttributePropagationSettings_OutputCredentialsItem
+pattern AttributePropagationSettings_OutputCredentialsItem_Header = AttributePropagationSettings_OutputCredentialsItem "HEADER"
+
+-- | Propagate attributes in the JWT of the form: @\"additional_claims\": { \"my_attribute\": [\"value1\", \"value2\"] }@
+pattern AttributePropagationSettings_OutputCredentialsItem_Jwt :: AttributePropagationSettings_OutputCredentialsItem
+pattern AttributePropagationSettings_OutputCredentialsItem_Jwt = AttributePropagationSettings_OutputCredentialsItem "JWT"
+
+-- | Propagate attributes in the RCToken of the form: @\"additional_claims\": { \"my_attribute\": [\"value1\", \"value2\"] }@
+pattern AttributePropagationSettings_OutputCredentialsItem_Rctoken :: AttributePropagationSettings_OutputCredentialsItem
+pattern AttributePropagationSettings_OutputCredentialsItem_Rctoken = AttributePropagationSettings_OutputCredentialsItem "RCTOKEN"
+
+{-# COMPLETE
+  AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED,
+  AttributePropagationSettings_OutputCredentialsItem_Header,
+  AttributePropagationSettings_OutputCredentialsItem_Jwt,
+  AttributePropagationSettings_OutputCredentialsItem_Rctoken,
+  AttributePropagationSettings_OutputCredentialsItem
+  #-}
+
+-- | Reauth method requested.
 newtype ReauthSettings_Method = ReauthSettings_Method {fromReauthSettings_Method :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -98,11 +144,11 @@ newtype ReauthSettings_Method = ReauthSettings_Method {fromReauthSettings_Method
 pattern ReauthSettings_Method_METHODUNSPECIFIED :: ReauthSettings_Method
 pattern ReauthSettings_Method_METHODUNSPECIFIED = ReauthSettings_Method "METHOD_UNSPECIFIED"
 
--- | Mimicks the behavior as if the user had logged out and tried to log in again. Users with 2SV (step verification) enabled will see their 2SV challenges if they did not opt to have their second factor responses saved. Apps Core (GSuites) admins can configure settings to disable 2SV cookies and require 2-step verification for all Apps Core users in their domains.
+-- | Prompts the user to log in again.
 pattern ReauthSettings_Method_Login :: ReauthSettings_Method
 pattern ReauthSettings_Method_Login = ReauthSettings_Method "LOGIN"
 
--- | User must type their password.
+-- | Deprecated.
 pattern ReauthSettings_Method_Password :: ReauthSettings_Method
 pattern ReauthSettings_Method_Password = ReauthSettings_Method "PASSWORD"
 
@@ -110,11 +156,16 @@ pattern ReauthSettings_Method_Password = ReauthSettings_Method "PASSWORD"
 pattern ReauthSettings_Method_SECUREKEY :: ReauthSettings_Method
 pattern ReauthSettings_Method_SECUREKEY = ReauthSettings_Method "SECURE_KEY"
 
+-- | User can use any enabled 2nd factor.
+pattern ReauthSettings_Method_ENROLLEDSECONDFACTORS :: ReauthSettings_Method
+pattern ReauthSettings_Method_ENROLLEDSECONDFACTORS = ReauthSettings_Method "ENROLLED_SECOND_FACTORS"
+
 {-# COMPLETE
   ReauthSettings_Method_METHODUNSPECIFIED,
   ReauthSettings_Method_Login,
   ReauthSettings_Method_Password,
   ReauthSettings_Method_SECUREKEY,
+  ReauthSettings_Method_ENROLLEDSECONDFACTORS,
   ReauthSettings_Method
   #-}
 
@@ -131,7 +182,7 @@ newtype ReauthSettings_PolicyType = ReauthSettings_PolicyType {fromReauthSetting
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused\/invalid.
+-- | Default value. This value is unused.
 pattern ReauthSettings_PolicyType_POLICYTYPEUNSPECIFIED :: ReauthSettings_PolicyType
 pattern ReauthSettings_PolicyType_POLICYTYPEUNSPECIFIED = ReauthSettings_PolicyType "POLICY_TYPE_UNSPECIFIED"
 

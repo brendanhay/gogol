@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an enrollment token for a given enterprise.
+-- Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore. Once an enrollment token has been created, it\'s not possible to retrieve the token\'s content anymore using AM API. It is recommended for EMMs to securely store the token if it\'s intended to be reused.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.enrollmentTokens.create@.
 module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
@@ -57,7 +57,7 @@ type AndroidManagementEnterprisesEnrollmentTokensCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] EnrollmentToken
     Core.:> Core.Post '[Core.JSON] EnrollmentToken
 
--- | Creates an enrollment token for a given enterprise.
+-- | Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore. Once an enrollment token has been created, it\'s not possible to retrieve the token\'s content anymore using AM API. It is recommended for EMMs to securely store the token if it\'s intended to be reused.
 --
 -- /See:/ 'newAndroidManagementEnterprisesEnrollmentTokensCreate' smart constructor.
 data AndroidManagementEnterprisesEnrollmentTokensCreate = AndroidManagementEnterprisesEnrollmentTokensCreate

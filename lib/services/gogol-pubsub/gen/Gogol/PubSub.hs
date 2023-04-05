@@ -39,6 +39,11 @@ module Gogol.PubSub
 
     -- * Resources
 
+    -- ** pubsub.projects.schemas.commit
+    PubSubProjectsSchemasCommitResource,
+    PubSubProjectsSchemasCommit (..),
+    newPubSubProjectsSchemasCommit,
+
     -- ** pubsub.projects.schemas.create
     PubSubProjectsSchemasCreateResource,
     PubSubProjectsSchemasCreate (..),
@@ -48,6 +53,11 @@ module Gogol.PubSub
     PubSubProjectsSchemasDeleteResource,
     PubSubProjectsSchemasDelete (..),
     newPubSubProjectsSchemasDelete,
+
+    -- ** pubsub.projects.schemas.deleteRevision
+    PubSubProjectsSchemasDeleteRevisionResource,
+    PubSubProjectsSchemasDeleteRevision (..),
+    newPubSubProjectsSchemasDeleteRevision,
 
     -- ** pubsub.projects.schemas.get
     PubSubProjectsSchemasGetResource,
@@ -63,6 +73,16 @@ module Gogol.PubSub
     PubSubProjectsSchemasListResource,
     PubSubProjectsSchemasList (..),
     newPubSubProjectsSchemasList,
+
+    -- ** pubsub.projects.schemas.listRevisions
+    PubSubProjectsSchemasListRevisionsResource,
+    PubSubProjectsSchemasListRevisions (..),
+    newPubSubProjectsSchemasListRevisions,
+
+    -- ** pubsub.projects.schemas.rollback
+    PubSubProjectsSchemasRollbackResource,
+    PubSubProjectsSchemasRollback (..),
+    newPubSubProjectsSchemasRollback,
 
     -- ** pubsub.projects.schemas.setIamPolicy
     PubSubProjectsSchemasSetIamPolicyResource,
@@ -258,9 +278,20 @@ module Gogol.PubSub
     AcknowledgeRequest (..),
     newAcknowledgeRequest,
 
+    -- ** BigQueryConfig
+    BigQueryConfig (..),
+    newBigQueryConfig,
+
+    -- ** BigQueryConfig_State
+    BigQueryConfig_State (..),
+
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** CommitSchemaRequest
+    CommitSchemaRequest (..),
+    newCommitSchemaRequest,
 
     -- ** CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -289,6 +320,10 @@ module Gogol.PubSub
     -- ** Expr
     Expr (..),
     newExpr,
+
+    -- ** ListSchemaRevisionsResponse
+    ListSchemaRevisionsResponse (..),
+    newListSchemaRevisionsResponse,
 
     -- ** ListSchemasResponse
     ListSchemasResponse (..),
@@ -373,6 +408,10 @@ module Gogol.PubSub
     -- ** RetryPolicy
     RetryPolicy (..),
     newRetryPolicy,
+
+    -- ** RollbackSchemaRequest
+    RollbackSchemaRequest (..),
+    newRollbackSchemaRequest,
 
     -- ** Schema
     Schema (..),
@@ -471,14 +510,21 @@ module Gogol.PubSub
 
     -- ** ProjectsSchemasListView
     ProjectsSchemasListView (..),
+
+    -- ** ProjectsSchemasListRevisionsView
+    ProjectsSchemasListRevisionsView (..),
   )
 where
 
+import Gogol.PubSub.Projects.Schemas.Commit
 import Gogol.PubSub.Projects.Schemas.Create
 import Gogol.PubSub.Projects.Schemas.Delete
+import Gogol.PubSub.Projects.Schemas.DeleteRevision
 import Gogol.PubSub.Projects.Schemas.Get
 import Gogol.PubSub.Projects.Schemas.GetIamPolicy
 import Gogol.PubSub.Projects.Schemas.List
+import Gogol.PubSub.Projects.Schemas.ListRevisions
+import Gogol.PubSub.Projects.Schemas.Rollback
 import Gogol.PubSub.Projects.Schemas.SetIamPolicy
 import Gogol.PubSub.Projects.Schemas.TestIamPermissions
 import Gogol.PubSub.Projects.Schemas.Validate

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List Services for this workspace.
+-- List Services for this Metrics Scope.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.services.list@.
 module Gogol.Monitoring.Services.List
@@ -59,7 +59,7 @@ type MonitoringServicesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListServicesResponse
 
--- | List Services for this workspace.
+-- | List Services for this Metrics Scope.
 --
 -- /See:/ 'newMonitoringServicesList' smart constructor.
 data MonitoringServicesList = MonitoringServicesList
@@ -69,13 +69,14 @@ data MonitoringServicesList = MonitoringServicesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A filter specifying what Services to return. The filter currently supports the following fields: - @identifier_case@ - @app_engine.module_id@ - @cloud_endpoints.service@ (reserved for future use) - @mesh_istio.mesh_uid@ - @mesh_istio.service_namespace@ - @mesh_istio.service_name@ - @cluster_istio.location@ (deprecated) - @cluster_istio.cluster_name@ (deprecated) - @cluster_istio.service_namespace@ (deprecated) - @cluster_istio.service_name@ (deprecated) identifier/case refers to which option in the identifier oneof is populated. For example, the filter identifier/case = \"CUSTOM\" would match all services with a value for the custom field. Valid options are \"CUSTOM\", \"APP/ENGINE\", \"MESH/ISTIO\", plus \"CLUSTER/ISTIO\" (deprecated) and \"CLOUD/ENDPOINTS\" (reserved for future use).
+    -- | A filter specifying what Services to return. The filter supports filtering on a particular service-identifier type or one of its attributes.To filter on a particular service-identifier type, the identifier/case refers to which option in the identifier field is populated. For example, the filter identifier/case = \"CUSTOM\" would match all services with a value for the custom field. Valid options include \"CUSTOM\", \"APP/ENGINE\", \"MESH/ISTIO\", and the other options listed at https:\/\/cloud.google.com\/monitoring\/api\/ref/v3\/rest\/v3\/services#ServiceTo filter on an attribute of a service-identifier type, apply the filter name by using the snake case of the service-identifier type and the attribute of that service-identifier type, and join the two with a period. For example, to filter by the meshUid field of the MeshIstio service-identifier type, you must filter on mesh/istio.mesh/uid = \"123\" to match all services with mesh UID \"123\". Service-identifier types and their attributes are described at
+    -- https:\/\/cloud.google.com\/monitoring\/api\/ref/v3\/rest\/v3\/services#Service
     filter :: (Core.Maybe Core.Text),
     -- | A non-negative number that is the maximum number of results to return. When 0, use default page size.
     pageSize :: (Core.Maybe Core.Int32),
     -- | If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the parent containing the listed services, either a project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) or a Monitoring Workspace. The formats are: projects\/[PROJECT/ID/OR/NUMBER] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]
+    -- | Required. Resource name of the parent containing the listed services, either a project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) or a Monitoring Metrics Scope. The formats are: projects\/[PROJECT/ID/OR/NUMBER] workspaces\/[HOST/PROJECT/ID/OR/NUMBER]
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +87,7 @@ data MonitoringServicesList = MonitoringServicesList
 
 -- | Creates a value of 'MonitoringServicesList' with the minimum fields required to make a request.
 newMonitoringServicesList ::
-  -- |  Required. Resource name of the parent containing the listed services, either a project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) or a Monitoring Workspace. The formats are: projects\/[PROJECT/ID/OR/NUMBER] workspaces\/[HOST/PROJECT/ID/OR/NUMBER] See 'parent'.
+  -- |  Required. Resource name of the parent containing the listed services, either a project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) or a Monitoring Metrics Scope. The formats are: projects\/[PROJECT/ID/OR/NUMBER] workspaces\/[HOST/PROJECT/ID/OR/NUMBER] See 'parent'.
   Core.Text ->
   MonitoringServicesList
 newMonitoringServicesList parent =

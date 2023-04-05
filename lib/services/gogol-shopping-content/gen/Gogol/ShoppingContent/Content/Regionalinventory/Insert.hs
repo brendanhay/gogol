@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
+-- Updates the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.regionalinventory.insert@.
 module Gogol.ShoppingContent.Content.Regionalinventory.Insert
@@ -60,7 +60,7 @@ type ContentRegionalinventoryInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] RegionalInventory
     Core.:> Core.Post '[Core.JSON] RegionalInventory
 
--- | Update the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
+-- | Updates the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.
 --
 -- /See:/ 'newContentRegionalinventoryInsert' smart constructor.
 data ContentRegionalinventoryInsert = ContentRegionalinventoryInsert

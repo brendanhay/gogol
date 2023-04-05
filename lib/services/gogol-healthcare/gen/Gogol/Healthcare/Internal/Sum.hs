@@ -105,6 +105,14 @@ module Gogol.Healthcare.Internal.Sum
         ..
       ),
 
+    -- * FhirStore_ComplexDataTypeReferenceParsing
+    FhirStore_ComplexDataTypeReferenceParsing
+      ( FhirStore_ComplexDataTypeReferenceParsing_COMPLEXDATATYPEREFERENCEPARSINGUNSPECIFIED,
+        FhirStore_ComplexDataTypeReferenceParsing_Disabled,
+        FhirStore_ComplexDataTypeReferenceParsing_Enabled,
+        ..
+      ),
+
     -- * FhirStore_Version
     FhirStore_Version
       ( FhirStore_Version_VERSIONUNSPECIFIED,
@@ -183,6 +191,7 @@ module Gogol.Healthcare.Internal.Sum
       ( ParserConfig_Version_PARSERVERSIONUNSPECIFIED,
         ParserConfig_Version_V1,
         ParserConfig_Version_V2,
+        ParserConfig_Version_V3,
         ..
       ),
 
@@ -190,6 +199,7 @@ module Gogol.Healthcare.Internal.Sum
     SchemaConfig_SchemaType
       ( SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED,
         SchemaConfig_SchemaType_Analytics,
+        SchemaConfig_SchemaType_ANALYTICS_V2,
         ..
       ),
 
@@ -207,6 +217,16 @@ module Gogol.Healthcare.Internal.Sum
         SchemaPackage_UnexpectedSegmentHandling_Fail,
         SchemaPackage_UnexpectedSegmentHandling_Skip,
         SchemaPackage_UnexpectedSegmentHandling_Parse,
+        ..
+      ),
+
+    -- * TimePartitioning_Type
+    TimePartitioning_Type
+      ( TimePartitioning_Type_PARTITIONTYPEUNSPECIFIED,
+        TimePartitioning_Type_Hour,
+        TimePartitioning_Type_Day,
+        TimePartitioning_Type_Month,
+        TimePartitioning_Type_Year,
         ..
       ),
 
@@ -567,6 +587,38 @@ pattern EvaluateUserConsentsRequest_ResponseView_Full = EvaluateUserConsentsRequ
   EvaluateUserConsentsRequest_ResponseView
   #-}
 
+-- | Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+newtype FhirStore_ComplexDataTypeReferenceParsing = FhirStore_ComplexDataTypeReferenceParsing {fromFhirStore_ComplexDataTypeReferenceParsing :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No parsing behavior specified. This is the same as DISABLED for backwards compatibility.
+pattern FhirStore_ComplexDataTypeReferenceParsing_COMPLEXDATATYPEREFERENCEPARSINGUNSPECIFIED :: FhirStore_ComplexDataTypeReferenceParsing
+pattern FhirStore_ComplexDataTypeReferenceParsing_COMPLEXDATATYPEREFERENCEPARSINGUNSPECIFIED = FhirStore_ComplexDataTypeReferenceParsing "COMPLEX_DATA_TYPE_REFERENCE_PARSING_UNSPECIFIED"
+
+-- | References in complex data types are ignored.
+pattern FhirStore_ComplexDataTypeReferenceParsing_Disabled :: FhirStore_ComplexDataTypeReferenceParsing
+pattern FhirStore_ComplexDataTypeReferenceParsing_Disabled = FhirStore_ComplexDataTypeReferenceParsing "DISABLED"
+
+-- | References in complex data types are parsed.
+pattern FhirStore_ComplexDataTypeReferenceParsing_Enabled :: FhirStore_ComplexDataTypeReferenceParsing
+pattern FhirStore_ComplexDataTypeReferenceParsing_Enabled = FhirStore_ComplexDataTypeReferenceParsing "ENABLED"
+
+{-# COMPLETE
+  FhirStore_ComplexDataTypeReferenceParsing_COMPLEXDATATYPEREFERENCEPARSINGUNSPECIFIED,
+  FhirStore_ComplexDataTypeReferenceParsing_Disabled,
+  FhirStore_ComplexDataTypeReferenceParsing_Enabled,
+  FhirStore_ComplexDataTypeReferenceParsing
+  #-}
+
 -- | Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
 newtype FhirStore_Version = FhirStore_Version {fromFhirStore_Version :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -736,11 +788,11 @@ pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEDI
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEEMPTY :: GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEEMPTY = GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition "WRITE_EMPTY"
 
--- | Erase all existing data in a table before writing the instances.
+-- | Erase all existing data in the destination table before writing the instances.
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITETRUNCATE :: GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITETRUNCATE = GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition "WRITE_TRUNCATE"
 
--- | Append data to the existing table.
+-- | Append data to the destination table.
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEAPPEND :: GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEAPPEND = GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition "WRITE_APPEND"
 
@@ -773,11 +825,11 @@ pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEDIS
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEEMPTY :: GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEEMPTY = GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition "WRITE_EMPTY"
 
--- | Erase all existing data in the tables before writing the instances.
+-- | Erase all existing data in the destination tables before writing the FHIR resources.
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITETRUNCATE :: GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITETRUNCATE = GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition "WRITE_TRUNCATE"
 
--- | Append data to the existing tables.
+-- | Append data to the destination tables.
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEAPPEND :: GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition
 pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEAPPEND = GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition "WRITE_APPEND"
 
@@ -810,7 +862,7 @@ pattern ImageConfig_TextRedactionMode_TEXTREDACTIONMODEUNSPECIFIED = ImageConfig
 pattern ImageConfig_TextRedactionMode_REDACTALLTEXT :: ImageConfig_TextRedactionMode
 pattern ImageConfig_TextRedactionMode_REDACTALLTEXT = ImageConfig_TextRedactionMode "REDACT_ALL_TEXT"
 
--- | Redact sensitive text.
+-- | Redact sensitive text. Uses the set of <https://cloud.google.com/healthcare-api/docs/how-tos/dicom-deidentify#default_dicom_infotypes Default DICOM InfoTypes>.
 pattern ImageConfig_TextRedactionMode_REDACTSENSITIVETEXT :: ImageConfig_TextRedactionMode
 pattern ImageConfig_TextRedactionMode_REDACTSENSITIVETEXT = ImageConfig_TextRedactionMode "REDACT_SENSITIVE_TEXT"
 
@@ -893,10 +945,15 @@ pattern ParserConfig_Version_V1 = ParserConfig_Version "V1"
 pattern ParserConfig_Version_V2 :: ParserConfig_Version
 pattern ParserConfig_Version_V2 = ParserConfig_Version "V2"
 
+-- | This version is the same as V2, with the following change. The @parsed_data@ contains unescaped escaped field separators, component separators, sub-component separators, repetition separators, escape characters, and truncation characters. If @schema@ is specified, the schematized parser uses improved parsing heuristics compared to previous versions.
+pattern ParserConfig_Version_V3 :: ParserConfig_Version
+pattern ParserConfig_Version_V3 = ParserConfig_Version "V3"
+
 {-# COMPLETE
   ParserConfig_Version_PARSERVERSIONUNSPECIFIED,
   ParserConfig_Version_V1,
   ParserConfig_Version_V2,
+  ParserConfig_Version_V3,
   ParserConfig_Version
   #-}
 
@@ -921,9 +978,14 @@ pattern SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED = SchemaConfig_SchemaType 
 pattern SchemaConfig_SchemaType_Analytics :: SchemaConfig_SchemaType
 pattern SchemaConfig_SchemaType_Analytics = SchemaConfig_SchemaType "ANALYTICS"
 
+-- | Analytics V2, similar to schema defined by the FHIR community, with added support for extensions with one or more occurrences and contained resources in stringified JSON. Analytics V2 uses more space in the destination table than Analytics V1.
+pattern SchemaConfig_SchemaType_ANALYTICS_V2 :: SchemaConfig_SchemaType
+pattern SchemaConfig_SchemaType_ANALYTICS_V2 = SchemaConfig_SchemaType "ANALYTICS_V2"
+
 {-# COMPLETE
   SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED,
   SchemaConfig_SchemaType_Analytics,
+  SchemaConfig_SchemaType_ANALYTICS_V2,
   SchemaConfig_SchemaType
   #-}
 
@@ -994,6 +1056,48 @@ pattern SchemaPackage_UnexpectedSegmentHandling_Parse = SchemaPackage_Unexpected
   SchemaPackage_UnexpectedSegmentHandling_Skip,
   SchemaPackage_UnexpectedSegmentHandling_Parse,
   SchemaPackage_UnexpectedSegmentHandling
+  #-}
+
+-- | Type of partitioning.
+newtype TimePartitioning_Type = TimePartitioning_Type {fromTimePartitioning_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default unknown time.
+pattern TimePartitioning_Type_PARTITIONTYPEUNSPECIFIED :: TimePartitioning_Type
+pattern TimePartitioning_Type_PARTITIONTYPEUNSPECIFIED = TimePartitioning_Type "PARTITION_TYPE_UNSPECIFIED"
+
+-- | Data partitioned by hour.
+pattern TimePartitioning_Type_Hour :: TimePartitioning_Type
+pattern TimePartitioning_Type_Hour = TimePartitioning_Type "HOUR"
+
+-- | Data partitioned by day.
+pattern TimePartitioning_Type_Day :: TimePartitioning_Type
+pattern TimePartitioning_Type_Day = TimePartitioning_Type "DAY"
+
+-- | Data partitioned by month.
+pattern TimePartitioning_Type_Month :: TimePartitioning_Type
+pattern TimePartitioning_Type_Month = TimePartitioning_Type "MONTH"
+
+-- | Data partitioned by year.
+pattern TimePartitioning_Type_Year :: TimePartitioning_Type
+pattern TimePartitioning_Type_Year = TimePartitioning_Type "YEAR"
+
+{-# COMPLETE
+  TimePartitioning_Type_PARTITIONTYPEUNSPECIFIED,
+  TimePartitioning_Type_Hour,
+  TimePartitioning_Type_Day,
+  TimePartitioning_Type_Month,
+  TimePartitioning_Type_Year,
+  TimePartitioning_Type
   #-}
 
 -- | If this is a primitive type then this field is the type of the primitive For example, STRING. Leave unspecified for composite types.

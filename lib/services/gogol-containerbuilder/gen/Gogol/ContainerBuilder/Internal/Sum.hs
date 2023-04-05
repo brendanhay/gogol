@@ -66,6 +66,13 @@ module Gogol.ContainerBuilder.Internal.Sum
         ..
       ),
 
+    -- * BuildOptions_DefaultLogsBucketBehavior
+    BuildOptions_DefaultLogsBucketBehavior
+      ( BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+        BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+        ..
+      ),
+
     -- * BuildOptions_LogStreamingOption
     BuildOptions_LogStreamingOption
       ( BuildOptions_LogStreamingOption_STREAMDEFAULT,
@@ -142,6 +149,13 @@ module Gogol.ContainerBuilder.Internal.Sum
         ..
       ),
 
+    -- * BuildTrigger_IncludeBuildLogs
+    BuildTrigger_IncludeBuildLogs
+      ( BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED,
+        BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS,
+        ..
+      ),
+
     -- * FailureInfo_Type
     FailureInfo_Type
       ( FailureInfo_Type_FAILURETYPEUNSPECIFIED,
@@ -160,6 +174,7 @@ module Gogol.ContainerBuilder.Internal.Sum
         GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
         GitFileSource_RepoType_Github,
         GitFileSource_RepoType_BITBUCKETSERVER,
+        GitFileSource_RepoType_Gitlab,
         ..
       ),
 
@@ -169,6 +184,7 @@ module Gogol.ContainerBuilder.Internal.Sum
         GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
         GitRepoSource_RepoType_Github,
         GitRepoSource_RepoType_BITBUCKETSERVER,
+        GitRepoSource_RepoType_Gitlab,
         ..
       ),
 
@@ -203,6 +219,15 @@ module Gogol.ContainerBuilder.Internal.Sum
       ( PullRequestFilter_CommentControl_COMMENTSDISABLED,
         PullRequestFilter_CommentControl_COMMENTSENABLED,
         PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
+        ..
+      ),
+
+    -- * RepositoryEventConfig_RepositoryType
+    RepositoryEventConfig_RepositoryType
+      ( RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED,
+        RepositoryEventConfig_RepositoryType_Github,
+        RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE,
+        RepositoryEventConfig_RepositoryType_GITLABENTERPRISE,
         ..
       ),
 
@@ -406,6 +431,33 @@ pattern BuildApproval_State_Cancelled = BuildApproval_State "CANCELLED"
   BuildApproval_State
   #-}
 
+-- | Optional. Option to specify how default logs buckets are setup.
+newtype BuildOptions_DefaultLogsBucketBehavior = BuildOptions_DefaultLogsBucketBehavior {fromBuildOptions_DefaultLogsBucketBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED :: BuildOptions_DefaultLogsBucketBehavior
+pattern BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED = BuildOptions_DefaultLogsBucketBehavior "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"
+
+-- | Bucket is located in user-owned project in the same region as the build. The builder service account must have access to create and write to GCS buckets in the build project.
+pattern BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET :: BuildOptions_DefaultLogsBucketBehavior
+pattern BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET = BuildOptions_DefaultLogsBucketBehavior "REGIONAL_USER_OWNED_BUCKET"
+
+{-# COMPLETE
+  BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+  BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+  BuildOptions_DefaultLogsBucketBehavior
+  #-}
+
 -- | Option to define build log streaming behavior to Google Cloud Storage.
 newtype BuildOptions_LogStreamingOption = BuildOptions_LogStreamingOption {fromBuildOptions_LogStreamingOption :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -540,11 +592,11 @@ newtype BuildOptions_RequestedVerifyOption = BuildOptions_RequestedVerifyOption 
       Core.FromJSONKey
     )
 
--- | Not a verifiable build. (default)
+-- | Not a verifiable build (the default).
 pattern BuildOptions_RequestedVerifyOption_NOTVERIFIED :: BuildOptions_RequestedVerifyOption
 pattern BuildOptions_RequestedVerifyOption_NOTVERIFIED = BuildOptions_RequestedVerifyOption "NOT_VERIFIED"
 
--- | Verified build.
+-- | Build must be verified.
 pattern BuildOptions_RequestedVerifyOption_Verified :: BuildOptions_RequestedVerifyOption
 pattern BuildOptions_RequestedVerifyOption_Verified = BuildOptions_RequestedVerifyOption "VERIFIED"
 
@@ -721,6 +773,33 @@ pattern BuildTrigger_EventType_Manual = BuildTrigger_EventType "MANUAL"
   BuildTrigger_EventType
   #-}
 
+-- | If set to INCLUDE/BUILD/LOGS/WITH/STATUS, log url will be shown on GitHub page when build status is final. Setting this field to INCLUDE/BUILD/LOGS/WITH/STATUS for non GitHub triggers results in INVALID_ARGUMENT error.
+newtype BuildTrigger_IncludeBuildLogs = BuildTrigger_IncludeBuildLogs {fromBuildTrigger_IncludeBuildLogs :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Build logs will not be shown on GitHub.
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED :: BuildTrigger_IncludeBuildLogs
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED = BuildTrigger_IncludeBuildLogs "INCLUDE_BUILD_LOGS_UNSPECIFIED"
+
+-- | Build logs will be shown on GitHub.
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS :: BuildTrigger_IncludeBuildLogs
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS = BuildTrigger_IncludeBuildLogs "INCLUDE_BUILD_LOGS_WITH_STATUS"
+
+{-# COMPLETE
+  BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED,
+  BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS,
+  BuildTrigger_IncludeBuildLogs
+  #-}
+
 -- | The name of the failure.
 newtype FailureInfo_Type = FailureInfo_Type {fromFailureInfo_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -802,11 +881,16 @@ pattern GitFileSource_RepoType_Github = GitFileSource_RepoType "GITHUB"
 pattern GitFileSource_RepoType_BITBUCKETSERVER :: GitFileSource_RepoType
 pattern GitFileSource_RepoType_BITBUCKETSERVER = GitFileSource_RepoType "BITBUCKET_SERVER"
 
+-- | A GitLab-hosted repo.
+pattern GitFileSource_RepoType_Gitlab :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_Gitlab = GitFileSource_RepoType "GITLAB"
+
 {-# COMPLETE
   GitFileSource_RepoType_Unknown,
   GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
   GitFileSource_RepoType_Github,
   GitFileSource_RepoType_BITBUCKETSERVER,
+  GitFileSource_RepoType_Gitlab,
   GitFileSource_RepoType
   #-}
 
@@ -839,11 +923,16 @@ pattern GitRepoSource_RepoType_Github = GitRepoSource_RepoType "GITHUB"
 pattern GitRepoSource_RepoType_BITBUCKETSERVER :: GitRepoSource_RepoType
 pattern GitRepoSource_RepoType_BITBUCKETSERVER = GitRepoSource_RepoType "BITBUCKET_SERVER"
 
+-- | A GitLab-hosted repo.
+pattern GitRepoSource_RepoType_Gitlab :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_Gitlab = GitRepoSource_RepoType "GITLAB"
+
 {-# COMPLETE
   GitRepoSource_RepoType_Unknown,
   GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
   GitRepoSource_RepoType_Github,
   GitRepoSource_RepoType_BITBUCKETSERVER,
+  GitRepoSource_RepoType_Gitlab,
   GitRepoSource_RepoType
   #-}
 
@@ -983,6 +1072,43 @@ pattern PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSO
   PullRequestFilter_CommentControl_COMMENTSENABLED,
   PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
   PullRequestFilter_CommentControl
+  #-}
+
+-- | Output only. The type of the SCM vendor the repository points to.
+newtype RepositoryEventConfig_RepositoryType = RepositoryEventConfig_RepositoryType {fromRepositoryEventConfig_RepositoryType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If unspecified, RepositoryType defaults to GITHUB.
+pattern RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED = RepositoryEventConfig_RepositoryType "REPOSITORY_TYPE_UNSPECIFIED"
+
+-- | The SCM repo is GITHUB.
+pattern RepositoryEventConfig_RepositoryType_Github :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_Github = RepositoryEventConfig_RepositoryType "GITHUB"
+
+-- | The SCM repo is GITHUB Enterprise.
+pattern RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE = RepositoryEventConfig_RepositoryType "GITHUB_ENTERPRISE"
+
+-- | The SCM repo is GITLAB Enterprise.
+pattern RepositoryEventConfig_RepositoryType_GITLABENTERPRISE :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_GITLABENTERPRISE = RepositoryEventConfig_RepositoryType "GITLAB_ENTERPRISE"
+
+{-# COMPLETE
+  RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED,
+  RepositoryEventConfig_RepositoryType_Github,
+  RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE,
+  RepositoryEventConfig_RepositoryType_GITLABENTERPRISE,
+  RepositoryEventConfig_RepositoryType
   #-}
 
 -- | The priority for this warning.

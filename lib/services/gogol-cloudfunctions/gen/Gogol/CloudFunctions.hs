@@ -132,6 +132,9 @@ module Gogol.CloudFunctions
     BuildConfig (..),
     newBuildConfig,
 
+    -- ** BuildConfig_DockerRegistry
+    BuildConfig_DockerRegistry (..),
+
     -- ** BuildConfig_EnvironmentVariables
     BuildConfig_EnvironmentVariables (..),
     newBuildConfig_EnvironmentVariables,
@@ -180,6 +183,31 @@ module Gogol.CloudFunctions
     -- ** GenerateUploadUrlResponse
     GenerateUploadUrlResponse (..),
     newGenerateUploadUrlResponse,
+
+    -- ** GoogleCloudFunctionsV2OperationMetadata
+    GoogleCloudFunctionsV2OperationMetadata (..),
+    newGoogleCloudFunctionsV2OperationMetadata,
+
+    -- ** GoogleCloudFunctionsV2OperationMetadata_RequestResource
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource (..),
+    newGoogleCloudFunctionsV2OperationMetadata_RequestResource,
+
+    -- ** GoogleCloudFunctionsV2Stage
+    GoogleCloudFunctionsV2Stage (..),
+    newGoogleCloudFunctionsV2Stage,
+
+    -- ** GoogleCloudFunctionsV2Stage_Name
+    GoogleCloudFunctionsV2Stage_Name (..),
+
+    -- ** GoogleCloudFunctionsV2Stage_State
+    GoogleCloudFunctionsV2Stage_State (..),
+
+    -- ** GoogleCloudFunctionsV2StateMessage
+    GoogleCloudFunctionsV2StateMessage (..),
+    newGoogleCloudFunctionsV2StateMessage,
+
+    -- ** GoogleCloudFunctionsV2StateMessage_Severity
+    GoogleCloudFunctionsV2StateMessage_Severity (..),
 
     -- ** GoogleCloudFunctionsV2alphaOperationMetadata
     GoogleCloudFunctionsV2alphaOperationMetadata (..),
@@ -300,6 +328,18 @@ module Gogol.CloudFunctions
     -- ** Runtime_Stage
     Runtime_Stage (..),
 
+    -- ** SecretEnvVar
+    SecretEnvVar (..),
+    newSecretEnvVar,
+
+    -- ** SecretVersion
+    SecretVersion (..),
+    newSecretVersion,
+
+    -- ** SecretVolume
+    SecretVolume (..),
+    newSecretVolume,
+
     -- ** ServiceConfig
     ServiceConfig (..),
     newServiceConfig,
@@ -310,6 +350,9 @@ module Gogol.CloudFunctions
 
     -- ** ServiceConfig_IngressSettings
     ServiceConfig_IngressSettings (..),
+
+    -- ** ServiceConfig_SecurityLevel
+    ServiceConfig_SecurityLevel (..),
 
     -- ** ServiceConfig_VpcConnectorEgressSettings
     ServiceConfig_VpcConnectorEgressSettings (..),

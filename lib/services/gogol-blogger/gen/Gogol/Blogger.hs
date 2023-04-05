@@ -28,7 +28,7 @@
 --
 -- The Blogger API provides access to posts, comments and pages of a Blogger blog.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference>
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference>
 module Gogol.Blogger
   ( -- * Configuration
     bloggerService,
@@ -426,6 +426,9 @@ module Gogol.Blogger
 
     -- ** PostsListOrderBy
     PostsListOrderBy (..),
+
+    -- ** PostsListSortOption
+    PostsListSortOption (..),
 
     -- ** PostsListStatus
     PostsListStatus (..),

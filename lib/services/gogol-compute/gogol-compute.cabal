@@ -57,6 +57,7 @@ library
     Gogol.Compute.Addresses.Get
     Gogol.Compute.Addresses.Insert
     Gogol.Compute.Addresses.List
+    Gogol.Compute.Addresses.SetLabels
     Gogol.Compute.Autoscalers.AggregatedList
     Gogol.Compute.Autoscalers.Delete
     Gogol.Compute.Autoscalers.Get
@@ -79,10 +80,12 @@ library
     Gogol.Compute.BackendServices.DeleteSignedUrlKey
     Gogol.Compute.BackendServices.Get
     Gogol.Compute.BackendServices.GetHealth
+    Gogol.Compute.BackendServices.GetIamPolicy
     Gogol.Compute.BackendServices.Insert
     Gogol.Compute.BackendServices.List
     Gogol.Compute.BackendServices.Patch
     Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
+    Gogol.Compute.BackendServices.SetIamPolicy
     Gogol.Compute.BackendServices.SetSecurityPolicy
     Gogol.Compute.BackendServices.Update
     Gogol.Compute.Disks.AddResourcePolicies
@@ -98,6 +101,7 @@ library
     Gogol.Compute.Disks.SetIamPolicy
     Gogol.Compute.Disks.SetLabels
     Gogol.Compute.Disks.TestIamPermissions
+    Gogol.Compute.Disks.Update
     Gogol.Compute.DiskTypes.AggregatedList
     Gogol.Compute.DiskTypes.Get
     Gogol.Compute.DiskTypes.List
@@ -143,6 +147,7 @@ library
     Gogol.Compute.GlobalAddresses.Get
     Gogol.Compute.GlobalAddresses.Insert
     Gogol.Compute.GlobalAddresses.List
+    Gogol.Compute.GlobalAddresses.SetLabels
     Gogol.Compute.GlobalForwardingRules.Delete
     Gogol.Compute.GlobalForwardingRules.Get
     Gogol.Compute.GlobalForwardingRules.Insert
@@ -260,6 +265,7 @@ library
     Gogol.Compute.Instances.SetMachineType
     Gogol.Compute.Instances.SetMetadata
     Gogol.Compute.Instances.SetMinCpuPlatform
+    Gogol.Compute.Instances.SetName
     Gogol.Compute.Instances.SetScheduling
     Gogol.Compute.Instances.SetServiceAccount
     Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
@@ -275,6 +281,7 @@ library
     Gogol.Compute.Instances.UpdateDisplayDevice
     Gogol.Compute.Instances.UpdateNetworkInterface
     Gogol.Compute.Instances.UpdateShieldedInstanceConfig
+    Gogol.Compute.InstanceTemplates.AggregatedList
     Gogol.Compute.InstanceTemplates.Delete
     Gogol.Compute.InstanceTemplates.Get
     Gogol.Compute.InstanceTemplates.GetIamPolicy
@@ -288,6 +295,7 @@ library
     Gogol.Compute.InterconnectAttachments.Insert
     Gogol.Compute.InterconnectAttachments.List
     Gogol.Compute.InterconnectAttachments.Patch
+    Gogol.Compute.InterconnectAttachments.SetLabels
     Gogol.Compute.InterconnectLocations.Get
     Gogol.Compute.InterconnectLocations.List
     Gogol.Compute.Interconnects.Delete
@@ -296,6 +304,7 @@ library
     Gogol.Compute.Interconnects.Insert
     Gogol.Compute.Interconnects.List
     Gogol.Compute.Interconnects.Patch
+    Gogol.Compute.Interconnects.SetLabels
     Gogol.Compute.LicenseCodes.Get
     Gogol.Compute.LicenseCodes.TestIamPermissions
     Gogol.Compute.Licenses.Delete
@@ -315,6 +324,19 @@ library
     Gogol.Compute.MachineTypes.AggregatedList
     Gogol.Compute.MachineTypes.Get
     Gogol.Compute.MachineTypes.List
+    Gogol.Compute.NetworkAttachments.AggregatedList
+    Gogol.Compute.NetworkAttachments.Delete
+    Gogol.Compute.NetworkAttachments.Get
+    Gogol.Compute.NetworkAttachments.GetIamPolicy
+    Gogol.Compute.NetworkAttachments.Insert
+    Gogol.Compute.NetworkAttachments.List
+    Gogol.Compute.NetworkAttachments.SetIamPolicy
+    Gogol.Compute.NetworkAttachments.TestIamPermissions
+    Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
+    Gogol.Compute.NetworkEdgeSecurityServices.Delete
+    Gogol.Compute.NetworkEdgeSecurityServices.Get
+    Gogol.Compute.NetworkEdgeSecurityServices.Insert
+    Gogol.Compute.NetworkEdgeSecurityServices.Patch
     Gogol.Compute.NetworkEndpointGroups.AggregatedList
     Gogol.Compute.NetworkEndpointGroups.AttachNetworkEndpoints
     Gogol.Compute.NetworkEndpointGroups.Delete
@@ -363,6 +385,7 @@ library
     Gogol.Compute.NodeGroups.Patch
     Gogol.Compute.NodeGroups.SetIamPolicy
     Gogol.Compute.NodeGroups.SetNodeTemplate
+    Gogol.Compute.NodeGroups.SimulateMaintenanceEvent
     Gogol.Compute.NodeGroups.TestIamPermissions
     Gogol.Compute.NodeTemplates.AggregatedList
     Gogol.Compute.NodeTemplates.Delete
@@ -415,9 +438,11 @@ library
     Gogol.Compute.RegionBackendServices.Delete
     Gogol.Compute.RegionBackendServices.Get
     Gogol.Compute.RegionBackendServices.GetHealth
+    Gogol.Compute.RegionBackendServices.GetIamPolicy
     Gogol.Compute.RegionBackendServices.Insert
     Gogol.Compute.RegionBackendServices.List
     Gogol.Compute.RegionBackendServices.Patch
+    Gogol.Compute.RegionBackendServices.SetIamPolicy
     Gogol.Compute.RegionBackendServices.Update
     Gogol.Compute.RegionCommitments.AggregatedList
     Gogol.Compute.RegionCommitments.Get
@@ -436,6 +461,7 @@ library
     Gogol.Compute.RegionDisks.SetIamPolicy
     Gogol.Compute.RegionDisks.SetLabels
     Gogol.Compute.RegionDisks.TestIamPermissions
+    Gogol.Compute.RegionDisks.Update
     Gogol.Compute.RegionDiskTypes.Get
     Gogol.Compute.RegionDiskTypes.List
     Gogol.Compute.RegionHealthChecks.Delete
@@ -504,10 +530,21 @@ library
     Gogol.Compute.RegionOperations.Wait
     Gogol.Compute.Regions.Get
     Gogol.Compute.Regions.List
+    Gogol.Compute.RegionSecurityPolicies.Delete
+    Gogol.Compute.RegionSecurityPolicies.Get
+    Gogol.Compute.RegionSecurityPolicies.Insert
+    Gogol.Compute.RegionSecurityPolicies.List
+    Gogol.Compute.RegionSecurityPolicies.Patch
     Gogol.Compute.RegionSslCertificates.Delete
     Gogol.Compute.RegionSslCertificates.Get
     Gogol.Compute.RegionSslCertificates.Insert
     Gogol.Compute.RegionSslCertificates.List
+    Gogol.Compute.RegionSslPolicies.Delete
+    Gogol.Compute.RegionSslPolicies.Get
+    Gogol.Compute.RegionSslPolicies.Insert
+    Gogol.Compute.RegionSslPolicies.List
+    Gogol.Compute.RegionSslPolicies.ListAvailableFeatures
+    Gogol.Compute.RegionSslPolicies.Patch
     Gogol.Compute.RegionTargetHttpProxies.Delete
     Gogol.Compute.RegionTargetHttpProxies.Get
     Gogol.Compute.RegionTargetHttpProxies.Insert
@@ -520,6 +557,10 @@ library
     Gogol.Compute.RegionTargetHttpsProxies.Patch
     Gogol.Compute.RegionTargetHttpsProxies.SetSslCertificates
     Gogol.Compute.RegionTargetHttpsProxies.SetUrlMap
+    Gogol.Compute.RegionTargetTcpProxies.Delete
+    Gogol.Compute.RegionTargetTcpProxies.Get
+    Gogol.Compute.RegionTargetTcpProxies.Insert
+    Gogol.Compute.RegionTargetTcpProxies.List
     Gogol.Compute.RegionUrlMaps.Delete
     Gogol.Compute.RegionUrlMaps.Get
     Gogol.Compute.RegionUrlMaps.Insert
@@ -560,6 +601,7 @@ library
     Gogol.Compute.Routes.Insert
     Gogol.Compute.Routes.List
     Gogol.Compute.SecurityPolicies.AddRule
+    Gogol.Compute.SecurityPolicies.AggregatedList
     Gogol.Compute.SecurityPolicies.Delete
     Gogol.Compute.SecurityPolicies.Get
     Gogol.Compute.SecurityPolicies.GetRule
@@ -569,6 +611,7 @@ library
     Gogol.Compute.SecurityPolicies.Patch
     Gogol.Compute.SecurityPolicies.PatchRule
     Gogol.Compute.SecurityPolicies.RemoveRule
+    Gogol.Compute.SecurityPolicies.SetLabels
     Gogol.Compute.ServiceAttachments.AggregatedList
     Gogol.Compute.ServiceAttachments.Delete
     Gogol.Compute.ServiceAttachments.Get
@@ -591,6 +634,7 @@ library
     Gogol.Compute.SslCertificates.Get
     Gogol.Compute.SslCertificates.Insert
     Gogol.Compute.SslCertificates.List
+    Gogol.Compute.SslPolicies.AggregatedList
     Gogol.Compute.SslPolicies.Delete
     Gogol.Compute.SslPolicies.Get
     Gogol.Compute.SslPolicies.Insert
@@ -627,6 +671,7 @@ library
     Gogol.Compute.TargetHttpsProxies.Insert
     Gogol.Compute.TargetHttpsProxies.List
     Gogol.Compute.TargetHttpsProxies.Patch
+    Gogol.Compute.TargetHttpsProxies.SetCertificateMap
     Gogol.Compute.TargetHttpsProxies.SetQuicOverride
     Gogol.Compute.TargetHttpsProxies.SetSslCertificates
     Gogol.Compute.TargetHttpsProxies.SetSslPolicy
@@ -652,9 +697,11 @@ library
     Gogol.Compute.TargetSslProxies.Insert
     Gogol.Compute.TargetSslProxies.List
     Gogol.Compute.TargetSslProxies.SetBackendService
+    Gogol.Compute.TargetSslProxies.SetCertificateMap
     Gogol.Compute.TargetSslProxies.SetProxyHeader
     Gogol.Compute.TargetSslProxies.SetSslCertificates
     Gogol.Compute.TargetSslProxies.SetSslPolicy
+    Gogol.Compute.TargetTcpProxies.AggregatedList
     Gogol.Compute.TargetTcpProxies.Delete
     Gogol.Compute.TargetTcpProxies.Get
     Gogol.Compute.TargetTcpProxies.Insert
@@ -666,6 +713,7 @@ library
     Gogol.Compute.TargetVpnGateways.Get
     Gogol.Compute.TargetVpnGateways.Insert
     Gogol.Compute.TargetVpnGateways.List
+    Gogol.Compute.TargetVpnGateways.SetLabels
     Gogol.Compute.Types
     Gogol.Compute.UrlMaps.AggregatedList
     Gogol.Compute.UrlMaps.Delete
@@ -689,6 +737,7 @@ library
     Gogol.Compute.VpnTunnels.Get
     Gogol.Compute.VpnTunnels.Insert
     Gogol.Compute.VpnTunnels.List
+    Gogol.Compute.VpnTunnels.SetLabels
     Gogol.Compute.ZoneOperations.Delete
     Gogol.Compute.ZoneOperations.Get
     Gogol.Compute.ZoneOperations.List
@@ -701,5 +750,5 @@ library
     Gogol.Compute.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

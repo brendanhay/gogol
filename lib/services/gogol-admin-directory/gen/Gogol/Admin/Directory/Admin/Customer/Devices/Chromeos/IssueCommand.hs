@@ -76,9 +76,9 @@ data AdminCustomerDevicesChromeosIssueCommand = AdminCustomerDevicesChromeosIssu
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Immutable. Immutable ID of the Google Workspace account.
+    -- | Immutable. ID of the Google Workspace account.
     customerId :: Core.Text,
-    -- | Immutable. Immutable ID of Chrome OS Device.
+    -- | Immutable. ID of Chrome OS Device.
     deviceId :: Core.Text,
     -- | Multipart request metadata.
     payload :: DirectoryChromeosdevicesIssueCommandRequest,
@@ -91,9 +91,9 @@ data AdminCustomerDevicesChromeosIssueCommand = AdminCustomerDevicesChromeosIssu
 
 -- | Creates a value of 'AdminCustomerDevicesChromeosIssueCommand' with the minimum fields required to make a request.
 newAdminCustomerDevicesChromeosIssueCommand ::
-  -- |  Immutable. Immutable ID of the Google Workspace account. See 'customerId'.
+  -- |  Immutable. ID of the Google Workspace account. See 'customerId'.
   Core.Text ->
-  -- |  Immutable. Immutable ID of Chrome OS Device. See 'deviceId'.
+  -- |  Immutable. ID of Chrome OS Device. See 'deviceId'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   DirectoryChromeosdevicesIssueCommandRequest ->

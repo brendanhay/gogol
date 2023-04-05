@@ -59,6 +59,15 @@ module Gogol.Spanner.Internal.Sum
         ..
       ),
 
+    -- * CopyBackupEncryptionConfig_EncryptionType
+    CopyBackupEncryptionConfig_EncryptionType
+      ( CopyBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+        CopyBackupEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION,
+        CopyBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+        CopyBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+        ..
+      ),
+
     -- * CreateDatabaseRequest_DatabaseDialect
     CreateDatabaseRequest_DatabaseDialect
       ( CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
@@ -110,11 +119,53 @@ module Gogol.Spanner.Internal.Sum
         ..
       ),
 
+    -- * FreeInstanceMetadata_ExpireBehavior
+    FreeInstanceMetadata_ExpireBehavior
+      ( FreeInstanceMetadata_ExpireBehavior_EXPIREBEHAVIORUNSPECIFIED,
+        FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED,
+        FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD,
+        ..
+      ),
+
+    -- * Instance_InstanceType
+    Instance_InstanceType
+      ( Instance_InstanceType_INSTANCETYPEUNSPECIFIED,
+        Instance_InstanceType_Provisioned,
+        Instance_InstanceType_FREEINSTANCE,
+        ..
+      ),
+
     -- * Instance_State
     Instance_State
       ( Instance_State_STATEUNSPECIFIED,
         Instance_State_Creating,
         Instance_State_Ready,
+        ..
+      ),
+
+    -- * InstanceConfig_ConfigType
+    InstanceConfig_ConfigType
+      ( InstanceConfig_ConfigType_TYPEUNSPECIFIED,
+        InstanceConfig_ConfigType_GOOGLEMANAGED,
+        InstanceConfig_ConfigType_USERMANAGED,
+        ..
+      ),
+
+    -- * InstanceConfig_FreeInstanceAvailability
+    InstanceConfig_FreeInstanceAvailability
+      ( InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED,
+        InstanceConfig_FreeInstanceAvailability_Available,
+        InstanceConfig_FreeInstanceAvailability_Unsupported,
+        InstanceConfig_FreeInstanceAvailability_Disabled,
+        InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED,
+        ..
+      ),
+
+    -- * InstanceConfig_State
+    InstanceConfig_State
+      ( InstanceConfig_State_STATEUNSPECIFIED,
+        InstanceConfig_State_Creating,
+        InstanceConfig_State_Ready,
         ..
       ),
 
@@ -131,6 +182,14 @@ module Gogol.Spanner.Internal.Sum
       ( PlanNode_Kind_KINDUNSPECIFIED,
         PlanNode_Kind_Relational,
         PlanNode_Kind_Scalar,
+        ..
+      ),
+
+    -- * ReadWrite_ReadLockMode
+    ReadWrite_ReadLockMode
+      ( ReadWrite_ReadLockMode_READLOCKMODEUNSPECIFIED,
+        ReadWrite_ReadLockMode_Pessimistic,
+        ReadWrite_ReadLockMode_Optimistic,
         ..
       ),
 
@@ -189,6 +248,8 @@ module Gogol.Spanner.Internal.Sum
         Type_Code_Struct,
         Type_Code_Numeric,
         Type_Code_Json,
+        Type_Code_Proto,
+        Type_Code_Enum',
         ..
       ),
 
@@ -196,6 +257,7 @@ module Gogol.Spanner.Internal.Sum
     Type_TypeAnnotation
       ( Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
         Type_TypeAnnotation_PGNUMERIC,
+        Type_TypeAnnotation_PGJSONB,
         ..
       ),
 
@@ -280,7 +342,7 @@ newtype Backup_DatabaseDialect = Backup_DatabaseDialect {fromBackup_DatabaseDial
 pattern Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: Backup_DatabaseDialect
 pattern Backup_DatabaseDialect_DATABASEDIALECTUNSPECIFIED = Backup_DatabaseDialect "DATABASE_DIALECT_UNSPECIFIED"
 
--- | Google standard SQL.
+-- | GoogleSQL supported SQL.
 pattern Backup_DatabaseDialect_GOOGLESTANDARDSQL :: Backup_DatabaseDialect
 pattern Backup_DatabaseDialect_GOOGLESTANDARDSQL = Backup_DatabaseDialect "GOOGLE_STANDARD_SQL"
 
@@ -369,6 +431,43 @@ pattern ContextValue_Severity_Fatal = ContextValue_Severity "FATAL"
   ContextValue_Severity
   #-}
 
+-- | Required. The encryption type of the backup.
+newtype CopyBackupEncryptionConfig_EncryptionType = CopyBackupEncryptionConfig_EncryptionType {fromCopyBackupEncryptionConfig_EncryptionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Do not use.
+pattern CopyBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED :: CopyBackupEncryptionConfig_EncryptionType
+pattern CopyBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED = CopyBackupEncryptionConfig_EncryptionType "ENCRYPTION_TYPE_UNSPECIFIED"
+
+-- | This is the default option for CopyBackup when encryption_config is not specified. For example, if the source backup is using @Customer_Managed_Encryption@, the backup will be using the same Cloud KMS key as the source backup.
+pattern CopyBackupEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION :: CopyBackupEncryptionConfig_EncryptionType
+pattern CopyBackupEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION = CopyBackupEncryptionConfig_EncryptionType "USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION"
+
+-- | Use Google default encryption.
+pattern CopyBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION :: CopyBackupEncryptionConfig_EncryptionType
+pattern CopyBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION = CopyBackupEncryptionConfig_EncryptionType "GOOGLE_DEFAULT_ENCRYPTION"
+
+-- | Use customer managed encryption. If specified, either @kms_key_name@ or @kms_key_names@ must contain valid Cloud KMS key(s).
+pattern CopyBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION :: CopyBackupEncryptionConfig_EncryptionType
+pattern CopyBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION = CopyBackupEncryptionConfig_EncryptionType "CUSTOMER_MANAGED_ENCRYPTION"
+
+{-# COMPLETE
+  CopyBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+  CopyBackupEncryptionConfig_EncryptionType_USECONFIGDEFAULTORBACKUPENCRYPTION,
+  CopyBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+  CopyBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+  CopyBackupEncryptionConfig_EncryptionType
+  #-}
+
 -- | Optional. The dialect of the Cloud Spanner Database.
 newtype CreateDatabaseRequest_DatabaseDialect = CreateDatabaseRequest_DatabaseDialect {fromCreateDatabaseRequest_DatabaseDialect :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -386,7 +485,7 @@ newtype CreateDatabaseRequest_DatabaseDialect = CreateDatabaseRequest_DatabaseDi
 pattern CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: CreateDatabaseRequest_DatabaseDialect
 pattern CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED = CreateDatabaseRequest_DatabaseDialect "DATABASE_DIALECT_UNSPECIFIED"
 
--- | Google standard SQL.
+-- | GoogleSQL supported SQL.
 pattern CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL :: CreateDatabaseRequest_DatabaseDialect
 pattern CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL = CreateDatabaseRequest_DatabaseDialect "GOOGLE_STANDARD_SQL"
 
@@ -418,7 +517,7 @@ newtype Database_DatabaseDialect = Database_DatabaseDialect {fromDatabase_Databa
 pattern Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED :: Database_DatabaseDialect
 pattern Database_DatabaseDialect_DATABASEDIALECTUNSPECIFIED = Database_DatabaseDialect "DATABASE_DIALECT_UNSPECIFIED"
 
--- | Google standard SQL.
+-- | GoogleSQL supported SQL.
 pattern Database_DatabaseDialect_GOOGLESTANDARDSQL :: Database_DatabaseDialect
 pattern Database_DatabaseDialect_GOOGLESTANDARDSQL = Database_DatabaseDialect "GOOGLE_STANDARD_SQL"
 
@@ -576,6 +675,70 @@ pattern ExecuteSqlRequest_QueryMode_Profile = ExecuteSqlRequest_QueryMode "PROFI
   ExecuteSqlRequest_QueryMode
   #-}
 
+-- | Specifies the expiration behavior of a free instance. The default of ExpireBehavior is @REMOVE_AFTER_GRACE_PERIOD@. This can be modified during or after creation, and before expiration.
+newtype FreeInstanceMetadata_ExpireBehavior = FreeInstanceMetadata_ExpireBehavior {fromFreeInstanceMetadata_ExpireBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern FreeInstanceMetadata_ExpireBehavior_EXPIREBEHAVIORUNSPECIFIED :: FreeInstanceMetadata_ExpireBehavior
+pattern FreeInstanceMetadata_ExpireBehavior_EXPIREBEHAVIORUNSPECIFIED = FreeInstanceMetadata_ExpireBehavior "EXPIRE_BEHAVIOR_UNSPECIFIED"
+
+-- | When the free instance expires, upgrade the instance to a provisioned instance.
+pattern FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED :: FreeInstanceMetadata_ExpireBehavior
+pattern FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED = FreeInstanceMetadata_ExpireBehavior "FREE_TO_PROVISIONED"
+
+-- | When the free instance expires, disable the instance, and delete it after the grace period passes if it has not been upgraded.
+pattern FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD :: FreeInstanceMetadata_ExpireBehavior
+pattern FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD = FreeInstanceMetadata_ExpireBehavior "REMOVE_AFTER_GRACE_PERIOD"
+
+{-# COMPLETE
+  FreeInstanceMetadata_ExpireBehavior_EXPIREBEHAVIORUNSPECIFIED,
+  FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED,
+  FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD,
+  FreeInstanceMetadata_ExpireBehavior
+  #-}
+
+-- | The @InstanceType@ of the current instance.
+newtype Instance_InstanceType = Instance_InstanceType {fromInstance_InstanceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern Instance_InstanceType_INSTANCETYPEUNSPECIFIED :: Instance_InstanceType
+pattern Instance_InstanceType_INSTANCETYPEUNSPECIFIED = Instance_InstanceType "INSTANCE_TYPE_UNSPECIFIED"
+
+-- | Provisioned instances have dedicated resources, standard usage limits and support.
+pattern Instance_InstanceType_Provisioned :: Instance_InstanceType
+pattern Instance_InstanceType_Provisioned = Instance_InstanceType "PROVISIONED"
+
+-- | Free instances provide no guarantee for dedicated resources, [node/count, processing/units] should be 0. They come with stricter usage limits and limited support.
+pattern Instance_InstanceType_FREEINSTANCE :: Instance_InstanceType
+pattern Instance_InstanceType_FREEINSTANCE = Instance_InstanceType "FREE_INSTANCE"
+
+{-# COMPLETE
+  Instance_InstanceType_INSTANCETYPEUNSPECIFIED,
+  Instance_InstanceType_Provisioned,
+  Instance_InstanceType_FREEINSTANCE,
+  Instance_InstanceType
+  #-}
+
 -- | Output only. The current instance state. For CreateInstance, the state must be either omitted or set to @CREATING@. For UpdateInstance, the state must be either omitted or set to @READY@.
 newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -606,6 +769,112 @@ pattern Instance_State_Ready = Instance_State "READY"
   Instance_State_Creating,
   Instance_State_Ready,
   Instance_State
+  #-}
+
+-- | Output only. Whether this instance config is a Google or User Managed Configuration.
+newtype InstanceConfig_ConfigType = InstanceConfig_ConfigType {fromInstanceConfig_ConfigType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern InstanceConfig_ConfigType_TYPEUNSPECIFIED :: InstanceConfig_ConfigType
+pattern InstanceConfig_ConfigType_TYPEUNSPECIFIED = InstanceConfig_ConfigType "TYPE_UNSPECIFIED"
+
+-- | Google managed configuration.
+pattern InstanceConfig_ConfigType_GOOGLEMANAGED :: InstanceConfig_ConfigType
+pattern InstanceConfig_ConfigType_GOOGLEMANAGED = InstanceConfig_ConfigType "GOOGLE_MANAGED"
+
+-- | User managed configuration.
+pattern InstanceConfig_ConfigType_USERMANAGED :: InstanceConfig_ConfigType
+pattern InstanceConfig_ConfigType_USERMANAGED = InstanceConfig_ConfigType "USER_MANAGED"
+
+{-# COMPLETE
+  InstanceConfig_ConfigType_TYPEUNSPECIFIED,
+  InstanceConfig_ConfigType_GOOGLEMANAGED,
+  InstanceConfig_ConfigType_USERMANAGED,
+  InstanceConfig_ConfigType
+  #-}
+
+-- | Output only. Describes whether free instances are available to be created in this instance config.
+newtype InstanceConfig_FreeInstanceAvailability = InstanceConfig_FreeInstanceAvailability {fromInstanceConfig_FreeInstanceAvailability :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED :: InstanceConfig_FreeInstanceAvailability
+pattern InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED = InstanceConfig_FreeInstanceAvailability "FREE_INSTANCE_AVAILABILITY_UNSPECIFIED"
+
+-- | Indicates that free instances are available to be created in this instance config.
+pattern InstanceConfig_FreeInstanceAvailability_Available :: InstanceConfig_FreeInstanceAvailability
+pattern InstanceConfig_FreeInstanceAvailability_Available = InstanceConfig_FreeInstanceAvailability "AVAILABLE"
+
+-- | Indicates that free instances are not supported in this instance config.
+pattern InstanceConfig_FreeInstanceAvailability_Unsupported :: InstanceConfig_FreeInstanceAvailability
+pattern InstanceConfig_FreeInstanceAvailability_Unsupported = InstanceConfig_FreeInstanceAvailability "UNSUPPORTED"
+
+-- | Indicates that free instances are currently not available to be created in this instance config.
+pattern InstanceConfig_FreeInstanceAvailability_Disabled :: InstanceConfig_FreeInstanceAvailability
+pattern InstanceConfig_FreeInstanceAvailability_Disabled = InstanceConfig_FreeInstanceAvailability "DISABLED"
+
+-- | Indicates that additional free instances cannot be created in this instance config because the project has reached its limit of free instances.
+pattern InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED :: InstanceConfig_FreeInstanceAvailability
+pattern InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED = InstanceConfig_FreeInstanceAvailability "QUOTA_EXCEEDED"
+
+{-# COMPLETE
+  InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED,
+  InstanceConfig_FreeInstanceAvailability_Available,
+  InstanceConfig_FreeInstanceAvailability_Unsupported,
+  InstanceConfig_FreeInstanceAvailability_Disabled,
+  InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED,
+  InstanceConfig_FreeInstanceAvailability
+  #-}
+
+-- | Output only. The current instance config state.
+newtype InstanceConfig_State = InstanceConfig_State {fromInstanceConfig_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern InstanceConfig_State_STATEUNSPECIFIED :: InstanceConfig_State
+pattern InstanceConfig_State_STATEUNSPECIFIED = InstanceConfig_State "STATE_UNSPECIFIED"
+
+-- | The instance config is still being created.
+pattern InstanceConfig_State_Creating :: InstanceConfig_State
+pattern InstanceConfig_State_Creating = InstanceConfig_State "CREATING"
+
+-- | The instance config is fully created and ready to be used to create instances.
+pattern InstanceConfig_State_Ready :: InstanceConfig_State
+pattern InstanceConfig_State_Ready = InstanceConfig_State "READY"
+
+{-# COMPLETE
+  InstanceConfig_State_STATEUNSPECIFIED,
+  InstanceConfig_State_Creating,
+  InstanceConfig_State_Ready,
+  InstanceConfig_State
   #-}
 
 -- | The aggregation function used to aggregate each key bucket
@@ -670,6 +939,38 @@ pattern PlanNode_Kind_Scalar = PlanNode_Kind "SCALAR"
   PlanNode_Kind_Relational,
   PlanNode_Kind_Scalar,
   PlanNode_Kind
+  #-}
+
+-- | Read lock mode for the transaction.
+newtype ReadWrite_ReadLockMode = ReadWrite_ReadLockMode {fromReadWrite_ReadLockMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. If the value is not specified, the pessimistic read lock is used.
+pattern ReadWrite_ReadLockMode_READLOCKMODEUNSPECIFIED :: ReadWrite_ReadLockMode
+pattern ReadWrite_ReadLockMode_READLOCKMODEUNSPECIFIED = ReadWrite_ReadLockMode "READ_LOCK_MODE_UNSPECIFIED"
+
+-- | Pessimistic lock mode. Read locks are acquired immediately on read.
+pattern ReadWrite_ReadLockMode_Pessimistic :: ReadWrite_ReadLockMode
+pattern ReadWrite_ReadLockMode_Pessimistic = ReadWrite_ReadLockMode "PESSIMISTIC"
+
+-- | Optimistic lock mode. Locks for reads within the transaction are not acquired on read. Instead the locks are acquired on a commit to validate that read\/queried data has not changed since the transaction started.
+pattern ReadWrite_ReadLockMode_Optimistic :: ReadWrite_ReadLockMode
+pattern ReadWrite_ReadLockMode_Optimistic = ReadWrite_ReadLockMode "OPTIMISTIC"
+
+{-# COMPLETE
+  ReadWrite_ReadLockMode_READLOCKMODEUNSPECIFIED,
+  ReadWrite_ReadLockMode_Pessimistic,
+  ReadWrite_ReadLockMode_Optimistic,
+  ReadWrite_ReadLockMode
   #-}
 
 -- | The type of replica.
@@ -898,6 +1199,14 @@ pattern Type_Code_Numeric = Type_Code "NUMERIC"
 pattern Type_Code_Json :: Type_Code
 pattern Type_Code_Json = Type_Code "JSON"
 
+-- | Encoded as a base64-encoded @string@, as described in RFC 4648, section 4.
+pattern Type_Code_Proto :: Type_Code
+pattern Type_Code_Proto = Type_Code "PROTO"
+
+-- | Encoded as @string@, in decimal format.
+pattern Type_Code_Enum' :: Type_Code
+pattern Type_Code_Enum' = Type_Code "ENUM"
+
 {-# COMPLETE
   Type_Code_TYPECODEUNSPECIFIED,
   Type_Code_Bool,
@@ -911,6 +1220,8 @@ pattern Type_Code_Json = Type_Code "JSON"
   Type_Code_Struct,
   Type_Code_Numeric,
   Type_Code_Json,
+  Type_Code_Proto,
+  Type_Code_Enum',
   Type_Code
   #-}
 
@@ -935,9 +1246,14 @@ pattern Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED = Type_TypeAnnotation 
 pattern Type_TypeAnnotation_PGNUMERIC :: Type_TypeAnnotation
 pattern Type_TypeAnnotation_PGNUMERIC = Type_TypeAnnotation "PG_NUMERIC"
 
+-- | PostgreSQL compatible JSONB type. This annotation needs to be applied to Type instances having JSON type code to specify that values of this type should be treated as PostgreSQL JSONB values. Currently this annotation is always needed for JSON when a client interacts with PostgreSQL-enabled Spanner databases.
+pattern Type_TypeAnnotation_PGJSONB :: Type_TypeAnnotation
+pattern Type_TypeAnnotation_PGJSONB = Type_TypeAnnotation "PG_JSONB"
+
 {-# COMPLETE
   Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
   Type_TypeAnnotation_PGNUMERIC,
+  Type_TypeAnnotation_PGJSONB,
   Type_TypeAnnotation
   #-}
 

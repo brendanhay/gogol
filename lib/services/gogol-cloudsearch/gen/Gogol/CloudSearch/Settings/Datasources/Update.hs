@@ -67,7 +67,7 @@ data CloudSearchSettingsDatasourcesUpdate = CloudSearchSettingsDatasourcesUpdate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the datasource resource. Format: datasources\/{source_id}. The name is ignored when creating a datasource.
+    -- | The name of the datasource resource. Format: datasources\/{source_id}. The name is ignored when creating a datasource.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: UpdateDataSourceRequest,
@@ -80,7 +80,7 @@ data CloudSearchSettingsDatasourcesUpdate = CloudSearchSettingsDatasourcesUpdate
 
 -- | Creates a value of 'CloudSearchSettingsDatasourcesUpdate' with the minimum fields required to make a request.
 newCloudSearchSettingsDatasourcesUpdate ::
-  -- |  Name of the datasource resource. Format: datasources\/{source_id}. The name is ignored when creating a datasource. See 'name'.
+  -- |  The name of the datasource resource. Format: datasources\/{source_id}. The name is ignored when creating a datasource. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   UpdateDataSourceRequest ->

@@ -231,6 +231,10 @@ module Gogol.ServiceNetworking
     BackendRule (..),
     newBackendRule,
 
+    -- ** BackendRule_OverridesByRequestProtocol
+    BackendRule_OverridesByRequestProtocol (..),
+    newBackendRule_OverridesByRequestProtocol,
+
     -- ** BackendRule_PathTranslation
     BackendRule_PathTranslation (..),
 
@@ -245,6 +249,24 @@ module Gogol.ServiceNetworking
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
+
+    -- ** ClientLibrarySettings
+    ClientLibrarySettings (..),
+    newClientLibrarySettings,
+
+    -- ** ClientLibrarySettings_LaunchStage
+    ClientLibrarySettings_LaunchStage (..),
+
+    -- ** CloudSQLConfig
+    CloudSQLConfig (..),
+    newCloudSQLConfig,
+
+    -- ** CommonLanguageSettings
+    CommonLanguageSettings (..),
+    newCommonLanguageSettings,
+
+    -- ** CommonLanguageSettings_DestinationsItem
+    CommonLanguageSettings_DestinationsItem (..),
 
     -- ** Connection
     Connection (..),
@@ -273,6 +295,10 @@ module Gogol.ServiceNetworking
     -- ** Control
     Control (..),
     newControl,
+
+    -- ** CppSettings
+    CppSettings (..),
+    newCppSettings,
 
     -- ** CustomError
     CustomError (..),
@@ -318,6 +344,18 @@ module Gogol.ServiceNetworking
     DocumentationRule (..),
     newDocumentationRule,
 
+    -- ** DotnetSettings
+    DotnetSettings (..),
+    newDotnetSettings,
+
+    -- ** DotnetSettings_RenamedResources
+    DotnetSettings_RenamedResources (..),
+    newDotnetSettings_RenamedResources,
+
+    -- ** DotnetSettings_RenamedServices
+    DotnetSettings_RenamedServices (..),
+    newDotnetSettings_RenamedServices,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -351,6 +389,10 @@ module Gogol.ServiceNetworking
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** GoSettings
+    GoSettings (..),
+    newGoSettings,
+
     -- ** GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
     GoogleCloudServicenetworkingV1ConsumerConfigReservedRange (..),
     newGoogleCloudServicenetworkingV1ConsumerConfigReservedRange,
@@ -370,6 +412,14 @@ module Gogol.ServiceNetworking
     -- ** HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- ** JavaSettings
+    JavaSettings (..),
+    newJavaSettings,
+
+    -- ** JavaSettings_ServiceClassNames
+    JavaSettings_ServiceClassNames (..),
+    newJavaSettings_ServiceClassNames,
 
     -- ** JwtLocation
     JwtLocation (..),
@@ -406,12 +456,20 @@ module Gogol.ServiceNetworking
     LoggingDestination (..),
     newLoggingDestination,
 
+    -- ** LongRunning
+    LongRunning (..),
+    newLongRunning,
+
     -- ** Method
     Method (..),
     newMethod,
 
     -- ** Method_Syntax
     Method_Syntax (..),
+
+    -- ** MethodSettings
+    MethodSettings (..),
+    newMethodSettings,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -460,6 +518,10 @@ module Gogol.ServiceNetworking
     MonitoringDestination (..),
     newMonitoringDestination,
 
+    -- ** NodeSettings
+    NodeSettings (..),
+    newNodeSettings,
+
     -- ** OAuthRequirements
     OAuthRequirements (..),
     newOAuthRequirements,
@@ -500,9 +562,24 @@ module Gogol.ServiceNetworking
     PeeredDnsDomainMetadata (..),
     newPeeredDnsDomainMetadata,
 
+    -- ** PhpSettings
+    PhpSettings (..),
+    newPhpSettings,
+
     -- ** PolicyBinding
     PolicyBinding (..),
     newPolicyBinding,
+
+    -- ** Publishing
+    Publishing (..),
+    newPublishing,
+
+    -- ** Publishing_Organization
+    Publishing_Organization (..),
+
+    -- ** PythonSettings
+    PythonSettings (..),
+    newPythonSettings,
 
     -- ** Quota
     Quota (..),
@@ -551,6 +628,10 @@ module Gogol.ServiceNetworking
     -- ** Route
     Route (..),
     newRoute,
+
+    -- ** RubySettings
+    RubySettings (..),
+    newRubySettings,
 
     -- ** SearchRangeRequest
     SearchRangeRequest (..),

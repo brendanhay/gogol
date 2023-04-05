@@ -28,7 +28,7 @@
 --
 -- CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.
 --
--- /See:/ <https://cloud.google.com/profiler/ Stackdriver Profiler API Reference> for @cloudprofiler.projects.profiles.createOffline@.
+-- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference> for @cloudprofiler.projects.profiles.createOffline@.
 module Gogol.CloudProfiler.Projects.Profiles.CreateOffline
   ( -- * Resource
     CloudProfilerProjectsProfilesCreateOfflineResource,

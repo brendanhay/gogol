@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. Important: This method is only whitelisted for selected merchants.
+-- Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. This method is only available to selected merchants.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.buyongoogleprograms.requestreview@.
 module Gogol.ShoppingContent.Content.Buyongoogleprograms.Requestreview
@@ -62,7 +62,7 @@ type ContentBuyongoogleprogramsRequestreviewResource =
               RequestReviewBuyOnGoogleProgramRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. Important: This method is only whitelisted for selected merchants.
+-- | Requests review and then activates the BoG program in your Merchant Center account for the first time. Moves the program to the REVIEW_PENDING state. This method is only available to selected merchants.
 --
 -- /See:/ 'newContentBuyongoogleprogramsRequestreview' smart constructor.
 data ContentBuyongoogleprogramsRequestreview = ContentBuyongoogleprogramsRequestreview

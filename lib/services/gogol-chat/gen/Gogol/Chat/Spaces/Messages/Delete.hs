@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a message.
+-- Deletes a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#delete_a_message Delete a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.delete@.
 module Gogol.Chat.Spaces.Messages.Delete
@@ -55,7 +55,7 @@ type ChatSpacesMessagesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a message.
+-- | Deletes a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#delete_a_message Delete a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
 --
 -- /See:/ 'newChatSpacesMessagesDelete' smart constructor.
 data ChatSpacesMessagesDelete = ChatSpacesMessagesDelete
@@ -91,7 +91,9 @@ newChatSpacesMessagesDelete name =
 
 instance Core.GoogleRequest ChatSpacesMessagesDelete where
   type Rs ChatSpacesMessagesDelete = Empty
-  type Scopes ChatSpacesMessagesDelete = '[]
+  type
+    Scopes ChatSpacesMessagesDelete =
+      '[Chat'Bot, Chat'Messages]
   requestClient ChatSpacesMessagesDelete {..} =
     go
       name

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
+-- Returns the specified BackendBucket resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.backendBuckets.get@.
 module Gogol.Compute.BackendBuckets.Get
@@ -60,7 +60,7 @@ type ComputeBackendBucketsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] BackendBucket
 
--- | Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
+-- | Returns the specified BackendBucket resource.
 --
 -- /See:/ 'newComputeBackendBucketsGet' smart constructor.
 data ComputeBackendBucketsGet = ComputeBackendBucketsGet

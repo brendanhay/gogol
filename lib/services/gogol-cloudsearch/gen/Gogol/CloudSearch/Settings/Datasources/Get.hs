@@ -71,7 +71,7 @@ data CloudSearchSettingsDatasourcesGet = CloudSearchSettingsDatasourcesGet
     callback :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | Name of the datasource resource. Format: datasources\/{source_id}.
+    -- | The name of the datasource resource. Format: datasources\/{source_id}.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,7 +82,7 @@ data CloudSearchSettingsDatasourcesGet = CloudSearchSettingsDatasourcesGet
 
 -- | Creates a value of 'CloudSearchSettingsDatasourcesGet' with the minimum fields required to make a request.
 newCloudSearchSettingsDatasourcesGet ::
-  -- |  Name of the datasource resource. Format: datasources\/{source_id}. See 'name'.
+  -- |  The name of the datasource resource. Format: datasources\/{source_id}. See 'name'.
   Core.Text ->
   CloudSearchSettingsDatasourcesGet
 newCloudSearchSettingsDatasourcesGet name =

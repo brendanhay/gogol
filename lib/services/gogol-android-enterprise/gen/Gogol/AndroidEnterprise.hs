@@ -78,6 +78,11 @@ module Gogol.AndroidEnterprise
     AndroidEnterpriseEnterprisesCompleteSignup (..),
     newAndroidEnterpriseEnterprisesCompleteSignup,
 
+    -- ** androidenterprise.enterprises.createEnrollmentToken
+    AndroidEnterpriseEnterprisesCreateEnrollmentTokenResource,
+    AndroidEnterpriseEnterprisesCreateEnrollmentToken (..),
+    newAndroidEnterpriseEnterprisesCreateEnrollmentToken,
+
     -- ** androidenterprise.enterprises.createWebToken
     AndroidEnterpriseEnterprisesCreateWebTokenResource,
     AndroidEnterpriseEnterprisesCreateWebToken (..),
@@ -526,6 +531,10 @@ module Gogol.AndroidEnterprise
     ConfigurationVariables (..),
     newConfigurationVariables,
 
+    -- ** CreateEnrollmentTokenResponse
+    CreateEnrollmentTokenResponse (..),
+    newCreateEnrollmentTokenResponse,
+
     -- ** Device
     Device (..),
     newDevice,
@@ -560,6 +569,10 @@ module Gogol.AndroidEnterprise
     EnterpriseAccount (..),
     newEnterpriseAccount,
 
+    -- ** EnterpriseAuthenticationAppLinkConfig
+    EnterpriseAuthenticationAppLinkConfig (..),
+    newEnterpriseAuthenticationAppLinkConfig,
+
     -- ** EnterprisesListResponse
     EnterprisesListResponse (..),
     newEnterprisesListResponse,
@@ -578,6 +591,16 @@ module Gogol.AndroidEnterprise
     -- ** EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- ** GoogleAuthenticationSettings
+    GoogleAuthenticationSettings (..),
+    newGoogleAuthenticationSettings,
+
+    -- ** GoogleAuthenticationSettings_DedicatedDevicesAllowed
+    GoogleAuthenticationSettings_DedicatedDevicesAllowed (..),
+
+    -- ** GoogleAuthenticationSettings_GoogleAuthenticationRequired
+    GoogleAuthenticationSettings_GoogleAuthenticationRequired (..),
 
     -- ** GroupLicense
     GroupLicense (..),
@@ -874,6 +897,9 @@ module Gogol.AndroidEnterprise
     WebAppsListResponse (..),
     newWebAppsListResponse,
 
+    -- ** EnterprisesCreateEnrollmentTokenDeviceType
+    EnterprisesCreateEnrollmentTokenDeviceType (..),
+
     -- ** EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType (..),
 
@@ -890,6 +916,7 @@ import Gogol.AndroidEnterprise.Devices.SetState
 import Gogol.AndroidEnterprise.Devices.Update
 import Gogol.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
 import Gogol.AndroidEnterprise.Enterprises.CompleteSignup
+import Gogol.AndroidEnterprise.Enterprises.CreateEnrollmentToken
 import Gogol.AndroidEnterprise.Enterprises.CreateWebToken
 import Gogol.AndroidEnterprise.Enterprises.Enroll
 import Gogol.AndroidEnterprise.Enterprises.GenerateSignupUrl

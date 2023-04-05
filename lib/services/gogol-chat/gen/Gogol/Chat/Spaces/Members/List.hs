@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists human memberships in a space.
+-- Lists memberships in a space. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.memberships@ or @chat.memberships.readonly@ authorization scope.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.members.list@.
 module Gogol.Chat.Spaces.Members.List
@@ -58,7 +58,7 @@ type ChatSpacesMembersListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListMembershipsResponse
 
--- | Lists human memberships in a space.
+-- | Lists memberships in a space. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.memberships@ or @chat.memberships.readonly@ authorization scope.
 --
 -- /See:/ 'newChatSpacesMembersList' smart constructor.
 data ChatSpacesMembersList = ChatSpacesMembersList
@@ -68,11 +68,11 @@ data ChatSpacesMembersList = ChatSpacesMembersList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+    -- | The maximum number of memberships to return. The service may return fewer than this value. If unspecified, at most 100 memberships are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an INVALID_ARGUMENT error.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A token identifying a page of results the server should return.
+    -- | A page token, received from a previous call to list memberships. Provide this to retrieve the subsequent page. When paginating, all other parameters provided should match the call that provided the page token. Passing different values to the other parameters may lead to unexpected results.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the space for which membership list is to be fetched, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAAA
+    -- | Required. The resource name of the space for which to fetch a membership list. Format: spaces\/{space}
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +83,7 @@ data ChatSpacesMembersList = ChatSpacesMembersList
 
 -- | Creates a value of 'ChatSpacesMembersList' with the minimum fields required to make a request.
 newChatSpacesMembersList ::
-  -- |  Required. The resource name of the space for which membership list is to be fetched, in the form \"spaces\/*\". Example: spaces\/AAAAAAAAAAAA See 'parent'.
+  -- |  Required. The resource name of the space for which to fetch a membership list. Format: spaces\/{space} See 'parent'.
   Core.Text ->
   ChatSpacesMembersList
 newChatSpacesMembersList parent =
@@ -102,7 +102,12 @@ instance Core.GoogleRequest ChatSpacesMembersList where
   type
     Rs ChatSpacesMembersList =
       ListMembershipsResponse
-  type Scopes ChatSpacesMembersList = '[]
+  type
+    Scopes ChatSpacesMembersList =
+      '[ Chat'Bot,
+         Chat'Memberships,
+         Chat'Memberships'Readonly
+       ]
   requestClient ChatSpacesMembersList {..} =
     go
       parent

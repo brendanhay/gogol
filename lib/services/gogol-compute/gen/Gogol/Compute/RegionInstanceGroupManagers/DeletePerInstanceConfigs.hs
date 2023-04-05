@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes selected per-instance configs for the managed instance group.
+-- Deletes selected per-instance configurations for the managed instance group.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionInstanceGroupManagers.deletePerInstanceConfigs@.
 module Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
@@ -65,7 +65,7 @@ type ComputeRegionInstanceGroupManagersDeletePerInstanceConfigsResource =
               RegionInstanceGroupManagerDeleteInstanceConfigReq
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Deletes selected per-instance configs for the managed instance group.
+-- | Deletes selected per-instance configurations for the managed instance group.
 --
 -- /See:/ 'newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs' smart constructor.
 data ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs = ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs

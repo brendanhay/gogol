@@ -37,6 +37,7 @@ module Gogol.ServiceManagement.Internal.Sum
     Api_Syntax
       ( Api_Syntax_SYNTAX_PROTO2,
         Api_Syntax_SYNTAX_PROTO3,
+        Api_Syntax_SYNTAXEDITIONS,
         ..
       ),
 
@@ -54,6 +55,27 @@ module Gogol.ServiceManagement.Internal.Sum
       ( BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED,
         BackendRule_PathTranslation_CONSTANTADDRESS,
         BackendRule_PathTranslation_APPENDPATHTOADDRESS,
+        ..
+      ),
+
+    -- * ClientLibrarySettings_LaunchStage
+    ClientLibrarySettings_LaunchStage
+      ( ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+        ClientLibrarySettings_LaunchStage_Unimplemented,
+        ClientLibrarySettings_LaunchStage_Prelaunch,
+        ClientLibrarySettings_LaunchStage_EARLYACCESS,
+        ClientLibrarySettings_LaunchStage_Alpha,
+        ClientLibrarySettings_LaunchStage_Beta,
+        ClientLibrarySettings_LaunchStage_GA,
+        ClientLibrarySettings_LaunchStage_Deprecated,
+        ..
+      ),
+
+    -- * CommonLanguageSettings_DestinationsItem
+    CommonLanguageSettings_DestinationsItem
+      ( CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED,
+        CommonLanguageSettings_DestinationsItem_Github,
+        CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER,
         ..
       ),
 
@@ -88,6 +110,7 @@ module Gogol.ServiceManagement.Internal.Sum
     Enum_Syntax
       ( Enum_Syntax_SYNTAX_PROTO2,
         Enum_Syntax_SYNTAX_PROTO3,
+        Enum_Syntax_SYNTAXEDITIONS,
         ..
       ),
 
@@ -136,6 +159,7 @@ module Gogol.ServiceManagement.Internal.Sum
     Method_Syntax
       ( Method_Syntax_SYNTAX_PROTO2,
         Method_Syntax_SYNTAX_PROTO3,
+        Method_Syntax_SYNTAXEDITIONS,
         ..
       ),
 
@@ -199,6 +223,16 @@ module Gogol.ServiceManagement.Internal.Sum
         ..
       ),
 
+    -- * Publishing_Organization
+    Publishing_Organization
+      ( Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
+        Publishing_Organization_Cloud,
+        Publishing_Organization_Ads,
+        Publishing_Organization_Photos,
+        Publishing_Organization_STREETVIEW,
+        ..
+      ),
+
     -- * Rollout_Status
     Rollout_Status
       ( Rollout_Status_ROLLOUTSTATUSUNSPECIFIED,
@@ -226,6 +260,7 @@ module Gogol.ServiceManagement.Internal.Sum
     Type_Syntax
       ( Type_Syntax_SYNTAX_PROTO2,
         Type_Syntax_SYNTAX_PROTO3,
+        Type_Syntax_SYNTAXEDITIONS,
         ..
       ),
 
@@ -295,9 +330,14 @@ pattern Api_Syntax_SYNTAX_PROTO2 = Api_Syntax "SYNTAX_PROTO2"
 pattern Api_Syntax_SYNTAX_PROTO3 :: Api_Syntax
 pattern Api_Syntax_SYNTAX_PROTO3 = Api_Syntax "SYNTAX_PROTO3"
 
+-- | Syntax @editions@.
+pattern Api_Syntax_SYNTAXEDITIONS :: Api_Syntax
+pattern Api_Syntax_SYNTAXEDITIONS = Api_Syntax "SYNTAX_EDITIONS"
+
 {-# COMPLETE
   Api_Syntax_SYNTAX_PROTO2,
   Api_Syntax_SYNTAX_PROTO3,
+  Api_Syntax_SYNTAXEDITIONS,
   Api_Syntax
   #-}
 
@@ -367,6 +407,94 @@ pattern BackendRule_PathTranslation_APPENDPATHTOADDRESS = BackendRule_PathTransl
   BackendRule_PathTranslation_CONSTANTADDRESS,
   BackendRule_PathTranslation_APPENDPATHTOADDRESS,
   BackendRule_PathTranslation
+  #-}
+
+-- | Launch stage of this version of the API.
+newtype ClientLibrarySettings_LaunchStage = ClientLibrarySettings_LaunchStage {fromClientLibrarySettings_LaunchStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED = ClientLibrarySettings_LaunchStage "LAUNCH_STAGE_UNSPECIFIED"
+
+-- | The feature is not yet implemented. Users can not use it.
+pattern ClientLibrarySettings_LaunchStage_Unimplemented :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_Unimplemented = ClientLibrarySettings_LaunchStage "UNIMPLEMENTED"
+
+-- | Prelaunch features are hidden from users and are only visible internally.
+pattern ClientLibrarySettings_LaunchStage_Prelaunch :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_Prelaunch = ClientLibrarySettings_LaunchStage "PRELAUNCH"
+
+-- | Early Access features are limited to a closed group of testers. To use these features, you must sign up in advance and sign a Trusted Tester agreement (which includes confidentiality provisions). These features may be unstable, changed in backward-incompatible ways, and are not guaranteed to be released.
+pattern ClientLibrarySettings_LaunchStage_EARLYACCESS :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_EARLYACCESS = ClientLibrarySettings_LaunchStage "EARLY_ACCESS"
+
+-- | Alpha is a limited availability test for releases before they are cleared for widespread use. By Alpha, all significant design issues are resolved and we are in the process of verifying functionality. Alpha customers need to apply for access, agree to applicable terms, and have their projects allowlisted. Alpha releases don\'t have to be feature complete, no SLAs are provided, and there are no technical support obligations, but they will be far enough along that customers can actually use them in test environments or for limited-use tests -- just like they would in normal production cases.
+pattern ClientLibrarySettings_LaunchStage_Alpha :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_Alpha = ClientLibrarySettings_LaunchStage "ALPHA"
+
+-- | Beta is the point at which we are ready to open a release for any customer to use. There are no SLA or technical support obligations in a Beta release. Products will be complete from a feature perspective, but may have some open outstanding issues. Beta releases are suitable for limited production use cases.
+pattern ClientLibrarySettings_LaunchStage_Beta :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_Beta = ClientLibrarySettings_LaunchStage "BETA"
+
+-- | GA features are open to all developers and are considered stable and fully qualified for production use.
+pattern ClientLibrarySettings_LaunchStage_GA :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_GA = ClientLibrarySettings_LaunchStage "GA"
+
+-- | Deprecated features are scheduled to be shut down and removed. For more information, see the \"Deprecation Policy\" section of our <https://cloud.google.com/terms/ Terms of Service> and the <https://cloud.google.com/terms/deprecation Google Cloud Platform Subject to the Deprecation Policy> documentation.
+pattern ClientLibrarySettings_LaunchStage_Deprecated :: ClientLibrarySettings_LaunchStage
+pattern ClientLibrarySettings_LaunchStage_Deprecated = ClientLibrarySettings_LaunchStage "DEPRECATED"
+
+{-# COMPLETE
+  ClientLibrarySettings_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+  ClientLibrarySettings_LaunchStage_Unimplemented,
+  ClientLibrarySettings_LaunchStage_Prelaunch,
+  ClientLibrarySettings_LaunchStage_EARLYACCESS,
+  ClientLibrarySettings_LaunchStage_Alpha,
+  ClientLibrarySettings_LaunchStage_Beta,
+  ClientLibrarySettings_LaunchStage_GA,
+  ClientLibrarySettings_LaunchStage_Deprecated,
+  ClientLibrarySettings_LaunchStage
+  #-}
+
+newtype CommonLanguageSettings_DestinationsItem = CommonLanguageSettings_DestinationsItem {fromCommonLanguageSettings_DestinationsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Client libraries will neither be generated nor published to package managers.
+pattern CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED :: CommonLanguageSettings_DestinationsItem
+pattern CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED = CommonLanguageSettings_DestinationsItem "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED"
+
+-- | Generate the client library in a repo under github.com\/googleapis, but don\'t publish it to package managers.
+pattern CommonLanguageSettings_DestinationsItem_Github :: CommonLanguageSettings_DestinationsItem
+pattern CommonLanguageSettings_DestinationsItem_Github = CommonLanguageSettings_DestinationsItem "GITHUB"
+
+-- | Publish the library to package managers like nuget.org and npmjs.com.
+pattern CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER :: CommonLanguageSettings_DestinationsItem
+pattern CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER = CommonLanguageSettings_DestinationsItem "PACKAGE_MANAGER"
+
+{-# COMPLETE
+  CommonLanguageSettings_DestinationsItem_CLIENTLIBRARYDESTINATIONUNSPECIFIED,
+  CommonLanguageSettings_DestinationsItem_Github,
+  CommonLanguageSettings_DestinationsItem_PACKAGEMANAGER,
+  CommonLanguageSettings_DestinationsItem
   #-}
 
 -- | The type for this change, either ADDED, REMOVED, or MODIFIED.
@@ -501,9 +629,14 @@ pattern Enum_Syntax_SYNTAX_PROTO2 = Enum_Syntax "SYNTAX_PROTO2"
 pattern Enum_Syntax_SYNTAX_PROTO3 :: Enum_Syntax
 pattern Enum_Syntax_SYNTAX_PROTO3 = Enum_Syntax "SYNTAX_PROTO3"
 
+-- | Syntax @editions@.
+pattern Enum_Syntax_SYNTAXEDITIONS :: Enum_Syntax
+pattern Enum_Syntax_SYNTAXEDITIONS = Enum_Syntax "SYNTAX_EDITIONS"
+
 {-# COMPLETE
   Enum_Syntax_SYNTAX_PROTO2,
   Enum_Syntax_SYNTAX_PROTO3,
+  Enum_Syntax_SYNTAXEDITIONS,
   Enum_Syntax
   #-}
 
@@ -709,9 +842,14 @@ pattern Method_Syntax_SYNTAX_PROTO2 = Method_Syntax "SYNTAX_PROTO2"
 pattern Method_Syntax_SYNTAX_PROTO3 :: Method_Syntax
 pattern Method_Syntax_SYNTAX_PROTO3 = Method_Syntax "SYNTAX_PROTO3"
 
+-- | Syntax @editions@.
+pattern Method_Syntax_SYNTAXEDITIONS :: Method_Syntax
+pattern Method_Syntax_SYNTAXEDITIONS = Method_Syntax "SYNTAX_EDITIONS"
+
 {-# COMPLETE
   Method_Syntax_SYNTAX_PROTO2,
   Method_Syntax_SYNTAX_PROTO3,
+  Method_Syntax_SYNTAXEDITIONS,
   Method_Syntax
   #-}
 
@@ -975,6 +1113,48 @@ pattern MonitoredResourceDescriptor_LaunchStage_Deprecated = MonitoredResourceDe
   MonitoredResourceDescriptor_LaunchStage
   #-}
 
+-- | For whom the client library is being published.
+newtype Publishing_Organization = Publishing_Organization {fromPublishing_Organization :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not useful.
+pattern Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED :: Publishing_Organization
+pattern Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED = Publishing_Organization "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED"
+
+-- | Google Cloud Platform Org.
+pattern Publishing_Organization_Cloud :: Publishing_Organization
+pattern Publishing_Organization_Cloud = Publishing_Organization "CLOUD"
+
+-- | Ads (Advertising) Org.
+pattern Publishing_Organization_Ads :: Publishing_Organization
+pattern Publishing_Organization_Ads = Publishing_Organization "ADS"
+
+-- | Photos Org.
+pattern Publishing_Organization_Photos :: Publishing_Organization
+pattern Publishing_Organization_Photos = Publishing_Organization "PHOTOS"
+
+-- | Street View Org.
+pattern Publishing_Organization_STREETVIEW :: Publishing_Organization
+pattern Publishing_Organization_STREETVIEW = Publishing_Organization "STREET_VIEW"
+
+{-# COMPLETE
+  Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
+  Publishing_Organization_Cloud,
+  Publishing_Organization_Ads,
+  Publishing_Organization_Photos,
+  Publishing_Organization_STREETVIEW,
+  Publishing_Organization
+  #-}
+
 -- | The status of this rollout. Readonly. In case of a failed rollout, the system will automatically rollback to the current Rollout version. Readonly.
 newtype Rollout_Status = Rollout_Status {fromRollout_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1095,9 +1275,14 @@ pattern Type_Syntax_SYNTAX_PROTO2 = Type_Syntax "SYNTAX_PROTO2"
 pattern Type_Syntax_SYNTAX_PROTO3 :: Type_Syntax
 pattern Type_Syntax_SYNTAX_PROTO3 = Type_Syntax "SYNTAX_PROTO3"
 
+-- | Syntax @editions@.
+pattern Type_Syntax_SYNTAXEDITIONS :: Type_Syntax
+pattern Type_Syntax_SYNTAXEDITIONS = Type_Syntax "SYNTAX_EDITIONS"
+
 {-# COMPLETE
   Type_Syntax_SYNTAX_PROTO2,
   Type_Syntax_SYNTAX_PROTO3,
+  Type_Syntax_SYNTAXEDITIONS,
   Type_Syntax
   #-}
 

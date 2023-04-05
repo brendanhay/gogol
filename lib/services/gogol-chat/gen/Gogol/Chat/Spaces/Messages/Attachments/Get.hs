@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the metadata of a message attachment. The attachment data is fetched using the media API.
+-- Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/chat/api/reference/rest/v1/media/download media API>. Requires <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.attachments.get@.
 module Gogol.Chat.Spaces.Messages.Attachments.Get
@@ -55,7 +55,7 @@ type ChatSpacesMessagesAttachmentsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Attachment
 
--- | Gets the metadata of a message attachment. The attachment data is fetched using the media API.
+-- | Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/chat/api/reference/rest/v1/media/download media API>. Requires <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>.
 --
 -- /See:/ 'newChatSpacesMessagesAttachmentsGet' smart constructor.
 data ChatSpacesMessagesAttachmentsGet = ChatSpacesMessagesAttachmentsGet
@@ -94,7 +94,9 @@ instance
     ChatSpacesMessagesAttachmentsGet
   where
   type Rs ChatSpacesMessagesAttachmentsGet = Attachment
-  type Scopes ChatSpacesMessagesAttachmentsGet = '[]
+  type
+    Scopes ChatSpacesMessagesAttachmentsGet =
+      '[Chat'Bot]
   requestClient ChatSpacesMessagesAttachmentsGet {..} =
     go
       name

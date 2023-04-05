@@ -53,6 +53,14 @@ module Gogol.Dataproc.Types
     AutoscalingPolicy_Labels (..),
     newAutoscalingPolicy_Labels,
 
+    -- ** AuxiliaryNodeGroup
+    AuxiliaryNodeGroup (..),
+    newAuxiliaryNodeGroup,
+
+    -- ** AuxiliaryServicesConfig
+    AuxiliaryServicesConfig (..),
+    newAuxiliaryServicesConfig,
+
     -- ** BasicAutoscalingAlgorithm
     BasicAutoscalingAlgorithm (..),
     newBasicAutoscalingAlgorithm,
@@ -172,6 +180,10 @@ module Gogol.Dataproc.Types
     DiskConfig (..),
     newDiskConfig,
 
+    -- ** DriverSchedulingConfig
+    DriverSchedulingConfig (..),
+    newDriverSchedulingConfig,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -222,6 +234,29 @@ module Gogol.Dataproc.Types
     -- ** GkeClusterConfig
     GkeClusterConfig (..),
     newGkeClusterConfig,
+
+    -- ** GkeNodeConfig
+    GkeNodeConfig (..),
+    newGkeNodeConfig,
+
+    -- ** GkeNodePoolAcceleratorConfig
+    GkeNodePoolAcceleratorConfig (..),
+    newGkeNodePoolAcceleratorConfig,
+
+    -- ** GkeNodePoolAutoscalingConfig
+    GkeNodePoolAutoscalingConfig (..),
+    newGkeNodePoolAutoscalingConfig,
+
+    -- ** GkeNodePoolConfig
+    GkeNodePoolConfig (..),
+    newGkeNodePoolConfig,
+
+    -- ** GkeNodePoolTarget
+    GkeNodePoolTarget (..),
+    newGkeNodePoolTarget,
+
+    -- ** GkeNodePoolTarget_RolesItem
+    GkeNodePoolTarget_RolesItem (..),
 
     -- ** HadoopJob
     HadoopJob (..),
@@ -278,6 +313,10 @@ module Gogol.Dataproc.Types
     InstantiateWorkflowTemplateRequest_Parameters (..),
     newInstantiateWorkflowTemplateRequest_Parameters,
 
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
     -- ** Job
     Job (..),
     newJob,
@@ -319,6 +358,22 @@ module Gogol.Dataproc.Types
     -- ** KerberosConfig
     KerberosConfig (..),
     newKerberosConfig,
+
+    -- ** KubernetesClusterConfig
+    KubernetesClusterConfig (..),
+    newKubernetesClusterConfig,
+
+    -- ** KubernetesSoftwareConfig
+    KubernetesSoftwareConfig (..),
+    newKubernetesSoftwareConfig,
+
+    -- ** KubernetesSoftwareConfig_ComponentVersion
+    KubernetesSoftwareConfig_ComponentVersion (..),
+    newKubernetesSoftwareConfig_ComponentVersion,
+
+    -- ** KubernetesSoftwareConfig_Properties
+    KubernetesSoftwareConfig_Properties (..),
+    newKubernetesSoftwareConfig_Properties,
 
     -- ** LifecycleConfig
     LifecycleConfig (..),
@@ -386,13 +441,42 @@ module Gogol.Dataproc.Types
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
 
+    -- ** NodeGroup
+    NodeGroup (..),
+    newNodeGroup,
+
+    -- ** NodeGroup_Labels
+    NodeGroup_Labels (..),
+    newNodeGroup_Labels,
+
+    -- ** NodeGroup_RolesItem
+    NodeGroup_RolesItem (..),
+
     -- ** NodeGroupAffinity
     NodeGroupAffinity (..),
     newNodeGroupAffinity,
 
+    -- ** NodeGroupOperationMetadata
+    NodeGroupOperationMetadata (..),
+    newNodeGroupOperationMetadata,
+
+    -- ** NodeGroupOperationMetadata_Labels
+    NodeGroupOperationMetadata_Labels (..),
+    newNodeGroupOperationMetadata_Labels,
+
+    -- ** NodeGroupOperationMetadata_OperationType
+    NodeGroupOperationMetadata_OperationType (..),
+
     -- ** NodeInitializationAction
     NodeInitializationAction (..),
     newNodeInitializationAction,
+
+    -- ** NodePool
+    NodePool (..),
+    newNodePool,
+
+    -- ** NodePool_RepairAction
+    NodePool_RepairAction (..),
 
     -- ** Operation
     Operation (..),
@@ -476,6 +560,10 @@ module Gogol.Dataproc.Types
 
     -- ** ReservationAffinity_ConsumeReservationType
     ReservationAffinity_ConsumeReservationType (..),
+
+    -- ** ResizeNodeGroupRequest
+    ResizeNodeGroupRequest (..),
+    newResizeNodeGroupRequest,
 
     -- ** RuntimeConfig
     RuntimeConfig (..),
@@ -618,9 +706,29 @@ module Gogol.Dataproc.Types
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** TrinoJob
+    TrinoJob (..),
+    newTrinoJob,
+
+    -- ** TrinoJob_Properties
+    TrinoJob_Properties (..),
+    newTrinoJob_Properties,
+
+    -- ** UsageMetrics
+    UsageMetrics (..),
+    newUsageMetrics,
+
+    -- ** UsageSnapshot
+    UsageSnapshot (..),
+    newUsageSnapshot,
+
     -- ** ValueValidation
     ValueValidation (..),
     newValueValidation,
+
+    -- ** VirtualClusterConfig
+    VirtualClusterConfig (..),
+    newVirtualClusterConfig,
 
     -- ** WorkflowGraph
     WorkflowGraph (..),

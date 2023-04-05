@@ -16,7 +16,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  The cloud asset API manages the history and inventory of cloud resources.
+  The Cloud Asset API manages the history and inventory of Google Cloud resources.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -58,5 +58,5 @@ library
     Gogol.CloudAsset.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

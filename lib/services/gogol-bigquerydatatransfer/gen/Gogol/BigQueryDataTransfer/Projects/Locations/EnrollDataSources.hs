@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the BigQuery UI \'https:\/\/bigquery.cloud.google.com\' (and the documents can be found at https:\/\/cloud.google.com\/bigquery\/bigquery-web-ui and https:\/\/cloud.google.com\/bigquery\/docs\/working-with-transfers).
+-- Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the <https://console.cloud.google.com/bigquery BigQuery UI>, and the documents can be found in the public guide for <https://cloud.google.com/bigquery/bigquery-web-ui BigQuery Web UI> and <https://cloud.google.com/bigquery/docs/working-with-transfers Data Transfer Service>.
 --
 -- /See:/ <https://cloud.google.com/bigquery-transfer/ BigQuery Data Transfer API Reference> for @bigquerydatatransfer.projects.locations.enrollDataSources@.
 module Gogol.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
@@ -56,7 +56,7 @@ type BigQueryDataTransferProjectsLocationsEnrollDataSourcesResource =
     Core.:> Core.ReqBody '[Core.JSON] EnrollDataSourcesRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the BigQuery UI \'https:\/\/bigquery.cloud.google.com\' (and the documents can be found at https:\/\/cloud.google.com\/bigquery\/bigquery-web-ui and https:\/\/cloud.google.com\/bigquery\/docs\/working-with-transfers).
+-- | Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the <https://console.cloud.google.com/bigquery BigQuery UI>, and the documents can be found in the public guide for <https://cloud.google.com/bigquery/bigquery-web-ui BigQuery Web UI> and <https://cloud.google.com/bigquery/docs/working-with-transfers Data Transfer Service>.
 --
 -- /See:/ 'newBigQueryDataTransferProjectsLocationsEnrollDataSources' smart constructor.
 data BigQueryDataTransferProjectsLocationsEnrollDataSources = BigQueryDataTransferProjectsLocationsEnrollDataSources

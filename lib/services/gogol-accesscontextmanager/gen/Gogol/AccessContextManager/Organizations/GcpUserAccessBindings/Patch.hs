@@ -71,7 +71,7 @@ data AccessContextManagerOrganizationsGcpUserAccessBindingsPatch = AccessContext
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GcpUserAccessBinding,
-    -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and must always be: update/mask { paths: \"access/levels\" }
+    -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and may only contain the following fields: @access_levels@, @dry_run_access_levels@. update/mask { paths: \"access/levels\" }
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

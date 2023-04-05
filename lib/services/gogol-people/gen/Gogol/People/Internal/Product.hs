@@ -1466,7 +1466,7 @@ instance Core.ToJSON EmailAddress where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -2728,7 +2728,7 @@ data Person = Person
     relationshipStatuses :: (Core.Maybe [RelationshipStatus]),
     -- | __DEPRECATED__: (Please use @person.locations@ instead) The person\'s residences.
     residences :: (Core.Maybe [Residence]),
-    -- | The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of @people\/{person_id}@.
+    -- | The resource name for the person, assigned by the server. An ASCII string in the form of @people\/{person_id}@.
     resourceName :: (Core.Maybe Core.Text),
     -- | The person\'s SIP addresses.
     sipAddresses :: (Core.Maybe [SipAddress]),

@@ -64,7 +64,7 @@ import Gogol.AppsTasks.Internal.Product
 import Gogol.AppsTasks.Internal.Sum
 import qualified Gogol.Prelude as Core
 
--- | Default request referring to version @v1@ of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v1@ of the Google Tasks API. This contains the host and root path used as a starting point for constructing service requests.
 appsTasksService :: Core.ServiceConfig
 appsTasksService =
   Core.defaultService

@@ -51,7 +51,6 @@ type StorageNotificationsGetResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> "notificationConfigs"
     Core.:> Core.Capture "notification" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -65,8 +64,6 @@ data StorageNotificationsGet = StorageNotificationsGet
     bucket :: Core.Text,
     -- | Notification ID
     notification :: Core.Text,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -85,7 +82,6 @@ newStorageNotificationsGet bucket notification =
   StorageNotificationsGet
     { bucket = bucket,
       notification = notification,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -104,7 +100,6 @@ instance Core.GoogleRequest StorageNotificationsGet where
     go
       bucket
       notification
-      provisionalUserProject
       uploadType
       userProject
       (Core.Just Core.AltJSON)

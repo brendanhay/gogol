@@ -179,6 +179,11 @@ module Gogol.YouTube
     YouTubeLiveBroadcastsInsert (..),
     newYouTubeLiveBroadcastsInsert,
 
+    -- ** youtube.liveBroadcasts.insertCuepoint
+    YouTubeLiveBroadcastsInsertCuepointResource,
+    YouTubeLiveBroadcastsInsertCuepoint (..),
+    newYouTubeLiveBroadcastsInsertCuepoint,
+
     -- ** youtube.liveBroadcasts.list
     YouTubeLiveBroadcastsListResource,
     YouTubeLiveBroadcastsList (..),
@@ -919,6 +924,13 @@ module Gogol.YouTube
     -- ** ContentRating_YtRating
     ContentRating_YtRating (..),
 
+    -- ** Cuepoint
+    Cuepoint (..),
+    newCuepoint,
+
+    -- ** Cuepoint_CueType
+    Cuepoint_CueType (..),
+
     -- ** Entity
     Entity (..),
     newEntity,
@@ -1353,6 +1365,10 @@ module Gogol.YouTube
     ThirdPartyLink (..),
     newThirdPartyLink,
 
+    -- ** ThirdPartyLinkListResponse
+    ThirdPartyLinkListResponse (..),
+    newThirdPartyLinkListResponse,
+
     -- ** ThirdPartyLinkSnippet
     ThirdPartyLinkSnippet (..),
     newThirdPartyLinkSnippet,
@@ -1686,6 +1702,7 @@ import Gogol.YouTube.I18nRegions.List
 import Gogol.YouTube.LiveBroadcasts.Bind
 import Gogol.YouTube.LiveBroadcasts.Delete
 import Gogol.YouTube.LiveBroadcasts.Insert
+import Gogol.YouTube.LiveBroadcasts.InsertCuepoint
 import Gogol.YouTube.LiveBroadcasts.List
 import Gogol.YouTube.LiveBroadcasts.Transition
 import Gogol.YouTube.LiveBroadcasts.Update

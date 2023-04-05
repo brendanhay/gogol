@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+-- Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.securityPolicies.patch@.
 module Gogol.Compute.SecurityPolicies.Patch
@@ -62,7 +62,7 @@ type ComputeSecurityPoliciesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] SecurityPolicy
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+-- | Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ 'newComputeSecurityPoliciesPatch' smart constructor.
 data ComputeSecurityPoliciesPatch = ComputeSecurityPoliciesPatch

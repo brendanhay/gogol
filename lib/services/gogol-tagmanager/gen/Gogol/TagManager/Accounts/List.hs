@@ -51,6 +51,7 @@ type TagManagerAccountsListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "includeGoogleTags" Core.Bool
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -67,6 +68,8 @@ data TagManagerAccountsList = TagManagerAccountsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Also retrieve accounts associated with Google Tag when true.
+    includeGoogleTags :: (Core.Maybe Core.Bool),
     -- | Continuation token for fetching the next page of results.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -84,6 +87,7 @@ newTagManagerAccountsList =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      includeGoogleTags = Core.Nothing,
       pageToken = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -102,6 +106,7 @@ instance Core.GoogleRequest TagManagerAccountsList where
       xgafv
       accessToken
       callback
+      includeGoogleTags
       pageToken
       uploadType
       uploadProtocol

@@ -65,7 +65,7 @@ data DataprocProjectsLocationsBatchesDelete = DataprocProjectsLocationsBatchesDe
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the batch resource to delete.
+    -- | Required. The fully qualified name of the batch to retrieve in the format \"projects\/PROJECT/ID\/locations\/DATAPROC/REGION\/batches\/BATCH_ID\"
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +76,7 @@ data DataprocProjectsLocationsBatchesDelete = DataprocProjectsLocationsBatchesDe
 
 -- | Creates a value of 'DataprocProjectsLocationsBatchesDelete' with the minimum fields required to make a request.
 newDataprocProjectsLocationsBatchesDelete ::
-  -- |  Required. The name of the batch resource to delete. See 'name'.
+  -- |  Required. The fully qualified name of the batch to retrieve in the format \"projects\/PROJECT/ID\/locations\/DATAPROC/REGION\/batches\/BATCH_ID\" See 'name'.
   Core.Text ->
   DataprocProjectsLocationsBatchesDelete
 newDataprocProjectsLocationsBatchesDelete name =

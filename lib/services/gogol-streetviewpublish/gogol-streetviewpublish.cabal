@@ -58,6 +58,11 @@ library
     Gogol.StreetViewPublish.Photos.BatchGet
     Gogol.StreetViewPublish.Photos.BatchUpdate
     Gogol.StreetViewPublish.Photos.List
+    Gogol.StreetViewPublish.PhotoSequence.Create
+    Gogol.StreetViewPublish.PhotoSequence.Delete
+    Gogol.StreetViewPublish.PhotoSequence.Get
+    Gogol.StreetViewPublish.PhotoSequence.StartUpload
+    Gogol.StreetViewPublish.PhotoSequences.List
     Gogol.StreetViewPublish.Types
 
   other-modules:
@@ -65,5 +70,5 @@ library
     Gogol.StreetViewPublish.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

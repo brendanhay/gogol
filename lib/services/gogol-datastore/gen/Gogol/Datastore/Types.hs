@@ -38,6 +38,29 @@ module Gogol.Datastore.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- ** AggregationQuery
+    AggregationQuery (..),
+    newAggregationQuery,
+
+    -- ** AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- ** AggregationResult_AggregateProperties
+    AggregationResult_AggregateProperties (..),
+    newAggregationResult_AggregateProperties,
+
+    -- ** AggregationResultBatch
+    AggregationResultBatch (..),
+    newAggregationResultBatch,
+
+    -- ** AggregationResultBatch_MoreResults
+    AggregationResultBatch_MoreResults (..),
+
     -- ** AllocateIdsRequest
     AllocateIdsRequest (..),
     newAllocateIdsRequest,
@@ -75,6 +98,10 @@ module Gogol.Datastore.Types
 
     -- ** CompositeFilter_Op
     CompositeFilter_Op (..),
+
+    -- ** Count
+    Count (..),
+    newCount,
 
     -- ** Empty
     Empty (..),
@@ -373,6 +400,14 @@ module Gogol.Datastore.Types
     -- ** RollbackResponse
     RollbackResponse (..),
     newRollbackResponse,
+
+    -- ** RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- ** RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
 
     -- ** RunQueryRequest
     RunQueryRequest (..),

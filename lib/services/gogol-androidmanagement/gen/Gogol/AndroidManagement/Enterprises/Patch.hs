@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an enterprise.
+-- Updates an enterprise. See also: SigninDetail
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.patch@.
 module Gogol.AndroidManagement.Enterprises.Patch
@@ -57,7 +57,7 @@ type AndroidManagementEnterprisesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Enterprise
     Core.:> Core.Patch '[Core.JSON] Enterprise
 
--- | Updates an enterprise.
+-- | Updates an enterprise. See also: SigninDetail
 --
 -- /See:/ 'newAndroidManagementEnterprisesPatch' smart constructor.
 data AndroidManagementEnterprisesPatch = AndroidManagementEnterprisesPatch

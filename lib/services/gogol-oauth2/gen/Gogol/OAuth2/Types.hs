@@ -57,7 +57,7 @@ oAuth2Service =
     (Core.ServiceId "oauth2:v2")
     "www.googleapis.com"
 
--- | View your email address
+-- | See your primary Google Account email address
 type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available

@@ -45,7 +45,7 @@ import Gogol.TPU.Types
 -- | A resource alias for @tpu.projects.locations.nodes.stop@ method which the
 -- 'TPUProjectsLocationsNodesStop' request conforms to.
 type TPUProjectsLocationsNodesStopResource =
-  "v2alpha1"
+  "v2"
     Core.:> Core.CaptureMode "name" "stop" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -66,7 +66,7 @@ data TPUProjectsLocationsNodesStop = TPUProjectsLocationsNodesStop
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name.
+    -- | Required. The resource name.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: StopNodeRequest,
@@ -79,7 +79,7 @@ data TPUProjectsLocationsNodesStop = TPUProjectsLocationsNodesStop
 
 -- | Creates a value of 'TPUProjectsLocationsNodesStop' with the minimum fields required to make a request.
 newTPUProjectsLocationsNodesStop ::
-  -- |  The resource name. See 'name'.
+  -- |  Required. The resource name. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   StopNodeRequest ->

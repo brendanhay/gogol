@@ -42,6 +42,14 @@ module Gogol.CloudFunctions.Internal.Sum
         ..
       ),
 
+    -- * BuildConfig_DockerRegistry
+    BuildConfig_DockerRegistry
+      ( BuildConfig_DockerRegistry_DOCKERREGISTRYUNSPECIFIED,
+        BuildConfig_DockerRegistry_CONTAINERREGISTRY,
+        BuildConfig_DockerRegistry_ARTIFACTREGISTRY,
+        ..
+      ),
+
     -- * EventTrigger_RetryPolicy
     EventTrigger_RetryPolicy
       ( EventTrigger_RetryPolicy_RETRYPOLICYUNSPECIFIED,
@@ -66,6 +74,36 @@ module Gogol.CloudFunctions.Internal.Sum
         Function_State_Deploying,
         Function_State_Deleting,
         Function_State_Unknown,
+        ..
+      ),
+
+    -- * GoogleCloudFunctionsV2Stage_Name
+    GoogleCloudFunctionsV2Stage_Name
+      ( GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED,
+        GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY,
+        GoogleCloudFunctionsV2Stage_Name_Build,
+        GoogleCloudFunctionsV2Stage_Name_Service,
+        GoogleCloudFunctionsV2Stage_Name_Trigger,
+        GoogleCloudFunctionsV2Stage_Name_SERVICEROLLBACK,
+        GoogleCloudFunctionsV2Stage_Name_TRIGGERROLLBACK,
+        ..
+      ),
+
+    -- * GoogleCloudFunctionsV2Stage_State
+    GoogleCloudFunctionsV2Stage_State
+      ( GoogleCloudFunctionsV2Stage_State_STATEUNSPECIFIED,
+        GoogleCloudFunctionsV2Stage_State_NOTSTARTED,
+        GoogleCloudFunctionsV2Stage_State_INPROGRESS,
+        GoogleCloudFunctionsV2Stage_State_Complete,
+        ..
+      ),
+
+    -- * GoogleCloudFunctionsV2StateMessage_Severity
+    GoogleCloudFunctionsV2StateMessage_Severity
+      ( GoogleCloudFunctionsV2StateMessage_Severity_SEVERITYUNSPECIFIED,
+        GoogleCloudFunctionsV2StateMessage_Severity_Error',
+        GoogleCloudFunctionsV2StateMessage_Severity_Warning,
+        GoogleCloudFunctionsV2StateMessage_Severity_Info,
         ..
       ),
 
@@ -167,6 +205,14 @@ module Gogol.CloudFunctions.Internal.Sum
         ..
       ),
 
+    -- * ServiceConfig_SecurityLevel
+    ServiceConfig_SecurityLevel
+      ( ServiceConfig_SecurityLevel_SECURITYLEVELUNSPECIFIED,
+        ServiceConfig_SecurityLevel_SECUREALWAYS,
+        ServiceConfig_SecurityLevel_SECUREOPTIONAL,
+        ..
+      ),
+
     -- * ServiceConfig_VpcConnectorEgressSettings
     ServiceConfig_VpcConnectorEgressSettings
       ( ServiceConfig_VpcConnectorEgressSettings_VPCCONNECTOREGRESSSETTINGSUNSPECIFIED,
@@ -243,6 +289,38 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType
   #-}
 
+-- | Optional. Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If @docker_repository@ field is specified, this field will be automatically set as @ARTIFACT_REGISTRY@. If unspecified, it currently defaults to @CONTAINER_REGISTRY@. This field may be overridden by the backend for eligible deployments.
+newtype BuildConfig_DockerRegistry = BuildConfig_DockerRegistry {fromBuildConfig_DockerRegistry :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern BuildConfig_DockerRegistry_DOCKERREGISTRYUNSPECIFIED :: BuildConfig_DockerRegistry
+pattern BuildConfig_DockerRegistry_DOCKERREGISTRYUNSPECIFIED = BuildConfig_DockerRegistry "DOCKER_REGISTRY_UNSPECIFIED"
+
+-- | Docker images will be stored in multi-regional Container Registry repositories named @gcf@.
+pattern BuildConfig_DockerRegistry_CONTAINERREGISTRY :: BuildConfig_DockerRegistry
+pattern BuildConfig_DockerRegistry_CONTAINERREGISTRY = BuildConfig_DockerRegistry "CONTAINER_REGISTRY"
+
+-- | Docker images will be stored in regional Artifact Registry repositories. By default, GCF will create and use repositories named @gcf-artifacts@ in every region in which a function is deployed. But the repository to use can also be specified by the user using the @docker_repository@ field.
+pattern BuildConfig_DockerRegistry_ARTIFACTREGISTRY :: BuildConfig_DockerRegistry
+pattern BuildConfig_DockerRegistry_ARTIFACTREGISTRY = BuildConfig_DockerRegistry "ARTIFACT_REGISTRY"
+
+{-# COMPLETE
+  BuildConfig_DockerRegistry_DOCKERREGISTRYUNSPECIFIED,
+  BuildConfig_DockerRegistry_CONTAINERREGISTRY,
+  BuildConfig_DockerRegistry_ARTIFACTREGISTRY,
+  BuildConfig_DockerRegistry
+  #-}
+
 -- | Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).
 newtype EventTrigger_RetryPolicy = EventTrigger_RetryPolicy {fromEventTrigger_RetryPolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -275,7 +353,7 @@ pattern EventTrigger_RetryPolicy_RETRYPOLICYRETRY = EventTrigger_RetryPolicy "RE
   EventTrigger_RetryPolicy
   #-}
 
--- | Describe whether the function is gen1 or gen2.
+-- | Describe whether the function is 1st Gen or 2nd Gen.
 newtype Function_Environment = Function_Environment {fromFunction_Environment :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -352,6 +430,132 @@ pattern Function_State_Unknown = Function_State "UNKNOWN"
   Function_State_Deleting,
   Function_State_Unknown,
   Function_State
+  #-}
+
+-- | Name of the Stage. This will be unique for each Stage.
+newtype GoogleCloudFunctionsV2Stage_Name = GoogleCloudFunctionsV2Stage_Name {fromGoogleCloudFunctionsV2Stage_Name :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. Invalid name.
+pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED = GoogleCloudFunctionsV2Stage_Name "NAME_UNSPECIFIED"
+
+-- | Artifact Regsitry Stage
+pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY = GoogleCloudFunctionsV2Stage_Name "ARTIFACT_REGISTRY"
+
+-- | Build Stage
+pattern GoogleCloudFunctionsV2Stage_Name_Build :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_Build = GoogleCloudFunctionsV2Stage_Name "BUILD"
+
+-- | Service Stage
+pattern GoogleCloudFunctionsV2Stage_Name_Service :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_Service = GoogleCloudFunctionsV2Stage_Name "SERVICE"
+
+-- | Trigger Stage
+pattern GoogleCloudFunctionsV2Stage_Name_Trigger :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_Trigger = GoogleCloudFunctionsV2Stage_Name "TRIGGER"
+
+-- | Service Rollback Stage
+pattern GoogleCloudFunctionsV2Stage_Name_SERVICEROLLBACK :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_SERVICEROLLBACK = GoogleCloudFunctionsV2Stage_Name "SERVICE_ROLLBACK"
+
+-- | Trigger Rollback Stage
+pattern GoogleCloudFunctionsV2Stage_Name_TRIGGERROLLBACK :: GoogleCloudFunctionsV2Stage_Name
+pattern GoogleCloudFunctionsV2Stage_Name_TRIGGERROLLBACK = GoogleCloudFunctionsV2Stage_Name "TRIGGER_ROLLBACK"
+
+{-# COMPLETE
+  GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED,
+  GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY,
+  GoogleCloudFunctionsV2Stage_Name_Build,
+  GoogleCloudFunctionsV2Stage_Name_Service,
+  GoogleCloudFunctionsV2Stage_Name_Trigger,
+  GoogleCloudFunctionsV2Stage_Name_SERVICEROLLBACK,
+  GoogleCloudFunctionsV2Stage_Name_TRIGGERROLLBACK,
+  GoogleCloudFunctionsV2Stage_Name
+  #-}
+
+-- | Current state of the Stage
+newtype GoogleCloudFunctionsV2Stage_State = GoogleCloudFunctionsV2Stage_State {fromGoogleCloudFunctionsV2Stage_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. Invalid state.
+pattern GoogleCloudFunctionsV2Stage_State_STATEUNSPECIFIED :: GoogleCloudFunctionsV2Stage_State
+pattern GoogleCloudFunctionsV2Stage_State_STATEUNSPECIFIED = GoogleCloudFunctionsV2Stage_State "STATE_UNSPECIFIED"
+
+-- | Stage has not started.
+pattern GoogleCloudFunctionsV2Stage_State_NOTSTARTED :: GoogleCloudFunctionsV2Stage_State
+pattern GoogleCloudFunctionsV2Stage_State_NOTSTARTED = GoogleCloudFunctionsV2Stage_State "NOT_STARTED"
+
+-- | Stage is in progress.
+pattern GoogleCloudFunctionsV2Stage_State_INPROGRESS :: GoogleCloudFunctionsV2Stage_State
+pattern GoogleCloudFunctionsV2Stage_State_INPROGRESS = GoogleCloudFunctionsV2Stage_State "IN_PROGRESS"
+
+-- | Stage has completed.
+pattern GoogleCloudFunctionsV2Stage_State_Complete :: GoogleCloudFunctionsV2Stage_State
+pattern GoogleCloudFunctionsV2Stage_State_Complete = GoogleCloudFunctionsV2Stage_State "COMPLETE"
+
+{-# COMPLETE
+  GoogleCloudFunctionsV2Stage_State_STATEUNSPECIFIED,
+  GoogleCloudFunctionsV2Stage_State_NOTSTARTED,
+  GoogleCloudFunctionsV2Stage_State_INPROGRESS,
+  GoogleCloudFunctionsV2Stage_State_Complete,
+  GoogleCloudFunctionsV2Stage_State
+  #-}
+
+-- | Severity of the state message.
+newtype GoogleCloudFunctionsV2StateMessage_Severity = GoogleCloudFunctionsV2StateMessage_Severity {fromGoogleCloudFunctionsV2StateMessage_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. Invalid severity.
+pattern GoogleCloudFunctionsV2StateMessage_Severity_SEVERITYUNSPECIFIED :: GoogleCloudFunctionsV2StateMessage_Severity
+pattern GoogleCloudFunctionsV2StateMessage_Severity_SEVERITYUNSPECIFIED = GoogleCloudFunctionsV2StateMessage_Severity "SEVERITY_UNSPECIFIED"
+
+-- | ERROR-level severity.
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Error' :: GoogleCloudFunctionsV2StateMessage_Severity
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Error' = GoogleCloudFunctionsV2StateMessage_Severity "ERROR"
+
+-- | WARNING-level severity.
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Warning :: GoogleCloudFunctionsV2StateMessage_Severity
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Warning = GoogleCloudFunctionsV2StateMessage_Severity "WARNING"
+
+-- | INFO-level severity.
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Info :: GoogleCloudFunctionsV2StateMessage_Severity
+pattern GoogleCloudFunctionsV2StateMessage_Severity_Info = GoogleCloudFunctionsV2StateMessage_Severity "INFO"
+
+{-# COMPLETE
+  GoogleCloudFunctionsV2StateMessage_Severity_SEVERITYUNSPECIFIED,
+  GoogleCloudFunctionsV2StateMessage_Severity_Error',
+  GoogleCloudFunctionsV2StateMessage_Severity_Warning,
+  GoogleCloudFunctionsV2StateMessage_Severity_Info,
+  GoogleCloudFunctionsV2StateMessage_Severity
   #-}
 
 -- | Name of the Stage. This will be unique for each Stage.
@@ -762,6 +966,38 @@ pattern ServiceConfig_IngressSettings_ALLOWINTERNALANDGCLB = ServiceConfig_Ingre
   ServiceConfig_IngressSettings_ALLOWINTERNALONLY,
   ServiceConfig_IngressSettings_ALLOWINTERNALANDGCLB,
   ServiceConfig_IngressSettings
+  #-}
+
+-- | Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.
+newtype ServiceConfig_SecurityLevel = ServiceConfig_SecurityLevel {fromServiceConfig_SecurityLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern ServiceConfig_SecurityLevel_SECURITYLEVELUNSPECIFIED :: ServiceConfig_SecurityLevel
+pattern ServiceConfig_SecurityLevel_SECURITYLEVELUNSPECIFIED = ServiceConfig_SecurityLevel "SECURITY_LEVEL_UNSPECIFIED"
+
+-- | Requests for a URL that match this handler that do not use HTTPS are automatically redirected to the HTTPS URL with the same path. Query parameters are reserved for the redirect.
+pattern ServiceConfig_SecurityLevel_SECUREALWAYS :: ServiceConfig_SecurityLevel
+pattern ServiceConfig_SecurityLevel_SECUREALWAYS = ServiceConfig_SecurityLevel "SECURE_ALWAYS"
+
+-- | Both HTTP and HTTPS requests with URLs that match the handler succeed without redirects. The application can examine the request to determine which protocol was used and respond accordingly.
+pattern ServiceConfig_SecurityLevel_SECUREOPTIONAL :: ServiceConfig_SecurityLevel
+pattern ServiceConfig_SecurityLevel_SECUREOPTIONAL = ServiceConfig_SecurityLevel "SECURE_OPTIONAL"
+
+{-# COMPLETE
+  ServiceConfig_SecurityLevel_SECURITYLEVELUNSPECIFIED,
+  ServiceConfig_SecurityLevel_SECUREALWAYS,
+  ServiceConfig_SecurityLevel_SECUREOPTIONAL,
+  ServiceConfig_SecurityLevel
   #-}
 
 -- | The egress settings for the connector, controlling what traffic is diverted through it.

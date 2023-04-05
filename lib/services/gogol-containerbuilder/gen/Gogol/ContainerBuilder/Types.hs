@@ -37,14 +37,6 @@ module Gogol.ContainerBuilder.Types
     -- ** Xgafv
     Xgafv (..),
 
-    -- ** AddBitbucketServerConnectedRepositoryRequest
-    AddBitbucketServerConnectedRepositoryRequest (..),
-    newAddBitbucketServerConnectedRepositoryRequest,
-
-    -- ** AddBitbucketServerConnectedRepositoryResponse
-    AddBitbucketServerConnectedRepositoryResponse (..),
-    newAddBitbucketServerConnectedRepositoryResponse,
-
     -- ** ApprovalConfig
     ApprovalConfig (..),
     newApprovalConfig,
@@ -83,6 +75,18 @@ module Gogol.ContainerBuilder.Types
     -- ** BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
     BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..),
     newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesRequest
+    BatchCreateGitLabConnectedRepositoriesRequest (..),
+    newBatchCreateGitLabConnectedRepositoriesRequest,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponse
+    BatchCreateGitLabConnectedRepositoriesResponse (..),
+    newBatchCreateGitLabConnectedRepositoriesResponse,
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponseMetadata
+    BatchCreateGitLabConnectedRepositoriesResponseMetadata (..),
+    newBatchCreateGitLabConnectedRepositoriesResponseMetadata,
 
     -- ** BitbucketServerConfig
     BitbucketServerConfig (..),
@@ -138,6 +142,9 @@ module Gogol.ContainerBuilder.Types
     BuildOptions (..),
     newBuildOptions,
 
+    -- ** BuildOptions_DefaultLogsBucketBehavior
+    BuildOptions_DefaultLogsBucketBehavior (..),
+
     -- ** BuildOptions_LogStreamingOption
     BuildOptions_LogStreamingOption (..),
 
@@ -170,6 +177,9 @@ module Gogol.ContainerBuilder.Types
     -- ** BuildTrigger_EventType
     BuildTrigger_EventType (..),
 
+    -- ** BuildTrigger_IncludeBuildLogs
+    BuildTrigger_IncludeBuildLogs (..),
+
     -- ** BuildTrigger_Substitutions
     BuildTrigger_Substitutions (..),
     newBuildTrigger_Substitutions,
@@ -201,6 +211,10 @@ module Gogol.ContainerBuilder.Types
     -- ** CreateGitLabConfigOperationMetadata
     CreateGitLabConfigOperationMetadata (..),
     newCreateGitLabConfigOperationMetadata,
+
+    -- ** CreateGitLabConnectedRepositoryRequest
+    CreateGitLabConnectedRepositoryRequest (..),
+    newCreateGitLabConnectedRepositoryRequest,
 
     -- ** CreateWorkerPoolOperationMetadata
     CreateWorkerPoolOperationMetadata (..),
@@ -256,20 +270,40 @@ module Gogol.ContainerBuilder.Types
     GitHubEventsConfig (..),
     newGitHubEventsConfig,
 
+    -- ** GitLabConfig
+    GitLabConfig (..),
+    newGitLabConfig,
+
+    -- ** GitLabConnectedRepository
+    GitLabConnectedRepository (..),
+    newGitLabConnectedRepository,
+
+    -- ** GitLabEnterpriseConfig
+    GitLabEnterpriseConfig (..),
+    newGitLabEnterpriseConfig,
+
+    -- ** GitLabEventsConfig
+    GitLabEventsConfig (..),
+    newGitLabEventsConfig,
+
+    -- ** GitLabRepository
+    GitLabRepository (..),
+    newGitLabRepository,
+
+    -- ** GitLabRepositoryId
+    GitLabRepositoryId (..),
+    newGitLabRepositoryId,
+
+    -- ** GitLabSecrets
+    GitLabSecrets (..),
+    newGitLabSecrets,
+
     -- ** GitRepoSource
     GitRepoSource (..),
     newGitRepoSource,
 
     -- ** GitRepoSource_RepoType
     GitRepoSource_RepoType (..),
-
-    -- ** GoogleDevtoolsCloudbuildV2OperationMetadata
-    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
-    newGoogleDevtoolsCloudbuildV2OperationMetadata,
-
-    -- ** HTTPDelivery
-    HTTPDelivery (..),
-    newHTTPDelivery,
 
     -- ** Hash
     Hash (..),
@@ -310,6 +344,14 @@ module Gogol.ContainerBuilder.Types
     ListBuildsResponse (..),
     newListBuildsResponse,
 
+    -- ** ListGitLabConfigsResponse
+    ListGitLabConfigsResponse (..),
+    newListGitLabConfigsResponse,
+
+    -- ** ListGitLabRepositoriesResponse
+    ListGitLabRepositoriesResponse (..),
+    newListGitLabRepositoriesResponse,
+
     -- ** ListGithubEnterpriseConfigsResponse
     ListGithubEnterpriseConfigsResponse (..),
     newListGithubEnterpriseConfigsResponse,
@@ -318,40 +360,16 @@ module Gogol.ContainerBuilder.Types
     ListWorkerPoolsResponse (..),
     newListWorkerPoolsResponse,
 
+    -- ** MavenArtifact
+    MavenArtifact (..),
+    newMavenArtifact,
+
     -- ** NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
 
     -- ** NetworkConfig_EgressOption
     NetworkConfig_EgressOption (..),
-
-    -- ** Notification
-    Notification (..),
-    newNotification,
-
-    -- ** Notification_StructDelivery
-    Notification_StructDelivery (..),
-    newNotification_StructDelivery,
-
-    -- ** NotifierConfig
-    NotifierConfig (..),
-    newNotifierConfig,
-
-    -- ** NotifierMetadata
-    NotifierMetadata (..),
-    newNotifierMetadata,
-
-    -- ** NotifierSecret
-    NotifierSecret (..),
-    newNotifierSecret,
-
-    -- ** NotifierSecretRef
-    NotifierSecretRef (..),
-    newNotifierSecretRef,
-
-    -- ** NotifierSpec
-    NotifierSpec (..),
-    newNotifierSpec,
 
     -- ** Operation
     Operation (..),
@@ -399,6 +417,10 @@ module Gogol.ContainerBuilder.Types
     PushFilter (..),
     newPushFilter,
 
+    -- ** PythonPackage
+    PythonPackage (..),
+    newPythonPackage,
+
     -- ** ReceiveTriggerWebhookResponse
     ReceiveTriggerWebhookResponse (..),
     newReceiveTriggerWebhookResponse,
@@ -407,6 +429,10 @@ module Gogol.ContainerBuilder.Types
     RemoveBitbucketServerConnectedRepositoryRequest (..),
     newRemoveBitbucketServerConnectedRepositoryRequest,
 
+    -- ** RemoveGitLabConnectedRepositoryRequest
+    RemoveGitLabConnectedRepositoryRequest (..),
+    newRemoveGitLabConnectedRepositoryRequest,
+
     -- ** RepoSource
     RepoSource (..),
     newRepoSource,
@@ -414,6 +440,13 @@ module Gogol.ContainerBuilder.Types
     -- ** RepoSource_Substitutions
     RepoSource_Substitutions (..),
     newRepoSource_Substitutions,
+
+    -- ** RepositoryEventConfig
+    RepositoryEventConfig (..),
+    newRepositoryEventConfig,
+
+    -- ** RepositoryEventConfig_RepositoryType
+    RepositoryEventConfig_RepositoryType (..),
 
     -- ** Results
     Results (..),
@@ -426,14 +459,6 @@ module Gogol.ContainerBuilder.Types
     -- ** RunBuildTriggerRequest
     RunBuildTriggerRequest (..),
     newRunBuildTriggerRequest,
-
-    -- ** RunWorkflowCustomOperationMetadata
-    RunWorkflowCustomOperationMetadata (..),
-    newRunWorkflowCustomOperationMetadata,
-
-    -- ** SMTPDelivery
-    SMTPDelivery (..),
-    newSMTPDelivery,
 
     -- ** Secret
     Secret (..),
@@ -451,9 +476,9 @@ module Gogol.ContainerBuilder.Types
     Secrets (..),
     newSecrets,
 
-    -- ** SlackDelivery
-    SlackDelivery (..),
-    newSlackDelivery,
+    -- ** ServiceDirectoryConfig
+    ServiceDirectoryConfig (..),
+    newServiceDirectoryConfig,
 
     -- ** Source
     Source (..),
@@ -502,6 +527,14 @@ module Gogol.ContainerBuilder.Types
     -- ** UpdateWorkerPoolOperationMetadata
     UpdateWorkerPoolOperationMetadata (..),
     newUpdateWorkerPoolOperationMetadata,
+
+    -- ** UploadedMavenArtifact
+    UploadedMavenArtifact (..),
+    newUploadedMavenArtifact,
+
+    -- ** UploadedPythonPackage
+    UploadedPythonPackage (..),
+    newUploadedPythonPackage,
 
     -- ** Volume
     Volume (..),

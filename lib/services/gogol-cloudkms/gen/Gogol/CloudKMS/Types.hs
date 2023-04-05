@@ -136,9 +136,16 @@ module Gogol.CloudKMS.Types
     Digest (..),
     newDigest,
 
+    -- ** EkmConfig
+    EkmConfig (..),
+    newEkmConfig,
+
     -- ** EkmConnection
     EkmConnection (..),
     newEkmConnection,
+
+    -- ** EkmConnection_KeyManagementMode
+    EkmConnection_KeyManagementMode (..),
 
     -- ** EncryptRequest
     EncryptRequest (..),

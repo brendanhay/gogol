@@ -1156,7 +1156,7 @@ pattern PositionedObjectPositioning_Layout_BREAKLEFT = PositionedObjectPositioni
 pattern PositionedObjectPositioning_Layout_BREAKRIGHT :: PositionedObjectPositioning_Layout
 pattern PositionedObjectPositioning_Layout_BREAKRIGHT = PositionedObjectPositioning_Layout "BREAK_RIGHT"
 
--- | Breaks text such that there is no text on the left or right of the positioned object.
+-- | Breaks text such that there\'s no text on the left or right of the positioned object.
 pattern PositionedObjectPositioning_Layout_BREAKLEFTRIGHT :: PositionedObjectPositioning_Layout
 pattern PositionedObjectPositioning_Layout_BREAKLEFTRIGHT = PositionedObjectPositioning_Layout "BREAK_LEFT_RIGHT"
 
@@ -1196,7 +1196,7 @@ newtype ReplaceImageRequest_ImageReplaceMethod = ReplaceImageRequest_ImageReplac
 pattern ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED :: ReplaceImageRequest_ImageReplaceMethod
 pattern ReplaceImageRequest_ImageReplaceMethod_IMAGEREPLACEMETHODUNSPECIFIED = ReplaceImageRequest_ImageReplaceMethod "IMAGE_REPLACE_METHOD_UNSPECIFIED"
 
--- | Scales and centers the image to fill the bounds of the original image. The image may be cropped in order to fill the original image\'s bounds. The rendered size of the image will be the same as that of the original image.
+-- | Scales and centers the image to fill the bounds of the original image. The image may be cropped in order to fill the original image\'s bounds. The rendered size of the image will be the same as the original image.
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP :: ReplaceImageRequest_ImageReplaceMethod
 pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP = ReplaceImageRequest_ImageReplaceMethod "CENTER_CROP"
 
@@ -1206,7 +1206,7 @@ pattern ReplaceImageRequest_ImageReplaceMethod_CENTERCROP = ReplaceImageRequest_
   ReplaceImageRequest_ImageReplaceMethod
   #-}
 
--- | The style of column separators. This style can be set even when there is one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+-- | The style of column separators. This style can be set even when there\'s one column in the section. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
 newtype SectionStyle_ColumnSeparatorStyle = SectionStyle_ColumnSeparatorStyle {fromSectionStyle_ColumnSeparatorStyle :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1435,7 +1435,7 @@ newtype TableColumnProperties_WidthType = TableColumnProperties_WidthType {fromT
 pattern TableColumnProperties_WidthType_WIDTHTYPEUNSPECIFIED :: TableColumnProperties_WidthType
 pattern TableColumnProperties_WidthType_WIDTHTYPEUNSPECIFIED = TableColumnProperties_WidthType "WIDTH_TYPE_UNSPECIFIED"
 
--- | The column width is evenly distributed among the other evenly distrubted columns. The width of the column is automatically determined and will have an equal portion of the width remaining for the table after accounting for all columns with specified widths.
+-- | The column width is evenly distributed among the other evenly distributed columns. The width of the column is automatically determined and will have an equal portion of the width remaining for the table after accounting for all columns with specified widths.
 pattern TableColumnProperties_WidthType_EVENLYDISTRIBUTED :: TableColumnProperties_WidthType
 pattern TableColumnProperties_WidthType_EVENLYDISTRIBUTED = TableColumnProperties_WidthType "EVENLY_DISTRIBUTED"
 
@@ -1450,7 +1450,7 @@ pattern TableColumnProperties_WidthType_FIXEDWIDTH = TableColumnProperties_Width
   TableColumnProperties_WidthType
   #-}
 
--- | The text\'s vertical offset from its normal position. Text with @SUPERSCRIPT@ or @SUBSCRIPT@ baseline offsets is automatically rendered in a smaller font size, computed based on the @font_size@ field. The @font_size@ itself is not affected by changes in this field.
+-- | The text\'s vertical offset from its normal position. Text with @SUPERSCRIPT@ or @SUBSCRIPT@ baseline offsets is automatically rendered in a smaller font size, computed based on the @font_size@ field. Changes in this field don\'t affect the @font_size@.
 newtype TextStyle_BaselineOffset = TextStyle_BaselineOffset {fromTextStyle_BaselineOffset :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

@@ -28,7 +28,7 @@
 --
 -- Gets a comment by id.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API v3 Reference> for @blogger.comments.get@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.get@.
 module Gogol.Blogger.Comments.Get
   ( -- * Resource
     BloggerCommentsGetResource,

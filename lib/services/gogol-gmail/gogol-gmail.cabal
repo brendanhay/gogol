@@ -76,6 +76,17 @@ library
     Gogol.Gmail.Users.Messages.Send
     Gogol.Gmail.Users.Messages.Trash
     Gogol.Gmail.Users.Messages.Untrash
+    Gogol.Gmail.Users.Settings.Cse.Identities.Create
+    Gogol.Gmail.Users.Settings.Cse.Identities.Delete
+    Gogol.Gmail.Users.Settings.Cse.Identities.Get
+    Gogol.Gmail.Users.Settings.Cse.Identities.List
+    Gogol.Gmail.Users.Settings.Cse.Identities.Patch
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.Create
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.Disable
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.Enable
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.Get
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.List
+    Gogol.Gmail.Users.Settings.Cse.Keypairs.Obliterate
     Gogol.Gmail.Users.Settings.Delegates.Create
     Gogol.Gmail.Users.Settings.Delegates.Delete
     Gogol.Gmail.Users.Settings.Delegates.Get
@@ -124,5 +135,5 @@ library
     Gogol.Gmail.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

@@ -220,7 +220,7 @@ newtype ProjectsGroupStatsListAlignment = ProjectsGroupStatsListAlignment {fromP
 pattern ProjectsGroupStatsListAlignment_ERRORCOUNTALIGNMENTUNSPECIFIED :: ProjectsGroupStatsListAlignment
 pattern ProjectsGroupStatsListAlignment_ERRORCOUNTALIGNMENTUNSPECIFIED = ProjectsGroupStatsListAlignment "ERROR_COUNT_ALIGNMENT_UNSPECIFIED"
 
--- | The time periods shall be consecutive, have width equal to the requested duration, and be aligned at the @alignment_time@ provided in the request. The @alignment_time@ does not have to be inside the query period but even if it is outside, only time periods are returned which overlap with the query period. A rounded alignment will typically result in a different size of the first or the last time period.
+-- | The time periods shall be consecutive, have width equal to the requested duration, and be aligned at the alignment/time provided in the request. The alignment/time does not have to be inside the query period but even if it is outside, only time periods are returned which overlap with the query period. A rounded alignment will typically result in a different size of the first or the last time period.
 pattern ProjectsGroupStatsListAlignment_ALIGNMENTEQUALROUNDED :: ProjectsGroupStatsListAlignment
 pattern ProjectsGroupStatsListAlignment_ALIGNMENTEQUALROUNDED = ProjectsGroupStatsListAlignment "ALIGNMENT_EQUAL_ROUNDED"
 

@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List Services.
+-- Lists Services.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.list@.
 module Gogol.Run.Projects.Locations.Services.List
@@ -61,7 +61,7 @@ type RunProjectsLocationsServicesListResource =
               '[Core.JSON]
               GoogleCloudRunV2ListServicesResponse
 
--- | List Services.
+-- | Lists Services.
 --
 -- /See:/ 'newRunProjectsLocationsServicesList' smart constructor.
 data RunProjectsLocationsServicesList = RunProjectsLocationsServicesList
@@ -75,7 +75,7 @@ data RunProjectsLocationsServicesList = RunProjectsLocationsServicesList
     pageSize :: (Core.Maybe Core.Int32),
     -- | A page token received from a previous call to ListServices. All other parameters must match.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The location and project to list resources on. Location must be a valid GCP region, and may not be the \"-\" wildcard. Format: projects\/{projectnumber}\/locations\/{location}
+    -- | Required. The location and project to list resources on. Location must be a valid Google Cloud region, and cannot be the \"-\" wildcard. Format: projects\/{project}\/locations\/{location}, where {project} can be project id or number.
     parent :: Core.Text,
     -- | If true, returns deleted (but unexpired) resources along with active ones.
     showDeleted :: (Core.Maybe Core.Bool),
@@ -88,7 +88,7 @@ data RunProjectsLocationsServicesList = RunProjectsLocationsServicesList
 
 -- | Creates a value of 'RunProjectsLocationsServicesList' with the minimum fields required to make a request.
 newRunProjectsLocationsServicesList ::
-  -- |  Required. The location and project to list resources on. Location must be a valid GCP region, and may not be the \"-\" wildcard. Format: projects\/{projectnumber}\/locations\/{location} See 'parent'.
+  -- |  Required. The location and project to list resources on. Location must be a valid Google Cloud region, and cannot be the \"-\" wildcard. Format: projects\/{project}\/locations\/{location}, where {project} can be project id or number. See 'parent'.
   Core.Text ->
   RunProjectsLocationsServicesList
 newRunProjectsLocationsServicesList parent =

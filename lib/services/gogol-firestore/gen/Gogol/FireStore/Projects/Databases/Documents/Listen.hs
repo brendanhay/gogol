@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Listens to changes.
+-- Listens to changes. This method is only available via gRPC or WebChannel (not REST).
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.documents.listen@.
 module Gogol.FireStore.Projects.Databases.Documents.Listen
@@ -57,7 +57,7 @@ type FireStoreProjectsDatabasesDocumentsListenResource =
     Core.:> Core.ReqBody '[Core.JSON] ListenRequest
     Core.:> Core.Post '[Core.JSON] ListenResponse
 
--- | Listens to changes.
+-- | Listens to changes. This method is only available via gRPC or WebChannel (not REST).
 --
 -- /See:/ 'newFireStoreProjectsDatabasesDocumentsListen' smart constructor.
 data FireStoreProjectsDatabasesDocumentsListen = FireStoreProjectsDatabasesDocumentsListen

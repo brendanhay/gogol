@@ -162,7 +162,7 @@ instance Core.ToJSON Arg where
           ]
       )
 
--- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for @Empty@ is empty JSON object @{}@.
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
 data Empty = Empty
@@ -553,7 +553,7 @@ data Release = Release
     createTime :: (Core.Maybe Core.DateTime),
     -- | Required. Format: @projects\/{project_id}\/releases\/{release_id}@
     name :: (Core.Maybe Core.Text),
-    -- | Required. Name of the @Ruleset@ referred to by this @Release@. The @Ruleset@ must exist the @Release@ to be created.
+    -- | Required. Name of the @Ruleset@ referred to by this @Release@. The @Ruleset@ must exist for the @Release@ to be created.
     rulesetName :: (Core.Maybe Core.Text),
     -- | Output only. Time the release was updated.
     updateTime :: (Core.Maybe Core.DateTime)

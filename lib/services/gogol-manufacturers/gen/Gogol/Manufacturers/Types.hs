@@ -45,6 +45,10 @@ module Gogol.Manufacturers.Types
     Capacity (..),
     newCapacity,
 
+    -- ** Certification
+    Certification (..),
+    newCertification,
+
     -- ** Count
     Count (..),
     newCount,
@@ -63,6 +67,14 @@ module Gogol.Manufacturers.Types
     -- ** FeatureDescription
     FeatureDescription (..),
     newFeatureDescription,
+
+    -- ** FloatUnit
+    FloatUnit (..),
+    newFloatUnit,
+
+    -- ** Grocery
+    Grocery (..),
+    newGrocery,
 
     -- ** Image
     Image (..),
@@ -84,9 +96,17 @@ module Gogol.Manufacturers.Types
     -- ** Issue_Severity
     Issue_Severity (..),
 
+    -- ** ListProductCertificationsResponse
+    ListProductCertificationsResponse (..),
+    newListProductCertificationsResponse,
+
     -- ** ListProductsResponse
     ListProductsResponse (..),
     newListProductsResponse,
+
+    -- ** Nutrition
+    Nutrition (..),
+    newNutrition,
 
     -- ** Price
     Price (..),
@@ -96,9 +116,17 @@ module Gogol.Manufacturers.Types
     Product (..),
     newProduct,
 
+    -- ** ProductCertification
+    ProductCertification (..),
+    newProductCertification,
+
     -- ** ProductDetail
     ProductDetail (..),
     newProductDetail,
+
+    -- ** VoluntaryNutritionFact
+    VoluntaryNutritionFact (..),
+    newVoluntaryNutritionFact,
 
     -- ** AccountsProductsGetInclude
     AccountsProductsGetInclude (..),

@@ -82,6 +82,22 @@ module Gogol.CloudFunctions.Internal.Product
     GenerateUploadUrlResponse (..),
     newGenerateUploadUrlResponse,
 
+    -- * GoogleCloudFunctionsV2OperationMetadata
+    GoogleCloudFunctionsV2OperationMetadata (..),
+    newGoogleCloudFunctionsV2OperationMetadata,
+
+    -- * GoogleCloudFunctionsV2OperationMetadata_RequestResource
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource (..),
+    newGoogleCloudFunctionsV2OperationMetadata_RequestResource,
+
+    -- * GoogleCloudFunctionsV2Stage
+    GoogleCloudFunctionsV2Stage (..),
+    newGoogleCloudFunctionsV2Stage,
+
+    -- * GoogleCloudFunctionsV2StateMessage
+    GoogleCloudFunctionsV2StateMessage (..),
+    newGoogleCloudFunctionsV2StateMessage,
+
     -- * GoogleCloudFunctionsV2alphaOperationMetadata
     GoogleCloudFunctionsV2alphaOperationMetadata (..),
     newGoogleCloudFunctionsV2alphaOperationMetadata,
@@ -174,6 +190,18 @@ module Gogol.CloudFunctions.Internal.Product
     Runtime (..),
     newRuntime,
 
+    -- * SecretEnvVar
+    SecretEnvVar (..),
+    newSecretEnvVar,
+
+    -- * SecretVersion
+    SecretVersion (..),
+    newSecretVersion,
+
+    -- * SecretVolume
+    SecretVolume (..),
+    newSecretVolume,
+
     -- * ServiceConfig
     ServiceConfig (..),
     newServiceConfig,
@@ -220,7 +248,7 @@ import Gogol.CloudFunctions.Internal.Sum
 import qualified Gogol.Prelude as Core
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
--- ADMIN/READ logging. It also exempts jose\@example.com from DATA/READ logging, and aliya\@example.com from DATA/WRITE logging.
+-- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
 -- /See:/ 'newAuditConfig' smart constructor.
 data AuditConfig = AuditConfig
@@ -300,8 +328,9 @@ instance Core.ToJSON AuditLogConfig where
 data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
-    -- | Specifies the principals requesting access for a Cloud Platform resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains
-    -- the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@.
+    -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
+    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
     members :: (Core.Maybe [Core.Text]),
     -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
     role' :: (Core.Maybe Core.Text)
@@ -345,7 +374,11 @@ instance Core.ToJSON Binding where
 data BuildConfig = BuildConfig
   { -- | Output only. The Cloud Build name of the latest successful deployment of the function.
     build :: (Core.Maybe Core.Text),
-    -- | Optional. User managed repository created in Artifact Registry optionally with a customer managed encryption key. This is the repository to which the function docker image will be pushed after it is built by Cloud Build. If unspecified, GCF will create and use a repository named \'gcf-artifacts\' for every deployed region. It must match the pattern @projects\/{project}\/locations\/{location}\/repositories\/{repository}@. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be \'DOCKER\'.
+    -- | Specifies one of the Google provided buildpack stacks.
+    buildpackStack :: (Core.Maybe Core.Text),
+    -- | Optional. Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If @docker_repository@ field is specified, this field will be automatically set as @ARTIFACT_REGISTRY@. If unspecified, it currently defaults to @CONTAINER_REGISTRY@. This field may be overridden by the backend for eligible deployments.
+    dockerRegistry :: (Core.Maybe BuildConfig_DockerRegistry),
+    -- | User managed repository created in Artifact Registry optionally with a customer managed encryption key. This is the repository to which the function docker image will be pushed after it is built by Cloud Build. If unspecified, GCF will create and use a repository named \'gcf-artifacts\' for every deployed region. It must match the pattern @projects\/{project}\/locations\/{location}\/repositories\/{repository}@. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be \'DOCKER\'.
     dockerRepository :: (Core.Maybe Core.Text),
     -- | The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named \"function\". For Node.js this is name of a function exported by the module specified in @source_location@.
     entryPoint :: (Core.Maybe Core.Text),
@@ -368,6 +401,8 @@ newBuildConfig ::
 newBuildConfig =
   BuildConfig
     { build = Core.Nothing,
+      buildpackStack = Core.Nothing,
+      dockerRegistry = Core.Nothing,
       dockerRepository = Core.Nothing,
       entryPoint = Core.Nothing,
       environmentVariables = Core.Nothing,
@@ -384,6 +419,8 @@ instance Core.FromJSON BuildConfig where
       ( \o ->
           BuildConfig
             Core.<$> (o Core..:? "build")
+            Core.<*> (o Core..:? "buildpackStack")
+            Core.<*> (o Core..:? "dockerRegistry")
             Core.<*> (o Core..:? "dockerRepository")
             Core.<*> (o Core..:? "entryPoint")
             Core.<*> (o Core..:? "environmentVariables")
@@ -398,6 +435,8 @@ instance Core.ToJSON BuildConfig where
     Core.object
       ( Core.catMaybes
           [ ("build" Core..=) Core.<$> build,
+            ("buildpackStack" Core..=) Core.<$> buildpackStack,
+            ("dockerRegistry" Core..=) Core.<$> dockerRegistry,
             ("dockerRepository" Core..=)
               Core.<$> dockerRepository,
             ("entryPoint" Core..=) Core.<$> entryPoint,
@@ -450,6 +489,8 @@ instance Core.ToJSON BuildConfig_EnvironmentVariables where
 data EventFilter = EventFilter
   { -- | Required. The name of a CloudEvents attribute.
     attribute :: (Core.Maybe Core.Text),
+    -- | Optional. The operator used for matching the events with the value of the filter. If not specified, only events that have an exact key-value pair specified in the filter are matched. The only allowed value is @match-path-pattern@.
+    operator :: (Core.Maybe Core.Text),
     -- | Required. The value for the attribute.
     value :: (Core.Maybe Core.Text)
   }
@@ -458,7 +499,12 @@ data EventFilter = EventFilter
 -- | Creates a value of 'EventFilter' with the minimum fields required to make a request.
 newEventFilter ::
   EventFilter
-newEventFilter = EventFilter {attribute = Core.Nothing, value = Core.Nothing}
+newEventFilter =
+  EventFilter
+    { attribute = Core.Nothing,
+      operator = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON EventFilter where
   parseJSON =
@@ -467,6 +513,7 @@ instance Core.FromJSON EventFilter where
       ( \o ->
           EventFilter
             Core.<$> (o Core..:? "attribute")
+            Core.<*> (o Core..:? "operator")
             Core.<*> (o Core..:? "value")
       )
 
@@ -475,6 +522,7 @@ instance Core.ToJSON EventFilter where
     Core.object
       ( Core.catMaybes
           [ ("attribute" Core..=) Core.<$> attribute,
+            ("operator" Core..=) Core.<$> operator,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -483,7 +531,9 @@ instance Core.ToJSON EventFilter where
 --
 -- /See:/ 'newEventTrigger' smart constructor.
 data EventTrigger = EventTrigger
-  { -- | Criteria used to filter events.
+  { -- | Optional. The name of the channel associated with the trigger in @projects\/{project}\/locations\/{location}\/channels\/{channel}@ format. You must provide a channel to receive events from Eventarc SaaS partners.
+    channel :: (Core.Maybe Core.Text),
+    -- | Criteria used to filter events.
     eventFilters :: (Core.Maybe [EventFilter]),
     -- | Required. The type of event to observe. For example: @google.cloud.audit.log.v1.written@ or @google.cloud.pubsub.topic.v1.messagePublished@.
     eventType :: (Core.Maybe Core.Text),
@@ -505,7 +555,8 @@ newEventTrigger ::
   EventTrigger
 newEventTrigger =
   EventTrigger
-    { eventFilters = Core.Nothing,
+    { channel = Core.Nothing,
+      eventFilters = Core.Nothing,
       eventType = Core.Nothing,
       pubsubTopic = Core.Nothing,
       retryPolicy = Core.Nothing,
@@ -520,7 +571,8 @@ instance Core.FromJSON EventTrigger where
       "EventTrigger"
       ( \o ->
           EventTrigger
-            Core.<$> (o Core..:? "eventFilters")
+            Core.<$> (o Core..:? "channel")
+            Core.<*> (o Core..:? "eventFilters")
             Core.<*> (o Core..:? "eventType")
             Core.<*> (o Core..:? "pubsubTopic")
             Core.<*> (o Core..:? "retryPolicy")
@@ -533,7 +585,8 @@ instance Core.ToJSON EventTrigger where
   toJSON EventTrigger {..} =
     Core.object
       ( Core.catMaybes
-          [ ("eventFilters" Core..=) Core.<$> eventFilters,
+          [ ("channel" Core..=) Core.<$> channel,
+            ("eventFilters" Core..=) Core.<$> eventFilters,
             ("eventType" Core..=) Core.<$> eventType,
             ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
             ("retryPolicy" Core..=) Core.<$> retryPolicy,
@@ -594,7 +647,7 @@ instance Core.ToJSON Expr where
           ]
       )
 
--- | Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
+-- | Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.
 --
 -- /See:/ 'newFunction' smart constructor.
 data Function = Function
@@ -602,10 +655,12 @@ data Function = Function
     buildConfig :: (Core.Maybe BuildConfig),
     -- | User-provided description of a function.
     description :: (Core.Maybe Core.Text),
-    -- | Describe whether the function is gen1 or gen2.
+    -- | Describe whether the function is 1st Gen or 2nd Gen.
     environment :: (Core.Maybe Function_Environment),
     -- | An Eventarc trigger managed by Google Cloud Functions that fires events in response to a condition in another service.
     eventTrigger :: (Core.Maybe EventTrigger),
+    -- | Resource name of a KMS crypto key (managed by the user) used to encrypt\/decrypt function resources. It must match the pattern @projects\/{project}\/locations\/{location}\/keyRings\/{key_ring}\/cryptoKeys\/{crypto_key}@.
+    kmsKeyName :: (Core.Maybe Core.Text),
     -- | Labels associated with this Cloud Function.
     labels :: (Core.Maybe Function_Labels),
     -- | A user-defined name of the function. Function names must be unique globally and match pattern @projects\/*\/locations\/*\/functions\/*@
@@ -615,7 +670,7 @@ data Function = Function
     -- | Output only. State of the function.
     state :: (Core.Maybe Function_State),
     -- | Output only. State Messages for this Cloud Function.
-    stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2betaStateMessage]),
+    stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2StateMessage]),
     -- | Output only. The last update timestamp of a Cloud Function.
     updateTime :: (Core.Maybe Core.DateTime)
   }
@@ -630,6 +685,7 @@ newFunction =
       description = Core.Nothing,
       environment = Core.Nothing,
       eventTrigger = Core.Nothing,
+      kmsKeyName = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
       serviceConfig = Core.Nothing,
@@ -648,6 +704,7 @@ instance Core.FromJSON Function where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "eventTrigger")
+            Core.<*> (o Core..:? "kmsKeyName")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceConfig")
@@ -664,6 +721,7 @@ instance Core.ToJSON Function where
             ("description" Core..=) Core.<$> description,
             ("environment" Core..=) Core.<$> environment,
             ("eventTrigger" Core..=) Core.<$> eventTrigger,
+            ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("serviceConfig" Core..=) Core.<$> serviceConfig,
@@ -754,22 +812,33 @@ instance Core.ToJSON GenerateDownloadUrlResponse where
 -- | Request of @GenerateSourceUploadUrl@ method.
 --
 -- /See:/ 'newGenerateUploadUrlRequest' smart constructor.
-data GenerateUploadUrlRequest = GenerateUploadUrlRequest
+newtype GenerateUploadUrlRequest = GenerateUploadUrlRequest
+  { -- | Resource name of a KMS crypto key (managed by the user) used to encrypt\/decrypt function source code objects in intermediate Cloud Storage buckets. When you generate an upload url and upload your source code, it gets copied to an intermediate Cloud Storage bucket. The source code is then copied to a versioned directory in the sources bucket in the consumer project during the function deployment. It must match the pattern @projects\/{project}\/locations\/{location}\/keyRings\/{key_ring}\/cryptoKeys\/{crypto_key}@. The Google Cloud Functions service account (service-{project_number}\@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role \'Cloud KMS CryptoKey Encrypter\/Decrypter (roles\/cloudkms.cryptoKeyEncrypterDecrypter)\' on the Key\/KeyRing\/Project\/Organization (least access preferred).
+    kmsKeyName :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GenerateUploadUrlRequest' with the minimum fields required to make a request.
 newGenerateUploadUrlRequest ::
   GenerateUploadUrlRequest
-newGenerateUploadUrlRequest = GenerateUploadUrlRequest
+newGenerateUploadUrlRequest =
+  GenerateUploadUrlRequest {kmsKeyName = Core.Nothing}
 
 instance Core.FromJSON GenerateUploadUrlRequest where
   parseJSON =
     Core.withObject
       "GenerateUploadUrlRequest"
-      (\o -> Core.pure GenerateUploadUrlRequest)
+      ( \o ->
+          GenerateUploadUrlRequest
+            Core.<$> (o Core..:? "kmsKeyName")
+      )
 
 instance Core.ToJSON GenerateUploadUrlRequest where
-  toJSON = Core.const Core.emptyObject
+  toJSON GenerateUploadUrlRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("kmsKeyName" Core..=) Core.<$> kmsKeyName]
+      )
 
 -- | Response of @GenerateSourceUploadUrl@ method.
 --
@@ -807,6 +876,237 @@ instance Core.ToJSON GenerateUploadUrlResponse where
       ( Core.catMaybes
           [ ("storageSource" Core..=) Core.<$> storageSource,
             ("uploadUrl" Core..=) Core.<$> uploadUrl
+          ]
+      )
+
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleCloudFunctionsV2OperationMetadata' smart constructor.
+data GoogleCloudFunctionsV2OperationMetadata = GoogleCloudFunctionsV2OperationMetadata
+  { -- | API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    cancelRequested :: (Core.Maybe Core.Bool),
+    -- | The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | The original request that started the operation.
+    requestResource ::
+      ( Core.Maybe
+          GoogleCloudFunctionsV2OperationMetadata_RequestResource
+      ),
+    -- | Mechanism for reporting in-progress stages
+    stages :: (Core.Maybe [GoogleCloudFunctionsV2Stage]),
+    -- | Human-readable status of the operation, if any.
+    statusDetail :: (Core.Maybe Core.Text),
+    -- | Server-defined resource path for the target of the operation.
+    target :: (Core.Maybe Core.Text),
+    -- | Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudFunctionsV2OperationMetadata' with the minimum fields required to make a request.
+newGoogleCloudFunctionsV2OperationMetadata ::
+  GoogleCloudFunctionsV2OperationMetadata
+newGoogleCloudFunctionsV2OperationMetadata =
+  GoogleCloudFunctionsV2OperationMetadata
+    { apiVersion = Core.Nothing,
+      cancelRequested = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      requestResource = Core.Nothing,
+      stages = Core.Nothing,
+      statusDetail = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudFunctionsV2OperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudFunctionsV2OperationMetadata"
+      ( \o ->
+          GoogleCloudFunctionsV2OperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "cancelRequested")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "requestResource")
+            Core.<*> (o Core..:? "stages")
+            Core.<*> (o Core..:? "statusDetail")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudFunctionsV2OperationMetadata
+  where
+  toJSON GoogleCloudFunctionsV2OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("cancelRequested" Core..=) Core.<$> cancelRequested,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("requestResource" Core..=) Core.<$> requestResource,
+            ("stages" Core..=) Core.<$> stages,
+            ("statusDetail" Core..=) Core.<$> statusDetail,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
+
+-- | The original request that started the operation.
+--
+-- /See:/ 'newGoogleCloudFunctionsV2OperationMetadata_RequestResource' smart constructor.
+newtype GoogleCloudFunctionsV2OperationMetadata_RequestResource = GoogleCloudFunctionsV2OperationMetadata_RequestResource
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudFunctionsV2OperationMetadata_RequestResource' with the minimum fields required to make a request.
+newGoogleCloudFunctionsV2OperationMetadata_RequestResource ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  GoogleCloudFunctionsV2OperationMetadata_RequestResource
+newGoogleCloudFunctionsV2OperationMetadata_RequestResource additional =
+  GoogleCloudFunctionsV2OperationMetadata_RequestResource
+    { additional = additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudFunctionsV2OperationMetadata_RequestResource"
+      ( \o ->
+          GoogleCloudFunctionsV2OperationMetadata_RequestResource
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource
+  where
+  toJSON
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource {..} =
+      Core.toJSON additional
+
+-- | Each Stage of the deployment process
+--
+-- /See:/ 'newGoogleCloudFunctionsV2Stage' smart constructor.
+data GoogleCloudFunctionsV2Stage = GoogleCloudFunctionsV2Stage
+  { -- | Message describing the Stage
+    message :: (Core.Maybe Core.Text),
+    -- | Name of the Stage. This will be unique for each Stage.
+    name :: (Core.Maybe GoogleCloudFunctionsV2Stage_Name),
+    -- | Resource of the Stage
+    resource :: (Core.Maybe Core.Text),
+    -- | Link to the current Stage resource
+    resourceUri :: (Core.Maybe Core.Text),
+    -- | Current state of the Stage
+    state :: (Core.Maybe GoogleCloudFunctionsV2Stage_State),
+    -- | State messages from the current Stage.
+    stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2StateMessage])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudFunctionsV2Stage' with the minimum fields required to make a request.
+newGoogleCloudFunctionsV2Stage ::
+  GoogleCloudFunctionsV2Stage
+newGoogleCloudFunctionsV2Stage =
+  GoogleCloudFunctionsV2Stage
+    { message = Core.Nothing,
+      name = Core.Nothing,
+      resource = Core.Nothing,
+      resourceUri = Core.Nothing,
+      state = Core.Nothing,
+      stateMessages = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudFunctionsV2Stage where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudFunctionsV2Stage"
+      ( \o ->
+          GoogleCloudFunctionsV2Stage
+            Core.<$> (o Core..:? "message")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "resource")
+            Core.<*> (o Core..:? "resourceUri")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "stateMessages")
+      )
+
+instance Core.ToJSON GoogleCloudFunctionsV2Stage where
+  toJSON GoogleCloudFunctionsV2Stage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("message" Core..=) Core.<$> message,
+            ("name" Core..=) Core.<$> name,
+            ("resource" Core..=) Core.<$> resource,
+            ("resourceUri" Core..=) Core.<$> resourceUri,
+            ("state" Core..=) Core.<$> state,
+            ("stateMessages" Core..=) Core.<$> stateMessages
+          ]
+      )
+
+-- | Informational messages about the state of the Cloud Function or Operation.
+--
+-- /See:/ 'newGoogleCloudFunctionsV2StateMessage' smart constructor.
+data GoogleCloudFunctionsV2StateMessage = GoogleCloudFunctionsV2StateMessage
+  { -- | The message.
+    message :: (Core.Maybe Core.Text),
+    -- | Severity of the state message.
+    severity :: (Core.Maybe GoogleCloudFunctionsV2StateMessage_Severity),
+    -- | One-word CamelCase type of the state message.
+    type' :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudFunctionsV2StateMessage' with the minimum fields required to make a request.
+newGoogleCloudFunctionsV2StateMessage ::
+  GoogleCloudFunctionsV2StateMessage
+newGoogleCloudFunctionsV2StateMessage =
+  GoogleCloudFunctionsV2StateMessage
+    { message = Core.Nothing,
+      severity = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudFunctionsV2StateMessage
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudFunctionsV2StateMessage"
+      ( \o ->
+          GoogleCloudFunctionsV2StateMessage
+            Core.<$> (o Core..:? "message")
+            Core.<*> (o Core..:? "severity")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudFunctionsV2StateMessage
+  where
+  toJSON GoogleCloudFunctionsV2StateMessage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("message" Core..=) Core.<$> message,
+            ("severity" Core..=) Core.<$> severity,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
@@ -1919,12 +2219,146 @@ instance Core.ToJSON Runtime where
           ]
       )
 
--- | Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).
+-- | Configuration for a secret environment variable. It has the information necessary to fetch the secret value from secret manager and expose it as an environment variable.
+--
+-- /See:/ 'newSecretEnvVar' smart constructor.
+data SecretEnvVar = SecretEnvVar
+  { -- | Name of the environment variable.
+    key :: (Core.Maybe Core.Text),
+    -- | Project identifier (preferably project number but can also be the project ID) of the project that contains the secret. If not set, it is assumed that the secret is in the same project as the function.
+    projectId :: (Core.Maybe Core.Text),
+    -- | Name of the secret in secret manager (not the full resource name).
+    secret :: (Core.Maybe Core.Text),
+    -- | Version of the secret (version number or the string \'latest\'). It is recommended to use a numeric version for secret environment variables as any updates to the secret value is not reflected until new instances start.
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SecretEnvVar' with the minimum fields required to make a request.
+newSecretEnvVar ::
+  SecretEnvVar
+newSecretEnvVar =
+  SecretEnvVar
+    { key = Core.Nothing,
+      projectId = Core.Nothing,
+      secret = Core.Nothing,
+      version = Core.Nothing
+    }
+
+instance Core.FromJSON SecretEnvVar where
+  parseJSON =
+    Core.withObject
+      "SecretEnvVar"
+      ( \o ->
+          SecretEnvVar
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "secret")
+            Core.<*> (o Core..:? "version")
+      )
+
+instance Core.ToJSON SecretEnvVar where
+  toJSON SecretEnvVar {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("key" Core..=) Core.<$> key,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("secret" Core..=) Core.<$> secret,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | Configuration for a single version.
+--
+-- /See:/ 'newSecretVersion' smart constructor.
+data SecretVersion = SecretVersion
+  { -- | Relative path of the file under the mount path where the secret value for this version will be fetched and made available. For example, setting the mount_path as \'\/etc\/secrets\' and path as @secret_foo@ would mount the secret value file at @\/etc\/secrets\/secret_foo@.
+    path :: (Core.Maybe Core.Text),
+    -- | Version of the secret (version number or the string \'latest\'). It is preferable to use @latest@ version with secret volumes as secret value changes are reflected immediately.
+    version :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SecretVersion' with the minimum fields required to make a request.
+newSecretVersion ::
+  SecretVersion
+newSecretVersion = SecretVersion {path = Core.Nothing, version = Core.Nothing}
+
+instance Core.FromJSON SecretVersion where
+  parseJSON =
+    Core.withObject
+      "SecretVersion"
+      ( \o ->
+          SecretVersion
+            Core.<$> (o Core..:? "path") Core.<*> (o Core..:? "version")
+      )
+
+instance Core.ToJSON SecretVersion where
+  toJSON SecretVersion {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("path" Core..=) Core.<$> path,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | Configuration for a secret volume. It has the information necessary to fetch the secret value from secret manager and make it available as files mounted at the requested paths within the application container.
+--
+-- /See:/ 'newSecretVolume' smart constructor.
+data SecretVolume = SecretVolume
+  { -- | The path within the container to mount the secret volume. For example, setting the mount_path as @\/etc\/secrets@ would mount the secret value files under the @\/etc\/secrets@ directory. This directory will also be completely shadowed and unavailable to mount any other secrets. Recommended mount path: \/etc\/secrets
+    mountPath :: (Core.Maybe Core.Text),
+    -- | Project identifier (preferably project number but can also be the project ID) of the project that contains the secret. If not set, it is assumed that the secret is in the same project as the function.
+    projectId :: (Core.Maybe Core.Text),
+    -- | Name of the secret in secret manager (not the full resource name).
+    secret :: (Core.Maybe Core.Text),
+    -- | List of secret versions to mount for this secret. If empty, the @latest@ version of the secret will be made available in a file named after the secret under the mount point.
+    versions :: (Core.Maybe [SecretVersion])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SecretVolume' with the minimum fields required to make a request.
+newSecretVolume ::
+  SecretVolume
+newSecretVolume =
+  SecretVolume
+    { mountPath = Core.Nothing,
+      projectId = Core.Nothing,
+      secret = Core.Nothing,
+      versions = Core.Nothing
+    }
+
+instance Core.FromJSON SecretVolume where
+  parseJSON =
+    Core.withObject
+      "SecretVolume"
+      ( \o ->
+          SecretVolume
+            Core.<$> (o Core..:? "mountPath")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "secret")
+            Core.<*> (o Core..:? "versions")
+      )
+
+instance Core.ToJSON SecretVolume where
+  toJSON SecretVolume {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("mountPath" Core..=) Core.<$> mountPath,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("secret" Core..=) Core.<$> secret,
+            ("versions" Core..=) Core.<$> versions
+          ]
+      )
+
+-- | Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
 --
 -- /See:/ 'newServiceConfig' smart constructor.
 data ServiceConfig = ServiceConfig
   { -- | Whether 100% of traffic is routed to the latest revision. On CreateFunction and UpdateFunction, when set to true, the revision being deployed will serve 100% of traffic, ignoring any traffic split settings, if any. On GetFunction, true will be returned if the latest revision is serving 100% of traffic.
     allTrafficOnLatestRevision :: (Core.Maybe Core.Bool),
+    -- | The number of CPUs used in a single container instance. Default value is calculated from available memory. Supports the same values as Cloud Run, see https:\/\/cloud.google.com\/run\/docs\/reference\/rest\/v1\/Container#resourcerequirements Example: \"1\" indicates 1 vCPU
+    availableCpu :: (Core.Maybe Core.Text),
     -- | The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes. See https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go a full description.
     availableMemory :: (Core.Maybe Core.Text),
     -- | Environment variables that shall be available during function execution.
@@ -1933,8 +2367,18 @@ data ServiceConfig = ServiceConfig
     ingressSettings :: (Core.Maybe ServiceConfig_IngressSettings),
     -- | The limit on the maximum number of function instances that may coexist at a given time. In some cases, such as rapid traffic surges, Cloud Functions may, for a short period of time, create more instances than the specified max instances limit. If your function cannot tolerate this temporary behavior, you may want to factor in a safety margin and set a lower max instances value than your function can tolerate. See the <https://cloud.google.com/functions/docs/max-instances Max Instances> Guide for more details.
     maxInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Sets the maximum number of concurrent requests that each instance can receive. Defaults to 1.
+    maxInstanceRequestConcurrency :: (Core.Maybe Core.Int32),
     -- | The limit on the minimum number of function instances that may coexist at a given time. Function instances are kept in idle state for a short period after they finished executing the request to reduce cold start time for subsequent requests. Setting a minimum instance count will ensure that the given number of instances are kept running in idle state always. This can help with cold start times when jump in incoming request count occurs after the idle instance would have been stopped in the default case.
     minInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Output only. The name of service revision.
+    revision :: (Core.Maybe Core.Text),
+    -- | Secret environment variables configuration.
+    secretEnvironmentVariables :: (Core.Maybe [SecretEnvVar]),
+    -- | Secret volumes configuration.
+    secretVolumes :: (Core.Maybe [SecretVolume]),
+    -- | Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.
+    securityLevel :: (Core.Maybe ServiceConfig_SecurityLevel),
     -- | Output only. Name of the service associated with a Function. The format of this field is @projects\/{project}\/locations\/{region}\/services\/{service}@
     service :: (Core.Maybe Core.Text),
     -- | The email of the service\'s service account. If empty, defaults to @{project_number}-compute\@developer.gserviceaccount.com@.
@@ -1956,11 +2400,17 @@ newServiceConfig ::
 newServiceConfig =
   ServiceConfig
     { allTrafficOnLatestRevision = Core.Nothing,
+      availableCpu = Core.Nothing,
       availableMemory = Core.Nothing,
       environmentVariables = Core.Nothing,
       ingressSettings = Core.Nothing,
       maxInstanceCount = Core.Nothing,
+      maxInstanceRequestConcurrency = Core.Nothing,
       minInstanceCount = Core.Nothing,
+      revision = Core.Nothing,
+      secretEnvironmentVariables = Core.Nothing,
+      secretVolumes = Core.Nothing,
+      securityLevel = Core.Nothing,
       service = Core.Nothing,
       serviceAccountEmail = Core.Nothing,
       timeoutSeconds = Core.Nothing,
@@ -1976,11 +2426,17 @@ instance Core.FromJSON ServiceConfig where
       ( \o ->
           ServiceConfig
             Core.<$> (o Core..:? "allTrafficOnLatestRevision")
+            Core.<*> (o Core..:? "availableCpu")
             Core.<*> (o Core..:? "availableMemory")
             Core.<*> (o Core..:? "environmentVariables")
             Core.<*> (o Core..:? "ingressSettings")
             Core.<*> (o Core..:? "maxInstanceCount")
+            Core.<*> (o Core..:? "maxInstanceRequestConcurrency")
             Core.<*> (o Core..:? "minInstanceCount")
+            Core.<*> (o Core..:? "revision")
+            Core.<*> (o Core..:? "secretEnvironmentVariables")
+            Core.<*> (o Core..:? "secretVolumes")
+            Core.<*> (o Core..:? "securityLevel")
             Core.<*> (o Core..:? "service")
             Core.<*> (o Core..:? "serviceAccountEmail")
             Core.<*> (o Core..:? "timeoutSeconds")
@@ -1995,14 +2451,22 @@ instance Core.ToJSON ServiceConfig where
       ( Core.catMaybes
           [ ("allTrafficOnLatestRevision" Core..=)
               Core.<$> allTrafficOnLatestRevision,
+            ("availableCpu" Core..=) Core.<$> availableCpu,
             ("availableMemory" Core..=) Core.<$> availableMemory,
             ("environmentVariables" Core..=)
               Core.<$> environmentVariables,
             ("ingressSettings" Core..=) Core.<$> ingressSettings,
             ("maxInstanceCount" Core..=)
               Core.<$> maxInstanceCount,
+            ("maxInstanceRequestConcurrency" Core..=)
+              Core.<$> maxInstanceRequestConcurrency,
             ("minInstanceCount" Core..=)
               Core.<$> minInstanceCount,
+            ("revision" Core..=) Core.<$> revision,
+            ("secretEnvironmentVariables" Core..=)
+              Core.<$> secretEnvironmentVariables,
+            ("secretVolumes" Core..=) Core.<$> secretVolumes,
+            ("securityLevel" Core..=) Core.<$> securityLevel,
             ("service" Core..=) Core.<$> service,
             ("serviceAccountEmail" Core..=)
               Core.<$> serviceAccountEmail,
@@ -2054,7 +2518,7 @@ instance
 --
 -- /See:/ 'newSetIamPolicyRequest' smart constructor.
 data SetIamPolicyRequest = SetIamPolicyRequest
-  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.
+  { -- | REQUIRED: The complete policy to be applied to the @resource@. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
     policy :: (Core.Maybe Policy),
     -- | OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: @paths: \"bindings, etag\"@
     updateMask :: (Core.Maybe Core.FieldMask)
@@ -2280,7 +2744,7 @@ instance Core.ToJSON StorageSource where
 --
 -- /See:/ 'newTestIamPermissionsRequest' smart constructor.
 newtype TestIamPermissionsRequest = TestIamPermissionsRequest
-  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as \'/\' or \'storage./\') are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
+  { -- | The set of permissions to check for the @resource@. Permissions with wildcards (such as @*@ or @storage.*@) are not allowed. For more information see <https://cloud.google.com/iam/docs/overview#permissions IAM Overview>.
     permissions :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

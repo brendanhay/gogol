@@ -73,7 +73,7 @@ data CloudIdentityGroupsSearch = CloudIdentityGroupsSearch
     pageSize :: (Core.Maybe Core.Int32),
     -- | The @next_page_token@ value returned from a previous search request, if any.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The search query. Must be specified in <https://opensource.google/projects/cel Common Expression Language>. May only contain equality operators on the parent and inclusion operators on labels (e.g., @parent == \'customers\/{customer}\' && \'cloudidentity.googleapis.com\/groups.discussion_forum\' in labels@). The @customer@ must begin with \"C\" (for example, \'C046psxkn\').
+    -- | Required. The search query. * Must be specified in <https://opensource.google/projects/cel Common Expression Language>. * Must contain equality operators on the parent, e.g. @parent == \'customers\/{customer_id}\'@. The @customer_id@ must begin with \"C\" (for example, \'C046psxkn\'). [Find your customer ID.] (https:\/\/support.google.com\/cloudidentity\/answer\/10070793) * Can contain optional inclusion operators on @labels@ such as @\'cloudidentity.googleapis.com\/groups.discussion_forum\' in labels@). * Can contain an optional equality operator on @domain_name@. e.g. @domain_name == \'abc.com\'@ * Can contain optional @startsWith\/contains\/equality@ operators on @group_key@, e.g. @group_key.startsWith(\'dev\')@, @group_key.contains(\'dev\'), group_key == \'dev\@abc.com\'@ * Can contain optional @startsWith\/contains\/equality@ operators on @display_name@, such as @display_name.startsWith(\'dev\')@ , @display_name.contains(\'dev\')@, @display_name == \'dev\'@
     query :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

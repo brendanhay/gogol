@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends the specified message to the recipients in the @To@, @Cc@, and @Bcc@ headers.
+-- Sends the specified message to the recipients in the @To@, @Cc@, and @Bcc@ headers. For example usage, see <https://developers.google.com/gmail/api/guides/sending Sending email>.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.send@.
 module Gogol.Gmail.Users.Messages.Send
@@ -76,7 +76,7 @@ type GmailUsersMessagesSendResource =
       Core.:> Core.MultipartRelated '[Core.JSON] Message
       Core.:> Core.Post '[Core.JSON] Message
 
--- | Sends the specified message to the recipients in the @To@, @Cc@, and @Bcc@ headers.
+-- | Sends the specified message to the recipients in the @To@, @Cc@, and @Bcc@ headers. For example usage, see <https://developers.google.com/gmail/api/guides/sending Sending email>.
 --
 -- /See:/ 'newGmailUsersMessagesSend' smart constructor.
 data GmailUsersMessagesSend = GmailUsersMessagesSend

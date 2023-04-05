@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified subnetwork. Gets a list of available subnetworks list() request.
+-- Returns the specified subnetwork.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.subnetworks.get@.
 module Gogol.Compute.Subnetworks.Get
@@ -61,7 +61,7 @@ type ComputeSubnetworksGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Subnetwork
 
--- | Returns the specified subnetwork. Gets a list of available subnetworks list() request.
+-- | Returns the specified subnetwork.
 --
 -- /See:/ 'newComputeSubnetworksGet' smart constructor.
 data ComputeSubnetworksGet = ComputeSubnetworksGet

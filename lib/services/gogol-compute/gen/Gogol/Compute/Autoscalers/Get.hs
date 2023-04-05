@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
+-- Returns the specified autoscaler resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.autoscalers.get@.
 module Gogol.Compute.Autoscalers.Get
@@ -61,7 +61,7 @@ type ComputeAutoscalersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Autoscaler
 
--- | Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
+-- | Returns the specified autoscaler resource.
 --
 -- /See:/ 'newComputeAutoscalersGet' smart constructor.
 data ComputeAutoscalersGet = ComputeAutoscalersGet

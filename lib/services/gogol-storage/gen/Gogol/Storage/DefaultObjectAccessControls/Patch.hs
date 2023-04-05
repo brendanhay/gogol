@@ -51,7 +51,6 @@ type StorageDefaultObjectAccessControlsPatchResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> "defaultObjectAcl"
     Core.:> Core.Capture "entity" Core.Text
-    Core.:> Core.QueryParam "provisionalUserProject" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -68,8 +67,6 @@ data StorageDefaultObjectAccessControlsPatch = StorageDefaultObjectAccessControl
     entity :: Core.Text,
     -- | Multipart request metadata.
     payload :: ObjectAccessControl,
-    -- | The project to be billed for this request if the target bucket is requester-pays bucket.
-    provisionalUserProject :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -91,7 +88,6 @@ newStorageDefaultObjectAccessControlsPatch bucket entity payload =
     { bucket = bucket,
       entity = entity,
       payload = payload,
-      provisionalUserProject = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -111,7 +107,6 @@ instance
       go
         bucket
         entity
-        provisionalUserProject
         uploadType
         userProject
         (Core.Just Core.AltJSON)

@@ -16,7 +16,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  Lets Android application developers access their Google Play accounts.
+  Lets Android application developers access their Google Play accounts. At a high level, the expected workflow is to \"insert\" an Edit, make changes as necessary, and then \"commit\" it.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -49,6 +49,9 @@ library
 
   exposed-modules:
     Gogol.AndroidPublisher
+    Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Create
+    Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Get
+    Gogol.AndroidPublisher.Applications.DeviceTierConfigs.List
     Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
     Gogol.AndroidPublisher.Edits.Apks.List
     Gogol.AndroidPublisher.Edits.Apks.Upload
@@ -99,8 +102,26 @@ library
     Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadapk
     Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
     Gogol.AndroidPublisher.Monetization.ConvertRegionPrices
+    Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Activate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Deactivate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Delete
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Activate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deactivate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Delete
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Get
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.List
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Patch
+    Gogol.AndroidPublisher.Monetization.Subscriptions.Create
+    Gogol.AndroidPublisher.Monetization.Subscriptions.Delete
+    Gogol.AndroidPublisher.Monetization.Subscriptions.Get
+    Gogol.AndroidPublisher.Monetization.Subscriptions.List
+    Gogol.AndroidPublisher.Monetization.Subscriptions.Patch
     Gogol.AndroidPublisher.Orders.Refund
     Gogol.AndroidPublisher.Purchases.Products.Acknowledge
+    Gogol.AndroidPublisher.Purchases.Products.Consume
     Gogol.AndroidPublisher.Purchases.Products.Get
     Gogol.AndroidPublisher.Purchases.Subscriptions.Acknowledge
     Gogol.AndroidPublisher.Purchases.Subscriptions.Cancel
@@ -108,6 +129,7 @@ library
     Gogol.AndroidPublisher.Purchases.Subscriptions.Get
     Gogol.AndroidPublisher.Purchases.Subscriptions.Refund
     Gogol.AndroidPublisher.Purchases.Subscriptions.Revoke
+    Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Get
     Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
     Gogol.AndroidPublisher.Reviews.Get
     Gogol.AndroidPublisher.Reviews.List
@@ -127,5 +149,5 @@ library
     Gogol.AndroidPublisher.Internal.Sum
 
   build-depends:
-    , base        >=4.12 && <5
-    , gogol-core  ^>=1
+    , base        >=4.12   && <5
+    , gogol-core  ^>=1.0.0

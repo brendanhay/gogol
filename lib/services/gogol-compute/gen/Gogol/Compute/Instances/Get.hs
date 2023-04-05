@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Instance resource. Gets a list of available instances by making a list() request.
+-- Returns the specified Instance resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.instances.get@.
 module Gogol.Compute.Instances.Get
@@ -61,7 +61,7 @@ type ComputeInstancesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Instance
 
--- | Returns the specified Instance resource. Gets a list of available instances by making a list() request.
+-- | Returns the specified Instance resource.
 --
 -- /See:/ 'newComputeInstancesGet' smart constructor.
 data ComputeInstancesGet = ComputeInstancesGet

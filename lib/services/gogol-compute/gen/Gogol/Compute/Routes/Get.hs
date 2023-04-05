@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified Route resource. Gets a list of available routes by making a list() request.
+-- Returns the specified Route resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.routes.get@.
 module Gogol.Compute.Routes.Get
@@ -60,7 +60,7 @@ type ComputeRoutesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Route
 
--- | Returns the specified Route resource. Gets a list of available routes by making a list() request.
+-- | Returns the specified Route resource.
 --
 -- /See:/ 'newComputeRoutesGet' smart constructor.
 data ComputeRoutesGet = ComputeRoutesGet

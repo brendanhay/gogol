@@ -28,7 +28,7 @@
 --
 -- Returns all tasks in the specified task list.
 --
--- /See:/ <https://developers.google.com/tasks/ Tasks API Reference> for @tasks.tasks.list@.
+-- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.list@.
 module Gogol.AppsTasks.Tasks.List
   ( -- * Resource
     TasksTasksListResource,

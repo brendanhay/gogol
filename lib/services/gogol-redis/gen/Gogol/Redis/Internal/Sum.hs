@@ -71,6 +71,13 @@ module Gogol.Redis.Internal.Sum
         ..
       ),
 
+    -- * Instance_SuspensionReasonsItem
+    Instance_SuspensionReasonsItem
+      ( Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED,
+        Instance_SuspensionReasonsItem_CUSTOMERMANAGEDKEYISSUE,
+        ..
+      ),
+
     -- * Instance_Tier
     Instance_Tier
       ( Instance_Tier_TIERUNSPECIFIED,
@@ -102,6 +109,14 @@ module Gogol.Redis.Internal.Sum
         PersistenceConfig_RdbSnapshotPeriod_SIXHOURS,
         PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS,
         PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS,
+        ..
+      ),
+
+    -- * ReconciliationOperationMetadata_ExclusiveAction
+    ReconciliationOperationMetadata_ExclusiveAction
+      ( ReconciliationOperationMetadata_ExclusiveAction_UNKNOWNREPAIRACTION,
+        ReconciliationOperationMetadata_ExclusiveAction_Delete',
+        ReconciliationOperationMetadata_ExclusiveAction_Retry,
         ..
       ),
 
@@ -316,6 +331,32 @@ pattern Instance_State_FAILINGOVER = Instance_State "FAILING_OVER"
   Instance_State
   #-}
 
+newtype Instance_SuspensionReasonsItem = Instance_SuspensionReasonsItem {fromInstance_SuspensionReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not set.
+pattern Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED :: Instance_SuspensionReasonsItem
+pattern Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED = Instance_SuspensionReasonsItem "SUSPENSION_REASON_UNSPECIFIED"
+
+-- | Something wrong with the CMEK key provided by customer.
+pattern Instance_SuspensionReasonsItem_CUSTOMERMANAGEDKEYISSUE :: Instance_SuspensionReasonsItem
+pattern Instance_SuspensionReasonsItem_CUSTOMERMANAGEDKEYISSUE = Instance_SuspensionReasonsItem "CUSTOMER_MANAGED_KEY_ISSUE"
+
+{-# COMPLETE
+  Instance_SuspensionReasonsItem_SUSPENSIONREASONUNSPECIFIED,
+  Instance_SuspensionReasonsItem_CUSTOMERMANAGEDKEYISSUE,
+  Instance_SuspensionReasonsItem
+  #-}
+
 -- | Required. The service tier of the instance.
 newtype Instance_Tier = Instance_Tier {fromInstance_Tier :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -441,7 +482,7 @@ pattern PersistenceConfig_RdbSnapshotPeriod_SIXHOURS = PersistenceConfig_RdbSnap
 pattern PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS :: PersistenceConfig_RdbSnapshotPeriod
 pattern PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS = PersistenceConfig_RdbSnapshotPeriod "TWELVE_HOURS"
 
--- | Snapshot every 24 horus.
+-- | Snapshot every 24 hours.
 pattern PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS :: PersistenceConfig_RdbSnapshotPeriod
 pattern PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS = PersistenceConfig_RdbSnapshotPeriod "TWENTY_FOUR_HOURS"
 
@@ -452,6 +493,38 @@ pattern PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS = PersistenceConfig_
   PersistenceConfig_RdbSnapshotPeriod_TWELVEHOURS,
   PersistenceConfig_RdbSnapshotPeriod_TWENTYFOURHOURS,
   PersistenceConfig_RdbSnapshotPeriod
+  #-}
+
+-- | Excluisive action returned by the CLH.
+newtype ReconciliationOperationMetadata_ExclusiveAction = ReconciliationOperationMetadata_ExclusiveAction {fromReconciliationOperationMetadata_ExclusiveAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown repair action.
+pattern ReconciliationOperationMetadata_ExclusiveAction_UNKNOWNREPAIRACTION :: ReconciliationOperationMetadata_ExclusiveAction
+pattern ReconciliationOperationMetadata_ExclusiveAction_UNKNOWNREPAIRACTION = ReconciliationOperationMetadata_ExclusiveAction "UNKNOWN_REPAIR_ACTION"
+
+-- | The resource has to be deleted. When using this bit, the CLH should fail the operation. DEPRECATED. Instead use DELETE_RESOURCE OperationSignal in SideChannel.
+pattern ReconciliationOperationMetadata_ExclusiveAction_Delete' :: ReconciliationOperationMetadata_ExclusiveAction
+pattern ReconciliationOperationMetadata_ExclusiveAction_Delete' = ReconciliationOperationMetadata_ExclusiveAction "DELETE"
+
+-- | This resource could not be repaired but the repair should be tried again at a later time. This can happen if there is a dependency that needs to be resolved first- e.g. if a parent resource must be repaired before a child resource.
+pattern ReconciliationOperationMetadata_ExclusiveAction_Retry :: ReconciliationOperationMetadata_ExclusiveAction
+pattern ReconciliationOperationMetadata_ExclusiveAction_Retry = ReconciliationOperationMetadata_ExclusiveAction "RETRY"
+
+{-# COMPLETE
+  ReconciliationOperationMetadata_ExclusiveAction_UNKNOWNREPAIRACTION,
+  ReconciliationOperationMetadata_ExclusiveAction_Delete',
+  ReconciliationOperationMetadata_ExclusiveAction_Retry,
+  ReconciliationOperationMetadata_ExclusiveAction
   #-}
 
 -- | Required. If reschedule type is SPECIFIC/TIME, must set up schedule/time as well.

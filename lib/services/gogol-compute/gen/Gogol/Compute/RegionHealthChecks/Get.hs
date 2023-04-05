@@ -26,7 +26,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
+-- Returns the specified HealthCheck resource.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionHealthChecks.get@.
 module Gogol.Compute.RegionHealthChecks.Get
@@ -61,7 +61,7 @@ type ComputeRegionHealthChecksGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] HealthCheck
 
--- | Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
+-- | Returns the specified HealthCheck resource.
 --
 -- /See:/ 'newComputeRegionHealthChecksGet' smart constructor.
 data ComputeRegionHealthChecksGet = ComputeRegionHealthChecksGet

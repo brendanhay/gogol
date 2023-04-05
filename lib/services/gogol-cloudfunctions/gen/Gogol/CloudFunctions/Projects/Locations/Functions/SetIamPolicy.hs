@@ -45,7 +45,7 @@ import qualified Gogol.Prelude as Core
 -- | A resource alias for @cloudfunctions.projects.locations.functions.setIamPolicy@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsSetIamPolicy' request conforms to.
 type CloudFunctionsProjectsLocationsFunctionsSetIamPolicyResource =
-  "v2beta"
+  "v2"
     Core.:> Core.CaptureMode "resource" "setIamPolicy" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -68,7 +68,7 @@ data CloudFunctionsProjectsLocationsFunctionsSetIamPolicy = CloudFunctionsProjec
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: SetIamPolicyRequest,
-    -- | REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.
+    -- | REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field.
     resource :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,7 +81,7 @@ data CloudFunctionsProjectsLocationsFunctionsSetIamPolicy = CloudFunctionsProjec
 newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy ::
   -- |  Multipart request metadata. See 'payload'.
   SetIamPolicyRequest ->
-  -- |  REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field. See 'resource'.
+  -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   CloudFunctionsProjectsLocationsFunctionsSetIamPolicy
 newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy payload resource =

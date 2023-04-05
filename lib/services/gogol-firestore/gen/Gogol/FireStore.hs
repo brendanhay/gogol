@@ -74,6 +74,16 @@ module Gogol.FireStore
     FireStoreProjectsDatabasesCollectionGroupsIndexesList (..),
     newFireStoreProjectsDatabasesCollectionGroupsIndexesList,
 
+    -- ** firestore.projects.databases.create
+    FireStoreProjectsDatabasesCreateResource,
+    FireStoreProjectsDatabasesCreate (..),
+    newFireStoreProjectsDatabasesCreate,
+
+    -- ** firestore.projects.databases.delete
+    FireStoreProjectsDatabasesDeleteResource,
+    FireStoreProjectsDatabasesDelete (..),
+    newFireStoreProjectsDatabasesDelete,
+
     -- ** firestore.projects.databases.documents.batchGet
     FireStoreProjectsDatabasesDocumentsBatchGetResource,
     FireStoreProjectsDatabasesDocumentsBatchGet (..),
@@ -143,6 +153,11 @@ module Gogol.FireStore
     FireStoreProjectsDatabasesDocumentsRollbackResource,
     FireStoreProjectsDatabasesDocumentsRollback (..),
     newFireStoreProjectsDatabasesDocumentsRollback,
+
+    -- ** firestore.projects.databases.documents.runAggregationQuery
+    FireStoreProjectsDatabasesDocumentsRunAggregationQueryResource,
+    FireStoreProjectsDatabasesDocumentsRunAggregationQuery (..),
+    newFireStoreProjectsDatabasesDocumentsRunAggregationQuery,
 
     -- ** firestore.projects.databases.documents.runQuery
     FireStoreProjectsDatabasesDocumentsRunQueryResource,
@@ -214,6 +229,18 @@ module Gogol.FireStore
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** Aggregation
+    Aggregation (..),
+    newAggregation,
+
+    -- ** AggregationResult
+    AggregationResult (..),
+    newAggregationResult,
+
+    -- ** AggregationResult_AggregateFields
+    AggregationResult_AggregateFields (..),
+    newAggregationResult_AggregateFields,
+
     -- ** ArrayValue
     ArrayValue (..),
     newArrayValue,
@@ -264,6 +291,10 @@ module Gogol.FireStore
 
     -- ** CompositeFilter_Op
     CompositeFilter_Op (..),
+
+    -- ** Count
+    Count (..),
+    newCount,
 
     -- ** Cursor
     Cursor (..),
@@ -385,6 +416,9 @@ module Gogol.FireStore
     GoogleFirestoreAdminV1Index (..),
     newGoogleFirestoreAdminV1Index,
 
+    -- ** GoogleFirestoreAdminV1Index_ApiScope
+    GoogleFirestoreAdminV1Index_ApiScope (..),
+
     -- ** GoogleFirestoreAdminV1Index_QueryScope
     GoogleFirestoreAdminV1Index_QueryScope (..),
 
@@ -438,6 +472,20 @@ module Gogol.FireStore
     -- ** GoogleFirestoreAdminV1Progress
     GoogleFirestoreAdminV1Progress (..),
     newGoogleFirestoreAdminV1Progress,
+
+    -- ** GoogleFirestoreAdminV1TtlConfig
+    GoogleFirestoreAdminV1TtlConfig (..),
+    newGoogleFirestoreAdminV1TtlConfig,
+
+    -- ** GoogleFirestoreAdminV1TtlConfig_State
+    GoogleFirestoreAdminV1TtlConfig_State (..),
+
+    -- ** GoogleFirestoreAdminV1TtlConfigDelta
+    GoogleFirestoreAdminV1TtlConfigDelta (..),
+    newGoogleFirestoreAdminV1TtlConfigDelta,
+
+    -- ** GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+    GoogleFirestoreAdminV1TtlConfigDelta_ChangeType (..),
 
     -- ** GoogleFirestoreAdminV1UpdateDatabaseMetadata
     GoogleFirestoreAdminV1UpdateDatabaseMetadata (..),
@@ -554,6 +602,14 @@ module Gogol.FireStore
     RollbackRequest (..),
     newRollbackRequest,
 
+    -- ** RunAggregationQueryRequest
+    RunAggregationQueryRequest (..),
+    newRunAggregationQueryRequest,
+
+    -- ** RunAggregationQueryResponse
+    RunAggregationQueryResponse (..),
+    newRunAggregationQueryResponse,
+
     -- ** RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -569,6 +625,10 @@ module Gogol.FireStore
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** StructuredAggregationQuery
+    StructuredAggregationQuery (..),
+    newStructuredAggregationQuery,
 
     -- ** StructuredQuery
     StructuredQuery (..),
@@ -632,6 +692,8 @@ import Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
 import Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Delete
 import Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Get
 import Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.List
+import Gogol.FireStore.Projects.Databases.Create
+import Gogol.FireStore.Projects.Databases.Delete
 import Gogol.FireStore.Projects.Databases.Documents.BatchGet
 import Gogol.FireStore.Projects.Databases.Documents.BatchWrite
 import Gogol.FireStore.Projects.Databases.Documents.BeginTransaction
@@ -646,6 +708,7 @@ import Gogol.FireStore.Projects.Databases.Documents.Listen
 import Gogol.FireStore.Projects.Databases.Documents.PartitionQuery
 import Gogol.FireStore.Projects.Databases.Documents.Patch
 import Gogol.FireStore.Projects.Databases.Documents.Rollback
+import Gogol.FireStore.Projects.Databases.Documents.RunAggregationQuery
 import Gogol.FireStore.Projects.Databases.Documents.RunQuery
 import Gogol.FireStore.Projects.Databases.Documents.Write
 import Gogol.FireStore.Projects.Databases.ExportDocuments
